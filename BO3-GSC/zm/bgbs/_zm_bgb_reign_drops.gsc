@@ -1,0 +1,113 @@
+/*************************************************
+ * Decompiled by Serious and Edited by SyndiShanX
+ * Script: zm\bgbs\_zm_bgb_reign_drops.gsc
+*************************************************/
+
+#using scripts\codescripts\struct;
+#using scripts\shared\flag_shared;
+#using scripts\shared\system_shared;
+#using scripts\shared\util_shared;
+#using scripts\zm\_zm_bgb;
+#using scripts\zm\_zm_powerups;
+#using scripts\zm\_zm_utility;
+#using scripts\zm\bgbs\_zm_bgb_extra_credit;
+#namespace zm_bgb_reign_drops;
+
+function autoexec __init__sytem__() {
+  system::register("zm_bgb_reign_drops", & __init__, undefined, "bgb");
+}
+
+function __init__() {
+  if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
+    return;
+  }
+  bgb::register("zm_bgb_reign_drops", "activated", 2, undefined, undefined, & validation, & activation);
+}
+
+function validation() {
+  if(isDefined(self.var_b90dda44) && self.var_b90dda44) {
+    return false;
+  }
+  return true;
+}
+
+function activation() {
+  self endon("disconnect");
+  self endon("bled_out");
+  level thread bgb::function_dea74fb0("minigun", self function_ed573cc2(1));
+  self thread zm_bgb_extra_credit::function_b18c3b2d(self function_ed573cc2(2));
+  level thread bgb::function_dea74fb0("nuke", self function_ed573cc2(3));
+  level thread bgb::function_dea74fb0("carpenter", self function_ed573cc2(4));
+  level thread bgb::function_dea74fb0("free_perk", self function_ed573cc2(5));
+  level thread bgb::function_dea74fb0("fire_sale", self function_ed573cc2(6));
+  level thread bgb::function_dea74fb0("insta_kill", self function_ed573cc2(7));
+  level thread bgb::function_dea74fb0("full_ammo", self function_ed573cc2(8));
+  level thread bgb::function_dea74fb0("double_points", self function_ed573cc2(9));
+  self.var_b90dda44 = 1;
+  self thread function_7892610e();
+}
+
+function function_7892610e() {
+  wait(0.05);
+  n_start_time = gettime();
+  n_total_time = 0;
+  while(isDefined(level.active_powerups) && level.active_powerups.size) {
+    wait(0.5);
+    n_current_time = gettime();
+    n_total_time = (n_current_time - n_start_time) / 1000;
+    if(n_total_time >= 28) {
+      break;
+    }
+  }
+  self.var_b90dda44 = undefined;
+}
+
+function function_ed573cc2(n_position) {
+  v_powerup = self bgb::get_player_dropped_powerup_origin();
+  v_up = vectorscale((0, 0, 1), 5);
+  var_8e2dcc47 = (v_powerup + (anglesToForward(self.angles) * 60)) + v_up;
+  var_682b51de = (var_8e2dcc47 + (anglesToForward(self.angles) * 60)) + v_up;
+  switch (n_position) {
+    case 1: {
+      v_origin = (v_powerup + (anglestoright(self.angles) * -60)) + v_up;
+      break;
+    }
+    case 2: {
+      v_origin = v_powerup;
+      break;
+    }
+    case 3: {
+      v_origin = (v_powerup + (anglestoright(self.angles) * 60)) + v_up;
+      break;
+    }
+    case 4: {
+      v_origin = (var_8e2dcc47 + (anglestoright(self.angles) * -60)) + v_up;
+      break;
+    }
+    case 5: {
+      v_origin = var_8e2dcc47;
+      break;
+    }
+    case 6: {
+      v_origin = (var_8e2dcc47 + (anglestoright(self.angles) * 60)) + v_up;
+      break;
+    }
+    case 7: {
+      v_origin = (var_682b51de + (anglestoright(self.angles) * -60)) + v_up;
+      break;
+    }
+    case 8: {
+      v_origin = var_682b51de;
+      break;
+    }
+    case 9: {
+      v_origin = (var_682b51de + (anglestoright(self.angles) * 60)) + v_up;
+      break;
+    }
+    default: {
+      v_origin = v_powerup;
+      break;
+    }
+  }
+  return v_origin;
+}

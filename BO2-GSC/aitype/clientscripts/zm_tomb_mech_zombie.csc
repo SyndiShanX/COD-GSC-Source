@@ -1,0 +1,22 @@
+/***********************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: aitype\clientscripts\zm_tomb_mech_zombie.csc
+***********************************************************/
+
+#include character\clientscripts\c_zom_dlc_mech;
+
+main() {
+  character\clientscripts\c_zom_dlc_mech::main();
+  self._aitype = "zm_tomb_mech_zombie";
+}
+
+#using_animtree("zm_tomb_mechz");
+
+precache(ai_index) {
+  character\clientscripts\c_zom_dlc_mech::precache();
+  usefootsteptable(ai_index, "fly_step_mechz");
+  usefootstepfxtable(ai_index, "zm_mechz_footstepfxtable");
+  scriptcallbackonfootstepevent(ai_index);
+  precacheanimstatedef(ai_index, #animtree, "zm_tomb_mechz");
+  setdemolockonvalues(ai_index, 100, 60, -15, 60, 30, -5, 60);
+}

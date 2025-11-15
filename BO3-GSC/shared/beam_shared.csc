@@ -1,0 +1,88 @@
+/*************************************************
+ * Decompiled by Serious and Edited by SyndiShanX
+ * Script: shared\beam_shared.csc
+*************************************************/
+
+#using scripts\codescripts\struct;
+#using scripts\shared\callbacks_shared;
+#using scripts\shared\system_shared;
+#using scripts\shared\util_shared;
+#namespace beam;
+
+function launch(ent_1, str_tag1, ent_2, str_tag2, str_beam_type) {
+  s_beam = _get_beam(ent_1, str_tag1, ent_2, str_tag2, str_beam_type);
+  if(!isDefined(s_beam)) {
+    s_beam = _new_beam(ent_1, str_tag1, ent_2, str_tag2, str_beam_type);
+  }
+  if(self == level) {
+    if(isDefined(level.localplayers)) {
+      foreach(player in level.localplayers) {
+        if(isDefined(player)) {
+          player launch(ent_1, str_tag1, ent_2, str_tag2, str_beam_type);
+        }
+      }
+    }
+  } else if(isDefined(s_beam)) {
+    s_beam.beam_id = beamlaunch(self.localclientnum, ent_1, str_tag1, ent_2, str_tag2, str_beam_type);
+    self thread _kill_on_ent_death(s_beam, ent_1, ent_2);
+    return s_beam.beam_id;
+  }
+}
+
+function kill(ent_1, str_tag1, ent_2, str_tag2, str_beam_type) {
+  if(isDefined(self.active_beams)) {
+    s_beam = _get_beam(ent_1, str_tag1, ent_2, str_tag2, str_beam_type);
+    arrayremovevalue(self.active_beams, s_beam, 0);
+  }
+  if(self == level) {
+    if(isDefined(level.localplayers)) {
+      foreach(player in level.localplayers) {
+        if(isDefined(player)) {
+          player kill(ent_1, str_tag1, ent_2, str_tag2, str_beam_type);
+        }
+      }
+    }
+  } else if(isDefined(s_beam)) {
+    s_beam notify("kill");
+    beamkill(self.localclientnum, s_beam.beam_id);
+  }
+}
+
+function private _new_beam(ent_1, str_tag1, ent_2, str_tag2, str_beam_type) {
+  if(!isDefined(self.active_beams)) {
+    self.active_beams = [];
+  }
+  s_beam = spawnStruct();
+  s_beam.ent_1 = ent_1;
+  s_beam.str_tag1 = str_tag1;
+  s_beam.ent_2 = ent_2;
+  s_beam.str_tag2 = str_tag2;
+  s_beam.str_beam_type = str_beam_type;
+  if(!isDefined(self.active_beams)) {
+    self.active_beams = [];
+  } else if(!isarray(self.active_beams)) {
+    self.active_beams = array(self.active_beams);
+  }
+  self.active_beams[self.active_beams.size] = s_beam;
+  return s_beam;
+}
+
+function private _get_beam(ent_1, str_tag1, ent_2, str_tag2, str_beam_type) {
+  if(isDefined(self.active_beams)) {
+    foreach(s_beam in self.active_beams) {
+      if(s_beam.ent_1 == ent_1 && s_beam.str_tag1 == str_tag1 && s_beam.ent_2 == ent_2 && s_beam.str_tag2 == str_tag2 && s_beam.str_beam_type == str_beam_type) {
+        return s_beam;
+      }
+    }
+  }
+}
+
+function private _kill_on_ent_death(s_beam, ent_1, ent_2) {
+  s_beam endon("kill");
+  self endon("death");
+  util::waittill_any_ents(ent_1, "entityshutdown", ent_2, "entityshutdown", s_beam, "kill", self, "death");
+  if(isDefined(self)) {
+    arrayremovevalue(self.active_beams, s_beam, 0);
+    beamkill(self.localclientnum, s_beam.beam_id);
+  }
+}

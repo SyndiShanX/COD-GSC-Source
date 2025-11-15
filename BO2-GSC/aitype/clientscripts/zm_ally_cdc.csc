@@ -1,0 +1,20 @@
+/************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: aitype\clientscripts\zm_ally_cdc.csc
+************************************************/
+
+#include character\clientscripts\c_zom_ally_cdc;
+
+main() {
+  character\clientscripts\c_zom_ally_cdc::main();
+  self._aitype = "zm_ally_cdc";
+}
+
+#using_animtree("zm_ally");
+
+precache(ai_index) {
+  character\clientscripts\c_zom_ally_cdc::precache();
+  usefootsteptable(ai_index, "default_ai");
+  precacheanimstatedef(ai_index, #animtree, "zm_ally_basic");
+  setdemolockonvalues(ai_index, 100, 60, -15, 60, 30, -5, 60);
+}

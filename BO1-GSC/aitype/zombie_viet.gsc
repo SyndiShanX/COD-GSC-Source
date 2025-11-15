@@ -1,0 +1,52 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: aitype\zombie_viet.gsc
+**************************************/
+
+main() {
+  self.animTree = "";
+  self.team = "axis";
+  self.type = "zombie";
+  self.accuracy = 1;
+  self.health = 150;
+  self.weapon = "m1911_zm";
+  self.secondaryweapon = "";
+  self.sidearm = "m1911_zm";
+  self.grenadeWeapon = "frag_grenade_zm";
+  self.grenadeAmmo = 0;
+  self.csvInclude = "";
+  self setEngagementMinDist(250.000000, 0.000000);
+  self setEngagementMaxDist(700.000000, 1000.000000);
+  switch (codescripts\character::get_random_character(5)) {
+    case 0:
+      character\c_viet_zombie_nva1::main();
+      break;
+    case 1:
+      character\c_viet_zombie_female_body::main();
+      break;
+    case 2:
+      character\c_viet_zombie_vc::main();
+      break;
+    case 3:
+      character\c_viet_zombie_nva1_alt::main();
+      break;
+    case 4:
+      character\c_viet_zombie_female_body_alt::main();
+      break;
+  }
+}
+
+spawner() {
+  self setspawnerteam("axis");
+}
+
+precache() {
+  character\c_viet_zombie_nva1::precache();
+  character\c_viet_zombie_female_body::precache();
+  character\c_viet_zombie_vc::precache();
+  character\c_viet_zombie_nva1_alt::precache();
+  character\c_viet_zombie_female_body_alt::precache();
+  precacheItem("m1911_zm");
+  precacheItem("m1911_zm");
+  precacheItem("frag_grenade_zm");
+}

@@ -1,0 +1,20 @@
+/****************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: aitype\clientscripts\zm_buried_sloth.csc
+****************************************************/
+
+#include character\clientscripts\c_zom_buried_sloth;
+
+main() {
+  character\clientscripts\c_zom_buried_sloth::main();
+  self._aitype = "zm_buried_sloth";
+}
+
+#using_animtree("zm_buried_sloth");
+
+precache(ai_index) {
+  character\clientscripts\c_zom_buried_sloth::precache();
+  usefootsteptable(ai_index, "fly_step_sloth");
+  precacheanimstatedef(ai_index, #animtree, "zm_buried_sloth");
+  setdemolockonvalues(ai_index, 100, 70, -15, 60, 8, 0, 60);
+}

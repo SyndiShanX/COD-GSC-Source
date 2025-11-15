@@ -1,0 +1,32 @@
+/****************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\zm_alcatraz_classic.csc
+****************************************************/
+
+#include clientscripts\mp\_utility;
+#include clientscripts\mp\zombies\_zm_weapons;
+#include clientscripts\mp\zombies\_zm_utility;
+#include clientscripts\mp\zm_prison_fx;
+#include clientscripts\mp\zombies\_zm_afterlife;
+#include clientscripts\mp\zm_alcatraz_craftables;
+
+precache() {
+  level._effect["powerup_on"] = loadfx("maps/zombie_alcatraz/fx_alcatraz_powerup");
+}
+
+premain() {
+  registerclientfield("world", "fake_master_key", 9000, 2, "int", clientscripts\mp\zm_prison_fx::fxanim_setup_pulley, 0);
+  clientscripts\mp\zombies\_zm_afterlife::init();
+  clientscripts\mp\zm_alcatraz_craftables::include_craftables();
+  clientscripts\mp\zm_alcatraz_craftables::init_craftables();
+}
+
+#using_animtree("fxanim_props");
+
+init_fan_trap_animtree() {
+  scriptmodelsuseanimtree(#animtree);
+}
+
+init_gondola_chains_animtree() {
+  scriptmodelsuseanimtree(#animtree);
+}

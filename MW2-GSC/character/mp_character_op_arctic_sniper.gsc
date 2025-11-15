@@ -1,0 +1,18 @@
+/********************************************************
+ * Decompiled by FreeTheTech101 and Edited by SyndiShanX
+ * Script: character\mp_character_op_arctic_sniper.gsc
+********************************************************/
+
+main() {
+  self setModel("mp_body_op_arctic_sniper");
+  self attach("head_op_arctic_sniper", "", true);
+  self.headModel = "head_op_arctic_sniper";
+  self setViewmodel("viewhands_sniper_op_arctic");
+  self.voice = "russian";
+}
+
+precache() {
+  precacheModel("mp_body_op_arctic_sniper");
+  precacheModel("head_op_arctic_sniper");
+  precacheModel("viewhands_sniper_op_arctic");
+}

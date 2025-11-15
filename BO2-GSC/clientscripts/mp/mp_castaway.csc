@@ -1,0 +1,46 @@
+/********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\mp_castaway.csc
+********************************************/
+
+#include clientscripts\mp\_utility;
+#include clientscripts\mp\_load;
+#include clientscripts\mp\mp_castaway_fx;
+#include clientscripts\mp\_audio;
+#include clientscripts\mp\mp_castaway_amb;
+
+main() {
+  level.worldmapx = 0;
+  level.worldmapy = 0;
+  level.worldlat = -37.8301;
+  level.worldlong = 77.555;
+  clientscripts\mp\_load::main();
+  clientscripts\mp\mp_castaway_fx::main();
+  thread clientscripts\mp\_audio::audio_init(0);
+  thread clientscripts\mp\mp_castaway_amb::main();
+  setdvar("tu12_cg_vehicleCamAboveWater", "8");
+  setsaveddvar("sm_sunsamplesizenear", 0.26);
+  level.playerland = ::castaway_on_player_land;
+  setsaveddvar("r_waterwavespeed", "1 1 1 1");
+  setsaveddvar("r_waterwaveamplitude", "1.5 1.5 1.5 1.5");
+  setsaveddvar("r_waterwavewavelength", "1024 1024 1024 1024");
+  setsaveddvar("r_waterwavesteepness", "1 1 1 1");
+  setsaveddvar("r_waterwaveangle", "0 90 180 270");
+  waitforclient(0);
+
+  println("*** Client : mp_castaway running...");
+}
+
+castaway_on_player_land(localclientnum, player, ground_type, firstperson, quiet, damageplayer) {
+  if(ground_type == "water") {
+    down = (0, 0, -1);
+    velocity = player getvelocity();
+    velocity = vectornormalize(velocity);
+    v = vectordot(velocity, down);
+
+    if(v > 0.2) {
+      trace = bulletTrace(player.origin + vectorscale((0, 0, 1), 60.0), player.origin, 0, player);
+      playFX(localclientnum, level._effect["water_splash_sm"], trace["position"]);
+    }
+  }
+}

@@ -1,0 +1,16 @@
+/**********************************************************
+ * Decompiled by FreeTheTech101 and Edited by SyndiShanX
+ * Script: character\character_civilian_worker_welder.gsc
+**********************************************************/
+
+main() {
+  self setModel("body_work_civ_male_a");
+  self attach("head_work_civ_welder", "", true);
+  self.headModel = "head_work_civ_welder";
+  self.voice = "russian";
+}
+
+precache() {
+  precacheModel("body_work_civ_male_a");
+  precacheModel("head_work_civ_welder");
+}

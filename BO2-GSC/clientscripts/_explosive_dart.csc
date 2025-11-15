@@ -1,0 +1,38 @@
+/*********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\_explosive_dart.csc
+*********************************************/
+
+main() {
+  level._effect["dart_light"] = loadfx("weapon/titus/fx_titus_bolt_blink_os");
+
+  println("dart_light :" + level._effect["dart_light"]);
+}
+
+spawned(localclientnum) {
+  println("titus dart spawned");
+
+  player = getlocalplayer(localclientnum);
+  enemy = 0;
+  self.fxtagname = "tag_origin";
+
+  if(self.team != player.team)
+    enemy = 1;
+
+  self thread loop_local_sound(localclientnum, "wpn_titus_alert", 0.3, level._effect["dart_light"]);
+}
+
+loop_local_sound(localclientnum, alias, interval, fx) {
+  self endon("entityshutdown");
+
+  while(true) {
+    self playSound(localclientnum, alias);
+    n_id = playFXOnTag(localclientnum, fx, self, self.fxtagname);
+    wait(interval);
+    stopfx(localclientnum, n_id);
+    interval = interval / 1.2;
+
+    if(interval < 0.1)
+      interval = 0.1;
+  }
+}

@@ -1,0 +1,207 @@
+/*****************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\_destructible.gsc
+*****************************************************/
+
+#include maps\_utility;
+#include common_scripts\utility;
+#using_animtree("vehicles");
+
+main() {
+  PrecacheRumble("explosion_generic");
+  find_destructibles();
+}
+
+find_destructibles() {
+  array_thread(getEntArray("destructible", "targetname"), ::setup_destructibles);
+}
+
+do_explosion() {
+  self useanimtree(#animtree);
+  self.exploded = false;
+  preexplode_fx_played = false;
+  for(;;) {
+    self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName);
+    if(IsPlayer(attacker)) {
+      self.player_damage += damage;
+    } else {
+      if(attacker != self) {
+        self.non_player_damage += damage;
+      }
+    }
+    if(self.health <= 200 && !self.exploded) {
+      timer = GetTime() + 5000;
+      while(self.health > 0 && GetTime() < timer) {
+        if(isDefined(level._effect[self.destructibledef + "_preexplode"]) && !preexplode_fx_played) {
+          playFX(level._effect[self.destructibledef + "_preexplode"], self GetTagOrigin("hood_jnt"));
+          preexplode_fx_played = true;
+        }
+        wait(0.2);
+      }
+      animation = [
+        [level.destructible_pointers["explosion_anim_" + self.destructibledef]]
+      ]();
+      self ClearAnim( % root, 0);
+      self SetAnimKnob(animation, 1.0, 1.0, 1.0);
+      level thread do_explosion_sound(self.origin);
+      if(isDefined(level.vehicle_death_earthquake[self.destructibledef]))
+        earthquake(
+          level.vehicle_death_earthquake[self.destructibledef].scale,
+          level.vehicle_death_earthquake[self.destructibledef].duration,
+          self.origin,
+          level.vehicle_death_earthquake[self.destructibledef].radius
+        );
+      PlayRumbleOnPosition("explosion_generic", self.origin);
+      self kill_damage(self.destructibledef, attacker);
+      self.exploded = true;
+      if(arcadeMode_car_kill() && IsPlayer(attacker)) {
+        arcademode_assignpoints("arcademode_score_vehicle", attacker);
+      }
+      break;
+    } else {
+      if(IsSubStr(modelName, "_tire") || IsSubStr(modelName, "sidemirror")) {
+        self.health = self.health + damage;
+      }
+    }
+  }
+  self notify("destroyed");
+}
+
+do_explosion_sound(sound_orig) {
+  temp_org = spawn("script_origin", sound_orig);
+  temp_org playSound("explo_metal_rand", "explo_metal_rand_done");
+  temp_org waittill("explo_metal_rand_done");
+  temp_org delete();
+}
+
+do_flat_tires() {
+  self useanimtree(#animtree);
+  for(;;) {
+    self waittill("broken", broken_notify);
+    animation = [[level.destructible_pointers["flattire_anim_" + self.destructibledef]]](broken_notify);
+    self SetAnim(animation);
+  }
+}
+
+setup_destructibles() {
+  if(isDefined(self.destructibledef)) {
+    if(self.destructibledef == "dest_type95scoutcar" ||
+      self.destructibledef == "dest_beetle" ||
+      self.destructibledef == "dest_horch1a" ||
+      self.destructibledef == "dest_mercedesw136" ||
+      self.destructibledef == "dest_mercedesw136b" ||
+      self.destructibledef == "dest_opel_blitz" ||
+      self.destructibledef == "dest_bmwmotorcycle" ||
+      self.destructibledef == "dest_type94truck" ||
+      self.destructibledef == "dest_type94truckcamo") {
+      if(!isDefined(level.destructible_pointers_inited) || !isDefined(level.destructible_pointers_inited[self.destructibledef])) {
+        temp_def = "";
+        for(i = 5; i < self.destructibledef.size; i++) {
+          temp_def = temp_def + self.destructibledef[i];
+        }
+        ASSERTMSG("You have not initialized the destructible script for \"" + self.destructibledef + "\" -- It'd be something like: maps\\_destructible_" + temp_def + "::init(); before _load::main() in your level script.");
+        return;
+      }
+      self add_damage_owner_recorder();
+      self thread do_explosion();
+      self thread do_flat_tires();
+    }
+    return;
+  }
+}
+
+add_damage_owner_recorder() {
+  self.player_damage = 0;
+  self.non_player_damage = 0;
+  self.car_damage_owner_recorder = true;
+}
+
+arcadeMode_car_kill() {
+  if(!arcadeMode()) {
+    return false;
+  }
+  if(isDefined(level.allCarsDamagedByPlayer)) {
+    return true;
+  }
+  return self maps\_gameskill::player_did_most_damage();
+}
+
+set_function_pointer(type, def, func) {
+  if(!isDefined(level.destructible_pointers)) {
+    level.destructible_pointers = [];
+  }
+  if(!isDefined(level.destructible_pointers_inited)) {
+    level.destructible_pointers_inited = [];
+  }
+  if(!isDefined(level.destructible_pointers_inited[def])) {
+    level.destructible_pointers_inited[def] = true;
+  }
+  level.destructible_pointers[type + "_" + def] = func;
+}
+
+set_pre_explosion(def, fx) {
+  level._effect[def + "_preexplode"] = LoadFx(fx);
+}
+
+build_destructible_radiusdamage(destructibledef, offset, range, maxdamage, mindamage, bKillplayer) {
+  if(!isDefined(level.destructible_death_radiusdamage))
+    level.destructible_death_radiusdamage = [];
+  if(!isDefined(bKillplayer))
+    bKillplayer = false;
+  if(!isDefined(offset))
+    offset = (0, 0, 0);
+  struct = spawnStruct();
+  struct.offset = offset;
+  struct.range = range;
+  struct.maxdamage = maxdamage;
+  struct.mindamage = mindamage;
+  struct.bKillplayer = bKillplayer;
+  level.destructible_death_radiusdamage[destructibledef] = struct;
+}
+
+kill_damage(destructibledef, attacker) {
+  if(isDefined(level.destructible_death_radiusdamage) && isDefined(level.destructible_death_radiusdamage[destructibledef])) {
+    offset = level.destructible_death_radiusdamage[destructibledef].offset;
+    range = level.destructible_death_radiusdamage[destructibledef].range;
+    maxdamage = level.destructible_death_radiusdamage[destructibledef].maxdamage;
+    mindamage = level.destructible_death_radiusdamage[destructibledef].mindamage;
+    bKillplayer = level.destructible_death_radiusdamage[destructibledef].bKillplayer;
+  } else {
+    println("build_destructible_radiusdamage() was not called in the util script for destructible: " + destructibledef + ". using default values");
+    offset = (0, 0, 0);
+    range = 128;
+    maxdamage = 20000;
+    mindamage = 20000;
+    bKillplayer = true;
+  }
+  if(bKillplayer) {
+    players = get_players();
+    for(i = 0; i < players.size; i++) {
+      players[i] enableHealthShield(false);
+    }
+  }
+  self dodamage(20000, self.origin + offset, attacker);
+  if(!isDefined(attacker)) {
+    attacker = self;
+  }
+  attacker.car_explosion = 1;
+  radiusDamage(self.origin + offset, range, maxdamage, mindamage, attacker);
+  if(bKillplayer) {
+    players = get_players();
+    for(i = 0; i < players.size; i++) {
+      players[i] enableHealthShield(true);
+    }
+  }
+  wait 0.05;
+  attacker.car_explosion = undefined;
+}
+
+build_destructible_deathquake(destructible_def, scale, duration, radius) {
+  if(!isDefined(level.vehicle_death_earthquake)) {
+    level.vehicle_death_earthquake = [];
+  }
+  level.vehicle_death_earthquake[destructible_def] = spawnStruct();
+  level.vehicle_death_earthquake[destructible_def].scale = scale;
+  level.vehicle_death_earthquake[destructible_def].duration = duration;
+  level.vehicle_death_earthquake[destructible_def].radius = radius;
+}

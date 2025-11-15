@@ -1,0 +1,18 @@
+/********************************************************
+ * Decompiled by FreeTheTech101 and Edited by SyndiShanX
+ * Script: character\mp_character_op_militia_sniper.gsc
+********************************************************/
+
+main() {
+  self setModel("mp_body_op_miltia_sniper");
+  self attach("head_op_militia_sniper", "", true);
+  self.headModel = "head_op_militia_sniper";
+  self setViewmodel("viewhands_militia");
+  self.voice = "portuguese";
+}
+
+precache() {
+  precacheModel("mp_body_op_miltia_sniper");
+  precacheModel("head_op_militia_sniper");
+  precacheModel("viewhands_militia");
+}

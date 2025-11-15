@@ -1,0 +1,18 @@
+/************************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: character\character_mp_opforce_urban_support.gsc
+************************************************************/
+
+main() {
+  self setModel("body_mp_opforce_support");
+  self attach("head_mp_opforce_3hole_mask", "", true);
+  self.headModel = "head_mp_opforce_3hole_mask";
+  self setViewmodel("viewhands_op_force");
+  self.voice = "russian";
+}
+
+precache() {
+  precacheModel("body_mp_opforce_support");
+  precacheModel("head_mp_opforce_3hole_mask");
+  precacheModel("viewhands_op_force");
+}

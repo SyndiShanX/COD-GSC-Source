@@ -1,0 +1,71 @@
+/*******************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\zombies\_zm_ai_brutus.csc
+*******************************************************/
+
+#include clientscripts\mp\_utility;
+#include clientscripts\mp\zombies\_zm_utility;
+
+init() {
+  registerclientfield("actor", "helmet_off", 9000, 1, "int", ::brutus_helmet_launch_cb);
+  registerclientfield("actor", "brutus_lock_down", 9000, 1, "int", ::brutus_lock_down_effects_cb);
+  registerbrutusfootstepcb("zm_alcatraz_brutus", ::brutusfootstepcbfunc);
+}
+
+brutus_helmet_launch_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+  if(is_true(self.helmet_launched)) {
+    return;
+  }
+  if(newval) {
+    self.helmet_launched = 1;
+    createdynentandlaunch(localclientnum, "c_zom_cellbreaker_helmet", self.origin + vectorscale((0, 0, 1), 85.0), self.angles, self.origin + vectorscale((0, 0, 1), 85.0), anglesToForward(self.angles));
+  }
+}
+
+brutus_lock_down_effects_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+  if(bwasdemojump) {
+    return;
+  }
+  if(bnewent) {
+    println("LDS: NewEnt!");
+
+  }
+
+  if(binitialsnap) {
+    println("LDS: InitialSnap!");
+
+  }
+
+  player = getlocalplayer(localclientnum);
+  player earthquake(0.7, 1, self.origin, 1500);
+  playrumbleonposition(localclientnum, "explosion_generic", self.origin);
+}
+
+brutusfootstepcbfunc(localclientnum, pos, surface, notetrack, bone) {
+  players = getlocalplayers();
+
+  for(i = 0; i < players.size; i++) {
+    if(abs(self.origin[2] - players[i].origin[2]) < 100) {
+      players[i] earthquake(0.5, 0.1, self.origin, 1500);
+      playerlocalclientnum = players[i] getlocalclientnumber();
+
+      if(isDefined(playerlocalclientnum))
+        playrumbleonposition(playerlocalclientnum, "brutus_footsteps", self.origin);
+    }
+  }
+
+  footstepdoeverything();
+}
+
+registerbrutusfootstepcb(aitype, func) {
+  if(!isDefined(level._footstepcbfuncs))
+    level._footstepcbfuncs = [];
+
+  if(isDefined(level._footstepcbfuncs[aitype])) {
+    println("Attempting to register footstep callback function for ai type " + aitype + " multiple times.");
+
+    return;
+  }
+
+  level._footstepcbfuncs[aitype] = func;
+}

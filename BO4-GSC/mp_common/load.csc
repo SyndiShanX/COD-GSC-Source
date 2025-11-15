@@ -1,0 +1,41 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: mp_common\load.csc
+***********************************************/
+
+#include scripts\core_common\clientfield_shared;
+#include scripts\core_common\flagsys_shared;
+#include scripts\core_common\map;
+#include scripts\core_common\system_shared;
+#include scripts\core_common\util_shared;
+#include scripts\core_common\vehicles\driving_fx;
+#include scripts\mp_common\callbacks;
+#include scripts\mp_common\gametypes\gametype;
+
+#namespace load;
+
+levelnotifyhandler(clientnum, state, oldstate) {
+  if(state != "") {
+    level notify(state, {
+      #localclientnum: clientnum
+    });
+  }
+}
+
+main() {
+  assert(isDefined(level.first_frame), "<dev string:x38>");
+  level thread util::init_utility();
+  util::registersystem("levelNotify", &levelnotifyhandler);
+  register_clientfields();
+  level.createfx_disable_fx = getdvarint(#"disable_fx", 0) == 1;
+  map::init();
+  gametype::init();
+  system::wait_till("all");
+  level flagsys::set(#"load_main_complete");
+}
+
+register_clientfields() {
+  clientfield::register("missile", "cf_m_proximity", 1, 1, "int", &callback::callback_proximity, 0, 0);
+  clientfield::register("missile", "cf_m_emp", 1, 1, "int", &callback::callback_emp, 0, 0);
+  clientfield::register("missile", "cf_m_stun", 1, 1, "int", &callback::callback_stunned, 0, 0);
+}

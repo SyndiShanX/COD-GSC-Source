@@ -1,0 +1,17 @@
+/***********************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: character\mp_character_opforce_snow_shotgun.gsc
+***********************************************************/
+
+main() {
+  self setModel("mp_body_russian_military_shotgun_a_arctic");
+  codescripts\character::attachhead("alias_russian_military_arctic_heads", xmodelalias\alias_russian_military_arctic_heads::main());
+  self setviewmodel("viewhands_russian_d");
+  self.voice = "russian";
+}
+
+precache() {
+  precachemodel("mp_body_russian_military_shotgun_a_arctic");
+  codescripts\character::precachemodelarray(xmodelalias\alias_russian_military_arctic_heads::main());
+  precachemodel("viewhands_russian_d");
+}

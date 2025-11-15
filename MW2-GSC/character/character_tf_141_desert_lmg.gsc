@@ -1,0 +1,15 @@
+/********************************************************
+ * Decompiled by FreeTheTech101 and Edited by SyndiShanX
+ * Script: character\character_tf_141_desert_lmg.gsc
+********************************************************/
+
+main() {
+  self setModel("body_desert_tf141_lmg");
+  codescripts\character::attachHead("alias_tf141_heads_desert", xmodelalias\alias_tf141_heads_desert::main());
+  self.voice = "taskforce";
+}
+
+precache() {
+  precacheModel("body_desert_tf141_lmg");
+  codescripts\character::precacheModelArray(xmodelalias\alias_tf141_heads_desert::main());
+}

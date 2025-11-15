@@ -1,0 +1,12 @@
+/*******************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: xmodelalias\char_rus_guardwet_helmalias.gsc
+*******************************************************/
+
+main() {
+  a[0] = "char_rus_guardwet_helm1";
+  a[1] = "char_rus_guardwet_hat";
+  a[2] = "char_rus_guardwet_ushankadown1";
+  a[3] = "char_rus_guardwet_ushankaup1";
+  return a;
+}

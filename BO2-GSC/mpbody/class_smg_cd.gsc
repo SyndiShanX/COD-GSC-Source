@@ -1,0 +1,22 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: mpbody\class_smg_cd.gsc
+**************************************/
+
+#include common_scripts\utility;
+
+precache() {
+  precachemodel("c_mul_mp_cordis_smg_fb");
+  precachemodel("c_mul_mp_cordis_smg_viewhands");
+
+  if(level.multiteam)
+    game["set_player_model"]["team6"]["smg"] = ::set_player_model;
+  else
+    game["set_player_model"]["axis"]["smg"] = ::set_player_model;
+}
+
+set_player_model() {
+  self setModel("c_mul_mp_cordis_smg_fb");
+  self setviewmodel("c_mul_mp_cordis_smg_viewhands");
+  heads = [];
+}

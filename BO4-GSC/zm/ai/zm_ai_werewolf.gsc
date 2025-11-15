@@ -1,0 +1,1348 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: zm\ai\zm_ai_werewolf.gsc
+***********************************************/
+
+#include script_2c5daa95f8fec03c;
+#include scripts\core_common\aat_shared;
+#include scripts\core_common\ai\archetype_damage_utility;
+#include scripts\core_common\ai\systems\ai_blackboard;
+#include scripts\core_common\ai\systems\ai_interface;
+#include scripts\core_common\ai\systems\animation_state_machine_mocomp;
+#include scripts\core_common\ai\systems\animation_state_machine_notetracks;
+#include scripts\core_common\ai\systems\behavior_state_machine;
+#include scripts\core_common\ai\systems\behavior_tree_utility;
+#include scripts\core_common\ai\systems\blackboard;
+#include scripts\core_common\ai\systems\gib;
+#include scripts\core_common\ai\zombie_utility;
+#include scripts\core_common\ai_shared;
+#include scripts\core_common\array_shared;
+#include scripts\core_common\callbacks_shared;
+#include scripts\core_common\clientfield_shared;
+#include scripts\core_common\flag_shared;
+#include scripts\core_common\spawner_shared;
+#include scripts\core_common\struct;
+#include scripts\core_common\system_shared;
+#include scripts\core_common\util_shared;
+#include scripts\zm\ai\zm_ai_werewolf_interface;
+#include scripts\zm\powerup\zm_powerup_nuke;
+#include scripts\zm_common\ai\zm_ai_utility;
+#include scripts\zm_common\trials\zm_trial_special_enemy;
+#include scripts\zm_common\zm_audio;
+#include scripts\zm_common\zm_behavior;
+#include scripts\zm_common\zm_cleanup_mgr;
+#include scripts\zm_common\zm_customgame;
+#include scripts\zm_common\zm_devgui;
+#include scripts\zm_common\zm_powerups;
+#include scripts\zm_common\zm_score;
+#include scripts\zm_common\zm_spawner;
+#include scripts\zm_common\zm_utility;
+#include scripts\zm_common\zm_zonemgr;
+
+#namespace zm_ai_werewolf;
+
+class class_9f07f58e {
+  var adjustmentstarted;
+  var var_425c4c8b;
+
+  constructor() {
+    adjustmentstarted = 0;
+    var_425c4c8b = 1;
+  }
+
+}
+
+autoexec __init__system__() {
+  system::register(#"zm_ai_werewolf", &__init__, &__main__, undefined);
+}
+
+__init__() {
+  registerbehaviorscriptfunctions();
+  zm_ai_werewolf_interface::registerwerewolfinterfaceattributes();
+  init();
+  spawner::add_archetype_spawn_function(#"werewolf", &function_c759ad64);
+  spawner::add_archetype_spawn_function(#"werewolf", &function_3d5e8286);
+  spawner::function_89a2cd87(#"werewolf", &function_eaceec8b);
+  zm_cleanup::function_cdf5a512(#"werewolf", &function_ccbee20);
+  clientfield::register("actor", "wrwlf_silver_death_fx", 8000, 1, "int");
+  clientfield::register("actor", "wrwlf_weakpoint_fx", 8000, 2, "counter");
+  clientfield::register("actor", "wrwlf_silver_hit_fx", 8000, 1, "counter");
+  clientfield::register("actor", "wrwlf_leap_attack_rumble", 8000, 1, "counter");
+
+  level thread function_e79ce40a();
+  spawner::add_archetype_spawn_function(#"werewolf", &zombie_utility::updateanimationrate);
+}
+
+__main__() {}
+
+init() {
+  level thread aat::register_immunity("zm_aat_brain_decay", #"werewolf", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_frostbite", #"werewolf", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_kill_o_watt", #"werewolf", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_plasmatic_burst", #"werewolf", 1, 1, 1);
+}
+
+private function_c759ad64() {
+  blackboard::createblackboardforentity(self);
+  ai::createinterfaceforentity(self);
+  self.___archetypeonanimscriptedcallback = &function_2e8f8923;
+}
+
+private function_2e8f8923(entity) {
+  entity.__blackboard = undefined;
+  entity function_c759ad64();
+}
+
+private registerbehaviorscriptfunctions() {
+  assert(isscriptfunctionptr(&werewolfstunstart));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"werewolfstunstart", &werewolfstunstart);
+  assert(isscriptfunctionptr(&function_6bfc7a5f));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_50eb50a32d0c4791", &function_6bfc7a5f);
+  assert(isscriptfunctionptr(&werewolfshouldstun));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"werewolfshouldstun", &werewolfshouldstun);
+  assert(isscriptfunctionptr(&werewolfidlestart));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"werewolfidlestart", &werewolfidlestart);
+  assert(isscriptfunctionptr(&function_4014790a));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_5bd93c0cfe1ada6", &function_4014790a);
+  assert(isscriptfunctionptr(&function_1917d76d));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_7d2da6c50e1bc111", &function_1917d76d);
+  assert(isscriptfunctionptr(&function_f8912291));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_603662b9e4017e3f", &function_f8912291);
+  assert(isscriptfunctionptr(&function_f5d7dc0a));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_6268b60dd4b1a7d4", &function_f5d7dc0a);
+  assert(isscriptfunctionptr(&function_fcc1c537));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_6ce96736fe43832a", &function_fcc1c537);
+  assert(isscriptfunctionptr(&function_f2e3495a));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_6f2cd3c4d5ecbf8d", &function_f2e3495a);
+  assert(isscriptfunctionptr(&function_ee311142));
+  behaviorstatemachine::registerbsmscriptapiinternal(#"hash_1516ae5422f14ad8", &function_ee311142);
+  assert(isscriptfunctionptr(&function_6488bc7e));
+  behaviorstatemachine::registerbsmscriptapiinternal(#"hash_28bbc81deeedc395", &function_6488bc7e);
+  assert(isscriptfunctionptr(&function_ba605111));
+  behaviorstatemachine::registerbsmscriptapiinternal(#"hash_37194f1a33dd9fa9", &function_ba605111);
+  assert(isscriptfunctionptr(&werewolfshouldreset));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"werewolfshouldreset", &werewolfshouldreset);
+  assert(isscriptfunctionptr(&werewolfshouldshowpain));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"werewolfshouldshowpain", &werewolfshouldshowpain);
+  assert(isscriptfunctionptr(&function_1ab1a5b3));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_2485d20310e0248c", &function_1ab1a5b3);
+  assert(isscriptfunctionptr(&werewolfshouldmelee));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"werewolfshouldmelee", &werewolfshouldmelee);
+  assert(isscriptfunctionptr(&function_9e901f61));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_3ac66a354287014b", &function_9e901f61);
+  assert(isscriptfunctionptr(&function_da984f51));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_645ddbbfa8bea6f9", &function_da984f51);
+  assert(isscriptfunctionptr(&function_7e2f67cf));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_5e3e49240f58c3fb", &function_7e2f67cf);
+  assert(isscriptfunctionptr(&function_390c9423));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_45de1aecce571c1", &function_390c9423);
+  assert(isscriptfunctionptr(&function_7a66357b));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_3bca879f16f06962", &function_7a66357b);
+  assert(isscriptfunctionptr(&werewolftargetservice));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"werewolftargetservice", &werewolftargetservice);
+  assert(isscriptfunctionptr(&function_a5c42011));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_599e12fb160520d7", &function_a5c42011);
+  assert(isscriptfunctionptr(&function_e523fa0d));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_1d036f310bd792ad", &function_e523fa0d);
+  animationstatenetwork::registernotetrackhandlerfunction("summon_wolves", &summonwolves);
+  animationstatenetwork::registernotetrackhandlerfunction("werewolf_leap_melee", &werewolfleapattack);
+  animationstatenetwork::registernotetrackhandlerfunction("werewolf_disable_pain", &werewolfdisablepain);
+  animationstatenetwork::registernotetrackhandlerfunction("wrwlf_silver_death_fx", &function_b74b9f01);
+  animationstatenetwork::registernotetrackhandlerfunction("werewolf_leap_rumble", &function_e980911c);
+  animationstatenetwork::registernotetrackhandlerfunction("start_breakout", &function_dc05cd83);
+  animationstatenetwork::registernotetrackhandlerfunction("end_breakout", &function_2d5048be);
+  assert(!isDefined(undefined) || isscriptfunctionptr(undefined));
+  assert(!isDefined(&function_8ddb1128) || isscriptfunctionptr(&function_8ddb1128));
+  assert(!isDefined(undefined) || isscriptfunctionptr(undefined));
+  behaviortreenetworkutility::registerbehaviortreeaction(#"hash_4f16c6f87860a582", undefined, &function_8ddb1128, undefined);
+  animationstatenetwork::registeranimationmocomp("mocomp_werewolf_leap_attack", &function_7ad7aa7d, &function_8b63ee0e, &function_76968111);
+}
+
+werewolfshouldstun(entity) {
+  if(zm_behavior::zombieshouldstun(entity) && function_833670b7(entity)) {
+    return true;
+  }
+
+  return false;
+}
+
+private function_833670b7(entity) {
+  var_7a69f7e9 = blackboard::getblackboardevents("wrwlf_stun");
+
+  if(isDefined(var_7a69f7e9) && var_7a69f7e9.size) {
+    foreach(event in var_7a69f7e9) {
+      if(event.werewolf === entity) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+werewolfstunstart(entity) {
+  zm_behavior::zombiestunstart(entity);
+  var_268f1415 = spawnStruct();
+  var_268f1415.werewolf = entity;
+  blackboard::addblackboardevent("wrwlf_stun", var_268f1415, randomintrange(10000, 12000));
+  entity.var_cc2d7568 = 1;
+}
+
+private function_8ddb1128(entity, asmstatename) {
+  if(entity ai::is_stunned()) {
+    return 5;
+  }
+
+  return 4;
+}
+
+function_6bfc7a5f(entity) {
+  zm_behavior::function_c377438f(entity);
+  entity.var_cc2d7568 = 0;
+}
+
+werewolfidlestart(entity) {
+  if(isDefined(entity.var_cc2d7568) && entity.var_cc2d7568) {
+    entity.var_cc2d7568 = 0;
+
+    if(entity getpathmode() == "dont move") {
+      entity pathmode("move allowed");
+    }
+  }
+}
+
+private function_dc05cd83(entity) {
+  self.var_2037a949 = 1;
+}
+
+private function_2d5048be(entity) {
+  self.var_2037a949 = 0;
+}
+
+private function_3d5e8286() {
+  aiutility::addaioverridedamagecallback(self, &function_ebf85268);
+  self.fovcosine = 0;
+  self.fovcosinebusy = 0;
+  self.fovcosinez = 0;
+  self.closest_player_override = &zm_utility::function_c52e1749;
+  self.var_1a60ad62 = 0;
+  self.var_b7ba7211 = 0;
+  self.var_9d9575a4 = 0;
+  self.ignore_nuke = 1;
+  self.lightning_chain_immune = 1;
+  self.var_dd6fe31f = 1;
+  self.var_126d7bef = 1;
+  self.var_ccb2e201 = 0;
+  self.instakill_func = &zm_powerups::function_16c2586a;
+  self.var_f46fbf3f = 1;
+  self.ignorepathenemyfightdist = 1;
+  self.var_ceed8829 = 1;
+  self.var_7d39ec6a = 1;
+  self callback::function_d8abfc3d(#"on_ai_killed", &on_werewolf_killed);
+  self zm_powerup_nuke::function_9a79647b(0.5);
+  self setavoidancemask("avoid none");
+  self collidewithactors(1);
+  self function_11578581(70);
+  self setblackboardattribute("_locomotion_speed", "locomotion_speed_walk");
+  self setblackboardattribute("_werewolf_stance", "upright");
+  self thread function_8fa45bb0();
+  self.var_b467f3a1 = &function_96640dc5;
+  self.ai.var_9465ce93 = gettime() + randomintrange(4500, 5500);
+
+  self thread function_1aba0132();
+
+    target_set(self);
+}
+
+on_werewolf_killed(params) {
+  if(self.archetype != #"werewolf") {
+    return;
+  }
+
+  e_attacker = params.eattacker;
+
+  if(!isplayer(e_attacker)) {
+    return;
+  }
+
+  if(zm_trial_special_enemy::is_active() && level.active_powerups.size > 0) {
+    return;
+  }
+
+  if(level flag::get("zombie_drop_powerups") && !zm_utility::is_standard() && randomint(100) <= 40) {
+    self.no_powerups = 1;
+    self thread zm_powerups::specific_powerup_drop(self.var_d0686fde, self.origin, undefined, undefined, undefined, undefined, undefined, undefined, 0, 1);
+  }
+}
+
+private function_1aba0132() {
+  self endon(#"death");
+
+  while(true) {
+    if(isDefined(self.enemy)) {
+      enemypos = function_6cde7a8b(self);
+      distance = distance(self.origin, enemypos);
+      eyeorigin = self gettagorigin("tag_eye");
+      eyeangles = self gettagangles("tag_eye");
+      eyedir = anglesToForward(eyeangles);
+
+      if(self cansee(self.enemy)) {
+        recordline(eyeorigin, eyeorigin + eyedir * 100, (0, 1, 0), "<dev string:x38>");
+      } else {
+        recordline(eyeorigin, eyeorigin + eyedir * 100, (1, 0, 0), "<dev string:x38>");
+      }
+
+      record3dtext("<dev string:x41>" + distance, self.origin, (0, 0, 1), "<dev string:x38>");
+
+    }
+
+    waitframe(1);
+  }
+}
+
+private function_eaceec8b() {
+  self.maxhealth = self zm_ai_utility::function_8d44707e(1, self._starting_round_number);
+  self.health = self.maxhealth;
+  self.var_c59e2dbf = 0;
+
+  if(zm_score::function_e5ca5733(self.archetype) == 0) {
+    zm_score::function_e5d6e6dd(self.archetype, 100);
+  }
+
+    self zm_score::function_82732ced();
+  self.deathfunction = &zm_spawner::zombie_death_animscript;
+  level thread zm_spawner::zombie_death_event(self);
+  namespace_81245006::initweakpoints(self, #"c_t8_zmb_werewolf_weakpoint_def");
+}
+
+function_ccbee20() {
+  self endon(#"death");
+  a_s_spawn_locs = struct::get_array("werewolf_location", "script_noteworthy");
+
+  if(isarray(a_s_spawn_locs)) {
+    for(i = 0; i < a_s_spawn_locs.size; i++) {
+      if(!zm_zonemgr::zone_is_enabled(a_s_spawn_locs[i].zone_name)) {
+        arrayremoveindex(a_s_spawn_locs, i);
+        continue;
+      }
+
+      if(isDefined(a_s_spawn_locs[i].var_39512f0e) && level flag::get(a_s_spawn_locs[i].var_39512f0e)) {
+        if(a_s_spawn_locs[i].var_39512f0e === "power_on3" && zm_custom::function_901b751c("zmPowerState") == 2 && zm_custom::function_901b751c(#"zmpowerdoorstate") == 0) {
+          i++;
+        } else {
+          arrayremoveindex(a_s_spawn_locs, i);
+        }
+
+        continue;
+      }
+    }
+
+    if(a_s_spawn_locs.size < 1) {
+      self.b_ignore_cleanup = 1;
+      return true;
+    }
+  } else {
+    self.b_ignore_cleanup = 1;
+    return true;
+  }
+
+  if(zm_utility::is_standard() && level flag::exists("started_defend_area") && level flag::get("started_defend_area")) {
+    self.b_ignore_cleanup = 1;
+    return true;
+  }
+
+  var_31f7011a = arraycopy(level.players);
+  var_31f7011a = arraysortclosest(var_31f7011a, self.origin);
+  i = 0;
+  var_b2aa54a9 = a_s_spawn_locs[0];
+  var_56feeec4 = distancesquared(var_31f7011a[0].origin, var_b2aa54a9.origin);
+
+  foreach(var_d7eff26a in a_s_spawn_locs) {
+    if(!zm_utility::is_player_valid(var_31f7011a[i])) {
+      i++;
+
+      if(i >= var_31f7011a.size) {
+        i = 0;
+        util::wait_network_frame();
+      }
+
+      continue;
+    }
+
+    var_e8ab126e = distancesquared(var_31f7011a[i].origin, var_d7eff26a.origin);
+
+    if(var_e8ab126e < var_56feeec4) {
+      var_56feeec4 = var_e8ab126e;
+      var_b2aa54a9 = var_d7eff26a;
+    }
+  }
+
+  self zm_ai_utility::function_a8dc3363(var_b2aa54a9);
+  return true;
+}
+
+private function_ebf85268(inflictor, attacker, damage, idflags, meansofdeath, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
+  if(isDefined(attacker) && self === attacker) {
+    damage = 0;
+  }
+
+  var_786d7e06 = zm_ai_utility::function_422fdfd4(self, attacker, weapon, boneindex, hitloc, point);
+  final_damage = int(damage * var_786d7e06.damage_scale);
+  var_934e9dce = isDefined(var_786d7e06.var_84ed9a13) && isDefined(var_786d7e06.registerzombie_bgb_used_reinforce) && var_786d7e06.registerzombie_bgb_used_reinforce && isDefined(attacker) && isplayer(attacker);
+
+  if(var_934e9dce) {
+    self.var_265cb589 = 1;
+    self.var_4bb78ac7 = gettime() + 1000;
+    attacker playhitmarker(undefined, 5, undefined, 1, 0);
+
+    if(var_786d7e06.var_84ed9a13.var_51e8b151 === "tag_chest_ws") {
+      clientfield::increment("wrwlf_weakpoint_fx", 1);
+    } else {
+      clientfield::increment("wrwlf_weakpoint_fx", 2);
+    }
+  } else if(isDefined(self.var_4bb78ac7) && gettime() < self.var_4bb78ac7) {
+    self.var_265cb589 = 1;
+  } else {
+    self.var_265cb589 = 0;
+  }
+
+  if(level.var_abe0b71d) {
+    iprintlnbold("<dev string:x44>" + var_786d7e06.damage_scale + "<dev string:x52>" + final_damage + "<dev string:x5c>" + self.health - final_damage);
+  }
+
+    if(isDefined(self.var_c59e2dbf)) {
+      self.var_c59e2dbf += final_damage;
+    }
+  else {
+    self.var_c59e2dbf = final_damage;
+  }
+
+  if(!(isDefined(self.var_48baa747) && self.var_48baa747) && !(isDefined(self.var_e9ed8a62) && self.var_e9ed8a62) && self.var_c59e2dbf > self.maxhealth * self ai::function_9139c839().var_96b9b674 / 100) {
+    if(self.var_b7ba7211 < gettime() && hasasm(self) && self function_ebbebf56() >= 1) {
+      self.var_1cfbbe3d = 1;
+    }
+
+    self.var_c59e2dbf = 0;
+  }
+
+  if(isDefined(attacker) && isplayer(attacker) && isDefined(weapon) && attacker zm_utility::function_aa45670f(weapon, 0)) {
+    if(isDefined(var_934e9dce) && var_934e9dce && isDefined(self.var_48baa747) && self.var_48baa747 && isDefined(self.var_2037a949) && self.var_2037a949 && hasasm(self) && self function_ebbebf56() >= 1) {
+      self.var_1cfbbe3d = 1;
+      self.blockingpain = 0;
+    }
+
+    if(gettime() >= self.ai.var_9465ce93) {
+      self.ai.var_9465ce93 = gettime() + randomintrange(4500, 5500);
+      self.var_125e7ef = 1;
+      self clientfield::increment("wrwlf_silver_hit_fx");
+    }
+  }
+
+  return final_damage;
+}
+
+function_7e2f67cf(entity) {
+  currentstance = entity getblackboardattribute("_werewolf_stance");
+
+  if(currentstance == "upright" && isDefined(self.var_125e7ef) && self.var_125e7ef) {
+    self.var_125e7ef = 0;
+    return true;
+  }
+
+  self.var_125e7ef = 0;
+  return false;
+}
+
+private function_390c9423(entity) {
+  currentstance = entity getblackboardattribute("_werewolf_stance");
+
+  if(currentstance == "upright") {
+    return true;
+  }
+
+  return false;
+}
+
+private function_7a66357b(entity) {
+  if(isDefined(entity.var_1cfbbe3d) && entity.var_1cfbbe3d) {
+    return true;
+  }
+
+  return false;
+}
+
+private function_da984f51(entity) {
+  if(isDefined(entity.var_e0f90289) && entity.var_e0f90289) {
+    return true;
+  }
+
+  return false;
+}
+
+private werewolfshouldreset(entity) {
+  if(isDefined(entity.var_1cfbbe3d) && entity.var_1cfbbe3d) {
+    return true;
+  }
+
+  return false;
+}
+
+private werewolfshouldshowpain(entity) {
+  if(function_7a66357b(entity)) {
+    return true;
+  }
+
+  if(!werewolfshouldmelee(entity) && btapi_locomotionbehaviorcondition(entity) && function_390c9423(entity)) {
+    return true;
+  }
+
+  return false;
+}
+
+private function_4014790a(entity) {
+  entity.var_1cfbbe3d = undefined;
+  entity.var_b7ba7211 = gettime() + int(entity ai::function_9139c839().var_bd87ef4d * 1000);
+  entity.blockingpain = 1;
+  function_43f02cf0(entity);
+}
+
+private function_1917d76d(entity) {
+  entity.blockingpain = 0;
+  entity pathmode("move allowed");
+}
+
+private werewolfdisablepain(entity) {
+  entity.var_e9ed8a62 = 1;
+}
+
+function_b74b9f01(entity) {
+  self clientfield::set("wrwlf_silver_death_fx", 1);
+  self thread function_fc2777d9();
+}
+
+private function_fc2777d9() {
+  wait 3;
+
+  if(isDefined(self)) {
+    self delete();
+  }
+}
+
+function_2341cdf0(entity, attribute, oldvalue, value) {
+  entity.b_ignore_cleanup = value;
+
+  if(value == 0 && oldvalue != value) {
+    entity notify(#"patrol_done");
+  }
+}
+
+private function_e523fa0d(entity) {
+  enemies = getaiarchetypearray(#"zombie");
+  enemies = arraycombine(enemies, getaiarchetypearray(#"catalyst"), 0, 0);
+  enemies = array::filter(enemies, 0, &function_3d752709, entity);
+
+  foreach(enemy in enemies) {
+    enemy zombie_utility::setup_zombie_knockdown(entity);
+    enemy.knockdown_type = "knockdown_shoved";
+  }
+}
+
+private function_3d752709(enemy, target) {
+  if(isDefined(enemy.knockdown) && enemy.knockdown) {
+    return false;
+  }
+
+  if(gibserverutils::isgibbed(enemy, 384)) {
+    return false;
+  }
+
+  if(distancesquared(enemy.origin, target.origin) > self ai::function_9139c839().var_179988df * self ai::function_9139c839().var_179988df) {
+    return false;
+  }
+
+  facingvec = anglesToForward(target.angles);
+  enemyvec = enemy.origin - target.origin;
+  var_3e3c8075 = (enemyvec[0], enemyvec[1], 0);
+  var_c2ee8451 = (facingvec[0], facingvec[1], 0);
+  var_3e3c8075 = vectornormalize(var_3e3c8075);
+  var_c2ee8451 = vectornormalize(var_c2ee8451);
+  enemydot = vectordot(var_c2ee8451, var_3e3c8075);
+
+  if(enemydot < 0) {
+    return false;
+  }
+
+  return true;
+}
+
+private werewolftargetservice(entity) {
+  if(isDefined(entity.ignoreall) && entity.ignoreall) {
+    return;
+  }
+
+  if(isDefined(entity.ispuppet) && entity.ispuppet || isDefined(entity.var_ff56e34c)) {
+    return;
+  }
+
+    entity.favoriteenemy = entity.var_93a62fe;
+
+  if(entity ai::has_behavior_attribute("patrol") && entity ai::get_behavior_attribute("patrol")) {
+    self setblackboardattribute("_locomotion_speed", "locomotion_speed_walk");
+
+    if(!isDefined(entity.enemy)) {
+      return;
+    }
+
+    if(entity.health == entity.maxhealth && !entity seerecently(entity.enemy, 0.25)) {
+      return;
+    }
+
+    zm_ai_utility::stop_patrol(entity);
+  }
+
+  entity setblackboardattribute("_locomotion_speed", "locomotion_speed_run");
+  entity.zombie_poi = entity zm_utility::get_zombie_point_of_interest(entity.origin);
+
+  if(isDefined(entity.zombie_poi) && isDefined(entity.zombie_poi[1])) {
+    entity.var_ee6f38fb = gettime() + 1000;
+    goalpos = entity.zombie_poi[0];
+    return entity zm_utility::function_64259898(goalpos);
+  }
+
+  if(!isDefined(entity.enemy) || zm_behavior::zombieshouldmoveawaycondition(entity)) {
+    zone = zm_utility::get_current_zone();
+
+    if(isDefined(zone)) {
+      wait_locations = level.zones[zone].a_loc_types[#"wait_location"];
+
+      if(isDefined(wait_locations) && wait_locations.size > 0) {
+        return zm_utility::function_64259898(wait_locations[0].origin);
+      }
+    }
+
+    entity setgoal(entity.origin);
+    return 0;
+  }
+
+  if(isDefined(entity.var_93a62fe)) {
+    targetpos = getclosestpointonnavmesh(entity.var_93a62fe.origin, 100, self getpathfindingradius());
+
+    if(!isDefined(targetpos)) {
+      targetpos = entity.origin;
+    }
+
+    entity setgoal(targetpos);
+  }
+}
+
+private function_4b392ea3(entity) {
+  if(entity function_ebbebf56() != 1) {
+    return false;
+  }
+
+  if(isDefined(entity.ai.var_d6cd1d4e)) {
+    if(gettime() < entity.ai.var_d6cd1d4e) {
+      return false;
+    }
+  }
+
+  var_34529779 = blackboard::getblackboardevents("wrlf_stance_change");
+
+  if(isDefined(var_34529779) && var_34529779.size) {
+    foreach(var_462d3042 in var_34529779) {
+      if(isDefined(var_462d3042.data.pos) && distancesquared(var_462d3042.data.pos, entity.origin) <= 800 * 800) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+private function_a5c42011(entity) {
+  currentstance = entity getblackboardattribute("_werewolf_stance");
+  desiredstance = currentstance;
+  pathgoalpos = entity.pathgoalpos;
+
+  if(function_4b392ea3(entity)) {
+    if(isDefined(pathgoalpos)) {
+      distsq = distancesquared(entity.origin, pathgoalpos);
+
+      if(currentstance == "upright" && distsq > entity ai::function_9139c839().var_ed83d6e9 * entity ai::function_9139c839().var_ed83d6e9) {
+        desiredstance = "quad";
+        self allowpitchangle(1);
+        self setpitchorient();
+      } else if(currentstance == "quad" && distsq < entity ai::function_9139c839().var_e5f93adc * entity ai::function_9139c839().var_e5f93adc) {
+        desiredstance = "upright";
+        self allowpitchangle(0);
+        self clearpitchorient();
+      }
+    } else {
+      desiredstance = "upright";
+    }
+
+    entity.ai.var_d6cd1d4e = gettime() + int(entity ai::function_9139c839().var_6d4b0dd6 * 1000);
+    entity setblackboardattribute("_werewolf_stance", desiredstance);
+    var_462d3042 = spawnStruct();
+    var_462d3042.pos = entity.origin;
+    blackboard::addblackboardevent("wrlf_stance_change", var_462d3042, randomintrange(1000, 5000));
+  }
+}
+
+private function_6488bc7e(entity) {
+  zombies = getaiteamarray(level.zombie_team);
+  zombies = arraysortclosest(zombies, entity.origin, undefined, 0, entity getpathfindingradius() + 20);
+  var_31a419e0 = [];
+
+  foreach(zombie in zombies) {
+    if(zombie.zm_ai_category === #"basic" || zombie.zm_ai_category === #"popcorn") {
+      if(!isDefined(var_31a419e0)) {
+        var_31a419e0 = [];
+      } else if(!isarray(var_31a419e0)) {
+        var_31a419e0 = array(var_31a419e0);
+      }
+
+      var_31a419e0[var_31a419e0.size] = zombie;
+    }
+  }
+
+  foreach(zombie in var_31a419e0) {
+    zombie zombie_utility::setup_zombie_knockdown(entity);
+  }
+
+  return true;
+}
+
+private function_ee311142(entity) {
+  return true;
+}
+
+private function_ba605111(entity) {
+  return true;
+}
+
+private function_f5d7dc0a(entity) {
+  var_3bfe8ebe = spawnStruct();
+  var_3bfe8ebe.enemy = entity.enemy;
+  blackboard::addblackboardevent("vlf_melee_event", var_3bfe8ebe, randomintrange(6000, 8500));
+  return true;
+}
+
+private function_e84f3864(entity) {
+  if(getdvarint(#"hash_786b741fd20cb7c1", 0)) {
+    return true;
+  }
+
+    if(!isDefined(entity.enemy)) {
+      return false;
+    }
+
+  var_33f55f67 = blackboard::getblackboardevents("vlf_melee_event");
+
+  if(isDefined(var_33f55f67) && var_33f55f67.size) {
+    foreach(var_3bfe8ebe in var_33f55f67) {
+      if(var_3bfe8ebe.data.enemy === entity.enemy) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+private werewolfshouldmelee(entity) {
+  if(!function_2801a911(entity)) {
+    return false;
+  }
+
+  if(btapi_shouldnormalmelee(entity) || function_9e901f61(entity)) {
+    return true;
+  }
+
+  return false;
+}
+
+private function_2801a911(entity) {
+  if(entity.ignoreall) {
+    return false;
+  }
+
+  if(!isDefined(entity.enemy)) {
+    return false;
+  }
+
+  if(isDefined(entity.zombie_poi) || isDefined(entity.var_ee6f38fb) && entity.var_ee6f38fb > gettime()) {
+    return false;
+  }
+
+  if(abs(entity.enemy.origin[2] - entity.origin[2]) > 64) {
+    return false;
+  }
+
+  return true;
+}
+
+private function_6cde7a8b(entity, predictedenemypos) {
+  enemypos = entity.enemy.origin;
+
+  if(isDefined(predictedenemypos)) {
+    enemypos = predictedenemypos;
+  }
+
+  dirtoenemy = vectornormalize(enemypos - entity.origin);
+  dirtoenemy = vectornormalize(dirtoenemy);
+  return enemypos + dirtoenemy * -1 * 45;
+}
+
+private function_93211521(entity, var_856465ed) {
+  vectoenemy = var_856465ed - entity.origin;
+  var_c43ad98d = entity.origin + vectorscale(vectoenemy, 0.5);
+  results = physicstraceex(var_c43ad98d, var_c43ad98d + (0, 0, 120), (-15, -15, -5), (15, 15, 5), self);
+
+  if(results[#"fraction"] == 1) {
+    recordcircle(var_c43ad98d, 4, (0, 1, 0));
+
+      return true;
+  }
+
+  recordcircle(var_c43ad98d, 4, (1, 0, 0));
+
+    return false;
+}
+
+private function_9e901f61(entity) {
+  if(entity function_ebbebf56() != 1) {
+    return false;
+  }
+
+  if(entity.ignoreall) {
+    return false;
+  }
+
+  if(!isDefined(entity.enemy)) {
+    return false;
+  }
+
+  if(!function_e84f3864(entity)) {
+    return false;
+  }
+
+  if(isDefined(entity.zombie_poi) || isDefined(entity.var_ee6f38fb) && entity.var_ee6f38fb > gettime()) {
+    return false;
+  }
+
+  if(isDefined(entity.enemy)) {
+    var_856465ed = function_6cde7a8b(entity);
+    distancesq = distancesquared(entity.origin, var_856465ed);
+
+    if(!ispointonnavmesh(entity.enemy.origin, entity.enemy)) {
+      return false;
+    }
+
+    if(!ispointonnavmesh(entity.enemy.origin, entity)) {
+      return false;
+    }
+
+    if(!ispointonnavmesh(var_856465ed, 60)) {
+      return false;
+    }
+
+    if(!ispointonnavmesh(var_856465ed, entity.enemy)) {
+      return false;
+    }
+
+    if(abs(entity.origin[2] - entity.enemy.origin[2]) > 64) {
+      return false;
+    }
+
+    if(abs(entity.origin[2] - var_856465ed[2]) > 64) {
+      return false;
+    }
+
+    if(distancesq < entity ai::function_9139c839().var_2a25aee8 * entity ai::function_9139c839().var_2a25aee8) {
+      return false;
+    }
+
+    if(distancesq > entity ai::function_9139c839().chargemeleedist * entity ai::function_9139c839().chargemeleedist) {
+      return false;
+    }
+
+    if(!tracepassedonnavmesh(entity.origin, var_856465ed, entity getpathfindingradius())) {
+      return false;
+    }
+
+    if(!util::within_fov(self.origin, self.angles, var_856465ed, cos(40))) {
+      return false;
+    }
+
+    if(!function_93211521(entity, var_856465ed)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  return false;
+}
+
+private werewolfleapattack(entity) {
+  if(entity.ignoreall) {
+    return;
+  }
+
+  if(!isDefined(entity.enemy)) {
+    return;
+  }
+
+  if(entity.enemy.ignoreme) {
+    return;
+  }
+
+  radiusdamage(entity.origin, 200, 15, 5, entity, "MOD_MELEE");
+  zombies = getaiarchetypearray(#"zombie", level.zombie_team);
+  zombies = arraysortclosest(zombies, self.origin + anglesToForward(self.angles) * 65 * 0.5, undefined, undefined, self getpathfindingradius() + 65);
+
+  recordcircle(self.origin + anglesToForward(self.angles) * 65 * 0.5, self getpathfindingradius() + 65, (0, 0, 1));
+
+    foreach(zombie in zombies) {
+      zombie zombie_utility::setup_zombie_knockdown(self);
+      zombie.knockdown_type = "knockdown_stun";
+    }
+
+  entity melee(anglesToForward(entity.angles));
+}
+
+private function_e980911c(entity) {
+  entity clientfield::increment("wrwlf_leap_attack_rumble");
+}
+
+private function_f2e3495a(entity) {
+  entity.var_e9ed8a62 = undefined;
+}
+
+private function_7ad7aa7d(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+  entity animmode("gravity", 1);
+  entity orientmode("face angle", entity.angles[1]);
+  entity.blockingpain = 1;
+  entity.usegoalanimweight = 1;
+  entity pathmode("dont move");
+  entity collidewithactors(0);
+  entity.var_b736fc8b = 1;
+
+  if(isDefined(entity.enemy)) {
+    dirtoenemy = vectornormalize(entity.enemy.origin - entity.origin);
+    entity forceteleport(entity.origin, vectortoangles(dirtoenemy));
+  }
+
+  if(!isDefined(self.meleeinfo)) {
+    self.meleeinfo = new class_9f07f58e();
+    self.meleeinfo.var_9bfa8497 = entity.origin;
+    self.meleeinfo.var_98bc84b7 = getnotetracktimes(mocompanim, "start_procedural")[0];
+    self.meleeinfo.var_6392c3a2 = getnotetracktimes(mocompanim, "stop_procedural")[0];
+    var_e397f54c = getmovedelta(mocompanim, 0, 1, entity);
+    self.meleeinfo.var_cb28f380 = entity localtoworldcoords(var_e397f54c);
+
+    movedelta = getmovedelta(mocompanim, 0, 1, entity);
+    animendpos = entity localtoworldcoords(movedelta);
+    distance = distance(entity.origin, animendpos);
+    recordcircle(animendpos, 3, (0, 1, 0), "<dev string:x38>");
+    record3dtext("<dev string:x41>" + distance, animendpos, (0, 1, 0), "<dev string:x38>");
+
+  }
+}
+
+function_8b63ee0e(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+  assert(isDefined(entity.meleeinfo));
+  currentanimtime = entity getanimtime(mocompanim);
+  zombies = getaiarchetypearray(#"zombie", level.zombie_team);
+  zombies = arraysortclosest(zombies, entity.origin, undefined, 0, entity getpathfindingradius() + 15);
+  var_7bfb4133 = 0;
+
+  foreach(zombie in zombies) {
+    if(isDefined(zombie.knockdown) && zombie.knockdown) {
+      continue;
+    }
+
+    zombie zombie_utility::setup_zombie_knockdown(entity);
+    var_7bfb4133++;
+
+    if(var_7bfb4133 >= 5) {
+      break;
+    }
+  }
+
+  if(isDefined(entity.enemy) && !entity.meleeinfo.adjustmentstarted && entity.meleeinfo.var_425c4c8b && currentanimtime >= entity.meleeinfo.var_98bc84b7) {
+    predictedenemypos = entity.enemy.origin;
+    var_856465ed = function_6cde7a8b(entity, predictedenemypos);
+    entity.meleeinfo.adjustedendpos = var_856465ed;
+    var_cc075bd0 = vectornormalize(entity.origin - entity.meleeinfo.adjustedendpos);
+    var_cf699df5 = distancesquared(entity.meleeinfo.var_9bfa8497, entity.meleeinfo.var_cb28f380);
+    var_776ddabf = distancesquared(entity.meleeinfo.var_cb28f380, entity.meleeinfo.adjustedendpos);
+    var_65cbfb52 = distancesquared(entity.meleeinfo.var_9bfa8497, entity.meleeinfo.adjustedendpos);
+    var_201660e6 = tracepassedonnavmesh(entity.meleeinfo.var_9bfa8497, entity.meleeinfo.adjustedendpos, entity getpathfindingradius());
+    traceresult = bulletTrace(entity.origin, entity.meleeinfo.adjustedendpos + (0, 0, 30), 0, entity);
+    isvisible = traceresult[#"fraction"] == 1;
+    var_535d098c = 0;
+
+    if(isDefined(traceresult[#"hitloc"]) && traceresult[#"hitloc"] == "riotshield") {
+      entity.meleeinfo.adjustedendpos += vectorscale(var_cc075bd0, 50);
+      var_535d098c = 1;
+    }
+
+    if(!var_201660e6) {
+      record3dtext("<dev string:x69>", entity.origin + (0, 0, 60), (1, 0, 0), "<dev string:x38>");
+
+        entity.meleeinfo.var_425c4c8b = 0;
+    } else if(var_cf699df5 > var_65cbfb52 && var_776ddabf >= entity ai::function_9139c839().var_d781a7cc * entity ai::function_9139c839().var_d781a7cc) {
+      record3dtext("<dev string:x7a>", entity.origin + (0, 0, 60), (1, 0, 0), "<dev string:x38>");
+
+        entity.meleeinfo.var_425c4c8b = 0;
+    } else if(var_776ddabf >= entity ai::function_9139c839().var_e49498dc * entity ai::function_9139c839().var_e49498dc) {
+      record3dtext("<dev string:x88>", entity.origin + (0, 0, 60), (1, 0, 0), "<dev string:x38>");
+
+        entity.meleeinfo.var_425c4c8b = 0;
+    }
+
+    if(var_535d098c) {
+      record3dtext("<dev string:x96>", entity.origin + (0, 0, 60), (1, 0, 0), "<dev string:x38>");
+
+        entity.meleeinfo.var_425c4c8b = 1;
+    }
+
+    if(entity.meleeinfo.var_425c4c8b) {
+      var_776ddabf = distancesquared(entity.meleeinfo.var_cb28f380, entity.meleeinfo.adjustedendpos);
+      myforward = anglesToForward(entity.angles);
+      var_1c3641f2 = (var_856465ed[0], var_856465ed[1], entity.origin[2]);
+      dirtoenemy = vectornormalize(var_1c3641f2 - entity.origin);
+      zdiff = entity.meleeinfo.var_cb28f380[2] - var_856465ed[2];
+      withinzrange = abs(zdiff) <= entity ai::function_9139c839().var_3c41cb92;
+      withinfov = vectordot(myforward, dirtoenemy) > entity ai::function_9139c839().var_e2b09972;
+      var_7948b2f3 = withinzrange && withinfov;
+      var_425c4c8b = (isvisible || var_535d098c) && var_7948b2f3;
+
+      reasons = "<dev string:xa9>" + isvisible + "<dev string:xb0>" + withinzrange + "<dev string:xb6>" + withinfov;
+
+      if(var_425c4c8b) {
+        record3dtext(reasons, entity.origin + (0, 0, 60), (0, 1, 0), "<dev string:x38>");
+      } else {
+        record3dtext(reasons, entity.origin + (0, 0, 60), (1, 0, 0), "<dev string:x38>");
+      }
+
+        if(var_425c4c8b) {
+          var_90c3cdd2 = length(entity.meleeinfo.adjustedendpos - entity.meleeinfo.var_cb28f380);
+          timestep = function_60d95f53();
+          animlength = getanimlength(mocompanim) * 1000;
+          starttime = entity.meleeinfo.var_98bc84b7 * animlength;
+          stoptime = entity.meleeinfo.var_6392c3a2 * animlength;
+          starttime = floor(starttime / timestep);
+          stoptime = floor(stoptime / timestep);
+          adjustduration = stoptime - starttime;
+          entity.meleeinfo.var_10b8b6d1 = vectornormalize(entity.meleeinfo.adjustedendpos - entity.meleeinfo.var_cb28f380);
+          entity.meleeinfo.var_8b9a15a6 = var_90c3cdd2 / adjustduration;
+          entity.meleeinfo.var_425c4c8b = 1;
+          entity.meleeinfo.adjustmentstarted = 1;
+        }
+      else {
+        entity.meleeinfo.var_425c4c8b = 0;
+      }
+    }
+  }
+
+  if(entity.meleeinfo.adjustmentstarted) {
+    if(currentanimtime <= entity.meleeinfo.var_6392c3a2) {
+      assert(isDefined(entity.meleeinfo.var_10b8b6d1) && isDefined(entity.meleeinfo.var_8b9a15a6));
+
+      recordsphere(entity.meleeinfo.var_cb28f380, 3, (0, 1, 0), "<dev string:x38>");
+      recordsphere(entity.meleeinfo.adjustedendpos, 3, (0, 0, 1), "<dev string:x38>");
+
+        adjustedorigin = entity.origin + entity.meleeinfo.var_10b8b6d1 * entity.meleeinfo.var_8b9a15a6;
+      entity forceteleport(adjustedorigin);
+      return;
+    }
+
+    if(isDefined(entity.enemy)) {
+      entity orientmode("face enemy");
+    }
+  }
+}
+
+function_76968111(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+  entity.blockingpain = 0;
+  entity.usegoalanimweight = 0;
+  entity clearpath();
+  entity orientmode("face enemy");
+  entity pathmode("move delayed", 1, 0.2);
+  entity collidewithactors(1);
+  entity.meleeinfo = undefined;
+  entity.var_b736fc8b = 0;
+}
+
+function_2c67c3e1(entity, attribute, oldvalue, value) {
+  entity.summon_wolves = value;
+}
+
+private function_43f02cf0(entity) {
+  if(isDefined(entity.summon_wolves) && entity.summon_wolves) {
+    return 0;
+  }
+
+  if(entity function_ebbebf56() != 1) {
+    return 0;
+  }
+
+  if(entity.health / entity.maxhealth > entity ai::function_9139c839().var_8c0e8cfb / 100) {
+    return 0;
+  }
+
+  if(entity.var_1a60ad62 > gettime()) {
+    return 0;
+  }
+
+  if(!(isDefined(level.var_8a5c1a7a) && level.var_8a5c1a7a) && zombie_utility::get_current_zombie_count() >= level.zombie_ai_limit) {
+    return 0;
+  }
+
+  if(randomintrangeinclusive(0, 100) < entity ai::function_9139c839().var_d9838997) {
+    entity.summon_wolves = 1;
+  }
+}
+
+private function_1ab1a5b3(entity) {
+  return isDefined(entity.summon_wolves) && entity.summon_wolves;
+}
+
+private function_f8912291(entity) {
+  entity.var_48baa747 = 1;
+  entity.summon_wolves = undefined;
+  entity.var_1a60ad62 = gettime() + entity ai::function_9139c839().var_fe050356;
+  entity.blockingpain = 1;
+}
+
+private function_fcc1c537(entity) {
+  entity.var_48baa747 = 0;
+  entity.ai.var_d6cd1d4e = gettime() + int(entity ai::function_9139c839().var_6d4b0dd6 * 1000);
+  entity.var_1a60ad62 = gettime() + entity ai::function_9139c839().var_fe050356;
+  entity.blockingpain = 0;
+}
+
+private summonwolves(entity) {
+  var_c59b482e = self.maxhealth * entity ai::function_9139c839().var_362e4d4c / 100;
+  self.health = int(min(self.health + var_c59b482e, self.maxhealth));
+}
+
+private function_39671958() {
+  werewolves = getaiarchetypearray(#"werewolf");
+
+  foreach(werewolf in werewolves) {
+    nearest_nodes = getnodesinradiussorted(werewolf.origin, 1024, 0);
+
+    foreach(node in nearest_nodes) {
+      if(node.script_noteworthy === "<dev string:xbe>" && !iscovernode(node) && ispathnode(node)) {
+        var_71c80ceb = zm_ai_utility::get_pathnode_path(node);
+        zm_ai_utility::start_patrol(werewolf, var_71c80ceb.path, var_71c80ceb.loops, undefined, undefined);
+        break;
+      }
+    }
+  }
+}
+
+private function_bb9fe466() {
+  werewolves = getaiarchetypearray(#"werewolf");
+
+  foreach(werewolf in werewolves) {
+    werewolf.summon_wolves = 1;
+  }
+}
+
+private function_91180121() {
+  var_d480edb7 = getscriptbundle(#"c_t8_zmb_werewolf_weakpoint_def");
+
+  foreach(var_dd54fdb1 in var_d480edb7.weakpoints) {
+    hittag = isDefined(var_dd54fdb1.var_51e8b151) ? var_dd54fdb1.var_51e8b151 : var_dd54fdb1.var_910e2f9b;
+
+    if(isDefined(hittag)) {
+      adddebugcommand("<dev string:xce>" + hittag + "<dev string:xf9>" + hittag + "<dev string:x129>");
+    }
+  }
+}
+
+private function_5ffd8dd3(hittag) {
+  werewolves = getaiarchetypearray(#"werewolf");
+
+  foreach(werewolf in werewolves) {
+    var_dd54fdb1 = namespace_81245006::function_37e3f011(werewolf, hittag);
+    werewolf function_ebf85268(undefined, undefined, var_dd54fdb1.health, undefined, undefined, undefined, undefined, undefined, undefined, undefined, hittag);
+  }
+}
+
+private function_e79ce40a() {
+  adddebugcommand("<dev string:x12e>");
+  spawners = getactorspawnerarray();
+
+  if(isDefined(spawners)) {
+    foreach(spawner in spawners) {
+      if(spawner.subarchetype === #"werewolf_hallion" && isDefined(spawner.script_noteworthy)) {
+        adddebugcommand("<dev string:x175>");
+        break;
+      }
+    }
+  }
+
+  adddebugcommand("<dev string:x1cc>");
+  adddebugcommand("<dev string:x215>");
+  adddebugcommand("<dev string:x264>");
+  adddebugcommand("<dev string:x2bb>");
+  function_91180121();
+  level.var_abe0b71d = 0;
+
+  while(true) {
+    waitframe(1);
+    string = getdvarstring(#"hash_4fe745cc8a7d9b8c", "<dev string:x41>");
+    cmd = strtok(string, "<dev string:x30a>");
+
+    if(cmd.size > 0) {
+      switch (cmd[0]) {
+        case #"spawn":
+          zm_devgui::spawn_archetype("<dev string:x30e>");
+          break;
+        case #"spawn_hallion":
+          spawners = getspawnerarray();
+
+          foreach(spawner in spawners) {
+            if(spawner.subarchetype === #"werewolf_hallion" && isDefined(spawner.script_noteworthy)) {
+              zm_devgui::spawn_archetype(spawner.script_noteworthy);
+              break;
+            }
+          }
+
+          break;
+        case #"kill":
+          zm_devgui::kill_archetype(#"werewolf");
+          break;
+        case #"patrol":
+          function_39671958();
+          break;
+        case #"summon_wolves":
+          function_bb9fe466();
+          break;
+        case #"destroy_weakpoint":
+          function_5ffd8dd3(cmd[1]);
+          break;
+        case #"debug_dmg":
+          level.var_abe0b71d = !level.var_abe0b71d;
+          break;
+        default:
+          break;
+      }
+    }
+
+    setdvar(#"hash_4fe745cc8a7d9b8c", "<dev string:x41>");
+  }
+}
+
+  function function_96640dc5(eventstruct) {
+    notify_string = eventstruct.action;
+
+    switch (notify_string) {
+      case #"death":
+        if(isDefined(self.bgb_tone_death) && self.bgb_tone_death) {
+          level thread zm_audio::zmbaivox_playvox(self, "death_whimsy", 1, 4);
+        } else {
+          level thread zm_audio::zmbaivox_playvox(self, notify_string, 1, 4);
+        }
+
+        break;
+      case #"pain":
+      case #"shake":
+        level thread zm_audio::zmbaivox_playvox(self, notify_string, 1, 3, 1);
+        break;
+      case #"howl":
+        level thread zm_audio::zmbaivox_playvox(self, notify_string, 1, 3, 1);
+        break;
+      case #"growl_anim":
+        level thread zm_audio::zmbaivox_playvox(self, "growl", 1, 3, 1);
+        break;
+      case #"attack_leap":
+      case #"attack_melee":
+        level thread zm_audio::zmbaivox_playvox(self, "attack", 1, 2, 1);
+        break;
+      case #"sprint":
+      case #"ambient":
+      case #"growl":
+        level thread zm_audio::zmbaivox_playvox(self, notify_string, 0, 1);
+        break;
+      default:
+        level thread zm_audio::zmbaivox_playvox(self, notify_string, 0, 2);
+        break;
+    }
+  }
+
+function_8fa45bb0() {
+  self endon(#"death");
+
+  if(!isDefined(self.var_db792001)) {
+    tag_origin = self gettagorigin("tag_eye");
+    self.var_db792001 = spawn("script_origin", tag_origin);
+    self.var_db792001 linkto(self);
+    self.var_db792001 playLoopSound(#"hash_6875b34c441a8695");
+    self thread function_dfe1236();
+    self thread function_10ac98a8();
+  }
+
+  laststance = "";
+  var_76ed16d4 = 99;
+  n_cooldown = 10;
+  var_83773814 = "ambient";
+
+  while(true) {
+    currentstance = self getblackboardattribute("_werewolf_stance");
+
+    if(isDefined(currentstance)) {
+      if(currentstance != laststance) {
+        laststance = currentstance;
+
+        if(currentstance == "upright") {
+          var_83773814 = "ambient";
+          n_cooldown = randomintrange(7, 13);
+        } else if(currentstance == "quad") {
+          var_83773814 = "sprint";
+          n_cooldown = randomintrange(4, 7);
+        }
+      }
+    }
+
+    if(var_76ed16d4 >= n_cooldown) {
+      var_76ed16d4 = 0;
+      bhtnactionstartevent(self, var_83773814);
+    } else {
+      var_76ed16d4++;
+    }
+
+    wait 1;
+  }
+}
+
+function_dfe1236() {
+  self endon(#"death");
+
+  while(true) {
+    if(isDefined(self.talking) && self.talking) {
+      self.var_db792001 stoploopsound();
+
+      while(isDefined(self.talking) && self.talking) {
+        wait 0.5;
+      }
+
+      self.var_db792001 playLoopSound(#"hash_6875b34c441a8695");
+    }
+
+    wait 0.5;
+  }
+}
+
+function_10ac98a8() {
+  var_80c3a5c6 = self.var_db792001;
+  self waittill(#"death");
+  waitframe(1);
+  var_80c3a5c6 delete();
+}

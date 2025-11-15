@@ -1,0 +1,16 @@
+/********************************************************
+ * Decompiled by FreeTheTech101 and Edited by SyndiShanX
+ * Script: character\character_hero_arctic_price.gsc
+********************************************************/
+
+main() {
+  self setModel("body_tf141_assault_a");
+  self attach("head_hero_price_arctic", "", true);
+  self.headModel = "head_hero_price_arctic";
+  self.voice = "taskforce";
+}
+
+precache() {
+  precacheModel("body_tf141_assault_a");
+  precacheModel("head_hero_price_arctic");
+}

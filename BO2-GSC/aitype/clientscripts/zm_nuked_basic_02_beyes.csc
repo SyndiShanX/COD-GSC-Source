@@ -1,0 +1,30 @@
+/*******************************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: aitype\clientscripts\zm_nuked_basic_02_beyes.csc
+*******************************************************************/
+
+#include character\clientscripts\c_zom_dlc0_zombie_soldier_1_beyes;
+#include character\clientscripts\c_zom_dlc0_zombie_soldier_civ_1_beyes;
+
+main() {
+  switch (self getcharacterindex()) {
+    case 0:
+      character\clientscripts\c_zom_dlc0_zombie_soldier_1_beyes::main();
+      break;
+    case 1:
+      character\clientscripts\c_zom_dlc0_zombie_soldier_civ_1_beyes::main();
+      break;
+  }
+
+  self._aitype = "zm_nuked_basic_02_beyes";
+}
+
+#using_animtree("zm_nuked_basic");
+
+precache(ai_index) {
+  character\clientscripts\c_zom_dlc0_zombie_soldier_1_beyes::precache();
+  character\clientscripts\c_zom_dlc0_zombie_soldier_civ_1_beyes::precache();
+  usefootsteptable(ai_index, "default_ai");
+  precacheanimstatedef(ai_index, #animtree, "zm_nuked_basic");
+  setdemolockonvalues(ai_index, 100, 60, -15, 60, 30, -5, 60);
+}

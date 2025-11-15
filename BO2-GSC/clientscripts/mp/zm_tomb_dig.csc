@@ -1,0 +1,25 @@
+/********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\zm_tomb_dig.csc
+********************************************/
+
+#include clientscripts\mp\zombies\_zm_utility;
+
+init() {
+  registerclientfield("world", "shovel_player1", 14000, 2, "int", undefined, 0);
+  registerclientfield("world", "shovel_player2", 14000, 2, "int", undefined, 0);
+  registerclientfield("world", "shovel_player3", 14000, 2, "int", undefined, 0);
+  registerclientfield("world", "shovel_player4", 14000, 2, "int", undefined, 0);
+  registerclientfield("world", "helmet_player1", 14000, 1, "int", undefined, 0);
+  registerclientfield("world", "helmet_player2", 14000, 1, "int", undefined, 0);
+  registerclientfield("world", "helmet_player3", 14000, 1, "int", undefined, 0);
+  registerclientfield("world", "helmet_player4", 14000, 1, "int", undefined, 0);
+  setupclientfieldcodecallbacks("world", 1, "shovel_player1");
+  setupclientfieldcodecallbacks("world", 1, "shovel_player2");
+  setupclientfieldcodecallbacks("world", 1, "shovel_player3");
+  setupclientfieldcodecallbacks("world", 1, "shovel_player4");
+  setupclientfieldcodecallbacks("world", 1, "helmet_player1");
+  setupclientfieldcodecallbacks("world", 1, "helmet_player2");
+  setupclientfieldcodecallbacks("world", 1, "helmet_player3");
+  setupclientfieldcodecallbacks("world", 1, "helmet_player4");
+}

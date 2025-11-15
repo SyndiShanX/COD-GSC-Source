@@ -1,0 +1,14 @@
+/*****************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: character\c_usa_unioninsp_salazar_cin.gsc
+*****************************************************/
+
+main() {
+  self setModel("c_usa_unioninsp_salazar_cin_fb");
+  self.voice = "american";
+  self.skeleton = "base";
+}
+
+precache() {
+  precachemodel("c_usa_unioninsp_salazar_cin_fb");
+}

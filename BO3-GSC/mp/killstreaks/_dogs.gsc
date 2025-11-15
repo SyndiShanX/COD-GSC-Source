@@ -1,0 +1,750 @@
+/*************************************************
+ * Decompiled by Serious and Edited by SyndiShanX
+ * Script: mp\killstreaks\_dogs.gsc
+*************************************************/
+
+#using scripts\codescripts\struct;
+#using scripts\mp\_util;
+#using scripts\mp\gametypes\_battlechatter;
+#using scripts\mp\gametypes\_dev;
+#using scripts\mp\gametypes\_spawning;
+#using scripts\mp\gametypes\_spawnlogic;
+#using scripts\mp\killstreaks\_killstreakrules;
+#using scripts\mp\killstreaks\_killstreaks;
+#using scripts\mp\killstreaks\_supplydrop;
+#using scripts\shared\array_shared;
+#using scripts\shared\scoreevents_shared;
+#using scripts\shared\system_shared;
+#using scripts\shared\tweakables_shared;
+#using scripts\shared\util_shared;
+#using scripts\shared\weapons\_weapon_utils;
+#using scripts\shared\weapons\_weapons;
+#namespace dogs;
+
+function init() {
+  level.dog_targets = [];
+  level.dog_targets[level.dog_targets.size] = "trigger_radius";
+  level.dog_targets[level.dog_targets.size] = "trigger_multiple";
+  level.dog_targets[level.dog_targets.size] = "trigger_use_touch";
+  level.dog_spawns = [];
+  level thread devgui_dog_think();
+  level.dogsonflashdogs = & flash_dogs;
+}
+
+function init_spawns() {
+  spawns = getnodearray("spawn", "script_noteworthy");
+  if(!isDefined(spawns) || !spawns.size) {
+    println("");
+    return;
+  }
+  dog_spawner = getent("dog_spawner", "targetname");
+  if(!isDefined(dog_spawner)) {
+    println("");
+    return;
+  }
+  valid = spawnlogic::get_spawnpoint_array("mp_tdm_spawn");
+  dog = dog_spawner spawnfromspawner();
+  foreach(spawn in spawns) {
+    valid = arraysort(valid, spawn.origin, 0);
+    for(i = 0; i < 5; i++) {
+      if(dog findpath(spawn.origin, valid[i].origin, 1, 0)) {
+        level.dog_spawns[level.dog_spawns.size] = spawn;
+        break;
+      }
+    }
+  }
+  if(!level.dog_spawns.size) {
+    println("");
+  }
+  dog delete();
+}
+
+function initkillstreak() {}
+
+function usekillstreakdogs(hardpointtype) {
+  if(!dog_killstreak_init()) {
+    return false;
+  }
+  if(!self killstreakrules::iskillstreakallowed(hardpointtype, self.team)) {
+    return false;
+  }
+  killstreak_id = self killstreakrules::killstreakstart("dogs", self.team);
+  self thread ownerhadactivedogs();
+  if(killstreak_id == -1) {
+    return false;
+  }
+  if(level.teambased) {
+    foreach(team in level.teams) {
+      if(team == self.team) {
+        continue;
+      }
+    }
+  }
+  self killstreaks::play_killstreak_start_dialog("dogs", self.team, 1);
+  self addweaponstat(getweapon("dogs"), "used", 1);
+  ownerdeathcount = self.deathcount;
+  level thread dog_manager_spawn_dogs(self, ownerdeathcount, killstreak_id);
+  level notify("called_in_the_dogs");
+  return true;
+}
+
+function ownerhadactivedogs() {
+  self endon("disconnect");
+  self.dogsactive = 1;
+  self.dogsactivekillstreak = 0;
+  self util::waittill_any("death", "game_over", "dogs_complete");
+  self.dogsactivekillstreak = 0;
+  self.dogsactive = undefined;
+}
+
+function dog_killstreak_init() {
+  dog_spawner = getent("dog_spawner", "targetname");
+  if(!isDefined(dog_spawner)) {
+    println("");
+    return false;
+  }
+  spawns = getnodearray("spawn", "script_noteworthy");
+  if(level.dog_spawns.size <= 0) {
+    println("");
+    return false;
+  }
+  exits = getnodearray("exit", "script_noteworthy");
+  if(exits.size <= 0) {
+    println("");
+    return false;
+  }
+  return true;
+}
+
+function dog_set_model() {
+  self setModel("german_shepherd_vest");
+  self setenemymodel("german_shepherd_vest_black");
+}
+
+function init_dog() {
+  assert(isai(self));
+  self.targetname = "attack_dog";
+  self.animtree = "dog.atr";
+  self.type = "dog";
+  self.accuracy = 0.2;
+  self.health = 100;
+  self.maxhealth = 100;
+  self.secondaryweapon = "";
+  self.sidearm = "";
+  self.grenadeammo = 0;
+  self.goalradius = 128;
+  self.nododgemove = 1;
+  self.ignoresuppression = 1;
+  self.suppressionthreshold = 1;
+  self.disablearrivals = 0;
+  self.pathenemyfightdist = 512;
+  self.soundmod = "dog";
+  self thread dog_health_regen();
+  self thread selfdefensechallenge();
+}
+
+function get_spawn_node(owner, team) {
+  assert(level.dog_spawns.size > 0);
+  return array::random(level.dog_spawns);
+}
+
+function get_score_for_spawn(origin, team) {
+  players = getplayers();
+  score = 0;
+  foreach(player in players) {
+    if(!isDefined(player)) {
+      continue;
+    }
+    if(!isalive(player)) {
+      continue;
+    }
+    if(player.sessionstate != "playing") {
+      continue;
+    }
+    if(distancesquared(player.origin, origin) > 4194304) {
+      continue;
+    }
+    if(player.team == team) {
+      score++;
+      continue;
+    }
+    score--;
+  }
+  return score;
+}
+
+function dog_set_owner(owner, team, requireddeathcount) {
+  self setentityowner(owner);
+  self.team = team;
+  self.requireddeathcount = requireddeathcount;
+}
+
+function dog_create_spawn_influencer(team) {
+  self spawning::create_entity_enemy_influencer("dog", team);
+}
+
+function dog_manager_spawn_dog(owner, team, spawn_node, requireddeathcount) {
+  dog_spawner = getent("dog_spawner", "targetname");
+  dog = dog_spawner spawnfromspawner();
+  dog forceteleport(spawn_node.origin, spawn_node.angles);
+  dog init_dog();
+  dog dog_set_owner(owner, team, requireddeathcount);
+  dog dog_set_model();
+  dog dog_create_spawn_influencer(team);
+  dog thread dog_owner_kills();
+  dog thread dog_notify_level_on_death();
+  dog thread dog_patrol();
+  dog thread monitor_dog_special_grenades();
+  return dog;
+}
+
+function monitor_dog_special_grenades() {
+  self endon("death");
+  while(true) {
+    self waittill("damage", damage, attacker, direction_vec, point, type, modelname, tagname, partname, weapon, idflags);
+    if(weapon_utils::isflashorstunweapon(weapon)) {
+      damage_area = spawn("trigger_radius", self.origin, 0, 128, 128);
+      attacker thread flash_dogs(damage_area);
+      wait(0.05);
+      damage_area delete();
+    }
+  }
+}
+
+function dog_manager_spawn_dogs(owner, deathcount, killstreak_id) {
+  requireddeathcount = deathcount;
+  team = owner.team;
+  level.dog_abort = 0;
+  owner thread dog_manager_abort();
+  level thread dog_manager_game_ended();
+  count = 0;
+  while(count < 10) {
+    if(level.dog_abort) {
+      break;
+    }
+    dogs = dog_manager_get_dogs();
+    while(dogs.size < 5 && count < 10 && !level.dog_abort) {
+      node = get_spawn_node(owner, team);
+      level dog_manager_spawn_dog(owner, team, node, requireddeathcount);
+      count++;
+      wait(randomfloatrange(2, 5));
+      dogs = dog_manager_get_dogs();
+    }
+    level waittill("dog_died");
+  }
+  for(;;) {
+    dogs = dog_manager_get_dogs();
+    if(dogs.size <= 0) {
+      killstreakrules::killstreakstop("dogs", team, killstreak_id);
+      if(isDefined(owner)) {
+        owner notify("dogs_complete");
+      }
+      return;
+    }
+    level waittill("dog_died");
+  }
+}
+
+function dog_abort() {
+  level.dog_abort = 1;
+  dogs = dog_manager_get_dogs();
+  foreach(dog in dogs) {
+    dog notify("abort");
+  }
+  level notify("dog_abort");
+}
+
+function dog_manager_abort() {
+  level endon("dog_abort");
+  self util::wait_endon(45, "disconnect", "joined_team", "joined_spectators");
+  dog_abort();
+}
+
+function dog_manager_game_ended() {
+  level endon("dog_abort");
+  level waittill("game_ended");
+  dog_abort();
+}
+
+function dog_notify_level_on_death() {
+  self waittill("death");
+  level notify("dog_died");
+}
+
+function dog_leave() {
+  self clearentitytarget();
+  self.ignoreall = 1;
+  self.goalradius = 30;
+  self setgoal(self dog_get_exit_node());
+  self util::wait_endon(20, "goal", "bad_path");
+  self delete();
+}
+
+function dog_patrol() {
+  self endon("death");
+  self endon("debug_patrol");
+  for(;;) {
+    if(level.dog_abort) {
+      self dog_leave();
+      return;
+    }
+    if(isDefined(self.enemy)) {
+      wait(randomintrange(3, 5));
+      continue;
+    }
+    nodes = [];
+    objectives = dog_patrol_near_objective();
+    for(i = 0; i < objectives.size; i++) {
+      objective = array::random(objectives);
+      nodes = getnodesinradius(objective.origin, 256, 64, 512, "Path", 16);
+      if(nodes.size) {
+        break;
+      }
+    }
+    if(!nodes.size) {
+      player = self dog_patrol_near_enemy();
+      if(isDefined(player)) {
+        nodes = getnodesinradius(player.origin, 1024, 0, 128, "Path", 8);
+      }
+    }
+    if(!nodes.size && isDefined(self.script_owner)) {
+      if(isalive(self.script_owner) && self.script_owner.sessionstate == "playing") {
+        nodes = getnodesinradius(self.script_owner.origin, 512, 256, 512, "Path", 16);
+      }
+    }
+    if(!nodes.size) {
+      nodes = getnodesinradius(self.origin, 1024, 512, 512, "Path");
+    }
+    if(nodes.size) {
+      nodes = array::randomize(nodes);
+      foreach(node in nodes) {
+        if(isDefined(node.script_noteworthy)) {
+          continue;
+        }
+        if(isDefined(node.dog_claimed) && isalive(node.dog_claimed)) {
+          continue;
+        }
+        self setgoal(node);
+        node.dog_claimed = self;
+        nodes = [];
+        event = self util::waittill_any_return("goal", "bad_path", "enemy", "abort");
+        if(event == "goal") {
+          util::wait_endon(randomintrange(3, 5), "damage", "enemy", "abort");
+        }
+        node.dog_claimed = undefined;
+        break;
+      }
+    }
+    wait(0.5);
+  }
+}
+
+function dog_patrol_near_objective() {
+  if(!isDefined(level.dog_objectives)) {
+    level.dog_objectives = [];
+    level.dog_objective_next_update = 0;
+  }
+  if(level.gametype == "tdm" || level.gametype == "dm") {
+    return level.dog_objectives;
+  }
+  if(gettime() >= level.dog_objective_next_update) {
+    level.dog_objectives = [];
+    foreach(target in level.dog_targets) {
+      ents = getEntArray(target, "classname");
+      foreach(ent in ents) {
+        if(level.gametype == "koth") {
+          if(isDefined(ent.targetname) && ent.targetname == "radiotrigger") {
+            level.dog_objectives[level.dog_objectives.size] = ent;
+          }
+          continue;
+        }
+        if(level.gametype == "sd") {
+          if(isDefined(ent.targetname) && ent.targetname == "bombzone") {
+            level.dog_objectives[level.dog_objectives.size] = ent;
+          }
+          continue;
+        }
+        if(!isDefined(ent.script_gameobjectname)) {
+          continue;
+        }
+        if(!issubstr(ent.script_gameobjectname, level.gametype)) {
+          continue;
+        }
+        level.dog_objectives[level.dog_objectives.size] = ent;
+      }
+    }
+    level.dog_objective_next_update = gettime() + randomintrange(5000, 10000);
+  }
+  return level.dog_objectives;
+}
+
+function dog_patrol_near_enemy() {
+  players = getplayers();
+  closest = undefined;
+  distsq = 99999999;
+  foreach(player in players) {
+    if(!isDefined(player)) {
+      continue;
+    }
+    if(!isalive(player)) {
+      continue;
+    }
+    if(player.sessionstate != "playing") {
+      continue;
+    }
+    if(isDefined(self.script_owner) && player == self.script_owner) {
+      continue;
+    }
+    if(level.teambased) {
+      if(player.team == self.team) {
+        continue;
+      }
+    }
+    if((gettime() - player.lastfiretime) > 3000) {
+      continue;
+    }
+    if(!isDefined(closest)) {
+      closest = player;
+      distsq = distancesquared(self.origin, player.origin);
+      continue;
+    }
+    d = distancesquared(self.origin, player.origin);
+    if(d < distsq) {
+      closest = player;
+      distsq = d;
+    }
+  }
+  return closest;
+}
+
+function dog_manager_get_dogs() {
+  dogs = getEntArray("attack_dog", "targetname");
+  return dogs;
+}
+
+function dog_owner_kills() {
+  if(!isDefined(self.script_owner)) {
+    return;
+  }
+  self endon("clear_owner");
+  self endon("death");
+  self.script_owner endon("disconnect");
+  while(true) {
+    self waittill("killed", player);
+    self.script_owner notify("dog_handler");
+  }
+}
+
+function dog_health_regen() {
+  self endon("death");
+  interval = 0.5;
+  regen_interval = int((self.health / 5) * interval);
+  regen_start = 2;
+  for(;;) {
+    self waittill("damage", damage, attacker, direction, point, type, tagname, modelname, partname, weapon, idflags);
+    self trackattackerdamage(attacker);
+    self thread dog_health_regen_think(regen_start, interval, regen_interval);
+  }
+}
+
+function trackattackerdamage(attacker) {
+  if(!isDefined(attacker) || !isplayer(attacker) || !isDefined(self.script_owner)) {
+    return;
+  }
+  if(level.teambased && attacker.team == self.script_owner.team || attacker == self) {
+    return;
+  }
+  if(!isDefined(self.attackerdata) || !isDefined(self.attackers)) {
+    self.attackerdata = [];
+    self.attackers = [];
+  }
+  if(!isDefined(self.attackerdata[attacker.clientid])) {
+    self.attackerclientid[attacker.clientid] = spawnStruct();
+    self.attackers[self.attackers.size] = attacker;
+  }
+}
+
+function resetattackerdamage() {
+  self.attackerdata = [];
+  self.attackers = [];
+}
+
+function dog_health_regen_think(delay, interval, regen_interval) {
+  self endon("death");
+  self endon("damage");
+  wait(delay);
+  step = 0;
+  while(step <= 5) {
+    if(self.health >= 100) {
+      break;
+    }
+    self.health = self.health + regen_interval;
+    wait(interval);
+    step = step + interval;
+  }
+  self resetattackerdamage();
+  self.health = 100;
+}
+
+function selfdefensechallenge() {
+  self waittill("death", attacker);
+  if(isDefined(attacker) && isplayer(attacker)) {
+    if(isDefined(self.script_owner) && self.script_owner == attacker) {
+      return;
+    }
+    if(level.teambased && isDefined(self.script_owner) && self.script_owner.team == attacker.team) {
+      return;
+    }
+    if(isDefined(self.attackers)) {
+      foreach(player in self.attackers) {
+        if(player != attacker) {
+          scoreevents::processscoreevent("killed_dog_assist", player);
+        }
+      }
+    }
+    attacker notify("selfdefense_dog");
+  }
+}
+
+function dog_get_exit_node() {
+  exits = getnodearray("exit", "script_noteworthy");
+  return arraygetclosest(self.origin, exits);
+}
+
+function flash_dogs(area) {
+  self endon("disconnect");
+  dogs = dog_manager_get_dogs();
+  foreach(dog in dogs) {
+    if(!isalive(dog)) {
+      continue;
+    }
+    if(dog istouching(area)) {
+      do_flash = 1;
+      if(isplayer(self)) {
+        if(level.teambased && dog.team == self.team) {
+          do_flash = 0;
+        } else if(!level.teambased && isDefined(dog.script_owner) && self == dog.script_owner) {
+          do_flash = 0;
+        }
+      }
+      if(isDefined(dog.lastflashed) && (dog.lastflashed + 1500) > gettime()) {
+        do_flash = 0;
+      }
+      if(do_flash) {
+        dog setflashbanged(1, 500);
+        dog.lastflashed = gettime();
+      }
+    }
+  }
+}
+
+function devgui_dog_think() {
+  setdvar("", "");
+  debug_patrol = 0;
+  for(;;) {
+    cmd = getdvarstring("");
+    switch (cmd) {
+      case "": {
+        player = util::gethostplayer();
+        devgui_dog_spawn(player.team);
+        break;
+      }
+      case "": {
+        player = util::gethostplayer();
+        foreach(team in level.teams) {
+          if(team == player.team) {
+            continue;
+          }
+          devgui_dog_spawn(team);
+        }
+        break;
+      }
+      case "": {
+        level dog_abort();
+        break;
+      }
+      case "": {
+        devgui_dog_camera();
+        break;
+      }
+      case "": {
+        devgui_crate_spawn();
+        break;
+      }
+      case "": {
+        devgui_crate_delete();
+        break;
+      }
+      case "": {
+        devgui_spawn_show();
+        break;
+      }
+      case "": {
+        devgui_exit_show();
+        break;
+      }
+      case "": {
+        devgui_debug_route();
+        break;
+      }
+    }
+    if(cmd != "") {
+      setdvar("", "");
+    }
+    wait(0.5);
+  }
+}
+
+function devgui_dog_spawn(team) {
+  player = util::gethostplayer();
+  dog_spawner = getent("", "");
+  level.dog_abort = 0;
+  if(!isDefined(dog_spawner)) {
+    iprintln("");
+    return;
+  }
+  direction = player getplayerangles();
+  direction_vec = anglesToForward(direction);
+  eye = player getEye();
+  scale = 8000;
+  direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
+  trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
+  nodes = getnodesinradius(trace[""], 256, 0, 128, "", 8);
+  if(!nodes.size) {
+    iprintln("");
+    return;
+  }
+  iprintln("");
+  node = arraygetclosest(trace[""], nodes);
+  dog = dog_manager_spawn_dog(player, player.team, node, 5);
+  if(team != player.team) {
+    dog.team = team;
+    dog clearentityowner();
+    dog notify("clear_owner");
+  }
+}
+
+function devgui_dog_camera() {
+  player = util::gethostplayer();
+  if(!isDefined(level.devgui_dog_camera)) {
+    level.devgui_dog_camera = 0;
+  }
+  dog = undefined;
+  dogs = dog_manager_get_dogs();
+  if(dogs.size <= 0) {
+    level.devgui_dog_camera = undefined;
+    player cameraactivate(0);
+    return;
+  }
+  for(i = 0; i < dogs.size; i++) {
+    dog = dogs[i];
+    if(!isDefined(dog) || !isalive(dog)) {
+      dog = undefined;
+      continue;
+    }
+    if(!isDefined(dog.cam)) {
+      forward = anglesToForward(dog.angles);
+      dog.cam = spawn("", (dog.origin + vectorscale((0, 0, 1), 50)) + (forward * -100));
+      dog.cam setModel("");
+      dog.cam linkto(dog);
+    }
+    if(dog getentitynumber() <= level.devgui_dog_camera) {
+      dog = undefined;
+      continue;
+    }
+    break;
+  }
+  if(isDefined(dog)) {
+    level.devgui_dog_camera = dog getentitynumber();
+    player camerasetposition(dog.cam);
+    player camerasetlookat(dog);
+    player cameraactivate(1);
+  } else {
+    level.devgui_dog_camera = undefined;
+    player cameraactivate(0);
+  }
+}
+
+function devgui_crate_spawn() {
+  player = util::gethostplayer();
+  direction = player getplayerangles();
+  direction_vec = anglesToForward(direction);
+  eye = player getEye();
+  scale = 8000;
+  direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
+  trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
+  killcament = spawn("", player.origin);
+  level thread supplydrop::dropcrate(trace[""] + vectorscale((0, 0, 1), 25), direction, "", player, player.team, killcament);
+}
+
+function devgui_crate_delete() {
+  if(!isDefined(level.devgui_crates)) {
+    return;
+  }
+  for(i = 0; i < level.devgui_crates.size; i++) {
+    level.devgui_crates[i] delete();
+  }
+  level.devgui_crates = [];
+}
+
+function devgui_spawn_show() {
+  if(!isDefined(level.dog_spawn_show)) {
+    level.dog_spawn_show = 1;
+  } else {
+    level.dog_spawn_show = !level.dog_spawn_show;
+  }
+  if(!level.dog_spawn_show) {
+    level notify("hide_dog_spawns");
+    return;
+  }
+  spawns = level.dog_spawns;
+  color = (0, 1, 0);
+  for(i = 0; i < spawns.size; i++) {
+    dev::showonespawnpoint(spawns[i], color, "", 32, "");
+  }
+}
+
+function devgui_exit_show() {
+  if(!isDefined(level.dog_exit_show)) {
+    level.dog_exit_show = 1;
+  } else {
+    level.dog_exit_show = !level.dog_exit_show;
+  }
+  if(!level.dog_exit_show) {
+    level notify("hide_dog_exits");
+    return;
+  }
+  exits = getnodearray("", "");
+  color = (1, 0, 0);
+  for(i = 0; i < exits.size; i++) {
+    dev::showonespawnpoint(exits[i], color, "", 32, "");
+  }
+}
+
+function dog_debug_patrol(node1, node2) {
+  self endon("death");
+  self endon("debug_patrol");
+  for(;;) {
+    self setgoal(node1);
+    self util::waittill_any("", "");
+    wait(1);
+    self setgoal(node2);
+    self util::waittill_any("", "");
+    wait(1);
+  }
+}
+
+function devgui_debug_route() {
+  iprintln("");
+  nodes = dev::dev_get_node_pair();
+  if(!isDefined(nodes)) {
+    iprintln("");
+    return;
+  }
+  iprintln("");
+  dogs = dog_manager_get_dogs();
+  if(isDefined(dogs[0])) {
+    dogs[0] notify("debug_patrol");
+    dogs[0] thread dog_debug_patrol(nodes[0], nodes[1]);
+  }
+}

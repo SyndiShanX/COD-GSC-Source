@@ -1,0 +1,18 @@
+/***********************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: character\character_mp_opforce_urban_sniper.gsc
+***********************************************************/
+
+main() {
+  self setModel("body_mp_opforce_sniper_urban");
+  self attach("head_mp_opforce_justin", "", true);
+  self.headModel = "head_mp_opforce_justin";
+  self setViewmodel("viewhands_op_force");
+  self.voice = "russian";
+}
+
+precache() {
+  precacheModel("body_mp_opforce_sniper_urban");
+  precacheModel("head_mp_opforce_justin");
+  precacheModel("viewhands_op_force");
+}

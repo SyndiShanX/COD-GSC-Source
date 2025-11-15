@@ -1,0 +1,14 @@
+/***********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: character\c_usa_nicaragua_woods.gsc
+***********************************************/
+
+main() {
+  self setModel("c_usa_nicaragua_woods_fb");
+  self.voice = "american";
+  self.skeleton = "base";
+}
+
+precache() {
+  precachemodel("c_usa_nicaragua_woods_fb");
+}

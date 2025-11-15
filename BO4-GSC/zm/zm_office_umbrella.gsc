@@ -1,0 +1,124 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: zm\zm_office_umbrella.gsc
+***********************************************/
+
+#include scripts\core_common\callbacks_shared;
+#include scripts\core_common\clientfield_shared;
+#include scripts\core_common\flag_shared;
+#include scripts\core_common\struct;
+#include scripts\core_common\system_shared;
+#include scripts\zm_common\zm_sq;
+#include scripts\zm_common\zm_utility;
+#include scripts\zm_common\zm_zonemgr;
+
+#namespace zm_office_umbrella;
+
+autoexec __init__system__() {
+  system::register(#"zm_office_umbrella", &__init__, &__main__, undefined);
+}
+
+__init__() {
+  init_clientfield();
+  init_quests();
+  init_objects();
+}
+
+__main__() {
+  level flag::wait_till(#"all_players_spawned");
+  zm_sq::start(#"jump_scare");
+  zm_sq::start(#"narrative_room");
+}
+
+init_clientfield() {
+  clientfield::register("toplayer", "" + #"hash_f2d0b920043dbbd", 1, 1, "counter");
+  clientfield::register("world", "" + #"narrative_room", 1, 1, "int");
+}
+
+init_quests() {
+  zm_sq::register(#"jump_scare", #"step_1", #"hash_3203b932029a4e0b", &jump_scare, &jump_scare_cleanup);
+  zm_sq::register(#"narrative_room", #"step_1", #"hash_64d6af5ddc324d26", &function_6f55d670, &function_13c87ace);
+  zm_sq::register(#"narrative_room", #"step_2", #"hash_3f567f217222e5b2", &narrative_room, &narrative_room_cleanup);
+}
+
+init_objects() {
+  level.ls_door = getent("ls_door", "targetname");
+  level.ls_door disconnectpaths();
+  level.var_ff3d8977 = getent(level.ls_door.target, "targetname");
+  level.var_ff3d8977 disconnectpaths();
+}
+
+on_player_connect() {
+  self thread track_player_eyes();
+}
+
+jump_scare(var_a276c861) {
+  foreach(player in level.players) {
+    player thread track_player_eyes();
+  }
+
+  callback::on_connect(&on_player_connect);
+}
+
+track_player_eyes() {
+  self notify(#"track_player_eyes");
+  self endon(#"disconnect", #"track_player_eyes");
+  b_saw_the_wth = 0;
+  var_616e76c5 = struct::get("sq_gl_scare", "targetname");
+
+  while(!b_saw_the_wth) {
+    n_time = 0;
+
+    while(self adsbuttonpressed() && n_time < 25) {
+      n_time++;
+      waitframe(1);
+    }
+
+    if(n_time >= 25 && self adsbuttonpressed() && self zm_zonemgr::entity_in_zone("cage") && is_weapon_sniper(self getcurrentweapon()) && self zm_utility::is_player_looking_at(var_616e76c5.origin, 0.9975, 0, self)) {
+      self zm_utility::do_player_general_vox("general", "scare_react", undefined, 100);
+      self clientfield::increment_to_player("" + #"hash_f2d0b920043dbbd", 1);
+      j_time = 0;
+
+      while(self adsbuttonpressed() && j_time < 5) {
+        j_time++;
+        waitframe(1);
+      }
+
+      b_saw_the_wth = 1;
+    }
+
+    waitframe(1);
+  }
+}
+
+private is_weapon_sniper(w_weapon) {
+  if(isDefined(w_weapon.issniperweapon) && w_weapon.issniperweapon) {
+    if(weaponhasattachment(w_weapon, "elo") || weaponhasattachment(w_weapon, "reflex") || weaponhasattachment(w_weapon, "holo") || weaponhasattachment(w_weapon, "is")) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+jump_scare_cleanup(var_a276c861, var_19e802fa) {}
+
+function_6f55d670(var_a276c861) {
+  level waittill(#"fake_waittill");
+}
+
+function_13c87ace(var_a276c861, var_19e802fa) {}
+
+narrative_room(var_a276c861) {
+  spawn_instant_revive = getent("ls_blocker", "targetname");
+  spawn_instant_revive delete();
+  level.var_ff3d8977 connectpaths();
+  level.var_ff3d8977 delete();
+  level.ls_door rotateyaw(90, 1.6);
+  level.ls_door connectpaths();
+  level clientfield::set("" + #"narrative_room", 1);
+}
+
+narrative_room_cleanup(var_a276c861, var_19e802fa) {}

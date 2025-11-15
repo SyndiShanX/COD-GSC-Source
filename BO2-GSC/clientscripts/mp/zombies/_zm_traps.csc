@@ -1,0 +1,37 @@
+/**************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\zombies\_zm_traps.csc
+**************************************************/
+
+#include clientscripts\mp\_utility;
+#include clientscripts\mp\zombies\_zm_utility;
+#include clientscripts\mp\_visionset_mgr;
+
+init() {
+  s_traps_array = getstructarray("zm_traps", "targetname");
+  a_registered_traps = [];
+
+  foreach(trap in s_traps_array) {
+    if(isDefined(trap.script_noteworthy)) {
+      if(!trap is_trap_registered(a_registered_traps))
+        a_registered_traps[trap.script_noteworthy] = 1;
+    }
+  }
+
+  keys = getarraykeys(a_registered_traps);
+
+  foreach(key in keys) {
+    switch (key) {
+      case "electric":
+        clientscripts\mp\_visionset_mgr::vsmgr_register_overlay_info_style_electrified("zm_trap_electric", 16000, 15, 1.25);
+        break;
+      case "fire":
+        clientscripts\mp\_visionset_mgr::vsmgr_register_overlay_info_style_burn("zm_trap_burn", 16000, 15, 1.25);
+        break;
+    }
+  }
+}
+
+is_trap_registered(a_registered_traps) {
+  return isDefined(a_registered_traps[self.script_noteworthy]);
+}

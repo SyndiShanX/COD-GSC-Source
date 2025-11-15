@@ -1,0 +1,487 @@
+/*************************************************
+ * Decompiled by Serious and Edited by SyndiShanX
+ * Script: shared\stealth_player.gsc
+*************************************************/
+
+#using scripts\cp\_util;
+#using scripts\cp\gametypes\_globallogic_score;
+#using scripts\shared\abilities\_ability_util;
+#using scripts\shared\array_shared;
+#using scripts\shared\clientfield_shared;
+#using scripts\shared\flag_shared;
+#using scripts\shared\stealth;
+#using scripts\shared\stealth_aware;
+#using scripts\shared\stealth_debug;
+#using scripts\shared\stealth_level;
+#using scripts\shared\stealth_status;
+#using scripts\shared\stealth_tagging;
+#using scripts\shared\stealth_vo;
+#using scripts\shared\trigger_shared;
+#using scripts\shared\util_shared;
+#namespace stealth_player;
+
+function init() {
+  assert(isplayer(self));
+  assert(!isDefined(self.stealth));
+  if(!isDefined(self.stealth)) {
+    self.stealth = spawnStruct();
+  }
+  self.stealth.player_detected = 0;
+  self.stealth.player_detect_count = 0;
+  self thread stance_monitor_thread();
+  self thread detected_monitor_thread();
+  self stealth_tagging::init();
+  self stealth_vo::init();
+  self stealth_debug::init_debug();
+  self thread function_7300ae66();
+  self thread function_bb9ffa41();
+  self thread function_ff057a95();
+}
+
+function stop() {}
+
+function reset() {
+  self.stealth.var_31bf1854 = undefined;
+  self.stealth.var_b9ae563d = undefined;
+  self.stealth.var_23eafafa = undefined;
+  self.stealth.var_9f4ce919 = [];
+}
+
+function enabled() {
+  return isDefined(self.stealth) && isDefined(self.stealth.player_detected);
+}
+
+function inc_detected(detector, alertvalue) {
+  self.stealth.player_detect_count++;
+}
+
+function inc_aware(detector, alertvalue) {
+  if(!isDefined(self.stealth.sensing)) {
+    self.stealth.sensing = [];
+  }
+  furthestsq = 0;
+  replace = -1;
+  for(i = 0; i < self.stealth.sensing.size; i++) {
+    value = self detection_value(self.stealth.sensing[i]);
+    if(value == 127 || !isDefined(self.stealth.sensing[i]) || self.stealth.sensing[i] == detector) {
+      self.stealth.sensing[i] = detector;
+      return;
+    }
+    distsq = distancesquared(self.stealth.sensing[i].origin, self.origin);
+    if(distsq > furthestsq) {
+      furthestsq = distsq;
+      replace = i;
+    }
+  }
+  if(self.stealth.sensing.size < 4) {
+    self.stealth.sensing[self.stealth.sensing.size] = detector;
+    return;
+  }
+  distsq = distancesquared(detector.origin, self.origin);
+  if(distsq < furthestsq) {
+    self.stealth.sensing[replace] = detector;
+  }
+}
+
+function function_ff057a95() {
+  self notify("hash_ff057a95");
+  self endon("hash_ff057a95");
+  self endon("disconnect");
+  self endon("stop_stealth");
+  assert(isDefined(self.stealth));
+  if(!isDefined(self.stealth.var_9f4ce919)) {
+    self.stealth.var_9f4ce919 = [];
+  }
+  while(true) {
+    if(!(isDefined(level.stealth.vo_callouts) && level.stealth.vo_callouts)) {
+      wait(1);
+      continue;
+    }
+    if(self playerads() > 0.3) {
+      var_bd8fb968 = self hascybercomability("cybercom_hijack");
+      eye = self getEye();
+      var_fd26df34 = anglesToForward(self getplayerangles());
+      targets = getaiteamarray("axis");
+      if(isDefined(level.stealth.var_581c13ae)) {
+        var_2680d17d = [];
+        foreach(var_daf22616 in level.stealth.var_581c13ae) {
+          if(!isDefined(var_daf22616)) {
+            continue;
+          }
+          targets[targets.size] = var_daf22616;
+          var_2680d17d[var_2680d17d.size] = var_daf22616;
+        }
+        if(var_2680d17d.size != level.stealth.var_581c13ae.size) {
+          level.stealth.var_581c13ae = var_2680d17d;
+        }
+      }
+      foreach(var_daf22616 in targets) {
+        warnmsg = "careful";
+        var_bbf94a49 = var_daf22616.origin;
+        if(issentient(var_daf22616)) {
+          var_bbf94a49 = var_daf22616 getEye();
+        }
+        if(isDefined(var_daf22616.var_3bee9acf)) {
+          warnmsg = var_daf22616.var_3bee9acf;
+        } else if(isvehicle(var_daf22616)) {
+          if(var_bd8fb968 && var_daf22616 isremotecontrol()) {
+            warnmsg = "careful_hack";
+          } else {
+            warnmsg = "careful_" + var_daf22616.archetype;
+          }
+        }
+        if(isDefined(self.stealth.var_9f4ce919[warnmsg])) {
+          continue;
+        }
+        dir = vectornormalize(var_bbf94a49 - eye);
+        if(vectordot(var_fd26df34, dir) > 0.99) {
+          if(sighttracepassed(var_bbf94a49, eye, 0, undefined)) {
+            self stealth_vo::function_e3ae87b3(warnmsg);
+            self.stealth.var_9f4ce919[warnmsg] = 1;
+          }
+        }
+      }
+    }
+    wait(0.05);
+  }
+}
+
+function detection_value(other) {
+  if(!isDefined(other)) {
+    return 127;
+  }
+  if(getdvarint("stealth_display", 1) == 1 && isalive(other) && !other.ignoreall) {
+    value = other getstealthsightvalue(self) * 49;
+    bcansee = other stealth::can_see(self);
+    bcombat = isDefined(other.stealth.aware_combat) && isDefined(other.stealth.aware_combat[self getentitynumber()]);
+    balert = isDefined(other.stealth.aware_alerted) && isDefined(other.stealth.aware_alerted[self getentitynumber()]);
+    if(value > 0 || balert || bcombat) {
+      if(bcombat) {
+        value = 50;
+      } else if(balert) {
+        value = 49;
+      }
+      if(bcansee || bcombat) {
+        value = value + 50;
+      }
+      return int(value);
+    }
+  }
+  return 127;
+}
+
+function function_b9393d6c(awareness) {
+  vals = level stealth_level::get_parms(awareness);
+  assert(isDefined(vals));
+  maxvisibledist = vals.maxsightdist;
+  if(awareness != "combat") {
+    stance = self getstance();
+    if(isDefined(self.stealth.in_shadow) && self.stealth.in_shadow) {
+      maxvisibledist = maxvisibledist * 0.5;
+    }
+    if(stance == "prone") {
+      maxvisibledist = maxvisibledist * 0.25;
+    } else if(stance == "crouch") {
+      maxvisibledist = maxvisibledist * 0.5;
+    }
+  }
+  self.maxvisibledist = maxvisibledist;
+  self.maxseenfovcosine = vals.fovcosine;
+  self.maxseenfovcosinez = vals.fovcosinez;
+}
+
+function set_detected(detected) {
+  self.stealth.player_detected = detected;
+}
+
+function get_detected() {
+  if(!self enabled()) {
+    return 0;
+  }
+  return self.stealth.player_detected;
+}
+
+function stance_monitor_thread() {
+  self endon("disconnect");
+  while(true) {
+    stance = self getstance();
+    maxvisibledist = 1600;
+    switch (stance) {
+      case "crouch": {
+        maxvisibledist = 800;
+        break;
+      }
+      case "prone": {
+        maxvisibledist = 400;
+        break;
+      }
+    }
+    if(isDefined(self.stealth) && (isDefined(self.stealth.in_shadow) && self.stealth.in_shadow)) {
+      maxvisibledist = maxvisibledist * 0.5;
+    }
+    self.maxvisibledist = maxvisibledist;
+    wait(0.25);
+  }
+}
+
+function detected_monitor_thread() {
+  self endon("disconnect");
+  self endon("stop_stealth");
+  while(true) {
+    self.stealth.player_detect_count = 0;
+    wait(1);
+    if(self.stealth.player_detect_count <= 0) {
+      self set_detected(0);
+    }
+  }
+}
+
+function function_7300ae66() {
+  self endon("disconnect");
+  self endon("stop_stealth");
+  wait(0.05);
+  self set_ignore_me_one_to_one(1);
+  while(true) {
+    self util::waittill_any("spawned");
+    self function_b9393d6c("high_alert");
+    wait(0.05);
+    self set_ignore_me_one_to_one(1);
+  }
+}
+
+function function_bb9ffa41() {
+  self endon("disconnect");
+  self endon("stop_stealth");
+  var_52ff854e = 0;
+  while(true) {
+    kills = self globallogic_score::getpersstat("kills");
+    if(!isDefined(kills)) {
+      kills = 0;
+    }
+    var_b69afa72 = kills;
+    lastkilltime = gettime();
+    self waittill("killed_ai", victim, smeansofdeath, weapon);
+    waittillframeend();
+    if(isDefined(victim) && isDefined(victim.team) && victim.team != "axis") {
+      self thread stealth_vo::function_e3ae87b3("fail_kill");
+      continue;
+    }
+    kills = self globallogic_score::getpersstat("kills");
+    if(!isDefined(kills)) {
+      kills = 1;
+    }
+    var_c839bf74 = kills - var_b69afa72;
+    if((gettime() - lastkilltime) > 1000) {
+      var_52ff854e = 0;
+    }
+    if(var_c839bf74 >= 2 && isDefined(smeansofdeath) && util::isbulletimpactmod(smeansofdeath)) {
+      self notify("double_kill");
+    }
+    var_52ff854e = var_52ff854e + var_c839bf74;
+    if(!isDefined(self.stealth)) {
+      return;
+    }
+    if(!isDefined(level.stealth)) {
+      return;
+    }
+    self thread function_e507ced8(victim, smeansofdeath, weapon, var_52ff854e);
+  }
+}
+
+function function_e507ced8(victim, smeansofdeath, weapon, killcount) {
+  self notify("hash_e507ced8");
+  self endon("hash_e507ced8");
+  self endon("disconnect");
+  self endon("stop_stealth");
+  self endon("death");
+  if(!level flag::get("stealth_alert") && !level flag::get("stealth_combat") && !level flag::get("stealth_discovered")) {
+    if(isDefined(victim) && isDefined(victim.var_99baf927)) {
+      self stealth_vo::function_e3ae87b3(victim.var_99baf927);
+    } else if(!(isDefined(level.stealth.var_30d9fcc6) && level.stealth.var_30d9fcc6)) {
+      if(killcount > 1) {} else if(isDefined(weapon) && weapon.type == "bullet") {}
+    }
+  }
+}
+
+function set_ignore_me_one_to_one(ignore) {
+  if(!isDefined(level.stealth)) {
+    return;
+  }
+  if(!isDefined(level.stealth.enemies)) {
+    return;
+  }
+  if(!isDefined(level.stealth.enemies[self.team])) {
+    return;
+  }
+  foreach(enemy in level.stealth.enemies[self.team]) {
+    if(!isDefined(enemy)) {
+      continue;
+    }
+    if(enemy stealth_aware::enabled()) {
+      enemy stealth_aware::set_ignore_sentient(self, ignore);
+    }
+  }
+}
+
+function update_audio(e_other, bcansee, awareness) {
+  if(getdvarint("stealth_audio", 1) == 0) {
+    return;
+  }
+  bcombat = awareness == "combat";
+  if(!self enabled()) {
+    return;
+  }
+  if(!(isDefined(self.stealth.player_detected) && self.stealth.player_detected)) {
+    if(!bcombat) {
+      if(bcansee) {
+        self thread sighting_thread(awareness);
+      }
+    }
+    if(bcombat) {
+      self.stealth.player_detected = 1;
+      self thread function_e6e6afd7(e_other);
+    }
+  }
+}
+
+function function_e6e6afd7(e_other) {
+  self endon("disconnect");
+  result = e_other util::waittill_any_timeout(0.25, "death");
+  if(result == "timeout") {
+    self thread stealth_broken_sound();
+  }
+}
+
+function sighting_thread(awareness) {
+  self notify("sighting_thread");
+  self endon("sighting_thread");
+  self endon("disconnect");
+  self endon("stop_stealth");
+  self endon("death");
+  sighting_field = 1;
+  if(awareness == "high_alert") {
+    sighting_field = 2;
+  }
+  self clientfield::set_to_player("stealth_sighting", sighting_field);
+  wait(0.15);
+  self clientfield::set_to_player("stealth_sighting", 0);
+}
+
+function alerted_thread() {
+  self notify("alerted_thread");
+  self endon("alerted_thread");
+  self endon("disconnect");
+  self endon("stop_stealth");
+  self endon("death");
+  self clientfield::set_to_player("stealth_alerted", 1);
+  wait(0.15);
+  self clientfield::set_to_player("stealth_alerted", 0);
+}
+
+function stealth_broken_sound() {
+  stealth::function_e0319e51("combat");
+}
+
+function function_ca6a0809(enemy) {
+  if(enemy stealth_aware::enabled() && enemy stealth_aware::get_awareness() == "combat") {
+    return;
+  }
+  self thread function_509ca7a6(enemy);
+  self thread function_3f6bd04c(enemy);
+}
+
+function function_509ca7a6(enemy) {
+  now = gettime();
+  var_9f8c9118 = now;
+  entnum = self getentitynumber();
+  assert(isDefined(enemy));
+  assert(isDefined(enemy.stealth));
+  if(isDefined(self.stealth.incombat) && self.stealth.incombat) {
+    return;
+  }
+  if(isDefined(enemy.stealth.var_d1c69a51) && isDefined(enemy.stealth.var_d1c69a51[entnum]) && (now - enemy.stealth.var_d1c69a51[entnum]) < 20000) {
+    return;
+  }
+  if(getdvarint("stealth_indicator", 0)) {
+    enemy notify("sight_indicator_" + entnum);
+    enemy endon("sight_indicator_" + entnum);
+    enemy endon("death");
+    if(!isDefined(enemy.stealth.var_d1c69a51)) {
+      enemy.stealth.var_d1c69a51 = [];
+    }
+    enemy.stealth.var_d1c69a51[entnum] = now;
+    basealpha = 0.67;
+    var_f69107b4 = 1000;
+    index = entnum + var_f69107b4;
+    enemy stealth_status::icon_show(self, var_f69107b4);
+    str_shader = "white_stealth_spotting";
+    color = (1, 1, 1);
+    if(isDefined(enemy.stealth.status.icon_ent) && isDefined(enemy.stealth.status.icons[index])) {
+      enemy.stealth.status.icons[index] settargetent(enemy.stealth.status.icon_ent);
+      enemy.stealth.status.icons[index] setshader(str_shader, 5, 5);
+      enemy.stealth.status.icons[index] setwaypoint(0, str_shader, 0, 0);
+      enemy.stealth.status.icons[index].color = color;
+      enemy.stealth.status.icons[index].alpha = basealpha;
+      enemy.stealth.status.icons[index].var_c3d91e16 = gettime();
+    }
+    var_8c974758 = 1 * 1000;
+    var_61fba14c = min(1000, var_8c974758);
+    var_a4ef7967 = 0;
+    while(var_a4ef7967 < var_8c974758) {
+      if(enemy stealth_aware::get_awareness() == "combat") {
+        var_a4ef7967 = max(var_8c974758 - var_61fba14c, var_a4ef7967);
+      }
+      var_ddb74378 = basealpha + (sin(float(gettime())) * (1 - basealpha));
+      if((var_8c974758 - var_a4ef7967) <= var_61fba14c && isDefined(enemy.stealth.status.icon_ent) && isDefined(enemy.stealth.status.icons[index])) {
+        alpha = var_ddb74378 * (float(var_8c974758 - var_a4ef7967)) / float(var_61fba14c);
+        enemy.stealth.status.icons[index].alpha = min(max(alpha, 0), 1);
+      } else {
+        enemy.stealth.status.icons[index].alpha = min(max(var_ddb74378, 0), 1);
+      }
+      wait(0.05);
+      var_a4ef7967 = var_a4ef7967 + 50;
+    }
+    enemy stealth_status::function_180adb28(index, var_f69107b4);
+  }
+}
+
+function function_3f6bd04c(enemy) {
+  assert(isDefined(self.stealth));
+  now = gettime();
+  if(isDefined(self.stealth.incombat) && self.stealth.incombat) {
+    return;
+  }
+  if(isDefined(self.stealth.var_45848ab) && (now - self.stealth.var_45848ab) < 20000) {
+    return;
+  }
+  self notify("hash_3f6bd04c");
+  self endon("hash_3f6bd04c");
+  self endon("disconnect");
+  self endon("stop_stealth");
+  self.stealth.var_45848ab = now;
+  var_612fc483 = self.angles[1] - (vectortoangles(enemy.origin - self.origin)[1]);
+  var_a113a204 = vectortoangles(enemy.origin - self.origin)[0];
+  var_a113a204 = angleclamp180(var_a113a204);
+  if(var_612fc483 < 0) {
+    var_612fc483 = var_612fc483 + 360;
+  }
+  var_be26784d = "enemy_behind";
+  if(var_a113a204 > 45) {
+    var_be26784d = "enemy_below";
+  } else {
+    if(var_a113a204 < -45) {
+      var_be26784d = "enemy_above";
+    } else {
+      if(var_612fc483 >= 315 || var_612fc483 <= 45) {
+        var_be26784d = "enemy_ahead";
+      } else {
+        if(var_612fc483 >= 45 && var_612fc483 <= 135) {
+          var_be26784d = "enemy_right";
+        } else if(var_612fc483 >= 225 && var_612fc483 <= 315) {
+          var_be26784d = "enemy_left";
+        }
+      }
+    }
+  }
+  self stealth_vo::function_866c6270(var_be26784d, 1);
+}

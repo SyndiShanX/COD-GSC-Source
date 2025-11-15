@@ -1,0 +1,22 @@
+/*****************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: character\char_usa_navy_wetsailor3.gsc
+*****************************************************/
+
+main() {
+  self setModel("char_usa_navy_wetsailor_body");
+  self.headModel = "char_usa_navy_wetsailor_head3_1";
+  self attach(self.headModel, "", true);
+  self.hatModel = codescripts\character::randomElement(xmodelalias\char_usa_navy_cap3alias::main());
+  self attach(self.hatModel, "", true);
+  self.gearModel = "char_usa_navy_wetsailor_vest";
+  self attach(self.gearModel);
+  self.voice = "american";
+}
+
+precache() {
+  precacheModel("char_usa_navy_wetsailor_body");
+  precacheModel("char_usa_navy_wetsailor_head3_1");
+  codescripts\character::precacheModelArray(xmodelalias\char_usa_navy_cap3alias::main());
+  precacheModel("char_usa_navy_wetsailor_vest");
+}

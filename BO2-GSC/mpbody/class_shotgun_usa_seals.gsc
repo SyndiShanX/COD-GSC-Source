@@ -1,0 +1,22 @@
+/**********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: mpbody\class_shotgun_usa_seals.gsc
+**********************************************/
+
+#include common_scripts\utility;
+
+precache() {
+  precachemodel("c_usa_mp_seal6_shotgun_fb");
+  precachemodel("c_usa_mp_seal6_shortsleeve_viewhands");
+
+  if(level.multiteam)
+    game["set_player_model"]["allies"]["spread"] = ::set_player_model;
+  else
+    game["set_player_model"]["allies"]["spread"] = ::set_player_model;
+}
+
+set_player_model() {
+  self setModel("c_usa_mp_seal6_shotgun_fb");
+  self setviewmodel("c_usa_mp_seal6_shortsleeve_viewhands");
+  heads = [];
+}

@@ -1,0 +1,12 @@
+/*****************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: animscripts\concealment_stand.gsc
+*****************************************************/
+
+#include animscripts\combat_Utility;
+#include animscripts\SetPoseMovement;
+#using_animtree("generic_human");
+
+main() {
+  animscripts\cover_stand::main();
+}

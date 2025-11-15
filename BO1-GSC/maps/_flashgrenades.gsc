@@ -1,0 +1,84 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\_flashgrenades.gsc
+**************************************/
+
+main() {
+  precacheShellshock("flashbang");
+}
+
+startMonitoringFlash() {
+  self thread monitorFlash();
+}
+
+stopMonitoringFlash(disconnected) {
+  self notify("stop_monitoring_flash");
+}
+
+flashRumbleLoop(duration) {
+  self endon("stop_monitoring_flash");
+  self endon("flash_rumble_loop");
+  self notify("flash_rumble_loop");
+  goalTime = getTime() + duration * 1000;
+  while(getTime() < goalTime) {
+    self playRumbleOnEntity("damage_heavy");
+    wait(0.05);
+  }
+}
+
+monitorFlash() {
+  self endon("disconnect");
+  self.flashEndTime = 0;
+  while(1) {
+    self waittill("flashbang", amount_distance, amount_angle, attacker);
+    if(!isalive(self)) {
+      continue;
+    }
+    hurtattacker = false;
+    hurtvictim = true;
+    if(amount_angle < 0.5) {
+      amount_angle = 0.5;
+    } else if(amount_angle > 0.8) {
+      amount_angle = 1;
+    }
+    duration = amount_distance * amount_angle * 6;
+    if(duration < 0.25) {
+      continue;
+    }
+    rumbleduration = undefined;
+    if(duration > 2) {
+      rumbleduration = 0.75;
+    } else {
+      rumbleduration = 0.25;
+    }
+    if(hurtvictim) {
+      self thread applyFlash(duration, rumbleduration);
+    }
+    if(hurtattacker) {
+      attacker thread applyFlash(duration, rumbleduration);
+    }
+  }
+}
+
+applyFlash(duration, rumbleduration) {
+  if(!isDefined(self.flashDuration) || duration > self.flashDuration) {
+    self.flashDuration = duration;
+  }
+  if(!isDefined(self.flashRumbleDuration) || rumbleduration > self.flashRumbleDuration) {
+    self.flashRumbleDuration = rumbleduration;
+  }
+  wait .05;
+  if(isDefined(self.flashDuration)) {
+    self shellshock("flashbang", self.flashDuration);
+    self.flashEndTime = getTime() + (self.flashDuration * 1000);
+  }
+  if(isDefined(self.flashRumbleDuration)) {
+    self thread flashRumbleLoop(self.flashRumbleDuration);
+  }
+  self.flashDuration = undefined;
+  self.flashRumbleDuration = undefined;
+}
+
+isFlashbanged() {
+  return isDefined(self.flashEndTime) && gettime() < self.flashEndTime;
+}

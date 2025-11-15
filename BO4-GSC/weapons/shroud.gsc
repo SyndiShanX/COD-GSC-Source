@@ -1,0 +1,387 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: weapons\shroud.gsc
+***********************************************/
+
+#include scripts\core_common\callbacks_shared;
+#include scripts\core_common\challenges_shared;
+#include scripts\core_common\clientfield_shared;
+#include scripts\core_common\damage;
+#include scripts\core_common\damagefeedback_shared;
+#include scripts\core_common\globallogic\globallogic_score;
+#include scripts\core_common\player\player_stats;
+#include scripts\core_common\scoreevents_shared;
+#include scripts\core_common\system_shared;
+#include scripts\core_common\util_shared;
+#include scripts\core_common\weapons_shared;
+#include scripts\killstreaks\killstreaks_shared;
+#include scripts\weapons\weaponobjects;
+
+#namespace shroud;
+
+autoexec __init__system__() {
+  system::register(#"shroud", &init_shared, undefined, undefined);
+}
+
+init_shared() {
+  level thread register();
+  callback::on_spawned(&on_player_spawned);
+  weaponobjects::function_e6400478(#"eq_shroud", &function_2fb567f2, 1);
+  globallogic_score::register_kill_callback(getweapon("eq_shroud"), &function_75f9989a);
+  globallogic_score::function_86f90713(getweapon("eq_shroud"), &function_75f9989a);
+  level.var_9bc205c6 = getweapon("eq_shroud");
+
+  if(getgametypesetting(#"competitivesettings") === 1) {
+    level.var_88c99ac4 = getscriptbundle("shroud_custom_settings_comp");
+  } else if(isDefined(level.var_9bc205c6.customsettings)) {
+    level.var_88c99ac4 = getscriptbundle(level.var_9bc205c6.customsettings);
+  } else {
+    level.var_88c99ac4 = getscriptbundle("shroud_custom_settings");
+  }
+
+  level.var_f53da9ba = &function_4db10465;
+  callback::on_finalize_initialization(&function_1c601b99);
+}
+
+function_1c601b99() {
+  if(isDefined(level.var_1b900c1d)) {
+    [[level.var_1b900c1d]](level.var_9bc205c6, &function_bff5c062);
+  }
+
+  if(isDefined(level.var_a5dacbea)) {
+    [[level.var_a5dacbea]](level.var_9bc205c6, &weaponobjects::function_127fb8f3);
+  }
+}
+
+function_bff5c062(shroud, attackingplayer) {
+  shroud.owner weaponobjects::hackerremoveweapon(shroud);
+  arrayremovevalue(shroud.owner.shrouds, shroud);
+  shroud setteam(attackingplayer.team);
+  shroud.team = attackingplayer.team;
+  shroud.owner = attackingplayer;
+  shroud setowner(attackingplayer);
+  shroud notify(#"hacked");
+  shroud clientfield::set("shroud_state", 1);
+  shroud weaponobjects::function_386fa470(attackingplayer);
+
+  if(!isDefined(attackingplayer.shrouds)) {
+    attackingplayer.shrouds = [];
+  }
+
+  if(!isDefined(attackingplayer.shrouds)) {
+    attackingplayer.shrouds = [];
+  } else if(!isarray(attackingplayer.shrouds)) {
+    attackingplayer.shrouds = array(attackingplayer.shrouds);
+  }
+
+  attackingplayer.shrouds[attackingplayer.shrouds.size] = shroud;
+
+  if(isDefined(level.var_f1edf93f)) {
+    _station_up_to_detention_center_triggers = [[level.var_f1edf93f]]() * 1000;
+
+    if(isDefined(_station_up_to_detention_center_triggers) ? _station_up_to_detention_center_triggers : 0) {
+      shroud notify(#"cancel_timeout");
+      shroud thread weaponobjects::function_d9c08e94(_station_up_to_detention_center_triggers, &function_4db10465);
+    }
+  }
+
+  if(isDefined(level.var_fc1bbaef)) {
+    [[level.var_fc1bbaef]](shroud);
+  }
+
+  shroud thread weaponobjects::function_6d8aa6a0(attackingplayer, shroud.var_2d045452);
+}
+
+register() {
+  clientfield::register("missile", "shroud_state", 1, 1, "int");
+  clientfield::register("clientuimodel", "hudItems.shroudCount", 1, 3, "int");
+}
+
+on_player_spawned() {
+  weapon = getweapon("eq_shroud");
+
+  if(isDefined(weapon) && !self hasweapon(weapon)) {
+    self clientfield::set_player_uimodel("hudItems.shroudCount", 0);
+  }
+}
+
+function_75f9989a(attacker, victim, weapon, attackerweapon, meansofdeath) {
+  if(!isDefined(attackerweapon) || !isDefined(attacker) || !isDefined(victim) || !isDefined(weapon)) {
+    return false;
+  }
+
+  if(weapon == attackerweapon) {
+    return false;
+  }
+
+  function_a86d28fc(attacker, victim);
+
+  if(isDefined(attacker.shrouds)) {
+    foreach(dart in attacker.shrouds) {
+      if(isDefined(dart) && distance2dsquared(victim.origin, dart.origin) < 1350 * 1350) {
+        dart.killcount = (isDefined(dart.killcount) ? dart.killcount : 0) + 1;
+
+        if(!isDefined(dart.var_cbca1a8f) && isDefined(level.var_ac6052e9) && dart.killcount >= [
+            [level.var_ac6052e9]
+          ]("shroudSuccessKillCount", 0) && isDefined(level.playgadgetsuccess) && isDefined(dart.owner)) {
+          dart.owner[[level.playgadgetsuccess]](getweapon("eq_shroud"), undefined, victim);
+          dart.var_cbca1a8f = 1;
+        }
+
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+function_a86d28fc(attacker, victim) {
+  if(!level.teambased) {
+    return;
+  }
+
+  if(!util::function_fbce7263(attacker.team, victim.team)) {
+    return;
+  }
+
+  var_f557e840 = getplayers(attacker.team);
+
+  foreach(teammate in var_f557e840) {
+    if(!isDefined(teammate)) {
+      continue;
+    }
+
+    if(teammate == attacker) {
+      continue;
+    }
+
+    if(!isDefined(teammate.shrouds)) {
+      continue;
+    }
+
+    foreach(dart in teammate.shrouds) {
+      if(!isDefined(dart)) {
+        continue;
+      }
+
+      if(distance2dsquared(victim.origin, dart.origin) >= 1350 * 1350) {
+        continue;
+      }
+
+      scoreevents::processscoreevent(#"shroud_assist", teammate, victim, getweapon(#"eq_shroud"));
+      break;
+    }
+  }
+}
+
+function_2fb567f2(watcher) {
+  watcher.ondetonatecallback = &function_4b3bc61d;
+  watcher.hackable = 1;
+  watcher.hackertoolradius = level.equipmenthackertoolradius;
+  watcher.hackertooltimems = level.equipmenthackertooltimems;
+  watcher.ownergetsassist = 1;
+  watcher.ignoredirection = 1;
+  watcher.deleteonplayerspawn = 0;
+  watcher.enemydestroy = 1;
+  watcher.onspawn = &function_f4970a20;
+  watcher.ondamage = &function_55de888f;
+  watcher.ondestroyed = &function_c142e8ec;
+  watcher.pickup = &weaponobjects::function_db70257;
+  watcher.var_994b472b = &function_95c69960;
+}
+
+function_95c69960(player) {
+  self function_c142e8ec(undefined, undefined);
+}
+
+function_f4970a20(watcher, player) {
+  player endon(#"death", #"disconnect");
+  level endon(#"game_ended");
+  self endon(#"death");
+  self weaponobjects::onspawnuseweaponobject(watcher, player);
+  self clientfield::set("shroud_state", 1);
+  self.var_2d045452 = watcher;
+  self.weapon = getweapon(#"eq_shroud");
+  self setweapon(self.weapon);
+
+  if(!isDefined(player.shrouds)) {
+    player.shrouds = [];
+  }
+
+  if(!isDefined(player.shrouds)) {
+    player.shrouds = [];
+  } else if(!isarray(player.shrouds)) {
+    player.shrouds = array(player.shrouds);
+  }
+
+  player.shrouds[player.shrouds.size] = self;
+  waitresult = self waittilltimeout(5, #"stationary");
+
+  if(waitresult._notify == #"timeout") {
+    function_4db10465();
+    return;
+  }
+
+  player notify(#"shroud_active", {
+    #dart: self
+  });
+  player clientfield::set_player_uimodel("hudItems.shroudCount", player.shrouds.size);
+  player stats::function_e24eec31(self.weapon, #"used", 1);
+  self util::make_sentient();
+  self thread function_aa8bb7be();
+  self thread function_6852f0e1();
+
+  if(isDefined(level.var_3a9b373a)) {
+    level thread[[level.var_3a9b373a]](self, player);
+  }
+
+  if(isDefined(level.var_7e7cce95)) {
+    n_fuse_time = level.var_7e7cce95;
+  } else {
+    n_fuse_time = int((isDefined(level.var_88c99ac4.var_c4e30db1) ? level.var_88c99ac4.var_c4e30db1 : 0) * 1000);
+  }
+
+  self thread weaponobjects::function_d9c08e94(n_fuse_time, &function_4db10465);
+  self clientfield::set("enemyequip", 1);
+  playFXOnTag(#"hash_18309807d9c34a77", self, "tag_fx");
+
+  if(isDefined(level.var_bd715920)) {
+    player[[level.var_bd715920]](self.weapon, undefined, self.origin, self);
+  }
+}
+
+private function_6852f0e1() {
+  owner = self.owner;
+  waitresult = self waittill(#"picked_up", #"death");
+
+  if(isDefined(owner) && isDefined(owner.shrouds)) {
+    arrayremovevalue(owner.shrouds, undefined);
+    owner clientfield::set_player_uimodel("hudItems.shroudCount", owner.shrouds.size);
+  }
+
+  if(waitresult._notify == "death") {
+    return;
+  }
+
+  if(isDefined(self)) {
+    self clientfield::set("shroud_state", 0);
+  }
+}
+
+function_aa8bb7be() {
+  self endon(#"death");
+  self waittill(#"hacked");
+}
+
+function_c142e8ec(attacker, callback_data) {
+  playFX(level._equipment_explode_fx_lg, self.origin);
+  self playSound(#"hash_330c9380b91a673");
+  var_3c4d4b60 = isDefined(self.owner);
+
+  if(isDefined(attacker) && (!var_3c4d4b60 || self.owner util::isenemyplayer(attacker))) {
+    if(var_3c4d4b60) {
+      self.owner thread killstreaks::play_taacom_dialog("shroudDestroyedFriendly");
+    }
+
+    attacker challenges::destroyedequipment();
+    scoreevents::processscoreevent(#"shroud_shutdown", attacker, self.owner, undefined);
+
+    if(isDefined(level.var_d2600afc)) {
+      self[[level.var_d2600afc]](attacker, self.owner, self.weapon);
+    }
+  }
+
+  self delete();
+}
+
+function_4db10465() {
+  self thread function_c142e8ec(undefined, undefined);
+}
+
+function_4b3bc61d(attacker, weapon, target) {
+  level notify(#"shroud_destroyed");
+
+  if(!isDefined(weapon) || !weapon.isemp) {
+    playFX(level._equipment_explode_fx_lg, self.origin);
+  }
+
+  if(isDefined(level.var_88c99ac4.var_bb6c29b4) && isDefined(weapon) && weapon == getweapon(#"shock_rifle")) {
+    playFX(level.var_88c99ac4.var_bb6c29b4, self.origin);
+  }
+
+  if(isDefined(attacker) && self.owner util::isenemyplayer(attacker)) {
+    attacker challenges::destroyedequipment(weapon);
+    self.owner globallogic_score::function_5829abe3(attacker, weapon, self.weapon);
+  }
+
+  if(validateorigin(self.origin)) {
+    playsoundatposition(#"hash_330c9380b91a673", self.origin);
+  }
+
+  if(isDefined(level.var_d2600afc)) {
+    self[[level.var_d2600afc]](attacker, self.owner, self.weapon, weapon);
+  }
+
+  self.owner luinotifyevent(#"shroud_destroyed");
+  self delete();
+}
+
+function_55de888f(watcher) {
+  self endon(#"death");
+  self setCanDamage(1);
+  damagemax = 20;
+
+  if(!self util::ishacked()) {
+    self.damagetaken = 0;
+  }
+
+  self.maxhealth = 10000;
+  self.health = self.maxhealth;
+  self setmaxhealth(self.maxhealth);
+  attacker = undefined;
+
+  while(true) {
+    waitresult = self waittill(#"damage");
+    profilestart();
+    damage = waitresult.amount;
+    type = waitresult.mod;
+    weapon = waitresult.weapon;
+    damage = weapons::function_74bbb3fa(damage, weapon, self.weapon);
+    attacker = self[[level.figure_out_attacker]](waitresult.attacker);
+    attackerisplayer = isplayer(attacker);
+    profilestop();
+
+    if(level.teambased && !sessionmodeiswarzonegame()) {
+      if(attackerisplayer && !(isDefined(level.hardcoremode) && level.hardcoremode) && !util::function_fbce7263(self.owner.team, attacker.pers[#"team"]) && self.owner != attacker) {
+        continue;
+      }
+    }
+
+    profilestart();
+
+    if(watcher.stuntime > 0 && weapon.dostun) {
+      self thread weaponobjects::stunstart(watcher, watcher.stuntime);
+    }
+
+    if(attackerisplayer && damage::friendlyfirecheck(self.owner, attacker)) {
+      if(damagefeedback::dodamagefeedback(weapon, attacker)) {
+        attacker damagefeedback::update();
+      }
+    }
+
+    if(type == "MOD_MELEE" || type == "MOD_MELEE_WEAPON_BUTT" || weapon.isemp || weapon.destroysequipment) {
+      self.damagetaken = damagemax;
+    } else {
+      self.damagetaken += damage;
+    }
+
+    if(self.damagetaken >= damagemax) {
+      watcher thread weaponobjects::waitanddetonate(self, 0.05, attacker, weapon);
+      profilestop();
+      return;
+    }
+
+    profilestop();
+  }
+}

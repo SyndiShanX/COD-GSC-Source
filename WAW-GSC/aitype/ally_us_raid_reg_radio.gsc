@@ -1,0 +1,31 @@
+/*****************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: aitype\ally_us_raid_reg_radio.gsc
+*****************************************************/
+
+main() {
+  self.animTree = "";
+  self.team = "allies";
+  self.type = "human";
+  self.accuracy = 0.2;
+  self.health = 100;
+  self.weapon = "thompson";
+  self.secondaryweapon = "";
+  self.sidearm = "colt";
+  self.grenadeWeapon = "fraggrenade";
+  self.grenadeAmmo = 3;
+  self setEngagementMinDist(256.000000, 0.000000);
+  self setEngagementMaxDist(1024.000000, 1024.000000);
+  character\char_usa_raider_r_radio::main();
+}
+
+spawner() {
+  self setspawnerteam("allies");
+}
+
+precache() {
+  character\char_usa_raider_r_radio::precache();
+  precacheItem("thompson");
+  precacheItem("colt");
+  precacheItem("fraggrenade");
+}

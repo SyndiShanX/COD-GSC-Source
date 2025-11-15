@@ -1,0 +1,541 @@
+/*******************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\anim\shoot_behavior.gsc
+*******************************************/
+
+func_4F69(param_00) {
+  self endon("killanimscript");
+  self notify("stop_deciding_how_to_shoot");
+  self endon("stop_deciding_how_to_shoot");
+  self endon("death");
+  scripts\sp\gameskill::resetmisstime_code();
+  self.var_FECA = param_00;
+  self.var_FE9E = undefined;
+  self.var_FECF = undefined;
+  self.var_FED7 = "none";
+  self.var_6B92 = 0;
+  self.var_1006D = undefined;
+  if(!isDefined(self.var_3C60)) {
+    self.var_3C60 = 0;
+  }
+
+  var_01 = isDefined(self.covernode) && self.covernode.type != "Cover Prone" && self.covernode.type != "Conceal Prone";
+  if(var_01) {
+    wait(0.05);
+  }
+
+  var_02 = self.var_FE9E;
+  var_03 = self.var_FECF;
+  var_04 = self.var_FED7;
+  if(!isDefined(self.var_8B95)) {
+    self.a.laseron = 1;
+    scripts\anim\shared::updatelaserstatus();
+  }
+
+  if(scripts\anim\utility_common::isasniper()) {
+    func_E26D();
+  }
+
+  if(var_01 && !self.a.var_2411 || !scripts\anim\utility_common::canseeenemy()) {
+    thread func_13A46();
+  }
+
+  thread func_E883();
+  self.var_1E2B = undefined;
+  for(;;) {
+    if(isDefined(self.var_FED1)) {
+      if(!isDefined(self.isnodeoccupied)) {
+        self.var_FECF = self.var_FED1;
+        self.var_FED1 = undefined;
+        func_13696();
+      } else {
+        self.var_FED1 = undefined;
+      }
+    }
+
+    var_05 = undefined;
+    if(self.var_394 == "none") {
+      func_C064();
+    } else if(scripts\anim\utility_common::usingrocketlauncher()) {
+      var_05 = func_E778();
+    } else if(scripts\anim\utility_common::isusingsidearm()) {
+      var_05 = func_CBE2();
+    } else {
+      var_05 = func_E501();
+    }
+
+    if(isDefined(self.a.var_1096D)) {
+      [
+        [self.a.var_1096D]
+      ]();
+    }
+
+    if(func_3DFB(var_02, self.var_FE9E) || !isDefined(self.var_FE9E) && func_3DFB(var_03, self.var_FECF) || func_3DFB(var_04, self.var_FED7)) {
+      self notify("shoot_behavior_change");
+    }
+
+    var_02 = self.var_FE9E;
+    var_03 = self.var_FECF;
+    var_04 = self.var_FED7;
+    if(!isDefined(var_05)) {
+      func_13696();
+    }
+  }
+}
+
+func_13696() {
+  self endon("enemy");
+  self endon("done_changing_cover_pos");
+  self endon("weapon_position_change");
+  self endon("enemy_visible");
+  if(isDefined(self.var_FE9E)) {
+    self.var_FE9E endon("death");
+    self endon("do_slow_things");
+    wait(0.05);
+    while(isDefined(self.var_FE9E)) {
+      self.var_FECF = self.var_FE9E getshootatpos();
+      wait(0.05);
+    }
+
+    return;
+  }
+
+  self waittill("do_slow_things");
+}
+
+func_C064() {
+  self.var_FE9E = undefined;
+  self.var_FECF = undefined;
+  self.var_FED7 = "none";
+  self.var_FECA = "normal";
+}
+
+func_100A4() {
+  return !scripts\anim\utility_common::isasniper() && !scripts\anim\utility_common::isshotgun(self.var_394);
+}
+
+func_E503() {
+  if(!scripts\anim\utility_common::shouldshootenemyent()) {
+    if(scripts\anim\utility_common::isasniper()) {
+      func_E26D();
+    }
+
+    if(self.var_FC) {
+      self.var_FECA = "ambush";
+      return "retry";
+    }
+
+    if(!isDefined(self.isnodeoccupied)) {
+      func_8C4D();
+      return;
+    }
+
+    func_B376();
+    if((self.assertmsg || randomint(5) > 0) && func_100A4()) {
+      self.var_FECA = "suppress";
+    } else {
+      self.var_FECA = "ambush";
+    }
+
+    return "retry";
+  }
+
+  func_F83F();
+  func_F842();
+}
+
+func_E504(param_00) {
+  if(!param_00) {
+    func_8C4D();
+    return;
+  }
+
+  self.var_FE9E = undefined;
+  self.var_FECF = scripts\anim\utility::func_7E90();
+  func_F841();
+}
+
+func_E502(param_00) {
+  self.var_FED7 = "none";
+  self.var_FE9E = undefined;
+  if(!param_00) {
+    func_7DB9();
+    if(func_1009A()) {
+      self.var_1E2B = undefined;
+      self notify("return_to_cover");
+      self.var_1006D = 1;
+      return;
+    }
+
+    return;
+  }
+
+  self.var_FECF = scripts\anim\utility::func_7E90();
+  if(func_1009A()) {
+    self.var_1E2B = undefined;
+    if(func_100A4()) {
+      self.var_FECA = "suppress";
+    }
+
+    if(randomint(3) == 0) {
+      self notify("return_to_cover");
+      self.var_1006D = 1;
+    }
+
+    return "retry";
+  }
+}
+
+func_7DB9() {
+  if(isDefined(self.isnodeoccupied) && self getpersstat(self.isnodeoccupied)) {
+    func_F83F();
+    return;
+  }
+
+  var_00 = self getsafeanimmovedeltapercentage();
+  if(!isDefined(var_00)) {
+    if(isDefined(self.covernode)) {
+      var_00 = self.covernode.angles;
+    } else if(isDefined(self.var_1E2C)) {
+      var_00 = self.var_1E2C.angles;
+    } else if(isDefined(self.isnodeoccupied)) {
+      var_00 = vectortoangles(self lastknownpos(self.isnodeoccupied) - self.origin);
+    } else {
+      var_00 = self.angles;
+    }
+  }
+
+  var_01 = 1024;
+  if(isDefined(self.isnodeoccupied)) {
+    var_01 = distance(self.origin, self.isnodeoccupied.origin);
+  }
+
+  var_02 = self getEye() + anglesToForward(var_00) * var_01;
+  if(!isDefined(self.var_FECF) || distancesquared(var_02, self.var_FECF) > 25) {
+    self.var_FECF = var_02;
+  }
+}
+
+func_E501() {
+  if(self.var_FECA == "normal") {
+    func_E503();
+  } else {
+    if(scripts\anim\utility_common::shouldshootenemyent()) {
+      self.var_FECA = "normal";
+      self.var_1E2B = undefined;
+      return "retry";
+    }
+
+    func_B376();
+    if(scripts\anim\utility_common::isasniper()) {
+      func_E26D();
+    }
+
+    var_00 = scripts\anim\utility_common::cansuppressenemy();
+    if(self.var_FECA == "suppress" || self.team == "allies" && !isDefined(self.isnodeoccupied) && !var_00) {
+      func_E504(var_00);
+    } else {
+      func_E502(var_00);
+    }
+  }
+}
+
+func_1009A() {
+  if(!isDefined(self.var_1E2B)) {
+    if(self gettargetchargepos()) {
+      self.var_1E2B = gettime() + randomintrange(10000, -5536);
+    } else {
+      self.var_1E2B = gettime() + randomintrange(4000, 10000);
+    }
+  }
+
+  return self.var_1E2B < gettime();
+}
+
+func_E778() {
+  if(!scripts\anim\utility_common::shouldshootenemyent()) {
+    func_B376();
+    func_8C4D();
+    return;
+  }
+
+  func_F83F();
+  func_F840("single", 0);
+  var_00 = lengthsquared(self.origin - self.var_FECF);
+  if(var_00 < squared(512)) {
+    self notify("return_to_cover");
+    self.var_1006D = 1;
+  }
+}
+
+func_CBE2() {
+  if(self.var_FECA == "normal") {
+    if(!scripts\anim\utility_common::shouldshootenemyent()) {
+      if(!isDefined(self.isnodeoccupied)) {
+        func_8C4D();
+        return;
+      }
+
+      func_B376();
+      self.var_FECA = "ambush";
+      return "retry";
+    }
+
+    func_F83F();
+    func_F840("single", 0);
+    return;
+  }
+
+  if(scripts\anim\utility_common::shouldshootenemyent()) {
+    self.var_FECA = "normal";
+    self.var_1E2B = undefined;
+    return "retry";
+  }
+
+  func_B376();
+  self.var_FE9E = undefined;
+  self.var_FED7 = "none";
+  self.var_FECF = scripts\anim\utility::func_7E90();
+  if(!isDefined(self.var_1E2B)) {
+    self.var_1E2B = gettime() + randomintrange(4000, 8000);
+  }
+
+  if(self.var_1E2B < gettime()) {
+    self.var_FECA = "normal";
+    self.var_1E2B = undefined;
+    return "retry";
+  }
+}
+
+func_B376() {
+  if(isDefined(self.isnodeoccupied) && !self.var_3C60 && self.script != "combat") {
+    if(isai(self.isnodeoccupied) && isDefined(self.isnodeoccupied.script) && self.isnodeoccupied.script == "cover_stand" || self.isnodeoccupied.script == "cover_crouch") {
+      if(isDefined(self.isnodeoccupied.a.var_4727) && self.isnodeoccupied.a.var_4727 == "hide") {
+        return;
+      }
+    }
+
+    self.var_46A6 = self.isnodeoccupied.origin;
+  }
+}
+
+func_13A46() {
+  self endon("killanimscript");
+  self endon("stop_deciding_how_to_shoot");
+  for(;;) {
+    self waittill("suppression");
+    if(self.testbrushedgesforgrapple > self.suppressionthreshold) {
+      if(func_DD7D()) {
+        self notify("return_to_cover");
+        self.var_1006D = 1;
+      }
+    }
+  }
+}
+
+func_DD7D() {
+  if(self.var_3C60) {
+    return 0;
+  }
+
+  if(!isDefined(self.isnodeoccupied) || !self getpersstat(self.isnodeoccupied)) {
+    return 1;
+  }
+
+  if(gettime() < self.var_4740 + 800) {
+    return 0;
+  }
+
+  if(isplayer(self.isnodeoccupied) && self.isnodeoccupied.health < self.isnodeoccupied.maxhealth * 0.5) {
+    if(gettime() < self.var_4740 + 3000) {
+      return 0;
+    }
+  }
+
+  return 1;
+}
+
+func_E883() {
+  self endon("death");
+  scripts\engine\utility::waittill_any_3("killanimscript", "stop_deciding_how_to_shoot");
+  self.a.laseron = 0;
+  scripts\anim\shared::updatelaserstatus();
+}
+
+func_3DFB(param_00, param_01) {
+  if(isDefined(param_00) != isDefined(param_01)) {
+    return 1;
+  }
+
+  if(!isDefined(param_01)) {
+    return 0;
+  }
+
+  return param_00 != param_01;
+}
+
+func_F83F() {
+  self.var_FE9E = self.isnodeoccupied;
+  self.var_FECF = self.var_FE9E getshootatpos();
+}
+
+func_8C4D() {
+  self.var_FE9E = undefined;
+  self.var_FECF = undefined;
+  self.var_FED7 = "none";
+  if(self.var_FC) {
+    self.var_FECA = "ambush";
+  }
+
+  if(!self.var_3C60) {
+    self notify("return_to_cover");
+    self.var_1006D = 1;
+  }
+}
+
+func_FFC6() {
+  return level.var_7683 == 3 && isplayer(self.isnodeoccupied);
+}
+
+func_F842() {
+  if(isDefined(self.var_FE9E.isnodeoccupied) && isDefined(self.var_FE9E.isnodeoccupied.physics_setgravityragdollscalar)) {
+    return func_F840("single", 0);
+  }
+
+  if(scripts\anim\utility_common::isasniper()) {
+    return func_F840("single", 0);
+  }
+
+  if(scripts\anim\utility_common::isshotgun(self.var_394)) {
+    if(scripts\anim\utility_common::weapon_pump_action_shotgun()) {
+      return func_F840("single", 0);
+    } else {
+      return func_F840("semi", 0);
+    }
+  }
+
+  if(weaponclass(self.var_394) == "grenade") {
+    return func_F840("single", 0);
+  }
+
+  if(weaponburstcount(self.var_394) > 0) {
+    return func_F840("burst", 0);
+  }
+
+  if(isDefined(self.var_A4A3) && self.var_A4A3) {
+    return func_F840("full", 1);
+  }
+
+  var_00 = distancesquared(self getshootatpos(), self.var_FECF);
+  var_01 = weaponclass(self.var_394) == "mg";
+  if(self.assertmsg && var_01) {
+    return func_F840("full", 0);
+  }
+
+  if(var_00 < -3036) {
+    if(isDefined(self.var_FE9E) && isDefined(self.var_FE9E.var_B14F)) {
+      return func_F840("single", 0);
+    } else {
+      return func_F840("full", 0);
+    }
+  } else if(var_00 < 810000 || func_FFC6()) {
+    if(weaponissemiauto(self.var_394) || func_FFF6()) {
+      return func_F840("semi", 1);
+    } else {
+      return func_F840("burst", 1);
+    }
+  } else if(self.assertmsg || var_01 || var_00 < 2560000) {
+    if(func_FFF6()) {
+      return func_F840("semi", 0);
+    } else {
+      return func_F840("burst", 0);
+    }
+  }
+
+  return func_F840("single", 0);
+}
+
+func_F841() {
+  var_00 = distancesquared(self getshootatpos(), self.var_FECF);
+  if(weaponissemiauto(self.var_394)) {
+    if(var_00 < 2560000) {
+      return func_F840("semi", 0);
+    }
+
+    return func_F840("single", 0);
+  }
+
+  if(weaponclass(self.var_394) == "mg") {
+    return func_F840("full", 0);
+  }
+
+  if(self.assertmsg || var_00 < 2560000) {
+    if(func_FFF6()) {
+      return func_F840("semi", 0);
+    } else {
+      return func_F840("burst", 0);
+    }
+  }
+
+  return func_F840("single", 0);
+}
+
+func_F840(param_00, param_01) {
+  self.var_FED7 = param_00;
+  self.var_6B92 = param_01;
+}
+
+func_FFF6() {
+  if(weaponclass(self.var_394) != "rifle") {
+    return 0;
+  }
+
+  if(self.team != "allies") {
+    return 0;
+  }
+
+  var_00 = scripts\anim\utility_common::safemod(int(self.origin[1]), 10000) + 2000;
+  var_01 = int(self.origin[0]) + gettime();
+  return var_01 % 2 * var_00 > var_00;
+}
+
+func_E26D() {
+  self.var_103BF = 0;
+  self.var_103BA = 0;
+  thread func_103A7();
+}
+
+func_103A7() {
+  self endon("killanimscript");
+  self endon("enemy");
+  self endon("return_to_cover");
+  self notify("new_glint_thread");
+  self endon("new_glint_thread");
+  if(isDefined(self.var_5583) && self.var_5583) {
+    return;
+  }
+
+  if(!isDefined(level._effect["sniper_glint"])) {
+    return;
+  }
+
+  if(!isalive(self.isnodeoccupied)) {
+    return;
+  }
+
+  var_00 = scripts\engine\utility::getfx("sniper_glint");
+  wait(0.2);
+  for(;;) {
+    if(self.var_394 == self.primaryweapon && scripts\anim\combat_utility::func_D285()) {
+      if(distancesquared(self.origin, self.isnodeoccupied.origin) > 65536) {
+        playFXOnTag(var_00, self, "tag_flash");
+      }
+
+      var_01 = randomfloatrange(3, 5);
+      wait(var_01);
+    }
+
+    wait(0.2);
+  }
+}

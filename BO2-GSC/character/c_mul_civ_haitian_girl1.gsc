@@ -1,0 +1,14 @@
+/*************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: character\c_mul_civ_haitian_girl1.gsc
+*************************************************/
+
+main() {
+  self setModel("c_mul_civ_haitian_girl1_fb");
+  self.voice = "american";
+  self.skeleton = "base";
+}
+
+precache() {
+  precachemodel("c_mul_civ_haitian_girl1_fb");
+}

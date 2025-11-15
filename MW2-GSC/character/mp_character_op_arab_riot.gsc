@@ -1,0 +1,18 @@
+/********************************************************
+ * Decompiled by FreeTheTech101 and Edited by SyndiShanX
+ * Script: character\mp_character_op_arab_riot.gsc
+********************************************************/
+
+main() {
+  self setModel("mp_body_riot_op_arab");
+  self attach("head_riot_op_arab", "", true);
+  self.headModel = "head_riot_op_arab";
+  self setViewmodel("viewhands_militia");
+  self.voice = "arab";
+}
+
+precache() {
+  precacheModel("mp_body_riot_op_arab");
+  precacheModel("head_riot_op_arab");
+  precacheModel("viewhands_militia");
+}

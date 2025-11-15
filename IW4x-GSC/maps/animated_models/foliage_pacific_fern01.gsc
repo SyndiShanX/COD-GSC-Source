@@ -1,0 +1,23 @@
+/***********************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\animated_models\foliage_pacific_fern01.gsc
+***********************************************************/
+
+#include common_scripts\utility;
+#using_animtree("animated_props");
+main() {
+  if(!isDefined(level.anim_prop_models))
+    level.anim_prop_models = [];
+
+
+  mapname = tolower(getdvar("mapname"));
+  SP = true;
+  if(string_starts_with(mapname, "mp_"))
+    SP = false;
+
+  model = "foliage_pacific_fern01_animated";
+  if(SP) {
+    level.anim_prop_models[model]["sway"] = % foliage_pacific_fern01_sway;
+  } else
+    level.anim_prop_models[model]["sway"] = "foliage_pacific_fern01_sway";
+}

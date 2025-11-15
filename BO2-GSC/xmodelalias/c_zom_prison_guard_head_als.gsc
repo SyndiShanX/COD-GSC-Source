@@ -1,0 +1,12 @@
+/*********************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: xmodelalias\c_zom_prison_guard_head_als.gsc
+*********************************************************/
+
+main() {
+  a[0] = "c_zom_zombie_barbwire_head";
+  a[1] = "c_zom_zombie_hellcatraz_head";
+  a[2] = "c_zom_zombie_mask_head";
+  a[3] = "c_zom_zombie_slackjaw_head";
+  return a;
+}

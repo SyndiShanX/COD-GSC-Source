@@ -1,0 +1,22 @@
+/*****************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: character\char_rus_r_ppsh_forsniper.gsc
+*****************************************************/
+
+main() {
+  codescripts\character::setModelFromArray(xmodelalias\char_rus_guard_bodyalias::main());
+  self.headModel = codescripts\character::randomElement(xmodelalias\char_rus_guard_headalias::main());
+  self attach(self.headModel, "", true);
+  self.hatModel = codescripts\character::randomElement(xmodelalias\char_rus_guard_helmalias::main());
+  self attach(self.hatModel, "", true);
+  self.gearModel = codescripts\character::randomElement(xmodelalias\char_rus_guard_gearalias::main());
+  self attach(self.gearModel, "", true);
+  self.voice = "russian";
+}
+
+precache() {
+  codescripts\character::precacheModelArray(xmodelalias\char_rus_guard_bodyalias::main());
+  codescripts\character::precacheModelArray(xmodelalias\char_rus_guard_headalias::main());
+  codescripts\character::precacheModelArray(xmodelalias\char_rus_guard_helmalias::main());
+  codescripts\character::precacheModelArray(xmodelalias\char_rus_guard_gearalias::main());
+}

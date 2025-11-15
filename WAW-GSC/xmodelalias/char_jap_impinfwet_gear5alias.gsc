@@ -1,0 +1,12 @@
+/*********************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: xmodelalias\char_jap_impinfwet_gear5alias.gsc
+*********************************************************/
+
+main() {
+  a[0] = "char_jap_impinfwet_body5_gear1";
+  a[1] = "char_jap_impinfwet_body5_gear2";
+  a[2] = "char_jap_impinfwet_body5_gear3";
+  a[3] = "char_jap_impinfwet_body5_gear4";
+  return a;
+}

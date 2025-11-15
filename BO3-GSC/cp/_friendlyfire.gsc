@@ -1,0 +1,464 @@
+/*************************************************
+ * Decompiled by Serious and Edited by SyndiShanX
+ * Script: cp\_friendlyfire.gsc
+*************************************************/
+
+#using scripts\cp\_util;
+#using scripts\shared\ai\archetype_utility;
+#using scripts\shared\callbacks_shared;
+#using scripts\shared\load_shared;
+#using scripts\shared\system_shared;
+#using scripts\shared\util_shared;
+#namespace friendlyfire;
+
+function autoexec __init__sytem__() {
+  system::register("friendlyfire", & __init__, undefined, undefined);
+}
+
+function __init__() {
+  level.friendlyfirepoints["min_participation"] = -1600;
+  level.friendlyfirepoints["max_participation"] = 1000;
+  level.friendlyfirepoints["enemy_kill_points"] = 250;
+  level.friendlyfirepoints["friend_kill_points"] = -600;
+  level.friendlyfirepoints["civ_kill_points"] = -900;
+  level.friendlyfirepoints["point_loss_interval"] = 0.75;
+  level.friendlyfiredamagepercentage = 1;
+  if(util::coopgame()) {
+    setdvar("friendlyfire_enabled", "0");
+  }
+  if(!isDefined(level.friendlyfiredisabled)) {
+    level.friendlyfiredisabled = 0;
+  }
+  callback::on_connect( & init_player);
+}
+
+function init_player() {
+  assert(isDefined(self), "");
+  self.participation = 0;
+  self thread debug_friendlyfire();
+  self thread participation_point_flattenovertime();
+}
+
+function debug_log(msg) {
+  if(getdvarstring("") == "") {
+    iprintlnbold(msg);
+  }
+  if(getdvarstring("") == "") {
+    println("" + msg);
+  }
+}
+
+function debug_friendlyfire() {
+  self endon("hash_cca1b1b9");
+  self endon("disconnect");
+  if(getdvarstring("") == "") {
+    setdvar("", "");
+  }
+  if(getdvarstring("") == "") {
+    setdvar("", "");
+  }
+  fullpts = level.friendlyfirepoints[""] - level.friendlyfirepoints[""];
+  lbound = 520;
+  rbound = 620;
+  ypos = 130;
+  bar_width = rbound - lbound;
+  friendly_fire = newdebughudelem();
+  friendly_fire.fontscale = 3;
+  friendly_fire.alignx = "";
+  friendly_fire.aligny = "";
+  friendly_fire.x = (rbound - (bar_width * (level.friendlyfirepoints[""] / fullpts))) - (log(self.participation) * friendly_fire.fontscale);
+  friendly_fire.y = 100;
+  friendly_fire.alpha = 1;
+  friendly_fire_lower_bound_label = newdebughudelem();
+  friendly_fire_lower_bound_label.fontscale = 1.5;
+  friendly_fire_lower_bound_label.alignx = "";
+  friendly_fire_lower_bound_label.aligny = "";
+  friendly_fire_lower_bound_label.x = lbound - (((ceil(max(log(abs(level.friendlyfirepoints[""])) / log(10), 0))) - 2) + (self.participation < 0) * friendly_fire.fontscale);
+  friendly_fire_lower_bound_label.y = ypos;
+  friendly_fire_lower_bound_label.alpha = 1;
+  friendly_fire_lower_bound_label setvalue(level.friendlyfirepoints[""]);
+  friendly_fire_upper_bound_label = newdebughudelem();
+  friendly_fire_upper_bound_label.fontscale = 1.5;
+  friendly_fire_upper_bound_label.alignx = "";
+  friendly_fire_upper_bound_label.aligny = "";
+  friendly_fire_upper_bound_label.x = rbound + ((2 * ((ceil(max(log(abs(level.friendlyfirepoints[""])) / log(10), 0))) + 2.5) + (self.participation < 0)) * friendly_fire.fontscale);
+  friendly_fire_upper_bound_label.y = ypos;
+  friendly_fire_upper_bound_label.alpha = 1;
+  friendly_fire_upper_bound_label setvalue(level.friendlyfirepoints[""]);
+  debug_health_bar_bg = newclienthudelem(self);
+  debug_health_bar_bg.alignx = "";
+  debug_health_bar_bg.aligny = "";
+  debug_health_bar_bg.x = rbound;
+  debug_health_bar_bg.y = ypos;
+  debug_health_bar_bg.sort = 1;
+  debug_health_bar_bg.alpha = 1;
+  debug_health_bar_bg.foreground = 1;
+  debug_health_bar_bg.color = vectorscale((1, 1, 1), 0.4);
+  debug_health_bar_bg setshader("", bar_width, 9);
+  debug_health_bar = newclienthudelem(self);
+  debug_health_bar.alignx = "";
+  debug_health_bar.aligny = "";
+  debug_health_bar.x = 620;
+  debug_health_bar.y = ypos;
+  debug_health_bar.sort = 4;
+  debug_health_bar.alpha = 1;
+  debug_health_bar.foreground = 1;
+  debug_health_bar.color = vectorscale((0, 0, 1), 0.9);
+  debug_health_bar setshader("", 4, 15);
+  debug_health_bar_left_bound = newclienthudelem(self);
+  debug_health_bar_left_bound.alignx = "";
+  debug_health_bar_left_bound.aligny = "";
+  debug_health_bar_left_bound.x = lbound;
+  debug_health_bar_left_bound.y = ypos;
+  debug_health_bar_left_bound.sort = 2;
+  debug_health_bar_left_bound.alpha = 1;
+  debug_health_bar_left_bound.foreground = 1;
+  debug_health_bar_left_bound setshader("", 4, 21);
+  debug_health_bar_right_bound = newclienthudelem(self);
+  debug_health_bar_right_bound.alignx = "";
+  debug_health_bar_right_bound.aligny = "";
+  debug_health_bar_right_bound.x = rbound;
+  debug_health_bar_right_bound.y = ypos;
+  debug_health_bar_right_bound.sort = 2;
+  debug_health_bar_right_bound.alpha = 1;
+  debug_health_bar_right_bound.foreground = 1;
+  debug_health_bar_right_bound setshader("", 4, 21);
+  debug_health_bar_0_top = newclienthudelem(self);
+  debug_health_bar_0_top.alignx = "";
+  debug_health_bar_0_top.aligny = "";
+  debug_health_bar_0_top.x = lbound + (((level.friendlyfirepoints[""] * -1) / fullpts) * bar_width);
+  debug_health_bar_0_top.y = ypos + 9;
+  debug_health_bar_0_top.sort = 2;
+  debug_health_bar_0_top.alpha = 1;
+  debug_health_bar_0_top.foreground = 1;
+  debug_health_bar_0_top setshader("", 4, 4);
+  debug_health_bar_0_bottom = newclienthudelem(self);
+  debug_health_bar_0_bottom.alignx = "";
+  debug_health_bar_0_bottom.aligny = "";
+  debug_health_bar_0_bottom.x = lbound + (((level.friendlyfirepoints[""] * -1) / fullpts) * bar_width);
+  debug_health_bar_0_bottom.y = ypos - 9;
+  debug_health_bar_0_bottom.sort = 2;
+  debug_health_bar_0_bottom.alpha = 1;
+  debug_health_bar_0_bottom.foreground = 1;
+  debug_health_bar_0_bottom setshader("", 4, 4);
+  for(;;) {
+    if(getdvarstring("") == "") {
+      friendly_fire.alpha = 1;
+      friendly_fire_lower_bound_label.alpha = 1;
+      friendly_fire_upper_bound_label.alpha = 1;
+      debug_health_bar_bg.alpha = 1;
+      debug_health_bar.alpha = 1;
+      debug_health_bar_left_bound.alpha = 1;
+      debug_health_bar_right_bound.alpha = 1;
+      debug_health_bar_0_top.alpha = 1;
+      debug_health_bar_0_bottom.alpha = 1;
+    } else {
+      friendly_fire.alpha = 0;
+      friendly_fire_lower_bound_label.alpha = 0;
+      friendly_fire_upper_bound_label.alpha = 0;
+      debug_health_bar_bg.alpha = 0;
+      debug_health_bar.alpha = 0;
+      debug_health_bar_left_bound.alpha = 0;
+      debug_health_bar_right_bound.alpha = 0;
+      debug_health_bar_0_top.alpha = 0;
+      debug_health_bar_0_bottom.alpha = 0;
+    }
+    xpos = ((level.friendlyfirepoints[""] - self.participation) / fullpts) * bar_width;
+    debug_health_bar.x = rbound - xpos;
+    friendly_fire setvalue(self.participation);
+    friendly_fire.x = (rbound - (bar_width * (level.friendlyfirepoints[""] / fullpts))) + ((((ceil(max(log(abs(self.participation)) / log(10), 0))) + 1) + (self.participation < 0) * friendly_fire.fontscale) * 2);
+    wait(0.25);
+  }
+}
+
+function check_warlord_killed(entity) {
+  if(entity.archetype == "warlord_soldier") {
+    return entity.shieldhealth <= 0;
+  }
+  return 0;
+}
+
+function friendly_fire_callback(entity, damage, attacker, method) {
+  if(!isDefined(entity)) {
+    return;
+  }
+  if(!isDefined(entity.team)) {
+    entity.team = "allies";
+  }
+  if(!isDefined(entity)) {
+    return;
+  }
+  warlord_was_killed = check_warlord_killed(entity);
+  if(entity.health <= 0) {
+    if(!warlord_was_killed) {
+      return;
+    }
+  }
+  if(level.friendlyfiredisabled) {
+    return;
+  }
+  if(isDefined(entity.nofriendlyfire) && entity.nofriendlyfire) {
+    return;
+  }
+  if(!isDefined(attacker)) {
+    return;
+  }
+  bplayersdamage = 0;
+  if(isplayer(attacker)) {
+    bplayersdamage = 1;
+  } else if(isDefined(attacker.classname) && attacker.classname == "script_vehicle") {
+    owner = attacker getvehicleowner();
+    if(isDefined(owner)) {
+      if(isplayer(owner)) {
+        if(!isDefined(owner.friendlyfire_attacker_not_vehicle_owner)) {
+          bplayersdamage = 1;
+          attacker = owner;
+        }
+      }
+    }
+  }
+  if(!bplayersdamage) {
+    return;
+  }
+  same_team = entity.team == attacker.team;
+  if(attacker.team == "allies") {
+    if(entity.team == "neutral" && (!(isDefined(level.ignoreneutralfriendlyfire) && level.ignoreneutralfriendlyfire))) {
+      same_team = 1;
+    }
+  }
+  if(entity.team != "neutral" || (entity.team == "neutral" && (!(isDefined(level.ignoreneutralfriendlyfire) && level.ignoreneutralfriendlyfire)))) {
+    attacker.last_hit_team = entity.team;
+  }
+  killed = damage >= entity.health || warlord_was_killed;
+  if(!entity.allowdeath) {
+    killed = 0;
+  }
+  if(!same_team) {
+    if(killed) {
+      attacker.participation = attacker.participation + level.friendlyfirepoints["enemy_kill_points"];
+      attacker participation_point_cap();
+      debug_log(("Enemy killed: +") + level.friendlyfirepoints["enemy_kill_points"]);
+    }
+    return;
+  }
+  if(isDefined(entity.no_friendly_fire_penalty)) {
+    return;
+  }
+  if(killed) {
+    if(entity.team == "neutral") {
+      level notify("player_killed_civ");
+      attacker.participation = attacker.participation + level.friendlyfirepoints["civ_kill_points"];
+      debug_log(("Civilian killed: -") + (0 - level.friendlyfirepoints["civ_kill_points"]));
+    } else {
+      if(isDefined(entity) && isDefined(entity.ff_kill_penalty)) {
+        attacker.participation = attacker.participation + entity.ff_kill_penalty;
+        debug_log(("Friendly killed with custom penalty: -") + (0 - entity.ff_kill_penalty));
+      } else {
+        attacker.participation = attacker.participation + level.friendlyfirepoints["friend_kill_points"];
+        debug_log(("Friendly killed: -") + (0 - level.friendlyfirepoints["friend_kill_points"]));
+      }
+    }
+  } else {
+    attacker.participation = attacker.participation - damage;
+    debug_log(("Friendly hurt: -") + damage);
+  }
+  attacker participation_point_cap();
+  if(check_grenade(entity, method) && savecommit_aftergrenade()) {
+    return;
+  }
+  attacker friendly_fire_checkpoints();
+}
+
+function friendly_fire_think(entity) {
+  level endon("hash_77e184");
+  entity endon("no_friendly_fire");
+  if(!isDefined(entity)) {
+    return;
+  }
+  if(!isDefined(entity.team)) {
+    entity.team = "allies";
+  }
+  for(;;) {
+    if(!isDefined(entity)) {
+      return;
+    }
+    entity waittill("damage", damage, attacker, $_, $_, method);
+    if(level.friendlyfiredisabled) {
+      continue;
+    }
+    if(!isDefined(entity)) {
+      return;
+    }
+    if(isDefined(entity.nofriendlyfire) && entity.nofriendlyfire) {
+      continue;
+    }
+    if(!isDefined(attacker)) {
+      continue;
+    }
+    bplayersdamage = 0;
+    if(isplayer(attacker)) {
+      bplayersdamage = 1;
+    } else if(isDefined(attacker.classname) && attacker.classname == "script_vehicle") {
+      owner = attacker getvehicleowner();
+      if(isDefined(owner)) {
+        if(isplayer(owner)) {
+          if(!isDefined(owner.friendlyfire_attacker_not_vehicle_owner)) {
+            bplayersdamage = 1;
+            attacker = owner;
+          }
+        }
+      }
+    }
+    if(!bplayersdamage) {
+      continue;
+    }
+    same_team = entity.team == attacker.team;
+    if(attacker.team == "allies") {
+      if(entity.team == "neutral" && (!(isDefined(level.ignoreneutralfriendlyfire) && level.ignoreneutralfriendlyfire))) {
+        same_team = 1;
+      }
+    }
+    if(entity.team != "neutral" || (entity.team == "neutral" && (!(isDefined(level.ignoreneutralfriendlyfire) && level.ignoreneutralfriendlyfire)))) {
+      attacker.last_hit_team = entity.team;
+    }
+    killed = damage >= entity.health;
+    if(!same_team) {
+      if(killed) {
+        attacker.participation = attacker.participation + level.friendlyfirepoints["enemy_kill_points"];
+        attacker participation_point_cap();
+        debug_log(("Enemy killed: +") + level.friendlyfirepoints["enemy_kill_points"]);
+      }
+      return;
+    }
+    if(isDefined(entity.no_friendly_fire_penalty)) {
+      continue;
+    }
+    if(killed) {
+      if(entity.team == "neutral") {
+        level notify("player_killed_civ");
+        if(attacker.participation <= 0) {
+          attacker.participation = attacker.participation + level.friendlyfirepoints["min_participation"];
+          debug_log("Civilian killed with negative score, autofail!");
+        } else {
+          attacker.participation = attacker.participation + level.friendlyfirepoints["civ_kill_points"];
+          debug_log(("Civilian killed: -") + (0 - level.friendlyfirepoints["civ_kill_points"]));
+        }
+      } else {
+        if(isDefined(entity) && isDefined(entity.ff_kill_penalty)) {
+          attacker.participation = attacker.participation + entity.ff_kill_penalty;
+          debug_log(("Friendly killed with custom penalty: -") + (0 - entity.ff_kill_penalty));
+        } else {
+          attacker.participation = attacker.participation + level.friendlyfirepoints["friend_kill_points"];
+          debug_log(("Friendly killed: -") + (0 - level.friendlyfirepoints["friend_kill_points"]));
+        }
+      }
+    } else {
+      attacker.participation = attacker.participation - damage;
+      debug_log(("Friendly hurt: -") + damage);
+    }
+    attacker participation_point_cap();
+    if(check_grenade(entity, method) && savecommit_aftergrenade()) {
+      if(killed) {
+        return;
+      }
+      continue;
+    }
+    attacker friendly_fire_checkpoints();
+  }
+}
+
+function friendly_fire_checkpoints() {
+  if(self.participation <= level.friendlyfirepoints["min_participation"]) {
+    self thread missionfail();
+  }
+}
+
+function check_grenade(entity, method) {
+  if(!isDefined(entity)) {
+    return 0;
+  }
+  wasgrenade = 0;
+  if(isDefined(entity.damageweapon) && entity.damageweapon.name == "none") {
+    wasgrenade = 1;
+  }
+  if(isDefined(method) && method == "MOD_GRENADE_SPLASH") {
+    wasgrenade = 1;
+  }
+  return wasgrenade;
+}
+
+function savecommit_aftergrenade() {
+  currenttime = gettime();
+  if(currenttime < 4500) {
+    println("");
+    return true;
+  }
+  return false;
+}
+
+function participation_point_cap() {
+  if(!isDefined(self.participation)) {
+    assertmsg("");
+    return;
+  }
+  if(self.participation > level.friendlyfirepoints["max_participation"]) {
+    self.participation = level.friendlyfirepoints["max_participation"];
+  }
+  if(self.participation < level.friendlyfirepoints["min_participation"]) {
+    self.participation = level.friendlyfirepoints["min_participation"];
+  }
+}
+
+function participation_point_flattenovertime() {
+  level endon("friendly_fire_terminate");
+  self endon("disconnect");
+  for(;;) {
+    if(self.participation > 0) {
+      self.participation--;
+    } else if(self.participation < 0) {
+      self.participation++;
+    }
+    wait(level.friendlyfirepoints["point_loss_interval"]);
+  }
+}
+
+function turnbackon() {
+  level.friendlyfiredisabled = 0;
+}
+
+function turnoff() {
+  level.friendlyfiredisabled = 1;
+}
+
+function missionfail() {
+  self endon("death");
+  level endon("hash_1078e68a");
+  self.participation = 0;
+  self.lives = 0;
+  if(self.last_hit_team === "neutral") {
+    util::missionfailedwrapper_nodeath(&"SCRIPT_MISSIONFAIL_KILLTEAM_NEUTRAL", & "SCRIPT_MISSIONFAIL_WATCH_FIRE");
+  } else {
+    util::missionfailedwrapper_nodeath(&"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN", & "SCRIPT_MISSIONFAIL_WATCH_FIRE");
+  }
+}
+
+function notifydamage(entity) {
+  level endon("hash_77e184");
+  entity endon("death");
+  for(;;) {
+    entity waittill("damage", damage, attacker, $_, $_, method);
+    entity notify("friendlyfire_notify", damage, attacker, undefined, undefined, method);
+  }
+}
+
+function notifydamagenotdone(entity) {
+  level endon("hash_77e184");
+  entity waittill("damage_notdone", damage, attacker, $_, $_, method);
+  entity notify("friendlyfire_notify", -1, attacker, undefined, undefined, method);
+}
+
+function notifydeath(entity) {
+  level endon("hash_77e184");
+  entity waittill("death", attacker, method);
+  entity notify("friendlyfire_notify", -1, attacker, undefined, undefined, method);
+}

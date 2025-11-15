@@ -1,0 +1,18 @@
+/***************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: character\character_mp_usmc_specops.gsc
+***************************************************/
+
+main() {
+  self setModel("body_mp_usmc_specops");
+  self attach("head_mp_usmc_tactical_mich_stripes_nomex", "", true);
+  self.headModel = "head_mp_usmc_tactical_mich_stripes_nomex";
+  self setViewmodel("viewmodel_base_viewhands");
+  self.voice = "american";
+}
+
+precache() {
+  precacheModel("body_mp_usmc_specops");
+  precacheModel("head_mp_usmc_tactical_mich_stripes_nomex");
+  precacheModel("viewmodel_base_viewhands");
+}

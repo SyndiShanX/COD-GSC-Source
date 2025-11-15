@@ -1,0 +1,84 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: zm_common\gametypes\zgrief.gsc
+***********************************************/
+
+#include scripts\core_common\callbacks_shared;
+#include scripts\core_common\math_shared;
+#include scripts\core_common\struct;
+#include scripts\zm_common\gametypes\globallogic;
+#include scripts\zm_common\gametypes\globallogic_utils;
+#include scripts\zm_common\gametypes\zm_gametype;
+#include scripts\zm_common\util;
+#include scripts\zm_common\zm_player;
+#include scripts\zm_common\zm_round_logic;
+#include scripts\zm_common\zm_stats;
+
+#namespace zgrief;
+
+event_handler[gametype_init] main(eventstruct) {
+  zm_gametype::main();
+  util::registertimelimit(0, 1440);
+  util::registerscorelimit(0, 50000);
+  level.forceallallies = 0;
+  level.onprecachegametype = &onprecachegametype;
+  level.onstartgametype = &onstartgametype;
+  level.ontimelimit = &ontimelimit;
+  level.onscorelimit = &onscorelimit;
+  level._game_module_custom_spawn_init_func = &zm_gametype::custom_spawn_init_func;
+  level._game_module_stat_update_func = &zm_stats::survival_classic_custom_stat_update;
+  level._round_start_func = &zm_round_logic::round_start;
+  zm_player::register_player_damage_callback(&playerdamagecallback);
+  callback::on_spawned(&onplayerspawned);
+}
+
+onprecachegametype() {
+  level.canplayersuicide = &zm_gametype::canplayersuicide;
+}
+
+onstartgametype() {
+  level.spawnmins = (0, 0, 0);
+  level.spawnmaxs = (0, 0, 0);
+  structs = struct::get_array("player_respawn_point", "targetname");
+
+  foreach(struct in structs) {
+    level.spawnmins = math::expand_mins(level.spawnmins, struct.origin);
+    level.spawnmaxs = math::expand_maxs(level.spawnmaxs, struct.origin);
+  }
+
+  level.mapcenter = math::find_box_center(level.spawnmins, level.spawnmaxs);
+  setmapcenter(level.mapcenter);
+}
+
+ontimelimit() {
+  winner = globallogic::determineteamwinnerbygamestat("teamScores");
+  globallogic_utils::logteamwinstring("time limit", winner);
+  setdvar(#"ui_text_endreason", game.strings[#"time_limit_reached"]);
+  thread globallogic::endgame(winner, game.strings[#"time_limit_reached"]);
+}
+
+onscorelimit() {
+  winner = globallogic::determineteamwinnerbygamestat("teamScores");
+  globallogic_utils::logteamwinstring("scorelimit", winner);
+  setdvar(#"ui_text_endreason", game.strings[#"score_limit_reached"]);
+  thread globallogic::endgame(winner, game.strings[#"score_limit_reached"]);
+}
+
+playerdamagecallback(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
+  if(isDefined(eattacker) && isplayer(eattacker)) {
+    return 0;
+  }
+
+  return idamage;
+}
+
+onplayerspawned() {
+  self function_dee3f41b(1);
+
+  foreach(player in getplayers()) {
+    if(player != self) {
+      self setignoreent(player, 1);
+      player setignoreent(self, 1);
+    }
+  }
+}

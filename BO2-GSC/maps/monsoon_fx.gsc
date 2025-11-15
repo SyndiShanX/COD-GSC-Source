@@ -1,0 +1,222 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\monsoon_fx.gsc
+**************************************/
+
+#include maps\_utility;
+#include common_scripts\utility;
+#include maps\_anim;
+#include maps\createfx\monsoon_fx;
+#include maps\monsoon_ruins;
+#include maps\monsoon_lab;
+
+main() {
+  precache_fxanim_props();
+  precache_scripted_fx();
+  precache_createfx_fx();
+  wind_init();
+  maps\createfx\monsoon_fx::main();
+}
+
+precache_scripted_fx() {
+  level._effect["flesh_hit"] = loadfx("impacts/fx_flesh_hit");
+  level._effect["harper_drips"] = loadfx("maps/monsoon/fx_water_drips_harper_intro");
+  level._effect["fx_water_wingsuit"] = loadfx("maps/monsoon/fx_mon_speed_visual_rain");
+  level._effect["fx_water_rope_swing"] = loadfx("maps/monsoon/fx_mon_speed_visual_rope");
+  level._effect["player_rain"] = loadfx("maps/monsoon/fx_mon_rain_player_runner");
+  level._effect["player_rain_binoc"] = loadfx("maps/monsoon/fx_mon_rain_player_bino_runner");
+  level._effect["player_rain_temple"] = loadfx("maps/monsoon/fx_mon_rain_player_nomist_runner");
+  level._effect["wingsuit_rain"] = loadfx("maps/monsoon/fx_rain_suit01");
+  level._effect["ai_rain"] = loadfx("maps/monsoon/fx_mon_player_rain_impacts");
+  level._effect["ai_rain_helmet"] = loadfx("maps/monsoon/fx_mon_player_rain_impacts_head");
+  level._effect["harper_swing_trail"] = loadfx("maps/monsoon/fx_mon_water_rope_swing_trail");
+  level._effect["rope_taut"] = loadfx("water/fx_mon_water_rope_taut");
+  level._effect["lift_light"] = loadfx("light/fx_mon_light_elevator_blink");
+  level._effect["laser_cutter_sparking"] = loadfx("props/fx_com_laser_cutter_sparking_2");
+  level._effect["camo_transition"] = loadfx("misc/fx_camo_reveal_transition");
+  level._effect["nanoglove_impact"] = loadfx("dirt/fx_mon_dust_nano_glove");
+  level._effect["nanoglove_impact_cheap"] = loadfx("dirt/fx_mon_dust_nano_glove_chp");
+  level._effect["light_yard"] = loadfx("light/fx_light_m_p6_container_yard_light");
+  level._effect["light_generator"] = loadfx("light/fx_light_m_ctl_light_spotlight_generator");
+  level._effect["fx_com_emergency_lights"] = loadfx("maps/command_center/fx_com_emergency_lights");
+  level._effect["fx_mon_ending_spotlight"] = loadfx("maps/monsoon/fx_mon_ending_spotlight");
+  level._effect["fx_mon_emergency_lights"] = loadfx("maps/monsoon/fx_mon_emergency_lights");
+  level._effect["fx_tree_nub"] = loadfx("maps/monsoon/fx_tree_nub");
+  level._effect["fx_tree_trunk_slide"] = loadfx("maps/monsoon/fx_tree_trunk_slide");
+  level._effect["freeze_short_circuit"] = loadfx("destructibles/fx_metalstorm_damagestate_nitro");
+  level._effect["sniper_glint"] = loadfx("misc/fx_misc_sniper_scope_glint");
+  level._effect["c4_blink"] = loadfx("misc/fx_light_c4_blink");
+  level._effect["c4_explode"] = loadfx("explosions/fx_grenadeexp_default");
+  level._effect["retreat_smoke"] = loadfx("maps/monsoon/fx_mon_smoke_passage_filler");
+  level._effect["erik_neck_shot"] = loadfx("blood/fx_mon_neck_shot_spurt");
+  level._effect["agr_death_smolder"] = loadfx("destructibles/fx_metalstorm_death_smolder");
+  level._effect["single_weld_spark"] = loadfx("electrical/fx_weld_spark_burst_sm");
+  level._effect["single_weld_spark_loop"] = loadfx("electrical/fx_weld_spark_burst_sm_loop");
+  level._effect["hallway_wire_spark"] = loadfx("electrical/fx_elec_wire_spark_burst_xsm");
+  level._effect["celerium_strobe"] = loadfx("maps/monsoon/fx_mon_celerium_strobe");
+  level._effect["celerium_glow"] = loadfx("maps/monsoon/fx_mon_celerium_glow");
+  level._effect["light_lens_flare"] = loadfx("lens_flares/fx_lf_monsoon_light_lab");
+  level._effect["mighty_fx"] = loadfx("electrical/fx_elec_player_md");
+  level._effect["shield_lights"] = loadfx("weapon/riotshield/fx_riotshield_depoly_lights");
+  level._effect["shield_deploy_dust"] = loadfx("weapon/riotshield/fx_riotshield_depoly_dust");
+  level._effect["grenade_arm_launcher"] = loadfx("maps/monsoon/fx_trail_fake_grenade");
+}
+
+precache_createfx_fx() {
+  level._effect["fx_mon_lightning_flash_cliff"] = loadfx("maps/monsoon/fx_mon_lightning_flash_cliff");
+  level._effect["fx_lightning_flash_single_lg"] = loadfx("weather/fx_lightning_flash_single_lg");
+  level._effect["fx_lightning_bolt_single_streak"] = loadfx("weather/fx_lightning_bolt_single_streak");
+  level._effect["fx_lightning_tree_hit"] = loadfx("maps/monsoon/fx_mon_tree_lightning_hit");
+  level._effect["fx_mon_exp_lion_statue_a"] = loadfx("maps/monsoon/fx_mon_exp_lion_statue_a");
+  level._effect["fx_mon_heli_blade_sparks_sm"] = loadfx("maps/monsoon/fx_mon_heli_blade_sparks_sm");
+  level._effect["fx_mon_heli_blade_sparks"] = loadfx("maps/monsoon/fx_mon_heli_blade_sparks");
+  level._effect["fx_mon_mud_stream_xlg"] = loadfx("dirt/fx_mon_mud_stream_xlg");
+  level._effect["fx_mon_mud_stream_lg"] = loadfx("dirt/fx_mon_mud_stream_lg");
+  level._effect["fx_exp_gate_entrance"] = loadfx("maps/monsoon/fx_exp_gate_entrance");
+  level._effect["fx_exp_glass_window_shatter_lg"] = loadfx("maps/monsoon/fx_exp_glass_window_shatter_lg");
+  level._effect["fx_mon_steam_burst_lg"] = loadfx("maps/monsoon/fx_mon_steam_burst_lg");
+  level._effect["fx_smoke_breach_room_filler"] = loadfx("maps/monsoon/fx_smoke_breach_room_filler");
+  level._effect["fx_exp_int_truck_bash"] = loadfx("maps/monsoon/fx_exp_int_truck_bash");
+  level._effect["fx_mon_mud_stream_xlg"] = loadfx("dirt/fx_mon_mud_stream_xlg");
+  level._effect["fx_mon_sld_lft_mud_froth"] = loadfx("maps/monsoon/fx_mon_sld_lft_mud_froth");
+  level._effect["fx_mon_sld_lft_tower_hit_top"] = loadfx("maps/monsoon/fx_mon_sld_lft_tower_hit_top");
+  level._effect["fx_mon_sld_lft_tower_hit"] = loadfx("maps/monsoon/fx_mon_sld_lft_tower_hit");
+  level._effect["fx_mon_sld_lft_tower_hit"] = loadfx("maps/monsoon/fx_mon_sld_lft_tower_hit");
+  level._effect["fx_mon_sld_lft_tree_hit"] = loadfx("maps/monsoon/fx_mon_sld_lft_tree_hit");
+  level._effect["fx_mon_sld_foam"] = loadfx("maps/monsoon/fx_mon_sld_foam");
+  level._effect["fx_mon_chamber_wall_glow"] = loadfx("maps/monsoon/fx_mon_chamber_wall_glow");
+  level._effect["fx_fog_crate_exit"] = loadfx("maps/monsoon/fx_fog_crate_exit");
+  level._effect["fx_exp_chamber_pillar_exp"] = loadfx("explosions/fx_mon_exp_concrete_pillar_md");
+  level._effect["fx_elec_short_sparks"] = loadfx("electrical/fx_mon_elec_tv_mount_sparks");
+  level._effect["fx_mon_tv_shake_dust"] = loadfx("maps/monsoon/fx_mon_tv_shake_dust");
+  level._effect["fx_mon_gate_bash_dust"] = loadfx("maps/monsoon/fx_mon_gate_bash_dust");
+  level._effect["fx_fire_sm_smolder"] = loadfx("env/fire/fx_fire_sm_smolder");
+  level._effect["fx_fire_md_smolder"] = loadfx("env/fire/fx_fire_md_smolder");
+  level._effect["fx_mon_light_short_pop"] = loadfx("electrical/fx_mon_light_short_pop");
+  level._effect["fx_mon_crate_fall_mud_splat"] = loadfx("dirt/fx_mon_crate_fall_mud_splat");
+  level._effect["fx_mon_chamber_blue_beam"] = loadfx("maps/monsoon/fx_mon_chamber_blue_beam");
+  level._effect["fx_mon_chamber_fog_dropdown"] = loadfx("maps/monsoon/fx_mon_chamber_fog_dropdown");
+  level._effect["fx_mon_chamber_spot_blue"] = loadfx("light/fx_mon_chamber_spot_blue");
+  level._effect["fx_mon_mud_stream_froth"] = loadfx("dirt/fx_mon_mud_stream_froth");
+  level._effect["fx_mon_mud_stream_wide"] = loadfx("dirt/fx_mon_mud_stream_wide");
+  level._effect["fx_mon_mud_stream_md"] = loadfx("dirt/fx_mon_mud_stream_md");
+  level._effect["fx_light_dist_base_white"] = loadfx("light/fx_mon_light_dist_base_white");
+  level._effect["fx_light_dist_base_red"] = loadfx("light/fx_mon_light_dist_base_red");
+  level._effect["fx_waterfall01"] = loadfx("maps/monsoon/fx_waterfall01");
+  level._effect["fx_water_spill_sm_splash"] = loadfx("water/fx_water_spill_sm_splash");
+  level._effect["fx_water_roof_spill_lg_hvy"] = loadfx("water/fx_water_roof_spill_lg_hvy");
+  level._effect["fx_water_sheeting_lg_hvy"] = loadfx("water/fx_water_sheeting_lg_hvy");
+  level._effect["fx_water_splash_detail"] = loadfx("water/fx_water_splash_detail");
+  level._effect["fx_water_splash_detail_lg"] = loadfx("water/fx_water_splash_detail_lg");
+  level._effect["fx_water_spill_splash_wide"] = loadfx("water/fx_water_spill_splash_wide");
+  level._effect["fx_water_drips_hvy_120"] = loadfx("water/fx_water_drips_hvy_120");
+  level._effect["fx_water_drips_hvy_200"] = loadfx("water/fx_water_drips_hvy_200");
+  level._effect["fx_mon_vent_cleanroom_slow"] = loadfx("maps/monsoon/fx_mon_vent_cleanroom_slow");
+  level._effect["fx_mon_vent_roof_steam_lg"] = loadfx("smoke/fx_mon_vent_roof_steam_lg");
+  level._effect["fx_mon_vent_roof_steam_wide"] = loadfx("smoke/fx_mon_vent_roof_steam_wide");
+  level._effect["fx_mon_steam_lab_rising"] = loadfx("smoke/fx_mon_steam_lab_rising");
+  level._effect["fx_mon_fog_temple_shaft"] = loadfx("maps/monsoon/fx_mon_fog_temple_shaft");
+  level._effect["fx_mon_fog_temple_ground"] = loadfx("maps/monsoon/fx_mon_fog_temple_ground");
+  level._effect["fx_mon_godray_temple_shaft"] = loadfx("maps/monsoon/fx_mon_godray_temple_shaft");
+  level._effect["fx_mon_light_overhead_rain"] = loadfx("light/fx_mon_light_overhead_rain");
+  level._effect["fx_mon_cloud_cover_volume"] = loadfx("maps/monsoon/fx_mon_cloud_cover_volume");
+  level._effect["fx_cloud_cover_volume_sm"] = loadfx("weather/fx_cloud_cover_volume_sm");
+  level._effect["fx_mon_cloud_cover_flat"] = loadfx("maps/monsoon/fx_mon_cloud_cover_flat");
+  level._effect["fx_mon_fog_rising_tall_xlg"] = loadfx("fog/fx_mon_fog_rising_tall_xlg");
+  level._effect["fx_rain_ground_gusts_fast_sm"] = loadfx("maps/monsoon/fx_rain_ground_gusts_fast_sm");
+  level._effect["fx_rain_ground_gusts_fast_lg"] = loadfx("maps/monsoon/fx_rain_ground_gusts_fast_lg");
+  level._effect["fx_mon_leaves_gust_fast_lg"] = loadfx("foliage/fx_mon_leaves_gust_fast_lg");
+  level._effect["fx_mon_branch_fall_lg"] = loadfx("foliage/fx_mon_branch_fall_lg");
+  level._effect["fx_mon_branch_gust_fast_lg"] = loadfx("foliage/fx_mon_branch_gust_fast_lg");
+  level._effect["fx_lf_karma_light_plain1"] = loadfx("lens_flares/fx_lf_karma_light_plain1");
+  level._effect["fx_lf_karma_light_plain1_white"] = loadfx("lens_flares/fx_lf_monsoon_light_plain");
+  level._effect["fx_kar_flare01"] = loadfx("maps/karma/fx_kar_flare01");
+  level._effect["fx_mon_lab_steam_vent"] = loadfx("maps/monsoon/fx_mon_lab_steam_vent");
+  level._effect["fx_mon_lab_steam_room"] = loadfx("maps/monsoon/fx_mon_lab_steam_room");
+  level._effect["fx_mon_light_overhead_rain"] = loadfx("light/fx_mon_light_overhead_rain");
+  level._effect["fx_mon_wtr_rain_light_fill"] = loadfx("water/fx_mon_wtr_rain_light_fill");
+  level._effect["fx_wtr_spill_sm_thin_gusty"] = loadfx("water/fx_wtr_spill_sm_thin_gusty");
+  level._effect["fx_water_pipe_spill_sm_thin_tall_gusty"] = loadfx("water/fx_water_pipe_spill_sm_thin_tall_gusty");
+  level._effect["fx_water_spill_sm_gusty"] = loadfx("water/fx_water_spill_sm_gusty");
+  level._effect["fx_water_roof_spill_md_gusty"] = loadfx("water/fx_water_roof_spill_md_gusty");
+  level._effect["fx_water_roof_spill_md_hvy_gusty"] = loadfx("water/fx_water_roof_spill_md_hvy_gusty");
+  level._effect["fx_water_roof_spill_lg_gusty"] = loadfx("water/fx_water_roof_spill_lg_gusty");
+  level._effect["fx_water_roof_spill_lg_hvy_gusty"] = loadfx("water/fx_water_roof_spill_lg_hvy_gusty");
+  level._effect["fx_water_roof_spill_sngl_tall_gusty"] = loadfx("water/fx_water_roof_spill_sngl_tall_gusty");
+  level._effect["fx_mon_lab_ceiling_flat_lg_warm"] = loadfx("light/fx_mon_lab_ceiling_flat_lg_warm");
+  level._effect["fx_mon_lab_ceiling_led_cool"] = loadfx("light/fx_mon_lab_ceiling_led_cool");
+  level._effect["fx_mon_lab_ceiling_led_cool_x2"] = loadfx("light/fx_mon_lab_ceiling_led_cool_x2");
+  level._effect["fx_mon_lab_ceiling_led_cool_x9"] = loadfx("light/fx_mon_lab_ceiling_led_cool_x9");
+  level._effect["fx_com_emergency_lights"] = loadfx("maps/command_center/fx_com_emergency_lights");
+  level._effect["fx_com_flourescent_glow_white"] = loadfx("maps/command_center/fx_com_flourescent_glow_white");
+  level._effect["fx_com_flourescent_glow_warm"] = loadfx("maps/command_center/fx_com_flourescent_glow_warm");
+  level._effect["fx_com_flourescent_glow_green"] = loadfx("maps/command_center/fx_com_flourescent_glow_green");
+  level._effect["fx_com_flourescent_glow_cool"] = loadfx("maps/command_center/fx_com_flourescent_glow_cool");
+  level._effect["fx_com_flourescent_glow_cool_sm"] = loadfx("maps/command_center/fx_com_flourescent_glow_cool_sm");
+  level._effect["fx_com_tv_glow_blue"] = loadfx("maps/command_center/fx_com_tv_glow_blue");
+  level._effect["fx_com_tv_glow_green"] = loadfx("maps/command_center/fx_com_tv_glow_green");
+  level._effect["fx_com_tv_glow_yellow"] = loadfx("maps/command_center/fx_com_tv_glow_yellow");
+  level._effect["fx_com_tv_glow_yellow_sml"] = loadfx("maps/command_center/fx_com_tv_glow_yellow_sml");
+  level._effect["fx_com_light_glow_white"] = loadfx("maps/command_center/fx_com_light_glow_white");
+  level._effect["fx_lf_commandcenter_light1"] = loadfx("lens_flares/fx_lf_commandcenter_light1");
+  level._effect["fx_lf_commandcenter_light2"] = loadfx("lens_flares/fx_lf_commandcenter_light2");
+  level._effect["fx_lf_commandcenter_light3"] = loadfx("lens_flares/fx_lf_commandcenter_light3");
+  level._effect["fx_com_glow_sml_blue"] = loadfx("maps/command_center/fx_com_glow_sml_blue");
+}
+
+wind_init() {
+  setsaveddvar("wind_global_vector", "-287 -284 69");
+  setsaveddvar("wind_global_low_altitude", -1500);
+  setsaveddvar("wind_global_hi_altitude", 5000);
+  setsaveddvar("wind_global_low_strength_percent", 0.5);
+}
+
+#using_animtree("fxanim_props");
+
+precache_fxanim_props() {
+  level.scr_anim["fxanim_props"]["shrine_lft"] = % fxanim_monsoon_shrine_lft_anim;
+  level.scr_anim["fxanim_props"]["shrine_lft_mudslide"] = % fxanim_monsoon_shrine_lft_mudslide_anim;
+  level.scr_anim["fxanim_props"]["metal_storm_enter01"] = % fxanim_monsoon_metal_storm_enter01_anim;
+  level.scr_anim["fxanim_props"]["metal_storm_enter02"] = % fxanim_monsoon_metal_storm_enter02_anim;
+  level.scr_anim["fxanim_props"]["lion_statue_01"] = % fxanim_monsoon_lion_statue_01_anim;
+  level.scr_anim["fxanim_props"]["lion_statue_02"] = % fxanim_monsoon_lion_statue_02_anim;
+  level.scr_anim["fxanim_props"]["swing_vines"] = % fxanim_monsoon_swing_vines_anim;
+  level.scr_anim["fxanim_props"]["bamboo_fast"] = % fxanim_gp_bamboo_fast_anim;
+  level.scr_anim["fxanim_props"]["wind_crates"] = % fxanim_monsoon_wind_crates_anim;
+  level.scr_anim["fxanim_props"]["wind_light"] = % fxanim_monsoon_wind_light_anim;
+  level.scr_anim["fxanim_props"]["wind_barrel_01"] = % fxanim_monsoon_wind_barrel_01_anim;
+  level.scr_anim["fxanim_props"]["wind_barrel_02"] = % fxanim_monsoon_wind_barrel_02_anim;
+  level.scr_anim["fxanim_props"]["tarp_tree"] = % fxanim_monsoon_tarp_tree_anim;
+  level.scr_anim["fxanim_props"]["defend_room_door_01"] = % fxanim_monsoon_defend_room_door_01_anim;
+  level.scr_anim["fxanim_props"]["defend_room_door_02"] = % fxanim_monsoon_defend_room_door_02_anim;
+  level.scr_anim["fxanim_props"]["defend_room_01"] = % fxanim_monsoon_defend_room_01_anim;
+  level.scr_anim["fxanim_props"]["defend_room_02"] = % fxanim_monsoon_defend_room_02_anim;
+  level.scr_anim["fxanim_props"]["defend_room_monitors_01"] = % fxanim_monsoon_defend_room_monitors_01_anim;
+  level.scr_anim["fxanim_props"]["defend_room_monitors_02"] = % fxanim_monsoon_defend_room_monitors_02_anim;
+  level.scr_anim["fxanim_props"]["defend_room_monitors_03"] = % fxanim_monsoon_defend_room_monitors_03_anim;
+  level.scr_anim["fxanim_props"]["lightning_tree"] = % fxanim_monsoon_lightning_tree_anim;
+  level.scr_anim["fxanim_props"]["lightning_ropes"] = % fxanim_monsoon_lightning_ropes_anim;
+  level.scr_anim["fxanim_props"]["tarp_chopper"] = % fxanim_monsoon_tarp_chopper_anim;
+  level.scr_anim["fxanim_props"]["emergency_light"] = % fxanim_gp_blk_emergency_light_anim;
+  level.scr_anim["fxanim_props"]["wirespark_med"] = % fxanim_gp_wirespark_med_anim;
+  level.scr_anim["fxanim_props"]["wirespark_long"] = % fxanim_gp_wirespark_long_anim;
+  level.scr_anim["fxanim_props"]["server_arm_loop"] = % fxanim_monsoon_server_arm_loop_anim;
+  level.scr_anim["fxanim_props"]["server_arm_modems"] = % fxanim_monsoon_server_arm_modems_anim;
+  level.scr_anim["fxanim_props"]["heli_parts"] = % fxanim_monsoon_heli_parts_anim;
+  level.scr_anim["fxanim_props"]["tree_fall_rt"] = % fxanim_monsoon_tree_fall_rt_anim;
+  level.scr_anim["fxanim_props"]["temple_door"] = % fxanim_monsoon_temple_door_anim;
+  level.scr_anim["fxanim_props"]["flank"] = % fxanim_monsoon_flank_anim;
+  level.scr_anim["fxanim_props"]["elevator_asd_dmg"] = % fxanim_monsoon_elevator_asd_dmg_anim;
+  addnotetrack_customfunction("fxanim_props", "exploder 10550 #shrine_lft_mudslide", maps\monsoon_ruins::inner_ruins_destroy_left_temple, "shrine_lft_mudslide");
+  addnotetrack_level_notify("fxanim_props", "exploder 10255 #light_splash_sparks", "fx_light_fall", "wind_light");
+  addnotetrack_fxontag("fxanim_props", "lightning_tree", "exploder 10102 #tree_scrape_start", "fx_tree_nub", "tree_trunk_01_jnt");
+  addnotetrack_fxontag("fxanim_props", "lightning_tree", "exploder 10102 #tree_scrape_start", "fx_tree_trunk_slide", "tree_trunk_01_jnt");
+  addnotetrack_fxontag("fxanim_props", "wirespark_med_loop", "spark_wire", "hallway_wire_spark", "med_spark_06_jnt");
+  addnotetrack_fxontag("fxanim_props", "wirespark_long_loop", "spark_wire", "hallway_wire_spark", "long_spark_06_jnt");
+  addnotetrack_customfunction("fxanim_props", "exploder 10800 #first_beam", maps\monsoon_lab::struct_1_spark, "elevator_asd_dmg");
+  addnotetrack_customfunction("fxanim_props", "exploder 10801 #second_beam", maps\monsoon_lab::struct_2_spark, "elevator_asd_dmg");
+  addnotetrack_customfunction("fxanim_props", "exploder 10802 #third_beam", maps\monsoon_lab::struct_3_spark, "elevator_asd_dmg");
+  addnotetrack_customfunction("fxanim_props", "exploder 10803 #fourth_beam", maps\monsoon_lab::struct_4_spark, "elevator_asd_dmg");
+  addnotetrack_customfunction("fxanim_props", "exploder 10804 #fifth_beam", maps\monsoon_lab::struct_5_spark, "elevator_asd_dmg");
+  addnotetrack_customfunction("fxanim_props", "exploder 10805 #sixth_beam", maps\monsoon_lab::struct_6_spark, "elevator_asd_dmg");
+}

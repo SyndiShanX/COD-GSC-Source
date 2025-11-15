@@ -1,0 +1,304 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: core_common\ai\archetype_human.gsc
+***********************************************/
+
+#include scripts\core_common\ai\archetype_damage_utility;
+#include scripts\core_common\ai\archetype_human_interface;
+#include scripts\core_common\ai\archetype_utility;
+#include scripts\core_common\ai\systems\ai_blackboard;
+#include scripts\core_common\ai\systems\ai_interface;
+#include scripts\core_common\ai\systems\blackboard;
+#include scripts\core_common\ai\systems\destructible_character;
+#include scripts\core_common\ai\systems\gib;
+#include scripts\core_common\ai_shared;
+#include scripts\core_common\clientfield_shared;
+#include scripts\core_common\math_shared;
+#include scripts\core_common\spawner_shared;
+
+#namespace archetype_human;
+
+autoexec init() {
+  spawner::add_archetype_spawn_function(#"human", &archetypehumanblackboardinit);
+  spawner::add_archetype_spawn_function(#"human", &archetypehumaninit);
+  humaninterface::registerhumaninterfaceattributes();
+  clientfield::register("actor", "facial_dial", 1, 1, "int");
+
+  level.__ai_forcegibs = getdvarint(#"ai_forcegibs", 0);
+}
+
+private archetypehumaninit() {
+  entity = self;
+  aiutility::addaioverridedamagecallback(entity, &damageoverride);
+  aiutility::addaioverridekilledcallback(entity, &humangibkilledoverride);
+  locomotiontypes = array("alt1", "alt2", "alt3", "alt4");
+  altindex = entity getentitynumber() % locomotiontypes.size;
+  entity setblackboardattribute("_human_locomotion_variation", locomotiontypes[altindex]);
+
+  if(isDefined(entity.hero) && entity.hero) {
+    entity setblackboardattribute("_human_locomotion_variation", "alt1");
+  }
+}
+
+private archetypehumanblackboardinit() {
+  blackboard::createblackboardforentity(self);
+  ai::createinterfaceforentity(self);
+  self.___archetypeonanimscriptedcallback = &archetypehumanonanimscriptedcallback;
+  self.___archetypeonbehavecallback = &archetypehumanonbehavecallback;
+
+  if(self.accuratefire) {
+    self thread aiutility::preshootlaserandglinton(self);
+    self thread aiutility::postshootlaserandglintoff(self);
+  }
+
+  destructserverutils::togglespawngibs(self, 1);
+  gibserverutils::togglespawngibs(self, 1);
+}
+
+private archetypehumanonbehavecallback(entity) {
+  if(btapi_isatcovercondition(entity)) {
+    entity setblackboardattribute("_previous_cover_mode", "cover_alert");
+    entity setblackboardattribute("_cover_mode", "cover_mode_none");
+  }
+
+  grenadethrowinfo = spawnStruct();
+  grenadethrowinfo.grenadethrower = entity;
+  blackboard::addblackboardevent("human_grenade_throw", grenadethrowinfo, randomintrange(3000, 4000));
+}
+
+private archetypehumanonanimscriptedcallback(entity) {
+  entity.__blackboard = undefined;
+  entity archetypehumanblackboardinit();
+  vignettemode = ai::getaiattribute(entity, "vignette_mode");
+  humansoldierserverutils::vignettemodecallback(entity, "vignette_mode", vignettemode, vignettemode);
+}
+
+private humangibkilledoverride(inflictor, attacker, damage, meansofdeath, weapon, dir, hitloc, offsettime) {
+  entity = self;
+
+  if(math::cointoss()) {
+    return damage;
+  }
+
+  attackerdistance = 0;
+
+  if(isDefined(attacker)) {
+    attackerdistance = distancesquared(attacker.origin, entity.origin);
+  }
+
+  isexplosive = isinarray(array("MOD_CRUSH", "MOD_GRENADE", "MOD_GRENADE_SPLASH", "MOD_PROJECTILE", "MOD_PROJECTILE_SPLASH", "MOD_EXPLOSIVE"), meansofdeath);
+  forcegibbing = 0;
+
+  if(isDefined(weapon.weapclass) && weapon.weapclass == "turret") {
+    forcegibbing = 1;
+
+    if(isDefined(inflictor)) {
+      isdirectexplosive = isinarray(array("MOD_GRENADE", "MOD_GRENADE_SPLASH", "MOD_PROJECTILE", "MOD_PROJECTILE_SPLASH", "MOD_EXPLOSIVE"), meansofdeath);
+      iscloseexplosive = distancesquared(inflictor.origin, entity.origin) <= 60 * 60;
+
+      if(isdirectexplosive && iscloseexplosive) {
+        gibserverutils::annihilate(entity);
+      }
+    }
+  }
+
+  if(forcegibbing || isexplosive || isDefined(level.__ai_forcegibs) && level.__ai_forcegibs || weapon.dogibbing && attackerdistance <= weapon.maxgibdistance * weapon.maxgibdistance) {
+    gibserverutils::togglespawngibs(entity, 1);
+    destructserverutils::togglespawngibs(entity, 1);
+    trygibbinglimb(entity, damage, hitloc, isexplosive || forcegibbing);
+    trygibbinglegs(entity, damage, hitloc, isexplosive);
+  }
+
+  return damage;
+}
+
+private trygibbinghead(entity, damage, hitloc, isexplosive) {
+  if(isexplosive) {
+    gibserverutils::gibhead(entity);
+    return;
+  }
+
+  if(isinarray(array("head", "neck", "helmet"), hitloc)) {
+    gibserverutils::gibhead(entity);
+  }
+}
+
+private trygibbinglimb(entity, damage, hitloc, isexplosive) {
+  if(isexplosive) {
+    randomchance = randomfloatrange(0, 1);
+
+    if(randomchance < 0.5) {
+      gibserverutils::gibrightarm(entity);
+    } else {
+      gibserverutils::gibleftarm(entity);
+    }
+
+    return;
+  }
+
+  if(isinarray(array("left_hand", "left_arm_lower", "left_arm_upper"), hitloc)) {
+    gibserverutils::gibleftarm(entity);
+    return;
+  }
+
+  if(isinarray(array("right_hand", "right_arm_lower", "right_arm_upper"), hitloc)) {
+    gibserverutils::gibrightarm(entity);
+    return;
+  }
+
+  if(isinarray(array("torso_upper"), hitloc) && math::cointoss()) {
+    if(math::cointoss()) {
+      gibserverutils::gibleftarm(entity);
+      return;
+    }
+
+    gibserverutils::gibrightarm(entity);
+  }
+}
+
+private trygibbinglegs(entity, damage, hitloc, isexplosive, attacker) {
+  if(isexplosive) {
+    randomchance = randomfloatrange(0, 1);
+
+    if(randomchance < 0.33) {
+      gibserverutils::gibrightleg(entity);
+    } else if(randomchance < 0.66) {
+      gibserverutils::gibleftleg(entity);
+    } else {
+      gibserverutils::giblegs(entity);
+    }
+
+    return;
+  }
+
+  if(isinarray(array("left_leg_upper", "left_leg_lower", "left_foot"), hitloc)) {
+    gibserverutils::gibleftleg(entity);
+    return;
+  }
+
+  if(isinarray(array("right_leg_upper", "right_leg_lower", "right_foot"), hitloc)) {
+    gibserverutils::gibrightleg(entity);
+    return;
+  }
+
+  if(isinarray(array("torso_lower"), hitloc) && math::cointoss()) {
+    if(math::cointoss()) {
+      gibserverutils::gibleftleg(entity);
+      return;
+    }
+
+    gibserverutils::gibrightleg(entity);
+  }
+}
+
+damageoverride(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex, modelindex) {
+  entity = self;
+  entity destructserverutils::handledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex, modelindex);
+
+  if(isDefined(eattacker) && isplayer(eattacker) && (smeansofdeath === "MOD_RIFLE_BULLET" || smeansofdeath === "MOD_PISTOL_BULLET" || smeansofdeath === "MOD_HEAD_SHOT") && isDefined(shitloc) && (shitloc == "head" || shitloc == "helmet" || shitloc == "neck")) {
+    idamage *= 5;
+  }
+
+  if(isDefined(eattacker) && !isplayer(eattacker) && !isvehicle(eattacker)) {
+    dist = distancesquared(entity.origin, eattacker.origin);
+
+    if(dist < 65536) {
+      idamage = int(idamage * 10);
+    } else {
+      idamage = int(idamage * 1.5);
+    }
+  }
+
+  if(sweapon.name == "incendiary_grenade") {
+    idamage = entity.health;
+  }
+
+  return idamage;
+}
+
+#namespace humansoldierserverutils;
+
+cqbattributecallback(entity, attribute, oldvalue, value) {
+  if(value) {
+    entity asmchangeanimmappingtable(2);
+    return;
+  }
+
+  if(entity ai::get_behavior_attribute("useAnimationOverride")) {
+    entity asmchangeanimmappingtable(1);
+    return;
+  }
+
+  entity asmchangeanimmappingtable(0);
+}
+
+forcetacticalwalkcallback(entity, attribute, oldvalue, value) {
+  entity.ignorerunandgundist = value;
+}
+
+movemodeattributecallback(entity, attribute, oldvalue, value) {
+  entity.ignorepathenemyfightdist = 0;
+
+  switch (value) {
+    case #"normal":
+      break;
+    case #"rambo":
+      entity.ignorepathenemyfightdist = 1;
+      break;
+  }
+}
+
+useanimationoverridecallback(entity, attribute, oldvalue, value) {
+  if(value) {
+    entity asmchangeanimmappingtable(1);
+    return;
+  }
+
+  entity asmchangeanimmappingtable(0);
+}
+
+disablesprintcallback(entity, attribute, oldvalue, value) {
+  if(value) {
+    entity.disablesprint = 1;
+    return;
+  }
+
+  entity.disablesprint = 0;
+}
+
+forcesprintcallback(entity, attribute, oldvalue, value) {
+  if(value) {
+    entity.forcesprint = 1;
+    return;
+  }
+
+  entity.forcesprint = 0;
+}
+
+vignettemodecallback(entity, attribute, oldvalue, value) {
+  switch (value) {
+    case #"off":
+      entity.pushable = 1;
+      entity collidewithactors(0);
+      entity pushplayer(0);
+      entity setavoidancemask("avoid all");
+      entity setsteeringmode("normal steering");
+      break;
+    case #"slow":
+      entity.pushable = 0;
+      entity collidewithactors(0);
+      entity pushplayer(1);
+      entity setavoidancemask("avoid ai");
+      entity setsteeringmode("vignette steering");
+      break;
+    case #"fast":
+      entity.pushable = 0;
+      entity collidewithactors(1);
+      entity pushplayer(1);
+      entity setavoidancemask("avoid none");
+      entity setsteeringmode("vignette steering");
+      break;
+    default:
+      break;
+  }
+}

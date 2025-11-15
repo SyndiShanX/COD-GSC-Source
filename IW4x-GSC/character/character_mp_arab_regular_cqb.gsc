@@ -1,0 +1,18 @@
+/*******************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: character\character_mp_arab_regular_cqb.gsc
+*******************************************************/
+
+main() {
+  self setModel("body_mp_arab_regular_cqb");
+  self attach("head_mp_arab_regular_headwrap", "", true);
+  self.headModel = "head_mp_arab_regular_headwrap";
+  self setViewmodel("viewhands_desert_opfor");
+  self.voice = "arab";
+}
+
+precache() {
+  precacheModel("body_mp_arab_regular_cqb");
+  precacheModel("head_mp_arab_regular_headwrap");
+  precacheModel("viewhands_desert_opfor");
+}

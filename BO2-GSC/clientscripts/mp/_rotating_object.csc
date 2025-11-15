@@ -1,0 +1,50 @@
+/*************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\_rotating_object.csc
+*************************************************/
+
+#include clientscripts\mp\_utility;
+
+init(localclientnum) {
+  rotating_objects = getEntArray(localclientnum, "rotating_object", "targetname");
+  array_thread(rotating_objects, ::rotating_object_think);
+}
+
+rotating_object_think() {
+  self endon("entityshutdown");
+  axis = "yaw";
+  direction = 360;
+  revolutions = 1000;
+  rotate_time = 12;
+
+  if(isDefined(self.script_noteworthy))
+    axis = self.script_noteworthy;
+
+  if(isDefined(self.script_float))
+    rotate_time = self.script_float;
+
+  if(rotate_time == 0)
+    rotate_time = 12;
+
+  if(rotate_time < 0) {
+    direction = direction * -1;
+    rotate_time = rotate_time * -1;
+  }
+
+  while(true) {
+    switch (axis) {
+      case "roll":
+        self rotateroll(direction * revolutions, rotate_time * revolutions);
+        break;
+      case "pitch":
+        self rotatepitch(direction * revolutions, rotate_time * revolutions);
+        break;
+      case "yaw":
+      default:
+        self rotateyaw(direction * revolutions, rotate_time * revolutions);
+        break;
+    }
+
+    self waittill("rotatedone");
+  }
+}

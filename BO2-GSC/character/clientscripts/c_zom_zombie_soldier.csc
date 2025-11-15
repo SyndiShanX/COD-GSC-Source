@@ -1,0 +1,28 @@
+/*******************************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: character\clientscripts\c_zom_zombie_soldier.csc
+*******************************************************************/
+
+main() {
+  self._gib_def = level._gibbing_actor_models["c_zom_zombie_soldier_body"];
+}
+
+precache() {
+  register_gibs();
+}
+
+register_gibs() {
+  if(!isDefined(level._gibbing_actor_models))
+    level._gibbing_actor_models = [];
+
+  gib_spawn = spawnStruct();
+  gib_spawn.gibspawn1 = "c_zom_zombie_soldier_g_rarmspawn";
+  gib_spawn.gibspawntag1 = "J_Elbow_RI";
+  gib_spawn.gibspawn2 = "c_zom_zombie_soldier_g_larmspawn";
+  gib_spawn.gibspawntag2 = "J_Elbow_LE";
+  gib_spawn.gibspawn3 = "c_zom_zombie_soldier_g_rlegspawn";
+  gib_spawn.gibspawntag3 = "J_Knee_RI";
+  gib_spawn.gibspawn4 = "c_zom_zombie_soldier_g_llegspawn";
+  gib_spawn.gibspawntag4 = "J_Knee_LE";
+  level._gibbing_actor_models["c_zom_zombie_soldier_body"] = gib_spawn;
+}

@@ -1,0 +1,18 @@
+/***********************************************************
+ * Decompiled by Mjkzy
+ * Edited by SyndiShanX
+ * Script: character\character_dead_russian_loyalist_b.gsc
+***********************************************************/
+
+main() {
+  self setModel("body_russian_loyalist_b_dead");
+  self attach("head_russian_loyalist_a_dead", "", 1);
+  self.headmodel = "head_russian_loyalist_a_dead";
+  self.voice = "russian";
+  self setclothtype("vestlight");
+}
+
+precache() {
+  precachemodel("body_russian_loyalist_b_dead");
+  precachemodel("head_russian_loyalist_a_dead");
+}

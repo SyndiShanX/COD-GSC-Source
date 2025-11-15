@@ -1,0 +1,16 @@
+/*******************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: character\character_elite_pmc_shotgun_b.gsc
+*******************************************************/
+
+main() {
+  self setModel("body_elite_pmc_shotgun_b");
+  codescripts\character::attachhead("alias_elite_pmc_heads", xmodelalias\alias_elite_pmc_heads::main());
+  self.voice = "russian";
+  self setclothtype("vestheavy");
+}
+
+precache() {
+  precachemodel("body_elite_pmc_shotgun_b");
+  codescripts\character::precachemodelarray(xmodelalias\alias_elite_pmc_heads::main());
+}

@@ -1,0 +1,19 @@
+/*****************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: character\char_japwet_off.gsc
+*****************************************************/
+
+main() {
+  self setModel("char_jap_impinfwet_officer_body");
+  self.headModel = "char_jap_impinf_officer_head";
+  self attach(self.headModel, "", true);
+  self.hatModel = "char_jap_impinfwet_officer_hat";
+  self attach(self.hatModel);
+  self.voice = "japanese";
+}
+
+precache() {
+  precacheModel("char_jap_impinfwet_officer_body");
+  precacheModel("char_jap_impinf_officer_head");
+  precacheModel("char_jap_impinfwet_officer_hat");
+}

@@ -1,0 +1,13 @@
+/*****************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: xmodelalias\char_usa_raider_gearalias.gsc
+*****************************************************/
+
+main() {
+  a[0] = "char_usa_raider_gear1";
+  a[1] = "char_usa_raider_gear2";
+  a[2] = "char_usa_raider_gear3";
+  a[3] = "char_usa_raider_gear4";
+  a[4] = "char_usa_raider_gear5";
+  return a;
+}

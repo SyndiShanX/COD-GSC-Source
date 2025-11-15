@@ -1,0 +1,106 @@
+/*****************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\zombies\_zm_powerups.csc
+*****************************************************/
+
+#include clientscripts\mp\_utility;
+#include clientscripts\mp\zombies\_zm_utility;
+
+init() {
+  add_zombie_powerup("insta_kill", "powerup_instant_kill");
+  add_zombie_powerup("double_points", "powerup_double_points");
+  add_zombie_powerup("fire_sale", "powerup_fire_sale");
+  add_zombie_powerup("bonfire_sale", "powerup_bon_fire");
+  add_zombie_powerup("minigun", "powerup_mini_gun");
+  add_zombie_powerup("tesla", "powerup_tesla");
+  add_zombie_powerup("insta_kill_ug", "powerup_instant_kill_ug", 5000);
+  add_zombie_powerup("nuke");
+  add_zombie_powerup("full_ammo");
+  add_zombie_powerup("carpenter");
+  add_zombie_powerup("free_perk");
+  add_zombie_powerup("random_weapon");
+  add_zombie_powerup("bonus_points_player");
+  add_zombie_powerup("bonus_points_team");
+  add_zombie_powerup("lose_points_team");
+  add_zombie_powerup("lose_perk");
+  add_zombie_powerup("empty_clip");
+  level thread set_clientfield_code_callbacks();
+
+  if(!is_true(level.createfx_enabled)) {
+    level._effect["powerup_on"] = loadfx("misc/fx_zombie_powerup_on");
+    level._effect["powerup_on_solo"] = loadfx("misc/fx_zombie_powerup_solo_on");
+    level._effect["powerup_on_caution"] = loadfx("misc/fx_zombie_powerup_caution_on");
+  }
+
+  if(is_true(level.using_zombie_powerups))
+    level._effect["powerup_on_red"] = loadfx("misc/fx_zombie_powerup_on_red");
+
+  registerclientfield("scriptmover", "powerup_fx", 1000, 3, "int", ::powerup_fx_callback);
+}
+
+add_zombie_powerup(powerup_name, client_field_name, clientfield_version) {
+  if(!isDefined(clientfield_version))
+    clientfield_version = 1;
+
+  if(isDefined(level.zombie_include_powerups) && !isDefined(level.zombie_include_powerups[powerup_name])) {
+    return;
+  }
+  struct = spawnStruct();
+
+  if(!isDefined(level.zombie_powerups))
+    level.zombie_powerups = [];
+
+  struct.powerup_name = powerup_name;
+  level.zombie_powerups[powerup_name] = struct;
+
+  if(!level.createfx_enabled) {
+    if(isDefined(client_field_name)) {
+      registerclientfield("toplayer", client_field_name, clientfield_version, 2, "int", undefined, 0, 1);
+      struct.client_field_name = client_field_name;
+    }
+  }
+}
+
+set_clientfield_code_callbacks() {
+  wait 0.1;
+
+  if(!level.createfx_enabled) {
+    powerup_keys = getarraykeys(level.zombie_powerups);
+    powerup_clientfield_name = undefined;
+
+    for(powerup_key_index = 0; powerup_key_index < powerup_keys.size; powerup_key_index++) {
+      powerup_clientfield_name = level.zombie_powerups[powerup_keys[powerup_key_index]].client_field_name;
+
+      if(isDefined(powerup_clientfield_name))
+        setupclientfieldcodecallbacks("toplayer", 1, powerup_clientfield_name);
+    }
+  }
+}
+
+include_zombie_powerup(powerup_name) {
+  if(!isDefined(level.zombie_include_powerups))
+    level.zombie_include_powerups = [];
+
+  level.zombie_include_powerups[powerup_name] = 1;
+}
+
+powerup_fx_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+  switch (newval) {
+    case 1:
+      fx = level._effect["powerup_on"];
+      break;
+    case 2:
+      fx = level._effect["powerup_on_solo"];
+      break;
+    case 3:
+      fx = level._effect["powerup_on_red"];
+      break;
+    case 4:
+      fx = level._effect["powerup_on_caution"];
+      break;
+    default:
+      return;
+  }
+
+  playFXOnTag(localclientnum, fx, self, "tag_origin");
+}

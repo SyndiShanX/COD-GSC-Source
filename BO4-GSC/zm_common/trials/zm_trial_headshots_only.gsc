@@ -1,0 +1,89 @@
+/********************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: zm_common\trials\zm_trial_headshots_only.gsc
+********************************************************/
+
+#include scripts\core_common\callbacks_shared;
+#include scripts\core_common\flag_shared;
+#include scripts\core_common\system_shared;
+#include scripts\zm_common\zm_loadout;
+#include scripts\zm_common\zm_traps;
+#include scripts\zm_common\zm_trial;
+#include scripts\zm_common\zm_trial_util;
+#include scripts\zm_common\zm_utility;
+
+#namespace zm_trial_headshots_only;
+
+autoexec __init__system__() {
+  system::register(#"zm_trial_headshots_only", &__init__, undefined, undefined);
+}
+
+__init__() {
+  if(!zm_trial::is_trial_mode()) {
+    return;
+  }
+
+  zm_trial::register_challenge(#"headshots_only", &on_begin, &on_end);
+}
+
+private on_begin(weapon_name) {
+  level.var_153e9058 = 1;
+  level.var_fe2bb2ac = 1;
+  zm_traps::function_6966417b();
+
+  foreach(player in getplayers()) {
+    foreach(var_5a1e3e5b in level.hero_weapon) {
+      foreach(w_hero in var_5a1e3e5b) {
+        player lockweapon(w_hero, 1, 1);
+      }
+    }
+
+    player zm_trial_util::function_9bf8e274();
+    player zm_trial_util::function_dc9ab223(1);
+  }
+
+  callback::function_33f0ddd3(&function_33f0ddd3);
+  level zm_trial::function_44200d07(1);
+  level zm_trial::function_cd75b690(1);
+}
+
+private on_end(round_reset) {
+  level.var_153e9058 = 0;
+  level.var_fe2bb2ac = 0;
+  zm_traps::function_9d0c9706();
+
+  foreach(player in getplayers()) {
+    foreach(var_5a1e3e5b in level.hero_weapon) {
+      foreach(w_hero in var_5a1e3e5b) {
+        player unlockweapon(w_hero);
+      }
+    }
+
+    player zm_trial_util::function_73ff0096();
+
+    foreach(w_equip in level.zombie_weapons) {
+      if(w_equip.weapon_classname === "equipment") {
+        player unlockweapon(w_equip.weapon);
+      }
+    }
+
+    player zm_trial_util::function_dc9ab223(0);
+  }
+
+  callback::function_824d206(&function_33f0ddd3);
+  level zm_trial::function_44200d07(0);
+  level zm_trial::function_cd75b690(0);
+}
+
+is_active() {
+  challenge = zm_trial::function_a36e8c38(#"headshots_only");
+  return isDefined(challenge);
+}
+
+private function_33f0ddd3(s_event) {
+  if(s_event.event === "give_weapon") {
+    if(zm_loadout::function_59b0ef71("lethal_grenade", s_event.weapon)) {
+      self lockweapon(s_event.weapon, 1, 1);
+    }
+  }
+}

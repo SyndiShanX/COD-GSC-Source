@@ -1,0 +1,14 @@
+/***********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: character\c_usa_nicaragua_mason.gsc
+***********************************************/
+
+main() {
+  self setModel("c_usa_nicaragua_mason_fb");
+  self.voice = "american";
+  self.skeleton = "base";
+}
+
+precache() {
+  precachemodel("c_usa_nicaragua_mason_fb");
+}

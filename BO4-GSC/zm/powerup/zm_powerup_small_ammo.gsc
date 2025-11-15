@@ -1,0 +1,213 @@
+/************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: zm\powerup\zm_powerup_small_ammo.gsc
+************************************************/
+
+#include scripts\core_common\ai\zombie_death;
+#include scripts\core_common\clientfield_shared;
+#include scripts\core_common\hud_util_shared;
+#include scripts\core_common\laststand_shared;
+#include scripts\core_common\struct;
+#include scripts\core_common\system_shared;
+#include scripts\core_common\util_shared;
+#include scripts\zm_common\trials\zm_trial_reset_loadout;
+#include scripts\zm_common\zm_loadout;
+#include scripts\zm_common\zm_placeable_mine;
+#include scripts\zm_common\zm_powerups;
+#include scripts\zm_common\zm_score;
+#include scripts\zm_common\zm_spawner;
+#include scripts\zm_common\zm_utility;
+#include scripts\zm_common\zm_weapons;
+
+#namespace zm_powerup_small_ammo;
+
+autoexec __init__system__() {
+  system::register(#"zm_powerup_small_ammo", &__init__, undefined, undefined);
+}
+
+__init__() {
+  zm_powerups::register_powerup("small_ammo", &function_81558cdf);
+
+  if(zm_powerups::function_cc33adc8()) {
+    zm_powerups::add_zombie_powerup("small_ammo", "p7_zm_power_up_max_ammo", #"hash_69256172c78db147", &zm_powerups::func_should_never_drop, 1, 0, 0);
+  }
+}
+
+function_81558cdf(player) {
+  if(zm_powerups::function_cfd04802(#"small_ammo")) {
+    level thread function_d7d24283(self, player);
+    return;
+  }
+
+  level thread function_8be02874(self, player);
+}
+
+function_d7d24283(e_powerup, player) {
+  if(isDefined(level.check_player_is_ready_for_ammo)) {
+    if([
+        [level.check_player_is_ready_for_ammo]
+      ](player) == 0) {
+      return;
+    }
+  }
+
+  function_ae7afb91(player);
+  player playsoundtoplayer(#"zmb_full_ammo", player);
+}
+
+function_8be02874(drop_item, player) {
+  players = getplayers(player.team);
+
+  if(isDefined(level.var_73345bfd)) {
+    players = [[level.var_73345bfd]](player);
+  }
+
+  level notify(#"hash_41ccd6a10f7370cc");
+
+  foreach(player in players) {
+    if(isDefined(level.check_player_is_ready_for_ammo)) {
+      if([
+          [level.check_player_is_ready_for_ammo]
+        ](player) == 0) {
+        continue;
+      }
+    }
+
+    function_ae7afb91(player);
+  }
+
+  level thread function_71bf1101(drop_item, player.team);
+}
+
+function_ae7afb91(player) {
+  a_w_weapons = player getweaponslist(0);
+  player.var_655c0753 = undefined;
+  player notify(#"zmb_small_ammo");
+  player zm_placeable_mine::disable_all_prompts_for_player();
+
+  foreach(w_weapon in a_w_weapons) {
+    if(zm_loadout::is_lethal_grenade(w_weapon) || zm_loadout::is_offhand_weapon(w_weapon)) {
+      continue;
+    }
+
+    if(isDefined(level.zombie_include_equipment) && isDefined(level.zombie_include_equipment[w_weapon]) && !(isDefined(level.zombie_equipment[w_weapon].refill_max_ammo) && level.zombie_equipment[w_weapon].refill_max_ammo)) {
+      continue;
+    }
+
+    if(isDefined(level.zombie_weapons_no_max_ammo) && isDefined(level.zombie_weapons_no_max_ammo[w_weapon.name])) {
+      continue;
+    }
+
+    if(zm_loadout::is_hero_weapon(w_weapon)) {
+      continue;
+    }
+
+    if(player hasweapon(w_weapon)) {
+      player function_7374e868(w_weapon);
+    }
+  }
+}
+
+function_71bf1101(drop_item, player_team) {
+  players = getplayers(player_team);
+  players[0] playsoundtoteam("zmb_full_ammo", player_team);
+}
+
+function_7374e868(weapon) {
+  var_cd9d17e0 = 0;
+
+  if(!zm_loadout::is_offhand_weapon(weapon) || weapon.isriotshield) {
+    weapon = self zm_weapons::get_weapon_with_attachments(weapon);
+
+    if(isDefined(weapon)) {
+      var_cb48c3c9 = weapon.maxammo;
+      var_ef0714fa = weapon.startammo;
+      n_clip_size = weapon.clipsize;
+      var_5916b9ab = 0;
+
+      if(weapon.dualwieldweapon != level.weaponnone) {
+        var_5916b9ab = weapon.dualwieldweapon.clipsize;
+      }
+
+      var_b8624c26 = self getammocount(weapon);
+
+      if(self hasperk(#"specialty_extraammo")) {
+        n_ammo_max = var_cb48c3c9;
+      } else {
+        n_ammo_max = var_ef0714fa;
+      }
+
+      if(weapon.isdualwield) {
+        n_ammo_max *= 2;
+      }
+
+      if(var_b8624c26 >= n_ammo_max + n_clip_size + var_5916b9ab) {
+        var_cd9d17e0 = 0;
+      } else {
+        var_cd9d17e0 = 1;
+      }
+    }
+  } else if(self zm_weapons::has_weapon_or_upgrade(weapon)) {
+    if(self getammocount(weapon) < weapon.maxammo) {
+      var_cd9d17e0 = 1;
+    }
+  }
+
+  if(var_cd9d17e0) {
+    self give_clip_of_ammo(weapon);
+    return 1;
+  }
+
+  if(!var_cd9d17e0) {
+    return 0;
+  }
+}
+
+give_clip_of_ammo(w_weapon) {
+  if(zm_loadout::function_2ff6913(w_weapon)) {
+    return;
+  }
+
+  if(!self hasweapon(w_weapon)) {
+    return;
+  }
+
+  self notify(#"hash_64f02bb4452a4bd7");
+
+  if(zm_trial_reset_loadout::is_active(1)) {
+    self function_7f7c1226(w_weapon);
+    return;
+  }
+
+  n_clip = 0;
+  var_98f6dae8 = self getweaponammoclip(w_weapon);
+  n_pool = 0;
+  var_df670713 = self getammocount(w_weapon);
+
+  if(self hasperk(#"specialty_extraammo")) {
+    n_pool = w_weapon.maxammo;
+  } else {
+    n_pool = w_weapon.startammo;
+  }
+
+  if(weaponhasattachment(w_weapon, "uber") && w_weapon.statname == #"smg_capacity_t8" || isDefined(w_weapon.isriotshield) && w_weapon.isriotshield) {
+    n_clip = w_weapon.clipsize / 4;
+  } else {
+    n_clip = w_weapon.clipsize;
+  }
+
+  n_stock = int(min(n_pool, var_df670713 - var_98f6dae8 + n_clip));
+  self setweaponammostock(w_weapon, n_stock);
+}
+
+private function_7f7c1226(weapon) {
+  waittillframeend();
+
+  if(weaponhasattachment(weapon, "uber") && weapon.statname == #"smg_capacity_t8" || isDefined(weapon.isriotshield) && weapon.isriotshield) {
+    n_stock = weapon.clipsize / 4;
+  } else {
+    n_stock = 0;
+  }
+
+  self setweaponammostock(weapon, n_stock);
+}

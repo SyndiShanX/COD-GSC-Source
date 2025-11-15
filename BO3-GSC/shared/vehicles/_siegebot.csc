@@ -1,0 +1,25 @@
+/*************************************************
+ * Decompiled by Serious and Edited by SyndiShanX
+ * Script: shared\vehicles\_siegebot.csc
+*************************************************/
+
+#using scripts\codescripts\struct;
+#using scripts\shared\callbacks_shared;
+#using scripts\shared\clientfield_shared;
+#using scripts\shared\system_shared;
+#using scripts\shared\vehicle_shared;
+#using scripts\shared\weapons\spike_charge_siegebot;
+#namespace siegebot;
+
+function autoexec main() {
+  vehicle::add_vehicletype_callback("siegebot", & _setup_);
+}
+
+function _setup_(localclientnum) {
+  if(isDefined(self.scriptbundlesettings)) {
+    settings = struct::get_script_bundle("vehiclecustomsettings", self.scriptbundlesettings);
+  }
+  if(!isDefined(settings)) {
+    return;
+  }
+}

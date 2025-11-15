@@ -1,0 +1,66 @@
+/************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\gametypes\zmeat.csc
+************************************************/
+
+#include clientscripts\mp\_utility;
+#include clientscripts\mp\zombies\_zm_utility;
+
+main() {
+  registerclientfield("allplayers", "holding_meat", 7000, 1, "int", ::play_meat_glow, 0);
+  registerclientfield("scriptmover", "ring_glowfx", 7000, 1, "int", ::play_ring_glow, 0);
+  registerclientfield("scriptmover", "ring_glow_meatfx", 7000, 1, "int", ::play_ring_meatglow, 0);
+  level._zombie_gamemodeprecache = ::onprecachegametype;
+  level._zombie_gamemodemain = ::onstartgametype;
+  level._effect["meat_glow3p"] = loadfx("maps/zombie/fx_zmb_meat_glow_3p");
+  level._effect["meat_glow"] = loadfx("maps/zombie/fx_zmb_meat_glow");
+  level._effect["ring_glow"] = loadfx("misc/fx_zombie_powerup_on");
+  init_animtree();
+}
+
+#using_animtree("zombie_meat");
+
+init_animtree() {
+  scriptmodelsuseanimtree(#animtree);
+}
+
+onprecachegametype() {
+}
+
+onstartgametype() {
+  setsaveddvar("r_skyTransition", 1);
+  ui3dsetwindow(0, 0, 0, 1, 1);
+}
+
+play_meat_glow(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+  if(localclientnum != 0) {
+    return;
+  }
+  if(newval) {
+    if(!isDefined(self._meat_fx))
+      self._meat_fx = playFXOnTag(localclientnum, level._effect["meat_glow3p"], self, "tag_weapon_right");
+  } else if(isDefined(self._meat_fx)) {
+    deletefx(localclientnum, self._meat_fx);
+    self._meat_fx = undefined;
+  }
+}
+
+play_ring_meatglow(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+  if(newval) {
+    if(!isDefined(self._glow_fx))
+      self._glow_fx = playFXOnTag(localclientnum, level._effect["meat_glow"], self, "tag_origin");
+  } else if(isDefined(self._glow_fx)) {
+    deletefx(localclientnum, self._glow_fx);
+    self._glow_fx = undefined;
+  }
+}
+
+play_ring_glow(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+  if(newval) {
+    if(!isDefined(self._glow_fx))
+      self._glow_fx = playFXOnTag(localclientnum, level._effect["ring_glow"], self, "tag_origin");
+  } else if(isDefined(self._glow_fx)) {
+    deletefx(localclientnum, self._glow_fx);
+    self._glow_fx = undefined;
+  }
+}

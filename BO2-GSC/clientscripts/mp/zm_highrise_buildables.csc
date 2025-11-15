@@ -1,0 +1,18 @@
+/*********************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\zm_highrise_buildables.csc
+*********************************************************/
+
+#include clientscripts\mp\zombies\_zm_utility;
+
+init_buildables() {
+  level.buildable_piece_count = 13;
+  add_zombie_buildable("springpad_zm");
+  add_zombie_buildable("keys_zm");
+  level thread set_clientfield_buildables_code_callbacks();
+}
+
+include_buildables() {
+  include_buildable("springpad_zm");
+  include_buildable("keys_zm");
+}

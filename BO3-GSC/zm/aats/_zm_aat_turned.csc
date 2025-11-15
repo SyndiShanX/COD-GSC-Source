@@ -1,0 +1,40 @@
+/*************************************************
+ * Decompiled by Serious and Edited by SyndiShanX
+ * Script: zm\aats\_zm_aat_turned.csc
+*************************************************/
+
+#using scripts\shared\aat_shared;
+#using scripts\shared\array_shared;
+#using scripts\shared\clientfield_shared;
+#using scripts\shared\system_shared;
+#namespace zm_aat_turned;
+
+function autoexec __init__sytem__() {
+  system::register("zm_aat_turned", & __init__, undefined, undefined);
+}
+
+function __init__() {
+  if(!(isDefined(level.aat_in_use) && level.aat_in_use)) {
+    return;
+  }
+  aat::register("zm_aat_turned", "zmui_zm_aat_turned", "t7_icon_zm_aat_turned");
+  clientfield::register("actor", "zm_aat_turned", 1, 1, "int", & zm_aat_turned_cb, 0, 0);
+}
+
+function zm_aat_turned_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+  if(newval) {
+    self setdrawname(makelocalizedstring("zmui_zm_aat_turned"), 1);
+    self.fx_aat_turned_eyes = playFXOnTag(localclientnum, "zombie/fx_glow_eye_green", self, "j_eyeball_le");
+    self.fx_aat_turned_torso = playFXOnTag(localclientnum, "zombie/fx_aat_turned_spore_torso_zmb", self, "j_spine4");
+    self playSound(localclientnum, "");
+  } else {
+    if(isDefined(self.fx_aat_turned_eyes)) {
+      stopfx(localclientnum, self.fx_aat_turned_eyes);
+      self.fx_aat_turned_eyes = undefined;
+    }
+    if(isDefined(self.fx_aat_turned_torso)) {
+      stopfx(localclientnum, self.fx_aat_turned_torso);
+      self.fx_aat_turned_torso = undefined;
+    }
+  }
+}

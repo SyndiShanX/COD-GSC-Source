@@ -1,0 +1,18 @@
+/*********************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: clientscripts\mp\zombies\_zm_challenges.csc
+*********************************************************/
+
+#include clientscripts\mp\_utility;
+#include clientscripts\mp\zombies\_zm_utility;
+
+init() {
+  registerclientfield("toplayer", "challenge_complete_1", 14000, 1, "int", undefined, 0, 1);
+  registerclientfield("toplayer", "challenge_complete_2", 14000, 1, "int", undefined, 0, 1);
+  registerclientfield("toplayer", "challenge_complete_3", 14000, 1, "int", undefined, 0, 1);
+  registerclientfield("toplayer", "challenge_complete_4", 14000, 1, "int", undefined, 0, 1);
+  setupclientfieldcodecallbacks("toplayer", 1, "challenge_complete_1");
+  setupclientfieldcodecallbacks("toplayer", 1, "challenge_complete_2");
+  setupclientfieldcodecallbacks("toplayer", 1, "challenge_complete_3");
+  setupclientfieldcodecallbacks("toplayer", 1, "challenge_complete_4");
+}

@@ -1,0 +1,82 @@
+/*********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\createart\mp_dome_ns_fog.gsc
+*********************************************/
+
+main() {
+  var_0 = maps\mp\_art::create_vision_set_fog("mp_dome_ns");
+  var_0.startdist = 100;
+  var_0.halfwaydist = 2700;
+  var_0.red = 0.53;
+  var_0.green = 0.54;
+  var_0.blue = 0.58;
+  var_0.maxopacity = 0.65;
+  var_0.transitiontime = 0;
+  var_0.sunfogenabled = 1;
+  var_0.sunred = 1;
+  var_0.sungreen = 0.87;
+  var_0.sunblue = 0.78;
+  var_0.sundir = (-0.95, -0.247, 0.17);
+  var_0.sunbeginfadeangle = 0;
+  var_0.sunendfadeangle = 107;
+  var_0.normalfogscale = 0.425;
+  var_0.hdrsuncolorintensity = 0.75;
+  var_0.hdrcolorintensity = 1.0;
+  var_0.skyfogintensity = 0.8;
+  var_0.skyfogminangle = -9;
+  var_0.skyfogmaxangle = 71.0;
+  var_0.hdroverride = "mp_dome_ns_HDR";
+  var_0 = maps\mp\_art::create_vision_set_fog("mp_dome_ns_HDR");
+  var_0.startdist = 0;
+  var_0.halfwaydist = 3100;
+  var_0.red = 0.69;
+  var_0.green = 0.681;
+  var_0.blue = 0.66;
+  var_0.maxopacity = 0.34;
+  var_0.transitiontime = 0;
+  var_0.sunfogenabled = 1;
+  var_0.sunred = 1.0;
+  var_0.sungreen = 0.9;
+  var_0.sunblue = 0.83;
+  var_0.sundir = (-0.95, -0.247, 0.17);
+  var_0.sunbeginfadeangle = 0;
+  var_0.sunendfadeangle = 86;
+  var_0.normalfogscale = 0.73;
+  var_0.hdrsuncolorintensity = 1.25;
+  var_0.hdrcolorintensity = 1.4;
+  var_0.skyfogintensity = 1.0;
+  var_0.skyfogminangle = 25;
+  var_0.skyfogmaxangle = 72.0;
+  var_0 = maps\mp\_art::create_vision_set_fog("mp_dome_ns_green");
+  var_0.startdist = 0;
+  var_0.halfwaydist = 35037.9;
+  var_0.red = 0;
+  var_0.green = 0.999931;
+  var_0.blue = 0.350113;
+  var_0.maxopacity = 0.991253;
+  var_0.transitiontime = 0;
+  var_0.sunfogenabled = 1;
+  var_0.sunred = 0.848716;
+  var_0.sungreen = 0.5;
+  var_0.sunblue = 0.5;
+  var_0.sundir = (-0.974322, 0.0567653, 0.217885);
+  var_0.sunbeginfadeangle = 0;
+  var_0.sunendfadeangle = 18.1434;
+  var_0.normalfogscale = 2.80317;
+  var_0 = maps\mp\_art::create_vision_set_fog("mp_dome_ns_blue");
+  var_0.startdist = 15133;
+  var_0.halfwaydist = 5000;
+  var_0.red = 0.500007;
+  var_0.green = 0.500117;
+  var_0.blue = 1;
+  var_0.maxopacity = 1;
+  var_0.transitiontime = 0;
+  var_0.sunfogenabled = 1;
+  var_0.sunred = 0.211453;
+  var_0.sungreen = 0.212094;
+  var_0.sunblue = 0.212169;
+  var_0.sundir = (0.761396, -0.615753, 0.202795);
+  var_0.sunbeginfadeangle = 7.97556;
+  var_0.sunendfadeangle = 101.616;
+  var_0.normalfogscale = 7.13039;
+}

@@ -1,0 +1,15 @@
+/*************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\createart\mp_firingrange_art.gsc
+*************************************************/
+
+main() {
+  level.tweakfile = true;
+
+
+
+  setdvar("scr_fog_disable", "0");
+
+  setExpFog(3015.28, 4009.05, 0.517317, 0.521552, 0.541961, 0.7, 0);
+  VisionSetNaked("mp_firingrange", 0);
+}

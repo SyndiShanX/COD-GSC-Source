@@ -1,0 +1,16 @@
+/***************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\mp\mp_estate_tropical_precache.gsc
+***************************************************/
+
+main() {
+  common_scripts\_destructible_types_anim_generator::main();
+  common_scripts\_destructible_types_anim_wallfan::main();
+
+  maps\animated_models\foliage_tropical_estate_1::main();
+  maps\animated_models\foliage_codo_short_palm_1::main();
+  maps\animated_models\foliage_codo_plantain_1::main();
+  maps\animated_models\foliage_palm_bare_3::main();
+  maps\animated_models\foliage_palm_bare_2::main();
+  maps\animated_models\foliage_palm_bare_1::main();
+}

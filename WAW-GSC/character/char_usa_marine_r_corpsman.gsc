@@ -1,0 +1,19 @@
+/*****************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: character\char_usa_marine_r_corpsman.gsc
+*****************************************************/
+
+main() {
+  self setModel("char_usa_marine_corpsman_body");
+  self.headModel = "char_usa_marine_corpsman_head";
+  self attach(self.headModel, "", true);
+  self.hatModel = "char_usa_marine_helmm";
+  self attach(self.hatModel);
+  self.voice = "american";
+}
+
+precache() {
+  precacheModel("char_usa_marine_corpsman_body");
+  precacheModel("char_usa_marine_corpsman_head");
+  precacheModel("char_usa_marine_helmm");
+}

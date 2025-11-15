@@ -1,0 +1,11 @@
+/*******************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: xmodelalias\char_rus_guardwet_gearalias.gsc
+*******************************************************/
+
+main() {
+  a[0] = "char_rus_guardwet_body1_gear1_1";
+  a[1] = "char_rus_guardwet_body1_gear2_1";
+  a[2] = "char_rus_guardwet_body1_gear3_1";
+  return a;
+}

@@ -1,0 +1,16 @@
+/********************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\createart\co_hunted_art.gsc
+********************************************/
+
+main() {
+  level.tweakfile = true;
+
+  setDevDvar("scr_fog_disable", "0");
+
+  setExpFog(300, 4000, 0.5, 0.5, 0.5, 1, 0);
+
+  VisionSetNaked("co_hunted", 0);
+
+  setdvar("r_specularcolorscale", "5");
+}
