@@ -1,0 +1,70 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: script\script_6409d04aa560106c.csc
+***********************************************/
+
+#using scripts\core_common\lui_shared;
+#namespace zm_laststand_client;
+
+class czm_laststand_client: cluielem {
+  function set_revive_progress(localclientnum, value) {
+    set_data(localclientnum, "revive_progress", value);
+  }
+
+  function set_bleedout_progress(localclientnum, value) {
+    set_data(localclientnum, "bleedout_progress", value);
+  }
+
+  function open(localclientnum) {
+    cluielem::open(localclientnum, # "zm_laststand_client");
+  }
+
+  function function_cf9c4603(localclientnum) {
+    cluielem::function_cf9c4603(localclientnum);
+    set_data(localclientnum, "bleedout_progress", 0);
+    set_data(localclientnum, "revive_progress", 0);
+  }
+
+  function register_clientside(uid) {
+    cluielem::register_clientside(uid);
+  }
+
+  function setup_clientfields(uid, var_466bcfc, var_f45e8d0d) {
+    cluielem::setup_clientfields(uid);
+    cluielem::add_clientfield("bleedout_progress", 1, 6, "float", var_466bcfc);
+    cluielem::add_clientfield("revive_progress", 1, 5, "float", var_f45e8d0d);
+  }
+
+}
+
+register(uid, var_466bcfc, var_f45e8d0d) {
+  elem = new czm_laststand_client();
+  [[elem]] - > setup_clientfields(uid, var_466bcfc, var_f45e8d0d);
+  return elem;
+}
+
+register_clientside(uid) {
+  elem = new czm_laststand_client();
+  [[elem]] - > register_clientside(uid);
+  return elem;
+}
+
+open(player) {
+  [[self]] - > open(player);
+}
+
+close(player) {
+  [[self]] - > close(player);
+}
+
+is_open(localclientnum) {
+  return [[self]] - > is_open(localclientnum);
+}
+
+set_bleedout_progress(localclientnum, value) {
+  [[self]] - > set_bleedout_progress(localclientnum, value);
+}
+
+set_revive_progress(localclientnum, value) {
+  [[self]] - > set_revive_progress(localclientnum, value);
+}

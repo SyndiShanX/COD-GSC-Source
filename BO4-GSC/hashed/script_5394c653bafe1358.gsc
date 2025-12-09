@@ -1,0 +1,70 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: script\script_5394c653bafe1358.gsc
+***********************************************/
+
+#using scripts\core_common\clientfield_shared;
+#using scripts\core_common\lui_shared;
+#namespace mp_revive_prompt;
+
+class cmp_revive_prompt: cluielem {
+  var var_57a3d576;
+
+  function set_reviveprogress(player, value) {
+    player clientfield::function_8fe7322a(var_57a3d576, "reviveProgress", value);
+  }
+
+  function set_health(player, value) {
+    player clientfield::function_8fe7322a(var_57a3d576, "health", value);
+  }
+
+  function set_clientnum(player, value) {
+    player clientfield::function_8fe7322a(var_57a3d576, "clientnum", value);
+  }
+
+  function close(player) {
+    cluielem::close_luielem(player);
+  }
+
+  function open(player, persistent = 0) {
+    cluielem::open_luielem(player, "mp_revive_prompt", persistent);
+  }
+
+  function setup_clientfields(uid) {
+    cluielem::setup_clientfields(uid);
+    cluielem::add_clientfield("clientnum", 1, 6, "int");
+    cluielem::add_clientfield("health", 1, 5, "float");
+    cluielem::add_clientfield("reviveProgress", 1, 5, "float");
+  }
+
+}
+
+register(uid) {
+  elem = new cmp_revive_prompt();
+  [[elem]] - > setup_clientfields(uid);
+  return elem;
+}
+
+open(player, persistent = 0) {
+  [[self]] - > open(player, persistent);
+}
+
+close(player) {
+  [[self]] - > close(player);
+}
+
+is_open(player) {
+  return [[self]] - > function_76692f88(player);
+}
+
+set_clientnum(player, value) {
+  [[self]] - > set_clientnum(player, value);
+}
+
+set_health(player, value) {
+  [[self]] - > set_health(player, value);
+}
+
+set_reviveprogress(player, value) {
+  [[self]] - > set_reviveprogress(player, value);
+}

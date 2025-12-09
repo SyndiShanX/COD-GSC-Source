@@ -1,0 +1,80 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: script\script_42409fc24e357285.csc
+***********************************************/
+
+#using scripts\core_common\lui_shared;
+#namespace zm_game_timer;
+
+class czm_game_timer: cluielem {
+  function set_showzero(localclientnum, value) {
+    set_data(localclientnum, "showzero", value);
+  }
+
+  function set_minutes(localclientnum, value) {
+    set_data(localclientnum, "minutes", value);
+  }
+
+  function set_seconds(localclientnum, value) {
+    set_data(localclientnum, "seconds", value);
+  }
+
+  function open(localclientnum) {
+    cluielem::open(localclientnum, # "zm_game_timer");
+  }
+
+  function function_cf9c4603(localclientnum) {
+    cluielem::function_cf9c4603(localclientnum);
+    set_data(localclientnum, "seconds", 0);
+    set_data(localclientnum, "minutes", 0);
+    set_data(localclientnum, "showzero", 0);
+  }
+
+  function register_clientside(uid) {
+    cluielem::register_clientside(uid);
+  }
+
+  function setup_clientfields(uid, var_f7588fa5, var_563b0bfd, var_6a2be891) {
+    cluielem::setup_clientfields(uid);
+    cluielem::add_clientfield("seconds", 1, 6, "int", var_f7588fa5);
+    cluielem::add_clientfield("minutes", 1, 9, "int", var_563b0bfd);
+    cluielem::add_clientfield("showzero", 1, 1, "int", var_6a2be891);
+  }
+
+}
+
+register(uid, var_f7588fa5, var_563b0bfd, var_6a2be891) {
+  elem = new czm_game_timer();
+  [[elem]] - > setup_clientfields(uid, var_f7588fa5, var_563b0bfd, var_6a2be891);
+  return elem;
+}
+
+register_clientside(uid) {
+  elem = new czm_game_timer();
+  [[elem]] - > register_clientside(uid);
+  return elem;
+}
+
+open(player) {
+  [[self]] - > open(player);
+}
+
+close(player) {
+  [[self]] - > close(player);
+}
+
+is_open(localclientnum) {
+  return [[self]] - > is_open(localclientnum);
+}
+
+set_seconds(localclientnum, value) {
+  [[self]] - > set_seconds(localclientnum, value);
+}
+
+set_minutes(localclientnum, value) {
+  [[self]] - > set_minutes(localclientnum, value);
+}
+
+set_showzero(localclientnum, value) {
+  [[self]] - > set_showzero(localclientnum, value);
+}

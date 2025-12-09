@@ -1,0 +1,62 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: script\script_40114edfb27a2dd9.csc
+***********************************************/
+
+#using scripts\core_common\lui_shared;
+#namespace scavenger_icon;
+
+class cscavenger_icon: cluielem {
+  function increment_pulse(localclientnum) {
+    current_val = get_data(localclientnum, "pulse");
+    new_val = (current_val + 1) % 2;
+    set_data(localclientnum, "pulse", new_val);
+  }
+
+  function open(localclientnum) {
+    cluielem::open(localclientnum, # "scavenger_icon");
+  }
+
+  function function_cf9c4603(localclientnum) {
+    cluielem::function_cf9c4603(localclientnum);
+    set_data(localclientnum, "pulse", 0);
+  }
+
+  function register_clientside(uid) {
+    cluielem::register_clientside(uid);
+  }
+
+  function setup_clientfields(uid, var_9bf17359) {
+    cluielem::setup_clientfields(uid);
+    cluielem::add_clientfield("pulse", 1, 1, "counter", var_9bf17359);
+  }
+
+}
+
+register(uid, var_9bf17359) {
+  elem = new cscavenger_icon();
+  [[elem]] - > setup_clientfields(uid, var_9bf17359);
+  return elem;
+}
+
+register_clientside(uid) {
+  elem = new cscavenger_icon();
+  [[elem]] - > register_clientside(uid);
+  return elem;
+}
+
+open(player) {
+  [[self]] - > open(player);
+}
+
+close(player) {
+  [[self]] - > close(player);
+}
+
+is_open(localclientnum) {
+  return [[self]] - > is_open(localclientnum);
+}
+
+increment_pulse(localclientnum) {
+  [[self]] - > increment_pulse(localclientnum);
+}
