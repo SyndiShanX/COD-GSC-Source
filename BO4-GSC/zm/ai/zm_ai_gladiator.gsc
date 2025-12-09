@@ -1566,9 +1566,7 @@ function_831dd6bd() {
             remaininglength = deviationdistance - segmentlength;
             seedposition = path[index - 1] + vectornormalize(path[index] - path[index - 1]) * remaininglength;
 
-
             recordcircle(seedposition, 2, (1, 0.5, 0), "<dev string:xc7>", self);
-
 
               innerzigzagradius = level.inner_zigzag_radius;
 

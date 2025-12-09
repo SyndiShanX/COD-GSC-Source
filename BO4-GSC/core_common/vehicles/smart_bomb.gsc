@@ -166,7 +166,6 @@ state_combat_update(params) {
           movedir = vectornormalize(point.origin - self.origin);
 
           if(vectordot(movedir, self.prevmovedir) > 0.64) {
-
             if(!isDefined(point._scoredebug)) {
               point._scoredebug = [];
             }
@@ -177,7 +176,6 @@ state_combat_update(params) {
 
             point._scoredebug[#"currentmovedir"].score = randomfloatrange(50, 150);
             point._scoredebug[#"currentmovedir"].scorename = "<dev string:x64>";
-
 
               point.score += randomfloatrange(50, 150);
           }

@@ -1567,7 +1567,6 @@ blocker_init() {
           if(targets[j].script_noteworthy == "2" || targets[j].script_noteworthy == "3" || targets[j].script_noteworthy == "4" || targets[j].script_noteworthy == "5" || targets[j].script_noteworthy == "6") {
             targets[j] hide();
 
-
             iprintlnbold("<dev string:x259>");
 
           }

@@ -94,7 +94,6 @@ function_dc61ccae(vnd_start, var_6f06d19d, var_ca144d1e) {
             var_b43bc141 = self.var_b20b0960.origin + (0, 0, 1) * var_41aabd6d;
             height_difference = var_b43bc141[2] - self.var_b20b0960.origin[2];
 
-
             line(self.var_b20b0960.origin, var_b43bc141, (1, 0, 1));
             record3dtext("<dev string:xae>" + height_difference, self.var_b20b0960.origin, (1, 1, 1), "<dev string:xb1>");
 

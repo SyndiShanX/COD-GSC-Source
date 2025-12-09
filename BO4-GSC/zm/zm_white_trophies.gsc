@@ -209,7 +209,6 @@ function_5e1138a2() {
         if(self function_91cfddc4()) {
           iprintlnbold("<dev string:x143>" + i + 1);
 
-
           iprintlnbold("<dev string:x38>" + "<dev string:x154>");
 
             self zm_utility::giveachievement_wrapper("zm_white_perk", 0);

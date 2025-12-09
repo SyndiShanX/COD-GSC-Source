@@ -1150,7 +1150,6 @@ getnextmoveposition_tactical() {
 
         foreach(point in queryresult.data) {
           if(point.visowner === 1) {
-
             if(!isDefined(point._scoredebug)) {
               point._scoredebug = [];
             }
@@ -1162,12 +1161,10 @@ getnextmoveposition_tactical() {
             point._scoredebug[#"visowner"].score = 300;
             point._scoredebug[#"visowner"].scorename = "<dev string:x99>";
 
-
               point.score += 300;
           }
 
           if(point.visenemy === 1) {
-
             if(!isDefined(point._scoredebug)) {
               point._scoredebug = [];
             }
@@ -1178,7 +1175,6 @@ getnextmoveposition_tactical() {
 
             point._scoredebug[#"visenemy"].score = 300;
             point._scoredebug[#"visenemy"].scorename = "<dev string:xa4>";
-
 
               point.score += 300;
           }

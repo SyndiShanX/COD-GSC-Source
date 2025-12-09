@@ -705,9 +705,7 @@ zombieupdategoal() {
               remaininglength = deviationdistance - segmentlength;
               seedposition = path[index - 1] + vectornormalize(path[index] - path[index - 1]) * remaininglength;
 
-
               recordcircle(seedposition, 2, (1, 0.5, 0), "<dev string:x38>", self);
-
 
                 innerzigzagradius = level.inner_zigzag_radius;
 
@@ -811,9 +809,7 @@ zombieupdategoalcode() {
             remaininglength = deviationdistance - segmentlength;
             seedposition = path[index - 1] + vectornormalize(path[index] - path[index - 1]) * remaininglength;
 
-
             recordcircle(seedposition, 2, (1, 0.5, 0), "<dev string:x38>", self);
-
 
               innerzigzagradius = level.inner_zigzag_radius;
             outerzigzagradius = level.outer_zigzag_radius;

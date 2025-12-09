@@ -1262,11 +1262,9 @@ function_d2ba8baa() {
 
         foreach(var_504a6ed6 in var_2e23111a) {
           if(var_504a6ed6.script_noteworthy === "stoker_location") {
-
             if(getdvarint(#"hash_1f8efa579fee787c", 0)) {
               iprintlnbold("<dev string:x6d>");
             }
-
 
               if(!isDefined(a_s_spawn_locs)) {
                 a_s_spawn_locs = [];
@@ -1294,11 +1292,9 @@ function_d2ba8baa() {
 
           foreach(var_504a6ed6 in var_2e23111a) {
             if(var_504a6ed6.script_noteworthy === "stoker_location") {
-
               if(getdvarint(#"hash_1f8efa579fee787c", 0)) {
                 iprintlnbold("<dev string:x38>" + s_loc.zone_name + "<dev string:xb5>");
               }
-
 
                 if(!isDefined(a_s_spawn_locs)) {
                   a_s_spawn_locs = [];

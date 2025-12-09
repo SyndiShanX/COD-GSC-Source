@@ -144,12 +144,10 @@ private _play_banter(var_3e24b5d5, var_a33019a0, a_players, b_force = 0) {
           var_a2be76a3 = function_2b7b1675(var_3e24b5d5, n_index, player1, player2);
 
           if(var_a2be76a3.var_dbeb023e.size) {
-
             if(getdvarint(#"zm_debug_vo", 0)) {
               iprintlnbold(var_3e24b5d5 + "<dev string:x38>" + function_9e72a96(var_ac829b0) + "<dev string:x38>" + n_index);
               println(var_3e24b5d5 + "<dev string:x38>" + function_9e72a96(var_ac829b0) + "<dev string:x38>" + n_index);
             }
-
 
               if(function_7e4562d7(var_a2be76a3.var_dbeb023e, var_a2be76a3.var_1dc0a881, 1)) {
                 if(isDefined(player1)) {

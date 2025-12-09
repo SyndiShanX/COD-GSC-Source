@@ -648,7 +648,6 @@ crowd_throw_item(var_2bd26cff) {
 
         if(isplayer(var_264cf1f9) && isplayer(self)) {
           if(var_264cf1f9 == self) {
-
             self thread zm_net::network_choke_action("<dev string:x38>", &function_f3e454c1, var_264cf1f9.name + "<dev string:x84>" + str_powerup + "<dev string:x90>");
 
           } else {
@@ -661,7 +660,6 @@ crowd_throw_item(var_2bd26cff) {
                 var_264cf1f9 function_b8dfa139(#"stole_crowd_item");
               }
             }
-
 
             thread zm_net::network_choke_action("<dev string:x38>", &function_f3e454c1, var_264cf1f9.name + "<dev string:xa3>" + self.name + "<dev string:xad>" + str_powerup);
 

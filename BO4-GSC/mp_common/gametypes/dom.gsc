@@ -1255,7 +1255,6 @@ function_610d3790(einflictor, victim, idamage, weapon) {
             victim recordkillmodifier("defending");
             break;
           } else {
-
             attacker iprintlnbold("<dev string:x262>");
 
           }

@@ -2052,12 +2052,10 @@ function_cc7214a9(params) {
           player.var_f8b767c9++;
 
           if(player.var_f8b767c9 >= 9 && !player hasweapon(getweapon(#"hash_6a9069969e6fa287"))) {
-
             if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
               iprintlnbold("<dev string:x14e>");
               println("<dev string:x14e>");
             }
-
 
               player.var_f8b767c9 = undefined;
             player thread function_2c343fd8();

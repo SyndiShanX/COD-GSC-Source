@@ -204,7 +204,6 @@ private function_22006009(cmd) {
           if(function_ad642b3a(self)) {
             retreat = " retreat";
 
-
             line(level.e_avogadro.var_77ef4a35.origin, end, (1, 1, 0));
 
           }
@@ -822,10 +821,8 @@ function_a9be3eba(entity) {
           var_9d872a34 = self maymovefrompointtopoint(entity.origin, endpoint, 1, 1);
 
           if(ispointonnavmesh(endpoint, entity) && self maymovefrompointtopoint(entity.origin, endpoint, 1, 1)) {
-
             recordline(entity.origin, endpoint, (0, 1, 0));
             recordsphere(endpoint, 15, (0, 1, 0));
-
 
               entity.var_1ce249af = 1;
             return 1;

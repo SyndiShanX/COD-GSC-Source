@@ -671,7 +671,6 @@ getnextmoveposition_evasive(client_flags) {
           abs_directness = abs(point.directness);
 
           if(abs_directness < 0.2) {
-
             if(!isDefined(point._scoredebug)) {
               point._scoredebug = [];
             }
@@ -683,13 +682,11 @@ getnextmoveposition_evasive(client_flags) {
             point._scoredebug[#"evading_directness"].score = 200;
             point._scoredebug[#"evading_directness"].scorename = "<dev string:x6d>";
 
-
               point.score += 200;
             continue;
           }
 
           if(abs_directness > (isDefined(self.settings.lock_evade_enemy_line_of_sight_directness) ? self.settings.lock_evade_enemy_line_of_sight_directness : 0.9)) {
-
             if(!isDefined(point._scoredebug)) {
               point._scoredebug = [];
             }
@@ -700,7 +697,6 @@ getnextmoveposition_evasive(client_flags) {
 
             point._scoredebug[#"evading_directness_line_of_sight"].score = -101;
             point._scoredebug[#"evading_directness_line_of_sight"].scorename = "<dev string:x82>";
-
 
               point.score += -101;
           }

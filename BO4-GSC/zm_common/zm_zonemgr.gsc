@@ -1295,14 +1295,11 @@ private function_74a20786() {
 
             var_db6c400c /= zone.a_loc_types[var_4b0b7fff].size;
 
-
             print3d(var_db6c400c, zone_text, (1, 1, 1), 1, 1);
-
 
               for(index = 0; index < zone.a_loc_types[var_4b0b7fff].size; index++) {
                 node = zone.a_loc_types[var_4b0b7fff][index];
                 node_location = node.origin;
-
 
                 line(var_db6c400c, node_location, line_color, 1, 0, 1);
                 sphere(node_location, 6, sphere_color, 1, 0, 10, 1);

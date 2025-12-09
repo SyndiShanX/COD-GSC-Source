@@ -170,9 +170,7 @@ function_d814403c() {
           wait 1;
 
           if(isDefined(self)) {
-
             iprintlnbold("<dev string:xbd>" + self getentnum());
-
 
               self zm_utility::giveachievement_wrapper("ZM_ZODT8_LITTLE_PACK", 0);
             self.var_6ba87fa = undefined;
@@ -212,9 +210,7 @@ function_1b454689() {
           wait 1;
 
           if(isDefined(self)) {
-
             iprintlnbold("<dev string:xed>" + self getentnum());
-
 
               self zm_utility::giveachievement_wrapper("ZM_ZODT8_SHORTCUT", 0);
             self.var_b5982a89 = undefined;

@@ -791,7 +791,6 @@ function_2193794() {
             level thread function_fdbf869e(self.s_unitrigger.var_92ac68d0);
             self.s_unitrigger.var_9c74d1b8 = 1;
 
-
             iprintlnbold("<dev string:x5c>" + self.s_unitrigger.n_position + "<dev string:x65>");
 
           }
@@ -4540,9 +4539,7 @@ function_b0b7e8a9() {
 
               var_fae5a971 = zm_round_logic::get_round_number() + 1;
 
-
               iprintlnbold("<dev string:x310>");
-
 
                 level flag::clear(#"hash_3972ecbdd044ba98");
               vh_wisp clientfield::set("fx8_power_wisp_lg", 0);

@@ -110,9 +110,7 @@ function_b23e4b45() {
         if(bullettracepassed(self.origin + (0, 0, 10), var_921106a1, 0, self, self, 0, 0)) {
           recordline(self.origin + (0, 0, 10), var_921106a1, (0, 0, 1), "<dev string:x38>");
 
-
           recordsphere(self.origin + (0, 0, 10), 3, (0, 0, 1), "<dev string:x38>");
-
 
           recordsphere(var_921106a1, 3, (0, 0, 1), "<dev string:x38>");
 
@@ -120,9 +118,7 @@ function_b23e4b45() {
         } else {
           recordline(self.origin + (0, 0, 10), var_921106a1, (1, 0.5, 0), "<dev string:x38>");
 
-
           recordsphere(self.origin + (0, 0, 10), 3, (1, 0.5, 0), "<dev string:x38>");
-
 
           recordsphere(var_921106a1, 3, (1, 0.5, 0), "<dev string:x38>");
 
@@ -617,9 +613,7 @@ function_3e16dec3(params) {
           tacpoints = damage_armor_activati_(self, tacpoints);
 
           if(isDefined(tacpoints) && tacpoints.size != 0) {
-
             record3dtext("<dev string:x49>", self.origin - (0, 0, 20), (1, 0, 0));
-
 
               newpos = tacpoints[0].origin;
             newpos = getclosestpointonnavmesh(newpos, 500, self getpathfindingradius() * 1.2);

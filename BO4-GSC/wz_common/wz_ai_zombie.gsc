@@ -1803,21 +1803,15 @@ function_173e098f() {
             pos3 = trace3[#"position"];
             var_bc50df31 = trace3[#"surfacetype"];
 
-
             drawdebugcross(pos3, 5, (1, 1, 0), 1);
 
-
               if(function_21b44b70(var_bc50df31)) {
-
                 drawdebugcross(pos, 5, (0, 1, 0), 1);
-
 
                   return 1;
               }
 
-
             drawdebugcross(pos, 5, (1, 0, 0), 1);
-
 
               return 0;
           }

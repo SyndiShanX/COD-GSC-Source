@@ -610,7 +610,6 @@ function_c76f5e7f() {
             if(var_be77f82e) {
               level flag::set(#"hash_2d1cd18f39ac5fa7");
             } else {
-
               if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
                 iprintlnbold("<dev string:x16f>" + self.script_noteworthy);
                 println("<dev string:x16f>" + self.script_noteworthy);

@@ -944,9 +944,7 @@ private function_d7864087(var_dbce0c44) {
               var_fe695913[var_4f8675aa][var_fe695913[var_4f8675aa].size] = var_75b393f9.var_2ecba2c5;
               level.var_8cb2d124[var_4f8675aa] -= var_376db024;
 
-
               level.var_d112f81e[var_4f8675aa] += var_376db024;
-
 
                 var_75b393f9.var_28ba9034--;
               var_63839dc9 = 1;

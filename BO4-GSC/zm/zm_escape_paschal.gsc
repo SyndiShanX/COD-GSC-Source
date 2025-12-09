@@ -944,9 +944,7 @@ function_1875f44f() {
             }
 
             if(!(isDefined(level.var_dcc985c4.mdl_bird.speedmid) && level.var_dcc985c4.mdl_bird.speedmid)) {
-
               iprintln("<dev string:xe5>");
-
 
                 level.var_dcc985c4.mdl_bird.speedmid = 1;
               level thread function_b6abb124();

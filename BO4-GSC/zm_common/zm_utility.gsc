@@ -1717,36 +1717,28 @@ vehicle_outline_watcher(origin, chunks_grate) {
           }
 
           if(grate_order2[i].state == "repaired") {
-
             iprintlnbold("<dev string:xa7>");
-
 
               grate_order3[i] thread show_grate_pull();
             return grate_order2[i];
           }
 
           if(grate_order3[i].state == "repaired") {
-
             iprintlnbold("<dev string:xb5>");
-
 
               grate_order4[i] thread show_grate_pull();
             return grate_order3[i];
           }
 
           if(grate_order4[i].state == "repaired") {
-
             iprintlnbold("<dev string:xc3>");
-
 
               grate_order5[i] thread show_grate_pull();
             return grate_order4[i];
           }
 
           if(grate_order5[i].state == "repaired") {
-
             iprintlnbold("<dev string:xd1>");
-
 
               grate_order6[i] thread show_grate_pull();
             return grate_order5[i];

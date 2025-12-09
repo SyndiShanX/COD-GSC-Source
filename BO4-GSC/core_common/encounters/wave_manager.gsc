@@ -191,11 +191,9 @@ private debug_think() {
                 str_status = "<dev string:x133>";
               }
 
-
               str_text = "<dev string:x1ab>" + var_1d3b29d6 + "<dev string:x1b8>" + var_c21b798e.var_bcd4e683 + "<dev string:x1c5>" + var_c21b798e.var_23791f08 + "<dev string:x13d>" + str_status + "<dev string:x1cf>";
               debug2dtext((800, var_c708e6e1, 0), str_text, (1, 1, 1), 1, (0, 0, 0), 0.9, 1, 1);
               var_c708e6e1 += var_90fbd845;
-
 
                 var_1d3b29d6++;
             }
@@ -207,21 +205,16 @@ private debug_think() {
           foreach(var_c21b798e in var_dcd6c23.var_376c2c29) {
             foreach(ai in var_c21b798e.var_bb290b79) {
               if(isDefined(ai)) {
-
                 sphere(ai.origin, 4, (0, 0, 1), 1, 0, 8, 1);
                 print3d(ai.origin + (0, 0, 10), "<dev string:x1d4>" + var_dcd6c23.var_4417045b + "<dev string:x1dc>" + var_1d3b29d6, (0, 0, 1), 1, 0.5, 1);
 
-
                   if(isDefined(var_dcd6c23.var_3844e966)) {
-
                     line(ai.origin + (0, 0, 30), var_dcd6c23.var_3844e966.origin, (0, 0, 1), 1, 0, 1);
-
 
                       continue;
                   }
 
                 if(isDefined(level.players[0])) {
-
                   origin = level.players[0].origin + vectorscale(anglesToForward(level.players[0].angles), 100);
                   line(ai.origin + (0, 0, 30), origin, (0, 0, 1), 1, 0, 1);
 
@@ -237,21 +230,16 @@ private debug_think() {
           foreach(var_c082553f, v in var_dcd6c23.var_419edb9f) {
             foreach(ai in v) {
               if(isDefined(ai)) {
-
                 sphere(ai.origin, 4, (1, 0, 0), 1, 0, 8, 1);
                 print3d(ai.origin + (0, 0, 10), "<dev string:x1d4>" + var_c082553f, (1, 0, 0), 1, 0.5, 1);
 
-
                   if(isDefined(var_dcd6c23.var_3844e966)) {
-
                     line(ai.origin + (0, 0, 30), var_dcd6c23.var_3844e966.origin, (1, 0, 0), 1, 0, 1);
-
 
                       continue;
                   }
 
                 if(isDefined(level.players[0])) {
-
                   origin = level.players[0].origin + vectorscale(anglesToForward(level.players[0].angles), 100);
                   line(ai.origin + (0, 0, 30), origin, (1, 0, 0), 1, 0, 1);
 
@@ -268,7 +256,6 @@ private debug_think() {
 
         if(isDefined(var_dcd6c23.var_246fb97f) && isarray(var_dcd6c23.var_246fb97f)) {
           foreach(var_fa24a14b in var_dcd6c23.var_246fb97f) {
-
             sphere(var_fa24a14b.origin, 4, (0, 1, 0), 1, 0, 8, 1);
             print3d(var_fa24a14b.origin + (0, 0, 10), function_9e72a96(var_fa24a14b.archetype), (0, 1, 0), 1, 0.5, 1);
             line(var_fa24a14b.origin, var_fa24a14b.origin + (0, 0, 45), (0, 1, 0), 1, 0, 1);

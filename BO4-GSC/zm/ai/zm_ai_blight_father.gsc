@@ -750,9 +750,7 @@ private function_911c3934(entity) {
           v_goal = getclosestpointonnavmesh(poi.origin, 24, entity getpathfindingradius());
 
           if(isDefined(v_goal)) {
-
             iprintlnbold("<dev string:x9e>" + entity getentitynumber() + "<dev string:xb5>" + poi getentitynumber());
-
 
               entity.var_81ce9fcd = poi;
             entity.var_c52d968a = v_goal;

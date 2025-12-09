@@ -316,13 +316,10 @@ private function_23b6897(player, position) {
             sighttrace = physicstraceex(eyepos, checkpoint, (-0.5, -0.5, -0.5), (0.5, 0.5, 0.5), player, 1);
 
             if(sighttrace[#"fraction"] < 1) {
-
               debug_line(eyepos, checkpoint, (1, 0, 0));
-
 
                 continue;
             }
-
 
             debug_line(eyepos, checkpoint, (0, 1, 1));
 
