@@ -164,7 +164,7 @@ event_handler[level_init] main(eventstruct) {
 
   level thread office_devgui();
 
-    level thread registergondola_moving_watcher();
+  level thread registergondola_moving_watcher();
   level thread function_8aea12();
   level thread function_785cadc4();
   zm_sq::register(#"main_quest", #"step1", #"main_quest_step1", &main_quest_step1_setup, &main_quest_step1_cleanup, 1);
