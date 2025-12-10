@@ -11,18 +11,18 @@
 main() {
   /*
   // for launcher
-  add_start( "wakeup", 		 		::start_wakeup_after_crash, "", 					::wakeup_after_crash );
-  add_start( "wakefast", 		 		::start_wakeup_after_crash, "", 					::wakeup_after_crash );
-  add_start( "turnbuckle", 			::start_turnbuckle, "", 							::fight_turnbuckle );
-  add_start( "gloat", 				::start_shepherd_gloats, "", 						::shepherd_gloats );
-  add_start( "gun_drop", 	 			::start_gun_drop, "", 								::gun_drop );
-  add_start( "crawl", 				::start_gun_crawl, "", 								::gun_crawl );
-  add_start( "gun_kick", 				::start_gun_kick, "", 								::gun_kick );
-  add_start( "wounded", 				::start_wounded_show, "Watch Price/Shep fight", 	::wounded_show );
-  add_start( "pullout", 				::start_knife_pullout, "", 	 						::knife_pullout );
-  add_start( "kill", 					::start_knife_kill, "", 	 						::knife_kill );
-  add_start( "price_wakeup", 			::start_price_wakeup, "", 							::price_wakeup );
-  add_start( "walkoff", 				::start_walkoff, "", 								::walkoff );
+  add_start( "wakeup", ::start_wakeup_after_crash, "", ::wakeup_after_crash );
+  add_start( "wakefast", ::start_wakeup_after_crash, "", ::wakeup_after_crash );
+  add_start( "turnbuckle", ::start_turnbuckle, "", ::fight_turnbuckle );
+  add_start( "gloat", ::start_shepherd_gloats, "", ::shepherd_gloats );
+  add_start( "gun_drop", ::start_gun_drop, "", ::gun_drop );
+  add_start( "crawl", ::start_gun_crawl, "", ::gun_crawl );
+  add_start( "gun_kick", ::start_gun_kick, "", ::gun_kick );
+  add_start( "wounded", ::start_wounded_show, "Watch Price/Shep fight", 	::wounded_show );
+  add_start( "pullout", ::start_knife_pullout, "", ::knife_pullout );
+  add_start( "kill", ::start_knife_kill, "", ::knife_kill );
+  add_start( "price_wakeup", ::start_price_wakeup, "", ::price_wakeup );
+  add_start( "walkoff", ::start_walkoff, "", ::walkoff );
   */
 
   //	PreCacheItem( "cheytac" );
@@ -152,17 +152,13 @@ ending_music() {
     case "kill":
     case "price_wakeup":
     case "walkoff":
-
       flag_wait("af_chase_final_ending");
       musicplaywrapper("af_chase_final_ending");
       flag_wait("af_chase_ending_credits");
       music_loop("af_chase_ending_credits", 122, 1);
-
       break;
-
     default:
       AssertMsg("Unhandled start point " + level.start_point);
       break;
   }
-
 }
