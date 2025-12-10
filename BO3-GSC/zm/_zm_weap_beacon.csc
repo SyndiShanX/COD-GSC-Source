@@ -16,11 +16,11 @@ function init() {
   level._effect["beacon_launch_fx"] = "dlc5/tomb/fx_tomb_beacon_launch";
   level._effect["beacon_shell_explosion"] = "dlc5/tomb/fx_tomb_beacon_exp";
   level._effect["beacon_shell_trail"] = "dlc5/tomb/fx_tomb_beacon_trail";
-  clientfield::register("world", "play_launch_artillery_fx_robot_0", 21000, 1, "int", & function_59491961, 0, 0);
-  clientfield::register("world", "play_launch_artillery_fx_robot_1", 21000, 1, "int", & function_59491961, 0, 0);
-  clientfield::register("world", "play_launch_artillery_fx_robot_2", 21000, 1, "int", & function_59491961, 0, 0);
-  clientfield::register("scriptmover", "play_beacon_fx", 21000, 1, "int", & function_dc4ed336, 0, 0);
-  clientfield::register("scriptmover", "play_artillery_barrage", 21000, 2, "int", & play_artillery_barrage, 0, 0);
+  clientfield::register("world", "play_launch_artillery_fx_robot_0", 21000, 1, "int", &function_59491961, 0, 0);
+  clientfield::register("world", "play_launch_artillery_fx_robot_1", 21000, 1, "int", &function_59491961, 0, 0);
+  clientfield::register("world", "play_launch_artillery_fx_robot_2", 21000, 1, "int", &function_59491961, 0, 0);
+  clientfield::register("scriptmover", "play_beacon_fx", 21000, 1, "int", &function_dc4ed336, 0, 0);
+  clientfield::register("scriptmover", "play_artillery_barrage", 21000, 2, "int", &play_artillery_barrage, 0, 0);
 }
 
 function function_59491961(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

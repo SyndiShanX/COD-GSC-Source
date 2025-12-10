@@ -9,8 +9,8 @@ init() {
   var_0.weaponinfo = "deployable_vest_marker_mp";
   var_0.modelbase = "prop_ballistic_vest_iw6";
   var_0.modelbombsquad = "prop_ballistic_vest_iw6_bombsquad";
-  var_0.hintstring = & "KILLSTREAKS_HINTS_LIGHT_ARMOR_PICKUP";
-  var_0.func_3A41 = & "KILLSTREAKS_BOX_GETTING_VEST";
+  var_0.hintstring = &"KILLSTREAKS_HINTS_LIGHT_ARMOR_PICKUP";
+  var_0.func_3A41 = &"KILLSTREAKS_BOX_GETTING_VEST";
   var_0.func_67E5 = "deployable_vest_taken";
   var_0.streakname = "deployable_vest";
   var_0.func_10A38 = "used_deployable_vest";

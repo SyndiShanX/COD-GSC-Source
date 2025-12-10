@@ -10,17 +10,17 @@
 #namespace raz;
 
 function autoexec main() {
-  clientfield::register("scriptmover", "raz_detonate_ground_torpedo", 12000, 1, "int", & razclientutils::razdetonategroundtorpedo, 0, 0);
-  clientfield::register("scriptmover", "raz_torpedo_play_fx_on_self", 12000, 1, "int", & razclientutils::razplayselffx, 0, 0);
-  clientfield::register("scriptmover", "raz_torpedo_play_trail", 12000, 1, "counter", & razclientutils::raztorpedoplaytrailfx, 0, 0);
-  clientfield::register("actor", "raz_detach_gun", 12000, 1, "int", & razclientutils::razdetachgunfx, 0, 0);
-  clientfield::register("actor", "raz_gun_weakpoint_hit", 12000, 1, "counter", & razclientutils::razgunweakpointhitfx, 0, 0);
-  clientfield::register("actor", "raz_detach_helmet", 12000, 1, "int", & razclientutils::razhelmetdetach, 0, 0);
-  clientfield::register("actor", "raz_detach_chest_armor", 12000, 1, "int", & razclientutils::razchestarmordetach, 0, 0);
-  clientfield::register("actor", "raz_detach_l_shoulder_armor", 12000, 1, "int", & razclientutils::razleftshoulderarmordetach, 0, 0);
-  clientfield::register("actor", "raz_detach_r_thigh_armor", 12000, 1, "int", & razclientutils::razrightthigharmordetach, 0, 0);
-  clientfield::register("actor", "raz_detach_l_thigh_armor", 12000, 1, "int", & razclientutils::razleftthigharmordetach, 0, 0);
-  ai::add_archetype_spawn_function("raz", & razclientutils::razspawn);
+  clientfield::register("scriptmover", "raz_detonate_ground_torpedo", 12000, 1, "int", &razclientutils::razdetonategroundtorpedo, 0, 0);
+  clientfield::register("scriptmover", "raz_torpedo_play_fx_on_self", 12000, 1, "int", &razclientutils::razplayselffx, 0, 0);
+  clientfield::register("scriptmover", "raz_torpedo_play_trail", 12000, 1, "counter", &razclientutils::raztorpedoplaytrailfx, 0, 0);
+  clientfield::register("actor", "raz_detach_gun", 12000, 1, "int", &razclientutils::razdetachgunfx, 0, 0);
+  clientfield::register("actor", "raz_gun_weakpoint_hit", 12000, 1, "counter", &razclientutils::razgunweakpointhitfx, 0, 0);
+  clientfield::register("actor", "raz_detach_helmet", 12000, 1, "int", &razclientutils::razhelmetdetach, 0, 0);
+  clientfield::register("actor", "raz_detach_chest_armor", 12000, 1, "int", &razclientutils::razchestarmordetach, 0, 0);
+  clientfield::register("actor", "raz_detach_l_shoulder_armor", 12000, 1, "int", &razclientutils::razleftshoulderarmordetach, 0, 0);
+  clientfield::register("actor", "raz_detach_r_thigh_armor", 12000, 1, "int", &razclientutils::razrightthigharmordetach, 0, 0);
+  clientfield::register("actor", "raz_detach_l_thigh_armor", 12000, 1, "int", &razclientutils::razleftthigharmordetach, 0, 0);
+  ai::add_archetype_spawn_function("raz", &razclientutils::razspawn);
 }
 
 function autoexec precache() {
@@ -122,7 +122,7 @@ function autoexec precache() {
 #namespace razclientutils;
 
 function private razspawn(localclientnum) {
-  level._footstepcbfuncs[self.archetype] = & razprocessfootstep;
+  level._footstepcbfuncs[self.archetype] = &razprocessfootstep;
   self thread razplayfireemissiveshader(localclientnum);
   self thread razplayroarsound(localclientnum);
   self thread razplaytaunts(localclientnum);

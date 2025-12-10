@@ -42,9 +42,9 @@ main() {
     return;
   }
 
-  level.magic_wheel_spin_hint = & "CP_DISCO_INTERACTIONS_SPIN_WHEEL";
-  level.reboard_barriers_hint = & "CP_DISCO_INTERACTIONS_SECURE_WINDOW";
-  level.enter_area_hint = & "CP_DISCO_INTERACTIONS_ENTER_THIS_AREA";
+  level.magic_wheel_spin_hint = &"CP_DISCO_INTERACTIONS_SPIN_WHEEL";
+  level.reboard_barriers_hint = &"CP_DISCO_INTERACTIONS_SECURE_WINDOW";
+  level.enter_area_hint = &"CP_DISCO_INTERACTIONS_ENTER_THIS_AREA";
   level thread subway_trains();
   level.player_pap_machines = [];
   level.event_funcs_init = ::cp_disco_event_wave_init;
@@ -2395,7 +2395,7 @@ turn_on_room_exit_portal() {
 
 teleport_from_hidden_room_before_time_up(param_00) {
   param_00 makeusable();
-  param_00 sethintstring( & "CP_DISCO_INTERACTIONS_LEAVE_PAP");
+  param_00 sethintstring(&"CP_DISCO_INTERACTIONS_LEAVE_PAP");
   param_00.portal_is_open = 1;
   for(;;) {
     param_00 waittill("trigger", var_01);
@@ -2415,10 +2415,10 @@ pap_portal_hint_logic(param_00, param_01) {
   }
 
   if(isDefined(param_00.cooling_down)) {
-    return & "COOP_INTERACTIONS_COOLDOWN";
+    return &"COOP_INTERACTIONS_COOLDOWN";
   }
 
-  return & "CP_DISCO_INTERACTIONS_ACCESS_PAP";
+  return &"CP_DISCO_INTERACTIONS_ACCESS_PAP";
 }
 
 pap_portal_use_func(param_00, param_01) {
@@ -3749,10 +3749,10 @@ deny_wheel_hint_func(param_00, param_01, param_02) {
   param_01 endon("disconnect");
   param_01 playlocalsound("purchase_deny");
   if(isDefined(param_02)) {
-    param_01 forceusehinton( & "CP_DISCO_INTERACTIONS_KUNG_FU_FAIL");
+    param_01 forceusehinton(&"CP_DISCO_INTERACTIONS_KUNG_FU_FAIL");
   } else {
     param_01 thread scripts\cp\cp_vo::try_to_play_vo("no_cash", "zmb_comment_vo", "high", 30, 0, 0, 1, 50);
-    param_01 forceusehinton( & "COOP_INTERACTIONS_NEED_MONEY");
+    param_01 forceusehinton(&"COOP_INTERACTIONS_NEED_MONEY");
   }
 
   wait(1);
@@ -3763,7 +3763,7 @@ magic_wheel_take_func(param_00, param_01, param_02) {
   if(!scripts\engine\utility::istrue(param_01.kung_fu_mode)) {
     return 1;
   } else {
-    param_01 forceusehinton( & "CP_DISCO_INTERACTIONS_KUNG_FU_FAIL");
+    param_01 forceusehinton(&"CP_DISCO_INTERACTIONS_KUNG_FU_FAIL");
     wait(0.5);
     param_01 getrigindexfromarchetyperef();
     return 0;
@@ -4171,21 +4171,21 @@ choose_correct_strings_for_lost_and_found(param_00, param_01) {
 
   param_00 = scripts\cp\utility::getbaseweaponname(param_01);
   if(!isDefined(param_00)) {
-    return & "CP_ZMB_WEAPONS_GENERIC";
+    return &"CP_ZMB_WEAPONS_GENERIC";
   }
 
   switch (param_00) {
     case "iw7_katana":
-      return & "CP_DISCO_WEAPONS_KATANA";
+      return &"CP_DISCO_WEAPONS_KATANA";
 
     case "iw7_nunchucks":
-      return & "CP_DISCO_WEAPONS_NUNCHUCKS";
+      return &"CP_DISCO_WEAPONS_NUNCHUCKS";
 
     default:
-      return & "CP_ZMB_WEAPONS_GENERIC";
+      return &"CP_ZMB_WEAPONS_GENERIC";
   }
 
-  return & "CP_ZMB_WEAPONS_GENERIC";
+  return &"CP_ZMB_WEAPONS_GENERIC";
 }
 
 movedefaultspawners() {
@@ -4200,16 +4200,16 @@ movedefaultspawners() {
 }
 
 cp_disco_introscreen_text() {
-  var_00 = scripts\cp\cp_hud_util::introscreen_corner_line( & "CP_DISCO_INTRO_LINE_1", 1);
+  var_00 = scripts\cp\cp_hud_util::introscreen_corner_line(&"CP_DISCO_INTRO_LINE_1", 1);
   wait(1);
-  var_01 = scripts\cp\cp_hud_util::introscreen_corner_line( & "CP_DISCO_INTRO_LINE_2", 2);
+  var_01 = scripts\cp\cp_hud_util::introscreen_corner_line(&"CP_DISCO_INTRO_LINE_2", 2);
   wait(1);
-  var_02 = scripts\cp\cp_hud_util::introscreen_corner_line( & "CP_DISCO_INTRO_LINE_3", 3);
+  var_02 = scripts\cp\cp_hud_util::introscreen_corner_line(&"CP_DISCO_INTRO_LINE_3", 3);
   wait(1);
   if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
-    var_03 = scripts\cp\cp_hud_util::introscreen_corner_line( & "DIRECT_BOSS_FIGHT_LINE4_DISCO", 4);
+    var_03 = scripts\cp\cp_hud_util::introscreen_corner_line(&"DIRECT_BOSS_FIGHT_LINE4_DISCO", 4);
   } else {
-    var_03 = scripts\cp\cp_hud_util::introscreen_corner_line( & "CP_DISCO_INTRO_LINE_4", 4);
+    var_03 = scripts\cp\cp_hud_util::introscreen_corner_line(&"CP_DISCO_INTRO_LINE_4", 4);
   }
 
   wait(3);

@@ -17,11 +17,11 @@ init() {
   if(!elevator_groups.size)
     return;
 
-  // Press and hold &&1 to call elevator.
+  // Press and hold && 1 to call elevator.
   precacheString(&"ELEVATOR_CALL_HINT");
-  // Press and hold &&1 to use elevator.
+  // Press and hold && 1 to use elevator.
   precacheString(&"ELEVATOR_USE_HINT");
-  // Press and hold &&1 to select floor.
+  // Press and hold && 1 to select floor.
   precacheString(&"ELEVATOR_FLOOR_SELECT_HINT");
 
   precacheMenu("elevator_floor_selector");
@@ -65,7 +65,7 @@ elevator_update_global_dvars() {
     level.elevator_aggressive_call = elevator_get_dvar_int("scr_elevator_aggressive_call", "0"); // calls all available elevators to floor
     level.elevator_debug = elevator_get_dvar_int("debug_elevator", "0"); // 2: full 1: simple, 0: debug off
 
-    // mp & sp default differences:
+    // mp &sp default differences:
     if(isSP()) {
       level.elevator_motion_detection = elevator_get_dvar_int("scr_elevator_motion_detection", "0"); // calls elevators via motion detection
     } else {
@@ -801,17 +801,17 @@ setup_hints() {
 
     use_trig SetCursorHint("HINT_NOICON");
     if(num_of_floors > 2)
-      // Press and hold &&1 to select floor.
+      // Press and hold && 1 to select floor.
       use_trig setHintString(&"ELEVATOR_FLOOR_SELECT_HINT");
     else
-      // Press and hold &&1 to use elevator.
+      // Press and hold && 1 to use elevator.
       use_trig setHintString(&"ELEVATOR_USE_HINT");
   }
 
   // elevator call button hint
   foreach(callbutton in level.elevator_callbuttons) {
     callbutton SetCursorHint("HINT_NOICON");
-    // Press and hold &&1 to call elevator.
+    // Press and hold && 1 to call elevator.
     callbutton setHintString(&"ELEVATOR_CALL_HINT");
   }
 }

@@ -603,9 +603,9 @@ function turngrenadeintoadud(weapon, isthrowngrenade, player) {
         timeleft = 1;
       }
       if(isthrowngrenade) {
-        player iprintlnbold(&"MP_GRENADE_UNAVAILABLE_FOR_N", (" " + timeleft) + " ", & "EXE_SECONDS");
+        player iprintlnbold(&"MP_GRENADE_UNAVAILABLE_FOR_N", (" " + timeleft) + " ", &"EXE_SECONDS");
       } else {
-        player iprintlnbold(&"MP_LAUNCHER_UNAVAILABLE_FOR_N", (" " + timeleft) + " ", & "EXE_SECONDS");
+        player iprintlnbold(&"MP_LAUNCHER_UNAVAILABLE_FOR_N", (" " + timeleft) + " ", &"EXE_SECONDS");
       }
       self makegrenadedud();
     }

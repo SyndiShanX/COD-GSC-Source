@@ -23,7 +23,7 @@
 #namespace zm_tomb_ee_main_step_4;
 
 function init() {
-  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_4", & init_stage, & stage_logic, & exit_stage);
+  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_4", &init_stage, &stage_logic, &exit_stage);
 }
 
 function init_stage() {
@@ -31,7 +31,7 @@ function init_stage() {
   level.ee_mech_zombies_killed = 0;
   level.ee_mech_zombies_alive = 0;
   level.ee_mech_zombies_spawned = 0;
-  level.quadrotor_custom_behavior = & mech_zombie_hole_search;
+  level.quadrotor_custom_behavior = &mech_zombie_hole_search;
 }
 
 function stage_logic() {

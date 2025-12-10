@@ -266,7 +266,7 @@ function_9885f550(entity, hitloc, var_a9e3f040) {
 
 isdestructed(entity, piecenumber) {
   assert(1 <= piecenumber && piecenumber <= 20);
-  return getdestructstate(entity)&1 << piecenumber;
+  return getdestructstate(entity)& 1 << piecenumber;
 }
 
 reapplydestructedpieces(entity) {

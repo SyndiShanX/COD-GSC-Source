@@ -15,10 +15,10 @@
 #namespace parasite;
 
 function autoexec main() {
-  clientfield::register("vehicle", "parasite_tell_fx", 1, 1, "int", & parasitetellfxhandler, 0, 0);
-  clientfield::register("toplayer", "parasite_damage", 1, 1, "counter", & parasite_damage, 0, 0);
-  clientfield::register("vehicle", "parasite_secondary_deathfx", 1, 1, "int", & parasitesecondarydeathfxhandler, 0, 0);
-  vehicle::add_vehicletype_callback("parasite", & _setup_);
+  clientfield::register("vehicle", "parasite_tell_fx", 1, 1, "int", &parasitetellfxhandler, 0, 0);
+  clientfield::register("toplayer", "parasite_damage", 1, 1, "counter", &parasite_damage, 0, 0);
+  clientfield::register("vehicle", "parasite_secondary_deathfx", 1, 1, "int", &parasitesecondarydeathfxhandler, 0, 0);
+  vehicle::add_vehicletype_callback("parasite", &_setup_);
 }
 
 function private parasitetellfxhandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {

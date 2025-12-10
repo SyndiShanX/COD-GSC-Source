@@ -19,9 +19,9 @@
 #namespace bot_ball;
 
 function init() {
-  level.botidle = & bot_idle;
-  level.botcombat = & bot_combat;
-  level.botprecombat = & bot_pre_combat;
+  level.botidle = &bot_idle;
+  level.botcombat = &bot_combat;
+  level.botprecombat = &bot_pre_combat;
 }
 
 function release_control_on_landing() {

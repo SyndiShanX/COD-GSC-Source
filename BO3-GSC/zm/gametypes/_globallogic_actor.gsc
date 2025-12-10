@@ -71,7 +71,7 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
       weapon = getweapon("destructible_car");
     }
   }
-  if(!idflags & level.idflags_no_protection) {
+  if(!idflags &level.idflags_no_protection) {
     if(isplayer(eattacker)) {
       eattacker.pers["participation"]++;
     }

@@ -14,7 +14,7 @@
 #namespace attack_drone;
 
 function autoexec __init__sytem__() {
-  system::register("attack_drone", & __init__, undefined, undefined);
+  system::register("attack_drone", &__init__, undefined, undefined);
 }
 
 function __init__() {}

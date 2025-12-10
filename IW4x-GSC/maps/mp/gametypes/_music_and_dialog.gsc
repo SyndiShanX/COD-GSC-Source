@@ -46,7 +46,6 @@ init() {
   game["dialog"]["round_failure"] = "encourage_lost";
   game["dialog"]["round_draw"] = "draw";
 
-
   game["dialog"]["timesup"] = "timesup";
   game["dialog"]["winning_time"] = "winning";
   game["dialog"]["losing_time"] = "losing";
@@ -426,6 +425,4 @@ suspenseMusic() {
 
 finalKillcamMusic() {
   self waittill("showing_final_killcam");
-
-
 }

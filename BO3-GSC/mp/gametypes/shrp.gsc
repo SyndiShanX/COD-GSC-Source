@@ -31,12 +31,12 @@ function main() {
   util::registerroundlimit(0, 10);
   util::registerroundwinlimit(0, 10);
   util::registernumlives(0, 100);
-  level.onstartgametype = & onstartgametype;
-  level.onspawnplayer = & onspawnplayer;
-  level.onplayerkilled = & onplayerkilled;
-  level.onwagerawards = & onwagerawards;
+  level.onstartgametype = &onstartgametype;
+  level.onspawnplayer = &onspawnplayer;
+  level.onplayerkilled = &onplayerkilled;
+  level.onwagerawards = &onwagerawards;
   gameobjects::register_allowed_gameobject(level.gametype);
-  level.givecustomloadout = & givecustomloadout;
+  level.givecustomloadout = &givecustomloadout;
   game["dialog"]["gametype"] = "ss_start";
   game["dialog"]["wm_weapons_cycled"] = "ssharp_cycle_01";
   game["dialog"]["wm_final_weapon"] = "ssharp_fweapon";
@@ -56,18 +56,18 @@ function onstartgametype() {
   setdvar("scr_xpscalemp", 0);
   setdvar("ui_guncycle", 0);
   setclientnamemode("auto_change");
-  util::setobjectivetext("allies", & "OBJECTIVES_SHRP");
-  util::setobjectivetext("axis", & "OBJECTIVES_SHRP");
+  util::setobjectivetext("allies", &"OBJECTIVES_SHRP");
+  util::setobjectivetext("axis", &"OBJECTIVES_SHRP");
   attach_compatibility_init();
   if(level.splitscreen) {
-    util::setobjectivescoretext("allies", & "OBJECTIVES_SHRP");
-    util::setobjectivescoretext("axis", & "OBJECTIVES_SHRP");
+    util::setobjectivescoretext("allies", &"OBJECTIVES_SHRP");
+    util::setobjectivescoretext("axis", &"OBJECTIVES_SHRP");
   } else {
-    util::setobjectivescoretext("allies", & "OBJECTIVES_SHRP_SCORE");
-    util::setobjectivescoretext("axis", & "OBJECTIVES_SHRP_SCORE");
+    util::setobjectivescoretext("allies", &"OBJECTIVES_SHRP_SCORE");
+    util::setobjectivescoretext("axis", &"OBJECTIVES_SHRP_SCORE");
   }
-  util::setobjectivehinttext("allies", & "OBJECTIVES_SHRP_HINT");
-  util::setobjectivehinttext("axis", & "OBJECTIVES_SHRP_HINT");
+  util::setobjectivehinttext("allies", &"OBJECTIVES_SHRP_HINT");
+  util::setobjectivehinttext("axis", &"OBJECTIVES_SHRP_HINT");
   spawning::create_map_placed_influencers();
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
@@ -85,11 +85,11 @@ function onstartgametype() {
   spawnpoint = spawnlogic::get_random_intermission_point();
   setdemointermissionpoint(spawnpoint.origin, spawnpoint.angles);
   level.usestartspawns = 0;
-  wager::add_powerup("specialty_bulletflinch", "perk", & "PERKS_TOUGHNESS", "perk_warrior");
-  wager::add_powerup("specialty_movefaster", "perk", & "PERKS_LIGHTWEIGHT", "perk_lightweight");
-  wager::add_powerup("specialty_fallheight", "perk", & "PERKS_LIGHTWEIGHT", "perk_lightweight");
-  wager::add_powerup("specialty_longersprint", "perk", & "PERKS_EXTREME_CONDITIONING", "perk_marathon");
-  wager::add_powerup(2, "score_multiplier", & "PERKS_SCORE_MULTIPLIER", "perk_times_two");
+  wager::add_powerup("specialty_bulletflinch", "perk", &"PERKS_TOUGHNESS", "perk_warrior");
+  wager::add_powerup("specialty_movefaster", "perk", &"PERKS_LIGHTWEIGHT", "perk_lightweight");
+  wager::add_powerup("specialty_fallheight", "perk", &"PERKS_LIGHTWEIGHT", "perk_lightweight");
+  wager::add_powerup("specialty_longersprint", "perk", &"PERKS_EXTREME_CONDITIONING", "perk_marathon");
+  wager::add_powerup(2, "score_multiplier", &"PERKS_SCORE_MULTIPLIER", "perk_times_two");
   level.guncycletimer = hud::createservertimer("extrasmall", 1.2);
   level.guncycletimer.horzalign = "user_left";
   level.guncycletimer.vertalign = "user_top";
@@ -97,7 +97,7 @@ function onstartgametype() {
   level.guncycletimer.y = 123;
   level.guncycletimer.alignx = "left";
   level.guncycletimer.aligny = "top";
-  level.guncycletimer.label = & "MP_SHRP_COUNTDOWN";
+  level.guncycletimer.label = &"MP_SHRP_COUNTDOWN";
   level.guncycletimer.alpha = 0;
   level.guncycletimer.hidewheninkillcam = 1;
   level.displayroundendtext = 0;
@@ -306,7 +306,7 @@ function chooserandomguns() {
     if(ispenultimateround) {
       level.sharpshootermultiplier = 2;
       for(i = 0; i < level.players.size; i++) {
-        level.players[i] thread wager::queue_popup(&"MP_SHRP_PENULTIMATE_RND", 0, & "MP_SHRP_PENULTIMATE_MULTIPLIER", "wm_bonus_rnd");
+        level.players[i] thread wager::queue_popup(&"MP_SHRP_PENULTIMATE_RND", 0, &"MP_SHRP_PENULTIMATE_MULTIPLIER", "wm_bonus_rnd");
       }
     } else {
       if(issharpshooterround) {
@@ -318,7 +318,7 @@ function chooserandomguns() {
         setdvar("ui_guncycle", 0);
         level.guncycletimer.alpha = 0;
         for(i = 0; i < level.players.size; i++) {
-          level.players[i] thread wager::queue_popup(&"MP_SHRP_RND", 0, & "MP_SHRP_FINAL_MULTIPLIER", "wm_shrp_rnd");
+          level.players[i] thread wager::queue_popup(&"MP_SHRP_RND", 0, &"MP_SHRP_FINAL_MULTIPLIER", "wm_shrp_rnd");
         }
         break;
       } else {

@@ -16,7 +16,7 @@
 #namespace zm_zonemgr;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zonemgr", & __init__, undefined, undefined);
+  system::register("zm_zonemgr", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -26,7 +26,7 @@ function __init__() {
   level.zone_flags = [];
   level.zone_scanning_active = 0;
   level.str_zone_mgr_mode = "occupied_and_adjacent";
-  level.create_spawner_list_func = & create_spawner_list;
+  level.create_spawner_list_func = &create_spawner_list;
 }
 
 function zone_is_enabled(zone_name) {

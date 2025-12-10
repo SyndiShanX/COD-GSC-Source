@@ -125,7 +125,7 @@ getRespawnDelay() {
     timeRemaining += level.extraDelay + 1.0; // extra second for slowed spawning
 
     if(level.spawnDelay >= level.hqAutoDestroyTime)
-      setLowerMessage("hq_respawn", & "MP_WAITING_FOR_HQ", undefined, 10);
+      setLowerMessage("hq_respawn", &"MP_WAITING_FOR_HQ", undefined, 10);
 
     if(!isAlive(self))
       self.forceSpawnNearTeammates = true;
@@ -139,21 +139,21 @@ getRespawnDelay() {
 }
 
 onStartGameType() {
-  setObjectiveText("allies", & "OBJECTIVES_KOTH");
-  setObjectiveText("axis", & "OBJECTIVES_KOTH");
+  setObjectiveText("allies", &"OBJECTIVES_KOTH");
+  setObjectiveText("axis", &"OBJECTIVES_KOTH");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", & "OBJECTIVES_KOTH");
-    setObjectiveScoreText("axis", & "OBJECTIVES_KOTH");
+    setObjectiveScoreText("allies", &"OBJECTIVES_KOTH");
+    setObjectiveScoreText("axis", &"OBJECTIVES_KOTH");
   } else {
-    setObjectiveScoreText("allies", & "OBJECTIVES_KOTH_SCORE");
-    setObjectiveScoreText("axis", & "OBJECTIVES_KOTH_SCORE");
+    setObjectiveScoreText("allies", &"OBJECTIVES_KOTH_SCORE");
+    setObjectiveScoreText("axis", &"OBJECTIVES_KOTH_SCORE");
   }
 
-  level.objectiveHintPrepareHQ = & "MP_CONTROL_HQ";
-  level.objectiveHintCaptureHQ = & "MP_CAPTURE_HQ";
-  level.objectiveHintDestroyHQ = & "MP_DESTROY_HQ";
-  level.objectiveHintDefendHQ = & "MP_DEFEND_HQ";
+  level.objectiveHintPrepareHQ = &"MP_CONTROL_HQ";
+  level.objectiveHintCaptureHQ = &"MP_CAPTURE_HQ";
+  level.objectiveHintDestroyHQ = &"MP_DESTROY_HQ";
+  level.objectiveHintDefendHQ = &"MP_DEFEND_HQ";
   precacheString(level.objectiveHintPrepareHQ);
   precacheString(level.objectiveHintCaptureHQ);
   precacheString(level.objectiveHintDestroyHQ);
@@ -205,17 +205,17 @@ HQMainLoop() {
 
   level.hqRevealTime = -100000;
 
-  hqSpawningInStr = & "MP_HQ_AVAILABLE_IN";
+  hqSpawningInStr = &"MP_HQ_AVAILABLE_IN";
   if(level.kothmode) {
-    hqDestroyedInFriendlyStr = & "MP_HQ_DESPAWN_IN";
-    hqDestroyedInEnemyStr = & "MP_HQ_DESPAWN_IN";
+    hqDestroyedInFriendlyStr = &"MP_HQ_DESPAWN_IN";
+    hqDestroyedInEnemyStr = &"MP_HQ_DESPAWN_IN";
   } else {
     if(!level.splitscreen) {
-      hqDestroyedInFriendlyStr = & "MP_HQ_REINFORCEMENTS_IN";
-      hqDestroyedInEnemyStr = & "MP_HQ_DESPAWN_IN";
+      hqDestroyedInFriendlyStr = &"MP_HQ_REINFORCEMENTS_IN";
+      hqDestroyedInEnemyStr = &"MP_HQ_DESPAWN_IN";
     } else {
-      hqDestroyedInFriendlyStr = & "MP_HQ_REINFORCEMENTS_IN_SPLITSCREEN";
-      hqDestroyedInEnemyStr = & "MP_HQ_DESPAWN_IN";
+      hqDestroyedInFriendlyStr = &"MP_HQ_REINFORCEMENTS_IN_SPLITSCREEN";
+      hqDestroyedInEnemyStr = &"MP_HQ_DESPAWN_IN";
     }
   }
 
@@ -257,7 +257,7 @@ HQMainLoop() {
     radio = PickRadioTospawn();
     radio makeRadioActive();
 
-    //iPrintLn( &"MP_HQ_REVEALED" );
+    //iPrintLn(&"MP_HQ_REVEALED" );
     playSoundOnPlayers("mp_suitcase_pickup");
     leaderDialog("hq_located");
 

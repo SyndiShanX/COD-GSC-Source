@@ -68,8 +68,8 @@
 function autoexec function_d9af860b() {
   level.aat_in_use = 1;
   level.bgb_in_use = 1;
-  level.zbarrier_override = & function_aeabaa98;
-  level.zbarrier_override_tear_in = & function_ee422b5c;
+  level.zbarrier_override = &function_aeabaa98;
+  level.zbarrier_override_tear_in = &function_ee422b5c;
 }
 
 function main() {
@@ -80,22 +80,22 @@ function main() {
   level.default_start_location = "default";
   zm_asylum_fx::main();
   init_clientfields();
-  visionset_mgr::register_info("visionset", "zm_showerhead", 21000, 100, 31, 1, & visionset_mgr::ramp_in_out_thread_per_player, 0);
+  visionset_mgr::register_info("visionset", "zm_showerhead", 21000, 100, 31, 1, &visionset_mgr::ramp_in_out_thread_per_player, 0);
   visionset_mgr::register_info("overlay", "zm_showerhead_postfx", 21000, 500, 32, 1);
   visionset_mgr::register_info("overlay", "zm_waterfall_postfx", 21000, 501, 32, 1);
   level._uses_sticky_grenades = 1;
   zm::init_fx();
   level._uses_retrievable_ballisitic_knives = 1;
-  level.register_offhand_weapons_for_level_defaults_override = & offhand_weapon_overrride;
-  level._zmbvoxlevelspecific = & init_level_specific_audio;
-  level.customspawnlogic = & function_91b06047;
-  level._round_start_func = & zm::round_start;
-  level.givecustomcharacters = & givecustomcharacters;
+  level.register_offhand_weapons_for_level_defaults_override = &offhand_weapon_overrride;
+  level._zmbvoxlevelspecific = &init_level_specific_audio;
+  level.customspawnlogic = &function_91b06047;
+  level._round_start_func = &zm::round_start;
+  level.givecustomcharacters = &givecustomcharacters;
   initcharacterstartindex();
-  level._zombie_custom_add_weapons = & custom_add_weapons;
-  level.customrandomweaponweights = & function_659c2324;
+  level._zombie_custom_add_weapons = &custom_add_weapons;
+  level.customrandomweaponweights = &function_659c2324;
   level.var_12d3a848 = 0;
-  level.customhudreveal = & customhudreveal;
+  level.customhudreveal = &customhudreveal;
   include_perks_in_random_rotation();
   level flag::init("intro_finished");
   load::main();
@@ -107,7 +107,7 @@ function main() {
   _zm_weap_cymbal_monkey::init();
   _zm_weap_tesla::init();
   level thread function_54bf648f();
-  level.zone_manager_init_func = & asylum_zone_init;
+  level.zone_manager_init_func = &asylum_zone_init;
   init_zones[0] = "west_downstairs_zone";
   init_zones[1] = "west2_downstairs_zone";
   level thread zm_zonemgr::manage_zones(init_zones);
@@ -123,7 +123,7 @@ function main() {
   level thread function_bb75f24a();
   level thread master_electric_switch();
   function_a552cd4a();
-  level.var_9aaae7ae = & function_869d6f66;
+  level.var_9aaae7ae = &function_869d6f66;
   level thread zm_perks::spare_change();
   zm_asylum_ffotd::main_end();
 }
@@ -271,7 +271,7 @@ function asylum_zone_init() {
 function function_54bf648f() {
   level.use_multiple_spawns = 1;
   level.spawner_int = 1;
-  level.fn_custom_zombie_spawner_selection = & function_54da140a;
+  level.fn_custom_zombie_spawner_selection = &function_54da140a;
 }
 
 function function_54da140a() {
@@ -361,7 +361,7 @@ function init_zombie_asylum() {
   level flag::set("spawn_point_override");
   level thread init_lights();
   water_trigs = getEntArray("waterfall", "targetname");
-  array::thread_all(water_trigs, & watersheet_on_trigger);
+  array::thread_all(water_trigs, &watersheet_on_trigger);
 }
 
 function chair_useage() {
@@ -384,7 +384,7 @@ function function_a67a7819() {
   if(!isDefined(var_769dd606)) {
     return;
   }
-  var_769dd606 zm_unitrigger::create_unitrigger(undefined, undefined, & function_f8772aa4);
+  var_769dd606 zm_unitrigger::create_unitrigger(undefined, undefined, &function_f8772aa4);
   var_7d2efc67 = 0;
   while(var_7d2efc67 < 3) {
     var_769dd606 waittill("trigger_activated");
@@ -881,7 +881,7 @@ function function_659c2324(a_keys) {
 function function_bb75f24a() {
   level.var_a3dcfd4f = 0;
   var_f0a0f84f = struct::get_array("s_toilet_zhd", "targetname");
-  array::thread_all(var_f0a0f84f, & function_db379af2);
+  array::thread_all(var_f0a0f84f, &function_db379af2);
   level thread function_fa408417();
   level waittill("hash_137fb152");
   level.var_a3dcfd4f = undefined;
@@ -896,7 +896,7 @@ function function_db379af2() {
   self.var_46907f23 = 0;
   self.activated = 0;
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "toilet3") {
-    self zm_unitrigger::create_unitrigger(undefined, undefined, & function_dffe609d);
+    self zm_unitrigger::create_unitrigger(undefined, undefined, &function_dffe609d);
   } else {
     self zm_unitrigger::create_unitrigger();
   }
@@ -958,7 +958,7 @@ function include_perks_in_random_rotation() {
   zm_perk_random::include_perk_in_random_rotation("specialty_staminup");
   zm_perk_random::include_perk_in_random_rotation("specialty_deadshot");
   zm_perk_random::include_perk_in_random_rotation("specialty_widowswine");
-  level.custom_random_perk_weights = & function_c027d01d;
+  level.custom_random_perk_weights = &function_c027d01d;
 }
 
 function function_c027d01d() {

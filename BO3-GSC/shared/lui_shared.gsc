@@ -14,11 +14,11 @@
 #namespace lui;
 
 function autoexec __init__sytem__() {
-  system::register("lui_shared", & __init__, undefined, undefined);
+  system::register("lui_shared", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_spawned( & refresh_menu_values);
+  callback::on_spawned(&refresh_menu_values);
 }
 
 function private refresh_menu_values() {

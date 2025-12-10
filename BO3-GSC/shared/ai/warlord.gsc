@@ -27,12 +27,12 @@
 #namespace warlord;
 
 function autoexec __init__sytem__() {
-  system::register("warlord", & __init__, undefined, undefined);
+  system::register("warlord", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  spawner::add_archetype_spawn_function("warlord", & warlordbehavior::archetypewarlordblackboardinit);
-  spawner::add_archetype_spawn_function("warlord", & warlordserverutils::warlordspawnsetup);
+  spawner::add_archetype_spawn_function("warlord", &warlordbehavior::archetypewarlordblackboardinit);
+  spawner::add_archetype_spawn_function("warlord", &warlordserverutils::warlordspawnsetup);
   if(ai::shouldregisterclientfieldforarchetype("warlord")) {
     clientfield::register("actor", "warlord_damage_state", 1, 2, "int");
     clientfield::register("actor", "warlord_thruster_direction", 1, 3, "int");
@@ -45,23 +45,23 @@ function __init__() {
 #namespace warlordbehavior;
 
 function autoexec registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordCanJukeCondition", & canjukecondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordCanTacticalJukeCondition", & cantacticaljukecondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordShouldBeAngryCondition", & shouldbeangrycondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordShouldNormalMelee", & warlordshouldnormalmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordCanTakePainCondition", & cantakepaincondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordExposedPainActionStart", & exposedpainactionstart);
-  behaviortreenetworkutility::registerbehaviortreeaction("warlordDeathAction", & deathaction, undefined, undefined);
-  behaviortreenetworkutility::registerbehaviortreeaction("warlordJukeAction", & jukeaction, undefined, & jukeactionterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("chooseBetterPositionService", & choosebetterpositionservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("WarlordAngryAttack", & warlordangryattack);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordCanJukeCondition", &canjukecondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordCanTacticalJukeCondition", &cantacticaljukecondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordShouldBeAngryCondition", &shouldbeangrycondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordShouldNormalMelee", &warlordshouldnormalmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordCanTakePainCondition", &cantakepaincondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("warlordExposedPainActionStart", &exposedpainactionstart);
+  behaviortreenetworkutility::registerbehaviortreeaction("warlordDeathAction", &deathaction, undefined, undefined);
+  behaviortreenetworkutility::registerbehaviortreeaction("warlordJukeAction", &jukeaction, undefined, &jukeactionterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("chooseBetterPositionService", &choosebetterpositionservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("WarlordAngryAttack", &warlordangryattack);
 }
 
 function private archetypewarlordblackboardinit() {
   blackboard::createblackboardforentity(self);
   ai::createinterfaceforentity(self);
   self aiutility::registerutilityblackboardattributes();
-  self.___archetypeonanimscriptedcallback = & archetypewarlordonanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = &archetypewarlordonanimscriptedcallback;
   self finalizetrackedblackboardattributes();
 }
 
@@ -991,7 +991,7 @@ function warlordspawnsetup() {
   entity.currentmaxthreat = 0;
   entity.ignorerunandgundist = 1;
   entity.combatmode = "no_cover";
-  aiutility::addaioverridedamagecallback(entity, & warlorddamageoverride);
+  aiutility::addaioverridedamagecallback(entity, &warlorddamageoverride);
   entity.health = int(getscaledforplayers(entity.health, 2, 2.5, 3));
   entity.fullhealth = entity.health;
   entity.damagestatehealth = int(entity.fullhealth * 0.5);

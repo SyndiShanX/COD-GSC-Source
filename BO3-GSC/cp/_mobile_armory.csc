@@ -8,11 +8,11 @@
 #namespace _mobile_armory;
 
 function autoexec __init__sytem__() {
-  system::register("cp_mobile_armory", & __init__, & __main__, undefined);
+  system::register("cp_mobile_armory", &__init__, &__main__, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "mobile_armory_cac", 1, 4, "int", & function_dd709a6d, 0, 0);
+  clientfield::register("toplayer", "mobile_armory_cac", 1, 4, "int", &function_dd709a6d, 0, 0);
 }
 
 function __main__() {}

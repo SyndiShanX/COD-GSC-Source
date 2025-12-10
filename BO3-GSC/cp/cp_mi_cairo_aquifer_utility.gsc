@@ -51,7 +51,7 @@
 #namespace aquifer_util;
 
 function autoexec __init__sytem__() {
-  system::register("aquifer_util", & __init__, undefined, undefined);
+  system::register("aquifer_util", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -130,7 +130,7 @@ function function_c2768198() {
 }
 
 function function_4dc4bd2c() {
-  self.get_stinger_target_override = & function_a3fd472e;
+  self.get_stinger_target_override = &function_a3fd472e;
 }
 
 function function_a3fd472e() {
@@ -171,10 +171,10 @@ function splash_fx() {
 
 function function_b86ff37e(n_hacking_time, objective, var_d66abd8d) {
   trig = getent(var_d66abd8d, "targetname");
-  trig.var_611ccff1 = util::init_interactive_gameobject(trig, istring(objective), & "CP_MI_CAIRO_AQUIFER_OPEN", & function_ee5d34cb);
+  trig.var_611ccff1 = util::init_interactive_gameobject(trig, istring(objective), &"CP_MI_CAIRO_AQUIFER_OPEN", &function_ee5d34cb);
   trig.var_611ccff1 gameobjects::set_use_time(n_hacking_time);
-  trig.var_611ccff1.onbeginuse = & function_eae79770;
-  trig.var_611ccff1.onenduse = & function_35e9f08;
+  trig.var_611ccff1.onbeginuse = &function_eae79770;
+  trig.var_611ccff1.onenduse = &function_35e9f08;
   level waittill("hash_26700a52");
   trig.var_611ccff1 gameobjects::disable_object();
 }
@@ -215,10 +215,10 @@ function setup_reusable_destructible() {
   level._effect["fx_exlg_water_destructible"] = "water/fx_water_fall_os_burst_sgen";
   trigs = getEntArray("reusable_destructible", "targetname");
   var_c08b6e63 = getEntArray("reusable_destructible_players", "targetname");
-  array::thread_all(trigs, & handle_reusable_destructible);
-  array::thread_all(var_c08b6e63, & function_dd7031ad);
+  array::thread_all(trigs, &handle_reusable_destructible);
+  array::thread_all(var_c08b6e63, &function_dd7031ad);
   var_afe76451 = getEntArray("environment_destructible", "targetname");
-  array::thread_all(var_afe76451, & function_eee6cbf2);
+  array::thread_all(var_afe76451, &function_eee6cbf2);
 }
 
 function handle_reusable_destructible() {
@@ -261,7 +261,7 @@ function function_9c6e51f(ent) {
 }
 
 function intro_screen() {
-  util::do_chyron_text(&"CP_MI_CAIRO_AQUIFER_INTRO_LINE_2_FULL", "", & "CP_MI_CAIRO_AQUIFER_INTRO_LINE_3_FULL", & "CP_MI_CAIRO_AQUIFER_INTRO_LINE_3_SHORT", & "CP_MI_CAIRO_AQUIFER_INTRO_LINE_4_FULL", & "CP_MI_CAIRO_AQUIFER_INTRO_LINE_4_SHORT", & "CP_MI_CAIRO_AQUIFER_INTRO_LINE_5_FULL", & "CP_MI_CAIRO_AQUIFER_INTRO_LINE_5_SHORT");
+  util::do_chyron_text(&"CP_MI_CAIRO_AQUIFER_INTRO_LINE_2_FULL", "", &"CP_MI_CAIRO_AQUIFER_INTRO_LINE_3_FULL", &"CP_MI_CAIRO_AQUIFER_INTRO_LINE_3_SHORT", &"CP_MI_CAIRO_AQUIFER_INTRO_LINE_4_FULL", &"CP_MI_CAIRO_AQUIFER_INTRO_LINE_4_SHORT", &"CP_MI_CAIRO_AQUIFER_INTRO_LINE_5_FULL", &"CP_MI_CAIRO_AQUIFER_INTRO_LINE_5_SHORT");
   level flag::set("intro_chryon_done");
 }
 
@@ -2603,7 +2603,7 @@ function function_b7cf4d2d(player = undefined) {
 }
 
 function function_61b71c43() {
-  scene::add_scene_func("cin_aqu_01_10_intro_1st_flyin_main", & function_f005cfe, "done");
+  scene::add_scene_func("cin_aqu_01_10_intro_1st_flyin_main", &function_f005cfe, "done");
   scene::init("cin_aqu_01_10_intro_1st_flyin_main");
   level.var_39c3b76e = vehicle::simple_spawn_single("hendricks_vtol");
   level.kane = getent("kane_intro", "targetname") spawner::spawn(1);
@@ -2715,11 +2715,11 @@ function function_9d40b42c() {
   wait(3);
   self clientfield::set_player_uimodel("vehicle.showAimHint", 0);
   notifydata = spawnStruct();
-  notifydata.notifytext2 = & "CP_MI_CAIRO_AQUIFER_VTOL_MISSILE_HINT";
+  notifydata.notifytext2 = &"CP_MI_CAIRO_AQUIFER_VTOL_MISSILE_HINT";
   notifydata.duration = 5;
   self hud_message::notifymessage(notifydata);
   wait(notifydata.duration);
-  notifydata.notifytext2 = & "CP_MI_CAIRO_AQUIFER_VTOL_MG_HINT";
+  notifydata.notifytext2 = &"CP_MI_CAIRO_AQUIFER_VTOL_MG_HINT";
   self hud_message::notifymessage(notifydata);
   wait(notifydata.duration);
   self hud_message::resetnotify();
@@ -2729,7 +2729,7 @@ function function_9d40b42c() {
     wait(0.05);
   }
   if(var_f6a2729b <= 0) {
-    notifydata.notifytext2 = & "CP_MI_CAIRO_AQUIFER_VTOL_AIM_HINT";
+    notifydata.notifytext2 = &"CP_MI_CAIRO_AQUIFER_VTOL_AIM_HINT";
     notifydata.duration = 5;
     self hud_message::notifymessage(notifydata);
     wait(notifydata.duration);
@@ -2738,7 +2738,7 @@ function function_9d40b42c() {
 }
 
 function function_a97555a0(ai_group, vol) {
-  spawner::add_spawn_function_ai_group(ai_group, & function_c11cfb53, vol);
+  spawner::add_spawn_function_ai_group(ai_group, &function_c11cfb53, vol);
 }
 
 function function_c11cfb53(var_1f5ba763) {
@@ -3038,7 +3038,7 @@ function exterior_aerial_threats() {
   level.var_3bfa4edb = 1;
   level endon("hash_ac2ce9fc");
   tname = "hunter_exterior_auto1";
-  vehicle::add_spawn_function(tname, & function_c386420b);
+  vehicle::add_spawn_function(tname, &function_c386420b);
   thread function_f3326322(tname + "_vh");
   aerial_enemy_spawners = getEntArray(tname, "targetname");
   wait(3);

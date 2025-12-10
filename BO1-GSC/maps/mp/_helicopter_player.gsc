@@ -74,7 +74,7 @@ init() {
   init_heli_anims();
   if(maps\mp\gametypes\_tweakables::getTweakableValue("killstreak", "allowhelicopter_player_firstperson")) {
     maps\mp\gametypes\_hardpoints::registerKillstreak("helicopter_player_firstperson_mp", "helicopter_player_firstperson_mp", "killstreak_helicopter_player_firstperson", "helicopter_used", ::useKillstreakHelicopterPlayer, true);
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("helicopter_player_firstperson_mp", & "KILLSTREAK_EARNED_HELICOPTER_PLAYER", & "KILLSTREAK_HELICOPTER_PLAYER_NOT_AVAILABLE", & "KILLSTREAK_HELICOPTER_PLAYER_INBOUND");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("helicopter_player_firstperson_mp", &"KILLSTREAK_EARNED_HELICOPTER_PLAYER", &"KILLSTREAK_HELICOPTER_PLAYER_NOT_AVAILABLE", &"KILLSTREAK_HELICOPTER_PLAYER_INBOUND");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("helicopter_player_firstperson_mp", "mpl_killstreak_heli", "kls_attackheli_used", "", "kls_attackheli_enemy", "", "kls_attackheli_ready");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("helicopter_player_firstperson_mp", "scr_givehelicopterplayerfirstperson");
     maps\mp\gametypes\_hardpoints::registerKillstreakAltWeapon("helicopter_player_firstperson_mp", "hind_rockets_firstperson_mp");
@@ -82,7 +82,7 @@ init() {
   }
   if(maps\mp\gametypes\_tweakables::getTweakableValue("killstreak", "allowhelicopter_gunner")) {
     maps\mp\gametypes\_hardpoints::registerKillstreak("helicopter_gunner_mp", "helicopter_gunner_mp", "killstreak_helicopter_gunner", "helicopter_used", ::useKillstreakHelicopterGunner, true);
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("helicopter_gunner_mp", & "KILLSTREAK_EARNED_HELICOPTER_GUNNER", & "KILLSTREAK_HELICOPTER_GUNNER_NOT_AVAILABLE", & "KILLSTREAK_HELICOPTER_GUNNER_INBOUND");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("helicopter_gunner_mp", &"KILLSTREAK_EARNED_HELICOPTER_GUNNER", &"KILLSTREAK_HELICOPTER_GUNNER_NOT_AVAILABLE", &"KILLSTREAK_HELICOPTER_GUNNER_INBOUND");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("helicopter_gunner_mp", "mpl_killstreak_heli", "kls_huey_used", "", "kls_huey_enemy", "", "kls_huey_ready");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("helicopter_gunner_mp", "scr_givehelicoptergunner");
     maps\mp\gametypes\_hardpoints::registerKillstreakAltWeapon("helicopter_gunner_mp", "hind_rockets_mp");

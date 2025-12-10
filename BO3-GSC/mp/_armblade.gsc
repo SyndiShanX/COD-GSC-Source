@@ -12,12 +12,12 @@
 #namespace armblade;
 
 function autoexec __init__sytem__() {
-  system::register("armblade", & __init__, undefined, undefined);
+  system::register("armblade", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.weaponarmblade = getweapon("hero_armblade");
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function on_player_spawned() {

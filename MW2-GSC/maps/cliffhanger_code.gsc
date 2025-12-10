@@ -74,7 +74,7 @@ global_inits() {
   maps\_compass::setupMiniMap("compass_map_cliffhanger");
 
   // Press^3 [{+actionslot 3}] ^7to activate heartbeat sensor.
-  add_hint_string("hint_heartbeat_sensor", & "CLIFFHANGER_SWITCH_HEARTBEAT", ::should_break_activate_heartbeat);
+  add_hint_string("hint_heartbeat_sensor", &"CLIFFHANGER_SWITCH_HEARTBEAT", ::should_break_activate_heartbeat);
 
   //must be after _load.gsc
 
@@ -1527,7 +1527,7 @@ ch_teleport_player(name) {
 
 objective_follow_price() {
   // Follow Captain MacTavish.
-  registerObjective("obj_follow_price", & "CLIFFHANGER_OBJ_FOLLOW", (0, 0, 0));
+  registerObjective("obj_follow_price", &"CLIFFHANGER_OBJ_FOLLOW", (0, 0, 0));
   setObjectiveState("obj_follow_price", "current");
 
   //this is where compass 1 dvar is turned on.
@@ -1552,7 +1552,7 @@ objective_enter_camp() {
   origin = flagEnt.origin;
 
   // Find a way into the base.
-  registerObjective("obj_enter", & "CLIFFHANGER_OBJ_BASE", origin);
+  registerObjective("obj_enter", &"CLIFFHANGER_OBJ_BASE", origin);
   setObjectiveState("obj_enter", "current");
 
   flag_wait("give_c4_obj");
@@ -1568,7 +1568,7 @@ objective_c4_both() {
   origin = fuel_tank_c4.origin;
 
   // Plant explosives on the fuel tanks.
-  registerObjective("obj_fuel", & "CLIFFHANGER_OBJ_C4", origin);
+  registerObjective("obj_fuel", &"CLIFFHANGER_OBJ_C4", origin);
   setObjectiveState("obj_fuel", "current");
 
   // Plant explosives on the MiG-29 Jet Fighter.
@@ -1578,7 +1578,7 @@ objective_c4_both() {
   origin = mig_c4.origin;
 
   // Plant explosives on the MiG-29 Jet Fighter.
-  registerObjective("obj_mig", & "CLIFFHANGER_OBJ_C4_MIG", origin);
+  registerObjective("obj_mig", &"CLIFFHANGER_OBJ_C4_MIG", origin);
 
   //Objective_AdditionalPosition( level.objectives["obj_fuel"].id, 1, mig_c4.origin );
   //objective_current( level.objectives["obj_fuel"].id, level.objectives["obj_mig"].id );
@@ -1603,7 +1603,7 @@ objective_c4_fuel_tanks() {
   origin = fuel_tank_c4.origin;
 
   // Plant explosives on the fuel tanks.
-  registerObjective("obj_fuel", & "CLIFFHANGER_OBJ_C4", origin);
+  registerObjective("obj_fuel", &"CLIFFHANGER_OBJ_C4", origin);
   setObjectiveState("obj_fuel", "current");
 
   flag_wait("fuel_c4_planted");
@@ -1619,7 +1619,7 @@ objective_c4_mig() {
   origin = mig_c4.origin;
 
   // Plant explosives on the MiG-29 Jet Fighter.
-  registerObjective("obj_mig", & "CLIFFHANGER_OBJ_C4_MIG", origin);
+  registerObjective("obj_mig", &"CLIFFHANGER_OBJ_C4_MIG", origin);
 
   if(!flag("mig_c4_planted"))
     setObjectiveState("obj_mig", "current");
@@ -1637,7 +1637,7 @@ objective_c4_fuel_station() {
   origin = mig_c4.origin;
 
   // Plant explosives on the fueling station.
-  registerObjective("obj_mig", & "CLIFFHANGER_OBJ_FUEL_STATION", origin);
+  registerObjective("obj_mig", &"CLIFFHANGER_OBJ_FUEL_STATION", origin);
 
   if(!flag("mig_c4_planted"))
     setObjectiveState("obj_mig", "current");
@@ -1656,7 +1656,7 @@ objective_goto_hanger() {
   origin = flagEnt.origin;
 
   // Get to the satellite.
-  registerObjective("obj_goto_hanger", & "CLIFFHANGER_OBJ_GOTO_HANGER", origin);
+  registerObjective("obj_goto_hanger", &"CLIFFHANGER_OBJ_GOTO_HANGER", origin);
   setObjectiveState("obj_goto_hanger", "current");
 
   flag_wait("at_hanger_entrance");
@@ -1668,7 +1668,7 @@ objective_satellite() {
   flag_wait("player_on_backdoor_path");
 
   // Retrieve the ACS module.
-  registerObjective("obj_satellite", & "CLIFFHANGER_OBJ_COMPUTER", (0, 0, 0));
+  registerObjective("obj_satellite", &"CLIFFHANGER_OBJ_COMPUTER", (0, 0, 0));
   setObjectiveState("obj_satellite", "current");
   setObjectiveOnEntity("obj_satellite", level.price);
 
@@ -1693,7 +1693,7 @@ objective_exfiltrate() {
   //	level.snowmobile_objective_origin = (-12357.9, -32374.2, 397.2);
 
   // Escape with Captain MacTavish.
-  registerObjective("obj_exfiltrate", & "CLIFFHANGER_OBJ_EVACUATE", (0, 0, 0));
+  registerObjective("obj_exfiltrate", &"CLIFFHANGER_OBJ_EVACUATE", (0, 0, 0));
   setObjectiveOnEntity("obj_exfiltrate", level.price);
 
   setObjectiveState("obj_exfiltrate", "current");
@@ -1713,7 +1713,7 @@ objective_snowmobile() {
     return;
 
   // Obtain a snowmobile.
-  registerObjective("obj_snowmobile", & "CLIFFHANGER_OBJ_SNOWMOBILE", level.player_snowmobile.origin + (0, 0, 48));
+  registerObjective("obj_snowmobile", &"CLIFFHANGER_OBJ_SNOWMOBILE", level.player_snowmobile.origin + (0, 0, 48));
   setObjectiveState("obj_snowmobile", "current");
 
   flag_wait("player_rides_snowmobile");
@@ -1724,7 +1724,7 @@ objective_snowmobile() {
   ent = spawn("script_origin", (0, 0, 0));
   ent thread objective_ent_leads_player();
   // Get to the extraction point.
-  Objective_Add(9, "current", & "CLIFFHANGER_OBJ_EXTRACT", (0, 0, 0));
+  Objective_Add(9, "current", &"CLIFFHANGER_OBJ_EXTRACT", (0, 0, 0));
   Objective_Current(9);
 
   //Objective_OnEntity( 9, ent );
@@ -1877,28 +1877,28 @@ misc_precache() {
   // Get the thing from the satelite
 
   // Plant explosives on the fueling station.
-  level.strings["fuel_station_obj"] = & "CLIFFHANGER_OBJ_FUEL_STATION";
+  level.strings["fuel_station_obj"] = &"CLIFFHANGER_OBJ_FUEL_STATION";
   // Extract the Data Storage Module from the Satellite.
-  level.strings["use_satelite_obj"] = & "CLIFFHANGER_OBJ_USE_SATELITE";
+  level.strings["use_satelite_obj"] = &"CLIFFHANGER_OBJ_USE_SATELITE";
   // Get to the satellite.
-  level.strings["goto_hanger_obj"] = & "CLIFFHANGER_OBJ_GOTO_HANGER";
+  level.strings["goto_hanger_obj"] = &"CLIFFHANGER_OBJ_GOTO_HANGER";
   // Retrieve the 'package'.
-  level.strings["obj_package"] = & "CLIFFHANGER_OBJ_PACKAGE";
+  level.strings["obj_package"] = &"CLIFFHANGER_OBJ_PACKAGE";
   // Find a way into the base.
-  level.strings["obj_base"] = & "CLIFFHANGER_OBJ_BASE";
+  level.strings["obj_base"] = &"CLIFFHANGER_OBJ_BASE";
   // Plant explosives on the fuel tanks.
-  level.strings["obj_c4"] = & "CLIFFHANGER_OBJ_C4";
+  level.strings["obj_c4"] = &"CLIFFHANGER_OBJ_C4";
   // Find the fuel tankers.
-  level.strings["obj_fuel"] = & "CLIFFHANGER_OBJ_FIND_FUEL";
+  level.strings["obj_fuel"] = &"CLIFFHANGER_OBJ_FIND_FUEL";
 
   // Plant explosives on the MiG-29 Jet Fighter.
-  level.strings["obj_c4_mig"] = & "CLIFFHANGER_OBJ_C4_MIG";
+  level.strings["obj_c4_mig"] = &"CLIFFHANGER_OBJ_C4_MIG";
 
-  // Press and hold &&1 to plant the explosives.
-  level.strings["hint_c4_plant"] = & "SCRIPT_PLATFORM_HINTSTR_PLANTEXPLOSIVES";
+  // Press and hold && 1 to plant the explosives.
+  level.strings["hint_c4_plant"] = &"SCRIPT_PLATFORM_HINTSTR_PLANTEXPLOSIVES";
 
   // Escape with Captain MacTavish.
-  level.strings["obj_snowmobile"] = & "CLIFFHANGER_OBJ_EVACUATE";
+  level.strings["obj_snowmobile"] = &"CLIFFHANGER_OBJ_EVACUATE";
 
   foreach(string in level.strings)
   PreCacheString(string);
@@ -4161,7 +4161,7 @@ price_died_you_lose() {
   wait(2.5);
 
   // Captain MacTavish was executed.
-  SetDvar("ui_deadquote", & "CLIFFHANGER_PRICE_DIED");
+  SetDvar("ui_deadquote", &"CLIFFHANGER_PRICE_DIED");
   missionFailedWrapper();
   level.player waittill("detonate");
 }

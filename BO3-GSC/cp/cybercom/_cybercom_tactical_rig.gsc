@@ -34,8 +34,8 @@ function init() {
 }
 
 function main() {
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
   cybercom_tacrig_sensorybuffer::main();
   cybercom_tacrig_emergencyreserve::main();
   cybercom_tacrig_proximitydeterrent::main();

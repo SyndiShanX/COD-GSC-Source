@@ -26,7 +26,7 @@ init() {
   level.odinSettings["odin_support"].voKillSingle = "odin_target_killed";
   level.odinSettings["odin_support"].voKillMulti = "odin_targets_killed";
   level.odinSettings["odin_support"].ui_num = 1;
-  level.odinSettings["odin_support"].unavailable_string = & "KILLSTREAKS_ODIN_UNAVAILABLE";
+  level.odinSettings["odin_support"].unavailable_string = &"KILLSTREAKS_ODIN_UNAVAILABLE";
 
   level.odinSettings["odin_support"].weapon["airdrop"] = spawnStruct();
   level.odinSettings["odin_support"].weapon["airdrop"].projectile = "odin_projectile_airdrop_mp";
@@ -84,7 +84,7 @@ init() {
   level.odinSettings["odin_assault"].voKillSingle = "odin_target_killed";
   level.odinSettings["odin_assault"].voKillMulti = "odin_targets_killed";
   level.odinSettings["odin_assault"].ui_num = 2;
-  level.odinSettings["odin_assault"].unavailable_string = & "KILLSTREAKS_LOKI_UNAVAILABLE";
+  level.odinSettings["odin_assault"].unavailable_string = &"KILLSTREAKS_LOKI_UNAVAILABLE";
 
   level.odinSettings["odin_assault"].weapon["airdrop"] = spawnStruct();
   level.odinSettings["odin_assault"].weapon["airdrop"].projectile = "odin_projectile_airdrop_mp";

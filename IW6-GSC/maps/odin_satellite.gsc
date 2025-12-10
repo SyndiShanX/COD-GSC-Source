@@ -57,8 +57,8 @@ section_flag_init() {
 }
 
 section_hint_string_init() {
-  maps\_utility::add_hint_string("ODIN_RCS_PROMPT", & "ODIN_RCS_PROMPT", ::odin_rcs_prompt);
-  maps\_utility::add_hint_string("SATELLITE_TIMEOUT", & "ODIN_SATELLITE_TIMEOUT");
+  maps\_utility::add_hint_string("ODIN_RCS_PROMPT", &"ODIN_RCS_PROMPT", ::odin_rcs_prompt);
+  maps\_utility::add_hint_string("SATELLITE_TIMEOUT", &"ODIN_SATELLITE_TIMEOUT");
 }
 
 odin_rcs_prompt() {

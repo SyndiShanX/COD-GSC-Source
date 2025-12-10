@@ -12,14 +12,14 @@
 #namespace namespace_19e79ea1;
 
 function autoexec __init__sytem__() {
-  system::register("zm_stalingrad_dragon_strike", & __init__, undefined, undefined);
+  system::register("zm_stalingrad_dragon_strike", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "lockbox_light_1", 12000, 2, "int", & lockbox_light_1, 0, 0);
-  clientfield::register("scriptmover", "lockbox_light_2", 12000, 2, "int", & lockbox_light_2, 0, 0);
-  clientfield::register("scriptmover", "lockbox_light_3", 12000, 2, "int", & lockbox_light_3, 0, 0);
-  clientfield::register("scriptmover", "lockbox_light_4", 12000, 2, "int", & lockbox_light_4, 0, 0);
+  clientfield::register("scriptmover", "lockbox_light_1", 12000, 2, "int", &lockbox_light_1, 0, 0);
+  clientfield::register("scriptmover", "lockbox_light_2", 12000, 2, "int", &lockbox_light_2, 0, 0);
+  clientfield::register("scriptmover", "lockbox_light_3", 12000, 2, "int", &lockbox_light_3, 0, 0);
+  clientfield::register("scriptmover", "lockbox_light_4", 12000, 2, "int", &lockbox_light_4, 0, 0);
 }
 
 function lockbox_light_1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

@@ -167,7 +167,7 @@ mechz_setup_fx() {
 clear_one_off_fx(fx_id) {
   self endon("death");
   wait 10;
-  self.fx_field = self.fx_field & ~fx_id;
+  self.fx_field = self.fx_field &~fx_id;
   self setclientfield("mechz_fx", self.fx_field);
 }
 
@@ -182,7 +182,7 @@ traversal_booster_fx_watcher() {
       self.sndloopent playSound("zmb_ai_mechz_rocket_start");
       self.sndloopent playLoopSound("zmb_ai_mechz_rocket_loop", 0.75);
     } else if(notetrack == "booster_off") {
-      self.fx_field = self.fx_field & ~128;
+      self.fx_field = self.fx_field &~128;
       self.sndloopent playSound("zmb_ai_mechz_rocket_stop");
       self.sndloopent stoploopsound(1);
     }
@@ -206,7 +206,7 @@ booster_fx_watcher() {
       self.sndloopent playSound("zmb_ai_mechz_rocket_start");
       self.sndloopent playLoopSound("zmb_ai_mechz_rocket_loop", 0.75);
     } else if(notetrack == "booster_off") {
-      self.fx_field = self.fx_field & ~128;
+      self.fx_field = self.fx_field &~128;
       self.sndloopent playSound("zmb_ai_mechz_rocket_stop");
       self.sndloopent stoploopsound(1);
     } else if(notetrack == "impact") {
@@ -231,7 +231,7 @@ flamethrower_fx_watcher() {
     if(notetrack == "start_ft")
       self.fx_field = self.fx_field | 64;
     else if(notetrack == "stop_ft")
-      self.fx_field = self.fx_field & ~64;
+      self.fx_field = self.fx_field &~64;
 
     self setclientfield("mechz_fx", self.fx_field);
   }
@@ -1394,7 +1394,7 @@ mechz_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
       self playSound("zmb_ai_mechz_vox_angry");
 
     self.fx_field = self.fx_field | 1024;
-    self.fx_field = self.fx_field & ~2048;
+    self.fx_field = self.fx_field &~2048;
     self setclientfield("mechz_fx", self.fx_field);
 
     if(!(isDefined(self.not_interruptable) && self.not_interruptable) && !(isDefined(self.is_traversing) && self.is_traversing)) {

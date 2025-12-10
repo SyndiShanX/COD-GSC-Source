@@ -9,7 +9,7 @@
 #namespace zm_aat_thunder_wall;
 
 function autoexec __init__sytem__() {
-  system::register("zm_aat_thunder_wall", & __init__, undefined, undefined);
+  system::register("zm_aat_thunder_wall", &__init__, undefined, undefined);
 }
 
 function __init__() {

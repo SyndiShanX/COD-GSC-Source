@@ -537,7 +537,7 @@ class careadefend {
 
   function ritual_start_message_internal(player) {
     if(!m_b_started) {
-      return & "";
+      return &"";
     }
     switch (m_n_state) {
       case 0: {
@@ -547,7 +547,7 @@ class careadefend {
         return m_str_area_defend_available;
       }
       default: {
-        return & "";
+        return &"";
       }
     }
   }
@@ -631,11 +631,11 @@ class careadefend {
     m_n_defend_radius_sq = m_n_defend_radius * m_n_defend_radius;
     m_n_rumble_radius = m_n_defend_radius;
     m_n_rumble_radius_sq = m_n_rumble_radius * m_n_rumble_radius;
-    m_str_area_defend_unavailable = & "ZM_ZOD_DEFEND_AREA_UNAVAILABLE";
-    m_str_area_defend_available = & "ZM_ZOD_DEFEND_AREA_AVAILABLE";
-    m_str_area_defend_in_progress = & "ZM_ZOD_DEFEND_AREA_IN_PROGRESS";
-    m_func_trigger_visibility = & ritual_start_prompt_and_visibility;
-    m_func_trigger_thread = & usetrigger_think;
+    m_str_area_defend_unavailable = &"ZM_ZOD_DEFEND_AREA_UNAVAILABLE";
+    m_str_area_defend_available = &"ZM_ZOD_DEFEND_AREA_AVAILABLE";
+    m_str_area_defend_in_progress = &"ZM_ZOD_DEFEND_AREA_IN_PROGRESS";
+    m_func_trigger_visibility = &ritual_start_prompt_and_visibility;
+    m_func_trigger_thread = &usetrigger_think;
     populate_spawn_points();
     m_n_state = 0;
     m_b_started = 0;

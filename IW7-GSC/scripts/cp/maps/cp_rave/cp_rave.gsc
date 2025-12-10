@@ -140,9 +140,9 @@ main() {
   level.custom_onspawnplayer_func = ::cp_rave_onplayerspawned;
   level.wave_complete_dialogues_func = ::wave_complete_dialogues;
   level.power_vo_func = ::rave_power_on_vo;
-  level.magic_wheel_spin_hint = & "CP_RAVE_SPIN_WHEEL";
-  level.reboard_barriers_hint = & "CP_RAVE_SECURE_WINDOW";
-  level.enter_area_hint = & "CP_RAVE_ENTER_THIS_AREA";
+  level.magic_wheel_spin_hint = &"CP_RAVE_SPIN_WHEEL";
+  level.reboard_barriers_hint = &"CP_RAVE_SECURE_WINDOW";
+  level.enter_area_hint = &"CP_RAVE_ENTER_THIS_AREA";
   level thread setup_pa_speakers();
   init_weapon_change_funcs();
   init_wall_buys_array();
@@ -903,7 +903,7 @@ cleanup_model_after_time(param_00) {
 }
 
 toy_animal_statue_hint_func(param_00, param_01) {
-  return & "CP_RAVE_PICKUP_ITEM";
+  return &"CP_RAVE_PICKUP_ITEM";
 }
 
 harpoon_upgrade_quest() {
@@ -918,11 +918,11 @@ toy_charging_hint_func(param_00, param_01) {
   var_02 = ["wolf", "owl", "deer", "eagle"];
   for(var_03 = 0; var_03 < var_02.size; var_03++) {
     if(scripts\engine\utility::flag(var_02[var_03] + "_toy_found") && !scripts\engine\utility::flag(var_02[var_03] + "_toy_placed") && !scripts\engine\utility::flag(var_02[var_03] + "_toy_charged")) {
-      return & "CP_RAVE_PLACE_ITEM";
+      return &"CP_RAVE_PLACE_ITEM";
     }
 
     if(isDefined(param_00.current_statue) && scripts\engine\utility::flag(var_02[var_03] + "_toy_placed") && scripts\engine\utility::flag(var_02[var_03] + "_toy_charged")) {
-      return & "CP_RAVE_PICKUP_ITEM";
+      return &"CP_RAVE_PICKUP_ITEM";
     }
   }
 
@@ -966,11 +966,11 @@ toy_statue_end_pos_hint_func(param_00, param_01) {
   }
 
   if(!scripts\engine\utility::flag(param_00.name + "_toy_placed")) {
-    return & "CP_RAVE_PLACE_ITEM";
+    return &"CP_RAVE_PLACE_ITEM";
   }
 
   if(scripts\engine\utility::flag(param_00.name + "_quest_completed")) {
-    return & "CP_RAVE_PICKUP_ITEM";
+    return &"CP_RAVE_PICKUP_ITEM";
   }
 
   return "";
@@ -1965,18 +1965,18 @@ cp_rave_pillage_init() {
 }
 
 cp_rave_introscreen_text() {
-  var_00 = scripts\cp\cp_hud_util::introscreen_corner_line( & "CP_RAVE_INTRO_LINE_1", 1);
+  var_00 = scripts\cp\cp_hud_util::introscreen_corner_line(&"CP_RAVE_INTRO_LINE_1", 1);
   wait(1);
-  var_01 = scripts\cp\cp_hud_util::introscreen_corner_line( & "CP_RAVE_INTRO_LINE_2", 2);
+  var_01 = scripts\cp\cp_hud_util::introscreen_corner_line(&"CP_RAVE_INTRO_LINE_2", 2);
   wait(1);
   if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
-    var_02 = scripts\cp\cp_hud_util::introscreen_corner_line( & "DIRECT_BOSS_FIGHT_LINE4_RAVE", 4);
+    var_02 = scripts\cp\cp_hud_util::introscreen_corner_line(&"DIRECT_BOSS_FIGHT_LINE4_RAVE", 4);
   } else {
-    var_02 = scripts\cp\cp_hud_util::introscreen_corner_line( & "CP_RAVE_INTRO_LINE_3", 3);
+    var_02 = scripts\cp\cp_hud_util::introscreen_corner_line(&"CP_RAVE_INTRO_LINE_3", 3);
   }
 
   wait(1);
-  var_03 = scripts\cp\cp_hud_util::introscreen_corner_line( & "CP_RAVE_INTRO_LINE_4", 4);
+  var_03 = scripts\cp\cp_hud_util::introscreen_corner_line(&"CP_RAVE_INTRO_LINE_4", 4);
   wait(3);
   var_00 fadeovertime(3);
   var_01 fadeovertime(3);
@@ -6003,68 +6003,68 @@ rave_getweaponnamestring(param_00, param_01) {
   switch (param_00) {
     case "iw7_two":
       if(var_02) {
-        return & "CP_RAVE_WEAPONS_TWO_HEADED_AXE_PAP1";
+        return &"CP_RAVE_WEAPONS_TWO_HEADED_AXE_PAP1";
       } else if(var_03) {
-        return & "CP_RAVE_WEAPONS_TWO_HEADED_AXE_PAP2";
+        return &"CP_RAVE_WEAPONS_TWO_HEADED_AXE_PAP2";
       } else {
-        return & "CP_RAVE_WEAPONS_TWO_HEADED_AXE";
+        return &"CP_RAVE_WEAPONS_TWO_HEADED_AXE";
       }
 
       break;
 
     case "iw7_machete":
       if(var_02) {
-        return & "CP_RAVE_WEAPONS_MACHETE_PAP1";
+        return &"CP_RAVE_WEAPONS_MACHETE_PAP1";
       } else if(var_03) {
-        return & "CP_RAVE_WEAPONS_MACHETE_PAP2";
+        return &"CP_RAVE_WEAPONS_MACHETE_PAP2";
       } else {
-        return & "CP_RAVE_WEAPONS_MACHETE";
+        return &"CP_RAVE_WEAPONS_MACHETE";
       }
 
       break;
 
     case "iw7_spiked":
       if(var_02) {
-        return & "CP_RAVE_WEAPONS_BAT_PAP1";
+        return &"CP_RAVE_WEAPONS_BAT_PAP1";
       } else if(var_03) {
-        return & "CP_RAVE_WEAPONS_BAT_PAP2";
+        return &"CP_RAVE_WEAPONS_BAT_PAP2";
       } else {
-        return & "CP_RAVE_WEAPONS_BAT";
+        return &"CP_RAVE_WEAPONS_BAT";
       }
 
       break;
 
     case "iw7_slasher":
-      return & "CP_RAVE_WEAPONS_SLASHER_SAW";
+      return &"CP_RAVE_WEAPONS_SLASHER_SAW";
 
     case "iw7_harpoon":
-      return & "CP_RAVE_WEAPONS_HARPOON";
+      return &"CP_RAVE_WEAPONS_HARPOON";
 
     case "iw7_harpoon1":
-      return & "CP_RAVE_WEAPONS_HARPOON1";
+      return &"CP_RAVE_WEAPONS_HARPOON1";
 
     case "iw7_harpoon2":
-      return & "CP_RAVE_WEAPONS_HARPOON2";
+      return &"CP_RAVE_WEAPONS_HARPOON2";
 
     case "iw7_harpoon3":
-      return & "CP_RAVE_WEAPONS_HARPOON3";
+      return &"CP_RAVE_WEAPONS_HARPOON3";
 
     case "iw7_harpoon4":
-      return & "CP_RAVE_WEAPONS_HARPOON4";
+      return &"CP_RAVE_WEAPONS_HARPOON4";
 
     case "iw7_golf":
       if(var_02) {
-        return & "CP_RAVE_WEAPONS_GOLF_CLUB_PAP1";
+        return &"CP_RAVE_WEAPONS_GOLF_CLUB_PAP1";
       } else if(var_03) {
-        return & "CP_RAVE_WEAPONS_GOLF_CLUB_PAP2";
+        return &"CP_RAVE_WEAPONS_GOLF_CLUB_PAP2";
       } else {
-        return & "CP_RAVE_WEAPONS_GOLF_CLUB";
+        return &"CP_RAVE_WEAPONS_GOLF_CLUB";
       }
 
       break;
 
     default:
-      return & "CP_ZMB_WEAPONS_GENERIC";
+      return &"CP_ZMB_WEAPONS_GENERIC";
   }
 }
 

@@ -33,14 +33,14 @@ function init() {}
 function main() {
   cybercom_gadget::registerability(0, 2);
   level.cybercom.servo_shortout = spawnStruct();
-  level.cybercom.servo_shortout._is_flickering = & _is_flickering;
-  level.cybercom.servo_shortout._on_flicker = & _on_flicker;
-  level.cybercom.servo_shortout._on_give = & _on_give;
-  level.cybercom.servo_shortout._on_take = & _on_take;
-  level.cybercom.servo_shortout._on_connect = & _on_connect;
-  level.cybercom.servo_shortout._on = & _on;
-  level.cybercom.servo_shortout._off = & _off;
-  level.cybercom.servo_shortout._is_primed = & _is_primed;
+  level.cybercom.servo_shortout._is_flickering = &_is_flickering;
+  level.cybercom.servo_shortout._on_flicker = &_on_flicker;
+  level.cybercom.servo_shortout._on_give = &_on_give;
+  level.cybercom.servo_shortout._on_take = &_on_take;
+  level.cybercom.servo_shortout._on_connect = &_on_connect;
+  level.cybercom.servo_shortout._on = &_on;
+  level.cybercom.servo_shortout._off = &_off;
+  level.cybercom.servo_shortout._is_primed = &_is_primed;
   level.cybercom.servo_shortout.gibcounter = 0;
 }
 
@@ -53,8 +53,8 @@ function _on_give(slot, weapon) {
   if(self hascybercomability("cybercom_servoshortout") == 2) {
     self.cybercom.var_110c156a = getdvarint("scr_servo_shortout_upgraded_count", 3);
   }
-  self.cybercom.targetlockcb = & _get_valid_targets;
-  self.cybercom.targetlockrequirementcb = & _lock_requirement;
+  self.cybercom.targetlockcb = &_get_valid_targets;
+  self.cybercom.targetlockrequirementcb = &_lock_requirement;
   self thread cybercom::function_b5f4e597(weapon);
 }
 

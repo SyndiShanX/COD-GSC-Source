@@ -82,18 +82,18 @@ onStartGameType() {
   if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = false;
 
-  setObjectiveText("allies", & "OBJECTIVES_GRND");
-  setObjectiveText("axis", & "OBJECTIVES_GRND");
+  setObjectiveText("allies", &"OBJECTIVES_GRND");
+  setObjectiveText("axis", &"OBJECTIVES_GRND");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", & "OBJECTIVES_GRND");
-    setObjectiveScoreText("axis", & "OBJECTIVES_GRND");
+    setObjectiveScoreText("allies", &"OBJECTIVES_GRND");
+    setObjectiveScoreText("axis", &"OBJECTIVES_GRND");
   } else {
-    setObjectiveScoreText("allies", & "OBJECTIVES_GRND_SCORE");
-    setObjectiveScoreText("axis", & "OBJECTIVES_GRND_SCORE");
+    setObjectiveScoreText("allies", &"OBJECTIVES_GRND_SCORE");
+    setObjectiveScoreText("axis", &"OBJECTIVES_GRND_SCORE");
   }
-  setObjectiveHintText("allies", & "OBJECTIVES_DOM_HINT");
-  setObjectiveHintText("axis", & "OBJECTIVES_DOM_HINT");
+  setObjectiveHintText("allies", &"OBJECTIVES_DOM_HINT");
+  setObjectiveHintText("axis", &"OBJECTIVES_DOM_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -123,7 +123,7 @@ onStartGameType() {
   maps\mp\gametypes\_gameobjects::main(allowed);
 
   level.grnd_HUD["timerDisplay"] = createServerTimer("objective", 1.4);
-  level.grnd_HUD["timerDisplay"].label = & "MP_NEXT_DROP_ZONE_IN";
+  level.grnd_HUD["timerDisplay"].label = &"MP_NEXT_DROP_ZONE_IN";
 
   level.grnd_HUD["timerDisplay"] setPoint("BOTTOMCENTER", "BOTTOMCENTER", 0, -28);
 
@@ -414,7 +414,7 @@ cycleZones() {
     if(level.matchRules_dropTime)
       level thread randomDrops();
 
-    level.grnd_HUD["timerDisplay"].label = & "MP_NEXT_DROP_ZONE_IN";
+    level.grnd_HUD["timerDisplay"].label = &"MP_NEXT_DROP_ZONE_IN";
     level.grnd_HUD["timerDisplay"] setTimer(level.matchRules_zoneSwitchTime);
     level.grnd_HUD["timerDisplay"].alpha = 1;
     maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(level.matchRules_zoneSwitchTime);

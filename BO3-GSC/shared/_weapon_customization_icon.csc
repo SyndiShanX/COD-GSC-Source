@@ -13,15 +13,15 @@
 #namespace weapon_customization_icon;
 
 function autoexec __init__sytem__() {
-  system::register("weapon_customization_icon", & __init__, undefined, undefined);
+  system::register("weapon_customization_icon", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.extra_cam_wc_paintjob_icon = [];
   level.extra_cam_wc_variant_icon = [];
-  level.extra_cam_render_wc_paintjobicon_func_callback = & process_wc_paintjobicon_extracam_request;
-  level.extra_cam_render_wc_varianticon_func_callback = & process_wc_varianticon_extracam_request;
-  level.weaponcustomizationiconsetup = & wc_icon_setup;
+  level.extra_cam_render_wc_paintjobicon_func_callback = &process_wc_paintjobicon_extracam_request;
+  level.extra_cam_render_wc_varianticon_func_callback = &process_wc_varianticon_extracam_request;
+  level.weaponcustomizationiconsetup = &wc_icon_setup;
 }
 
 function wc_icon_setup(localclientnum) {

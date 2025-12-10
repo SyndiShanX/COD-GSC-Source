@@ -22,11 +22,11 @@
 #namespace zm_craftables;
 
 function autoexec __init__sytem__() {
-  system::register("zm_craftables", & __init__, & __main__, undefined);
+  system::register("zm_craftables", &__init__, &__main__, undefined);
 }
 
 function __init__() {
-  callback::on_finalize_initialization( & set_craftable_clientfield);
+  callback::on_finalize_initialization(&set_craftable_clientfield);
 }
 
 function init() {
@@ -46,12 +46,12 @@ function init() {
   }
   open_table = spawnStruct();
   open_table.name = "open_table";
-  open_table.triggerthink = & opentablecraftable;
-  open_table.custom_craftablestub_update_prompt = & open_craftablestub_update_prompt;
+  open_table.triggerthink = &opentablecraftable;
+  open_table.custom_craftablestub_update_prompt = &open_craftablestub_update_prompt;
   include_zombie_craftable(open_table);
-  add_zombie_craftable("open_table", & "");
+  add_zombie_craftable("open_table", &"");
   if(isDefined(level.use_swipe_protection)) {
-    callback::on_connect( & craftables_watch_swipes);
+    callback::on_connect(&craftables_watch_swipes);
   }
 }
 
@@ -362,7 +362,7 @@ function generate_piece_unitrigger(classname, origin, angles, flags, radius = 64
     unitrigger_stub.hint_string_override = hint_string;
     unitrigger_stub.hint_string = unitrigger_stub.hint_string_override;
   } else {
-    unitrigger_stub.hint_string = & "ZOMBIE_BUILD_PIECE_GRAB";
+    unitrigger_stub.hint_string = &"ZOMBIE_BUILD_PIECE_GRAB";
   }
   unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   if(isDefined(b_nolook) && (isDefined(int(b_nolook)) && int(b_nolook))) {
@@ -388,13 +388,13 @@ function generate_piece_unitrigger(classname, origin, angles, flags, radius = 64
     }
   }
   zm_unitrigger::unitrigger_force_per_player_triggers(unitrigger_stub, 1);
-  unitrigger_stub.prompt_and_visibility_func = & piecetrigger_update_prompt;
-  unitrigger_stub.originfunc = & piecestub_get_unitrigger_origin;
-  unitrigger_stub.onspawnfunc = & anystub_on_spawn_trigger;
+  unitrigger_stub.prompt_and_visibility_func = &piecetrigger_update_prompt;
+  unitrigger_stub.originfunc = &piecestub_get_unitrigger_origin;
+  unitrigger_stub.onspawnfunc = &anystub_on_spawn_trigger;
   if(isDefined(moving) && moving) {
-    zm_unitrigger::register_unitrigger(unitrigger_stub, & piece_unitrigger_think);
+    zm_unitrigger::register_unitrigger(unitrigger_stub, &piece_unitrigger_think);
   } else {
-    zm_unitrigger::register_static_unitrigger(unitrigger_stub, & piece_unitrigger_think);
+    zm_unitrigger::register_static_unitrigger(unitrigger_stub, &piece_unitrigger_think);
   }
   return unitrigger_stub;
 }
@@ -415,7 +415,7 @@ function piecestub_update_prompt(player, slot = self.piece.inventory_slot) {
   }
   if(isDefined(player.current_craftable_pieces[slot]) && (!(isDefined(self.piece.is_shared) && self.piece.is_shared))) {
     if(!level.craftable_piece_swap_allowed) {
-      self.hint_string = & "ZOMBIE_CRAFTABLE_NO_SWITCH";
+      self.hint_string = &"ZOMBIE_CRAFTABLE_NO_SWITCH";
     } else {
       spiece = self.piece;
       cpiece = player.current_craftable_pieces[slot];
@@ -426,14 +426,14 @@ function piecestub_update_prompt(player, slot = self.piece.inventory_slot) {
       if(isDefined(self.hint_string_override)) {
         self.hint_string = self.hint_string_override;
       } else {
-        self.hint_string = & "ZOMBIE_BUILD_PIECE_SWITCH";
+        self.hint_string = &"ZOMBIE_BUILD_PIECE_SWITCH";
       }
     }
   } else {
     if(isDefined(self.hint_string_override)) {
       self.hint_string = self.hint_string_override;
     } else {
-      self.hint_string = & "ZOMBIE_BUILD_PIECE_GRAB";
+      self.hint_string = &"ZOMBIE_BUILD_PIECE_GRAB";
     }
   }
   return true;
@@ -911,12 +911,12 @@ function generate_piece(piecestub) {
   if(isDefined(piecestub.onpickup)) {
     piecespawn.onpickup = piecestub.onpickup;
   } else {
-    piecespawn.onpickup = & onpickuputs;
+    piecespawn.onpickup = &onpickuputs;
   }
   if(isDefined(piecestub.ondrop)) {
     piecespawn.ondrop = piecestub.ondrop;
   } else {
-    piecespawn.ondrop = & ondroputs;
+    piecespawn.ondrop = &ondroputs;
   }
   if(isDefined(piecestub.oncrafted)) {
     piecespawn.oncrafted = piecestub.oncrafted;
@@ -1023,10 +1023,10 @@ function setup_unitrigger_craftable_internal(trig, equipname, weaponname, trigge
   } else if(isDefined(trig.usetime)) {
     unitrigger_stub.usetime = trig.usetime;
   }
-  unitrigger_stub.onbeginuse = & onbeginuseuts;
-  unitrigger_stub.onenduse = & onenduseuts;
-  unitrigger_stub.onuse = & onuseplantobjectuts;
-  unitrigger_stub.oncantuse = & oncantuseuts;
+  unitrigger_stub.onbeginuse = &onbeginuseuts;
+  unitrigger_stub.onenduse = &onenduseuts;
+  unitrigger_stub.onuse = &onuseplantobjectuts;
+  unitrigger_stub.oncantuse = &oncantuseuts;
   tmins = trig getmins();
   tmaxs = trig getmaxs();
   tsize = tmaxs - tmins;
@@ -1060,8 +1060,8 @@ function setup_unitrigger_craftable_internal(trig, equipname, weaponname, trigge
   if(isDefined(unitrigger_stub.craftablestub.custom_craftablestub_update_prompt)) {
     unitrigger_stub.custom_craftablestub_update_prompt = unitrigger_stub.craftablestub.custom_craftablestub_update_prompt;
   }
-  unitrigger_stub.prompt_and_visibility_func = & craftabletrigger_update_prompt;
-  zm_unitrigger::register_static_unitrigger(unitrigger_stub, & craftable_place_think);
+  unitrigger_stub.prompt_and_visibility_func = &craftabletrigger_update_prompt;
+  zm_unitrigger::register_static_unitrigger(unitrigger_stub, &craftable_place_think);
   unitrigger_stub.piece_trigger = trig;
   trig.trigger_stub = unitrigger_stub;
   if(isDefined(trig.zombie_weapon_upgrade)) {
@@ -1501,11 +1501,11 @@ function craftablestub_update_prompt(player, unitrigger, slot = self.craftablest
   if(!(isDefined(self.crafted) && self.crafted)) {
     if(!self.craftablespawn craftable_can_use_shared_piece()) {
       if(!isDefined(player.current_craftable_pieces[slot])) {
-        self.hint_string = & "ZOMBIE_BUILD_PIECE_MORE";
+        self.hint_string = &"ZOMBIE_BUILD_PIECE_MORE";
         return false;
       }
       if(!self.craftablespawn craftable_has_piece(player.current_craftable_pieces[slot])) {
-        self.hint_string = & "ZOMBIE_BUILD_PIECE_WRONG";
+        self.hint_string = &"ZOMBIE_BUILD_PIECE_WRONG";
         return false;
       }
     }
@@ -1514,22 +1514,22 @@ function craftablestub_update_prompt(player, unitrigger, slot = self.craftablest
   } else {
     if(self.persistent == 1) {
       if(zm_equipment::is_limited(self.weaponname) && zm_equipment::limited_in_use(self.weaponname)) {
-        self.hint_string = & "ZOMBIE_BUILD_PIECE_ONLY_ONE";
+        self.hint_string = &"ZOMBIE_BUILD_PIECE_ONLY_ONE";
         return false;
       }
       if(player zm_equipment::has_player_equipment(self.weaponname)) {
-        self.hint_string = & "ZOMBIE_BUILD_PIECE_HAVE_ONE";
+        self.hint_string = &"ZOMBIE_BUILD_PIECE_HAVE_ONE";
         return false;
       }
       self.hint_string = self.trigger_hintstring;
     } else {
       if(self.persistent == 2) {
         if(!zm_weapons::limited_weapon_below_quota(self.weaponname, undefined)) {
-          self.hint_string = & "ZOMBIE_GO_TO_THE_BOX_LIMITED";
+          self.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
           return false;
         }
         if(isDefined(self.str_taken) && self.str_taken) {
-          self.hint_string = & "ZOMBIE_GO_TO_THE_BOX";
+          self.hint_string = &"ZOMBIE_GO_TO_THE_BOX";
           return false;
         }
         self.hint_string = self.trigger_hintstring;
@@ -1618,7 +1618,7 @@ function open_craftablestub_update_prompt(player, slot = 0) {
     switch (self.a_uts_open_craftables_available.size) {
       case 0: {
         if(!isDefined(player.current_craftable_pieces[slot])) {
-          self.hint_string = & "ZOMBIE_BUILD_PIECE_MORE";
+          self.hint_string = &"ZOMBIE_BUILD_PIECE_MORE";
           self.n_open_craftable_choice = -1;
           return false;
         }
@@ -1639,15 +1639,15 @@ function open_craftablestub_update_prompt(player, slot = 0) {
   } else {
     if(self.persistent == 2) {
       if(!zm_weapons::limited_weapon_below_quota(self.weaponname, undefined)) {
-        self.hint_string = & "ZOMBIE_GO_TO_THE_BOX_LIMITED";
+        self.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
         return false;
       }
       if(isDefined(self.bought) && self.bought) {
-        self.hint_string = & "ZOMBIE_GO_TO_THE_BOX";
+        self.hint_string = &"ZOMBIE_GO_TO_THE_BOX";
         return false;
       }
       if(isDefined(self.str_taken) && self.str_taken) {
-        self.hint_string = & "ZOMBIE_GO_TO_THE_BOX";
+        self.hint_string = &"ZOMBIE_GO_TO_THE_BOX";
         return false;
       }
       self.hint_string = self.trigger_hintstring;
@@ -1883,12 +1883,12 @@ function craftable_place_think() {
       self craftabletrigger_update_prompt(player_crafted);
     }
     if(!zm_weapons::limited_weapon_below_quota(self.stub.weaponname, undefined)) {
-      self.stub.hint_string = & "ZOMBIE_GO_TO_THE_BOX_LIMITED";
+      self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
       self sethintstring(self.stub.hint_string);
       return;
     }
     if(isDefined(self.stub.str_taken) && self.stub.str_taken) {
-      self.stub.hint_string = & "ZOMBIE_GO_TO_THE_BOX";
+      self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX";
       self sethintstring(self.stub.hint_string);
       return;
     }
@@ -1943,9 +1943,9 @@ function craftable_place_think() {
         }
       }
       if(!zm_weapons::limited_weapon_below_quota(self.stub.weaponname, undefined)) {
-        self.stub.hint_string = & "ZOMBIE_GO_TO_THE_BOX_LIMITED";
+        self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
       } else {
-        self.stub.hint_string = & "ZOMBIE_GO_TO_THE_BOX";
+        self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX";
       }
       self sethintstring(self.stub.hint_string);
       player track_craftables_pickedup(self.stub.craftablespawn);
@@ -2147,8 +2147,8 @@ function setup_vehicle_unitrigger_craftable(parent, trigger_targetname, equipnam
   unitrigger_stub.link_parent = parent;
   unitrigger_stub.origin_parent = trig;
   unitrigger_stub.trigger_targetname = trigger_targetname;
-  unitrigger_stub.originfunc = & anystub_get_unitrigger_origin;
-  unitrigger_stub.onspawnfunc = & anystub_on_spawn_trigger;
+  unitrigger_stub.originfunc = &anystub_get_unitrigger_origin;
+  unitrigger_stub.onspawnfunc = &anystub_on_spawn_trigger;
   unitrigger_stub.origin = trig.origin;
   unitrigger_stub.angles = trig.angles;
   unitrigger_stub.equipname = equipname;
@@ -2158,10 +2158,10 @@ function setup_vehicle_unitrigger_craftable(parent, trigger_targetname, equipnam
   unitrigger_stub.crafted = 0;
   unitrigger_stub.persistent = persistent;
   unitrigger_stub.usetime = int(3000);
-  unitrigger_stub.onbeginuse = & onbeginuseuts;
-  unitrigger_stub.onenduse = & onenduseuts;
-  unitrigger_stub.onuse = & onuseplantobjectuts;
-  unitrigger_stub.oncantuse = & oncantuseuts;
+  unitrigger_stub.onbeginuse = &onbeginuseuts;
+  unitrigger_stub.onenduse = &onenduseuts;
+  unitrigger_stub.onuse = &onuseplantobjectuts;
+  unitrigger_stub.oncantuse = &oncantuseuts;
   tmins = trig getmins();
   tmaxs = trig getmaxs();
   tsize = tmaxs - tmins;
@@ -2196,8 +2196,8 @@ function setup_vehicle_unitrigger_craftable(parent, trigger_targetname, equipnam
   unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
   unitrigger_stub.require_look_at = 1;
   zm_unitrigger::unitrigger_force_per_player_triggers(unitrigger_stub, 1);
-  unitrigger_stub.prompt_and_visibility_func = & craftabletrigger_update_prompt;
-  zm_unitrigger::register_unitrigger(unitrigger_stub, & craftable_place_think);
+  unitrigger_stub.prompt_and_visibility_func = &craftabletrigger_update_prompt;
+  zm_unitrigger::register_unitrigger(unitrigger_stub, &craftable_place_think);
   unitrigger_stub.piece_trigger = trig;
   trig.trigger_stub = unitrigger_stub;
   unitrigger_stub.craftablespawn = unitrigger_stub craftable_piece_unitriggers(equipname, unitrigger_stub.origin);

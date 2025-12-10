@@ -16,11 +16,11 @@
 #namespace draft;
 
 autoexec __init__system__() {
-  system::register(#"draft", & __init__, undefined, undefined);
+  system::register(#"draft", &__init__, undefined, undefined);
 }
 
 __init__() {
-  clientfield::register("world", "draft", 1, 3, "int", & handledraftstage, 0, 0);
+  clientfield::register("world", "draft", 1, 3, "int", &handledraftstage, 0, 0);
   clientfield::register("clientuimodel", "PositionDraft.stage", 1, 3, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "PositionDraft.autoSelected", 1, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "PositionDraft.cooldown", 1, 5, "int", undefined, 0, 0);

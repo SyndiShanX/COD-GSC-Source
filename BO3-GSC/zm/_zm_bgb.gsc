@@ -33,11 +33,11 @@
 #namespace bgb;
 
 function autoexec __init__sytem__() {
-  system::register("bgb", & __init__, & __main__, undefined);
+  system::register("bgb", &__init__, &__main__, undefined);
 }
 
 function private __init__() {
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
@@ -51,7 +51,7 @@ function private __init__() {
   clientfield::register("clientuimodel", "bgb_invalid_use", 1, 1, "counter");
   clientfield::register("clientuimodel", "bgb_one_shot_use", 1, 1, "counter");
   clientfield::register("toplayer", "bgb_blow_bubble", 1, 1, "counter");
-  zm::register_vehicle_damage_callback( & vehicle_damage_override);
+  zm::register_vehicle_damage_callback(&vehicle_damage_override);
 }
 
 function private __main__() {

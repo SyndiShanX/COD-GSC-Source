@@ -17,7 +17,7 @@
 #namespace collectibles;
 
 function autoexec __init__sytem__() {
-  system::register("bzm_collectibles", & __init__, & __main__, undefined);
+  system::register("bzm_collectibles", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -63,7 +63,7 @@ function function_ab60ef67() {
     collectible = function_8765a33c(mdl_collectible);
     array::add(level.collectibles, collectible, 0);
   }
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function private function_b963f25(mdl_collectible) {
@@ -90,14 +90,14 @@ function function_8765a33c(mdl_collectible) {
   trigger_use setteamfortrigger("none");
   trigger_use setcursorhint("HINT_INTERACTIVE_PROMPT");
   trigger_use sethintstring(&"COLLECTIBLE_PICK_UP");
-  var_837a6185 = gameobjects::create_use_object("any", trigger_use, array(mdl_collectible), (0, 0, 0), & "cp_magic_song");
+  var_837a6185 = gameobjects::create_use_object("any", trigger_use, array(mdl_collectible), (0, 0, 0), &"cp_magic_song");
   var_837a6185 gameobjects::allow_use("any");
   var_837a6185 gameobjects::set_use_time(0.35);
   var_837a6185 gameobjects::set_owner_team("allies");
   var_837a6185 gameobjects::set_visible_team("any");
   var_837a6185.mdl_collectible = mdl_collectible;
-  var_837a6185.onuse = & onuse;
-  var_837a6185.onbeginuse = & onbeginuse;
+  var_837a6185.onuse = &onuse;
+  var_837a6185.onbeginuse = &onbeginuse;
   var_837a6185.single_use = 1;
   var_837a6185.origin = mdl_collectible.origin;
   var_837a6185.angles = var_837a6185.angles;

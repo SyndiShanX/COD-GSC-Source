@@ -10,7 +10,7 @@
 #namespace zm_radio;
 
 function autoexec __init__sytem__() {
-  system::register("zm_radio", & __init__, & __main__, undefined);
+  system::register("zm_radio", &__init__, &__main__, undefined);
 }
 
 function __init__() {}
@@ -31,7 +31,7 @@ function __main__() {
     return;
   }
   println("" + var_903fae71.size);
-  array::thread_all(var_903fae71, & function_8554d5da);
+  array::thread_all(var_903fae71, &function_8554d5da);
 }
 
 function function_8554d5da() {

@@ -25,15 +25,15 @@
 #namespace bgb_machine;
 
 function autoexec __init__sytem__() {
-  system::register("bgb_machine", & __init__, & __main__, undefined);
+  system::register("bgb_machine", &__init__, &__main__, undefined);
 }
 
 function private __init__() {
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  callback::on_connect( & on_player_connect);
-  callback::on_disconnect( & on_player_disconnect);
+  callback::on_connect(&on_player_connect);
+  callback::on_disconnect(&on_player_disconnect);
   clientfield::register("zbarrier", "zm_bgb_machine", 1, 1, "int");
   clientfield::register("zbarrier", "zm_bgb_machine_selection", 1, 8, "int");
   clientfield::register("zbarrier", "zm_bgb_machine_fx_state", 1, 3, "int");
@@ -74,7 +74,7 @@ function private __main__() {
     level.bgb_machine_never_move = 1;
   }
   if(!isDefined(level.bgb_machine_state_func)) {
-    level.bgb_machine_state_func = & process_bgb_machine_state;
+    level.bgb_machine_state_func = &process_bgb_machine_state;
   }
   level thread setup_devgui();
   level thread setup_bgb_machines();
@@ -191,7 +191,7 @@ function private bgb_machine_init() {
   }
   level.bgb_machines = array::randomize(level.bgb_machines);
   init_starting_bgb_machine_location();
-  array::thread_all(level.bgb_machines, & bgb_machine_think);
+  array::thread_all(level.bgb_machines, &bgb_machine_think);
 }
 
 function private init_starting_bgb_machine_location() {
@@ -230,7 +230,7 @@ function create_bgb_machine_unitrigger_stub() {
   self.unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   self.unitrigger_stub.trigger_target = self;
   zm_unitrigger::unitrigger_force_per_player_triggers(self.unitrigger_stub, 1);
-  self.unitrigger_stub.prompt_and_visibility_func = & bgb_machine_trigger_update_prompt;
+  self.unitrigger_stub.prompt_and_visibility_func = &bgb_machine_trigger_update_prompt;
 }
 
 function bgb_machine_trigger_update_prompt(player) {
@@ -283,10 +283,10 @@ function bgb_machine_stub_update_prompt(player) {
   self.hint_parm1 = undefined;
   if(isDefined(self.stub.trigger_target.grab_bgb_hint) && self.stub.trigger_target.grab_bgb_hint) {
     if(!(isDefined(self.stub.trigger_target.b_bgb_is_available) && self.stub.trigger_target.b_bgb_is_available)) {
-      str_hint = & "ZOMBIE_BGB_MACHINE_OUT_OF";
+      str_hint = &"ZOMBIE_BGB_MACHINE_OUT_OF";
       b_result = 0;
     } else {
-      str_hint = & "ZOMBIE_BGB_MACHINE_OFFERING";
+      str_hint = &"ZOMBIE_BGB_MACHINE_OFFERING";
       b_result = 1;
     }
     cursor_hint = "HINT_BGB";
@@ -297,14 +297,14 @@ function bgb_machine_stub_update_prompt(player) {
     self setcursorhint("HINT_NOICON");
     if(player.bgb_machine_uses_this_round < level.bgb_machine_max_uses_per_round) {
       if(isDefined(level.var_42792b8b) && level.var_42792b8b) {
-        self.hint_string = & "ZOMBIE_BGB_MACHINE_AVAILABLE_CFILL";
+        self.hint_string = &"ZOMBIE_BGB_MACHINE_AVAILABLE_CFILL";
       } else {
-        self.hint_string = & "ZOMBIE_BGB_MACHINE_AVAILABLE";
+        self.hint_string = &"ZOMBIE_BGB_MACHINE_AVAILABLE";
         self.hint_parm1 = function_6c7a96b4(player, self.stub.trigger_target.base_cost);
       }
       b_result = 1;
     } else {
-      self.hint_string = & "ZOMBIE_BGB_MACHINE_COMEBACK";
+      self.hint_string = &"ZOMBIE_BGB_MACHINE_COMEBACK";
       b_result = 0;
     }
   }
@@ -441,7 +441,7 @@ function bgb_machine_think() {
   self set_bgb_machine_state("open");
   self waittill("gumball_available");
   self.grab_bgb_hint = 1;
-  self thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, & bgb_machine_unitrigger_think);
+  self thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, &bgb_machine_unitrigger_think);
   gumballtaken = 0;
   gumballoffered = 0;
   var_8a2037cd = 0;
@@ -776,7 +776,7 @@ function process_bgb_machine_state(state) {
       self showzbarrierpiece(3);
       self showzbarrierpiece(5);
       self thread bgb_machine_initial();
-      self thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, & bgb_machine_unitrigger_think);
+      self thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, &bgb_machine_unitrigger_think);
       self.state = "initial";
       break;
     }

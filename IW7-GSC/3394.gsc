@@ -151,7 +151,7 @@ register_interactions() {
   if(isDefined(level.reboard_barriers_hint)) {
     level.interaction_hintstrings["secure_window"] = level.reboard_barriers_hint;
   } else {
-    level.interaction_hintstrings["secure_window"] = & "CP_ZMB_INTERACTIONS_SECURE_WINDOW";
+    level.interaction_hintstrings["secure_window"] = &"CP_ZMB_INTERACTIONS_SECURE_WINDOW";
   }
 
   scripts\cp\cp_interaction::register_interaction("secure_window", "window_board", 1, undefined, ::func_DDAE, 0);

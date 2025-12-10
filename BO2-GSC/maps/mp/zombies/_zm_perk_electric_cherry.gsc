@@ -13,7 +13,7 @@
 #include maps\mp\zombies\_zm_ai_basic;
 
 enable_electric_cherry_perk_for_level() {
-  maps\mp\zombies\_zm_perks::register_perk_basic_info("specialty_grenadepulldeath", "electric_cherry", 2000, & "ZM_PRISON_PERK_CHERRY", "zombie_perk_bottle_cherry");
+  maps\mp\zombies\_zm_perks::register_perk_basic_info("specialty_grenadepulldeath", "electric_cherry", 2000, &"ZM_PRISON_PERK_CHERRY", "zombie_perk_bottle_cherry");
   maps\mp\zombies\_zm_perks::register_perk_precache_func("specialty_grenadepulldeath", ::electic_cherry_precache);
   maps\mp\zombies\_zm_perks::register_perk_clientfields("specialty_grenadepulldeath", ::electric_cherry_register_clientfield, ::electric_cherry_set_clientfield);
   maps\mp\zombies\_zm_perks::register_perk_threads("specialty_grenadepulldeath", ::electric_cherry_reload_attack, ::electric_cherry_perk_lost);

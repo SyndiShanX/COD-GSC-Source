@@ -23,7 +23,7 @@ main(model, type) {
   build_compassicon();
   build_vehiclewalk(6);
   build_aianims(::setanims, ::set_vehicle_anims);
-  level.vehicletypefancy["see2_ot34"] = & "VEHICLENAME_T34_TANK";
+  level.vehicletypefancy["see2_ot34"] = &"VEHICLENAME_T34_TANK";
   precachemodel("vehicle_rus_tracked_t34_seta_body");
   precachemodel("vehicle_rus_tracked_t34_seta_turret");
   precachemodel("vehicle_rus_tracked_t34_setb_body");

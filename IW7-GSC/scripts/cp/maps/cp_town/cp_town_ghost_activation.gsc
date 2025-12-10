@@ -823,7 +823,7 @@ cp_town_gns_4_setup() {
   level.pre_gns_end_func = ::deactivate_color_indicator;
   level.ghost_n_skull_reactivate_func = ::reactivate_skullbuster_cabinet;
   level.moving_target_attack_interval = 9000;
-  level.grab_same_ghost_string = & "CP_TOWN_GNS_TRACK_SAME_CUBE";
+  level.grab_same_ghost_string = &"CP_TOWN_GNS_TRACK_SAME_CUBE";
   level.all_perk_list = ["perk_machine_boom", "perk_machine_flash", "perk_machine_fwoosh", "perk_machine_more", "perk_machine_rat_a_tat", "perk_machine_revive", "perk_machine_run", "perk_machine_deadeye", "perk_machine_tough", "perk_machine_change", "perk_machine_zap", "perk_machine_smack"];
   level.placed_crafted_traps = [];
   level.pool_placement_volume = getent("pool_extraction_volume", "targetname");
@@ -2253,11 +2253,11 @@ init() {
   var_00 = spawnStruct();
   var_00.timeout = 40;
   var_00.lifespan = 40;
-  var_00.pow = & "COOP_CRAFTABLES_PICKUP";
-  var_00.placestring = & "COOP_CRAFTABLES_PLACE";
-  var_00.cannotplacestring = & "COOP_CRAFTABLES_CANNOT_PLACE";
-  var_00.placecancelablestring = & "COOP_CRAFTABLES_PLACE_CANCELABLE";
-  var_00.var_74BF = & "ZOMBIE_CRAFTING_SOUVENIRS_DETONATE";
+  var_00.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_00.placestring = &"COOP_CRAFTABLES_PLACE";
+  var_00.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
+  var_00.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
+  var_00.var_74BF = &"ZOMBIE_CRAFTING_SOUVENIRS_DETONATE";
   var_00.var_9F43 = 0;
   var_00.placementheighttolerance = 30;
   var_00.placementradius = 16;

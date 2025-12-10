@@ -39,7 +39,7 @@ function hack_powerups() {
       struct.script_int = 5000;
       struct.powerup = powerup;
       powerup thread powerup_pickup_watcher(struct);
-      zm_equip_hacker::register_pooled_hackable_struct(struct, & powerup_hack);
+      zm_equip_hacker::register_pooled_hackable_struct(struct, &powerup_hack);
     }
   }
 }

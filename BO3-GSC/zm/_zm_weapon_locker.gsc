@@ -18,7 +18,7 @@ function main() {
   }
   level.weapon_locker_online = sessionmodeisonlinegame();
   weapon_lockers = struct::get_array("weapons_locker", "targetname");
-  array::thread_all(weapon_lockers, & triggerweaponslockerwatch);
+  array::thread_all(weapon_lockers, &triggerweaponslockerwatch);
 }
 
 function wl_has_stored_weapondata() {
@@ -74,8 +74,8 @@ function triggerweaponslockerwatch() {
   unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   unitrigger_stub.clientfieldname = "weapon_locker";
   zm_unitrigger::unitrigger_force_per_player_triggers(unitrigger_stub, 1);
-  unitrigger_stub.prompt_and_visibility_func = & triggerweaponslockerthinkupdateprompt;
-  zm_unitrigger::register_static_unitrigger(unitrigger_stub, & triggerweaponslockerthink);
+  unitrigger_stub.prompt_and_visibility_func = &triggerweaponslockerthinkupdateprompt;
+  zm_unitrigger::register_static_unitrigger(unitrigger_stub, &triggerweaponslockerthink);
 }
 
 function triggerweaponslockerisvalidweapon(weapon) {

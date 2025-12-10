@@ -92,7 +92,7 @@ getRespawnDelay() {
     if(!level.spawnDelay)
       return undefined;
     if(level.spawnDelay >= level.safeZoneAutoDestroyTime)
-      self.lowerMessageOverride = & "MP_WAITING_FOR_SAFEZONE";
+      self.lowerMessageOverride = &"MP_WAITING_FOR_SAFEZONE";
     if(level.delayPlayer) {
       return min(level.spawnDelay, timeRemaining);
     } else {
@@ -102,16 +102,16 @@ getRespawnDelay() {
 }
 
 onStartGameType() {
-  maps\mp\gametypes\_globallogic::setObjectiveText("allies", & "OBJECTIVES_SUR");
-  maps\mp\gametypes\_globallogic::setObjectiveText("axis", & "OBJECTIVES_SUR");
+  maps\mp\gametypes\_globallogic::setObjectiveText("allies", &"OBJECTIVES_SUR");
+  maps\mp\gametypes\_globallogic::setObjectiveText("axis", &"OBJECTIVES_SUR");
   if(level.splitscreen) {
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", & "OBJECTIVES_SUR");
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", & "OBJECTIVES_SUR");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", &"OBJECTIVES_SUR");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", &"OBJECTIVES_SUR");
   } else {
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", & "OBJECTIVES_SUR_SCORE");
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", & "OBJECTIVES_SUR_SCORE");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", &"OBJECTIVES_SUR_SCORE");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", &"OBJECTIVES_SUR_SCORE");
   }
-  updateObjectiveHintMessages(&"MP_LOCATE_CARGO", & "MP_LOCATE_CARGO");
+  updateObjectiveHintMessages(&"MP_LOCATE_CARGO", &"MP_LOCATE_CARGO");
   setClientNameMode("auto_change");
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -151,13 +151,13 @@ SURMainLoop() {
   level.timerDisplay = [];
   level.timerDisplay["allies"] = createServerTimer("objective", 1.4, "allies");
   level.timerDisplay["allies"] setPoint("TOPRIGHT", "TOPRIGHT", 0, 0);
-  level.timerDisplay["allies"].label = & "MP_SAFEZONE_AVAILABLE_IN";
+  level.timerDisplay["allies"].label = &"MP_SAFEZONE_AVAILABLE_IN";
   level.timerDisplay["allies"].alpha = 0;
   level.timerDisplay["allies"].archived = false;
   level.timerDisplay["allies"].hideWhenInMenu = true;
   level.timerDisplay["axis"] = createServerTimer("objective", 1.4, "axis");
   level.timerDisplay["axis"] setPoint("TOPRIGHT", "TOPRIGHT", 0, 0);
-  level.timerDisplay["axis"].label = & "MP_SAFEZONE_AVAILABLE_IN";
+  level.timerDisplay["axis"].label = &"MP_SAFEZONE_AVAILABLE_IN";
   level.timerDisplay["axis"].alpha = 0;
   level.timerDisplay["axis"].archived = false;
   level.timerDisplay["axis"].hideWhenInMenu = true;
@@ -234,7 +234,7 @@ spawnCargo() {
   cargoObject maps\mp\gametypes\_gameobjects::enableObject();
   cargoObject maps\mp\gametypes\_gameobjects::allowUse("any");
   cargoObject maps\mp\gametypes\_gameobjects::setModelVisibility(true);
-  updateObjectiveHintMessages(&"MP_LOCATE_CARGO", & "MP_LOCATE_CARGO");
+  updateObjectiveHintMessages(&"MP_LOCATE_CARGO", &"MP_LOCATE_CARGO");
   return cargoObject;
 }
 
@@ -259,9 +259,9 @@ spawnSafeZone() {
   maps\mp\gametypes\_globallogic::leaderDialog("obj_capture");
   ownerTeam = getCargoOwnerTeam();
   if(ownerTeam == "allies") {
-    updateObjectiveHintMessages(&"MP_CARGO_TO_SAFEZONE", & "MP_INTERCEPT_CARGO");
+    updateObjectiveHintMessages(&"MP_CARGO_TO_SAFEZONE", &"MP_INTERCEPT_CARGO");
   } else if(ownerTeam == "axis") {
-    updateObjectiveHintMessages(&"MP_INTERCEPT_CARGO", & "MP_CARGO_TO_SAFEZONE");
+    updateObjectiveHintMessages(&"MP_INTERCEPT_CARGO", &"MP_CARGO_TO_SAFEZONE");
   }
   playSoundOnPlayers("mp_killstreak_radar");
   cargoOwnerTeam = getCargoOwnerTeam();
@@ -290,10 +290,10 @@ spawnSafeZone() {
 }
 
 checkSafeZoneResets(safeZoneObject) {
-  level.timerDisplay["allies"].label = & "MP_SAFEZONE_DESPAWN_IN";
+  level.timerDisplay["allies"].label = &"MP_SAFEZONE_DESPAWN_IN";
   if(!level.splitscreen)
     level.timerDisplay["allies"].alpha = 1;
-  level.timerDisplay["axis"].label = & "MP_SAFEZONE_DESPAWN_IN";
+  level.timerDisplay["axis"].label = &"MP_SAFEZONE_DESPAWN_IN";
   if(!level.splitscreen)
     level.timerDisplay["axis"].alpha = 1;
   level waittill("safezone_destroyed");

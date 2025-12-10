@@ -126,7 +126,7 @@ init() {
   weapon = weaponsSystems_Create_Weapon();
   weapon.v["weapon"] = "cobra_20mm";
   // M197 20mm Cannon
-  weapon.v["realWeaponName"] = & "COBRAPILOT_20MM";
+  weapon.v["realWeaponName"] = &"COBRAPILOT_20MM";
   weapon.v["weaponNameLocationX"] = 573;
   weapon.v["weaponNameLocationY"] = 149;
   weapon.v["equipButton"] = "BUTTON_A";
@@ -143,7 +143,7 @@ init() {
   weapon = weaponsSystems_Create_Weapon();
   weapon.v["weapon"] = "cobra_FFAR";
   // LAU-61C/A Unguided Rockets
-  weapon.v["realWeaponName"] = & "COBRAPILOT_FFAR";
+  weapon.v["realWeaponName"] = &"COBRAPILOT_FFAR";
   weapon.v["weaponNameLocationX"] = 573;
   weapon.v["weaponNameLocationY"] = 167;
   weapon.v["equipButton"] = "BUTTON_B";
@@ -160,7 +160,7 @@ init() {
   weapon = weaponsSystems_Create_Weapon();
   weapon.v["weapon"] = "cobra_Hellfire";
   // AGM-114 Hellfire Anti-Tank
-  weapon.v["realWeaponName"] = & "COBRAPILOT_HELLFIRE";
+  weapon.v["realWeaponName"] = &"COBRAPILOT_HELLFIRE";
   weapon.v["weaponNameLocationX"] = 573;
   weapon.v["weaponNameLocationY"] = 185;
   weapon.v["equipButton"] = "BUTTON_X";
@@ -181,7 +181,7 @@ init() {
   weapon = weaponsSystems_Create_Weapon();
   weapon.v["weapon"] = "cobra_Sidewinder";
   // AIM-9 Sidewinder Air-to-Air
-  weapon.v["realWeaponName"] = & "COBRAPILOT_SIDEWINDER";
+  weapon.v["realWeaponName"] = &"COBRAPILOT_SIDEWINDER";
   weapon.v["sound_armed_loop"] = "weap_aim9_growl4";
   weapon.v["weaponNameLocationX"] = 573;
   weapon.v["weaponNameLocationY"] = 203;
@@ -2160,7 +2160,7 @@ edge_Of_World_Warning()
 		level.edge_of_world_warning.horzAlign = "center";
 		level.edge_of_world_warning.vertAlign = "middle";
 		level.edge_of_world_warning.foreground = true;
-		level.edge_of_world_warning setText( &"COBRAPILOT_EDGE_OF_WORLD_WARNING" );
+		level.edge_of_world_warning setText(&"COBRAPILOT_EDGE_OF_WORLD_WARNING" );
 		level.edge_of_world_warning.fontscale = 2;
 		level.edge_of_world_warning.color = ( 1, 0, 0 );
 	}

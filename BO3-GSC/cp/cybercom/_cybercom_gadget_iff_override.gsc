@@ -32,14 +32,14 @@ function main() {
   level._effect["iff_takeover_revert"] = "explosions/fx_exp_grenade_flshbng";
   level._effect["iff_takeover_death"] = "explosions/fx_exp_grenade_flshbng";
   level.cybercom.iff_override = spawnStruct();
-  level.cybercom.iff_override._is_flickering = & _is_flickering;
-  level.cybercom.iff_override._on_flicker = & _on_flicker;
-  level.cybercom.iff_override._on_give = & _on_give;
-  level.cybercom.iff_override._on_take = & _on_take;
-  level.cybercom.iff_override._on_connect = & _on_connect;
-  level.cybercom.iff_override._on = & _on;
-  level.cybercom.iff_override._off = & _off;
-  level.cybercom.iff_override._is_primed = & _is_primed;
+  level.cybercom.iff_override._is_flickering = &_is_flickering;
+  level.cybercom.iff_override._on_flicker = &_on_flicker;
+  level.cybercom.iff_override._on_give = &_on_give;
+  level.cybercom.iff_override._on_take = &_on_take;
+  level.cybercom.iff_override._on_connect = &_on_connect;
+  level.cybercom.iff_override._on = &_on;
+  level.cybercom.iff_override._off = &_off;
+  level.cybercom.iff_override._is_primed = &_is_primed;
 }
 
 function _is_flickering(slot) {}
@@ -55,10 +55,10 @@ function _on_give(slot, weapon) {
     self.cybercom.iff_override_lifetime = getdvarint("scr_iff_override_upgraded_lifetime", 120);
     self.cybercom.var_84bab148 = getdvarint("scr_iff_override_control_upgraded_count", 2);
   }
-  self.cybercom.targetlockcb = & _get_valid_targets;
-  self.cybercom.targetlockrequirementcb = & _lock_requirement;
+  self.cybercom.targetlockcb = &_get_valid_targets;
+  self.cybercom.targetlockrequirementcb = &_lock_requirement;
   self.cybercom.var_46a37937 = [];
-  self.cybercom.var_73d069a7 = & function_17342509;
+  self.cybercom.var_73d069a7 = &function_17342509;
   self.cybercom.var_46483c8f = 63;
   self thread cybercom::function_b5f4e597(weapon);
 }
@@ -260,7 +260,7 @@ function private _iff_overridevehicle(assignedowner) {
   self endon("death");
   wait(randomfloatrange(0, 0.75));
   if(isplayer(assignedowner)) {
-    self.iff_override_cb = & iff_vehiclecb;
+    self.iff_override_cb = &iff_vehiclecb;
     self.iffowner = assignedowner;
   }
   assignedowner thread function_2458babe(self);

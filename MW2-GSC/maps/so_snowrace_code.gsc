@@ -67,7 +67,7 @@ init_snow_race(skipDialog) {
   finish_line_origin = getent("finish_line_origin", "targetname");
   assert(isDefined(level.objective_desc));
   objective_add(1, "current", level.objective_desc, finish_line_origin.origin);
-  objective_setpointertextoverride(1, & "SO_SNOWRACE1_CLIFFHANGER_FINISHLINE");
+  objective_setpointertextoverride(1, &"SO_SNOWRACE1_CLIFFHANGER_FINISHLINE");
   //Objective_OnEntity( 1, finish_line_origin );
   thread objective_location_update(finish_line_origin);
   array_thread(getEntArray("move_objective", "targetname"), ::move_objective, finish_line_origin);

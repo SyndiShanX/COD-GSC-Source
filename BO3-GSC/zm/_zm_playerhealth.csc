@@ -10,11 +10,11 @@
 #namespace zm_playerhealth;
 
 function autoexec __init__sytem__() {
-  system::register("zm_playerhealth", & __init__, undefined, undefined);
+  system::register("zm_playerhealth", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "sndZombieHealth", 21000, 1, "int", & sndzombiehealth, 0, 1);
+  clientfield::register("toplayer", "sndZombieHealth", 21000, 1, "int", &sndzombiehealth, 0, 1);
   visionset_mgr::register_overlay_info_style_speed_blur("zm_health_blur", 1, 1, 0.1, 0.5, 0.75, 0, 0, 500, 500, 0);
 }
 

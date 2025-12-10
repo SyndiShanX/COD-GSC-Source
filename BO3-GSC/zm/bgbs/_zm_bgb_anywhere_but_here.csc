@@ -12,7 +12,7 @@
 #namespace zm_bgb_anywhere_but_here;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_anywhere_but_here", & __init__, undefined, undefined);
+  system::register("zm_bgb_anywhere_but_here", &__init__, undefined, undefined);
 }
 
 function __init__() {

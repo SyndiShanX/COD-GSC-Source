@@ -1881,7 +1881,7 @@ roofrun_player_bigjump() {
   animref = spawn("script_origin", startpoint);
   animref.angles = startangles;
 
-  // spawn & set up the rig
+  // spawn &set up the rig
   player_rig = spawn_anim_model(animname, animstartorigin);
   player_rig.angles = animstartangles;
   player_rig Hide();
@@ -2103,7 +2103,7 @@ recovery_fov_change() {
 
 bigjump_save() {
   // we can force save since we are in a known state of goodness and safeness
-  SaveGame("bigjump_recovery", & "AUTOSAVE_AUTOSAVE");
+  SaveGame("bigjump_recovery", &"AUTOSAVE_AUTOSAVE");
 }
 
 roofrun_modulate_playerspeed(targetEnt) {
@@ -2852,7 +2852,7 @@ solorun_timer_prethink() {
 
   flag_wait("solorun_timer_start");
   timerTime = 30;
-  timerLoc = & "FAVELA_ESCAPE_CHOPPER_TIMER";
+  timerLoc = &"FAVELA_ESCAPE_CHOPPER_TIMER";
   thread solorun_timer(timerTime, timerLoc, true);
 
   thread solorun_timer_extend_when_close(timerTime, timerLoc);
@@ -2920,7 +2920,7 @@ timer_tick() {
 }
 
 solorun_timer_expired() {
-  deadquote = & "FAVELA_ESCAPE_CHOPPER_TIMER_EXPIRED";
+  deadquote = &"FAVELA_ESCAPE_CHOPPER_TIMER_EXPIRED";
   level.player endon("death");
   level endon("kill_timer");
   level notify("mission failed");
@@ -3200,7 +3200,7 @@ solorun_playerhurt_replacehint() {
   wait(1);
 
   // "You are Hurt, Run For Your Life!"
-  level.strings["take_cover"].text = & "FAVELA_ESCAPE_SOLORUN_KEEP_MOVING";
+  level.strings["take_cover"].text = &"FAVELA_ESCAPE_SOLORUN_KEEP_MOVING";
 }
 
 solorun_player_progression_tracker() {
@@ -3291,7 +3291,7 @@ solorun_sprint_tracker() {
 }
 
 sprint_hint(flagstr) {
-  hintstr = & "FAVELA_ESCAPE_HINT_SPRINT_PC_ALT"; // "Press ^3[{+breath_sprint}]^7 while moving forward to sprint."
+  hintstr = &"FAVELA_ESCAPE_HINT_SPRINT_PC_ALT"; // "Press ^3[{+breath_sprint}]^7 while moving forward to sprint."
   if(!level.console) {
     change = false;
 
@@ -3305,7 +3305,7 @@ sprint_hint(flagstr) {
     }
 
     if(change) {
-      hintstr = & "FAVELA_ESCAPE_HINT_SPRINT_PC"; //"Press ^3[{+sprint}]^7 while moving forward to sprint."
+      hintstr = &"FAVELA_ESCAPE_HINT_SPRINT_PC"; //"Press ^3[{+sprint}]^7 while moving forward to sprint."
     }
   }
 
@@ -5018,7 +5018,7 @@ airliner_setup() {
   ASSERT(isDefined(org));
   otherents = array_remove(ents, org);
 
-  // turn on lights & exhaust
+  // turn on lights &exhaust
   light_wingtip_left = airliner_fx(light_wingtip_left, "airliner_wingtip_left");
   light_belly = airliner_fx(light_belly, "airliner_belly");
   light_tail = airliner_fx(light_tail, "airliner_tail");

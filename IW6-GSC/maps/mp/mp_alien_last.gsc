@@ -17,10 +17,10 @@ main() {
   level.removed_hives = [];
   common_scripts\utility::flag_init("intro_sequence_complete");
   level.initial_spawn_loc_override_func = ::last_player_initial_spawn_loc_override;
-  level.introscreen_line_1 = & "MP_ALIEN_LAST_INTRO_LINE_1";
-  level.introscreen_line_2 = & "MP_ALIEN_LAST_INTRO_LINE_2";
-  level.introscreen_line_3 = & "MP_ALIEN_LAST_INTRO_LINE_3";
-  level.introscreen_line_4 = & "MP_ALIEN_LAST_INTRO_LINE_4";
+  level.introscreen_line_1 = &"MP_ALIEN_LAST_INTRO_LINE_1";
+  level.introscreen_line_2 = &"MP_ALIEN_LAST_INTRO_LINE_2";
+  level.introscreen_line_3 = &"MP_ALIEN_LAST_INTRO_LINE_3";
+  level.introscreen_line_4 = &"MP_ALIEN_LAST_INTRO_LINE_4";
   maps\mp\alien\_utility::alien_mode_enable("kill_resource", "wave", "lurker", "collectible", "loot", "pillage", "challenge", "outline", "scenes");
   level.recipe_setup_func = ::last_recipe_setup_func;
   level.random_crafting_list = ["amolecular", "wire", "cellbattery", "liquidbattery", "nucleicbattery", "fuse", "pipe", "pressureplate", "tnt", "resin", "orangebiolum", "bluebiolum", "biolum", "oorangebiolum", "bbluebiolum", "bbiolum", "detonator", "casing", "substrate", "cortexgel", "cortexhousing"];
@@ -148,9 +148,9 @@ main() {
   level thread maps\mp\alien\_lasedstrike_alien::init();
   level thread collectible_easter_egg_setup();
   level thread carwash_intel_easter_egg();
-  level.drill_repair_hint = & "MP_ALIEN_LAST_GENERATOR_REPAIR_HINT";
-  level.drill_repair_hint_urgent = & "MP_ALIEN_LAST_GENERATOR_REPAIR_URGENT";
-  level.drill_repair = & "MP_ALIEN_LAST_REPAIRGENERATOR";
+  level.drill_repair_hint = &"MP_ALIEN_LAST_GENERATOR_REPAIR_HINT";
+  level.drill_repair_hint_urgent = &"MP_ALIEN_LAST_GENERATOR_REPAIR_URGENT";
+  level.drill_repair = &"MP_ALIEN_LAST_REPAIRGENERATOR";
   level thread fix_map_holes();
 }
 
@@ -608,29 +608,29 @@ last_locker_weapon_pickup_string_func(var_0) {
 
   switch (var_0) {
     case "weapon_vks":
-      return & "ALIEN_PICKUPS_DESCENT_LOCKER_VKS";
+      return &"ALIEN_PICKUPS_DESCENT_LOCKER_VKS";
     case "weapon_usr":
-      return & "ALIEN_PICKUPS_DESCENT_LOCKER_USR";
+      return &"ALIEN_PICKUPS_DESCENT_LOCKER_USR";
     case "weapon_remington_r5rgp":
-      return & "ALIEN_PICKUPS_DESCENT_LOCKER_R5RGP";
+      return &"ALIEN_PICKUPS_DESCENT_LOCKER_R5RGP";
     case "weapon_rm_22":
-      return & "ALIEN_PICKUPS_DESCENT_LOCKER_MAVERICK";
+      return &"ALIEN_PICKUPS_DESCENT_LOCKER_MAVERICK";
     case "weapon_evopro":
-      return & "ALIEN_PICKUPS_DESCENT_LOCKER_RIPPER";
+      return &"ALIEN_PICKUPS_DESCENT_LOCKER_RIPPER";
     case "weapon_k7":
-      return & "ALIEN_PICKUPS_DESCENT_LOCKER_K7";
+      return &"ALIEN_PICKUPS_DESCENT_LOCKER_K7";
     case "weapon_uts_15":
-      return & "ALIEN_PICKUPS_DESCENT_LOCKER_UTS";
+      return &"ALIEN_PICKUPS_DESCENT_LOCKER_UTS";
     case "weapon_maul":
-      return & "ALIEN_PICKUPS_DESCENT_LOCKER_MAUL";
+      return &"ALIEN_PICKUPS_DESCENT_LOCKER_MAUL";
     case "weapon_mk14_ebr_iw6":
-      return & "ALIEN_PICKUPS_DESCENT_LOCKER_MK14";
+      return &"ALIEN_PICKUPS_DESCENT_LOCKER_MK14";
     case "weapon_imbel_ia2":
-      return & "ALIEN_PICKUPS_DESCENT_LOCKER_IMBEL";
+      return &"ALIEN_PICKUPS_DESCENT_LOCKER_IMBEL";
     case "weapon_kac_chainsaw":
-      return & "ALIEN_PICKUPS_DESCENT_LOCKER_KAC";
+      return &"ALIEN_PICKUPS_DESCENT_LOCKER_KAC";
     case "weapon_ameli":
-      return & "ALIEN_PICKUPS_DESCENT_LOCKER_AMELI";
+      return &"ALIEN_PICKUPS_DESCENT_LOCKER_AMELI";
   }
 }
 
@@ -686,19 +686,19 @@ mp_alien_last_pillage_init() {
 
 last_hint_precache() {
   var_0 = [];
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_AMELI"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_AMELI";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_IMBEL"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_IMBEL";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_K7"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_K7";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_KAC"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_KAC";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_KASTET"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_KASTET";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_MAUL"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_MAUL";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_MAVERICK"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_MAVERICK";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_MK14"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_MK14";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_R5RGP"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_R5RGP";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_RIPPER"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_RIPPER";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_USR"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_USR";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_UTS"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_UTS";
-  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_VKS"] = & "ALIEN_PICKUPS_DESCENT_PICKUP_VKS";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_AMELI"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_AMELI";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_IMBEL"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_IMBEL";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_K7"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_K7";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_KAC"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_KAC";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_KASTET"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_KASTET";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_MAUL"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_MAUL";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_MAVERICK"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_MAVERICK";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_MK14"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_MK14";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_R5RGP"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_R5RGP";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_RIPPER"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_RIPPER";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_USR"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_USR";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_UTS"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_UTS";
+  var_0["ALIEN_PICKUPS_DESCENT_PICKUP_VKS"] = &"ALIEN_PICKUPS_DESCENT_PICKUP_VKS";
   return var_0;
 }
 
@@ -742,11 +742,11 @@ last_get_hintstring_for_pillaged_item_func(var_0) {
 
   switch (var_0) {
     case "crafting":
-      return & "ALIEN_CRAFTING_FOUND_CRAFTING_ITEM";
+      return &"ALIEN_CRAFTING_FOUND_CRAFTING_ITEM";
     case "locker_key":
-      return & "ALIEN_PILLAGE_LOCKER_FOUND_LOCKER_KEY";
+      return &"ALIEN_PILLAGE_LOCKER_FOUND_LOCKER_KEY";
     case "locker_weapon":
-      return & "ALIEN_PILLAGE_LOCKER_FOUND_LOCKER_WEAPON";
+      return &"ALIEN_PILLAGE_LOCKER_FOUND_LOCKER_WEAPON";
   }
 }
 
@@ -755,68 +755,68 @@ last_get_hintstring_for_item_pickup_func(var_0) {
 
   switch (var_0) {
     case "wire":
-      return & "ALIEN_CRAFTING_PICKUP_WIRE";
+      return &"ALIEN_CRAFTING_PICKUP_WIRE";
     case "amolecular":
-      return & "ALIEN_CRAFTING_PICKUP_AMOLECULAR";
+      return &"ALIEN_CRAFTING_PICKUP_AMOLECULAR";
     case "fuse":
-      return & "ALIEN_CRAFTING_PICKUP_FUSE";
+      return &"ALIEN_CRAFTING_PICKUP_FUSE";
     case "pipe":
-      return & "ALIEN_CRAFTING_PICKUP_PIPE";
+      return &"ALIEN_CRAFTING_PICKUP_PIPE";
     case "pressureplate":
-      return & "ALIEN_CRAFTING_PICKUP_PRESSUREPLATE";
+      return &"ALIEN_CRAFTING_PICKUP_PRESSUREPLATE";
     case "nucleicbattery":
-      return & "ALIEN_CRAFTING_PICKUP_NUCLEICBATTERY";
+      return &"ALIEN_CRAFTING_PICKUP_NUCLEICBATTERY";
     case "cellbattery":
-      return & "ALIEN_CRAFTING_PICKUP_CELLBATTERY";
+      return &"ALIEN_CRAFTING_PICKUP_CELLBATTERY";
     case "liquidbattery":
-      return & "ALIEN_CRAFTING_PICKUP_LIQUIDBATTERY";
+      return &"ALIEN_CRAFTING_PICKUP_LIQUIDBATTERY";
     case "tnt":
-      return & "ALIEN_CRAFTING_PICKUP_TNT";
+      return &"ALIEN_CRAFTING_PICKUP_TNT";
     case "resin":
-      return & "ALIEN_CRAFTING_PICKUP_RESIN";
+      return &"ALIEN_CRAFTING_PICKUP_RESIN";
     case "bbiolum":
-      return & "ALIEN_CRAFTING_PICKUP_BIOLUM";
+      return &"ALIEN_CRAFTING_PICKUP_BIOLUM";
     case "biolum":
-      return & "ALIEN_CRAFTING_PICKUP_BIOLUM";
+      return &"ALIEN_CRAFTING_PICKUP_BIOLUM";
     case "locker_key":
-      return & "ALIEN_PILLAGE_LOCKER_PICKUP_LOCKER_KEY";
+      return &"ALIEN_PILLAGE_LOCKER_PICKUP_LOCKER_KEY";
     case "locker_weapon":
-      return & "ALIEN_PILLAGE_LOCKER_PICKUP_LOCKER_WEAPON";
+      return &"ALIEN_PILLAGE_LOCKER_PICKUP_LOCKER_WEAPON";
     case "venomx":
-      return & "ALIEN_CRAFTING_PICKUP_DISARMED_VENOM";
+      return &"ALIEN_CRAFTING_PICKUP_DISARMED_VENOM";
     case "bbluebiolum":
     case "bluebiolum":
-      return & "ALIEN_CRAFTING_PICKUP_BLUEBIOLUM";
+      return &"ALIEN_CRAFTING_PICKUP_BLUEBIOLUM";
     case "oorangebiolum":
     case "orangebiolum":
-      return & "ALIEN_CRAFTING_PICKUP_ORANGEBIOLUM";
+      return &"ALIEN_CRAFTING_PICKUP_ORANGEBIOLUM";
     case "amethystbiolum":
-      return & "ALIEN_CRAFTING_PICKUP_PURPLEBIOLUM";
+      return &"ALIEN_CRAFTING_PICKUP_PURPLEBIOLUM";
     case "iw6_aliendlc22_mp":
-      return & "ALIEN_CRAFTING_PICKUP_PIPEBOMB";
+      return &"ALIEN_CRAFTING_PICKUP_PIPEBOMB";
     case "stickyflare":
     case "viewmodel_flare":
     case "iw6_aliendlc21_mp":
     case "flare":
-      return & "ALIEN_CRAFTING_PICKUP_STICKYFLARE";
+      return &"ALIEN_CRAFTING_PICKUP_STICKYFLARE";
     case "detonator":
-      return & "ALIEN_CRAFTING_PICKUP_DETONATOR";
+      return &"ALIEN_CRAFTING_PICKUP_DETONATOR";
     case "casing":
-      return & "ALIEN_CRAFTING_PICKUP_CASING";
+      return &"ALIEN_CRAFTING_PICKUP_CASING";
     case "cortexgel":
-      return & "ALIEN_CRAFTING_PICKUP_CORTEXGEL";
+      return &"ALIEN_CRAFTING_PICKUP_CORTEXGEL";
     case "cortexhousing":
-      return & "ALIEN_CRAFTING_PICKUP_CORTEXHOUSING";
+      return &"ALIEN_CRAFTING_PICKUP_CORTEXHOUSING";
     case "substrate":
-      return & "ALIEN_CRAFTING_PICKUP_SUBSTRATE";
+      return &"ALIEN_CRAFTING_PICKUP_SUBSTRATE";
     case "iw6_aliendlc31_mp":
-      return & "ALIEN_CRAFTING_PICKUP_VENOMXGRENADE";
+      return &"ALIEN_CRAFTING_PICKUP_VENOMXGRENADE";
     case "iw6_aliendlc32_mp":
-      return & "ALIEN_CRAFTING_PICKUP_VENOMLXGRENADE";
+      return &"ALIEN_CRAFTING_PICKUP_VENOMLXGRENADE";
     case "iw6_aliendlc33_mp":
-      return & "ALIEN_CRAFTING_PICKUP_VENOMFXGRENADE";
+      return &"ALIEN_CRAFTING_PICKUP_VENOMFXGRENADE";
     case "iw6_aliendlc43_mp":
-      return & "ALIEN_CRAFTING_PICKUP_CORTEXGRENADE";
+      return &"ALIEN_CRAFTING_PICKUP_CORTEXGRENADE";
   }
 
   if(isDefined(level.level_locker_weapon_pickup_string_func))

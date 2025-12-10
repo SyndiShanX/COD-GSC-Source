@@ -28,14 +28,14 @@ function init() {
 function main() {
   cybercom_gadget::registerability(1, 2);
   level.cybercom.forced_malfunction = spawnStruct();
-  level.cybercom.forced_malfunction._is_flickering = & _is_flickering;
-  level.cybercom.forced_malfunction._on_flicker = & _on_flicker;
-  level.cybercom.forced_malfunction._on_give = & _on_give;
-  level.cybercom.forced_malfunction._on_take = & _on_take;
-  level.cybercom.forced_malfunction._on_connect = & _on_connect;
-  level.cybercom.forced_malfunction._on = & _on;
-  level.cybercom.forced_malfunction._off = & _off;
-  level.cybercom.forced_malfunction._is_primed = & _is_primed;
+  level.cybercom.forced_malfunction._is_flickering = &_is_flickering;
+  level.cybercom.forced_malfunction._on_flicker = &_on_flicker;
+  level.cybercom.forced_malfunction._on_give = &_on_give;
+  level.cybercom.forced_malfunction._on_take = &_on_take;
+  level.cybercom.forced_malfunction._on_connect = &_on_connect;
+  level.cybercom.forced_malfunction._on = &_on;
+  level.cybercom.forced_malfunction._off = &_off;
+  level.cybercom.forced_malfunction._is_primed = &_is_primed;
 }
 
 function _is_flickering(slot) {}
@@ -47,8 +47,8 @@ function _on_give(slot, weapon) {
   if(self hascybercomability("cybercom_forcedmalfunction") == 2) {
     self.cybercom.var_110c156a = getdvarint("scr_forced_malfunction_upgraded_count", 4);
   }
-  self.cybercom.targetlockcb = & _get_valid_targets;
-  self.cybercom.targetlockrequirementcb = & _lock_requirement;
+  self.cybercom.targetlockcb = &_get_valid_targets;
+  self.cybercom.targetlockrequirementcb = &_lock_requirement;
   self thread cybercom::function_b5f4e597(weapon);
   self cybercom::function_8257bcb3("base_rifle", 5);
   self cybercom::function_8257bcb3("fem_rifle", 3);

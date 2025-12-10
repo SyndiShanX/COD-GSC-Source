@@ -266,7 +266,7 @@ waitandspawnclient() {
     var_4 = teamkilldelay();
 
     if(var_4 > 0) {
-      maps\mp\_utility::setlowermessage("friendly_fire", & "MP_FRIENDLY_FIRE_WILL_NOT", var_4, 1, 1);
+      maps\mp\_utility::setlowermessage("friendly_fire", &"MP_FRIENDLY_FIRE_WILL_NOT", var_4, 1, 1);
       thread respawn_asspectator(var_2.origin, var_2.angles);
       var_0 = 1;
       wait(var_4);
@@ -281,7 +281,7 @@ waitandspawnclient() {
   var_5 = self.pers["suicideSpawnDelay"];
 
   if(isDefined(var_5) && var_5 > 0) {
-    maps\mp\_utility::setlowermessage("suicidePenalty", & "MP_SUICIDE_PUNISHED", var_5, 1, 1);
+    maps\mp\_utility::setlowermessage("suicidePenalty", &"MP_SUICIDE_PUNISHED", var_5, 1, 1);
 
     if(!var_0)
       thread respawn_asspectator(var_2.origin, var_2.angles);

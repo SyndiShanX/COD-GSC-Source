@@ -372,7 +372,7 @@ generate_piece_unitrigger(classname, origin, angles, flags, radius, script_heigh
 
   unitrigger_stub.radius = radius;
   unitrigger_stub.cursor_hint = "HINT_NOICON";
-  unitrigger_stub.hint_string = & "ZOMBIE_BUILD_PIECE_GRAB";
+  unitrigger_stub.hint_string = &"ZOMBIE_BUILD_PIECE_GRAB";
   unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   unitrigger_stub.require_look_at = 0;
 
@@ -442,7 +442,7 @@ piecestub_update_prompt(player) {
       self.hint_string = spiece.hint_swap;
       self.hint_parm1 = self.piece.hint_swap_parm1;
     } else
-      self.hint_string = & "ZOMBIE_BUILD_PIECE_SWITCH";
+      self.hint_string = &"ZOMBIE_BUILD_PIECE_SWITCH";
 
     if(isDefined(self.piece.cursor_hint))
       self.cursor_hint = self.piece.cursor_hint;
@@ -454,7 +454,7 @@ piecestub_update_prompt(player) {
       self.hint_string = self.piece.hint_grab;
       self.hint_parm1 = self.piece.hint_grab_parm1;
     } else
-      self.hint_string = & "ZOMBIE_BUILD_PIECE_GRAB";
+      self.hint_string = &"ZOMBIE_BUILD_PIECE_GRAB";
 
     if(isDefined(self.piece.cursor_hint))
       self.cursor_hint = self.piece.cursor_hint;
@@ -1480,14 +1480,14 @@ buildablestub_update_prompt(player) {
       if(isDefined(level.zombie_buildables[self.equipname].hint_more))
         self.hint_string = level.zombie_buildables[self.equipname].hint_more;
       else
-        self.hint_string = & "ZOMBIE_BUILD_PIECE_MORE";
+        self.hint_string = &"ZOMBIE_BUILD_PIECE_MORE";
 
       return false;
     } else if(!self.buildablezone buildable_has_piece(player player_get_buildable_piece(slot))) {
       if(isDefined(level.zombie_buildables[self.equipname].hint_wrong))
         self.hint_string = level.zombie_buildables[self.equipname].hint_wrong;
       else
-        self.hint_string = & "ZOMBIE_BUILD_PIECE_WRONG";
+        self.hint_string = &"ZOMBIE_BUILD_PIECE_WRONG";
 
       return false;
     } else {
@@ -1500,12 +1500,12 @@ buildablestub_update_prompt(player) {
     }
   } else if(self.persistent == 1) {
     if(maps\mp\zombies\_zm_equipment::is_limited_equipment(self.weaponname) && maps\mp\zombies\_zm_equipment::limited_equipment_in_use(self.weaponname)) {
-      self.hint_string = & "ZOMBIE_BUILD_PIECE_ONLY_ONE";
+      self.hint_string = &"ZOMBIE_BUILD_PIECE_ONLY_ONE";
       return false;
     }
 
     if(player has_player_equipment(self.weaponname)) {
-      self.hint_string = & "ZOMBIE_BUILD_PIECE_HAVE_ONE";
+      self.hint_string = &"ZOMBIE_BUILD_PIECE_HAVE_ONE";
       return false;
     }
 
@@ -1517,10 +1517,10 @@ buildablestub_update_prompt(player) {
     self.hint_string = self.trigger_hintstring;
   } else if(self.persistent == 2) {
     if(!maps\mp\zombies\_zm_weapons::limited_weapon_below_quota(self.weaponname, undefined)) {
-      self.hint_string = & "ZOMBIE_GO_TO_THE_BOX_LIMITED";
+      self.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
       return false;
     } else if(isDefined(self.bought) && self.bought) {
-      self.hint_string = & "ZOMBIE_GO_TO_THE_BOX";
+      self.hint_string = &"ZOMBIE_GO_TO_THE_BOX";
       return false;
     }
 
@@ -1793,13 +1793,13 @@ bptrigger_think_one_use_and_fly(player_built) {
     self buildabletrigger_update_prompt(player_built);
 
   if(!maps\mp\zombies\_zm_weapons::limited_weapon_below_quota(self.stub.weaponname, undefined)) {
-    self.stub.hint_string = & "ZOMBIE_GO_TO_THE_BOX_LIMITED";
+    self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
     self sethintstring(self.stub.hint_string);
     return;
   }
 
   if(isDefined(self.stub.bought) && self.stub.bought) {
-    self.stub.hint_string = & "ZOMBIE_GO_TO_THE_BOX";
+    self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX";
     self sethintstring(self.stub.hint_string);
     return;
   }
@@ -1816,7 +1816,7 @@ bptrigger_think_one_use_and_fly(player_built) {
       continue;
     }
     if(!maps\mp\zombies\_zm_weapons::limited_weapon_below_quota(self.stub.weaponname, undefined)) {
-      self.stub.hint_string = & "ZOMBIE_GO_TO_THE_BOX_LIMITED";
+      self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
       self sethintstring(self.stub.hint_string);
       return;
     }
@@ -1846,9 +1846,9 @@ bptrigger_think_one_use_and_fly(player_built) {
       self[[level.zombie_include_buildables[self.stub.equipname].onbuyweapon]](player);
 
     if(!maps\mp\zombies\_zm_weapons::limited_weapon_below_quota(self.stub.weaponname, undefined))
-      self.stub.hint_string = & "ZOMBIE_GO_TO_THE_BOX_LIMITED";
+      self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
     else
-      self.stub.hint_string = & "ZOMBIE_GO_TO_THE_BOX";
+      self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX";
 
     self sethintstring(self.stub.hint_string);
     player track_buildables_pickedup(self.stub.weaponname);

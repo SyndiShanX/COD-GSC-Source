@@ -14,13 +14,13 @@
 #namespace threat_detector;
 
 function autoexec __init__sytem__() {
-  system::register("threat_detector", & __init__, undefined, undefined);
+  system::register("threat_detector", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.sensorhandle = 1;
   level.sensors = [];
-  clientfield::register("missile", "threat_detector", 1, 1, "int", & spawnedthreatdetector, 0, 0);
+  clientfield::register("missile", "threat_detector", 1, 1, "int", &spawnedthreatdetector, 0, 0);
 }
 
 function spawnedthreatdetector(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

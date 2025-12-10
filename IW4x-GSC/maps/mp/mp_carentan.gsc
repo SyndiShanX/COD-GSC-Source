@@ -7,13 +7,8 @@ main() {
   maps\mp\mp_carentan_fx::main();
   maps\createart\mp_carentan_art::main();
 
-
-
-
-
   maps\mp\_load::main();
   maps\mp\_compass::setupMiniMap("compass_map_mp_carentan");
-
 
   level.airstrikeHeightScale = 1.4;
 

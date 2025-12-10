@@ -616,7 +616,7 @@ function activate_kill_trigger(robot, foot_side) {
           z_diff = abs(n_my_z - n_giant_robot_z);
           if(z_diff <= 100) {
             zombie.v_punched_from = self.origin;
-            zombie animcustom( & _zm_weap_one_inch_punch::knockdown_zombie_animate);
+            zombie animcustom(&_zm_weap_one_inch_punch::knockdown_zombie_animate);
           }
         }
       }
@@ -907,15 +907,15 @@ function gr_head_exit_trigger_start(s_origin) {
   s_origin.unitrigger_stub.radius = 36;
   s_origin.unitrigger_stub.height = 256;
   s_origin.unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
-  s_origin.unitrigger_stub.hint_string = & "ZM_TOMB_EHT";
+  s_origin.unitrigger_stub.hint_string = &"ZM_TOMB_EHT";
   s_origin.unitrigger_stub.cursor_hint = "HINT_NOICON";
   s_origin.unitrigger_stub.require_look_at = 1;
   s_origin.unitrigger_stub.target = s_origin.target;
   s_origin.unitrigger_stub.script_int = s_origin.script_int;
   s_origin.unitrigger_stub.is_available = 1;
-  s_origin.unitrigger_stub.prompt_and_visibility_func = & gr_head_eject_trigger_visibility;
+  s_origin.unitrigger_stub.prompt_and_visibility_func = &gr_head_eject_trigger_visibility;
   zm_unitrigger::unitrigger_force_per_player_triggers(s_origin.unitrigger_stub, 1);
-  zm_unitrigger::register_static_unitrigger(s_origin.unitrigger_stub, & player_exits_giant_robot_head_trigger_think);
+  zm_unitrigger::register_static_unitrigger(s_origin.unitrigger_stub, &player_exits_giant_robot_head_trigger_think);
 }
 
 function gr_head_eject_trigger_visibility(player) {
@@ -927,7 +927,7 @@ function gr_head_eject_trigger_visibility(player) {
 
 function reset_gr_head_unitriggers() {
   zm_unitrigger::unregister_unitrigger(self.unitrigger_stub);
-  zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, & player_exits_giant_robot_head_trigger_think);
+  zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, &player_exits_giant_robot_head_trigger_think);
 }
 
 function player_exits_giant_robot_head_trigger_think() {
@@ -1047,7 +1047,7 @@ function giant_robot_head_player_eject_thread(m_linkpoint, str_tube, b_timeout =
   self.giant_robot_transition = 0;
   self notify("gr_eject_sequence_complete");
   if(!level flag::get("story_vo_playing")) {
-    self util::delay(3, undefined, & zm_audio::create_and_play_dialog, "general", "air_chute_landing");
+    self util::delay(3, undefined, &zm_audio::create_and_play_dialog, "general", "air_chute_landing");
   }
   debug_level = getdvarint("");
   if(isDefined(debug_level) && debug_level) {

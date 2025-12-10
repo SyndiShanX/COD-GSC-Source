@@ -10,10 +10,10 @@ hint_phonebooth(param_00, param_01) {
   }
 
   if(scripts\engine\utility::istrue(param_00.powered_on)) {
-    return & "CP_DISCO_INTERACTIONS_PHONEBOOTH_USE";
+    return &"CP_DISCO_INTERACTIONS_PHONEBOOTH_USE";
   }
 
-  return & "COOP_INTERACTIONS_REQUIRES_POWER";
+  return &"COOP_INTERACTIONS_REQUIRES_POWER";
 }
 
 init_phonebooth() {

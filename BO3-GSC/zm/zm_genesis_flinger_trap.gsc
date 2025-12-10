@@ -22,7 +22,7 @@
 
 function main() {
   var_565a8d95 = getEntArray("flinger_trap_trigger", "targetname");
-  array::thread_all(var_565a8d95, & init_flinger);
+  array::thread_all(var_565a8d95, &init_flinger);
 }
 
 function init_flinger() {
@@ -69,11 +69,11 @@ function init_flinger() {
   }
   self thread trap_move_switches();
   self triggerenable(0);
-  array::thread_all(self.a_s_triggers, & function_38d940ac, self);
+  array::thread_all(self.a_s_triggers, &function_38d940ac, self);
 }
 
 function function_38d940ac(var_60532813) {
-  s_unitrigger = self zm_unitrigger::create_unitrigger(&"ZOMBIE_NEED_POWER", 64, & function_dc9dafb8);
+  s_unitrigger = self zm_unitrigger::create_unitrigger(&"ZOMBIE_NEED_POWER", 64, &function_dc9dafb8);
   s_unitrigger.require_look_at = 1;
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger, 1);
   s_unitrigger.var_60532813 = var_60532813;
@@ -270,7 +270,7 @@ function private do_zombie_explode() {
     self zombie_utility::zombie_eye_glow_stop();
     self clientfield::increment("skull_turret_explode_fx");
     self ghost();
-    self util::delay(0.25, undefined, & zm_utility::self_delete);
+    self util::delay(0.25, undefined, &zm_utility::self_delete);
   }
 }
 

@@ -29,7 +29,7 @@
 #namespace zm_island_side_ee_secret_maxammo;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_side_ee_secret_maxammo", & __init__, undefined, undefined);
+  system::register("zm_island_side_ee_secret_maxammo", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -40,8 +40,8 @@ function __init__() {
   level.var_e9cb2217.var_fc7e1b7a = struct::get("s_secret_ammo_pos", "targetname");
   level.var_e9cb2217.var_2559c370 = getent("easter_egg_hidden_max_ammo_appear", "targetname");
   level.var_e9cb2217.var_2559c370 hide();
-  callback::on_spawned( & on_player_spawned);
-  callback::on_connect( & on_player_connected);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_connect(&on_player_connected);
 }
 
 function main() {
@@ -66,7 +66,7 @@ function function_1c4fc4a7(mdl_target) {
       self notify("hash_49419595");
     } else {
       function_8ae0d6df();
-      callback::remove_on_spawned( & on_player_spawned);
+      callback::remove_on_spawned(&on_player_spawned);
     }
   }
 }
@@ -89,7 +89,7 @@ function function_8ae0d6df() {
 }
 
 function function_35b46d1a() {
-  zm_devgui::add_custom_devgui_callback( & function_41601624);
+  zm_devgui::add_custom_devgui_callback(&function_41601624);
   adddebugcommand("");
 }
 

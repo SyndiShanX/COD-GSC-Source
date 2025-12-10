@@ -30,16 +30,16 @@ main() {
     return;
   }
 
-  maps\_utility::add_start("crash", ::start_crash, & "STARTS_CRASH");
-  maps\_utility::add_start("path", ::start_dirt_path, & "STARTS_PATH");
-  maps\_utility::add_start("barn", ::start_barn, & "STARTS_BARN");
-  maps\_utility::add_start("field", ::start_field, & "STARTS_FIELD2");
-  maps\_utility::add_start("basement", ::start_basement, & "STARTS_BASEMENT");
-  maps\_utility::add_start("dogs", ::start_farm, & "STARTS_DOGS");
-  maps\_utility::add_start("farm", ::start_farm, & "STARTS_FARM");
-  maps\_utility::add_start("creek", ::start_creek, & "STARTS_CREEK");
-  maps\_utility::add_start("greenhouse", ::start_greenhouse, & "STARTS_GREENHOUSE");
-  maps\_utility::add_start("ac130", ::start_ac130, & "STARTS_AC130");
+  maps\_utility::add_start("crash", ::start_crash, &"STARTS_CRASH");
+  maps\_utility::add_start("path", ::start_dirt_path, &"STARTS_PATH");
+  maps\_utility::add_start("barn", ::start_barn, &"STARTS_BARN");
+  maps\_utility::add_start("field", ::start_field, &"STARTS_FIELD2");
+  maps\_utility::add_start("basement", ::start_basement, &"STARTS_BASEMENT");
+  maps\_utility::add_start("dogs", ::start_farm, &"STARTS_DOGS");
+  maps\_utility::add_start("farm", ::start_farm, &"STARTS_FARM");
+  maps\_utility::add_start("creek", ::start_creek, &"STARTS_CREEK");
+  maps\_utility::add_start("greenhouse", ::start_greenhouse, &"STARTS_GREENHOUSE");
+  maps\_utility::add_start("ac130", ::start_ac130, &"STARTS_AC130");
   precachemodel("com_flashlight_on");
   precachemodel("h1_prop_dogtag");
   precachemodel("vehicle_blackhawk_hero_interior");
@@ -255,25 +255,25 @@ setup_flags() {
 
 objective_lz() {
   var_0 = common_scripts\utility::getstruct("bridge_origin", "targetname");
-  objective_add(1, "active", & "HUNTED_OBJ_EXTRACTION_POINT", var_0.origin);
+  objective_add(1, "active", &"HUNTED_OBJ_EXTRACTION_POINT", var_0.origin);
   objective_current(1);
 }
 
 objective_stinger() {
   if(!common_scripts\utility::flag("helicopter_down")) {
     var_0 = getent("stinger_objective", "targetname");
-    objective_add(2, "active", & "HUNTED_OBJ_DESTROY_HELICOPTER", var_0.origin);
+    objective_add(2, "active", &"HUNTED_OBJ_DESTROY_HELICOPTER", var_0.origin);
     objective_indentlevel(2, 1);
     objective_current(2);
     common_scripts\utility::flag_wait("helicopter_down");
     wait 1;
     objective_state(2, "done");
   } else {
-    objective_add(2, "done", & "HUNTED_OBJ_DESTROY_HELICOPTER");
+    objective_add(2, "done", &"HUNTED_OBJ_DESTROY_HELICOPTER");
     objective_indentlevel(2, 1);
   }
 
-  objective_add(3, "active", & "HUNTED_OBJ_FOLLOW_PRICE", level.price.origin);
+  objective_add(3, "active", &"HUNTED_OBJ_FOLLOW_PRICE", level.price.origin);
   objective_indentlevel(3, 1);
   objective_current(3);
   level thread my_objective_onentity(3, level.price);

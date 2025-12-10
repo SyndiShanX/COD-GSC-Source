@@ -49,7 +49,7 @@ init() {
   precacheitem(level.straferunrocketweapon);
   precacheshellshock(level.straferunshellshock);
   maps\mp\killstreaks\_killstreaks::registerkillstreak("straferun_mp", "straferun_mp", "killstreak_straferun", "straferun_used", ::usekillstreakstraferun, 1);
-  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("straferun_mp", & "MP_EARNED_STRAFERUN", & "KILLSTREAK_STRAFERUN_NOT_AVAILABLE", & "MP_WAR_STRAFERUN_INBOUND", & "MP_WAR_STRAFERUN_INBOUND_NEAR_YOUR_POSITION");
+  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("straferun_mp", &"MP_EARNED_STRAFERUN", &"KILLSTREAK_STRAFERUN_NOT_AVAILABLE", &"MP_WAR_STRAFERUN_INBOUND", &"MP_WAR_STRAFERUN_INBOUND_NEAR_YOUR_POSITION");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("straferun_mp", "mpl_killstreak_straferun", "kls_straferun_used", "", "kls_straferun_enemy", "", "kls_straferun_ready");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("straferun_mp", "scr_givestraferun");
   maps\mp\killstreaks\_killstreaks::registerkillstreakaltweapon("straferun_mp", level.straferungunweapon);

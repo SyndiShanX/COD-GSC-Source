@@ -97,24 +97,24 @@ function main() {
   level.default_start_location = "default";
   init_clientfields();
   level flag::init("lander_intro_done");
-  visionset_mgr::register_info("visionset", "zm_cosmodrome_no_power", 21000, 100, 31, 1, & visionset_mgr::ramp_in_thread_per_player, 0);
-  visionset_mgr::register_info("visionset", "zm_cosmodrome_power_antic", 21000, 102, 31, 1, & visionset_mgr::ramp_in_out_thread_per_player, 0);
-  visionset_mgr::register_info("visionset", "zm_cosmodrome_power_flare", 21000, 103, 31, 1, & visionset_mgr::ramp_in_out_thread_per_player, 0);
-  visionset_mgr::register_info("visionset", "zm_cosmodrome_monkey_on", 21000, 996, 31, 1, & visionset_mgr::ramp_in_thread_per_player, 0);
-  visionset_mgr::register_info("visionset", "zm_cosmodrome_monkey_off", 21000, 995, 31, 1, & visionset_mgr::ramp_in_out_thread_per_player, 0);
+  visionset_mgr::register_info("visionset", "zm_cosmodrome_no_power", 21000, 100, 31, 1, &visionset_mgr::ramp_in_thread_per_player, 0);
+  visionset_mgr::register_info("visionset", "zm_cosmodrome_power_antic", 21000, 102, 31, 1, &visionset_mgr::ramp_in_out_thread_per_player, 0);
+  visionset_mgr::register_info("visionset", "zm_cosmodrome_power_flare", 21000, 103, 31, 1, &visionset_mgr::ramp_in_out_thread_per_player, 0);
+  visionset_mgr::register_info("visionset", "zm_cosmodrome_monkey_on", 21000, 996, 31, 1, &visionset_mgr::ramp_in_thread_per_player, 0);
+  visionset_mgr::register_info("visionset", "zm_cosmodrome_monkey_off", 21000, 995, 31, 1, &visionset_mgr::ramp_in_out_thread_per_player, 0);
   level.default_game_mode = "zclassic";
   zm_cosmodrome_fx::main();
   zm::init_fx();
   level.zombiemode = 1;
-  level._zmbvoxlevelspecific = & init_level_specific_audio;
-  level._round_start_func = & function_a4a54181;
-  level.givecustomcharacters = & givecustomcharacters;
+  level._zmbvoxlevelspecific = &init_level_specific_audio;
+  level._round_start_func = &function_a4a54181;
+  level.givecustomcharacters = &givecustomcharacters;
   initcharacterstartindex();
   level.random_pandora_box_start = 0;
-  level.door_dialog_function = & zm::play_door_dialog;
-  level._zombie_custom_add_weapons = & custom_add_weapons;
-  level.register_offhand_weapons_for_level_defaults_override = & cosmodrome_offhand_weapon_overrride;
-  level.zombiemode_offhand_weapon_give_override = & offhand_weapon_give_override;
+  level.door_dialog_function = &zm::play_door_dialog;
+  level._zombie_custom_add_weapons = &custom_add_weapons;
+  level.register_offhand_weapons_for_level_defaults_override = &cosmodrome_offhand_weapon_overrride;
+  level.zombiemode_offhand_weapon_give_override = &offhand_weapon_give_override;
   include_perks_in_random_rotation();
   load::main();
   zm_cosmodrome_amb::main();
@@ -123,18 +123,18 @@ function main() {
   level.laststandpistol = level.default_laststandpistol;
   level.start_weapon = level.default_laststandpistol;
   level thread zm::last_stand_pistol_rank_init();
-  level.var_9aaae7ae = & function_869d6f66;
-  level.var_35efa94c = & function_f97e7fed;
+  level.var_9aaae7ae = &function_869d6f66;
+  level.var_35efa94c = &function_f97e7fed;
   init_sounds();
   level thread setupmusic();
   if(getdvarint("artist") > 0) {
     return;
   }
   level.player_out_of_playable_area_monitor = 1;
-  level.player_out_of_playable_area_monitor_callback = & zombie_cosmodrome_player_out_of_playable_area_monitor_callback;
+  level.player_out_of_playable_area_monitor_callback = &zombie_cosmodrome_player_out_of_playable_area_monitor_callback;
   level thread zm_cosmodrome_ai_monkey::init();
-  level.monkey_round_start = & function_2c076a5e;
-  level.monkey_round_stop = & function_980a894b;
+  level.monkey_round_start = &function_2c076a5e;
+  level.monkey_round_stop = &function_980a894b;
   level.pay_turret_cost = 1000;
   level.lander_cost = 250;
   level.custom_ai_type = [];
@@ -143,8 +143,8 @@ function main() {
   } else if(!isarray(level.custom_ai_type)) {
     level.custom_ai_type = array(level.custom_ai_type);
   }
-  level.custom_ai_type[level.custom_ai_type.size] = & zm_ai_monkey::function_4c8046f8;
-  level.monkey_prespawn = & zm_cosmodrome_ai_monkey::monkey_cosmodrome_prespawn;
+  level.custom_ai_type[level.custom_ai_type.size] = &zm_ai_monkey::function_4c8046f8;
+  level.monkey_prespawn = &zm_cosmodrome_ai_monkey::monkey_cosmodrome_prespawn;
   level.max_perks = 5;
   level.max_solo_lives = 3;
   level thread zm_cosmodrome_lander::init();
@@ -152,7 +152,7 @@ function main() {
   level._allow_melee_weapon_switching = 1;
   level zm_cosmodrome_magic_box::magic_box_init();
   level thread function_54bf648f();
-  level.zone_manager_init_func = & cosmodrome_zone_init;
+  level.zone_manager_init_func = &cosmodrome_zone_init;
   init_zones[0] = "centrifuge_zone";
   init_zones[1] = "centrifuge_zone2";
   level thread zm_zonemgr::manage_zones(init_zones);
@@ -166,14 +166,14 @@ function main() {
   level thread zm_cosmodrome_achievement::init();
   level thread zm::post_main();
   execdevgui("");
-  level.custom_devgui = & function_161eeb8e;
+  level.custom_devgui = &function_161eeb8e;
   setup_devgui();
   level thread function_e509f24d();
   level thread spawn_kill_brushes();
   level thread function_9503fe88();
   level thread zm_perks::spare_change();
-  scene::add_scene_func("cin_zmhd_sizzle_cosmodrome_cam", & cin_zmhd_sizzle_cosmodrome_cam, "play");
-  scene::add_scene_func("cin_zmhd_sizzle_cosmodrome_cam2", & cin_zmhd_sizzle_cosmodrome_cam2, "play");
+  scene::add_scene_func("cin_zmhd_sizzle_cosmodrome_cam", &cin_zmhd_sizzle_cosmodrome_cam, "play");
+  scene::add_scene_func("cin_zmhd_sizzle_cosmodrome_cam2", &cin_zmhd_sizzle_cosmodrome_cam2, "play");
   zm_cosmodrome_ffotd::main_end();
 }
 
@@ -369,7 +369,7 @@ function cosmodrome_zone_init() {
 function function_54bf648f() {
   level.use_multiple_spawns = 1;
   level.spawner_int = 1;
-  level.fn_custom_zombie_spawner_selection = & function_54da140a;
+  level.fn_custom_zombie_spawner_selection = &function_54da140a;
 }
 
 function function_54da140a() {
@@ -1132,7 +1132,7 @@ function function_f9572b4e() {
 }
 
 function function_e509f24d() {
-  callback::on_spawned( & function_f9572b4e);
+  callback::on_spawned(&function_f9572b4e);
 }
 
 function function_2c076a5e() {
@@ -1158,7 +1158,7 @@ function function_980a894b() {
 function include_perks_in_random_rotation() {
   zm_perk_random::include_perk_in_random_rotation("specialty_doubletap2");
   zm_perk_random::include_perk_in_random_rotation("specialty_deadshot");
-  level.custom_random_perk_weights = & function_c027d01d;
+  level.custom_random_perk_weights = &function_c027d01d;
 }
 
 function function_c027d01d() {

@@ -56,7 +56,7 @@ init() {
   precacheVehicle("pavelow_mp");
   precacheTurret("pavelow_minigun_mp");
   precacheModel("weapon_minigun");
-  precacheString( & "MP_CIVILIAN_AIR_TRAFFIC");
+  precacheString(&"MP_CIVILIAN_AIR_TRAFFIC");
 
   level.h2_chopper_fire_fx = loadfx("fx/muzzleflashes/minigun_flash");
 
@@ -233,12 +233,12 @@ useHelicopterMK19(lifeId) {
 
 tryUseHelicopter(lifeId, heliType) {
   if(isDefined(level.civilianJetFlyBy)) {
-    self iprintlnbold( & "MP_CIVILIAN_AIR_TRAFFIC");
+    self iprintlnbold(&"MP_CIVILIAN_AIR_TRAFFIC");
     return false;
   }
 
   if((!isDefined(heliType) || heliType == "flares") && isDefined(level.chopper)) {
-    self iprintlnbold( & "LUA_KS_UNAVAILABLE_AIRSPACE_QUEUE");
+    self iprintlnbold(&"LUA_KS_UNAVAILABLE_AIRSPACE_QUEUE");
 
     if(isDefined(heliType))
       streakName = "pavelow_mp";
@@ -259,7 +259,7 @@ tryUseHelicopter(lifeId, heliType) {
 
     return false;
   } else if(isDefined(level.chopper)) {
-    self iprintlnbold( & "LUA_KS_UNAVAILABLE_AIRSPACE");
+    self iprintlnbold(&"LUA_KS_UNAVAILABLE_AIRSPACE");
     return false;
   }
 
@@ -276,7 +276,7 @@ tryUseHelicopter(lifeId, heliType) {
 
     if(isDefined(level.chopper)) {
       self clearUsingRemote();
-      self iprintlnbold( & "LUA_KS_UNAVAILABLE_AIRSPACE");
+      self iprintlnbold(&"LUA_KS_UNAVAILABLE_AIRSPACE");
       return false;
     }
   }

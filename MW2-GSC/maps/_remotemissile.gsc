@@ -33,11 +33,11 @@ init() {
   precacheString(&"HELLFIRE_FIRE");
 
   // Predator Drone has been destroyed.
-  add_hint_string("hint_predator_drone_destroyed", & "HELLFIRE_DESTROYED", ::should_break_destroyed);
+  add_hint_string("hint_predator_drone_destroyed", &"HELLFIRE_DESTROYED", ::should_break_destroyed);
   // Predator Drone is unavailable.
-  add_hint_string("hint_predator_drone_4", & "HELLFIRE_USE_DRONE", ::should_break_use_drone);
-  add_hint_string("hint_predator_drone_2", & "HELLFIRE_USE_DRONE_2", ::should_break_use_drone);
-  add_hint_string("hint_predator_drone_not_available", & "HELLFIRE_DRONE_NOT_AVAILABLE", ::should_break_available);
+  add_hint_string("hint_predator_drone_4", &"HELLFIRE_USE_DRONE", ::should_break_use_drone);
+  add_hint_string("hint_predator_drone_2", &"HELLFIRE_USE_DRONE_2", ::should_break_use_drone);
+  add_hint_string("hint_predator_drone_not_available", &"HELLFIRE_DRONE_NOT_AVAILABLE", ::should_break_available);
 
   //	array_thread( level.players, ::RemoteMissileDetonatorNotify );
 

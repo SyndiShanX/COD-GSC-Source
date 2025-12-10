@@ -294,7 +294,7 @@ meatshield_event() {
   wait 0.5;
   model = get_model_or_models_from_scene("menendez_radio_room_idle", "menendez");
   model.team = "allies";
-  model setlookattext("", & "");
+  model setlookattext("", &"");
   player_enter_the_hut();
   level thread clean_up_village_guards();
   level thread clean_up_beartrap_test();

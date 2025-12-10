@@ -25,13 +25,13 @@ _ufo() {
 
 god() {
   FL_GODMODE = 1 << 0;
-  msg = & "";
+  msg = &"";
 
-  if(self.entityflags & FL_GODMODE) {
-    msg = & "GAME_GODMODE_OFF";
+  if(self.entityflags &FL_GODMODE) {
+    msg = &"GAME_GODMODE_OFF";
     self.entityflags &= ~FL_GODMODE;
   } else {
-    msg = & "GAME_GODMODE_ON";
+    msg = &"GAME_GODMODE_ON";
     self.entityflags |= FL_GODMODE;
   }
 
@@ -42,13 +42,13 @@ god() {
 
 demiGod() {
   FL_DEMI_GODMODE = 1 << 1;
-  msg = & "";
+  msg = &"";
 
-  if(self.entityflags & FL_DEMI_GODMODE) {
-    msg = & "GAME_DEMI_GODMODE_OFF";
+  if(self.entityflags &FL_DEMI_GODMODE) {
+    msg = &"GAME_DEMI_GODMODE_OFF";
     self.entityflags &= ~FL_DEMI_GODMODE;
   } else {
-    msg = & "GAME_DEMI_GODMODE_ON";
+    msg = &"GAME_DEMI_GODMODE_ON";
     self.entityflags |= FL_DEMI_GODMODE;
   }
 
@@ -59,13 +59,13 @@ demiGod() {
 
 noTarget() {
   FL_NOTARGET = 1 << 2;
-  msg = & "";
+  msg = &"";
 
-  if(self.entityflags & FL_NOTARGET) {
-    msg = & "GAME_NOTARGETOFF";
+  if(self.entityflags &FL_NOTARGET) {
+    msg = &"GAME_NOTARGETOFF";
     self.entityflags &= ~FL_NOTARGET;
   } else {
-    msg = & "GAME_NOTARGETON";
+    msg = &"GAME_NOTARGETON";
     self.entityflags |= FL_NOTARGET;
   }
 

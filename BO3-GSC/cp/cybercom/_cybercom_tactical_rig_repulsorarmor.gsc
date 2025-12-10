@@ -20,13 +20,13 @@
 function init() {}
 
 function main() {
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
   level._effect["repulsorarmor_fx"] = "player/fx_plyr_ability_repulsor_armor";
   level._effect["repulsorarmorUpgraded_fx"] = "player/fx_plyr_ability_repulsor_armor";
   level._effect["repulsorarmor_contact"] = "electric/fx_elec_sparks_burst_lg_os";
   cybercom_tacrig::register_cybercom_rig_ability("cybercom_repulsorarmor", 1);
-  cybercom_tacrig::register_cybercom_rig_possession_callbacks("cybercom_repulsorarmor", & repulsorarmorshieldgive, & repulsorarmorshieldtake);
+  cybercom_tacrig::register_cybercom_rig_possession_callbacks("cybercom_repulsorarmor", &repulsorarmorshieldgive, &repulsorarmorshieldtake);
 }
 
 function on_player_connect() {}

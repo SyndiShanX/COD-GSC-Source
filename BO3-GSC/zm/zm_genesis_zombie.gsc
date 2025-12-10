@@ -26,18 +26,18 @@
 function autoexec init() {
   initzmgenesisbehaviorsandasm();
   setdvar("scr_zm_use_code_enemy_selection", 0);
-  level.closest_player_override = & genesis_closest_player;
+  level.closest_player_override = &genesis_closest_player;
   level.pathdist_type = 2;
-  level.custom_rise_func = & genesis_custom_rise_func;
-  level.zm_custom_spawn_location_selection = & genesis_custom_spawn_location_selection;
-  level.should_zigzag = & genesis_should_zigzag;
+  level.custom_rise_func = &genesis_custom_rise_func;
+  level.zm_custom_spawn_location_selection = &genesis_custom_spawn_location_selection;
+  level.should_zigzag = &genesis_should_zigzag;
   level.validate_on_navmesh = 1;
   level thread update_closest_player();
   level thread function_68528574();
-  spawner::add_archetype_spawn_function("zombie", & function_e0c0cb69);
-  spawner::add_archetype_spawn_function("spider", & function_6c5e4588);
-  callback::on_spawned( & function_a11812c);
-  level.octobomb_targets = & genesis_octobomb_targets;
+  spawner::add_archetype_spawn_function("zombie", &function_e0c0cb69);
+  spawner::add_archetype_spawn_function("spider", &function_6c5e4588);
+  callback::on_spawned(&function_a11812c);
+  level.octobomb_targets = &genesis_octobomb_targets;
 }
 
 function private function_68528574() {
@@ -55,8 +55,8 @@ function private function_68528574() {
 }
 
 function private initzmgenesisbehaviorsandasm() {
-  animationstatenetwork::registeranimationmocomp("mocomp_teleport_traversal@zombie", & teleporttraversalmocompstart, undefined, undefined);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldMoveLowg", & shouldmovelowg);
+  animationstatenetwork::registeranimationmocomp("mocomp_teleport_traversal@zombie", &teleporttraversalmocompstart, undefined, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldMoveLowg", &shouldmovelowg);
 }
 
 function shouldmovelowg(entity) {
@@ -65,7 +65,7 @@ function shouldmovelowg(entity) {
 
 function private function_6c5e4588() {
   self thread zm::update_zone_name();
-  self.can_reach_enemy = & function_2f50c929;
+  self.can_reach_enemy = &function_2f50c929;
 }
 
 function private function_2f50c929() {
@@ -84,7 +84,7 @@ function private function_2f50c929() {
 function private function_e0c0cb69() {
   self thread function_2fa8f151();
   self thread function_bb062ca5();
-  self.traversalspeedboost = & function_1108488e;
+  self.traversalspeedboost = &function_1108488e;
 }
 
 function private function_a11812c() {

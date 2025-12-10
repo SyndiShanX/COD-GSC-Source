@@ -13,22 +13,22 @@
 #namespace qrdrone;
 
 function autoexec __init__sytem__() {
-  system::register("qrdrone", & __init__, undefined, undefined);
+  system::register("qrdrone", &__init__, undefined, undefined);
 }
 
 function __init__() {
   type = "qrdrone_mp";
-  clientfield::register("helicopter", "qrdrone_state", 1, 3, "int", & statechange, 0, 0);
-  clientfield::register("vehicle", "qrdrone_state", 1, 3, "int", & statechange, 0, 0);
+  clientfield::register("helicopter", "qrdrone_state", 1, 3, "int", &statechange, 0, 0);
+  clientfield::register("vehicle", "qrdrone_state", 1, 3, "int", &statechange, 0, 0);
   level._effect["qrdrone_enemy_light"] = "killstreaks/fx_drgnfire_light_red_3p";
   level._effect["qrdrone_friendly_light"] = "killstreaks/fx_drgnfire_light_green_3p";
   level._effect["qrdrone_viewmodel_light"] = "killstreaks/fx_drgnfire_light_green_1p";
-  clientfield::register("helicopter", "qrdrone_countdown", 1, 1, "int", & start_blink, 0, 0);
-  clientfield::register("helicopter", "qrdrone_timeout", 1, 1, "int", & final_blink, 0, 0);
-  clientfield::register("vehicle", "qrdrone_countdown", 1, 1, "int", & start_blink, 0, 0);
-  clientfield::register("vehicle", "qrdrone_timeout", 1, 1, "int", & final_blink, 0, 0);
-  clientfield::register("vehicle", "qrdrone_out_of_range", 1, 1, "int", & out_of_range_update, 0, 0);
-  vehicle::add_vehicletype_callback("qrdrone_mp", & spawned);
+  clientfield::register("helicopter", "qrdrone_countdown", 1, 1, "int", &start_blink, 0, 0);
+  clientfield::register("helicopter", "qrdrone_timeout", 1, 1, "int", &final_blink, 0, 0);
+  clientfield::register("vehicle", "qrdrone_countdown", 1, 1, "int", &start_blink, 0, 0);
+  clientfield::register("vehicle", "qrdrone_timeout", 1, 1, "int", &final_blink, 0, 0);
+  clientfield::register("vehicle", "qrdrone_out_of_range", 1, 1, "int", &out_of_range_update, 0, 0);
+  vehicle::add_vehicletype_callback("qrdrone_mp", &spawned);
 }
 
 function spawned(localclientnum) {

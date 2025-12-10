@@ -9,8 +9,8 @@
 #namespace zm_temple_geyser;
 
 function main() {
-  clientfield::register("allplayers", "geyserfakestand", 21000, 1, "int", & geyser_player_setup_stand, 0, 0);
-  clientfield::register("allplayers", "geyserfakeprone", 21000, 1, "int", & geyser_player_setup_prone, 0, 0);
+  clientfield::register("allplayers", "geyserfakestand", 21000, 1, "int", &geyser_player_setup_stand, 0, 0);
+  clientfield::register("allplayers", "geyserfakeprone", 21000, 1, "int", &geyser_player_setup_prone, 0, 0);
 }
 
 function geyser_player_setup_prone(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

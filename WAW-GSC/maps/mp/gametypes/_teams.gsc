@@ -14,7 +14,7 @@ init() {
   precacheShader("mpflag_russian");
   precacheShader("mpflag_spectator");
   precacheModel("char_usa_raider_gear_flametank");
-  game["strings"]["autobalance"] = & "MP_AUTOBALANCE_NOW";
+  game["strings"]["autobalance"] = &"MP_AUTOBALANCE_NOW";
   precacheString(&"MP_AUTOBALANCE_NOW");
   precacheString(&"MP_AUTOBALANCE_NEXT_ROUND");
   precacheString(&"MP_AUTOBALANCE_SECONDS");

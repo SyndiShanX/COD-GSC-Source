@@ -16,7 +16,7 @@
 #namespace sm_initial_spawns;
 
 function autoexec __init__sytem__() {
-  system::register("sm_initial_spawns", & __init__, & __main__, undefined);
+  system::register("sm_initial_spawns", &__init__, &__main__, undefined);
 }
 
 function __init__() {}

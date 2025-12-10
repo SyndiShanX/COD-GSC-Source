@@ -11,7 +11,7 @@
 #namespace zm_tomb_ambient_scripts;
 
 function main() {
-  clientfield::register("scriptmover", "zeppelin_fx", 21000, 1, "int", & zeppelin_fx, 0, 0);
+  clientfield::register("scriptmover", "zeppelin_fx", 21000, 1, "int", &zeppelin_fx, 0, 0);
 }
 
 function zeppelin_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

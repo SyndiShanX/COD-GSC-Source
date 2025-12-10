@@ -16,24 +16,24 @@
 #namespace archetype_human_cover;
 
 function autoexec registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldReturnToCoverCondition", & shouldreturntocovercondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldReturnToSuppressedCover", & shouldreturntosuppressedcover);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldAdjustToCover", & shouldadjusttocover);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareForAdjustToCover", & prepareforadjusttocover);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("coverBlindfireShootStart", & coverblindfireshootactionstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("canChangeStanceAtCoverCondition", & canchangestanceatcovercondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("coverChangeStanceActionStart", & coverchangestanceactionstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareToChangeStanceToStand", & preparetochangestancetostand);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("cleanUpChangeStanceToStand", & cleanupchangestancetostand);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareToChangeStanceToCrouch", & preparetochangestancetocrouch);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("cleanUpChangeStanceToCrouch", & cleanupchangestancetocrouch);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldVantageAtCoverCondition", & shouldvantageatcovercondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("supportsVantageCoverCondition", & supportsvantagecovercondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("coverVantageInitialize", & covervantageinitialize);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldThrowGrenadeAtCoverCondition", & shouldthrowgrenadeatcovercondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("coverPrepareToThrowGrenade", & coverpreparetothrowgrenade);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("coverCleanUpToThrowGrenade", & covercleanuptothrowgrenade);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("senseNearbyPlayers", & sensenearbyplayers);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldReturnToCoverCondition", &shouldreturntocovercondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldReturnToSuppressedCover", &shouldreturntosuppressedcover);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldAdjustToCover", &shouldadjusttocover);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareForAdjustToCover", &prepareforadjusttocover);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("coverBlindfireShootStart", &coverblindfireshootactionstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("canChangeStanceAtCoverCondition", &canchangestanceatcovercondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("coverChangeStanceActionStart", &coverchangestanceactionstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareToChangeStanceToStand", &preparetochangestancetostand);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("cleanUpChangeStanceToStand", &cleanupchangestancetostand);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareToChangeStanceToCrouch", &preparetochangestancetocrouch);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("cleanUpChangeStanceToCrouch", &cleanupchangestancetocrouch);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldVantageAtCoverCondition", &shouldvantageatcovercondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("supportsVantageCoverCondition", &supportsvantagecovercondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("coverVantageInitialize", &covervantageinitialize);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldThrowGrenadeAtCoverCondition", &shouldthrowgrenadeatcovercondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("coverPrepareToThrowGrenade", &coverpreparetothrowgrenade);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("coverCleanUpToThrowGrenade", &covercleanuptothrowgrenade);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("senseNearbyPlayers", &sensenearbyplayers);
 }
 
 function shouldthrowgrenadeatcovercondition(behaviortreeentity, throwifpossible = 0) {
@@ -152,7 +152,7 @@ function private covercleanuptothrowgrenade(behaviortreeentity) {
       if(isDefined(grenade)) {
         grenade.owner = behaviortreeentity;
         grenade.team = behaviortreeentity.team;
-        grenade setcontents(grenade setcontents(0) & (~(((32768 | 67108864) | 8388608) | 33554432)));
+        grenade setcontents(grenade setcontents(0) &(~(((32768 | 67108864) | 8388608) | 33554432)));
       }
     }
   }

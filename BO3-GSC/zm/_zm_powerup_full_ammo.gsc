@@ -19,13 +19,13 @@
 #namespace zm_powerup_full_ammo;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_full_ammo", & __init__, undefined, undefined);
+  system::register("zm_powerup_full_ammo", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  zm_powerups::register_powerup("full_ammo", & grab_full_ammo);
+  zm_powerups::register_powerup("full_ammo", &grab_full_ammo);
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("full_ammo", "p7_zm_power_up_max_ammo", & "ZOMBIE_POWERUP_MAX_AMMO", & zm_powerups::func_should_always_drop, 0, 0, 0);
+    zm_powerups::add_zombie_powerup("full_ammo", "p7_zm_power_up_max_ammo", &"ZOMBIE_POWERUP_MAX_AMMO", &zm_powerups::func_should_always_drop, 0, 0, 0);
   }
 }
 

@@ -25,7 +25,7 @@
 #namespace zm_island_zones;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_zones", & __init__, & __main__, undefined);
+  system::register("zm_genesis_zones", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -35,11 +35,11 @@ function __init__() {
 
 function __main__() {
   level.zones = [];
-  level.zone_manager_init_func = & function_19a0be33;
-  level.zone_occupied_func = & zm_genesis_ffotd::function_dce2d8a9;
+  level.zone_manager_init_func = &function_19a0be33;
+  level.zone_occupied_func = &zm_genesis_ffotd::function_dce2d8a9;
   init_zones[0] = "start_zone";
   level thread zm_zonemgr::manage_zones(init_zones);
-  level.player_out_of_playable_area_monitor_callback = & player_out_of_playable_area_override;
+  level.player_out_of_playable_area_monitor_callback = &player_out_of_playable_area_override;
   level thread function_6b91d71();
 }
 
@@ -161,7 +161,7 @@ function function_19a0be33() {
 
 function function_6b91d71() {
   var_25778c2d = getnodearray("blocker_traversal", "script_noteworthy");
-  array::thread_all(var_25778c2d, & function_9ce5da3b);
+  array::thread_all(var_25778c2d, &function_9ce5da3b);
 }
 
 function function_9ce5da3b() {

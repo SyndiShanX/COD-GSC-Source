@@ -48,7 +48,7 @@ main() {
     game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
   }
 
-  game["strings"]["overtime_hint"] = & "MP_FIRST_BLOOD";
+  game["strings"]["overtime_hint"] = &"MP_FIRST_BLOOD";
   thread onplayerconnect();
 }
 
@@ -74,18 +74,18 @@ onstartgametype() {
     game["defenders"] = var_00;
   }
 
-  scripts\mp\utility::setobjectivetext("allies", & "OBJECTIVES_FRONT");
-  scripts\mp\utility::setobjectivetext("axis", & "OBJECTIVES_FRONT");
+  scripts\mp\utility::setobjectivetext("allies", &"OBJECTIVES_FRONT");
+  scripts\mp\utility::setobjectivetext("axis", &"OBJECTIVES_FRONT");
   if(level.splitscreen) {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_FRONT");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_FRONT");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_FRONT");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_FRONT");
   } else {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_FRONT_SCORE");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_FRONT_SCORE");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_FRONT_SCORE");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_FRONT_SCORE");
   }
 
-  scripts\mp\utility::setobjectivehinttext("allies", & "OBJECTIVES_FRONT_HINT");
-  scripts\mp\utility::setobjectivehinttext("axis", & "OBJECTIVES_FRONT_HINT");
+  scripts\mp\utility::setobjectivehinttext("allies", &"OBJECTIVES_FRONT_HINT");
+  scripts\mp\utility::setobjectivehinttext("axis", &"OBJECTIVES_FRONT_HINT");
   level.iconkill3d = "waypoint_capture_kill";
   level.iconkill2d = "waypoint_capture_kill";
   initspawns();
@@ -194,7 +194,7 @@ func_654C() {
     scripts\mp\utility::_hudoutlineviewmodelenable(5, 0, 0);
   }
 
-  self sethudtutorialmessage( & "MP_FRONT_REVEALED");
+  self sethudtutorialmessage(&"MP_FRONT_REVEALED");
   wait(level.var_654C);
   scripts\mp\utility::outlinedisable(self.var_28A5, self);
   scripts\mp\utility::_hudoutlineviewmodeldisable();

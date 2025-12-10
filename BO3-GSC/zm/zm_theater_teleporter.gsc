@@ -23,7 +23,7 @@
 #namespace zm_theater_teleporter;
 
 function autoexec __init__sytem__() {
-  system::register("zm_theater_teleporter", & __init__, undefined, undefined);
+  system::register("zm_theater_teleporter", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -34,7 +34,7 @@ function __init__() {
   clientfield::register("scriptmover", "play_fly_me_to_the_moon_fx", 21000, 1, "int");
   clientfield::register("world", "teleporter_initiate_fx", 21000, 1, "counter");
   clientfield::register("scriptmover", "teleporter_link_cable_mtl", 21000, 1, "int");
-  callback::on_spawned( & init_player);
+  callback::on_spawned(&init_player);
 }
 
 function teleporter_init() {
@@ -45,7 +45,7 @@ function teleporter_init() {
   level.eeroomsinuse = undefined;
   level.second_hand = getent("zom_clock_second_hand", "targetname");
   level.second_hand_angles = level.second_hand.angles;
-  level.zombietheaterteleporterseeklogicfunc = & zombietheaterteleporterseeklogic;
+  level.zombietheaterteleporterseeklogicfunc = &zombietheaterteleporterseeklogic;
   level flag::init("teleporter_linked");
   level flag::init("core_linked");
   setdvar("theaterAftereffectOverride", "-1");
@@ -71,15 +71,15 @@ function teleporter_init() {
     util::setclientsysstate("levelNotify", "pack_clock_start", players[i]);
   }
   if(!issplitscreen()) {
-    level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_fov;
+    level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_fov;
   }
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_shellshock;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_shellshock_electric;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_bw_vision;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_red_vision;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_flashy_vision;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_flare_vision;
-  scene::add_scene_func("p7_fxanim_zm_kino_wormhole_bundle", & function_d11d2c50, "play");
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_shellshock;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_shellshock_electric;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_bw_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_red_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_flashy_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_flare_vision;
+  scene::add_scene_func("p7_fxanim_zm_kino_wormhole_bundle", &function_d11d2c50, "play");
 }
 
 function init_player() {
@@ -191,12 +191,12 @@ function player_teleporting(index) {
   if(!isDefined(var_1bea176e) || (isDefined(var_1bea176e) && var_1bea176e.size < 1)) {
     return;
   }
-  var_1bea176e = array::filter(var_1bea176e, 0, & function_1488cf91);
+  var_1bea176e = array::filter(var_1bea176e, 0, &function_1488cf91);
   foreach(e_player in var_1bea176e) {
     e_player.var_35c3d096 = 1;
   }
   wait(30);
-  var_1bea176e = array::filter(var_1bea176e, 0, & function_1488cf91);
+  var_1bea176e = array::filter(var_1bea176e, 0, &function_1488cf91);
   level.extracam_screen clientfield::set("extra_screen", 0);
   if(randomint(100) > 24 && !isDefined(level.eeroomsinuse)) {
     loc = "eerooms";
@@ -211,19 +211,19 @@ function player_teleporting(index) {
   self thread teleport_pad_player_fx(var_1bea176e);
   self thread teleport_2d_audio_specialroom_start(var_1bea176e);
   wait(level.teleport_delay);
-  var_1bea176e = array::filter(var_1bea176e, 0, & function_1488cf91);
+  var_1bea176e = array::filter(var_1bea176e, 0, &function_1488cf91);
   self notify("fx_done");
   self thread teleport_2d_audio_specialroom_go(var_1bea176e);
   self teleport_players(var_1bea176e, loc);
   if(isDefined(loc) && loc == "eerooms") {
     loc = "theater";
     wait(4);
-    var_1bea176e = array::filter(var_1bea176e, 0, & function_1488cf91);
+    var_1bea176e = array::filter(var_1bea176e, 0, &function_1488cf91);
     self thread teleport_2d_audio_specialroom_start(var_1bea176e);
     exploder::exploder(301);
     self thread teleport_pad_player_fx(var_1bea176e);
     wait(level.teleport_delay);
-    var_1bea176e = array::filter(var_1bea176e, 0, & function_1488cf91);
+    var_1bea176e = array::filter(var_1bea176e, 0, &function_1488cf91);
     self notify("fx_done");
     self thread teleport_2d_audio_specialroom_go(var_1bea176e);
     self teleport_players(var_1bea176e, loc);
@@ -341,7 +341,7 @@ function teleport_players(var_1bea176e, loc) {
     return;
   }
   wait(2);
-  var_1bea176e = array::filter(var_1bea176e, 0, & function_1488cf91);
+  var_1bea176e = array::filter(var_1bea176e, 0, &function_1488cf91);
   dest_room = [];
   if(loc == "projroom") {
     dest_room = get_array_spots("projroom_teleport_player", dest_room);
@@ -359,7 +359,7 @@ function teleport_players(var_1bea176e, loc) {
   }
   initialize_occupied_flag(dest_room);
   check_for_occupied_spots(dest_room, all_players, player_radius);
-  var_1bea176e = array::filter(var_1bea176e, 0, & function_1488cf91);
+  var_1bea176e = array::filter(var_1bea176e, 0, &function_1488cf91);
   for(i = 0; i < var_1bea176e.size; i++) {
     if(isDefined(var_1bea176e[i])) {
       slot = randomintrange(0, 4);

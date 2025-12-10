@@ -13,16 +13,16 @@
 #namespace hud_message;
 
 function autoexec __init__sytem__() {
-  system::register("hud_message", & __init__, undefined, undefined);
+  system::register("hud_message", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
+  callback::on_start_gametype(&init);
 }
 
 function init() {
-  callback::on_connect( & on_player_connect);
-  callback::on_disconnect( & on_player_disconnect);
+  callback::on_connect(&on_player_connect);
+  callback::on_disconnect(&on_player_disconnect);
 }
 
 function on_player_connect() {
@@ -222,7 +222,7 @@ function shownotifymessage(notifydata, duration) {
     if(isDefined(notifydata.titlelabel)) {
       self.notifytitle.label = notifydata.titlelabel;
     } else {
-      self.notifytitle.label = & "";
+      self.notifytitle.label = &"";
     }
     if(isDefined(notifydata.titlelabel) && !isDefined(notifydata.titleisstring)) {
       self.notifytitle setvalue(notifydata.titletext);
@@ -238,7 +238,7 @@ function shownotifymessage(notifydata, duration) {
     if(isDefined(notifydata.textlabel)) {
       self.notifytext.label = notifydata.textlabel;
     } else {
-      self.notifytext.label = & "";
+      self.notifytext.label = &"";
     }
     if(isDefined(notifydata.textlabel) && !isDefined(notifydata.textisstring)) {
       self.notifytext setvalue(notifydata.notifytext);
@@ -263,7 +263,7 @@ function shownotifymessage(notifydata, duration) {
       if(isDefined(notifydata.text2label)) {
         self.notifytext2.label = notifydata.text2label;
       } else {
-        self.notifytext2.label = & "";
+        self.notifytext2.label = &"";
       }
       self.notifytext2 settext(notifydata.notifytext2);
       self.notifytext2 setpulsefx(100, int(duration * 1000), 1000);

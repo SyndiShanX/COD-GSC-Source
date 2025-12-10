@@ -17,34 +17,34 @@
 #namespace oed;
 
 function autoexec __init__sytem__() {
-  system::register("oed", & __init__, undefined, undefined);
+  system::register("oed", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "ev_toggle", 1, 1, "int", & ev_player_toggle, 0, 0);
-  clientfield::register("toplayer", "sitrep_toggle", 1, 1, "int", & sitrep_player_toggle, 0, 0);
-  clientfield::register("toplayer", "tmode_toggle", 1, 3, "int", & tmode_player_toggle, 0, 0);
-  clientfield::register("toplayer", "active_dni_fx", 1, 1, "counter", & function_6b87ceb0, 0, 0);
-  clientfield::register("toplayer", "hack_dni_fx", 1, 1, "counter", & hack_dni_fx, 0, 0);
-  clientfield::register("actor", "thermal_active", 1, 1, "int", & ent_thermal_callback, 0, 0);
-  clientfield::register("actor", "sitrep_material", 1, 1, "int", & ent_material_callback, 0, 0);
-  clientfield::register("actor", "force_tmode", 1, 1, "int", & tmode_force_toggle, 0, 0);
-  clientfield::register("actor", "tagged", 1, 1, "int", & tagged_toggle, 0, 0);
-  clientfield::register("vehicle", "thermal_active", 1, 1, "int", & ent_thermal_callback, 0, 0);
-  clientfield::register("vehicle", "sitrep_material", 1, 1, "int", & ent_material_callback, 0, 0);
-  clientfield::register("scriptmover", "thermal_active", 1, 1, "int", & ent_thermal_callback, 0, 0);
-  clientfield::register("scriptmover", "sitrep_material", 1, 1, "int", & ent_material_callback, 0, 0);
-  clientfield::register("item", "sitrep_material", 1, 1, "int", & ent_material_callback, 0, 0);
+  clientfield::register("toplayer", "ev_toggle", 1, 1, "int", &ev_player_toggle, 0, 0);
+  clientfield::register("toplayer", "sitrep_toggle", 1, 1, "int", &sitrep_player_toggle, 0, 0);
+  clientfield::register("toplayer", "tmode_toggle", 1, 3, "int", &tmode_player_toggle, 0, 0);
+  clientfield::register("toplayer", "active_dni_fx", 1, 1, "counter", &function_6b87ceb0, 0, 0);
+  clientfield::register("toplayer", "hack_dni_fx", 1, 1, "counter", &hack_dni_fx, 0, 0);
+  clientfield::register("actor", "thermal_active", 1, 1, "int", &ent_thermal_callback, 0, 0);
+  clientfield::register("actor", "sitrep_material", 1, 1, "int", &ent_material_callback, 0, 0);
+  clientfield::register("actor", "force_tmode", 1, 1, "int", &tmode_force_toggle, 0, 0);
+  clientfield::register("actor", "tagged", 1, 1, "int", &tagged_toggle, 0, 0);
+  clientfield::register("vehicle", "thermal_active", 1, 1, "int", &ent_thermal_callback, 0, 0);
+  clientfield::register("vehicle", "sitrep_material", 1, 1, "int", &ent_material_callback, 0, 0);
+  clientfield::register("scriptmover", "thermal_active", 1, 1, "int", &ent_thermal_callback, 0, 0);
+  clientfield::register("scriptmover", "sitrep_material", 1, 1, "int", &ent_material_callback, 0, 0);
+  clientfield::register("item", "sitrep_material", 1, 1, "int", &ent_material_callback, 0, 0);
   duplicate_render::set_dr_filter_offscreen("sitrep_keyline", 25, "keyline_active", "keyfill_active", 2, "mc/hud_outline_model_z_white", 0);
   duplicate_render::set_dr_filter_offscreen("sitrep_fill", 25, "keyfill_active", "keyline_active", 2, "mc/hud_outline_model_orange_alpha", 0);
   duplicate_render::set_dr_filter_offscreen("sitrep_keyfill", 30, "keyline_active,keyfill_active", undefined, 2, "mc/hud_outline_model_orange_calpha", 0);
   duplicate_render::set_dr_filter_offscreen("enemy_thermal", 24, "thermal_enemy_active", undefined, 2, "mc/hud_outline_model_z_red", 0);
   duplicate_render::set_dr_filter_offscreen("friendly_thermal", 24, "thermal_friendly_active", undefined, 2, "mc/hud_outline_model_z_green", 0);
   visionset_mgr::register_visionset_info("tac_mode", 1, 15, undefined, "tac_mode_blue");
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
   level flag::init("activate_tmode");
   level flag::init("activate_thermal");
-  callback::on_localclient_shutdown( & on_localplayer_shutdown);
+  callback::on_localclient_shutdown(&on_localplayer_shutdown);
 }
 
 function on_player_spawned(localclientnum) {

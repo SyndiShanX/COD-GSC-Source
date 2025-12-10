@@ -15,21 +15,21 @@
 #namespace zm_playerhealth;
 
 function autoexec __init__sytem__() {
-  system::register("zm_playerhealth", & __init__, undefined, undefined);
+  system::register("zm_playerhealth", &__init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("toplayer", "sndZombieHealth", 21000, 1, "int");
-  level.global_damage_func_ads = & empty_kill_func;
-  level.global_damage_func = & empty_kill_func;
+  level.global_damage_func_ads = &empty_kill_func;
+  level.global_damage_func = &empty_kill_func;
   level.difficultytype[0] = "easy";
   level.difficultytype[1] = "normal";
   level.difficultytype[2] = "hardened";
   level.difficultytype[3] = "veteran";
-  level.difficultystring["easy"] = & "GAMESKILL_EASY";
-  level.difficultystring["normal"] = & "GAMESKILL_NORMAL";
-  level.difficultystring["hardened"] = & "GAMESKILL_HARDENED";
-  level.difficultystring["veteran"] = & "GAMESKILL_VETERAN";
+  level.difficultystring["easy"] = &"GAMESKILL_EASY";
+  level.difficultystring["normal"] = &"GAMESKILL_NORMAL";
+  level.difficultystring["hardened"] = &"GAMESKILL_HARDENED";
+  level.difficultystring["veteran"] = &"GAMESKILL_VETERAN";
   thread playerhealthdebug();
   level.gameskill = 1;
   switch (level.gameskill) {
@@ -59,11 +59,11 @@ function __init__() {
   level.invultime_postshield = 0.3;
   level.playerhealth_regularregendelay = 2400;
   level.worthydamageratio = 0.1;
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
   if(!isDefined(level.vsmgr_prio_overlay_zm_player_health_blur)) {
     level.vsmgr_prio_overlay_zm_player_health_blur = 22;
   }
-  visionset_mgr::register_info("overlay", "zm_health_blur", 1, level.vsmgr_prio_overlay_zm_player_health_blur, 1, 1, & visionset_mgr::ramp_in_out_thread_per_player, 1);
+  visionset_mgr::register_info("overlay", "zm_health_blur", 1, level.vsmgr_prio_overlay_zm_player_health_blur, 1, 1, &visionset_mgr::ramp_in_out_thread_per_player, 1);
 }
 
 function on_player_spawned() {

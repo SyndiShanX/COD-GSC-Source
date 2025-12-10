@@ -92,7 +92,7 @@ function teleporter_function(name) {
               }
               wait(0.5);
               exploder::exploder("fxexp_502");
-              level util::delay(2, undefined, & function_78f5cb79);
+              level util::delay(2, undefined, &function_78f5cb79);
               level flag::set("teleported_to_nml");
             }
             if(name == "nml_teleporter") {
@@ -391,7 +391,7 @@ function teleporter_ending(teleporter_ent, was_aborted) {
         level.round_number = zm::get_round_number();
         zm_moon_wasteland::resume_moon_rounds(level.round_number);
         level thread zm_moon::zombie_moon_gravity_init();
-        level.round_spawn_func = & zm::round_spawning;
+        level.round_spawn_func = &zm::round_spawning;
         level thread teleporter_to_nml_power_down();
         zombie_utility::set_zombie_var("zombie_intermission_time", 15);
         zombie_utility::set_zombie_var("zombie_between_round_time", 10);

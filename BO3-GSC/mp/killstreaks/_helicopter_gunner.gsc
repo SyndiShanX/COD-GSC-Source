@@ -34,8 +34,8 @@
 #namespace helicopter_gunner;
 
 function init() {
-  killstreaks::register("helicopter_gunner", "helicopter_player_gunner", "killstreak_helicopter_player_gunner", "helicopter_used", & activatemaingunner, 1);
-  killstreaks::register_strings("helicopter_gunner", & "KILLSTREAK_EARNED_HELICOPTER_GUNNER", & "KILLSTREAK_HELICOPTER_GUNNER_NOT_AVAILABLE", & "KILLSTREAK_HELICOPTER_GUNNER_INBOUND", undefined, & "KILLSTREAK_HELICOPTER_GUNNER_HACKED");
+  killstreaks::register("helicopter_gunner", "helicopter_player_gunner", "killstreak_helicopter_player_gunner", "helicopter_used", &activatemaingunner, 1);
+  killstreaks::register_strings("helicopter_gunner", &"KILLSTREAK_EARNED_HELICOPTER_GUNNER", &"KILLSTREAK_HELICOPTER_GUNNER_NOT_AVAILABLE", &"KILLSTREAK_HELICOPTER_GUNNER_INBOUND", undefined, &"KILLSTREAK_HELICOPTER_GUNNER_HACKED");
   killstreaks::register_dialog("helicopter_gunner", "mpl_killstreak_osprey_strt", "helicopterGunnerDialogBundle", "helicopterGunnerPilotDialogBundle", "friendlyHelicopterGunner", "enemyHelicopterGunner", "enemyHelicopterGunnerMultiple", "friendlyHelicopterGunnerHacked", "enemyHelecopterGunnerHacked", "requestHelicopterGunner", "threatHelicopterGunner");
   killstreaks::register_alt_weapon("helicopter_gunner", "helicopter_gunner_turret_rockets");
   killstreaks::register_alt_weapon("helicopter_gunner", "helicopter_gunner_turret_primary");
@@ -43,23 +43,23 @@ function init() {
   killstreaks::register_alt_weapon("helicopter_gunner", "helicopter_gunner_turret_tertiary");
   killstreaks::set_team_kill_penalty_scale("helicopter_gunner", level.teamkillreducedpenalty);
   killstreaks::devgui_scorestreak_command("helicopter_gunner", "Debug Paths", "toggle scr_devHeliPathsDebugDraw 1 0");
-  killstreaks::register("helicopter_gunner_assistant", "helicopter_gunner_assistant", "killstreak_" + "helicopter_gunner_assistant", "helicopter_used", & activatesupportgunner, 1, undefined, 0, 0);
-  killstreaks::register_strings("helicopter_gunner_assistant", & "KILLSTREAK_EARNED_HELICOPTER_GUNNER", & "KILLSTREAK_HELICOPTER_GUNNER_NOT_AVAILABLE", & "KILLSTREAK_HELICOPTER_GUNNER_INBOUND", undefined, & "KILLSTREAK_HELICOPTER_GUNNER_HACKED");
+  killstreaks::register("helicopter_gunner_assistant", "helicopter_gunner_assistant", "killstreak_" + "helicopter_gunner_assistant", "helicopter_used", &activatesupportgunner, 1, undefined, 0, 0);
+  killstreaks::register_strings("helicopter_gunner_assistant", &"KILLSTREAK_EARNED_HELICOPTER_GUNNER", &"KILLSTREAK_HELICOPTER_GUNNER_NOT_AVAILABLE", &"KILLSTREAK_HELICOPTER_GUNNER_INBOUND", undefined, &"KILLSTREAK_HELICOPTER_GUNNER_HACKED");
   killstreaks::register_dialog("helicopter_gunner_assistant", "mpl_killstreak_osprey_strt", "helicopterGunnerDialogBundle", "helicopterGunnerPilotDialogBundle", "friendlyHelicopterGunner", "enemyHelicopterGunner", "enemyHelicopterGunnerMultiple", "friendlyHelicopterGunnerHacked", "enemyHelecopterGunnerHacked", "requestHelicopterGunner", "threatHelicopterGunner");
   killstreaks::set_team_kill_penalty_scale("helicopter_gunner_assistant", level.teamkillreducedpenalty);
   level.killstreaks["helicopter_gunner"].threatonkill = 1;
-  callback::on_connect( & onplayerconnect);
-  callback::on_spawned( & updateplayerstate);
-  callback::on_joined_team( & updateplayerstate);
-  callback::on_joined_spectate( & updateplayerstate);
-  callback::on_disconnect( & updateplayerstate);
-  callback::on_player_killed( & updateplayerstate);
+  callback::on_connect(&onplayerconnect);
+  callback::on_spawned(&updateplayerstate);
+  callback::on_joined_team(&updateplayerstate);
+  callback::on_joined_spectate(&updateplayerstate);
+  callback::on_disconnect(&updateplayerstate);
+  callback::on_player_killed(&updateplayerstate);
   clientfield::register("vehicle", "vtol_turret_destroyed_0", 1, 1, "int");
   clientfield::register("vehicle", "vtol_turret_destroyed_1", 1, 1, "int");
   clientfield::register("vehicle", "mothership", 1, 1, "int");
   clientfield::register("toplayer", "vtol_update_client", 1, 1, "counter");
   clientfield::register("toplayer", "fog_bank_2", 1, 1, "int");
-  visionset_mgr::register_info("visionset", "mothership_visionset", 1, 70, 16, 1, & visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
+  visionset_mgr::register_info("visionset", "mothership_visionset", 1, 70, 16, 1, &visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
   level thread waitforgameendthread();
   level.vtol = undefined;
 }
@@ -234,9 +234,9 @@ function spawnheligunner() {
   startnode = level.heli_primary_path[0];
   level.vtol = spawnvehicle("veh_bo3_mil_gunship_mp", startnode.origin, startnode.angles, "dynamic_spawn_ai");
   level.vtol killstreaks::configure_team("helicopter_gunner", killstreak_id, player, "helicopter");
-  level.vtol killstreak_hacking::enable_hacking("helicopter_gunner", & hackedprefunction, & hackedpostfunction);
+  level.vtol killstreak_hacking::enable_hacking("helicopter_gunner", &hackedprefunction, &hackedpostfunction);
   level.vtol.killstreak_id = killstreak_id;
-  level.vtol.destroyfunc = & deletehelicoptercallback;
+  level.vtol.destroyfunc = &deletehelicoptercallback;
   level.vtol.hardpointtype = "helicopter_gunner";
   level.vtol clientfield::set("enemyvehicle", 1);
   level.vtol clientfield::set("vtol_turret_destroyed_0", 0);
@@ -252,9 +252,9 @@ function spawnheligunner() {
   level.vtol.usage = [];
   inithelicopterseat(0, "tag_gunner_barrel1");
   inithelicopterseat(1, "tag_gunner_barrel2");
-  level.destructible_callbacks["turret_destroyed"] = & vtoldestructiblecallback;
-  level.destructible_callbacks["turret1_destroyed"] = & vtoldestructiblecallback;
-  level.destructible_callbacks["turret2_destroyed"] = & vtoldestructiblecallback;
+  level.destructible_callbacks["turret_destroyed"] = &vtoldestructiblecallback;
+  level.destructible_callbacks["turret1_destroyed"] = &vtoldestructiblecallback;
+  level.destructible_callbacks["turret2_destroyed"] = &vtoldestructiblecallback;
   level.vtol.shuttingdown = 0;
   level.vtol thread playlockonsoundsthread(player, level.vtol);
   level.vtol thread helicopter::wait_for_killed();
@@ -279,9 +279,9 @@ function spawnheligunner() {
   level.vtol.totalrockethits = 0;
   level.vtol.turretrockethits = 0;
   level.vtol.targetent = undefined;
-  level.vtol.overridevehicledamage = & helicoptergunnerdamageoverride;
-  level.vtol.hackedhealthupdatecallback = & helicoptergunner_hacked_health_callback;
-  level.vtol.detonateviaemp = & helicoptedetonateviaemp;
+  level.vtol.overridevehicledamage = &helicoptergunnerdamageoverride;
+  level.vtol.hackedhealthupdatecallback = &helicoptergunner_hacked_health_callback;
+  level.vtol.detonateviaemp = &helicoptedetonateviaemp;
   player thread killstreaks::play_killstreak_start_dialog("helicopter_gunner", player.team, killstreak_id);
   level.vtol killstreaks::play_pilot_dialog_on_owner("arrive", "helicopter_gunner", killstreak_id);
   player addweaponstat(getweapon("helicopter_player_gunner"), "used", 1);
@@ -313,7 +313,7 @@ function waitforvtolshutdownthread() {
   helicopter = self;
   helicopter waittill("vtol_shutdown", attacker);
   if(isDefined(attacker)) {
-    luinotifyevent(&"player_callout", 2, & "KILLSTREAK_DESTROYED_HELICOPTER_GUNNER", attacker.entnum);
+    luinotifyevent(&"player_callout", 2, &"KILLSTREAK_DESTROYED_HELICOPTER_GUNNER", attacker.entnum);
   }
   if(isDefined(helicopter.targetent)) {
     target_remove(helicopter.targetent);
@@ -475,7 +475,7 @@ function mainturretdestroyed(helicopter, eattacker, weapon) {
   updateallkillstreakinventory();
   eattacker = self[[level.figure_out_attacker]](eattacker);
   if(!isDefined(helicopter.destroyscoreeventgiven) && isDefined(eattacker) && (!isDefined(helicopter.owner) || helicopter.owner util::isenemyplayer(eattacker))) {
-    luinotifyevent(&"player_callout", 2, & "KILLSTREAK_HELICOPTER_GUNNER_DAMAGED", eattacker.entnum);
+    luinotifyevent(&"player_callout", 2, &"KILLSTREAK_HELICOPTER_GUNNER_DAMAGED", eattacker.entnum);
     challenges::destroyedaircraft(eattacker, weapon, 1);
     eattacker challenges::addflyswatterstat(weapon, helicopter);
     scoreevents::processscoreevent("destroyed_vtol_mothership", eattacker, helicopter.owner, weapon);
@@ -714,7 +714,7 @@ function helicoptergunnerdamageoverride(einflictor, eattacker, idamage, idflags,
     updateallkillstreakinventory();
     if(!isDefined(helicopter.destroyscoreeventgiven) && isDefined(eattacker) && (!isDefined(helicopter.owner) || helicopter.owner util::isenemyplayer(eattacker))) {
       eattacker = self[[level.figure_out_attacker]](eattacker);
-      luinotifyevent(&"player_callout", 2, & "KILLSTREAK_HELICOPTER_GUNNER_DAMAGED", eattacker.entnum);
+      luinotifyevent(&"player_callout", 2, &"KILLSTREAK_HELICOPTER_GUNNER_DAMAGED", eattacker.entnum);
       scoreevents::processscoreevent("destroyed_vtol_mothership", eattacker, helicopter.owner, weapon);
       helicopter killstreaks::play_destroyed_dialog_on_owner("helicopter_gunner", helicopter.killstreak_id);
       helicopter.destroyscoreeventgiven = 1;
@@ -886,7 +886,7 @@ function helicopterthinkthread(startnode, destnodes) {
     self.killstreak_duration = (self.killstreak_timer_start_using_hacked_time === 1 ? self killstreak_hacking::get_hacked_timeout_duration_ms() : 60000);
     self.killstreak_end_time = gettime() + self.killstreak_duration;
     self.killstreakendtime = int(self.killstreak_end_time);
-    self thread killstreaks::waitfortimeout("helicopter_gunner", self.killstreak_duration, & ontimeoutcallback, "delete", "death");
+    self thread killstreaks::waitfortimeout("helicopter_gunner", self.killstreak_duration, &ontimeoutcallback, "delete", "death");
     self.killstreak_timer_started = 1;
     self updatedrivabletimeforalloccupants(self.killstreak_duration, self.killstreak_end_time);
     firstpass = 0;

@@ -30,8 +30,8 @@
 
 function autoexec init() {
   initthrasherbehaviorsandasm();
-  spawner::add_archetype_spawn_function("human_clone", & archetypecloneblackboardinit);
-  spawner::add_archetype_spawn_function("human_clone", & clonespawnsetup);
+  spawner::add_archetype_spawn_function("human_clone", &archetypecloneblackboardinit);
+  spawner::add_archetype_spawn_function("human_clone", &clonespawnsetup);
 }
 
 function private initthrasherbehaviorsandasm() {}
@@ -41,7 +41,7 @@ function private archetypecloneblackboardinit() {
   blackboard::createblackboardforentity(entity);
   entity aiutility::registerutilityblackboardattributes();
   ai::createinterfaceforentity(entity);
-  entity.___archetypeonanimscriptedcallback = & archetypecloneonanimscriptedcallback;
+  entity.___archetypeonanimscriptedcallback = &archetypecloneonanimscriptedcallback;
   entity finalizetrackedblackboardattributes();
 }
 

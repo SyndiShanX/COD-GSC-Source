@@ -20,24 +20,24 @@ function autoexec init() {
   mapname = getdvarstring("mapname");
   if(mapname == "cp_mi_sing_sgen") {
     namespace_e15266b8::init_voice();
-    level.bzm_sgendialogue1callback = & function_1304b9f1;
-    level.bzm_sgendialogue1_1callback = & function_4a08b9b5;
-    level.bzm_sgendialogue1_2callback = & function_700b341e;
-    level.bzm_sgendialogue1_3callback = & function_960dae87;
+    level.bzm_sgendialogue1callback = &function_1304b9f1;
+    level.bzm_sgendialogue1_1callback = &function_4a08b9b5;
+    level.bzm_sgendialogue1_2callback = &function_700b341e;
+    level.bzm_sgendialogue1_3callback = &function_960dae87;
     level flag::init("BZM_SGENDialogue1_3");
-    level.bzm_sgendialogue1_3callback_waittill_done = & function_1dfa8915;
-    level.bzm_sgendialogue2callback = & function_3907345a;
-    level.bzm_sgendialogue2_1callback = & function_7752cc92;
-    level.bzm_sgendialogue3callback = & function_5f09aec3;
-    level.bzm_sgendialogue4callback = & function_850c292c;
-    level.bzm_sgendialogue4_1callback = & function_1230a890;
-    level.bzm_sgendialogue5callback = & function_ab0ea395;
-    level.bzm_sgendialogue6callback = & function_d1111dfe;
-    level.bzm_sgendialogue7callback = & function_f7139867;
-    level.bzm_sgendialogue8callback = & function_bcee6c40;
-    level.bzm_sgendialogue8_1callback = & function_549842dc;
-    level.bzm_sgendialogue8_2callback = & function_c69fb217;
-    level.bzm_sgendialogue9callback = & function_e2f0e6a9;
+    level.bzm_sgendialogue1_3callback_waittill_done = &function_1dfa8915;
+    level.bzm_sgendialogue2callback = &function_3907345a;
+    level.bzm_sgendialogue2_1callback = &function_7752cc92;
+    level.bzm_sgendialogue3callback = &function_5f09aec3;
+    level.bzm_sgendialogue4callback = &function_850c292c;
+    level.bzm_sgendialogue4_1callback = &function_1230a890;
+    level.bzm_sgendialogue5callback = &function_ab0ea395;
+    level.bzm_sgendialogue6callback = &function_d1111dfe;
+    level.bzm_sgendialogue7callback = &function_f7139867;
+    level.bzm_sgendialogue8callback = &function_bcee6c40;
+    level.bzm_sgendialogue8_1callback = &function_549842dc;
+    level.bzm_sgendialogue8_2callback = &function_c69fb217;
+    level.bzm_sgendialogue9callback = &function_e2f0e6a9;
   }
 }
 

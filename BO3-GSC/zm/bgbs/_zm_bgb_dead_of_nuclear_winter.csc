@@ -12,7 +12,7 @@
 #namespace zm_bgb_dead_of_nuclear_winter;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_dead_of_nuclear_winter", & __init__, undefined, undefined);
+  system::register("zm_bgb_dead_of_nuclear_winter", &__init__, undefined, undefined);
 }
 
 function __init__() {

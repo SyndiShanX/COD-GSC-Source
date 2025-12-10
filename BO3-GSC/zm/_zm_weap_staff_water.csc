@@ -10,13 +10,13 @@
 #namespace zm_weap_staff_water;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_staff_water", & __init__, undefined, undefined);
+  system::register("zm_weap_staff_water", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "staff_blizzard_fx", 21000, 1, "int", & staff_blizzard_fx, 1, 0);
-  clientfield::register("actor", "attach_bullet_model", 21000, 1, "int", & attach_model, 0, 0);
-  clientfield::register("actor", "staff_shatter_fx", 21000, 1, "int", & staff_shatter_fx, 0, 0);
+  clientfield::register("scriptmover", "staff_blizzard_fx", 21000, 1, "int", &staff_blizzard_fx, 1, 0);
+  clientfield::register("actor", "attach_bullet_model", 21000, 1, "int", &attach_model, 0, 0);
+  clientfield::register("actor", "staff_shatter_fx", 21000, 1, "int", &staff_shatter_fx, 0, 0);
   level._effect["staff_water_blizzard"] = "dlc5/zmb_weapon/fx_staff_ice_impact_ug_hit";
   level._effect["staff_water_ice_shard"] = "dlc5/zmb_weapon/fx_staff_ice_trail_bolt";
   level._effect["staff_water_shatter"] = "dlc5/zmb_weapon/fx_staff_ice_exp";

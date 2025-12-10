@@ -18,7 +18,7 @@
 #namespace zm_weap_shrink_ray;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_shrink_ray", & __init__, & __main__, undefined);
+  system::register("zm_weap_shrink_ray", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -30,11 +30,11 @@ function __init__() {
   level._effect["shrink_ray_stepped_on_no_gore"] = "dlc5/temple/fx_ztem_monkey_shrink";
   level._effect["shrink"] = "dlc5/zmb_weapon/fx_shrink_ray_zombie_shrink";
   level._effect["unshrink"] = "dlc5/zmb_weapon/fx_shrink_ray_zombie_unshrink";
-  callback::on_spawned( & function_37ce705e);
+  callback::on_spawned(&function_37ce705e);
   level.var_c50bd012 = [];
   level.w_shrink_ray = getweapon("shrink_ray");
   level.w_shrink_ray_upgraded = getweapon("shrink_ray_upgraded");
-  zm::register_player_damage_callback( & function_19171a77);
+  zm::register_player_damage_callback(&function_19171a77);
 }
 
 function __main__() {
@@ -239,7 +239,7 @@ function shrink_zombie(upgraded, attacker) {
       self thread function_6d284e94();
       self thread function_643fa9c8();
       self thread watch_for_death();
-      self.zombie_board_tear_down_callback = & function_8b44a1f8;
+      self.zombie_board_tear_down_callback = &function_8b44a1f8;
       if(isDefined(self._zombie_shrink_callback)) {
         self[[self._zombie_shrink_callback]]();
       }

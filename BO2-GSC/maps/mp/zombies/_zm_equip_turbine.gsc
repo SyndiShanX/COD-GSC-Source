@@ -14,10 +14,10 @@
 
 init(hint, howto) {
   if(!isDefined(hint))
-    hint = & "ZOMBIE_EQUIP_TURBINE_PICKUP_HINT_STRING";
+    hint = &"ZOMBIE_EQUIP_TURBINE_PICKUP_HINT_STRING";
 
   if(!isDefined(howto))
-    howto = & "ZOMBIE_EQUIP_TURBINE_HOWTO";
+    howto = &"ZOMBIE_EQUIP_TURBINE_HOWTO";
 
   if(!maps\mp\zombies\_zm_equipment::is_equipment_included("equip_turbine_zm")) {
     return;

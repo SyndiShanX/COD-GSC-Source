@@ -21,7 +21,7 @@ init_teleport_portals() {
 }
 
 register_portal_interactions() {
-  level.interaction_hintstrings["portal_console"] = & "CP_TOWN_INTERACTIONS_ATM_DEPOSIT";
+  level.interaction_hintstrings["portal_console"] = &"CP_TOWN_INTERACTIONS_ATM_DEPOSIT";
   scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(0, "portal_console", undefined, undefined, ::portal_console_hint_func, ::portal_console_activate_func, 0, 1, ::portal_console_init_func);
   scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(0, "portal_gun_button", undefined, undefined, ::portal_gun_hint_func, ::portal_gun_activate_func, 0, 1, ::portal_gun_init_func);
 }
@@ -783,7 +783,7 @@ turn_on_room_exit_portal() {
 
 teleport_from_hidden_room_before_time_up(param_00) {
   param_00 makeusable();
-  param_00 sethintstring( & "CP_FINAL_INTERACTIONS_EXIT_PAP_ROOM");
+  param_00 sethintstring(&"CP_FINAL_INTERACTIONS_EXIT_PAP_ROOM");
   param_00.portal_is_open = 1;
   for(;;) {
     param_00 waittill("trigger", var_01);

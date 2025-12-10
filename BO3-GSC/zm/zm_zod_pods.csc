@@ -18,18 +18,18 @@
 #namespace zm_zod_pods;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_pods", & __init__, undefined, undefined);
+  system::register("zm_zod_pods", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "ZM_ZOD_UI_POD_SPRAYER_PICKUP", 1, 1, "int", & zm_utility::zm_ui_infotext, 0, 1);
-  clientfield::register("scriptmover", "update_fungus_pod_level", 1, 3, "int", & update_fungus_pod_level, 0, 0);
-  clientfield::register("scriptmover", "pod_sprayer_glint", 1, 1, "int", & pod_sprayer_glint, 0, 0);
-  clientfield::register("scriptmover", "pod_miasma", 1, 1, "counter", & function_59408649, 0, 0);
-  clientfield::register("scriptmover", "pod_harvest", 1, 1, "counter", & play_harvested_fx, 0, 0);
-  clientfield::register("scriptmover", "pod_self_destruct", 1, 1, "counter", & pod_self_destruct, 0, 0);
-  clientfield::register("toplayer", "pod_sprayer_held", 1, 1, "int", & zm_utility::setinventoryuimodels, 0, 1);
-  clientfield::register("toplayer", "pod_sprayer_hint_range", 1, 1, "int", & zm_utility::setinventoryuimodels, 0, 0);
+  clientfield::register("toplayer", "ZM_ZOD_UI_POD_SPRAYER_PICKUP", 1, 1, "int", &zm_utility::zm_ui_infotext, 0, 1);
+  clientfield::register("scriptmover", "update_fungus_pod_level", 1, 3, "int", &update_fungus_pod_level, 0, 0);
+  clientfield::register("scriptmover", "pod_sprayer_glint", 1, 1, "int", &pod_sprayer_glint, 0, 0);
+  clientfield::register("scriptmover", "pod_miasma", 1, 1, "counter", &function_59408649, 0, 0);
+  clientfield::register("scriptmover", "pod_harvest", 1, 1, "counter", &play_harvested_fx, 0, 0);
+  clientfield::register("scriptmover", "pod_self_destruct", 1, 1, "counter", &pod_self_destruct, 0, 0);
+  clientfield::register("toplayer", "pod_sprayer_held", 1, 1, "int", &zm_utility::setinventoryuimodels, 0, 1);
+  clientfield::register("toplayer", "pod_sprayer_hint_range", 1, 1, "int", &zm_utility::setinventoryuimodels, 0, 0);
   scene::init("p7_fxanim_zm_zod_fungus_pod_stage1_bundle");
   scene::init("p7_fxanim_zm_zod_fungus_pod_stage1_death_bundle");
   scene::init("p7_fxanim_zm_zod_fungus_pod_stage2_bundle");

@@ -12,16 +12,16 @@
 #namespace mirg2000;
 
 function autoexec __init__sytem__() {
-  system::register("mirg2000", & __init__, undefined, undefined);
+  system::register("mirg2000", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "plant_killer", 9000, getminbitcountfornum(4), "int", & function_23a70949, 0, 0);
-  clientfield::register("vehicle", "mirg2000_spider_death_fx", 9000, 2, "int", & function_1d3d9723, 0, 0);
-  clientfield::register("actor", "mirg2000_enemy_impact_fx", 9000, 2, "int", & function_15ad909d, 0, 0);
-  clientfield::register("vehicle", "mirg2000_enemy_impact_fx", 9000, 2, "int", & function_15ad909d, 0, 0);
-  clientfield::register("allplayers", "mirg2000_fire_button_held_sound", 9000, 1, "int", & mirg2000_fire_button_held_sound, 0, 0);
-  clientfield::register("toplayer", "mirg2000_charge_glow", 9000, 2, "int", & mirg2000_charge_glow, 0, 0);
+  clientfield::register("scriptmover", "plant_killer", 9000, getminbitcountfornum(4), "int", &function_23a70949, 0, 0);
+  clientfield::register("vehicle", "mirg2000_spider_death_fx", 9000, 2, "int", &function_1d3d9723, 0, 0);
+  clientfield::register("actor", "mirg2000_enemy_impact_fx", 9000, 2, "int", &function_15ad909d, 0, 0);
+  clientfield::register("vehicle", "mirg2000_enemy_impact_fx", 9000, 2, "int", &function_15ad909d, 0, 0);
+  clientfield::register("allplayers", "mirg2000_fire_button_held_sound", 9000, 1, "int", &mirg2000_fire_button_held_sound, 0, 0);
+  clientfield::register("toplayer", "mirg2000_charge_glow", 9000, 2, "int", &mirg2000_charge_glow, 0, 0);
   level._effect["mirg2000_charged_shot_1"] = "dlc2/zmb_weapon/fx_mirg_impact_aoe_chrg2";
   level._effect["mirg2000_charged_shot_2"] = "dlc2/zmb_weapon/fx_mirg_impact_aoe_chrg3";
   level._effect["mirg2000_charged_shot_1_up"] = "dlc2/zmb_weapon/fx_mirg_impact_aoe_chrg2_ug";

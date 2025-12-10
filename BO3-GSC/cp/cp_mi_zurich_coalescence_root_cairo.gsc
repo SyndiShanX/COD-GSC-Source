@@ -35,8 +35,8 @@ function main() {
   level._effect["explosion_medium"] = "explosions/fx_exp_debris_metal_md";
   level._effect["explosion_large"] = "explosions/fx_exp_sky_bridge_lotus";
   level thread function_54b0174d();
-  scene::add_scene_func("p7_fxanim_cp_zurich_wall_drop_bundle", & zurich_util::function_9f90bc0f, "done", "cairo_root_completed");
-  scene::add_scene_func("p7_fxanim_cp_zurich_checkpoint_wall_01_bundle", & zurich_util::function_9f90bc0f, "done", "cairo_root_completed");
+  scene::add_scene_func("p7_fxanim_cp_zurich_wall_drop_bundle", &zurich_util::function_9f90bc0f, "done", "cairo_root_completed");
+  scene::add_scene_func("p7_fxanim_cp_zurich_checkpoint_wall_01_bundle", &zurich_util::function_9f90bc0f, "done", "cairo_root_completed");
 }
 
 function init_clientfields() {
@@ -56,8 +56,8 @@ function skipto_main(str_objective, b_starting) {
   exploder::exploder("weather_lightning_exp");
   var_4ccf970 = zurich_util::function_a00fa665(str_objective);
   zurich_util::enable_surreal_ai_fx(1, 0.5);
-  spawner::add_spawn_function_group("raven_ambush_ai", "script_parameters", & zurich_util::function_aceff870);
-  spawner::add_spawn_function_group("raven_spawn_teleport", "script_parameters", & zurich_util::function_3287bea1);
+  spawner::add_spawn_function_group("raven_ambush_ai", "script_parameters", &zurich_util::function_aceff870);
+  spawner::add_spawn_function_group("raven_spawn_teleport", "script_parameters", &zurich_util::function_3287bea1);
   level thread namespace_67110270::function_1935b4aa();
   level thread function_42dddb91(str_objective);
   level clientfield::set("cairo_client_ents", 1);
@@ -165,20 +165,20 @@ function function_d3f1996d(str_objective) {
 }
 
 function function_962eebf2(str_objective) {
-  array::run_all(level.players, & freezecontrols, 1);
-  array::run_all(level.players, & enableinvulnerability);
+  array::run_all(level.players, &freezecontrols, 1);
+  array::run_all(level.players, &enableinvulnerability);
   level scene::init("cin_zur_14_01_cairo_root_1st_fall");
   level util::streamer_wait();
   level thread util::screen_fade_in(1);
-  array::thread_all(level.players, & clientfield::increment_to_player, "postfx_transition");
+  array::thread_all(level.players, &clientfield::increment_to_player, "postfx_transition");
   playsoundatposition("evt_clearing_trans_in", (0, 0, 0));
   if(isDefined(level.bzm_zurichdialogue15callback)) {
     level thread[[level.bzm_zurichdialogue15callback]]();
   }
   level scene::play("cin_zur_14_01_cairo_root_1st_fall");
   level util::teleport_players_igc("root_cairo_intro_end");
-  array::run_all(level.players, & freezecontrols, 0);
-  array::run_all(level.players, & disableinvulnerability);
+  array::run_all(level.players, &freezecontrols, 0);
+  array::run_all(level.players, &disableinvulnerability);
   util::clear_streamer_hint();
   savegame::checkpoint_save();
   level thread zurich_util::function_c90e23b6(str_objective, "breadcrumb_cairoroot_3");
@@ -186,8 +186,8 @@ function function_962eebf2(str_objective) {
 }
 
 function function_4cca3b70() {
-  scene::add_scene_func("p7_fxanim_cp_zurich_wall_drop_bundle", & function_fe87d3eb, "done");
-  scene::add_scene_func("p7_fxanim_cp_zurich_wall_drop_bundle", & function_e3c9dd29, "play");
+  scene::add_scene_func("p7_fxanim_cp_zurich_wall_drop_bundle", &function_fe87d3eb, "done");
+  scene::add_scene_func("p7_fxanim_cp_zurich_wall_drop_bundle", &function_e3c9dd29, "play");
   level thread function_ef1ee0c7();
   var_15ecae1 = getent("trigger_vtol_arrival", "targetname");
   var_15ecae1 waittill("trigger");
@@ -236,8 +236,8 @@ function function_899f9f96() {
 }
 
 function function_6559d2b2() {
-  scene::add_scene_func("p7_fxanim_cp_zurich_checkpoint_wall_01_bundle", & function_c5b12ba9, "init");
-  scene::add_scene_func("p7_fxanim_cp_zurich_checkpoint_wall_01_bundle", & function_73238a8, "play");
+  scene::add_scene_func("p7_fxanim_cp_zurich_checkpoint_wall_01_bundle", &function_c5b12ba9, "init");
+  scene::add_scene_func("p7_fxanim_cp_zurich_checkpoint_wall_01_bundle", &function_73238a8, "play");
   trigger::wait_till("trig_cairo_arena_start", "script_noteworthy");
   spawn_manager::enable("sm_cairo_wall_02");
   spawn_manager::enable("sm_cairo_ambush");
@@ -329,7 +329,7 @@ function function_42dddb91(str_objective) {
 
 function function_c3dca267() {
   var_765ae49e = getEntArray("cairo_vortex_spawn", "targetname");
-  array::thread_all(var_765ae49e, & function_24c08a2f);
+  array::thread_all(var_765ae49e, &function_24c08a2f);
 }
 
 function function_24c08a2f() {
@@ -337,7 +337,7 @@ function function_24c08a2f() {
   var_66b68fff = getEntArray(self.target, "targetname");
   self delete();
   for(i = 0; i < var_66b68fff.size; i++) {
-    ai_raps = spawner::simple_spawn_single(var_66b68fff[i], & zurich_util::ai_surreal_spawn_fx);
+    ai_raps = spawner::simple_spawn_single(var_66b68fff[i], &zurich_util::ai_surreal_spawn_fx);
     if(isDefined(var_66b68fff[i].script_noteworthy)) {
       ai_raps.animname = var_66b68fff[i].script_noteworthy;
       ai_raps vehicle_ai::set_state("scripted");

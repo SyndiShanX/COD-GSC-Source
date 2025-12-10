@@ -42,7 +42,7 @@ function skipto_temple_init(str_objective, b_starting) {
   if(b_starting) {
     load::function_73adcefc();
     vengeance_util::skipto_baseline(str_objective, b_starting);
-    callback::on_spawned( & vengeance_util::give_hero_weapon);
+    callback::on_spawned(&vengeance_util::give_hero_weapon);
     vengeance_util::init_hero("hendricks", str_objective);
     level thread vengeance_util::function_cc6f3598();
     level thread vengeance_util::function_3f34106b();
@@ -57,48 +57,48 @@ function skipto_temple_init(str_objective, b_starting) {
 
 function temple_main(str_objective) {
   stealth::reset();
-  level.var_67e1f60e[level.var_67e1f60e.size] = & function_591ead63;
+  level.var_67e1f60e[level.var_67e1f60e.size] = &function_591ead63;
   level flag::set("temple_begin");
   setdvar("scr_security_breach_lose_contact_distance", 36000);
   setdvar("scr_security_breach_lost_contact_distance", 72000);
   level thread namespace_523da15d::function_a6fadcaa();
   level thread temple_vo();
   level.ai_hendricks thread setup_temple_hendricks();
-  spawner::add_spawn_function_group("temple_ambient_civilian", "script_noteworthy", & function_8e6475bd);
+  spawner::add_spawn_function_group("temple_ambient_civilian", "script_noteworthy", &function_8e6475bd);
   level thread function_47dc557f();
   level thread function_a86ac59d();
   level thread setup_breakable_garden_windows();
   vengeance_util::function_e00864bd("office_umbra_gate", 0, "office_gate");
-  level.temple_patroller_spawners = spawner::simple_spawn("temple_patroller_spawners", & function_e8f0e2bd);
+  level.temple_patroller_spawners = spawner::simple_spawn("temple_patroller_spawners", &function_e8f0e2bd);
   level thread function_f8f4e73e();
   level thread vengeance_util::function_e3420328("temple_ambient_anims", "dogleg_2_at_end");
   level thread scene::play("cin_ven_05_20_pond_floaters_vign");
-  spawner::add_spawn_function_group("drowncivilian_enemy", "targetname", & function_558af5fd, undefined, "cin_ven_05_22_drowncivilian_civdeath_vign", "cin_ven_05_22_drowncivilian_enemyreact_vign", undefined);
+  spawner::add_spawn_function_group("drowncivilian_enemy", "targetname", &function_558af5fd, undefined, "cin_ven_05_22_drowncivilian_civdeath_vign", "cin_ven_05_22_drowncivilian_enemyreact_vign", undefined);
   level thread scene::play("cin_ven_05_22_drowncivilian_vign");
-  spawner::add_spawn_function_group("rocksmash_enemy", "targetname", & function_558af5fd, undefined, "cin_ven_05_21_rocksmash_civdeath_vign", "cin_ven_05_21_rocksmash_enemyreact_vign", "rocksmash_boulder");
+  spawner::add_spawn_function_group("rocksmash_enemy", "targetname", &function_558af5fd, undefined, "cin_ven_05_21_rocksmash_civdeath_vign", "cin_ven_05_21_rocksmash_enemyreact_vign", "rocksmash_boulder");
   var_6a07eb6c = [];
   var_6a07eb6c[0] = "rocksmash_civilian";
-  scene::add_scene_func("cin_ven_05_21_rocksmash_vign", & vengeance_util::function_65a61b78, "play", var_6a07eb6c);
+  scene::add_scene_func("cin_ven_05_21_rocksmash_vign", &vengeance_util::function_65a61b78, "play", var_6a07eb6c);
   level thread scene::play("cin_ven_05_21_rocksmash_vign");
-  spawner::add_spawn_function_group("slicendice_enemy", "targetname", & function_558af5fd, undefined, "cin_ven_05_23_slicendice_civdeath_vign", undefined, "slicendice_machete");
+  spawner::add_spawn_function_group("slicendice_enemy", "targetname", &function_558af5fd, undefined, "cin_ven_05_23_slicendice_civdeath_vign", undefined, "slicendice_machete");
   var_6a07eb6c = [];
   var_6a07eb6c[0] = "slicendice_civilian";
-  scene::add_scene_func("cin_ven_05_23_slicendice_vign", & vengeance_util::function_65a61b78, "play", var_6a07eb6c);
+  scene::add_scene_func("cin_ven_05_23_slicendice_vign", &vengeance_util::function_65a61b78, "play", var_6a07eb6c);
   level thread scene::play("cin_ven_05_23_slicendice_vign");
-  spawner::add_spawn_function_group("beatdown_enemy", "targetname", & function_558af5fd, undefined, "cin_ven_05_26_beatdown_civdeath_vign", undefined, undefined);
+  spawner::add_spawn_function_group("beatdown_enemy", "targetname", &function_558af5fd, undefined, "cin_ven_05_26_beatdown_civdeath_vign", undefined, undefined);
   level thread scene::play("cin_ven_05_26_beatdown_vign");
-  spawner::add_spawn_function_group("execution_lineup_enemy", "targetname", & function_558af5fd, undefined, "cin_ven_05_24_execution_lineup_civdeath_vign", undefined, undefined);
+  spawner::add_spawn_function_group("execution_lineup_enemy", "targetname", &function_558af5fd, undefined, "cin_ven_05_24_execution_lineup_civdeath_vign", undefined, undefined);
   level thread scene::play("cin_ven_05_24_execution_lineup_vign");
-  spawner::add_spawn_function_group("ammorestock_en3", "targetname", & function_558af5fd, undefined, undefined, "cin_ven_05_27_ammorestock_enemyreact_vign", undefined);
+  spawner::add_spawn_function_group("ammorestock_en3", "targetname", &function_558af5fd, undefined, undefined, "cin_ven_05_27_ammorestock_enemyreact_vign", undefined);
   level thread scene::play("cin_ven_05_27_ammorestock_vign");
-  spawner::add_spawn_function_group("grassstomp_enemy", "targetname", & function_558af5fd, undefined, "cin_ven_05_28_grassstomp_civdeath_vign", undefined, undefined);
+  spawner::add_spawn_function_group("grassstomp_enemy", "targetname", &function_558af5fd, undefined, "cin_ven_05_28_grassstomp_civdeath_vign", undefined, undefined);
   level thread scene::play("cin_ven_05_28_grassstomp_vign");
-  spawner::add_spawn_function_group("railbeatdown_enemy", "targetname", & function_558af5fd, undefined, "cin_ven_05_29_rail_beatdown_civdeath_vign", "cin_ven_05_29_rail_beatdown_enemyreact_vign", undefined);
+  spawner::add_spawn_function_group("railbeatdown_enemy", "targetname", &function_558af5fd, undefined, "cin_ven_05_29_rail_beatdown_civdeath_vign", "cin_ven_05_29_rail_beatdown_enemyreact_vign", undefined);
   var_6a07eb6c = [];
   var_6a07eb6c[0] = "railbeatdown_civ";
-  scene::add_scene_func("cin_ven_05_29_rail_beatdown_vign", & vengeance_util::function_65a61b78, "play", var_6a07eb6c);
+  scene::add_scene_func("cin_ven_05_29_rail_beatdown_vign", &vengeance_util::function_65a61b78, "play", var_6a07eb6c);
   level thread scene::play("cin_ven_05_29_rail_beatdown_vign");
-  spawner::add_spawn_function_group("wallbeatdown_enemy1", "targetname", & function_558af5fd, undefined, "cin_ven_05_32_wall_beatdown_civdeath_vign", "cin_ven_05_32_wall_beatdown_enemyreact_vign", undefined);
+  spawner::add_spawn_function_group("wallbeatdown_enemy1", "targetname", &function_558af5fd, undefined, "cin_ven_05_32_wall_beatdown_civdeath_vign", "cin_ven_05_32_wall_beatdown_enemyreact_vign", undefined);
   level thread scene::play("cin_ven_05_32_wall_beatdown_vign");
   level thread function_ea758541("temple_rooftop_sniper_trigger", "targetname");
   triggers = getEntArray("temple_stealth_checkpoint_trigger", "targetname");
@@ -253,7 +253,7 @@ function function_e8f0e2bd() {
 }
 
 function function_47dc557f() {
-  level.var_47dc557f = spawner::simple_spawn("temple_wasps", & function_a044ee0);
+  level.var_47dc557f = spawner::simple_spawn("temple_wasps", &function_a044ee0);
 }
 
 function function_a044ee0() {
@@ -515,13 +515,13 @@ function temple_vo() {
 function function_a86ac59d() {
   level endon("hash_29964e40");
   level flag::wait_till("stealth_discovered");
-  array::thread_all(getaiteamarray("axis"), & function_329c89f);
+  array::thread_all(getaiteamarray("axis"), &function_329c89f);
   level thread vengeance_util::function_e6399870("temple_molotov_trigger", "script_noteworthy", 2);
   level flag::set("enable_temple_robot_triggers");
   var_b264f09 = getEntArray("temple_robot_trigger", "targetname");
-  array::thread_all(var_b264f09, & function_dd797045);
+  array::thread_all(var_b264f09, &function_dd797045);
   stealth::function_26f24c93(0);
-  level thread vengeance_util::function_80840124( & function_e4612dd6);
+  level thread vengeance_util::function_80840124(&function_e4612dd6);
   level thread function_578145a3();
   while(true) {
     guys = getaiteamarray("axis");
@@ -647,7 +647,7 @@ function cleanup_temple() {
 
 function setup_breakable_garden_windows() {
   breakable_garden_windows = getEntArray("breakable_garden_window", "targetname");
-  array::thread_all(breakable_garden_windows, & breakable_garden_window_watcher);
+  array::thread_all(breakable_garden_windows, &breakable_garden_window_watcher);
 }
 
 function breakable_garden_window_watcher() {
@@ -729,7 +729,7 @@ function function_38bcd0() {
 function function_cf782b84() {
   e_trigger = getent("dogleg_2_door_entry_trigger", "targetname");
   e_trigger triggerenable(1);
-  e_door_use_object = util::init_interactive_gameobject(e_trigger, & "cp_prompt_enter_ven_doors", & "CP_MI_SING_VENGEANCE_HINT_OPEN", & function_863781f2);
+  e_door_use_object = util::init_interactive_gameobject(e_trigger, &"cp_prompt_enter_ven_doors", &"CP_MI_SING_VENGEANCE_HINT_OPEN", &function_863781f2);
   objectives::set("cp_level_vengeance_open_dogleg_2_menu");
   level notify("hash_479fadce");
   var_71678477 = getent("dogleg_2_entry_door_lf", "targetname");
@@ -803,7 +803,7 @@ function function_ca660ef7() {
 
 function function_ea758541(name, key) {
   var_fc0a0636 = getEntArray(name, key);
-  array::thread_all(var_fc0a0636, & function_8f9d056c);
+  array::thread_all(var_fc0a0636, &function_8f9d056c);
 }
 
 function function_3bb1295b() {

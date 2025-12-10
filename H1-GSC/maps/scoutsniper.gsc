@@ -124,18 +124,18 @@ main() {
   level.hearing_distance = 512;
   level.macmillan_exposed_cqb_radius = 8;
   maps\_utility::default_start(::start_intro);
-  maps\_utility::add_start("church", ::start_church, & "STARTS_CHURCH");
-  maps\_utility::add_start("church_x", ::start_church_x, & "STARTS_CHURCHX");
-  maps\_utility::add_start("graveyard", ::start_graveyard, & "STARTS_GRAVEYARD");
-  maps\_utility::add_start("graveyard_x", ::start_graveyard_x, & "STARTS_GRAVEYARDX");
-  maps\_utility::add_start("field", ::start_field, & "STARTS_FIELD");
-  maps\_utility::add_start("pond", ::start_pond, & "STARTS_POND");
-  maps\_utility::add_start("cargo", ::start_cargo, & "STARTS_CARGO");
-  maps\_utility::add_start("dash", ::start_dash, & "STARTS_DASH");
-  maps\_utility::add_start("town", ::start_town, & "STARTS_TOWN");
-  maps\_utility::add_start("dogs", ::start_dogs, & "STARTS_DOGS");
-  maps\_utility::add_start("center", ::start_center, & "STARTS_CENTER");
-  maps\_utility::add_start("end", ::start_end, & "STARTS_END");
+  maps\_utility::add_start("church", ::start_church, &"STARTS_CHURCH");
+  maps\_utility::add_start("church_x", ::start_church_x, &"STARTS_CHURCHX");
+  maps\_utility::add_start("graveyard", ::start_graveyard, &"STARTS_GRAVEYARD");
+  maps\_utility::add_start("graveyard_x", ::start_graveyard_x, &"STARTS_GRAVEYARDX");
+  maps\_utility::add_start("field", ::start_field, &"STARTS_FIELD");
+  maps\_utility::add_start("pond", ::start_pond, &"STARTS_POND");
+  maps\_utility::add_start("cargo", ::start_cargo, &"STARTS_CARGO");
+  maps\_utility::add_start("dash", ::start_dash, &"STARTS_DASH");
+  maps\_utility::add_start("town", ::start_town, &"STARTS_TOWN");
+  maps\_utility::add_start("dogs", ::start_dogs, &"STARTS_DOGS");
+  maps\_utility::add_start("center", ::start_center, &"STARTS_CENTER");
+  maps\_utility::add_start("end", ::start_end, &"STARTS_END");
   setsaveddvar("ai_friendlyFireBlockDuration", 0);
   maps\createart\scoutsniper_art::main();
   maps\_drone_ai::init();
@@ -4226,7 +4226,7 @@ objective_main() {
     wait 14;
   }
 
-  objective_add(1, "active", & "SCOUTSNIPER_FOLLOW_CPT_MACMILLAN");
+  objective_add(1, "active", &"SCOUTSNIPER_FOLLOW_CPT_MACMILLAN");
   objective_current(1);
   objective_onentity(1, level.price);
 }

@@ -1165,7 +1165,7 @@ player_behaviors_to_alert_drone() {
   level endon("sewer_move_up");
   level.player waittill_any("weapon_fired", "grenade_fire", "grenade_launcher_fire", "too_close");
   wait 0.5;
-  level notify("drone_detects_player", & "PAKISTAN_SHARED_DRONE_FAIL_SOUND");
+  level notify("drone_detects_player", &"PAKISTAN_SHARED_DRONE_FAIL_SOUND");
 }
 
 drone_detects_damage_for_alert() {
@@ -1179,7 +1179,7 @@ drone_detects_damage_for_alert() {
   else
     level.harper thread say_dialog("harp_what_are_you_doing_2", 1);
 
-  level notify("drone_detects_player", & "PAKISTAN_SHARED_DRONE_FAIL_SOUND");
+  level notify("drone_detects_player", &"PAKISTAN_SHARED_DRONE_FAIL_SOUND");
   self notify("player_shotme");
 }
 
@@ -1218,7 +1218,7 @@ drone_spotlight_detection() {
         else
           level.harper say_dialog("harp_dammit_it_s_seen_y_0", 1);
 
-        level notify("drone_detects_player", & "PAKISTAN_SHARED_DRONE_FAIL_SIGHT");
+        level notify("drone_detects_player", &"PAKISTAN_SHARED_DRONE_FAIL_SIGHT");
       }
     }
 

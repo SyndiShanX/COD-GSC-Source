@@ -18,8 +18,8 @@ function init_parameters() {
     level.pack_a_punch = spawnStruct();
     level.pack_a_punch.timeout = 15;
     level.pack_a_punch.interaction_height = 35;
-    level.pack_a_punch.move_in_func = & pap_weapon_move_in;
-    level.pack_a_punch.move_out_func = & pap_weapon_move_out;
+    level.pack_a_punch.move_in_func = &pap_weapon_move_in;
+    level.pack_a_punch.move_out_func = &pap_weapon_move_out;
     level.pack_a_punch.grabbable_by_anyone = 0;
     level.pack_a_punch.swap_attachments_on_reuse = 0;
     level.pack_a_punch.triggers = [];

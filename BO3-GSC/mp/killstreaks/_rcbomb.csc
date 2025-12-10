@@ -16,7 +16,7 @@
 #namespace rcbomb;
 
 function autoexec __init__sytem__() {
-  system::register("rcbomb", & __init__, undefined, undefined);
+  system::register("rcbomb", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -26,8 +26,8 @@ function __init__() {
   level._effect["rcbomb_friendly_light_blink"] = "killstreaks/fx_rcxd_lights_grn";
   level._effect["rcbomb_stunned"] = "_t6/weapon/grenade/fx_spark_disabled_rc_car";
   level.rcbombbundle = struct::get_script_bundle("killstreak", "killstreak_rcbomb");
-  clientfield::register("vehicle", "rcbomb_stunned", 1, 1, "int", & callback::callback_stunned, 0, 0);
-  vehicle::add_vehicletype_callback("rc_car_mp", & spawned);
+  clientfield::register("vehicle", "rcbomb_stunned", 1, 1, "int", &callback::callback_stunned, 0, 0);
+  vehicle::add_vehicletype_callback("rc_car_mp", &spawned);
 }
 
 function spawned(localclientnum) {
@@ -35,8 +35,8 @@ function spawned(localclientnum) {
   self thread stunnedhandler(localclientnum);
   self thread boost_think(localclientnum);
   self thread shutdown_think(localclientnum);
-  self.driving_fx_collision_override = & ondrivingfxcollision;
-  self.driving_fx_jump_landing_override = & ondrivingfxjumplanding;
+  self.driving_fx_collision_override = &ondrivingfxcollision;
+  self.driving_fx_jump_landing_override = &ondrivingfxjumplanding;
   self.killstreakbundle = level.rcbombbundle;
 }
 

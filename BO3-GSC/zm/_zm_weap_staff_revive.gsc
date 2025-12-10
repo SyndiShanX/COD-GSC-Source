@@ -18,11 +18,11 @@
 #namespace zm_weap_staff_revive;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_staff_revive", & __init__, undefined, undefined);
+  system::register("zm_weap_staff_revive", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_spawned( & onplayerspawned);
+  callback::on_spawned(&onplayerspawned);
 }
 
 function onplayerspawned() {

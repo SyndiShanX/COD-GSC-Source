@@ -38,7 +38,7 @@ init() {
   level.sentrySettings["sentry_minigun"].modelPlacementFailed = "weapon_sentry_chaingun_obj_red";
   level.sentrySettings["sentry_minigun"].modelBombSquad = "weapon_sentry_chaingun_bombsquad";
   level.sentrySettings["sentry_minigun"].modelDestroyed = "weapon_sentry_chaingun_destroyed";
-  level.sentrySettings["sentry_minigun"].hintString = & "SENTRY_PICKUP";
+  level.sentrySettings["sentry_minigun"].hintString = &"SENTRY_PICKUP";
   level.sentrySettings["sentry_minigun"].headIcon = true;
   level.sentrySettings["sentry_minigun"].teamSplash = "used_sentry";
   level.sentrySettings["sentry_minigun"].shouldSplash = false;
@@ -66,7 +66,7 @@ init() {
   level.sentrySettings["sam_turret"].modelPlacement = "mp_sam_turret_placement";
   level.sentrySettings["sam_turret"].modelPlacementFailed = "mp_sam_turret_placement_failed";
   level.sentrySettings["sam_turret"].modelDestroyed = "mp_sam_turret";
-  level.sentrySettings["sam_turret"].hintString = & "SENTRY_PICKUP";
+  level.sentrySettings["sam_turret"].hintString = &"SENTRY_PICKUP";
   level.sentrySettings["sam_turret"].headIcon = true;
   level.sentrySettings["sam_turret"].teamSplash = "used_sam_turret";
   level.sentrySettings["sam_turret"].shouldSplash = false;

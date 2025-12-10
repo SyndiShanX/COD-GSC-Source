@@ -185,15 +185,12 @@ onPlayerConnect() {
       player.pers["summary"]["match"] = 0;
       player.pers["summary"]["misc"] = 0;
 
-
       player setClientDvar("player_summary_xp", "0");
       player setClientDvar("player_summary_score", "0");
       player setClientDvar("player_summary_challenge", "0");
       player setClientDvar("player_summary_match", "0");
       player setClientDvar("player_summary_misc", "0");
     }
-
-
 
     player setClientDvar("ui_opensummary", 0);
 
@@ -329,7 +326,6 @@ giveRankXP(type, value) {
   if(self rankingEnabled() && updateRank(oldxp))
     self thread updateRankAnnounceHUD();
 
-
   self syncXPStat();
 
   if(!level.hardcoreMode) {
@@ -389,7 +385,6 @@ updateRank(oldxp) {
   rankId = self.pers["rank"];
   self.pers["rank"] = newRankId;
 
-
   println("promoted " + self.name + " from rank " + oldRank + " to " + newRankId + ". Experience went from " + oldxp + " to " + self getRankXP() + ".");
 
   self setRank(newRankId);
@@ -407,7 +402,6 @@ updateRankAnnounceHUD() {
   if(!isDefined(team)) {
     return;
   }
-
 
   if(!levelFlag("game_over"))
     level waittill_notify_or_timeout("game_over", 0.25);
@@ -452,9 +446,9 @@ scorePopup(amount, bonus, hudColor, glowAlpha) {
   wait(0.05);
 
   if(self.xpUpdateTotal < 0)
-    self.hud_scorePopup.label = & "";
+    self.hud_scorePopup.label = &"";
   else
-    self.hud_scorePopup.label = & "MP_PLUS";
+    self.hud_scorePopup.label = &"MP_PLUS";
 
   self.hud_scorePopup.color = hudColor;
   self.hud_scorePopup.glowColor = hudColor;
@@ -634,10 +628,6 @@ getRestXPAward(baseXP) {
 
   if(mayGiveRestXP <= 0)
     return 0;
-
-
-
-
 
   return wantGiveRestXP;
 }

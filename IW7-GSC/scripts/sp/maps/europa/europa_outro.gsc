@@ -48,9 +48,9 @@ func_C7D3() {
   level.player _meth_82C0("europa_suck_out_hit_fade_to_black", 0);
   setmusicstate("");
   scripts\engine\utility::flag_set("player_holding_on");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", & "EUROPA_OBJECTIVE_ACCESS");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "done", & "EUROPA_OBJECTIVE_FSPAR");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(3, "current", & "EUROPA_OBJECTIVE_ESCAPE");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", &"EUROPA_OBJECTIVE_ACCESS");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "done", &"EUROPA_OBJECTIVE_FSPAR");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(3, "current", &"EUROPA_OBJECTIVE_ESCAPE");
 }
 
 func_94FB() {

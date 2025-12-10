@@ -13,7 +13,7 @@
 #namespace gravity_spikes;
 
 function autoexec __init__sytem__() {
-  system::register("gravity_spikes", & __init__, undefined, undefined);
+  system::register("gravity_spikes", &__init__, undefined, undefined);
 }
 
 function __init__() {

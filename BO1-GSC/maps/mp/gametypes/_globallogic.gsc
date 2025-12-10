@@ -44,7 +44,7 @@ init() {
   level.resetPlayerScoreEveryRound = false;
   level.gameForfeited = false;
   level.halftimeType = "halftime";
-  level.halftimeSubCaption = & "MP_SWITCHING_SIDES_CAPS";
+  level.halftimeSubCaption = &"MP_SWITCHING_SIDES_CAPS";
   level.lastStatusTime = 0;
   level.wasWinning = "none";
   level.lastSlowProcessFrame = 0;
@@ -180,12 +180,12 @@ forceEnd(hostsucks) {
   level.forcedEnd = true;
   level.hostForcedEnd = true;
   if(hostsucks) {
-    endString = & "MP_HOST_SUCKS";
+    endString = &"MP_HOST_SUCKS";
   } else {
     if(level.splitscreen)
-      endString = & "MP_ENDED_GAME";
+      endString = &"MP_ENDED_GAME";
     else
-      endString = & "MP_HOST_ENDED_GAME";
+      endString = &"MP_HOST_ENDED_GAME";
   }
   setMatchFlag("disableIngameMenu", 1);
   makeDvarServerInfo("ui_text_endreason", endString);
@@ -214,7 +214,7 @@ killserverPc() {
   level.forcedEnd = true;
   level.hostForcedEnd = true;
   level.killserver = true;
-  endString = & "MP_HOST_ENDED_GAME";
+  endString = &"MP_HOST_ENDED_GAME";
   thread endGame(winner, endString);
 }
 updateGameEvents() {
@@ -575,9 +575,9 @@ getEndReasonText() {
     return game["strings"]["score_limit_reached"];
   if(level.forcedEnd) {
     if(level.hostForcedEnd)
-      return & "MP_HOST_ENDED_GAME";
+      return &"MP_HOST_ENDED_GAME";
     else
-      return & "MP_ENDED_GAME";
+      return &"MP_ENDED_GAME";
   }
   return game["strings"]["time_limit_reached"];
 }
@@ -1170,29 +1170,29 @@ Callback_StartGameType() {
     makeDvarServerInfo("scr_axis", "nva");
     makeDvarServerInfo("cg_thirdPersonAngle", 354);
     setDvar("cg_thirdPersonAngle", 354);
-    game["strings"]["press_to_spawn"] = & "PLATFORM_PRESS_TO_SPAWN";
+    game["strings"]["press_to_spawn"] = &"PLATFORM_PRESS_TO_SPAWN";
     if(level.teamBased) {
-      game["strings"]["waiting_for_teams"] = & "MP_WAITING_FOR_TEAMS";
-      game["strings"]["opponent_forfeiting_in"] = & "MP_OPPONENT_FORFEITING_IN";
+      game["strings"]["waiting_for_teams"] = &"MP_WAITING_FOR_TEAMS";
+      game["strings"]["opponent_forfeiting_in"] = &"MP_OPPONENT_FORFEITING_IN";
     } else {
-      game["strings"]["waiting_for_teams"] = & "MP_WAITING_FOR_PLAYERS";
-      game["strings"]["opponent_forfeiting_in"] = & "MP_OPPONENT_FORFEITING_IN";
+      game["strings"]["waiting_for_teams"] = &"MP_WAITING_FOR_PLAYERS";
+      game["strings"]["opponent_forfeiting_in"] = &"MP_OPPONENT_FORFEITING_IN";
     }
-    game["strings"]["match_starting_in"] = & "MP_MATCH_STARTING_IN";
-    game["strings"]["spawn_next_round"] = & "MP_SPAWN_NEXT_ROUND";
-    game["strings"]["waiting_to_spawn"] = & "MP_WAITING_TO_SPAWN";
-    game["strings"]["waiting_to_spawn_ss"] = & "MP_WAITING_TO_SPAWN_SS";
-    game["strings"]["match_starting"] = & "MP_MATCH_STARTING";
-    game["strings"]["change_class"] = & "MP_CHANGE_CLASS_NEXT_SPAWN";
-    game["strings"]["last_stand"] = & "MPUI_LAST_STAND";
-    game["strings"]["cowards_way"] = & "PLATFORM_COWARDS_WAY_OUT";
-    game["strings"]["tie"] = & "MP_MATCH_TIE";
-    game["strings"]["round_draw"] = & "MP_ROUND_DRAW";
-    game["strings"]["enemies_eliminated"] = & "MP_ENEMIES_ELIMINATED";
-    game["strings"]["score_limit_reached"] = & "MP_SCORE_LIMIT_REACHED";
-    game["strings"]["round_limit_reached"] = & "MP_ROUND_LIMIT_REACHED";
-    game["strings"]["time_limit_reached"] = & "MP_TIME_LIMIT_REACHED";
-    game["strings"]["players_forfeited"] = & "MP_PLAYERS_FORFEITED";
+    game["strings"]["match_starting_in"] = &"MP_MATCH_STARTING_IN";
+    game["strings"]["spawn_next_round"] = &"MP_SPAWN_NEXT_ROUND";
+    game["strings"]["waiting_to_spawn"] = &"MP_WAITING_TO_SPAWN";
+    game["strings"]["waiting_to_spawn_ss"] = &"MP_WAITING_TO_SPAWN_SS";
+    game["strings"]["match_starting"] = &"MP_MATCH_STARTING";
+    game["strings"]["change_class"] = &"MP_CHANGE_CLASS_NEXT_SPAWN";
+    game["strings"]["last_stand"] = &"MPUI_LAST_STAND";
+    game["strings"]["cowards_way"] = &"PLATFORM_COWARDS_WAY_OUT";
+    game["strings"]["tie"] = &"MP_MATCH_TIE";
+    game["strings"]["round_draw"] = &"MP_ROUND_DRAW";
+    game["strings"]["enemies_eliminated"] = &"MP_ENEMIES_ELIMINATED";
+    game["strings"]["score_limit_reached"] = &"MP_SCORE_LIMIT_REACHED";
+    game["strings"]["round_limit_reached"] = &"MP_ROUND_LIMIT_REACHED";
+    game["strings"]["time_limit_reached"] = &"MP_TIME_LIMIT_REACHED";
+    game["strings"]["players_forfeited"] = &"MP_PLAYERS_FORFEITED";
     if(!level.createFX_enabled) {
       Assert(isDefined(game["strings"]["allies_win"]));
       Assert(isDefined(game["strings"]["allies_win_round"]));

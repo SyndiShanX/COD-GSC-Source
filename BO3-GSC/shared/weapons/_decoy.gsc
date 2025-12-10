@@ -17,13 +17,13 @@ function init_shared() {
   level.decoyweapons["semiauto"] = [];
   level.decoyweapons["fullauto"][level.decoyweapons["fullauto"].size] = getweapon("ar_accurate");
   level.decoyweapons["semiauto"][level.decoyweapons["semiauto"].size] = getweapon("pistol_standard");
-  callback::add_weapon_watcher( & create_watcher);
+  callback::add_weapon_watcher(&create_watcher);
 }
 
 function create_watcher() {
   watcher = self weaponobjects::createuseweaponobjectwatcher("nightingale", self.team);
-  watcher.onspawn = & on_spawn;
-  watcher.ondetonatecallback = & detonate;
+  watcher.onspawn = &on_spawn;
+  watcher.ondetonatecallback = &detonate;
   watcher.deleteondifferentobjectspawn = 0;
   watcher.headicon = 0;
 }

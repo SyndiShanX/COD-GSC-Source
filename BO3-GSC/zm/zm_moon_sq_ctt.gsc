@@ -23,8 +23,8 @@
 
 function init_1() {
   level._active_tanks = [];
-  zm_spawner::add_custom_zombie_spawn_logic( & tank_volume_death_check);
-  zm_sidequests::declare_sidequest_stage("tanks", "ctt1", & init_stage_1, & stage_logic, & exit_stage_1);
+  zm_spawner::add_custom_zombie_spawn_logic(&tank_volume_death_check);
+  zm_sidequests::declare_sidequest_stage("tanks", "ctt1", &init_stage_1, &stage_logic, &exit_stage_1);
 }
 
 function init_stage_1() {
@@ -42,7 +42,7 @@ function exit_stage_1(success) {
 }
 
 function init_2() {
-  zm_sidequests::declare_sidequest_stage("tanks", "ctt2", & init_stage_2, & stage_logic, & exit_stage_2);
+  zm_sidequests::declare_sidequest_stage("tanks", "ctt2", &init_stage_2, &stage_logic, &exit_stage_2);
 }
 
 function init_stage_2() {
@@ -101,7 +101,7 @@ function stage_logic() {
     tank.capacitor moveto(tank.capacitor.origin + vectorscale((0, 0, 1), 12), 2);
     tank.tank moveto(tank.tank.origin - vectorscale((0, 0, 1), 57.156), 2);
     tank.tank playSound("evt_tube_move_down");
-    tank.tank util::delay(2, undefined, & exploder::stop_exploder, "canister_light_0" + tank.tank.script_int);
+    tank.tank util::delay(2, undefined, &exploder::stop_exploder, "canister_light_0" + tank.tank.script_int);
     tank.tank thread play_delayed_stop_sound(2);
     tank triggerenable(0);
   }
@@ -237,7 +237,7 @@ function add_tank(tank_name, other_tank_name) {
     tank_model = getent(capacitor_struct.target, "targetname");
     tank_model thread movetopos(tank_model.origin + (0, 0, 57.156));
     tank_model playSound("evt_tube_move_up");
-    tank_model util::delay(2, undefined, & exploder::exploder, "canister_light_0" + tank_model.script_int);
+    tank_model util::delay(2, undefined, &exploder::exploder, "canister_light_0" + tank_model.script_int);
     tank_model thread play_delayed_stop_sound(1);
     tank_trigger.tank = tank_model;
     tank_trigger.fill = 0;

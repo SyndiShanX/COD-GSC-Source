@@ -10,12 +10,12 @@
 #namespace bb;
 
 function init_shared() {
-  callback::on_start_gametype( & init);
+  callback::on_start_gametype(&init);
 }
 
 function init() {
-  callback::on_connect( & player_init);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&player_init);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function player_init() {

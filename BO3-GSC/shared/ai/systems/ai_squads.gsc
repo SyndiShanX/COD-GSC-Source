@@ -79,13 +79,13 @@ class squad {
 #namespace aisquads;
 
 function autoexec __init__sytem__() {
-  system::register("ai_squads", & __init__, undefined, undefined);
+  system::register("ai_squads", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level._squads = [];
   actorspawnerarray = getactorspawnerteamarray("axis");
-  array::run_all(actorspawnerarray, & spawner::add_spawn_function, & squadmemberthink);
+  array::run_all(actorspawnerarray, &spawner::add_spawn_function, &squadmemberthink);
 }
 
 function private createsquad(squadname) {

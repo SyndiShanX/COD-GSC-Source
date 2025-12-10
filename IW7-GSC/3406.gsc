@@ -195,22 +195,22 @@ fast_travel_hint_logic(param_00, param_01) {
   }
 
   if(param_00.requires_power && !param_00.powered_on) {
-    return & "COOP_INTERACTIONS_REQUIRES_POWER";
+    return &"COOP_INTERACTIONS_REQUIRES_POWER";
   }
 
   if(param_00.script_area == level.end_portal_name) {
     if(scripts\engine\utility::istrue(level.var_8E61)) {
-      return & "CP_ZMB_INTERACTIONS_HIDDEN_TELEPORT";
+      return &"CP_ZMB_INTERACTIONS_HIDDEN_TELEPORT";
     } else if(level.var_8E63) {
-      return & "COOP_INTERACTIONS_COOLDOWN";
+      return &"COOP_INTERACTIONS_COOLDOWN";
     } else {
-      return & "CP_ZMB_INTERACTIONS_EXIT_PORTAL";
+      return &"CP_ZMB_INTERACTIONS_EXIT_PORTAL";
     }
   }
 
   if(!scripts\engine\utility::istrue(param_00.portal_can_be_started)) {
     if(param_00.var_D67E) {
-      return & "COOP_INTERACTIONS_COOLDOWN";
+      return &"COOP_INTERACTIONS_COOLDOWN";
     } else {
       return "";
     }
@@ -260,7 +260,7 @@ run_fast_travel_logic(param_00, param_01) {
     }
 
     param_01 thread scripts\cp\cp_vo::try_to_play_vo("no_cash", "zmb_comment_vo", "high", 30, 0, 0, 1, 50);
-    param_01 scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_NEED_MONEY");
+    param_01 scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_NEED_MONEY");
     param_01 scripts\cp\cp_interaction::refresh_interaction();
     return;
   }
@@ -603,7 +603,7 @@ turn_on_room_exit_portal() {
 
 teleport_from_hidden_room_before_time_up(param_00) {
   param_00 makeusable();
-  param_00 sethintstring( & "CP_ZMB_INTERACTIONS_HIDDEN_LEAVE");
+  param_00 sethintstring(&"CP_ZMB_INTERACTIONS_HIDDEN_LEAVE");
   param_00.portal_is_open = 1;
   for(;;) {
     param_00 waittill("trigger", var_01);

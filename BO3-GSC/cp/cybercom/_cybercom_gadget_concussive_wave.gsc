@@ -26,14 +26,14 @@ function init() {}
 function main() {
   cybercom_gadget::registerability(1, 4, 1);
   level.cybercom.concussive_wave = spawnStruct();
-  level.cybercom.concussive_wave._is_flickering = & _is_flickering;
-  level.cybercom.concussive_wave._on_flicker = & _on_flicker;
-  level.cybercom.concussive_wave._on_give = & _on_give;
-  level.cybercom.concussive_wave._on_take = & _on_take;
-  level.cybercom.concussive_wave._on_connect = & _on_connect;
-  level.cybercom.concussive_wave._on = & _on;
-  level.cybercom.concussive_wave._off = & _off;
-  level.cybercom.concussive_wave._is_primed = & _is_primed;
+  level.cybercom.concussive_wave._is_flickering = &_is_flickering;
+  level.cybercom.concussive_wave._on_flicker = &_on_flicker;
+  level.cybercom.concussive_wave._on_give = &_on_give;
+  level.cybercom.concussive_wave._on_take = &_on_take;
+  level.cybercom.concussive_wave._on_connect = &_on_connect;
+  level.cybercom.concussive_wave._on = &_on;
+  level.cybercom.concussive_wave._off = &_off;
+  level.cybercom.concussive_wave._is_primed = &_is_primed;
 }
 
 function _is_flickering(slot) {}
@@ -49,8 +49,8 @@ function _on_give(slot, weapon) {
     self.cybercom.spikeweapon = getweapon("hero_gravityspikes_cybercom_upgraded");
   }
   self.cybercom.concussive_wave_knockdown_damage = 5 * getdvarfloat("scr_concussive_wave_scale", 1);
-  self.cybercom.targetlockcb = & _get_valid_targets;
-  self.cybercom.targetlockrequirementcb = & _lock_requirement;
+  self.cybercom.targetlockcb = &_get_valid_targets;
+  self.cybercom.targetlockrequirementcb = &_lock_requirement;
   self thread cybercom::function_b5f4e597(weapon);
 }
 

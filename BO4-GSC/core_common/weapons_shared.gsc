@@ -610,7 +610,7 @@ has_heavy_weapon() {
 has_lockon(target) {
   player = self;
   clientnum = player getentitynumber();
-  return isDefined(target.locked_on) && target.locked_on&1 << clientnum;
+  return isDefined(target.locked_on) && target.locked_on& 1 << clientnum;
 }
 
 function_9568854f(weapon, attachmentname) {

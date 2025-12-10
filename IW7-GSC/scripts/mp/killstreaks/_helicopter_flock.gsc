@@ -17,7 +17,7 @@ init() {
 func_128ED(param_00, param_01) {
   var_02 = 5;
   if(func_8DB7() || scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\utility::maxvehiclesallowed()) {
-    self iprintlnbold( & "KILLSTREAKS_TOO_MANY_VEHICLES");
+    self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
     return 0;
   }
 
@@ -58,7 +58,7 @@ func_F1C9(param_00, param_01) {
   self endon("stop_location_selection");
   self waittill("confirm_location", var_02, var_03);
   if(func_8DB7() || scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount >= scripts\mp\utility::maxvehiclesallowed()) {
-    self iprintlnbold( & "KILLSTREAKS_TOO_MANY_VEHICLES");
+    self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
     self notify("cancel_location");
     return 0;
   }
@@ -297,11 +297,11 @@ func_3758(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     return;
   }
 
-  if(isDefined(param_03) && param_03 & level.idflags_penetration) {
+  if(isDefined(param_03) && param_03 &level.idflags_penetration) {
     self.wasdamagedfrombulletpenetration = 1;
   }
 
-  if(isDefined(param_03) && param_03 & level.idflags_ricochet) {
+  if(isDefined(param_03) && param_03 &level.idflags_ricochet) {
     self.wasdamagedfrombulletricochet = 1;
   }
 

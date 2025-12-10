@@ -104,12 +104,12 @@ custom_end_screen() {
       players[i].survived_hud.y = players[i].survived_hud.y + 40;
     }
 
-    winner_text = & "ZOMBIE_GRIEF_WIN";
-    loser_text = & "ZOMBIE_GRIEF_LOSE";
+    winner_text = &"ZOMBIE_GRIEF_WIN";
+    loser_text = &"ZOMBIE_GRIEF_LOSE";
 
     if(level.round_number < 2) {
-      winner_text = & "ZOMBIE_GRIEF_WIN_SINGLE";
-      loser_text = & "ZOMBIE_GRIEF_LOSE_SINGLE";
+      winner_text = &"ZOMBIE_GRIEF_WIN_SINGLE";
+      loser_text = &"ZOMBIE_GRIEF_LOSE_SINGLE";
     }
 
     if(isDefined(level.host_ended_game) && level.host_ended_game)
@@ -140,7 +140,7 @@ postinit_func() {
   level._effect["meat_stink_camera"] = loadfx("maps/zombie/fx_zmb_meat_stink_camera");
   level._effect["meat_stink_torso"] = loadfx("maps/zombie/fx_zmb_meat_stink_torso");
   include_powerup("meat_stink");
-  maps\mp\zombies\_zm_powerups::add_zombie_powerup("meat_stink", "t6_wpn_zmb_meat_world", & "ZOMBIE_POWERUP_MAX_AMMO", ::func_should_drop_meat, 0, 0, 0);
+  maps\mp\zombies\_zm_powerups::add_zombie_powerup("meat_stink", "t6_wpn_zmb_meat_world", &"ZOMBIE_POWERUP_MAX_AMMO", ::func_should_drop_meat, 0, 0, 0);
   setmatchtalkflag("DeadChatWithDead", 1);
   setmatchtalkflag("DeadChatWithTeam", 1);
   setmatchtalkflag("DeadHearTeamLiving", 1);
@@ -495,7 +495,7 @@ show_grief_hud_msg_cleanup() {
 }
 
 grief_reset_message() {
-  msg = & "ZOMBIE_GRIEF_RESET";
+  msg = &"ZOMBIE_GRIEF_RESET";
   players = get_players();
 
   if(isDefined(level.hostmigrationtimer)) {
@@ -680,7 +680,7 @@ update_players_on_bleedout_or_disconnect(excluded_player) {
 
       if(players_remaining < 1) {
         player thread show_grief_hud_msg(&"ZOMBIE_ZGRIEF_ALL_PLAYERS_DOWN", undefined, undefined, 1);
-        player delay_thread_watch_host_migrate(2, ::show_grief_hud_msg, & "ZOMBIE_ZGRIEF_SURVIVE", undefined, 30, 1);
+        player delay_thread_watch_host_migrate(2, ::show_grief_hud_msg, &"ZOMBIE_ZGRIEF_SURVIVE", undefined, 30, 1);
         continue;
       }
 

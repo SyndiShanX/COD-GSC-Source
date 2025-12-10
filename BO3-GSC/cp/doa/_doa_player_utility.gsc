@@ -2076,7 +2076,7 @@ function function_139199e1(type) {
       level thread doa_utility::function_37fb5c23(&"DOA_REWARD_FURY");
       var_213a57a7 = self.doa.default_weap;
       wait(2);
-      level thread doa_fate::function_17fb777b(self, "zombietron_statue_fury", 0.5, & donothing);
+      level thread doa_fate::function_17fb777b(self, "zombietron_statue_fury", 0.5, &donothing);
       self.doa.default_weap = level.doa.var_69899304;
       self function_d5f89a15(self.doa.default_weap.name);
       while(level flag::get("doa_round_active")) {
@@ -2091,7 +2091,7 @@ function function_139199e1(type) {
       wait(1);
       level thread doa_pickups::directeditemawardto(self, level.doa.booster_model, 6);
       wait(1);
-      level thread doa_fate::function_17fb777b(self, "zombietron_statue_force", 0.5, & donothing);
+      level thread doa_fate::function_17fb777b(self, "zombietron_statue_force", 0.5, &donothing);
       self.doa.var_480b6280 = 1;
       var_2b4d4c09 = self.doa.default_movespeed;
       self.doa.default_movespeed = level.doa.rules.var_b92b82b;

@@ -35,11 +35,11 @@
 #namespace siegebot_nikolai;
 
 function autoexec __init__sytem__() {
-  system::register("zm_siegebot_nikolai", & __init__, undefined, undefined);
+  system::register("zm_siegebot_nikolai", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("siegebot_nikolai", & siegebot_initialize);
+  vehicle::add_main_callback("siegebot_nikolai", &siegebot_initialize);
   clientfield::register("vehicle", "nikolai_destroyed_r_arm", 12000, 1, "int");
   clientfield::register("vehicle", "nikolai_destroyed_l_arm", 12000, 1, "int");
   clientfield::register("vehicle", "nikolai_destroyed_r_chest", 12000, 1, "int");
@@ -91,7 +91,7 @@ function siegebot_initialize() {
   self.goalradius = 9999999;
   self.goalheight = 5000;
   self setgoal(self.origin, 0, self.goalradius, self.goalheight);
-  self.overridevehicledamage = & function_b9b039e0;
+  self.overridevehicledamage = &function_b9b039e0;
   self pain_toggle(1);
   self initjumpstruct();
   self setgunnerturretontargetrange(0, self.settings.gunner_turret_on_target_range);
@@ -119,14 +119,14 @@ function init_clientfields() {
 
 function defaultrole() {
   self vehicle_ai::init_state_machine_for_role();
-  self vehicle_ai::get_state_callbacks("combat").update_func = & state_groundcombat_update;
-  self vehicle_ai::get_state_callbacks("combat").exit_func = & state_groundcombat_exit;
-  self vehicle_ai::get_state_callbacks("pain").enter_func = & pain_enter;
-  self vehicle_ai::get_state_callbacks("pain").update_func = & pain_update;
-  self vehicle_ai::get_state_callbacks("pain").exit_func = & pain_exit;
-  self vehicle_ai::get_state_callbacks("death").update_func = & state_death_update;
+  self vehicle_ai::get_state_callbacks("combat").update_func = &state_groundcombat_update;
+  self vehicle_ai::get_state_callbacks("combat").exit_func = &state_groundcombat_exit;
+  self vehicle_ai::get_state_callbacks("pain").enter_func = &pain_enter;
+  self vehicle_ai::get_state_callbacks("pain").update_func = &pain_update;
+  self vehicle_ai::get_state_callbacks("pain").exit_func = &pain_exit;
+  self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
   self vehicle_ai::add_state("special_attack", undefined, undefined, undefined);
-  self vehicle_ai::add_state("jump", & state_jump_enter, & state_jump_update, & state_jump_exit);
+  self vehicle_ai::add_state("jump", &state_jump_enter, &state_jump_update, &state_jump_exit);
   vehicle_ai::add_utility_connection("jump", "combat");
   vehicle_ai::startinitialstate("combat");
 }

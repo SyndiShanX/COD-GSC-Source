@@ -10,14 +10,14 @@
 #namespace skeleton;
 
 function autoexec __init__sytem__() {
-  system::register("skeleton", & __init__, undefined, undefined);
+  system::register("skeleton", &__init__, undefined, undefined);
 }
 
 function autoexec precache() {}
 
 function __init__() {
   if(ai::shouldregisterclientfieldforarchetype("skeleton")) {
-    clientfield::register("actor", "skeleton", 1, 1, "int", & zombieclientutils::zombiehandler, 0, 0);
+    clientfield::register("actor", "skeleton", 1, 1, "int", &zombieclientutils::zombiehandler, 0, 0);
   }
 }
 
@@ -30,11 +30,11 @@ function zombiehandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap
   }
   if(!isDefined(entity.initializedgibcallbacks) || !entity.initializedgibcallbacks) {
     entity.initializedgibcallbacks = 1;
-    gibclientutils::addgibcallback(localclientnum, entity, 8, & _gibcallback);
-    gibclientutils::addgibcallback(localclientnum, entity, 16, & _gibcallback);
-    gibclientutils::addgibcallback(localclientnum, entity, 32, & _gibcallback);
-    gibclientutils::addgibcallback(localclientnum, entity, 128, & _gibcallback);
-    gibclientutils::addgibcallback(localclientnum, entity, 256, & _gibcallback);
+    gibclientutils::addgibcallback(localclientnum, entity, 8, &_gibcallback);
+    gibclientutils::addgibcallback(localclientnum, entity, 16, &_gibcallback);
+    gibclientutils::addgibcallback(localclientnum, entity, 32, &_gibcallback);
+    gibclientutils::addgibcallback(localclientnum, entity, 128, &_gibcallback);
+    gibclientutils::addgibcallback(localclientnum, entity, 256, &_gibcallback);
   }
 }
 

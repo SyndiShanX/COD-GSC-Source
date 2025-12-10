@@ -20,15 +20,15 @@
 #namespace zm_weap_staff_fire;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_staff_fire", & __init__, undefined, undefined);
+  system::register("zm_weap_staff_fire", &__init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("actor", "fire_char_fx", 21000, 1, "int");
   clientfield::register("toplayer", "fire_muzzle_fx", 21000, 1, "counter");
-  callback::on_spawned( & onplayerspawned);
-  zm_spawner::register_zombie_damage_callback( & staff_fire_zombie_damage_response);
-  zm_spawner::register_zombie_death_event_callback( & staff_fire_death_event);
+  callback::on_spawned(&onplayerspawned);
+  zm_spawner::register_zombie_damage_callback(&staff_fire_zombie_damage_response);
+  zm_spawner::register_zombie_death_event_callback(&staff_fire_death_event);
   level.w_staff_fire = getweapon("staff_fire");
   level.w_staff_fire_upgraded = getweapon("staff_fire_upgraded");
 }

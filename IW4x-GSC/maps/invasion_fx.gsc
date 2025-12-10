@@ -8,7 +8,6 @@
 main() {
   level._effect["uav_explosion"] = LoadFX("explosions/vehicle_explosion_hummer_nodoors");
 
-
   level._effect["water_stop"] = LoadFX("misc/parabolic_water_stand");
   level._effect["water_movement"] = LoadFX("misc/parabolic_water_movement");
 
@@ -21,17 +20,8 @@ main() {
 
   level._effect["ceiling_dust"] = LoadFX("dust/ceiling_dust_default");
 
-
-
-
-
-
-
   level._effect["humvee_explosion"] = LoadFX("explosions/small_vehicle_explosion");
   level._effect["pillar_explosion_brick"] = LoadFX("explosions/pillar_explosion_brick_invasion");
-
-
-
 
   level._effect["nates_roof_balcony_blaster"] = LoadFX("explosions/default_explosion");
   level._effect["nates_roof_balcony_blaster_bricks"] = LoadFX("explosions/brick_chunk");
@@ -43,13 +33,11 @@ main() {
   level._effect["nates_roof_awning_flareup"] = LoadFX("explosions/fuel_med_explosion");
   level._effect["nates_roof_pipe_fire"] = LoadFX("impacts/pipe_fire");
 
-
   level._effect["nates_super_explosion_smoke"] = LoadFX("smoke/thin_black_smoke_L");
   level._effect["nates_super_explosion"] = LoadFX("explosions/nates_super_explosion");
   level._effect["nates_sign_explode"] = LoadFX("explosions/nates_sign_explode");
 
   level._effect["falling_debris_player"] = LoadFX("misc/falling_debris_player");
-
 
   level._effect["fire_tree"] = LoadFX("fire/fire_tree");
   level._effect["fire_tree_slow"] = LoadFX("fire/fire_tree_slow");
@@ -63,7 +51,6 @@ main() {
   level._effect["firelp_small_pm_a"] = LoadFX("fire/firelp_small_pm_a");
 
   level._effect["firelp_small_streak_pm1_h"] = loadfx("fire/firelp_small_streak_pm1_h");
-
 
   level._effect["bird_seagull_flock_large"] = LoadFX("misc/bird_seagull_flock_large");
   level._effect["insect_trail_runner_icbm"] = LoadFX("misc/insect_trail_runner_icbm");

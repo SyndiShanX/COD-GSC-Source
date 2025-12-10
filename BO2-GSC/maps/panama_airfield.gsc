@@ -1884,7 +1884,7 @@ monitor_player_distance() {
 
   while(true) {
     if(distancesquared(level.player.origin, level.mason.origin) <= 750) {
-      setdvar("ui_deadquote", & "PANAMA_HANGAR_FAIL");
+      setdvar("ui_deadquote", &"PANAMA_HANGAR_FAIL");
       level notify("mission failed");
       maps\_utility::missionfailedwrapper();
     }
@@ -1897,7 +1897,7 @@ hotel_path_fail() {
   trigger_wait("trig_hotel_warn");
   level.player thread display_hint("hangar_warning");
   trigger_wait("trig_hotel_fail");
-  setdvar("ui_deadquote", & "PANAMA_HANGAR_FAIL");
+  setdvar("ui_deadquote", &"PANAMA_HANGAR_FAIL");
   level notify("mission failed");
   maps\_utility::missionfailedwrapper();
 }
@@ -2610,7 +2610,7 @@ sniper_victim() {
 runway_standoff_fail_timeout() {
   level endon("player_at_hatch");
   wait 35;
-  setdvar("ui_deadquote", & "PANAMA_ROOFTOP_FAIL");
+  setdvar("ui_deadquote", &"PANAMA_ROOFTOP_FAIL");
   level notify("mission failed");
   maps\_utility::missionfailedwrapper();
 }
@@ -3063,7 +3063,7 @@ rooftop_fail_timeout() {
   level endon("player_near_skylight");
   level endon("player_in_hangar");
   wait 25;
-  setdvar("ui_deadquote", & "PANAMA_ROOFTOP_FAIL");
+  setdvar("ui_deadquote", &"PANAMA_ROOFTOP_FAIL");
   level notify("mission failed");
   maps\_utility::missionfailedwrapper();
 }

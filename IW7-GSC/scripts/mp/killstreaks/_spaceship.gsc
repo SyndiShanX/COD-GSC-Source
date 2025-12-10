@@ -678,9 +678,9 @@ func_105C5(param_00, param_01) {
   param_00.var_130F2 = var_02;
   var_03 = scripts\mp\gameobjects::createuseobject(param_01, var_02, []);
   var_03 scripts\mp\gameobjects::setusetime(2);
-  var_03 scripts\mp\gameobjects::setusetext( & "MP_JACKAL_BOARDING");
+  var_03 scripts\mp\gameobjects::setusetext(&"MP_JACKAL_BOARDING");
   if(var_02.classname == "trigger_use") {
-    var_03 scripts\mp\gameobjects::setusehinttext( & "MP_JACKAL_BOARD");
+    var_03 scripts\mp\gameobjects::setusehinttext(&"MP_JACKAL_BOARD");
   }
 
   var_03 scripts\mp\gameobjects::allowuse("friendly");
@@ -734,14 +734,14 @@ func_10579(param_00, param_01) {
   if(level.var_A407.allowgrenadedamage) {
     if(isDefined(param_00.var_A83C)) {
       if(!isDefined(param_00.var_A83C.team) || param_00.var_A83C.team == param_01.team) {
-        param_01 iprintlnbold( & "MP_JACKAL_CANT_LAND");
+        param_01 iprintlnbold(&"MP_JACKAL_CANT_LAND");
         return 0;
       }
     }
 
     return 1;
   } else if(!func_10591(param_00)) {
-    param_01 iprintlnbold( & "MP_JACKAL_CANT_LAND");
+    param_01 iprintlnbold(&"MP_JACKAL_CANT_LAND");
     return 0;
   }
 
@@ -753,7 +753,7 @@ func_10581(param_00, param_01, param_02) {
   param_00 endon("death");
   var_03 = func_10584(param_00, param_01);
   if(!isDefined(var_03)) {
-    param_01 iprintlnbold( & "MP_JACKAL_CANT_LAND");
+    param_01 iprintlnbold(&"MP_JACKAL_CANT_LAND");
     return;
   }
 
@@ -815,7 +815,7 @@ func_105B8(param_00) {
       if(func_10579(param_00.var_10574, param_00)) {
         func_10581(param_00.var_10574, param_00);
       } else {
-        param_00 iprintlnbold( & "MP_JACKAL_CANT_LAND");
+        param_00 iprintlnbold(&"MP_JACKAL_CANT_LAND");
       }
 
       continue;
@@ -925,7 +925,7 @@ func_10591(param_00) {
 }
 
 func_105AC(param_00, param_01) {
-  param_00.triggerportableradarping forceusehinton( & "MP_JACKAL_EXIT");
+  param_00.triggerportableradarping forceusehinton(&"MP_JACKAL_EXIT");
 }
 
 func_105B2(param_00, param_01, param_02) {
@@ -997,7 +997,7 @@ func_1058F(param_00) {
 
 func_1057A(param_00) {
   if(param_00 ismantling() || param_00 isonladder()) {
-    param_00 iprintlnbold( & "MP_JACKAL_CANT_SUMMON");
+    param_00 iprintlnbold(&"MP_JACKAL_CANT_SUMMON");
     return 0;
   }
 
@@ -1008,7 +1008,7 @@ func_1057A(param_00) {
   if(level.var_A407.allowhide) {
     foreach(var_02 in level.var_105EC) {
       if(param_00 istouching(var_02)) {
-        param_00 iprintlnbold( & "MP_JACKAL_CANT_SUMMON");
+        param_00 iprintlnbold(&"MP_JACKAL_CANT_SUMMON");
         return 0;
       }
     }
@@ -1022,7 +1022,7 @@ func_1057A(param_00) {
     }
   }
 
-  var_02 iprintlnbold( & "MP_JACKAL_CANT_SUMMON");
+  var_02 iprintlnbold(&"MP_JACKAL_CANT_SUMMON");
   return 0;
 }
 
@@ -1041,7 +1041,7 @@ func_105CF(param_00) {
   var_04 = physics_createcontents(["physicscontents_aiavoid", "physicscontents_solid", "physicscontents_structural"]);
   var_05 = physics_charactercast(var_01, var_03, param_00, 0, param_00.angles, var_04, param_00, "physicsquery_any");
   if(var_05) {
-    param_00 iprintlnbold( & "MP_JACKAL_CANT_SUMMON");
+    param_00 iprintlnbold(&"MP_JACKAL_CANT_SUMMON");
     return;
   }
 
@@ -1053,7 +1053,7 @@ func_105CF(param_00) {
     var_07 = var_07 + (0, 0, var_08 + 1);
     var_05 = physics_getclosestpointtosphere(var_07, var_08, 0, var_04, undefined, "physicsquery_any");
     if(var_05) {
-      param_00 iprintlnbold( & "MP_JACKAL_CANT_SUMMON");
+      param_00 iprintlnbold(&"MP_JACKAL_CANT_SUMMON");
       return;
     }
   }

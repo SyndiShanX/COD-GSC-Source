@@ -749,11 +749,11 @@ drone_setname() {
   subtext = undefined;
 
   if(!isDefined(self.weapon))
-    subtext = & "";
+    subtext = &"";
   else {
     switch (self.weapon) {
       case "commando_sp":
-        subtext = & "";
+        subtext = &"";
         break;
       case "SVT40":
       case "lee_enfield":
@@ -761,25 +761,25 @@ drone_setname() {
       case "m1garand":
       case "m1garand_wet":
       case "mosin_rifle":
-        subtext = & "WEAPON_RIFLEMAN";
+        subtext = &"WEAPON_RIFLEMAN";
         break;
       case "thompson":
       case "thompson_wet":
-        subtext = & "WEAPON_SUBMACHINEGUNNER";
+        subtext = &"WEAPON_SUBMACHINEGUNNER";
         break;
       case "BAR":
       case "ppsh":
       default:
-        subtext = & "WEAPON_SUPPORTGUNNER";
+        subtext = &"WEAPON_SUPPORTGUNNER";
         break;
     }
   }
 
   if(isDefined(self.model) && issubstr(self.model, "medic"))
-    subtext = & "WEAPON_MEDICPLACEHOLDER";
+    subtext = &"WEAPON_MEDICPLACEHOLDER";
 
   assert(isDefined(subtext));
-  self setlookattext(self.name, & "");
+  self setlookattext(self.name, &"");
 }
 
 drone_think(firstnode, override_target_node) {

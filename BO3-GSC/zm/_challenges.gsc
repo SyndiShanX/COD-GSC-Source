@@ -12,7 +12,7 @@
 #namespace challenges;
 
 function autoexec __init__sytem__() {
-  system::register("challenges", & __init__, undefined, undefined);
+  system::register("challenges", &__init__, undefined, undefined);
 }
 
 function __init__() {}
@@ -23,16 +23,16 @@ function init() {
   }
   waittillframeend();
   if(canprocesschallenges()) {
-    registerchallengescallback("playerKilled", & challengekills);
-    registerchallengescallback("actorKilled", & challengeactorkills);
-    registerchallengescallback("gameEnd", & challengegameend);
-    registerchallengescallback("roundEnd", & challengeroundend);
+    registerchallengescallback("playerKilled", &challengekills);
+    registerchallengescallback("actorKilled", &challengeactorkills);
+    registerchallengescallback("gameEnd", &challengegameend);
+    registerchallengescallback("roundEnd", &challengeroundend);
   }
-  callback::on_connect( & on_player_connect);
+  callback::on_connect(&on_player_connect);
   foreach(team in level.teams) {
     initteamchallenges(team);
   }
-  level.challengesoneventreceived = & eventreceived;
+  level.challengesoneventreceived = &eventreceived;
 }
 
 function challengekills(data, time) {

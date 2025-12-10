@@ -11,7 +11,7 @@
 
 function function_35209d64() {
   self thread function_ea61aedc();
-  callback::on_vehicle_damage( & function_610493ff, self);
+  callback::on_vehicle_damage(&function_610493ff, self);
 }
 
 function function_ea61aedc() {

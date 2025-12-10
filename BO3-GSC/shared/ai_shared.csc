@@ -6,7 +6,7 @@
 #namespace ai_shared;
 
 function autoexec main() {
-  level._customactorcbfunc = & ai::spawned_callback;
+  level._customactorcbfunc = &ai::spawned_callback;
 }
 
 #namespace ai;

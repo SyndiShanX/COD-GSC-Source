@@ -280,7 +280,7 @@ level_end_save() {
   }
   flag_set("game_saving");
   imagename = "levelshots / autosave / autosave_" + level.script + "end";
-  saveGame("levelend", & "AUTOSAVE_AUTOSAVE", imagename, true);
+  saveGame("levelend", &"AUTOSAVE_AUTOSAVE", imagename, true);
   flag_clear("game_saving");
 }
 
@@ -2953,7 +2953,7 @@ add_start(msg, func, loc_string) {
     precachestring(loc_string);
     level.start_loc_string[msg] = loc_string;
   } else {
-    level.start_loc_string[msg] = & "MISSING_LOC_STRING";
+    level.start_loc_string[msg] = &"MISSING_LOC_STRING";
   }
 }
 
@@ -5524,7 +5524,7 @@ warp_player_start(fade_time) {
   if(!isDefined(self.warp_text)) {
     self EnableInvulnerability();
     self DisableWeapons();
-    hudString = & "GAME_COOP_WARP_PLAYER_HINT";
+    hudString = &"GAME_COOP_WARP_PLAYER_HINT";
     if(GetDvarInt("splitscreen") && !GetDvarInt("hidef"))
       fontScale = 2.5;
     else

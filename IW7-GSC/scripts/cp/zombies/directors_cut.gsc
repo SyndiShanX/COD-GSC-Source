@@ -214,10 +214,10 @@ remove_talisman_interaction(param_00, param_01) {
 
 talisman_hint_func(param_00, param_01) {
   if(player_can_earn_talisman(param_01)) {
-    return & "DIRECTORS_CUT_PICK_UP_TALISMAN";
+    return &"DIRECTORS_CUT_PICK_UP_TALISMAN";
   }
 
-  return & "DIRECTORS_CUT_UNABLE_PICK_UP_TALISMAN";
+  return &"DIRECTORS_CUT_UNABLE_PICK_UP_TALISMAN";
 }
 
 soul_jar_hint_func(param_00, param_01) {

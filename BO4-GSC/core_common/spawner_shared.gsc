@@ -893,24 +893,24 @@ spawn(b_force = 0, str_targetname, v_origin, v_angles, bignorespawninglimit) {
   }
 
   if(isactorspawner(self)) {
-    if(isDefined(self.spawnflags) && (self.spawnflags&2) == 2) {
+    if(isDefined(self.spawnflags) && (self.spawnflags& 2) == 2) {
       makeroom = 1;
     }
 
-    if(isDefined(self.spawnflags) && (self.spawnflags&128) == 128) {
+    if(isDefined(self.spawnflags) && (self.spawnflags& 128) == 128) {
       deleteonzerocount = 1;
     }
   } else if(isvehiclespawner(self)) {
-    if(isDefined(self.spawnflags) && (self.spawnflags&8) == 8) {
+    if(isDefined(self.spawnflags) && (self.spawnflags& 8) == 8) {
       makeroom = 1;
     }
   }
 
-  if(b_force || isDefined(self.spawnflags) && (self.spawnflags&16) == 16 || isDefined(self.script_forcespawn)) {
+  if(b_force || isDefined(self.spawnflags) && (self.spawnflags& 16) == 16 || isDefined(self.script_forcespawn)) {
     force_spawn = 1;
   }
 
-  if(isDefined(self.spawnflags) && (self.spawnflags&64) == 64) {
+  if(isDefined(self.spawnflags) && (self.spawnflags& 64) == 64) {
     infinitespawn = 1;
   }
 
@@ -980,7 +980,7 @@ spawn(b_force = 0, str_targetname, v_origin, v_angles, bignorespawninglimit) {
       archetype_spawner.origin = originalorigin;
       archetype_spawner.angles = originalangles;
 
-      if(isDefined(archetype_spawner.spawnflags) && (archetype_spawner.spawnflags&64) == 64) {
+      if(isDefined(archetype_spawner.spawnflags) && (archetype_spawner.spawnflags& 64) == 64) {
         archetype_spawner.count++;
       }
 

@@ -67,7 +67,7 @@ function main() {
   function_1f7e5210();
   util::init_breath_fx();
   util::init_streamer_hints(6);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
   savegame::set_mission_name("sgen");
   cp_mi_sing_sgen_fx::main();
   cp_mi_sing_sgen_sound::main();
@@ -113,31 +113,31 @@ function function_b29072ff() {
 }
 
 function setup_skiptos() {
-  skipto::add("intro", & cp_mi_sing_sgen_exterior::skipto_intro_init, "Intro", & cp_mi_sing_sgen_exterior::skipto_intro_done);
-  skipto::add("exterior", & cp_mi_sing_sgen_exterior::function_d43e5685, "Exterior", & cp_mi_sing_sgen_exterior::function_91e8545f);
-  skipto::function_d68e678e("enter_lobby", & cp_mi_sing_sgen_exterior::skipto_enter_lobby_init, "Enter Lobby", & cp_mi_sing_sgen_exterior::skipto_enter_lobby_done);
-  skipto::function_d68e678e("discover_data", & cp_mi_sing_sgen_enter_silo::skipto_discover_data_init, "Discover Data", & cp_mi_sing_sgen_enter_silo::skipto_discover_data_done);
-  skipto::function_d68e678e("aquarium_shimmy", & cp_mi_sing_sgen_enter_silo::skipto_aquarium_shimmy_init, "Aquarium Shimmy", & cp_mi_sing_sgen_enter_silo::skipto_aquarium_shimmy_done);
-  skipto::function_d68e678e("gen_lab", & cp_mi_sing_sgen_enter_silo::skipto_gen_lab_init, "Genetics Lab", & cp_mi_sing_sgen_enter_silo::skipto_gen_lab_done);
-  skipto::function_d68e678e("post_gen_lab", & cp_mi_sing_sgen_enter_silo::skipto_post_gen_lab_init, "Post Gen Lab", & cp_mi_sing_sgen_enter_silo::skipto_post_gen_lab_done);
-  skipto::function_d68e678e("chem_lab", & cp_mi_sing_sgen_enter_silo::skipto_chem_lab_init, "Chemical Lab", & cp_mi_sing_sgen_enter_silo::skipto_chem_lab_done);
-  skipto::function_d68e678e("post_chem_lab", & cp_mi_sing_sgen_enter_silo::skipto_post_chem_lab_init, "Post Chem Lab", & cp_mi_sing_sgen_enter_silo::skipto_post_chem_lab_done);
-  skipto::function_d68e678e("silo_floor", & cp_mi_sing_sgen_enter_silo::skipto_silo_floor_init, "Silo Floor Battle", & cp_mi_sing_sgen_enter_silo::skipto_silo_floor_done);
-  skipto::function_d68e678e("under_silo", & cp_mi_sing_sgen_enter_silo::skipto_under_silo_init, "Under Silo", & cp_mi_sing_sgen_enter_silo::skipto_under_silo_done);
-  skipto::function_d68e678e("fallen_soldiers", & cp_mi_sing_sgen_fallen_soldiers::skipto_fallen_soldiers_init, "Fallen Soldiers", & cp_mi_sing_sgen_fallen_soldiers::skipto_fallen_soldiers_done);
-  skipto::function_d68e678e("testing_lab_igc", & cp_mi_sing_sgen_testing_lab_igc::skipto_testing_lab_igc_init, "Human Testing Lab", & cp_mi_sing_sgen_testing_lab_igc::skipto_testing_lab_igc_done);
-  skipto::function_d68e678e("dark_battle", & cp_mi_sing_sgen_dark_battle::skipto_dark_battle_init, "Dark Battle", & cp_mi_sing_sgen_dark_battle::skipto_dark_battle_done);
-  skipto::function_d68e678e("charging_station", & cp_mi_sing_sgen_dark_battle::skipto_charging_station_init, "Charging Station", & cp_mi_sing_sgen_dark_battle::skipto_charging_station_done);
-  skipto::function_d68e678e("descent", & cp_mi_sing_sgen_pallas::skipto_descent_init, "Descent", & cp_mi_sing_sgen_pallas::skipto_descent_done);
-  skipto::add("pallas_start", & cp_mi_sing_sgen_pallas::skipto_pallas_start_init, "pallas start", & cp_mi_sing_sgen_pallas::skipto_pallas_start_done);
-  skipto::add("pallas_end", & cp_mi_sing_sgen_pallas::skipto_pallas_end_init, "Pallas Death", & cp_mi_sing_sgen_pallas::skipto_pallas_end_done);
-  skipto::function_d68e678e("twin_revenge", & cp_mi_sing_sgen_revenge_igc::skipto_revenge_init, "Twin Revenge", & cp_mi_sing_sgen_revenge_igc::skipto_revenge_done);
-  skipto::function_d68e678e("flood_combat", & cp_mi_sing_sgen_flood::skipto_flood_init, "Flood Combat", & cp_mi_sing_sgen_flood::skipto_flood_done);
-  skipto::function_d68e678e("flood_defend", & cp_mi_sing_sgen_flood::skipto_flood_defend_init, "Flood Defend", & cp_mi_sing_sgen_flood::skipto_flood_defend_done);
-  skipto::function_d68e678e("underwater_battle", & cp_mi_sing_sgen_uw_battle::skipto_underwater_init, "Underwater Battle", & cp_mi_sing_sgen_uw_battle::skipto_underwater_done);
-  skipto::function_d68e678e("underwater_rail", & cp_mi_sing_sgen_water_ride::skipto_underwater_rail_init, "Underwater Rail", & cp_mi_sing_sgen_water_ride::skipto_underwater_rail_done);
-  skipto::function_d68e678e("silo_swim", & cp_mi_sing_sgen_silo_swim::skipto_silo_swim_init, "Silo Swim", & cp_mi_sing_sgen_silo_swim::skipto_silo_swim_done);
-  skipto::add_dev("dev_flood_combat", & cp_mi_sing_sgen_flood::skipto_flood_init, "Flood Combat", & cp_mi_sing_sgen_flood::skipto_flood_done);
+  skipto::add("intro", &cp_mi_sing_sgen_exterior::skipto_intro_init, "Intro", &cp_mi_sing_sgen_exterior::skipto_intro_done);
+  skipto::add("exterior", &cp_mi_sing_sgen_exterior::function_d43e5685, "Exterior", &cp_mi_sing_sgen_exterior::function_91e8545f);
+  skipto::function_d68e678e("enter_lobby", &cp_mi_sing_sgen_exterior::skipto_enter_lobby_init, "Enter Lobby", &cp_mi_sing_sgen_exterior::skipto_enter_lobby_done);
+  skipto::function_d68e678e("discover_data", &cp_mi_sing_sgen_enter_silo::skipto_discover_data_init, "Discover Data", &cp_mi_sing_sgen_enter_silo::skipto_discover_data_done);
+  skipto::function_d68e678e("aquarium_shimmy", &cp_mi_sing_sgen_enter_silo::skipto_aquarium_shimmy_init, "Aquarium Shimmy", &cp_mi_sing_sgen_enter_silo::skipto_aquarium_shimmy_done);
+  skipto::function_d68e678e("gen_lab", &cp_mi_sing_sgen_enter_silo::skipto_gen_lab_init, "Genetics Lab", &cp_mi_sing_sgen_enter_silo::skipto_gen_lab_done);
+  skipto::function_d68e678e("post_gen_lab", &cp_mi_sing_sgen_enter_silo::skipto_post_gen_lab_init, "Post Gen Lab", &cp_mi_sing_sgen_enter_silo::skipto_post_gen_lab_done);
+  skipto::function_d68e678e("chem_lab", &cp_mi_sing_sgen_enter_silo::skipto_chem_lab_init, "Chemical Lab", &cp_mi_sing_sgen_enter_silo::skipto_chem_lab_done);
+  skipto::function_d68e678e("post_chem_lab", &cp_mi_sing_sgen_enter_silo::skipto_post_chem_lab_init, "Post Chem Lab", &cp_mi_sing_sgen_enter_silo::skipto_post_chem_lab_done);
+  skipto::function_d68e678e("silo_floor", &cp_mi_sing_sgen_enter_silo::skipto_silo_floor_init, "Silo Floor Battle", &cp_mi_sing_sgen_enter_silo::skipto_silo_floor_done);
+  skipto::function_d68e678e("under_silo", &cp_mi_sing_sgen_enter_silo::skipto_under_silo_init, "Under Silo", &cp_mi_sing_sgen_enter_silo::skipto_under_silo_done);
+  skipto::function_d68e678e("fallen_soldiers", &cp_mi_sing_sgen_fallen_soldiers::skipto_fallen_soldiers_init, "Fallen Soldiers", &cp_mi_sing_sgen_fallen_soldiers::skipto_fallen_soldiers_done);
+  skipto::function_d68e678e("testing_lab_igc", &cp_mi_sing_sgen_testing_lab_igc::skipto_testing_lab_igc_init, "Human Testing Lab", &cp_mi_sing_sgen_testing_lab_igc::skipto_testing_lab_igc_done);
+  skipto::function_d68e678e("dark_battle", &cp_mi_sing_sgen_dark_battle::skipto_dark_battle_init, "Dark Battle", &cp_mi_sing_sgen_dark_battle::skipto_dark_battle_done);
+  skipto::function_d68e678e("charging_station", &cp_mi_sing_sgen_dark_battle::skipto_charging_station_init, "Charging Station", &cp_mi_sing_sgen_dark_battle::skipto_charging_station_done);
+  skipto::function_d68e678e("descent", &cp_mi_sing_sgen_pallas::skipto_descent_init, "Descent", &cp_mi_sing_sgen_pallas::skipto_descent_done);
+  skipto::add("pallas_start", &cp_mi_sing_sgen_pallas::skipto_pallas_start_init, "pallas start", &cp_mi_sing_sgen_pallas::skipto_pallas_start_done);
+  skipto::add("pallas_end", &cp_mi_sing_sgen_pallas::skipto_pallas_end_init, "Pallas Death", &cp_mi_sing_sgen_pallas::skipto_pallas_end_done);
+  skipto::function_d68e678e("twin_revenge", &cp_mi_sing_sgen_revenge_igc::skipto_revenge_init, "Twin Revenge", &cp_mi_sing_sgen_revenge_igc::skipto_revenge_done);
+  skipto::function_d68e678e("flood_combat", &cp_mi_sing_sgen_flood::skipto_flood_init, "Flood Combat", &cp_mi_sing_sgen_flood::skipto_flood_done);
+  skipto::function_d68e678e("flood_defend", &cp_mi_sing_sgen_flood::skipto_flood_defend_init, "Flood Defend", &cp_mi_sing_sgen_flood::skipto_flood_defend_done);
+  skipto::function_d68e678e("underwater_battle", &cp_mi_sing_sgen_uw_battle::skipto_underwater_init, "Underwater Battle", &cp_mi_sing_sgen_uw_battle::skipto_underwater_done);
+  skipto::function_d68e678e("underwater_rail", &cp_mi_sing_sgen_water_ride::skipto_underwater_rail_init, "Underwater Rail", &cp_mi_sing_sgen_water_ride::skipto_underwater_rail_done);
+  skipto::function_d68e678e("silo_swim", &cp_mi_sing_sgen_silo_swim::skipto_silo_swim_init, "Silo Swim", &cp_mi_sing_sgen_silo_swim::skipto_silo_swim_done);
+  skipto::add_dev("dev_flood_combat", &cp_mi_sing_sgen_flood::skipto_flood_init, "Flood Combat", &cp_mi_sing_sgen_flood::skipto_flood_done);
 }
 
 function precache() {
@@ -207,7 +207,7 @@ function init_clientfields() {
   clientfield::register("actor", "disable_tmode", 1, 1, "int");
   clientfield::register("actor", "sndStepSet", 1, 1, "int");
   clientfield::register("world", "sndLabWalla", 1, 1, "int");
-  visionset_mgr::register_info("overlay", "earthquake_blur", 1, 50, 1, 1, & visionset_mgr::timeout_lerp_thread_per_player, 0);
+  visionset_mgr::register_info("overlay", "earthquake_blur", 1, 50, 1, 1, &visionset_mgr::timeout_lerp_thread_per_player, 0);
 }
 
 function init_flags() {
@@ -309,13 +309,13 @@ function init_flags() {
 
 function level_threads() {
   a_t_mover = getEntArray("t_mover", "targetname");
-  array::thread_all(a_t_mover, & sgen_util::trig_mover);
+  array::thread_all(a_t_mover, &sgen_util::trig_mover);
   a_t_ev_on = getEntArray("enhanced_vision_on", "targetname");
   a_t_ev_off = getEntArray("enhanced_vision_off", "targetname");
-  array::thread_all(a_t_ev_on, & function_5dd1ccff, 1);
-  array::thread_all(a_t_ev_off, & function_5dd1ccff, 0);
+  array::thread_all(a_t_ev_on, &function_5dd1ccff, 1);
+  array::thread_all(a_t_ev_off, &function_5dd1ccff, 0);
   a_t_water = getEntArray("water_movement_trigger", "targetname");
-  array::thread_all(a_t_water, & water_movement);
+  array::thread_all(a_t_water, &water_movement);
   level thread silo_grate();
   level thread scale_rock_slide();
   level thread hide_show_fxanim_door_flood();
@@ -335,25 +335,25 @@ function init_hendricks(str_objective) {
 
 function robot_oed_toggles() {
   for(x = 2; x < 4; x++) {
-    scene::add_scene_func("cin_sgen_15_04_robot_ambush_aie_arise_robot0" + x, & enhanced_vision_entity_off, "init");
-    scene::add_scene_func("cin_sgen_15_04_robot_ambush_aie_arise_robot0" + x, & enhanced_vision_entity_on, "play");
+    scene::add_scene_func("cin_sgen_15_04_robot_ambush_aie_arise_robot0" + x, &enhanced_vision_entity_off, "init");
+    scene::add_scene_func("cin_sgen_15_04_robot_ambush_aie_arise_robot0" + x, &enhanced_vision_entity_on, "play");
   }
   for(x = 1; x < 5; x++) {
-    scene::add_scene_func("cin_sgen_13_01_robots_awaken_aie_awake_robot0" + x, & enhanced_vision_entity_off, "init");
-    scene::add_scene_func("cin_sgen_13_01_robots_awaken_aie_awake_robot0" + x, & enhanced_vision_entity_on, "play");
+    scene::add_scene_func("cin_sgen_13_01_robots_awaken_aie_awake_robot0" + x, &enhanced_vision_entity_off, "init");
+    scene::add_scene_func("cin_sgen_13_01_robots_awaken_aie_awake_robot0" + x, &enhanced_vision_entity_on, "play");
   }
   for(x = 1; x < 5; x++) {
-    scene::add_scene_func("cin_sgen_12_02_corvus_vign_wakeup_rail_robot_0" + x, & enhanced_vision_entity_off, "init");
-    scene::add_scene_func("cin_sgen_12_02_corvus_vign_wakeup_rail_robot_0" + x, & enhanced_vision_entity_on, "play");
+    scene::add_scene_func("cin_sgen_12_02_corvus_vign_wakeup_rail_robot_0" + x, &enhanced_vision_entity_off, "init");
+    scene::add_scene_func("cin_sgen_12_02_corvus_vign_wakeup_rail_robot_0" + x, &enhanced_vision_entity_on, "play");
   }
-  scene::add_scene_func("cin_sgen_16_01_charging_station_aie_idle_robot01", & enhanced_vision_entity_off, "init");
-  scene::add_scene_func("cin_sgen_16_01_charging_station_aie_idle_robot01", & enhanced_vision_entity_off, "play");
-  scene::add_scene_func("cin_sgen_16_01_charging_station_aie_fail_robot01", & enhanced_vision_entity_off, "init");
-  scene::add_scene_func("cin_sgen_16_01_charging_station_aie_fail_robot01", & enhanced_vision_entity_off, "play");
+  scene::add_scene_func("cin_sgen_16_01_charging_station_aie_idle_robot01", &enhanced_vision_entity_off, "init");
+  scene::add_scene_func("cin_sgen_16_01_charging_station_aie_idle_robot01", &enhanced_vision_entity_off, "play");
+  scene::add_scene_func("cin_sgen_16_01_charging_station_aie_fail_robot01", &enhanced_vision_entity_off, "init");
+  scene::add_scene_func("cin_sgen_16_01_charging_station_aie_fail_robot01", &enhanced_vision_entity_off, "play");
   for(x = 1; x < 7; x++) {
-    scene::add_scene_func("cin_sgen_16_01_charging_station_aie_awaken_robot0" + x, & enhanced_vision_entity_on, "play");
+    scene::add_scene_func("cin_sgen_16_01_charging_station_aie_awaken_robot0" + x, &enhanced_vision_entity_on, "play");
   }
-  scene::add_scene_func("cin_sgen_16_01_charging_station_aie_awaken_robot05_jumpdown", & enhanced_vision_entity_on, "play");
+  scene::add_scene_func("cin_sgen_16_01_charging_station_aie_awaken_robot05_jumpdown", &enhanced_vision_entity_on, "play");
 }
 
 function lift_pillar_cover_pallas() {
@@ -372,10 +372,10 @@ function on_player_spawned() {
 function silo_grate() {
   level flag::wait_till("silo_grate_open");
   a_blockers = getEntArray("silo_floor_clip", "targetname");
-  array::run_all(a_blockers, & delete);
+  array::run_all(a_blockers, &delete);
   level flag::wait_till("silo_swim");
   a_blockers = getEntArray("silo_grate", "targetname");
-  array::run_all(a_blockers, & delete);
+  array::run_all(a_blockers, &delete);
 }
 
 function pull_out_last_weapon() {
@@ -410,7 +410,7 @@ function function_5dd1ccff(b_enable, b_use_trig = 1, e_player) {
       e_player cybercom::disablecybercom();
       e_player cybercom_tacrig::function_ccca7010("cybercom_playermovement");
       if(b_enable != var_154f55d0) {
-        util::show_event_message(e_player, & "CP_MI_SING_SGEN_VISION_INTERFERENCE");
+        util::show_event_message(e_player, &"CP_MI_SING_SGEN_VISION_INTERFERENCE");
       }
     } else {
       level flag::clear("optics_out");
@@ -420,7 +420,7 @@ function function_5dd1ccff(b_enable, b_use_trig = 1, e_player) {
       var_11f40d11 = e_player cybercom::function_cc812e3b("cybercom_playermovement");
       e_player cybercom_tacrig::giverigability("cybercom_playermovement", var_11f40d11);
       if(b_enable != var_154f55d0) {
-        util::show_event_message(e_player, & "CP_MI_SING_SGEN_VISION_RESTORED");
+        util::show_event_message(e_player, &"CP_MI_SING_SGEN_VISION_RESTORED");
       }
     }
     if(!b_use_trig) {
@@ -436,7 +436,7 @@ function enhanced_vision_entity_off(a_ents) {
     self disableaimassist();
   }
   if(isDefined(a_ents)) {
-    array::thread_all(a_ents, & enhanced_vision_entity_off);
+    array::thread_all(a_ents, &enhanced_vision_entity_off);
   }
 }
 
@@ -447,7 +447,7 @@ function enhanced_vision_entity_on(a_ents) {
     self enableaimassist();
   }
   if(isDefined(a_ents)) {
-    array::thread_all(a_ents, & enhanced_vision_entity_on);
+    array::thread_all(a_ents, &enhanced_vision_entity_on);
   }
 }
 
@@ -476,7 +476,7 @@ function water_movement_player(e_player) {
 
 function scale_rock_slide() {
   m_rocks = getEntArray("silo_rock_slide", "targetname");
-  array::run_all(m_rocks, & setscale, 2);
+  array::run_all(m_rocks, &setscale, 2);
 }
 
 function script_tag_align_create(str_name, n_index = 0) {

@@ -10,7 +10,7 @@
 #namespace sticky_grenade;
 
 autoexec __init__system__() {
-  system::register(#"sticky_grenade", undefined, & __main__, undefined);
+  system::register(#"sticky_grenade", undefined, &__main__, undefined);
 }
 
 __main__() {

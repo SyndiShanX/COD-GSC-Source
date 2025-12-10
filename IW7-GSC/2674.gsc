@@ -12,12 +12,12 @@ init() {
   var_0.modelbase = "zom_machinery_generator_portable_01";
   var_0.modelplacement = "zom_machinery_generator_portable_01";
   var_0.modelplacementfailed = "zom_machinery_generator_portable_01_red";
-  var_0.hintstring = & "COOP_CRAFTABLES_PICKUP";
+  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
   var_0.func_9F43 = 0;
-  var_0.hintstring = & "COOP_CRAFTABLES_PICKUP";
-  var_0.placestring = & "COOP_CRAFTABLES_PLACE";
-  var_0.cannotplacestring = & "COOP_CRAFTABLES_CANNOT_PLACE";
-  var_0.placecancelablestring = & "COOP_CRAFTABLES_PLACE_CANCELABLE";
+  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
+  var_0.placestring = &"COOP_CRAFTABLES_PLACE";
+  var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
+  var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
   var_0.placementheighttolerance = 30.0;
   var_0.placementradius = 32.0;
   var_0.carriedtrapoffset = (0, 0, 25);

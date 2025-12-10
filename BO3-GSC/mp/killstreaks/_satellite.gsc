@@ -38,12 +38,12 @@ function init() {
   }
   level.activeplayersatellites = [];
   if(tweakables::gettweakablevalue("killstreak", "allowradardirection")) {
-    killstreaks::register("satellite", "satellite", "killstreak_satellite", "uav_used", & activatesatellite);
-    killstreaks::register_strings("satellite", & "KILLSTREAK_EARNED_SATELLITE", & "KILLSTREAK_SATELLITE_NOT_AVAILABLE", & "KILLSTREAK_SATELLITE_INBOUND", undefined, & "KILLSTREAK_SATELLITE_HACKED");
+    killstreaks::register("satellite", "satellite", "killstreak_satellite", "uav_used", &activatesatellite);
+    killstreaks::register_strings("satellite", &"KILLSTREAK_EARNED_SATELLITE", &"KILLSTREAK_SATELLITE_NOT_AVAILABLE", &"KILLSTREAK_SATELLITE_INBOUND", undefined, &"KILLSTREAK_SATELLITE_HACKED");
     killstreaks::register_dialog("satellite", "mpl_killstreak_satellite", "satelliteDialogBundle", undefined, "friendlySatellite", "enemySatellite", "enemySatelliteMultiple", "friendlySatelliteHacked", "enemySatelliteHacked", "requestSatellite", "threatSatellite");
   }
-  callback::on_connect( & onplayerconnect);
-  callback::on_spawned( & onplayerspawned);
+  callback::on_connect(&onplayerconnect);
+  callback::on_spawned(&onplayerspawned);
   level thread satellitetracker();
 }
 
@@ -84,22 +84,22 @@ function activatesatellite() {
   satellite.team = self.team;
   satellite setteam(self.team);
   satellite setowner(self);
-  satellite killstreaks::configure_team("satellite", killstreak_id, self, undefined, undefined, & configureteampost);
-  satellite killstreak_hacking::enable_hacking("satellite", & hackedprefunction, undefined);
+  satellite killstreaks::configure_team("satellite", killstreak_id, self, undefined, undefined, &configureteampost);
+  satellite killstreak_hacking::enable_hacking("satellite", &hackedprefunction, undefined);
   satellite.targetname = "satellite";
   satellite.maxhealth = 700;
   satellite.lowhealth = 700 * 0.5;
   satellite.health = 99999;
   satellite.leaving = 0;
   satellite setCanDamage(1);
-  satellite thread killstreaks::monitordamage("satellite", satellite.maxhealth, & destroysatellite, satellite.lowhealth, & onlowhealth, 0, undefined, 0);
-  satellite thread killstreaks::waittillemp( & destroysatellitebyemp);
-  satellite.killstreakdamagemodifier = & killstreakdamagemodifier;
+  satellite thread killstreaks::monitordamage("satellite", satellite.maxhealth, &destroysatellite, satellite.lowhealth, &onlowhealth, 0, undefined, 0);
+  satellite thread killstreaks::waittillemp(&destroysatellitebyemp);
+  satellite.killstreakdamagemodifier = &killstreakdamagemodifier;
   satellite.rocketdamage = (satellite.maxhealth / 3) + 1;
   satellite moveto(airsupport::getmapcenter() + (xoffset * -1, yoffset * -1, zoffset), 40000 * 0.001);
   target_set(satellite);
   satellite clientfield::set("enemyvehicle", 1);
-  satellite thread killstreaks::waitfortimeout("satellite", 40000, & ontimeout, "death", "crashing");
+  satellite thread killstreaks::waitfortimeout("satellite", 40000, &ontimeout, "death", "crashing");
   satellite thread heatseekingmissile::missiletarget_proximitydetonateincomingmissile("death", undefined, 1);
   satellite thread rotate(10);
   self killstreaks::play_killstreak_start_dialog("satellite", self.team, killstreak_id);
@@ -115,7 +115,7 @@ function hackedprefunction(hacker) {
 
 function configureteampost(owner, ishacked) {
   satellite = self;
-  satellite thread teams::waituntilteamchangesingleton(owner, "Satellite_watch_team_change", & onteamchange, self.entnum, "delete", "death", "leaving");
+  satellite thread teams::waituntilteamchangesingleton(owner, "Satellite_watch_team_change", &onteamchange, self.entnum, "delete", "death", "leaving");
   if(ishacked == 0) {
     satellite teams::hidetosameteam();
   } else {
@@ -160,7 +160,7 @@ function destroysatellite(attacker = undefined, weapon = undefined) {
     challenges::destroyedaircraft(attacker, weapon, 0);
     scoreevents::processscoreevent("destroyed_satellite", attacker, self.owner, weapon);
     attacker challenges::addflyswatterstat(weapon, self);
-    luinotifyevent(&"player_callout", 2, & "KILLSTREAK_DESTROYED_SATELLITE", attacker.entnum);
+    luinotifyevent(&"player_callout", 2, &"KILLSTREAK_DESTROYED_SATELLITE", attacker.entnum);
     if(!self.leaving) {
       self killstreaks::play_destroyed_dialog_on_owner("satellite", self.killstreak_id);
     }

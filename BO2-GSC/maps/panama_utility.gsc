@@ -677,7 +677,7 @@ ir_strobe_watch() {
     return;
   }
   if(level.script == "panama_2") {
-    screen_message_create(&"PANAMA_STROBE_GRENADE_TUTORIAL", & "PANAMA_SELECT_IRSTROBE");
+    screen_message_create(&"PANAMA_STROBE_GRENADE_TUTORIAL", &"PANAMA_SELECT_IRSTROBE");
     self thread watch_ir_strobe_equipped();
     self waittill_notify_or_timeout("strobe_equipped", 10);
     self notify("hint_over");

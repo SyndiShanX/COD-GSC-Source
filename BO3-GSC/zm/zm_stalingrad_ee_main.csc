@@ -12,7 +12,7 @@
 #namespace zm_stalingrad_ee_main;
 
 function autoexec __init__sytem__() {
-  system::register("zm_stalingrad_ee_main", & __init__, undefined, undefined);
+  system::register("zm_stalingrad_ee_main", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -24,25 +24,25 @@ function __init__() {
   level._effect["ee_raz_eye"] = "dlc3/stalingrad/fx_main_raz_eye_glow_friendly";
   level._effect["ee_sewer_switch"] = "dlc3/stalingrad/fx_main_impact_success";
   level._effect["post_outro_smoke"] = "dlc3/stalingrad/fx_mech_vdest_smoke_column";
-  clientfield::register("scriptmover", "ee_anomaly_hit", 12000, 1, "counter", & function_f5deabb1, 0, 0);
-  clientfield::register("scriptmover", "ee_anomaly_loop", 12000, 1, "int", & function_d1216748, 0, 0);
-  clientfield::register("scriptmover", "ee_cargo_explosion", 12000, 1, "int", & function_9a9410ac, 0, 0);
-  clientfield::register("vehicle", "ee_drone_cam_override", 12000, 1, "int", & function_5bdec411, 0, 0);
-  clientfield::register("scriptmover", "ee_generator_kill", 12000, 1, "int", & function_2a4222fe, 0, 0);
-  clientfield::register("scriptmover", "ee_generator_target", 12000, 1, "int", & function_3a96f955, 0, 0);
-  clientfield::register("scriptmover", "ee_koth_light_1", 12000, 2, "int", & function_ee9d73b7, 0, 0);
-  clientfield::register("scriptmover", "ee_koth_light_2", 12000, 2, "int", & function_7c96047c, 0, 0);
-  clientfield::register("scriptmover", "ee_koth_light_3", 12000, 2, "int", & function_a2987ee5, 0, 0);
-  clientfield::register("scriptmover", "ee_koth_light_4", 12000, 2, "int", & function_30910faa, 0, 0);
-  clientfield::register("toplayer", "ee_lockdown_fog", 12000, 1, "int", & function_1616098c, 0, 0);
-  clientfield::register("actor", "ee_raz_eye_override", 12000, 1, "int", & function_17268d90, 0, 0);
-  clientfield::register("scriptmover", "ee_sewer_switch", 12000, 1, "int", & function_f1804aa5, 0, 0);
-  clientfield::register("world", "ee_eye_beam_rumble", 12000, 1, "int", & function_ae73f9d5, 0, 0);
-  clientfield::register("toplayer", "ee_hatch_strain_rumble", 12000, 1, "int", & function_fb18b2da, 0, 0);
-  clientfield::register("scriptmover", "ee_hatch_break_rumble", 12000, 1, "int", & function_ebc93656, 0, 0);
-  clientfield::register("scriptmover", "ee_safe_smash_rumble", 12000, 1, "int", & function_61ba3846, 0, 0);
-  clientfield::register("scriptmover", "ee_timed_explosion_rumble", 12000, 1, "counter", & function_fa9a5ecf, 0, 0);
-  clientfield::register("scriptmover", "post_outro_smoke", 12000, 1, "int", & function_725d353b, 0, 0);
+  clientfield::register("scriptmover", "ee_anomaly_hit", 12000, 1, "counter", &function_f5deabb1, 0, 0);
+  clientfield::register("scriptmover", "ee_anomaly_loop", 12000, 1, "int", &function_d1216748, 0, 0);
+  clientfield::register("scriptmover", "ee_cargo_explosion", 12000, 1, "int", &function_9a9410ac, 0, 0);
+  clientfield::register("vehicle", "ee_drone_cam_override", 12000, 1, "int", &function_5bdec411, 0, 0);
+  clientfield::register("scriptmover", "ee_generator_kill", 12000, 1, "int", &function_2a4222fe, 0, 0);
+  clientfield::register("scriptmover", "ee_generator_target", 12000, 1, "int", &function_3a96f955, 0, 0);
+  clientfield::register("scriptmover", "ee_koth_light_1", 12000, 2, "int", &function_ee9d73b7, 0, 0);
+  clientfield::register("scriptmover", "ee_koth_light_2", 12000, 2, "int", &function_7c96047c, 0, 0);
+  clientfield::register("scriptmover", "ee_koth_light_3", 12000, 2, "int", &function_a2987ee5, 0, 0);
+  clientfield::register("scriptmover", "ee_koth_light_4", 12000, 2, "int", &function_30910faa, 0, 0);
+  clientfield::register("toplayer", "ee_lockdown_fog", 12000, 1, "int", &function_1616098c, 0, 0);
+  clientfield::register("actor", "ee_raz_eye_override", 12000, 1, "int", &function_17268d90, 0, 0);
+  clientfield::register("scriptmover", "ee_sewer_switch", 12000, 1, "int", &function_f1804aa5, 0, 0);
+  clientfield::register("world", "ee_eye_beam_rumble", 12000, 1, "int", &function_ae73f9d5, 0, 0);
+  clientfield::register("toplayer", "ee_hatch_strain_rumble", 12000, 1, "int", &function_fb18b2da, 0, 0);
+  clientfield::register("scriptmover", "ee_hatch_break_rumble", 12000, 1, "int", &function_ebc93656, 0, 0);
+  clientfield::register("scriptmover", "ee_safe_smash_rumble", 12000, 1, "int", &function_61ba3846, 0, 0);
+  clientfield::register("scriptmover", "ee_timed_explosion_rumble", 12000, 1, "counter", &function_fa9a5ecf, 0, 0);
+  clientfield::register("scriptmover", "post_outro_smoke", 12000, 1, "int", &function_725d353b, 0, 0);
 }
 
 function function_f5deabb1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

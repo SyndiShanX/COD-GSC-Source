@@ -20,19 +20,19 @@ function autoexec init() {
   mapname = getdvarstring("mapname");
   if(mapname == "cp_mi_sing_biodomes" || mapname == "cp_mi_sing_biodomes2") {
     namespace_27f0ae11::init_voice();
-    level.bzm_biodialogue1callback = & function_30d5fd50;
-    level.bzm_biodialogue2callback = & function_a2dd6c8b;
-    level.bzm_biodialogue2_2callback = & function_8d77af70;
-    level.bzm_biodialogue2_3callback = & function_b37a29d9;
-    level.bzm_biodialogue2_4callback = & function_71868de6;
-    level.bzm_biodialogue3callback = & function_7cdaf222;
-    level.bzm_biodialogue4callback = & function_eee2615d;
-    level.bzm_biodialogue5callback = & function_c8dfe6f4;
-    level.bzm_biodialogue5_1callback = & function_ed187ea8;
-    level.bzm_biodialogue5_2callback = & function_5f1fede3;
-    level.bzm_biodialogue5_3callback = & function_391d737a;
-    level.bzm_biodialogue5_4callback = & function_ab24e2b5;
-    level.bzm_biodialogue6callback = & function_3ae7562f;
+    level.bzm_biodialogue1callback = &function_30d5fd50;
+    level.bzm_biodialogue2callback = &function_a2dd6c8b;
+    level.bzm_biodialogue2_2callback = &function_8d77af70;
+    level.bzm_biodialogue2_3callback = &function_b37a29d9;
+    level.bzm_biodialogue2_4callback = &function_71868de6;
+    level.bzm_biodialogue3callback = &function_7cdaf222;
+    level.bzm_biodialogue4callback = &function_eee2615d;
+    level.bzm_biodialogue5callback = &function_c8dfe6f4;
+    level.bzm_biodialogue5_1callback = &function_ed187ea8;
+    level.bzm_biodialogue5_2callback = &function_5f1fede3;
+    level.bzm_biodialogue5_3callback = &function_391d737a;
+    level.bzm_biodialogue5_4callback = &function_ab24e2b5;
+    level.bzm_biodialogue6callback = &function_3ae7562f;
     function_f0d84c78();
   }
 }

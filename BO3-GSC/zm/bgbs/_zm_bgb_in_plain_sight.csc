@@ -13,7 +13,7 @@
 #namespace zm_bgb_in_plain_sight;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_in_plain_sight", & __init__, undefined, undefined);
+  system::register("zm_bgb_in_plain_sight", &__init__, undefined, undefined);
 }
 
 function __init__() {

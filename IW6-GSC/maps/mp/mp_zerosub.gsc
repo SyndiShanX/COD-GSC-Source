@@ -321,7 +321,7 @@ zeroSubCustomCrateFunc() {
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "zerosub_level_killstreak", CONST_KILLSTREAK_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), & "MP_ZEROSUB_LEVEL_KILLSTREAK_ACTIVATE");
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "zerosub_level_killstreak", CONST_KILLSTREAK_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), &"MP_ZEROSUB_LEVEL_KILLSTREAK_ACTIVATE");
   level thread zerosub_killstreak_watch_for_crate();
 }
 

@@ -677,7 +677,7 @@ func_3343() {
   if(isDefined(var_04) && (issubstr(var_04, "MOD_GRENADE") || issubstr(var_04, "MOD_EXPLOSIVE")))
     self.waschained = 1;
 
-  if(isDefined(var_08) && var_08 & level.idflags_penetration)
+  if(isDefined(var_08) && var_08 &level.idflags_penetration)
     self.wasdamagedfrombulletpenetration = 1;
 
   self.wasdamaged = 1;

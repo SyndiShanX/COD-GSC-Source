@@ -30,14 +30,14 @@
 function autoexec init() {
   initzmbehaviorsandasm();
   level thread zm_remaster_zombie::update_closest_player();
-  level.last_valid_position_override = & moon_last_valid_position;
+  level.last_valid_position_override = &moon_last_valid_position;
 }
 
 function private initzmbehaviorsandasm() {
-  spawner::add_archetype_spawn_function("zombie", & function_7a726580);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("moonZombieKilledByMicrowaveGunDw", & killedbymicrowavegundw);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("moonZombieKilledByMicrowaveGun", & killedbymicrowavegun);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("moonShouldMoveLowg", & moonshouldmovelowg);
+  spawner::add_archetype_spawn_function("zombie", &function_7a726580);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("moonZombieKilledByMicrowaveGunDw", &killedbymicrowavegundw);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("moonZombieKilledByMicrowaveGun", &killedbymicrowavegun);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("moonShouldMoveLowg", &moonshouldmovelowg);
 }
 
 function teleporttraversalmocompstart(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
@@ -85,8 +85,8 @@ function zodshouldmove(entity) {
 }
 
 function private function_7a726580() {
-  self.cant_move_cb = & moon_cant_move_cb;
-  self.closest_player_override = & zm_remaster_zombie::remaster_closest_player;
+  self.cant_move_cb = &moon_cant_move_cb;
+  self.closest_player_override = &zm_remaster_zombie::remaster_closest_player;
 }
 
 function private moon_cant_move_cb() {

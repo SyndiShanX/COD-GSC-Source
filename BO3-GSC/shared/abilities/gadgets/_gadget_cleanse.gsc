@@ -15,17 +15,17 @@
 #namespace _gadget_cleanse;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_cleanse", & __init__, undefined, undefined);
+  system::register("gadget_cleanse", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(17, & gadget_cleanse_on, & gadget_cleanse_off);
-  ability_player::register_gadget_possession_callbacks(17, & gadget_cleanse_on_give, & gadget_cleanse_on_take);
-  ability_player::register_gadget_flicker_callbacks(17, & gadget_cleanse_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(17, & gadget_cleanse_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(17, & gadget_cleanse_is_flickering);
+  ability_player::register_gadget_activation_callbacks(17, &gadget_cleanse_on, &gadget_cleanse_off);
+  ability_player::register_gadget_possession_callbacks(17, &gadget_cleanse_on_give, &gadget_cleanse_on_take);
+  ability_player::register_gadget_flicker_callbacks(17, &gadget_cleanse_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(17, &gadget_cleanse_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(17, &gadget_cleanse_is_flickering);
   clientfield::register("allplayers", "gadget_cleanse_on", 1, 1, "int");
-  callback::on_connect( & gadget_cleanse_on_connect);
+  callback::on_connect(&gadget_cleanse_on_connect);
 }
 
 function gadget_cleanse_is_inuse(slot) {

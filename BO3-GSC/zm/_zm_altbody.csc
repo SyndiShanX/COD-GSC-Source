@@ -18,13 +18,13 @@
 #namespace zm_altbody;
 
 function autoexec __init__sytem__() {
-  system::register("zm_altbody", & __init__, undefined, undefined);
+  system::register("zm_altbody", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("clientuimodel", "player_mana", 1, 8, "float", & set_player_mana, 0, 1);
-  clientfield::register("toplayer", "player_in_afterlife", 1, 1, "int", & toggle_player_altbody, 0, 1);
-  clientfield::register("allplayers", "player_altbody", 1, 1, "int", & toggle_player_altbody_3p, 0, 1);
+  clientfield::register("clientuimodel", "player_mana", 1, 8, "float", &set_player_mana, 0, 1);
+  clientfield::register("toplayer", "player_in_afterlife", 1, 1, "int", &toggle_player_altbody, 0, 1);
+  clientfield::register("allplayers", "player_altbody", 1, 1, "int", &toggle_player_altbody_3p, 0, 1);
   setupclientfieldcodecallbacks("toplayer", 1, "player_in_afterlife");
 }
 

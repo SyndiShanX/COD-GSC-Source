@@ -46,8 +46,8 @@ init() {
       }
     }
 
-    precachestring( & "MP_HOST_ENDED_GAME");
-    precachestring( & "MP_HOST_ENDGAME_RESPONSE");
+    precachestring(&"MP_HOST_ENDED_GAME");
+    precachestring(&"MP_HOST_ENDGAME_RESPONSE");
   }
 
   level thread onplayerconnect();
@@ -244,7 +244,7 @@ watchforteamchange() {
     }
 
     if(getdvarint("scr_lua_splashes"))
-      self luinotifyevent( & "clear_notification_queue", 0);
+      self luinotifyevent(&"clear_notification_queue", 0);
 
     self setclientomnvar("ui_loadout_selected", -1);
 

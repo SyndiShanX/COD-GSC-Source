@@ -18,9 +18,9 @@ function init_shared() {
 }
 
 function register() {
-  clientfield::register("scriptmover", "firefly_state", 1, 3, "int", & firefly_state_change, 0, 0);
-  clientfield::register("toplayer", "fireflies_attacking", 1, 1, "int", & fireflies_attacking, 0, 1);
-  clientfield::register("toplayer", "fireflies_chasing", 1, 1, "int", & fireflies_chasing, 0, 1);
+  clientfield::register("scriptmover", "firefly_state", 1, 3, "int", &firefly_state_change, 0, 0);
+  clientfield::register("toplayer", "fireflies_attacking", 1, 1, "int", &fireflies_attacking, 0, 1);
+  clientfield::register("toplayer", "fireflies_chasing", 1, 1, "int", &fireflies_chasing, 0, 1);
 }
 
 function getotherteam(team) {
@@ -123,7 +123,7 @@ function on_shutdown(localclientnum, ent) {
 }
 
 function firefly_init(localclientnum) {
-  self callback::on_shutdown( & on_shutdown, self);
+  self callback::on_shutdown(&on_shutdown, self);
 }
 
 function firefly_deploying(localclientnum) {

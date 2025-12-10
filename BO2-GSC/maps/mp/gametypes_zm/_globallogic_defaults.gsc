@@ -30,7 +30,7 @@ default_onforfeit(team) {
   wait 10.0;
   announcement(game["strings"]["opponent_forfeiting_in"], 10.0, 0);
   wait 10.0;
-  endreason = & "";
+  endreason = &"";
 
   if(!isDefined(team)) {
     setdvar("ui_text_endreason", game["strings"]["players_forfeited"]);
@@ -93,7 +93,7 @@ default_ononeleftevent(team) {
     else
       logstring("last one alive, win: unknown");
 
-    thread maps\mp\gametypes_zm\_globallogic::endgame(winner, & "MP_ENEMIES_ELIMINATED");
+    thread maps\mp\gametypes_zm\_globallogic::endgame(winner, &"MP_ENEMIES_ELIMINATED");
   } else {
     for(index = 0; index < level.players.size; index++) {
       player = level.players[index];

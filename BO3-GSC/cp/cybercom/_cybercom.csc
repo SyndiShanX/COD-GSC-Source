@@ -17,7 +17,7 @@
 #namespace cybercom;
 
 function autoexec __init__sytem__() {
-  system::register("cybercom", & __init__, undefined, undefined);
+  system::register("cybercom", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -25,33 +25,33 @@ function __init__() {
   level.cybercom_status = 0;
   init_clientfields();
   function_15b9d1ea();
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
   cybercom_firefly::init();
   cybercom_security_breach::init();
   cybercom_misdirection::init();
 }
 
 function init_clientfields() {
-  clientfield::register("world", "cybercom_disabled", 1, 1, "int", & cybercomdisabledall, 0, 0);
-  clientfield::register("toplayer", "cybercom_disabled", 1, 1, "int", & cybercomdisabled, 0, 0);
-  clientfield::register("vehicle", "cybercom_setiffname", 1, 3, "int", & setiffname, 0, 0);
-  clientfield::register("actor", "cybercom_setiffname", 1, 3, "int", & setiffname, 0, 0);
-  clientfield::register("actor", "cybercom_immolate", 1, 2, "int", & function_87475da2, 0, 0);
-  clientfield::register("vehicle", "cybercom_immolate", 1, 1, "int", & function_a7363f41, 0, 0);
-  clientfield::register("actor", "cybercom_sysoverload", 1, 2, "int", & function_572c7315, 0, 0);
-  clientfield::register("vehicle", "cybercom_sysoverload", 1, 1, "int", & function_38510c4a, 0, 0);
-  clientfield::register("actor", "cybercom_surge", 1, 2, "int", & function_2d61bf2e, 0, 0);
-  clientfield::register("vehicle", "cybercom_surge", 1, 2, "int", & function_50dfd00b, 0, 0);
-  clientfield::register("scriptmover", "cybercom_surge", 1, 1, "int", & function_38cc3f2e, 0, 0);
-  clientfield::register("actor", "cybercom_shortout", 1, 2, "int", & function_82d4e6fe, 0, 0);
-  clientfield::register("vehicle", "cybercom_shortout", 1, 2, "int", & function_6f88468d, 0, 0);
-  clientfield::register("allplayers", "cyber_arm_pulse", 1, 2, "counter", & cyber_arm_pulse, 0, 0);
-  clientfield::register("actor", "cyber_arm_pulse", 1, 2, "counter", & cyber_arm_pulse, 0, 0);
-  clientfield::register("scriptmover", "cyber_arm_pulse", 1, 2, "counter", & cyber_arm_pulse, 0, 0);
-  clientfield::register("actor", "sensory_overload", 1, 2, "int", & cybercom_sensoryoverload, 0, 0);
-  clientfield::register("actor", "forced_malfunction", 1, 1, "int", & cybercom_forcedmalfunction, 0, 0);
-  clientfield::register("toplayer", "hacking_progress", 1, 12, "int", & function_9439eecf, 0, 0);
-  clientfield::register("toplayer", "resetAbilityWheel", 1, 1, "int", & function_806d1a61, 0, 0);
+  clientfield::register("world", "cybercom_disabled", 1, 1, "int", &cybercomdisabledall, 0, 0);
+  clientfield::register("toplayer", "cybercom_disabled", 1, 1, "int", &cybercomdisabled, 0, 0);
+  clientfield::register("vehicle", "cybercom_setiffname", 1, 3, "int", &setiffname, 0, 0);
+  clientfield::register("actor", "cybercom_setiffname", 1, 3, "int", &setiffname, 0, 0);
+  clientfield::register("actor", "cybercom_immolate", 1, 2, "int", &function_87475da2, 0, 0);
+  clientfield::register("vehicle", "cybercom_immolate", 1, 1, "int", &function_a7363f41, 0, 0);
+  clientfield::register("actor", "cybercom_sysoverload", 1, 2, "int", &function_572c7315, 0, 0);
+  clientfield::register("vehicle", "cybercom_sysoverload", 1, 1, "int", &function_38510c4a, 0, 0);
+  clientfield::register("actor", "cybercom_surge", 1, 2, "int", &function_2d61bf2e, 0, 0);
+  clientfield::register("vehicle", "cybercom_surge", 1, 2, "int", &function_50dfd00b, 0, 0);
+  clientfield::register("scriptmover", "cybercom_surge", 1, 1, "int", &function_38cc3f2e, 0, 0);
+  clientfield::register("actor", "cybercom_shortout", 1, 2, "int", &function_82d4e6fe, 0, 0);
+  clientfield::register("vehicle", "cybercom_shortout", 1, 2, "int", &function_6f88468d, 0, 0);
+  clientfield::register("allplayers", "cyber_arm_pulse", 1, 2, "counter", &cyber_arm_pulse, 0, 0);
+  clientfield::register("actor", "cyber_arm_pulse", 1, 2, "counter", &cyber_arm_pulse, 0, 0);
+  clientfield::register("scriptmover", "cyber_arm_pulse", 1, 2, "counter", &cyber_arm_pulse, 0, 0);
+  clientfield::register("actor", "sensory_overload", 1, 2, "int", &cybercom_sensoryoverload, 0, 0);
+  clientfield::register("actor", "forced_malfunction", 1, 1, "int", &cybercom_forcedmalfunction, 0, 0);
+  clientfield::register("toplayer", "hacking_progress", 1, 12, "int", &function_9439eecf, 0, 0);
+  clientfield::register("toplayer", "resetAbilityWheel", 1, 1, "int", &function_806d1a61, 0, 0);
   level._effect["sensory_disable_human"] = "electric/fx_ability_elec_sensory_ol_human";
   level._effect["forced_malfunction"] = "electric/fx_ability_elec_sensory_ol_weapon";
 }
@@ -518,7 +518,7 @@ function setiffname(localclientnum, oldval, newval, bnewent, binitialsnap, field
     case 2: {
       self.var_2b998b77 = function_a4cd6b9a();
       self setdrawname(self.var_2b998b77);
-      self callback::on_shutdown( & function_d48fcfa6);
+      self callback::on_shutdown(&function_d48fcfa6);
       break;
     }
     case 3: {

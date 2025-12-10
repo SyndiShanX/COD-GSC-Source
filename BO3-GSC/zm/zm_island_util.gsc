@@ -58,8 +58,8 @@ function private spawn_unitrigger(origin, angles, radius_or_dims, use_trigger = 
     trigger_stub.func_unitrigger_message = func_per_player_msg;
     zm_unitrigger::unitrigger_force_per_player_triggers(trigger_stub, 1);
   }
-  trigger_stub.prompt_and_visibility_func = & function_5ea427bf;
-  zm_unitrigger::register_unitrigger(trigger_stub, & unitrigger_think);
+  trigger_stub.prompt_and_visibility_func = &function_5ea427bf;
+  zm_unitrigger::register_unitrigger(trigger_stub, &unitrigger_think);
   return trigger_stub;
 }
 
@@ -70,7 +70,7 @@ function function_5ea427bf(player) {
   } else if(isDefined(self.stub.func_unitrigger_visible)) {
     b_visible = self[[self.stub.func_unitrigger_visible]](player);
   }
-  str_msg = & "";
+  str_msg = &"";
   param1 = undefined;
   if(b_visible) {
     if(isDefined(self.stub.func_unitrigger_message)) {

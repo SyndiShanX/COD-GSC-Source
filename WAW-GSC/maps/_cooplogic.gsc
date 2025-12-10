@@ -29,7 +29,7 @@ forceEnd() {
   if(level.splitscreen)
     endString = "";
   else
-    endString = & "GAME_HOST_ENDED_GAME";
+    endString = &"GAME_HOST_ENDED_GAME";
   makeDvarServerInfo("ui_text_endreason", endString);
   setDvar("ui_text_endreason", endString);
   thread endGame(endString);

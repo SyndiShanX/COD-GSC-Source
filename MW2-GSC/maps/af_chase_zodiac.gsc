@@ -33,7 +33,7 @@ zodiac_main() {
 
   // I need to do this too. because the use hint for mounting the zodiac happens to late.
   //	zodiac_triggers = getEntArray( "zodiac_trigger", "targetname" );
-  //	array_call( zodiac_triggers, ::setHintString, "Press &&1 to mount" );
+  //	array_call( zodiac_triggers, ::setHintString, "Press && 1 to mount" );
 
   clear_all_ai_grenades();
 

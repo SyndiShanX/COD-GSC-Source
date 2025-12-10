@@ -39,10 +39,10 @@ main() {
     return;
   }
 
-  maps\_utility::add_start("ambush", ::start_ambush, & "STARTS_AMBUSH");
-  maps\_utility::add_start("village", ::start_village, & "STARTS_VILLAGE");
-  maps\_utility::add_start("morpheus", ::start_morpheus, & "STARTS_MORPHEUS");
-  maps\_utility::add_start("apartment", ::start_apartment, & "STARTS_APARTMENT");
+  maps\_utility::add_start("ambush", ::start_ambush, &"STARTS_AMBUSH");
+  maps\_utility::add_start("village", ::start_village, &"STARTS_VILLAGE");
+  maps\_utility::add_start("morpheus", ::start_morpheus, &"STARTS_MORPHEUS");
+  maps\_utility::add_start("apartment", ::start_apartment, &"STARTS_APARTMENT");
   maps\_utility::add_start("suicide", ::start_suicide, "SUICIDE");
   maps\_utility::default_start(::start_default);
   createthreatbiasgroup("player");
@@ -382,14 +382,14 @@ guardtower_dead_enemies() {
 takeover_objective() {
   wait 8;
   var_0 = getent("obj_checkpoint", "targetname");
-  objective_add(0, "active", & "AMBUSH_OBJ_CHECKPOINT", var_0.origin);
+  objective_add(0, "active", &"AMBUSH_OBJ_CHECKPOINT", var_0.origin);
   objective_current(0);
   common_scripts\utility::flag_wait_either("takeover_checkpoint_located", "takeover_force");
   objective_state(0, "done");
 
   if(!common_scripts\utility::flag("takeover_force")) {
     var_1 = getent("obj_dumpster", "targetname");
-    objective_add(1, "active", & "AMBUSH_OBJ_GET_IN_POSITION", var_1.origin);
+    objective_add(1, "active", &"AMBUSH_OBJ_GET_IN_POSITION", var_1.origin);
     objective_current(1);
   }
 
@@ -400,7 +400,7 @@ takeover_objective() {
   if(common_scripts\utility::flag("takeover_checkpoint_located"))
     objective_state(1, "done");
 
-  objective_add(2, "active", & "AMBUSH_OBJ_SECURE_CHECKPOINT", var_0.origin);
+  objective_add(2, "active", &"AMBUSH_OBJ_SECURE_CHECKPOINT", var_0.origin);
   objective_current(2);
   common_scripts\utility::flag_wait("takeover_done");
   maps\_utility::arcademode_checkpoint(3.5, 1);
@@ -694,7 +694,7 @@ ambush_helicopter() {
 
 ambush_objective() {
   common_scripts\utility::flag_wait("takeover_fade_done");
-  objective_add(3, "active", & "AMBUSH_OBJ_AMBUSH_CONVOY", level.player.origin);
+  objective_add(3, "active", &"AMBUSH_OBJ_AMBUSH_CONVOY", level.player.origin);
   objective_current(3);
   common_scripts\utility::flag_wait("ambush_start");
   objective_state(3, "done");
@@ -1554,7 +1554,7 @@ ambush_recover() {
 
 main_objective() {
   var_0 = getent("main_objective", "targetname");
-  objective_add(4, "active", & "AMBUSH_OBJ_CAPTURE_TARGET", var_0.origin);
+  objective_add(4, "active", &"AMBUSH_OBJ_CAPTURE_TARGET", var_0.origin);
   objective_current(4);
 
   while(isDefined(var_0.target)) {
@@ -1570,7 +1570,7 @@ main_objective() {
   }
 
   common_scripts\utility::flag_wait("obj_flexicuff");
-  objective_string(4, & "AMBUSH_OBJ_FLEXICUFF");
+  objective_string(4, &"AMBUSH_OBJ_FLEXICUFF");
   common_scripts\utility::flag_wait("apartment_suicide_done");
 }
 

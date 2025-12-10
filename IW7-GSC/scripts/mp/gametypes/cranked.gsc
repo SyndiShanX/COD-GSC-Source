@@ -55,7 +55,7 @@ main() {
   game["dialog"]["offense_obj"] = "crnk_hint";
   game["dialog"]["begin_cranked"] = "crnk_cranked";
   game["dialog"]["five_seconds_left"] = "crnk_det";
-  game["strings"]["overtime_hint"] = & "MP_FIRST_BLOOD";
+  game["strings"]["overtime_hint"] = &"MP_FIRST_BLOOD";
   level thread onplayerconnect();
 }
 
@@ -97,13 +97,13 @@ onstartgametype() {
     game["defenders"] = var_00;
   }
 
-  var_02 = & "OBJECTIVES_WAR";
-  var_03 = & "OBJECTIVES_WAR_SCORE";
-  var_04 = & "OBJECTIVES_WAR_HINT";
+  var_02 = &"OBJECTIVES_WAR";
+  var_03 = &"OBJECTIVES_WAR_SCORE";
+  var_04 = &"OBJECTIVES_WAR_HINT";
   if(!level.teambased) {
-    var_02 = & "OBJECTIVES_DM";
-    var_03 = & "OBJECTIVES_DM_SCORE";
-    var_04 = & "OBJECTIVES_DM_HINT";
+    var_02 = &"OBJECTIVES_DM";
+    var_03 = &"OBJECTIVES_DM_SCORE";
+    var_04 = &"OBJECTIVES_DM_HINT";
   }
 
   scripts\mp\utility::setobjectivetext("allies", var_02);

@@ -23,8 +23,8 @@
 #namespace drone_strike;
 
 function init() {
-  killstreaks::register("drone_strike", "drone_strike", "killstreak_drone_strike", "drone_strike_used", & activatedronestrike, 1);
-  killstreaks::register_strings("drone_strike", & "KILLSTREAK_DRONE_STRIKE_EARNED", & "KILLSTREAK_DRONE_STRIKE_NOT_AVAILABLE", & "KILLSTREAK_DRONE_STRIKE_INBOUND", & "KILLSTREAK_DRONE_STRIKE_INBOUND_NEAR_PLAYER", & "KILLSTREAK_DRONE_STRIKE_HACKED");
+  killstreaks::register("drone_strike", "drone_strike", "killstreak_drone_strike", "drone_strike_used", &activatedronestrike, 1);
+  killstreaks::register_strings("drone_strike", &"KILLSTREAK_DRONE_STRIKE_EARNED", &"KILLSTREAK_DRONE_STRIKE_NOT_AVAILABLE", &"KILLSTREAK_DRONE_STRIKE_INBOUND", &"KILLSTREAK_DRONE_STRIKE_INBOUND_NEAR_PLAYER", &"KILLSTREAK_DRONE_STRIKE_HACKED");
   killstreaks::register_dialog("drone_strike", "mpl_killstreak_drone_strike", "droneStrikeDialogBundle", undefined, "friendlyDroneStrike", "enemyDroneStrike", "enemyDroneStrikeMultiple", "friendlyDroneStrikeHacked", "enemyDroneStrikeHacked", "requestDroneStrike", "threatDroneStrike");
   killstreaks::set_team_kill_penalty_scale("drone_strike", level.teamkillreducedpenalty);
 }
@@ -63,7 +63,7 @@ function selectdronestrikepath() {
     return 0;
   }
   self.pers["drone_strike_radar_used"] = 0;
-  return self airsupport::finishhardpointlocationusage(location, & dronestrikelocationselected);
+  return self airsupport::finishhardpointlocationusage(location, &dronestrikelocationselected);
 }
 
 function waitforlocationselection() {
@@ -182,7 +182,7 @@ function setupdamagehandling() {
   drone.maxhealth = killstreak_bundles::get_max_health("drone_strike");
   drone.lowhealth = killstreak_bundles::get_low_health("drone_strike");
   drone.health = drone.maxhealth;
-  drone thread killstreaks::monitordamage("drone_strike", drone.maxhealth, & destroydroneplane, drone.lowhealth, undefined, 0, & empdamagedrone, 1);
+  drone thread killstreaks::monitordamage("drone_strike", drone.maxhealth, &destroydroneplane, drone.lowhealth, undefined, 0, &empdamagedrone, 1);
 }
 
 function destroydroneplane(attacker, weapon) {
@@ -192,7 +192,7 @@ function destroydroneplane(attacker, weapon) {
     challenges::destroyedaircraft(attacker, weapon, 0);
     attacker challenges::addflyswatterstat(weapon, self);
     scoreevents::processscoreevent("destroyed_rolling_thunder_drone", attacker, self.owner, weapon);
-    luinotifyevent(&"player_callout", 2, & "KILLSTREAK_DESTROYED_ROLLING_THUNDER_DRONE", attacker.entnum);
+    luinotifyevent(&"player_callout", 2, &"KILLSTREAK_DESTROYED_ROLLING_THUNDER_DRONE", attacker.entnum);
   }
   params = level.killstreakbundle["drone_strike"];
   if(isDefined(params.ksexplosionfx)) {
@@ -235,7 +235,7 @@ function dronestrikeawardempscoreevent(attacker, victim) {
   scoreevents::processscoreevent("destroyed_rolling_thunder_all_drones", attacker, victim, getweapon("emp"));
   challenges::destroyedaircraft(attacker, getweapon("emp"), 0);
   attacker challenges::addflyswatterstat(getweapon("emp"), self);
-  luinotifyevent(&"player_callout", 2, & "KILLSTREAK_DESTROYED_ROLLING_THUNDER_ALL_DRONES", attacker.entnum);
+  luinotifyevent(&"player_callout", 2, &"KILLSTREAK_DESTROYED_ROLLING_THUNDER_ALL_DRONES", attacker.entnum);
   owner globallogic_audio::play_taacom_dialog("destroyed", "drone_strike");
 }
 

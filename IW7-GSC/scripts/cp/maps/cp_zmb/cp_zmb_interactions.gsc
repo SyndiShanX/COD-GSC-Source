@@ -5,111 +5,111 @@
 **********************************************************/
 
 register_interactions() {
-  level.interaction_hintstrings["neil_head"] = & "CP_ZMB_INTERACTIONS_NEIL_HEAD_PICKUP";
-  level.interaction_hintstrings["neil_battery"] = & "CP_QUEST_WOR_PART";
-  level.interaction_hintstrings["neil_firmware"] = & "CP_QUEST_WOR_PART";
-  level.interaction_hintstrings["neil_repair"] = & "CP_ZMB_INTERACTIONS_REPAR_NEIL";
+  level.interaction_hintstrings["neil_head"] = &"CP_ZMB_INTERACTIONS_NEIL_HEAD_PICKUP";
+  level.interaction_hintstrings["neil_battery"] = &"CP_QUEST_WOR_PART";
+  level.interaction_hintstrings["neil_firmware"] = &"CP_QUEST_WOR_PART";
+  level.interaction_hintstrings["neil_repair"] = &"CP_ZMB_INTERACTIONS_REPAR_NEIL";
   level.interaction_hintstrings["dj_quest_part_1"] = "";
   level.interaction_hintstrings["dj_quest_part_2"] = "";
   level.interaction_hintstrings["dj_quest_part_3"] = "";
-  level.interaction_hintstrings["dj_quest_speaker"] = & "CP_QUEST_WOR_PLACE_PART";
-  level.interaction_hintstrings["rockettrap"] = & "CP_ZMB_INTERACTIONS_ROCKET_TRAP";
-  level.interaction_hintstrings["beamtrap"] = & "CP_ZMB_INTERACTIONS_BEAMTRAP";
-  level.interaction_hintstrings["interaction_discoballtrap"] = & "CP_ZMB_INTERACTIONS_USE_DISCO_TRAP";
-  level.interaction_hintstrings["scrambler"] = & "CP_ZMB_INTERACTIONS_SCRAMBLER";
-  level.interaction_hintstrings["blackhole_trap"] = & "CP_ZMB_INTERACTIONS_USE_BLACKHOLE_TRAP";
-  level.interaction_hintstrings["debris_350"] = & "CP_ZMB_INTERACTIONS_PURCHASE_AREA";
-  level.interaction_hintstrings["debris_1000"] = & "CP_ZMB_INTERACTIONS_PURCHASE_AREA";
-  level.interaction_hintstrings["debris_1500"] = & "CP_ZMB_INTERACTIONS_PURCHASE_AREA";
-  level.interaction_hintstrings["debris_2000"] = & "CP_ZMB_INTERACTIONS_PURCHASE_AREA";
-  level.interaction_hintstrings["debris_2500"] = & "CP_ZMB_INTERACTIONS_PURCHASE_AREA";
-  level.interaction_hintstrings["debris_1250"] = & "CP_ZMB_INTERACTIONS_PURCHASE_AREA";
-  level.interaction_hintstrings["debris_750"] = & "CP_ZMB_INTERACTIONS_PURCHASE_AREA";
-  level.interaction_hintstrings["team_door_switch"] = & "CP_ZMB_INTERACTIONS_TEAM_DOOR_SWITCH";
-  level.interaction_hintstrings["tutorial"] = & "CP_ZMB_INTERACTIONS_TURN_ON_TUTORIALS";
-  level.interaction_hintstrings["iw7_ar57_zm"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_m4_zm"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_fmg_zm"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_ake_zm"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_ake_zml"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_sonic_zm"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_sonic_zmr"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_nrg_zm"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_m1_zm"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_m1_zmr"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_m1c_zm"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_revolver_zm"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_spas_zm"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_crb_zm"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_crb_zml"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_erad_zm"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_kbs_zm"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_ripper_zm"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_ripper_zmr"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_ump45_zml"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_m8_zm"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_cheytac_zm"] = & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
-  level.interaction_hintstrings["crafting_pickup"] = & "ZOMBIE_CRAFTING_SOUVENIRS_CRAFTINGITEM_PICKUP";
-  level.interaction_hintstrings["crafting_item_swap"] = & "ZOMBIE_CRAFTING_SOUVENIRS_CRAFTINGITEM_SWAP";
-  level.interaction_hintstrings["crafting_station"] = & "ZOMBIE_CRAFTING_SOUVENIRS_CRAFTING_ADDPIECE";
-  level.interaction_hintstrings["crafting_nopiece"] = & "ZOMBIE_CRAFTING_SOUVENIRS_CRAFTING_NOPIECE";
-  level.interaction_hintstrings["crafting_addpiece"] = & "ZOMBIE_CRAFTING_SOUVENIRS_CRAFTING_ADDPIECE";
-  level.interaction_hintstrings["crafted_windowtrap"] = & "ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_LASERTRAP";
-  level.interaction_hintstrings["crafted_autosentry"] = & "ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_AUTOSENTRY";
-  level.interaction_hintstrings["crafted_ims"] = & "ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_IMS";
-  level.interaction_hintstrings["crafted_medusa"] = & "ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_MEDUSA";
-  level.interaction_hintstrings["crafted_electric_trap"] = & "ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_ELECTRIC_TRAP";
-  level.interaction_hintstrings["crafted_boombox"] = & "ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_BOOMBOX";
-  level.interaction_hintstrings["crafted_revocator"] = & "ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_REVOCATOR";
-  level.interaction_hintstrings["crafted_gascan"] = & "ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_GASCAN";
-  level.interaction_hintstrings["weapon_upgrade"] = & "CP_ZMB_INTERACTIONS_UPGRADE_WEAPON";
-  level.interaction_hintstrings["atm_deposit"] = & "CP_ZMB_INTERACTIONS_ATM_DEPOSIT";
-  level.interaction_hintstrings["atm_withdrawal"] = & "CP_ZMB_INTERACTIONS_ATM_WITHDRAWAL";
-  level.interaction_hintstrings["power_armageddon"] = & "COOP_INTERACTIONS_CRAFTED_ARMAGEDDON";
-  level.interaction_hintstrings["power_bioSpike"] = & "COOP_INTERACTIONS_CRAFTED_BIOSPIKE";
-  level.interaction_hintstrings["power_c4"] = & "COOP_INTERACTIONS_CRAFTED_C4";
-  level.interaction_hintstrings["power_barrier"] = & "COOP_INTERACTIONS_CRAFTED_BARRIER";
-  level.interaction_hintstrings["power_cloak"] = & "COOP_INTERACTIONS_CRAFTED_CLOAK";
-  level.interaction_hintstrings["power_mortarMount"] = & "COOP_INTERACTIONS_CRAFTED_MORTAR_MOUNT";
-  level.interaction_hintstrings["power_teleport"] = & "COOP_INTERACTIONS_CRAFTED_TELEPORT";
-  level.interaction_hintstrings["power_transponder"] = & "COOP_INTERACTIONS_CRAFTED_TRANSPONDER";
-  level.interaction_hintstrings["power_speedBoost"] = & "COOP_INTERACTIONS_CRAFTED_SPEED_BO0ST";
-  level.interaction_hintstrings["power_phaseShift"] = & "COOP_INTERACTIONS_CRAFTED_PHASE_SHIFT";
-  level.interaction_hintstrings["power_kineticPulse"] = & "COOP_INTERACTIONS_CRAFTED_KINETIC_PULSE";
-  level.interaction_hintstrings["power_microTurret"] = & "COOP_INTERACTIONS_CRAFTED_MICRO_TURRET";
-  level.interaction_hintstrings["power_chargeMode"] = & "COOP_INTERACTIONS_CRAFTED_CHARGE_MODE";
-  level.interaction_hintstrings["power_rewind"] = & "COOP_INTERACTIONS_CRAFTED_REWIND";
-  level.interaction_hintstrings["fast_travel"] = & "CP_ZMB_INTERACTIONS_ENTER_PORTAL";
-  level.interaction_hintstrings["small_ticket_prize"] = & "CP_ZMB_INTERACTIONS_BAG_O_BULLETS";
-  level.interaction_hintstrings["medium_ticket_prize"] = & "CP_ZMB_INTERACTIONS_GRENADE_POUCH";
-  level.interaction_hintstrings["large_ticket_prize"] = & "CP_ZMB_INTERACTIONS_ARK_ATTACHMENT";
-  level.interaction_hintstrings["iw7_forgefreeze_zm"] = & "CP_ZMB_INTERACTIONS_REDEEM_FREEZE";
-  level.interaction_hintstrings["zfreeze_semtex_mp"] = & "CP_ZMB_INTERACTIONS_REDEEM_CRYONADE";
-  level.interaction_hintstrings["gold_teeth"] = & "CP_QUEST_WOR_GATOR_TEETH";
-  level.interaction_hintstrings["gator_teeth_placement"] = & "CP_QUEST_WOR_PLACE_PART";
-  level.interaction_hintstrings["laughingclown"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["laughingclown_afterlife"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["coaster"] = & "CP_ZMB_INTERACTIONS_RIDE_COASTER";
-  level.interaction_hintstrings["basketball_game"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["basketball_game_afterlife"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["shooting_gallery"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["bowling_for_planets"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["bowling_for_planets_afterlife"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["clown_tooth_game"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["clown_tooth_game_afterlife"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["game_race"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["wor_crafting_crate"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["ark_quest_station"] = & "CP_QUEST_WOR_PLACE_PART";
-  level.interaction_hintstrings["white_ark"] = & "CP_ZMB_INTERACTIONS_EQUIP_WHITE_ARK";
-  level.interaction_hintstrings["arcade_barnstorming"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_robottank"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_spider"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_demon"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_starmaster"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_riverraid"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_pitfall"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_cosmic"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["spawned_essence"] = & "CP_QUEST_WOR_PART";
+  level.interaction_hintstrings["dj_quest_speaker"] = &"CP_QUEST_WOR_PLACE_PART";
+  level.interaction_hintstrings["rockettrap"] = &"CP_ZMB_INTERACTIONS_ROCKET_TRAP";
+  level.interaction_hintstrings["beamtrap"] = &"CP_ZMB_INTERACTIONS_BEAMTRAP";
+  level.interaction_hintstrings["interaction_discoballtrap"] = &"CP_ZMB_INTERACTIONS_USE_DISCO_TRAP";
+  level.interaction_hintstrings["scrambler"] = &"CP_ZMB_INTERACTIONS_SCRAMBLER";
+  level.interaction_hintstrings["blackhole_trap"] = &"CP_ZMB_INTERACTIONS_USE_BLACKHOLE_TRAP";
+  level.interaction_hintstrings["debris_350"] = &"CP_ZMB_INTERACTIONS_PURCHASE_AREA";
+  level.interaction_hintstrings["debris_1000"] = &"CP_ZMB_INTERACTIONS_PURCHASE_AREA";
+  level.interaction_hintstrings["debris_1500"] = &"CP_ZMB_INTERACTIONS_PURCHASE_AREA";
+  level.interaction_hintstrings["debris_2000"] = &"CP_ZMB_INTERACTIONS_PURCHASE_AREA";
+  level.interaction_hintstrings["debris_2500"] = &"CP_ZMB_INTERACTIONS_PURCHASE_AREA";
+  level.interaction_hintstrings["debris_1250"] = &"CP_ZMB_INTERACTIONS_PURCHASE_AREA";
+  level.interaction_hintstrings["debris_750"] = &"CP_ZMB_INTERACTIONS_PURCHASE_AREA";
+  level.interaction_hintstrings["team_door_switch"] = &"CP_ZMB_INTERACTIONS_TEAM_DOOR_SWITCH";
+  level.interaction_hintstrings["tutorial"] = &"CP_ZMB_INTERACTIONS_TURN_ON_TUTORIALS";
+  level.interaction_hintstrings["iw7_ar57_zm"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_m4_zm"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_fmg_zm"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_ake_zm"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_ake_zml"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_sonic_zm"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_sonic_zmr"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_nrg_zm"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_m1_zm"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_m1_zmr"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_m1c_zm"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_revolver_zm"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_spas_zm"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_crb_zm"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_crb_zml"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_erad_zm"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_kbs_zm"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_ripper_zm"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_ripper_zmr"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_ump45_zml"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_m8_zm"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_cheytac_zm"] = &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
+  level.interaction_hintstrings["crafting_pickup"] = &"ZOMBIE_CRAFTING_SOUVENIRS_CRAFTINGITEM_PICKUP";
+  level.interaction_hintstrings["crafting_item_swap"] = &"ZOMBIE_CRAFTING_SOUVENIRS_CRAFTINGITEM_SWAP";
+  level.interaction_hintstrings["crafting_station"] = &"ZOMBIE_CRAFTING_SOUVENIRS_CRAFTING_ADDPIECE";
+  level.interaction_hintstrings["crafting_nopiece"] = &"ZOMBIE_CRAFTING_SOUVENIRS_CRAFTING_NOPIECE";
+  level.interaction_hintstrings["crafting_addpiece"] = &"ZOMBIE_CRAFTING_SOUVENIRS_CRAFTING_ADDPIECE";
+  level.interaction_hintstrings["crafted_windowtrap"] = &"ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_LASERTRAP";
+  level.interaction_hintstrings["crafted_autosentry"] = &"ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_AUTOSENTRY";
+  level.interaction_hintstrings["crafted_ims"] = &"ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_IMS";
+  level.interaction_hintstrings["crafted_medusa"] = &"ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_MEDUSA";
+  level.interaction_hintstrings["crafted_electric_trap"] = &"ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_ELECTRIC_TRAP";
+  level.interaction_hintstrings["crafted_boombox"] = &"ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_BOOMBOX";
+  level.interaction_hintstrings["crafted_revocator"] = &"ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_REVOCATOR";
+  level.interaction_hintstrings["crafted_gascan"] = &"ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_GASCAN";
+  level.interaction_hintstrings["weapon_upgrade"] = &"CP_ZMB_INTERACTIONS_UPGRADE_WEAPON";
+  level.interaction_hintstrings["atm_deposit"] = &"CP_ZMB_INTERACTIONS_ATM_DEPOSIT";
+  level.interaction_hintstrings["atm_withdrawal"] = &"CP_ZMB_INTERACTIONS_ATM_WITHDRAWAL";
+  level.interaction_hintstrings["power_armageddon"] = &"COOP_INTERACTIONS_CRAFTED_ARMAGEDDON";
+  level.interaction_hintstrings["power_bioSpike"] = &"COOP_INTERACTIONS_CRAFTED_BIOSPIKE";
+  level.interaction_hintstrings["power_c4"] = &"COOP_INTERACTIONS_CRAFTED_C4";
+  level.interaction_hintstrings["power_barrier"] = &"COOP_INTERACTIONS_CRAFTED_BARRIER";
+  level.interaction_hintstrings["power_cloak"] = &"COOP_INTERACTIONS_CRAFTED_CLOAK";
+  level.interaction_hintstrings["power_mortarMount"] = &"COOP_INTERACTIONS_CRAFTED_MORTAR_MOUNT";
+  level.interaction_hintstrings["power_teleport"] = &"COOP_INTERACTIONS_CRAFTED_TELEPORT";
+  level.interaction_hintstrings["power_transponder"] = &"COOP_INTERACTIONS_CRAFTED_TRANSPONDER";
+  level.interaction_hintstrings["power_speedBoost"] = &"COOP_INTERACTIONS_CRAFTED_SPEED_BO0ST";
+  level.interaction_hintstrings["power_phaseShift"] = &"COOP_INTERACTIONS_CRAFTED_PHASE_SHIFT";
+  level.interaction_hintstrings["power_kineticPulse"] = &"COOP_INTERACTIONS_CRAFTED_KINETIC_PULSE";
+  level.interaction_hintstrings["power_microTurret"] = &"COOP_INTERACTIONS_CRAFTED_MICRO_TURRET";
+  level.interaction_hintstrings["power_chargeMode"] = &"COOP_INTERACTIONS_CRAFTED_CHARGE_MODE";
+  level.interaction_hintstrings["power_rewind"] = &"COOP_INTERACTIONS_CRAFTED_REWIND";
+  level.interaction_hintstrings["fast_travel"] = &"CP_ZMB_INTERACTIONS_ENTER_PORTAL";
+  level.interaction_hintstrings["small_ticket_prize"] = &"CP_ZMB_INTERACTIONS_BAG_O_BULLETS";
+  level.interaction_hintstrings["medium_ticket_prize"] = &"CP_ZMB_INTERACTIONS_GRENADE_POUCH";
+  level.interaction_hintstrings["large_ticket_prize"] = &"CP_ZMB_INTERACTIONS_ARK_ATTACHMENT";
+  level.interaction_hintstrings["iw7_forgefreeze_zm"] = &"CP_ZMB_INTERACTIONS_REDEEM_FREEZE";
+  level.interaction_hintstrings["zfreeze_semtex_mp"] = &"CP_ZMB_INTERACTIONS_REDEEM_CRYONADE";
+  level.interaction_hintstrings["gold_teeth"] = &"CP_QUEST_WOR_GATOR_TEETH";
+  level.interaction_hintstrings["gator_teeth_placement"] = &"CP_QUEST_WOR_PLACE_PART";
+  level.interaction_hintstrings["laughingclown"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["laughingclown_afterlife"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["coaster"] = &"CP_ZMB_INTERACTIONS_RIDE_COASTER";
+  level.interaction_hintstrings["basketball_game"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["basketball_game_afterlife"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["shooting_gallery"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["bowling_for_planets"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["bowling_for_planets_afterlife"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["clown_tooth_game"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["clown_tooth_game_afterlife"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["game_race"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["wor_crafting_crate"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["ark_quest_station"] = &"CP_QUEST_WOR_PLACE_PART";
+  level.interaction_hintstrings["white_ark"] = &"CP_ZMB_INTERACTIONS_EQUIP_WHITE_ARK";
+  level.interaction_hintstrings["arcade_barnstorming"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_robottank"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_spider"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_demon"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_starmaster"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_riverraid"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_pitfall"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_cosmic"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["spawned_essence"] = &"CP_QUEST_WOR_PART";
   if(scripts\cp\utility::isplayingsolo() || level.only_one_player) {
     scripts\cp\cp_interaction::register_interaction("tutorial", "quest", undefined, undefined, ::interact_spaceland_tutorial, 0, 0, ::init_spaceland_tutorial);
   }
@@ -219,7 +219,7 @@ register_interactions() {
   scripts\cp\cp_interaction::register_interaction("pillage_item", "pillage_item", 1, ::scripts\cp\zombies\zombies_pillage::pillage_hint_func, ::scripts\cp\zombies\zombies_pillage::player_used_pillage_spot, 0, 0);
   scripts\cp\cp_interaction::register_interaction("wor_standee", "quest", undefined, ::scripts\cp\zombies\zombies_wor::standee_hint_logic, ::scripts\cp\zombies\zombies_wor::standee_activate_logic, 0, 0, ::scripts\cp\zombies\zombies_wor::init_standee_interaction);
   if(scripts\cp\utility::is_escape_gametype()) {
-    level.interaction_hintstrings["escape_exit"] = & "CP_ZMB_INTERACTIONS_ESCAPE_THE_PARK";
+    level.interaction_hintstrings["escape_exit"] = &"CP_ZMB_INTERACTIONS_ESCAPE_THE_PARK";
     scripts\cp\cp_interaction::register_interaction("escape_exit", undefined, undefined, undefined, ::scripts\cp\gametypes\escape::player_escape, 0, 0, ::scripts\cp\maps\cp_zmb\cp_zmb_escape::init_escape_interactions);
     return;
   }
@@ -440,13 +440,13 @@ zmb_wait_for_interaction_triggered(param_00) {
         continue;
       }
     } else if(scripts\cp\cp_interaction::interaction_is_souvenir(param_00) && scripts\cp\cp_interaction::player_has_souvenir(param_00, self)) {
-      scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_ALREADY_HAVE");
+      scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_ALREADY_HAVE");
       wait(0.1);
       continue;
     } else if(param_00.script_noteworthy == "dj_quest_speaker") {
       var_03 = self canplayerplacesentry(1, 24);
       if(!self isonground() || !var_03["result"] || abs(param_00.origin[2] - self.origin[2]) > 24) {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_NOT_ENOUGH_SPACE");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_NOT_ENOUGH_SPACE");
         wait(0.1);
         continue;
       }
@@ -475,7 +475,7 @@ zmb_wait_for_interaction_triggered(param_00) {
       var_05 = scripts\cp\cp_weapon::get_weapon_level(var_04);
       if(scripts\engine\utility::istrue(var_01.has_zis_soul_key) || scripts\engine\utility::istrue(level.placed_alien_fuses)) {
         if(var_05 == 3) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_UPGRADE_MAXED");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_UPGRADE_MAXED");
           wait(0.1);
           continue;
         } else if(scripts\cp\cp_weapon::can_upgrade(var_04)) {
@@ -485,12 +485,12 @@ zmb_wait_for_interaction_triggered(param_00) {
             var_02 = 10000;
           }
         } else {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_FAIL");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_FAIL");
           wait(0.1);
           continue;
         }
       } else if(var_05 == level.pap_max) {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_UPGRADE_MAXED");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_UPGRADE_MAXED");
         wait(0.1);
         continue;
       } else if(scripts\cp\cp_weapon::can_upgrade(var_04)) {
@@ -500,20 +500,20 @@ zmb_wait_for_interaction_triggered(param_00) {
           var_02 = 10000;
         }
       } else {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_FAIL");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_FAIL");
         wait(0.1);
         continue;
       }
     } else if(isDefined(param_00.script_noteworthy) && param_00.script_noteworthy == "spawned_essence") {
       if(!scripts\cp\utility::weaponhasattachment(var_01 getcurrentweapon(), "arcane_base")) {
         thread scripts\cp\cp_vo::try_to_play_vo("quest_arcane_nocore_fail", "zmb_comment_vo", "medium", 10, 0, 0, 1, 100);
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "CP_QUEST_WOR_CANNOT_PICKUP_ESSENCE");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"CP_QUEST_WOR_CANNOT_PICKUP_ESSENCE");
         wait(0.1);
         continue;
       }
     } else if(scripts\cp\cp_interaction::interaction_is_white_ark(param_00)) {
       if(!scripts\cp\utility::weaponhasattachment(var_01 getcurrentweapon(), "arcane_base")) {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "CP_QUEST_WOR_CANNOT_PICKUP_ESSENCE");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"CP_QUEST_WOR_CANNOT_PICKUP_ESSENCE");
         wait(0.1);
         continue;
       }
@@ -527,7 +527,7 @@ zmb_wait_for_interaction_triggered(param_00) {
       var_07 = scripts\cp\utility::getbaseweaponname(var_06);
       if(param_00.script_parameters == "tickets") {
         if(self hasweapon(param_00.script_noteworthy)) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_ALREADY_HAVE");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_ALREADY_HAVE");
           wait(0.1);
           continue;
         }
@@ -538,7 +538,7 @@ zmb_wait_for_interaction_triggered(param_00) {
 
       if(scripts\cp\cp_weapon::has_weapon_variation(param_00.script_noteworthy)) {
         if(!scripts\cp\cp_interaction::can_purchase_ammo(param_00.script_noteworthy)) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_GAME_PLAY_AMMO_MAX");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_GAME_PLAY_AMMO_MAX");
           wait(0.1);
           continue;
         } else {
@@ -575,20 +575,20 @@ zmb_wait_for_interaction_triggered(param_00) {
 
         var_0A = scripts\cp\utility::get_attachment_from_interaction(param_00);
         if(scripts\cp\utility::weaponhasattachment(self getcurrentweapon(), var_0A)) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_ALREADY_HAVE");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_ALREADY_HAVE");
           wait(0.1);
           continue;
         }
 
         if(!scripts\cp\cp_weapon::can_use_attachment(var_0A)) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_PILLAGE_CANT_USE");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_PILLAGE_CANT_USE");
           wait(0.1);
           continue;
         }
       } else if(param_00.script_noteworthy == "arcade_counter_grenade") {
         var_0B = scripts\cp\powers\coop_powers::what_power_is_in_slot("primary");
         if(self.powers[var_0B].charges >= level.powers[var_0B].maxcharges) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_EQUIPMENT_FULL");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_EQUIPMENT_FULL");
           wait(0.1);
           continue;
         }
@@ -603,7 +603,7 @@ zmb_wait_for_interaction_triggered(param_00) {
           }
 
           if(var_0D) {
-            scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_GAME_PLAY_AMMO_MAX");
+            scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_GAME_PLAY_AMMO_MAX");
             wait(0.1);
             continue;
           }
@@ -612,7 +612,7 @@ zmb_wait_for_interaction_triggered(param_00) {
     } else if(scripts\cp\cp_interaction::interaction_is_fortune_teller(param_00)) {
       if(!scripts\engine\utility::istrue(level.unlimited_fnf)) {
         if(var_01.card_refills == 2) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_NO_MORE_CARDS_OWNED");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_NO_MORE_CARDS_OWNED");
           wait(0.1);
           continue;
         }
@@ -629,7 +629,7 @@ zmb_wait_for_interaction_triggered(param_00) {
       }
 
       if(isDefined(self.powers[param_00.power_name]) && self.powers[param_00.power_name].charges >= level.powers[param_00.power_name].maxcharges) {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_EQUIPMENT_FULL");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_EQUIPMENT_FULL");
         wait(0.1);
         continue;
       }
@@ -646,13 +646,13 @@ zmb_wait_for_interaction_triggered(param_00) {
     if(!scripts\cp\cp_interaction::can_purchase_interaction(param_00, var_02, level.interactions[param_00.script_noteworthy].spend_type)) {
       level notify("interaction", "purchase_denied", level.interactions[param_00.script_noteworthy], self);
       if(param_00.script_parameters == "tickets") {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "CP_ZMB_INTERACTIONS_NEED_TICKETS");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"CP_ZMB_INTERACTIONS_NEED_TICKETS");
         thread scripts\cp\cp_vo::try_to_play_vo("no_tickets", "zmb_comment_vo", "high", 10, 0, 0, 1, 50);
       } else if((scripts\cp\utility::isplayingsolo() || level.only_one_player) && scripts\cp\cp_interaction::interaction_is_perk(param_00) && param_00.perk_type == "perk_machine_revive" && var_01.self_revives_purchased >= var_01.max_self_revive_machine_use) {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_CANNOT_BUY_SELF_REVIVE");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_CANNOT_BUY_SELF_REVIVE");
       } else {
         thread scripts\cp\cp_vo::try_to_play_vo("no_cash", "zmb_comment_vo", "high", 10, 0, 0, 1, 50);
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_NEED_MONEY");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_NEED_MONEY");
       }
 
       wait(0.1);
@@ -663,7 +663,7 @@ zmb_wait_for_interaction_triggered(param_00) {
       if(isDefined(level.atm_transaction_amount)) {
         if(level.atm_amount_deposited < level.atm_transaction_amount) {
           thread scripts\cp\cp_vo::try_to_play_vo("no_cash", "zmb_comment_vo", "high", 30, 0, 0, 1, 50);
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_NEED_MONEY");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_NEED_MONEY");
           wait(0.1);
           continue;
         }

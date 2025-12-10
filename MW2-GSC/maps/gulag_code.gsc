@@ -2226,7 +2226,7 @@ cellblock_rappel_player() {
 player_rappels(ent) {
   trigger_ent = GetEnt("rappel_trigger", "script_noteworthy");
 
-  // Press and hold^3 &&1 ^7to rappel.
+  // Press and hold^3 && 1 ^7to rappel.
   trigger_ent SetHintString(&"GULAG_HOLD_1_TO_RAPPEL");
   flag_wait(ent.flag_name);
   trigger_ent Delete();
@@ -2943,7 +2943,7 @@ ending_rope() {
   rope glow();
 
   trigger_ent = getEntWithFlag("player_ropes");
-  // Press and hold^3 &&1 ^7to rappel.
+  // Press and hold^3 && 1 ^7to rappel.
   trigger_ent SetHintString(&"GULAG_HOLD_1_TO_RAPPEL");
 
   escape_lift = spawn_vehicle_from_targetname("escape_lift");

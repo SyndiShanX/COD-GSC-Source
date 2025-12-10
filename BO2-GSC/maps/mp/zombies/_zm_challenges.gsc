@@ -89,7 +89,7 @@ add_stat(str_name, b_team, str_hint, n_goal, str_reward_model, fp_give_reward, f
     b_team = 0;
 
   if(!isDefined(str_hint))
-    str_hint = & "";
+    str_hint = &"";
 
   if(!isDefined(n_goal))
     n_goal = 1;
@@ -339,7 +339,7 @@ box_init() {
   s_unitrigger_stub.script_width = 64;
   s_unitrigger_stub.script_height = 64;
   s_unitrigger_stub.cursor_hint = "HINT_NOICON";
-  s_unitrigger_stub.hint_string = & "";
+  s_unitrigger_stub.hint_string = &"";
   s_unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   s_unitrigger_stub.prompt_and_visibility_func = ::box_prompt_and_visiblity;
   s_unitrigger_stub ent_flag_init("waiting_for_grab");
@@ -372,8 +372,8 @@ box_prompt_and_visiblity(player) {
 update_box_prompt(player) {
   self endon("kill_trigger");
   player endon("death_or_disconnect");
-  str_hint = & "";
-  str_old_hint = & "";
+  str_hint = &"";
+  str_old_hint = &"";
   m_board = self.stub.m_board;
   self sethintstring(str_hint);
 
@@ -384,11 +384,11 @@ update_box_prompt(player) {
 
     if(self.stub.b_busy) {
       if(self.stub ent_flag("waiting_for_grab") && (!isDefined(self.stub.player_using) || self.stub.player_using == player))
-        str_hint = & "ZM_TOMB_CH_G";
+        str_hint = &"ZM_TOMB_CH_G";
       else
-        str_hint = & "";
+        str_hint = &"";
     } else {
-      str_hint = & "";
+      str_hint = &"";
       player.s_lookat_stat = undefined;
       n_closest_dot = 0.996;
       v_eye_origin = player getplayercamerapos();
@@ -413,7 +413,7 @@ update_box_prompt(player) {
             player.s_lookat_stat = s_tag.s_stat;
 
             if(stat_reward_available(s_tag.s_stat, player)) {
-              str_hint = & "ZM_TOMB_CH_S";
+              str_hint = &"ZM_TOMB_CH_S";
               b_showing_stat = 0;
               self.b_can_open = 1;
             }
@@ -421,15 +421,15 @@ update_box_prompt(player) {
         }
       }
 
-      if(str_hint == & "") {
+      if(str_hint == &"") {
         s_player = level._challenges.a_players[player.characterindex];
         s_team = level._challenges.s_team;
 
         if(s_player.n_medals_held > 0 || player player_has_unclaimed_team_reward()) {
-          str_hint = & "ZM_TOMB_CH_O";
+          str_hint = &"ZM_TOMB_CH_O";
           self.b_can_open = 1;
         } else
-          str_hint = & "ZM_TOMB_CH_V";
+          str_hint = &"ZM_TOMB_CH_V";
       }
     }
 
@@ -485,7 +485,7 @@ box_think() {
     }
 
     if(self.b_can_open) {
-      self.stub.hint_string = & "";
+      self.stub.hint_string = &"";
       self sethintstring(self.stub.hint_string);
       level thread open_box(player, self.stub);
     }

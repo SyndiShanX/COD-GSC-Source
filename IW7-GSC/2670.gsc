@@ -13,11 +13,11 @@ init() {
   var_0.modelbase = "zmb_medusa_energy_collector_01_empty";
   var_0.modelplacement = "zmb_medusa_energy_collector_01_empty";
   var_0.modelplacementfailed = "zmb_medusa_energy_collector_bad";
-  var_0.hintstring = & "COOP_CRAFTABLES_PICKUP";
-  var_0.placestring = & "COOP_CRAFTABLES_PLACE";
-  var_0.cannotplacestring = & "COOP_CRAFTABLES_CANNOT_PLACE";
-  var_0.placecancelablestring = & "COOP_CRAFTABLES_PLACE_CANCELABLE";
-  var_0.func_74BF = & "ZOMBIE_CRAFTING_SOUVENIRS_DETONATE";
+  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
+  var_0.placestring = &"COOP_CRAFTABLES_PLACE";
+  var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
+  var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
+  var_0.func_74BF = &"ZOMBIE_CRAFTING_SOUVENIRS_DETONATE";
   var_0.func_9F43 = 0;
   var_0.placementheighttolerance = 30.0;
   var_0.placementradius = 16.0;
@@ -294,7 +294,7 @@ func_B545(var_00, var_01, var_02) {
   var_03 solid();
 
   if(!isDefined(var_2.func_B546)) {
-    var_02 iprintlnbold( & "ZOMBIE_CRAFTING_SOUVENIRS_KILL_NEAR_MEDUSA");
+    var_02 iprintlnbold(&"ZOMBIE_CRAFTING_SOUVENIRS_KILL_NEAR_MEDUSA");
     var_2.func_B546 = 1;
   }
 

@@ -171,9 +171,9 @@ setup_skiptos() {
   add_skipto("g20_group1", ::skipto_la_1);
   add_skipto("drive", ::skipto_la_1);
   add_skipto("skyline", ::skipto_la_1);
-  add_skipto("street", maps\la_street::skipto_street, & "SKIPTO_STRING_HERE", maps\la_street::main);
-  add_skipto("plaza", maps\la_plaza::skipto_plaza, & "SKIPTO_STRING_HERE", maps\la_plaza::main);
-  add_skipto("intersection", maps\la_intersection::skipto_intersection, & "SKIPTO_STRING_HERE", maps\la_intersection::main);
+  add_skipto("street", maps\la_street::skipto_street, &"SKIPTO_STRING_HERE", maps\la_street::main);
+  add_skipto("plaza", maps\la_plaza::skipto_plaza, &"SKIPTO_STRING_HERE", maps\la_plaza::main);
+  add_skipto("intersection", maps\la_intersection::skipto_intersection, &"SKIPTO_STRING_HERE", maps\la_intersection::main);
   add_skipto("f35_wakeup", ::skipto_la_2);
   add_skipto("f35_boarding", ::skipto_la_2);
   add_skipto("f35_flying", ::skipto_la_2);

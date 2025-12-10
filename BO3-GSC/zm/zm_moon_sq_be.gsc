@@ -46,8 +46,8 @@ function init() {
   level._sliding_doors = getEntArray("zombie_door_airlock", "script_noteworthy");
   level._sliding_doors = arraycombine(level._sliding_doors, getEntArray("zombie_door", "targetname"), 0, 0);
   level._my_speed = 12;
-  zm_sidequests::declare_sidequest_stage("be", "stage_one", & init_stage_1, & stage_logic_1, & exit_stage_1);
-  zm_sidequests::declare_sidequest_stage("be", "stage_two", & init_stage_2, & stage_logic_2, & exit_stage_2);
+  zm_sidequests::declare_sidequest_stage("be", "stage_one", &init_stage_1, &stage_logic_1, &exit_stage_1);
+  zm_sidequests::declare_sidequest_stage("be", "stage_two", &init_stage_2, &stage_logic_2, &exit_stage_2);
 }
 
 function init_stage_2() {}
@@ -70,7 +70,7 @@ function stage_logic_2() {
     level._be_origin_animate stopanimscripted();
     level._be_origin_animate delete();
   }
-  zm_weap_quantum_bomb::quantum_bomb_register_result("be2", undefined, 100, & be2_validation);
+  zm_weap_quantum_bomb::quantum_bomb_register_result("be2", undefined, 100, &be2_validation);
   level._be_pos = level._be.origin;
   level waittill("be2_validation");
   zm_weap_quantum_bomb::quantum_bomb_deregister_result("be2");
@@ -78,7 +78,7 @@ function stage_logic_2() {
   level._be dontinterpolate();
   level._be.origin = s.origin;
   level.teleport_target_trigger = spawn("trigger_radius", s.origin + (vectorscale((0, 0, -1), 70)), 0, 125, 100);
-  level.black_hole_bomb_loc_check_func = & bhb_teleport_loc_check;
+  level.black_hole_bomb_loc_check_func = &bhb_teleport_loc_check;
   level waittill("be2_tp_done");
   players = getplayers();
   players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("eggs", "quest8", 2);

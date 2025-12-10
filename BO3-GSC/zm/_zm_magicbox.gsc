@@ -26,7 +26,7 @@
 #namespace zm_magicbox;
 
 function autoexec __init__sytem__() {
-  system::register("zm_magicbox", & __init__, & __main__, undefined);
+  system::register("zm_magicbox", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -47,10 +47,10 @@ function __main__() {
     level.chest_joker_model = "p7_zm_teddybear";
   }
   if(!isDefined(level.magic_box_zbarrier_state_func)) {
-    level.magic_box_zbarrier_state_func = & process_magic_box_zbarrier_state;
+    level.magic_box_zbarrier_state_func = &process_magic_box_zbarrier_state;
   }
   if(!isDefined(level.magic_box_check_equipment)) {
-    level.magic_box_check_equipment = & default_magic_box_check_equipment;
+    level.magic_box_check_equipment = &default_magic_box_check_equipment;
   }
   wait(0.05);
   if(zm_utility::is_classic()) {
@@ -93,7 +93,7 @@ function treasure_chest_init(start_chest_name) {
     level.chests[0].no_fly_away = 1;
   }
   init_starting_chest_location(start_chest_name);
-  array::thread_all(level.chests, & treasure_chest_think);
+  array::thread_all(level.chests, &treasure_chest_think);
 }
 
 function init_starting_chest_location(start_chest_name) {
@@ -138,7 +138,7 @@ function init_starting_chest_location(start_chest_name) {
     if(isDefined(level.custom_pandora_show_func)) {
       level.pandora_show_func = level.custom_pandora_show_func;
     } else {
-      level.pandora_show_func = & default_pandora_show_func;
+      level.pandora_show_func = &default_pandora_show_func;
     }
   }
   level.chests[level.chest_index] thread[[level.pandora_show_func]]();
@@ -171,7 +171,7 @@ function get_chest_pieces() {
   self.unitrigger_stub.script_length = 45;
   self.unitrigger_stub.trigger_target = self;
   zm_unitrigger::unitrigger_force_per_player_triggers(self.unitrigger_stub, 1);
-  self.unitrigger_stub.prompt_and_visibility_func = & boxtrigger_update_prompt;
+  self.unitrigger_stub.prompt_and_visibility_func = &boxtrigger_update_prompt;
   self.zbarrier.owner = self;
 }
 
@@ -206,9 +206,9 @@ function boxstub_update_prompt(player) {
     if(isDefined(level.magic_box_check_equipment) && [
         [level.magic_box_check_equipment]
       ](cursor_hint_weapon)) {
-      self.hint_string = & "ZOMBIE_TRADE_EQUIP_FILL";
+      self.hint_string = &"ZOMBIE_TRADE_EQUIP_FILL";
     } else {
-      self.hint_string = & "ZOMBIE_TRADE_WEAPON_FILL";
+      self.hint_string = &"ZOMBIE_TRADE_WEAPON_FILL";
     }
   } else {
     self setcursorhint("HINT_NOICON");
@@ -259,7 +259,7 @@ function show_chest() {
   self.zbarrier util::waittill_any_timeout(5, "arrived");
   self thread[[level.pandora_show_func]]();
   self.zbarrier clientfield::set("magicbox_closed_glow", 1);
-  thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, & magicbox_unitrigger_think);
+  thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, &magicbox_unitrigger_think);
   self.zbarrier clientfield::increment("zbarrier_show_sounds");
   self.hidden = 0;
   if(isDefined(self.box_hacks["summon_box"])) {
@@ -317,7 +317,7 @@ function default_pandora_fx_func() {
 function default_pandora_show_func(anchor, anchortarget, pieces) {
   if(!isDefined(self.pandora_light)) {
     if(!isDefined(level.pandora_fx_func)) {
-      level.pandora_fx_func = & default_pandora_fx_func;
+      level.pandora_fx_func = &default_pandora_fx_func;
     }
     self thread[[level.pandora_fx_func]]();
   }
@@ -452,7 +452,7 @@ function treasure_chest_think() {
       if(isDefined(weaponidx)) {
         user recordmapevent(10, gettime(), user.origin, level.round_number, weaponidx);
       }
-      thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, & magicbox_unitrigger_think);
+      thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, &magicbox_unitrigger_think);
       if(isDefined(self.zbarrier) && (!(isDefined(self.zbarrier.closed_by_emp) && self.zbarrier.closed_by_emp))) {
         self thread treasure_chest_timeout();
       }
@@ -534,7 +534,7 @@ function treasure_chest_think() {
       wait(3);
     }
     if(isDefined(level.zombie_vars["zombie_powerup_fire_sale_on"]) && level.zombie_vars["zombie_powerup_fire_sale_on"] && self[[level._zombiemode_check_firesale_loc_valid_func]]() || self == level.chests[level.chest_index]) {
-      thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, & magicbox_unitrigger_think);
+      thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, &magicbox_unitrigger_think);
     }
   }
   self._box_open = 0;
@@ -627,9 +627,9 @@ function default_box_move_logic() {
 function treasure_chest_move(player_vox) {
   level waittill("weapon_fly_away_start");
   players = getplayers();
-  array::thread_all(players, & play_crazi_sound);
+  array::thread_all(players, &play_crazi_sound);
   if(isDefined(player_vox)) {
-    player_vox util::delay(randomintrange(2, 7), undefined, & zm_audio::create_and_play_dialog, "general", "box_move");
+    player_vox util::delay(randomintrange(2, 7), undefined, &zm_audio::create_and_play_dialog, "general", "box_move");
   }
   level waittill("weapon_fly_away_end");
   if(isDefined(self.zbarrier)) {
@@ -1343,7 +1343,7 @@ function process_magic_box_zbarrier_state(state) {
     case "initial": {
       self showzbarrierpiece(1);
       self thread magic_box_initial();
-      thread zm_unitrigger::register_static_unitrigger(self.owner.unitrigger_stub, & magicbox_unitrigger_think);
+      thread zm_unitrigger::register_static_unitrigger(self.owner.unitrigger_stub, &magicbox_unitrigger_think);
       self.state = "initial";
       break;
     }

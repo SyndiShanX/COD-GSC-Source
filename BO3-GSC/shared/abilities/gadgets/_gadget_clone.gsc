@@ -23,16 +23,16 @@
 #namespace _gadget_clone;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_clone", & __init__, undefined, undefined);
+  system::register("gadget_clone", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(42, & gadget_clone_on, & gadget_clone_off);
-  ability_player::register_gadget_possession_callbacks(42, & gadget_clone_on_give, & gadget_clone_on_take);
-  ability_player::register_gadget_flicker_callbacks(42, & gadget_clone_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(42, & gadget_clone_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(42, & gadget_clone_is_flickering);
-  callback::on_connect( & gadget_clone_on_connect);
+  ability_player::register_gadget_activation_callbacks(42, &gadget_clone_on, &gadget_clone_off);
+  ability_player::register_gadget_possession_callbacks(42, &gadget_clone_on_give, &gadget_clone_on_take);
+  ability_player::register_gadget_flicker_callbacks(42, &gadget_clone_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(42, &gadget_clone_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(42, &gadget_clone_is_flickering);
+  callback::on_connect(&gadget_clone_on_connect);
   clientfield::register("actor", "clone_activated", 1, 1, "int");
   clientfield::register("actor", "clone_damaged", 1, 1, "int");
   clientfield::register("allplayers", "clone_activated", 1, 1, "int");
@@ -303,12 +303,12 @@ function private _configureclone(clone, player, forward, spawntime) {
   clone.propername = "";
   clone.ignoretriggerdamage = 1;
   clone.minwalkdistance = 125;
-  clone.overrideactordamage = & clonedamageoverride;
+  clone.overrideactordamage = &clonedamageoverride;
   clone.spawntime = gettime();
   clone setmaxhealth(int(1.5 * level.playermaxhealth));
   if(getdvarint("tu1_aiPathableMaterials", 0)) {
     if(isDefined(clone.pathablematerial)) {
-      clone.pathablematerial = clone.pathablematerial & (~2);
+      clone.pathablematerial = clone.pathablematerial &(~2);
     }
   }
   clone pushactors(1);

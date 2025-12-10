@@ -31,13 +31,13 @@
 #namespace zm_genesis_apothicon_fury;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_apothicon_fury", & __init__, undefined, undefined);
+  system::register("zm_genesis_apothicon_fury", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  spawner::add_archetype_spawn_function("apothicon_fury", & function_2c871f46);
-  spawner::add_archetype_spawn_function("apothicon_fury", & function_e5e94978);
-  spawner::add_archetype_spawn_function("apothicon_fury", & function_1dcdd145);
+  spawner::add_archetype_spawn_function("apothicon_fury", &function_2c871f46);
+  spawner::add_archetype_spawn_function("apothicon_fury", &function_e5e94978);
+  spawner::add_archetype_spawn_function("apothicon_fury", &function_1dcdd145);
   if(ai::shouldregisterclientfieldforarchetype("apothicon_fury")) {
     clientfield::register("scriptmover", "apothicon_fury_spawn_meteor", 15000, 2, "int");
   }
@@ -225,7 +225,7 @@ function function_1dcdd145() {
 
 function private function_bc2e7a98() {
   level flagsys::wait_till("");
-  zm_devgui::add_custom_devgui_callback( & function_744725d0);
+  zm_devgui::add_custom_devgui_callback(&function_744725d0);
 }
 
 function private function_744725d0(cmd) {

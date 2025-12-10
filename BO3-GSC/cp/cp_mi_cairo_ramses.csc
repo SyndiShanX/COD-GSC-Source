@@ -22,11 +22,11 @@
 #namespace cp_mi_cairo_ramses;
 
 function main() {
-  util::set_streamer_hint_function( & force_streamer, 3);
+  util::set_streamer_hint_function(&force_streamer, 3);
   init_clientfields();
   cp_mi_cairo_ramses_fx::main();
   cp_mi_cairo_ramses_sound::main();
-  callback::on_localclient_connect( & on_player_spawned);
+  callback::on_localclient_connect(&on_player_spawned);
   load::main();
   util::waitforclient(0);
   level.var_7ab81734 = findstaticmodelindexarray("station_shells");
@@ -40,15 +40,15 @@ function on_player_spawned(localclientnum) {
 }
 
 function init_clientfields() {
-  clientfield::register("world", "hide_station_miscmodels", 1, 1, "int", & show_hide_staiton_props, 0, 0);
-  clientfield::register("world", "turn_on_rotating_fxanim_fans", 1, 1, "int", & turn_on_rotating_fxanim_fans, 0, 0);
-  clientfield::register("world", "turn_on_rotating_fxanim_lights", 1, 1, "int", & turn_on_rotating_fxanim_lights, 0, 0);
-  clientfield::register("world", "delete_fxanim_fans", 1, 1, "int", & delete_fxanim_fans, 0, 0);
-  clientfield::register("toplayer", "nasser_interview_extra_cam", 1, 1, "int", & function_6aab1d81, 0, 0);
-  clientfield::register("world", "ramses_station_lamps", 1, 1, "int", & ramses_station_lamps, 0, 0);
-  clientfield::register("toplayer", "rap_blood_on_player", 1, 1, "counter", & player_rap_blood_postfx, 0, 0);
-  clientfield::register("world", "staging_area_intro", 1, 1, "int", & staging_area_intro, 0, 0);
-  clientfield::register("toplayer", "filter_ev_interference_toggle", 1, 1, "int", & filter_ev_interference_toggle, 0, 0);
+  clientfield::register("world", "hide_station_miscmodels", 1, 1, "int", &show_hide_staiton_props, 0, 0);
+  clientfield::register("world", "turn_on_rotating_fxanim_fans", 1, 1, "int", &turn_on_rotating_fxanim_fans, 0, 0);
+  clientfield::register("world", "turn_on_rotating_fxanim_lights", 1, 1, "int", &turn_on_rotating_fxanim_lights, 0, 0);
+  clientfield::register("world", "delete_fxanim_fans", 1, 1, "int", &delete_fxanim_fans, 0, 0);
+  clientfield::register("toplayer", "nasser_interview_extra_cam", 1, 1, "int", &function_6aab1d81, 0, 0);
+  clientfield::register("world", "ramses_station_lamps", 1, 1, "int", &ramses_station_lamps, 0, 0);
+  clientfield::register("toplayer", "rap_blood_on_player", 1, 1, "counter", &player_rap_blood_postfx, 0, 0);
+  clientfield::register("world", "staging_area_intro", 1, 1, "int", &staging_area_intro, 0, 0);
+  clientfield::register("toplayer", "filter_ev_interference_toggle", 1, 1, "int", &filter_ev_interference_toggle, 0, 0);
 }
 
 function force_streamer(n_zone) {

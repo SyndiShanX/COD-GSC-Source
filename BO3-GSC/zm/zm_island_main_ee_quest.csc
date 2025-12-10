@@ -13,14 +13,14 @@
 #namespace zm_island_main_ee_quest;
 
 function function_30d4f164() {
-  clientfield::register("vehicle", "plane_hit_by_aa_gun", 9000, 1, "int", & function_3b831537, 0, 0);
-  clientfield::register("scriptmover", "zipline_lightning_fx", 9000, 1, "int", & zipline_lightning_fx, 0, 0);
-  clientfield::register("allplayers", "lightning_shield_fx", 9000, 1, "int", & lightning_shield_fx, 1, 1);
-  clientfield::register("scriptmover", "smoke_trail_fx", 9000, 1, "int", & smoke_trail_fx, 0, 0);
-  clientfield::register("scriptmover", "smoke_smolder_fx", 9000, 1, "int", & function_67a61c, 0, 0);
-  clientfield::register("zbarrier", "bgb_lightning_fx", 9000, 1, "int", & bgb_lightning_fx, 0, 0);
-  clientfield::register("scriptmover", "perk_lightning_fx", 9000, getminbitcountfornum(6), "int", & perk_lightning_fx, 0, 0);
-  clientfield::register("world", "umbra_tome_outro_igc", 9000, 1, "int", & umbra_tome_outro_igc, 0, 0);
+  clientfield::register("vehicle", "plane_hit_by_aa_gun", 9000, 1, "int", &function_3b831537, 0, 0);
+  clientfield::register("scriptmover", "zipline_lightning_fx", 9000, 1, "int", &zipline_lightning_fx, 0, 0);
+  clientfield::register("allplayers", "lightning_shield_fx", 9000, 1, "int", &lightning_shield_fx, 1, 1);
+  clientfield::register("scriptmover", "smoke_trail_fx", 9000, 1, "int", &smoke_trail_fx, 0, 0);
+  clientfield::register("scriptmover", "smoke_smolder_fx", 9000, 1, "int", &function_67a61c, 0, 0);
+  clientfield::register("zbarrier", "bgb_lightning_fx", 9000, 1, "int", &bgb_lightning_fx, 0, 0);
+  clientfield::register("scriptmover", "perk_lightning_fx", 9000, getminbitcountfornum(6), "int", &perk_lightning_fx, 0, 0);
+  clientfield::register("world", "umbra_tome_outro_igc", 9000, 1, "int", &umbra_tome_outro_igc, 0, 0);
 }
 
 function function_f0e89ab2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

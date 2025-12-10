@@ -98,7 +98,7 @@ onRoundSwitch() {
     game["switchedsides"] = false;
   if(game["teamScores"]["allies"] == level.scorelimit - 1 && game["teamScores"]["axis"] == level.scorelimit - 1) {
     level.halftimeType = "overtime";
-    level.halftimeSubCaption = & "MP_TIE_BREAKER";
+    level.halftimeSubCaption = &"MP_TIE_BREAKER";
     game["tiebreaker"] = true;
   } else {
     level.halftimeType = "halftime";
@@ -109,31 +109,31 @@ onStartGameType() {
   if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = false;
   setClientNameMode("auto_change");
-  game["strings"]["target_destroyed"] = & "MP_TARGET_DESTROYED";
+  game["strings"]["target_destroyed"] = &"MP_TARGET_DESTROYED";
   if(!game["tiebreaker"]) {
-    maps\mp\gametypes\_globallogic_ui::setObjectiveText("allies", & "OBJECTIVES_SAB");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveText("axis", & "OBJECTIVES_SAB");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveText("allies", &"OBJECTIVES_SAB");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveText("axis", &"OBJECTIVES_SAB");
     if(level.splitscreen) {
-      maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", & "OBJECTIVES_SAB");
-      maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", & "OBJECTIVES_SAB");
+      maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", &"OBJECTIVES_SAB");
+      maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", &"OBJECTIVES_SAB");
     } else {
-      maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", & "OBJECTIVES_SAB_SCORE");
-      maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", & "OBJECTIVES_SAB_SCORE");
+      maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", &"OBJECTIVES_SAB_SCORE");
+      maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", &"OBJECTIVES_SAB_SCORE");
     }
-    maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("allies", & "OBJECTIVES_SAB_HINT");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("axis", & "OBJECTIVES_SAB_HINT");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("allies", &"OBJECTIVES_SAB_HINT");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("axis", &"OBJECTIVES_SAB_HINT");
   } else {
-    maps\mp\gametypes\_globallogic_ui::setObjectiveText("allies", & "OBJECTIVES_TDM");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveText("axis", & "OBJECTIVES_TDM");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveText("allies", &"OBJECTIVES_TDM");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveText("axis", &"OBJECTIVES_TDM");
     if(level.splitscreen) {
-      maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", & "OBJECTIVES_TDM");
-      maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", & "OBJECTIVES_TDM");
+      maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", &"OBJECTIVES_TDM");
+      maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", &"OBJECTIVES_TDM");
     } else {
-      maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", & "OBJECTIVES_TDM_SCORE");
-      maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", & "OBJECTIVES_TDM_SCORE");
+      maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", &"OBJECTIVES_TDM_SCORE");
+      maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", &"OBJECTIVES_TDM_SCORE");
     }
-    maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("allies", & "OBJECTIVES_TDM_HINT");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("axis", & "OBJECTIVES_TDM_HINT");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("allies", &"OBJECTIVES_TDM_HINT");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("axis", &"OBJECTIVES_TDM_HINT");
   }
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -171,7 +171,7 @@ onOvertime() {
   maps\mp\gametypes\_globallogic_audio::leaderDialog("sudden_death_boost");
   for(index = 0; index < level.players.size; index++) {
     level.players[index] notify("force_spawn");
-    level.players[index] thread maps\mp\gametypes\_hud_message::oldNotifyMessage(&"MP_SUDDEN_DEATH", & "MP_NO_RESPAWN", undefined, (1, 0, 0), "mp_last_stand");
+    level.players[index] thread maps\mp\gametypes\_hud_message::oldNotifyMessage(&"MP_SUDDEN_DEATH", &"MP_NO_RESPAWN", undefined, (1, 0, 0), "mp_last_stand");
     level.players[index] setClientUIVisibilityFlag("g_compassShowEnemies", 1);
   }
   SetMatchTalkFlag("DeadChatWithDead", 1);
@@ -220,7 +220,7 @@ onSpawnPlayerUnified() {
   self.isDefusing = false;
   self.isBombCarrier = false;
   if(game["tiebreaker"]) {
-    self thread maps\mp\gametypes\_hud_message::oldNotifyMessage(&"MP_TIE_BREAKER", & "MP_NO_RESPAWN", undefined, (1, 0, 0), "mp_last_stand");
+    self thread maps\mp\gametypes\_hud_message::oldNotifyMessage(&"MP_TIE_BREAKER", &"MP_NO_RESPAWN", undefined, (1, 0, 0), "mp_last_stand");
     hintMessage = maps\mp\gametypes\_globallogic_ui::getObjectiveHintText(self.pers["team"]);
     if(isDefined(hintMessage))
       self DisplayGameModeMessage(hintMessage, "uin_alert_slideout");
@@ -252,7 +252,7 @@ onSpawnPlayer() {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_allies);
   }
   if(game["tiebreaker"]) {
-    self thread maps\mp\gametypes\_hud_message::oldNotifyMessage(&"MP_TIE_BREAKER", & "MP_NO_RESPAWN", undefined, (1, 0, 0), "mp_last_stand");
+    self thread maps\mp\gametypes\_hud_message::oldNotifyMessage(&"MP_TIE_BREAKER", &"MP_NO_RESPAWN", undefined, (1, 0, 0), "mp_last_stand");
     hintMessage = maps\mp\gametypes\_globallogic_ui::getObjectiveHintText(self.pers["team"]);
     if(isDefined(hintMessage))
       self DisplayGameModeMessage(hintMessage, "uin_alert_slideout");

@@ -15,7 +15,7 @@
 #namespace zm_tomb_chamber;
 
 function autoexec __init__sytem__() {
-  system::register("zm_tomb_chamber", & __init__, undefined, undefined);
+  system::register("zm_tomb_chamber", &__init__, undefined, undefined);
 }
 
 function __init__() {

@@ -20,11 +20,11 @@
 #namespace spider;
 
 function autoexec __init__sytem__() {
-  system::register("spider", & __init__, undefined, undefined);
+  system::register("spider", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("spider", & spider_initialize);
+  vehicle::add_main_callback("spider", &spider_initialize);
   setdvar("", 0);
 }
 
@@ -50,7 +50,7 @@ function spider_initialize() {
   self.goalheight = 999999;
   self setgoal(self.origin, 0, self.goalradius, self.goalheight);
   self setontargetangle(3);
-  self.overridevehicledamage = & spider_callback_damage;
+  self.overridevehicledamage = &spider_callback_damage;
   self thread vehicle_ai::nudge_collision();
   if(isDefined(level.vehicle_initializer_cb)) {
     [[level.vehicle_initializer_cb]](self);
@@ -61,12 +61,12 @@ function spider_initialize() {
 
 function defaultrole() {
   self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("combat").update_func = & state_range_combat_update;
-  self vehicle_ai::get_state_callbacks("death").update_func = & state_death_update;
-  self vehicle_ai::get_state_callbacks("driving").update_func = & state_driving_update;
-  self vehicle_ai::add_state("meleeCombat", undefined, & state_melee_combat_update, undefined);
-  vehicle_ai::add_utility_connection("combat", "meleeCombat", & should_switch_to_melee);
-  vehicle_ai::add_utility_connection("meleeCombat", "combat", & should_switch_to_range);
+  self vehicle_ai::get_state_callbacks("combat").update_func = &state_range_combat_update;
+  self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
+  self vehicle_ai::get_state_callbacks("driving").update_func = &state_driving_update;
+  self vehicle_ai::add_state("meleeCombat", undefined, &state_melee_combat_update, undefined);
+  vehicle_ai::add_utility_connection("combat", "meleeCombat", &should_switch_to_melee);
+  vehicle_ai::add_utility_connection("meleeCombat", "combat", &should_switch_to_range);
   self vehicle_ai::call_custom_add_state_callbacks();
   vehicle_ai::startinitialstate("combat");
 }

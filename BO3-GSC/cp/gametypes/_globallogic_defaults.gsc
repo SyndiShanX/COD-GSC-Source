@@ -30,7 +30,7 @@ function default_onforfeit(team) {
   wait(10);
   announcement(game["strings"]["opponent_forfeiting_in"], 10, 0);
   wait(10);
-  endreason = & "";
+  endreason = &"";
   if(level.multiteam) {
     setdvar("ui_text_endreason", game["strings"]["other_teams_forfeited"]);
     endreason = game["strings"]["other_teams_forfeited"];
@@ -65,11 +65,11 @@ function default_ondeadevent(team) {
   if(team == "all") {
     winner = level.enemy_ai_team;
     globallogic_utils::logteamwinstring("team eliminated", winner);
-    thread globallogic::endgame(winner, & "SM_ALL_PLAYERS_KILLED");
+    thread globallogic::endgame(winner, &"SM_ALL_PLAYERS_KILLED");
   } else {
     winner = getwinningteamfromloser(team);
     globallogic_utils::logteamwinstring("team eliminated", winner);
-    thread globallogic::endgame(winner, & "SM_ALL_PLAYERS_KILLED");
+    thread globallogic::endgame(winner, &"SM_ALL_PLAYERS_KILLED");
   }
 }
 
@@ -114,9 +114,9 @@ function default_onlaststandevent(team) {
     return;
   }
   if(team == "all") {
-    thread globallogic::endgame(level.enemy_ai_team, & "SM_ALL_PLAYERS_KILLED");
+    thread globallogic::endgame(level.enemy_ai_team, &"SM_ALL_PLAYERS_KILLED");
   } else {
-    thread globallogic::endgame(util::getotherteam(team), & "SM_ALL_PLAYERS_KILLED");
+    thread globallogic::endgame(util::getotherteam(team), &"SM_ALL_PLAYERS_KILLED");
   }
 }
 
@@ -134,7 +134,7 @@ function default_ononeleftevent(team) {
     } else {
       print("");
     }
-    thread globallogic::endgame(winner, & "MP_ENEMIES_ELIMINATED");
+    thread globallogic::endgame(winner, &"MP_ENEMIES_ELIMINATED");
   } else {
     for(index = 0; index < level.players.size; index++) {
       player = level.players[index];

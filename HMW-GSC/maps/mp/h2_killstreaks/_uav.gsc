@@ -358,7 +358,7 @@ blockPlayerUAV() {
 
   self h2_jamPlayerRadar(false);
 
-  //self iPrintLn( &"MP_WAR_COUNTER_RADAR_EXPIRED" );
+  //self iPrintLn(&"MP_WAR_COUNTER_RADAR_EXPIRED" );
 }
 
 updateTeamUAVType() {
@@ -388,7 +388,7 @@ usePlayerUAV(doubleUAV, useTime) {
 
   self.hasRadar = false;
 
-  //self iPrintLn( &"MP_WAR_RADAR_EXPIRED" );
+  //self iPrintLn(&"MP_WAR_RADAR_EXPIRED" );
 }
 
 setTeamRadarWrapper(team, value) {
@@ -495,9 +495,9 @@ addActiveUAV() {
   foreach ( player in level.players )
   {
   if( player.team == self.team )
-  player iPrintLn( &"MP_WAR_RADAR_ACQUIRED", self.owner, level.radarViewTime );
+  player iPrintLn(&"MP_WAR_RADAR_ACQUIRED", self.owner, level.radarViewTime );
   else if( player.team == level.otherTeam[self.team] )
-  player iPrintLn( &"MP_WAR_RADAR_ACQUIRED_ENEMY", level.radarViewTime);
+  player iPrintLn(&"MP_WAR_RADAR_ACQUIRED_ENEMY", level.radarViewTime);
   }
   }	
   else
@@ -505,9 +505,9 @@ addActiveUAV() {
   foreach ( player in level.players )
   {
   if( player == self.owner )
-  player iPrintLn( &"MP_WAR_RADAR_ACQUIRED", self.owner, level.radarViewTime );
+  player iPrintLn(&"MP_WAR_RADAR_ACQUIRED", self.owner, level.radarViewTime );
   else
-  player iPrintLn( &"MP_WAR_RADAR_ACQUIRED_ENEMY", level.radarViewTime );
+  player iPrintLn(&"MP_WAR_RADAR_ACQUIRED_ENEMY", level.radarViewTime );
   }
   }
   */
@@ -524,9 +524,9 @@ addActiveCounterUAV() {
   foreach ( player in level.players )
   {
   if( player.team == self.team )
-  player iPrintLn( &"MP_WAR_COUNTER_RADAR_ACQUIRED", self.owner, level.uavBlockTime );
+  player iPrintLn(&"MP_WAR_COUNTER_RADAR_ACQUIRED", self.owner, level.uavBlockTime );
   else if( player.team == level.otherTeam[self.team] )
-  player iPrintLn( &"MP_WAR_COUNTER_RADAR_ACQUIRED_ENEMY", level.uavBlockTime );
+  player iPrintLn(&"MP_WAR_COUNTER_RADAR_ACQUIRED_ENEMY", level.uavBlockTime );
   }
   }	
   else
@@ -534,9 +534,9 @@ addActiveCounterUAV() {
   foreach ( player in level.players )
   {
   if( player == self.owner )
-  player iPrintLn( &"MP_WAR_COUNTER_RADAR_ACQUIRED", self.owner, level.uavBlockTime );
+  player iPrintLn(&"MP_WAR_COUNTER_RADAR_ACQUIRED", self.owner, level.uavBlockTime );
   else
-  player iPrintLn( &"MP_WAR_COUNTER_RADAR_ACQUIRED_ENEMY", level.uavBlockTime );
+  player iPrintLn(&"MP_WAR_COUNTER_RADAR_ACQUIRED_ENEMY", level.uavBlockTime );
   }
   }
   */
@@ -547,8 +547,8 @@ removeActiveUAV() {
     level.activeUAVs[self.team]--;
 
     if(!level.activeUAVs[self.team]) {
-      //printOnTeam( &"MP_WAR_RADAR_EXPIRED", self.team );
-      //printOnTeam( &"MP_WAR_RADAR_EXPIRED_ENEMY", level.otherTeam[self.team] );
+      //printOnTeam(&"MP_WAR_RADAR_EXPIRED", self.team );
+      //printOnTeam(&"MP_WAR_RADAR_EXPIRED_ENEMY", level.otherTeam[self.team] );
     }
   } else if(isDefined(self.owner)) {
     level.activeUAVs[self.owner.guid]--;
@@ -560,8 +560,8 @@ removeActiveCounterUAV() {
     level.activeCounterUAVs[self.team]--;
 
     if(!level.activeCounterUAVs[self.team]) {
-      //printOnTeam( &"MP_WAR_COUNTER_RADAR_EXPIRED", self.team );
-      //printOnTeam( &"MP_WAR_COUNTER_RADAR_EXPIRED_ENEMY", level.otherTeam[self.team] );
+      //printOnTeam(&"MP_WAR_COUNTER_RADAR_EXPIRED", self.team );
+      //printOnTeam(&"MP_WAR_COUNTER_RADAR_EXPIRED_ENEMY", level.otherTeam[self.team] );
     }
   } else if(isDefined(self.owner)) {
     level.activeCounterUAVs[self.owner.guid]--;

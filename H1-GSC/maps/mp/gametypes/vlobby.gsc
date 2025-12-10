@@ -43,12 +43,12 @@ onstartgametype() {
   if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = 0;
 
-  maps\mp\_utility::setobjectivetext("allies", & "OBJECTIVES_WAR");
-  maps\mp\_utility::setobjectivetext("axis", & "OBJECTIVES_WAR");
-  maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_WAR");
-  maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_WAR");
-  maps\mp\_utility::setobjectivehinttext("allies", & "OBJECTIVES_WAR");
-  maps\mp\_utility::setobjectivehinttext("axis", & "OBJECTIVES_WAR");
+  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_WAR");
+  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_WAR");
+  maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_WAR");
+  maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_WAR");
+  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_WAR");
+  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_WAR");
   init_spawns();
   var_0[0] = level.gametype;
   maps\mp\gametypes\_gameobjects::main(var_0);

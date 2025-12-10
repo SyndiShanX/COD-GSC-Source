@@ -20,11 +20,11 @@
 #namespace amws;
 
 function autoexec __init__sytem__() {
-  system::register("amws", & __init__, undefined, undefined);
+  system::register("amws", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("amws", & amws_initialize);
+  vehicle::add_main_callback("amws", &amws_initialize);
 }
 
 function amws_initialize() {
@@ -45,7 +45,7 @@ function amws_initialize() {
   self.goalheight = 512;
   self setgoal(self.origin, 0, self.goalradius, self.goalheight);
   self.delete_on_death = 0;
-  self.overridevehicledamage = & drone_callback_damage;
+  self.overridevehicledamage = &drone_callback_damage;
   self thread vehicle_ai::nudge_collision();
   self.cobra = 0;
   self asmrequestsubstate("locomotion@movement");
@@ -62,14 +62,14 @@ function amws_initialize() {
 
 function defaultrole() {
   self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("combat").enter_func = & state_combat_enter;
-  self vehicle_ai::get_state_callbacks("combat").update_func = & state_combat_update;
-  self vehicle_ai::get_state_callbacks("driving").update_func = & state_driving_update;
-  self vehicle_ai::get_state_callbacks("emped").update_func = & state_emped_update;
-  self vehicle_ai::get_state_callbacks("surge").update_func = & state_surge_update;
-  self vehicle_ai::get_state_callbacks("surge").exit_func = & state_surge_exit;
-  self vehicle_ai::get_state_callbacks("death").update_func = & state_death_update;
-  self vehicle_ai::add_state("stationary", & state_stationary_enter, & state_stationary_update, & state_stationary_exit);
+  self vehicle_ai::get_state_callbacks("combat").enter_func = &state_combat_enter;
+  self vehicle_ai::get_state_callbacks("combat").update_func = &state_combat_update;
+  self vehicle_ai::get_state_callbacks("driving").update_func = &state_driving_update;
+  self vehicle_ai::get_state_callbacks("emped").update_func = &state_emped_update;
+  self vehicle_ai::get_state_callbacks("surge").update_func = &state_surge_update;
+  self vehicle_ai::get_state_callbacks("surge").exit_func = &state_surge_exit;
+  self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
+  self vehicle_ai::add_state("stationary", &state_stationary_enter, &state_stationary_update, &state_stationary_exit);
   vehicle_ai::add_interrupt_connection("stationary", "scripted", "enter_scripted");
   vehicle_ai::add_interrupt_connection("stationary", "emped", "emped");
   vehicle_ai::add_interrupt_connection("stationary", "off", "shut_off");
@@ -529,7 +529,7 @@ function getnextmoveposition_evasive(client_flags) {
     attacker = level.players[i];
     if(isDefined(attacker)) {
       client_flag = 1 << attacker getentitynumber();
-      if(client_flag & remaining_flags_to_process) {
+      if(client_flag &remaining_flags_to_process) {
         positionquery_filter_directness(queryresult, self.origin, attacker.origin);
         foreach(point in queryresult.data) {
           abs_directness = abs(point.directness);
@@ -549,7 +549,7 @@ function getnextmoveposition_evasive(client_flags) {
             point.score = point.score + -101;
           }
         }
-        remaining_flags_to_process = remaining_flags_to_process & (~client_flag);
+        remaining_flags_to_process = remaining_flags_to_process &(~client_flag);
         remaining_lock_threats_to_evaluate--;
       }
     }

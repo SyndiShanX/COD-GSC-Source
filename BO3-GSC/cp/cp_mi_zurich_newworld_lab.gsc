@@ -46,9 +46,9 @@ function skipto_waking_up_igc_init(str_objective, b_starting) {
   if(isDefined(level.bzm_newworlddialogue12callback)) {
     level thread[[level.bzm_newworlddialogue12callback]]();
   }
-  scene::add_scene_func("cin_new_17_01_wakingup_1st_reveal", & function_4619fd7, "play");
-  scene::add_scene_func("cin_new_17_01_wakingup_1st_reveal", & function_8247e7d3, "play");
-  scene::add_scene_func("cin_new_17_01_wakingup_1st_reveal", & end_fade_out, "skip_started");
+  scene::add_scene_func("cin_new_17_01_wakingup_1st_reveal", &function_4619fd7, "play");
+  scene::add_scene_func("cin_new_17_01_wakingup_1st_reveal", &function_8247e7d3, "play");
+  scene::add_scene_func("cin_new_17_01_wakingup_1st_reveal", &end_fade_out, "skip_started");
   level thread scene::play("cin_new_17_01_wakingup_1st_reveal");
   level flag::clear("infinite_white_transition");
   level waittill("hash_720ce609");

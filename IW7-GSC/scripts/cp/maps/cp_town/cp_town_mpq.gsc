@@ -14,7 +14,7 @@ cp_town_mpq_init() {
   scripts\cp\zombies\zombie_quest::register_quest_step("deathray", 6, ::default_init, ::deathray_step_7, ::complete_deathray_step_7, ::debug_deathray_step_7, 1);
   scripts\cp\zombies\zombie_quest::register_quest_step("chemistry", 0, ::init_chemistry_step_1, ::chemistry_step_1, ::complete_chemistry_step_1, ::debug_chemistry_step_1, 2);
   scripts\cp\zombies\zombie_quest::register_quest_step("chemistry", 1, ::init_chemistry_step_2, ::chemistry_step_2, ::complete_chemistry_step_2, ::debug_chemistry_step_2, 2);
-  scripts\cp\zombies\zombie_quest::register_quest_step("chemistry", 2, ::init_chemistry_step_3, ::chemistry_step_3, ::complete_chemistry_step_3, ::debug_chemistry_step_3, 2, " Create & carry Chem Mix ");
+  scripts\cp\zombies\zombie_quest::register_quest_step("chemistry", 2, ::init_chemistry_step_3, ::chemistry_step_3, ::complete_chemistry_step_3, ::debug_chemistry_step_3, 2, " Create &carry Chem Mix ");
   scripts\cp\zombies\zombie_quest::register_quest_step("chemistry", 3, ::init_chemistry_step_4, ::chemistry_step_4, ::complete_chemistry_step_4, ::debug_chemistry_step_4, 2, " Add Chem Mix to bomb");
   scripts\cp\zombies\zombie_quest::register_quest_step("launchcode", 0, ::init_launchcode_step_1, ::launchcode_step_1, ::launchcode_step_1_complete, ::launchcode_step_1_debug, 3, " Open safe");
   scripts\cp\zombies\zombie_quest::register_quest_step("launchcode", 1, ::default_init, ::launchcode_step_2, ::launchcode_step_2_complete, ::launchcode_step_2_debug, 3, " Take codes");
@@ -1904,19 +1904,19 @@ phase3_check_for_combo_complete() {
 
 phase3_place_bomb_parts_hint(param_00, param_01) {
   if(scripts\engine\utility::flag("teleporter_charged")) {
-    return & "CP_TOWN_INTERACTIONS_TELEPORT_READY";
+    return &"CP_TOWN_INTERACTIONS_TELEPORT_READY";
   }
 
   if(level.teleporter_pieces_placed < level.teleporter_pieces_found) {
-    return & "CP_TOWN_INTERACTIONS_PLACE_BOMB_PIECE";
+    return &"CP_TOWN_INTERACTIONS_PLACE_BOMB_PIECE";
   }
 
   if(scripts\engine\utility::flag("chemistry_step3") && !scripts\engine\utility::flag("chemistry_step4")) {
-    return & "CP_TOWN_INTERACTIONS_ADD_CHEMS";
+    return &"CP_TOWN_INTERACTIONS_ADD_CHEMS";
   }
 
   if(scripts\engine\utility::flag("chemistry_step4") && scripts\engine\utility::flag("launchcode_step2") && scripts\engine\utility::flag("launchcode_step3") && !scripts\engine\utility::flag("launchcode_step4")) {
-    return & "CP_TOWN_INTERACTIONS_ACTIVATE_TELEPORT";
+    return &"CP_TOWN_INTERACTIONS_ACTIVATE_TELEPORT";
   }
 
   return "";

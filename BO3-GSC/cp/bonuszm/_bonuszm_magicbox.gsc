@@ -132,7 +132,7 @@ class class_dafbfd8e {
     var_7983c848 setcursorhint("HINT_INTERACTIVE_PROMPT");
     var_7983c848 sethintstring(&"COOP_MAGICBOX_SWAP_WEAPON");
     var_b8eeb0fe.var_7983c848 = var_7983c848;
-    var_aafa484e = util::init_interactive_gameobject(var_7983c848, & "cp_magic_box", & "COOP_MAGICBOX_SWAP_WEAPON", & onuse);
+    var_aafa484e = util::init_interactive_gameobject(var_7983c848, &"cp_magic_box", &"COOP_MAGICBOX_SWAP_WEAPON", &onuse);
     var_aafa484e.dontlinkplayertotrigger = 1;
     var_aafa484e.classobj = self;
     var_aafa484e enablelinkto();
@@ -189,7 +189,7 @@ class class_dafbfd8e {
       e_trigger enablelinkto();
       e_trigger linkto(moving_platform);
     }
-    s_mobile_armory_object = util::init_interactive_gameobject(e_trigger, & "cp_magic_box", & "COOP_OPEN", & onuse);
+    s_mobile_armory_object = util::init_interactive_gameobject(e_trigger, &"cp_magic_box", &"COOP_OPEN", &onuse);
     s_mobile_armory_object.dontlinkplayertotrigger = 1;
     s_mobile_armory_object.classobj = self;
     if(!isDefined(mdl_mobile_armory.script_linkto)) {
@@ -213,16 +213,16 @@ class class_dafbfd8e {
 #namespace bonuszm;
 
 function autoexec __init__sytem__() {
-  system::register("cp_mobile_magicbox", & __init__, & __main__, undefined);
+  system::register("cp_mobile_magicbox", &__init__, &__main__, undefined);
 }
 
 function __init__() {
-  level.var_40b3237f = & function_999eb742;
+  level.var_40b3237f = &function_999eb742;
   if(!sessionmodeiscampaignzombiesgame()) {
     return;
   }
-  level.bzm_hideallmagicboxescallback = & function_89a0f2a6;
-  level.bzm_cleanupmagicboxondeletioncallback = & function_76eab3e;
+  level.bzm_hideallmagicboxescallback = &function_89a0f2a6;
+  level.bzm_cleanupmagicboxondeletioncallback = &function_76eab3e;
   clientfield::register("zbarrier", "magicbox_open_glow", 1, 1, "int");
   clientfield::register("zbarrier", "magicbox_closed_glow", 1, 1, "int");
   clientfield::register("scriptmover", "weapon_disappear_fx", 1, 1, "int");

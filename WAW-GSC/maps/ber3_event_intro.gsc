@@ -344,7 +344,7 @@ fadeOverlay(duration, alpha, blur) {
 
 do_custom_introscreen() {
   wait(1);
-  custom_introscreen(&"BER3_INTROSCREEN_TITLE", & "BER3_INTROSCREEN_DATE", & "BER3_INTROSCREEN_PLACE", & "BER3_INTROSCREEN_NAME", & "BER3_INTROSCREEN_INFO");
+  custom_introscreen(&"BER3_INTROSCREEN_TITLE", &"BER3_INTROSCREEN_DATE", &"BER3_INTROSCREEN_PLACE", &"BER3_INTROSCREEN_NAME", &"BER3_INTROSCREEN_INFO");
 }
 
 custom_introscreen(string1, string2, string3, string4, string5) {
@@ -885,16 +885,16 @@ fire_shrecks(spwn, targit, time) {
 
 e1_objectives() {
   obj_struct = getstruct("obj_gather_in_house", "targetname");
-  objective_add(0, "current", & "BER3_OBJ0", obj_struct.origin);
+  objective_add(0, "current", &"BER3_OBJ0", obj_struct.origin);
   getent("e1_shreck_to_house", "targetname") waittill("trigger");
   wait(3);
   objective_state(0, "done");
   obj_struct = getstruct("obj_clear_library", "targetname");
-  objective_add(1, "current", & "BER3_OBJ1", obj_struct.origin);
+  objective_add(1, "current", &"BER3_OBJ1", obj_struct.origin);
   getent("trig_exiting_library", "targetname") waittill("trigger");
   objective_state(1, "done");
   obj_struct = getstruct("obj_storm_konigsplatz", "targetname");
-  objective_add(2, "current", & "BER3_OBJ2", obj_struct.origin);
+  objective_add(2, "current", &"BER3_OBJ2", obj_struct.origin);
   getent("e2_tank1_destroy", "targetname") waittill("trigger");
   objective_state(2, "done");
 }

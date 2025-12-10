@@ -21,15 +21,15 @@
 #namespace zm_genesis_hope;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_hope", & __init__, undefined, undefined);
+  system::register("zm_genesis_hope", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level._effect["spark_of_hope"] = "dlc4/genesis/fx_quest_hope";
-  clientfield::register("world", "hope_state", 15000, getminbitcountfornum(4), "int", & super_ee, 0, 0);
+  clientfield::register("world", "hope_state", 15000, getminbitcountfornum(4), "int", &super_ee, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.super_ee", 15000, 1, "int", undefined, 0, 0);
-  clientfield::register("toplayer", "hope_spark", 15000, 1, "int", & function_2e70599d, 0, 0);
-  clientfield::register("scriptmover", "hope_spark", 15000, 1, "int", & function_2e70599d, 0, 0);
+  clientfield::register("toplayer", "hope_spark", 15000, 1, "int", &function_2e70599d, 0, 0);
+  clientfield::register("scriptmover", "hope_spark", 15000, 1, "int", &function_2e70599d, 0, 0);
 }
 
 function super_ee(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

@@ -1151,7 +1151,7 @@ zombiemissinglegs(entity) {
 }
 
 zombieshouldproceduraltraverse(entity) {
-  return isDefined(entity.traversestartnode) && isDefined(entity.traverseendnode) && entity.traversestartnode.spawnflags&1024 && entity.traverseendnode.spawnflags&1024;
+  return isDefined(entity.traversestartnode) && isDefined(entity.traverseendnode) && entity.traversestartnode.spawnflags& 1024 && entity.traverseendnode.spawnflags& 1024;
 }
 
 zombieshouldmeleesuicide(entity) {

@@ -198,7 +198,7 @@ createballdrone(param_00, param_01) {
 
   var_0A = level.balldronesettings[param_00].modelbase;
   var_0B = level.balldronesettings[param_00].maxhealth;
-  var_0C = & "KILLSTREAKS_HINTS_VULTURE_SUPPORT";
+  var_0C = &"KILLSTREAKS_HINTS_VULTURE_SUPPORT";
   var_0D = scripts\mp\killstreak_loot::getrarityforlootitem(param_01.variantid);
   if(var_0D != "") {
     var_0A = var_0A + "_" + var_0D;
@@ -209,7 +209,7 @@ createballdrone(param_00, param_01) {
   }
 
   if(scripts\mp\killstreaks\_utility::func_A69F(param_01, "passive_guard")) {
-    var_0C = & "KILLSTREAKS_HINTS_VULTURE_GUARD";
+    var_0C = &"KILLSTREAKS_HINTS_VULTURE_GUARD";
   }
 
   var_0E = spawnhelicopter(self, var_04, var_02, level.balldronesettings[param_00].vehicleinfo, var_0A);
@@ -990,9 +990,9 @@ balldrone_watchmodeswitch() {
         self.var_BC = getothermode(self.var_BC, self.streakinfo);
         self notify(self.var_BC);
         if(self.var_BC == "ASSAULT") {
-          var_02 = & "KILLSTREAKS_HINTS_VULTURE_SUPPORT";
+          var_02 = &"KILLSTREAKS_HINTS_VULTURE_SUPPORT";
           if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo, "passive_guard")) {
-            var_02 = & "KILLSTREAKS_HINTS_VULTURE_GUARD";
+            var_02 = &"KILLSTREAKS_HINTS_VULTURE_GUARD";
           }
 
           self getplayerkillstreakcombatmode();
@@ -1003,7 +1003,7 @@ balldrone_watchmodeswitch() {
           thread func_27EA();
           thread func_27E8();
         } else {
-          var_02 = & "KILLSTREAKS_HINTS_VULTURE_ASSAULT";
+          var_02 = &"KILLSTREAKS_HINTS_VULTURE_ASSAULT";
           if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo, "passive_guard")) {
             self getplayerkillstreakcombatmode();
             self.var_2525 = undefined;

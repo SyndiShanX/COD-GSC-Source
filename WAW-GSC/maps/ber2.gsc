@@ -44,15 +44,15 @@ main() {
 }
 
 build_starts() {
-  add_start("event1", maps\ber2_event1::event1_start, & "STARTS_BER2_EVENT1");
-  add_start("e1_start_action", maps\ber2_event1::event1_start_action, & "STARTS_BER2_EVENT1_ACTION");
-  add_start("apt2", maps\ber2_event1::event1_start_apt2, & "STARTS_BER2_APT2");
-  add_start("atrium", maps\ber2_event1::event1_start_atrium, & "STARTS_BER2_ATRIUM");
-  add_start("loadingdock", maps\ber2_event1::event1_start_loadingdock, & "STARTS_BER2_LOADINGDOCK");
-  add_start("e1_outside", maps\ber2_event1::event1_start_outside, & "STARTS_BER2_OUTSIDE");
-  add_start("street_regroup", maps\ber2_event1::event1_start_street_regroup, & "STARTS_BER2_STREET_REGROUP");
-  add_start("event2", maps\ber2_event2::event2_start, & "STARTS_BER2_EVENT2");
-  add_start("metrowave", maps\ber2_event2::event2_start_metrowave, & "STARTS_BER2_EVENT2_METROWAVE");
+  add_start("event1", maps\ber2_event1::event1_start, &"STARTS_BER2_EVENT1");
+  add_start("e1_start_action", maps\ber2_event1::event1_start_action, &"STARTS_BER2_EVENT1_ACTION");
+  add_start("apt2", maps\ber2_event1::event1_start_apt2, &"STARTS_BER2_APT2");
+  add_start("atrium", maps\ber2_event1::event1_start_atrium, &"STARTS_BER2_ATRIUM");
+  add_start("loadingdock", maps\ber2_event1::event1_start_loadingdock, &"STARTS_BER2_LOADINGDOCK");
+  add_start("e1_outside", maps\ber2_event1::event1_start_outside, &"STARTS_BER2_OUTSIDE");
+  add_start("street_regroup", maps\ber2_event1::event1_start_street_regroup, &"STARTS_BER2_STREET_REGROUP");
+  add_start("event2", maps\ber2_event2::event2_start, &"STARTS_BER2_EVENT2");
+  add_start("metrowave", maps\ber2_event2::event2_start_metrowave, &"STARTS_BER2_EVENT2_METROWAVE");
   default_start(level.start_functions["event1"]);
   start = tolower(GetDvar("start"));
   if(isDefined(start) && start != "" && start != "default" && start != "event1" && !IsSubStr(start, "**")) {
@@ -112,14 +112,14 @@ precache_assets() {
 }
 
 setup_strings() {
-  level.obj_clear_bldgs = & "BER2_OBJ_CLEAR_BLDGS";
-  level.obj_move_thru_street = & "BER2_OBJ_MOVE_THRU_STREET";
-  level.obj_stay_with_tank = & "BER2_OBJ_STAY_WITH_TANK";
-  level.obj_execute = & "BER2_OBJ_EXECUTE";
-  level.obj_regroup = & "BER2_OBJ_REGROUP";
-  level.obj_get_to_metro = & "BER2_OBJ_GET_TO_METRO";
-  level.obj_fight_thru_metro = & "BER2_OBJ_FIGHT_THRU_METRO";
-  level.obj_defend_sarge = & "BER2_OBJ_DEFEND_SARGE";
+  level.obj_clear_bldgs = &"BER2_OBJ_CLEAR_BLDGS";
+  level.obj_move_thru_street = &"BER2_OBJ_MOVE_THRU_STREET";
+  level.obj_stay_with_tank = &"BER2_OBJ_STAY_WITH_TANK";
+  level.obj_execute = &"BER2_OBJ_EXECUTE";
+  level.obj_regroup = &"BER2_OBJ_REGROUP";
+  level.obj_get_to_metro = &"BER2_OBJ_GET_TO_METRO";
+  level.obj_fight_thru_metro = &"BER2_OBJ_FIGHT_THRU_METRO";
+  level.obj_defend_sarge = &"BER2_OBJ_DEFEND_SARGE";
 }
 
 set_objective(num, origin) {

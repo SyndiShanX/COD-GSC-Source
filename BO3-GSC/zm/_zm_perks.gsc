@@ -44,12 +44,12 @@ function init() {
   }
   level.machine_assets = [];
   if(!isDefined(level.custom_vending_precaching)) {
-    level.custom_vending_precaching = & default_vending_precaching;
+    level.custom_vending_precaching = &default_vending_precaching;
   }
   [[level.custom_vending_precaching]]();
   zombie_utility::set_zombie_var("zombie_perk_cost", 2000);
-  array::thread_all(vending_triggers, & vending_trigger_think);
-  array::thread_all(vending_triggers, & electric_perks_dialog);
+  array::thread_all(vending_triggers, &vending_trigger_think);
+  array::thread_all(vending_triggers, &electric_perks_dialog);
   if(level._custom_perks.size > 0) {
     a_keys = getarraykeys(level._custom_perks);
     for(i = 0; i < a_keys.size; i++) {
@@ -66,7 +66,7 @@ function init() {
     }
   }
   if(isDefined(level.quantum_bomb_register_result_func)) {
-    [[level.quantum_bomb_register_result_func]]("give_nearest_perk", & quantum_bomb_give_nearest_perk_result, 10, & quantum_bomb_give_nearest_perk_validation);
+    [[level.quantum_bomb_register_result_func]]("give_nearest_perk", &quantum_bomb_give_nearest_perk_result, 10, &quantum_bomb_give_nearest_perk_validation);
   }
   level thread perk_hostmigration();
 }
@@ -85,7 +85,7 @@ function perk_machine_think(str_key, s_custom_perk) {
       machine[i] solid();
     }
     level thread do_initial_power_off_callback(machine, str_key);
-    array::thread_all(machine_triggers, & set_power_on, 0);
+    array::thread_all(machine_triggers, &set_power_on, 0);
     level waittill(str_on);
     for(i = 0; i < machine.size; i++) {
       machine[i] setModel(level.machine_assets[str_key].on_model);
@@ -95,7 +95,7 @@ function perk_machine_think(str_key, s_custom_perk) {
       machine[i] thread play_loop_on_machine();
     }
     level notify(str_notify);
-    array::thread_all(machine_triggers, & set_power_on, 1);
+    array::thread_all(machine_triggers, &set_power_on, 1);
     if(isDefined(level.machine_assets[str_key].power_on_callback)) {
       array::thread_all(machine, level.machine_assets[str_key].power_on_callback);
     }
@@ -103,7 +103,7 @@ function perk_machine_think(str_key, s_custom_perk) {
     if(isDefined(level.machine_assets[str_key].power_off_callback)) {
       array::thread_all(machine, level.machine_assets[str_key].power_off_callback);
     }
-    array::thread_all(machine, & turn_perk_off);
+    array::thread_all(machine, &turn_perk_off);
   }
 }
 
@@ -452,7 +452,7 @@ function give_perk_presentation(perk) {
   if(isDefined(level.remove_perk_vo_delay) && level.remove_perk_vo_delay) {
     self zm_audio::create_and_play_dialog("perk", perk);
   } else {
-    self util::delay(1.5, undefined, & zm_audio::create_and_play_dialog, "perk", perk);
+    self util::delay(1.5, undefined, &zm_audio::create_and_play_dialog, "perk", perk);
   }
   self setblur(9, 0.1);
   wait(0.1);

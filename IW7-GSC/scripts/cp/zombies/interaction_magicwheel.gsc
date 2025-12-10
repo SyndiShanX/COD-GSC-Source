@@ -118,10 +118,10 @@ func_51EB(param_00, param_01, param_02) {
   param_01 endon("disconnect");
   param_01 playlocalsound("purchase_deny");
   if(isDefined(param_02)) {
-    param_01 forceusehinton( & "COOP_INTERACTIONS_CANNOT_BUY");
+    param_01 forceusehinton(&"COOP_INTERACTIONS_CANNOT_BUY");
   } else {
     param_01 thread scripts\cp\cp_vo::try_to_play_vo("no_cash", "zmb_comment_vo", "high", 30, 0, 0, 1, 50);
-    param_01 forceusehinton( & "COOP_INTERACTIONS_NEED_MONEY");
+    param_01 forceusehinton(&"COOP_INTERACTIONS_NEED_MONEY");
   }
 
   wait(1);
@@ -185,7 +185,7 @@ init_magic_wheel(param_00) {
     return;
   }
 
-  param_00 sethintstring( & "CP_ZMB_INTERACTIONS_SPIN_WHEEL");
+  param_00 sethintstring(&"CP_ZMB_INTERACTIONS_SPIN_WHEEL");
 }
 
 func_8E95(param_00) {
@@ -226,7 +226,7 @@ func_100ED(param_00) {
   param_00 setusefov(60);
   param_00 setuserange(72);
   if(scripts\engine\utility::flag_exist("fire_sale") && scripts\engine\utility::flag("fire_sale")) {
-    param_00 sethintstring( & "COOP_INTERACTIONS_SPIN_WHEEL_FIRE_SALE");
+    param_00 sethintstring(&"COOP_INTERACTIONS_SPIN_WHEEL_FIRE_SALE");
     return;
   }
 
@@ -235,7 +235,7 @@ func_100ED(param_00) {
     return;
   }
 
-  param_00 sethintstring( & "CP_ZMB_INTERACTIONS_SPIN_WHEEL");
+  param_00 sethintstring(&"CP_ZMB_INTERACTIONS_SPIN_WHEEL");
 }
 
 get_default_fx_state() {
@@ -1063,7 +1063,7 @@ func_10C4D(param_00, param_01, param_02) {
     }
 
     if(var_05.area_name == level.var_A8E2) {
-      var_05 sethintstring( & "COOP_INTERACTIONS_SPIN_WHEEL_FIRE_SALE");
+      var_05 sethintstring(&"COOP_INTERACTIONS_SPIN_WHEEL_FIRE_SALE");
       var_03 = var_05;
       continue;
     }
@@ -1099,7 +1099,7 @@ func_4DB4(param_00, param_01, param_02) {
         if(isDefined(level.magic_wheel_spin_hint)) {
           var_05 sethintstring(level.magic_wheel_spin_hint);
         } else {
-          var_05 sethintstring( & "CP_ZMB_INTERACTIONS_SPIN_WHEEL");
+          var_05 sethintstring(&"CP_ZMB_INTERACTIONS_SPIN_WHEEL");
         }
 
         continue;

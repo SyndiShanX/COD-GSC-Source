@@ -11,7 +11,7 @@
 #namespace hackable;
 
 function autoexec __init__sytem__() {
-  system::register("hackable", & init, undefined, undefined);
+  system::register("hackable", &init, undefined, undefined);
 }
 
 function init() {
@@ -38,7 +38,7 @@ function add_hackable_object(obj, test_callback, start_callback, fail_callback, 
     obj.hackable_timeout = getdvarfloat("scr_hacker_default_timeout");
   }
   if(!isDefined(obj.hackable_progress_prompt)) {
-    obj.hackable_progress_prompt = & "WEAPON_HACKING";
+    obj.hackable_progress_prompt = &"WEAPON_HACKING";
   }
   if(!isDefined(obj.hackable_cost_mult)) {
     obj.hackable_cost_mult = 1;
@@ -58,7 +58,7 @@ function remove_hackable_object(obj) {
 }
 
 function cleanup_hackable_objects() {
-  level.hackable_items = array::filter(level.hackable_items, 0, & filter_deleted);
+  level.hackable_items = array::filter(level.hackable_items, 0, &filter_deleted);
 }
 
 function filter_deleted(val) {

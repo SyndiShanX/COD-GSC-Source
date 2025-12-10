@@ -75,7 +75,7 @@ function pers_upgrades_monitor() {
                 }
                 player playsoundtoplayer("evt_player_upgrade", player);
                 if(isDefined(level.pers_upgrade_vo_spoken) && level.pers_upgrade_vo_spoken) {
-                  player util::delay(1, undefined, & zm_audio::create_and_play_dialog, "general", type, level.snd_pers_upgrade_force_variant);
+                  player util::delay(1, undefined, &zm_audio::create_and_play_dialog, "general", type, level.snd_pers_upgrade_force_variant);
                 }
                 if(isDefined(player.upgrade_fx_origin)) {
                   else {}

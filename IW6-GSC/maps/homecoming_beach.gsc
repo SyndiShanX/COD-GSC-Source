@@ -2154,7 +2154,7 @@ bunker_mg_guy() {
   maps\_utility::gun_remove();
   self notsolid();
   self.name = "";
-  self setlookattext("", & "");
+  self setlookattext("", &"");
   level.secondarygunner = getent("balcony_secondary_gunner", "targetname") maps\_utility::spawn_ai();
   level.secondarygunner.animname = "secondary_gunner";
   level.secondarygunner.name = "SGT. Harmer";

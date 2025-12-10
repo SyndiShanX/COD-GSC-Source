@@ -67,9 +67,9 @@ main() {
   scripts\cp\crafted_trap_seismic::init();
   scripts\cp\crafted_trap_mindcontrol::init();
   scripts\cp\crafted_trap_hypnosis::init();
-  level.magic_wheel_spin_hint = & "CP_TOWN_INTERACTIONS_SPIN_WHEEL";
-  level.reboard_barriers_hint = & "CP_TOWN_INTERACTIONS_SECURE_WINDOW";
-  level.enter_area_hint = & "CP_TOWN_INTERACTIONS_ENTER_THIS_AREA";
+  level.magic_wheel_spin_hint = &"CP_TOWN_INTERACTIONS_SPIN_WHEEL";
+  level.reboard_barriers_hint = &"CP_TOWN_INTERACTIONS_SECURE_WINDOW";
+  level.enter_area_hint = &"CP_TOWN_INTERACTIONS_ENTER_THIS_AREA";
   level.primary_melee_weapons = ["iw7_knife_zm_schoolgirl", "iw7_knife_zm_scientist", "iw7_knife_zm_soldier", "iw7_knife_zm_rebel", "iw7_knife_zm_crowbar", "iw7_knife_zm_elvira", "iw7_knife_zm_cleaver"];
   level.additional_laststand_weapon_exclusion = ["iw7_cpbasketball_mp", "iw7_cpskeeball_mp", "iw7_cpclowntoothball_mp", "iw7_horseracepistol_zm_blue", "iw7_horseracepistol_zm_yellow", "iw7_horseracepistol_zm_red", "iw7_horseracepistol_zm_green", "iw7_shootgallery_zm", "iw7_blackholegun_mp", "iw7_penetrationrail_mp", "iw7_atomizer_mp", "iw7_glr_mp", "iw7_claw_mp", "iw7_steeldragon_mp", "iw7_shootgallery_zm_blue", "iw7_shootgallery_zm_yellow", "iw7_shootgallery_zm_red", "iw7_shootgallery_zm_green", "iw7_gunless_zm"];
   level.last_stand_weapons = ["iw7_g18_zm", "iw7_g18_zmr", "iw7_g18_zml", "iw7_g18c_zm", "iw7_mag_zm", "iw7_revolver_zm", "iw7_revolver_zmr", "iw7_revolver_zmr_explosive", "iw7_revolver_zml", "iw7_revolver_zml_single", "iw7_emc_zm", "iw7_emc_zmr", "iw7_emc_zmr_burst", "iw7_emc_zml", "iw7_emc_zml_spread", "iw7_nrg_zm", "iw7_nrg_zmr", "iw7_nrg_zmr_smart", "iw7_nrg_zml", "iw7_nrg_zml_charge", "iw7_dischord_zm", "iw7_headcutter_zm", "iw7_shredder_zm", "iw7_facemelter_zm", "iw7_dischord_zm_pap1", "iw7_headcutter_zm_pap1", "iw7_shredder_zm_pap1", "iw7_facemelter_zm_pap1", "iw7_golf_club_mp_pap1", "iw7_two_headed_axe_mp_pap1", "iw7_spiked_bat_mp_pap1", "iw7_machete_mp_pap1", "iw7_golf_club_mp_pap2", "iw7_two_headed_axe_mp_pap2", "iw7_spiked_bat_mp_pap2", "iw7_machete_mp_pap2", "iw7_golf_club_mp", "iw7_two_headed_axe_mp", "iw7_spiked_bat_mp", "iw7_machete_mp"];
@@ -2251,18 +2251,18 @@ town_power_on_vo(param_00) {
 }
 
 cp_town_introscreen_text() {
-  var_00 = scripts\cp\cp_hud_util::introscreen_corner_line( & "CP_TOWN_INTRO_LINE_1", 1);
+  var_00 = scripts\cp\cp_hud_util::introscreen_corner_line(&"CP_TOWN_INTRO_LINE_1", 1);
   wait(1);
-  var_01 = scripts\cp\cp_hud_util::introscreen_corner_line( & "CP_TOWN_INTRO_LINE_2", 2);
+  var_01 = scripts\cp\cp_hud_util::introscreen_corner_line(&"CP_TOWN_INTRO_LINE_2", 2);
   wait(1);
   if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
-    var_02 = scripts\cp\cp_hud_util::introscreen_corner_line( & "DIRECT_BOSS_FIGHT_LINE4_TOWN", 4);
+    var_02 = scripts\cp\cp_hud_util::introscreen_corner_line(&"DIRECT_BOSS_FIGHT_LINE4_TOWN", 4);
   } else {
-    var_02 = scripts\cp\cp_hud_util::introscreen_corner_line( & "CP_TOWN_INTRO_LINE_3", 3);
+    var_02 = scripts\cp\cp_hud_util::introscreen_corner_line(&"CP_TOWN_INTRO_LINE_3", 3);
   }
 
   wait(1);
-  var_03 = scripts\cp\cp_hud_util::introscreen_corner_line( & "CP_TOWN_INTRO_LINE_4", 4);
+  var_03 = scripts\cp\cp_hud_util::introscreen_corner_line(&"CP_TOWN_INTRO_LINE_4", 4);
   wait(3);
   var_00 fadeovertime(3);
   var_01 fadeovertime(3);

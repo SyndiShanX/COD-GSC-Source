@@ -1443,7 +1443,7 @@ afterlife_trigger_create(s_origin) {
   s_origin.unitrigger_stub.radius = 36;
   s_origin.unitrigger_stub.height = 256;
   s_origin.unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
-  s_origin.unitrigger_stub.hint_string = & "ZM_PRISON_AFTERLIFE_KILL";
+  s_origin.unitrigger_stub.hint_string = &"ZM_PRISON_AFTERLIFE_KILL";
   s_origin.unitrigger_stub.cursor_hint = "HINT_NOICON";
   s_origin.unitrigger_stub.require_look_at = 1;
   s_origin.unitrigger_stub.prompt_and_visibility_func = ::afterlife_trigger_visibility;
@@ -1547,10 +1547,10 @@ afterlife_interact_object_think() {
     else {
       if(issubstr(self.model, "p6_zm_al_shock_box")) {
         trig_spawn_offset = (0, 11, 46);
-        str_hint = & "ZM_PRISON_AFTERLIFE_INTERACT";
+        str_hint = &"ZM_PRISON_AFTERLIFE_INTERACT";
       } else if(issubstr(self.model, "p6_zm_al_power_station_panels")) {
         trig_spawn_offset = (32, 35, 58);
-        str_hint = & "ZM_PRISON_AFTERLIFE_OVERLOAD";
+        str_hint = &"ZM_PRISON_AFTERLIFE_OVERLOAD";
       }
 
       afterlife_interact_hint_trigger_create(self, trig_spawn_offset, str_hint);

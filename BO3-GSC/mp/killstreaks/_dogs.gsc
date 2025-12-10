@@ -28,7 +28,7 @@ function init() {
   level.dog_targets[level.dog_targets.size] = "trigger_use_touch";
   level.dog_spawns = [];
   level thread devgui_dog_think();
-  level.dogsonflashdogs = & flash_dogs;
+  level.dogsonflashdogs = &flash_dogs;
 }
 
 function init_spawns() {

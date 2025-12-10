@@ -119,7 +119,7 @@ hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shi
     } else if(isDefined(inflictor) && isDefined(inflictor.soundmod)) {
       switch (inflictor.soundmod) {
         case #"player":
-          if(isDefined(idflags) && idflags&2048 && isDefined(victim)) {
+          if(isDefined(idflags) && idflags& 2048 && isDefined(victim)) {
             if(isDefined(victim.var_426947c4)) {
               hitalias = #"mpl_hit_alert_armor_broke";
             } else if(sessionmodeiswarzonegame()) {
@@ -196,7 +196,7 @@ hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shi
       hitalias = #"hash_27781beb722b7488";
     }
   } else if(isDefined(inflictor) && isDefined(inflictor.owner) && isDefined(inflictor.owner.soundmod)) {
-    if(inflictor.owner.soundmod == #"player" && isDefined(idflags) && idflags&2048 && isDefined(victim)) {
+    if(inflictor.owner.soundmod == #"player" && isDefined(idflags) && idflags& 2048 && isDefined(victim)) {
       if(isDefined(victim.var_426947c4)) {
         hitalias = #"mpl_hit_alert_armor_broke";
       }

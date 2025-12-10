@@ -13,7 +13,7 @@
 #namespace glaive;
 
 function autoexec main() {
-  clientfield::register("vehicle", "glaive_blood_fx", 1, 1, "int", & glaivebloodfxhandler, 0, 0);
+  clientfield::register("vehicle", "glaive_blood_fx", 1, 1, "int", &glaivebloodfxhandler, 0, 0);
 }
 
 function private glaivebloodfxhandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {

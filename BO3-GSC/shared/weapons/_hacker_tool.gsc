@@ -29,7 +29,7 @@ function init_shared() {
   level.vehiclehackertoolradius = 80;
   level.vehiclehackertooltimems = 5000;
   clientfield::register("toplayer", "hacker_tool", 1, 2, "int");
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function on_player_spawned() {

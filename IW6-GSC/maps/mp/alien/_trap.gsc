@@ -188,17 +188,17 @@ fire_trap_setup_sizes() {
   if(sizes[size_index] == "small") {
     self.DoT = CONST_FIRE_TRAP_DAMAGE_SMALL;
     self.cost = CONST_FIRE_TRAP_COST_SMALL;
-    self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_FIRE_TRAP_SMALL";
+    self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_FIRE_TRAP_SMALL";
   }
   if(sizes[size_index] == "medium") {
     self.DoT = CONST_FIRE_TRAP_DAMAGE_MED;
     self.cost = CONST_FIRE_TRAP_COST_MED;
-    self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_FIRE_TRAP_MED";
+    self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_FIRE_TRAP_MED";
   }
   if(sizes[size_index] == "large") {
     self.DoT = CONST_FIRE_TRAP_DAMAGE_LARGE;
     self.cost = CONST_FIRE_TRAP_COST_LARGE;
-    self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_FIRE_TRAP_LARGE";
+    self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_FIRE_TRAP_LARGE";
   }
 
   if(isDefined(self.custom)) {
@@ -266,7 +266,7 @@ fire_trap_think() {
         break;
       } else {
         wait 0.05;
-        owner setLowerMessage("no_money", & "ALIEN_COLLECTIBLES_NO_MONEY", 3);
+        owner setLowerMessage("no_money", &"ALIEN_COLLECTIBLES_NO_MONEY", 3);
 
         continue;
       }
@@ -628,7 +628,7 @@ run_electric_trap(play_trap_on_fx, play_trap_off_fx, play_ambient_shocks) {
         break;
       } else {
         wait 0.05;
-        owner setLowerMessage("no_money", & "ALIEN_COLLECTIBLES_NO_MONEY", 3);
+        owner setLowerMessage("no_money", &"ALIEN_COLLECTIBLES_NO_MONEY", 3);
 
         continue;
       }
@@ -669,9 +669,9 @@ run_electric_trap(play_trap_on_fx, play_trap_off_fx, play_ambient_shocks) {
 
     if(isDefined(self.owner) && isALive(self.owner)) {
       if(self.trap_type == "traps_fence")
-        self.owner setLowerMessage("electric_fence_offline", & "ALIEN_COLLECTIBLES_ELECTRIC_FENCE_OFFLINE", 3);
+        self.owner setLowerMessage("electric_fence_offline", &"ALIEN_COLLECTIBLES_ELECTRIC_FENCE_OFFLINE", 3);
       else
-        self.owner setLowerMessage("electric_fence_offline", & "ALIENS_PATCH_ELECTRIC_TRAP_OFFLINE", 3);
+        self.owner setLowerMessage("electric_fence_offline", &"ALIENS_PATCH_ELECTRIC_TRAP_OFFLINE", 3);
     }
 
     wait 0.5;
@@ -856,17 +856,17 @@ puddle_trap_setup_sizes() {
   if(sizes[size_index] == "small") {
     self.cost = CONST_PUDDLE_COST_SMALL;
     self.life_span = CONST_PUDDLE_LIFE_SPAN_SMALL;
-    self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_SMALL";
+    self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_SMALL";
   }
   if(sizes[size_index] == "medium") {
     self.cost = CONST_PUDDLE_COST_MED;
     self.life_span = CONST_PUDDLE_LIFE_SPAN_MED;
-    self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_MED";
+    self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_MED";
   }
   if(sizes[size_index] == "large") {
     self.cost = CONST_PUDDLE_COST_LARGE;
     self.life_span = CONST_PUDDLE_LIFE_SPAN_LARGE;
-    self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_LARGE";
+    self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_LARGE";
   }
 
   if(isDefined(self.custom)) {
@@ -1065,26 +1065,26 @@ fence_trap_setup_sizes() {
   if(sizes[size_index] == "small") {
     self.cost = CONST_FENCE_COST_SMALL;
     self.life_span = CONST_FENCE_LIFE_SPAN_SMALL;
-    self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_FENCE_SMALL";
+    self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_FENCE_SMALL";
 
     if(isDefined(level.generic_electric_trap_check) && self[[level.generic_electric_trap_check]]())
-      self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_SMALL";
+      self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_SMALL";
   }
   if(sizes[size_index] == "medium") {
     self.cost = CONST_FENCE_COST_MED;
     self.life_span = CONST_FENCE_LIFE_SPAN_MED;
-    self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_FENCE_MED";
+    self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_FENCE_MED";
 
     if(isDefined(level.generic_electric_trap_check) && self[[level.generic_electric_trap_check]]())
-      self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_MED";
+      self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_MED";
   }
   if(sizes[size_index] == "large") {
     self.cost = CONST_FENCE_COST_LARGE;
     self.life_span = CONST_FENCE_LIFE_SPAN_LARGE;
-    self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_FENCE_LARGE";
+    self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_FENCE_LARGE";
 
     if(isDefined(level.generic_electric_trap_check) && self[[level.generic_electric_trap_check]]())
-      self.hintString = & "ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_LARGE";
+      self.hintString = &"ALIEN_COLLECTIBLES_ACTIVATE_PUDDLE_LARGE";
   }
 
   if(isDefined(self.custom)) {
@@ -1189,7 +1189,7 @@ turret_monitorUse() {
       continue;
     }
     if(player is_holding_deployable()) {
-      player setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+      player setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
       continue;
     }
 
@@ -1202,7 +1202,7 @@ turret_monitorUse() {
         level thread maps\mp\alien\_music_and_dialog::playVOForSentry(player, "minigun");
         self thread monitor_player_use();
       } else {
-        player setLowerMessage("no_money", & "ALIEN_COLLECTIBLES_NO_MONEY", 3);
+        player setLowerMessage("no_money", &"ALIEN_COLLECTIBLES_NO_MONEY", 3);
 
       }
     } else {
@@ -1278,7 +1278,7 @@ monitor_player_use() {
       continue;
     }
     if(user is_holding_deployable()) {
-      user setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+      user setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
       continue;
     }
 
@@ -1296,7 +1296,7 @@ monitor_player_use() {
       self thread turret_cooldown_monitor();
       self thread clear_turret_ammo_counter_on_dismount(user);
       self thread clear_turret_ammo_counter_on_death(user);
-      user setLowerMessage("disengage_turret", & "ALIEN_COLLECTIBLES_DISENGAGE_TURRET", 4);
+      user setLowerMessage("disengage_turret", &"ALIEN_COLLECTIBLES_DISENGAGE_TURRET", 4);
     } else {
       user hide_turret_icon();
       if(!is_chaos_mode())

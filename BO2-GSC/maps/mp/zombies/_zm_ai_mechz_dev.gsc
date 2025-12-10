@@ -216,9 +216,9 @@ setup_force_behavior() {
   }
 
   self linkto(level.test_align_struct, "tag_origin", (0, 0, 0), (0, 0, 0));
-  self.fx_field = self.fx_field & ~64;
-  self.fx_field = self.fx_field & ~128;
-  self.fx_field = self.fx_field & ~256;
+  self.fx_field = self.fx_field &~64;
+  self.fx_field = self.fx_field &~128;
+  self.fx_field = self.fx_field &~256;
 }
 
 align_test_struct() {
@@ -331,7 +331,7 @@ fake_launch_claw() {
   self.m_claw moveto(v_claw_origin, 0.5);
   self.m_claw waittill("movedone");
   self.m_claw.fx_ent delete();
-  self.fx_field = self.fx_field & ~256;
+  self.fx_field = self.fx_field &~256;
   self setclientfield("mechz_fx", self.fx_field);
   v_claw_origin = self gettagorigin("tag_claw");
   v_claw_angles = self gettagangles("tag_claw");
@@ -375,7 +375,7 @@ mechz_force_damage_armor() {
     self.next_armor_piece = 0;
 
     for(i = 0; i < self.armor_state.size; i++) {
-      self.fx_field = self.fx_field & ~(1 << self.armor_state[i].index);
+      self.fx_field = self.fx_field &~(1 << self.armor_state[i].index);
 
       if(isDefined(self.armor_state[i].model))
         self attach(self.armor_state[i].model, self.armor_state[i].tag);
@@ -404,10 +404,10 @@ mechz_force_damage_faceplate() {
     self.has_helmet = 0;
     self detach("c_zom_mech_faceplate", "J_Helmet");
     self.fx_field = self.fx_field | 1024;
-    self.fx_field = self.fx_field & ~2048;
+    self.fx_field = self.fx_field &~2048;
   } else {
     self.has_helmet = 1;
-    self.fx_field = self.fx_field & ~1024;
+    self.fx_field = self.fx_field &~1024;
     self.fx_field = self.fx_field | 2048;
     self attach("c_zom_mech_faceplate", "J_Helmet");
   }

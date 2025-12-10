@@ -9,7 +9,7 @@
 #namespace zm_aat_blast_furnace;
 
 function autoexec __init__sytem__() {
-  system::register("zm_aat_blast_furnace", & __init__, undefined, undefined);
+  system::register("zm_aat_blast_furnace", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -17,10 +17,10 @@ function __init__() {
     return;
   }
   aat::register("zm_aat_blast_furnace", "zmui_zm_aat_blast_furnace", "t7_icon_zm_aat_blast_furnace");
-  clientfield::register("actor", "zm_aat_blast_furnace" + "_explosion", 1, 1, "counter", & zm_aat_blast_furnace_explosion, 0, 0);
-  clientfield::register("vehicle", "zm_aat_blast_furnace" + "_explosion_vehicle", 1, 1, "counter", & zm_aat_blast_furnace_explosion_vehicle, 0, 0);
-  clientfield::register("actor", "zm_aat_blast_furnace" + "_burn", 1, 1, "counter", & zm_aat_blast_furnace_burn, 0, 0);
-  clientfield::register("vehicle", "zm_aat_blast_furnace" + "_burn_vehicle", 1, 1, "counter", & zm_aat_blast_furnace_burn_vehicle, 0, 0);
+  clientfield::register("actor", "zm_aat_blast_furnace" + "_explosion", 1, 1, "counter", &zm_aat_blast_furnace_explosion, 0, 0);
+  clientfield::register("vehicle", "zm_aat_blast_furnace" + "_explosion_vehicle", 1, 1, "counter", &zm_aat_blast_furnace_explosion_vehicle, 0, 0);
+  clientfield::register("actor", "zm_aat_blast_furnace" + "_burn", 1, 1, "counter", &zm_aat_blast_furnace_burn, 0, 0);
+  clientfield::register("vehicle", "zm_aat_blast_furnace" + "_burn_vehicle", 1, 1, "counter", &zm_aat_blast_furnace_burn_vehicle, 0, 0);
   level._effect["zm_aat_blast_furnace"] = "zombie/fx_aat_blast_furnace_zmb";
 }
 

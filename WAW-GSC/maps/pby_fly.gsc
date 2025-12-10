@@ -100,12 +100,12 @@ main() {
   precacheRumble("explosion_generic");
   precacheRumble("damage_light");
   precacheRumble("damage_heavy");
-  add_start("boat_strafe", ::jumpto_event2_strafe_boats, & "STARTS_PBY_BOATS");
-  add_start("media", ::jumpto_event2_media, & "STARTS_PBY_BOATS");
-  add_start("pacing", ::jumpto_event3, & "STARTS_PBY_SUNRISE");
-  add_start("rescue", ::jumpto_event4, & "STARTS_PBY_RESCUE");
-  add_start("getaway", ::jumpto_event6, & "STARTS_PBY_LANDING");
-  add_start("zeroes", ::jumpto_initial_zeroes, & "STARTS_PBY_LANDING");
+  add_start("boat_strafe", ::jumpto_event2_strafe_boats, &"STARTS_PBY_BOATS");
+  add_start("media", ::jumpto_event2_media, &"STARTS_PBY_BOATS");
+  add_start("pacing", ::jumpto_event3, &"STARTS_PBY_SUNRISE");
+  add_start("rescue", ::jumpto_event4, &"STARTS_PBY_RESCUE");
+  add_start("getaway", ::jumpto_event6, &"STARTS_PBY_LANDING");
+  add_start("zeroes", ::jumpto_initial_zeroes, &"STARTS_PBY_LANDING");
   add_start("rescue_3", ::jumpto_event4_part3);
   default_start(::event1_new);
   level.callbackSaveRestored = ::pby_callback_saveRestored;
@@ -658,7 +658,7 @@ player_controlled_20mm_cannon_msg() {
     wait(0.1);
   }
   wait(1.0);
-  str_ref = & "PBY_FLY_CANNON";
+  str_ref = &"PBY_FLY_CANNON";
   level.ads_remind_text SetText(str_ref);
   wait(5);
   level.ads_remind_text SetText("");
@@ -669,7 +669,7 @@ setup_player_planes() {
   level.plane_a.animname = "pby";
   level.plane_a maps\pby_fly_amb::setup_plane_sounds(true);
   level.plane_a thread pby_veh_idle("fly", 0.05, "up");
-  level.plane_a SetVehicleLookAtText("Mantaray", & "PBY_FLY_PBY_SQUAD");
+  level.plane_a SetVehicleLookAtText("Mantaray", &"PBY_FLY_PBY_SQUAD");
   level.plane_a thread pby_veh_fire_guns();
   level.plane_a thread player_controlled_20mm_cannon();
   level.plane_a thread pby_damage_nose_glass();
@@ -682,7 +682,7 @@ setup_player_planes() {
   level.plane_b.animname = "pby";
   level.plane_b maps\pby_fly_amb::setup_plane_sounds(false);
   level.plane_b thread pby_veh_idle("fly", 0.45, "up");
-  level.plane_b SetVehicleLookAtText("Hammerhead", & "PBY_FLY_PBY_SQUAD");
+  level.plane_b SetVehicleLookAtText("Hammerhead", &"PBY_FLY_PBY_SQUAD");
   level.plane_b thread friendly_fire();
   level.plane_b thread fake_blister_gunners();
 }
@@ -6953,34 +6953,34 @@ set_objective(my_obj, ent) {
     return;
   } else if(my_obj == "merchant_boats") {
     objective_add(2, "current");
-    objective_string(2, & "PBY_FLY_OBJ_EV2", 3);
+    objective_string(2, &"PBY_FLY_OBJ_EV2", 3);
     objective_add(3, "active");
-    objective_string(3, & "PBY_FLY_OBJ_EV2_PTBOATS", 0);
-    level thread update_objective_stats_merchantship_ships(2, & "PBY_FLY_OBJ_EV2");
-    level thread update_objective_stats_ptboats(3, & "PBY_FLY_OBJ_EV2_PTBOATS");
+    objective_string(3, &"PBY_FLY_OBJ_EV2_PTBOATS", 0);
+    level thread update_objective_stats_merchantship_ships(2, &"PBY_FLY_OBJ_EV2");
+    level thread update_objective_stats_ptboats(3, &"PBY_FLY_OBJ_EV2_PTBOATS");
   } else if(my_obj == "back_to_base") {
     flag_set("merchant_ship_event_done");
     level notify("too late to sink merchant ships");
     obj_marker = GetEnt("base_obj", "targetname");
-    objective_add(4, "active", & "PBY_FLY_OBJ_EV3");
+    objective_add(4, "active", &"PBY_FLY_OBJ_EV3");
     objective_current(4);
   } else if(my_obj == "respond_to_distress_call") {
     obj_marker = GetEnt("fleet_obj", "targetname");
-    objective_string(4, & "PBY_FLY_OBJ_EV3B");
+    objective_string(4, &"PBY_FLY_OBJ_EV3B");
     objective_add(5, "active");
-    objective_string(5, & "PBY_FLY_OBJ_EV3B_ZEROES", 0);
-    level thread update_objective_states_zeroes(5, & "PBY_FLY_OBJ_EV3B_ZEROES");
+    objective_string(5, &"PBY_FLY_OBJ_EV3B_ZEROES", 0);
+    level thread update_objective_states_zeroes(5, &"PBY_FLY_OBJ_EV3B_ZEROES");
   } else if(my_obj == "save_sailors") {
     flag_set("respond_objective_done");
     objective_state(4, "done");
     obj_marker = GetEnt("fleet_obj", "targetname");
     objective_add(6, "active");
-    objective_string(6, & "PBY_FLY_OBJ_EV4", 0);
+    objective_string(6, &"PBY_FLY_OBJ_EV4", 0);
     objective_current(6);
-    level thread update_objective_states_rescue(6, & "PBY_FLY_OBJ_EV4");
+    level thread update_objective_states_rescue(6, &"PBY_FLY_OBJ_EV4");
   } else if(my_obj == "escape") {
     obj_marker = GetEnt("fleet_obj", "targetname");
-    objective_add(7, "active", & "PBY_FLY_OBJ_EV5");
+    objective_add(7, "active", &"PBY_FLY_OBJ_EV5");
     objective_current(7);
     flag_wait("the level is done");
     objective_state(7, "done");
@@ -8303,9 +8303,9 @@ turret_ads_reminder() {
   level.ads_remind_text.sort = 20;
   level.ads_remind_text.font = "default";
   if(level.console)
-    str_ref = & "PBY_FLY_ADS_HINT";
+    str_ref = &"PBY_FLY_ADS_HINT";
   else
-    str_ref = & "SCRIPT_PLATFORM_PBY_FLY_ADS_HINT";
+    str_ref = &"SCRIPT_PLATFORM_PBY_FLY_ADS_HINT";
   level.ads_remind_text SetText(str_ref);
   level thread turret_ads_reminder_off();
   level thread turret_ads_reminder_press();
@@ -8346,7 +8346,7 @@ turret_rescue_hud_elem() {
   level.save_text.alpha = 1.0;
   level.save_text.sort = 20;
   level.save_text.font = "default";
-  str_ref = & "PBY_FLY_RESCUE";
+  str_ref = &"PBY_FLY_RESCUE";
   while(flag("turret_hud")) {
     wait(0.1);
   }
@@ -8800,7 +8800,7 @@ fletcher_init() {
   self thread fletcher_ai_turret_think("zero", "tag_gunner_turret4", 3);
   random_name = level.used_fletcher_names;
   level.used_fletcher_names++;
-  self SetVehicleLookAtText(level.ship_names[random_name], & "VEHICLENAME_FLETCHER");
+  self SetVehicleLookAtText(level.ship_names[random_name], &"VEHICLENAME_FLETCHER");
   self.decal = spawn("script_model", self.origin);
   self.decal setModel("vehicle_usa_ship_fletcher_decal" + random_name);
   self.decal.angles = self.angles;

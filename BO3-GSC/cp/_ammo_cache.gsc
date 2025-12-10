@@ -130,27 +130,27 @@ class cammocrate {
     t_use linkto(mdl_ammo_cache);
     mdl_ammo_cache oed::enable_keyline(1);
     if(mdl_ammo_cache.script_string === "single_use") {
-      s_ammo_cache_object = gameobjects::create_use_object("any", t_use, array(mdl_ammo_cache), vectorscale((0, 0, 1), 32), & "cp_ammo_box");
+      s_ammo_cache_object = gameobjects::create_use_object("any", t_use, array(mdl_ammo_cache), vectorscale((0, 0, 1), 32), &"cp_ammo_box");
     } else {
-      s_ammo_cache_object = gameobjects::create_use_object("any", t_use, array(mdl_ammo_cache), vectorscale((0, 0, 1), 32), & "cp_ammo_crate");
+      s_ammo_cache_object = gameobjects::create_use_object("any", t_use, array(mdl_ammo_cache), vectorscale((0, 0, 1), 32), &"cp_ammo_crate");
     }
     s_ammo_cache_object gameobjects::allow_use("any");
     s_ammo_cache_object gameobjects::set_use_text(&"COOP_AMMO_REFILL");
     s_ammo_cache_object gameobjects::set_owner_team("allies");
     s_ammo_cache_object gameobjects::set_visible_team("any");
-    s_ammo_cache_object.onuse = & onuse;
+    s_ammo_cache_object.onuse = &onuse;
     s_ammo_cache_object.useweapon = undefined;
     s_ammo_cache_object.origin = mdl_ammo_cache.origin;
     s_ammo_cache_object.angles = s_ammo_cache_object.angles;
     if(mdl_ammo_cache.script_string === "single_use") {
       s_ammo_cache_object gameobjects::set_use_time(0.75);
-      s_ammo_cache_object.onbeginuse = & onbeginuse;
-      s_ammo_cache_object.onenduse = & onenduse;
+      s_ammo_cache_object.onbeginuse = &onbeginuse;
+      s_ammo_cache_object.onenduse = &onenduse;
       s_ammo_cache_object.single_use = 1;
     } else {
       s_ammo_cache_object gameobjects::set_use_time(0.75);
-      s_ammo_cache_object.onbeginuse = & onbeginuse;
-      s_ammo_cache_object.onenduse = & onenduse;
+      s_ammo_cache_object.onbeginuse = &onbeginuse;
+      s_ammo_cache_object.onenduse = &onenduse;
       s_ammo_cache_object.single_use = 0;
       mdl_ammo_cache.gameobject = s_ammo_cache_object;
       var_60a09143 = mdl_ammo_cache;
@@ -171,7 +171,7 @@ class cammocrate {
 #namespace ammo_cache;
 
 function autoexec __init__sytem__() {
-  system::register("cp_supply_manager", & __init__, & __main__, undefined);
+  system::register("cp_supply_manager", &__init__, &__main__, undefined);
 }
 
 function __init__() {}

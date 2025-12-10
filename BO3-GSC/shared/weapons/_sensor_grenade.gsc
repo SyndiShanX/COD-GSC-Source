@@ -17,18 +17,18 @@
 #namespace sensor_grenade;
 
 function init_shared() {
-  level.isplayertrackedfunc = & isplayertracked;
-  callback::add_weapon_watcher( & createsensorgrenadewatcher);
+  level.isplayertrackedfunc = &isplayertracked;
+  callback::add_weapon_watcher(&createsensorgrenadewatcher);
 }
 
 function createsensorgrenadewatcher() {
   watcher = self weaponobjects::createuseweaponobjectwatcher("sensor_grenade", self.team);
   watcher.headicon = 0;
-  watcher.onspawn = & onspawnsensorgrenade;
-  watcher.ondetonatecallback = & sensorgrenadedestroyed;
-  watcher.onstun = & weaponobjects::weaponstun;
+  watcher.onspawn = &onspawnsensorgrenade;
+  watcher.ondetonatecallback = &sensorgrenadedestroyed;
+  watcher.onstun = &weaponobjects::weaponstun;
   watcher.stuntime = 0;
-  watcher.ondamage = & watchsensorgrenadedamage;
+  watcher.ondamage = &watchsensorgrenadedamage;
   watcher.enemydestroy = 1;
 }
 

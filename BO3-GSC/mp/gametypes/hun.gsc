@@ -24,8 +24,8 @@ function main() {
   globallogic::registerfriendlyfiredelay(level.gametype, 0, 0, 1440);
   level.scoreroundwinbased = 1;
   level.resetplayerscoreeveryround = 1;
-  level.onstartgametype = & onstartgametype;
-  level.givecustomloadout = & givecustomloadout;
+  level.onstartgametype = &onstartgametype;
+  level.givecustomloadout = &givecustomloadout;
   level.helitime = getgametypesetting("objectiveSpawnTime");
   gameobjects::register_allowed_gameobject("dm");
   game["dialog"]["gametype"] = "ffa_start";
@@ -37,17 +37,17 @@ function main() {
 
 function onstartgametype() {
   setclientnamemode("auto_change");
-  util::setobjectivetext("allies", & "OBJECTIVES_DM");
-  util::setobjectivetext("axis", & "OBJECTIVES_DM");
+  util::setobjectivetext("allies", &"OBJECTIVES_DM");
+  util::setobjectivetext("axis", &"OBJECTIVES_DM");
   if(level.splitscreen) {
-    util::setobjectivescoretext("allies", & "OBJECTIVES_DM");
-    util::setobjectivescoretext("axis", & "OBJECTIVES_DM");
+    util::setobjectivescoretext("allies", &"OBJECTIVES_DM");
+    util::setobjectivescoretext("axis", &"OBJECTIVES_DM");
   } else {
-    util::setobjectivescoretext("allies", & "OBJECTIVES_DM_SCORE");
-    util::setobjectivescoretext("axis", & "OBJECTIVES_DM_SCORE");
+    util::setobjectivescoretext("allies", &"OBJECTIVES_DM_SCORE");
+    util::setobjectivescoretext("axis", &"OBJECTIVES_DM_SCORE");
   }
-  util::setobjectivehinttext("allies", & "OBJECTIVES_DM_HINT");
-  util::setobjectivehinttext("axis", & "OBJECTIVES_DM_HINT");
+  util::setobjectivehinttext("allies", &"OBJECTIVES_DM_HINT");
+  util::setobjectivehinttext("axis", &"OBJECTIVES_DM_HINT");
   spawning::create_map_placed_influencers();
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
@@ -145,11 +145,11 @@ function initdroplocations() {
 }
 
 function registercrates() {
-  supplydrop::registercratetype("hunted", "weapon", "smg_standard", 1, & "WEAPON_SMG_STANDARD", undefined, & givehuntedweapon, & huntedcratelandoverride);
-  supplydrop::registercratetype("hunted", "weapon", "ar_standard", 1, & "WEAPON_AR_STANDARD", undefined, & givehuntedweapon, & huntedcratelandoverride);
-  supplydrop::registercratetype("hunted", "weapon", "lmg_light", 1, & "WEAPON_LMG_LIGHT", undefined, & givehuntedweapon, & huntedcratelandoverride);
-  supplydrop::registercratetype("hunted", "weapon", "shotgun_pump", 1, & "WEAPON_SHOTGUN_PUMP", undefined, & givehuntedweapon, & huntedcratelandoverride);
-  supplydrop::registercratetype("hunted", "weapon", "pistol_standard", 1, & "WEAPON_PISTOL_STANDARD", undefined, & givehuntedweapon, & huntedcratelandoverride);
+  supplydrop::registercratetype("hunted", "weapon", "smg_standard", 1, &"WEAPON_SMG_STANDARD", undefined, &givehuntedweapon, &huntedcratelandoverride);
+  supplydrop::registercratetype("hunted", "weapon", "ar_standard", 1, &"WEAPON_AR_STANDARD", undefined, &givehuntedweapon, &huntedcratelandoverride);
+  supplydrop::registercratetype("hunted", "weapon", "lmg_light", 1, &"WEAPON_LMG_LIGHT", undefined, &givehuntedweapon, &huntedcratelandoverride);
+  supplydrop::registercratetype("hunted", "weapon", "shotgun_pump", 1, &"WEAPON_SHOTGUN_PUMP", undefined, &givehuntedweapon, &huntedcratelandoverride);
+  supplydrop::registercratetype("hunted", "weapon", "pistol_standard", 1, &"WEAPON_PISTOL_STANDARD", undefined, &givehuntedweapon, &huntedcratelandoverride);
   supplydrop::setcategorytypeweight("hunted", "weapon", 4);
   supplydrop::setcategorytypeweight("hunted", "killstreak", 1);
   supplydrop::advancedfinalizecratecategory("hunted");

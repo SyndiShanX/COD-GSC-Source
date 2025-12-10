@@ -1529,7 +1529,7 @@ func_D670() {
   if(isDefined(self.func_9FF0)) {
     return;
   }
-  if(self.spawnflags & var_00) {
+  if(self.spawnflags &var_00) {
     return;
   }
   func_8EAE();

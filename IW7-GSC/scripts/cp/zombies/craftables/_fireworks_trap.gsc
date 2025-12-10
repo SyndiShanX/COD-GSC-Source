@@ -11,10 +11,10 @@ init() {
   var_00.modelbase = "park_fireworks_trap";
   var_00.modelplacement = "park_fireworks_trap_good";
   var_00.modelplacementfailed = "park_fireworks_trap_bad";
-  var_00.pow = & "COOP_CRAFTABLES_PICKUP";
-  var_00.placestring = & "COOP_CRAFTABLES_PLACE";
-  var_00.cannotplacestring = & "COOP_CRAFTABLES_CANNOT_PLACE";
-  var_00.placecancelablestring = & "COOP_CRAFTABLES_PLACE_CANCELABLE";
+  var_00.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_00.placestring = &"COOP_CRAFTABLES_PLACE";
+  var_00.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
+  var_00.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
   var_00.lifespan = 120;
   var_00.var_DDAC = 2;
   var_00._meth_8487 = 0.4;

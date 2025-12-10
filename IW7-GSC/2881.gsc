@@ -4,11 +4,11 @@
 ***************************************/
 
 main() {
-  precachestring( & "SCRIPT_INTELLIGENCE_OF_EIGHTEEN");
-  precachestring( & "SCRIPT_RORKEFILE_PREV_FOUND");
-  precachestring( & "SCRIPT_RORKEFILE_PICKUP");
-  precachestring( & "SCRIPT_INTELLIGENCE_PERCENT");
-  precachestring( & "SCRIPT_INTELLIGENCE_UPLOADING");
+  precachestring(&"SCRIPT_INTELLIGENCE_OF_EIGHTEEN");
+  precachestring(&"SCRIPT_RORKEFILE_PREV_FOUND");
+  precachestring(&"SCRIPT_RORKEFILE_PICKUP");
+  precachestring(&"SCRIPT_INTELLIGENCE_PERCENT");
+  precachestring(&"SCRIPT_INTELLIGENCE_UPLOADING");
   level.func_9953 = func_48A0();
   setdvar("ui_level_cheatpoints", level.func_9953.size);
   level.func_9950 = 0;
@@ -123,7 +123,7 @@ func_135F5() {
   self endon("end_trigger_thread");
 
   if(self.classname == "trigger_use") {
-    self sethintstring( & "SCRIPT_RORKEFILE_PICKUP");
+    self sethintstring(&"SCRIPT_RORKEFILE_PICKUP");
     self usetriggerrequirelookat(1);
   }
 
@@ -198,19 +198,19 @@ func_9961(var_00, var_01) {
       var_04 = 0;
 
     if(var_04 < var_03 / 2)
-      var_00 give_zap_perk( & "SCRIPT_INTELLIGENCE_UPLOADING");
+      var_00 give_zap_perk(&"SCRIPT_INTELLIGENCE_UPLOADING");
     else
       var_00 give_zap_perk("");
 
     var_1.label = int(var_05 / var_02 * 100);
-    var_01 give_zap_perk( & "SCRIPT_INTELLIGENCE_PERCENT");
+    var_01 give_zap_perk(&"SCRIPT_INTELLIGENCE_PERCENT");
     var_4++;
     scripts\engine\utility::waitframe();
   }
 
-  var_00 give_zap_perk( & "SCRIPT_INTELLIGENCE_UPLOADING");
+  var_00 give_zap_perk(&"SCRIPT_INTELLIGENCE_UPLOADING");
   var_1.label = "100";
-  var_01 give_zap_perk( & "SCRIPT_INTELLIGENCE_PERCENT");
+  var_01 give_zap_perk(&"SCRIPT_INTELLIGENCE_PERCENT");
 }
 
 func_EB60() {
@@ -251,9 +251,9 @@ func_9952(var_00) {
     var_07 = 0;
 
     if(var_00 == var_05 && var_05 _meth_8153(self.func_C1D5))
-      var_6.label = & "SCRIPT_RORKEFILE_PREV_FOUND";
+      var_6.label = &"SCRIPT_RORKEFILE_PREV_FOUND";
     else {
-      var_6.label = & "SCRIPT_INTELLIGENCE_OF_EIGHTEEN";
+      var_6.label = &"SCRIPT_INTELLIGENCE_OF_EIGHTEEN";
       var_05 setplayerangles();
       var_07 = var_05 _meth_8139("cheatPoints");
       var_06 setvalue(var_07);

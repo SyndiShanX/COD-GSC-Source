@@ -27,7 +27,7 @@
 #namespace _zm_weap_elemental_bow_wolf_howl;
 
 function autoexec __init__sytem__() {
-  system::register("_zm_weap_elemental_bow_wolf_howl", & __init__, & __main__, undefined);
+  system::register("_zm_weap_elemental_bow_wolf_howl", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -42,8 +42,8 @@ function __init__() {
   clientfield::register("actor", "wolf_howl_slow_snow_fx", 5000, 1, "int");
   clientfield::register("actor", "zombie_hit_by_wolf_howl_charge", 5000, 1, "int");
   clientfield::register("actor", "wolf_howl_zombie_explode_fx", 8000, 1, "counter");
-  callback::on_connect( & function_b1b2ffc8);
-  zm_spawner::register_zombie_damage_callback( & function_5fded2aa);
+  callback::on_connect(&function_b1b2ffc8);
+  zm_spawner::register_zombie_damage_callback(&function_5fded2aa);
 }
 
 function __main__() {}
@@ -51,8 +51,8 @@ function __main__() {}
 function function_b1b2ffc8() {
   self endon("disconnect");
   self thread zm_weap_elemental_bow::function_982419bb("elemental_bow_wolf_howl");
-  self thread zm_weap_elemental_bow::function_ececa597("elemental_bow_wolf_howl", "elemental_bow_wolf_howl4", & function_9b74f1f4);
-  self thread zm_weap_elemental_bow::function_7bc6b9d("elemental_bow_wolf_howl", "elemental_bow_wolf_howl4", & function_dd4f7cba);
+  self thread zm_weap_elemental_bow::function_ececa597("elemental_bow_wolf_howl", "elemental_bow_wolf_howl4", &function_9b74f1f4);
+  self thread zm_weap_elemental_bow::function_7bc6b9d("elemental_bow_wolf_howl", "elemental_bow_wolf_howl4", &function_dd4f7cba);
   while(true) {
     self waittill("weapon_change", newweapon);
     if(newweapon.name === "elemental_bow_wolf_howl") {
@@ -207,8 +207,8 @@ function function_2abb74b7(e_player, var_8f0f462c, var_c807e383) {
   while(true) {
     var_ae2cfcc2 = getaiteamarray(level.zombie_team);
     var_7478bee7 = array::get_all_closest(var_28388a90.origin, var_ae2cfcc2, undefined, undefined, var_200ee8c9);
-    var_7478bee7 = array::filter(var_7478bee7, 0, & zm_weap_elemental_bow::function_5aec3adc);
-    var_7478bee7 = array::filter(var_7478bee7, 0, & function_e02cfeee);
+    var_7478bee7 = array::filter(var_7478bee7, 0, &zm_weap_elemental_bow::function_5aec3adc);
+    var_7478bee7 = array::filter(var_7478bee7, 0, &function_e02cfeee);
     if(var_7478bee7.size) {
       var_718ba60a = var_28388a90.origin;
       var_a2b66881 = var_718ba60a + (var_c807e383 * var_200ee8c9);
@@ -294,7 +294,7 @@ function do_zombie_explode() {
   self zombie_utility::zombie_eye_glow_stop();
   self clientfield::increment("wolf_howl_zombie_explode_fx");
   self ghost();
-  self util::delay(0.25, undefined, & zm_utility::self_delete);
+  self util::delay(0.25, undefined, &zm_utility::self_delete);
 }
 
 function function_720f6454(var_63f884ec) {
@@ -341,8 +341,8 @@ function function_6b3aa15a(v_hit_pos, var_8f0f462c) {
   var_3c5572a7 notify("hash_6fd14a64");
   var_ae2cfcc2 = getaiteamarray(level.zombie_team);
   var_7478bee7 = array::get_all_closest(v_hit_pos, var_ae2cfcc2, undefined, undefined, 256);
-  var_7478bee7 = array::filter(var_7478bee7, 0, & zm_weap_elemental_bow::function_5aec3adc);
-  var_7478bee7 = array::filter(var_7478bee7, 0, & function_e02cfeee);
+  var_7478bee7 = array::filter(var_7478bee7, 0, &zm_weap_elemental_bow::function_5aec3adc);
+  var_7478bee7 = array::filter(var_7478bee7, 0, &function_e02cfeee);
   foreach(ai_enemy in var_7478bee7) {
     ai_enemy thread function_720f6454(v_hit_pos);
   }
@@ -357,9 +357,9 @@ function function_6b3aa15a(v_hit_pos, var_8f0f462c) {
 
 function function_cc1bf02e(var_8f0f462c, b_show) {
   if(b_show) {
-    array::run_all(var_8f0f462c, & show);
+    array::run_all(var_8f0f462c, &show);
   } else {
-    array::run_all(var_8f0f462c, & ghost);
+    array::run_all(var_8f0f462c, &ghost);
   }
 }
 

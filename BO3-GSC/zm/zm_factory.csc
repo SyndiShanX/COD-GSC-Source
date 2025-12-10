@@ -53,17 +53,17 @@ function autoexec opt_in() {
   level._effect["zm_bgb_machine_bulb_time"] = "zombie/fx_bgb_machine_bulb_time_factory_zmb";
   level._effect["zm_bgb_machine_light_interior"] = "zombie/fx_bgb_machine_light_interior_factory_zmb";
   level._effect["zm_bgb_machine_light_interior_away"] = "zombie/fx_bgb_machine_light_interior_away_factory_zmb";
-  clientfield::register("world", "console_blue", 1, 1, "int", & console_blue, 0, 0);
-  clientfield::register("world", "console_green", 1, 1, "int", & console_green, 0, 0);
-  clientfield::register("world", "console_red", 1, 1, "int", & console_red, 0, 0);
-  clientfield::register("world", "console_start", 1, 1, "int", & console_start, 0, 0);
-  clientfield::register("toplayer", "lightning_strike", 1, 1, "counter", & lightning_strike, 0, 0);
+  clientfield::register("world", "console_blue", 1, 1, "int", &console_blue, 0, 0);
+  clientfield::register("world", "console_green", 1, 1, "int", &console_green, 0, 0);
+  clientfield::register("world", "console_red", 1, 1, "int", &console_red, 0, 0);
+  clientfield::register("world", "console_start", 1, 1, "int", &console_start, 0, 0);
+  clientfield::register("toplayer", "lightning_strike", 1, 1, "counter", &lightning_strike, 0, 0);
 }
 
 function main() {
   zm_factory_ffotd::main_start();
   zm_factory_fx::main();
-  level.setupcustomcharacterexerts = & setup_personality_character_exerts;
+  level.setupcustomcharacterexerts = &setup_personality_character_exerts;
   level.legacy_cymbal_monkey = 1;
   level._effect["eye_glow"] = "zombie/fx_glow_eye_orange";
   level._effect["headshot"] = "zombie/fx_bul_flesh_head_fatal_zmb";
@@ -82,8 +82,8 @@ function main() {
   _zm_weap_tesla::init();
   level thread zm_factory_amb::main();
   level thread power_on_fxanims();
-  callback::on_localclient_connect( & on_player_connected);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_localclient_connect(&on_player_connected);
+  callback::on_spawned(&on_player_spawned);
   level thread function_e0500062();
   zm_factory_ffotd::main_end();
   util::waitforclient(0);

@@ -752,7 +752,7 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
       }
 
       if(self weaponhasattachmentandunlocked(weapon, "fmj")) {
-        if(isDefined(var_6af452fc.idflags) && var_6af452fc.idflags&8) {
+        if(isDefined(var_6af452fc.idflags) && var_6af452fc.idflags& 8) {
           self stats::function_dad108fa(#"ekia_enemy_through_wall_with_fmj", 1);
         }
 
@@ -1301,7 +1301,7 @@ challengekills(data) {
     }
 
     if(isDefined(victim.idflagstime) && victim.idflagstime == time) {
-      if(victim.idflags&8) {
+      if(victim.idflags& 8) {
         player stats::function_dad108fa(#"kill_enemy_through_wall", 1);
 
         if(player weaponhasattachmentandunlocked(weapon, "fmj")) {

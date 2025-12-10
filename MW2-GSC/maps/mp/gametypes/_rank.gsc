@@ -456,9 +456,9 @@ scorePopup(amount, bonus, hudColor, glowAlpha) {
   wait(0.05);
 
   if(self.xpUpdateTotal < 0)
-    self.hud_scorePopup.label = & "";
+    self.hud_scorePopup.label = &"";
   else
-    self.hud_scorePopup.label = & "MP_PLUS";
+    self.hud_scorePopup.label = &"MP_PLUS";
 
   self.hud_scorePopup.color = hudColor;
   self.hud_scorePopup.glowColor = hudColor;

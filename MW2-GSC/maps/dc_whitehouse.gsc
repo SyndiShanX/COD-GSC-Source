@@ -44,7 +44,7 @@ global_inits() {
   precachemodel("mil_sandbag_plastic_white_single_bent");
   precachemodel("weapon_binocular");
 
-  add_hint_string("how_to_pop_flare", & "SCRIPT_PLATFORM_HINTSTR_POPFLARE", ::stop_flare_hint);
+  add_hint_string("how_to_pop_flare", &"SCRIPT_PLATFORM_HINTSTR_POPFLARE", ::stop_flare_hint);
 
   level.default_goalheight = 72;
 
@@ -304,7 +304,7 @@ objectives() {
   switch (level.start_point) {
     default:
     case "tunnels":
-      Objective_Add(9, "current", & "DC_WHITEHOUSE_OBJ_WHISKEY_HOTEL");
+      Objective_Add(9, "current", &"DC_WHITEHOUSE_OBJ_WHISKEY_HOTEL");
       objective_onentity(9, level.foley, (0, 0, 70));
 
       flag_wait("whitehouse_moveout");
@@ -312,7 +312,7 @@ objectives() {
       Objective_state(9, "done");
 
       pos = getstruct("objective_entrance", "targetname");
-      Objective_Add(10, "current", & "DC_WHITEHOUSE_OBJ_BREACH_WH", pos.origin);
+      Objective_Add(10, "current", &"DC_WHITEHOUSE_OBJ_BREACH_WH", pos.origin);
 
       flag_wait("oval_office_scene");
       level thread dunn_objective_dvars();
@@ -323,7 +323,7 @@ objectives() {
       Objective_state(10, "done");
 
     case "flare":
-      Objective_Add(11, "current", & "DC_WHITEHOUSE_OBJ_DEPLOY_FLARE");
+      Objective_Add(11, "current", &"DC_WHITEHOUSE_OBJ_DEPLOY_FLARE");
       objective_onentity(11, level.foley, (0, 0, 70));
 
       flag_wait("whitehouse_flare_breach");
@@ -725,7 +725,7 @@ whitehouse_hammerdown_kill() {
 
   level.player kill();
   waittillframeend;
-  setDvar("ui_deadquote", & "DC_WHITEHOUSE_FLARE_DEADQUOTE");
+  setDvar("ui_deadquote", &"DC_WHITEHOUSE_FLARE_DEADQUOTE");
 }
 
 whitehouse_nag() {

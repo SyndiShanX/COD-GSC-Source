@@ -1364,13 +1364,13 @@ function waittill_vehicle_move_up_button_pressed() {
 
 function init_button_wrappers() {
   if(!isDefined(level._button_funcs)) {
-    level._button_funcs[0] = & usebuttonpressed;
-    level._button_funcs[2] = & adsbuttonpressed;
-    level._button_funcs[3] = & attackbuttonpressed;
-    level._button_funcs[1] = & stancebuttonpressed;
-    level._button_funcs[6] = & actionslotfourbuttonpressed;
-    level._button_funcs[4] = & up_button_pressed;
-    level._button_funcs[5] = & down_button_pressed;
+    level._button_funcs[0] = &usebuttonpressed;
+    level._button_funcs[2] = &adsbuttonpressed;
+    level._button_funcs[3] = &attackbuttonpressed;
+    level._button_funcs[1] = &stancebuttonpressed;
+    level._button_funcs[6] = &actionslotfourbuttonpressed;
+    level._button_funcs[4] = &up_button_pressed;
+    level._button_funcs[5] = &down_button_pressed;
   }
 }
 
@@ -1858,7 +1858,7 @@ function auto_delete(n_mode = 1, n_min_time_alive = 0, n_dist_horizontal = 0, n_
   }
 }
 
-function query_ents( & a_kvps_match, b_match_all = 1, & a_kvps_ingnore, b_ignore_spawners = 0, b_match_substrings = 0) {
+function query_ents(&a_kvps_match, b_match_all = 1, &a_kvps_ingnore, b_ignore_spawners = 0, b_match_substrings = 0) {
   a_ret = [];
   if(b_match_substrings) {
     a_all_ents = getEntArray();
@@ -1907,7 +1907,7 @@ function query_ents( & a_kvps_match, b_match_all = 1, & a_kvps_ingnore, b_ignore
   return a_ret;
 }
 
-function _query_ents_by_substring_helper( & a_ents, str_value, str_key = "targetname", b_ignore_spawners = 0) {
+function _query_ents_by_substring_helper(&a_ents, str_value, str_key = "targetname", b_ignore_spawners = 0) {
   a_ret = [];
   foreach(ent in a_ents) {
     if(b_ignore_spawners && isspawner(ent)) {

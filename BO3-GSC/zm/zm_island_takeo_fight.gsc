@@ -37,7 +37,7 @@
 #namespace zm_island_takeo_fight;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_takeo_fight", & __init__, undefined, undefined);
+  system::register("zm_island_takeo_fight", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -609,8 +609,8 @@ function function_4ea8a87a() {
     self.var_8a71c4c5 = 0;
     self.a_ai_attackers = [];
     self.a_s_spawnpts = array::randomize(self.a_s_spawnpts);
-    zm_spawner::register_zombie_death_event_callback( & function_3127ccbd);
-    callback::on_vehicle_killed( & function_a3420702);
+    zm_spawner::register_zombie_death_event_callback(&function_3127ccbd);
+    callback::on_vehicle_killed(&function_a3420702);
     level flag::set("takeofight_wave_spawning");
     wait(0.1);
     level thread function_fe7b0c13();
@@ -691,8 +691,8 @@ function function_4ea8a87a() {
       self.a_ai_attackers = array::remove_undefined(self.a_ai_attackers);
       wait(1);
     }
-    zm_spawner::deregister_zombie_death_event_callback( & function_3127ccbd);
-    callback::remove_on_vehicle_killed( & function_a3420702);
+    zm_spawner::deregister_zombie_death_event_callback(&function_3127ccbd);
+    callback::remove_on_vehicle_killed(&function_a3420702);
     level.var_5258ba34 = 0;
     level flag::clear("takeofight_wave_spawning");
     self thread function_612749c9();
@@ -935,7 +935,7 @@ function function_75275516() {
 }
 
 function function_c2fee078() {
-  zm_devgui::add_custom_devgui_callback( & function_9eaf14a2);
+  zm_devgui::add_custom_devgui_callback(&function_9eaf14a2);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");

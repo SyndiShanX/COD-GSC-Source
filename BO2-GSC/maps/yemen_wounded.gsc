@@ -127,7 +127,7 @@ spawn_wounded(v_org, v_ang, str_animname, str_scene, str_anim_override, str_targ
     e_wounded.takedamage = 1;
   else {
     e_wounded.takedamage = 0;
-    e_wounded setlookattext("", & "");
+    e_wounded setlookattext("", &"");
     e_wounded notify("no_friendly_fire");
   }
 

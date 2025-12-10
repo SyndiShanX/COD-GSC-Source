@@ -10,7 +10,7 @@
 #using scripts\shared\util_shared;
 #namespace array;
 
-function filter( & array, b_keep_keys, func_filter, arg1, arg2, arg3, arg4, arg5) {
+function filter(&array, b_keep_keys, func_filter, arg1, arg2, arg3, arg4, arg5) {
   a_new = [];
   foreach(key, val in array) {
     if(util::single_func(self, func_filter, val, arg1, arg2, arg3, arg4, arg5)) {
@@ -32,19 +32,19 @@ function filter( & array, b_keep_keys, func_filter, arg1, arg2, arg3, arg4, arg5
   return a_new;
 }
 
-function remove_dead( & array, b_keep_keys) {
-  return filter(array, b_keep_keys, & _filter_dead);
+function remove_dead(&array, b_keep_keys) {
+  return filter(array, b_keep_keys, &_filter_dead);
 }
 
 function _filter_undefined(val) {
   return isDefined(val);
 }
 
-function remove_undefined( & array, b_keep_keys) {
-  return filter(array, b_keep_keys, & _filter_undefined);
+function remove_undefined(&array, b_keep_keys) {
+  return filter(array, b_keep_keys, &_filter_undefined);
 }
 
-function cleanup( & array, b_keep_empty_arrays = 0) {
+function cleanup(&array, b_keep_empty_arrays = 0) {
   a_keys = getarraykeys(array);
   for(i = a_keys.size - 1; i >= 0; i--) {
     key = a_keys[i];
@@ -58,12 +58,12 @@ function cleanup( & array, b_keep_empty_arrays = 0) {
   }
 }
 
-function filter_classname( & array, b_keep_keys, str_classname) {
-  return filter(array, b_keep_keys, & _filter_classname, str_classname);
+function filter_classname(&array, b_keep_keys, str_classname) {
+  return filter(array, b_keep_keys, &_filter_classname, str_classname);
 }
 
-function get_touching( & array, b_keep_keys) {
-  return filter(array, b_keep_keys, & istouching);
+function get_touching(&array, b_keep_keys) {
+  return filter(array, b_keep_keys, &istouching);
 }
 
 function remove_index(array, index, b_keep_keys) {
@@ -82,7 +82,7 @@ function remove_index(array, index, b_keep_keys) {
   return a_new;
 }
 
-function delete_all( & array, is_struct) {
+function delete_all(&array, is_struct) {
   foreach(ent in array) {
     if(isDefined(ent)) {
       if(isDefined(is_struct) && is_struct) {
@@ -99,13 +99,13 @@ function delete_all( & array, is_struct) {
   }
 }
 
-function notify_all( & array, str_notify) {
+function notify_all(&array, str_notify) {
   foreach(elem in array) {
     elem notify(str_notify);
   }
 }
 
-function thread_all( & entities, func, arg1, arg2, arg3, arg4, arg5, arg6) {
+function thread_all(&entities, func, arg1, arg2, arg3, arg4, arg5, arg6) {
   assert(isDefined(entities), "");
   assert(isDefined(func), "");
   if(isarray(entities)) {
@@ -153,7 +153,7 @@ function thread_all( & entities, func, arg1, arg2, arg3, arg4, arg5, arg6) {
   }
 }
 
-function thread_all_ents( & entities, func, arg1, arg2, arg3, arg4, arg5) {
+function thread_all_ents(&entities, func, arg1, arg2, arg3, arg4, arg5) {
   assert(isDefined(entities), "");
   assert(isDefined(func), "");
   if(isarray(entities)) {
@@ -168,7 +168,7 @@ function thread_all_ents( & entities, func, arg1, arg2, arg3, arg4, arg5) {
   }
 }
 
-function run_all( & entities, func, arg1, arg2, arg3, arg4, arg5, arg6) {
+function run_all(&entities, func, arg1, arg2, arg3, arg4, arg5, arg6) {
   assert(isDefined(entities), "");
   assert(isDefined(func), "");
   if(isarray(entities)) {
@@ -228,7 +228,7 @@ function exclude(array, array_exclude) {
   return newarray;
 }
 
-function add( & array, item, allow_dupes = 1) {
+function add(&array, item, allow_dupes = 1) {
   if(isDefined(item)) {
     if(allow_dupes || !isinarray(array, item)) {
       array[array.size] = item;
@@ -236,7 +236,7 @@ function add( & array, item, allow_dupes = 1) {
   }
 }
 
-function add_sorted( & array, item, allow_dupes = 1) {
+function add_sorted(&array, item, allow_dupes = 1) {
   if(isDefined(item)) {
     if(allow_dupes || !isinarray(array, item)) {
       for(i = 0; i <= array.size; i++) {
@@ -249,7 +249,7 @@ function add_sorted( & array, item, allow_dupes = 1) {
   }
 }
 
-function wait_till( & array, notifies, n_timeout) {
+function wait_till(&array, notifies, n_timeout) {
   if(isDefined(n_timeout)) {
     __s = spawnStruct();
     __s endon("timeout");
@@ -259,7 +259,7 @@ function wait_till( & array, notifies, n_timeout) {
   s_tracker._wait_count = 0;
   foreach(ent in array) {
     if(isDefined(ent)) {
-      ent thread util::timeout(n_timeout, & util::_waitlogic, s_tracker, notifies);
+      ent thread util::timeout(n_timeout, &util::_waitlogic, s_tracker, notifies);
     }
   }
   if(s_tracker._wait_count > 0) {
@@ -267,7 +267,7 @@ function wait_till( & array, notifies, n_timeout) {
   }
 }
 
-function wait_till_match( & array, str_notify, str_match, n_timeout) {
+function wait_till_match(&array, str_notify, str_match, n_timeout) {
   if(isDefined(n_timeout)) {
     __s = spawnStruct();
     __s endon("timeout");
@@ -278,8 +278,8 @@ function wait_till_match( & array, str_notify, str_match, n_timeout) {
   foreach(ent in array) {
     if(isDefined(ent)) {
       s_tracker._array_wait_count++;
-      ent thread util::timeout(n_timeout, & _waitlogic_match, s_tracker, str_notify, str_match);
-      ent thread util::timeout(n_timeout, & _waitlogic_death, s_tracker);
+      ent thread util::timeout(n_timeout, &_waitlogic_match, s_tracker, str_notify, str_match);
+      ent thread util::timeout(n_timeout, &_waitlogic_death, s_tracker);
     }
   }
   if(s_tracker._array_wait_count > 0) {
@@ -305,7 +305,7 @@ function update_waitlogic_tracker(s_tracker) {
   }
 }
 
-function flag_wait( & array, str_flag) {
+function flag_wait(&array, str_flag) {
   do {
     recheck = 0;
     for(i = 0; i < array.size; i++) {
@@ -320,7 +320,7 @@ function flag_wait( & array, str_flag) {
   while(recheck);
 }
 
-function flagsys_wait( & array, str_flag) {
+function flagsys_wait(&array, str_flag) {
   do {
     recheck = 0;
     for(i = 0; i < array.size; i++) {
@@ -335,7 +335,7 @@ function flagsys_wait( & array, str_flag) {
   while(recheck);
 }
 
-function flagsys_wait_any_flag( & array, ...) {
+function flagsys_wait_any_flag(&array, ...) {
   do {
     recheck = 0;
     for(i = 0; i < array.size; i++) {
@@ -358,7 +358,7 @@ function flagsys_wait_any_flag( & array, ...) {
   while(recheck);
 }
 
-function flagsys_wait_any( & array, str_flag) {
+function flagsys_wait_any(&array, str_flag) {
   foreach(ent in array) {
     if(ent flagsys::get(str_flag)) {
       return ent;
@@ -367,7 +367,7 @@ function flagsys_wait_any( & array, str_flag) {
   wait_any(array, str_flag);
 }
 
-function flag_wait_clear( & array, str_flag) {
+function flag_wait_clear(&array, str_flag) {
   do {
     recheck = 0;
     for(i = 0; i < array.size; i++) {
@@ -381,7 +381,7 @@ function flag_wait_clear( & array, str_flag) {
   while(recheck);
 }
 
-function flagsys_wait_clear( & array, str_flag, n_timeout) {
+function flagsys_wait_clear(&array, str_flag, n_timeout) {
   if(isDefined(n_timeout)) {
     __s = spawnStruct();
     __s endon("timeout");
@@ -409,7 +409,7 @@ function wait_any(array, msg, n_timeout) {
   s_tracker = spawnStruct();
   foreach(ent in array) {
     if(isDefined(ent)) {
-      level thread util::timeout(n_timeout, & _waitlogic2, s_tracker, ent, msg);
+      level thread util::timeout(n_timeout, &_waitlogic2, s_tracker, ent, msg);
     }
   }
   s_tracker endon("array_wait");
@@ -478,13 +478,13 @@ function remove_keys(array) {
   return a_new;
 }
 
-function swap( & array, index1, index2) {
+function swap(&array, index1, index2) {
   temp = array[index1];
   array[index1] = array[index2];
   array[index2] = temp;
 }
 
-function pop( & array, index, b_keep_keys = 1) {
+function pop(&array, index, b_keep_keys = 1) {
   if(array.size > 0) {
     if(!isDefined(index)) {
       keys = getarraykeys(array);
@@ -498,13 +498,13 @@ function pop( & array, index, b_keep_keys = 1) {
   }
 }
 
-function pop_front( & array, b_keep_keys = 1) {
+function pop_front(&array, b_keep_keys = 1) {
   keys = getarraykeys(array);
   index = keys[keys.size - 1];
   return pop(array, index, b_keep_keys);
 }
 
-function push( & array, val, index) {
+function push(&array, val, index) {
   if(!isDefined(index)) {
     index = 0;
     foreach(key in getarraykeys(array)) {
@@ -516,15 +516,15 @@ function push( & array, val, index) {
   arrayinsert(array, val, index);
 }
 
-function push_front( & array, val) {
+function push_front(&array, val) {
   push(array, val, 0);
 }
 
-function get_closest(org, & array, dist) {
+function get_closest(org, &array, dist) {
   assert(0, "");
 }
 
-function get_farthest(org, & array, dist = undefined) {
+function get_farthest(org, &array, dist = undefined) {
   assert(0, "");
 }
 
@@ -536,7 +536,7 @@ function fartherfunc(dist1, dist2) {
   return dist1 <= dist2;
 }
 
-function get_all_farthest(org, & array, a_exclude, n_max = array.size, n_maxdist) {
+function get_all_farthest(org, &array, a_exclude, n_max = array.size, n_maxdist) {
   a_ret = exclude(array, a_exclude);
   if(isDefined(n_maxdist)) {
     a_ret = arraysort(a_ret, org, 0, n_max, n_maxdist);
@@ -546,7 +546,7 @@ function get_all_farthest(org, & array, a_exclude, n_max = array.size, n_maxdist
   return a_ret;
 }
 
-function get_all_closest(org, & array, a_exclude, n_max = array.size, n_maxdist) {
+function get_all_closest(org, &array, a_exclude, n_max = array.size, n_maxdist) {
   a_ret = exclude(array, a_exclude);
   if(isDefined(n_maxdist)) {
     a_ret = arraysort(a_ret, org, 1, n_max, n_maxdist);
@@ -556,12 +556,12 @@ function get_all_closest(org, & array, a_exclude, n_max = array.size, n_maxdist)
   return a_ret;
 }
 
-function alphabetize( & array) {
+function alphabetize(&array) {
   return sort_by_value(array, 1);
 }
 
-function sort_by_value( & array, b_lowest_first = 0) {
-  return merge_sort(array, & _sort_by_value_compare_func, b_lowest_first);
+function sort_by_value(&array, b_lowest_first = 0) {
+  return merge_sort(array, &_sort_by_value_compare_func, b_lowest_first);
 }
 
 function _sort_by_value_compare_func(val1, val2, b_lowest_first) {
@@ -571,8 +571,8 @@ function _sort_by_value_compare_func(val1, val2, b_lowest_first) {
   return val1 > val2;
 }
 
-function sort_by_script_int( & a_ents, b_lowest_first = 0) {
-  return merge_sort(a_ents, & _sort_by_script_int_compare_func, b_lowest_first);
+function sort_by_script_int(&a_ents, b_lowest_first = 0) {
+  return merge_sort(a_ents, &_sort_by_script_int_compare_func, b_lowest_first);
 }
 
 function _sort_by_script_int_compare_func(e1, e2, b_lowest_first) {
@@ -582,7 +582,7 @@ function _sort_by_script_int_compare_func(e1, e2, b_lowest_first) {
   return e1.script_int > e2.script_int;
 }
 
-function merge_sort( & current_list, func_sort, param) {
+function merge_sort(&current_list, func_sort, param) {
   if(current_list.size <= 1) {
     return current_list;
   }
@@ -646,7 +646,7 @@ function merge(left, right, func_sort, param) {
   return result;
 }
 
-function insertion_sort( & a, comparefunc, val) {
+function insertion_sort(&a, comparefunc, val) {
   if(!isDefined(a)) {
     a = [];
     a[0] = val;
@@ -663,7 +663,7 @@ function insertion_sort( & a, comparefunc, val) {
   a[a.size] = val;
 }
 
-function spread_all( & entities, func, arg1, arg2, arg3, arg4, arg5) {
+function spread_all(&entities, func, arg1, arg2, arg3, arg4, arg5) {
   assert(isDefined(entities), "");
   assert(isDefined(func), "");
   if(isarray(entities)) {
@@ -679,13 +679,13 @@ function spread_all( & entities, func, arg1, arg2, arg3, arg4, arg5) {
   }
 }
 
-function wait_till_touching( & a_ents, e_volume) {
+function wait_till_touching(&a_ents, e_volume) {
   while(!is_touching(a_ents, e_volume)) {
     wait(0.05);
   }
 }
 
-function is_touching( & a_ents, e_volume) {
+function is_touching(&a_ents, e_volume) {
   foreach(e_ent in a_ents) {
     if(!e_ent istouching(e_volume)) {
       return false;
@@ -722,7 +722,7 @@ function quicksortmid(array, start, end, compare_func) {
   i = start;
   k = end;
   if(!isDefined(compare_func)) {
-    compare_func = & quicksort_compare;
+    compare_func = &quicksort_compare;
   }
   if((end - start) >= 1) {
     pivot = array[start];

@@ -61,11 +61,11 @@ function function_bb59f698() {
 }
 
 function function_31c377e(room) {
-  room.text = & "CP_DOA_BO3_CHALLENGE_ROOM_SPIRAL";
-  room.title = & "CP_DOA_BO3_TITLE_ROOM_SPIRAL";
+  room.text = &"CP_DOA_BO3_CHALLENGE_ROOM_SPIRAL";
+  room.title = &"CP_DOA_BO3_TITLE_ROOM_SPIRAL";
   room.vox = "vox_doaa_temple_fortress";
   room.var_e5c8b9e7 = level.doa.var_bc9b7c71;
-  level.doa.var_bc9b7c71 = & function_4c171b8e;
+  level.doa.var_bc9b7c71 = &function_4c171b8e;
   level thread namespace_3ca3c537::function_4586479a(0);
   level thread function_bb59f698();
   room.glow = [];
@@ -294,17 +294,17 @@ function function_b6c25c3c(spot) {
 function function_6aa91f48(room) {
   level clientfield::set("set_scoreHidden", 1);
   room.var_dc49d6a4 = level.callbackvehicledamage;
-  level.callbackvehicledamage = & function_fe1ce5f1;
+  level.callbackvehicledamage = &function_fe1ce5f1;
   room.var_e5c8b9e7 = level.doa.var_bc9b7c71;
-  level.doa.var_bc9b7c71 = & function_b6c25c3c;
-  room.text = & "CP_DOA_BO3_CHALLENGE_ROOM_TANKMAZE";
-  room.title = & "CP_DOA_BO3_TITLE_ROOM_TANKMAZE";
+  level.doa.var_bc9b7c71 = &function_b6c25c3c;
+  room.text = &"CP_DOA_BO3_CHALLENGE_ROOM_TANKMAZE";
+  room.title = &"CP_DOA_BO3_TITLE_ROOM_TANKMAZE";
   room.vox = "vox_doaa_tank_vault";
   room.var_674e3329 = 1;
   room.enemy_spawns = struct::get_array("tankmaze_enemy", "script_noteworthy");
   room.var_4f002f93 = struct::get_array("tankmaze_gemspot", "script_noteworthy");
   room.var_e01f23f0 = [];
-  room.host_migration = & function_c2b99e74;
+  room.host_migration = &function_c2b99e74;
   level thread function_246d3adb(room);
   level thread function_db531f2f(room);
   foreach(player in getplayers()) {
@@ -652,14 +652,14 @@ function function_810ced6b() {
 function function_ba487e2a(room) {
   level clientfield::set("set_scoreHidden", 1);
   room.var_e5c8b9e7 = level.doa.var_bc9b7c71;
-  level.doa.var_bc9b7c71 = & function_14e75d7a;
-  room.text = & "CP_DOA_BO3_CHALLENGE_ROOM_REDINS";
-  room.title = & "CP_DOA_BO3_TITLE_ROOM_REDINS";
+  level.doa.var_bc9b7c71 = &function_14e75d7a;
+  room.text = &"CP_DOA_BO3_CHALLENGE_ROOM_REDINS";
+  room.title = &"CP_DOA_BO3_TITLE_ROOM_REDINS";
   room.vox = "vox_doaa_redins_rally";
   room.var_674e3329 = 1;
   room.var_2f400c3b = math::clamp(2 + (getplayers().size * 2), 4, 8);
   room.var_462dd92 = 50 + (room.var_2f400c3b * 5);
-  room.host_migration = & function_c2b99e74;
+  room.host_migration = &function_c2b99e74;
   if(getdvarint("scr_doa_soak_think", 0) > 1) {
     room.var_462dd92 = 10;
   }
@@ -690,14 +690,14 @@ function function_f14ef72f(room) {
   while(room.var_b57e2384 > 0) {
     msg = level util::waittill_any_timeout(1, "redins_rally_complete");
     if(msg == "redins_rally_complete") {
-      room.title2 = & "CP_DOA_BO3_REDINS_TITLE2_SUCCESS";
+      room.title2 = &"CP_DOA_BO3_REDINS_TITLE2_SUCCESS";
       level notify("hash_16154574");
       return;
     }
     room.var_b57e2384 = room.var_b57e2384 - 1;
     level clientfield::set("set_ui_GlobalGPR0", room.var_b57e2384);
   }
-  room.title2 = & "CP_DOA_BO3_REDINS_TITLE2_FAIL";
+  room.title2 = &"CP_DOA_BO3_REDINS_TITLE2_FAIL";
   level notify("hash_d1f5acf7");
 }
 
@@ -1082,14 +1082,14 @@ function function_dae418ed() {
 
 function function_c7e4d911(room) {
   room.var_e5c8b9e7 = level.doa.var_bc9b7c71;
-  level.doa.var_bc9b7c71 = & function_dae418ed;
-  room.text = & "CP_DOA_BO3_CHALLENGE_ROOM_TRUCKSOCCER";
-  room.title = & "CP_DOA_BO3_TITLE_ROOM_TRUCKSOCCER";
+  level.doa.var_bc9b7c71 = &function_dae418ed;
+  room.text = &"CP_DOA_BO3_CHALLENGE_ROOM_TRUCKSOCCER";
+  room.title = &"CP_DOA_BO3_TITLE_ROOM_TRUCKSOCCER";
   room.vox = "vox_doaa_chicken_bowl";
   room.var_7daa1c03 = struct::get("truck_soccer_ball", "targetname");
   room.var_14ee1a58 = getent("doa_mork_veh", "targetname");
   room.safezone = namespace_3ca3c537::function_dc34896f();
-  room.host_migration = & function_c2b99e74;
+  room.host_migration = &function_c2b99e74;
   room.var_677f63c8 = [];
   room.var_efbfafed = 0;
   foreach(player in getplayers()) {

@@ -24,12 +24,12 @@
 #namespace zm_island_takeo_fight;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_takeo_fight", & __init__, undefined, undefined);
+  system::register("zm_island_takeo_fight", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "takeofight_teleport_fx", 9000, 1, "int", & takeofight_teleport_fx, 0, 0);
-  clientfield::register("scriptmover", "takeo_arm_hit_fx", 1, 3, "int", & takeo_arm_hit_fx, 0, 0);
+  clientfield::register("toplayer", "takeofight_teleport_fx", 9000, 1, "int", &takeofight_teleport_fx, 0, 0);
+  clientfield::register("scriptmover", "takeo_arm_hit_fx", 1, 3, "int", &takeo_arm_hit_fx, 0, 0);
 }
 
 function main() {}

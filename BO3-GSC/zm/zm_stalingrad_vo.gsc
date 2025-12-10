@@ -31,14 +31,14 @@
 #namespace zm_stalingrad_vo;
 
 function autoexec __init__sytem__() {
-  system::register("zm_stalingrad_vo", & __init__, undefined, undefined);
+  system::register("zm_stalingrad_vo", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
   level.a_e_speakers = [];
-  level.audio_get_mod_type = & custom_get_mod_type;
+  level.audio_get_mod_type = &custom_get_mod_type;
   level thread function_772aa229();
   level.var_bac3b790 = [];
   level.var_38d92be7 = [];
@@ -51,9 +51,9 @@ function __init__() {
   level flag::init("story_playing");
   level flag::init("abcd_speaking");
   level thread function_e84d923f();
-  level.sndtrapfunc = & function_643d8310;
-  level.var_71ab2462 = & function_df1536ac;
-  level.var_ae95a175 = & function_999cab02;
+  level.sndtrapfunc = &function_643d8310;
+  level.var_71ab2462 = &function_df1536ac;
+  level.var_ae95a175 = &function_999cab02;
   level thread main();
 }
 
@@ -76,7 +76,7 @@ function on_player_spawned() {
 function main() {
   level thread function_267933e4();
   level thread function_99a382c3();
-  level.craft_shield_piece_pickup_vo_override = & function_5adc22c7;
+  level.craft_shield_piece_pickup_vo_override = &function_5adc22c7;
 }
 
 function on_player_connect() {
@@ -1468,8 +1468,8 @@ function function_e84d923f() {
   level function_258b62c();
   level function_285b3095();
   iprintlnbold("");
-  array::thread_all(level.players, & function_e12b1498);
-  callback::on_connect( & function_4534864d);
+  array::thread_all(level.players, &function_e12b1498);
+  callback::on_connect(&function_4534864d);
   level function_ea43145d();
   level function_7e60bca8();
   level function_55eb82ac();

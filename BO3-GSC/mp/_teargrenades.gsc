@@ -16,7 +16,7 @@ function main() {
   level.teargasduration = 23;
   level.tearsufferingduration = 3;
   level.teargrenadetimer = 4;
-  fgmonitor = perplayer::init("tear_grenade_monitor", & startmonitoringtearusage, & stopmonitoringtearusage);
+  fgmonitor = perplayer::init("tear_grenade_monitor", &startmonitoringtearusage, &stopmonitoringtearusage);
   perplayer::enable(fgmonitor);
 }
 

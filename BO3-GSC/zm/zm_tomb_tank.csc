@@ -12,9 +12,9 @@
 #namespace zm_tomb_tank;
 
 function init() {
-  clientfield::register("vehicle", "tank_tread_fx", 21000, 1, "int", & function_66e53adf, 0, 0);
-  clientfield::register("vehicle", "tank_flamethrower_fx", 21000, 2, "int", & function_de8b2ce1, 0, 0);
-  clientfield::register("vehicle", "tank_cooldown_fx", 21000, 2, "int", & function_5bc757af, 0, 0);
+  clientfield::register("vehicle", "tank_tread_fx", 21000, 1, "int", &function_66e53adf, 0, 0);
+  clientfield::register("vehicle", "tank_flamethrower_fx", 21000, 2, "int", &function_de8b2ce1, 0, 0);
+  clientfield::register("vehicle", "tank_cooldown_fx", 21000, 2, "int", &function_5bc757af, 0, 0);
 }
 
 function function_66e53adf(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

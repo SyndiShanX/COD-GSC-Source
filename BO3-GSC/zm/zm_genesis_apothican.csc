@@ -25,19 +25,19 @@
 #namespace zm_genesis_apothican;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_apothican", & __init__, undefined, undefined);
+  system::register("zm_genesis_apothican", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("allplayers", "apothicon_player_keyline", 15000, 1, "int", & apothicon_player_keyline, 0, 0);
-  clientfield::register("toplayer", "apothicon_entry_postfx", 15000, 1, "int", & apothicon_entry_postfx, 0, 0);
-  clientfield::register("world", "gas_fog_bank_switch", 15000, 1, "int", & gas_fog_bank_switch, 0, 0);
-  clientfield::register("scriptmover", "egg_spawn_fx", 15000, 1, "int", & egg_spawn_fx, 0, 0);
-  clientfield::register("scriptmover", "gateworm_mtl", 15000, 1, "int", & gateworm_mtl, 0, 0);
-  clientfield::register("toplayer", "player_apothicon_egg", 15000, 1, "int", & zm_utility::setinventoryuimodels, 0, 0);
+  clientfield::register("allplayers", "apothicon_player_keyline", 15000, 1, "int", &apothicon_player_keyline, 0, 0);
+  clientfield::register("toplayer", "apothicon_entry_postfx", 15000, 1, "int", &apothicon_entry_postfx, 0, 0);
+  clientfield::register("world", "gas_fog_bank_switch", 15000, 1, "int", &gas_fog_bank_switch, 0, 0);
+  clientfield::register("scriptmover", "egg_spawn_fx", 15000, 1, "int", &egg_spawn_fx, 0, 0);
+  clientfield::register("scriptmover", "gateworm_mtl", 15000, 1, "int", &gateworm_mtl, 0, 0);
+  clientfield::register("toplayer", "player_apothicon_egg", 15000, 1, "int", &zm_utility::setinventoryuimodels, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.widget_apothicon_egg", 15000, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.player_apothicon_egg_bg", 15000, 1, "int", undefined, 0, 0);
-  clientfield::register("toplayer", "player_gate_worm", 15000, 1, "int", & zm_utility::setinventoryuimodels, 0, 0);
+  clientfield::register("toplayer", "player_gate_worm", 15000, 1, "int", &zm_utility::setinventoryuimodels, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.widget_gate_worm", 15000, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.player_gate_worm_bg", 15000, 1, "int", undefined, 0, 0);
   level.var_e8af7a2f = 0;

@@ -13,9 +13,9 @@
 //	Tweakables
 // ---------------------------------------------------------------------------------
 
-CONST_regular_obj = & "SO_SABOTAGE_CLIFFHANGER_OBJ_REGULAR";
-CONST_hardened_obj = & "SO_SABOTAGE_CLIFFHANGER_OBJ_HARDENED";
-CONST_veteran_obj = & "SO_SABOTAGE_CLIFFHANGER_OBJ_VETERAN";
+CONST_regular_obj = &"SO_SABOTAGE_CLIFFHANGER_OBJ_REGULAR";
+CONST_hardened_obj = &"SO_SABOTAGE_CLIFFHANGER_OBJ_HARDENED";
+CONST_veteran_obj = &"SO_SABOTAGE_CLIFFHANGER_OBJ_VETERAN";
 
 CONST_regular_accuracy = 2; // accuracy modifier
 CONST_hardened_accuracy = 2; // accuracy modifier
@@ -34,7 +34,7 @@ main() {
   PreCacheShader("overlay_frozen");
   PreCacheItem("c4");
 
-  level.strings["hint_c4_plant"] = & "SCRIPT_PLATFORM_HINTSTR_PLANTEXPLOSIVES";
+  level.strings["hint_c4_plant"] = &"SCRIPT_PLATFORM_HINTSTR_PLANTEXPLOSIVES";
 
   level._effect["extraction_smoke"] = loadfx("smoke/signal_smoke_green");
 
@@ -106,7 +106,7 @@ start_so_sabotage() {
       so_setup_veteran();
       break; // Veteran
   }
-  level.challenge_objective_escape = & "SO_SABOTAGE_CLIFFHANGER_OBJ_ESCAPE";
+  level.challenge_objective_escape = &"SO_SABOTAGE_CLIFFHANGER_OBJ_ESCAPE";
 
   deadquotes = [];
   deadquotes[deadquotes.size] = "@DEADQUOTE_SO_STEALTH_LOOK_FOR_ENEMIES";

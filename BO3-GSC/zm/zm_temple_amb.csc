@@ -18,7 +18,7 @@ function main() {
   level thread wait_for_game_end();
   level thread snd_start_autofx_audio();
   level thread function_d19cb2f8();
-  clientfield::register("scriptmover", "meteor_shrink", 21000, 1, "counter", & meteor_shrink, 0, 0);
+  clientfield::register("scriptmover", "meteor_shrink", 21000, 1, "counter", &meteor_shrink, 0, 0);
 }
 
 function function_28416c1e() {

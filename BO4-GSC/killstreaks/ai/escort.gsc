@@ -154,7 +154,7 @@ get_point_of_interest() {
 function_d15dd929(origin) {
   result = function_9cc082d2(origin + (0, 0, 100), 200);
 
-  if(isDefined(result) && isDefined(result[#"materialflags"]) && result[#"materialflags"]&2) {
+  if(isDefined(result) && isDefined(result[#"materialflags"]) && result[#"materialflags"]& 2) {
     return false;
   }
 

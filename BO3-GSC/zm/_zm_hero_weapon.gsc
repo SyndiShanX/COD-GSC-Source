@@ -22,16 +22,16 @@
 #namespace zm_hero_weapon;
 
 function autoexec __init__sytem__() {
-  system::register("zm_hero_weapons", & __init__, undefined, undefined);
+  system::register("zm_hero_weapons", &__init__, undefined, undefined);
 }
 
 function __init__() {
   if(!isDefined(level._hero_weapons)) {
     level._hero_weapons = [];
   }
-  callback::on_spawned( & on_player_spawned);
-  level.hero_power_update = & hero_power_event_callback;
-  ability_player::register_gadget_activation_callbacks(14, & gadget_hero_weapon_on_activate, & gadget_hero_weapon_on_off);
+  callback::on_spawned(&on_player_spawned);
+  level.hero_power_update = &hero_power_event_callback;
+  ability_player::register_gadget_activation_callbacks(14, &gadget_hero_weapon_on_activate, &gadget_hero_weapon_on_off);
 }
 
 function gadget_hero_weapon_on_activate(slot, weapon) {}
@@ -60,12 +60,12 @@ function register_hero_weapon(weapon_name) {
   if(weapon != weaponnone) {
     hero_weapon = spawnStruct();
     hero_weapon.weapon = weapon;
-    hero_weapon.give_fn = & default_give;
-    hero_weapon.take_fn = & default_take;
-    hero_weapon.wield_fn = & default_wield;
-    hero_weapon.unwield_fn = & default_unwield;
-    hero_weapon.power_full_fn = & default_power_full;
-    hero_weapon.power_empty_fn = & default_power_empty;
+    hero_weapon.give_fn = &default_give;
+    hero_weapon.take_fn = &default_take;
+    hero_weapon.wield_fn = &default_wield;
+    hero_weapon.unwield_fn = &default_unwield;
+    hero_weapon.power_full_fn = &default_power_full;
+    hero_weapon.power_empty_fn = &default_power_empty;
     if(!isDefined(level._hero_weapons)) {
       level._hero_weapons = [];
     }
@@ -74,7 +74,7 @@ function register_hero_weapon(weapon_name) {
   }
 }
 
-function register_hero_weapon_give_take_callbacks(weapon_name, give_fn = & default_give, take_fn = & default_take) {
+function register_hero_weapon_give_take_callbacks(weapon_name, give_fn = &default_give, take_fn = &default_take) {
   weaponnone = getweapon("none");
   weapon = getweapon(weapon_name);
   if(weapon != weaponnone && isDefined(level._hero_weapons[weapon])) {
@@ -96,7 +96,7 @@ function default_take(weapon) {
   self set_hero_weapon_state(weapon, 0);
 }
 
-function register_hero_weapon_wield_unwield_callbacks(weapon_name, wield_fn = & default_wield, unwield_fn = & default_unwield) {
+function register_hero_weapon_wield_unwield_callbacks(weapon_name, wield_fn = &default_wield, unwield_fn = &default_unwield) {
   weaponnone = getweapon("none");
   weapon = getweapon(weapon_name);
   if(weapon != weaponnone && isDefined(level._hero_weapons[weapon])) {
@@ -113,7 +113,7 @@ function default_unwield(weapon) {
   self set_hero_weapon_state(weapon, 1);
 }
 
-function register_hero_weapon_power_callbacks(weapon_name, power_full_fn = & default_power_full, power_empty_fn = & default_power_empty) {
+function register_hero_weapon_power_callbacks(weapon_name, power_full_fn = &default_power_full, power_empty_fn = &default_power_empty) {
   weaponnone = getweapon("none");
   weapon = getweapon(weapon_name);
   if(weapon != weaponnone && isDefined(level._hero_weapons[weapon])) {

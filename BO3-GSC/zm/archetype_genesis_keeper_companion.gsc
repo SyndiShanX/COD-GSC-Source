@@ -66,35 +66,35 @@ function autoexec main() {
   clientfield::register("scriptmover", "keeper_ai_spawn_tell", 15000, 1, "int");
   clientfield::register("scriptmover", "keeper_thunderwall_360", 15000, 1, "counter");
   initzombiebehaviorsandasm();
-  spawner::add_archetype_spawn_function("keeper_companion", & function_8c4e826e);
-  spawner::add_archetype_spawn_function("keeper_companion", & function_bd5d4573);
+  spawner::add_archetype_spawn_function("keeper_companion", &function_8c4e826e);
+  spawner::add_archetype_spawn_function("keeper_companion", &function_bd5d4573);
   keepercompanioninterface::function_e7b6b58c();
   registerbehaviorscriptfunctions();
 }
 
 function registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("keeperCompanionShouldmove", & keepercompanionshouldmove);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("keeperCompanionDelayMovement", & keepercompaniondelaymovement);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("keeperCompanionShouldTraverse", & keepercompanionshouldtraverse);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("keeperCompanionKeepsUpdateMovementMode", & keepercompanionkeepsupdatemovementmode);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("keeperUpdatethunderwallAttackParams", & keeperupdatethunderwallattackparams);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("keeperCompanionUpdateLeader", & keepercompanionupdateleader);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("keeperCompanionMovementService", & keepercompanionmovementservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("keeperCompanionShouldmove", &keepercompanionshouldmove);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("keeperCompanionDelayMovement", &keepercompaniondelaymovement);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("keeperCompanionShouldTraverse", &keepercompanionshouldtraverse);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("keeperCompanionKeepsUpdateMovementMode", &keepercompanionkeepsupdatemovementmode);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("keeperUpdatethunderwallAttackParams", &keeperupdatethunderwallattackparams);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("keeperCompanionUpdateLeader", &keepercompanionupdateleader);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("keeperCompanionMovementService", &keepercompanionmovementservice);
 }
 
 function private initzombiebehaviorsandasm() {
-  animationstatenetwork::registeranimationmocomp("mocomp_teleport_out_traversal@keeper_companion", & function_3ff0b3e, undefined, undefined);
-  animationstatenetwork::registeranimationmocomp("mocomp_teleport_in_traversal@keeper_companion", & function_f1efe0ab, undefined, undefined);
-  animationstatenetwork::registeranimationmocomp("mocomp_keeper_companion_idle@keeper_companion", & function_7cf81f38, & function_7cf81f38, & function_7cf81f38);
-  animationstatenetwork::registeranimationmocomp("mocomp_keeper_tactical_walk@keeper_companion", & function_8c2af335, & function_8c2af335, & function_8d3c82f6);
-  animationstatenetwork::registernotetrackhandlerfunction("thunder", & function_7cbb0165);
-  animationstatenetwork::registernotetrackhandlerfunction("attack_left", & function_c6326468);
-  animationstatenetwork::registernotetrackhandlerfunction("attack_right", & function_ec3b8737);
-  animationstatenetwork::registernotetrackhandlerfunction("attack_up", & function_86b6a4a8);
-  animationstatenetwork::registernotetrackhandlerfunction("keeper_teleport_out", & function_cd4d7e12);
-  animationstatenetwork::registernotetrackhandlerfunction("keeper_teleport_in", & function_d938ace7);
-  animationstatenetwork::registernotetrackhandlerfunction("keeper_spawn_in", & function_10c1bf1);
-  animationstatenetwork::registernotetrackhandlerfunction("keeper_spawn_out", & function_26729028);
+  animationstatenetwork::registeranimationmocomp("mocomp_teleport_out_traversal@keeper_companion", &function_3ff0b3e, undefined, undefined);
+  animationstatenetwork::registeranimationmocomp("mocomp_teleport_in_traversal@keeper_companion", &function_f1efe0ab, undefined, undefined);
+  animationstatenetwork::registeranimationmocomp("mocomp_keeper_companion_idle@keeper_companion", &function_7cf81f38, &function_7cf81f38, &function_7cf81f38);
+  animationstatenetwork::registeranimationmocomp("mocomp_keeper_tactical_walk@keeper_companion", &function_8c2af335, &function_8c2af335, &function_8d3c82f6);
+  animationstatenetwork::registernotetrackhandlerfunction("thunder", &function_7cbb0165);
+  animationstatenetwork::registernotetrackhandlerfunction("attack_left", &function_c6326468);
+  animationstatenetwork::registernotetrackhandlerfunction("attack_right", &function_ec3b8737);
+  animationstatenetwork::registernotetrackhandlerfunction("attack_up", &function_86b6a4a8);
+  animationstatenetwork::registernotetrackhandlerfunction("keeper_teleport_out", &function_cd4d7e12);
+  animationstatenetwork::registernotetrackhandlerfunction("keeper_teleport_in", &function_d938ace7);
+  animationstatenetwork::registernotetrackhandlerfunction("keeper_spawn_in", &function_10c1bf1);
+  animationstatenetwork::registernotetrackhandlerfunction("keeper_spawn_out", &function_26729028);
 }
 
 function function_3ff0b3e(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
@@ -464,7 +464,7 @@ function private pick_new_movement_point() {
   queryresult = positionquery_source_navigation(self.companion_anchor_point, 96, 256, 48, 20, self);
   if(queryresult.data.size) {
     if(isDefined(self.enemy) && self.enemy.archetype == "parasite") {
-      array::filter(queryresult.data, 0, & function_ab299a53, self.enemy);
+      array::filter(queryresult.data, 0, &function_ab299a53, self.enemy);
     }
   }
   if(queryresult.data.size) {

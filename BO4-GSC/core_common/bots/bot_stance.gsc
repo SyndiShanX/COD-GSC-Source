@@ -277,13 +277,13 @@ function_821cce69(tacbundle, params, node) {
     return false;
   }
 
-  if(!(node.spawnflags&8)) {
+  if(!(node.spawnflags& 8)) {
     self bot::record_text("<dev string:x12c>", (1, 0, 0), "<dev string:x4c>");
 
     return false;
   }
 
-  if(node.spawnflags&4) {
+  if(node.spawnflags& 4) {
     self bot::record_text("<dev string:x147>", (1, 0, 0), "<dev string:x4c>");
 
     return false;

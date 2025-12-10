@@ -181,7 +181,7 @@ gulliver() {
   if(flag("it_mgr_disabled"))
     level.ai_gulliver gulliver_eye_scan();
   else
-    spiderbot_lost(0, & "KARMA_TAZE_FAIL_HINT");
+    spiderbot_lost(0, &"KARMA_TAZE_FAIL_HINT");
 
   level.vh_spiderbot ent_flag_clear("playing_scripted_anim");
   flag_wait("spiderbot_end");
@@ -259,7 +259,7 @@ spin_fan() {
 fan_death() {
   level endon("spiderbot_end");
   trigger_wait("trig_fan_death");
-  spiderbot_lost(0, & "KARMA_FAN_DEATH_HINT");
+  spiderbot_lost(0, &"KARMA_FAN_DEATH_HINT");
 }
 
 suspicious_guys_leaving_pip() {
@@ -293,7 +293,7 @@ zapper_power_box() {
 zap_player() {
   level endon("bug_zapper_disabled");
   self waittill("trigger");
-  spiderbot_lost(0, & "KARMA_ELECTRICAL_FIELD_DEATH_HINT", 1, "KARMA_ZAPPER_PROXIMITY_WARNING");
+  spiderbot_lost(0, &"KARMA_ELECTRICAL_FIELD_DEATH_HINT", 1, "KARMA_ZAPPER_PROXIMITY_WARNING");
 }
 
 gulliver_think() {

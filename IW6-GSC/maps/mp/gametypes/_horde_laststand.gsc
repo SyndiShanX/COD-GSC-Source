@@ -318,7 +318,7 @@ lastStandTimerHorde(bleedOutTime, reviveEnt) {
 
   timer = self maps\mp\gametypes\_hud_util::createTimer("hudsmall", 1.0);
   timer maps\mp\gametypes\_hud_util::setPoint("CENTER", undefined, 0, timer_offset);
-  timer.label = & "MP_HORDE_BLEED_OUT";
+  timer.label = &"MP_HORDE_BLEED_OUT";
   timer.color = CONST_LAST_STAND_COLOR;
   timer.archived = false;
   timer.showInKillcam = false;

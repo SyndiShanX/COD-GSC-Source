@@ -38,7 +38,7 @@
 #namespace ball;
 
 autoexec __init__system__() {
-  system::register(#"ball", & __init__, undefined, undefined);
+  system::register(#"ball", &__init__, undefined, undefined);
 }
 
 __init__() {
@@ -78,18 +78,18 @@ event_handler[gametype_init] main(eventstruct) {
   level.overrideteamscore = 1;
   level.clampscorelimit = 0;
   level.doubleovertime = 1;
-  level.onprecachegametype = & onprecachegametype;
-  level.onstartgametype = & onstartgametype;
-  level.onspawnplayer = & onspawnplayer;
-  level.onroundscorelimit = & onroundscorelimit;
-  level.onendround = & onendround;
-  level.onendgame = & onendgame;
-  level.getteamkillpenalty = & function_54dd76af;
-  level.getteamkillscore = & function_eb6c9496;
-  level.shouldplayovertimeround = & shouldplayovertimeround;
-  level.ontimelimit = & function_25dd17ea;
-  level.var_c9d3723c = & function_4fdb87a6;
-  player::function_b0320e78( & onplayerkilled);
+  level.onprecachegametype = &onprecachegametype;
+  level.onstartgametype = &onstartgametype;
+  level.onspawnplayer = &onspawnplayer;
+  level.onroundscorelimit = &onroundscorelimit;
+  level.onendround = &onendround;
+  level.onendgame = &onendgame;
+  level.getteamkillpenalty = &function_54dd76af;
+  level.getteamkillscore = &function_eb6c9496;
+  level.shouldplayovertimeround = &shouldplayovertimeround;
+  level.ontimelimit = &function_25dd17ea;
+  level.var_c9d3723c = &function_4fdb87a6;
+  player::function_b0320e78(&onplayerkilled);
   globallogic_audio::set_leader_gametype_dialog("startUplink", "hcStartUplink", "uplOrders", "uplOrders");
 }
 
@@ -139,10 +139,10 @@ onstartgametype() {
       util::registertimelimit(0, 1440);
     }
     if(game.overtime_round == 1) {} else if(isDefined(game.overtime_first_winner)) {
-      level.ontimelimit = & function_972a6af9;
+      level.ontimelimit = &function_972a6af9;
       game.teamsuddendeath[game.overtime_first_winner] = 1;
     } else {
-      level.ontimelimit = & function_972a6af9;
+      level.ontimelimit = &function_972a6af9;
     }
   } else if(isDefined(game.round_time_to_beat)) {
     util::registertimelimit(game.round_time_to_beat / 60000, game.round_time_to_beat / 60000);
@@ -194,7 +194,7 @@ function_6dd12da4() {
 function_83143ec0() {
   ball = function_481ef46f();
   if(isDefined(ball)) {
-    level.ontimelimit = & function_e1d7d235;
+    level.ontimelimit = &function_e1d7d235;
     ball function_4dbb4a6a();
   }
 }
@@ -499,8 +499,8 @@ function_b22de10a(trigger, team) {
   foreach(ball in level.balls) {
     useobj gameobjects::set_key_object(ball);
   }
-  useobj.var_cd77875d = & function_ce3bd9c9;
-  useobj.onuse = & function_3d1ee3cc;
+  useobj.var_cd77875d = &function_ce3bd9c9;
+  useobj.onuse = &function_3d1ee3cc;
   useobj.ball_in_goal = 0;
   useobj.radiussq = trigger.radius * trigger.radius;
   useobj.center = trigger.origin + (0, 0, trigger.height * 0.5);
@@ -574,12 +574,12 @@ function_dbf94d16(trigger) {
   var_afffeadd.disallowplaceablepickup = 1;
   var_afffeadd.var_9c48a02d = 0;
   var_afffeadd gameobjects::update_objective();
-  var_afffeadd.canuseobject = & function_b861e1df;
-  var_afffeadd.onpickup = & function_6ce143ff;
-  var_afffeadd.setdropped = & ball_set_dropped;
-  var_afffeadd.onreset = & function_df2611a2;
-  var_afffeadd.pickuptimeoutoverride = & ball_physics_timeout;
-  var_afffeadd.carryweaponthink = & function_804453f1;
+  var_afffeadd.canuseobject = &function_b861e1df;
+  var_afffeadd.onpickup = &function_6ce143ff;
+  var_afffeadd.setdropped = &ball_set_dropped;
+  var_afffeadd.onreset = &function_df2611a2;
+  var_afffeadd.pickuptimeoutoverride = &ball_physics_timeout;
+  var_afffeadd.carryweaponthink = &function_804453f1;
   var_afffeadd.in_goal = 0;
   var_afffeadd.lastcarrierscored = 0;
   var_afffeadd.lastcarrierteam = # "neutral";
@@ -1438,7 +1438,7 @@ player_update_pass_target(var_afffeadd) {
           var_9ee2cc0f[var_9ee2cc0f.size] = target;
         }
       }
-      var_9ee2cc0f = array::quick_sort(var_9ee2cc0f, & compare_player_pass_dot);
+      var_9ee2cc0f = array::quick_sort(var_9ee2cc0f, &compare_player_pass_dot);
       foreach(target in var_9ee2cc0f) {
         if(sighttracepassed(playereye, target.var_4e7a846b, 0, target)) {
           new_target = target;

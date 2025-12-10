@@ -131,7 +131,7 @@ proPerkkills(data, time) {
     }
   }
   if(attacker ownsAndUsingPerk("specialty_bulletpenetration")) {
-    if(isDefined(victim.iDFlags) && victim.iDFlags & level.iDFLAGS_PENETRATION) {
+    if(isDefined(victim.iDFlags) && victim.iDFlags &level.iDFLAGS_PENETRATION) {
       attacker maps\mp\gametypes\_persistence::statAdd("PERKS_DEEP_IMPACT_KILL", 1, false);
     }
   }
@@ -192,7 +192,7 @@ multiGrenadeKill() {
 shotEquipment(owner, idflags) {
   if(isplayer(self) && self ownsAndUsingPerk("specialty_bulletpenetration")) {
     if(isDefined(owner)) {
-      if(isDefined(iDFlags) && (iDFlags & level.iDFLAGS_PENETRATION)) {
+      if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION)) {
         if(level.teambased) {
           if(isplayer(owner) && (owner.team != self.team))
             self maps\mp\gametypes\_persistence::statAdd("PERKS_DEEP_IMPACT_SHOT_EQUIPMENT", 1, false);

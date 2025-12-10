@@ -39,7 +39,7 @@ init() {
 }
 
 setupretrievablehintstrings() {
-  maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("claymore", & "ZOMBIE_CLAYMORE_PICKUP");
+  maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("claymore", &"ZOMBIE_CLAYMORE_PICKUP");
 }
 
 onplayerconnect() {
@@ -842,7 +842,7 @@ init_spawnable_weapon_upgrade() {
           unitrigger_stub.hint_parm1 = "missing weapon name " + spawn_list[i].zombie_weapon_upgrade;
 
         unitrigger_stub.hint_parm2 = unitrigger_stub.cost;
-        unitrigger_stub.hint_string = & "ZOMBIE_WEAPONCOSTONLY";
+        unitrigger_stub.hint_string = &"ZOMBIE_WEAPONCOSTONLY";
       }
     }
 
@@ -1013,7 +1013,7 @@ wall_weapon_update_prompt(player) {
       else
         ammo_cost = get_ammo_cost(weapon);
 
-      self.stub.hint_string = & "ZOMBIE_WEAPONAMMOONLY";
+      self.stub.hint_string = &"ZOMBIE_WEAPONAMMOONLY";
       self sethintstring(self.stub.hint_string, ammo_cost);
     }
   } else if(!player has_weapon_or_upgrade(weapon)) {
@@ -1029,7 +1029,7 @@ wall_weapon_update_prompt(player) {
       if(!isDefined(weapon_display) || weapon_display == "" || weapon_display == "none")
         weapon_display = "missing weapon name " + weapon;
 
-      self.stub.hint_string = & "ZOMBIE_WEAPONCOSTONLY";
+      self.stub.hint_string = &"ZOMBIE_WEAPONCOSTONLY";
       self sethintstring(self.stub.hint_string, weapon_display, cost);
     }
   } else {
@@ -1038,7 +1038,7 @@ wall_weapon_update_prompt(player) {
     else
       ammo_cost = get_ammo_cost(weapon);
 
-    self.stub.hint_string = & "ZOMBIE_WEAPONAMMOONLY";
+    self.stub.hint_string = &"ZOMBIE_WEAPONAMMOONLY";
     self sethintstring(self.stub.hint_string, ammo_cost);
   }
 
@@ -1128,7 +1128,7 @@ init_weapon_upgrade() {
       if(!isDefined(weapon_display) || weapon_display == "" || weapon_display == "none")
         weapon_display = "missing weapon name " + weapon_spawns[i].zombie_weapon_upgrade;
 
-      hint_string = & "ZOMBIE_WEAPONCOSTONLY";
+      hint_string = &"ZOMBIE_WEAPONCOSTONLY";
       weapon_spawns[i] sethintstring(hint_string, weapon_display, cost);
     }
 
@@ -1154,10 +1154,10 @@ init_weapon_toggle() {
   precachestring(&"ZOMBIE_WEAPON_TOGGLE_ACTIVATE");
   precachestring(&"ZOMBIE_WEAPON_TOGGLE_DEACTIVATE");
   precachestring(&"ZOMBIE_WEAPON_TOGGLE_ACQUIRED");
-  level.zombie_weapon_toggle_disabled_hint = & "ZOMBIE_WEAPON_TOGGLE_DISABLED";
-  level.zombie_weapon_toggle_activate_hint = & "ZOMBIE_WEAPON_TOGGLE_ACTIVATE";
-  level.zombie_weapon_toggle_deactivate_hint = & "ZOMBIE_WEAPON_TOGGLE_DEACTIVATE";
-  level.zombie_weapon_toggle_acquired_hint = & "ZOMBIE_WEAPON_TOGGLE_ACQUIRED";
+  level.zombie_weapon_toggle_disabled_hint = &"ZOMBIE_WEAPON_TOGGLE_DISABLED";
+  level.zombie_weapon_toggle_activate_hint = &"ZOMBIE_WEAPON_TOGGLE_ACTIVATE";
+  level.zombie_weapon_toggle_deactivate_hint = &"ZOMBIE_WEAPON_TOGGLE_DEACTIVATE";
+  level.zombie_weapon_toggle_acquired_hint = &"ZOMBIE_WEAPON_TOGGLE_ACQUIRED";
   precachemodel("zombie_zapper_cagelight");
   precachemodel("zombie_zapper_cagelight_green");
   precachemodel("zombie_zapper_cagelight_red");
@@ -1379,7 +1379,7 @@ get_weapon_display_name(weapon_name) {
   weapon_display = getweapondisplayname(weapon_name);
 
   if(!isDefined(weapon_display) || weapon_display == "" || weapon_display == "none") {
-    weapon_display = & "MPUI_NONE";
+    weapon_display = &"MPUI_NONE";
 
     weapon_display = "missing weapon name " + weapon_name;
 
@@ -1727,9 +1727,9 @@ get_player_weapon_with_same_base(weaponname) {
 
 get_weapon_hint_ammo() {
   if(isDefined(level.has_pack_a_punch) && !level.has_pack_a_punch)
-    return & "ZOMBIE_WEAPONCOSTAMMO";
+    return &"ZOMBIE_WEAPONCOSTAMMO";
   else
-    return & "ZOMBIE_WEAPONCOSTAMMO_UPGRADE";
+    return &"ZOMBIE_WEAPONCOSTAMMO_UPGRADE";
 }
 
 weapon_set_first_time_hint(cost, ammo_cost) {

@@ -15,7 +15,7 @@
 #namespace scene;
 
 function autoexec __init__sytem__() {
-  system::register("", & __init__, undefined, undefined);
+  system::register("", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -502,7 +502,7 @@ function set_origin(v_origin) {
 function toggle_postfx_igc_loop() {
   while(true) {
     if(getdvarint("", 0)) {
-      array::run_all(level.activeplayers, & clientfield::increment_to_player, "", 1);
+      array::run_all(level.activeplayers, &clientfield::increment_to_player, "", 1);
       wait(4);
     }
     wait(1);

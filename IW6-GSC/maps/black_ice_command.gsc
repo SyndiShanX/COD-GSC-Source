@@ -96,12 +96,12 @@ section_flag_inits() {
 }
 
 section_precache() {
-  maps\_utility::add_hint_string("pull_lever", & "BLACK_ICE_COMMAND_PULL_LEVER", ::hint_pull_lever);
-  maps\_utility::add_hint_string("pull_lever_reverse", & "BLACK_ICE_COMMAND_PULL_LEVER_REVERSE", ::hint_pull_lever);
-  maps\_utility::add_hint_string("pull_lever_no_glyph", & "BLACK_ICE_COMMAND_PULL_LEVER_NO_GLYPH", ::hint_pull_lever);
-  maps\_utility::add_hint_string("pull_lever_no_glyph_reverse", & "BLACK_ICE_COMMAND_PULL_LEVER_NO_GLYPH_REVERSE", ::hint_pull_lever);
-  maps\_utility::add_hint_string("pull_lever_pc", & "BLACK_ICE_COMMAND_PULL_LEVER_PC", ::hint_pull_lever);
-  maps\_utility::add_hint_string("hint_command_button_press", & "BLACK_ICE_COMMAND_USE_CONSOLE", ::hint_button_press);
+  maps\_utility::add_hint_string("pull_lever", &"BLACK_ICE_COMMAND_PULL_LEVER", ::hint_pull_lever);
+  maps\_utility::add_hint_string("pull_lever_reverse", &"BLACK_ICE_COMMAND_PULL_LEVER_REVERSE", ::hint_pull_lever);
+  maps\_utility::add_hint_string("pull_lever_no_glyph", &"BLACK_ICE_COMMAND_PULL_LEVER_NO_GLYPH", ::hint_pull_lever);
+  maps\_utility::add_hint_string("pull_lever_no_glyph_reverse", &"BLACK_ICE_COMMAND_PULL_LEVER_NO_GLYPH_REVERSE", ::hint_pull_lever);
+  maps\_utility::add_hint_string("pull_lever_pc", &"BLACK_ICE_COMMAND_PULL_LEVER_PC", ::hint_pull_lever);
+  maps\_utility::add_hint_string("hint_command_button_press", &"BLACK_ICE_COMMAND_USE_CONSOLE", ::hint_button_press);
   precachestring(&"BLACK_ICE_COMMAND_USE_CONSOLE");
   precachestring(&"BLACK_ICE_COMMAND_FAIL_EARLY");
   precachestring(&"BLACK_ICE_COMMAND_FAIL_LATE");
@@ -272,7 +272,7 @@ command_fail_late_death() {
   level.player thread maps\_gameskill::blood_splat_on_screen("left");
   level.player thread maps\_gameskill::blood_splat_on_screen("right");
   level.player thread maps\_gameskill::blood_splat_on_screen("bottom");
-  setdvar("ui_deadquote", & "BLACK_ICE_COMMAND_FAIL_LATE");
+  setdvar("ui_deadquote", &"BLACK_ICE_COMMAND_FAIL_LATE");
   wait 1.0;
   maps\_utility::missionfailedwrapper();
   wait 10;

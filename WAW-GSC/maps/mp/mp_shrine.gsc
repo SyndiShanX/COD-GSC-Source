@@ -21,11 +21,11 @@ main() {
   game["axis_soldiertype"] = "pacific";
   setdvar("r_specularcolorscale", "1");
   setdvar("compassmaxrange", "2100");
-  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_SHRINE_A";
-  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_SHRINE_B";
-  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_SHRINE_C";
-  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_SHRINE_D";
-  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_SHRINE_E";
+  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_SHRINE_A";
+  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_SHRINE_B";
+  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_SHRINE_C";
+  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_SHRINE_D";
+  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_SHRINE_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_SHRINE_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_SHRINE_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_SHRINE_C";

@@ -16,11 +16,11 @@
 #namespace zm_trap_buy_buttons;
 
 autoexec __init__system__() {
-  system::register(#"zm_trap_buy_buttons", & __init__, & __main__, undefined);
+  system::register(#"zm_trap_buy_buttons", &__init__, &__main__, undefined);
 }
 
 __init__() {
-  callback::on_finalize_initialization( & init);
+  callback::on_finalize_initialization(&init);
 }
 
 __main__() {
@@ -28,7 +28,7 @@ __main__() {
 
 init() {
   level.a_s_trap_buttons = struct::get_array("s_trap_button", "targetname");
-  scene::add_scene_func("p8_fxanim_zm_towers_trap_switch_bundle", & function_8edd4db5, "init");
+  scene::add_scene_func("p8_fxanim_zm_towers_trap_switch_bundle", &function_8edd4db5, "init");
   level thread function_1b8272d7();
 }
 

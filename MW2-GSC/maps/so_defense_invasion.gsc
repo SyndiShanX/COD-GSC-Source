@@ -187,15 +187,15 @@ so_defense_init() {
 }
 
 so_defense_setup_regular() {
-  level.challenge_objective = & "SO_DEFENSE_INVASION_OBJ_REGULAR";
+  level.challenge_objective = &"SO_DEFENSE_INVASION_OBJ_REGULAR";
 }
 
 so_defense_setup_hardened() {
-  level.challenge_objective = & "SO_DEFENSE_INVASION_OBJ_HARDENED";
+  level.challenge_objective = &"SO_DEFENSE_INVASION_OBJ_HARDENED";
 }
 
 so_defense_setup_veteran() {
-  level.challenge_objective = & "SO_DEFENSE_INVASION_OBJ_VETERAN";
+  level.challenge_objective = &"SO_DEFENSE_INVASION_OBJ_VETERAN";
 }
 
 so_defense_setup_radio_dialog() {

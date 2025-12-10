@@ -11,12 +11,12 @@
 #namespace remotemissile;
 
 function autoexec __init__sytem__() {
-  system::register("remotemissile", & __init__, undefined, undefined);
+  system::register("remotemissile", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("missile", "remote_missile_bomblet_fired", 1, 1, "int", & bomblets_deployed, 0, 0);
-  clientfield::register("missile", "remote_missile_fired", 1, 2, "int", & missile_fired, 0, 0);
+  clientfield::register("missile", "remote_missile_bomblet_fired", 1, 1, "int", &bomblets_deployed, 0, 0);
+  clientfield::register("missile", "remote_missile_fired", 1, 2, "int", &missile_fired, 0, 0);
 }
 
 function missile_fired(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

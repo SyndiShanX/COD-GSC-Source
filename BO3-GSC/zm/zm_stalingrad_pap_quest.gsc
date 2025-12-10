@@ -39,7 +39,7 @@
 #namespace zm_stalingrad_pap;
 
 function autoexec __init__sytem__() {
-  system::register("zm_stalingrad_pap", & __init__, undefined, undefined);
+  system::register("zm_stalingrad_pap", &__init__, undefined, undefined);
 }
 
 function function_5efc91a4() {
@@ -207,7 +207,7 @@ function function_6236d848(var_e57afa84, var_7741a4b8, var_ed686791, var_2a448c9
   }
   level thread zm_stalingrad_util::function_e7c75cf0();
   level flag::clear("zombie_drop_powerups");
-  zm_spawner::deregister_zombie_death_event_callback( & namespace_2e6e7fce::function_1389d425);
+  zm_spawner::deregister_zombie_death_event_callback(&namespace_2e6e7fce::function_1389d425);
   level thread zm_stalingrad_util::function_3804dbf1();
   level zm_stalingrad_util::function_adf4d1d0();
   level flag::clear("lockdown_complete");
@@ -417,7 +417,7 @@ function function_6236d848(var_e57afa84, var_7741a4b8, var_ed686791, var_2a448c9
   function_f10ea3a8();
   exploder::exploder_stop("pavlov_" + 0);
   exploder::exploder_stop("pavlov_" + 4);
-  zm_spawner::register_zombie_death_event_callback( & namespace_2e6e7fce::function_1389d425);
+  zm_spawner::register_zombie_death_event_callback(&namespace_2e6e7fce::function_1389d425);
   level flag::set("zombie_drop_powerups");
   level flag::set("lockdown_complete");
   level thread zm_stalingrad_util::function_3804dbf1(0);
@@ -648,7 +648,7 @@ function function_2c6fd7(var_2b71b5b4, var_15eb9a52, var_f92c3865, var_13d1e831)
   level.var_1dfcc9b2 = spawnStruct();
   level thread zm_stalingrad_util::function_e7c75cf0();
   level flag::clear("zombie_drop_powerups");
-  zm_spawner::deregister_zombie_death_event_callback( & namespace_2e6e7fce::function_1389d425);
+  zm_spawner::deregister_zombie_death_event_callback(&namespace_2e6e7fce::function_1389d425);
   level thread zm_stalingrad_util::function_3804dbf1();
   level zm_stalingrad_util::function_adf4d1d0();
   level flag::clear("lockdown_complete");
@@ -778,7 +778,7 @@ function function_2c6fd7(var_2b71b5b4, var_15eb9a52, var_f92c3865, var_13d1e831)
   function_f10ea3a8();
   exploder::exploder_stop("pavlov_" + 0);
   exploder::exploder_stop("pavlov_" + 4);
-  zm_spawner::register_zombie_death_event_callback( & namespace_2e6e7fce::function_1389d425);
+  zm_spawner::register_zombie_death_event_callback(&namespace_2e6e7fce::function_1389d425);
   level flag::set("zombie_drop_powerups");
   level flag::set("lockdown_complete");
   level thread zm_stalingrad_util::function_3804dbf1(0);

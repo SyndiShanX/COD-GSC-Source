@@ -21,22 +21,22 @@
 #namespace zm_perk_additionalprimaryweapon;
 
 function autoexec __init__sytem__() {
-  system::register("zm_perk_additionalprimaryweapon", & __init__, undefined, undefined);
+  system::register("zm_perk_additionalprimaryweapon", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.additionalprimaryweapon_limit = 3;
   enable_additional_primary_weapon_perk_for_level();
-  callback::on_laststand( & on_laststand);
-  level.return_additionalprimaryweapon = & return_additionalprimaryweapon;
+  callback::on_laststand(&on_laststand);
+  level.return_additionalprimaryweapon = &return_additionalprimaryweapon;
 }
 
 function enable_additional_primary_weapon_perk_for_level() {
-  zm_perks::register_perk_basic_info("specialty_additionalprimaryweapon", "additionalprimaryweapon", 4000, & "ZOMBIE_PERK_ADDITIONALPRIMARYWEAPON", getweapon("zombie_perk_bottle_additionalprimaryweapon"));
-  zm_perks::register_perk_precache_func("specialty_additionalprimaryweapon", & additional_primary_weapon_precache);
-  zm_perks::register_perk_clientfields("specialty_additionalprimaryweapon", & additional_primary_weapon_register_clientfield, & additional_primary_weapon_set_clientfield);
-  zm_perks::register_perk_machine("specialty_additionalprimaryweapon", & additional_primary_weapon_perk_machine_setup);
-  zm_perks::register_perk_threads("specialty_additionalprimaryweapon", & give_additional_primary_weapon_perk, & take_additional_primary_weapon_perk);
+  zm_perks::register_perk_basic_info("specialty_additionalprimaryweapon", "additionalprimaryweapon", 4000, &"ZOMBIE_PERK_ADDITIONALPRIMARYWEAPON", getweapon("zombie_perk_bottle_additionalprimaryweapon"));
+  zm_perks::register_perk_precache_func("specialty_additionalprimaryweapon", &additional_primary_weapon_precache);
+  zm_perks::register_perk_clientfields("specialty_additionalprimaryweapon", &additional_primary_weapon_register_clientfield, &additional_primary_weapon_set_clientfield);
+  zm_perks::register_perk_machine("specialty_additionalprimaryweapon", &additional_primary_weapon_perk_machine_setup);
+  zm_perks::register_perk_threads("specialty_additionalprimaryweapon", &give_additional_primary_weapon_perk, &take_additional_primary_weapon_perk);
   zm_perks::register_perk_host_migration_params("specialty_additionalprimaryweapon", "vending_additionalprimaryweapon", "additionalprimaryweapon_light");
 }
 

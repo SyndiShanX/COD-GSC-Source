@@ -122,7 +122,7 @@ eagle_eye_far_flung() {
   flag_set("goggles_started");
   level clientnotify("sndFakeAmb");
   flag_set("intro_start_ambient_activity");
-  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, & "goggles_hud");
+  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, &"goggles_hud");
   wait 20;
   flag_set("goggles_done");
   wait 1;
@@ -525,12 +525,12 @@ cliff_intro_harper_intro(guy) {
 
 cliff_swing_success_window_assist_start(guy) {
   level.player thread player_camera_shake_loop(0.15, 0.5, level.player.origin, 1000);
-  cliff_swing_success_window_harper(0.3, 0.2, "monsoon_gloves_impact", & "MONSOON_PROMPT_SWING", "lstick", "left");
+  cliff_swing_success_window_harper(0.3, 0.2, "monsoon_gloves_impact", &"MONSOON_PROMPT_SWING", "lstick", "left");
 }
 
 cliff_swing_success_window_grab_start(guy) {
   level.player thread player_camera_shake_loop(0.25, 0.5, level.player.origin, 1000);
-  cliff_swing_success_window_player(0.6, 0.2, "monsoon_gloves_impact", & "MONSOON_PROMPT_GLOVES_ON", "ltrig_rtrig");
+  cliff_swing_success_window_player(0.6, 0.2, "monsoon_gloves_impact", &"MONSOON_PROMPT_GLOVES_ON", "ltrig_rtrig");
 }
 
 cliff_swing_6_landing(guy) {

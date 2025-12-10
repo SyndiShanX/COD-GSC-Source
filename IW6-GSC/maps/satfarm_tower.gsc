@@ -5,41 +5,41 @@
 
 tower_init() {
   level.start_point = "tower";
-  objective_add(maps\_utility::obj("rendesvouz"), "invisible", & "SATFARM_OBJ_RENDESVOUZ");
+  objective_add(maps\_utility::obj("rendesvouz"), "invisible", &"SATFARM_OBJ_RENDESVOUZ");
   objective_state_nomessage(maps\_utility::obj("rendesvouz"), "done");
-  objective_add(maps\_utility::obj("reach_air_strip"), "invisible", & "SATFARM_OBJ_REACH_AIR_STRIP");
+  objective_add(maps\_utility::obj("reach_air_strip"), "invisible", &"SATFARM_OBJ_REACH_AIR_STRIP");
   objective_state_nomessage(maps\_utility::obj("reach_air_strip"), "done");
-  objective_add(maps\_utility::obj("air_strip_defenses"), "invisible", & "SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES");
+  objective_add(maps\_utility::obj("air_strip_defenses"), "invisible", &"SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES");
   objective_state_nomessage(maps\_utility::obj("air_strip_defenses"), "done");
-  objective_add(maps\_utility::obj("launch_missile"), "current", & "SATFARM_OBJ_LAUNCH_MISSILE");
+  objective_add(maps\_utility::obj("launch_missile"), "current", &"SATFARM_OBJ_LAUNCH_MISSILE");
   level.player thread maps\_utility::vision_set_fog_changes("satfarm_tower", 0);
 }
 
 post_missile_launch_init() {
   level.start_point = "post_missile_launch";
-  objective_add(maps\_utility::obj("rendesvouz"), "invisible", & "SATFARM_OBJ_RENDESVOUZ");
+  objective_add(maps\_utility::obj("rendesvouz"), "invisible", &"SATFARM_OBJ_RENDESVOUZ");
   objective_state_nomessage(maps\_utility::obj("rendesvouz"), "done");
-  objective_add(maps\_utility::obj("reach_air_strip"), "invisible", & "SATFARM_OBJ_REACH_AIR_STRIP");
+  objective_add(maps\_utility::obj("reach_air_strip"), "invisible", &"SATFARM_OBJ_REACH_AIR_STRIP");
   objective_state_nomessage(maps\_utility::obj("reach_air_strip"), "done");
-  objective_add(maps\_utility::obj("air_strip_defenses"), "invisible", & "SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES");
+  objective_add(maps\_utility::obj("air_strip_defenses"), "invisible", &"SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES");
   objective_state_nomessage(maps\_utility::obj("air_strip_defenses"), "done");
-  objective_add(maps\_utility::obj("launch_missile"), "current", & "SATFARM_OBJ_LAUNCH_MISSILE");
+  objective_add(maps\_utility::obj("launch_missile"), "current", &"SATFARM_OBJ_LAUNCH_MISSILE");
   objective_state_nomessage(maps\_utility::obj("launch_missile"), "done");
-  objective_add(maps\_utility::obj("train"), "current", & "SATFARM_OBJ_TRAIN");
+  objective_add(maps\_utility::obj("train"), "current", &"SATFARM_OBJ_TRAIN");
   level.player thread maps\_utility::vision_set_fog_changes("satfarm_tower_02", 0);
 }
 
 warehouse_init() {
   level.start_point = "warehouse";
-  objective_add(maps\_utility::obj("rendesvouz"), "invisible", & "SATFARM_OBJ_RENDESVOUZ");
+  objective_add(maps\_utility::obj("rendesvouz"), "invisible", &"SATFARM_OBJ_RENDESVOUZ");
   objective_state_nomessage(maps\_utility::obj("rendesvouz"), "done");
-  objective_add(maps\_utility::obj("reach_air_strip"), "invisible", & "SATFARM_OBJ_REACH_AIR_STRIP");
+  objective_add(maps\_utility::obj("reach_air_strip"), "invisible", &"SATFARM_OBJ_REACH_AIR_STRIP");
   objective_state_nomessage(maps\_utility::obj("reach_air_strip"), "done");
-  objective_add(maps\_utility::obj("air_strip_defenses"), "invisible", & "SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES");
+  objective_add(maps\_utility::obj("air_strip_defenses"), "invisible", &"SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES");
   objective_state_nomessage(maps\_utility::obj("air_strip_defenses"), "done");
-  objective_add(maps\_utility::obj("launch_missile"), "current", & "SATFARM_OBJ_LAUNCH_MISSILE");
+  objective_add(maps\_utility::obj("launch_missile"), "current", &"SATFARM_OBJ_LAUNCH_MISSILE");
   objective_state_nomessage(maps\_utility::obj("launch_missile"), "done");
-  objective_add(maps\_utility::obj("train"), "current", & "SATFARM_OBJ_TRAIN");
+  objective_add(maps\_utility::obj("train"), "current", &"SATFARM_OBJ_TRAIN");
   level.player thread maps\_utility::vision_set_fog_changes("satfarm_warehouse", 0);
 }
 
@@ -836,7 +836,7 @@ allies_vo_tower() {
   level.allies[0] thread maps\satfarm_code::char_dialog_add_and_go("satfarm_hsh_letsgetthisbastard");
   maps\_utility::delaythread(0.5, maps\_utility::music_crossfade, "mus_sfarm_battle_to_train", 1.0);
   wait 1;
-  objective_add(maps\_utility::obj("train"), "current", & "SATFARM_OBJ_TRAIN");
+  objective_add(maps\_utility::obj("train"), "current", &"SATFARM_OBJ_TRAIN");
 }
 
 breach_nag() {
@@ -2135,7 +2135,7 @@ safe_activate_trigger_with_targetname(var_0) {
   if(isDefined(var_2) && !isDefined(var_2.trigger_off)) {
     var_2 maps\_utility::activate_trigger();
 
-    if(isDefined(var_2.spawnflags) && var_2.spawnflags & var_1)
+    if(isDefined(var_2.spawnflags) && var_2.spawnflags &var_1)
       var_2 common_scripts\utility::trigger_off();
   }
 }
@@ -2234,7 +2234,7 @@ train_car() {
 
   if(!common_scripts\utility::flag("player_train_trigger")) {
     if(isalive(level.player)) {
-      setdvar("ui_deadquote", & "SATFARM_FAIL_TRAIN");
+      setdvar("ui_deadquote", &"SATFARM_FAIL_TRAIN");
       maps\_utility::missionfailedwrapper();
     }
   }
@@ -2320,7 +2320,7 @@ player_falls_on_tracks() {
   for(;;) {
     if(level.player istouching(var_0)) {
       if(isalive(level.player)) {
-        setdvar("ui_deadquote", & "SATFARM_FAIL_TRAIN");
+        setdvar("ui_deadquote", &"SATFARM_FAIL_TRAIN");
         maps\_utility::missionfailedwrapper();
       }
     }

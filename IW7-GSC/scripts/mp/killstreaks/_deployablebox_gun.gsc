@@ -10,8 +10,8 @@ init() {
   var_00.var_39B = "crate_marker_mp";
   var_00.modelbase = "mp_weapon_crate";
   var_00.modelbombsquad = "mp_weapon_crate_bombsquad";
-  var_00.pow = & "KILLSTREAKS_HINTS_DEPLOYABLE_AMMO_USE";
-  var_00.var_3A41 = & "KILLSTREAKS_DEPLOYABLE_AMMO_TAKING";
+  var_00.pow = &"KILLSTREAKS_HINTS_DEPLOYABLE_AMMO_USE";
+  var_00.var_3A41 = &"KILLSTREAKS_DEPLOYABLE_AMMO_TAKING";
   var_00.var_67E5 = "deployable_ammo_taken";
   var_00.streakname = "deployable_ammo";
   var_00.var_10A38 = "used_deployable_ammo";

@@ -9,7 +9,7 @@
 #namespace footsteps;
 
 function autoexec __init__sytem__() {
-  system::register("footsteps", & __init__, undefined, undefined);
+  system::register("footsteps", &__init__, undefined, undefined);
 }
 
 function __init__() {

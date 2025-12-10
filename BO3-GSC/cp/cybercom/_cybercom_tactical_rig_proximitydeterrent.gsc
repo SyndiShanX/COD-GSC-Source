@@ -22,11 +22,11 @@
 function init() {}
 
 function main() {
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
   cybercom_tacrig::register_cybercom_rig_ability("cybercom_proximitydeterrent", 2);
-  cybercom_tacrig::register_cybercom_rig_possession_callbacks("cybercom_proximitydeterrent", & proximitydeterrentgive, & proximitydeterrenttake);
-  cybercom_tacrig::register_cybercom_rig_activation_callbacks("cybercom_proximitydeterrent", & proximitydeterrentactivate, & proximitydeterrentdeactivate);
+  cybercom_tacrig::register_cybercom_rig_possession_callbacks("cybercom_proximitydeterrent", &proximitydeterrentgive, &proximitydeterrenttake);
+  cybercom_tacrig::register_cybercom_rig_activation_callbacks("cybercom_proximitydeterrent", &proximitydeterrentactivate, &proximitydeterrentdeactivate);
 }
 
 function on_player_connect() {}

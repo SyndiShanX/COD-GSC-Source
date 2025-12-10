@@ -109,18 +109,18 @@ onstartgametype() {
     game["defenders"] = var_00;
   }
 
-  scripts\mp\utility::setobjectivetext("allies", & "OBJECTIVES_DOM");
-  scripts\mp\utility::setobjectivetext("axis", & "OBJECTIVES_DOM");
+  scripts\mp\utility::setobjectivetext("allies", &"OBJECTIVES_DOM");
+  scripts\mp\utility::setobjectivetext("axis", &"OBJECTIVES_DOM");
   if(level.splitscreen) {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_DOM");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_DOM");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_DOM");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_DOM");
   } else {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_DOM_SCORE");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_DOM_SCORE");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_DOM_SCORE");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_DOM_SCORE");
   }
 
-  scripts\mp\utility::setobjectivehinttext("allies", & "OBJECTIVES_DOM_HINT");
-  scripts\mp\utility::setobjectivehinttext("axis", & "OBJECTIVES_DOM_HINT");
+  scripts\mp\utility::setobjectivehinttext("allies", &"OBJECTIVES_DOM_HINT");
+  scripts\mp\utility::setobjectivehinttext("axis", &"OBJECTIVES_DOM_HINT");
   initspawns();
   var_02[0] = "dom";
   scripts\mp\gameobjects::main(var_02);
@@ -348,7 +348,7 @@ domflags() {
     var_0A = scripts\mp\gameobjects::createuseobject("neutral", var_08, var_09, (0, 0, 100));
     var_0A scripts\mp\gameobjects::allowuse("enemy");
     var_0A scripts\mp\gameobjects::setusetime(level.caprate);
-    var_0A scripts\mp\gameobjects::setusetext( & "MP_SECURING_POSITION");
+    var_0A scripts\mp\gameobjects::setusetext(&"MP_SECURING_POSITION");
     var_0B = var_0A scripts\mp\gameobjects::getlabel();
     var_0A.label = var_0B;
     var_0A scripts\mp\gameobjects::set2dicon("friendly", "waypoint_defend" + var_0B);
@@ -1430,7 +1430,7 @@ placedompoint() {
       var_06 = scripts\mp\gameobjects::createuseobject("neutral", var_01.trigger, var_01.visuals, (0, 0, 100));
       var_06 scripts\mp\gameobjects::allowuse("enemy");
       var_06 scripts\mp\gameobjects::setusetime(level.caprate);
-      var_06 scripts\mp\gameobjects::setusetext( & "MP_SECURING_POSITION");
+      var_06 scripts\mp\gameobjects::setusetext(&"MP_SECURING_POSITION");
       var_07 = var_00;
       var_06.label = var_07;
       var_06 scripts\mp\gameobjects::set2dicon("friendly", "waypoint_defend" + var_07);

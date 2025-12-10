@@ -13,7 +13,6 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_fav_tropical");
 
-
   level.airstrikeHeightScale = 1.5;
 
   ambientPlay("ambient_mp_favela");

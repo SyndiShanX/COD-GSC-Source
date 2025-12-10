@@ -9,7 +9,7 @@
 #namespace global_fx;
 
 function autoexec __init__sytem__() {
-  system::register("global_fx", & __init__, & main, undefined);
+  system::register("global_fx", &__init__, &main, undefined);
 }
 
 function __init__() {

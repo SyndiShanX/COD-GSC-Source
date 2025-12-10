@@ -222,7 +222,7 @@ getomnvarvalue(param_00) {
 
 ark_quest_hint_func(param_00, param_01) {
   if(isDefined(param_00.crystals) && param_00.crystals.size >= 1) {
-    return & "CP_QUEST_WOR_PART";
+    return &"CP_QUEST_WOR_PART";
   }
 
   return level.interaction_hintstrings[param_00.script_noteworthy];

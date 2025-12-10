@@ -339,7 +339,7 @@ function function_9f1a0b26(var_c3479584) {
   if(isDefined(var_44509e49)) {
     return var_44509e49;
   }
-  if(isDefined(var_c3479584) && level.doa.arenas[level.doa.current_arena].var_dd94482c & (1 << var_c3479584)) {
+  if(isDefined(var_c3479584) && level.doa.arenas[level.doa.current_arena].var_dd94482c &(1 << var_c3479584)) {
     return var_c3479584;
   }
   return 0;

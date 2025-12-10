@@ -56,9 +56,9 @@ init() {
   level.microwavecloseanim = % o_hpm_close;
   level.microwavedestroyedanim = % o_hpm_destroyed;
   level.auto_turret_settings["sentry"] = spawnStruct();
-  level.auto_turret_settings["sentry"].hintstring = & "KILLSTREAK_SENTRY_TURRET_PICKUP";
-  level.auto_turret_settings["sentry"].hackerhintstring = & "KILLSTREAK_TURRET_HACKING";
-  level.auto_turret_settings["sentry"].disablehintstring = & "KILLSTREAK_TURRET_SENTRY_DISABLE";
+  level.auto_turret_settings["sentry"].hintstring = &"KILLSTREAK_SENTRY_TURRET_PICKUP";
+  level.auto_turret_settings["sentry"].hackerhintstring = &"KILLSTREAK_TURRET_HACKING";
+  level.auto_turret_settings["sentry"].disablehintstring = &"KILLSTREAK_TURRET_SENTRY_DISABLE";
   level.auto_turret_settings["sentry"].hinticon = "hud_ks_auto_turret";
   level.auto_turret_settings["sentry"].modelbase = "t6_wpn_turret_sentry_gun";
   level.auto_turret_settings["sentry"].modelgoodplacement = "t6_wpn_turret_sentry_gun_yellow";
@@ -74,8 +74,8 @@ init() {
   level.auto_turret_settings["sentry"].hackertoolradius = level.sentryhackertoolradius;
   level.auto_turret_settings["sentry"].hackertooltimems = level.sentryhackertooltimems;
   level.auto_turret_settings["tow"] = spawnStruct();
-  level.auto_turret_settings["tow"].hintstring = & "KILLSTREAK_TOW_TURRET_PICKUP";
-  level.auto_turret_settings["tow"].hackerhintstring = & "KILLSTREAK_TURRET_HACKING";
+  level.auto_turret_settings["tow"].hintstring = &"KILLSTREAK_TOW_TURRET_PICKUP";
+  level.auto_turret_settings["tow"].hackerhintstring = &"KILLSTREAK_TURRET_HACKING";
   level.auto_turret_settings["tow"].hinticon = "hud_ks_sam_turret";
   level.auto_turret_settings["tow"].modelbase = "t6_wpn_turret_sam";
   level.auto_turret_settings["tow"].modelgoodplacement = "t6_wpn_turret_sam_yellow";
@@ -87,9 +87,9 @@ init() {
   level.auto_turret_settings["tow"].turretinitdelay = 3.0;
   level.auto_turret_settings["tow"].turretfiredelay = 5.0;
   level.auto_turret_settings["microwave"] = spawnStruct();
-  level.auto_turret_settings["microwave"].hintstring = & "KILLSTREAK_MICROWAVE_TURRET_PICKUP";
-  level.auto_turret_settings["microwave"].hackerhintstring = & "KILLSTREAK_TURRET_MICROWAVE_HACKING";
-  level.auto_turret_settings["microwave"].disablehintstring = & "KILLSTREAK_TURRET_MICROWAVE_DISABLE";
+  level.auto_turret_settings["microwave"].hintstring = &"KILLSTREAK_MICROWAVE_TURRET_PICKUP";
+  level.auto_turret_settings["microwave"].hackerhintstring = &"KILLSTREAK_TURRET_MICROWAVE_HACKING";
+  level.auto_turret_settings["microwave"].disablehintstring = &"KILLSTREAK_TURRET_MICROWAVE_DISABLE";
   level.auto_turret_settings["microwave"].hinticon = "hud_ks_microwave_turret";
   level.auto_turret_settings["microwave"].modelbase = "t6_wpn_turret_ads_world";
   level.auto_turret_settings["microwave"].modelgoodplacement = "t6_wpn_turret_ads_carry";
@@ -125,28 +125,28 @@ init() {
     maps\mp\killstreaks\_killstreaks::registerkillstreak("autoturret_mp", "autoturret_mp", "killstreak_auto_turret", "auto_turret_used", ::usesentryturretkillstreak);
     maps\mp\killstreaks\_killstreaks::registerkillstreakaltweapon("autoturret_mp", "auto_gun_turret_mp");
     maps\mp\killstreaks\_killstreaks::registerkillstreakremoteoverrideweapon("autoturret_mp", "killstreak_remote_turret_mp");
-    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("autoturret_mp", & "KILLSTREAK_EARNED_AUTO_TURRET", & "KILLSTREAK_AUTO_TURRET_NOT_AVAILABLE");
+    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("autoturret_mp", &"KILLSTREAK_EARNED_AUTO_TURRET", &"KILLSTREAK_AUTO_TURRET_NOT_AVAILABLE");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("autoturret_mp", "mpl_killstreak_auto_turret", "kls_turret_used", "", "kls_turret_enemy", "", "kls_turret_ready");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("autoturret_mp", "scr_giveautoturret");
     maps\mp\killstreaks\_killstreaks::registerkillstreak("turret_drop_mp", "turret_drop_mp", "killstreak_auto_turret_drop", "auto_turret_used", ::usekillstreakturretdrop, undefined, 1);
     maps\mp\killstreaks\_killstreaks::registerkillstreakremoteoverrideweapon("turret_drop_mp", "killstreak_remote_turret_mp");
-    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("turret_drop_mp", & "KILLSTREAK_EARNED_AUTO_TURRET", & "KILLSTREAK_AIRSPACE_FULL");
+    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("turret_drop_mp", &"KILLSTREAK_EARNED_AUTO_TURRET", &"KILLSTREAK_AIRSPACE_FULL");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("turret_drop_mp", "mpl_killstreak_turret", "kls_turret_used", "", "kls_turret_enemy", "", "kls_turret_ready");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("turret_drop_mp", "scr_giveautoturretdrop");
-    maps\mp\killstreaks\_supplydrop::registercratetype("turret_drop_mp", "killstreak", "autoturret_mp", 1, & "KILLSTREAK_AUTO_TURRET_CRATE", undefined, "MEDAL_SHARE_PACKAGE_AUTO_TURRET", maps\mp\killstreaks\_supplydrop::givecratekillstreak);
+    maps\mp\killstreaks\_supplydrop::registercratetype("turret_drop_mp", "killstreak", "autoturret_mp", 1, &"KILLSTREAK_AUTO_TURRET_CRATE", undefined, "MEDAL_SHARE_PACKAGE_AUTO_TURRET", maps\mp\killstreaks\_supplydrop::givecratekillstreak);
     level.killstreakicons["autoturret_mp"] = "hud_ks_auto_turret";
     maps\mp\killstreaks\_killstreaks::registerkillstreak("microwaveturret_mp", "microwaveturret_mp", "killstreak_microwave_turret", "microwave_turret_used", ::usemicrowaveturretkillstreak);
     maps\mp\killstreaks\_killstreaks::registerkillstreakaltweapon("microwaveturret_mp", "microwave_turret_mp");
     maps\mp\killstreaks\_killstreaks::registerkillstreakaltweapon("microwaveturret_mp", "microwave_turret_damage_mp");
-    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("microwaveturret_mp", & "KILLSTREAK_EARNED_MICROWAVE_TURRET", & "KILLSTREAK_MICROWAVE_TURRET_NOT_AVAILABLE");
+    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("microwaveturret_mp", &"KILLSTREAK_EARNED_MICROWAVE_TURRET", &"KILLSTREAK_MICROWAVE_TURRET_NOT_AVAILABLE");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("microwaveturret_mp", "mpl_killstreak_auto_turret", "kls_microwave_used", "", "kls_microwave_enemy", "", "kls_microwave_ready");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("microwaveturret_mp", "scr_givemicrowaveturret");
     maps\mp\killstreaks\_killstreaks::setkillstreakteamkillpenaltyscale("microwaveturret_mp", level.teamkillreducedpenalty);
     maps\mp\killstreaks\_killstreaks::registerkillstreak("microwaveturret_drop_mp", "microwaveturret_drop_mp", "killstreak_microwave_turret_drop", "microwave_turret_used", ::usekillstreakturretdrop, undefined, 1);
-    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("microwaveturret_drop_mp", & "KILLSTREAK_EARNED_MICROWAVE_TURRET", & "KILLSTREAK_AIRSPACE_FULL");
+    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("microwaveturret_drop_mp", &"KILLSTREAK_EARNED_MICROWAVE_TURRET", &"KILLSTREAK_AIRSPACE_FULL");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("microwaveturret_drop_mp", "mpl_killstreak_turret", "kls_microwave_used", "", "kls_microwave_enemy", "", "kls_microwave_ready");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("microwaveturret_drop_mp", "scr_givemicrowaveturretdrop");
-    maps\mp\killstreaks\_supplydrop::registercratetype("microwaveturret_drop_mp", "killstreak", "microwaveturret_mp", 1, & "KILLSTREAK_MICROWAVE_TURRET_CRATE", undefined, "MEDAL_SHARE_PACKAGE_MICROWAVE_TURRET", maps\mp\killstreaks\_supplydrop::givecratekillstreak);
+    maps\mp\killstreaks\_supplydrop::registercratetype("microwaveturret_drop_mp", "killstreak", "microwaveturret_mp", 1, &"KILLSTREAK_MICROWAVE_TURRET_CRATE", undefined, "MEDAL_SHARE_PACKAGE_MICROWAVE_TURRET", maps\mp\killstreaks\_supplydrop::givecratekillstreak);
     level.killstreakicons["microwaveturret_mp"] = "hud_ks_microwave_turret";
   }
 
@@ -612,7 +612,7 @@ updateturretplacement(turret) {
     placement = self canplayerplaceturret(turret);
     turret.origin = placement["origin"];
     turret.angles = placement["angles"];
-    good_spot_check = placement["result"] & !turret turretinhurttrigger() & !turret turretinnoturretplacementtrigger();
+    good_spot_check = placement["result"] &!turret turretinhurttrigger() &!turret turretinnoturretplacementtrigger();
     turret.canbeplaced = good_spot_check;
 
     if(turret.canbeplaced != lastplacedturret && !(turret.turrettype == "microwave" && firstmodel == 1)) {

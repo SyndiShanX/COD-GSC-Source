@@ -18,14 +18,14 @@
 #namespace zm_aat_thunder_wall;
 
 function autoexec __init__sytem__() {
-  system::register("zm_aat_thunder_wall", & __init__, undefined, "aat");
+  system::register("zm_aat_thunder_wall", &__init__, undefined, "aat");
 }
 
 function __init__() {
   if(!(isDefined(level.aat_in_use) && level.aat_in_use)) {
     return;
   }
-  aat::register("zm_aat_thunder_wall", 0.25, 0, 10, 0, 1, & result, "t7_hud_zm_aat_thunderwall", "wpn_aat_thunder_wall_plr");
+  aat::register("zm_aat_thunder_wall", 0.25, 0, 10, 0, 1, &result, "t7_hud_zm_aat_thunderwall", "wpn_aat_thunder_wall_plr");
   level._effect["zm_aat_thunder_wall" + "_break_fx"] = "zombie/fx_aat_thunderwall_zmb";
 }
 

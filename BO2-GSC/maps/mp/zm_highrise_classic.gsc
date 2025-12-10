@@ -30,7 +30,7 @@ precache() {
   maps\mp\zm_highrise_buildables::include_buildables();
   maps\mp\zm_highrise_buildables::init_buildables();
   maps\mp\zm_highrise_sq::init();
-  maps\mp\zombies\_zm_equip_springpad::init(&"ZM_HIGHRISE_EQUIP_SPRINGPAD_PICKUP_HINT_STRING", & "ZM_HIGHRISE_EQUIP_SPRINGPAD_HOWTO");
+  maps\mp\zombies\_zm_equip_springpad::init(&"ZM_HIGHRISE_EQUIP_SPRINGPAD_PICKUP_HINT_STRING", &"ZM_HIGHRISE_EQUIP_SPRINGPAD_HOWTO");
   level._zombiemode_post_respawn_callback = ::highrise_post_respawn_callback;
   onplayerconnect_callback(::highrise_player_connect_callback);
 }

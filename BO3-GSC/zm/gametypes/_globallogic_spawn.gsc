@@ -26,7 +26,7 @@
 
 function autoexec init() {
   if(!isDefined(level.givestartloadout)) {
-    level.givestartloadout = & givestartloadout;
+    level.givestartloadout = &givestartloadout;
   }
 }
 

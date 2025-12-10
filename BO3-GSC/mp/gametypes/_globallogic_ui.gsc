@@ -20,10 +20,10 @@
 function init() {}
 
 function setupcallbacks() {
-  level.autoassign = & menuautoassign;
-  level.spectator = & menuspectator;
-  level.curclass = & menuclass;
-  level.teammenu = & menuteam;
+  level.autoassign = &menuautoassign;
+  level.spectator = &menuspectator;
+  level.curclass = &menuclass;
+  level.teammenu = &menuteam;
 }
 
 function freegameplayhudelems() {

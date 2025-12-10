@@ -9,7 +9,6 @@
 #using scripts\shared\weapons\_weapons;
 
 class class_a17e6f03 {
-
   constructor() {}
 
   destructor() {}

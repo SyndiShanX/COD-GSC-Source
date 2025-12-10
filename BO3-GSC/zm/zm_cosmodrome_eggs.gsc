@@ -94,7 +94,7 @@ function teleport_target_event() {
   if(!isDefined(level.var_74eed1d3) || !level.var_74eed1d3) {
     level.teleport_target thread zm_cosmodrome::function_620401c0(level.teleport_target.origin, "", "", 2);
   }
-  level.black_hole_bomb_loc_check_func = & bhb_teleport_loc_check;
+  level.black_hole_bomb_loc_check_func = &bhb_teleport_loc_check;
   level waittill("hash_2a49912");
   teleport_target_spark delete();
   level flag::wait_till("target_teleported");
@@ -183,7 +183,7 @@ function function_27c6e567(switches) {
   }
   while(!level flag::get("switches_synced")) {
     level flag::wait_till("monkey_round");
-    array::thread_all(switches, & reveal_switch);
+    array::thread_all(switches, &reveal_switch);
     self thread switch_watcher();
     level util::waittill_either("between_round_over", "switches_synced");
   }
@@ -533,7 +533,7 @@ function weapon_combo_event() {
   focal_point setModel("tag_origin");
   fx = playFXOnTag(level._effect["gersh_spark"], focal_point, "tag_origin");
   level.black_hold_bomb_target_trig = spawn("trigger_radius", weapon_combo_spot.origin, 0, 50, 72);
-  level.black_hole_bomb_loc_check_func = & bhb_combo_loc_check;
+  level.black_hole_bomb_loc_check_func = &bhb_combo_loc_check;
   focal_point thread function_a0ad103c(weapon_combo_spot);
   level flag::wait_till("weapons_combined");
   level.black_hold_bomb_target_trig delete();
@@ -583,7 +583,7 @@ function wait_for_combo(trig) {
     doll_hit = 1;
   }
   players = getplayers();
-  array::thread_all(players, & thundergun_check, self, trig, weapon_combo_spot);
+  array::thread_all(players, &thundergun_check, self, trig, weapon_combo_spot);
   while(true) {
     trig waittill("damage", amount, inflictor, direction, point, type, tagname, modelname, partname, weapon);
     if(isDefined(inflictor)) {

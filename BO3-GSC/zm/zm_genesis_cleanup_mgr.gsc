@@ -17,7 +17,7 @@
 #namespace genesis_cleanup;
 
 function autoexec __init__sytem__() {
-  system::register("genesis_cleanup", & __init__, & __main__, undefined);
+  system::register("genesis_cleanup", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -26,7 +26,7 @@ function __init__() {
 
 function __main__() {
   level thread cleanup_main();
-  level.no_target_override = & no_target_override;
+  level.no_target_override = &no_target_override;
 }
 
 function force_check_now() {

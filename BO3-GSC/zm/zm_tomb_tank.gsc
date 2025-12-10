@@ -34,9 +34,9 @@ function init() {
   clientfield::register("vehicle", "tank_tread_fx", 21000, 1, "int");
   clientfield::register("vehicle", "tank_flamethrower_fx", 21000, 2, "int");
   clientfield::register("vehicle", "tank_cooldown_fx", 21000, 2, "int");
-  callback::on_spawned( & onplayerspawned);
-  level.enemy_location_override_func = & enemy_location_override;
-  level.zm_mantle_over_40_move_speed_override = & zm_mantle_over_40_move_speed_override;
+  callback::on_spawned(&onplayerspawned);
+  level.enemy_location_override_func = &enemy_location_override;
+  level.zm_mantle_over_40_move_speed_override = &zm_mantle_over_40_move_speed_override;
 }
 
 function main() {

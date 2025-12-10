@@ -255,19 +255,19 @@ onStartGameType() {
 
   level.damageListSize = 20;
 
-  setObjectiveText("allies", & "ALIEN_OBJECTIVES_ALIENS");
-  setObjectiveText("axis", & "ALIEN_OBJECTIVES_ALIENS");
+  setObjectiveText("allies", &"ALIEN_OBJECTIVES_ALIENS");
+  setObjectiveText("axis", &"ALIEN_OBJECTIVES_ALIENS");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", & "ALIEN_OBJECTIVES_ALIENS");
-    setObjectiveScoreText("axis", & "ALIEN_OBJECTIVES_ALIENS");
+    setObjectiveScoreText("allies", &"ALIEN_OBJECTIVES_ALIENS");
+    setObjectiveScoreText("axis", &"ALIEN_OBJECTIVES_ALIENS");
   } else {
-    setObjectiveScoreText("allies", & "ALIEN_OBJECTIVES_ALIENS_SCORE");
-    setObjectiveScoreText("axis", & "ALIEN_OBJECTIVES_ALIENS_SCORE");
+    setObjectiveScoreText("allies", &"ALIEN_OBJECTIVES_ALIENS_SCORE");
+    setObjectiveScoreText("axis", &"ALIEN_OBJECTIVES_ALIENS_SCORE");
   }
 
-  setObjectiveHintText("allies", & "ALIEN_OBJECTIVES_ALIENS_HINT");
-  setObjectiveHintText("axis", & "ALIEN_OBJECTIVES_ALIENS_HINT");
+  setObjectiveHintText("allies", &"ALIEN_OBJECTIVES_ALIENS_HINT");
+  setObjectiveHintText("axis", &"ALIEN_OBJECTIVES_ALIENS_HINT");
 
   maps\mp\alien\_persistence::BBData_init();
   maps\mp\alien\_persistence::rank_init();
@@ -1413,56 +1413,56 @@ show_tutorial_text(weapon) {
     case "alienbetty_mp":
       if(!self.betty_tutorial_given) {
         self.betty_tutorial_given = true;
-        self setLowerMessage("tutorial", & "ALIEN_COLLECTIBLES_TUTORIAL_BETTY", 3.5);
+        self setLowerMessage("tutorial", &"ALIEN_COLLECTIBLES_TUTORIAL_BETTY", 3.5);
       }
       break;
 
     case "alienclaymore_mp":
       if(!self.claymore_tutorial_given) {
         self.claymore_tutorial_given = true;
-        self setLowerMessage("tutorial", & "ALIEN_COLLECTIBLES_TUTORIAL_CLAYMORE", 3.5);
+        self setLowerMessage("tutorial", &"ALIEN_COLLECTIBLES_TUTORIAL_CLAYMORE", 3.5);
       }
       break;
 
     case "alienthrowingknife_mp":
       if(!self.pet_tutorial_given) {
         self.pet_tutorial_given = true;
-        self setLowerMessage("tutorial", & "ALIEN_COLLECTIBLES_TUTORIAL_PET", 3.5);
+        self setLowerMessage("tutorial", &"ALIEN_COLLECTIBLES_TUTORIAL_PET", 3.5);
       }
       break;
 
     case "alienflare_mp":
       if(!self.flare_tutorial_given) {
         self.flare_tutorial_given = true;
-        self setLowerMessage("tutorial", & "ALIEN_COLLECTIBLES_TUTORIAL_FLARE", 3.5);
+        self setLowerMessage("tutorial", &"ALIEN_COLLECTIBLES_TUTORIAL_FLARE", 3.5);
       }
       break;
 
     case "aliensemtex_mp":
       if(!self.semtex_tutorial_given) {
         self.semtex_tutorial_given = true;
-        self setLowerMessage("tutorial", & "ALIEN_COLLECTIBLES_TUTORIAL_SEMTEX", 3.5);
+        self setLowerMessage("tutorial", &"ALIEN_COLLECTIBLES_TUTORIAL_SEMTEX", 3.5);
       }
       break;
 
     case "alienmortar_shell_mp":
       if(!self.mortar_tutorial_given) {
         self.mortar_tutorial_given = true;
-        self setLowerMessage("tutorial", & "ALIEN_COLLECTIBLES_TUTORIAL_MORTARSHELL", 3.5);
+        self setLowerMessage("tutorial", &"ALIEN_COLLECTIBLES_TUTORIAL_MORTARSHELL", 3.5);
       }
       break;
 
     case "aliensoflam_mp":
       if(!self.soflam_tutorial_given) {
         self.soflam_tutorial_given = true;
-        self setLowerMessage("tutorial", & "ALIEN_COLLECTIBLES_TUTORIAL_SOFLAM", 3.5);
+        self setLowerMessage("tutorial", &"ALIEN_COLLECTIBLES_TUTORIAL_SOFLAM", 3.5);
       }
       break;
 
     case "alientrophy_mp":
       if(!self.trophy_tutorial_given) {
         self.trophy_tutorial_given = true;
-        self setLowerMessage("tutorial", & "ALIEN_COLLECTIBLES_TUTORIAL_TROPHY", 3.5);
+        self setLowerMessage("tutorial", &"ALIEN_COLLECTIBLES_TUTORIAL_TROPHY", 3.5);
       }
       break;
     case "alienbomb_mp":
@@ -1477,7 +1477,7 @@ get_drill_tutorial_text() {
   if(isDefined(level.drill_tutorial_text))
     return level.drill_tutorial_text;
 
-  return & "ALIEN_COLLECTIBLES_GO_PLANT_BOMB";
+  return &"ALIEN_COLLECTIBLES_GO_PLANT_BOMB";
 }
 
 enable_disable_usability_monitor() {

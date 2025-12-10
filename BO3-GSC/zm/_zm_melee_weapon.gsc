@@ -18,7 +18,7 @@
 #namespace zm_melee_weapon;
 
 function autoexec __init__sytem__() {
-  system::register("melee_weapon", & __init__, & __main__, undefined);
+  system::register("melee_weapon", &__init__, &__main__, undefined);
 }
 
 function private __init__() {
@@ -90,7 +90,7 @@ function prepare_stub(stub, weapon, flourish_weapon, ballistic_weapon, ballistic
     stub.flourish_weapon = flourish_weapon;
     stub.ballistic_weapon = ballistic_weapon;
     stub.ballistic_upgraded_weapon = ballistic_upgraded_weapon;
-    stub.trigger_func = & melee_weapon_think;
+    stub.trigger_func = &melee_weapon_think;
     stub.flourish_fn = flourish_fn;
   }
 }

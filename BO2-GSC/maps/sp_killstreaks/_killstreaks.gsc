@@ -299,7 +299,7 @@ streaknotify(streakval) {
   self waittill("playerKilledChallengesProcessed");
   wait 0.05;
   notifydata = spawnStruct();
-  notifydata.titlelabel = & "MP_KILLSTREAK_N";
+  notifydata.titlelabel = &"MP_KILLSTREAK_N";
   notifydata.titletext = streakval;
   notifydata.iconheight = 32;
 }

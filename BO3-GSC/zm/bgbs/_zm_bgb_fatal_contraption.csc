@@ -12,7 +12,7 @@
 #namespace zm_bgb_fatal_contraption;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_fatal_contraption", & __init__, undefined, undefined);
+  system::register("zm_bgb_fatal_contraption", &__init__, undefined, undefined);
 }
 
 function __init__() {

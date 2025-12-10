@@ -15,17 +15,17 @@
 #namespace _gadget_cacophany;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_cacophany", & __init__, undefined, undefined);
+  system::register("gadget_cacophany", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(25, & gadget_cacophany_on, & gadget_cacophany_off);
-  ability_player::register_gadget_possession_callbacks(25, & gadget_cacophany_on_give, & gadget_cacophany_on_take);
-  ability_player::register_gadget_flicker_callbacks(25, & gadget_cacophany_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(25, & gadget_cacophany_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(25, & gadget_cacophany_is_flickering);
-  ability_player::register_gadget_primed_callbacks(25, & gadget_cacophany_is_primed);
-  callback::on_connect( & gadget_cacophany_on_connect);
+  ability_player::register_gadget_activation_callbacks(25, &gadget_cacophany_on, &gadget_cacophany_off);
+  ability_player::register_gadget_possession_callbacks(25, &gadget_cacophany_on_give, &gadget_cacophany_on_take);
+  ability_player::register_gadget_flicker_callbacks(25, &gadget_cacophany_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(25, &gadget_cacophany_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(25, &gadget_cacophany_is_flickering);
+  ability_player::register_gadget_primed_callbacks(25, &gadget_cacophany_is_primed);
+  callback::on_connect(&gadget_cacophany_on_connect);
 }
 
 function gadget_cacophany_is_inuse(slot) {

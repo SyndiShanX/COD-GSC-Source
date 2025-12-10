@@ -634,7 +634,7 @@ checkEndCombat(meleeRange) {
 prepareAttackPlayer() {
   // [{+melee}] Melee the dog right when it bites to grab its throat.
   // Watch for the ^3[{+melee}]^7 hint to grab a dog.
-  level.dog_death_quote = & "NEW_DOG_DEATH_DO_NOTHING_ALT";
+  level.dog_death_quote = &"NEW_DOG_DEATH_DO_NOTHING_ALT";
   level.dog_death_type = "nothing";
   distanceToTarget = distance(self.origin, self.enemy.origin);
 
@@ -774,7 +774,7 @@ dog_melee_death() {
             self setanimlimited( % attack_player_late, 1, 0.2, 1);
             // [{+melee}] Melee the dog before it bites to grab its throat.
             // Too late. Watch for the ^3[{+melee}]^7 hint to grab a dog.
-            level.dog_death_quote = & "NEW_DOG_DEATH_TOO_LATE_ALT";
+            level.dog_death_quote = &"NEW_DOG_DEATH_TOO_LATE_ALT";
             level.dog_death_type = "late";
           }
 
@@ -785,7 +785,7 @@ dog_melee_death() {
         if(self.meleeingPlayer can_early_melee()) {
           // [{+melee}] Wait for the dog to bite to grab its throat.
           // Too early. Wait for the ^3[{+melee}]^7 hint to grab a dog.
-          level.dog_death_quote = & "NEW_DOG_DEATH_TOO_SOON_ALT";
+          level.dog_death_quote = &"NEW_DOG_DEATH_TOO_SOON_ALT";
           level.dog_death_type = "soon";
 
           rate = dog_vs_player_anim_rate();

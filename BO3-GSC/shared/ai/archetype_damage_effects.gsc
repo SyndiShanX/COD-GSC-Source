@@ -17,10 +17,10 @@
 function autoexec main() {
   clientfield::register("actor", "arch_actor_fire_fx", 1, 2, "int");
   clientfield::register("actor", "arch_actor_char", 1, 2, "int");
-  callback::on_actor_damage( & onactordamagecallback);
-  callback::on_vehicle_damage( & onvehicledamagecallback);
-  callback::on_actor_killed( & onactorkilledcallback);
-  callback::on_vehicle_killed( & onvehiclekilledcallback);
+  callback::on_actor_damage(&onactordamagecallback);
+  callback::on_vehicle_damage(&onvehicledamagecallback);
+  callback::on_actor_killed(&onactorkilledcallback);
+  callback::on_vehicle_killed(&onvehiclekilledcallback);
 }
 
 function onactordamagecallback(params) {

@@ -11,10 +11,10 @@ init() {
   var_00.modelplacement = "cp_town_teleporter_device_good";
   var_00.modelplacementfailed = "cp_town_teleporter_device_bad";
   var_00.placedmodel = "cp_town_teleporter_device";
-  var_00.pow = & "COOP_CRAFTABLES_PICKUP";
-  var_00.placestring = & "COOP_CRAFTABLES_PLACE";
-  var_00.cannotplacestring = & "COOP_CRAFTABLES_CANNOT_PLACE";
-  var_00.placecancelablestring = & "COOP_CRAFTABLES_PLACE_CANCELABLE";
+  var_00.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_00.placestring = &"COOP_CRAFTABLES_PLACE";
+  var_00.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
+  var_00.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
   var_00.placementheighttolerance = 30;
   var_00.placementradius = 24;
   var_00.carriedtrapoffset = (0, 0, 25);

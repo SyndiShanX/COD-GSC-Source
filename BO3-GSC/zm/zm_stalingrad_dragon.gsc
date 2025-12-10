@@ -50,7 +50,7 @@
 #namespace dragon;
 
 function autoexec __init__sytem__() {
-  system::register("stalingrad_dragon", & __init__, & __main__, undefined);
+  system::register("stalingrad_dragon", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -155,18 +155,18 @@ function function_8be04f83() {
   level.var_428b5b88 = 0;
   level.var_f73b438a = 0;
   level.var_fc730f22 = [];
-  zm_weapons::add_custom_limited_weapon_check( & function_8c1bac65);
+  zm_weapons::add_custom_limited_weapon_check(&function_8c1bac65);
   level.var_6e68a823 = [];
   level.var_6e68a823["library"] = "cin_t7_ai_zm_dlc3_dragon_transport_roost2";
   level.var_6e68a823["factory"] = "cin_t7_ai_zm_dlc3_dragon_transport_roost1";
   level.var_6e68a823["judicial"] = "cin_t7_ai_zm_dlc3_dragon_transport_roost3";
   foreach(var_76862d83 in level.var_6e68a823) {
     if(isDefined(var_76862d83)) {
-      scene::add_scene_func(var_76862d83, & function_c8c51697, "play");
-      scene::add_scene_func(var_76862d83, & function_7ba58f31, "done");
+      scene::add_scene_func(var_76862d83, &function_c8c51697, "play");
+      scene::add_scene_func(var_76862d83, &function_7ba58f31, "done");
     }
-    scene::add_scene_func(var_76862d83 + "_idle_2_pavlovs", & function_d2059ba7, "play");
-    scene::add_scene_func(var_76862d83 + "_idle_2_pavlovs", & function_c65ef401, "done");
+    scene::add_scene_func(var_76862d83 + "_idle_2_pavlovs", &function_d2059ba7, "play");
+    scene::add_scene_func(var_76862d83 + "_idle_2_pavlovs", &function_c65ef401, "done");
   }
   level.var_f5464041 = [];
   level.var_f5464041["library"] = 1;
@@ -213,11 +213,11 @@ function function_cf4cd159() {
   level.var_5eab5443["boss_east"] = "fxexp_400";
   level.var_5eab5443["boss_south"] = "fxexp_401";
   level.var_5eab5443["boss_west"] = "fxexp_402";
-  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_flight_idle_a_1", & function_59bb533b, "play");
+  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_flight_idle_a_1", &function_59bb533b, "play");
   foreach(var_29f29c1d in level.var_973195fc) {
     if(isDefined(var_29f29c1d)) {
-      scene::add_scene_func(var_29f29c1d, & function_4dfd2088, "play");
-      scene::add_scene_func(var_29f29c1d, & function_9ccce34a, "done");
+      scene::add_scene_func(var_29f29c1d, &function_4dfd2088, "play");
+      scene::add_scene_func(var_29f29c1d, &function_9ccce34a, "done");
     }
   }
   var_63b19580 = array("start", "alley", "opera_street", "department_store", "factory", "library", "red_brick", "yellow");
@@ -1028,8 +1028,8 @@ function function_eb1965f1(var_ffc320da) {
   s_unitrigger.radius = self.radius;
   s_unitrigger.height = self.height;
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger, 0);
-  s_unitrigger.prompt_and_visibility_func = & function_bd21006c;
-  zm_unitrigger::register_static_unitrigger(s_unitrigger, & function_8b508a1b);
+  s_unitrigger.prompt_and_visibility_func = &function_bd21006c;
+  zm_unitrigger::register_static_unitrigger(s_unitrigger, &function_8b508a1b);
   self.s_unitrigger = s_unitrigger;
 }
 
@@ -1390,8 +1390,8 @@ function function_cad59534(var_ffc320da) {
     s_unitrigger.radius = s_unitrigger_stub.radius;
     s_unitrigger.height = s_unitrigger_stub.height;
     zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger, 1);
-    s_unitrigger.prompt_and_visibility_func = & function_cd9b4bf3;
-    zm_unitrigger::register_static_unitrigger(s_unitrigger, & function_69f9b2b8);
+    s_unitrigger.prompt_and_visibility_func = &function_cd9b4bf3;
+    zm_unitrigger::register_static_unitrigger(s_unitrigger, &function_69f9b2b8);
     s_unitrigger_stub.s_unitrigger = s_unitrigger;
   }
 }
@@ -1604,7 +1604,7 @@ function function_63326db4(b_debug = 0) {
     dragon_boss_intro_init();
     function_17b7a6a();
   }
-  zm_spawner::deregister_zombie_death_event_callback( & namespace_2e6e7fce::function_1389d425);
+  zm_spawner::deregister_zombie_death_event_callback(&namespace_2e6e7fce::function_1389d425);
   level zm_stalingrad_util::function_3804dbf1();
   zm_stalingrad_util::function_adf4d1d0();
   util::wait_network_frame();
@@ -1613,7 +1613,7 @@ function function_63326db4(b_debug = 0) {
   level.whelp_no_power_up_pickup = 1;
   function_c0e035d6("boss_arena_spawn");
   level thread scene::play("cin_sta_vign_mech_intro");
-  zm::register_player_damage_callback( & function_6689dfc5);
+  zm::register_player_damage_callback(&function_6689dfc5);
   wait(14);
   level.var_357a65b clientfield::set("dragon_mouth_fx", 1);
   level scene::play("cin_t7_ai_zm_dlc3_dragon_boss_fight_intro_b");
@@ -1624,7 +1624,7 @@ function function_c0e035d6(str_spawn, var_bf7e118f = 0, var_8f4dddff = 1) {
     zombie_utility::ai_calculate_health(20);
   }
   var_ad0ee644 = struct::get_array(str_spawn, "targetname");
-  var_ad0ee644 = array::filter(var_ad0ee644, 0, & zm_stalingrad_util::function_c66f2957);
+  var_ad0ee644 = array::filter(var_ad0ee644, 0, &zm_stalingrad_util::function_c66f2957);
   if(!var_bf7e118f) {
     level notify("stop_dragon_boss_zombie");
     wait(1);
@@ -1694,28 +1694,28 @@ function function_ffa0a9ed() {
   level.var_614028f9[2]["east"] = "cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_a";
   level.var_614028f9[2]["west"] = "cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_c";
   level flag::init("dragon_interrupt");
-  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_death_b", & function_6593b39c, "play");
-  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_death_b", & function_4d11a596, "done");
-  scene::add_scene_func("p7_fxanim_zm_stal_dragon_chunks_bundle", & function_d0a25c9e, "play");
-  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_intro_b", & function_883bba2, "done");
-  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_lance_pain_shoulder_a", & function_b138e200, "play");
-  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_lance_pain_belly_c", & function_b138e200, "play");
-  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_lance_pain_neck_b", & function_b138e200, "play");
-  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_lance_pain_shoulder_a", & function_4fd8b482, "done");
-  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_lance_pain_belly_c", & function_4fd8b482, "done");
-  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_lance_pain_neck_b", & function_4fd8b482, "done");
-  scene::add_scene_func("cin_sta_1st_boss_transition_dempsey", & function_8d48f9f7, "play", 0);
-  scene::add_scene_func("cin_sta_1st_boss_transition_nikolai", & function_8d48f9f7, "play", 1);
-  scene::add_scene_func("cin_sta_1st_boss_transition_richtofen", & function_8d48f9f7, "play", 2);
-  scene::add_scene_func("cin_sta_1st_boss_transition_takeo", & function_8d48f9f7, "play", 3);
-  scene::add_scene_func("cin_sta_1st_boss_transition_dempsey", & dragon_boss_transition_dempsey_done, "done");
-  scene::add_scene_func("cin_sta_1st_boss_transition_nikolai", & dragon_boss_transition_nikolai_done, "done");
-  scene::add_scene_func("cin_sta_1st_boss_transition_richtofen", & dragon_boss_transition_richtofen_done, "done");
-  scene::add_scene_func("cin_sta_1st_boss_transition_takeo", & dragon_boss_transition_takeo_done, "done");
-  scene::add_scene_func("cin_sta_vign_mech_intro", & function_109151c2, "init");
-  scene::add_scene_func("cin_sta_vign_mech_intro", & function_bd0972bc, "done");
-  scene::add_scene_func("", & function_e73b4306, "");
-  scene::add_scene_func("", & function_a2ac4477, "");
+  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_death_b", &function_6593b39c, "play");
+  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_death_b", &function_4d11a596, "done");
+  scene::add_scene_func("p7_fxanim_zm_stal_dragon_chunks_bundle", &function_d0a25c9e, "play");
+  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_intro_b", &function_883bba2, "done");
+  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_lance_pain_shoulder_a", &function_b138e200, "play");
+  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_lance_pain_belly_c", &function_b138e200, "play");
+  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_lance_pain_neck_b", &function_b138e200, "play");
+  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_lance_pain_shoulder_a", &function_4fd8b482, "done");
+  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_lance_pain_belly_c", &function_4fd8b482, "done");
+  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_lance_pain_neck_b", &function_4fd8b482, "done");
+  scene::add_scene_func("cin_sta_1st_boss_transition_dempsey", &function_8d48f9f7, "play", 0);
+  scene::add_scene_func("cin_sta_1st_boss_transition_nikolai", &function_8d48f9f7, "play", 1);
+  scene::add_scene_func("cin_sta_1st_boss_transition_richtofen", &function_8d48f9f7, "play", 2);
+  scene::add_scene_func("cin_sta_1st_boss_transition_takeo", &function_8d48f9f7, "play", 3);
+  scene::add_scene_func("cin_sta_1st_boss_transition_dempsey", &dragon_boss_transition_dempsey_done, "done");
+  scene::add_scene_func("cin_sta_1st_boss_transition_nikolai", &dragon_boss_transition_nikolai_done, "done");
+  scene::add_scene_func("cin_sta_1st_boss_transition_richtofen", &dragon_boss_transition_richtofen_done, "done");
+  scene::add_scene_func("cin_sta_1st_boss_transition_takeo", &dragon_boss_transition_takeo_done, "done");
+  scene::add_scene_func("cin_sta_vign_mech_intro", &function_109151c2, "init");
+  scene::add_scene_func("cin_sta_vign_mech_intro", &function_bd0972bc, "done");
+  scene::add_scene_func("", &function_e73b4306, "");
+  scene::add_scene_func("", &function_a2ac4477, "");
 }
 
 function function_b138e200(a_ents) {
@@ -1784,33 +1784,33 @@ function function_d76099a6() {
 function dragon_boss_init() {
   level.var_357a65b setModel("c_zom_dlc3_dragon_body_boss_hazard");
   foreach(var_5cd4afc1 in level.var_553153a1) {
-    scene::add_scene_func(var_5cd4afc1, & function_cab64a16, "play");
-    scene::add_scene_func(var_5cd4afc1, & function_3bc22c00, "done");
+    scene::add_scene_func(var_5cd4afc1, &function_cab64a16, "play");
+    scene::add_scene_func(var_5cd4afc1, &function_3bc22c00, "done");
   }
   foreach(var_a4070b4f in level.var_7804ba2f) {
-    scene::add_scene_func(var_a4070b4f, & function_c08b162c, "play");
-    scene::add_scene_func(var_a4070b4f, & function_8226b1a6, "done");
+    scene::add_scene_func(var_a4070b4f, &function_c08b162c, "play");
+    scene::add_scene_func(var_a4070b4f, &function_8226b1a6, "done");
   }
   foreach(var_13dbb8bc in level.var_2c32671c) {
-    scene::add_scene_func(var_13dbb8bc, & function_b499c281, "play");
-    scene::add_scene_func(var_13dbb8bc, & function_cbded78b, "done");
+    scene::add_scene_func(var_13dbb8bc, &function_b499c281, "play");
+    scene::add_scene_func(var_13dbb8bc, &function_cbded78b, "done");
   }
   foreach(var_3ee20f11 in level.var_6bda5d71) {
-    scene::add_scene_func(var_3ee20f11, & function_c24d6636, "play");
-    scene::add_scene_func(var_3ee20f11, & function_33594820, "done");
-    scene::add_scene_func(var_3ee20f11 + "_v2", & function_c24d6636, "play");
-    scene::add_scene_func(var_3ee20f11 + "_v2", & function_33594820, "done");
+    scene::add_scene_func(var_3ee20f11, &function_c24d6636, "play");
+    scene::add_scene_func(var_3ee20f11, &function_33594820, "done");
+    scene::add_scene_func(var_3ee20f11 + "_v2", &function_c24d6636, "play");
+    scene::add_scene_func(var_3ee20f11 + "_v2", &function_33594820, "done");
   }
   foreach(var_b4464c14 in level.var_c3753bf4) {
-    scene::add_scene_func(var_b4464c14, & function_829c1ad9, "play");
-    scene::add_scene_func(var_b4464c14, & function_3b09a8e3, "done");
+    scene::add_scene_func(var_b4464c14, &function_829c1ad9, "play");
+    scene::add_scene_func(var_b4464c14, &function_3b09a8e3, "done");
   }
-  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_a", & function_da9435cb, "play");
-  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_b", & function_da9435cb, "play");
-  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_c", & function_da9435cb, "play");
-  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_a", & function_a1be712d, "done");
-  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_b", & function_a1be712d, "done");
-  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_c", & function_a1be712d, "done");
+  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_a", &function_da9435cb, "play");
+  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_b", &function_da9435cb, "play");
+  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_c", &function_da9435cb, "play");
+  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_a", &function_a1be712d, "done");
+  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_b", &function_a1be712d, "done");
+  scene::add_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_c", &function_a1be712d, "done");
   level.var_81fa8ec0 = 0;
   level.var_62ebede = 0;
   level.var_cbe80f3e = 0;
@@ -2568,33 +2568,33 @@ function function_30560c4b() {
 
 function function_cf119cfd() {
   foreach(var_5cd4afc1 in level.var_553153a1) {
-    scene::remove_scene_func(var_5cd4afc1, & function_cab64a16, "play");
-    scene::remove_scene_func(var_5cd4afc1, & function_3bc22c00, "done");
+    scene::remove_scene_func(var_5cd4afc1, &function_cab64a16, "play");
+    scene::remove_scene_func(var_5cd4afc1, &function_3bc22c00, "done");
   }
   foreach(var_a4070b4f in level.var_7804ba2f) {
-    scene::remove_scene_func(var_a4070b4f, & function_c08b162c, "play");
-    scene::remove_scene_func(var_a4070b4f, & function_8226b1a6, "done");
+    scene::remove_scene_func(var_a4070b4f, &function_c08b162c, "play");
+    scene::remove_scene_func(var_a4070b4f, &function_8226b1a6, "done");
   }
   foreach(var_13dbb8bc in level.var_2c32671c) {
-    scene::remove_scene_func(var_13dbb8bc, & function_b499c281, "play");
-    scene::remove_scene_func(var_13dbb8bc, & function_cbded78b, "done");
+    scene::remove_scene_func(var_13dbb8bc, &function_b499c281, "play");
+    scene::remove_scene_func(var_13dbb8bc, &function_cbded78b, "done");
   }
   foreach(var_3ee20f11 in level.var_6bda5d71) {
-    scene::remove_scene_func(var_3ee20f11, & function_c24d6636, "play");
-    scene::remove_scene_func(var_3ee20f11, & function_33594820, "done");
-    scene::remove_scene_func(var_3ee20f11 + "_v2", & function_c24d6636, "play");
-    scene::remove_scene_func(var_3ee20f11 + "_v2", & function_33594820, "done");
+    scene::remove_scene_func(var_3ee20f11, &function_c24d6636, "play");
+    scene::remove_scene_func(var_3ee20f11, &function_33594820, "done");
+    scene::remove_scene_func(var_3ee20f11 + "_v2", &function_c24d6636, "play");
+    scene::remove_scene_func(var_3ee20f11 + "_v2", &function_33594820, "done");
   }
   foreach(var_b4464c14 in level.var_c3753bf4) {
-    scene::remove_scene_func(var_b4464c14, & function_829c1ad9, "play");
-    scene::remove_scene_func(var_b4464c14, & function_3b09a8e3, "done");
+    scene::remove_scene_func(var_b4464c14, &function_829c1ad9, "play");
+    scene::remove_scene_func(var_b4464c14, &function_3b09a8e3, "done");
   }
-  scene::remove_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_a", & function_da9435cb, "play");
-  scene::remove_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_b", & function_da9435cb, "play");
-  scene::remove_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_c", & function_da9435cb, "play");
-  scene::remove_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_a", & function_a1be712d, "done");
-  scene::remove_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_b", & function_a1be712d, "done");
-  scene::remove_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_c", & function_a1be712d, "done");
+  scene::remove_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_a", &function_da9435cb, "play");
+  scene::remove_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_b", &function_da9435cb, "play");
+  scene::remove_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_c", &function_da9435cb, "play");
+  scene::remove_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_a", &function_a1be712d, "done");
+  scene::remove_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_b", &function_a1be712d, "done");
+  scene::remove_scene_func("cin_t7_ai_zm_dlc3_dragon_boss_fight_pain_hvy_c", &function_a1be712d, "done");
   level flag::clear("dragon_boss_init");
   level.var_357a65b.var_caa5308f delete();
   level.var_357a65b delete();
@@ -2774,7 +2774,7 @@ function function_32faa6e1(no_delay = 0) {
     if(isDefined(var_b1a4952d)) {
       var_7649b699 = var_b1a4952d.script_string;
     }
-    var_f315c28 = array::filter(level.var_4c8e35f4, 0, & function_30e5b419, level.var_181b1223, var_7649b699);
+    var_f315c28 = array::filter(level.var_4c8e35f4, 0, &function_30e5b419, level.var_181b1223, var_7649b699);
     var_2cd775bb = array::random(var_f315c28);
     self setvehgoalpos(var_2cd775bb.origin, 1, 1);
     foundpath = self vehicle_ai::waittill_pathresult();

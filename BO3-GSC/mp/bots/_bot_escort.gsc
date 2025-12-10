@@ -18,7 +18,7 @@
 #namespace namespace_ebd80b8b;
 
 function init() {
-  level.botidle = & bot_idle;
+  level.botidle = &bot_idle;
 }
 
 function bot_idle() {

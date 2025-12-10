@@ -89,7 +89,7 @@ getRespawnDelay() {
     if(!level.spawnDelay)
       return undefined;
     if(level.spawnDelay >= level.hqAutoDestroyTime) {
-      self.lowerMessageOverride = & "MP_WAITING_FOR_HQ";
+      self.lowerMessageOverride = &"MP_WAITING_FOR_HQ";
     }
     if(level.delayPlayer) {
       return min(level.spawnDelay, timeRemaining);
@@ -100,19 +100,19 @@ getRespawnDelay() {
 }
 
 onStartGameType() {
-  maps\mp\gametypes\_globallogic::setObjectiveText("allies", & "OBJECTIVES_KOTH");
-  maps\mp\gametypes\_globallogic::setObjectiveText("axis", & "OBJECTIVES_KOTH");
+  maps\mp\gametypes\_globallogic::setObjectiveText("allies", &"OBJECTIVES_KOTH");
+  maps\mp\gametypes\_globallogic::setObjectiveText("axis", &"OBJECTIVES_KOTH");
   if(level.splitscreen) {
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", & "OBJECTIVES_KOTH");
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", & "OBJECTIVES_KOTH");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", &"OBJECTIVES_KOTH");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", &"OBJECTIVES_KOTH");
   } else {
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", & "OBJECTIVES_KOTH_SCORE");
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", & "OBJECTIVES_KOTH_SCORE");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", &"OBJECTIVES_KOTH_SCORE");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", &"OBJECTIVES_KOTH_SCORE");
   }
-  level.objectiveHintPrepareHQ = & "MP_CONTROL_HQ";
-  level.objectiveHintCaptureHQ = & "MP_CAPTURE_HQ";
-  level.objectiveHintDestroyHQ = & "MP_DESTROY_HQ";
-  level.objectiveHintDefendHQ = & "MP_DEFEND_HQ";
+  level.objectiveHintPrepareHQ = &"MP_CONTROL_HQ";
+  level.objectiveHintCaptureHQ = &"MP_CAPTURE_HQ";
+  level.objectiveHintDestroyHQ = &"MP_DESTROY_HQ";
+  level.objectiveHintDefendHQ = &"MP_DEFEND_HQ";
   precacheString(level.objectiveHintPrepareHQ);
   precacheString(level.objectiveHintCaptureHQ);
   precacheString(level.objectiveHintDestroyHQ);
@@ -163,13 +163,13 @@ spawn_next_radio() {
 HQMainLoop() {
   level endon("game_ended");
   level.hqRevealTime = -100000;
-  hqSpawningInStr = & "MP_HQ_AVAILABLE_IN";
+  hqSpawningInStr = &"MP_HQ_AVAILABLE_IN";
   if(level.kothmode) {
-    hqDestroyedInFriendlyStr = & "MP_HQ_DESPAWN_IN";
-    hqDestroyedInEnemyStr = & "MP_HQ_DESPAWN_IN";
+    hqDestroyedInFriendlyStr = &"MP_HQ_DESPAWN_IN";
+    hqDestroyedInEnemyStr = &"MP_HQ_DESPAWN_IN";
   } else {
-    hqDestroyedInFriendlyStr = & "MP_HQ_REINFORCEMENTS_IN";
-    hqDestroyedInEnemyStr = & "MP_HQ_DESPAWN_IN";
+    hqDestroyedInFriendlyStr = &"MP_HQ_REINFORCEMENTS_IN";
+    hqDestroyedInEnemyStr = &"MP_HQ_DESPAWN_IN";
   }
   precacheString(hqSpawningInStr);
   precacheString(hqDestroyedInFriendlyStr);
@@ -317,7 +317,7 @@ forceSpawnTeam(team) {
     if(isDefined(player.pers["team"]) && player.pers["team"] == "spectator") {
       continue;
     }
-    player.lowerMessageOverride = & "MP_PRESS_ACTIVATE_TO_RESPAWN";
+    player.lowerMessageOverride = &"MP_PRESS_ACTIVATE_TO_RESPAWN";
     player setLowerMessage(&"MP_PRESS_ACTIVATE_TO_RESPAWN");
     if(player.pers["team"] == team) {
       player notify("force_spawn");

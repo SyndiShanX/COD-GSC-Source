@@ -13,7 +13,7 @@
 function main() {
   precache_scripted_fx();
   precache_createfx_fx();
-  callback::on_localclient_connect( & function_129a815f);
+  callback::on_localclient_connect(&function_129a815f);
 }
 
 function precache_scripted_fx() {

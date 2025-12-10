@@ -17,11 +17,11 @@
 #namespace _gadget_shock_field;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_shock_field", & __init__, undefined, undefined);
+  system::register("gadget_shock_field", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("allplayers", "shock_field", 1, 1, "int", & player_shock_changed, 0, 1);
+  clientfield::register("allplayers", "shock_field", 1, 1, "int", &player_shock_changed, 0, 1);
   level.shock_field_fx = [];
 }
 

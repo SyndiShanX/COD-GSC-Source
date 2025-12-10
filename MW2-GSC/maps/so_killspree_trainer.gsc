@@ -44,10 +44,10 @@ main() {
 
   flag_set("so_killspree_trainer_initialized");
 
-  add_hint_string("hint_missed_target", & "SO_KILLSPREE_TRAINER_HINT_MISSED_TARGET", ::hint_missed_target_break);
-  add_hint_string("hint_missed_targets", & "SO_KILLSPREE_TRAINER_HINT_MISSED_TARGETS", ::hint_missed_target_break);
-  add_hint_string("hint_missed_target_before_jump", & "SO_KILLSPREE_TRAINER_HINT_MISSED_TARGET_JUMP", ::hint_missed_target_break);
-  add_hint_string("hint_missed_target_before_jumps", & "SO_KILLSPREE_TRAINER_HINT_MISSED_TARGETS_JUMP", ::hint_missed_target_break);
+  add_hint_string("hint_missed_target", &"SO_KILLSPREE_TRAINER_HINT_MISSED_TARGET", ::hint_missed_target_break);
+  add_hint_string("hint_missed_targets", &"SO_KILLSPREE_TRAINER_HINT_MISSED_TARGETS", ::hint_missed_target_break);
+  add_hint_string("hint_missed_target_before_jump", &"SO_KILLSPREE_TRAINER_HINT_MISSED_TARGET_JUMP", ::hint_missed_target_break);
+  add_hint_string("hint_missed_target_before_jumps", &"SO_KILLSPREE_TRAINER_HINT_MISSED_TARGETS_JUMP", ::hint_missed_target_break);
 }
 
 precache_shaders() {
@@ -330,10 +330,10 @@ so_splash(type) {
   }
 
   if(type == "civilian_hit") {
-    str = & "SO_KILLSPREE_TRAINER_CIVILIAN_HIT";
+    str = &"SO_KILLSPREE_TRAINER_CIVILIAN_HIT";
   } else {
     level thread play_sound_in_space("emt_airhorn_area_clear", level.player.origin + (0, 0, 40));
-    str = & "SO_KILLSPREE_TRAINER_AREA_CLEARED";
+    str = &"SO_KILLSPREE_TRAINER_AREA_CLEARED";
   }
 
   splash = so_create_hud_item(2, 0, str);
@@ -525,7 +525,7 @@ so_course_loop_think() {
   COURSE OBJECTIVE
   -------------------------*/
   if(level.first_time) {
-    maps\trainer::registerObjective("obj_course", & "SO_KILLSPREE_TRAINER_OBJ_MAIN", getEnt("origin_course_01", "targetname"));
+    maps\trainer::registerObjective("obj_course", &"SO_KILLSPREE_TRAINER_OBJ_MAIN", getEnt("origin_course_01", "targetname"));
     maps\trainer::setObjectiveState("obj_course", "current");
   }
 
@@ -795,14 +795,14 @@ course_gate_controll() {
 display_counters() {
   ypos = so_hud_ypos();
 
-  self.HUDenemies = so_create_hud_item(3, ypos, & "SO_KILLSPREE_TRAINER_ENEMIES", self);
-  self.HUDcivvies = so_create_hud_item(4, ypos, & "SO_KILLSPREE_TRAINER_CIVVIES", self);
+  self.HUDenemies = so_create_hud_item(3, ypos, &"SO_KILLSPREE_TRAINER_ENEMIES", self);
+  self.HUDcivvies = so_create_hud_item(4, ypos, &"SO_KILLSPREE_TRAINER_CIVVIES", self);
 
-  self.HUDenemiesKilled = so_create_hud_item(3, ypos, & "SO_KILLSPREE_TRAINER_ENEMIES_COUNT", self);
+  self.HUDenemiesKilled = so_create_hud_item(3, ypos, &"SO_KILLSPREE_TRAINER_ENEMIES_COUNT", self);
   self.HUDenemiesKilled setValue(level.targets_hit);
   self.HUDenemiesKilled.alignx = "left";
 
-  self.HUDcivviesKilled = so_create_hud_item(4, ypos, & "SO_KILLSPREE_TRAINER_CIVVIES_COUNT", self);
+  self.HUDcivviesKilled = so_create_hud_item(4, ypos, &"SO_KILLSPREE_TRAINER_CIVVIES_COUNT", self);
   self.HUDcivviesKilled setValue(level.friendlies_hit);
   self.HUDcivviesKilled.alignx = "left";
 

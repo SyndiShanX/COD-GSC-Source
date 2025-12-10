@@ -14,59 +14,59 @@
 #namespace vehicle;
 
 function autoexec __init__sytem__() {
-  system::register("vehicle_shared", & __init__, undefined, undefined);
+  system::register("vehicle_shared", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  level._customvehiclecbfunc = & spawned_callback;
-  clientfield::register("vehicle", "toggle_lockon", 1, 1, "int", & field_toggle_lockon_handler, 0, 0);
-  clientfield::register("vehicle", "toggle_sounds", 1, 1, "int", & field_toggle_sounds, 0, 0);
-  clientfield::register("vehicle", "use_engine_damage_sounds", 1, 2, "int", & field_use_engine_damage_sounds, 0, 0);
-  clientfield::register("vehicle", "toggle_treadfx", 1, 1, "int", & field_toggle_treadfx, 0, 0);
-  clientfield::register("vehicle", "toggle_exhaustfx", 1, 1, "int", & field_toggle_exhaustfx_handler, 0, 0);
-  clientfield::register("vehicle", "toggle_lights", 1, 2, "int", & field_toggle_lights_handler, 0, 0);
-  clientfield::register("vehicle", "toggle_lights_group1", 1, 1, "int", & field_toggle_lights_group_handler1, 0, 0);
-  clientfield::register("vehicle", "toggle_lights_group2", 1, 1, "int", & field_toggle_lights_group_handler2, 0, 0);
-  clientfield::register("vehicle", "toggle_lights_group3", 1, 1, "int", & field_toggle_lights_group_handler3, 0, 0);
-  clientfield::register("vehicle", "toggle_lights_group4", 1, 1, "int", & field_toggle_lights_group_handler4, 0, 0);
-  clientfield::register("vehicle", "toggle_ambient_anim_group1", 1, 1, "int", & field_toggle_ambient_anim_handler1, 0, 0);
-  clientfield::register("vehicle", "toggle_ambient_anim_group2", 1, 1, "int", & field_toggle_ambient_anim_handler2, 0, 0);
-  clientfield::register("vehicle", "toggle_ambient_anim_group3", 1, 1, "int", & field_toggle_ambient_anim_handler3, 0, 0);
-  clientfield::register("vehicle", "toggle_emp_fx", 1, 1, "int", & field_toggle_emp, 0, 0);
-  clientfield::register("vehicle", "toggle_burn_fx", 1, 1, "int", & field_toggle_burn, 0, 0);
-  clientfield::register("vehicle", "deathfx", 1, 2, "int", & field_do_deathfx, 0, 0);
-  clientfield::register("vehicle", "alert_level", 1, 2, "int", & field_update_alert_level, 0, 0);
-  clientfield::register("vehicle", "set_lighting_ent", 1, 1, "int", & util::field_set_lighting_ent, 0, 0);
-  clientfield::register("vehicle", "use_lighting_ent", 1, 1, "int", & util::field_use_lighting_ent, 0, 0);
-  clientfield::register("vehicle", "damage_level", 1, 3, "int", & field_update_damage_state, 0, 0);
-  clientfield::register("vehicle", "spawn_death_dynents", 1, 2, "int", & field_death_spawn_dynents, 0, 0);
-  clientfield::register("vehicle", "spawn_gib_dynents", 1, 1, "int", & field_gib_spawn_dynents, 0, 0);
-  clientfield::register("helicopter", "toggle_lockon", 1, 1, "int", & field_toggle_lockon_handler, 0, 0);
-  clientfield::register("helicopter", "toggle_sounds", 1, 1, "int", & field_toggle_sounds, 0, 0);
-  clientfield::register("helicopter", "use_engine_damage_sounds", 1, 2, "int", & field_use_engine_damage_sounds, 0, 0);
-  clientfield::register("helicopter", "toggle_treadfx", 1, 1, "int", & field_toggle_treadfx, 0, 0);
-  clientfield::register("helicopter", "toggle_exhaustfx", 1, 1, "int", & field_toggle_exhaustfx_handler, 0, 0);
-  clientfield::register("helicopter", "toggle_lights", 1, 2, "int", & field_toggle_lights_handler, 0, 0);
-  clientfield::register("helicopter", "toggle_lights_group1", 1, 1, "int", & field_toggle_lights_group_handler1, 0, 0);
-  clientfield::register("helicopter", "toggle_lights_group2", 1, 1, "int", & field_toggle_lights_group_handler2, 0, 0);
-  clientfield::register("helicopter", "toggle_lights_group3", 1, 1, "int", & field_toggle_lights_group_handler3, 0, 0);
-  clientfield::register("helicopter", "toggle_lights_group4", 1, 1, "int", & field_toggle_lights_group_handler4, 0, 0);
-  clientfield::register("helicopter", "toggle_ambient_anim_group1", 1, 1, "int", & field_toggle_ambient_anim_handler1, 0, 0);
-  clientfield::register("helicopter", "toggle_ambient_anim_group2", 1, 1, "int", & field_toggle_ambient_anim_handler2, 0, 0);
-  clientfield::register("helicopter", "toggle_ambient_anim_group3", 1, 1, "int", & field_toggle_ambient_anim_handler3, 0, 0);
-  clientfield::register("helicopter", "toggle_emp_fx", 1, 1, "int", & field_toggle_emp, 0, 0);
-  clientfield::register("helicopter", "toggle_burn_fx", 1, 1, "int", & field_toggle_burn, 0, 0);
-  clientfield::register("helicopter", "deathfx", 1, 1, "int", & field_do_deathfx, 0, 0);
-  clientfield::register("helicopter", "alert_level", 1, 2, "int", & field_update_alert_level, 0, 0);
-  clientfield::register("helicopter", "set_lighting_ent", 1, 1, "int", & util::field_set_lighting_ent, 0, 0);
-  clientfield::register("helicopter", "use_lighting_ent", 1, 1, "int", & util::field_use_lighting_ent, 0, 0);
-  clientfield::register("helicopter", "damage_level", 1, 3, "int", & field_update_damage_state, 0, 0);
-  clientfield::register("helicopter", "spawn_death_dynents", 1, 2, "int", & field_death_spawn_dynents, 0, 0);
-  clientfield::register("helicopter", "spawn_gib_dynents", 1, 1, "int", & field_gib_spawn_dynents, 0, 0);
-  clientfield::register("plane", "toggle_treadfx", 1, 1, "int", & field_toggle_treadfx, 0, 0);
-  clientfield::register("toplayer", "toggle_dnidamagefx", 1, 1, "int", & field_toggle_dnidamagefx, 0, 0);
-  clientfield::register("toplayer", "toggle_flir_postfx", 1, 2, "int", & toggle_flir_postfxbundle, 0, 0);
-  clientfield::register("toplayer", "static_postfx", 1, 1, "int", & set_static_postfxbundle, 0, 0);
+  level._customvehiclecbfunc = &spawned_callback;
+  clientfield::register("vehicle", "toggle_lockon", 1, 1, "int", &field_toggle_lockon_handler, 0, 0);
+  clientfield::register("vehicle", "toggle_sounds", 1, 1, "int", &field_toggle_sounds, 0, 0);
+  clientfield::register("vehicle", "use_engine_damage_sounds", 1, 2, "int", &field_use_engine_damage_sounds, 0, 0);
+  clientfield::register("vehicle", "toggle_treadfx", 1, 1, "int", &field_toggle_treadfx, 0, 0);
+  clientfield::register("vehicle", "toggle_exhaustfx", 1, 1, "int", &field_toggle_exhaustfx_handler, 0, 0);
+  clientfield::register("vehicle", "toggle_lights", 1, 2, "int", &field_toggle_lights_handler, 0, 0);
+  clientfield::register("vehicle", "toggle_lights_group1", 1, 1, "int", &field_toggle_lights_group_handler1, 0, 0);
+  clientfield::register("vehicle", "toggle_lights_group2", 1, 1, "int", &field_toggle_lights_group_handler2, 0, 0);
+  clientfield::register("vehicle", "toggle_lights_group3", 1, 1, "int", &field_toggle_lights_group_handler3, 0, 0);
+  clientfield::register("vehicle", "toggle_lights_group4", 1, 1, "int", &field_toggle_lights_group_handler4, 0, 0);
+  clientfield::register("vehicle", "toggle_ambient_anim_group1", 1, 1, "int", &field_toggle_ambient_anim_handler1, 0, 0);
+  clientfield::register("vehicle", "toggle_ambient_anim_group2", 1, 1, "int", &field_toggle_ambient_anim_handler2, 0, 0);
+  clientfield::register("vehicle", "toggle_ambient_anim_group3", 1, 1, "int", &field_toggle_ambient_anim_handler3, 0, 0);
+  clientfield::register("vehicle", "toggle_emp_fx", 1, 1, "int", &field_toggle_emp, 0, 0);
+  clientfield::register("vehicle", "toggle_burn_fx", 1, 1, "int", &field_toggle_burn, 0, 0);
+  clientfield::register("vehicle", "deathfx", 1, 2, "int", &field_do_deathfx, 0, 0);
+  clientfield::register("vehicle", "alert_level", 1, 2, "int", &field_update_alert_level, 0, 0);
+  clientfield::register("vehicle", "set_lighting_ent", 1, 1, "int", &util::field_set_lighting_ent, 0, 0);
+  clientfield::register("vehicle", "use_lighting_ent", 1, 1, "int", &util::field_use_lighting_ent, 0, 0);
+  clientfield::register("vehicle", "damage_level", 1, 3, "int", &field_update_damage_state, 0, 0);
+  clientfield::register("vehicle", "spawn_death_dynents", 1, 2, "int", &field_death_spawn_dynents, 0, 0);
+  clientfield::register("vehicle", "spawn_gib_dynents", 1, 1, "int", &field_gib_spawn_dynents, 0, 0);
+  clientfield::register("helicopter", "toggle_lockon", 1, 1, "int", &field_toggle_lockon_handler, 0, 0);
+  clientfield::register("helicopter", "toggle_sounds", 1, 1, "int", &field_toggle_sounds, 0, 0);
+  clientfield::register("helicopter", "use_engine_damage_sounds", 1, 2, "int", &field_use_engine_damage_sounds, 0, 0);
+  clientfield::register("helicopter", "toggle_treadfx", 1, 1, "int", &field_toggle_treadfx, 0, 0);
+  clientfield::register("helicopter", "toggle_exhaustfx", 1, 1, "int", &field_toggle_exhaustfx_handler, 0, 0);
+  clientfield::register("helicopter", "toggle_lights", 1, 2, "int", &field_toggle_lights_handler, 0, 0);
+  clientfield::register("helicopter", "toggle_lights_group1", 1, 1, "int", &field_toggle_lights_group_handler1, 0, 0);
+  clientfield::register("helicopter", "toggle_lights_group2", 1, 1, "int", &field_toggle_lights_group_handler2, 0, 0);
+  clientfield::register("helicopter", "toggle_lights_group3", 1, 1, "int", &field_toggle_lights_group_handler3, 0, 0);
+  clientfield::register("helicopter", "toggle_lights_group4", 1, 1, "int", &field_toggle_lights_group_handler4, 0, 0);
+  clientfield::register("helicopter", "toggle_ambient_anim_group1", 1, 1, "int", &field_toggle_ambient_anim_handler1, 0, 0);
+  clientfield::register("helicopter", "toggle_ambient_anim_group2", 1, 1, "int", &field_toggle_ambient_anim_handler2, 0, 0);
+  clientfield::register("helicopter", "toggle_ambient_anim_group3", 1, 1, "int", &field_toggle_ambient_anim_handler3, 0, 0);
+  clientfield::register("helicopter", "toggle_emp_fx", 1, 1, "int", &field_toggle_emp, 0, 0);
+  clientfield::register("helicopter", "toggle_burn_fx", 1, 1, "int", &field_toggle_burn, 0, 0);
+  clientfield::register("helicopter", "deathfx", 1, 1, "int", &field_do_deathfx, 0, 0);
+  clientfield::register("helicopter", "alert_level", 1, 2, "int", &field_update_alert_level, 0, 0);
+  clientfield::register("helicopter", "set_lighting_ent", 1, 1, "int", &util::field_set_lighting_ent, 0, 0);
+  clientfield::register("helicopter", "use_lighting_ent", 1, 1, "int", &util::field_use_lighting_ent, 0, 0);
+  clientfield::register("helicopter", "damage_level", 1, 3, "int", &field_update_damage_state, 0, 0);
+  clientfield::register("helicopter", "spawn_death_dynents", 1, 2, "int", &field_death_spawn_dynents, 0, 0);
+  clientfield::register("helicopter", "spawn_gib_dynents", 1, 1, "int", &field_gib_spawn_dynents, 0, 0);
+  clientfield::register("plane", "toggle_treadfx", 1, 1, "int", &field_toggle_treadfx, 0, 0);
+  clientfield::register("toplayer", "toggle_dnidamagefx", 1, 1, "int", &field_toggle_dnidamagefx, 0, 0);
+  clientfield::register("toplayer", "toggle_flir_postfx", 1, 2, "int", &toggle_flir_postfxbundle, 0, 0);
+  clientfield::register("toplayer", "static_postfx", 1, 1, "int", &set_static_postfxbundle, 0, 0);
 }
 
 function add_vehicletype_callback(vehicletype, callback) {
@@ -284,7 +284,7 @@ function lights_on(localclientnum, team) {
   }
 }
 
-function addanimtolist(animitem, & liston, & listoff, playwhenoff, id, maxid) {
+function addanimtolist(animitem, &liston, &listoff, playwhenoff, id, maxid) {
   if(isDefined(animitem) && id <= maxid) {
     if(playwhenoff === 1) {
       if(!isDefined(listoff)) {
@@ -839,7 +839,7 @@ function field_toggle_lights_handler(localclientnum, oldval, newval, bnewent, bi
 
 function field_toggle_lockon_handler(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {}
 
-function addfxandtagtolists(fx, tag, & fxlist, & taglist, id, maxid) {
+function addfxandtagtolists(fx, tag, &fxlist, &taglist, id, maxid) {
   if(isDefined(fx) && isDefined(tag) && id <= maxid) {
     if(!isDefined(fxlist)) {
       fxlist = [];

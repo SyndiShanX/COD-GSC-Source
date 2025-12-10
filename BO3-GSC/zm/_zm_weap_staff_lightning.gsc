@@ -20,7 +20,7 @@
 #namespace zm_weap_staff_lightning;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_staff_lightning", & __init__, undefined, undefined);
+  system::register("zm_weap_staff_lightning", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -32,9 +32,9 @@ function __init__() {
   clientfield::register("scriptmover", "lightning_miss_fx", 21000, 1, "int");
   clientfield::register("actor", "lightning_arc_fx", 21000, 1, "int");
   zombie_utility::set_zombie_var("tesla_head_gib_chance", 50);
-  callback::on_spawned( & onplayerspawned);
-  zm_spawner::register_zombie_damage_callback( & staff_lightning_zombie_damage_response);
-  zm_spawner::register_zombie_death_event_callback( & staff_lightning_death_event);
+  callback::on_spawned(&onplayerspawned);
+  zm_spawner::register_zombie_damage_callback(&staff_lightning_zombie_damage_response);
+  zm_spawner::register_zombie_death_event_callback(&staff_lightning_death_event);
 }
 
 function onplayerspawned() {
@@ -275,7 +275,7 @@ function zombie_shock_eyes() {
     return;
   }
   zm_net::network_safe_init("shock_eyes", 2);
-  zm_net::network_choke_action("shock_eyes", & zombie_shock_eyes_network_safe, level._effect["tesla_shock_eyes"], self, "j_eyeball_le");
+  zm_net::network_choke_action("shock_eyes", &zombie_shock_eyes_network_safe, level._effect["tesla_shock_eyes"], self, "j_eyeball_le");
 }
 
 function staff_lightning_zombie_damage_response(mod, hit_location, hit_origin, player, amount, weapon, direction_vec, tagname, modelname, partname, dflags, inflictor, chargelevel) {

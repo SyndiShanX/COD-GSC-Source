@@ -130,7 +130,7 @@ spawnclient() {
     self notify("attempted_spawn");
     if(scripts\mp\utility::istrue(self.pers["teamKillPunish"])) {
       self.pers["teamkills"] = max(self.pers["teamkills"] - 1, 0);
-      scripts\mp\utility::setlowermessage("friendly_fire", & "MP_FRIENDLY_FIRE_WILL_NOT");
+      scripts\mp\utility::setlowermessage("friendly_fire", &"MP_FRIENDLY_FIRE_WILL_NOT");
       if(!self.hasspawned && self.pers["teamkills"] <= level.maxallowedteamkills) {
         self.pers["teamKillPunish"] = 0;
       }
@@ -183,7 +183,7 @@ waitandspawnclient() {
   if(scripts\mp\utility::istrue(self.pers["teamKillPunish"])) {
     var_01 = teamkilldelay();
     if(var_01 > 0) {
-      scripts\mp\utility::setlowermessage("friendly_fire", & "MP_FRIENDLY_FIRE_WILL_NOT", var_01, 1, 1);
+      scripts\mp\utility::setlowermessage("friendly_fire", &"MP_FRIENDLY_FIRE_WILL_NOT", var_01, 1, 1);
       thread respawn_asspectator(self.origin + (0, 0, 60), self.angles);
       var_00 = 1;
       wait(var_01);
@@ -1796,7 +1796,7 @@ callback_playerconnect() {
   }
 
   if(!level.splitscreen && !isDefined(self.pers["score"])) {
-    iprintln( & "MP_CONNECTED", self);
+    iprintln(&"MP_CONNECTED", self);
   }
 
   self.usingonlinedataoffline = self isusingonlinedataoffline();

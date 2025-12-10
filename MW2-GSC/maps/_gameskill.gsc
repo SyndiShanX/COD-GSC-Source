@@ -72,13 +72,13 @@ setSkill(reset) {
     level.difficultyType[3] = "veteran";
 
     // string not found for GAMESKILL_EASY
-    level.difficultyString["easy"] = & "GAMESKILL_EASY";
+    level.difficultyString["easy"] = &"GAMESKILL_EASY";
     // string not found for GAMESKILL_NORMAL
-    level.difficultyString["normal"] = & "GAMESKILL_NORMAL";
+    level.difficultyString["normal"] = &"GAMESKILL_NORMAL";
     // string not found for GAMESKILL_HARDENED
-    level.difficultyString["hardened"] = & "GAMESKILL_HARDENED";
+    level.difficultyString["hardened"] = &"GAMESKILL_HARDENED";
     // string not found for GAMESKILL_VETERAN
-    level.difficultyString["veteran"] = & "GAMESKILL_VETERAN";
+    level.difficultyString["veteran"] = &"GAMESKILL_VETERAN";
     //thread update_skill_on_change();
 
     thread playerHealthDebug();
@@ -1241,7 +1241,7 @@ playerHealthRegenInit() {
 
   level.strings["take_cover"] = spawnStruct();
   // You are Hurt. Get to Cover!
-  level.strings["take_cover"].text = & "GAME_GET_TO_COVER";
+  level.strings["take_cover"].text = &"GAME_GET_TO_COVER";
 }
 
 playerHealthRegen() {
@@ -1738,7 +1738,7 @@ create_warning_elem() {
   thread destroy_warning_elem_when_hit_again(hudelem);
   hudelem thread destroy_warning_elem_when_mission_failed();
   // You are Hurt. Get to Cover!
-  //hudelem SetText( &"GAME_GET_TO_COVER" );
+  //hudelem SetText(&"GAME_GET_TO_COVER" );
   hudelem SetText(level.strings["take_cover"].text);
   hudelem.fontscale = 2;
   hudelem.alpha = 1;

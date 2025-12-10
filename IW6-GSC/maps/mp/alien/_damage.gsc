@@ -390,7 +390,7 @@ onAlienAgentDamaged(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWea
       typeHit = "none";
     else if(!maps\mp\gametypes\_damage::shouldWeaponFeedback(sWeapon))
       typeHit = "none";
-    else if(iDFlags & level.iDFLAGS_STUN)
+    else if(iDFlags &level.iDFLAGS_STUN)
       typeHit = "stun";
     else if(!eAttacker _hasperk("specialty_armorpiercing") && sHitLoc == "armor")
       typeHit = "hitalienarmor";

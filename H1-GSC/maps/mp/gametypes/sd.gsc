@@ -91,19 +91,19 @@ onstartgametype() {
 
   setclientnamemode("manual_change");
   maps\mp\gametypes\common_bomb_gameobject::loadbombfx();
-  maps\mp\_utility::setobjectivetext(game["attackers"], & "OBJECTIVES_SD_ATTACKER");
-  maps\mp\_utility::setobjectivetext(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+  maps\mp\_utility::setobjectivetext(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
+  maps\mp\_utility::setobjectivetext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
 
   if(level.splitscreen) {
-    maps\mp\_utility::setobjectivescoretext(game["attackers"], & "OBJECTIVES_SD_ATTACKER");
-    maps\mp\_utility::setobjectivescoretext(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+    maps\mp\_utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
+    maps\mp\_utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
   } else {
-    maps\mp\_utility::setobjectivescoretext(game["attackers"], & "OBJECTIVES_SD_ATTACKER_SCORE");
-    maps\mp\_utility::setobjectivescoretext(game["defenders"], & "OBJECTIVES_SD_DEFENDER_SCORE");
+    maps\mp\_utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_SD_ATTACKER_SCORE");
+    maps\mp\_utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_SCORE");
   }
 
-  maps\mp\_utility::setobjectivehinttext(game["attackers"], & "OBJECTIVES_SD_ATTACKER_HINT");
-  maps\mp\_utility::setobjectivehinttext(game["defenders"], & "OBJECTIVES_SD_DEFENDER_HINT");
+  maps\mp\_utility::setobjectivehinttext(game["attackers"], &"OBJECTIVES_SD_ATTACKER_HINT");
+  maps\mp\_utility::setobjectivehinttext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_HINT");
   initspawns();
   var_2[0] = "sd";
   var_2[1] = "bombzone";

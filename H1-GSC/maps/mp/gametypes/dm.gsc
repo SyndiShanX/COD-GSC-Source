@@ -53,19 +53,19 @@ initializematchrules() {
 
 onstartgametype() {
   setclientnamemode("auto_change");
-  maps\mp\_utility::setobjectivetext("allies", & "OBJECTIVES_DM");
-  maps\mp\_utility::setobjectivetext("axis", & "OBJECTIVES_DM");
+  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_DM");
+  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_DM");
 
   if(level.splitscreen) {
-    maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_DM");
-    maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_DM");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_DM");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_DM");
   } else {
-    maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_DM_SCORE");
-    maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_DM_SCORE");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_DM_SCORE");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_DM_SCORE");
   }
 
-  maps\mp\_utility::setobjectivehinttext("allies", & "OBJECTIVES_DM_HINT");
-  maps\mp\_utility::setobjectivehinttext("axis", & "OBJECTIVES_DM_HINT");
+  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_DM_HINT");
+  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_DM_HINT");
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
   maps\mp\gametypes\_spawnlogic::addspawnpoints("allies", "mp_dm_spawn");

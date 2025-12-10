@@ -12,13 +12,13 @@
 #namespace raps_mp;
 
 function autoexec __init__sytem__() {
-  system::register("raps_mp", & __init__, undefined, undefined);
+  system::register("raps_mp", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("vehicle", "monitor_raps_drop_landing", 1, 1, "int", & monitor__drop_landing_changed, 0, 0);
-  clientfield::register("vehicle", "raps_heli_low_health", 1, 1, "int", & heli_low_health_fx, 0, 0);
-  clientfield::register("vehicle", "raps_heli_extra_low_health", 1, 1, "int", & heli_extra_low_health_fx, 0, 0);
+  clientfield::register("vehicle", "monitor_raps_drop_landing", 1, 1, "int", &monitor__drop_landing_changed, 0, 0);
+  clientfield::register("vehicle", "raps_heli_low_health", 1, 1, "int", &heli_low_health_fx, 0, 0);
+  clientfield::register("vehicle", "raps_heli_extra_low_health", 1, 1, "int", &heli_extra_low_health_fx, 0, 0);
 }
 
 function heli_low_health_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

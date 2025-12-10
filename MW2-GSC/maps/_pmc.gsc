@@ -79,19 +79,19 @@ initialize_gametype() {
   // Precache
   //--------------------------------
 
-  // Enemies Alive: &&1
+  // Enemies Alive: && 1
   precacheString(&"PMC_DEBUG_ENEMY_COUNT");
-  // Vehicles Alive: &&1
+  // Vehicles Alive: && 1
   precacheString(&"PMC_DEBUG_VEHICLE_COUNT");
-  // Enemy Spawners: &&1
+  // Enemy Spawners: && 1
   precacheString(&"PMC_DEBUG_SPAWNER_COUNT");
-  // Enemies remaining: &&1
+  // Enemies remaining: && 1
   precacheString(&"PMC_ENEMIES_REMAINING");
-  // Time Remaining: &&1
+  // Time Remaining: && 1
   precacheString(&"PMC_TIME_REMAINING");
   // Kill all enemies in the level.
   precacheString(&"PMC_OBJECTIVE_KILL_ENEMIES");
-  // Kill all enemies in the level [ &&1 Remaining ].
+  // Kill all enemies in the level [ && 1 Remaining ].
   precacheString(&"PMC_OBJECTIVE_KILL_ENEMIES_REMAINING");
   // Enter the abort codes into the laptop before time runs out.
   precacheString(&"PMC_OBJECTIVE_ABORT_CODES");
@@ -101,15 +101,15 @@ initialize_gametype() {
   precacheString(&"PMC_SPECTATING");
   // Reach the extraction zone before time runs out.
   precacheString(&"PMC_OBJECTIVE_EXTRACT");
-  // Press and hold &&1 to use the laptop.
+  // Press and hold && 1 to use the laptop.
   precacheString(&"PMC_HINT_USELAPTOP");
   // Set up a defensive position before enemy attack.
   precacheString(&"PMC_OBJECTIVE_SETUP_DEFENSES");
-  // Time until attack: &&1
+  // Time until attack: && 1
   precacheString(&"PMC_TIME_UNTIL_ATTACK");
   // Survive until time runs out.
   precacheString(&"PMC_OBJECTIVE_DEFEND");
-  // Press and hold &&1 on the laptop to skip set up time.
+  // Press and hold && 1 on the laptop to skip set up time.
   precacheString(&"PMC_START_ATTACK_USE_HINT");
   // Approach the laptop to skip set up time.
   precacheString(&"PMC_START_ATTACK_HINT");
@@ -1053,7 +1053,7 @@ defend_setup_time_hint() {
 
   hint_defend_setup = spawnStruct();
   // Approach the laptop to skip set up time.
-  hint_defend_setup.string = & "PMC_START_ATTACK_HINT";
+  hint_defend_setup.string = &"PMC_START_ATTACK_HINT";
   hint_defend_setup.timeout = 5;
   foreach(player in level.players)
   player show_hint(hint_defend_setup);
@@ -1064,7 +1064,7 @@ defend_setup_time_hint() {
 }
 
 defend_setup_time_trigger() {
-  // Press and hold &&1 on the laptop to skip set up time.
+  // Press and hold && 1 on the laptop to skip set up time.
   self setHintString(&"PMC_START_ATTACK_USE_HINT");
   self waittill("trigger");
   flag_set("pmc_defend_setup_time_finished");
@@ -1129,7 +1129,7 @@ defend_think(fill_time) {
     }
     if(enemy_time >= fill_time) {
       // Keep enemies away from the objective!
-      setDvar("ui_deadquote", & "PMC_DEFEND_FAILED");
+      setDvar("ui_deadquote", &"PMC_DEFEND_FAILED");
       maps\_utility::missionFailedWrapper();
     }
     wait .05;
@@ -1157,11 +1157,11 @@ show_remaining_enemy_count() {
   	level.pmc.hud.remainingEnemyCountHudElem.alignY = "bottom";
   	level.pmc.hud.remainingEnemyCountHudElem.horzAlign = "right";
   	level.pmc.hud.remainingEnemyCountHudElem.vertAlign = "bottom";
-  	// Enemies remaining: &&1
+  	// Enemies remaining: && 1
   	level.pmc.hud.remainingEnemyCountHudElem.label = &"PMC_ENEMIES_REMAINING";
   	level.pmc.hud.remainingEnemyCountHudElem.alpha = 1;*/
 
-  self.remainingEnemyCountHudelem = so_create_hud_item(2, so_hud_ypos(), & "SPECIAL_OPS_HOSTILES", self);
+  self.remainingEnemyCountHudelem = so_create_hud_item(2, so_hud_ypos(), &"SPECIAL_OPS_HOSTILES", self);
   self.remainingEnemyCountHudelemNum = so_create_hud_item(2, so_hud_ypos(), "", self);
   self.remainingEnemyCountHudelemNum.alignX = "left";
 
@@ -1176,10 +1176,10 @@ show_remaining_enemy_count() {
     if(isDefined(level.pmc.enemies_kills_to_win) && (level.pmc.enemies_kills_to_win > 0))
       thread so_dialog_counter_update(level.pmc.enemies_remaining, level.pmc_enemies);
 
-    // Kill all enemies in the level [ &&1 Remaining ].
+    // Kill all enemies in the level [ && 1 Remaining ].
     if(isDefined(level.pmc.objective_enemies_index))
-      // Kill all enemies in the level [ &&1 Remaining ].
-      objective_String_NoMessage(level.pmc.objective_enemies_index, & "PMC_OBJECTIVE_KILL_ENEMIES_REMAINING", level.pmc.enemies_remaining);
+      // Kill all enemies in the level [ && 1 Remaining ].
+      objective_String_NoMessage(level.pmc.objective_enemies_index, &"PMC_OBJECTIVE_KILL_ENEMIES_REMAINING", level.pmc.enemies_remaining);
 
     if(level.pmc.enemies_remaining <= 0) {
       self.remainingEnemyCountHudelem thread so_hud_pulse_success();
@@ -1234,7 +1234,7 @@ player_use_objective_think() {
   while(!isDefined(level.pmc.objective))
     wait 0.05;
 
-  // Press and hold &&1 to use the laptop.
+  // Press and hold && 1 to use the laptop.
   level.pmc.objective.trigger trigger_on();
   level.pmc.objective.laptop show();
   level.pmc.objective.trigger.active = true;
@@ -1325,7 +1325,7 @@ wait_objective_complete() {
   objective_state(1, "done");
 
   // Reach the extraction zone before time runs out.
-  objective_add(2, "current", & "PMC_OBJECTIVE_EXTRACT", extraction_info.script_origin.origin);
+  objective_add(2, "current", &"PMC_OBJECTIVE_EXTRACT", extraction_info.script_origin.origin);
   if(!flag("exfiltrate_music_playing")) {
     flag_set("exfiltrate_music_playing");
     //		thread musicPlayWrapper( level.pmc.music[ "exfiltrate" ] );
@@ -1381,9 +1381,9 @@ objective_add_enemies(objNum) {
     objNum = 1;
   level.pmc.objective_enemies_index = objNum;
   // Kill all enemies in the level.
-  objective_add(objNum, "current", & "PMC_OBJECTIVE_KILL_ENEMIES", (0, 0, 0));
-  // Kill all enemies in the level [ &&1 Remaining ].
-  objective_String_NoMessage(objNum, & "PMC_OBJECTIVE_KILL_ENEMIES_REMAINING", level.pmc.enemies_remaining);
+  objective_add(objNum, "current", &"PMC_OBJECTIVE_KILL_ENEMIES", (0, 0, 0));
+  // Kill all enemies in the level [ && 1 Remaining ].
+  objective_String_NoMessage(objNum, &"PMC_OBJECTIVE_KILL_ENEMIES_REMAINING", level.pmc.enemies_remaining);
 }
 
 objective_add_laptop(objNum) {
@@ -1396,7 +1396,7 @@ objective_add_laptop(objNum) {
     wait 0.05;
 
   // Retrieve enemy intel.
-  objective_add(objNum, "current", & "PMC_OBJECTIVE_ABORT_CODES", level.pmc.objective.trigger.origin);
+  objective_add(objNum, "current", &"PMC_OBJECTIVE_ABORT_CODES", level.pmc.objective.trigger.origin);
 }
 
 objective_add_defend() {
@@ -1404,7 +1404,7 @@ objective_add_defend() {
   assert(isDefined(level.pmc.defendTime));
 
   // Set up a defensive position before enemy attack.
-  objective_add(1, "current", & "PMC_OBJECTIVE_SETUP_DEFENSES", (0, 0, 0));
+  objective_add(1, "current", &"PMC_OBJECTIVE_SETUP_DEFENSES", (0, 0, 0));
   thread show_defend_timer();
 
   flag_wait("pmc_defend_setup_time_finished");
@@ -1414,7 +1414,7 @@ objective_add_defend() {
 
   objective_state(1, "done");
   // Survive until time runs out.
-  objective_add(2, "current", & "PMC_OBJECTIVE_DEFEND", (0, 0, 0));
+  objective_add(2, "current", &"PMC_OBJECTIVE_DEFEND", (0, 0, 0));
 
   wait level.pmc.defendTime;
 
@@ -1432,14 +1432,14 @@ show_defend_timer() {
   level.pmc.hud.defendTimer.horzAlign = "left";
   level.pmc.hud.defendTimer.vertAlign = "middle";
   level.pmc.hud.defendTimer.alpha = 1;
-  // Time until attack: &&1
-  level.pmc.hud.defendTimer.label = & "PMC_TIME_UNTIL_ATTACK";
+  // Time until attack: && 1
+  level.pmc.hud.defendTimer.label = &"PMC_TIME_UNTIL_ATTACK";
   level.pmc.hud.defendTimer setTimer(level.pmc.defendSetupTime);
 
   flag_wait("pmc_defend_setup_time_finished");
 
-  // Time Remaining: &&1
-  level.pmc.hud.defendTimer.label = & "PMC_TIME_REMAINING";
+  // Time Remaining: && 1
+  level.pmc.hud.defendTimer.label = &"PMC_TIME_REMAINING";
   level.pmc.hud.defendTimer setTimer(level.pmc.defendTime);
 }
 
@@ -1492,8 +1492,8 @@ debug_show_enemy_spawners_count() {
   level.pmc.hud.enemySpawnerCountHudElem.alignY = "bottom";
   level.pmc.hud.enemySpawnerCountHudElem.horzAlign = "left";
   level.pmc.hud.enemySpawnerCountHudElem.vertAlign = "bottom";
-  // Enemy Spawners: &&1
-  level.pmc.hud.enemySpawnerCountHudElem.label = & "PMC_DEBUG_SPAWNER_COUNT";
+  // Enemy Spawners: && 1
+  level.pmc.hud.enemySpawnerCountHudElem.label = &"PMC_DEBUG_SPAWNER_COUNT";
   level.pmc.hud.enemySpawnerCountHudElem.alpha = 1;
 
   for(;;) {
@@ -1513,8 +1513,8 @@ debug_show_enemies_alive_count() {
   level.pmc.hud.enemyCountHudElem.alignY = "bottom";
   level.pmc.hud.enemyCountHudElem.horzAlign = "left";
   level.pmc.hud.enemyCountHudElem.vertAlign = "bottom";
-  // Enemies Alive: &&1
-  level.pmc.hud.enemyCountHudElem.label = & "PMC_DEBUG_ENEMY_COUNT";
+  // Enemies Alive: && 1
+  level.pmc.hud.enemyCountHudElem.label = &"PMC_DEBUG_ENEMY_COUNT";
   level.pmc.hud.enemyCountHudElem.alpha = 1;
 
   for(;;) {
@@ -1535,8 +1535,8 @@ debug_show_vehicles_alive_count() {
   level.pmc.hud.enemyVehicleCountHudElem.alignY = "bottom";
   level.pmc.hud.enemyVehicleCountHudElem.horzAlign = "left";
   level.pmc.hud.enemyVehicleCountHudElem.vertAlign = "bottom";
-  // Vehicles Alive: &&1
-  level.pmc.hud.enemyVehicleCountHudElem.label = & "PMC_DEBUG_VEHICLE_COUNT";
+  // Vehicles Alive: && 1
+  level.pmc.hud.enemyVehicleCountHudElem.label = &"PMC_DEBUG_VEHICLE_COUNT";
   level.pmc.hud.enemyVehicleCountHudElem.alpha = 1;
 
   for(;;) {

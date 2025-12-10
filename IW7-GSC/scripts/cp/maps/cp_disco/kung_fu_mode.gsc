@@ -224,7 +224,7 @@ usegourdhint(param_00) {
   param_00 endon("kill_gourd_watchers");
   param_00.gourd_hint_display = 0;
   while(param_00.gourd_hint_display < 5) {
-    param_00 scripts\cp\utility::setlowermessage("msg_kung_fu_exit_hint", & "CP_DISCO_USE_GOURD_HINT", 4);
+    param_00 scripts\cp\utility::setlowermessage("msg_kung_fu_exit_hint", &"CP_DISCO_USE_GOURD_HINT", 4);
     param_00.gourd_hint_display = param_00.gourd_hint_display + 1;
     wait(randomfloatrange(5, 10));
   }
@@ -1166,7 +1166,7 @@ blackcatinteractions(param_00, param_01, param_02, param_03) {
 }
 
 trainer_hint_func(param_00, param_01) {
-  return & "CP_DISCO_CHALLENGES_TALK_TO_TRAINER";
+  return &"CP_DISCO_CHALLENGES_TALK_TO_TRAINER";
 }
 
 start_phase_2_task1() {
@@ -1218,31 +1218,31 @@ style_hint_func(param_00, param_01) {
 
   switch (param_00.name) {
     case "snake":
-      param_01.interaction_trigger sethintstringparams( & "CP_DISCO_CHALLENGES_SNAKE");
+      param_01.interaction_trigger sethintstringparams(&"CP_DISCO_CHALLENGES_SNAKE");
       break;
 
     case "tiger":
-      param_01.interaction_trigger sethintstringparams( & "CP_DISCO_CHALLENGES_TIGER");
+      param_01.interaction_trigger sethintstringparams(&"CP_DISCO_CHALLENGES_TIGER");
       break;
 
     case "crane":
-      param_01.interaction_trigger sethintstringparams( & "CP_DISCO_CHALLENGES_CRANE");
+      param_01.interaction_trigger sethintstringparams(&"CP_DISCO_CHALLENGES_CRANE");
       break;
 
     case "dragon":
-      param_01.interaction_trigger sethintstringparams( & "CP_DISCO_CHALLENGES_DRAGON");
+      param_01.interaction_trigger sethintstringparams(&"CP_DISCO_CHALLENGES_DRAGON");
       break;
   }
 
   if(var_02 < 1 && !isDefined(var_03) || var_03 != param_00.name) {
-    return & "CP_DISCO_CHALLENGES_TRAINING_BEGIN";
+    return &"CP_DISCO_CHALLENGES_TRAINING_BEGIN";
   }
 
   if(var_02 < 3) {
-    return & "CP_DISCO_CHALLENGES_CONTINUE";
+    return &"CP_DISCO_CHALLENGES_CONTINUE";
   }
 
-  return & "CP_DISCO_CHALLENGES_DRINK_GOURD";
+  return &"CP_DISCO_CHALLENGES_DRINK_GOURD";
 }
 
 usegourd_hint_func(param_00, param_01) {
@@ -1265,24 +1265,24 @@ usegourd_hint_func(param_00, param_01) {
   var_02 = param_01.kung_fu_progression.active_discipline;
   switch (var_02) {
     case "snake":
-      param_01.interaction_trigger sethintstringparams( & "CP_DISCO_CHALLENGES_SNAKE");
+      param_01.interaction_trigger sethintstringparams(&"CP_DISCO_CHALLENGES_SNAKE");
       break;
 
     case "tiger":
-      param_01.interaction_trigger sethintstringparams( & "CP_DISCO_CHALLENGES_TIGER");
+      param_01.interaction_trigger sethintstringparams(&"CP_DISCO_CHALLENGES_TIGER");
       break;
 
     case "crane":
-      param_01.interaction_trigger sethintstringparams( & "CP_DISCO_CHALLENGES_CRANE");
+      param_01.interaction_trigger sethintstringparams(&"CP_DISCO_CHALLENGES_CRANE");
       break;
 
     case "dragon":
-      param_01.interaction_trigger sethintstringparams( & "CP_DISCO_CHALLENGES_DRAGON");
+      param_01.interaction_trigger sethintstringparams(&"CP_DISCO_CHALLENGES_DRAGON");
       break;
   }
 
   if(!scripts\engine\utility::istrue(param_01.kung_fu_mode)) {
-    return & "CP_DISCO_CHALLENGES_DRINK_GOURD";
+    return &"CP_DISCO_CHALLENGES_DRINK_GOURD";
   }
 }
 
@@ -1992,7 +1992,7 @@ kungfuexithint(param_00) {
   param_00 endon("kung_fu_style_timeout");
   param_00.kung_fu_hint_display = 0;
   while(param_00.kung_fu_hint_display < 5) {
-    param_00 scripts\cp\utility::setlowermessage("msg_kung_fu_exit_hint", & "CP_DISCO_EXIT_KUNG_FU", 4);
+    param_00 scripts\cp\utility::setlowermessage("msg_kung_fu_exit_hint", &"CP_DISCO_EXIT_KUNG_FU", 4);
     param_00.kung_fu_hint_display = param_00.kung_fu_hint_display + 1;
     wait(randomfloatrange(5, 10));
   }

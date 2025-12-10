@@ -21,8 +21,8 @@ function init_shared(localclientnum) {
   level._effect["fx_betty_exp"] = "weapon/fx_betty_exp";
   level._effect["fx_betty_exp_death"] = "weapon/fx_betty_exp_death";
   level._effect["fx_betty_launch_dust"] = "weapon/fx_betty_launch_dust";
-  clientfield::register("missile", "bouncingbetty_state", 1, 2, "int", & bouncingbetty_state_change, 0, 0);
-  clientfield::register("scriptmover", "bouncingbetty_state", 1, 2, "int", & bouncingbetty_state_change, 0, 0);
+  clientfield::register("missile", "bouncingbetty_state", 1, 2, "int", &bouncingbetty_state_change, 0, 0);
+  clientfield::register("scriptmover", "bouncingbetty_state", 1, 2, "int", &bouncingbetty_state_change, 0, 0);
 }
 
 function bouncingbetty_state_change(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

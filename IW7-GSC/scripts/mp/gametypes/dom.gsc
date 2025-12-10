@@ -79,18 +79,18 @@ seticonnames() {
 
 onstartgametype() {
   seticonnames();
-  scripts\mp\utility::setobjectivetext("allies", & "OBJECTIVES_DOM");
-  scripts\mp\utility::setobjectivetext("axis", & "OBJECTIVES_DOM");
+  scripts\mp\utility::setobjectivetext("allies", &"OBJECTIVES_DOM");
+  scripts\mp\utility::setobjectivetext("axis", &"OBJECTIVES_DOM");
   if(level.splitscreen) {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_DOM");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_DOM");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_DOM");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_DOM");
   } else {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_DOM_SCORE");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_DOM_SCORE");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_DOM_SCORE");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_DOM_SCORE");
   }
 
-  scripts\mp\utility::setobjectivehinttext("allies", & "OBJECTIVES_DOM_HINT");
-  scripts\mp\utility::setobjectivehinttext("axis", & "OBJECTIVES_DOM_HINT");
+  scripts\mp\utility::setobjectivehinttext("allies", &"OBJECTIVES_DOM_HINT");
+  scripts\mp\utility::setobjectivehinttext("axis", &"OBJECTIVES_DOM_HINT");
   setclientnamemode("auto_change");
   if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
@@ -776,7 +776,7 @@ placedompoint() {
       var_06 = scripts\mp\gameobjects::createuseobject("neutral", var_01.trigger, var_01.visuals, (0, 0, 100));
       var_06 scripts\mp\gameobjects::allowuse("enemy");
       var_06 scripts\mp\gameobjects::setusetime(10);
-      var_06 scripts\mp\gameobjects::setusetext( & "MP_SECURING_POSITION");
+      var_06 scripts\mp\gameobjects::setusetext(&"MP_SECURING_POSITION");
       var_07 = var_00;
       var_06.label = var_07;
       var_06 scripts\mp\gameobjects::setzonestatusicons(level.icondefend + var_07, level.iconneutral + var_07);

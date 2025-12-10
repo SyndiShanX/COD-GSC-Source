@@ -12,15 +12,15 @@
 #namespace burnplayer;
 
 function autoexec __init__sytem__() {
-  system::register("burnplayer", & __init__, undefined, undefined);
+  system::register("burnplayer", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("allplayers", "burn", 1, 1, "int", & burning_callback, 0, 0);
-  clientfield::register("playercorpse", "burned_effect", 1, 1, "int", & burning_corpse_callback, 0, 1);
+  clientfield::register("allplayers", "burn", 1, 1, "int", &burning_callback, 0, 0);
+  clientfield::register("playercorpse", "burned_effect", 1, 1, "int", &burning_corpse_callback, 0, 1);
   loadeffects();
-  callback::on_localplayer_spawned( & on_localplayer_spawned);
-  callback::on_localclient_connect( & on_local_client_connect);
+  callback::on_localplayer_spawned(&on_localplayer_spawned);
+  callback::on_localclient_connect(&on_local_client_connect);
 }
 
 function loadeffects() {

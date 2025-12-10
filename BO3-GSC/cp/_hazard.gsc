@@ -12,18 +12,18 @@
 #namespace hazard;
 
 function autoexec __init__sytem__() {
-  system::register("hazard", & __init__, undefined, undefined);
+  system::register("hazard", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  add_hazard("heat", 500, 50, 1, & function_476442fb);
+  add_hazard("heat", 500, 50, 1, &function_476442fb);
   add_hazard("filter", 500, 50, 2);
-  add_hazard("o2", 500, 60, 3, & function_8b413656);
+  add_hazard("o2", 500, 60, 3, &function_8b413656);
   add_hazard("radation", 500, 50, 4);
   add_hazard("biohazard", 500, 50, 5);
-  callback::on_spawned( & on_player_spawned);
-  callback::on_player_killed( & on_player_killed);
-  callback::on_connect( & on_player_connect);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_player_killed(&on_player_killed);
+  callback::on_connect(&on_player_connect);
 }
 
 function add_hazard(str_name, n_max_protection, n_regen_rate, n_type, func_update) {

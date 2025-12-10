@@ -120,7 +120,7 @@ portableradardamagelistener(var_0) {
     if(maps\mp\_utility::ismeleemod(var_5))
       self.damagetaken = self.damagetaken + self.maxhealth;
 
-    if(isDefined(var_9) && var_9 & level.idflags_penetration)
+    if(isDefined(var_9) && var_9 &level.idflags_penetration)
       self.wasdamagedfrombulletpenetration = 1;
 
     self.wasdamaged = 1;

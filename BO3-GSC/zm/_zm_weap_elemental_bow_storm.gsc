@@ -28,7 +28,7 @@
 #namespace _zm_weap_elemental_bow_storm;
 
 function autoexec __init__sytem__() {
-  system::register("_zm_weap_elemental_bow_storm", & __init__, & __main__, undefined);
+  system::register("_zm_weap_elemental_bow_storm", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -42,7 +42,7 @@ function __init__() {
   clientfield::register("scriptmover", "elem_storm_bolt_fx", 5000, 1, "int");
   clientfield::register("scriptmover", "elem_storm_zap_ambient", 5000, 1, "int");
   clientfield::register("actor", "elem_storm_shock_fx", 5000, 2, "int");
-  callback::on_connect( & function_ff153c1a);
+  callback::on_connect(&function_ff153c1a);
 }
 
 function __main__() {}
@@ -50,11 +50,11 @@ function __main__() {}
 function function_ff153c1a() {
   self thread zm_weap_elemental_bow::function_982419bb("elemental_bow_storm");
   self thread zm_weap_elemental_bow::function_ececa597("elemental_bow_storm", "elemental_bow_storm4");
-  self thread zm_weap_elemental_bow::function_7bc6b9d("elemental_bow_storm", "elemental_bow_storm4", & function_e2bef70c);
+  self thread zm_weap_elemental_bow::function_7bc6b9d("elemental_bow_storm", "elemental_bow_storm4", &function_e2bef70c);
 }
 
 function function_e2bef70c(weapon, v_position, radius, attacker, normal) {
-  self.var_a51c6ff2 = & function_3c763f48;
+  self.var_a51c6ff2 = &function_3c763f48;
   if(issubstr(weapon.name, "elemental_bow_storm4")) {
     var_d68af64c = self zm_weap_elemental_bow::function_866906f(v_position, weapon.name, attacker, 64, self.var_a51c6ff2);
     v_position = (isDefined(var_d68af64c) ? var_d68af64c : v_position);
@@ -120,7 +120,7 @@ function function_578bf1ca(v_hit_pos, var_31d6c509, var_337b3336, var_94d13bd0) 
   if(isDefined(var_337b3336.var_ff541a23) && var_337b3336.var_ff541a23) {
     util::wait_network_frame();
     var_337b3336 delete();
-    array::run_all(var_337b3336.var_5d0ae7cb, & delete);
+    array::run_all(var_337b3336.var_5d0ae7cb, &delete);
     if(isDefined(var_337b3336.var_627f5ce9)) {
       var_337b3336.var_627f5ce9 delete();
     }
@@ -137,8 +137,8 @@ function function_8f86e6d5(var_7b58139b, e_player) {
   if(zm_utility::is_player_valid(e_player)) {
     var_1c7748 = array::get_all_closest(e_player.origin, var_1c7748);
   }
-  var_1c7748 = array::filter(var_1c7748, 0, & zm_weap_elemental_bow::function_5aec3adc);
-  var_1c7748 = array::filter(var_1c7748, 0, & function_172d425);
+  var_1c7748 = array::filter(var_1c7748, 0, &zm_weap_elemental_bow::function_5aec3adc);
+  var_1c7748 = array::filter(var_1c7748, 0, &function_172d425);
   return var_1c7748;
 }
 

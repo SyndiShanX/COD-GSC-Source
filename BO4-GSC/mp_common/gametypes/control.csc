@@ -129,7 +129,7 @@ function_6e3affdc() {
 
 setup_warzone_fx(local_client_num) {
   for(zi = 0; zi < level.zones.size; zi++) {
-    zonestate = level.current_zone_state_mask[local_client_num] >> zi * 2&3;
+    zonestate = level.current_zone_state_mask[local_client_num] >> zi * 2& 3;
     effects = [];
 
     if(shoutcaster::is_shoutcaster(local_client_num)) {
@@ -147,7 +147,7 @@ setup_warzone_fx(local_client_num) {
 
     level.warzonefx[local_client_num][zi] = [];
 
-    if(level.current_zone_mask[local_client_num]&1 << zi) {
+    if(level.current_zone_mask[local_client_num]& 1 << zi) {
       if(isDefined(level.visuals[zi])) {
         attackers = get_attacking_team();
         fx_state = get_fx_state(local_client_num, zonestate, attackers, shoutcaster::is_shoutcaster(local_client_num));
@@ -308,7 +308,7 @@ warzone(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasti
   level.current_zone_mask[localclientnum] = newval;
 
   for(zi = 0; zi < level.zones.size; zi++) {
-    if((oldval&1 << zi) != (newval&1 << zi)) {
+    if((oldval& 1 << zi) != (newval& 1 << zi)) {
       level.current_zone_state_mask[localclientnum] &= ~(3 << zi);
     }
   }

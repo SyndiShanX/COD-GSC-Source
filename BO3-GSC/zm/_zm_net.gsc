@@ -67,7 +67,7 @@ function _network_safe_spawn(classname, origin) {
 
 function network_safe_spawn(id, max, classname, origin) {
   network_safe_init(id, max);
-  return network_choke_action(id, & _network_safe_spawn, classname, origin);
+  return network_choke_action(id, &_network_safe_spawn, classname, origin);
 }
 
 function _network_safe_play_fx_on_tag(fx, entity, tag) {
@@ -78,5 +78,5 @@ function _network_safe_play_fx_on_tag(fx, entity, tag) {
 
 function network_safe_play_fx_on_tag(id, max, fx, entity, tag) {
   network_safe_init(id, max);
-  network_choke_action(id, & _network_safe_play_fx_on_tag, fx, entity, tag);
+  network_choke_action(id, &_network_safe_play_fx_on_tag, fx, entity, tag);
 }

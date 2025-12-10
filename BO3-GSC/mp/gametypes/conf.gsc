@@ -30,13 +30,13 @@ function main() {
   globallogic::registerfriendlyfiredelay(level.gametype, 15, 0, 1440);
   level.scoreroundwinbased = 1;
   level.teambased = 1;
-  level.onprecachegametype = & onprecachegametype;
-  level.onstartgametype = & onstartgametype;
-  level.onspawnplayer = & onspawnplayer;
-  level.onroundendgame = & onroundendgame;
-  level.onplayerkilled = & onplayerkilled;
-  level.onroundswitch = & onroundswitch;
-  level.determinewinner = & determinewinner;
+  level.onprecachegametype = &onprecachegametype;
+  level.onstartgametype = &onstartgametype;
+  level.onspawnplayer = &onspawnplayer;
+  level.onroundendgame = &onroundendgame;
+  level.onplayerkilled = &onplayerkilled;
+  level.onroundswitch = &onroundswitch;
+  level.determinewinner = &determinewinner;
   level.overrideteamscore = 1;
   level.teamscoreperkill = getgametypesetting("teamScorePerKill");
   level.teamscoreperkillconfirmed = getgametypesetting("teamScorePerKillConfirmed");
@@ -66,12 +66,12 @@ function onstartgametype() {
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
   foreach(team in level.teams) {
-    util::setobjectivetext(team, & "OBJECTIVES_CONF");
-    util::setobjectivehinttext(team, & "OBJECTIVES_CONF_HINT");
+    util::setobjectivetext(team, &"OBJECTIVES_CONF");
+    util::setobjectivehinttext(team, &"OBJECTIVES_CONF_HINT");
     if(level.splitscreen) {
-      util::setobjectivescoretext(team, & "OBJECTIVES_CONF");
+      util::setobjectivescoretext(team, &"OBJECTIVES_CONF");
     } else {
-      util::setobjectivescoretext(team, & "OBJECTIVES_CONF_SCORE");
+      util::setobjectivescoretext(team, &"OBJECTIVES_CONF_SCORE");
     }
     spawnlogic::place_spawn_points(spawning::gettdmstartspawnname(team));
     spawnlogic::add_spawn_points(team, "mp_tdm_spawn");
@@ -98,7 +98,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
   if(!isplayer(attacker) || attacker.team == self.team) {
     return;
   }
-  level thread dogtags::spawn_dog_tag(self, attacker, & onuse, 1);
+  level thread dogtags::spawn_dog_tag(self, attacker, &onuse, 1);
   if(!isDefined(killstreaks::get_killstreak_for_weapon(weapon)) || (isDefined(level.killstreaksgivegamescore) && level.killstreaksgivegamescore)) {
     attacker globallogic_score::giveteamscoreforobjective(attacker.team, level.teamscoreperkill);
   }
@@ -109,7 +109,7 @@ function onuse(player) {
   if(player.team != self.attackerteam) {
     tacinsertboost = self.tacinsert;
     if(isDefined(self.attacker) && self.attacker.team == self.attackerteam) {
-      self.attacker luinotifyevent(&"player_callout", 2, & "MP_KILL_DENIED", player.entnum);
+      self.attacker luinotifyevent(&"player_callout", 2, &"MP_KILL_DENIED", player.entnum);
     }
     if(!tacinsertboost) {
       player globallogic_score::giveteamscoreforobjective(player.team, level.teamscoreperkilldenied);

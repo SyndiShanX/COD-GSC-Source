@@ -115,23 +115,23 @@ function main() {
   level._num_overriden_models = 0;
   level._use_choke_weapon_hints = 1;
   level._use_choke_blockers = 1;
-  level._special_blackhole_bomb_structs = & blackhole_bomb_area_check;
+  level._special_blackhole_bomb_structs = &blackhole_bomb_area_check;
   level._limited_equipment = [];
   level._limited_equipment[level._limited_equipment.size] = level.var_bbd4901d;
-  level._override_blackhole_destination_logic = & get_blackholebomb_destination_point;
-  level._blackhole_bomb_valid_area_check = & blackhole_bomb_in_invalid_area;
-  level.quantum_bomb_prevent_player_getting_teleported = & quantum_bomb_prevent_player_getting_teleported_override;
-  level.func_magicbox_update_prompt_use_override = & func_magicbox_update_prompt_use_override;
-  level.func_jump_pad_pulse_override = & zm_moon_jump_pad::function_d4f0f4fe;
+  level._override_blackhole_destination_logic = &get_blackholebomb_destination_point;
+  level._blackhole_bomb_valid_area_check = &blackhole_bomb_in_invalid_area;
+  level.quantum_bomb_prevent_player_getting_teleported = &quantum_bomb_prevent_player_getting_teleported_override;
+  level.func_magicbox_update_prompt_use_override = &func_magicbox_update_prompt_use_override;
+  level.func_jump_pad_pulse_override = &zm_moon_jump_pad::function_d4f0f4fe;
   level.dont_unset_perk_when_machine_paused = 1;
   level._no_water_risers = 1;
   level.use_clientside_board_fx = 1;
   level.riser_fx_on_client = 1;
   level.risers_use_low_gravity_fx = 1;
   level.debug_astro = 1;
-  level._round_start_func = & zm::round_start;
-  callback::on_connect( & function_35a61719);
-  callback::on_spawned( & on_player_spawned);
+  level._round_start_func = &zm::round_start;
+  callback::on_connect(&function_35a61719);
+  callback::on_spawned(&on_player_spawned);
   zm_moon_fx::main();
   zm::init_fx();
   level.zombiemode = 1;
@@ -145,12 +145,12 @@ function main() {
   register_clientfields();
   zm_moon_sq::init_clientfields();
   level.player_out_of_playable_area_monitor = 1;
-  level.player_out_of_playable_area_monitor_callback = & zombie_moon_player_out_of_playable_area_monitor_callback;
+  level.player_out_of_playable_area_monitor_callback = &zombie_moon_player_out_of_playable_area_monitor_callback;
   level thread moon_create_life_trigs();
   level.traps = [];
-  level.round_think_func = & moon_round_think_func;
+  level.round_think_func = &moon_round_think_func;
   level.random_pandora_box_start = 1;
-  level.door_dialog_function = & zm::play_door_dialog;
+  level.door_dialog_function = &zm::play_door_dialog;
   level.quad_move_speed = 35;
   level.quad_explode = 1;
   level.dogs_enabled = 1;
@@ -160,26 +160,26 @@ function main() {
   } else if(!isarray(level.custom_ai_type)) {
     level.custom_ai_type = array(level.custom_ai_type);
   }
-  level.custom_ai_type[level.custom_ai_type.size] = & zm_ai_dogs::init;
-  spawner::add_archetype_spawn_function("zombie_dog", & function_6db62803);
-  spawner::add_archetype_spawn_function("astronaut", & function_ff7d3b7);
+  level.custom_ai_type[level.custom_ai_type.size] = &zm_ai_dogs::init;
+  spawner::add_archetype_spawn_function("zombie_dog", &function_6db62803);
+  spawner::add_archetype_spawn_function("astronaut", &function_ff7d3b7);
   level thread zm_moon_utility::hacker_location_random_init();
-  level._zombie_custom_add_weapons = & custom_add_weapons;
-  level.zombiemode_gasmask_reset_player_model = & gasmask_reset_player_model;
-  level.zombiemode_gasmask_reset_player_viewmodel = & gasmask_reset_player_set_viewmodel;
-  level.zombiemode_gasmask_change_player_headmodel = & gasmask_change_player_headmodel;
-  level.zombiemode_gasmask_set_player_model = & gasmask_set_player_model;
-  level.zombiemode_gasmask_set_player_viewmodel = & gasmask_set_player_viewmodel;
-  level.register_offhand_weapons_for_level_defaults_override = & moon_offhand_weapon_overrride;
-  level.zombiemode_offhand_weapon_give_override = & offhand_weapon_give_override;
+  level._zombie_custom_add_weapons = &custom_add_weapons;
+  level.zombiemode_gasmask_reset_player_model = &gasmask_reset_player_model;
+  level.zombiemode_gasmask_reset_player_viewmodel = &gasmask_reset_player_set_viewmodel;
+  level.zombiemode_gasmask_change_player_headmodel = &gasmask_change_player_headmodel;
+  level.zombiemode_gasmask_set_player_model = &gasmask_set_player_model;
+  level.zombiemode_gasmask_set_player_viewmodel = &gasmask_set_player_viewmodel;
+  level.register_offhand_weapons_for_level_defaults_override = &moon_offhand_weapon_overrride;
+  level.zombiemode_offhand_weapon_give_override = &offhand_weapon_give_override;
   level._allow_melee_weapon_switching = 1;
-  level._hack_perks_override = & function_9f47ebff;
-  level.givecustomcharacters = & givecustomcharacters;
+  level._hack_perks_override = &function_9f47ebff;
+  level.givecustomcharacters = &givecustomcharacters;
   initcharacterstartindex();
   level.use_zombie_heroes = 1;
   level.moon_startmap = 1;
-  level._zm_blocker_trigger_think_return_override = & function_d70e1ddb;
-  level._zm_build_trigger_from_unitrigger_stub_override = & function_89f86341;
+  level._zm_blocker_trigger_think_return_override = &function_d70e1ddb;
+  level._zm_build_trigger_from_unitrigger_stub_override = &function_89f86341;
   load::main();
   level.default_laststandpistol = getweapon("pistol_m1911");
   level.default_solo_laststandpistol = getweapon("pistol_m1911_upgraded");
@@ -189,15 +189,15 @@ function main() {
   zm_ai_quad::function_5af423f4();
   level thread zm_moon_sq::start_moon_sidequest();
   level thread function_54bf648f();
-  level.var_9aaae7ae = & function_869d6f66;
-  level.var_2d4e3645 = & function_d9e1ec4d;
-  level.var_35efa94c = & function_f97e7fed;
-  level.var_9f5c2c50 = & function_e36dbcf4;
-  level.var_4824bb2d = & function_69e4bd99;
+  level.var_9aaae7ae = &function_869d6f66;
+  level.var_2d4e3645 = &function_d9e1ec4d;
+  level.var_35efa94c = &function_f97e7fed;
+  level.var_9f5c2c50 = &function_e36dbcf4;
+  level.var_4824bb2d = &function_69e4bd99;
   level thread zm::register_sidequest("EOA", "ZOMBIE_TEMPLE_SIDEQUEST");
   level thread zm::register_sidequest("MOON", "ZOMBIE_MOON_SIDEQUEST_TOTAL");
   _zm_weap_bowie::init();
-  level.zone_manager_init_func = & moon_zone_init;
+  level.zone_manager_init_func = &moon_zone_init;
   init_zones[0] = "bridge_zone";
   init_zones[1] = "nml_zone";
   level thread zm_zonemgr::manage_zones(init_zones);
@@ -220,8 +220,8 @@ function main() {
   level thread zm_moon_gravity::zombie_moon_update_player_float();
   level thread init_hackables();
   execdevgui("");
-  level.custom_devgui = & moon_devgui;
-  level.custom_intermission = & zm_moon_utility::moon_intermission;
+  level.custom_devgui = &moon_devgui;
+  level.custom_intermission = &zm_moon_utility::moon_intermission;
   level thread no_mans_land_power();
   level thread cliff_fall_death();
   level thread setup_fields();
@@ -229,18 +229,18 @@ function main() {
   level.tunnel_6_destroyed hide();
   level.tunnel_11_destroyed = getent("tunnel_11_destroyed", "targetname");
   level.tunnel_11_destroyed hide();
-  level.perk_lost_func = & moon_perk_lost;
-  level._black_hole_bomb_poi_override = & moon_black_hole_bomb_poi;
-  level.check_valid_spawn_override = & moon_respawn_override;
-  level._zombiemode_post_respawn_callback = & moon_post_respawn_callback;
-  level._poi_override = & moon_bhb_poi_control;
-  level._override_quad_explosion = & override_quad_explosion;
-  level.zombie_speed_up = & moon_speed_up;
-  level.ai_astro_explode = & moon_push_zombies_when_astro_explodes;
+  level.perk_lost_func = &moon_perk_lost;
+  level._black_hole_bomb_poi_override = &moon_black_hole_bomb_poi;
+  level.check_valid_spawn_override = &moon_respawn_override;
+  level._zombiemode_post_respawn_callback = &moon_post_respawn_callback;
+  level._poi_override = &moon_bhb_poi_control;
+  level._override_quad_explosion = &override_quad_explosion;
+  level.zombie_speed_up = &moon_speed_up;
+  level.ai_astro_explode = &moon_push_zombies_when_astro_explodes;
   level thread spare_change();
   setdvar("dlc5_get_client_weapon_from_entitystate", 1);
   setdvar("hkai_pathfindIterationLimit", 900);
-  scene::add_scene_func("cin_zmhd_sizzle_moon_cam", & cin_zmhd_sizzle_moon_cam, "play");
+  scene::add_scene_func("cin_zmhd_sizzle_moon_cam", &cin_zmhd_sizzle_moon_cam, "play");
   level thread zm_moon_ffotd::main_end();
 }
 
@@ -383,7 +383,7 @@ function init_hackables() {
   level thread zm_hackables_perks::hack_perks();
   level thread zm_hackables_packapunch::hack_packapunch();
   level thread zm_hackables_boards::hack_boards();
-  level thread zm_hackables_doors::hack_doors("zombie_airlock_buy", & zm_moon_utility::moon_door_opened);
+  level thread zm_hackables_doors::hack_doors("zombie_airlock_buy", &zm_moon_utility::moon_door_opened);
   level thread zm_hackables_doors::hack_doors();
   level thread zm_hackables_powerups::hack_powerups();
   level thread zm_hackables_box::box_hacks();
@@ -434,11 +434,11 @@ function packapunch_hack_think() {
   while(true) {
     level waittill("packapunch_hacked");
     level flag::clear("packapunch_hacked");
-    array::thread_all(pack_gates, & pack_gate_activate);
+    array::thread_all(pack_gates, &pack_gate_activate);
     level thread pack_gate_poi_activate(time);
     wait(time);
     level flag::set("packapunch_hacked");
-    zm_equip_hacker::register_pooled_hackable_struct(level._pack_hack_struct, & zm_hackables_packapunch::packapunch_hack);
+    zm_equip_hacker::register_pooled_hackable_struct(level._pack_hack_struct, &zm_hackables_packapunch::packapunch_hack);
   }
 }
 
@@ -786,7 +786,7 @@ function moon_round_think_func(restart = 0) {
     }
     zm::round_one_up();
     players = getplayers();
-    array::thread_all(players, & zm_blockers::rebuild_barrier_reward_reset);
+    array::thread_all(players, &zm_blockers::rebuild_barrier_reward_reset);
     if(!(isDefined(level.headshots_only) && level.headshots_only) && (!(isDefined(restart) && restart))) {
       if(!level flag::get("teleporter_used") || level.first_round == 1) {
         level thread zm::award_grenades_for_survivors();
@@ -853,7 +853,7 @@ function moon_round_think_func(restart = 0) {
       }
     }
     players = getplayers();
-    array::thread_all(players, & zm_pers_upgrades_system::round_end);
+    array::thread_all(players, &zm_pers_upgrades_system::round_end);
     if(((int(level.round_number / 5)) * 5) == level.round_number) {
       level clientfield::set("round_complete_time", int(((level.time - level.n_gameplay_start_time) + 500) / 1000));
       level clientfield::set("round_complete_num", level.round_number);
@@ -1188,7 +1188,7 @@ function moon_devgui(cmd) {
           player notify("starting_quantum_bomb");
         }
       }
-      array::thread_all(getplayers(), & zm_weap_black_hole_bomb::player_give_black_hole_bomb);
+      array::thread_all(getplayers(), &zm_weap_black_hole_bomb::player_give_black_hole_bomb);
       break;
     }
     case "": {
@@ -1200,7 +1200,7 @@ function moon_devgui(cmd) {
           player notify("starting_black_hole_bomb");
         }
       }
-      array::thread_all(getplayers(), & zm_weap_quantum_bomb::player_give_quantum_bomb);
+      array::thread_all(getplayers(), &zm_weap_quantum_bomb::player_give_quantum_bomb);
       break;
     }
     case "": {
@@ -1722,7 +1722,7 @@ function function_ff7d5f3b(player) {
 function function_54bf648f() {
   level.use_multiple_spawns = 1;
   level.spawner_int = 1;
-  level.fn_custom_zombie_spawner_selection = & function_54da140a;
+  level.fn_custom_zombie_spawner_selection = &function_54da140a;
 }
 
 function function_54da140a() {

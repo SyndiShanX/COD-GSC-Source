@@ -60,22 +60,22 @@ function nrc_knocking_main() {
   cp_prologue_util::function_47a62798(1);
   cp_prologue_util::function_25e841ea();
   level thread function_599e2f36();
-  util::delay(2, undefined, & function_b206d9a7);
+  util::delay(2, undefined, &function_b206d9a7);
   level thread function_e4486a45();
   if(isDefined(level.bzm_prologuedialogue2callback)) {
     level thread[[level.bzm_prologuedialogue2callback]]();
   }
   spawner::waittill_ai_group_cleared("tower_guards");
-  array::run_all(level.activeplayers, & util::set_low_ready, 1);
-  array::thread_all(level.activeplayers, & cp_mi_eth_prologue::function_7072c5d8);
+  array::run_all(level.activeplayers, &util::set_low_ready, 1);
+  array::thread_all(level.activeplayers, &cp_mi_eth_prologue::function_7072c5d8);
   level thread function_63075f1d();
   battlechatter::function_d9f49fba(0);
   level.ai_hendricks.allowbattlechatter["bc"] = 1;
   level thread function_127fb1fb();
   level thread function_5dc7beec();
   level thread function_a7dec0e7();
-  scene::add_scene_func("cin_pro_03_01_blendin_vign_movedown_tower_hendricks", & function_c9e3016d, "play");
-  scene::add_scene_func("cin_pro_03_01_blendin_vign_movedown_tower_hendricks", & function_fe6bccbc, "play");
+  scene::add_scene_func("cin_pro_03_01_blendin_vign_movedown_tower_hendricks", &function_c9e3016d, "play");
+  scene::add_scene_func("cin_pro_03_01_blendin_vign_movedown_tower_hendricks", &function_fe6bccbc, "play");
   level scene::play("cin_pro_03_01_blendin_vign_movedown_tower_hendricks");
   level flag::wait_till("player_reached_tower_bottom");
   skipto::objective_completed("skipto_nrc_knocking");
@@ -127,7 +127,7 @@ function function_b206d9a7() {
 
 function blend_in_start() {
   blend_in_precache();
-  spawner::add_spawn_function_group("start_through_take_out_guards", "script_aigroup", & set_ai_ignore);
+  spawner::add_spawn_function_group("start_through_take_out_guards", "script_aigroup", &set_ai_ignore);
   level thread function_bc06f066();
   level thread blend_in_main();
 }
@@ -312,9 +312,9 @@ function function_4358b88b() {
 
 function hendricks_movement_handler() {
   level thread function_ae8c8b7b();
-  level thread scene::add_scene_func("cin_pro_03_02_blendin_vign_call_for_help", & function_9b773ab2);
+  level thread scene::add_scene_func("cin_pro_03_02_blendin_vign_call_for_help", &function_9b773ab2);
   level thread scene::play("cin_pro_03_02_blendin_vign_call_for_help");
-  scene::add_scene_func("cin_pro_03_02_blendin_vign_tarmac_cross", & function_cdc39276, "play");
+  scene::add_scene_func("cin_pro_03_02_blendin_vign_tarmac_cross", &function_cdc39276, "play");
   level scene::play("cin_pro_03_01_blendin_vign_movedown_tower_exit_hendr");
   level waittill("hash_c64e52db");
   level flag::set("hendr_crossed_tarmac");
@@ -382,9 +382,9 @@ function function_a7dec0e7() {
   level flag::wait_till("tower_doors_open");
   level.ai_hendricks ai::set_behavior_attribute("cqb", 0);
   a_allies = cp_prologue_util::get_ai_allies();
-  array::thread_all(a_allies, & ai::set_behavior_attribute, "cqb", 0);
-  array::run_all(level.players, & util::set_low_ready, 1);
-  array::thread_all(level.players, & cp_mi_eth_prologue::function_7072c5d8);
+  array::thread_all(a_allies, &ai::set_behavior_attribute, "cqb", 0);
+  array::run_all(level.players, &util::set_low_ready, 1);
+  array::thread_all(level.players, &cp_mi_eth_prologue::function_7072c5d8);
 }
 
 function function_a87bddf2() {
@@ -433,12 +433,12 @@ function tarmac_vign_anims() {
   level thread function_d5fbb820("tarmac_wounded_2");
   level thread scene::play("tarmac_deathpose");
   var_197aede3 = struct::get("injured_carried2", "targetname");
-  var_197aede3 scene::add_scene_func(var_197aede3.scriptbundlename, & function_28d9b6cd, "play");
+  var_197aede3 scene::add_scene_func(var_197aede3.scriptbundlename, &function_28d9b6cd, "play");
   var_197aede3 thread scene::play(var_197aede3.scriptbundlename);
-  scene::add_scene_func("cin_pro_03_02_blendin_vign_destruction_help", & function_28d9b6cd, "play");
+  scene::add_scene_func("cin_pro_03_02_blendin_vign_destruction_help", &function_28d9b6cd, "play");
   level thread scene::play("cin_pro_03_02_blendin_vign_destruction_help");
   var_a7737ea8 = struct::get("injured_carried1", "targetname");
-  var_a7737ea8 scene::add_scene_func(var_a7737ea8.scriptbundlename, & function_28d9b6cd, "play");
+  var_a7737ea8 scene::add_scene_func(var_a7737ea8.scriptbundlename, &function_28d9b6cd, "play");
   var_a7737ea8 thread scene::play(var_a7737ea8.scriptbundlename);
 }
 
@@ -484,7 +484,7 @@ function blend_in_tsa_guard(str_scene) {
   ai_victim.health = int(ai_victim.health * 0.25);
   ai_victim thread function_b79bfbce();
   level thread scene::play(str_scene, ai_victim);
-  ai_victim util::delay(0.5, undefined, & kill);
+  ai_victim util::delay(0.5, undefined, &kill);
   ai_victim waittill("death");
   if(isDefined(ai_victim)) {
     ai_victim startragdoll(1);
@@ -721,8 +721,8 @@ function take_out_guards_main() {
   cp_prologue_util::function_47a62798(1);
   level.ai_hendricks.pacifist = 1;
   level.ai_hendricks.ignoreme = 1;
-  array::run_all(level.players, & util::set_low_ready, 1);
-  array::thread_all(level.players, & cp_mi_eth_prologue::function_7072c5d8);
+  array::run_all(level.players, &util::set_low_ready, 1);
+  array::thread_all(level.players, &cp_mi_eth_prologue::function_7072c5d8);
   level thread tunnel_vignettes();
   level thread take_out_guards_objective_handler();
   level thread function_65e80b9e();
@@ -738,10 +738,10 @@ function hendricks_take_out_guard() {
   level flag::wait_till("start_hendr_kill");
   level thread function_f126566f();
   level thread function_eb28ee9b();
-  level scene::add_scene_func("cin_pro_04_01_takeout_vign_keycard", & security_camera::function_30b1de21);
-  level scene::add_scene_func("cin_pro_05_01_securitycam_1st_stealth_kill_prepare", & security_camera::function_d6557dc4);
-  level scene::add_scene_func("cin_pro_05_01_securitycam_1st_stealth_kill_prepare", & security_camera::function_9887d555, "done");
-  level scene::add_scene_func("cin_pro_04_01_takeout_vign_kiosk_kill", & hend_taylor_dialog, "play");
+  level scene::add_scene_func("cin_pro_04_01_takeout_vign_keycard", &security_camera::function_30b1de21);
+  level scene::add_scene_func("cin_pro_05_01_securitycam_1st_stealth_kill_prepare", &security_camera::function_d6557dc4);
+  level scene::add_scene_func("cin_pro_05_01_securitycam_1st_stealth_kill_prepare", &security_camera::function_9887d555, "done");
+  level scene::add_scene_func("cin_pro_04_01_takeout_vign_kiosk_kill", &hend_taylor_dialog, "play");
   level scene::play("cin_pro_04_01_takeout_vign_kiosk_kill");
 }
 
@@ -843,7 +843,7 @@ function function_65e80b9e() {
   var_813b7ee8 setspeed(20, 15, 15);
   var_813b7ee8 resumespeed(20);
   var_813b7ee8 playLoopSound("evt_tunnel_truck_script_drive_lp", 0.2);
-  util::delay(2, undefined, & function_173d3769, "open");
+  util::delay(2, undefined, &function_173d3769, "open");
   level waittill("hash_bed7581c");
   function_173d3769("close");
 }

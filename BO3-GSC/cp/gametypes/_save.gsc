@@ -19,7 +19,7 @@
 #namespace savegame;
 
 function autoexec __init__sytem__() {
-  system::register("save", & __init__, undefined, undefined);
+  system::register("save", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -238,7 +238,7 @@ function function_152fdd8c(delay) {
     savegame_create();
     wait(delay);
     if(isDefined(player)) {
-      util::show_event_message(player, & "COOP_REACHED_SKIPTO");
+      util::show_event_message(player, &"COOP_REACHED_SKIPTO");
     }
   }
 }

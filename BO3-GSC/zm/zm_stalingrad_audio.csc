@@ -13,12 +13,12 @@
 #namespace zm_stalingrad_audio;
 
 function autoexec __init__sytem__() {
-  system::register("zm_stalingrad_audio", & __init__, undefined, undefined);
+  system::register("zm_stalingrad_audio", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "ee_anthem_pa", 12000, 1, "int", & function_a50e0efb, 0, 0);
-  clientfield::register("scriptmover", "ee_ballerina", 12000, 2, "int", & function_41eaf8b8, 0, 0);
+  clientfield::register("scriptmover", "ee_anthem_pa", 12000, 1, "int", &function_a50e0efb, 0, 0);
+  clientfield::register("scriptmover", "ee_ballerina", 12000, 2, "int", &function_41eaf8b8, 0, 0);
   level._effect["ee_anthem_pa_appear"] = "dlc3/stalingrad/fx_main_anomoly_emp_pulse";
   level._effect["ee_anthem_pa_explode"] = "dlc3/stalingrad/fx_main_impact_success";
   level._effect["ee_ballerina_appear"] = "dlc3/stalingrad/fx_main_impact_success";

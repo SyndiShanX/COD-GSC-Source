@@ -10,7 +10,7 @@
 //need to be able to save select dvar in menu (spending points while in the menu)
 //need to be able to save select dvar from script (dvars track which items are found)
 main() {
-  // &&1/30 pieces of enemy intel found.
+  // && 1/30 pieces of enemy intel found.
   precachestring(&"SCRIPT_INTELLIGENCE_OF_FOURTYFIVE");
   precachestring(&"SCRIPT_INTELLIGENCE_PREV_FOUND");
   level.intel_items = create_array_of_intel_items();
@@ -124,7 +124,7 @@ wait_for_pickup() {
   self endon("end_trigger_thread");
 
   if(self.classname == "trigger_use") {
-    // Press and hold^3 &&1 ^7to secure the enemy intelligence.
+    // Press and hold^3 && 1 ^7to secure the enemy intelligence.
     self setHintString(&"SCRIPT_INTELLIGENCE_PICKUP");
     self usetriggerrequirelookat();
   }
@@ -190,10 +190,10 @@ intel_feedback(found_by_player) {
 
     //if I found it and I already had it
     if(found_by_player == player && player GetPlayerIntelIsFound(self.num))
-      remaining_print.label = & "SCRIPT_INTELLIGENCE_PREV_FOUND";
+      remaining_print.label = &"SCRIPT_INTELLIGENCE_PREV_FOUND";
     else {
-      // &&1/30 pieces of enemy intel found.
-      remaining_print.label = & "SCRIPT_INTELLIGENCE_OF_FOURTYFIVE";
+      // && 1/30 pieces of enemy intel found.
+      remaining_print.label = &"SCRIPT_INTELLIGENCE_OF_FOURTYFIVE";
       player give_point();
       intel_found = (player GetLocalPlayerProfileData("cheatPoints"));
       remaining_print setValue(intel_found);

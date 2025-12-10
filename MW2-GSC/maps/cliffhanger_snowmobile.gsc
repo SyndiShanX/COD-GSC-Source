@@ -126,7 +126,7 @@ hill_attackers_spawn() {
 
 cover_price() {
   setObjectiveOnEntity("obj_exfiltrate", level.price);
-  setObjective_pointerText("obj_exfiltrate", & "SCRIPT_WAYPOINT_COVER");
+  setObjective_pointerText("obj_exfiltrate", &"SCRIPT_WAYPOINT_COVER");
 }
 
 go_to_mig() {
@@ -583,7 +583,7 @@ penalize_player_for_running_over_price(damage, attacker, direction_vec, point, t
   if(attacker != level.player.vehicle)
     return;
 
-  setdvar("ui_deadquote", & "CLIFFHANGER_RUN_OVER");
+  setdvar("ui_deadquote", &"CLIFFHANGER_RUN_OVER");
   missionfailedwrapper();
 }
 
@@ -1283,7 +1283,7 @@ snowmobile_ending_autosave() {
   flag_wait("downhill_autosave");
   if(level.player.health < 75)
     return;
-  id = SaveGameNoCommit("blah", & "AUTOSAVE_AUTOSAVE");
+  id = SaveGameNoCommit("blah", &"AUTOSAVE_AUTOSAVE");
   level.player endon("death");
   angles = level.player.vehicle.angles;
   //	if( flag( "price_disables_hill_autosave" ) )

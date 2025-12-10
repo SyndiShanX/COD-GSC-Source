@@ -81,8 +81,8 @@ onprecachegametype() {
 init_default_zcleansed_powerups() {
   maps\mp\zombies\_zm_powerups::include_zombie_powerup("the_cure");
   maps\mp\zombies\_zm_powerups::include_zombie_powerup("blue_monkey");
-  maps\mp\zombies\_zm_powerups::add_zombie_powerup("the_cure", "zombie_pickup_perk_bottle", & "ZOMBIE_POWERUP_MAX_AMMO", maps\mp\zombies\_zm_powerups::func_should_never_drop, 0, 0, 1);
-  maps\mp\zombies\_zm_powerups::add_zombie_powerup("blue_monkey", level.cymbal_monkey_model, & "ZOMBIE_POWERUP_MAX_AMMO", maps\mp\zombies\_zm_powerups::func_should_never_drop, 1, 0, 0);
+  maps\mp\zombies\_zm_powerups::add_zombie_powerup("the_cure", "zombie_pickup_perk_bottle", &"ZOMBIE_POWERUP_MAX_AMMO", maps\mp\zombies\_zm_powerups::func_should_never_drop, 0, 0, 1);
+  maps\mp\zombies\_zm_powerups::add_zombie_powerup("blue_monkey", level.cymbal_monkey_model, &"ZOMBIE_POWERUP_MAX_AMMO", maps\mp\zombies\_zm_powerups::func_should_never_drop, 1, 0, 0);
 }
 
 init_cleansed_powerup_fx() {
@@ -284,8 +284,8 @@ custom_end_screen() {
       players[i].survived_hud.y = players[i].survived_hud.y + 40;
     }
 
-    winner_text = & "ZOMBIE_CLEANSED_WIN";
-    loser_text = & "ZOMBIE_CLEANSED_LOSE";
+    winner_text = &"ZOMBIE_CLEANSED_WIN";
+    loser_text = &"ZOMBIE_CLEANSED_LOSE";
 
     if(isDefined(level.host_ended_game) && level.host_ended_game)
       players[i].survived_hud settext(&"MP_HOST_ENDED_GAME");
@@ -1514,16 +1514,16 @@ add_cleansed_powerup(name, powerupmodel, text, team, zombie_death_frequency, hum
 
 init_cleansed_powerups() {
   level._effect["powerup_on_solo"] = loadfx("misc/fx_zombie_powerup_on_blue");
-  add_cleansed_powerup("green_nuke", "zombie_bomb", & "ZOMBIE_THIS_IS_A_BUG", 0, 0.4, 0, ::turned_powerup_green_nuke);
-  add_cleansed_powerup("green_double", "zombie_x2_icon", & "ZOMBIE_THIS_IS_A_BUG", 0, 1, 0, ::turned_powerup_green_double);
-  add_cleansed_powerup("green_insta", "zombie_skull", & "ZOMBIE_THIS_IS_A_BUG", 0, 0.1, 0, ::turned_powerup_green_insta);
-  add_cleansed_powerup("green_ammo", "zombie_ammocan", & "ZOMBIE_POWERUP_MAX_AMMO", 0, 1, 0, ::turned_powerup_green_ammo);
-  add_cleansed_powerup("green_monkey", level.cymbal_monkey_model, & "ZOMBIE_THIS_IS_A_BUG", 0, 0.4, 0, ::turned_powerup_green_monkey);
-  add_cleansed_powerup("red_nuke", "zombie_bomb", & "ZOMBIE_THIS_IS_A_BUG", 1, 0, 0.4, ::turned_powerup_red_nuke);
-  add_cleansed_powerup("red_ammo", "zombie_ammocan", & "ZOMBIE_THIS_IS_A_BUG", 1, 0, 1, ::turned_powerup_red_ammo);
-  add_cleansed_powerup("red_double", "zombie_x2_icon", & "ZOMBIE_THIS_IS_A_BUG", 1, 0, 1, ::turned_powerup_red_double);
-  add_cleansed_powerup("yellow_double", "zombie_x2_icon", & "ZOMBIE_THIS_IS_A_BUG", 2, 0.1, 0.1, ::turned_powerup_yellow_double);
-  add_cleansed_powerup("yellow_nuke", "zombie_bomb", & "ZOMBIE_THIS_IS_A_BUG", 2, 0.01, 0.01, ::turned_powerup_yellow_nuke);
+  add_cleansed_powerup("green_nuke", "zombie_bomb", &"ZOMBIE_THIS_IS_A_BUG", 0, 0.4, 0, ::turned_powerup_green_nuke);
+  add_cleansed_powerup("green_double", "zombie_x2_icon", &"ZOMBIE_THIS_IS_A_BUG", 0, 1, 0, ::turned_powerup_green_double);
+  add_cleansed_powerup("green_insta", "zombie_skull", &"ZOMBIE_THIS_IS_A_BUG", 0, 0.1, 0, ::turned_powerup_green_insta);
+  add_cleansed_powerup("green_ammo", "zombie_ammocan", &"ZOMBIE_POWERUP_MAX_AMMO", 0, 1, 0, ::turned_powerup_green_ammo);
+  add_cleansed_powerup("green_monkey", level.cymbal_monkey_model, &"ZOMBIE_THIS_IS_A_BUG", 0, 0.4, 0, ::turned_powerup_green_monkey);
+  add_cleansed_powerup("red_nuke", "zombie_bomb", &"ZOMBIE_THIS_IS_A_BUG", 1, 0, 0.4, ::turned_powerup_red_nuke);
+  add_cleansed_powerup("red_ammo", "zombie_ammocan", &"ZOMBIE_THIS_IS_A_BUG", 1, 0, 1, ::turned_powerup_red_ammo);
+  add_cleansed_powerup("red_double", "zombie_x2_icon", &"ZOMBIE_THIS_IS_A_BUG", 1, 0, 1, ::turned_powerup_red_double);
+  add_cleansed_powerup("yellow_double", "zombie_x2_icon", &"ZOMBIE_THIS_IS_A_BUG", 2, 0.1, 0.1, ::turned_powerup_yellow_double);
+  add_cleansed_powerup("yellow_nuke", "zombie_bomb", &"ZOMBIE_THIS_IS_A_BUG", 2, 0.01, 0.01, ::turned_powerup_yellow_nuke);
   level.cleansed_powerup_history_depth = [];
   level.cleansed_powerup_history_depth[0] = 2;
   level.cleansed_powerup_history_depth[1] = 1;

@@ -301,7 +301,7 @@ hud_show_target_icon(vehicle) {
 hud_display_car_objectives() {
   level endon("special_op_terminated");
 
-  Objective_SetPointerTextOverride(1, & "SO_DEMO_SO_BRIDGE_OBJ_DESTROY");
+  Objective_SetPointerTextOverride(1, &"SO_DEMO_SO_BRIDGE_OBJ_DESTROY");
 
   while(!flag("so_demoman_complete")) {
     self waittill("show_vehicle_locs");
@@ -350,7 +350,7 @@ hud_hide_car_objectives() {
 // ---------------------------------------------------------------------------------
 
 hud_display_cars_remaining() {
-  self.car_title = so_create_hud_item(3, so_hud_ypos(), & "SO_DEMO_SO_BRIDGE_VEHICLES", self);
+  self.car_title = so_create_hud_item(3, so_hud_ypos(), &"SO_DEMO_SO_BRIDGE_VEHICLES", self);
   self.car_count = so_create_hud_item(3, so_hud_ypos(), undefined, self);
   self.car_count.alignx = "left";
   self.car_count SetValue(level.vehicles_alive);
@@ -369,7 +369,7 @@ hud_display_cars_remaining() {
   }
 
   self.car_count so_remove_hud_item(true);
-  self.car_count = so_create_hud_item(3, so_hud_ypos(), & "SPECIAL_OPS_DASHDASH", self);
+  self.car_count = so_create_hud_item(3, so_hud_ypos(), &"SPECIAL_OPS_DASHDASH", self);
   self.car_count.alignx = "left";
 
   self.car_title thread so_hud_pulse_success();
@@ -380,7 +380,7 @@ hud_display_cars_remaining() {
 }
 
 hud_display_wreckage_count() {
-  self.bonus_title = so_create_hud_item(4, so_hud_ypos(), & "SO_DEMO_SO_BRIDGE_WRECKAGE_IN", self);
+  self.bonus_title = so_create_hud_item(4, so_hud_ypos(), &"SO_DEMO_SO_BRIDGE_WRECKAGE_IN", self);
   self hud_create_bonus_count();
   self.bonus_count_current = level.bonus_count_goal;
   self.bonus_count SetValue(level.bonus_count_goal);
@@ -443,8 +443,8 @@ hud_rebuild_time_bonus(timer) {
   }
 
   if(!isDefined(self.time_bonus)) {
-    self.time_title = so_create_hud_item(5, so_hud_ypos(), & "SO_DEMO_SO_BRIDGE_INFINITE_AMMO", self);
-    self.time_bonus = so_create_hud_item(5, so_hud_ypos(), & "SPECIAL_OPS_TIME_NULL", self);
+    self.time_title = so_create_hud_item(5, so_hud_ypos(), &"SO_DEMO_SO_BRIDGE_INFINITE_AMMO", self);
+    self.time_bonus = so_create_hud_item(5, so_hud_ypos(), &"SPECIAL_OPS_TIME_NULL", self);
     self.time_bonus.alignx = "left";
     self.time_bonus.pulse_sound = "infinite_ammo_on";
     self.time_title.pulse_scale = 1.33;
@@ -498,11 +498,11 @@ hud_time_splash(timer) {
     return;
 
   if(!isDefined(self.time_splash)) {
-    self.time_msg = hud_create_splash(0, & "SO_DEMO_SO_BRIDGE_WRECKAGE_ACTIVE");
+    self.time_msg = hud_create_splash(0, &"SO_DEMO_SO_BRIDGE_WRECKAGE_ACTIVE");
     self.time_msg_x = self.time_msg.x;
     self.time_msg_y = self.time_msg.y;
 
-    self.time_splash = hud_create_splash(1, & "SO_DEMO_SO_BRIDGE_INFINITE_AMMO_AMOUNT");
+    self.time_splash = hud_create_splash(1, &"SO_DEMO_SO_BRIDGE_INFINITE_AMMO_AMOUNT");
     self.time_splash SetValue(level.bonus_time_amount);
     self.time_splash_x = self.time_splash.x;
     self.time_splash_y = self.time_splash.y;

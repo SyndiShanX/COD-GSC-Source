@@ -588,7 +588,7 @@ bus_event_failure() {
   m_bus = get_ent("bus_dam_bus", "targetname", 1);
   t_bus_kill = get_ent("bus_dam_damage_trigger", "targetname", 1);
   t_bus_kill thread maps\pakistan_market::trigger_kill_ai_on_contact("bus_dam_done");
-  setdvar("ui_deadquote", & "PAKISTAN_SHARED_BUS_FAIL");
+  setdvar("ui_deadquote", &"PAKISTAN_SHARED_BUS_FAIL");
   level thread bus_death_hud(level.player, 5.3);
   level thread run_scene("bus_dam_exit");
   wait 5.1;
@@ -755,7 +755,7 @@ monitor_bus_kill_player() {
 
   while(true) {
     if(distance2d(level.player.origin, self.origin) < 128 || level.player istouching(self)) {
-      setdvar("ui_deadquote", & "PAKISTAN_SHARED_BUS_FAIL");
+      setdvar("ui_deadquote", &"PAKISTAN_SHARED_BUS_FAIL");
       level thread bus_death_hud(level.player, 0.5);
       wait 0.2;
       missionfailed();
@@ -1145,7 +1145,7 @@ debris_collision(vh_ent) {
 
         if(n_current_time_ms - level.player._last_collision_time > 1000) {
           if(level.player.health < 20)
-            setdvar("ui_deadquote", & "PAKISTAN_SHARED_FROGGER_FAIL");
+            setdvar("ui_deadquote", &"PAKISTAN_SHARED_FROGGER_FAIL");
 
           level.player dodamage(20, self.origin, self);
           level.player._last_collision_time = n_current_time_ms;

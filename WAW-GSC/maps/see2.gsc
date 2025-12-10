@@ -45,9 +45,9 @@ main() {
   precachestring(&"SEE2_MG_COOP_HINT");
   precachestring(&"SEE2_ADS_HINT");
   default_start(::field_begin);
-  add_start("radio_tower", ::radio_tower_begin, & "STARTS_SEE2_RADIOTOWER");
-  add_start("fuel_depot", ::fuel_depot_begin, & "STARTS_SEE2_FUELDEPOT");
-  add_start("air_strike", ::air_strike_begin, & "STARTS_SEE2_AIRSTRIKE");
+  add_start("radio_tower", ::radio_tower_begin, &"STARTS_SEE2_RADIOTOWER");
+  add_start("fuel_depot", ::fuel_depot_begin, &"STARTS_SEE2_FUELDEPOT");
+  add_start("air_strike", ::air_strike_begin, &"STARTS_SEE2_AIRSTRIKE");
   level.drones_per_wave = 8;
   setup_level();
   maps\_drone::init();
@@ -1738,7 +1738,7 @@ field_begin() {
   }
   level.active_arty = arty_array.size;
   level.max_active_arty = arty_array.size;
-  objective_string(1, & "SEE2_DESTROY_ARTILLERY", level.active_arty);
+  objective_string(1, &"SEE2_DESTROY_ARTILLERY", level.active_arty);
   third_tier = getEntArray("third tier", "targetname");
   third_tier = array_merge(third_tier, getEntArray("third tier two", "targetname"));
   third_tier = array_merge(third_tier, getEntArray("third tier three", "targetname"));
@@ -1831,7 +1831,7 @@ wait_for_neutralize(objNum) {
   level.active_arty--;
   if(level.active_arty == 0) {
     Objective_AdditionalPosition(1, objNum, (0, 0, 0));
-    Objective_String_NoMessage(1, & "SEE2_DESTROY_ARTILLERY", level.active_arty);
+    Objective_String_NoMessage(1, &"SEE2_DESTROY_ARTILLERY", level.active_arty);
     flag_set("flak objective completed");
     Objective_State(1, "done");
     autosave_by_name("first area arty destroyed");
@@ -1840,7 +1840,7 @@ wait_for_neutralize(objNum) {
     thread do_sound_for_event("radio_tower_dialog");
   } else {
     Objective_AdditionalPosition(1, objNum, (0, 0, 0));
-    Objective_String(1, & "SEE2_DESTROY_ARTILLERY", level.active_arty);
+    Objective_String(1, &"SEE2_DESTROY_ARTILLERY", level.active_arty);
     if(level.active_arty == 2) {
       autosave_by_name("first area arty destroyed" + level.active_arty);
     }
@@ -2122,12 +2122,12 @@ add_radio_tower_objective(radiotower) {
   next_proceed_trigger = GetEnt("radio tower next proceed trigger", "targetname");
   thread do_radio_tower_owned_event();
   objective_add(2, "current");
-  Objective_String(2, & "SEE2_PROCEED_RADIOTOWER");
+  Objective_String(2, &"SEE2_PROCEED_RADIOTOWER");
   Objective_additionalPosition(2, 0, proceed_trigger.origin);
   proceed_trigger waittill("trigger");
   Objective_additionalPosition(2, 0, next_proceed_trigger.origin);
   next_proceed_trigger waittill("trigger");
-  Objective_String(2, & "SEE2_DESTROY_RADIOTOWER");
+  Objective_String(2, &"SEE2_DESTROY_RADIOTOWER");
   objective_additionalPosition(2, 0, radiotower.origin);
   while(1) {
     if(radiotower.model == "anim_seelow_radiotower_d") {
@@ -2148,7 +2148,7 @@ add_radio_tower_objective_alternate(radiotower) {
   next_proceed_trigger = GetEnt("radio tower next proceed trigger", "targetname");
   thread do_radio_tower_owned_event();
   objective_add(2, "current");
-  Objective_String(2, & "SEE2_DESTROY_RADIOTOWER");
+  Objective_String(2, &"SEE2_DESTROY_RADIOTOWER");
   objective_additionalPosition(2, 0, radiotower.origin);
   while(1) {
     if(radiotower.model == "anim_seelow_radiotower_d") {
@@ -2297,7 +2297,7 @@ fuel_depot_objectives() {
   }
   start_trigger = getEnt("finalbattle_trigger", "script_noteworthy");
   objective_add(3, "current");
-  Objective_String(3, & "SEE2_REJOIN_ARMY");
+  Objective_String(3, &"SEE2_REJOIN_ARMY");
   Objective_additionalPosition(3, 0, start_trigger.origin);
   while(1) {
     start_trigger waittill("trigger", guy);
@@ -2534,7 +2534,7 @@ wait_for_finalbattle(skipped_radio) {
     Objective_State(3, "done");
   }
   Objective_add(4, "current");
-  Objective_String(4, & "SEE2_BREAK_THE_LINE");
+  Objective_String(4, &"SEE2_BREAK_THE_LINE");
   autosave_by_name("line broken");
   level thread do_victory_scene();
 }

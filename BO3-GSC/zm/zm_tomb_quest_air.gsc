@@ -52,7 +52,7 @@ function air_puzzle_1_cleanup() {
 }
 
 function air_puzzle_1_run() {
-  array::thread_all(level.a_ceiling_rings, & ceiling_ring_run);
+  array::thread_all(level.a_ceiling_rings, &ceiling_ring_run);
 }
 
 function check_puzzle_solved() {

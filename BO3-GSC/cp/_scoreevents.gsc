@@ -16,18 +16,18 @@
 #namespace scoreevents;
 
 function autoexec __init__sytem__() {
-  system::register("scoreevents", & __init__, undefined, undefined);
+  system::register("scoreevents", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & main);
+  callback::on_start_gametype(&main);
 }
 
 function main() {
   level.scoreeventcallbacks = [];
-  level.scoreeventgameendcallback = & ongameend;
-  registerscoreeventcallback("playerKilled", & scoreeventplayerkill);
-  registerscoreeventcallback("actorKilled", & scoreeventactorkill);
+  level.scoreeventgameendcallback = &ongameend;
+  registerscoreeventcallback("playerKilled", &scoreeventplayerkill);
+  registerscoreeventcallback("actorKilled", &scoreeventactorkill);
 }
 
 function scoreeventtablelookupint(index, scoreeventcolumn) {

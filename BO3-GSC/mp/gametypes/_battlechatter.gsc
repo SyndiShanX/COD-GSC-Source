@@ -19,20 +19,20 @@
 #namespace battlechatter;
 
 function autoexec __init__sytem__() {
-  system::register("battlechatter", & __init__, undefined, undefined);
+  system::register("battlechatter", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level thread devgui_think();
-  callback::on_joined_team( & on_joined_team);
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
-  level.heroplaydialog = & play_dialog;
-  level.playgadgetready = & play_gadget_ready;
-  level.playgadgetactivate = & play_gadget_activate;
-  level.playgadgetsuccess = & play_gadget_success;
-  level.playpromotionreaction = & play_promotion_reaction;
-  level.playthrowhatchet = & play_throw_hatchet;
+  callback::on_joined_team(&on_joined_team);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
+  level.heroplaydialog = &play_dialog;
+  level.playgadgetready = &play_gadget_ready;
+  level.playgadgetactivate = &play_gadget_activate;
+  level.playgadgetsuccess = &play_gadget_success;
+  level.playpromotionreaction = &play_promotion_reaction;
+  level.playthrowhatchet = &play_throw_hatchet;
   level.bcsounds = [];
   level.bcsounds["incoming_alert"] = [];
   level.bcsounds["incoming_alert"]["frag_grenade"] = "incomingFrag";

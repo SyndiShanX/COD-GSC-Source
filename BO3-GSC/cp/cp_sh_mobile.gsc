@@ -22,10 +22,10 @@ function main() {
   load::main();
   level thread set_ambient_state();
   level thread setup_vignettes();
-  level scene::add_scene_func("p_player_enter_readyroom_mobile", & function_1b1968a9, "init");
-  level.var_8ea79b65 = & function_6c5a247e;
-  level.var_58373e3b = & function_3a7a79ca;
-  level.var_f3db725a = & function_9e35a10d;
+  level scene::add_scene_func("p_player_enter_readyroom_mobile", &function_1b1968a9, "init");
+  level.var_8ea79b65 = &function_6c5a247e;
+  level.var_58373e3b = &function_3a7a79ca;
+  level.var_f3db725a = &function_9e35a10d;
 }
 
 function set_ambient_state() {
@@ -88,7 +88,7 @@ function rumbles() {
 
 function function_6d9e2e34() {
   level.var_ea4a62a = util::spawn_model("tag_origin");
-  callback::on_spawned( & function_eb7433ac);
+  callback::on_spawned(&function_eb7433ac);
   while(true) {
     n_degree = randomfloatrange(0.25, 1);
     n_time = randomfloatrange(3, 6);

@@ -68,9 +68,9 @@ main() {
     precacheTurret("sentry_minigun_mp");
   }
 
-  // LANG_ENGLISH		Press and hold ^3&&1^7 to move the turret."
+  // LANG_ENGLISH		Press and hold ^3&& 1^7 to move the turret."
   precacheString(&"SENTRY_MOVE");
-  // Press and hold ^3&&1^7 to pick up the turret.
+  // Press and hold ^3&& 1^7 to pick up the turret.
   precacheString(&"SENTRY_PICKUP");
   precacheString(&"SENTRY_PLACE");
   precacheString(&"SENTRY_CANNOT_PLACE");
@@ -175,7 +175,7 @@ sentry_pickup_init(sentryType) {
   self.sentryType = sentryType;
 
   self setCursorHint("HINT_NOICON");
-  // Press and hold ^3&&1^7 to pick up the turret.
+  // Press and hold ^3&& 1^7 to pick up the turret.
   self setHintString(&"SENTRY_PICKUP");
   self makeUsable();
 

@@ -458,7 +458,7 @@ function timer_wait(n_wait) {
   return n_current_time;
 }
 
-function add_remove_list( & a = [], on_off) {
+function add_remove_list(&a = [], on_off) {
   if(on_off) {
     if(!isinarray(a, self)) {
       arrayinsert(a, self, a.size);
@@ -468,7 +468,7 @@ function add_remove_list( & a = [], on_off) {
   }
 }
 
-function clean_deleted( & array) {
+function clean_deleted(&array) {
   done = 0;
   while(!done && array.size > 0) {
     done = 1;
@@ -929,8 +929,8 @@ function button_held_think(which_button) {
 
 function init_button_wrappers() {
   if(!isDefined(level._button_funcs)) {
-    level._button_funcs[4] = & up_button_pressed;
-    level._button_funcs[5] = & down_button_pressed;
+    level._button_funcs[4] = &up_button_pressed;
+    level._button_funcs[5] = &down_button_pressed;
   }
 }
 

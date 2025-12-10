@@ -85,7 +85,7 @@ main() {
   level._effect["debri_explosion"] = LoadFX("explosions/debri_explosion");
   level._effect["falling_debrigulag_evac"] = LoadFX("misc/falling_debris_gulag_evac");
 
-  //Scripted Lights & Stuff
+  //Scripted Lights &Stuff
   level._effect["dlight_blue"] = LoadFX("misc/dlight_blue");
   level._effect["dlight_blue_flicker"] = LoadFX("misc/dlight_blue_flicker");
   level._effect["dlight_red"] = LoadFX("misc/dlight_red");

@@ -199,7 +199,7 @@ door_state_update(param_00) {
       }
     }
 
-    var_0F = scripts\engine\utility::ter_op(var_01.statecurr == 0, & "MP_DOOR_USE_OPEN", & "MP_DOOR_USE_CLOSE");
+    var_0F = scripts\engine\utility::ter_op(var_01.statecurr == 0, &"MP_DOOR_USE_OPEN", &"MP_DOOR_USE_CLOSE");
     var_01 sethintstring(var_0F);
     var_01 makeusable();
     var_01 waittill("trigger");

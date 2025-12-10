@@ -1716,13 +1716,13 @@ tow_missile_instructions() {
 
     if(weapon_name == "m220_tow_sp") {
       b_instructions_given = 1;
-      instruction_string = & "ANGOLA_2_TOW_INSTRUCTION";
+      instruction_string = &"ANGOLA_2_TOW_INSTRUCTION";
 
       if(level.wiiu) {
         controller_type = level.player getcontrollertype();
 
         if(controller_type == "remote")
-          instruction_string = & "ANGOLA_2_TOW_INSTRUCTION_WIIU_REMOTE";
+          instruction_string = &"ANGOLA_2_TOW_INSTRUCTION_WIIU_REMOTE";
       }
 
       screen_message_create(instruction_string);

@@ -121,7 +121,7 @@ func_18A6(param_00) {
   param_00 endon("disconnect");
   param_00 endon("death");
   self.trigger setcursorhint("HINT_NOICON");
-  self.trigger sethintstring( & "MP_PICKUP_ADRENALINE_MIST");
+  self.trigger sethintstring(&"MP_PICKUP_ADRENALINE_MIST");
   self.trigger scripts\mp\utility::setselfusable(param_00);
   self.trigger thread scripts\mp\utility::notusableforjoiningplayers(param_00);
   for(;;) {

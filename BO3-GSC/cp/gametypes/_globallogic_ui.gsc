@@ -24,7 +24,7 @@
 #namespace globallogic_ui;
 
 function init() {
-  callback::add_callback("hash_bc12b61f", & on_player_spawn);
+  callback::add_callback("hash_bc12b61f", &on_player_spawn);
   clientfield::register("clientuimodel", "hudItems.cybercoreSelectMenuDisabled", 1, 1, "int");
   clientfield::register("clientuimodel", "hudItems.playerInCombat", 1, 1, "int");
   clientfield::register("clientuimodel", "playerAbilities.repulsorIndicatorDirection", 1, 2, "int");
@@ -87,10 +87,10 @@ function watch_player_in_combat() {
 }
 
 function setupcallbacks() {
-  level.autoassign = & menuautoassign;
-  level.spectator = & menuspectator;
-  level.curclass = & menuclass;
-  level.teammenu = & menuteam;
+  level.autoassign = &menuautoassign;
+  level.spectator = &menuspectator;
+  level.curclass = &menuclass;
+  level.teammenu = &menuteam;
 }
 
 function freegameplayhudelems() {

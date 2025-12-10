@@ -1035,7 +1035,7 @@ additional_ability_hint(var_00, var_01) {
       continue;
     }
 
-    scripts\cp\utility::setlowermessage("msg_axe_hint", & "CP_ZOMBIE_ADD_ABILITY__HINT", 5);
+    scripts\cp\utility::setlowermessage("msg_axe_hint", &"CP_ZOMBIE_ADD_ABILITY__HINT", 5);
     self.additional_ability_hint_display++;
     wait(var_02);
   }

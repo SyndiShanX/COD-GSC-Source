@@ -20,13 +20,13 @@
 #namespace zm_powerup_fire_sale;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_fire_sale", & __init__, undefined, undefined);
+  system::register("zm_powerup_fire_sale", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  zm_powerups::register_powerup("fire_sale", & grab_fire_sale);
+  zm_powerups::register_powerup("fire_sale", &grab_fire_sale);
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("fire_sale", "p7_zm_power_up_firesale", & "ZOMBIE_POWERUP_MAX_AMMO", & func_should_drop_fire_sale, 0, 0, 0, undefined, "powerup_fire_sale", "zombie_powerup_fire_sale_time", "zombie_powerup_fire_sale_on");
+    zm_powerups::add_zombie_powerup("fire_sale", "p7_zm_power_up_firesale", &"ZOMBIE_POWERUP_MAX_AMMO", &func_should_drop_fire_sale, 0, 0, 0, undefined, "powerup_fire_sale", "zombie_powerup_fire_sale_time", "zombie_powerup_fire_sale_on");
   }
 }
 

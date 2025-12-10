@@ -72,16 +72,16 @@
 #namespace globallogic;
 
 function autoexec __init__sytem__() {
-  system::register("globallogic", & __init__, undefined, "visionset_mgr");
+  system::register("globallogic", &__init__, undefined, "visionset_mgr");
 }
 
 function __init__() {
   if(!isDefined(level.vsmgr_prio_visionset_mpintro)) {
     level.vsmgr_prio_visionset_mpintro = 5;
   }
-  visionset_mgr::register_info("visionset", "mpintro", 1, level.vsmgr_prio_visionset_mpintro, 31, 0, & visionset_mgr::ramp_in_out_thread, 0);
-  level.host_migration_activate_visionset_func = & mpintro_visionset_activate_func;
-  level.host_migration_deactivate_visionset_func = & mpintro_visionset_deactivate_func;
+  visionset_mgr::register_info("visionset", "mpintro", 1, level.vsmgr_prio_visionset_mpintro, 31, 0, &visionset_mgr::ramp_in_out_thread, 0);
+  level.host_migration_activate_visionset_func = &mpintro_visionset_activate_func;
+  level.host_migration_deactivate_visionset_func = &mpintro_visionset_deactivate_func;
 }
 
 function init() {
@@ -139,7 +139,7 @@ function init() {
   level.gameforfeited = 0;
   level.forceautoassign = 0;
   level.halftimetype = "halftime";
-  level.halftimesubcaption = & "MP_SWITCHING_SIDES_CAPS";
+  level.halftimesubcaption = &"MP_SWITCHING_SIDES_CAPS";
   level.laststatustime = 0;
   level.waswinning = [];
   level.lastslowprocessframe = 0;
@@ -188,9 +188,9 @@ function init() {
   clientfield::register("clientuimodel", "hudItems.captureCrateState", 5000, 2, "int");
   clientfield::register("clientuimodel", "hudItems.captureCrateTotalTime", 5000, 13, "int");
   level.playersdrivingvehiclesbecomeinvulnerable = 0;
-  level.figure_out_attacker = & globallogic_player::figure_out_attacker;
-  level.figure_out_friendly_fire = & globallogic_player::figure_out_friendly_fire;
-  level.get_base_weapon_param = & weapon_utils::getbaseweaponparam;
+  level.figure_out_attacker = &globallogic_player::figure_out_attacker;
+  level.figure_out_friendly_fire = &globallogic_player::figure_out_friendly_fire;
+  level.get_base_weapon_param = &weapon_utils::getbaseweaponparam;
   level thread function_aa9e547b();
 }
 
@@ -226,56 +226,56 @@ function registerdvars() {
 function blank(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) {}
 
 function setup_callbacks() {
-  level.spawnplayer = & globallogic_spawn::spawnplayer;
-  level.spawnplayerprediction = & globallogic_spawn::spawnplayerprediction;
-  level.spawnclient = & globallogic_spawn::spawnclient;
-  level.spawnspectator = & globallogic_spawn::spawnspectator;
-  level.spawnintermission = & globallogic_spawn::spawnintermission;
-  level.scoreongiveplayerscore = & globallogic_score::giveplayerscore;
-  level.onplayerscore = & globallogic_score::default_onplayerscore;
-  level.onteamscore = & globallogic_score::default_onteamscore;
-  level.wavespawntimer = & wavespawntimer;
-  level.spawnmessage = & globallogic_spawn::default_spawnmessage;
-  level.onspawnplayer = & blank;
-  level.onspawnplayer = & spawning::onspawnplayer;
-  level.onspawnspectator = & globallogic_defaults::default_onspawnspectator;
-  level.onspawnintermission = & globallogic_defaults::default_onspawnintermission;
-  level.onrespawndelay = & blank;
-  level.onforfeit = & globallogic_defaults::default_onforfeit;
-  level.ontimelimit = & globallogic_defaults::default_ontimelimit;
-  level.onscorelimit = & globallogic_defaults::default_onscorelimit;
-  level.onroundscorelimit = & globallogic_defaults::default_onroundscorelimit;
-  level.onalivecountchange = & globallogic_defaults::default_onalivecountchange;
+  level.spawnplayer = &globallogic_spawn::spawnplayer;
+  level.spawnplayerprediction = &globallogic_spawn::spawnplayerprediction;
+  level.spawnclient = &globallogic_spawn::spawnclient;
+  level.spawnspectator = &globallogic_spawn::spawnspectator;
+  level.spawnintermission = &globallogic_spawn::spawnintermission;
+  level.scoreongiveplayerscore = &globallogic_score::giveplayerscore;
+  level.onplayerscore = &globallogic_score::default_onplayerscore;
+  level.onteamscore = &globallogic_score::default_onteamscore;
+  level.wavespawntimer = &wavespawntimer;
+  level.spawnmessage = &globallogic_spawn::default_spawnmessage;
+  level.onspawnplayer = &blank;
+  level.onspawnplayer = &spawning::onspawnplayer;
+  level.onspawnspectator = &globallogic_defaults::default_onspawnspectator;
+  level.onspawnintermission = &globallogic_defaults::default_onspawnintermission;
+  level.onrespawndelay = &blank;
+  level.onforfeit = &globallogic_defaults::default_onforfeit;
+  level.ontimelimit = &globallogic_defaults::default_ontimelimit;
+  level.onscorelimit = &globallogic_defaults::default_onscorelimit;
+  level.onroundscorelimit = &globallogic_defaults::default_onroundscorelimit;
+  level.onalivecountchange = &globallogic_defaults::default_onalivecountchange;
   level.ondeadevent = undefined;
-  level.ononeleftevent = & globallogic_defaults::default_ononeleftevent;
-  level.giveteamscore = & globallogic_score::giveteamscore;
-  level.onlastteamaliveevent = & globallogic_defaults::default_onlastteamaliveevent;
-  level.gettimepassed = & globallogic_utils::gettimepassed;
-  level.gettimelimit = & globallogic_defaults::default_gettimelimit;
-  level.getteamkillpenalty = & globallogic_defaults::default_getteamkillpenalty;
-  level.getteamkillscore = & globallogic_defaults::default_getteamkillscore;
-  level.iskillboosting = & globallogic_score::default_iskillboosting;
-  level._setteamscore = & globallogic_score::_setteamscore;
-  level._setplayerscore = & globallogic_score::_setplayerscore;
-  level._getteamscore = & globallogic_score::_getteamscore;
-  level._getplayerscore = & globallogic_score::_getplayerscore;
-  level.resetplayerscorestreaks = & globallogic_score::resetplayerscorechainandmomentum;
-  level.onprecachegametype = & blank;
-  level.onstartgametype = & blank;
-  level.onplayerconnect = & blank;
-  level.onplayerdisconnect = & blank;
-  level.onplayerdamage = & blank;
-  level.onplayerkilled = & blank;
+  level.ononeleftevent = &globallogic_defaults::default_ononeleftevent;
+  level.giveteamscore = &globallogic_score::giveteamscore;
+  level.onlastteamaliveevent = &globallogic_defaults::default_onlastteamaliveevent;
+  level.gettimepassed = &globallogic_utils::gettimepassed;
+  level.gettimelimit = &globallogic_defaults::default_gettimelimit;
+  level.getteamkillpenalty = &globallogic_defaults::default_getteamkillpenalty;
+  level.getteamkillscore = &globallogic_defaults::default_getteamkillscore;
+  level.iskillboosting = &globallogic_score::default_iskillboosting;
+  level._setteamscore = &globallogic_score::_setteamscore;
+  level._setplayerscore = &globallogic_score::_setplayerscore;
+  level._getteamscore = &globallogic_score::_getteamscore;
+  level._getplayerscore = &globallogic_score::_getplayerscore;
+  level.resetplayerscorestreaks = &globallogic_score::resetplayerscorechainandmomentum;
+  level.onprecachegametype = &blank;
+  level.onstartgametype = &blank;
+  level.onplayerconnect = &blank;
+  level.onplayerdisconnect = &blank;
+  level.onplayerdamage = &blank;
+  level.onplayerkilled = &blank;
   level.onplayerkilledextraunthreadedcbs = [];
-  level.onteamoutcomenotify = & hud_message::teamoutcomenotify;
-  level.onoutcomenotify = & hud_message::outcomenotify;
-  level.setmatchscorehudelemforteam = & hud_message::setmatchscorehudelemforteam;
-  level.onendgame = & blank;
-  level.onroundendgame = & globallogic_defaults::default_onroundendgame;
-  level.determinewinner = & globallogic_defaults::default_determinewinner;
-  level.onmedalawarded = & blank;
-  level.dogmanagerongetdogs = & dogs::dog_manager_get_dogs;
-  callback::on_joined_team( & globallogic_player::on_joined_team);
+  level.onteamoutcomenotify = &hud_message::teamoutcomenotify;
+  level.onoutcomenotify = &hud_message::outcomenotify;
+  level.setmatchscorehudelemforteam = &hud_message::setmatchscorehudelemforteam;
+  level.onendgame = &blank;
+  level.onroundendgame = &globallogic_defaults::default_onroundendgame;
+  level.determinewinner = &globallogic_defaults::default_determinewinner;
+  level.onmedalawarded = &blank;
+  level.dogmanagerongetdogs = &dogs::dog_manager_get_dogs;
+  callback::on_joined_team(&globallogic_player::on_joined_team);
   globallogic_ui::setupcallbacks();
 }
 
@@ -462,12 +462,12 @@ function forceend(hostsucks = 0) {
   level.forcedend = 1;
   level.hostforcedend = 1;
   if(hostsucks) {
-    endstring = & "MP_HOST_SUCKS";
+    endstring = &"MP_HOST_SUCKS";
   } else {
     if(level.splitscreen) {
-      endstring = & "MP_ENDED_GAME";
+      endstring = &"MP_ENDED_GAME";
     } else {
-      endstring = & "MP_HOST_ENDED_GAME";
+      endstring = &"MP_HOST_ENDED_GAME";
     }
   }
   setmatchflag("disableIngameMenu", 1);
@@ -494,7 +494,7 @@ function killserverpc() {
   level.forcedend = 1;
   level.hostforcedend = 1;
   level.killserver = 1;
-  endstring = & "MP_HOST_ENDED_GAME";
+  endstring = &"MP_HOST_ENDED_GAME";
   println("");
   thread endgame(winner, endstring);
 }
@@ -693,7 +693,7 @@ function mpintro_visionset_ramp_hold_func() {
 }
 
 function mpintro_visionset_activate_func() {
-  visionset_mgr::activate("visionset", "mpintro", undefined, 0, & mpintro_visionset_ramp_hold_func, 2);
+  visionset_mgr::activate("visionset", "mpintro", undefined, 0, &mpintro_visionset_ramp_hold_func, 2);
 }
 
 function mpintro_visionset_deactivate_func() {
@@ -1222,9 +1222,9 @@ function getendreasontext() {
   }
   if(level.forcedend) {
     if(level.hostforcedend) {
-      return & "MP_HOST_ENDED_GAME";
+      return &"MP_HOST_ENDED_GAME";
     }
-    return & "MP_ENDED_GAME";
+    return &"MP_ENDED_GAME";
   }
   return game["strings"]["time_limit_reached"];
 }
@@ -2711,32 +2711,32 @@ function callback_startgametype() {
       game["state"] = "playing";
     }
     setdvar("cg_thirdPersonAngle", 354);
-    game["strings"]["press_to_spawn"] = & "PLATFORM_PRESS_TO_SPAWN";
+    game["strings"]["press_to_spawn"] = &"PLATFORM_PRESS_TO_SPAWN";
     if(level.teambased) {
-      game["strings"]["waiting_for_teams"] = & "MP_WAITING_FOR_TEAMS";
-      game["strings"]["opponent_forfeiting_in"] = & "MP_OPPONENT_FORFEITING_IN";
+      game["strings"]["waiting_for_teams"] = &"MP_WAITING_FOR_TEAMS";
+      game["strings"]["opponent_forfeiting_in"] = &"MP_OPPONENT_FORFEITING_IN";
     } else {
-      game["strings"]["waiting_for_teams"] = & "MP_WAITING_FOR_PLAYERS";
-      game["strings"]["opponent_forfeiting_in"] = & "MP_OPPONENT_FORFEITING_IN";
+      game["strings"]["waiting_for_teams"] = &"MP_WAITING_FOR_PLAYERS";
+      game["strings"]["opponent_forfeiting_in"] = &"MP_OPPONENT_FORFEITING_IN";
     }
-    game["strings"]["match_starting_in"] = & "MP_MATCH_STARTING_IN";
-    game["strings"]["spawn_next_round"] = & "MP_SPAWN_NEXT_ROUND";
-    game["strings"]["waiting_to_spawn"] = & "MP_WAITING_TO_SPAWN";
-    game["strings"]["waiting_to_spawn_ss"] = & "MP_WAITING_TO_SPAWN_SS";
-    game["strings"]["you_will_spawn"] = & "MP_YOU_WILL_RESPAWN";
-    game["strings"]["match_starting"] = & "MP_MATCH_STARTING";
-    game["strings"]["change_class"] = & "MP_CHANGE_CLASS_NEXT_SPAWN";
-    game["strings"]["last_stand"] = & "MPUI_LAST_STAND";
-    game["strings"]["cowards_way"] = & "PLATFORM_COWARDS_WAY_OUT";
-    game["strings"]["tie"] = & "MP_MATCH_TIE";
-    game["strings"]["round_draw"] = & "MP_ROUND_DRAW";
-    game["strings"]["enemies_eliminated"] = & "MP_ENEMIES_ELIMINATED";
-    game["strings"]["score_limit_reached"] = & "MP_SCORE_LIMIT_REACHED";
-    game["strings"]["round_score_limit_reached"] = & "MP_SCORE_LIMIT_REACHED";
-    game["strings"]["round_limit_reached"] = & "MP_ROUND_LIMIT_REACHED";
-    game["strings"]["time_limit_reached"] = & "MP_TIME_LIMIT_REACHED";
-    game["strings"]["players_forfeited"] = & "MP_PLAYERS_FORFEITED";
-    game["strings"]["other_teams_forfeited"] = & "MP_OTHER_TEAMS_FORFEITED";
+    game["strings"]["match_starting_in"] = &"MP_MATCH_STARTING_IN";
+    game["strings"]["spawn_next_round"] = &"MP_SPAWN_NEXT_ROUND";
+    game["strings"]["waiting_to_spawn"] = &"MP_WAITING_TO_SPAWN";
+    game["strings"]["waiting_to_spawn_ss"] = &"MP_WAITING_TO_SPAWN_SS";
+    game["strings"]["you_will_spawn"] = &"MP_YOU_WILL_RESPAWN";
+    game["strings"]["match_starting"] = &"MP_MATCH_STARTING";
+    game["strings"]["change_class"] = &"MP_CHANGE_CLASS_NEXT_SPAWN";
+    game["strings"]["last_stand"] = &"MPUI_LAST_STAND";
+    game["strings"]["cowards_way"] = &"PLATFORM_COWARDS_WAY_OUT";
+    game["strings"]["tie"] = &"MP_MATCH_TIE";
+    game["strings"]["round_draw"] = &"MP_ROUND_DRAW";
+    game["strings"]["enemies_eliminated"] = &"MP_ENEMIES_ELIMINATED";
+    game["strings"]["score_limit_reached"] = &"MP_SCORE_LIMIT_REACHED";
+    game["strings"]["round_score_limit_reached"] = &"MP_SCORE_LIMIT_REACHED";
+    game["strings"]["round_limit_reached"] = &"MP_ROUND_LIMIT_REACHED";
+    game["strings"]["time_limit_reached"] = &"MP_TIME_LIMIT_REACHED";
+    game["strings"]["players_forfeited"] = &"MP_PLAYERS_FORFEITED";
+    game["strings"]["other_teams_forfeited"] = &"MP_OTHER_TEAMS_FORFEITED";
     assertteamvariables();
     [[level.onprecachegametype]]();
     game["gamestarted"] = 1;
@@ -2913,7 +2913,7 @@ function callback_startgametype() {
   if(!isDefined(level.roundwinlimit)) {
     util::registerroundwinlimit(0, 10);
   }
-  globallogic_utils::registerpostroundevent( & killcam::post_round_final_killcam);
+  globallogic_utils::registerpostroundevent(&killcam::post_round_final_killcam);
   wavedelay = level.waverespawndelay;
   if(wavedelay) {
     foreach(team in level.teams) {

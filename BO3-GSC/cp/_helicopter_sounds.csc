@@ -12,8 +12,8 @@
 #namespace helicopter_sounds;
 
 function init() {
-  clientfield::register("helicopter", "vehicle_is_firing", 1, 1, "int", & vehicle_is_firing_function, 1, 0);
-  level.callbackentityshutdown = & heli_linkto_sound_ents_delete;
+  clientfield::register("helicopter", "vehicle_is_firing", 1, 1, "int", &vehicle_is_firing_function, 1, 0);
+  level.callbackentityshutdown = &heli_linkto_sound_ents_delete;
   level.helisoundvalues = [];
   init_heli_sound_values("cobra", "turbine", 65, 0.6, 0.8, 65, 1, 1.1);
   init_heli_sound_values("cobra", "top_rotor", 45, 0.7, 1, 45, 0.95, 1.1);

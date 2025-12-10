@@ -84,7 +84,7 @@ function callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeanso
   if(isDefined(eattacker) && isplayer(eattacker) && isDefined(eattacker.candocombat) && !eattacker.candocombat) {
     return;
   }
-  if(!1 & idflags) {
+  if(!1 &idflags) {
     idamage = loadout::cac_modified_vehicle_damage(self, eattacker, idamage, smeansofdeath, weapon, einflictor);
   }
   self.idflags = idflags;

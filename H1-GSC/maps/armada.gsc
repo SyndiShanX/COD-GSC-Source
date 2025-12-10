@@ -33,13 +33,13 @@ main() {
   }
 
   maps\_utility::default_start(::ride_start);
-  maps\_utility::add_start("ride", ::ride_start, & "STARTS_RIDE");
-  maps\_utility::add_start("landed", ::landed_start, & "STARTS_LANDED");
-  maps\_utility::add_start("hq2tv", ::hq2tv_start, & "STARTS_HQ2TV");
-  maps\_utility::add_start("intel", ::intel_start, & "STARTS_INTEL");
-  maps\_utility::add_start("tv", ::tv_start, & "STARTS_TV");
-  maps\_utility::add_start("tank", ::tank_start, & "STARTS_TANK");
-  maps\_utility::add_start("end", ::end_start, & "STARTS_END");
+  maps\_utility::add_start("ride", ::ride_start, &"STARTS_RIDE");
+  maps\_utility::add_start("landed", ::landed_start, &"STARTS_LANDED");
+  maps\_utility::add_start("hq2tv", ::hq2tv_start, &"STARTS_HQ2TV");
+  maps\_utility::add_start("intel", ::intel_start, &"STARTS_INTEL");
+  maps\_utility::add_start("tv", ::tv_start, &"STARTS_TV");
+  maps\_utility::add_start("tank", ::tank_start, &"STARTS_TANK");
+  maps\_utility::add_start("end", ::end_start, &"STARTS_END");
   precachemodel("vb_generic_s1");
   precachemodel("vehicle_blackhawk_hero_sas_night_interior");
   precachemodel("h1_mwr_com_widescreen_monitor_des");
@@ -701,28 +701,28 @@ end_of_script() {
 objectives() {
   common_scripts\utility::flag_wait("start_first_obj");
   var_0 = getent("outside_hq_obj", "targetname");
-  objective_add(1, "active", & "ARMADA_GET_INTO_POSITION_TO", var_0.origin);
+  objective_add(1, "active", &"ARMADA_GET_INTO_POSITION_TO", var_0.origin);
   objective_current(1);
   common_scripts\utility::flag_wait("hq_entered");
   var_1 = getent("inside_hq_obj", "targetname");
   objective_state(1, "done");
-  objective_add(2, "active", & "ARMADA_SEARCH_THE_HQ_BUILDING", var_1.origin);
+  objective_add(2, "active", &"ARMADA_SEARCH_THE_HQ_BUILDING", var_1.origin);
   objective_current(2);
   common_scripts\utility::flag_wait("hq_cleared");
   wait 2;
   var_2 = getent("regroup_obj", "targetname");
   objective_state(2, "done");
-  objective_add(3, "active", & "ARMADA_REGROUP_WITH_FIRST_SQUAD", var_2.origin);
+  objective_add(3, "active", &"ARMADA_REGROUP_WITH_FIRST_SQUAD", var_2.origin);
   objective_current(3);
   common_scripts\utility::flag_wait("regrouped");
   common_scripts\utility::flag_set("aa_street_fight");
   objective_state(3, "done");
-  objective_add(4, "active", & "ARMADA_MAKE_YOUR_WAY_TO_THE", (2808, 23672, -24));
+  objective_add(4, "active", &"ARMADA_MAKE_YOUR_WAY_TO_THE", (2808, 23672, -24));
   objective_current(4);
   common_scripts\utility::flag_wait("tvstation_entered");
   var_3 = getent("second_floor_obj", "targetname");
   objective_state(4, "done");
-  objective_add(5, "active", & "ARMADA_MAKE_YOUR_WAY_TO_THE1", var_3.origin);
+  objective_add(5, "active", &"ARMADA_MAKE_YOUR_WAY_TO_THE1", var_3.origin);
   objective_current(5);
   common_scripts\utility::flag_wait("entered_atrium");
   thread objective_on_friendly(5, level.price, "end_obj5");
@@ -730,7 +730,7 @@ objectives() {
   thread maps\_utility::autosave_by_name("second_floor");
   objective_state(5, "done");
   var_4 = getent("final_room_obj", "targetname");
-  objective_add(6, "active", & "ARMADA_SEARCH_THE_TV_STATION", level.price.origin);
+  objective_add(6, "active", &"ARMADA_SEARCH_THE_TV_STATION", level.price.origin);
   objective_current(6);
   thread objective_on_friendly(6, level.price, "end_obj6");
   var_5 = getent("end_positions", "targetname");

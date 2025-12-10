@@ -24,7 +24,7 @@
 #namespace lightning_chain;
 
 function autoexec __init__sytem__() {
-  system::register("lightning_chain", & init, undefined, undefined);
+  system::register("lightning_chain", &init, undefined, undefined);
 }
 
 function init() {
@@ -38,7 +38,7 @@ function init() {
   clientfield::register("vehicle", "lc_fx", 1, 2, "int");
   clientfield::register("actor", "lc_death_fx", 1, 2, "int");
   clientfield::register("vehicle", "lc_death_fx", 10000, 2, "int");
-  callback::on_connect( & on_player_connect);
+  callback::on_connect(&on_player_connect);
 }
 
 function create_lightning_chain_params(max_arcs = 5, max_enemies_killed = 10, radius_start = 300, radius_decay = 20, head_gib_chance = 75, arc_travel_time = 0.11, kills_for_powerup = 10, min_fx_distance = 128, network_death_choke = 4, should_kill_enemies = 1, clientside_fx = 1, arc_fx_sound = undefined, no_fx = 0, prevent_weapon_kill_credit = 0) {

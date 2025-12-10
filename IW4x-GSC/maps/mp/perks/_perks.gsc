@@ -18,8 +18,6 @@ init() {
   precacheModel("viewmodel_riot_shield_mp");
   precacheString(&"MPUI_CHANGING_KIT");
 
-
-
   level.spawnGlowModel["enemy"] = "mil_emergency_flare_mp";
   level.spawnGlowModel["friendly"] = "mil_emergency_flare_mp";
   level.spawnGlow["enemy"] = loadfx("misc/flare_ambient");
@@ -36,7 +34,6 @@ init() {
   precacheShaders();
 
   level._effect["ricochet"] = loadfx("impacts/large_metalhit_1");
-
 
   level.scriptPerks = [];
   level.perkSetFuncs = [];

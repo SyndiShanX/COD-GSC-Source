@@ -51,7 +51,7 @@ function init() {
   level flag::init("be2");
   level flag::init("ss1");
   level flag::init("soul_swap_done");
-  zm_sidequests::declare_sidequest("sq", & init_sidequest, & sidequest_logic, & complete_sidequest, & generic_stage_start, & generic_stage_complete);
+  zm_sidequests::declare_sidequest("sq", &init_sidequest, &sidequest_logic, &complete_sidequest, &generic_stage_start, &generic_stage_complete);
   zm_moon_sq_ss::init_1();
   zm_moon_sq_ss::init_2();
   zm_moon_sq_osc::init();
@@ -92,7 +92,7 @@ function init_clientfields() {
 function reward() {
   level notify("moon_sidequest_achieved");
   players = getplayers();
-  array::thread_all(players, & give_perk_reward);
+  array::thread_all(players, &give_perk_reward);
 }
 
 function watch_for_respawn() {
@@ -192,7 +192,7 @@ function rocket_test() {
 
 function rocket_raise(player_num) {
   rockets = getEntArray("moon_rockets", "script_noteworthy");
-  array::thread_all(rockets, & nml_show_hide);
+  array::thread_all(rockets, &nml_show_hide);
   for(i = 3; i > 0; i--) {
     level waittill("rl");
     level clientfield::increment("raise_rockets");
@@ -442,7 +442,7 @@ function sq_flatcard_logic() {
 }
 
 function sd_init() {
-  zm_spawner::add_custom_zombie_spawn_logic( & function_69090b83);
+  zm_spawner::add_custom_zombie_spawn_logic(&function_69090b83);
   level flag::init("sd_active");
   level flag::wait_till("start_zombie_round_logic");
   level.var_c920d4c5 = struct::get("sd_bowl", "targetname");
@@ -492,8 +492,8 @@ function function_4ee03f50() {
   var_8c15cb32.radius = 65;
   var_8c15cb32.height = 72;
   var_8c15cb32.script_float = 7;
-  var_8c15cb32.custom_string = & "ZM_MOON_HACK_SILENT";
-  zm_equip_hacker::register_pooled_hackable_struct(var_8c15cb32, & function_9391498d);
+  var_8c15cb32.custom_string = &"ZM_MOON_HACK_SILENT";
+  zm_equip_hacker::register_pooled_hackable_struct(var_8c15cb32, &function_9391498d);
 }
 
 function function_9391498d(hacker) {

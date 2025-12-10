@@ -17,11 +17,11 @@
 #namespace zm_ai_quadrotor;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_quadrotor", & __init__, undefined, undefined);
+  system::register("zm_ai_quadrotor", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("zm_quadrotor", & quadrotor_think);
+  vehicle::add_main_callback("zm_quadrotor", &quadrotor_think);
   execdevgui("");
   level thread function_a05da9fb();
 }
@@ -845,7 +845,7 @@ function kill_fx_if_target_revive(quadrotor, revive_target) {
 
 function private function_a05da9fb() {
   level flagsys::wait_till("");
-  zm_devgui::add_custom_devgui_callback( & function_d3a31a35);
+  zm_devgui::add_custom_devgui_callback(&function_d3a31a35);
 }
 
 function private function_d3a31a35(cmd) {

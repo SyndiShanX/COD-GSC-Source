@@ -43,7 +43,7 @@ init() {
     maps\mp\gametypes\_tweakables::init();
 
   level.halftimeType = "halftime";
-  level.halftimeSubCaption = & "MP_SWITCHING_SIDES";
+  level.halftimeSubCaption = &"MP_SWITCHING_SIDES";
 
   level.lastStatusTime = 0;
   level.wasWinning = "none";
@@ -190,7 +190,7 @@ testMenu() {
     wait(10.0);
 
     notifyData = spawnStruct();
-    notifyData.titleText = & "MP_CHALLENGE_COMPLETED";
+    notifyData.titleText = &"MP_CHALLENGE_COMPLETED";
     notifyData.notifyText = "wheee";
     notifyData.sound = "mp_challenge_complete";
 

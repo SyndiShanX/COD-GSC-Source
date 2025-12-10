@@ -21,7 +21,7 @@ function hack_packapunch() {
     struct.script_float = 5;
     struct.script_int = -1000;
     level._pack_hack_struct = struct;
-    zm_equip_hacker::register_pooled_hackable_struct(level._pack_hack_struct, & packapunch_hack);
+    zm_equip_hacker::register_pooled_hackable_struct(level._pack_hack_struct, &packapunch_hack);
     level._pack_hack_struct pack_trigger_think();
   }
 }

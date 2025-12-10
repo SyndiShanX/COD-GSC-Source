@@ -113,9 +113,9 @@ function include_weapons() {
 }
 
 function init_theater_box_indicator() {
-  level._custom_box_monitor = & theater_box_monitor;
+  level._custom_box_monitor = &theater_box_monitor;
   level._box_locations = array("start_chest_loc", "foyer_chest_loc", "crematorium_chest_loc", "alleyway_chest_loc", "control_chest_loc", "stage_chest_loc", "dressing_chest_loc", "dining_chest_loc", "theater_chest_loc");
-  callback::on_localclient_connect( & init_board_lights);
+  callback::on_localclient_connect(&init_board_lights);
 }
 
 function init_board_lights(clientnum) {
@@ -239,7 +239,7 @@ function theater_light_model_swap_init() {
   for(i = 0; i < players.size; i++) {
     theater_light_models = getEntArray(i, "model_lights_on", "targetname");
     if(isDefined(theater_light_models) && theater_light_models.size > 0) {
-      array::thread_all(theater_light_models, & theater_light_model_swap);
+      array::thread_all(theater_light_models, &theater_light_model_swap);
     }
   }
 }
@@ -257,9 +257,9 @@ function theater_light_model_swap() {
 }
 
 function register_clientfields() {
-  clientfield::register("world", "zm_theater_screen_in_place", 21000, 1, "int", & function_17e9c62f, 0, 0);
-  clientfield::register("scriptmover", "zombie_has_eyes", 21000, 1, "int", & zm::zombie_eyes_clientfield_cb, 0, 0);
-  clientfield::register("world", "zm_theater_movie_reel_playing", 21000, 2, "int", & zm_theater_fx::function_e4b3e1ca, 0, 0);
+  clientfield::register("world", "zm_theater_screen_in_place", 21000, 1, "int", &function_17e9c62f, 0, 0);
+  clientfield::register("scriptmover", "zombie_has_eyes", 21000, 1, "int", &zm::zombie_eyes_clientfield_cb, 0, 0);
+  clientfield::register("world", "zm_theater_movie_reel_playing", 21000, 2, "int", &zm_theater_fx::function_e4b3e1ca, 0, 0);
   zm_sidequests::register_sidequest_icon("movieReel", 21000);
 }
 

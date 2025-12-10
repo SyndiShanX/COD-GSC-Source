@@ -41,7 +41,7 @@ onuse(var_00, var_01) {
   var_02 = scripts\mp\utility\game::getotherteam(self.team);
 
   if(isDefined(level.func_C22F)) {
-    self iprintlnbold( & "KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+    self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
   } else {
     var_03 = scripts\mp\killstreaks\plane::selectairstrikelocation(var_00, "gas_airstrike", ::dostrike);

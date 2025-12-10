@@ -30,9 +30,7 @@ precacheFX() {
 placeGlows() {
   randomStartDelay = randomfloatrange(-20, -15);
 
-
   thread lightGlows("chinese_lantern_FX_origin", "chinese_lantern_FX", "misc/chinese_latern_glow_orange", randomStartDelay);
-
 
   thread lightGlows("ct_street_lamp_glow_FX_origin", "ct_street_lamp_glow_FX", "misc/ct_street_lamp_glow", randomStartDelay);
 }
@@ -45,7 +43,6 @@ lightGlows(targetname, fxName, fxFile, delay, soundalias) {
     lev._effect[fxName] = loadfx(fxFile);
 
   waittillframeend;
-
 
   ents = getstructarray(targetname, "targetname");
   if(!isDefined(ents))

@@ -13,7 +13,7 @@
 #namespace zm_bgb_now_you_see_me;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_now_you_see_me", & __init__, undefined, undefined);
+  system::register("zm_bgb_now_you_see_me", &__init__, undefined, undefined);
 }
 
 function __init__() {

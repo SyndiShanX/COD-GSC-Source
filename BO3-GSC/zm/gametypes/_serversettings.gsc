@@ -9,11 +9,11 @@
 #namespace serversettings;
 
 function autoexec __init__sytem__() {
-  system::register("serversettings", & __init__, undefined, undefined);
+  system::register("serversettings", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & main);
+  callback::on_start_gametype(&main);
 }
 
 function main() {

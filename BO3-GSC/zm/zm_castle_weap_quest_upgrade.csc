@@ -52,63 +52,63 @@ function main() {
   level._effect["wolf_hold_head"] = "dlc1/castle/fx_wolf_ink_hold_head";
   level._effect["wolf_trail"] = "dlc1/castle/fx_wolf_ink_trail_lg";
   level._effect["arrow_charge_wolf"] = "dlc1/castle/fx_wolf_arrow_whole_float_glow";
-  clientfield::register("scriptmover", "fossil_reveal", 5000, 2, "int", & function_fc150bb9, 0, 0);
-  clientfield::register("scriptmover", "fossil_collect_fx", 5000, 1, "int", & function_9a901aeb, 0, 0);
-  clientfield::register("scriptmover", "demonic_circle_reveal", 5000, 1, "int", & function_9de15a4d, 0, 0);
-  clientfield::register("scriptmover", "init_demongate_fossil", 5000, 2, "int", & function_b2c9069f, 0, 0);
-  clientfield::register("scriptmover", "urn_impact_fx", 5000, 1, "counter", & function_f821e372, 0, 0);
-  clientfield::register("scriptmover", "demongate_fossil_frenzy", 5000, 1, "int", & function_543f9ebd, 0, 0);
-  clientfield::register("scriptmover", "demongate_fossil_outro", 5000, 1, "int", & function_fec30c70, 0, 0);
-  clientfield::register("world", "demongate_client_cleanup", 5000, 1, "int", & function_8739dc84, 0, 0);
-  clientfield::register("scriptmover", "demongate_quest_portal", 5000, 1, "int", & function_e08420f7, 0, 0);
-  clientfield::register("toplayer", "demon_vo_release", 8000, 1, "counter", & function_414a0874, 0, 0);
-  clientfield::register("toplayer", "demon_vo_return", 8000, 1, "counter", & function_8a7c68af, 0, 0);
-  clientfield::register("toplayer", "demon_vo_souls", 8000, 1, "counter", & function_71168013, 0, 0);
-  clientfield::register("toplayer", "demon_vo_name", 8000, 1, "counter", & function_41a3306c, 0, 0);
-  clientfield::register("toplayer", "demon_vo_ask_name", 8000, 1, "counter", & function_e13571b8, 0, 0);
-  clientfield::register("toplayer", "demon_vo_name_correct", 8000, 1, "counter", & function_2ccca749, 0, 0);
-  clientfield::register("toplayer", "demon_vo_name_incorrect", 8000, 1, "counter", & function_8cd2582e, 0, 0);
-  clientfield::register("toplayer", "demon_vo_door", 8000, 1, "counter", & function_42fe618d, 0, 0);
-  clientfield::register("toplayer", "demon_vo_horn", 8000, 1, "counter", & function_ad13a872, 0, 0);
-  clientfield::register("toplayer", "demon_vo_heart", 8000, 1, "counter", & function_9b445487, 0, 0);
-  clientfield::register("toplayer", "demon_vo_griffon", 8000, 1, "counter", & function_e2b77200, 0, 0);
-  clientfield::register("toplayer", "demon_vo_crown", 8000, 1, "counter", & function_4ab357d6, 0, 0);
-  clientfield::register("toplayer", "demon_vo_stag", 8000, 1, "counter", & function_153cf9fc, 0, 0);
-  clientfield::register("scriptmover", "tower_break_fx", 5000, 1, "int", & function_7cc0d99b, 0, 0);
-  clientfield::register("scriptmover", "beacon_fx", 5000, 2, "int", & function_475de8c4, 0, 0);
-  clientfield::register("scriptmover", "wallrun_fx", 5000, 2, "int", & function_6103d0f7, 0, 0);
-  clientfield::register("scriptmover", "battery_fx", 5000, 2, "int", & function_f51349bf, 0, 0);
-  clientfield::register("scriptmover", "lightning_fx", 5000, 1, "int", & function_c31afa5, 0, 0);
-  clientfield::register("scriptmover", "tornado_fx", 5000, 1, "int", & function_9db8b2b2, 0, 0);
-  clientfield::register("toplayer", "arrow_charge_fx", 5000, 1, "int", & function_3f451756, 0, 1);
-  clientfield::register("world", "storm_variable_cleanup", 5000, 1, "int", & function_e92d950c, 0, 0);
-  clientfield::register("scriptmover", "obelisk_magma_reveal", 5000, 1, "int", & function_64bc7af0, 0, 0);
-  clientfield::register("scriptmover", "obelisk_runes_reveal", 5000, 1, "int", & function_febf0bf4, 0, 0);
-  clientfield::register("scriptmover", "obelisk_runes_drain", 5000, 1, "int", & function_5063c4f7, 0, 0);
-  clientfield::register("scriptmover", "runic_circle_reveal", 5000, 1, "int", & function_f32932c3, 0, 0);
-  clientfield::register("scriptmover", "runic_circle_fx", 5000, 1, "int", & function_3b5b1626, 0, 0);
-  clientfield::register("scriptmover", "runic_circle_death_fx", 5000, 1, "counter", & function_d6434cf, 0, 0);
-  clientfield::register("toplayer", "anchor_point_postfx", 5000, 1, "int", & function_c069c332, 0, 0);
-  clientfield::register("world", "orb_sanim_cleanup", 5000, 1, "counter", & function_2514cb86, 0, 0);
-  clientfield::register("scriptmover", "painting_symbol_reveal", 5000, 1, "int", & function_46f52afa, 0, 0);
-  clientfield::register("scriptmover", "painting_symbol_blink", 5000, 1, "counter", & function_6f66f54d, 0, 0);
-  clientfield::register("scriptmover", "wolf_howl_bone_fx", 5000, 1, "int", & function_65d81fc2, 0, 0);
-  clientfield::register("actor", "wolf_trail_fx", 5000, 2, "int", & function_aefa4e67, 0, 0);
-  clientfield::register("actor", "wolf_footprint_fx", 5000, 1, "int", & function_60ae2cd0, 0, 0);
-  clientfield::register("actor", "wolf_ghost_shader", 5000, 1, "int", & function_ccf12771, 0, 0);
-  clientfield::register("scriptmover", "arrow_charge_wolf_fx", 5000, 1, "int", & function_e051553d, 0, 0);
-  clientfield::register("scriptmover", "zombie_soul_demon_fx", 5000, 1, "int", & function_c75de902, 0, 0);
-  clientfield::register("scriptmover", "zombie_soul_rune_fx", 5000, 1, "int", & function_3cb9b375, 0, 0);
-  clientfield::register("scriptmover", "zombie_soul_storm_fx", 5000, 1, "int", & function_fa1ef690, 0, 0);
-  clientfield::register("scriptmover", "zombie_soul_wolf_fx", 5000, 1, "int", & function_d0720a0d, 0, 0);
-  clientfield::register("world", "quest_state_demon", 5000, 3, "int", & zm_utility::setsharedinventoryuimodels, 0, 0);
-  clientfield::register("world", "quest_state_rune", 5000, 3, "int", & zm_utility::setsharedinventoryuimodels, 0, 0);
-  clientfield::register("world", "quest_state_storm", 5000, 3, "int", & zm_utility::setsharedinventoryuimodels, 0, 0);
-  clientfield::register("world", "quest_state_wolf", 5000, 3, "int", & zm_utility::setsharedinventoryuimodels, 0, 0);
-  clientfield::register("world", "quest_owner_demon", 5000, 3, "int", & zm_utility::setsharedinventoryuimodels, 0, 0);
-  clientfield::register("world", "quest_owner_rune", 5000, 3, "int", & zm_utility::setsharedinventoryuimodels, 0, 0);
-  clientfield::register("world", "quest_owner_storm", 5000, 3, "int", & zm_utility::setsharedinventoryuimodels, 0, 0);
-  clientfield::register("world", "quest_owner_wolf", 5000, 3, "int", & zm_utility::setsharedinventoryuimodels, 0, 0);
+  clientfield::register("scriptmover", "fossil_reveal", 5000, 2, "int", &function_fc150bb9, 0, 0);
+  clientfield::register("scriptmover", "fossil_collect_fx", 5000, 1, "int", &function_9a901aeb, 0, 0);
+  clientfield::register("scriptmover", "demonic_circle_reveal", 5000, 1, "int", &function_9de15a4d, 0, 0);
+  clientfield::register("scriptmover", "init_demongate_fossil", 5000, 2, "int", &function_b2c9069f, 0, 0);
+  clientfield::register("scriptmover", "urn_impact_fx", 5000, 1, "counter", &function_f821e372, 0, 0);
+  clientfield::register("scriptmover", "demongate_fossil_frenzy", 5000, 1, "int", &function_543f9ebd, 0, 0);
+  clientfield::register("scriptmover", "demongate_fossil_outro", 5000, 1, "int", &function_fec30c70, 0, 0);
+  clientfield::register("world", "demongate_client_cleanup", 5000, 1, "int", &function_8739dc84, 0, 0);
+  clientfield::register("scriptmover", "demongate_quest_portal", 5000, 1, "int", &function_e08420f7, 0, 0);
+  clientfield::register("toplayer", "demon_vo_release", 8000, 1, "counter", &function_414a0874, 0, 0);
+  clientfield::register("toplayer", "demon_vo_return", 8000, 1, "counter", &function_8a7c68af, 0, 0);
+  clientfield::register("toplayer", "demon_vo_souls", 8000, 1, "counter", &function_71168013, 0, 0);
+  clientfield::register("toplayer", "demon_vo_name", 8000, 1, "counter", &function_41a3306c, 0, 0);
+  clientfield::register("toplayer", "demon_vo_ask_name", 8000, 1, "counter", &function_e13571b8, 0, 0);
+  clientfield::register("toplayer", "demon_vo_name_correct", 8000, 1, "counter", &function_2ccca749, 0, 0);
+  clientfield::register("toplayer", "demon_vo_name_incorrect", 8000, 1, "counter", &function_8cd2582e, 0, 0);
+  clientfield::register("toplayer", "demon_vo_door", 8000, 1, "counter", &function_42fe618d, 0, 0);
+  clientfield::register("toplayer", "demon_vo_horn", 8000, 1, "counter", &function_ad13a872, 0, 0);
+  clientfield::register("toplayer", "demon_vo_heart", 8000, 1, "counter", &function_9b445487, 0, 0);
+  clientfield::register("toplayer", "demon_vo_griffon", 8000, 1, "counter", &function_e2b77200, 0, 0);
+  clientfield::register("toplayer", "demon_vo_crown", 8000, 1, "counter", &function_4ab357d6, 0, 0);
+  clientfield::register("toplayer", "demon_vo_stag", 8000, 1, "counter", &function_153cf9fc, 0, 0);
+  clientfield::register("scriptmover", "tower_break_fx", 5000, 1, "int", &function_7cc0d99b, 0, 0);
+  clientfield::register("scriptmover", "beacon_fx", 5000, 2, "int", &function_475de8c4, 0, 0);
+  clientfield::register("scriptmover", "wallrun_fx", 5000, 2, "int", &function_6103d0f7, 0, 0);
+  clientfield::register("scriptmover", "battery_fx", 5000, 2, "int", &function_f51349bf, 0, 0);
+  clientfield::register("scriptmover", "lightning_fx", 5000, 1, "int", &function_c31afa5, 0, 0);
+  clientfield::register("scriptmover", "tornado_fx", 5000, 1, "int", &function_9db8b2b2, 0, 0);
+  clientfield::register("toplayer", "arrow_charge_fx", 5000, 1, "int", &function_3f451756, 0, 1);
+  clientfield::register("world", "storm_variable_cleanup", 5000, 1, "int", &function_e92d950c, 0, 0);
+  clientfield::register("scriptmover", "obelisk_magma_reveal", 5000, 1, "int", &function_64bc7af0, 0, 0);
+  clientfield::register("scriptmover", "obelisk_runes_reveal", 5000, 1, "int", &function_febf0bf4, 0, 0);
+  clientfield::register("scriptmover", "obelisk_runes_drain", 5000, 1, "int", &function_5063c4f7, 0, 0);
+  clientfield::register("scriptmover", "runic_circle_reveal", 5000, 1, "int", &function_f32932c3, 0, 0);
+  clientfield::register("scriptmover", "runic_circle_fx", 5000, 1, "int", &function_3b5b1626, 0, 0);
+  clientfield::register("scriptmover", "runic_circle_death_fx", 5000, 1, "counter", &function_d6434cf, 0, 0);
+  clientfield::register("toplayer", "anchor_point_postfx", 5000, 1, "int", &function_c069c332, 0, 0);
+  clientfield::register("world", "orb_sanim_cleanup", 5000, 1, "counter", &function_2514cb86, 0, 0);
+  clientfield::register("scriptmover", "painting_symbol_reveal", 5000, 1, "int", &function_46f52afa, 0, 0);
+  clientfield::register("scriptmover", "painting_symbol_blink", 5000, 1, "counter", &function_6f66f54d, 0, 0);
+  clientfield::register("scriptmover", "wolf_howl_bone_fx", 5000, 1, "int", &function_65d81fc2, 0, 0);
+  clientfield::register("actor", "wolf_trail_fx", 5000, 2, "int", &function_aefa4e67, 0, 0);
+  clientfield::register("actor", "wolf_footprint_fx", 5000, 1, "int", &function_60ae2cd0, 0, 0);
+  clientfield::register("actor", "wolf_ghost_shader", 5000, 1, "int", &function_ccf12771, 0, 0);
+  clientfield::register("scriptmover", "arrow_charge_wolf_fx", 5000, 1, "int", &function_e051553d, 0, 0);
+  clientfield::register("scriptmover", "zombie_soul_demon_fx", 5000, 1, "int", &function_c75de902, 0, 0);
+  clientfield::register("scriptmover", "zombie_soul_rune_fx", 5000, 1, "int", &function_3cb9b375, 0, 0);
+  clientfield::register("scriptmover", "zombie_soul_storm_fx", 5000, 1, "int", &function_fa1ef690, 0, 0);
+  clientfield::register("scriptmover", "zombie_soul_wolf_fx", 5000, 1, "int", &function_d0720a0d, 0, 0);
+  clientfield::register("world", "quest_state_demon", 5000, 3, "int", &zm_utility::setsharedinventoryuimodels, 0, 0);
+  clientfield::register("world", "quest_state_rune", 5000, 3, "int", &zm_utility::setsharedinventoryuimodels, 0, 0);
+  clientfield::register("world", "quest_state_storm", 5000, 3, "int", &zm_utility::setsharedinventoryuimodels, 0, 0);
+  clientfield::register("world", "quest_state_wolf", 5000, 3, "int", &zm_utility::setsharedinventoryuimodels, 0, 0);
+  clientfield::register("world", "quest_owner_demon", 5000, 3, "int", &zm_utility::setsharedinventoryuimodels, 0, 0);
+  clientfield::register("world", "quest_owner_rune", 5000, 3, "int", &zm_utility::setsharedinventoryuimodels, 0, 0);
+  clientfield::register("world", "quest_owner_storm", 5000, 3, "int", &zm_utility::setsharedinventoryuimodels, 0, 0);
+  clientfield::register("world", "quest_owner_wolf", 5000, 3, "int", &zm_utility::setsharedinventoryuimodels, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.widget_weap_quest_storm", 1, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.widget_weap_quest_rune", 1, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.widget_weap_quest_wolf", 1, 1, "int", undefined, 0, 0);
@@ -352,79 +352,79 @@ function function_e08420f7(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_414a0874(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    subtitleprint(localclientnum, 5000, & "ZM_CASTLE_DEMON_VO_RELEASE");
+    subtitleprint(localclientnum, 5000, &"ZM_CASTLE_DEMON_VO_RELEASE");
   }
 }
 
 function function_8a7c68af(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    subtitleprint(localclientnum, 6000, & "ZM_CASTLE_DEMON_VO_RETURN");
+    subtitleprint(localclientnum, 6000, &"ZM_CASTLE_DEMON_VO_RETURN");
   }
 }
 
 function function_71168013(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    subtitleprint(localclientnum, 6000, & "ZM_CASTLE_DEMON_VO_SOULS");
+    subtitleprint(localclientnum, 6000, &"ZM_CASTLE_DEMON_VO_SOULS");
   }
 }
 
 function function_41a3306c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    subtitleprint(localclientnum, 6000, & "ZM_CASTLE_DEMON_VO_NAME");
+    subtitleprint(localclientnum, 6000, &"ZM_CASTLE_DEMON_VO_NAME");
   }
 }
 
 function function_e13571b8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    subtitleprint(localclientnum, 5000, & "ZM_CASTLE_DEMON_VO_ASK_NAME");
+    subtitleprint(localclientnum, 5000, &"ZM_CASTLE_DEMON_VO_ASK_NAME");
   }
 }
 
 function function_2ccca749(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    subtitleprint(localclientnum, 5000, & "ZM_CASTLE_DEMON_VO_NAME_CORRECT");
+    subtitleprint(localclientnum, 5000, &"ZM_CASTLE_DEMON_VO_NAME_CORRECT");
   }
 }
 
 function function_8cd2582e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    subtitleprint(localclientnum, 5000, & "ZM_CASTLE_DEMON_VO_NAME_INCORRECT");
+    subtitleprint(localclientnum, 5000, &"ZM_CASTLE_DEMON_VO_NAME_INCORRECT");
   }
 }
 
 function function_42fe618d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    subtitleprint(localclientnum, 4000, & "ZM_CASTLE_DEMON_VO_DOOR");
+    subtitleprint(localclientnum, 4000, &"ZM_CASTLE_DEMON_VO_DOOR");
   }
 }
 
 function function_ad13a872(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    subtitleprint(localclientnum, 4000, & "ZM_CASTLE_DEMON_VO_HORN");
+    subtitleprint(localclientnum, 4000, &"ZM_CASTLE_DEMON_VO_HORN");
   }
 }
 
 function function_9b445487(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    subtitleprint(localclientnum, 4000, & "ZM_CASTLE_DEMON_VO_HEART");
+    subtitleprint(localclientnum, 4000, &"ZM_CASTLE_DEMON_VO_HEART");
   }
 }
 
 function function_e2b77200(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    subtitleprint(localclientnum, 4000, & "ZM_CASTLE_DEMON_VO_GRIFFON");
+    subtitleprint(localclientnum, 4000, &"ZM_CASTLE_DEMON_VO_GRIFFON");
   }
 }
 
 function function_4ab357d6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    subtitleprint(localclientnum, 4000, & "ZM_CASTLE_DEMON_VO_CROWN");
+    subtitleprint(localclientnum, 4000, &"ZM_CASTLE_DEMON_VO_CROWN");
   }
 }
 
 function function_153cf9fc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    subtitleprint(localclientnum, 4000, & "ZM_CASTLE_DEMON_VO_STAG");
+    subtitleprint(localclientnum, 4000, &"ZM_CASTLE_DEMON_VO_STAG");
   }
 }
 

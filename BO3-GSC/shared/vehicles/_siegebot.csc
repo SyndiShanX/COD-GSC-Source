@@ -12,7 +12,7 @@
 #namespace siegebot;
 
 function autoexec main() {
-  vehicle::add_vehicletype_callback("siegebot", & _setup_);
+  vehicle::add_vehicletype_callback("siegebot", &_setup_);
 }
 
 function _setup_(localclientnum) {

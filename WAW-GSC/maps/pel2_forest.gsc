@@ -1407,7 +1407,7 @@ players_rifle_gren_pickup_watch() {
 
 do_rifle_gren_hud_elem() {
   elem_text = newclienthudelem(self);
-  elem_text.label = & "PEL2_RIFLE_GRENADE_TEXT";
+  elem_text.label = &"PEL2_RIFLE_GRENADE_TEXT";
   elem_text.x = 260;
   elem_text.y = 190;
   elem_text.alpha = 0;

@@ -32,12 +32,12 @@ init() {
   level.oldschoolpickupsound = "oldschool_pickup";
   level.oldschoolrespawnsound = "oldschool_return";
   level.perkpickuphints = [];
-  level.perkpickuphints["specialty_bulletdamage"] = & "PLATFORM_PICK_UP_STOPPING_POWER";
-  level.perkpickuphints["specialty_armorvest"] = & "PLATFORM_PICK_UP_JUGGERNAUT";
-  level.perkpickuphints["specialty_rof"] = & "PLATFORM_PICK_UP_DOUBLE_TAP";
-  level.perkpickuphints["specialty_pistoldeath"] = & "PLATFORM_PICK_UP_LAST_STAND";
-  level.perkpickuphints["specialty_grenadepulldeath"] = & "PLATFORM_PICK_UP_MARTYRDOM";
-  level.perkpickuphints["specialty_fastreload"] = & "PLATFORM_PICK_UP_SLEIGHT_OF_HAND";
+  level.perkpickuphints["specialty_bulletdamage"] = &"PLATFORM_PICK_UP_STOPPING_POWER";
+  level.perkpickuphints["specialty_armorvest"] = &"PLATFORM_PICK_UP_JUGGERNAUT";
+  level.perkpickuphints["specialty_rof"] = &"PLATFORM_PICK_UP_DOUBLE_TAP";
+  level.perkpickuphints["specialty_pistoldeath"] = &"PLATFORM_PICK_UP_LAST_STAND";
+  level.perkpickuphints["specialty_grenadepulldeath"] = &"PLATFORM_PICK_UP_MARTYRDOM";
+  level.perkpickuphints["specialty_fastreload"] = &"PLATFORM_PICK_UP_SLEIGHT_OF_HAND";
 }
 
 bypassclasschoicefunc() {

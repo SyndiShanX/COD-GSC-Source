@@ -41,7 +41,7 @@
 
 function hostage_1_start(str_objective) {
   hostage_1_precache();
-  spawner::add_spawn_function_group("fuel_tunnel_ai", "script_noteworthy", & cp_prologue_util::ai_idle_then_alert, "fuel_tunnel_alerted", 1024);
+  spawner::add_spawn_function_group("fuel_tunnel_ai", "script_noteworthy", &cp_prologue_util::ai_idle_then_alert, "fuel_tunnel_alerted", 1024);
   if(!isDefined(level.ai_hendricks)) {
     level.ai_hendricks = util::get_hero("hendricks");
     cp_mi_eth_prologue::init_hendricks("skipto_hostage_1_hendricks");
@@ -64,7 +64,7 @@ function hostage_1_main() {
   cp_prologue_util::function_47a62798(1);
   level.ai_hendricks thread function_672c874();
   trigger::wait_till("hendricks_rollgrenade");
-  array::thread_all(level.players, & watch_player_fire);
+  array::thread_all(level.players, &watch_player_fire);
   level.ai_hendricks waittill("hash_ff2562ea");
   level thread function_88ddc4d5();
   level flag::set("fuel_tunnel_alerted");
@@ -114,7 +114,7 @@ function function_e14a508d() {
   a_ents = getEntArray("sp_fueling_stairwell_intro_guys", "targetname");
   for(i = 0; i < a_ents.size; i++) {
     e_ent = a_ents[i] spawner::spawn();
-    e_ent.overrideactordamage = & function_e93a75b6;
+    e_ent.overrideactordamage = &function_e93a75b6;
     e_ent.goalradius = 32;
   }
   level notify("hash_db677f8c");
@@ -128,7 +128,7 @@ function function_e93a75b6(einflictor, eattacker, idamage, idflags, smeansofdeat
 }
 
 function function_88ddc4d5() {
-  level scene::add_scene_func("p7_fxanim_cp_prologue_underground_truck_explode_bundle", & function_70b550de);
+  level scene::add_scene_func("p7_fxanim_cp_prologue_underground_truck_explode_bundle", &function_70b550de);
   level thread scene::play("p7_fxanim_cp_prologue_underground_truck_explode_bundle");
   level clientfield::set("fuel_depot_truck_explosion", 1);
   orig_explosion = getent("orig_fuel_tunnel_explosion", "targetname");
@@ -213,7 +213,7 @@ function function_672c874() {
   self function_8b6e6abe();
   level flag::wait_till("start_grenade_roll");
   level thread scene::play("cin_pro_06_01_hostage_vign_rollgrenade", level.ai_hendricks);
-  level util::delay(0.5, undefined, & trigger::use, "t_script_color_allies_r510");
+  level util::delay(0.5, undefined, &trigger::use, "t_script_color_allies_r510");
   level.ai_hendricks waittill("hash_ff2562ea");
   level thread cp_prologue_util::function_2a0bc326(level.ai_hendricks.origin, 0.65, 1.2, 800, 4);
   level.ai_hendricks ai::set_pacifist(0);
@@ -256,7 +256,7 @@ function function_5dc67e92() {
   while(true) {
     a_ai = cp_prologue_util::function_68b8f4af(e_volume);
     if(a_ai.size <= 3) {
-      array::thread_all(a_ai, & ai::bloody_death, randomintrange(6, 8));
+      array::thread_all(a_ai, &ai::bloody_death, randomintrange(6, 8));
     }
     if(a_ai.size <= 1) {
       break;
@@ -283,7 +283,7 @@ function function_386e6074() {
   var_72634645.angles = vectorscale((0, 1, 0), 270);
   var_f3ec8a31 = spawn("trigger_box", (5728, -1308, -276), 0, 300, 300, 300);
   var_f3ec8a31 waittill("trigger");
-  self colors::hero_catch_up_teleport(var_72634645, 350, 1, & function_bbaa282a);
+  self colors::hero_catch_up_teleport(var_72634645, 350, 1, &function_bbaa282a);
 }
 
 function function_bbaa282a() {
@@ -315,7 +315,7 @@ function function_1ddfda41() {
   a_enemy = cp_prologue_util::function_68b8f4af(e_volume);
   for(i = 0; i < a_enemy.size; i++) {
     self getperfectinfo(a_enemy[i], 1);
-    a_enemy[i].overrideactordamage = & function_e93a75b6;
+    a_enemy[i].overrideactordamage = &function_e93a75b6;
   }
   nd_node = getnode("nd_fueling_tunnel_top_stairs", "targetname");
   self setgoal(nd_node.origin);
@@ -382,7 +382,7 @@ function function_c9d7d48a() {
   }
   level thread namespace_21b2c1f2::function_d4c52995();
   wait(0.15);
-  level scene::add_scene_func("cin_pro_06_02_hostage_vign_getminister_hendricks_airlock", & function_5729b9e7, "play");
+  level scene::add_scene_func("cin_pro_06_02_hostage_vign_getminister_hendricks_airlock", &function_5729b9e7, "play");
   level scene::play("cin_pro_06_02_hostage_vign_getminister_hendricks_airlock");
   n_node = getnode("nd_hendricks_jail_setup", "targetname");
   level.ai_hendricks setgoal(n_node, 1);
@@ -554,7 +554,7 @@ function function_f50dec65() {
 
 function function_771ca4c3() {
   objectives::set("cp_level_prologue_free_the_minister");
-  callback::on_ai_killed( & namespace_61c634f2::function_c58a9e36);
+  callback::on_ai_killed(&namespace_61c634f2::function_c58a9e36);
   level flag::wait_till("player_entered_observation");
   objectives::complete("cp_level_prologue_goto_minister_door");
   level waittill("hash_a859aef4");
@@ -568,7 +568,7 @@ function function_771ca4c3() {
   level flag::wait_till("khalil_door_breached");
   objectives::complete("cp_level_prologue_goto_minister_door");
   objectives::complete("cp_level_prologue_free_khalil");
-  callback::remove_on_ai_killed( & namespace_61c634f2::function_c58a9e36);
+  callback::remove_on_ai_killed(&namespace_61c634f2::function_c58a9e36);
   objectives::set("cp_level_prologue_get_to_the_surface");
   level waittill("hendricks_by_weapon_room");
   level thread objectives::breadcrumb("post_prison_breadcrumb_start");
@@ -613,7 +613,7 @@ function function_a859aef4() {
   level.ai_minister.overrideactordamage = undefined;
   level waittill("khalil_available");
   trig_khalil_door triggerenable(1);
-  var_d86e08d0 = util::init_interactive_gameobject(trig_khalil_door, & "cp_prompt_enteralt_prologue_khalil_breach", & "CP_MI_ETH_PROLOGUE_DOOR_BREACH", & function_28af2208);
+  var_d86e08d0 = util::init_interactive_gameobject(trig_khalil_door, &"cp_prompt_enteralt_prologue_khalil_breach", &"CP_MI_ETH_PROLOGUE_DOOR_BREACH", &function_28af2208);
   var_d86e08d0 thread gameobjects::hide_icon_distance_and_los((1, 1, 1), 800, 0);
   level notify("hash_bd4342ed");
 }
@@ -633,8 +633,8 @@ function function_a1ad4aa7() {
 
 function function_28af2208(e_player) {
   self gameobjects::disable_object();
-  array::run_all(level.players, & util::set_low_ready, 1);
-  callback::on_spawned( & cp_mi_eth_prologue::function_4d4f1d4f);
+  array::run_all(level.players, &util::set_low_ready, 1);
+  callback::on_spawned(&cp_mi_eth_prologue::function_4d4f1d4f);
   level thread function_2137acd9();
   level flag::set("khalil_door_breached");
   level thread scene::play("cin_pro_06_03_hostage_1st_khalil_intro_player_rescue", e_player);
@@ -650,8 +650,8 @@ function function_28af2208(e_player) {
 
 function function_2137acd9() {
   wait(42);
-  array::run_all(level.players, & util::set_low_ready, 0);
-  callback::remove_on_spawned( & cp_mi_eth_prologue::function_4d4f1d4f);
+  array::run_all(level.players, &util::set_low_ready, 0);
+  callback::remove_on_spawned(&cp_mi_eth_prologue::function_4d4f1d4f);
   level thread cp_prologue_util::base_alarm_goes_off();
   level thread function_fae1bd07();
 }
@@ -663,7 +663,7 @@ function function_fae1bd07() {
 }
 
 function function_b8c0a930() {
-  level.ai_minister.overrideactordamage = & function_9b720436;
+  level.ai_minister.overrideactordamage = &function_9b720436;
 }
 
 function function_9b720436(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
@@ -676,7 +676,7 @@ function function_9b720436(einflictor, eattacker, idamage, idflags, smeansofdeat
     }
     self.var_28e02422 = self.var_28e02422 + idamage;
     if(self.var_28e02422 >= self.maxhealth) {
-      util::missionfailedwrapper_nodeath(&"CP_MI_ETH_PROLOGUE_MINISTER_SHOT", & "SCRIPT_MISSIONFAIL_WATCH_FIRE");
+      util::missionfailedwrapper_nodeath(&"CP_MI_ETH_PROLOGUE_MINISTER_SHOT", &"SCRIPT_MISSIONFAIL_WATCH_FIRE");
     } else {
       idamage = 0;
     }
@@ -687,7 +687,7 @@ function function_9b720436(einflictor, eattacker, idamage, idflags, smeansofdeat
 function function_ef1899fb() {
   var_130a032 = getent("trig_use_minister_door", "targetname");
   var_130a032 triggerenable(1);
-  var_e0897b20 = util::init_interactive_gameobject(var_130a032, & "cp_prompt_enteralt_prologue_minister_breach", & "CP_MI_ETH_PROLOGUE_DOOR_BREACH", & function_b0c29b02);
+  var_e0897b20 = util::init_interactive_gameobject(var_130a032, &"cp_prompt_enteralt_prologue_minister_breach", &"CP_MI_ETH_PROLOGUE_DOOR_BREACH", &function_b0c29b02);
   var_e0897b20 thread gameobjects::hide_icon_distance_and_los((1, 1, 1), 800, 0);
 }
 
@@ -698,7 +698,7 @@ function function_b0c29b02(e_player) {
     var_12195048 util::set_low_ready(1);
     var_12195048 thread function_db5cf0d5();
   }
-  callback::on_spawned( & cp_mi_eth_prologue::function_4d4f1d4f);
+  callback::on_spawned(&cp_mi_eth_prologue::function_4d4f1d4f);
   level flag::set("player_interrogation_breach");
   level scene::play("cin_pro_06_03_hostage_vign_breach_playerbreach", e_player);
   level notify("hash_516cb5e4");
@@ -714,10 +714,10 @@ function function_f8d7f50a(a_ents) {
 }
 
 function function_b317c15f() {
-  level scene::add_scene_func("cin_pro_06_03_hostage_vign_breach_interrogation", & function_b8d7b823, "init");
+  level scene::add_scene_func("cin_pro_06_03_hostage_vign_breach_interrogation", &function_b8d7b823, "init");
   level scene::init("cin_pro_06_03_hostage_vign_breach_interrogation");
   level waittill("hash_5c0ece37");
-  scene::add_scene_func("cin_pro_06_03_hostage_vign_breach_guardloop", & function_53775c4d, "play");
+  scene::add_scene_func("cin_pro_06_03_hostage_vign_breach_guardloop", &function_53775c4d, "play");
   level thread scene::play("cin_pro_06_03_hostage_vign_breach_guardloop");
   level scene::play("cin_pro_06_03_hostage_vign_breach_interrogation");
   level flag::set("interrogation_finished");
@@ -735,7 +735,7 @@ function function_b8d7b823(a_ents) {
   foreach(e_player in level.activeplayers) {
     e_player util::set_low_ready(0);
   }
-  callback::remove_on_spawned( & cp_mi_eth_prologue::function_4d4f1d4f);
+  callback::remove_on_spawned(&cp_mi_eth_prologue::function_4d4f1d4f);
 }
 
 function function_53775c4d(a_ents) {
@@ -798,7 +798,7 @@ function security_desk_start(str_objective) {
   level.ai_minister ai::set_ignoreall(0);
   battlechatter::function_d9f49fba(1);
   cp_prologue_util::function_47a62798(1);
-  spawner::add_spawn_function_group("bridge_attacker", "script_noteworthy", & hangar::ai_think);
+  spawner::add_spawn_function_group("bridge_attacker", "script_noteworthy", &hangar::ai_think);
   level thread security_desk_main();
   trigger::wait_till("t_start_lift_battle");
   skipto::objective_completed("skipto_security_desk");
@@ -893,7 +893,7 @@ function function_473b7de8() {
   while(!scene::is_ready("cin_pro_07_01_securitydesk_vign_weapons")) {
     wait(0.05);
   }
-  scene::add_scene_func("cin_pro_07_01_securitydesk_vign_weapons", & function_d4401b52);
+  scene::add_scene_func("cin_pro_07_01_securitydesk_vign_weapons", &function_d4401b52);
   scene::play("cin_pro_07_01_securitydesk_vign_weapons");
   level notify("hash_69db142c");
   nd_node = getnode("nd_khalil_armory_battle", "targetname");
@@ -975,7 +975,7 @@ function lift_escape_start(str_objective) {
     level.ai_khalil ai::set_ignoreme(1);
     skipto::teleport_ai(str_objective);
   }
-  callback::on_ai_killed( & namespace_61c634f2::function_cbaf37cd);
+  callback::on_ai_killed(&namespace_61c634f2::function_cbaf37cd);
   var_489e46a = getent("t_regroup_lift", "targetname");
   var_489e46a triggerenable(0);
   trigger::use("t_lift_respawns_disable");
@@ -995,7 +995,7 @@ function lift_escape_start(str_objective) {
   level thread function_a3dbf6a2();
   level thread lift_escape_cleanup();
   level waittill("hash_b100689e");
-  callback::remove_on_ai_killed( & namespace_61c634f2::function_cbaf37cd);
+  callback::remove_on_ai_killed(&namespace_61c634f2::function_cbaf37cd);
   skipto::objective_completed("skipto_lift_escape");
 }
 
@@ -1203,7 +1203,7 @@ function function_a3dbf6a2() {
   var_d39a9d5b = getent("player_lift_clip", "targetname");
   var_d39a9d5b movez(124, 0.05);
   level.var_5b3ac1ed = 1;
-  level scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_elevator_ride", & intro_cyber_soldiers::function_679e7da9, "play");
+  level scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_elevator_ride", &intro_cyber_soldiers::function_679e7da9, "play");
   level thread scene::play("cin_pro_09_01_intro_1st_cybersoldiers_lift_pushbutton");
   level.ai_minister.goalradius = 16;
   level.ai_minister.goalheight = 1600;
@@ -1282,7 +1282,7 @@ function function_4d214c02(delay) {
 
 function function_17ecef2() {
   self.script_accuracy = 0.5;
-  self.overrideactordamage = & function_10ffa58e;
+  self.overrideactordamage = &function_10ffa58e;
 }
 
 function function_10ffa58e(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
@@ -1332,14 +1332,14 @@ function get_to_lift_wait(str_s_target) {
 
 function send_hendricks_to_lift() {
   self colors::disable();
-  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_elevator_ride_start_hendricks", & function_3703e000, "play");
+  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_elevator_ride_start_hendricks", &function_3703e000, "play");
   level scene::play("cin_pro_09_01_intro_1st_cybersoldiers_elevator_ride_start_hendricks");
   level flag::set("hendricks_in_lift");
 }
 
 function function_c3ab179b() {
   self ai::set_behavior_attribute("vignette_mode", "slow");
-  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_elevator_ride_start_minister", & function_6d36e736, "play");
+  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_elevator_ride_start_minister", &function_6d36e736, "play");
   level scene::play("cin_pro_09_01_intro_1st_cybersoldiers_elevator_ride_start_minister");
   self setgoal(self.origin, 1);
   level flag::set("minister_in_lift");
@@ -1347,7 +1347,7 @@ function function_c3ab179b() {
 
 function function_f92b76b7() {
   self ai::set_behavior_attribute("vignette_mode", "slow");
-  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_elevator_ride_start_khalil", & function_789cecd6, "play");
+  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_elevator_ride_start_khalil", &function_789cecd6, "play");
   level scene::play("cin_pro_09_01_intro_1st_cybersoldiers_elevator_ride_start_khalil");
   self setgoal(self.origin, 1);
   level flag::set("khalil_in_lift");
@@ -1390,7 +1390,7 @@ function function_51da5fc6() {
   function_dfbe3c61();
   a_spawners = getEntArray("sp_lift_reinforcements", "targetname");
   for(i = 0; i < a_spawners.size; i++) {
-    a_spawners[i] spawner::add_spawn_function( & function_38a8e28b);
+    a_spawners[i] spawner::add_spawn_function(&function_38a8e28b);
     a_spawners[i] spawner::spawn();
   }
   v_down = (0, 0, -1);

@@ -45,7 +45,7 @@ init() {
 
   if(maps\mp\gametypes\_tweakables::gettweakablevalue("killstreak", "allowrcbomb")) {
     maps\mp\killstreaks\_killstreaks::registerkillstreak("rcbomb_mp", "rcbomb_mp", "killstreak_rcbomb", "rcbomb_used", ::usekillstreakrcbomb);
-    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("rcbomb_mp", & "KILLSTREAK_EARNED_RCBOMB", & "KILLSTREAK_RCBOMB_NOT_AVAILABLE", & "KILLSTREAK_RCBOMB_INBOUND");
+    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("rcbomb_mp", &"KILLSTREAK_EARNED_RCBOMB", &"KILLSTREAK_RCBOMB_NOT_AVAILABLE", &"KILLSTREAK_RCBOMB_INBOUND");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("rcbomb_mp", "mpl_killstreak_rcbomb", "kls_rcbomb_used", "", "kls_rcbomb_enemy", "", "kls_rcbomb_ready");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("rcbomb_mp", "scr_givercbomb");
     maps\mp\killstreaks\_killstreaks::allowkillstreakassists("rcbomb_mp", 1);

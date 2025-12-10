@@ -11,13 +11,13 @@
 #namespace apothiconfurybehavior;
 
 function autoexec main() {
-  ai::add_archetype_spawn_function("apothicon_fury", & apothiconspawnsetup);
+  ai::add_archetype_spawn_function("apothicon_fury", &apothiconspawnsetup);
   if(ai::shouldregisterclientfieldforarchetype("apothicon_fury")) {
-    clientfield::register("actor", "fury_fire_damage", 15000, getminbitcountfornum(7), "counter", & apothiconfiredamageeffect, 0, 0);
-    clientfield::register("actor", "furious_level", 15000, 1, "int", & apothiconfuriousmodeeffect, 0, 0);
-    clientfield::register("actor", "bamf_land", 15000, 1, "counter", & apothiconbamflandeffect, 0, 0);
-    clientfield::register("actor", "apothicon_fury_death", 15000, 2, "int", & apothiconfurydeath, 0, 0);
-    clientfield::register("actor", "juke_active", 15000, 1, "int", & apothiconjukeactive, 0, 0);
+    clientfield::register("actor", "fury_fire_damage", 15000, getminbitcountfornum(7), "counter", &apothiconfiredamageeffect, 0, 0);
+    clientfield::register("actor", "furious_level", 15000, 1, "int", &apothiconfuriousmodeeffect, 0, 0);
+    clientfield::register("actor", "bamf_land", 15000, 1, "counter", &apothiconbamflandeffect, 0, 0);
+    clientfield::register("actor", "apothicon_fury_death", 15000, 2, "int", &apothiconfurydeath, 0, 0);
+    clientfield::register("actor", "juke_active", 15000, 1, "int", &apothiconjukeactive, 0, 0);
   }
   level._effect["dlc4/genesis/fx_apothicon_fury_impact"] = "dlc4/genesis/fx_apothicon_fury_impact";
   level._effect["dlc4/genesis/fx_apothicon_fury_breath"] = "dlc4/genesis/fx_apothicon_fury_breath";

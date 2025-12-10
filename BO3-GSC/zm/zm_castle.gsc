@@ -125,20 +125,20 @@ function main() {
   clientfield::register("toplayer", "player_snow_fx", 5000, 1, "counter");
   clientfield::register("world", "snd_low_gravity_state", 5000, 2, "int");
   clientfield::register("world", "castle_fog_bank_switch", 1, 1, "int");
-  spawner::add_archetype_spawn_function("zombie", & function_59909697);
+  spawner::add_archetype_spawn_function("zombie", &function_59909697);
   level._uses_sticky_grenades = 1;
   level._uses_taser_knuckles = 1;
   level.var_1ae26ca5 = 5;
   level.var_bd64e31e = 5;
-  level.fn_custom_zombie_spawner_selection = & function_4353b980;
-  level.perk_random_idle_effects_override = & function_555e8704;
+  level.fn_custom_zombie_spawner_selection = &function_4353b980;
+  level.perk_random_idle_effects_override = &function_555e8704;
   level.str_elec_damage_shellshock_override = "castle_electrocution_zm";
   adddebugcommand("devgui_cmd \"ZM/Perks/Drink Dead Shot Daiquir (Castle)i:7\" \"zombie_devgui specialty_deadshot_castle\"\n");
   adddebugcommand("devgui_cmd \"ZM/Perks/Drink Widow's Wine (Castle):9\" \"zombie_devgui specialty_widowswine_castle\"\n");
   adddebugcommand("devgui_cmd \"ZM/Perks/Drink Electric Cherry (Castle):10\" \"zombie_devgui specialty_electriccherry_castle\"\n");
   adddebugcommand("devgui_cmd \"ZM/Perks/Remove All Perks (Castle):0\" \"zombie_devgui remove_perks_castle\"\n");
   adddebugcommand("devgui_cmd \"ZM/AI/Toggle_Skeletons (Castle):0\" \"zombie_devgui toggle_skeletons_castle\"\n");
-  level.custom_devgui = & function_fcfd712e;
+  level.custom_devgui = &function_fcfd712e;
   level flag::init("rocket_firing");
   zm::init_fx();
   zm_castle_fx::main();
@@ -152,35 +152,35 @@ function main() {
   level._effect["switch_sparks"] = "electric/fx_elec_sparks_directional_orange";
   level.default_start_location = "start_room";
   level.default_game_mode = "zclassic";
-  callback::on_spawned( & on_player_spawned);
-  callback::on_connect( & on_player_connect);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_connect(&on_player_connect);
   level.has_richtofen = 0;
-  level.precachecustomcharacters = & zm_castle_characters::precachecustomcharacters;
-  level.givecustomcharacters = & zm_castle_characters::givecustomcharacters;
+  level.precachecustomcharacters = &zm_castle_characters::precachecustomcharacters;
+  level.givecustomcharacters = &zm_castle_characters::givecustomcharacters;
   level thread setup_personality_character_exerts();
   zm_castle_characters::initcharacterstartindex();
-  level.register_offhand_weapons_for_level_defaults_override = & offhand_weapon_overrride;
-  level.zombiemode_offhand_weapon_give_override = & offhand_weapon_give_override;
+  level.register_offhand_weapons_for_level_defaults_override = &offhand_weapon_overrride;
+  level.zombiemode_offhand_weapon_give_override = &offhand_weapon_give_override;
   level.sndweaponpickupoverride = array("elemental_bow", "elemental_bow_demongate", "elemental_bow_rune_prison", "elemental_bow_storm", "elemental_bow_wolf_howl");
-  level.craft_shield_piece_pickup_vo_override = & zm_castle_vo::function_43b44df3;
-  level._zombie_custom_add_weapons = & custom_add_weapons;
+  level.craft_shield_piece_pickup_vo_override = &zm_castle_vo::function_43b44df3;
+  level._zombie_custom_add_weapons = &custom_add_weapons;
   level thread custom_add_vox();
   level._allow_melee_weapon_switching = 1;
-  level.enemy_location_override_func = & enemy_location_override;
-  level.no_target_override = & no_target_override;
-  level.minigun_damage_adjust_override = & function_ec8a9331;
-  level.var_2d0e5eb6 = & function_8921895f;
-  level.var_9aaae7ae = & function_869d6f66;
-  level.var_2d4e3645 = & function_d9e1ec4d;
-  level.var_9cef605e = & function_98a0818e;
-  level.gravityspike_position_check = & function_6190ec3f;
-  level.player_score_override = & function_77b8a0f7;
-  level.team_score_override = & function_5a64329b;
-  level.var_4e84030d = & function_f9a3207d;
-  level.gravityspikes_target_filter_callback = & function_862e966e;
-  level._zombie_custom_spawn_logic = & function_639f3b62;
-  level.zm_custom_spawn_location_selection = & function_c624f0b2;
-  level.player_out_of_playable_area_monitor_callback = & player_out_of_playable_area_monitor_callback;
+  level.enemy_location_override_func = &enemy_location_override;
+  level.no_target_override = &no_target_override;
+  level.minigun_damage_adjust_override = &function_ec8a9331;
+  level.var_2d0e5eb6 = &function_8921895f;
+  level.var_9aaae7ae = &function_869d6f66;
+  level.var_2d4e3645 = &function_d9e1ec4d;
+  level.var_9cef605e = &function_98a0818e;
+  level.gravityspike_position_check = &function_6190ec3f;
+  level.player_score_override = &function_77b8a0f7;
+  level.team_score_override = &function_5a64329b;
+  level.var_4e84030d = &function_f9a3207d;
+  level.gravityspikes_target_filter_callback = &function_862e966e;
+  level._zombie_custom_spawn_logic = &function_639f3b62;
+  level.zm_custom_spawn_location_selection = &function_c624f0b2;
+  level.player_out_of_playable_area_monitor_callback = &player_out_of_playable_area_monitor_callback;
   level.debug_keyline_zombies = 0;
   zm_castle_flingers::function_976c9217();
   include_perks_in_random_rotation();
@@ -198,13 +198,13 @@ function main() {
   zm_castle_craftables::include_craftables();
   zm_castle_craftables::init_craftables();
   load::main();
-  level._powerup_grab_check = & function_9b56d76;
+  level._powerup_grab_check = &function_9b56d76;
   level thread function_13fc99fa();
-  level.dog_round_track_override = & zm_castle_dogs::dog_round_tracker;
-  level.custom_dog_target_validity_check = & zm_castle_dogs::function_1aaa22b5;
-  level.fn_custom_round_ai_spawn = & zm_castle_dogs::function_33aa4940;
-  level.dog_spawn_func = & zm_castle_dogs::function_92e4eaff;
-  level.dog_setup_func = & zm_castle_dogs::function_8cf500c9;
+  level.dog_round_track_override = &zm_castle_dogs::dog_round_tracker;
+  level.custom_dog_target_validity_check = &zm_castle_dogs::function_1aaa22b5;
+  level.fn_custom_round_ai_spawn = &zm_castle_dogs::function_33aa4940;
+  level.dog_spawn_func = &zm_castle_dogs::function_92e4eaff;
+  level.dog_setup_func = &zm_castle_dogs::function_8cf500c9;
   level.dog_rounds_allowed = getgametypesetting("allowdogs");
   if(level.dog_rounds_allowed) {
     zm_ai_dogs::enable_dog_rounds();
@@ -218,15 +218,15 @@ function main() {
   level thread function_a6477691();
   level thread function_9be4ecd1();
   _zm_weap_cymbal_monkey::init();
-  level._round_start_func = & zm::round_start;
-  level.powerup_fx_func = & function_c7d8dba7;
+  level._round_start_func = &zm::round_start;
+  level.powerup_fx_func = &function_c7d8dba7;
   init_sounds();
   level.zones = [];
-  level.zone_manager_init_func = & zm_castle_zones::init;
+  level.zone_manager_init_func = &zm_castle_zones::init;
   level thread zm_zonemgr::manage_zones(array("zone_start"));
   level thread intro_screen();
   level thread setupmusic();
-  level.zone_occupied_func = & function_1ba33179;
+  level.zone_occupied_func = &function_1ba33179;
   setdvar("hkai_pathfindIterationLimit", 1000);
   level thread function_287ae5ec();
   zm_castle_ffotd::main_end();
@@ -461,7 +461,7 @@ function setupmusic() {
   zm_audio::musicstate_create("moon_rockets", 4, "moon_rockets");
   zm_audio::musicstate_create("none", 4, "none");
   array = getEntArray("sndMusicLocationTrig", "targetname");
-  array::thread_all(array, & function_44dc3fb4);
+  array::thread_all(array, &function_44dc3fb4);
 }
 
 function function_44dc3fb4() {
@@ -507,7 +507,7 @@ function include_perks_in_random_rotation() {
   zm_perk_random::include_perk_in_random_rotation("specialty_deadshot");
   zm_perk_random::include_perk_in_random_rotation("specialty_electriccherry");
   zm_perk_random::include_perk_in_random_rotation("specialty_widowswine");
-  level.custom_random_perk_weights = & function_798c5d1a;
+  level.custom_random_perk_weights = &function_798c5d1a;
 }
 
 function function_798c5d1a() {
@@ -812,7 +812,7 @@ function function_c624f0b2(a_spots) {
 }
 
 function function_69573a4c() {
-  scene::add_scene_func("p7_fxanim_gp_raven_idle_eating_bundle", & function_f7046db2, "play");
+  scene::add_scene_func("p7_fxanim_gp_raven_idle_eating_bundle", &function_f7046db2, "play");
 }
 
 function function_f7046db2(a_ents) {
@@ -857,7 +857,7 @@ function function_6058f34d() {
 
 function function_a691b3f6() {
   level scene::init("p7_fxanim_zm_castle_rocket_01_bundle");
-  level scene::add_scene_func("p7_fxanim_zm_castle_rocket_01_bundle", & function_7aae0fb2, "play");
+  level scene::add_scene_func("p7_fxanim_zm_castle_rocket_01_bundle", &function_7aae0fb2, "play");
   level waittill("hash_59e5a3dd");
   level thread scene::play("p7_fxanim_zm_castle_rocket_01_bundle");
   level waittill("start_of_round");
@@ -872,7 +872,7 @@ function function_a691b3f6() {
 }
 
 function function_7aae0fb2(a_ents) {
-  array::run_all(level.players, & playrumbleonentity, "zm_castle_opening_rocket_launch");
+  array::run_all(level.players, &playrumbleonentity, "zm_castle_opening_rocket_launch");
 }
 
 function power_electric_switch() {
@@ -1100,7 +1100,7 @@ function detect_reentry() {
 function function_287ae5ec() {
   level flagsys::wait_till("");
   wait(1);
-  zm_devgui::add_custom_devgui_callback( & function_f04119b5);
+  zm_devgui::add_custom_devgui_callback(&function_f04119b5);
   adddebugcommand("");
 }
 
@@ -1126,7 +1126,7 @@ function super_sesame() {
   }
   level notify("pressure_pads_activated");
   var_a6e47643 = struct::get_array("", "");
-  array::thread_all(var_a6e47643, & function_e9162f72);
+  array::thread_all(var_a6e47643, &function_e9162f72);
 }
 
 function function_e9162f72() {

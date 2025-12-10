@@ -28,17 +28,17 @@
 #namespace namespace_3ddd867f;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_pap_quest", & __init__, & __main__, undefined);
+  system::register("zm_genesis_pap_quest", &__init__, &__main__, undefined);
 }
 
 function __init__() {
   level.var_e1ee8457 = 0;
-  level.pack_a_punch.custom_power_think = & function_23a5b653;
+  level.pack_a_punch.custom_power_think = &function_23a5b653;
   level.zombiemode_reusing_pack_a_punch = 1;
-  scene::add_scene_func("p7_fxanim_zm_gen_apoth_pap_sac_arm_lft_bundle", & function_d2b266ee, "init");
-  scene::add_scene_func("p7_fxanim_zm_gen_apoth_pap_sac_arm_cnt_bundle", & function_d2b266ee, "init");
-  scene::add_scene_func("p7_fxanim_zm_gen_apoth_pap_sac_arm_rt_bundle", & function_d2b266ee, "init");
-  scene::add_scene_func("p7_fxanim_zm_gen_apoth_pap_sac_bundle", & function_dc681bed, "init");
+  scene::add_scene_func("p7_fxanim_zm_gen_apoth_pap_sac_arm_lft_bundle", &function_d2b266ee, "init");
+  scene::add_scene_func("p7_fxanim_zm_gen_apoth_pap_sac_arm_cnt_bundle", &function_d2b266ee, "init");
+  scene::add_scene_func("p7_fxanim_zm_gen_apoth_pap_sac_arm_rt_bundle", &function_d2b266ee, "init");
+  scene::add_scene_func("p7_fxanim_zm_gen_apoth_pap_sac_bundle", &function_dc681bed, "init");
   level thread scene::init("p7_fxanim_zm_gen_apoth_pap_sac_arm_lft_bundle");
   level thread scene::init("p7_fxanim_zm_gen_apoth_pap_sac_arm_cnt_bundle");
   level thread scene::init("p7_fxanim_zm_gen_apoth_pap_sac_arm_rt_bundle");
@@ -74,12 +74,12 @@ function set_pap_zbarrier_state(state) {
 
 function function_8d5c3682() {
   var_d1f5ed14 = getvehiclenodearray("pap_travel_spline", "targetname");
-  array::thread_all(var_d1f5ed14, & function_21d887cd);
+  array::thread_all(var_d1f5ed14, &function_21d887cd);
 }
 
 function function_21d887cd() {
   assert(ispointonnavmesh(self.origin), ("" + self.origin) + "");
-  s_stub = level zm_genesis_util::spawn_trigger_radius(self.origin, 256, undefined, & function_f8c1234b);
+  s_stub = level zm_genesis_util::spawn_trigger_radius(self.origin, 256, undefined, &function_f8c1234b);
   while(true) {
     s_stub waittill("trigger", e_player);
     e_player thread function_4ab898f4(self);

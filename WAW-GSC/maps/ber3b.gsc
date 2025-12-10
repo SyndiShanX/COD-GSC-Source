@@ -66,14 +66,14 @@ precache_assets() {
 }
 
 build_starts() {
-  add_start("intro", maps\ber3b_event_foyer::event_intro_start, & "STARTS_BER3B_INTRO");
-  add_start("foyer", maps\ber3b_event_foyer::event_foyer_start, & "STARTS_BER3B_FOYER");
-  add_start("foyer_pacing", maps\ber3b_event_foyer::event_foyer_pacing_start, & "STARTS_BER3B_FOYER_PACING");
-  add_start("parliament", maps\ber3b_event_parliament::event_parliament_start, & "STARTS_BER3B_PARLIAMENT");
-  add_start("parliament_doors", maps\ber3b_event_parliament::event_parliament_doors_start, & "STARTS_BER3B_PARLIAMENT_DOORS");
-  add_start("roof", maps\ber3b_event_roof::event_roof_start, & "STARTS_BER3B_ROOF");
-  add_start("roof_midpoint", maps\ber3b_event_roof::event_roof_midpoint_start, & "STARTS_BER3B_ROOF_MIDPOINT");
-  add_start("roof_flagplant", maps\ber3b_event_roof::event_roof_flagplant_start, & "STARTS_BER3B_ROOF_FLAGPLANT");
+  add_start("intro", maps\ber3b_event_foyer::event_intro_start, &"STARTS_BER3B_INTRO");
+  add_start("foyer", maps\ber3b_event_foyer::event_foyer_start, &"STARTS_BER3B_FOYER");
+  add_start("foyer_pacing", maps\ber3b_event_foyer::event_foyer_pacing_start, &"STARTS_BER3B_FOYER_PACING");
+  add_start("parliament", maps\ber3b_event_parliament::event_parliament_start, &"STARTS_BER3B_PARLIAMENT");
+  add_start("parliament_doors", maps\ber3b_event_parliament::event_parliament_doors_start, &"STARTS_BER3B_PARLIAMENT_DOORS");
+  add_start("roof", maps\ber3b_event_roof::event_roof_start, &"STARTS_BER3B_ROOF");
+  add_start("roof_midpoint", maps\ber3b_event_roof::event_roof_midpoint_start, &"STARTS_BER3B_ROOF_MIDPOINT");
+  add_start("roof_flagplant", maps\ber3b_event_roof::event_roof_flagplant_start, &"STARTS_BER3B_ROOF_FLAGPLANT");
   add_start("default", level.start_functions["intro"]);
   default_start(level.start_functions["intro"]);
 }
@@ -125,21 +125,21 @@ init_flags() {
 }
 
 setup_strings() {
-  level.obj1_string = & "BER3B_OBJ_1";
-  level.obj2_string = & "BER3B_OBJ_2A";
-  level.obj2b_string = & "BER3B_OBJ_2B";
-  level.obj3_string = & "BER3B_OBJ_2";
-  level.obj4_string = & "BER3B_OBJ_3";
-  level.obj5_string = & "BER3B_OBJ_4";
-  level.obj6_string = & "BER3B_OBJ_5";
-  level.diary_skip = & "BER3B_DIARY_SKIP";
-  level.obj_flag_carry_string = & "BER3B_OBJ_FLAG_CARRY";
-  level.obj_flag_retrieve_string = & "BER3B_OBJ_FLAG_RETRIEVE";
-  level.hint_flag_pickup_string = & "BER3B_HINT_FLAG_PICKUP";
-  level.hint_flag_drop_string = & "BER3B_HINT_FLAG_DROP";
-  level.flag_fail_warning = & "BER3B_FLAG_FAIL_WARNING";
-  level.flag_fail_deadquote = & "BER3B_FLAG_FAIL_DEADQUOTE";
-  level.flag_plant_trigger_string = & "BER3B_FLAG_PLANT_TRIGGER_HINT";
+  level.obj1_string = &"BER3B_OBJ_1";
+  level.obj2_string = &"BER3B_OBJ_2A";
+  level.obj2b_string = &"BER3B_OBJ_2B";
+  level.obj3_string = &"BER3B_OBJ_2";
+  level.obj4_string = &"BER3B_OBJ_3";
+  level.obj5_string = &"BER3B_OBJ_4";
+  level.obj6_string = &"BER3B_OBJ_5";
+  level.diary_skip = &"BER3B_DIARY_SKIP";
+  level.obj_flag_carry_string = &"BER3B_OBJ_FLAG_CARRY";
+  level.obj_flag_retrieve_string = &"BER3B_OBJ_FLAG_RETRIEVE";
+  level.hint_flag_pickup_string = &"BER3B_HINT_FLAG_PICKUP";
+  level.hint_flag_drop_string = &"BER3B_HINT_FLAG_DROP";
+  level.flag_fail_warning = &"BER3B_FLAG_FAIL_WARNING";
+  level.flag_fail_deadquote = &"BER3B_FLAG_FAIL_DEADQUOTE";
+  level.flag_plant_trigger_string = &"BER3B_FLAG_PLANT_TRIGGER_HINT";
 }
 
 set_objective(num) {

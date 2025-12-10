@@ -384,7 +384,7 @@ setLowerMessage(text, time) {
   if(!isDefined(self.lowerMessage)) {
     return;
   }
-  if(isDefined(self.lowerMessageOverride) && text != & "") {
+  if(isDefined(self.lowerMessageOverride) && text != &"") {
     text = self.lowerMessageOverride;
     time = undefined;
   }

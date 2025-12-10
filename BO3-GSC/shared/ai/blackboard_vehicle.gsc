@@ -10,11 +10,11 @@
 
 function registervehicleblackboardattributes() {
   assert(isvehicle(self), "");
-  registerblackboardattribute(self, "_speed", undefined, & bb_getspeed);
+  registerblackboardattribute(self, "_speed", undefined, &bb_getspeed);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  registerblackboardattribute(self, "_enemy_yaw", undefined, & bb_vehgetenemyyaw);
+  registerblackboardattribute(self, "_enemy_yaw", undefined, &bb_vehgetenemyyaw);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }

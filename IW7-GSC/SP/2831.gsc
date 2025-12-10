@@ -717,7 +717,7 @@ func_DC18() {
 
 func_2C16() {
   scripts\sp\names::func_7B05();
-  self _meth_8307(self.name, & "");
+  self _meth_8307(self.name, &"");
 }
 
 func_9DB6(param_00) {

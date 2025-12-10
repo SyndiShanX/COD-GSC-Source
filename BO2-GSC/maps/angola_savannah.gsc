@@ -1463,7 +1463,7 @@ vo_strafing_run_ready() {
 heli_strafe_run_controls() {
   level endon("stop_strafe_quake");
   wait 1;
-  screen_message_create(&"ANGOLA_HELI_MG", & "ANGOLA_HELI_ROCKET");
+  screen_message_create(&"ANGOLA_HELI_MG", &"ANGOLA_HELI_ROCKET");
   level.player waittill_ads_button_pressed();
   screen_message_delete();
 }
@@ -1582,14 +1582,14 @@ tank_objective_display() {
     wait 1;
 
     if(self.health > 0) {
-      set_objective(level.obj_destroy_first_wave, self, & "SP_OBJECTIVES_DESTROY", -1);
+      set_objective(level.obj_destroy_first_wave, self, &"SP_OBJECTIVES_DESTROY", -1);
       self waittill("death");
       set_objective(level.obj_destroy_first_wave, self, "remove");
     }
   } else if(isDefined(self.targetname) && self.targetname == "wave_two_tank" || isDefined(self.script_noteworthy) && self.script_noteworthy == "final_push_tank") {
     flag_wait("player_in_helicopter");
     wait 1;
-    set_objective(level.obj_destroy_second_wave, self, & "SP_OBJECTIVES_DESTROY", -1);
+    set_objective(level.obj_destroy_second_wave, self, &"SP_OBJECTIVES_DESTROY", -1);
     self waittill("death");
     set_objective(level.obj_destroy_second_wave, self, "remove");
   }
@@ -2439,7 +2439,7 @@ init_mortar_guy() {
   self.overrideactordamage = ::mortar_guy_damage;
   flag_wait("savannah_start_hudson");
   self thread stop_magic_bullet_shield();
-  set_objective(level.obj_destroy_mortar_crew, self, & "SP_OBJECTIVES_TARGET", -1);
+  set_objective(level.obj_destroy_mortar_crew, self, &"SP_OBJECTIVES_TARGET", -1);
   self waittill("death");
   level.savannah_mortar_team_kills++;
   set_objective(level.obj_destroy_mortar_crew, self, "remove");
@@ -2530,7 +2530,7 @@ track_and_shoot_heli() {
 
 init_technical_gunner() {
   self.overrideactordamage = ::mortar_guy_damage;
-  set_objective(level.obj_destroy_technical, self, & "SP_OBJECTIVES_TARGET", -1);
+  set_objective(level.obj_destroy_technical, self, &"SP_OBJECTIVES_TARGET", -1);
   self.dropweapon = 0;
   self waittill("death");
   level.savannah_technical_gunner_kills++;

@@ -35,7 +35,7 @@ init() {
   level.sentrysettings["sentry_microturret"].modelplacement = "weapon_sentry_chaingun_obj";
   level.sentrysettings["sentry_microturret"].modelplacementfailed = "weapon_sentry_chaingun_obj_red";
   level.sentrysettings["sentry_microturret"].modeldestroyed = "vehicle_drone_backup_buddy_gun";
-  level.sentrysettings["sentry_microturret"].pow = & "SENTRY_PICKUP";
+  level.sentrysettings["sentry_microturret"].pow = &"SENTRY_PICKUP";
   level.sentrysettings["sentry_microturret"].playerphysicstrace = 1;
   level.sentrysettings["sentry_microturret"].teamsplash = "used_sentry";
   level.sentrysettings["sentry_microturret"].shouldsplash = 0;
@@ -127,7 +127,7 @@ sentry_handledamage() {
       continue;
     }
 
-    if(isDefined(var_08) && var_08 & level.idflags_penetration) {
+    if(isDefined(var_08) && var_08 &level.idflags_penetration) {
       self.wasdamagedfrombulletpenetration = 1;
     }
 

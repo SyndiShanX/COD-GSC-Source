@@ -15,7 +15,7 @@
 #namespace animation;
 
 function autoexec __init__sytem__() {
-  system::register("animation", & __init__, undefined, undefined);
+  system::register("animation", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -358,26 +358,26 @@ function call_notetrack_handler(str_note, param1, param2) {
 }
 
 function setup_notetracks() {
-  add_notetrack_func("flag::set", & flag::set);
-  add_notetrack_func("flag::clear", & flag::clear);
-  add_notetrack_func("util::break_glass", & util::break_glass);
+  add_notetrack_func("flag::set", &flag::set);
+  add_notetrack_func("flag::clear", &flag::clear);
+  add_notetrack_func("util::break_glass", &util::break_glass);
   clientfield::register("scriptmover", "cracks_on", 1, getminbitcountfornum(4), "int");
   clientfield::register("scriptmover", "cracks_off", 1, getminbitcountfornum(4), "int");
-  add_global_notetrack_handler("red_cracks_on", & cracks_on, 0, "red");
-  add_global_notetrack_handler("green_cracks_on", & cracks_on, 0, "green");
-  add_global_notetrack_handler("blue_cracks_on", & cracks_on, 0, "blue");
-  add_global_notetrack_handler("all_cracks_on", & cracks_on, 0, "all");
-  add_global_notetrack_handler("red_cracks_off", & cracks_off, 0, "red");
-  add_global_notetrack_handler("green_cracks_off", & cracks_off, 0, "green");
-  add_global_notetrack_handler("blue_cracks_off", & cracks_off, 0, "blue");
-  add_global_notetrack_handler("all_cracks_off", & cracks_off, 0, "all");
-  add_global_notetrack_handler("headlook_on", & enable_headlook, 0, 1);
-  add_global_notetrack_handler("headlook_off", & enable_headlook, 0, 0);
-  add_global_notetrack_handler("headlook_notorso_on", & enable_headlook_notorso, 0, 1);
-  add_global_notetrack_handler("headlook_notorso_off", & enable_headlook_notorso, 0, 0);
-  add_global_notetrack_handler("attach weapon", & attach_weapon, 1);
-  add_global_notetrack_handler("detach weapon", & detach_weapon, 1);
-  add_global_notetrack_handler("fire", & fire_weapon, 0);
+  add_global_notetrack_handler("red_cracks_on", &cracks_on, 0, "red");
+  add_global_notetrack_handler("green_cracks_on", &cracks_on, 0, "green");
+  add_global_notetrack_handler("blue_cracks_on", &cracks_on, 0, "blue");
+  add_global_notetrack_handler("all_cracks_on", &cracks_on, 0, "all");
+  add_global_notetrack_handler("red_cracks_off", &cracks_off, 0, "red");
+  add_global_notetrack_handler("green_cracks_off", &cracks_off, 0, "green");
+  add_global_notetrack_handler("blue_cracks_off", &cracks_off, 0, "blue");
+  add_global_notetrack_handler("all_cracks_off", &cracks_off, 0, "all");
+  add_global_notetrack_handler("headlook_on", &enable_headlook, 0, 1);
+  add_global_notetrack_handler("headlook_off", &enable_headlook, 0, 0);
+  add_global_notetrack_handler("headlook_notorso_on", &enable_headlook_notorso, 0, 1);
+  add_global_notetrack_handler("headlook_notorso_off", &enable_headlook_notorso, 0, 0);
+  add_global_notetrack_handler("attach weapon", &attach_weapon, 1);
+  add_global_notetrack_handler("detach weapon", &detach_weapon, 1);
+  add_global_notetrack_handler("fire", &fire_weapon, 0);
 }
 
 function handle_notetracks(animation) {

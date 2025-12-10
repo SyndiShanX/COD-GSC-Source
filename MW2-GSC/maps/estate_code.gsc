@@ -103,21 +103,21 @@ global_inits() {
   level.scr_sound["mortar"]["dirt"] = "mortar_explosion_dirt";
   level.alwaysquake = 1;
 
-  add_hint_string("claymore_hint", & "ESTATE_USE_CLAYMORE_HINT", ::should_break_claymore_hint);
+  add_hint_string("claymore_hint", &"ESTATE_USE_CLAYMORE_HINT", ::should_break_claymore_hint);
 
   //PC Prone Key Config Handling - there are three different bindable controls for going prone on PC		
 
   //"toggleprone" (press prone once, stays prone)
   //Msg: "Press^3 [{toggleprone}] ^7to evade the landmine!"
-  add_hint_string("mineavoid_hint_toggle", & "ESTATE_LEARN_PRONE_TOGGLE", ::should_break_mineavoid_hint);
+  add_hint_string("mineavoid_hint_toggle", &"ESTATE_LEARN_PRONE_TOGGLE", ::should_break_mineavoid_hint);
 
   //"+prone" (press and hold to go prone, gets up as soon as key is released)
   //Msg: "Press and hold down^3 [{+prone}] ^7to evade the landmine!"
-  add_hint_string("mineavoid_hint_holddown", & "ESTATE_LEARN_PRONE_HOLDDOWN", ::should_break_mineavoid_hint);
+  add_hint_string("mineavoid_hint_holddown", &"ESTATE_LEARN_PRONE_HOLDDOWN", ::should_break_mineavoid_hint);
 
   // This last one works for console automatically
   // Press and hold^3 [{+stance}] ^7to evade the landmine!
-  add_hint_string("mineavoid_hint", & "ESTATE_LEARN_PRONE", ::should_break_mineavoid_hint);
+  add_hint_string("mineavoid_hint", &"ESTATE_LEARN_PRONE", ::should_break_mineavoid_hint);
 
   level.friendlyForestProgress = 0;
 
@@ -4036,7 +4036,7 @@ defense_helidrop_rider_settings(heliName) {
 //****************************************/
 
 /
-// AI SPAWN & BIOMETRICS
+// AI SPAWN &BIOMETRICS
 //****************************************/
 
 /
@@ -4108,7 +4108,7 @@ ending_shadowops_drone_init() {
 //****************************************/
 
 /
-// AI NAVIGATION & ENCROACHMENT
+// AI NAVIGATION &ENCROACHMENT
 //****************************************/
 
 /
@@ -4543,32 +4543,32 @@ download_progress() {
   if(!flag("download_test")) {
     level.hudelem = maps\_hud_util::get_countdown_hud(-300, undefined, undefined, true);
     level.hudelem SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-    level.hudelem.label = & "ESTATE_DSM_FRAME"; // DSM v6.04
+    level.hudelem.label = &"ESTATE_DSM_FRAME"; // DSM v6.04
     //level.hudelem.fontScale = 1.5;
     wait 0.65;
 
     level.hudelem_status = maps\_hud_util::get_countdown_hud(-200, undefined, undefined, true);
     level.hudelem_status SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-    level.hudelem_status.label = & "ESTATE_DSM_WORKING"; // ...working...
+    level.hudelem_status.label = &"ESTATE_DSM_WORKING"; // ...working...
     wait 2.85;
 
     level.hudelem_status destroy();
     level.hudelem_status = maps\_hud_util::get_countdown_hud(-200, undefined, undefined, true);
     level.hudelem_status SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-    level.hudelem_status.label = & "ESTATE_DSM_NETWORK_FOUND"; // ...network found...
+    level.hudelem_status.label = &"ESTATE_DSM_NETWORK_FOUND"; // ...network found...
     wait 3.75;
 
     level.hudelem_status destroy();
     level.hudelem_status = maps\_hud_util::get_countdown_hud(-200, undefined, undefined, true);
     level.hudelem_status SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-    level.hudelem_status.label = & "ESTATE_DSM_IRONBOX"; // ...ironbox detected...
+    level.hudelem_status.label = &"ESTATE_DSM_IRONBOX"; // ...ironbox detected...
     wait 2.25;
 
     level.hudelem_status destroy();
 
     level.hudelem_status = maps\_hud_util::get_countdown_hud(-200, undefined, undefined, true);
     level.hudelem_status SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-    level.hudelem_status.label = & "ESTATE_DSM_BYPASS"; // ...bypassed.
+    level.hudelem_status.label = &"ESTATE_DSM_BYPASS"; // ...bypassed.
     wait 3.1;
 
     level.hudelem destroy();
@@ -4665,7 +4665,7 @@ download_progress() {
 
   level.hudelem = maps\_hud_util::get_countdown_hud(-210); //205
   level.hudelem SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-  level.hudelem.label = & "ESTATE_DSM_PROGRESS"; // Files copied:
+  level.hudelem.label = &"ESTATE_DSM_PROGRESS"; // Files copied:
 
   level.hudelem_status = maps\_hud_util::get_download_state_hud(-62, undefined, undefined, true);
   level.hudelem_status SetPulseFX(30, 900000, 700); // something, decay start, decay duration
@@ -4675,11 +4675,11 @@ download_progress() {
   level.hudelem_status_total SetPulseFX(30, 900000, 700); // something, decay start, decay duration
 
   //level.hudelem_status_total.label = "/" + level.totalfiles;
-  level.hudelem_status_total.label = & "ESTATE_DSM_SLASH_TOTALFILES";
+  level.hudelem_status_total.label = &"ESTATE_DSM_SLASH_TOTALFILES";
 
   level.hudelem_dltimer_heading = maps\_hud_util::get_countdown_hud(-210, 120);
   level.hudelem_dltimer_heading SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-  level.hudelem_dltimer_heading.label = & "ESTATE_DSM_DLTIMELEFT"; // Time left:
+  level.hudelem_dltimer_heading.label = &"ESTATE_DSM_DLTIMELEFT"; // Time left:
   level.hudelem_dltimer_heading.fontScale = 1.1;
   level.hudelem_dltimer_heading.color = (0.4, 0.5, 0.4);
 
@@ -4691,13 +4691,13 @@ download_progress() {
 
   level.hudelem_dltimer_units = maps\_hud_util::get_countdown_hud(-126, 120, undefined, true);
   level.hudelem_dltimer_units SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-  level.hudelem_dltimer_units.label = & "ESTATE_DSM_DLTIMELEFT_MINS"; // mins
+  level.hudelem_dltimer_units.label = &"ESTATE_DSM_DLTIMELEFT_MINS"; // mins
   level.hudelem_dltimer_units.fontScale = 1.1;
   level.hudelem_dltimer_units.color = (0.4, 0.5, 0.4);
 
   level.hudelem_dlrate_heading = maps\_hud_util::get_countdown_hud(-91, 120, undefined, true);
   level.hudelem_dlrate_heading SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-  level.hudelem_dlrate_heading.label = & "ESTATE_DSM_DL_RATEMETER"; // at
+  level.hudelem_dlrate_heading.label = &"ESTATE_DSM_DL_RATEMETER"; // at
   level.hudelem_dlrate_heading.fontScale = 1.1;
   level.hudelem_dlrate_heading.color = (0.4, 0.5, 0.4);
 
@@ -4709,7 +4709,7 @@ download_progress() {
 
   level.hudelem_dlrate_units = maps\_hud_util::get_countdown_hud(-41, 120, undefined, true);
   level.hudelem_dlrate_units SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-  level.hudelem_dlrate_units.label = & "ESTATE_DSM_DLRATE"; // Mbps
+  level.hudelem_dlrate_units.label = &"ESTATE_DSM_DLRATE"; // Mbps
   level.hudelem_dlrate_units.fontScale = 1.1;
   level.hudelem_dlrate_units.color = (0.4, 0.5, 0.4);
 
@@ -4966,7 +4966,7 @@ download_fake_timer() {
 
     if(frac >= level.switchtosecs && frac < 1 && !erase_minutes) {
       erase_minutes = true;
-      level.hudelem_dltimer_units.label = & "ESTATE_DSM_DLTIMELEFT_SECS"; // secs
+      level.hudelem_dltimer_units.label = &"ESTATE_DSM_DLTIMELEFT_SECS"; // secs
     }
 
     if(frac >= level.switchtosecs && frac < 1) {
@@ -5120,9 +5120,9 @@ dsm_destruction_damage_detect() {
 
     if(level.dsmHealth <= 0) {
       if(attacker == level.player) {
-        setdvar("ui_deadquote", & "ESTATE_DSM_DESTROYED_BY_PLAYER");
+        setdvar("ui_deadquote", &"ESTATE_DSM_DESTROYED_BY_PLAYER");
       } else {
-        setdvar("ui_deadquote", & "ESTATE_DSM_DESTROYED_BY_AI_GUNFIRE");
+        setdvar("ui_deadquote", &"ESTATE_DSM_DESTROYED_BY_AI_GUNFIRE");
       }
 
       level notify("dsm_has_been_destroyed");
@@ -5483,7 +5483,7 @@ abandonment_failure() {
   radio_dialogue("est_gst_destroyedthedsm");
   radio_dialogue_stop();
 
-  setdvar("ui_deadquote", & "ESTATE_DSM_DESTROYED_BY_DESERTION");
+  setdvar("ui_deadquote", &"ESTATE_DSM_DESTROYED_BY_DESERTION");
 
   missionFailedWrapper();
 

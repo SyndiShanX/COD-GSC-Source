@@ -18,10 +18,10 @@ function init() {
   level flag::init("dgcwf_sw1_pressed");
   level flag::init("dgcwf_plot_vo_done");
   level._on_plate = 0;
-  zm_sidequests::declare_sidequest_stage("sq", "DgCWf", & init_stage, & stage_logic, & exit_stage);
+  zm_sidequests::declare_sidequest_stage("sq", "DgCWf", &init_stage, &stage_logic, &exit_stage);
   zm_sidequests::set_stage_time_limit("sq", "DgCWf", 300);
-  zm_sidequests::declare_stage_asset_from_struct("sq", "DgCWf", "sq_dgcwf_sw1", & function_3ab2e3c3, & function_375f6cbc);
-  zm_sidequests::declare_stage_asset("sq", "DgCWf", "sq_dgcwf_trig", & plate_trigger);
+  zm_sidequests::declare_stage_asset_from_struct("sq", "DgCWf", "sq_dgcwf_sw1", &function_3ab2e3c3, &function_375f6cbc);
+  zm_sidequests::declare_stage_asset("sq", "DgCWf", "sq_dgcwf_trig", &plate_trigger);
 }
 
 function plate_counter() {
@@ -257,7 +257,7 @@ function exit_stage(success) {
   if(success) {
     zm_temple_sq_brock::create_radio(3);
   } else {
-    zm_temple_sq_brock::create_radio(2, & zm_temple_sq_brock::radio2_override);
+    zm_temple_sq_brock::create_radio(2, &zm_temple_sq_brock::radio2_override);
     level thread zm_temple_sq_skits::fail_skit();
   }
   level.skit_vox_override = 0;

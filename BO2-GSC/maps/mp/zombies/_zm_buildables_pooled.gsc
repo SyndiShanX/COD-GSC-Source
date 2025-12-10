@@ -125,7 +125,7 @@ pooledbuildablestub_update_prompt(player, trigger) {
       if(isDefined(level.zombie_buildables[self.equipname].hint_more))
         self.hint_string = level.zombie_buildables[self.equipname].hint_more;
       else
-        self.hint_string = & "ZOMBIE_BUILD_PIECE_MORE";
+        self.hint_string = &"ZOMBIE_BUILD_PIECE_MORE";
 
       if(isDefined(level.custom_buildable_need_part_vo))
         player thread[[level.custom_buildable_need_part_vo]]();
@@ -135,7 +135,7 @@ pooledbuildablestub_update_prompt(player, trigger) {
       if(isDefined(level.zombie_buildables[self.bound_to_buildable.equipname].hint_wrong))
         self.hint_string = level.zombie_buildables[self.bound_to_buildable.equipname].hint_wrong;
       else
-        self.hint_string = & "ZOMBIE_BUILD_PIECE_WRONG";
+        self.hint_string = &"ZOMBIE_BUILD_PIECE_WRONG";
 
       if(isDefined(level.custom_buildable_wrong_part_vo))
         player thread[[level.custom_buildable_wrong_part_vo]]();
@@ -145,7 +145,7 @@ pooledbuildablestub_update_prompt(player, trigger) {
       if(isDefined(level.zombie_buildables[self.equipname].hint_wrong))
         self.hint_string = level.zombie_buildables[self.equipname].hint_wrong;
       else
-        self.hint_string = & "ZOMBIE_BUILD_PIECE_WRONG";
+        self.hint_string = &"ZOMBIE_BUILD_PIECE_WRONG";
 
       return 0;
     } else if(isDefined(self.bound_to_buildable)) {

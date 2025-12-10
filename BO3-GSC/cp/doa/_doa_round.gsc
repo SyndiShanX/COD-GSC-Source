@@ -50,7 +50,7 @@ function private function_542758d0() {
       var_72085a07.var_84aef63e = level.doa.rules.var_1faeb8d5;
     }
     if(!isDefined(var_72085a07.spawnfunc)) {
-      var_72085a07.spawnfunc = & doa_enemy::function_a4e16560;
+      var_72085a07.spawnfunc = &doa_enemy::function_a4e16560;
     }
     if(!isDefined(var_72085a07.var_83bae1f8)) {
       var_72085a07.var_83bae1f8 = level.doa.rules.var_466591b1;
@@ -193,7 +193,7 @@ function main() {
     level.doa.zombie_health = level.doa.zombie_health + level.doa.zombie_health_inc;
     level.doa.round_number++;
     level.doa.var_6f2c52d8 = undefined;
-    level clientfield::set("roundnumber", level.doa.round_number & (1024 - 1));
+    level clientfield::set("roundnumber", level.doa.round_number &(1024 - 1));
     function_d9345c74();
     function_55762a85();
     namespace_d88e3a06::function_7a8a936b();
@@ -301,7 +301,7 @@ function function_fe0946ac(spawn_origin, var_97887a95 = 1) {
 
 function function_55762a85(spawn_origin) {
   stopallrumbles();
-  array::thread_all(getplayers(), & function_fe0946ac, spawn_origin);
+  array::thread_all(getplayers(), &function_fe0946ac, spawn_origin);
   level notify("hash_3b6e1e2");
 }
 
@@ -387,7 +387,7 @@ function function_21a582ff(current_wave, endnote) {
         ai notify("hash_48b8c577");
         if(!isvehicle(ai) && (!(isDefined(ai.var_ad61c13d) && ai.var_ad61c13d))) {
           ai thread zombie_utility::zombie_gib_on_damage();
-          ai.tesla_head_gib_func = & namespace_fba031c8::function_deb7df37;
+          ai.tesla_head_gib_func = &namespace_fba031c8::function_deb7df37;
         }
         if(isDefined(level.doa.var_2836c8ee) && level.doa.var_2836c8ee) {
           ai thread namespace_eaa992c::function_285a2999("spawnZombie");

@@ -83,18 +83,18 @@ initEffects() {
 }
 
 onStartGameType() {
-  setObjectiveText("allies", & "OBJECTIVES_BLITZ");
-  setObjectiveText("axis", & "OBJECTIVES_BLITZ");
+  setObjectiveText("allies", &"OBJECTIVES_BLITZ");
+  setObjectiveText("axis", &"OBJECTIVES_BLITZ");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", & "OBJECTIVES_BLITZ");
-    setObjectiveScoreText("axis", & "OBJECTIVES_BLITZ");
+    setObjectiveScoreText("allies", &"OBJECTIVES_BLITZ");
+    setObjectiveScoreText("axis", &"OBJECTIVES_BLITZ");
   } else {
-    setObjectiveScoreText("allies", & "OBJECTIVES_BLITZ_ATTACKER_SCORE");
-    setObjectiveScoreText("axis", & "OBJECTIVES_BLITZ_ATTACKER_SCORE");
+    setObjectiveScoreText("allies", &"OBJECTIVES_BLITZ_ATTACKER_SCORE");
+    setObjectiveScoreText("axis", &"OBJECTIVES_BLITZ_ATTACKER_SCORE");
   }
-  setObjectiveHintText("allies", & "OBJECTIVES_BLITZ_HINT");
-  setObjectiveHintText("axis", & "OBJECTIVES_BLITZ_HINT");
+  setObjectiveHintText("allies", &"OBJECTIVES_BLITZ_HINT");
+  setObjectiveHintText("axis", &"OBJECTIVES_BLITZ_HINT");
 
   setClientNameMode("auto_change");
 

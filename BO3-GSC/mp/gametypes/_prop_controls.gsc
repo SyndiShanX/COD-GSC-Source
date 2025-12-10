@@ -45,71 +45,71 @@ function function_e17a8f06(command, key) {
   self endon((command + "_") + key);
   switch (key) {
     case "+attack": {
-      function_c6639fc9( & attackbuttonpressed, command);
+      function_c6639fc9(&attackbuttonpressed, command);
       break;
     }
     case "+toggleads_throw": {
-      function_c6639fc9( & adsbuttonpressed, command);
+      function_c6639fc9(&adsbuttonpressed, command);
       break;
     }
     case "weapnext": {
-      function_c6639fc9( & weaponswitchbuttonpressed, command);
+      function_c6639fc9(&weaponswitchbuttonpressed, command);
       break;
     }
     case "+usereload": {
-      function_c6639fc9( & usebuttonpressed, command);
+      function_c6639fc9(&usebuttonpressed, command);
       break;
     }
     case "+smoke": {
-      function_c6639fc9( & secondaryoffhandbuttonpressed, command);
+      function_c6639fc9(&secondaryoffhandbuttonpressed, command);
       break;
     }
     case "+frag": {
-      function_c6639fc9( & fragbuttonpressed, command);
+      function_c6639fc9(&fragbuttonpressed, command);
       break;
     }
     case "+actionslot 1": {
-      function_c6639fc9( & actionslotonebuttonpressed, command);
+      function_c6639fc9(&actionslotonebuttonpressed, command);
       break;
     }
     case "+actionslot 2": {
-      function_c6639fc9( & actionslottwobuttonpressed, command);
+      function_c6639fc9(&actionslottwobuttonpressed, command);
       break;
     }
     case "+actionslot 3": {
-      function_c6639fc9( & actionslotthreebuttonpressed, command);
+      function_c6639fc9(&actionslotthreebuttonpressed, command);
       break;
     }
     case "+actionslot 4": {
-      function_c6639fc9( & actionslotfourbuttonpressed, command);
+      function_c6639fc9(&actionslotfourbuttonpressed, command);
       break;
     }
     case "-actionslot 1": {
-      function_b01c4bcb( & actionslotonebuttonpressed, command);
+      function_b01c4bcb(&actionslotonebuttonpressed, command);
       break;
     }
     case "-actionslot 2": {
-      function_b01c4bcb( & actionslottwobuttonpressed, command);
+      function_b01c4bcb(&actionslottwobuttonpressed, command);
       break;
     }
     case "-actionslot 3": {
-      function_b01c4bcb( & actionslotthreebuttonpressed, command);
+      function_b01c4bcb(&actionslotthreebuttonpressed, command);
       break;
     }
     case "-actionslot 4": {
-      function_b01c4bcb( & actionslotfourbuttonpressed, command);
+      function_b01c4bcb(&actionslotfourbuttonpressed, command);
       break;
     }
     case "+stance": {
-      function_b01c4bcb( & stancebuttonpressed, command);
+      function_b01c4bcb(&stancebuttonpressed, command);
       break;
     }
     case "+breath_sprint": {
-      function_b01c4bcb( & sprintbuttonpressed, command);
+      function_b01c4bcb(&sprintbuttonpressed, command);
       break;
     }
     case "+melee": {
-      function_b01c4bcb( & meleebuttonpressed, command);
+      function_b01c4bcb(&meleebuttonpressed, command);
       break;
     }
   }
@@ -219,9 +219,9 @@ function propcontrolshud() {
   self.changepropkey = addupperrighthudelem(&"MP_PH_CHANGE", 0);
   self.currenthudy = self.currenthudy - 20;
   self.var_6f16621b = addupperrighthudelem(&"MP_PH_HIDEPROP");
-  self.matchslopekey = addupperrighthudelem(&"MP_PH_SLOPE", undefined, undefined, & "MP_PH_SLOPE_PC");
+  self.matchslopekey = addupperrighthudelem(&"MP_PH_SLOPE", undefined, undefined, &"MP_PH_SLOPE_PC");
   self.lockpropkey = addupperrighthudelem(&"MP_PH_LOCK");
-  self.spinpropkey = addupperrighthudelem(&"MP_PH_SPIN", undefined, undefined, & "MP_PH_SPIN_PC");
+  self.spinpropkey = addupperrighthudelem(&"MP_PH_SPIN", undefined, undefined, &"MP_PH_SPIN_PC");
   self setnewabilityhud();
   self.zoomkey = addupperrighthudelem(&"MP_PH_ZOOM");
   self thread updatetextongamepadchange();
@@ -268,18 +268,18 @@ function updatetextongamepadchange() {
       var_85e0f0fe = var_521408c;
       if(var_521408c) {
         if(!(isDefined(self.slopelocked) && self.slopelocked)) {
-          self.matchslopekey.label = & "MP_PH_SLOPE";
+          self.matchslopekey.label = &"MP_PH_SLOPE";
         } else {
-          self.matchslopekey.label = & "MP_PH_SLOPED";
+          self.matchslopekey.label = &"MP_PH_SLOPED";
         }
-        self.spinpropkey.label = & "MP_PH_SPIN";
+        self.spinpropkey.label = &"MP_PH_SPIN";
       } else {
         if(!(isDefined(self.slopelocked) && self.slopelocked)) {
-          self.matchslopekey.label = & "MP_PH_SLOPE_PC";
+          self.matchslopekey.label = &"MP_PH_SLOPE_PC";
         } else {
-          self.matchslopekey.label = & "MP_PH_SLOPED_PC";
+          self.matchslopekey.label = &"MP_PH_SLOPED_PC";
         }
-        self.spinpropkey.label = & "MP_PH_SPIN_PC";
+        self.spinpropkey.label = &"MP_PH_SPIN_PC";
       }
     }
     wait(0.05);
@@ -478,9 +478,9 @@ function propmatchslope() {
     }
     if(prop::useprophudserver()) {
       if(self is_player_gamepad_enabled()) {
-        self.matchslopekey.label = & "MP_PH_SLOPED";
+        self.matchslopekey.label = &"MP_PH_SLOPED";
       } else {
-        self.matchslopekey.label = & "MP_PH_SLOPED_PC";
+        self.matchslopekey.label = &"MP_PH_SLOPED_PC";
       }
     }
   } else {
@@ -493,9 +493,9 @@ function propmatchslope() {
     }
     if(prop::useprophudserver()) {
       if(self is_player_gamepad_enabled()) {
-        self.matchslopekey.label = & "MP_PH_SLOPE";
+        self.matchslopekey.label = &"MP_PH_SLOPE";
       } else {
-        self.matchslopekey.label = & "MP_PH_SLOPE_PC";
+        self.matchslopekey.label = &"MP_PH_SLOPE_PC";
       }
     }
   }
@@ -712,7 +712,7 @@ function unlockprop() {
   self.propanchor linkto(self);
   self.lock = 0;
   if(prop::useprophudserver()) {
-    self.lockpropkey.label = & "MP_PH_LOCK";
+    self.lockpropkey.label = &"MP_PH_LOCK";
     self thread flashlockpropkey();
   }
 }
@@ -733,7 +733,7 @@ function lockprop() {
   self.lock = 1;
   self notify("locked");
   if(prop::useprophudserver()) {
-    self.lockpropkey.label = & "MP_PH_LOCKED";
+    self.lockpropkey.label = &"MP_PH_LOCKED";
     self thread flashlockpropkey();
   }
 }
@@ -882,7 +882,7 @@ function propcamerazoom() {
 function setnewabilityhud() {
   switch (self.currentability) {
     case "FLASH": {
-      self.abilitykey.label = & "MP_PH_FLASH";
+      self.abilitykey.label = &"MP_PH_FLASH";
       break;
     }
     default: {
@@ -1017,7 +1017,7 @@ function cloneprop() {
   var_a20cbf64.health = 99999;
   var_a20cbf64.maxhealth = 99999;
   var_a20cbf64.playerowner = self;
-  var_a20cbf64 thread prop::function_500dc7d9( & damageclonewatch);
+  var_a20cbf64 thread prop::function_500dc7d9(&damageclonewatch);
   var_a20cbf64 setplayercollision(0);
   var_a20cbf64 makesentient();
   var_a20cbf64 notsolidcapsule();
@@ -1063,7 +1063,7 @@ function function_8e6b5244() {
 
 function function_de01cce2() {
   self.var_86fdc107 = hud::createfontstring("objective", 1);
-  self.var_86fdc107.label = & "SCORE_DECOY_KILLED";
+  self.var_86fdc107.label = &"SCORE_DECOY_KILLED";
   self.var_86fdc107.x = 0;
   self.var_86fdc107.y = 20;
   self.var_86fdc107.alignx = "center";
@@ -1386,12 +1386,12 @@ function function_8b7be7e3() {
   if(self.var_4a35819e) {
     self.prop clientfield::set("retrievable", 1);
     if(prop::useprophudserver()) {
-      self.var_6f16621b.label = & "MP_PH_SHOWPROP";
+      self.var_6f16621b.label = &"MP_PH_SHOWPROP";
     }
   } else {
     self.prop clientfield::set("retrievable", 0);
     if(prop::useprophudserver()) {
-      self.var_6f16621b.label = & "MP_PH_HIDEPROP";
+      self.var_6f16621b.label = &"MP_PH_HIDEPROP";
     }
   }
 }
@@ -1501,7 +1501,7 @@ function function_aac4667c() {
   objective_team(var_6f71e4e9, game["attackers"]);
   objective_position(var_6f71e4e9, self.origin);
   objective_icon(var_6f71e4e9, "t7_hud_waypoints_safeguard_location");
-  objective_setcolor(var_6f71e4e9, & "FriendlyBlue");
+  objective_setcolor(var_6f71e4e9, &"FriendlyBlue");
   objective_onentity(var_6f71e4e9, self);
   self thread function_41584b4b(var_6f71e4e9);
   self clientfield::set("pingHighlight", 1);

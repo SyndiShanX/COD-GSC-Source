@@ -14,29 +14,29 @@
 #namespace hud_message;
 
 function init() {
-  game["strings"]["draw"] = & "MP_DRAW_CAPS";
-  game["strings"]["round_draw"] = & "MP_ROUND_DRAW_CAPS";
-  game["strings"]["round_win"] = & "MP_ROUND_WIN_CAPS";
-  game["strings"]["round_loss"] = & "MP_ROUND_LOSS_CAPS";
-  game["strings"]["victory"] = & "MP_VICTORY_CAPS";
-  game["strings"]["defeat"] = & "MP_DEFEAT_CAPS";
-  game["strings"]["top3"] = & "MP_TOP3_CAPS";
-  game["strings"]["game_over"] = & "MP_GAME_OVER_CAPS";
-  game["strings"]["halftime"] = & "MP_HALFTIME_CAPS";
-  game["strings"]["overtime"] = & "MP_OVERTIME_CAPS";
-  game["strings"]["roundend"] = & "MP_ROUNDEND_CAPS";
-  game["strings"]["intermission"] = & "MP_INTERMISSION_CAPS";
-  game["strings"]["side_switch"] = & "MP_SWITCHING_SIDES_CAPS";
-  game["strings"]["match_bonus"] = & "MP_MATCH_BONUS_IS";
-  game["strings"]["codpoints_match_bonus"] = & "MP_CODPOINTS_MATCH_BONUS_IS";
-  game["strings"]["wager_winnings"] = & "MP_WAGER_WINNINGS_ARE";
-  game["strings"]["wager_sidebet_winnings"] = & "MP_WAGER_SIDEBET_WINNINGS_ARE";
-  game["strings"]["wager_inthemoney"] = & "MP_WAGER_IN_THE_MONEY_CAPS";
-  game["strings"]["wager_loss"] = & "MP_WAGER_LOSS_CAPS";
-  game["strings"]["wager_topwinners"] = & "MP_WAGER_TOPWINNERS";
-  game["strings"]["join_in_progress_loss"] = & "MP_JOIN_IN_PROGRESS_LOSS";
-  game["strings"]["cod_caster_team_wins"] = & "MP_WINS";
-  game["strings"]["cod_caster_team_eliminated"] = & "MP_TEAM_ELIMINATED";
+  game["strings"]["draw"] = &"MP_DRAW_CAPS";
+  game["strings"]["round_draw"] = &"MP_ROUND_DRAW_CAPS";
+  game["strings"]["round_win"] = &"MP_ROUND_WIN_CAPS";
+  game["strings"]["round_loss"] = &"MP_ROUND_LOSS_CAPS";
+  game["strings"]["victory"] = &"MP_VICTORY_CAPS";
+  game["strings"]["defeat"] = &"MP_DEFEAT_CAPS";
+  game["strings"]["top3"] = &"MP_TOP3_CAPS";
+  game["strings"]["game_over"] = &"MP_GAME_OVER_CAPS";
+  game["strings"]["halftime"] = &"MP_HALFTIME_CAPS";
+  game["strings"]["overtime"] = &"MP_OVERTIME_CAPS";
+  game["strings"]["roundend"] = &"MP_ROUNDEND_CAPS";
+  game["strings"]["intermission"] = &"MP_INTERMISSION_CAPS";
+  game["strings"]["side_switch"] = &"MP_SWITCHING_SIDES_CAPS";
+  game["strings"]["match_bonus"] = &"MP_MATCH_BONUS_IS";
+  game["strings"]["codpoints_match_bonus"] = &"MP_CODPOINTS_MATCH_BONUS_IS";
+  game["strings"]["wager_winnings"] = &"MP_WAGER_WINNINGS_ARE";
+  game["strings"]["wager_sidebet_winnings"] = &"MP_WAGER_SIDEBET_WINNINGS_ARE";
+  game["strings"]["wager_inthemoney"] = &"MP_WAGER_IN_THE_MONEY_CAPS";
+  game["strings"]["wager_loss"] = &"MP_WAGER_LOSS_CAPS";
+  game["strings"]["wager_topwinners"] = &"MP_WAGER_TOPWINNERS";
+  game["strings"]["join_in_progress_loss"] = &"MP_JOIN_IN_PROGRESS_LOSS";
+  game["strings"]["cod_caster_team_wins"] = &"MP_WINS";
+  game["strings"]["cod_caster_team_eliminated"] = &"MP_TEAM_ELIMINATED";
 }
 
 function teamoutcomenotify(winner, endtype, endreasontext) {
@@ -382,7 +382,7 @@ function wageroutcomenotify(winner, endreasontext) {
       secondtitle.archived = 0;
       secondtitle.immunetodemogamehudsettings = 1;
       secondtitle.immunetodemofreecamera = 1;
-      secondtitle.label = & "MP_WAGER_PLACE_NAME";
+      secondtitle.label = &"MP_WAGER_PLACE_NAME";
       secondtitle.playernum = i;
       secondtitle setplayernamestring(players[i]);
       playernamehudelems[playernamehudelems.size] = secondtitle;
@@ -394,7 +394,7 @@ function wageroutcomenotify(winner, endreasontext) {
       secondcp.archived = 0;
       secondcp.immunetodemogamehudsettings = 1;
       secondcp.immunetodemofreecamera = 1;
-      secondcp.label = & "MENU_POINTS";
+      secondcp.label = &"MENU_POINTS";
       secondcp.currentvalue = 0;
       if(isDefined(players[i].wagerwinnings)) {
         secondcp.targetvalue = players[i].wagerwinnings;

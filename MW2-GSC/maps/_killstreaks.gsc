@@ -10,7 +10,7 @@
 KILLSTREAK_STRING_TABLE = "sp/killstreakTable.csv";
 
 init() {
-  // &&1 Kill Streak!
+  // && 1 Kill Streak!
   precacheString(&"MP_KILLSTREAK_N");
 
   initKillstreakData();
@@ -38,12 +38,12 @@ initKillstreakData() {
 
     streakUseHint = tableLookupIString(KILLSTREAK_STRING_TABLE, 0, i, 6);
     // string not found for
-    assert(streakUseHint != & "");
+    assert(streakUseHint != &"");
     precacheString(streakUseHint);
 
     streakFailHint = tableLookupIString(KILLSTREAK_STRING_TABLE, 0, i, 11);
     // string not found for
-    assert(streakFailHint != & "");
+    assert(streakFailHint != &"");
     precacheString(streakFailHint);
 
     //chad - no earn dialog yet
@@ -169,8 +169,8 @@ streakNotify(streakVal) {
   wait .05;
 
   notifyData = spawnStruct();
-  // &&1 Kill Streak!
-  notifyData.titleLabel = & "MP_KILLSTREAK_N";
+  // && 1 Kill Streak!
+  notifyData.titleLabel = &"MP_KILLSTREAK_N";
   notifyData.titleText = streakVal;
 
   self maps\_rank::notifyMessage(notifyData);
@@ -182,8 +182,8 @@ rewardNotify(streakName, streakVal) {
   wait .05;
 
   notifyData = spawnStruct();
-  // &&1 Kill Streak!
-  notifyData.titleLabel = & "MP_KILLSTREAK_N";
+  // && 1 Kill Streak!
+  notifyData.titleLabel = &"MP_KILLSTREAK_N";
   notifyData.titleText = streakVal;
   notifyData.notifyText = getKillstreakHint(streakName);
   notifyData.textIsString = true;

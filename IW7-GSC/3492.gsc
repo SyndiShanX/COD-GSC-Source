@@ -31,7 +31,7 @@ usehighvaluetarget(var_00, var_01) {
     return 0;
 
   if(func_DD18() || isDefined(var_0.func_9264) && var_0.func_9264 >= 2) {
-    self iprintlnbold( & "KILLSTREAKS_HVT_MAX");
+    self iprintlnbold(&"KILLSTREAKS_HVT_MAX");
     return 0;
   }
 

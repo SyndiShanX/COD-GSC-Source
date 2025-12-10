@@ -31,7 +31,7 @@
 #namespace zm_genesis_shadowman;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_shadowman", & __init__, & __main__, undefined);
+  system::register("zm_genesis_shadowman", &__init__, &__main__, undefined);
 }
 
 function __init__() {

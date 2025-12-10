@@ -18,14 +18,14 @@
 #namespace _gadget_overdrive;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_overdrive", & __init__, undefined, undefined);
+  system::register("gadget_overdrive", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_localclient_connect( & on_player_connect);
-  callback::on_localplayer_spawned( & on_localplayer_spawned);
-  callback::on_localclient_shutdown( & on_localplayer_shutdown);
-  clientfield::register("toplayer", "overdrive_state", 1, 1, "int", & player_overdrive_handler, 0, 1);
+  callback::on_localclient_connect(&on_player_connect);
+  callback::on_localplayer_spawned(&on_localplayer_spawned);
+  callback::on_localclient_shutdown(&on_localplayer_shutdown);
+  clientfield::register("toplayer", "overdrive_state", 1, 1, "int", &player_overdrive_handler, 0, 1);
   visionset_mgr::register_visionset_info("overdrive", 1, 15, undefined, "overdrive_initialize");
 }
 

@@ -9,7 +9,7 @@
 #namespace cp_mi_zurich_newworld_fx;
 
 function main() {
-  clientfield::register("world", "set_fog_bank", 1, 2, "int", & function_c49f36a3, 0, 0);
+  clientfield::register("world", "set_fog_bank", 1, 2, "int", &function_c49f36a3, 0, 0);
 }
 
 function function_c49f36a3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

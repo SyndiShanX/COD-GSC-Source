@@ -927,7 +927,7 @@ open_exit(trigger, objective_id) {
   blocker.origin -= (0, 0, 500);
   trigger.exit_open = true;
   trigger thread exit_cleanup();
-  objective_add(objective_id, "active", & "EXIT", trigger.origin);
+  objective_add(objective_id, "active", &"EXIT", trigger.origin);
   objective_set3d(objective_id, true, "default", "*");
   objective_current(objective_id);
   trigger waittill("trigger");

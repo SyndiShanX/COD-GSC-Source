@@ -19,9 +19,9 @@
 #namespace bot_clean;
 
 function init() {
-  level.botpostcombat = & bot_post_combat;
-  level.botidle = & bot_idle;
-  level.botupdatethreatgoal = & update_threat_goal;
+  level.botpostcombat = &bot_post_combat;
+  level.botidle = &bot_idle;
+  level.botupdatethreatgoal = &update_threat_goal;
 }
 
 function bot_post_combat() {

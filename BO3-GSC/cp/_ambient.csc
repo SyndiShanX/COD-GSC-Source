@@ -11,11 +11,11 @@
 #namespace ambient;
 
 function autoexec __init__sytem__() {
-  system::register("ambient", & __init__, undefined, undefined);
+  system::register("ambient", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_localclient_connect( & on_player_connect);
+  callback::on_localclient_connect(&on_player_connect);
 }
 
 function on_player_connect(localclientnum) {
@@ -287,7 +287,7 @@ function ceiling_fans_init(clientnum) {
   fan_array = getEntArray(clientnum, "ceiling_fan", "targetname");
   if(isDefined(fan_array)) {
     println("" + fan_array.size);
-    array::thread_all(fan_array, & spin_fan);
+    array::thread_all(fan_array, &spin_fan);
   }
 }
 
@@ -353,17 +353,17 @@ function clocks_init(clientnum) {
   hour_hand_array = getEntArray(clientnum, "hour_hand", "targetname");
   if(isDefined(hour_hand_array)) {
     println("" + hour_hand_array.size);
-    array::thread_all(hour_hand_array, & clock_run, hour_values);
+    array::thread_all(hour_hand_array, &clock_run, hour_values);
   }
   minute_hand_array = getEntArray(clientnum, "minute_hand", "targetname");
   if(isDefined(minute_hand_array)) {
     println("" + minute_hand_array.size);
-    array::thread_all(minute_hand_array, & clock_run, minute_values);
+    array::thread_all(minute_hand_array, &clock_run, minute_values);
   }
   second_hand_array = getEntArray(clientnum, "second_hand", "targetname");
   if(isDefined(second_hand_array)) {
     println("" + second_hand_array.size);
-    array::thread_all(second_hand_array, & clock_run, second_values);
+    array::thread_all(second_hand_array, &clock_run, second_values);
   }
 }
 
@@ -460,11 +460,11 @@ function spin_anemometers(clientnum) {
   flat_spinners = getEntArray(clientnum, "spinner2", "targetname");
   if(isDefined(spoon_spinners)) {
     println("" + spoon_spinners.size);
-    array::thread_all(spoon_spinners, & spoon_spin_func);
+    array::thread_all(spoon_spinners, &spoon_spin_func);
   }
   if(isDefined(flat_spinners)) {
     println("" + flat_spinners.size);
-    array::thread_all(flat_spinners, & arrow_spin_func);
+    array::thread_all(flat_spinners, &arrow_spin_func);
   }
 }
 

@@ -33,13 +33,13 @@ function main() {
   level.matchrules_vampirism = 0;
   setspecialloadouts();
   level.teambased = 1;
-  level.initgametypeawards = & initgametypeawards;
-  level.onprecachegametype = & onprecachegametype;
-  level.onstartgametype = & onstartgametype;
-  level.onplayerkilled = & onplayerkilled;
-  level.onspawnplayer = & onspawnplayer;
-  level.onroundendgame = & onroundendgame;
-  level.onroundswitch = & onroundswitch;
+  level.initgametypeawards = &initgametypeawards;
+  level.onprecachegametype = &onprecachegametype;
+  level.onstartgametype = &onstartgametype;
+  level.onplayerkilled = &onplayerkilled;
+  level.onspawnplayer = &onspawnplayer;
+  level.onroundendgame = &onroundendgame;
+  level.onroundswitch = &onroundswitch;
   gameobjects::register_allowed_gameobject(level.gametype);
   gameobjects::register_allowed_gameobject("tdm");
   game["dialog"]["gametype"] = "team_def";
@@ -50,7 +50,7 @@ function main() {
   game["dialog"]["enemy_got_flag"] = "ctf_theytake";
   game["dialog"]["dropped_flag"] = "ctf_wedrop";
   game["dialog"]["enemy_dropped_flag"] = "ctf_theydrop";
-  game["strings"]["overtime_hint"] = & "MP_FIRST_BLOOD";
+  game["strings"]["overtime_hint"] = &"MP_FIRST_BLOOD";
 }
 
 function onprecachegametype() {}
@@ -66,17 +66,17 @@ function onstartgametype() {
     game["attackers"] = olddefenders;
     game["defenders"] = oldattackers;
   }
-  util::setobjectivetext("allies", & "OBJECTIVES_TDEF");
-  util::setobjectivetext("axis", & "OBJECTIVES_TDEF");
+  util::setobjectivetext("allies", &"OBJECTIVES_TDEF");
+  util::setobjectivetext("axis", &"OBJECTIVES_TDEF");
   if(level.splitscreen) {
-    util::setobjectivescoretext("allies", & "OBJECTIVES_TDEF");
-    util::setobjectivescoretext("axis", & "OBJECTIVES_TDEF");
+    util::setobjectivescoretext("allies", &"OBJECTIVES_TDEF");
+    util::setobjectivescoretext("axis", &"OBJECTIVES_TDEF");
   } else {
-    util::setobjectivescoretext("allies", & "OBJECTIVES_TDEF_SCORE");
-    util::setobjectivescoretext("axis", & "OBJECTIVES_TDEF_SCORE");
+    util::setobjectivescoretext("allies", &"OBJECTIVES_TDEF_SCORE");
+    util::setobjectivescoretext("axis", &"OBJECTIVES_TDEF_SCORE");
   }
-  util::setobjectivehinttext("allies", & "OBJECTIVES_TDEF_ATTACKER_HINT");
-  util::setobjectivehinttext("axis", & "OBJECTIVES_TDEF_ATTACKER_HINT");
+  util::setobjectivehinttext("allies", &"OBJECTIVES_TDEF_ATTACKER_HINT");
+  util::setobjectivehinttext("axis", &"OBJECTIVES_TDEF_ATTACKER_HINT");
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
   spawnlogic::place_spawn_points("mp_tdm_spawn_allies_start");
@@ -166,7 +166,7 @@ function ondrop(player) {
     if(isDefined(player.carryflag)) {
       player detachflag();
     }
-    util::printandsoundoneveryone(team, undefined, & "MP_NEUTRAL_FLAG_DROPPED_BY", & "MP_NEUTRAL_FLAG_DROPPED_BY", "mp_war_objective_lost", "mp_war_objective_lost", player);
+    util::printandsoundoneveryone(team, undefined, &"MP_NEUTRAL_FLAG_DROPPED_BY", &"MP_NEUTRAL_FLAG_DROPPED_BY", "mp_war_objective_lost", "mp_war_objective_lost", player);
   } else {
     sound::play_on_players("mp_war_objective_lost", team);
     sound::play_on_players("mp_war_objective_lost", otherteam);
@@ -203,7 +203,7 @@ function onpickup(player) {
   player recordgameevent("pickup");
   player addplayerstatwithgametype("CAPTURES", 1);
   player notify("objective", "captured");
-  util::printandsoundoneveryone(team, undefined, & "MP_NEUTRAL_FLAG_CAPTURED_BY", & "MP_NEUTRAL_FLAG_CAPTURED_BY", "mp_obj_captured", "mp_enemy_obj_captured", player);
+  util::printandsoundoneveryone(team, undefined, &"MP_NEUTRAL_FLAG_CAPTURED_BY", &"MP_NEUTRAL_FLAG_CAPTURED_BY", "mp_obj_captured", "mp_enemy_obj_captured", player);
   if(self.currentteam == otherteam) {
     player globallogic_score::giveteamscoreforobjective(team, score);
   }
@@ -296,9 +296,9 @@ function createflag(victim) {
   gameflag gameobjects::set_3d_icon("friendly", level.iconcaptureflag3d);
   gameflag gameobjects::set_carry_icon(level.icon2d["axis"]);
   gameflag.allowweapons = 1;
-  gameflag.onpickup = & onpickup;
-  gameflag.onpickupfailed = & onpickup;
-  gameflag.ondrop = & ondrop;
+  gameflag.onpickup = &onpickup;
+  gameflag.onpickupfailed = &onpickup;
+  gameflag.ondrop = &ondrop;
   gameflag.oldradius = 96;
   gameflag.currentteam = "none";
   gameflag.requireslos = 1;

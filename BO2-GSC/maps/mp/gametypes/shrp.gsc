@@ -65,20 +65,20 @@ onstartgametype() {
   setdvar("ui_guncycle", 0);
   makedvarserverinfo("ui_guncycle", 0);
   setclientnamemode("auto_change");
-  setobjectivetext("allies", & "OBJECTIVES_SHRP");
-  setobjectivetext("axis", & "OBJECTIVES_SHRP");
+  setobjectivetext("allies", &"OBJECTIVES_SHRP");
+  setobjectivetext("axis", &"OBJECTIVES_SHRP");
   attach_compatibility_init();
 
   if(level.splitscreen) {
-    setobjectivescoretext("allies", & "OBJECTIVES_SHRP");
-    setobjectivescoretext("axis", & "OBJECTIVES_SHRP");
+    setobjectivescoretext("allies", &"OBJECTIVES_SHRP");
+    setobjectivescoretext("axis", &"OBJECTIVES_SHRP");
   } else {
-    setobjectivescoretext("allies", & "OBJECTIVES_SHRP_SCORE");
-    setobjectivescoretext("axis", & "OBJECTIVES_SHRP_SCORE");
+    setobjectivescoretext("allies", &"OBJECTIVES_SHRP_SCORE");
+    setobjectivescoretext("axis", &"OBJECTIVES_SHRP_SCORE");
   }
 
-  setobjectivehinttext("allies", & "OBJECTIVES_SHRP_HINT");
-  setobjectivehinttext("axis", & "OBJECTIVES_SHRP_HINT");
+  setobjectivehinttext("allies", &"OBJECTIVES_SHRP_HINT");
+  setobjectivehinttext("axis", &"OBJECTIVES_SHRP_HINT");
   allowed[0] = "shrp";
   maps\mp\gametypes\_gameobjects::main(allowed);
   maps\mp\gametypes\_spawning::create_map_placed_influencers();
@@ -100,11 +100,11 @@ onstartgametype() {
   spawnpoint = maps\mp\gametypes\_spawnlogic::getrandomintermissionpoint();
   setdemointermissionpoint(spawnpoint.origin, spawnpoint.angles);
   level.usestartspawns = 0;
-  maps\mp\gametypes\_wager::addpowerup("specialty_bulletflinch", "perk", & "PERKS_TOUGHNESS", "perk_warrior");
-  maps\mp\gametypes\_wager::addpowerup("specialty_movefaster", "perk", & "PERKS_LIGHTWEIGHT", "perk_lightweight");
-  maps\mp\gametypes\_wager::addpowerup("specialty_fallheight", "perk", & "PERKS_LIGHTWEIGHT", "perk_lightweight");
-  maps\mp\gametypes\_wager::addpowerup("specialty_longersprint", "perk", & "PERKS_EXTREME_CONDITIONING", "perk_marathon");
-  maps\mp\gametypes\_wager::addpowerup(2, "score_multiplier", & "PERKS_SCORE_MULTIPLIER", "perk_times_two");
+  maps\mp\gametypes\_wager::addpowerup("specialty_bulletflinch", "perk", &"PERKS_TOUGHNESS", "perk_warrior");
+  maps\mp\gametypes\_wager::addpowerup("specialty_movefaster", "perk", &"PERKS_LIGHTWEIGHT", "perk_lightweight");
+  maps\mp\gametypes\_wager::addpowerup("specialty_fallheight", "perk", &"PERKS_LIGHTWEIGHT", "perk_lightweight");
+  maps\mp\gametypes\_wager::addpowerup("specialty_longersprint", "perk", &"PERKS_EXTREME_CONDITIONING", "perk_marathon");
+  maps\mp\gametypes\_wager::addpowerup(2, "score_multiplier", &"PERKS_SCORE_MULTIPLIER", "perk_times_two");
   level.guncycletimer = createservertimer("extrasmall", 1.2);
   level.guncycletimer.horzalign = "user_left";
   level.guncycletimer.vertalign = "user_top";
@@ -112,7 +112,7 @@ onstartgametype() {
   level.guncycletimer.y = 123;
   level.guncycletimer.alignx = "left";
   level.guncycletimer.aligny = "top";
-  level.guncycletimer.label = & "MP_SHRP_COUNTDOWN";
+  level.guncycletimer.label = &"MP_SHRP_COUNTDOWN";
   level.guncycletimer.alpha = 0;
   level.guncycletimer.hidewheninkillcam = 1;
   level.displayroundendtext = 0;
@@ -377,7 +377,7 @@ chooserandomguns() {
       level.sharpshootermultiplier = 2;
 
       for(i = 0; i < level.players.size; i++)
-        level.players[i] thread maps\mp\gametypes\_wager::queuewagerpopup(&"MP_SHRP_PENULTIMATE_RND", 0, & "MP_SHRP_PENULTIMATE_MULTIPLIER", "wm_bonus_rnd");
+        level.players[i] thread maps\mp\gametypes\_wager::queuewagerpopup(&"MP_SHRP_PENULTIMATE_RND", 0, &"MP_SHRP_PENULTIMATE_MULTIPLIER", "wm_bonus_rnd");
     } else if(issharpshooterround) {
       lastmultiplier = level.sharpshootermultiplier;
 
@@ -389,7 +389,7 @@ chooserandomguns() {
       level.guncycletimer.alpha = 0;
 
       for(i = 0; i < level.players.size; i++)
-        level.players[i] thread maps\mp\gametypes\_wager::queuewagerpopup(&"MP_SHRP_RND", 0, & "MP_SHRP_FINAL_MULTIPLIER", "wm_shrp_rnd");
+        level.players[i] thread maps\mp\gametypes\_wager::queuewagerpopup(&"MP_SHRP_RND", 0, &"MP_SHRP_FINAL_MULTIPLIER", "wm_shrp_rnd");
 
       break;
     } else

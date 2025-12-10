@@ -78,7 +78,7 @@ private _destructhandler(localclientnum, oldvalue, newvalue, bnewent, binitialsn
 
   entity = self;
   destructflags = oldvalue ^ newvalue;
-  shouldspawngibs = newvalue&1;
+  shouldspawngibs = newvalue& 1;
 
   if(bnewent) {
     destructflags = 0 ^ newvalue;
@@ -159,5 +159,5 @@ adddestructpiececallback(localclientnum, entity, piecenumber, callbackfunction) 
 }
 
 ispiecedestructed(localclientnum, entity, piecenumber) {
-  return _getdestructstate(localclientnum, entity)&1 << piecenumber;
+  return _getdestructstate(localclientnum, entity)& 1 << piecenumber;
 }

@@ -18,13 +18,13 @@
 #namespace zm_genesis_keeper;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_keeper", & __init__, undefined, undefined);
+  system::register("zm_genesis_keeper", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  ai::add_archetype_spawn_function("keeper", & function_6ded398b);
+  ai::add_archetype_spawn_function("keeper", &function_6ded398b);
   if(ai::shouldregisterclientfieldforarchetype("keeper")) {
-    clientfield::register("actor", "keeper_death", 15000, 2, "int", & function_6e8422e9, 0, 0);
+    clientfield::register("actor", "keeper_death", 15000, 2, "int", &function_6e8422e9, 0, 0);
   }
 }
 

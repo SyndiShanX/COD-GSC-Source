@@ -18,15 +18,15 @@
 #namespace zm_powerup_carpenter;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_carpenter", & __init__, undefined, undefined);
+  system::register("zm_powerup_carpenter", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  zm_powerups::register_powerup("carpenter", & grab_carpenter);
+  zm_powerups::register_powerup("carpenter", &grab_carpenter);
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("carpenter", "p7_zm_power_up_carpenter", & "ZOMBIE_POWERUP_MAX_AMMO", & func_should_drop_carpenter, 0, 0, 0);
+    zm_powerups::add_zombie_powerup("carpenter", "p7_zm_power_up_carpenter", &"ZOMBIE_POWERUP_MAX_AMMO", &func_should_drop_carpenter, 0, 0, 0);
   }
-  level.use_new_carpenter_func = & start_carpenter_new;
+  level.use_new_carpenter_func = &start_carpenter_new;
 }
 
 function grab_carpenter(player) {

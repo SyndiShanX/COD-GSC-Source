@@ -37,7 +37,7 @@ e3_objectives() {
   wait(2);
   level.ready_to_count_deaths = true;
   obj_struct = getstruct("obj_storm_stag", "targetname");
-  objective_add(4, "current", & "BER3_OBJ4", obj_struct.origin);
+  objective_add(4, "current", &"BER3_OBJ4", obj_struct.origin);
   getent("e3_trig_end_mission", "targetname") waittill("trigger");
   objective_state(4, "done");
   nextmission();

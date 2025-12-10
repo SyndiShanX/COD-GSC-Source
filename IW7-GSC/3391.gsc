@@ -394,46 +394,46 @@ func_7CF8(param_00, param_01) {
   switch (param_01) {
     case "foam_grenade_vm":
       if(param_00.power == "power_phaseShift") {
-        var_02 = & "CP_ZMB_INTERACTIONS_TICKET_PHASESHIFT";
+        var_02 = &"CP_ZMB_INTERACTIONS_TICKET_PHASESHIFT";
       } else if(param_00.power == "power_kineticPulse") {
-        var_02 = & "CP_ZMB_INTERACTIONS_TICKET_KINETICPULSE";
+        var_02 = &"CP_ZMB_INTERACTIONS_TICKET_KINETICPULSE";
       } else if(param_00.power == "power_rewind") {
-        var_02 = & "CP_ZMB_INTERACTIONS_TICKET_REWIND";
+        var_02 = &"CP_ZMB_INTERACTIONS_TICKET_REWIND";
       } else if(param_00.power == "power_transponder") {
-        var_02 = & "CP_ZMB_INTERACTIONS_TICKET_TRANSPONDER";
+        var_02 = &"CP_ZMB_INTERACTIONS_TICKET_TRANSPONDER";
       } else if(param_00.power == "power_tripMine") {
-        var_02 = & "CP_ZMB_INTERACTIONS_TICKET_TRIPMINE";
+        var_02 = &"CP_ZMB_INTERACTIONS_TICKET_TRIPMINE";
       } else if(param_00.power == "power_blackholeGrenade") {
-        var_02 = & "CP_ZMB_INTERACTIONS_TICKET_BHGRENADE";
+        var_02 = &"CP_ZMB_INTERACTIONS_TICKET_BHGRENADE";
       } else if(param_00.power == "power_repulsor") {
-        var_02 = & "CP_ZMB_INTERACTIONS_TICKET_REPULSOR";
+        var_02 = &"CP_ZMB_INTERACTIONS_TICKET_REPULSOR";
       }
       break;
 
     case "equipment_oxygen_tank_01":
       if(param_00.power == "power_armageddon") {
-        var_02 = & "CP_ZMB_INTERACTIONS_TICKET_ARMAGEDDON";
+        var_02 = &"CP_ZMB_INTERACTIONS_TICKET_ARMAGEDDON";
       } else if(param_00.power == "power_microTurret") {
-        var_02 = & "CP_ZMB_INTERACTIONS_TICKET_MICROTURRRET";
+        var_02 = &"CP_ZMB_INTERACTIONS_TICKET_MICROTURRRET";
       } else if(param_00.power == "power_portalGenerator") {
-        var_02 = & "CP_ZMB_INTERACTIONS_TICKET_PORTALGENERATOR";
+        var_02 = &"CP_ZMB_INTERACTIONS_TICKET_PORTALGENERATOR";
       } else if(param_00.power == "power_deployableCover") {
-        var_02 = & "CP_ZMB_INTERACTIONS_TICKET_DEPLOYABLECOVER";
+        var_02 = &"CP_ZMB_INTERACTIONS_TICKET_DEPLOYABLECOVER";
       } else if(param_00.power == "power_repulsor") {
-        var_02 = & "CP_ZMB_INTERACTIONS_TICKET_REPULSOR";
+        var_02 = &"CP_ZMB_INTERACTIONS_TICKET_REPULSOR";
       }
       break;
 
     case "food_trash_bag_paper_01":
-      var_02 = & "CP_ZMB_INTERACTIONS_BAG_O_BULLETS";
+      var_02 = &"CP_ZMB_INTERACTIONS_BAG_O_BULLETS";
       break;
 
     case "grenade_bag":
-      var_02 = & "CP_ZMB_INTERACTIONS_GRENADE_POUCH";
+      var_02 = &"CP_ZMB_INTERACTIONS_GRENADE_POUCH";
       break;
 
     case "attachment_zmb_arcane_muzzlebrake_wm":
-      var_02 = & "CP_ZMB_INTERACTIONS_BUY_ARCANE_CORE";
+      var_02 = &"CP_ZMB_INTERACTIONS_BUY_ARCANE_CORE";
       break;
 
     default:

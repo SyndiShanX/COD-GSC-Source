@@ -14,21 +14,21 @@
 #namespace electroball_grenade;
 
 function autoexec __init__sytem__() {
-  system::register("electroball_grenade", & __init__, undefined, undefined);
+  system::register("electroball_grenade", &__init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("toplayer", "tazered", 1, 1, "int", undefined, 0, 0);
-  clientfield::register("allplayers", "electroball_shock", 1, 1, "int", & function_1619af16, 0, 0);
-  clientfield::register("actor", "electroball_make_sparky", 1, 1, "int", & function_72eeb2e6, 0, 0);
-  clientfield::register("missile", "electroball_stop_trail", 1, 1, "int", & function_bd1f6a88, 0, 0);
-  clientfield::register("missile", "electroball_play_landed_fx", 1, 1, "int", & electroball_play_landed_fx, 0, 0);
+  clientfield::register("allplayers", "electroball_shock", 1, 1, "int", &function_1619af16, 0, 0);
+  clientfield::register("actor", "electroball_make_sparky", 1, 1, "int", &function_72eeb2e6, 0, 0);
+  clientfield::register("missile", "electroball_stop_trail", 1, 1, "int", &function_bd1f6a88, 0, 0);
+  clientfield::register("missile", "electroball_play_landed_fx", 1, 1, "int", &electroball_play_landed_fx, 0, 0);
   level._effect["fx_wpn_115_blob"] = "dlc1/castle/fx_wpn_115_blob";
   level._effect["fx_wpn_115_bul_trail"] = "dlc1/castle/fx_wpn_115_bul_trail";
   level._effect["fx_wpn_115_canister"] = "dlc1/castle/fx_wpn_115_canister";
   level._effect["electroball_grenade_player_shock"] = "weapon/fx_prox_grenade_impact_player_spwner";
   level._effect["electroball_grenade_sparky_conversion"] = "weapon/fx_prox_grenade_exp";
-  callback::add_weapon_type("electroball_grenade", & proximity_spawned);
+  callback::add_weapon_type("electroball_grenade", &proximity_spawned);
   level thread watchforproximityexplosion();
 }
 

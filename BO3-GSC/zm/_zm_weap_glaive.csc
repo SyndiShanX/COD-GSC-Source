@@ -13,16 +13,16 @@
 #namespace zm_weap_glaive;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_glaive", & __init__, undefined, undefined);
+  system::register("zm_weap_glaive", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("allplayers", "slam_fx", 1, 1, "counter", & do_slam_fx, 0, 0);
-  clientfield::register("toplayer", "throw_fx", 1, 1, "counter", & function_6b6e650c, 0, 0);
-  clientfield::register("toplayer", "swipe_fx", 1, 1, "counter", & do_swipe_fx, 0, 0);
-  clientfield::register("toplayer", "swipe_lv2_fx", 1, 1, "counter", & function_647dc27d, 0, 0);
-  clientfield::register("actor", "zombie_slice_r", 1, 2, "counter", & function_bbeb4c2c, 1, 0);
-  clientfield::register("actor", "zombie_slice_l", 1, 2, "counter", & function_38924d95, 1, 0);
+  clientfield::register("allplayers", "slam_fx", 1, 1, "counter", &do_slam_fx, 0, 0);
+  clientfield::register("toplayer", "throw_fx", 1, 1, "counter", &function_6b6e650c, 0, 0);
+  clientfield::register("toplayer", "swipe_fx", 1, 1, "counter", &do_swipe_fx, 0, 0);
+  clientfield::register("toplayer", "swipe_lv2_fx", 1, 1, "counter", &function_647dc27d, 0, 0);
+  clientfield::register("actor", "zombie_slice_r", 1, 2, "counter", &function_bbeb4c2c, 1, 0);
+  clientfield::register("actor", "zombie_slice_l", 1, 2, "counter", &function_38924d95, 1, 0);
   level._effect["sword_swipe_1p"] = "zombie/fx_sword_trail_1p_zod_zmb";
   level._effect["sword_swipe_lv2_1p"] = "zombie/fx_sword_trail_1p_lvl2_zod_zmb";
   level._effect["sword_bloodswipe_r_1p"] = "zombie/fx_sword_slash_right_1p_zod_zmb";

@@ -578,7 +578,7 @@ update_compass_until_shepherd_runs() {
 shepherd_stumbles() {
   thread compass_onscreen_updater();
   // Kill
-  Objective_SetPointerTextOverride(obj("get_shepherd"), & "SCRIPT_WAYPOINT_SHEPHERD");
+  Objective_SetPointerTextOverride(obj("get_shepherd"), &"SCRIPT_WAYPOINT_SHEPHERD");
   Objective_OnEntity(obj("get_shepherd"), self, (0, 0, 90));
   self.animname = "shepherd";
   self thread scale_player_if_close_to_shepherd();
@@ -2102,7 +2102,7 @@ button_wait(button_alt, button_track, button_index) {
 
     if(button_failure_time < GetTime()) {
       // Price was killed.
-      SetDvar("ui_deadquote", & "AF_CHASE_FAILED_TO_CRAWL");
+      SetDvar("ui_deadquote", &"AF_CHASE_FAILED_TO_CRAWL");
       missionFailedWrapper();
       level waittill("never");
     }
@@ -2324,7 +2324,7 @@ player_fails_if_he_doesnt_use_knife() {
   }
 
   // Price was killed.
-  SetDvar("ui_deadquote", & "AF_CHASE_FAILED_TO_PULL_KNIFE");
+  SetDvar("ui_deadquote", &"AF_CHASE_FAILED_TO_PULL_KNIFE");
   missionFailedWrapper();
 }
 

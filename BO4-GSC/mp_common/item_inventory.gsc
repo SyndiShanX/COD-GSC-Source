@@ -1819,7 +1819,7 @@ equip_backpack(item) {
   function_26c87da8(slotid, 13);
   self.inventory.var_7658cbec = item_inventory_util::function_d8cebda3(item.itementry);
 
-  if(self.inventory.var_7658cbec&1) {
+  if(self.inventory.var_7658cbec& 1) {
     self.inventory.var_c212de25 = 10;
   }
 

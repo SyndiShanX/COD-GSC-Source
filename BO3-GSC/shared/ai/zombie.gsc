@@ -32,76 +32,76 @@
 
 function autoexec init() {
   initzombiebehaviorsandasm();
-  spawner::add_archetype_spawn_function("zombie", & archetypezombieblackboardinit);
-  spawner::add_archetype_spawn_function("zombie", & archetypezombiedeathoverrideinit);
-  spawner::add_archetype_spawn_function("zombie", & archetypezombiespecialeffectsinit);
-  spawner::add_archetype_spawn_function("zombie", & zombie_utility::zombiespawnsetup);
+  spawner::add_archetype_spawn_function("zombie", &archetypezombieblackboardinit);
+  spawner::add_archetype_spawn_function("zombie", &archetypezombiedeathoverrideinit);
+  spawner::add_archetype_spawn_function("zombie", &archetypezombiespecialeffectsinit);
+  spawner::add_archetype_spawn_function("zombie", &zombie_utility::zombiespawnsetup);
   clientfield::register("actor", "zombie", 1, 1, "int");
   clientfield::register("actor", "zombie_special_day", 6001, 1, "counter");
   zombieinterface::registerzombieinterfaceattributes();
 }
 
 function private initzombiebehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreeaction("zombieMoveAction", & zombiemoveaction, & zombiemoveactionupdate, undefined);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieTargetService", & zombietargetservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieCrawlerCollisionService", & zombiecrawlercollision);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieTraversalService", & zombietraversalservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieIsAtAttackObject", & zombieisatattackobject);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldAttackObject", & zombieshouldattackobject);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldMelee", & zombieshouldmeleecondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldJumpMelee", & zombieshouldjumpmeleecondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldJumpUnderwaterMelee", & zombieshouldjumpunderwatermelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieGibLegsCondition", & zombiegiblegscondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldDisplayPain", & zombieshoulddisplaypain);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isZombieWalking", & iszombiewalking);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldMeleeSuicide", & zombieshouldmeleesuicide);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieMeleeSuicideStart", & zombiemeleesuicidestart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieMeleeSuicideUpdate", & zombiemeleesuicideupdate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieMeleeSuicideTerminate", & zombiemeleesuicideterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldJuke", & zombieshouldjukecondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieJukeActionStart", & zombiejukeactionstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieJukeActionTerminate", & zombiejukeactionterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieDeathAction", & zombiedeathaction);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieJukeService", & zombiejuke);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieStumbleService", & zombiestumble);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieStumbleCondition", & zombieshouldstumblecondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieStumbleActionStart", & zombiestumbleactionstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieAttackObjectStart", & zombieattackobjectstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieAttackObjectTerminate", & zombieattackobjectterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("wasKilledByInterdimensionalGun", & waskilledbyinterdimensionalguncondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("wasCrushedByInterdimensionalGunBlackhole", & wascrushedbyinterdimensionalgunblackholecondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieIDGunDeathUpdate", & zombieidgundeathupdate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieVortexPullUpdate", & zombieidgundeathupdate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieHasLegs", & zombiehaslegs);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldProceduralTraverse", & zombieshouldproceduraltraverse);
-  animationstatenetwork::registernotetrackhandlerfunction("zombie_melee", & zombienotetrackmeleefire);
-  animationstatenetwork::registernotetrackhandlerfunction("crushed", & zombienotetrackcrushfire);
-  animationstatenetwork::registeranimationmocomp("mocomp_death_idgun@zombie", & zombieidgundeathmocompstart, undefined, undefined);
-  animationstatenetwork::registeranimationmocomp("mocomp_vortex_pull@zombie", & zombieidgundeathmocompstart, undefined, undefined);
-  animationstatenetwork::registeranimationmocomp("mocomp_death_idgun_hole@zombie", & zombieidgunholedeathmocompstart, undefined, & zombieidgunholedeathmocompterminate);
-  animationstatenetwork::registeranimationmocomp("mocomp_turn@zombie", & zombieturnmocompstart, & zombieturnmocompupdate, & zombieturnmocompterminate);
-  animationstatenetwork::registeranimationmocomp("mocomp_melee_jump@zombie", & zombiemeleejumpmocompstart, & zombiemeleejumpmocompupdate, & zombiemeleejumpmocompterminate);
-  animationstatenetwork::registeranimationmocomp("mocomp_zombie_idle@zombie", & zombiezombieidlemocompstart, undefined, undefined);
-  animationstatenetwork::registeranimationmocomp("mocomp_attack_object@zombie", & zombieattackobjectmocompstart, & zombieattackobjectmocompupdate, undefined);
+  behaviortreenetworkutility::registerbehaviortreeaction("zombieMoveAction", &zombiemoveaction, &zombiemoveactionupdate, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieTargetService", &zombietargetservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieCrawlerCollisionService", &zombiecrawlercollision);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieTraversalService", &zombietraversalservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieIsAtAttackObject", &zombieisatattackobject);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldAttackObject", &zombieshouldattackobject);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldMelee", &zombieshouldmeleecondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldJumpMelee", &zombieshouldjumpmeleecondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldJumpUnderwaterMelee", &zombieshouldjumpunderwatermelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieGibLegsCondition", &zombiegiblegscondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldDisplayPain", &zombieshoulddisplaypain);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isZombieWalking", &iszombiewalking);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldMeleeSuicide", &zombieshouldmeleesuicide);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieMeleeSuicideStart", &zombiemeleesuicidestart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieMeleeSuicideUpdate", &zombiemeleesuicideupdate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieMeleeSuicideTerminate", &zombiemeleesuicideterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldJuke", &zombieshouldjukecondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieJukeActionStart", &zombiejukeactionstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieJukeActionTerminate", &zombiejukeactionterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieDeathAction", &zombiedeathaction);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieJukeService", &zombiejuke);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieStumbleService", &zombiestumble);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieStumbleCondition", &zombieshouldstumblecondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieStumbleActionStart", &zombiestumbleactionstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieAttackObjectStart", &zombieattackobjectstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieAttackObjectTerminate", &zombieattackobjectterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("wasKilledByInterdimensionalGun", &waskilledbyinterdimensionalguncondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("wasCrushedByInterdimensionalGunBlackhole", &wascrushedbyinterdimensionalgunblackholecondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieIDGunDeathUpdate", &zombieidgundeathupdate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieVortexPullUpdate", &zombieidgundeathupdate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieHasLegs", &zombiehaslegs);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldProceduralTraverse", &zombieshouldproceduraltraverse);
+  animationstatenetwork::registernotetrackhandlerfunction("zombie_melee", &zombienotetrackmeleefire);
+  animationstatenetwork::registernotetrackhandlerfunction("crushed", &zombienotetrackcrushfire);
+  animationstatenetwork::registeranimationmocomp("mocomp_death_idgun@zombie", &zombieidgundeathmocompstart, undefined, undefined);
+  animationstatenetwork::registeranimationmocomp("mocomp_vortex_pull@zombie", &zombieidgundeathmocompstart, undefined, undefined);
+  animationstatenetwork::registeranimationmocomp("mocomp_death_idgun_hole@zombie", &zombieidgunholedeathmocompstart, undefined, &zombieidgunholedeathmocompterminate);
+  animationstatenetwork::registeranimationmocomp("mocomp_turn@zombie", &zombieturnmocompstart, &zombieturnmocompupdate, &zombieturnmocompterminate);
+  animationstatenetwork::registeranimationmocomp("mocomp_melee_jump@zombie", &zombiemeleejumpmocompstart, &zombiemeleejumpmocompupdate, &zombiemeleejumpmocompterminate);
+  animationstatenetwork::registeranimationmocomp("mocomp_zombie_idle@zombie", &zombiezombieidlemocompstart, undefined, undefined);
+  animationstatenetwork::registeranimationmocomp("mocomp_attack_object@zombie", &zombieattackobjectmocompstart, &zombieattackobjectmocompupdate, undefined);
 }
 
 function archetypezombieblackboardinit() {
   blackboard::createblackboardforentity(self);
   self aiutility::registerutilityblackboardattributes();
   ai::createinterfaceforentity(self);
-  blackboard::registerblackboardattribute(self, "_arms_position", "arms_up", & bb_getarmsposition);
+  blackboard::registerblackboardattribute(self, "_arms_position", "arms_up", &bb_getarmsposition);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_speed", "locomotion_speed_walk", & bb_getlocomotionspeedtype);
+  blackboard::registerblackboardattribute(self, "_locomotion_speed", "locomotion_speed_walk", &bb_getlocomotionspeedtype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_has_legs", "has_legs_yes", & bb_gethaslegsstatus);
+  blackboard::registerblackboardattribute(self, "_has_legs", "has_legs_yes", &bb_gethaslegsstatus);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_variant_type", 0, & bb_getvarianttype);
+  blackboard::registerblackboardattribute(self, "_variant_type", 0, &bb_getvarianttype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -117,15 +117,15 @@ function archetypezombieblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_should_turn", "should_not_turn", & bb_getshouldturn);
+  blackboard::registerblackboardattribute(self, "_locomotion_should_turn", "should_not_turn", &bb_getshouldturn);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_idgun_damage_direction", "back", & bb_idgungetdamagedirection);
+  blackboard::registerblackboardattribute(self, "_idgun_damage_direction", "back", &bb_idgungetdamagedirection);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_low_gravity_variant", 0, & bb_getlowgravityvariant);
+  blackboard::registerblackboardattribute(self, "_low_gravity_variant", 0, &bb_getlowgravityvariant);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -145,7 +145,7 @@ function archetypezombieblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  self.___archetypeonanimscriptedcallback = & archetypezombieonanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = &archetypezombieonanimscriptedcallback;
   self finalizetrackedblackboardattributes();
 }
 
@@ -155,7 +155,7 @@ function private archetypezombieonanimscriptedcallback(entity) {
 }
 
 function archetypezombiespecialeffectsinit() {
-  aiutility::addaioverridedamagecallback(self, & archetypezombiespecialeffectscallback);
+  aiutility::addaioverridedamagecallback(self, &archetypezombiespecialeffectscallback);
 }
 
 function private archetypezombiespecialeffectscallback(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
@@ -1014,7 +1014,7 @@ function zombiemoveactionterminate(behaviortreeentity, asmstatename) {
 }
 
 function archetypezombiedeathoverrideinit() {
-  aiutility::addaioverridekilledcallback(self, & zombiegibkilledanhilateoverride);
+  aiutility::addaioverridekilledcallback(self, &zombiegibkilledanhilateoverride);
 }
 
 function private zombiegibkilledanhilateoverride(inflictor, attacker, damage, meansofdeath, weapon, dir, hitloc, offsettime) {

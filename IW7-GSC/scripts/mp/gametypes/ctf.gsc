@@ -117,17 +117,17 @@ onstartgametype() {
 
   setclientnamemode("auto_change");
   if(level.splitscreen) {
-    scripts\mp\utility::setobjectivescoretext(game["attackers"], & "OBJECTIVES_ONE_FLAG_ATTACKER");
-    scripts\mp\utility::setobjectivescoretext(game["defenders"], & "OBJECTIVES_ONE_FLAG_DEFENDER");
+    scripts\mp\utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_ONE_FLAG_ATTACKER");
+    scripts\mp\utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_ONE_FLAG_DEFENDER");
   } else {
-    scripts\mp\utility::setobjectivescoretext(game["attackers"], & "OBJECTIVES_ONE_FLAG_ATTACKER_SCORE");
-    scripts\mp\utility::setobjectivescoretext(game["defenders"], & "OBJECTIVES_ONE_FLAG_DEFENDER_SCORE");
+    scripts\mp\utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_ONE_FLAG_ATTACKER_SCORE");
+    scripts\mp\utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_ONE_FLAG_DEFENDER_SCORE");
   }
 
-  scripts\mp\utility::setobjectivetext(game["attackers"], & "OBJECTIVES_CTF");
-  scripts\mp\utility::setobjectivetext(game["defenders"], & "OBJECTIVES_CTF");
-  scripts\mp\utility::setobjectivehinttext(game["attackers"], & "OBJECTIVES_ONE_FLAG_ATTACKER_HINT");
-  scripts\mp\utility::setobjectivehinttext(game["defenders"], & "OBJECTIVES_ONE_FLAG_DEFENDER_HINT");
+  scripts\mp\utility::setobjectivetext(game["attackers"], &"OBJECTIVES_CTF");
+  scripts\mp\utility::setobjectivetext(game["defenders"], &"OBJECTIVES_CTF");
+  scripts\mp\utility::setobjectivehinttext(game["attackers"], &"OBJECTIVES_ONE_FLAG_ATTACKER_HINT");
+  scripts\mp\utility::setobjectivehinttext(game["defenders"], &"OBJECTIVES_ONE_FLAG_DEFENDER_HINT");
   flag_default_origins();
   var_05[0] = "ctf";
   scripts\mp\gameobjects::main(var_05);
@@ -500,8 +500,8 @@ createteamflag(param_00, param_01) {
   var_05[0] setasgametypeobjective();
   var_05[0] setteaminhuddatafromteamname(param_01);
   var_08 = scripts\mp\gameobjects::createcarryobject(param_00, var_03, var_05, (0, 0, 85));
-  var_08 scripts\mp\gameobjects::setteamusetext("enemy", & "MP_GRABBING_FLAG");
-  var_08 scripts\mp\gameobjects::setteamusetext("friendly", & "MP_RETURNING_FLAG");
+  var_08 scripts\mp\gameobjects::setteamusetext("enemy", &"MP_GRABBING_FLAG");
+  var_08 scripts\mp\gameobjects::setteamusetext("friendly", &"MP_RETURNING_FLAG");
   var_08 scripts\mp\gameobjects::allowcarry("enemy");
   var_08 scripts\mp\gameobjects::setteamusetime("enemy", level.pickuptime);
   var_08 scripts\mp\gameobjects::setteamusetime("friendly", level.returntime);
@@ -665,7 +665,7 @@ onpickup(param_00) {
     param_00 thread scripts\mp\utility::giveunifiedpoints("flag_return");
     thread returnflag();
     param_00 thread scripts\mp\matchdata::loggameevent("obj_return", param_00.origin);
-    scripts\mp\utility::printandsoundoneveryone(var_01, scripts\mp\utility::getotherteam(var_01), & "MP_FLAG_RETURNED", & "MP_ENEMY_FLAG_RETURNED", "mp_obj_returned", "mp_obj_returned", param_00);
+    scripts\mp\utility::printandsoundoneveryone(var_01, scripts\mp\utility::getotherteam(var_01), &"MP_FLAG_RETURNED", &"MP_ENEMY_FLAG_RETURNED", "mp_obj_returned", "mp_obj_returned", param_00);
     scripts\mp\utility::leaderdialog("enemy_flag_returned", var_02, "status");
     scripts\mp\utility::leaderdialog("flag_returned", var_01, "status");
     param_00 scripts\mp\utility::incperstat("returns", 1);
@@ -715,7 +715,7 @@ onpickup(param_00) {
   }
 
   level.capzones[var_02] scripts\mp\gameobjects::setvisibleteam("none");
-  scripts\mp\utility::printandsoundoneveryone(var_01, var_02, & "MP_ENEMY_FLAG_TAKEN_BY", & "MP_FLAG_TAKEN_BY", "mp_obj_taken", "mp_enemy_obj_taken", param_00);
+  scripts\mp\utility::printandsoundoneveryone(var_01, var_02, &"MP_ENEMY_FLAG_TAKEN_BY", &"MP_FLAG_TAKEN_BY", "mp_obj_taken", "mp_enemy_obj_taken", param_00);
   scripts\mp\utility::leaderdialog("enemy_flag_taken", var_01);
   scripts\mp\utility::leaderdialog("flag_getback", var_02);
   thread scripts\mp\utility::teamplayercardsplash("callout_flagpickup", param_00);
@@ -773,7 +773,7 @@ ondrop(param_00) {
       param_00 detachflag();
     }
 
-    scripts\mp\utility::printandsoundoneveryone(var_02, "none", & "MP_ENEMY_FLAG_DROPPED_BY", "", "mp_war_objective_lost", "", param_00);
+    scripts\mp\utility::printandsoundoneveryone(var_02, "none", &"MP_ENEMY_FLAG_DROPPED_BY", "", "mp_war_objective_lost", "", param_00);
     if(getdvarint("com_codcasterEnabled", 0) == 1) {
       param_00 setgametypevip(0);
     }
@@ -857,7 +857,7 @@ onuse(param_00) {
       param_00 scripts\mp\utility::setextrascore0(param_00.pers["captures"]);
     }
 
-    scripts\mp\utility::printandsoundoneveryone(var_01, var_02, & "MP_ENEMY_FLAG_CAPTURED_BY", & "MP_FRIENDLY_FLAG_CAPTURED_BY", "mp_obj_captured", "mp_enemy_obj_captured", param_00);
+    scripts\mp\utility::printandsoundoneveryone(var_01, var_02, &"MP_ENEMY_FLAG_CAPTURED_BY", &"MP_FRIENDLY_FLAG_CAPTURED_BY", "mp_obj_captured", "mp_enemy_obj_captured", param_00);
     if(isDefined(param_00.carryflag)) {
       param_00 detachflag();
     }
@@ -1218,8 +1218,8 @@ placeflag() {
       var_04[0] = spawn("script_model", var_02.origin);
       var_04[0] setModel(level.flagmodel[var_01]);
       var_05 = scripts\mp\gameobjects::createcarryobject(var_01, var_03, var_04, (0, 0, 85));
-      var_05 scripts\mp\gameobjects::setteamusetext("enemy", & "MP_GRABBING_FLAG");
-      var_05 scripts\mp\gameobjects::setteamusetext("friendly", & "MP_RETURNING_FLAG");
+      var_05 scripts\mp\gameobjects::setteamusetext("enemy", &"MP_GRABBING_FLAG");
+      var_05 scripts\mp\gameobjects::setteamusetext("friendly", &"MP_RETURNING_FLAG");
       var_05 scripts\mp\gameobjects::allowcarry("enemy");
       var_05 scripts\mp\gameobjects::setvisibleteam("none");
       var_05 scripts\mp\gameobjects::set2dicon("friendly", level.iconkill2d);

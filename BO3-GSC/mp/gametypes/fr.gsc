@@ -44,12 +44,12 @@ function main() {
   level.teamscoreperkill = getgametypesetting("teamScorePerKill");
   level.teamscoreperdeath = getgametypesetting("teamScorePerDeath");
   level.teamscoreperheadshot = getgametypesetting("teamScorePerHeadshot");
-  level.onstartgametype = & onstartgametype;
-  level.onspawnplayer = & onspawnplayer;
-  level.givecustomloadout = & givecustomloadout;
+  level.onstartgametype = &onstartgametype;
+  level.onspawnplayer = &onspawnplayer;
+  level.givecustomloadout = &givecustomloadout;
   level.postroundtime = 0.5;
   level.doendgamescoreboard = 0;
-  callback::on_connect( & on_player_connect);
+  callback::on_connect(&on_player_connect);
   gameobjects::register_allowed_gameobject("dm");
   gameobjects::register_allowed_gameobject(level.gametype);
   if(!isDefined(level.fr_target_impact_fx)) {
@@ -78,13 +78,13 @@ function main() {
 }
 
 function setupteam(team) {
-  util::setobjectivetext(team, & "OBJECTIVES_FR");
+  util::setobjectivetext(team, &"OBJECTIVES_FR");
   if(level.splitscreen) {
-    util::setobjectivescoretext(team, & "OBJECTIVES_FR");
+    util::setobjectivescoretext(team, &"OBJECTIVES_FR");
   } else {
-    util::setobjectivescoretext(team, & "OBJECTIVES_FR_SCORE");
+    util::setobjectivescoretext(team, &"OBJECTIVES_FR_SCORE");
   }
-  util::setobjectivehinttext(team, & "OBJECTIVES_FR_SCORE");
+  util::setobjectivehinttext(team, &"OBJECTIVES_FR_SCORE");
   spawnlogic::add_spawn_points(team, "mp_dm_spawn");
 }
 
@@ -354,7 +354,7 @@ function watchcheckpointtrigger() {
         player playsoundtoplayer("uin_freerun_checkpoint", player);
       }
     }
-    self thread util::trigger_thread(player, & oncheckpointtrigger, & leavecheckpointtrigger);
+    self thread util::trigger_thread(player, &oncheckpointtrigger, &leavecheckpointtrigger);
   }
 }
 
@@ -1002,25 +1002,25 @@ function show_tutorial_hint_with_full_movement(text, time) {
 }
 
 function register_tutorials() {
-  level.frgame.tutorialfunctions["tutorial_01"] = & tutorial_01;
-  level.frgame.tutorialfunctions["tutorial_02"] = & tutorial_02;
-  level.frgame.tutorialfunctions["tutorial_03"] = & tutorial_03;
-  level.frgame.tutorialfunctions["tutorial_06"] = & tutorial_06;
-  level.frgame.tutorialfunctions["tutorial_08"] = & tutorial_08;
-  level.frgame.tutorialfunctions["tutorial_09"] = & tutorial_09;
-  level.frgame.tutorialfunctions["tutorial_10"] = & tutorial_10;
-  level.frgame.tutorialfunctions["tutorial_10a"] = & tutorial_10a;
-  level.frgame.tutorialfunctions["tutorial_12"] = & tutorial_12;
-  level.frgame.tutorialfunctions["tutorial_12a"] = & tutorial_12a;
-  level.frgame.tutorialfunctions["tutorial_13"] = & tutorial_13;
-  level.frgame.tutorialfunctions["tutorial_14"] = & tutorial_14;
-  level.frgame.tutorialfunctions["tutorial_15"] = & tutorial_15;
-  level.frgame.tutorialfunctions["tutorial_16"] = & tutorial_16;
-  level.frgame.tutorialfunctions["tutorial_17"] = & tutorial_17;
-  level.frgame.tutorialfunctions["tutorial_17a"] = & tutorial_17a;
-  level.frgame.tutorialfunctions["tutorial_18"] = & tutorial_18;
-  level.frgame.tutorialfunctions["tutorial_19"] = & tutorial_19;
-  level.frgame.tutorialfunctions["tutorial_20"] = & tutorial_20;
+  level.frgame.tutorialfunctions["tutorial_01"] = &tutorial_01;
+  level.frgame.tutorialfunctions["tutorial_02"] = &tutorial_02;
+  level.frgame.tutorialfunctions["tutorial_03"] = &tutorial_03;
+  level.frgame.tutorialfunctions["tutorial_06"] = &tutorial_06;
+  level.frgame.tutorialfunctions["tutorial_08"] = &tutorial_08;
+  level.frgame.tutorialfunctions["tutorial_09"] = &tutorial_09;
+  level.frgame.tutorialfunctions["tutorial_10"] = &tutorial_10;
+  level.frgame.tutorialfunctions["tutorial_10a"] = &tutorial_10a;
+  level.frgame.tutorialfunctions["tutorial_12"] = &tutorial_12;
+  level.frgame.tutorialfunctions["tutorial_12a"] = &tutorial_12a;
+  level.frgame.tutorialfunctions["tutorial_13"] = &tutorial_13;
+  level.frgame.tutorialfunctions["tutorial_14"] = &tutorial_14;
+  level.frgame.tutorialfunctions["tutorial_15"] = &tutorial_15;
+  level.frgame.tutorialfunctions["tutorial_16"] = &tutorial_16;
+  level.frgame.tutorialfunctions["tutorial_17"] = &tutorial_17;
+  level.frgame.tutorialfunctions["tutorial_17a"] = &tutorial_17a;
+  level.frgame.tutorialfunctions["tutorial_18"] = &tutorial_18;
+  level.frgame.tutorialfunctions["tutorial_19"] = &tutorial_19;
+  level.frgame.tutorialfunctions["tutorial_20"] = &tutorial_20;
 }
 
 function tutorial_01() {
@@ -1047,7 +1047,7 @@ function tutorial_08() {
 }
 
 function tutorial_09() {
-  self play_tutorial_vo_with_hint("vox_tuto_tutorial_sequence_28", & "FREERUN_TUTORIAL_12");
+  self play_tutorial_vo_with_hint("vox_tuto_tutorial_sequence_28", &"FREERUN_TUTORIAL_12");
 }
 
 function tutorial_10() {
@@ -1067,7 +1067,7 @@ function tutorial_12a() {
 }
 
 function tutorial_13() {
-  self play_tutorial_vo_with_hint("vox_tuto_tutorial_sequence_17", & "FREERUN_TUTORIAL_14a");
+  self play_tutorial_vo_with_hint("vox_tuto_tutorial_sequence_17", &"FREERUN_TUTORIAL_14a");
   self play_tutorial_vo("vox_tuto_tutorial_sequence_18");
   self show_tutorial_hint_with_full_movement(&"FREERUN_TUTORIAL_16");
 }
@@ -1094,7 +1094,7 @@ function tutorial_17a() {
 }
 
 function tutorial_18() {
-  self play_tutorial_vo_with_hint("vox_tuto_tutorial_sequence_23", & "FREERUN_TUTORIAL_23");
+  self play_tutorial_vo_with_hint("vox_tuto_tutorial_sequence_23", &"FREERUN_TUTORIAL_23");
   self show_tutorial_hint_with_full_movement(&"FREERUN_TUTORIAL_22a");
 }
 

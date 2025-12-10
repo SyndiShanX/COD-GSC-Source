@@ -268,7 +268,7 @@ intro_display_introscreen() {
   level.player freezecontrols(1);
   take_away_offhands();
   thread maps\_utility::endondeath();
-  maps\_utility::intro_screen_create(&"CLOCKWORK_INTROSCREEN_LINE_1", & "CLOCKWORK_INTROSCREEN_LINE_2", & "CLOCKWORK_INTROSCREEN_LINE_5");
+  maps\_utility::intro_screen_create(&"CLOCKWORK_INTROSCREEN_LINE_1", &"CLOCKWORK_INTROSCREEN_LINE_2", &"CLOCKWORK_INTROSCREEN_LINE_5");
   level.introscreen_complete_delay = 2;
   wait 1;
   level.intro_black = thread maps\clockwork_code::introscreen_generic_black_fade_in_on_flag("start_watch_anim", 2.5);
@@ -1247,7 +1247,7 @@ kill_guy_at_end_of_anim() {
 obj_enterbase() {
   common_scripts\utility::flag_wait("FLAG_obj_enterbase");
   var_0 = maps\_utility::obj("enterbase");
-  objective_add(var_0, "active", & "CLOCKWORK_OBJ_INTO_BASE");
+  objective_add(var_0, "active", &"CLOCKWORK_OBJ_INTO_BASE");
   objective_current(var_0);
   common_scripts\utility::flag_wait("FLAG_obj_enterbase_complete");
   maps\_utility::objective_complete(var_0);
@@ -1257,7 +1257,7 @@ obj_bodydrag() {
   common_scripts\utility::flag_wait("FLAG_obj_bodydrag");
   var_0 = maps\_utility::obj("CleanupCheckpoint");
   var_1 = getent("obj_dragbody", "targetname");
-  objective_add(var_0, "active", & "CLOCKWORK_OBJ_CHECKPOINT");
+  objective_add(var_0, "active", &"CLOCKWORK_OBJ_CHECKPOINT");
   objective_current(var_0);
   objective_position(var_0, var_1.origin);
   common_scripts\utility::flag_wait("FLAG_obj_bodydrag_complete");
@@ -1281,7 +1281,7 @@ obj_getinjeep() {
 obj_stabdriver() {
   var_0 = maps\_utility::obj("stab");
   var_1 = getent("obj_stabdriver", "targetname");
-  objective_add(var_0, "current", & "CLOCKWORK_OBJ_DRIVER");
+  objective_add(var_0, "current", &"CLOCKWORK_OBJ_DRIVER");
   objective_current(var_0);
   thread complete_stabdriver(var_0);
   wait 1.75;
@@ -1755,7 +1755,7 @@ stab_enemy_hint() {
   level endon("ambush_player_kill");
   level endon("ambush_keegan_kill");
   level endon("ambush_player_timeout");
-  var_0 = & "CLOCKWORK_PROMPT_STAB";
+  var_0 = &"CLOCKWORK_PROMPT_STAB";
   thread stab_enemy_hint_cleanup();
 
   while(!common_scripts\utility::flag("ambush_scene_stab")) {
@@ -2211,7 +2211,7 @@ intro_drive() {
   common_scripts\utility::flag_wait("start_watchsync_vo");
   maps\_utility::stop_exploder(2000);
   thread allies_jeep_sync_anim();
-  thread blackout_timer(70, & "CLOCKWORK_POWERDOWN", 1, 0);
+  thread blackout_timer(70, &"CLOCKWORK_POWERDOWN", 1, 0);
   thread maps\clockwork_interior_nvg::init_tunnel();
   wait 4;
   level.jeep thread vehicle_play_guy_anim("clockwork_jeep_lookout", level.allies[2], 3, 1);
@@ -2578,7 +2578,7 @@ notify_ambush_destroy_player_off() {
 }
 
 mission_failed_intro() {
-  setdvar("ui_deadquote", & "CLOCKWORK_QUOTE_COMPROMISE");
+  setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_COMPROMISE");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -2724,7 +2724,7 @@ player_failcase_tunnel() {
 
     while(common_scripts\utility::flag("FLAG_player_failcase_tunnel")) {
       if(var_1 > var_0.size - 1) {
-        setdvar("ui_deadquote", & "CLOCKWORK_QUOTE_LEFT_TEAM");
+        setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_LEFT_TEAM");
         maps\_utility::missionfailedwrapper();
         break;
       }
@@ -2739,7 +2739,7 @@ player_failcase_tunnel() {
 player_failcase_tunnel_overrun() {
   level endon("player_in_jeep");
   common_scripts\utility::flag_wait("FLAG_player_failcase_tunnel_overrun");
-  setdvar("ui_deadquote", & "CLOCKWORK_QUOTE_LEFT_TEAM");
+  setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_LEFT_TEAM");
   maps\_utility::missionfailedwrapper();
 }
 

@@ -191,7 +191,7 @@ flying_intro() {
   var_5 rotateto((var_5.angles[0] - 89, var_5.angles[1], 0), 0.5, 0.3, 0.2);
 
   if(!var_3)
-    savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+    savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
 
   wait 0.5;
   common_scripts\utility::flag_set("pullup_weapon");
@@ -230,7 +230,7 @@ cargoship_intro() {
   cinematicingamesync("cargoship_fade");
   wait 0.4;
   level notify("intro_movie_done");
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   common_scripts\utility::flag_set("introscreen_remove_submix");
   introscreen_generic_white_fade_in(1.75);
   introscreen_feed_lines(level.introscreen_lines);
@@ -244,7 +244,7 @@ jeepride_intro() {
   level.player freezecontrols(1);
   cinematicingamesync("jeepride_fade");
   introscreen_feed_lines(level.introscreen_lines);
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   common_scripts\utility::flag_set("introscreen_complete");
   level.player freezecontrols(0);
 }
@@ -261,7 +261,7 @@ airlift_intro() {
   cinematicingamesync("airlift_fade");
   introscreen_feed_lines(level.introscreen_lines);
   wait 2;
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   level notify("introscreen_black");
   var_0 = newhudelem();
   var_0.x = 0;
@@ -318,7 +318,7 @@ village_defend_intro() {
   wait 8.8;
   introscreen_feed_lines(level.introscreen_lines);
   wait 10;
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   common_scripts\utility::flag_set("introscreen_remove_submix");
   var_0 fadeovertime(1.5);
   var_0.alpha = 0;
@@ -337,7 +337,7 @@ scoutsniper_intro() {
   cinematicingamesync("scoutsniper_fade");
   wait 4;
   maps\_utility::set_vision_set("grayscale");
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   var_0 = newhudelem();
   var_0.x = 0;
   var_0.y = 0;
@@ -399,7 +399,7 @@ ac130_intro() {
   level.player freezecontrols(1);
   introscreen_feed_lines(level.introscreen_lines);
   level notify("introscreen_black");
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   var_0 = newhudelem();
   var_0.x = 0;
   var_0.y = 0;
@@ -438,10 +438,10 @@ hunted_intro() {
   introscreen_feed_lines(level.introscreen_lines);
   cinematicingamesync("hunted_fade");
   wait 1;
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   common_scripts\utility::flag_set("introscreen_remove_submix");
   introscreen_generic_white_fade_in(2);
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   wait 1;
   level.player freezecontrols(0);
   common_scripts\utility::flag_set("introscreen_complete");
@@ -463,7 +463,7 @@ launchfacility_b_intro() {
   introscreen_feed_lines(level.introscreen_lines);
   introscreen_generic_white_fade_in(1);
   common_scripts\utility::flag_set("introscreen_remove_submix");
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   wait 1;
   level.player freezecontrols(0);
   common_scripts\utility::flag_set("introscreen_complete");
@@ -482,7 +482,7 @@ ambush_intro() {
   introscreen_feed_lines(level.introscreen_lines);
   cinematicingamesync("ambush_fade");
   wait 2;
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   introscreen_generic_white_fade_in(2);
   common_scripts\utility::flag_set("introscreen_remove_submix");
   thread maps\_utility::autosave_now(1);

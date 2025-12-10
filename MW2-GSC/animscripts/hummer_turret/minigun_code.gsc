@@ -26,7 +26,7 @@ minigun_cleanup_func(gunner, turret) {
   }
 }
 
-// controls spinning & firing the minigun, responding to commands from fireDirector()
+// controls spinning &firing the minigun, responding to commands from fireDirector()
 fireController_minigun(turret) {
   self endon("death");
   self endon("dismount");

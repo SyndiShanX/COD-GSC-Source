@@ -302,12 +302,12 @@ cortex_pickup_listener(var_0) {
       continue;
     }
     if(var_2 maps\mp\alien\_utility::is_holding_deployable()) {
-      var_2 maps\mp\_utility::setlowermessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+      var_2 maps\mp\_utility::setlowermessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
       continue;
     }
 
     if(var_2 getstance() == "prone" || var_2 getstance() == "crouch") {
-      var_2 maps\mp\_utility::setlowermessage("change_stance", & "ALIENS_PATCH_CHANGE_STANCE", 3);
+      var_2 maps\mp\_utility::setlowermessage("change_stance", &"ALIENS_PATCH_CHANGE_STANCE", 3);
       continue;
     }
 

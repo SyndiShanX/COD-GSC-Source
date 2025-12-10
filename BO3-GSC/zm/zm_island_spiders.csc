@@ -10,7 +10,7 @@
 #namespace zm_island_spiders;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_spiders", & __init__, & __main__, undefined);
+  system::register("zm_island_spiders", &__init__, &__main__, undefined);
 }
 
 function __init__() {}

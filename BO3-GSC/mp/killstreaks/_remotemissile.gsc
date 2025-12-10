@@ -24,10 +24,10 @@
 
 function init() {
   level.rockets = [];
-  killstreaks::register("remote_missile", "remote_missile", "killstreak_remote_missile", "remote_missle_used", & tryusepredatormissile, 1);
+  killstreaks::register("remote_missile", "remote_missile", "killstreak_remote_missile", "remote_missle_used", &tryusepredatormissile, 1);
   killstreaks::register_alt_weapon("remote_missile", "remote_missile_missile");
   killstreaks::register_alt_weapon("remote_missile", "remote_missile_bomblet");
-  killstreaks::register_strings("remote_missile", & "KILLSTREAK_EARNED_REMOTE_MISSILE", & "KILLSTREAK_REMOTE_MISSILE_NOT_AVAILABLE", & "KILLSTREAK_REMOTE_MISSILE_INBOUND", undefined, & "KILLSTREAK_REMOTE_MISSILE_HACKED");
+  killstreaks::register_strings("remote_missile", &"KILLSTREAK_EARNED_REMOTE_MISSILE", &"KILLSTREAK_REMOTE_MISSILE_NOT_AVAILABLE", &"KILLSTREAK_REMOTE_MISSILE_INBOUND", undefined, &"KILLSTREAK_REMOTE_MISSILE_HACKED");
   killstreaks::register_dialog("remote_missile", "mpl_killstreak_cruisemissile", "remoteMissileDialogBundle", "remoteMissilePilotDialogBundle", "friendlyRemoteMissile", "enemyRemoteMissile", "enemyRemoteMissileMultiple", "friendlyRemoteMissileHacked", "enemyRemoteMissileHacked", "requestRemoteMissile");
   killstreaks::set_team_kill_penalty_scale("remote_missile", level.teamkillreducedpenalty);
   killstreaks::override_entity_camera_in_demo("remote_missile", 1);
@@ -38,7 +38,7 @@ function init() {
   level.missileremotelaunchvert = 18000;
   level.missileremotelaunchhorz = 7000;
   level.missileremotelaunchtargetdist = 1500;
-  visionset_mgr::register_info("visionset", "remote_missile_visionset", 1, 110, 16, 1, & visionset_mgr::ramp_in_out_thread_per_player, 0);
+  visionset_mgr::register_info("visionset", "remote_missile_visionset", 1, 110, 16, 1, &visionset_mgr::ramp_in_out_thread_per_player, 0);
 }
 
 function remote_missile_game_end_think(rocket, team, killstreak_id) {
@@ -165,9 +165,9 @@ function _fire(lifeid, player, team, killstreak_id) {
   rocket.angles = vectortoangles(forceanglevector);
   rocket.targetname = "remote_missile";
   rocket killstreaks::configure_team("remote_missile", killstreak_id, self, undefined, undefined, undefined);
-  rocket killstreak_hacking::enable_hacking("remote_missile", undefined, & hackedpostfunction);
+  rocket killstreak_hacking::enable_hacking("remote_missile", undefined, &hackedpostfunction);
   killstreak_detect::killstreaktargetset(rocket);
-  rocket.hackedhealthupdatecallback = & hackedhealthupdate;
+  rocket.hackedhealthupdatecallback = &hackedhealthupdate;
   rocket clientfield::set("enemyvehicle", 1);
   rocket thread handledamage();
   player linktomissile(rocket, 1, 1);

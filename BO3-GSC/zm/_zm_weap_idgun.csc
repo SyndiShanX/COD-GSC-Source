@@ -15,7 +15,7 @@
 #namespace idgun;
 
 function autoexec __init__sytem__() {
-  system::register("idgun", & init, undefined, undefined);
+  system::register("idgun", &init, undefined, undefined);
 }
 
 function init() {
@@ -23,7 +23,7 @@ function init() {
   level.var_29323b70 = getweapon("robotech_launcher");
   level.var_672ab258 = getweapon("robotech_launcher_upgraded");
   construct_idgun_weapon_array();
-  callback::on_spawned( & function_50ee0a95);
+  callback::on_spawned(&function_50ee0a95);
 }
 
 function function_50ee0a95(localclientnum) {}

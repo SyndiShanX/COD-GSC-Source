@@ -181,7 +181,7 @@ function function_15a0c9b5(room) {
     if(!level flag::get("doa_game_is_over")) {
       level thread doa_utility::function_c5f3ece8(&"DOA_PLAYER_CHALLENGE_ROOM_FAILED");
       wait(1);
-      level thread doa_utility::function_37fb5c23((isDefined(room.title2) ? room.title2 : & "DOA_PLAYER_CHALLENGE_ROOM_FAILED2"));
+      level thread doa_utility::function_37fb5c23((isDefined(room.title2) ? room.title2 : &"DOA_PLAYER_CHALLENGE_ROOM_FAILED2"));
     }
     if(isDefined(room.var_1cd9eda)) {
       level[[room.var_1cd9eda]](room);
@@ -190,7 +190,7 @@ function function_15a0c9b5(room) {
     if(msg == "player_challenge_success") {
       level thread doa_utility::function_c5f3ece8(&"DOA_PLAYER_CHALLENGE_ROOM_SUCCESS");
       wait(1);
-      level thread doa_utility::function_37fb5c23((isDefined(room.title2) ? room.title2 : & "DOA_PLAYER_CHALLENGE_ROOM_SUCCESS2"));
+      level thread doa_utility::function_37fb5c23((isDefined(room.title2) ? room.title2 : &"DOA_PLAYER_CHALLENGE_ROOM_SUCCESS2"));
       if(isDefined(room.var_2530dc89)) {
         level[[room.var_2530dc89]](room);
       }
@@ -198,7 +198,7 @@ function function_15a0c9b5(room) {
       level notify(room.name + "_challenge_timeout");
       level thread doa_utility::function_c5f3ece8(&"DOA_PLAYER_CHALLENGE_ROOM_TIMEUP");
       wait(1);
-      level thread doa_utility::function_37fb5c23((isDefined(room.title2) ? room.title2 : & "DOA_PLAYER_CHALLENGE_ROOM_TIMEUP2"));
+      level thread doa_utility::function_37fb5c23((isDefined(room.title2) ? room.title2 : &"DOA_PLAYER_CHALLENGE_ROOM_TIMEUP2"));
     }
   }
   if(!level flag::get("doa_game_is_over")) {

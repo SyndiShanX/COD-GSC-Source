@@ -68,7 +68,7 @@ setupLevelKillstreak() {
 
   config = spawnStruct();
   config.crateWeight = 85;
-  config.crateHint = & "MP_PIRATE_CANNONS_USE";
+  config.crateHint = &"MP_PIRATE_CANNONS_USE";
   config.debugName = "Cannon Barrage";
   config.id = CONST_KILLSTREAK_CANNON;
   config.weaponName = "warhawk_mortar_mp";

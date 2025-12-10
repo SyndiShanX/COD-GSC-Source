@@ -207,14 +207,12 @@ JavelinUsageLoop() {
       if(timePassed < ADS_DELAY)
         continue;
 
-
       if(debugDraw && isDefined(self.javelinPoints)) {
         foreach(javPoint in self.javelinPoints)
         DrawStar(javPoint, (0.8, 1.0, 0.8));
         DrawStar(self.javelinPoints[self.javelinPoints.size - 1], (1, 1, 0.2));
         DrawStar(AveragePoint(self.javelinPoints), (0.2, 0.2, 1));
       }
-
 
         timePassed = GetTime() - lastGatherTime;
       if(timePassed < GATHER_DELAY)
@@ -273,10 +271,8 @@ JavelinUsageLoop() {
 
     if(self.javelinStage == 2) // LOCKING: complete lockon to point
     {
-
       if(debugDraw)
         DrawStar(self.javelinTargetPoint, (0.5, 1.0, 0.6));
-
 
         insideReticle = self WorldPointInReticle_Circle(self.javelinTargetPoint, 65, 45);
       if(!insideReticle) {
@@ -303,10 +299,8 @@ JavelinUsageLoop() {
 
     if(self.javelinStage == 3) // LOCKED: try and hold it
     {
-
       if(debugDraw)
         DrawStar(self.javelinTargetPoint, (0.1, 0.15, 1.0));
-
 
         insideReticle = self WorldPointInReticle_Circle(self.javelinTargetPoint, 65, 45);
       if(!insideReticle) {
@@ -373,7 +367,6 @@ GetTargetList() {
 }
 
 DebugSightLine(start, end, passed) {
-
   if(GetDVar("missileDebugDraw") != "1")
     return;
 
@@ -385,7 +378,6 @@ DebugSightLine(start, end, passed) {
   MY_OFFSET = (0, 0, 5);
 
   Line(start + MY_OFFSET, end, color);
-
 }
 
 VehicleLockSightTest(target) {

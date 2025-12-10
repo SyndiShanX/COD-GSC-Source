@@ -10,7 +10,7 @@
 #namespace zm_weap_staff_lightning;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_staff_lightning", & __init__, undefined, undefined);
+  system::register("zm_weap_staff_lightning", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -18,9 +18,9 @@ function __init__() {
   level._effect["lightning_arc"] = "dlc5/zmb_weapon/fx_staff_elec_trail_bolt_cheap";
   level._effect["lightning_impact"] = "dlc5/zmb_weapon/fx_staff_elec_impact_ug_hit_torso";
   level._effect["tesla_shock_eyes"] = "zombie/fx_tesla_shock_eyes_zmb";
-  clientfield::register("actor", "lightning_impact_fx", 21000, 1, "int", & function_41819534, 0, 0);
-  clientfield::register("scriptmover", "lightning_miss_fx", 21000, 1, "int", & function_6a2c832a, 0, 0);
-  clientfield::register("actor", "lightning_arc_fx", 21000, 1, "int", & function_fb3ed342, 0, 0);
+  clientfield::register("actor", "lightning_impact_fx", 21000, 1, "int", &function_41819534, 0, 0);
+  clientfield::register("scriptmover", "lightning_miss_fx", 21000, 1, "int", &function_6a2c832a, 0, 0);
+  clientfield::register("actor", "lightning_arc_fx", 21000, 1, "int", &function_fb3ed342, 0, 0);
   level.var_1d5f245c = [];
   zm_weap_staff::function_4be5e665(getweapon("staff_lightning_upgraded"), "dlc5/zmb_weapon/fx_staff_charge_elec_lv1");
 }

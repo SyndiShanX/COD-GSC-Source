@@ -17,25 +17,25 @@
 #namespace zm_tomb_giant_robot;
 
 function init() {
-  clientfield::register("scriptmover", "register_giant_robot", 21000, 1, "int", & register_giant_robot, 0, 0);
-  clientfield::register("world", "start_anim_robot_0", 21000, 1, "int", & function_7e19465b, 0, 0);
-  clientfield::register("world", "start_anim_robot_1", 21000, 1, "int", & function_7e19465b, 0, 0);
-  clientfield::register("world", "start_anim_robot_2", 21000, 1, "int", & function_7e19465b, 0, 0);
-  clientfield::register("world", "play_foot_stomp_fx_robot_0", 21000, 2, "int", & function_36b7480d, 0, 0);
-  clientfield::register("world", "play_foot_stomp_fx_robot_1", 21000, 2, "int", & function_36b7480d, 0, 0);
-  clientfield::register("world", "play_foot_stomp_fx_robot_2", 21000, 2, "int", & function_36b7480d, 0, 0);
-  clientfield::register("world", "play_foot_open_fx_robot_0", 21000, 2, "int", & function_6e99bd62, 0, 0);
-  clientfield::register("world", "play_foot_open_fx_robot_1", 21000, 2, "int", & function_6e99bd62, 0, 0);
-  clientfield::register("world", "play_foot_open_fx_robot_2", 21000, 2, "int", & function_6e99bd62, 0, 0);
-  clientfield::register("world", "eject_warning_fx_robot_0", 21000, 1, "int", & function_aa136ff9, 0, 0);
-  clientfield::register("world", "eject_warning_fx_robot_1", 21000, 1, "int", & function_aa136ff9, 0, 0);
-  clientfield::register("world", "eject_warning_fx_robot_2", 21000, 1, "int", & function_aa136ff9, 0, 0);
-  clientfield::register("scriptmover", "light_foot_fx_robot", 21000, 2, "int", & function_98a05ad2, 0, 0);
-  clientfield::register("allplayers", "eject_steam_fx", 21000, 1, "int", & function_d4c69cd, 0, 0);
-  clientfield::register("allplayers", "all_tubes_play_eject_steam_fx", 21000, 1, "int", & all_tubes_play_eject_steam_fx, 0, 0);
-  clientfield::register("allplayers", "gr_eject_player_impact_fx", 21000, 1, "int", & gr_eject_player_impact_fx, 0, 0);
-  clientfield::register("toplayer", "giant_robot_rumble_and_shake", 21000, 2, "int", & giant_robot_rumble_and_shake, 0, 0);
-  clientfield::register("world", "church_ceiling_fxanim", 21000, 1, "int", & church_ceiling_fxanim, 0, 0);
+  clientfield::register("scriptmover", "register_giant_robot", 21000, 1, "int", &register_giant_robot, 0, 0);
+  clientfield::register("world", "start_anim_robot_0", 21000, 1, "int", &function_7e19465b, 0, 0);
+  clientfield::register("world", "start_anim_robot_1", 21000, 1, "int", &function_7e19465b, 0, 0);
+  clientfield::register("world", "start_anim_robot_2", 21000, 1, "int", &function_7e19465b, 0, 0);
+  clientfield::register("world", "play_foot_stomp_fx_robot_0", 21000, 2, "int", &function_36b7480d, 0, 0);
+  clientfield::register("world", "play_foot_stomp_fx_robot_1", 21000, 2, "int", &function_36b7480d, 0, 0);
+  clientfield::register("world", "play_foot_stomp_fx_robot_2", 21000, 2, "int", &function_36b7480d, 0, 0);
+  clientfield::register("world", "play_foot_open_fx_robot_0", 21000, 2, "int", &function_6e99bd62, 0, 0);
+  clientfield::register("world", "play_foot_open_fx_robot_1", 21000, 2, "int", &function_6e99bd62, 0, 0);
+  clientfield::register("world", "play_foot_open_fx_robot_2", 21000, 2, "int", &function_6e99bd62, 0, 0);
+  clientfield::register("world", "eject_warning_fx_robot_0", 21000, 1, "int", &function_aa136ff9, 0, 0);
+  clientfield::register("world", "eject_warning_fx_robot_1", 21000, 1, "int", &function_aa136ff9, 0, 0);
+  clientfield::register("world", "eject_warning_fx_robot_2", 21000, 1, "int", &function_aa136ff9, 0, 0);
+  clientfield::register("scriptmover", "light_foot_fx_robot", 21000, 2, "int", &function_98a05ad2, 0, 0);
+  clientfield::register("allplayers", "eject_steam_fx", 21000, 1, "int", &function_d4c69cd, 0, 0);
+  clientfield::register("allplayers", "all_tubes_play_eject_steam_fx", 21000, 1, "int", &all_tubes_play_eject_steam_fx, 0, 0);
+  clientfield::register("allplayers", "gr_eject_player_impact_fx", 21000, 1, "int", &gr_eject_player_impact_fx, 0, 0);
+  clientfield::register("toplayer", "giant_robot_rumble_and_shake", 21000, 2, "int", &giant_robot_rumble_and_shake, 0, 0);
+  clientfield::register("world", "church_ceiling_fxanim", 21000, 1, "int", &church_ceiling_fxanim, 0, 0);
 }
 
 function register_giant_robot(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

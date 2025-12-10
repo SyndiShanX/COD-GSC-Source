@@ -392,7 +392,7 @@ level_end_save() {
 
   common_scripts\utility::flag_set("game_saving");
   var_2 = "levelshots / autosave / autosave_" + level.script + "end";
-  savegame("levelend", & "AUTOSAVE_AUTOSAVE", var_2, 1);
+  savegame("levelend", &"AUTOSAVE_AUTOSAVE", var_2, 1);
   common_scripts\utility::flag_clear("game_saving");
 }
 

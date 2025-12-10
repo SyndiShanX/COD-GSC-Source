@@ -19,7 +19,7 @@
 #namespace resurrect;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_resurrect", & __init__, undefined, undefined);
+  system::register("gadget_resurrect", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -27,23 +27,23 @@ function __init__() {
   clientfield::register("toplayer", "resurrect_state", 1, 2, "int");
   clientfield::register("clientuimodel", "hudItems.rejack.activationWindowEntered", 1, 1, "int");
   clientfield::register("clientuimodel", "hudItems.rejack.rejackActivated", 1, 1, "int");
-  ability_player::register_gadget_activation_callbacks(40, & gadget_resurrect_on, & gadget_resurrect_off);
-  ability_player::register_gadget_possession_callbacks(40, & gadget_resurrect_on_give, & gadget_resurrect_on_take);
-  ability_player::register_gadget_flicker_callbacks(40, & gadget_resurrect_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(40, & gadget_resurrect_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(40, & gadget_resurrect_is_flickering);
-  ability_player::register_gadget_primed_callbacks(40, & gadget_resurrect_is_primed);
-  ability_player::register_gadget_ready_callbacks(40, & gadget_resurrect_is_ready);
-  callback::on_connect( & gadget_resurrect_on_connect);
-  callback::on_spawned( & gadget_resurrect_on_spawned);
+  ability_player::register_gadget_activation_callbacks(40, &gadget_resurrect_on, &gadget_resurrect_off);
+  ability_player::register_gadget_possession_callbacks(40, &gadget_resurrect_on_give, &gadget_resurrect_on_take);
+  ability_player::register_gadget_flicker_callbacks(40, &gadget_resurrect_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(40, &gadget_resurrect_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(40, &gadget_resurrect_is_flickering);
+  ability_player::register_gadget_primed_callbacks(40, &gadget_resurrect_is_primed);
+  ability_player::register_gadget_ready_callbacks(40, &gadget_resurrect_is_ready);
+  callback::on_connect(&gadget_resurrect_on_connect);
+  callback::on_spawned(&gadget_resurrect_on_spawned);
   if(!isDefined(level.vsmgr_prio_visionset_resurrect)) {
     level.vsmgr_prio_visionset_resurrect = 62;
   }
   if(!isDefined(level.vsmgr_prio_visionset_resurrect_up)) {
     level.vsmgr_prio_visionset_resurrect_up = 63;
   }
-  visionset_mgr::register_info("visionset", "resurrect", 1, level.vsmgr_prio_visionset_resurrect, 16, 1, & visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
-  visionset_mgr::register_info("visionset", "resurrect_up", 1, level.vsmgr_prio_visionset_resurrect_up, 16, 1, & visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
+  visionset_mgr::register_info("visionset", "resurrect", 1, level.vsmgr_prio_visionset_resurrect, 16, 1, &visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
+  visionset_mgr::register_info("visionset", "resurrect_up", 1, level.vsmgr_prio_visionset_resurrect_up, 16, 1, &visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
 }
 
 function gadget_resurrect_is_inuse(slot) {

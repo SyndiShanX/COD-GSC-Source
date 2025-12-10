@@ -32,23 +32,23 @@
 #namespace zm_weap_dragon_gauntlet;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_dragon_gauntlet", & __init__, undefined, undefined);
+  system::register("zm_weap_dragon_gauntlet", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.weapon_dragon_gauntlet = getweapon("dragon_gauntlet_flamethrower");
   level.var_ae0fff53 = getweapon("dragon_gauntlet");
-  zm_hero_weapon::register_hero_recharge_event(level.weapon_dragon_gauntlet, & function_fa885ef2);
-  zm_hero_weapon::register_hero_recharge_event(level.var_ae0fff53, & function_fa885ef2);
-  callback::on_connect( & function_44774881);
-  callback::on_player_killed( & function_421902c5);
+  zm_hero_weapon::register_hero_recharge_event(level.weapon_dragon_gauntlet, &function_fa885ef2);
+  zm_hero_weapon::register_hero_recharge_event(level.var_ae0fff53, &function_fa885ef2);
+  callback::on_connect(&function_44774881);
+  callback::on_player_killed(&function_421902c5);
   zm_hero_weapon::register_hero_weapon("dragon_gauntlet_flamethrower");
-  zm_hero_weapon::register_hero_weapon_wield_unwield_callbacks("dragon_gauntlet_flamethrower", & function_712b36f9, & function_b90c6ba);
-  zm_hero_weapon::register_hero_weapon_power_callbacks("dragon_gauntlet_flamethrower", & function_cd7dbd9d, & function_2f36d185);
+  zm_hero_weapon::register_hero_weapon_wield_unwield_callbacks("dragon_gauntlet_flamethrower", &function_712b36f9, &function_b90c6ba);
+  zm_hero_weapon::register_hero_weapon_power_callbacks("dragon_gauntlet_flamethrower", &function_cd7dbd9d, &function_2f36d185);
   zm_hero_weapon::register_hero_weapon("dragon_gauntlet");
-  zm_hero_weapon::register_hero_weapon_wield_unwield_callbacks("dragon_gauntlet", & function_f79afde0, & function_d638417f);
-  zm_hero_weapon::register_hero_weapon_power_callbacks("dragon_gauntlet", & function_cd7dbd9d, & function_2f36d185);
-  zm::register_actor_damage_callback( & function_cb315e40);
+  zm_hero_weapon::register_hero_weapon_wield_unwield_callbacks("dragon_gauntlet", &function_f79afde0, &function_d638417f);
+  zm_hero_weapon::register_hero_weapon_power_callbacks("dragon_gauntlet", &function_cd7dbd9d, &function_2f36d185);
+  zm::register_actor_damage_callback(&function_cb315e40);
   level.var_af9cd4ca = new throttle();
   [[level.var_af9cd4ca]] - > initialize(6, 0.05);
   level thread function_a23fb854();
@@ -586,14 +586,14 @@ function function_cb315e40(inflictor, attacker, damage, flags, meansofdeath, wea
       }
       if(meansofdeath === "MOD_MELEE" && (!(isDefined(self.var_96906507) && self.var_96906507))) {
         damage = self.health + 6000;
-        self.deathfunction = & function_cb6fb97;
+        self.deathfunction = &function_cb6fb97;
         return damage;
       }
     }
     if(isDefined(weapon) && weapon === level.var_ae0fff53) {
       if(meansofdeath === "MOD_MELEE" && (!(isDefined(self.var_96906507) && self.var_96906507))) {
         damage = self.health + 6000;
-        self.deathfunction = & function_d775fe77;
+        self.deathfunction = &function_d775fe77;
         return damage;
       }
     }

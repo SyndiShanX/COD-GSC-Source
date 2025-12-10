@@ -17,18 +17,18 @@
 #namespace armor;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_armor", & __init__, undefined, undefined);
+  system::register("gadget_armor", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(4, & gadget_armor_on, & gadget_armor_off);
-  ability_player::register_gadget_possession_callbacks(4, & gadget_armor_on_give, & gadget_armor_on_take);
-  ability_player::register_gadget_flicker_callbacks(4, & gadget_armor_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(4, & gadget_armor_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(4, & gadget_armor_is_flickering);
+  ability_player::register_gadget_activation_callbacks(4, &gadget_armor_on, &gadget_armor_off);
+  ability_player::register_gadget_possession_callbacks(4, &gadget_armor_on_give, &gadget_armor_on_take);
+  ability_player::register_gadget_flicker_callbacks(4, &gadget_armor_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(4, &gadget_armor_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(4, &gadget_armor_is_flickering);
   clientfield::register("allplayers", "armor_status", 1, 5, "int");
   clientfield::register("toplayer", "player_damage_type", 1, 1, "int");
-  callback::on_connect( & gadget_armor_on_connect);
+  callback::on_connect(&gadget_armor_on_connect);
 }
 
 function gadget_armor_is_inuse(slot) {
@@ -63,7 +63,7 @@ function gadget_armor_on(slot, weapon) {
     if(isDefined(self.overrideplayerdamage)) {
       self.originaloverrideplayerdamage = self.overrideplayerdamage;
     }
-    self.overrideplayerdamage = & armor_player_damage;
+    self.overrideplayerdamage = &armor_player_damage;
     self thread gadget_armor_status(slot, weapon);
   }
 }

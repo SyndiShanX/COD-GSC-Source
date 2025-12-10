@@ -61,9 +61,9 @@ function skipto_descent_done(str_objective, b_starting, b_direct, player) {
 
 function skipto_pallas_start_init(str_objective, b_starting) {
   objectives::complete("cp_level_sgen_goto_server_room");
-  spawner::add_spawn_function_group("pallas_bot", "script_noteworthy", & robot_mindcontrol);
-  spawner::add_spawn_function_group("pallas_core_guard", "script_noteworthy", & robot_mindcontrol_core_guard);
-  spawner::add_spawn_function_group("pallas_center_guard", "script_noteworthy", & robot_mindcontrol_center_guard);
+  spawner::add_spawn_function_group("pallas_bot", "script_noteworthy", &robot_mindcontrol);
+  spawner::add_spawn_function_group("pallas_core_guard", "script_noteworthy", &robot_mindcontrol_core_guard);
+  spawner::add_spawn_function_group("pallas_center_guard", "script_noteworthy", &robot_mindcontrol_center_guard);
   level flag::set("pallas_start");
   level.var_e16e585d = 0;
   level.n_core_guard_count = 0;
@@ -84,7 +84,7 @@ function skipto_pallas_start_init(str_objective, b_starting) {
     e_lift movez(-1750, 0.1);
     load::function_a2995f22();
     level thread handle_pallas_animation();
-    array::thread_all(level.players, & clientfield::set_to_player, "pallas_monitors_state", 2);
+    array::thread_all(level.players, &clientfield::set_to_player, "pallas_monitors_state", 2);
   }
   level thread function_8470b8c(b_starting);
   level thread pallas_greeting_event(b_starting);
@@ -116,7 +116,7 @@ function skipto_pallas_end_init(str_objective, b_starting) {
   if(b_starting) {
     sgen::init_hendricks(str_objective);
     e_pallas_spawner = getent("pallas", "targetname");
-    e_pallas_spawner spawner::add_spawn_function( & pallas_init);
+    e_pallas_spawner spawner::add_spawn_function(&pallas_init);
     spawner::simple_spawn(e_pallas_spawner);
     objectives::complete("cp_level_sgen_enter_sgen_no_pointer");
     objectives::complete("cp_level_sgen_investigate_sgen");
@@ -135,16 +135,16 @@ function skipto_pallas_end_init(str_objective, b_starting) {
     util::screen_fade_out(0.25, "black", "ghost_fade");
     level util::player_lock_control();
   }
-  array::thread_all(level.players, & clientfield::set_to_player, "pallas_monitors_state", 3);
+  array::thread_all(level.players, &clientfield::set_to_player, "pallas_monitors_state", 3);
   if(isDefined(level.bzm_forceaicleanup)) {
     [[level.bzm_forceaicleanup]]();
   }
   level thread all_hoses_break();
-  level scene::add_scene_func("cin_sgen_19_ghost_3rd_sh010", & function_48b24f3d, "play");
-  level scene::add_scene_func("cin_sgen_19_ghost_3rd_sh040", & function_ac1384da, "play");
-  level scene::add_scene_func("cin_sgen_19_ghost_3rd_sh110", & ghost_3rd_sh110, "play");
-  level scene::add_scene_func("cin_sgen_19_ghost_3rd_sh050", & function_7d1791ba, "done");
-  level scene::add_scene_func("cin_sgen_19_ghost_3rd_sh190", & pallas_end_igc_complete, "done");
+  level scene::add_scene_func("cin_sgen_19_ghost_3rd_sh010", &function_48b24f3d, "play");
+  level scene::add_scene_func("cin_sgen_19_ghost_3rd_sh040", &function_ac1384da, "play");
+  level scene::add_scene_func("cin_sgen_19_ghost_3rd_sh110", &ghost_3rd_sh110, "play");
+  level scene::add_scene_func("cin_sgen_19_ghost_3rd_sh050", &function_7d1791ba, "done");
+  level scene::add_scene_func("cin_sgen_19_ghost_3rd_sh190", &pallas_end_igc_complete, "done");
   level thread scene::play("p7_fxanim_cp_sgen_pallas_ai_tower_collapse_bundle");
   level thread delete_geo_tower();
   level clientfield::set("set_exposure_bank", 1);
@@ -199,9 +199,9 @@ function ghost_3rd_sh110(a_ents) {
 function delete_geo_tower() {
   wait(0.05);
   a_e_core = getEntArray("pallas_core_destruct", "targetname");
-  array::run_all(a_e_core, & delete);
+  array::run_all(a_e_core, &delete);
   a_e_rail = getEntArray("pallas_rail_destruct", "targetname");
-  array::run_all(a_e_rail, & delete);
+  array::run_all(a_e_rail, &delete);
 }
 
 function skipto_pallas_end_done(str_objective, b_starting, b_direct, player) {
@@ -238,16 +238,16 @@ function link_elevator_light_probe() {
   a_probes = getEntArray("pallas_elevator_probe", "targetname");
   a_lights = getEntArray("pallas_elevator_light", "script_noteworthy");
   e_lift = getent("boss_fight_lift", "targetname");
-  array::run_all(a_lights, & linkto, e_lift);
-  array::run_all(a_probes, & linkto, e_lift);
+  array::run_all(a_lights, &linkto, e_lift);
+  array::run_all(a_probes, &linkto, e_lift);
 }
 
 function handle_pallas_animation() {
-  scene::add_scene_func("cin_sgen_18_01_pallasfight_vign_crucifix_pallas_loop", & scene_callback_pallas_loop, "play");
+  scene::add_scene_func("cin_sgen_18_01_pallasfight_vign_crucifix_pallas_loop", &scene_callback_pallas_loop, "play");
   e_pallas_spawner = getent("pallas", "targetname");
   e_pallas_spawner2 = getent("pallas2", "targetname");
-  e_pallas_spawner spawner::add_spawn_function( & pallas_init);
-  e_pallas_spawner2 spawner::add_spawn_function( & pallas_init, 1);
+  e_pallas_spawner spawner::add_spawn_function(&pallas_init);
+  e_pallas_spawner2 spawner::add_spawn_function(&pallas_init, 1);
   level thread scene::play("cin_sgen_18_01_pallasfight_vign_crucifix_pallas_loop");
   videostart("cp_sgen_env_diazserver", 1);
   level waittill("pallas_attacked");
@@ -436,7 +436,7 @@ function elevator_setup() {
   e_lift.a_e_doors["front"].str_state = "close";
   e_lift.a_e_doors["back"] = getent("pallas_lift_back", "targetname");
   e_lift.a_e_doors["back"].str_state = "close";
-  array::run_all(e_lift.a_e_doors, & linkto, e_lift);
+  array::run_all(e_lift.a_e_doors, &linkto, e_lift);
   e_lift.a_e_doors["front"] clientfield::set("sm_elevator_door_state", 1);
   e_lift.a_e_doors["back"] clientfield::set("sm_elevator_door_state", 2);
 }
@@ -481,7 +481,7 @@ function elevator_set_shaft_state(str_state) {
 }
 
 function elevator_set_move_direction(str_direction) {
-  array::run_all(level.players, & util::set_low_ready, 1);
+  array::run_all(level.players, &util::set_low_ready, 1);
   e_lift = getent("boss_fight_lift", "targetname");
   e_lift.str_direction = str_direction;
   e_decon_fx_origin = getent("decon_fx_origin", "targetname");
@@ -501,7 +501,7 @@ function elevator_set_move_direction(str_direction) {
   loop_snd_ent stoploopsound(0.5);
   e_lift playSound("veh_lift_stop");
   loop_snd_ent delete();
-  array::run_all(level.players, & util::set_low_ready, 0);
+  array::run_all(level.players, &util::set_low_ready, 0);
 }
 
 function elevator_set_opaque(n_state) {
@@ -515,8 +515,8 @@ function elevator_lift_intro() {
   t_lift = getent("pallas_lift_trigger", "targetname");
   t_lift sgen_util::gather_point_wait();
   level thread link_elevator_light_probe();
-  array::thread_all(getEntArray("head_track_model", "targetname"), & util::delay_notify, 0.05, "stop_head_track_player");
-  array::run_all(getEntArray("pallas_lift_front_clip", "targetname"), & movez, 112, 0.05);
+  array::thread_all(getEntArray("head_track_model", "targetname"), &util::delay_notify, 0.05, "stop_head_track_player");
+  array::run_all(getEntArray("pallas_lift_front_clip", "targetname"), &movez, 112, 0.05);
   elevator_set_door_state("front", "close");
   elevator_set_opaque(3);
   level thread namespace_d40478f6::function_874f01d();
@@ -530,8 +530,8 @@ function elevator_lift_intro() {
   }
   level clientfield::set("w_underwater_state", 0);
   objectives::complete("cp_level_sgen_goto_server_room_indicator", struct::get("pallas_elevator_descent_objective"));
-  util::delay(3, undefined, & skipto::objective_completed, "descent");
-  array::thread_all(level.players, & clientfield::set_to_player, "pallas_monitors_state", 2);
+  util::delay(3, undefined, &skipto::objective_completed, "descent");
+  array::thread_all(level.players, &clientfield::set_to_player, "pallas_monitors_state", 2);
   elevator_set_move_direction("down");
   elevator_set_door_state("back", "open");
   level notify("enter_server");
@@ -573,7 +573,7 @@ function pallas_greeting_event(b_starting) {
   savegame::checkpoint_save();
   level thread function_87d6b629();
   level dialog::player_say("plyr_diaz_you_have_to_s_0", 1);
-  array::thread_all(level.players, & clientfield::set_to_player, "pallas_monitors_state", 1);
+  array::thread_all(level.players, &clientfield::set_to_player, "pallas_monitors_state", 1);
   level.ai_pallas dialog::say("diaz_i_am_willing_to_d_0");
   level thread namespace_d40478f6::function_ad14681b();
   level flag::set("pallas_ambush_over");
@@ -638,14 +638,14 @@ function handle_pallas_pillar_weakspot() {
     t_coolant = a_t_coolant[0];
     level thread activate_flood_spawn();
     level waittill("pillar_destroyed");
-    array::thread_all(level.players, & clientfield::set_to_player, "pallas_monitors_state", 2);
+    array::thread_all(level.players, &clientfield::set_to_player, "pallas_monitors_state", 2);
     objectives::complete("cp_level_sgen_destroy_tower");
     level.var_e16e585d++;
     e_pallas_pillar playSound("evt_pillar_dest");
     playsoundatposition("evt_diaz_alarm", e_pallas_pillar.origin);
     level thread function_47bd64a2();
     wait(5);
-    array::thread_all(level.players, & clientfield::set_to_player, "pallas_monitors_state", 0);
+    array::thread_all(level.players, &clientfield::set_to_player, "pallas_monitors_state", 0);
     level thread core_nag();
     t_coolant triggerenable(1);
     s_temp = spawnStruct();
@@ -694,13 +694,13 @@ function handle_pallas_pillar_weakspot() {
         break;
       }
       case 3: {
-        level scene::add_scene_func("p7_fxanim_cp_sgen_pallas_ai_tower_collapse_bundle", & function_c5372adb, "play");
-        level scene::add_scene_func("p7_fxanim_cp_sgen_pallas_ai_tower_collapse_bundle", & function_6610aebe, "init");
+        level scene::add_scene_func("p7_fxanim_cp_sgen_pallas_ai_tower_collapse_bundle", &function_c5372adb, "play");
+        level scene::add_scene_func("p7_fxanim_cp_sgen_pallas_ai_tower_collapse_bundle", &function_6610aebe, "init");
         level thread scene::play(str_anim_base + "_a", e_player);
         level thread scene::init("p7_fxanim_cp_sgen_pallas_ai_tower_collapse_bundle");
         level waittill(str_anim_base + "_a_done");
         level flag::set("pallas_death");
-        array::thread_all(level.players, & clientfield::set_to_player, "pallas_monitors_state", 3);
+        array::thread_all(level.players, &clientfield::set_to_player, "pallas_monitors_state", 3);
         e_player disableinvulnerability();
         level thread skipto::objective_completed("pallas_start");
         break;
@@ -755,7 +755,7 @@ function handle_pallas_pillar_weakspot() {
       }
     }
     savegame::checkpoint_save();
-    array::thread_all(level.players, & clientfield::set_to_player, "pallas_monitors_state", 1);
+    array::thread_all(level.players, &clientfield::set_to_player, "pallas_monitors_state", 1);
     wait(2);
     switch (level.var_e16e585d) {
       case 1: {
@@ -1183,7 +1183,7 @@ function all_hoses_break() {
 
 function hide_cracked_glass() {
   a_e_glass = getEntArray("pallas_glass_break_whole", "script_noteworthy");
-  array::run_all(a_e_glass, & hide);
+  array::run_all(a_e_glass, &hide);
 }
 
 function show_cracked_glass(n_crack) {

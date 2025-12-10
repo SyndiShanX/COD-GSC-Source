@@ -590,7 +590,7 @@ remove_invalid_wm_attachments(param_00) {
 
 weapon_upgrade_hint_func(param_00, param_01) {
   if(scripts\engine\utility::istrue(level.has_picked_up_fuses) && !isDefined(level.placed_alien_fuses)) {
-    return & "CP_DISCO_PAP_UPGRADE";
+    return &"CP_DISCO_PAP_UPGRADE";
   }
 
   level.interactions[param_00.script_noteworthy].cost = 5000;
@@ -598,31 +598,31 @@ weapon_upgrade_hint_func(param_00, param_01) {
   var_03 = scripts\cp\cp_weapon::get_weapon_level(var_02);
   if(scripts\engine\utility::istrue(level.placed_alien_fuses)) {
     if(var_03 == 3) {
-      return & "COOP_INTERACTIONS_UPGRADE_MAXED";
+      return &"COOP_INTERACTIONS_UPGRADE_MAXED";
     } else if(!can_upgrade(var_02)) {
-      return & "CP_DISCO_UPGRADE_WEAPON_FAIL";
+      return &"CP_DISCO_UPGRADE_WEAPON_FAIL";
     } else if(var_03 == 1) {
-      return & "CP_DISCO_UPGRADE_WEAPON";
+      return &"CP_DISCO_UPGRADE_WEAPON";
     } else {
-      return & "CP_DISCO_UPGRADE_WEAPON";
+      return &"CP_DISCO_UPGRADE_WEAPON";
     }
 
-    return & "CP_DISCO_UPGRADE_WEAPON_FAIL";
+    return &"CP_DISCO_UPGRADE_WEAPON_FAIL";
   }
 
   if(var_03 == level.pap_max) {
-    return & "COOP_INTERACTIONS_UPGRADE_MAXED";
+    return &"COOP_INTERACTIONS_UPGRADE_MAXED";
   } else if(param_01 scripts\cp\utility::is_melee_weapon(var_02, 1)) {
     return "";
   } else if(!can_upgrade(var_02)) {
-    return & "CP_DISCO_UPGRADE_WEAPON_FAIL";
+    return &"CP_DISCO_UPGRADE_WEAPON_FAIL";
   } else if(var_03 == 1) {
-    return & "CP_DISCO_UPGRADE_WEAPON";
+    return &"CP_DISCO_UPGRADE_WEAPON";
   } else {
-    return & "CP_DISCO_UPGRADE_WEAPON";
+    return &"CP_DISCO_UPGRADE_WEAPON";
   }
 
-  return & "CP_DISCO_UPGRADE_WEAPON_FAIL";
+  return &"CP_DISCO_UPGRADE_WEAPON_FAIL";
 }
 
 can_upgrade(param_00, param_01) {

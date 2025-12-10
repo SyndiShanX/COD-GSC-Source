@@ -9,14 +9,14 @@
 #namespace music;
 
 function autoexec __init__sytem__() {
-  system::register("music", & __init__, undefined, undefined);
+  system::register("music", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.musicstate = "";
   util::registerclientsys("musicCmd");
   if(sessionmodeiscampaigngame()) {
-    callback::on_spawned( & on_player_spawned);
+    callback::on_spawned(&on_player_spawned);
   }
 }
 

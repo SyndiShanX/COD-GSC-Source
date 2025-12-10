@@ -22,13 +22,13 @@
 #namespace controllable_spider;
 
 function autoexec __init__sytem__() {
-  system::register("controllable_spider", & __init__, undefined, undefined);
+  system::register("controllable_spider", &__init__, undefined, undefined);
 }
 
 function __init__() {
   register_clientfields();
-  zm_placeable_mine::add_mine_type("controllable_spider", & "");
-  callback::on_spawned( & function_b2a01f79);
+  zm_placeable_mine::add_mine_type("controllable_spider", &"");
+  callback::on_spawned(&function_b2a01f79);
   level.w_controllable_spider = getweapon("controllable_spider");
   level flag::init("controllable_spider_equipped");
   function_be10e0f1();
@@ -51,9 +51,9 @@ function function_468b927() {
 function function_160ff11f() {
   if(!level flag::get("controllable_spider_equipped")) {
     level flag::set("controllable_spider_equipped");
-    level.zone_occupied_func = & function_84313596;
-    level.closest_player_targets_override = & closest_player_targets_override;
-    level.get_closest_valid_player_override = & closest_player_targets_override;
+    level.zone_occupied_func = &function_84313596;
+    level.closest_player_targets_override = &closest_player_targets_override;
+    level.get_closest_valid_player_override = &closest_player_targets_override;
   }
 }
 
@@ -235,7 +235,7 @@ function closest_player_targets_override() {
 }
 
 function function_be10e0f1() {
-  zm_devgui::add_custom_devgui_callback( & function_11949f35);
+  zm_devgui::add_custom_devgui_callback(&function_11949f35);
   adddebugcommand("");
 }
 

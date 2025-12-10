@@ -13,16 +13,16 @@
 #namespace zm_genesis_skull_turret;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_skull_turret", & __init__, & __main__, undefined);
+  system::register("zm_genesis_skull_turret", &__init__, &__main__, undefined);
 }
 
 function __init__() {
-  clientfield::register("vehicle", "skull_turret", 15000, 2, "int", & function_aeaa2ee6, 0, 0);
-  clientfield::register("vehicle", "skull_turret_beam_fire", 15000, 1, "int", & skull_turret_beam_fire, 0, 0);
-  clientfield::register("vehicle", "turret_beam_fire_crystal", 15000, 1, "int", & function_a70748cf, 0, 0);
-  clientfield::register("actor", "skull_turret_shock_fx", 15000, 1, "int", & skull_turret_shock_fx, 0, 0);
-  clientfield::register("actor", "skull_turret_shock_eye_fx", 15000, 1, "int", & skull_turret_shock_eye_fx, 0, 0);
-  clientfield::register("actor", "skull_turret_explode_fx", 15000, 1, "counter", & skull_turret_explode_fx, 0, 0);
+  clientfield::register("vehicle", "skull_turret", 15000, 2, "int", &function_aeaa2ee6, 0, 0);
+  clientfield::register("vehicle", "skull_turret_beam_fire", 15000, 1, "int", &skull_turret_beam_fire, 0, 0);
+  clientfield::register("vehicle", "turret_beam_fire_crystal", 15000, 1, "int", &function_a70748cf, 0, 0);
+  clientfield::register("actor", "skull_turret_shock_fx", 15000, 1, "int", &skull_turret_shock_fx, 0, 0);
+  clientfield::register("actor", "skull_turret_shock_eye_fx", 15000, 1, "int", &skull_turret_shock_eye_fx, 0, 0);
+  clientfield::register("actor", "skull_turret_explode_fx", 15000, 1, "counter", &skull_turret_explode_fx, 0, 0);
   level._effect["turret_zombie_shock"] = "dlc4/genesis/fx_tesla_trap_body_shock_red";
   level._effect["turret_zombie_explode"] = "dlc4/genesis/fx_tesla_trap_body_exp_red";
   level._effect["skull_turret_shock_eyes"] = "dlc4/genesis/fx_tesla_shock_eyes_zmb_red";

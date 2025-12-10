@@ -20,14 +20,14 @@
 #namespace namespace_64c6b720;
 
 function init() {
-  clientfield::register("world", "set_scoreHidden", 1, 1, "int", & function_7fe5e3f4, 0, 0);
+  clientfield::register("world", "set_scoreHidden", 1, 1, "int", &function_7fe5e3f4, 0, 0);
   for(i = 0; i < 4; i++) {
-    clientfield::register("world", "set_ui_gprDOA" + i, 1, 30, "int", & function_2db8b053, 0, 0);
-    clientfield::register("world", "set_ui_gpr2DOA" + i, 1, 30, "int", & function_b9397b2b, 0, 0);
-    clientfield::register("world", "set_ui_GlobalGPR" + i, 1, 30, "int", & function_e0f15ca4, 0, 0);
+    clientfield::register("world", "set_ui_gprDOA" + i, 1, 30, "int", &function_2db8b053, 0, 0);
+    clientfield::register("world", "set_ui_gpr2DOA" + i, 1, 30, "int", &function_b9397b2b, 0, 0);
+    clientfield::register("world", "set_ui_GlobalGPR" + i, 1, 30, "int", &function_e0f15ca4, 0, 0);
   }
-  clientfield::register("world", "startCountdown", 1, 3, "int", & function_75319a37, 0, 0);
-  callback::on_spawned( & on_player_spawn);
+  clientfield::register("world", "startCountdown", 1, 3, "int", &function_75319a37, 0, 0);
+  callback::on_spawned(&on_player_spawn);
   function_6fa6dee2();
 }
 
@@ -277,7 +277,7 @@ function on_shutdown(localclientnum, ent) {
 }
 
 function on_player_spawn(localclientnum) {
-  self callback::on_shutdown( & on_shutdown, self);
+  self callback::on_shutdown(&on_shutdown, self);
 }
 
 function function_7fe5e3f4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -348,7 +348,7 @@ function function_56dd76b(val) {
     level notify("countdown", val);
   }
   level notify("countdown", 0);
-  setuimodelvalue(getuimodel(level.var_7e2a814c, "countdown"), & "CP_DOA_BO3_GO");
+  setuimodelvalue(getuimodel(level.var_7e2a814c, "countdown"), &"CP_DOA_BO3_GO");
   playSound(0, "evt_countdown_go", (0, 0, 0));
   wait(1.1);
   setuimodelvalue(getuimodel(level.var_7e2a814c, "countdown"), "");

@@ -20,7 +20,7 @@
 function init() {
   level flag::init("given_dynamite");
   level flag::init("dynamite_chat");
-  zm_sidequests::declare_sidequest_stage("sq", "BaG", & init_stage, & stage_logic, & exit_stage);
+  zm_sidequests::declare_sidequest_stage("sq", "BaG", &init_stage, &stage_logic, &exit_stage);
   zm_sidequests::set_stage_time_limit("sq", "BaG", 300);
 }
 
@@ -146,7 +146,7 @@ function init_stage() {
   level flag::clear("given_dynamite");
   level flag::clear("dynamite_chat");
   gongs = getEntArray("sq_gong", "targetname");
-  array::thread_all(gongs, & gong_handler);
+  array::thread_all(gongs, &gong_handler);
   level thread give_me_the_boom_stick();
   zm_temple_sq::reset_dynamite();
   level thread delayed_start_skit();
@@ -270,7 +270,7 @@ function stage_logic() {
 
 function exit_stage(success) {
   if(success) {
-    zm_temple_sq_brock::create_radio(9, & zm_temple_sq_brock::radio9_override);
+    zm_temple_sq_brock::create_radio(9, &zm_temple_sq_brock::radio9_override);
     level._buttons_can_reset = 0;
   } else {
     zm_temple_sq_brock::create_radio(8);
@@ -298,7 +298,7 @@ function exit_stage(success) {
     level._give_trig delete();
   }
   gongs = getEntArray("sq_gong", "targetname");
-  array::thread_all(gongs, & dud_gong_handler);
+  array::thread_all(gongs, &dud_gong_handler);
   if(isDefined(level._bag_sound_ent)) {
     level._bag_sound_ent delete();
     level._bag_sound_ent = undefined;

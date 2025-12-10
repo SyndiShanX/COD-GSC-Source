@@ -14,9 +14,9 @@
 #namespace namespace_5f11fb0b;
 
 function autoexec main() {
-  clientfield::register("toplayer", "player_cam_blur", 1, 1, "int", & player_cam_blur, 0, 1);
-  clientfield::register("toplayer", "player_cam_bubbles", 1, 1, "int", & player_cam_bubbles, 0, 1);
-  clientfield::register("toplayer", "player_cam_fire", 1, 1, "int", & player_cam_fire, 0, 1);
+  clientfield::register("toplayer", "player_cam_blur", 1, 1, "int", &player_cam_blur, 0, 1);
+  clientfield::register("toplayer", "player_cam_bubbles", 1, 1, "int", &player_cam_bubbles, 0, 1);
+  clientfield::register("toplayer", "player_cam_fire", 1, 1, "int", &player_cam_fire, 0, 1);
 }
 
 function player_cam_blur(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

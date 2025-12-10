@@ -34,12 +34,12 @@
 #namespace zm_zod_idgun_quest;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_idgun_quest", & __init__, & __main__, undefined);
+  system::register("zm_zod_idgun_quest", &__init__, &__main__, undefined);
 }
 
 function __init__() {
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
   clientfield::register("world", "add_idgun_to_box", 1, 4, "int");
   clientfield::register("world", "remove_idgun_from_box", 1, 4, "int");
   level flag::init("second_idgun_time");
@@ -53,7 +53,7 @@ function __init__() {
 function __main__() {
   a_str_idgun_wpnnames = array("idgun_0", "idgun_1", "idgun_2", "idgun_3");
   level construct_idgun_weapon_array();
-  zm_spawner::register_zombie_death_event_callback( & idgun_zombie_death_watch);
+  zm_spawner::register_zombie_death_event_callback(&idgun_zombie_death_watch);
   for(i = 0; i < 2; i++) {
     level.idgun[i] = spawnStruct();
     level.idgun[i].kill_count = 0;
@@ -195,8 +195,8 @@ function function_a3712047(e_heart) {
   e_heart.unitrigger_stub.script_height = height;
   e_heart.unitrigger_stub.script_length = length;
   e_heart.unitrigger_stub.require_look_at = 0;
-  e_heart.unitrigger_stub.prompt_and_visibility_func = & function_12fffd19;
-  zm_unitrigger::register_static_unitrigger(e_heart.unitrigger_stub, & function_dd2f6fe3);
+  e_heart.unitrigger_stub.prompt_and_visibility_func = &function_12fffd19;
+  zm_unitrigger::register_static_unitrigger(e_heart.unitrigger_stub, &function_dd2f6fe3);
   wait(5);
   e_heart delete();
 }
@@ -333,7 +333,7 @@ function setup_idgun_upgrade_quest() {
         break;
       }
     }
-    var_c6a8002 = array::filter(var_ffcd34fb, 0, & filter_areaname, str_areaname);
+    var_c6a8002 = array::filter(var_ffcd34fb, 0, &filter_areaname, str_areaname);
     level.var_a26610f1[i] = array::random(var_c6a8002);
     mdl_cocoon = spawn("script_model", level.var_a26610f1[i].origin);
     mdl_cocoon setModel("p7_zm_zod_cocoon");
@@ -463,13 +463,13 @@ function give_idgun(n_idgun_level) {
 }
 
 function idgun_devgui() {
-  level thread zm_zod_util::setup_devgui_func("", "", 0, & devgui_idgun_give);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & devgui_idgun_give);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_8c7ac1b9);
+  level thread zm_zod_util::setup_devgui_func("", "", 0, &devgui_idgun_give);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &devgui_idgun_give);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_8c7ac1b9);
 }
 
 function idgun_quest_devgui() {
-  level thread zm_zod_util::setup_devgui_func("", "", 0, & function_1f7b4ebf);
+  level thread zm_zod_util::setup_devgui_func("", "", 0, &function_1f7b4ebf);
 }
 
 function devgui_idgun_give(n_value) {

@@ -14,11 +14,11 @@
 #namespace ability_power;
 
 function autoexec __init__sytem__() {
-  system::register("ability_power", & __init__, undefined, undefined);
+  system::register("ability_power", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_connect( & on_player_connect);
+  callback::on_connect(&on_player_connect);
 }
 
 function cpower_print(slot, str) {

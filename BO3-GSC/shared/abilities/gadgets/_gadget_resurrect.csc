@@ -16,12 +16,12 @@
 #namespace _gadget_resurrect;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_resurrect", & __init__, undefined, undefined);
+  system::register("gadget_resurrect", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("allplayers", "resurrecting", 1, 1, "int", & player_resurrect_changed, 0, 1);
-  clientfield::register("toplayer", "resurrect_state", 1, 2, "int", & player_resurrect_state_changed, 0, 1);
+  clientfield::register("allplayers", "resurrecting", 1, 1, "int", &player_resurrect_changed, 0, 1);
+  clientfield::register("toplayer", "resurrect_state", 1, 2, "int", &player_resurrect_state_changed, 0, 1);
   duplicate_render::set_dr_filter_offscreen("resurrecting", 99, "resurrecting", undefined, 2, "mc/hud_keyline_resurrect", 0);
   visionset_mgr::register_visionset_info("resurrect", 1, 16, undefined, "mp_ability_resurrection");
   visionset_mgr::register_visionset_info("resurrect_up", 1, 16, undefined, "mp_ability_wakeup");

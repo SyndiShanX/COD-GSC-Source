@@ -86,7 +86,7 @@ function function_a2c4c634() {
 }
 
 function function_d657f93a() {
-  callback::on_actor_killed( & function_8b3820b0);
+  callback::on_actor_killed(&function_8b3820b0);
 }
 
 function function_8b3820b0(params) {
@@ -99,7 +99,7 @@ function function_8b3820b0(params) {
 }
 
 function function_b68ffa5d() {
-  callback::on_ai_killed( & function_6e45ce5d);
+  callback::on_ai_killed(&function_6e45ce5d);
 }
 
 function function_6e45ce5d(params) {
@@ -134,7 +134,7 @@ function function_6e45ce5d(params) {
 }
 
 function function_c6ba5108() {
-  callback::on_actor_killed( & function_8eb61d56);
+  callback::on_actor_killed(&function_8eb61d56);
 }
 
 function function_8eb61d56(params) {
@@ -144,7 +144,7 @@ function function_8eb61d56(params) {
 }
 
 function function_367835e3() {
-  callback::on_ai_spawned( & function_109e560b);
+  callback::on_ai_spawned(&function_109e560b);
 }
 
 function function_109e560b() {
@@ -181,7 +181,7 @@ function function_8c0cbe3e() {
 }
 
 function function_4815496() {
-  callback::on_actor_killed( & function_b9a9c8d8);
+  callback::on_actor_killed(&function_b9a9c8d8);
 }
 
 function function_b9a9c8d8(params) {
@@ -191,7 +191,7 @@ function function_b9a9c8d8(params) {
 }
 
 function function_9e965239() {
-  callback::on_actor_killed( & function_3bbd5251);
+  callback::on_actor_killed(&function_3bbd5251);
 }
 
 function function_3bbd5251(params) {
@@ -201,7 +201,7 @@ function function_3bbd5251(params) {
 }
 
 function function_8593adf4() {
-  callback::on_ai_killed( & function_e36c85d8);
+  callback::on_ai_killed(&function_e36c85d8);
 }
 
 function function_e36c85d8(params) {
@@ -298,7 +298,7 @@ function function_75102c92() {
     level.var_d97ef4e5 = array(level.var_d97ef4e5);
   }
   level.var_d97ef4e5[level.var_d97ef4e5.size] = "cin_lot_04_01_security_vign_beaten_breakout_loop";
-  callback::on_actor_killed( & function_f5ef0d83);
+  callback::on_actor_killed(&function_f5ef0d83);
 }
 
 function function_f5ef0d83(params) {
@@ -322,9 +322,9 @@ function function_c20741bf() {
 
 function function_fc480d54() {
   level waittill("hash_a450f864");
-  callback::on_ai_killed( & function_e8cf8caa);
+  callback::on_ai_killed(&function_e8cf8caa);
   level waittill("hash_65ad50c6");
-  callback::remove_on_ai_killed( & function_e8cf8caa);
+  callback::remove_on_ai_killed(&function_e8cf8caa);
 }
 
 function function_e8cf8caa(params) {
@@ -334,9 +334,9 @@ function function_e8cf8caa(params) {
 }
 
 function function_12b1c299() {
-  callback::on_ai_killed( & function_436940b1);
+  callback::on_ai_killed(&function_436940b1);
   level flag::wait_till("players_made_it_to_stand_down");
-  callback::remove_on_ai_killed( & function_436940b1);
+  callback::remove_on_ai_killed(&function_436940b1);
 }
 
 function function_436940b1(params) {
@@ -356,8 +356,8 @@ function function_436940b1(params) {
 
 function function_f53b652e() {
   level waittill("hash_a450f864");
-  array::thread_all(level.players, & function_d57bb90f);
-  callback::on_spawned( & function_d57bb90f);
+  array::thread_all(level.players, &function_d57bb90f);
+  callback::on_spawned(&function_d57bb90f);
 }
 
 function function_d57bb90f() {
@@ -392,8 +392,8 @@ function function_aff09c5b() {
   foreach(player in level.players) {
     player flag::init("accolade_15_failed");
   }
-  callback::on_spawned( & function_428a25c7);
-  array::thread_all(level.players, & function_3d0c6b79);
+  callback::on_spawned(&function_428a25c7);
+  array::thread_all(level.players, &function_3d0c6b79);
   level waittill("gunship_almost_dead");
   foreach(player in level.players) {
     if(!player flag::get("accolade_15_failed")) {

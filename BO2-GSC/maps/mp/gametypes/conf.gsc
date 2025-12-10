@@ -83,13 +83,13 @@ onstartgametype() {
   level.spawnmaxs = (0, 0, 0);
 
   foreach(team in level.teams) {
-    setobjectivetext(team, & "OBJECTIVES_CONF");
-    setobjectivehinttext(team, & "OBJECTIVES_CONF_HINT");
+    setobjectivetext(team, &"OBJECTIVES_CONF");
+    setobjectivehinttext(team, &"OBJECTIVES_CONF_HINT");
 
     if(level.splitscreen)
-      setobjectivescoretext(team, & "OBJECTIVES_CONF");
+      setobjectivescoretext(team, &"OBJECTIVES_CONF");
     else
-      setobjectivescoretext(team, & "OBJECTIVES_CONF_SCORE");
+      setobjectivescoretext(team, &"OBJECTIVES_CONF_SCORE");
 
     maps\mp\gametypes\_spawnlogic::placespawnpoints(maps\mp\gametypes\_spawning::gettdmstartspawnname(team));
     maps\mp\gametypes\_spawnlogic::addspawnpoints(team, "mp_tdm_spawn");
@@ -231,16 +231,16 @@ onuse(player) {
     if(self.victim == player) {
       if(self.tacinsert == 0) {
         event = "retrieve_own_tags";
-        splash = & "SPLASHES_TAGS_RETRIEVED";
+        splash = &"SPLASHES_TAGS_RETRIEVED";
       } else
         tacinsertboost = 1;
     } else {
       event = "kill_denied";
-      splash = & "SPLASHES_KILL_DENIED";
+      splash = &"SPLASHES_KILL_DENIED";
     }
 
     if(isDefined(self.attacker) && self.attacker.team == self.attackerteam) {
-      self.attacker luinotifyevent(&"player_callout", 2, & "MP_KILL_DENIED", player.entnum);
+      self.attacker luinotifyevent(&"player_callout", 2, &"MP_KILL_DENIED", player.entnum);
       self.attacker playlocalsound(game["dialog"]["kc_denied"]);
     }
 
@@ -253,7 +253,7 @@ onuse(player) {
   } else {
     self.trigger playSound("mpl_killconfirm_tags_pickup");
     event = "kill_confirmed";
-    splash = & "SPLASHES_KILL_CONFIRMED";
+    splash = &"SPLASHES_KILL_CONFIRMED";
     player addplayerstat("KILLSCONFIRMED", 1);
     player recordgameevent("capture");
 

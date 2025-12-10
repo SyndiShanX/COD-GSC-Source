@@ -13,7 +13,7 @@
 #namespace destructible;
 
 function autoexec __init__sytem__() {
-  system::register("destructible", & __init__, undefined, undefined);
+  system::register("destructible", &__init__, undefined, undefined);
 }
 
 function __init__() {

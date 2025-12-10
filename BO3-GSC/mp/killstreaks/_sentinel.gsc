@@ -39,15 +39,15 @@
 #namespace sentinel;
 
 function init() {
-  killstreaks::register("sentinel", "sentinel", "killstreak_" + "sentinel", "sentinel" + "_used", & activatesentinel, 1);
-  killstreaks::register_strings("sentinel", & "KILLSTREAK_SENTINEL_EARNED", & "KILLSTREAK_SENTINEL_NOT_AVAILABLE", & "KILLSTREAK_SENTINEL_INBOUND", undefined, & "KILLSTREAK_SENTINEL_HACKED");
+  killstreaks::register("sentinel", "sentinel", "killstreak_" + "sentinel", "sentinel" + "_used", &activatesentinel, 1);
+  killstreaks::register_strings("sentinel", &"KILLSTREAK_SENTINEL_EARNED", &"KILLSTREAK_SENTINEL_NOT_AVAILABLE", &"KILLSTREAK_SENTINEL_INBOUND", undefined, &"KILLSTREAK_SENTINEL_HACKED");
   killstreaks::register_dialog("sentinel", "mpl_killstreak_sentinel_strt", "sentinelDialogBundle", "sentinelPilotDialogBundle", "friendlySentinel", "enemySentinel", "enemySentinelMultiple", "friendlySentinelHacked", "enemySentinelHacked", "requestSentinel", "threatSentinel");
   killstreaks::register_alt_weapon("sentinel", "killstreak_remote");
   killstreaks::register_alt_weapon("sentinel", "sentinel_turret");
-  remote_weapons::registerremoteweapon("sentinel", & "KILLSTREAK_SENTINEL_USE_REMOTE", & startsentinelremotecontrol, & endsentinelremotecontrol, 0);
+  remote_weapons::registerremoteweapon("sentinel", &"KILLSTREAK_SENTINEL_USE_REMOTE", &startsentinelremotecontrol, &endsentinelremotecontrol, 0);
   level.killstreaks["sentinel"].threatonkill = 1;
-  vehicle::add_main_callback("veh_sentinel_mp", & initsentinel);
-  visionset_mgr::register_info("visionset", "sentinel_visionset", 1, 100, 16, 1, & visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
+  vehicle::add_main_callback("veh_sentinel_mp", &initsentinel);
+  visionset_mgr::register_info("visionset", "sentinel_visionset", 1, 100, 16, 1, &visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
 }
 
 function initsentinel() {
@@ -68,18 +68,18 @@ function initsentinel() {
   self thread helicopter::create_flare_ent(vectorscale((0, 0, -1), 20));
   self thread audio::vehiclespawncontext();
   self.do_scripted_crash = 0;
-  self.overridevehicledamage = & sentineldamageoverride;
+  self.overridevehicledamage = &sentineldamageoverride;
   self.selfdestruct = 0;
   self.enable_target_laser = 1;
   self.aggresive_navvolume_recover = 1;
   self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("combat").enter_func = & wasp::state_combat_enter;
-  self vehicle_ai::get_state_callbacks("combat").update_func = & wasp::state_combat_update;
-  self vehicle_ai::get_state_callbacks("death").update_func = & wasp::state_death_update;
-  self vehicle_ai::get_state_callbacks("driving").enter_func = & driving_enter;
+  self vehicle_ai::get_state_callbacks("combat").enter_func = &wasp::state_combat_enter;
+  self vehicle_ai::get_state_callbacks("combat").update_func = &wasp::state_combat_update;
+  self vehicle_ai::get_state_callbacks("death").update_func = &wasp::state_death_update;
+  self vehicle_ai::get_state_callbacks("driving").enter_func = &driving_enter;
   wasp::init_guard_points();
-  self vehicle_ai::add_state("guard", & wasp::state_guard_enter, & wasp::state_guard_update, & wasp::state_guard_exit);
-  vehicle_ai::add_utility_connection("combat", "guard", & wasp::state_guard_can_enter);
+  self vehicle_ai::add_state("guard", &wasp::state_guard_enter, &wasp::state_guard_update, &wasp::state_guard_exit);
+  vehicle_ai::add_utility_connection("combat", "guard", &wasp::state_guard_can_enter);
   vehicle_ai::add_utility_connection("guard", "combat");
   vehicle_ai::add_interrupt_connection("guard", "emped", "emped");
   vehicle_ai::add_interrupt_connection("guard", "surge", "surge");
@@ -136,7 +136,7 @@ function sentineldamageoverride(einflictor, eattacker, idamage, idflags, smeanso
     return 0;
   }
   emp_damage = (self.healthdefault * 0.5) + 0.5;
-  idamage = killstreaks::ondamageperweapon("sentinel", eattacker, idamage, idflags, smeansofdeath, weapon, self.maxhealth, & destroyed_cb, self.maxhealth * 0.4, & low_health_cb, emp_damage, undefined, 1, 1);
+  idamage = killstreaks::ondamageperweapon("sentinel", eattacker, idamage, idflags, smeansofdeath, weapon, self.maxhealth, &destroyed_cb, self.maxhealth * 0.4, &low_health_cb, emp_damage, undefined, 1, 1);
   if(isDefined(eattacker) && isDefined(eattacker.team) && eattacker.team != self.team) {
     drone_pain(eattacker, smeansofdeath, vpoint, vdir, shitloc, partname, weapon);
   }
@@ -226,8 +226,8 @@ function activatesentinel(killstreaktype) {
   }
   player addweaponstat(getweapon("sentinel"), "used", 1);
   sentinel = spawnvehicle("veh_sentinel_mp", spawnpos.origin, spawnpos.angles, "dynamic_spawn_ai");
-  sentinel killstreaks::configure_team("sentinel", killstreak_id, player, "small_vehicle", undefined, & configureteampost);
-  sentinel killstreak_hacking::enable_hacking("sentinel", & hackedcallbackpre, & hackedcallbackpost);
+  sentinel killstreaks::configure_team("sentinel", killstreak_id, player, "small_vehicle", undefined, &configureteampost);
+  sentinel killstreak_hacking::enable_hacking("sentinel", &hackedcallbackpre, &hackedcallbackpost);
   sentinel.killstreak_id = killstreak_id;
   sentinel.killstreak_end_time = gettime() + 60000;
   sentinel.original_vehicle_type = sentinel.vehicletype;
@@ -248,7 +248,7 @@ function activatesentinel(killstreaktype) {
   sentinel.goalheight = 500;
   sentinel.enable_guard = 1;
   sentinel.always_face_enemy = 1;
-  sentinel thread killstreaks::waitfortimeout("sentinel", 60000, & ontimeout, "sentinel_shutdown");
+  sentinel thread killstreaks::waitfortimeout("sentinel", 60000, &ontimeout, "sentinel_shutdown");
   sentinel thread watchwater();
   sentinel thread watchdeath();
   sentinel thread watchshutdown();
@@ -310,7 +310,7 @@ function startsentinelremotecontrol(sentinel) {
     minheightoverride = minz_struct.origin[2];
   }
   sentinel thread qrdrone::qrdrone_watch_distance(0, minheightoverride);
-  sentinel.distance_shutdown_override = & sentineldistancefailure;
+  sentinel.distance_shutdown_override = &sentineldistancefailure;
   player vehicle::set_vehicle_drivable_time(60000, sentinel.killstreak_end_time);
   visionset_mgr::activate("visionset", "sentinel_visionset", player, 1, 90000, 1);
   if(isDefined(sentinel.playerdrivenversion)) {
@@ -386,7 +386,7 @@ function watchdeath() {
       if(modtype == "MOD_RIFLE_BULLET" || modtype == "MOD_PISTOL_BULLET") {
         attacker addplayerstat("shoot_down_sentinel", 1);
       }
-      luinotifyevent(&"player_callout", 2, & "KILLSTREAK_DESTROYED_SENTINEL", attacker.entnum);
+      luinotifyevent(&"player_callout", 2, &"KILLSTREAK_DESTROYED_SENTINEL", attacker.entnum);
     }
     if(isDefined(sentinel) && isDefined(sentinel.owner)) {
       sentinel killstreaks::play_destroyed_dialog_on_owner("sentinel", sentinel.killstreak_id);

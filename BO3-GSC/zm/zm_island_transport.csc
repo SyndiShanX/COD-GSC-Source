@@ -12,7 +12,7 @@
 #namespace zm_island_transport;
 
 function init() {
-  clientfield::register("vehicle", "sewer_current_fx", 9000, 1, "int", & sewer_current_fx, 0, 0);
+  clientfield::register("vehicle", "sewer_current_fx", 9000, 1, "int", &sewer_current_fx, 0, 0);
 }
 
 function sewer_current_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

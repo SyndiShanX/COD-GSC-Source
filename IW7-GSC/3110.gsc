@@ -223,7 +223,7 @@ func_13B35() {
   self.var_130F2.triggerportableradarping = self;
   self.var_130F2 thread func_4120(self);
   self.var_130F2 setcursorhint("HINT_NOICON");
-  self.var_130F2 sethintstring( & "MP_PICKUP_SPIDER_GRENADE");
+  self.var_130F2 sethintstring(&"MP_PICKUP_SPIDER_GRENADE");
   self.var_130F2 scripts\mp\utility::setselfusable(self.triggerportableradarping);
   self.var_130F2 thread scripts\mp\utility::notusableforjoiningplayers(self.triggerportableradarping);
   self.var_130F2 linkto(self);

@@ -32,13 +32,13 @@
 #namespace zm_island_side_ee_doppleganger;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_side_ee_doppleganger", & __init__, undefined, undefined);
+  system::register("zm_island_side_ee_doppleganger", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_connect( & on_player_connected);
-  callback::on_spawned( & on_player_spawned);
-  callback::on_disconnect( & on_player_disconnected);
+  callback::on_connect(&on_player_connected);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_disconnect(&on_player_disconnected);
   level.var_5f4ff545 = -1;
 }
 
@@ -268,7 +268,7 @@ function function_38165cb6() {
 }
 
 function function_bece461b() {
-  zm_devgui::add_custom_devgui_callback( & function_8924dbff);
+  zm_devgui::add_custom_devgui_callback(&function_8924dbff);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");

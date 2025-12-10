@@ -568,11 +568,11 @@ update_based_on_flags() {
 }
 
 is_look_trigger() {
-  return isDefined(self.spawnflags) && (self.spawnflags&256) == 256 && !is_trigger_of_type("trigger_damage") && !is_trigger_of_type("trigger_damage_new");
+  return isDefined(self.spawnflags) && (self.spawnflags& 256) == 256 && !is_trigger_of_type("trigger_damage") && !is_trigger_of_type("trigger_damage_new");
 }
 
 is_trigger_once() {
-  return isDefined(self.spawnflags) && (self.spawnflags&1024) == 1024 || is_trigger_of_type("trigger_once", "trigger_once_new");
+  return isDefined(self.spawnflags) && (self.spawnflags& 1024) == 1024 || is_trigger_of_type("trigger_once", "trigger_once_new");
 }
 
 wait_till_any(...) {

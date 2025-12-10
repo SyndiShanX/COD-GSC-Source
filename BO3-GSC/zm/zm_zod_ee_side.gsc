@@ -35,16 +35,16 @@
 #namespace zm_zod_ee_side;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_ee_side", & __init__, undefined, undefined);
+  system::register("zm_zod_ee_side", &__init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("world", "change_bouncingbetties", 1, 2, "int");
   clientfield::register("world", "lil_arnie_dance", 1, 1, "int");
-  callback::add_weapon_watcher( & function_758cc281);
-  callback::add_weapon_watcher( & function_a3213b07);
-  zm_placeable_mine::add_mine_type("bouncingbetty_devil", & "MP_BOUNCINGBETTY_PICKUP");
-  zm_placeable_mine::add_mine_type("bouncingbetty_holly", & "MP_BOUNCINGBETTY_PICKUP");
+  callback::add_weapon_watcher(&function_758cc281);
+  callback::add_weapon_watcher(&function_a3213b07);
+  zm_placeable_mine::add_mine_type("bouncingbetty_devil", &"MP_BOUNCINGBETTY_PICKUP");
+  zm_placeable_mine::add_mine_type("bouncingbetty_holly", &"MP_BOUNCINGBETTY_PICKUP");
 }
 
 function main() {
@@ -53,8 +53,8 @@ function main() {
   level flag::init("awarded_lion_gumball2");
   level flag::init("awarded_lion_gumball3");
   level flag::init("awarded_lion_gumball4");
-  callback::on_spawned( & on_player_spawned);
-  level.riotshield_melee_juke_callback = & function_c6930415;
+  callback::on_spawned(&on_player_spawned);
+  level.riotshield_melee_juke_callback = &function_c6930415;
   level flag::wait_till("all_players_spawned");
   level thread function_932e3574();
   level thread function_6d012317();
@@ -511,7 +511,7 @@ function function_e7a3a98f(a_str_lines) {
 function function_a59032c3() {
   level.var_89ad28cd = 0;
   var_e3c08ace = getEntArray("hs_radio", "targetname");
-  array::thread_all(var_e3c08ace, & function_68e137c8);
+  array::thread_all(var_e3c08ace, &function_68e137c8);
   while(true) {
     level waittill("hash_da6d056e");
     if(level.var_89ad28cd == var_e3c08ace.size) {
@@ -551,7 +551,7 @@ function function_68e137c8() {
 function function_e947749a() {
   level.var_d98fa1f1 = 0;
   a_items = getEntArray("hs_item", "targetname");
-  array::thread_all(a_items, & function_47965455);
+  array::thread_all(a_items, &function_47965455);
   while(true) {
     level waittill("hash_bcead67a");
     if(level.var_d98fa1f1 == a_items.size) {
@@ -675,7 +675,7 @@ function function_523509c2() {
       wait(0.05);
     }
     level notify("hash_e87ace62");
-    array::run_all(level.var_e0133c46, & delete);
+    array::run_all(level.var_e0133c46, &delete);
   }
   var_baa93c97 = struct::get_array("margwa_shiny", "targetname");
   var_baa93c97 = array::randomize(var_baa93c97);
@@ -684,8 +684,8 @@ function function_523509c2() {
     var_1205599e = util::spawn_model("tag_origin", var_b81be463.origin, var_b81be463.angles);
     var_1205599e thread function_68f6dbc2();
   }
-  level.margwa_smash_damage_callback = & function_e8628610;
-  level.margwa_damage_override_callback = & function_e6f86e4d;
+  level.margwa_smash_damage_callback = &function_e8628610;
+  level.margwa_damage_override_callback = &function_e6f86e4d;
   playsoundatposition("zmb_vocals_margwa_death", (0, 0, 0));
 }
 
@@ -790,13 +790,13 @@ function function_67a4dabe() {
     b_skip = 1;
   }
   if(b_skip == 0) {
-    zm_zod_util::on_zombie_killed( & function_4a0f0038);
+    zm_zod_util::on_zombie_killed(&function_4a0f0038);
     level waittill("hash_6e41959b");
-    arrayremovevalue(level.zombie_death_callbacks, & function_4a0f0038);
+    arrayremovevalue(level.zombie_death_callbacks, &function_4a0f0038);
   }
-  level.octobomb_attack_callback = & function_bfe0c3eb;
+  level.octobomb_attack_callback = &function_bfe0c3eb;
   level waittill("hash_8b3094ce");
-  level.octobomb_attack_callback = & function_31ef8fd4;
+  level.octobomb_attack_callback = &function_31ef8fd4;
   level waittill("hash_21edb6b6");
   foreach(player in level.activeplayers) {
     if(player hasweapon(level.w_octobomb)) {
@@ -1090,7 +1090,7 @@ function function_b943cc04() {
     level.var_ee921bdc = 1;
   }
   level.var_71279923 = getweapon("bouncingbetty");
-  zm_zod_util::on_zombie_killed( & function_b134ab6c);
+  zm_zod_util::on_zombie_killed(&function_b134ab6c);
   level thread function_41eedc1();
   level waittill("hash_25ff6e8", str_weapon);
   var_7a2a8066 = getweapon(str_weapon);
@@ -1110,7 +1110,7 @@ function function_b943cc04() {
 
 function function_41eedc1() {
   level waittill("hash_41eedc1");
-  arrayremovevalue(level.zombie_death_callbacks, & function_b134ab6c);
+  arrayremovevalue(level.zombie_death_callbacks, &function_b134ab6c);
 }
 
 function function_b134ab6c(e_attacker, str_means_of_death, w_weapon) {
@@ -1176,12 +1176,12 @@ function function_1bf9d0bf(watcher, owner) {
 function createbouncingbettywatcher(str_weapon) {
   watcher = self weaponobjects::createproximityweaponobjectwatcher(str_weapon, self.team);
   if(str_weapon == "bouncingbetty_devil") {
-    watcher.onspawn = & function_284bb3f1;
+    watcher.onspawn = &function_284bb3f1;
   } else {
-    watcher.onspawn = & function_1bf9d0bf;
+    watcher.onspawn = &function_1bf9d0bf;
   }
   watcher.watchforfire = 1;
-  watcher.ondetonatecallback = & bouncingbetty::bouncingbettydetonate;
+  watcher.ondetonatecallback = &bouncingbetty::bouncingbettydetonate;
   watcher.activatesound = "wpn_betty_alert";
   watcher.hackable = 1;
   watcher.hackertoolradius = level.equipmenthackertoolradius;
@@ -1193,7 +1193,7 @@ function createbouncingbettywatcher(str_weapon) {
   watcher.detectionmindist = level.bettymindist;
   watcher.detectiongraceperiod = level.bettygraceperiod;
   watcher.detonateradius = level.bettyradius;
-  watcher.stun = & weaponobjects::weaponstun;
+  watcher.stun = &weaponobjects::weaponstun;
   watcher.stuntime = level.bettystuntime;
   watcher.activationdelay = level.bettyactivationdelay;
 }
@@ -1346,11 +1346,11 @@ function create_unitrigger(str_hint) {
   s_unitrigger.script_unitrigger_type = "unitrigger_radius_use";
   s_unitrigger.cursor_hint = "HINT_NOICON";
   s_unitrigger.str_hint = str_hint;
-  s_unitrigger.prompt_and_visibility_func = & unitrigger_prompt_and_visibility;
+  s_unitrigger.prompt_and_visibility_func = &unitrigger_prompt_and_visibility;
   s_unitrigger.related_parent = self;
   s_unitrigger.radius = 64;
   self.s_unitrigger = s_unitrigger;
-  zm_unitrigger::register_static_unitrigger(s_unitrigger, & unitrigger_logic);
+  zm_unitrigger::register_static_unitrigger(s_unitrigger, &unitrigger_logic);
 }
 
 function unitrigger_prompt_and_visibility(player) {

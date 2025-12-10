@@ -93,7 +93,7 @@ func_AD5D() {
   for(;;) {
     self waittill("trigger", var_03);
     if(isplayer(var_03)) {
-      var_03 forceusehinton( & "CP_RAVE_USE_ZIPLINE");
+      var_03 forceusehinton(&"CP_RAVE_USE_ZIPLINE");
       var_03 thread handle_zipline_hint(self);
       if(var_03 isjumping()) {
         if(!scripts\engine\utility::istrue(var_03.is_fast_traveling)) {

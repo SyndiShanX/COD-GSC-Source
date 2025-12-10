@@ -17,19 +17,19 @@
 #namespace _zm_weap_elemental_bow_demongate;
 
 function autoexec __init__sytem__() {
-  system::register("_zm_weap_elemental_bow_demongate", & __init__, undefined, undefined);
+  system::register("_zm_weap_elemental_bow_demongate", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "elemental_bow_demongate" + "_ambient_bow_fx", 5000, 1, "int", & function_da7a9948, 0, 0);
-  clientfield::register("missile", "elemental_bow_demongate" + "_arrow_impact_fx", 5000, 1, "int", & function_f514bd4b, 0, 0);
-  clientfield::register("missile", "elemental_bow_demongate4" + "_arrow_impact_fx", 5000, 1, "int", & function_3e42c666, 0, 0);
-  clientfield::register("scriptmover", "demongate_portal_fx", 5000, 1, "int", & demongate_portal_fx, 0, 0);
-  clientfield::register("toplayer", "demongate_portal_rumble", 1, 1, "int", & demongate_portal_rumble, 0, 0);
-  clientfield::register("scriptmover", "demongate_wander_locomotion_anim", 5000, 1, "int", & demongate_wander_locomotion_anim, 0, 0);
-  clientfield::register("scriptmover", "demongate_attack_locomotion_anim", 5000, 1, "int", & demongate_attack_locomotion_anim, 0, 0);
-  clientfield::register("scriptmover", "demongate_chomper_fx", 5000, 1, "int", & demongate_chomper_fx, 0, 0);
-  clientfield::register("scriptmover", "demongate_chomper_bite_fx", 5000, 1, "counter", & demongate_chomper_bite_fx, 0, 0);
+  clientfield::register("toplayer", "elemental_bow_demongate" + "_ambient_bow_fx", 5000, 1, "int", &function_da7a9948, 0, 0);
+  clientfield::register("missile", "elemental_bow_demongate" + "_arrow_impact_fx", 5000, 1, "int", &function_f514bd4b, 0, 0);
+  clientfield::register("missile", "elemental_bow_demongate4" + "_arrow_impact_fx", 5000, 1, "int", &function_3e42c666, 0, 0);
+  clientfield::register("scriptmover", "demongate_portal_fx", 5000, 1, "int", &demongate_portal_fx, 0, 0);
+  clientfield::register("toplayer", "demongate_portal_rumble", 1, 1, "int", &demongate_portal_rumble, 0, 0);
+  clientfield::register("scriptmover", "demongate_wander_locomotion_anim", 5000, 1, "int", &demongate_wander_locomotion_anim, 0, 0);
+  clientfield::register("scriptmover", "demongate_attack_locomotion_anim", 5000, 1, "int", &demongate_attack_locomotion_anim, 0, 0);
+  clientfield::register("scriptmover", "demongate_chomper_fx", 5000, 1, "int", &demongate_chomper_fx, 0, 0);
+  clientfield::register("scriptmover", "demongate_chomper_bite_fx", 5000, 1, "counter", &demongate_chomper_bite_fx, 0, 0);
   level._effect["demongate_ambient_bow"] = "dlc1/zmb_weapon/fx_bow_demongate_ambient_1p_zmb";
   level._effect["demongate_arrow_impact"] = "dlc1/zmb_weapon/fx_bow_demongate_impact_zmb";
   level._effect["demongate_arrow_charged_impact"] = "dlc1/zmb_weapon/fx_bow_demongate_impact_ug_zmb";

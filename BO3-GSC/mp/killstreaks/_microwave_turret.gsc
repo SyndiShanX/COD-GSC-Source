@@ -35,8 +35,8 @@
 #namespace microwave_turret;
 
 function init() {
-  killstreaks::register("microwave_turret", "microwave_turret_deploy", "killstreak_" + "microwave_turret", "microwave_turret" + "_used", & activatemicrowaveturret, 0, 1);
-  killstreaks::register_strings("microwave_turret", & "KILLSTREAK_EARNED_MICROWAVE_TURRET", & "KILLSTREAK_MICROWAVE_TURRET_NOT_AVAILABLE", & "KILLSTREAK_MICROWAVE_TURRET_INBOUND", undefined, & "KILLSTREAK_MICROWAVE_TURRET_HACKED", 0);
+  killstreaks::register("microwave_turret", "microwave_turret_deploy", "killstreak_" + "microwave_turret", "microwave_turret" + "_used", &activatemicrowaveturret, 0, 1);
+  killstreaks::register_strings("microwave_turret", &"KILLSTREAK_EARNED_MICROWAVE_TURRET", &"KILLSTREAK_MICROWAVE_TURRET_NOT_AVAILABLE", &"KILLSTREAK_MICROWAVE_TURRET_INBOUND", undefined, &"KILLSTREAK_MICROWAVE_TURRET_HACKED", 0);
   killstreaks::register_dialog("microwave_turret", "mpl_killstreak_turret", "microwaveTurretDialogBundle", undefined, "friendlyMicrowaveTurret", "enemyMicrowaveTurret", "enemyMicrowaveTurretMultiple", "friendlyMicrowaveTurretHacked", "enemyMicrowaveTurretHacked", "requestMicrowaveTurret", "threatMicrowaveTurret");
   killstreaks::register_remote_override_weapon("microwave_turret", "microwave_turret");
   level.microwaveopenanim = % mp_microwaveturret::o_turret_guardian_open;
@@ -44,9 +44,9 @@ function init() {
   clientfield::register("vehicle", "turret_microwave_open", 1, 1, "int");
   clientfield::register("scriptmover", "turret_microwave_init", 1, 1, "int");
   clientfield::register("scriptmover", "turret_microwave_close", 1, 1, "int");
-  vehicle::add_main_callback("microwave_turret", & initturretvehicle);
-  callback::on_spawned( & on_player_spawned);
-  callback::on_vehicle_spawned( & on_vehicle_spawned);
+  vehicle::add_main_callback("microwave_turret", &initturretvehicle);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_vehicle_spawned(&on_vehicle_spawned);
 }
 
 function initturretvehicle() {
@@ -59,9 +59,9 @@ function initturretvehicle() {
   turretvehicle turret::set_on_target_angle(15, 0);
   turretvehicle clientfield::set("enemyvehicle", 1);
   turretvehicle.soundmod = "hpm";
-  turretvehicle.overridevehicledamage = & onturretdamage;
-  turretvehicle.overridevehicledeath = & onturretdeath;
-  turretvehicle.overridevehicledeathpostgame = & onturretdeathpostgame;
+  turretvehicle.overridevehicledamage = &onturretdamage;
+  turretvehicle.overridevehicledeath = &onturretdeath;
+  turretvehicle.overridevehicledeathpostgame = &onturretdeathpostgame;
   turretvehicle.aim_only_no_shooting = 1;
 }
 
@@ -86,7 +86,7 @@ function activatemicrowaveturret() {
     return false;
   }
   bundle = level.killstreakbundle["microwave_turret"];
-  turret = player placeables::spawnplaceable("microwave_turret", killstreakid, & onplaceturret, & oncancelplacement, & onpickupturret, & onshutdown, undefined, & onemp, "veh_t7_turret_guardian", "veh_t7_turret_guardian_yellow", "veh_t7_turret_guardian_red", 1, & "KILLSTREAK_MICROWAVE_TURRET_PICKUP", 90000, undefined, 1800 + 1, bundle.ksplaceablehint, bundle.ksplaceableinvalidlocationhint);
+  turret = player placeables::spawnplaceable("microwave_turret", killstreakid, &onplaceturret, &oncancelplacement, &onpickupturret, &onshutdown, undefined, &onemp, "veh_t7_turret_guardian", "veh_t7_turret_guardian_yellow", "veh_t7_turret_guardian_red", 1, &"KILLSTREAK_MICROWAVE_TURRET_PICKUP", 90000, undefined, 1800 + 1, bundle.ksplaceablehint, bundle.ksplaceableinvalidlocationhint);
   turret killstreaks::setup_health("microwave_turret");
   turret.damagetaken = 0;
   turret.killstreakendtime = gettime() + 90000;
@@ -125,7 +125,7 @@ function onplaceturret(turret) {
     level thread popups::displaykillstreakteammessagetoall("microwave_turret", player);
     player addweaponstat(getweapon("microwave_turret"), "used", 1);
     turret.vehicle killstreaks::configure_team("microwave_turret", turret.killstreakid, player);
-    turret.vehicle killstreak_hacking::enable_hacking("microwave_turret", & hackedprefunction, & hackedpostfunction);
+    turret.vehicle killstreak_hacking::enable_hacking("microwave_turret", &hackedprefunction, &hackedpostfunction);
     player killstreaks::play_killstreak_start_dialog("microwave_turret", player.pers["team"], turret.killstreakid);
   }
   turret.vehicle turret::enable(0, 0);
@@ -193,7 +193,7 @@ function onturretdeath(einflictor, eattacker, idamage, smeansofdeath, weapon, vd
     eattacker challenges::destroynonairscorestreak_poststatslock(weapon);
     eattacker addplayerstat("destroy_turret", 1);
     eattacker addweaponstat(weapon, "destroy_turret", 1);
-    luinotifyevent(&"player_callout", 2, & "KILLSTREAK_DESTROYED_MICROWAVE_TURRET", eattacker.entnum);
+    luinotifyevent(&"player_callout", 2, &"KILLSTREAK_DESTROYED_MICROWAVE_TURRET", eattacker.entnum);
   }
   if(isDefined(turretvehicle.parentstruct)) {
     turretvehicle.parentstruct notify("microwave_turret_shutdown");

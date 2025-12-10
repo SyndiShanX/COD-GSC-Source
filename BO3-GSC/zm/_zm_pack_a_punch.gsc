@@ -30,7 +30,7 @@
 #namespace _zm_pack_a_punch;
 
 function autoexec __init__sytem__() {
-  system::register("zm_pack_a_punch", & __init__, & __main__, undefined);
+  system::register("zm_pack_a_punch", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -40,12 +40,12 @@ function __init__() {
 
 function __main__() {
   if(!isDefined(level.pap_zbarrier_state_func)) {
-    level.pap_zbarrier_state_func = & process_pap_zbarrier_state;
+    level.pap_zbarrier_state_func = &process_pap_zbarrier_state;
   }
   spawn_init();
   vending_weapon_upgrade_trigger = zm_pap_util::get_triggers();
   if(vending_weapon_upgrade_trigger.size >= 1) {
-    array::thread_all(vending_weapon_upgrade_trigger, & vending_weapon_upgrade);
+    array::thread_all(vending_weapon_upgrade_trigger, &vending_weapon_upgrade);
   }
   old_packs = getEntArray("zombie_vending_upgrade", "targetname");
   for(i = 0; i < old_packs.size; i++) {
@@ -87,7 +87,7 @@ function private spawn_init() {
     use_trigger.target = "vending_packapunch";
     use_trigger.zbarrier.targetname = "vending_packapunch";
     powered_on = get_start_state();
-    use_trigger.powered = zm_power::add_powered_item( & turn_on, & turn_off, & get_range, & cost_func, 0, powered_on, use_trigger);
+    use_trigger.powered = zm_power::add_powered_item(&turn_on, &turn_off, &get_range, &cost_func, 0, powered_on, use_trigger);
     if(isDefined(level.pack_a_punch.custom_power_think)) {
       use_trigger thread[[level.pack_a_punch.custom_power_think]](powered_on);
     } else {

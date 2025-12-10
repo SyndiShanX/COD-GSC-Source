@@ -8,7 +8,7 @@
 #namespace demo;
 
 function autoexec __init__sytem__() {
-  system::register("demo", & __init__, undefined, undefined);
+  system::register("demo", &__init__, undefined, undefined);
 }
 
 function __init__() {

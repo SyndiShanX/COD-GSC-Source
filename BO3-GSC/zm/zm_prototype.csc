@@ -41,7 +41,7 @@
 #namespace zm_prototype;
 
 function autoexec __init__sytem__() {
-  system::register("zm_prototype", & __init__, undefined, undefined);
+  system::register("zm_prototype", &__init__, undefined, undefined);
 }
 
 function __init__() {

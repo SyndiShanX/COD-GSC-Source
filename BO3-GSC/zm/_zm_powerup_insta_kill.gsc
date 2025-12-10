@@ -16,13 +16,13 @@
 #namespace zm_powerup_insta_kill;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_insta_kill", & __init__, undefined, undefined);
+  system::register("zm_powerup_insta_kill", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  zm_powerups::register_powerup("insta_kill", & grab_insta_kill);
+  zm_powerups::register_powerup("insta_kill", &grab_insta_kill);
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("insta_kill", "p7_zm_power_up_insta_kill", & "ZOMBIE_POWERUP_INSTA_KILL", & zm_powerups::func_should_always_drop, 0, 0, 0, undefined, "powerup_instant_kill", "zombie_powerup_insta_kill_time", "zombie_powerup_insta_kill_on");
+    zm_powerups::add_zombie_powerup("insta_kill", "p7_zm_power_up_insta_kill", &"ZOMBIE_POWERUP_INSTA_KILL", &zm_powerups::func_should_always_drop, 0, 0, 0, undefined, "powerup_instant_kill", "zombie_powerup_insta_kill_time", "zombie_powerup_insta_kill_on");
   }
 }
 

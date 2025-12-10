@@ -15,5 +15,4 @@ main() {
   level._effect["moth_runner"] = loadfx("misc/moth_runner");
   level._effect["battlefield_smokebank_S"] = loadfx("smoke/battlefield_smokebank_S_tropical");
   level._effect["hallway_smoke_light"] = loadfx("smoke/hallway_smoke_light");
-
 }

@@ -18,13 +18,13 @@
 #namespace _gadget_clone;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_clone", & __init__, undefined, undefined);
+  system::register("gadget_clone", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("actor", "clone_activated", 1, 1, "int", & clone_activated, 0, 1);
-  clientfield::register("actor", "clone_damaged", 1, 1, "int", & clone_damaged, 0, 0);
-  clientfield::register("allplayers", "clone_activated", 1, 1, "int", & player_clone_activated, 0, 0);
+  clientfield::register("actor", "clone_activated", 1, 1, "int", &clone_activated, 0, 1);
+  clientfield::register("actor", "clone_damaged", 1, 1, "int", &clone_damaged, 0, 0);
+  clientfield::register("allplayers", "clone_activated", 1, 1, "int", &player_clone_activated, 0, 0);
 }
 
 function set_shader(localclientnum, enabled, entity) {

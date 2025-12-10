@@ -11,16 +11,16 @@
 #namespace spike_charge_siegebot;
 
 function autoexec __init__sytem__() {
-  system::register("spike_charge_siegebot", & __init__, undefined, undefined);
+  system::register("spike_charge_siegebot", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level._effect["spike_charge_siegebot_light"] = "light/fx_light_red_spike_charge_os";
-  callback::add_weapon_type("spike_charge_siegebot", & spawned);
-  callback::add_weapon_type("spike_charge_siegebot_theia", & spawned);
-  callback::add_weapon_type("siegebot_launcher_turret", & spawned);
-  callback::add_weapon_type("siegebot_launcher_turret_theia", & spawned);
-  callback::add_weapon_type("siegebot_javelin_turret", & spawned);
+  callback::add_weapon_type("spike_charge_siegebot", &spawned);
+  callback::add_weapon_type("spike_charge_siegebot_theia", &spawned);
+  callback::add_weapon_type("siegebot_launcher_turret", &spawned);
+  callback::add_weapon_type("siegebot_launcher_turret_theia", &spawned);
+  callback::add_weapon_type("siegebot_javelin_turret", &spawned);
 }
 
 function spawned(localclientnum) {

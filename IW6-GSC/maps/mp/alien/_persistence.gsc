@@ -230,7 +230,7 @@ give_player_currency(amount, font_size, sHitloc, skip_prestige_scalar) {
       return;
     }
     if(!level.gameEnded) {
-      self maps\mp\_utility::setLowerMessage("maxmoney", & "ALIEN_COLLECTIBLES_MONEY_MAX", 4);
+      self maps\mp\_utility::setLowerMessage("maxmoney", &"ALIEN_COLLECTIBLES_MONEY_MAX", 4);
       self.next_maxmoney_hint_time = current_time + MAX_CASH_COOL_DOWN_TIME;
     }
   }

@@ -13,11 +13,11 @@
 #namespace zm_island_power;
 
 function init() {
-  clientfield::register("scriptmover", "bucket_fx", 9000, 1, "int", & bucket_fx, 0, 0);
-  clientfield::register("world", "power_switch_1_fx", 9000, 1, "int", & power_switch_1_fx, 0, 0);
-  clientfield::register("world", "power_switch_2_fx", 9000, 1, "int", & power_switch_2_fx, 0, 0);
-  clientfield::register("world", "penstock_fx_anim", 9000, 1, "int", & function_8816d2aa, 0, 0);
-  clientfield::register("scriptmover", "power_plant_glow", 9000, 1, "int", & power_plant_glow, 0, 0);
+  clientfield::register("scriptmover", "bucket_fx", 9000, 1, "int", &bucket_fx, 0, 0);
+  clientfield::register("world", "power_switch_1_fx", 9000, 1, "int", &power_switch_1_fx, 0, 0);
+  clientfield::register("world", "power_switch_2_fx", 9000, 1, "int", &power_switch_2_fx, 0, 0);
+  clientfield::register("world", "penstock_fx_anim", 9000, 1, "int", &function_8816d2aa, 0, 0);
+  clientfield::register("scriptmover", "power_plant_glow", 9000, 1, "int", &power_plant_glow, 0, 0);
 }
 
 function bucket_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

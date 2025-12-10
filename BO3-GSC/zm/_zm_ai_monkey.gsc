@@ -35,11 +35,11 @@
 
 function autoexec init() {
   initmonkeybehaviorsandasm();
-  spawner::add_archetype_spawn_function("monkey", & archetypemonkeyblackboardinit);
-  spawner::add_archetype_spawn_function("monkey", & monkeyspawnsetup);
-  animationstatenetwork::registernotetrackhandlerfunction("monkey_melee", & monkeynotetrackmeleefire);
-  animationstatenetwork::registernotetrackhandlerfunction("monkey_groundpound", & monkeynotetrackgroundpound);
-  animationstatenetwork::registernotetrackhandlerfunction("grenade_pickup", & function_fcdc0829);
+  spawner::add_archetype_spawn_function("monkey", &archetypemonkeyblackboardinit);
+  spawner::add_archetype_spawn_function("monkey", &monkeyspawnsetup);
+  animationstatenetwork::registernotetrackhandlerfunction("monkey_melee", &monkeynotetrackmeleefire);
+  animationstatenetwork::registernotetrackhandlerfunction("monkey_groundpound", &monkeynotetrackgroundpound);
+  animationstatenetwork::registernotetrackhandlerfunction("grenade_pickup", &function_fcdc0829);
   level thread aat::register_immunity("zm_aat_blast_furnace", "monkey", 1, 1, 1);
   level thread aat::register_immunity("zm_aat_dead_wire", "monkey", 1, 1, 1);
   level thread aat::register_immunity("zm_aat_fire_works", "monkey", 1, 1, 1);
@@ -143,11 +143,11 @@ function archetypemonkeyblackboardinit() {
   blackboard::createblackboardforentity(self);
   self aiutility::registerutilityblackboardattributes();
   ai::createinterfaceforentity(self);
-  blackboard::registerblackboardattribute(self, "_locomotion_speed", "locomotion_speed_walk", & zombiebehavior::bb_getlocomotionspeedtype);
+  blackboard::registerblackboardattribute(self, "_locomotion_speed", "locomotion_speed_walk", &zombiebehavior::bb_getlocomotionspeedtype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  self.___archetypeonanimscriptedcallback = & archetypemonkeyonanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = &archetypemonkeyonanimscriptedcallback;
   self finalizetrackedblackboardattributes();
 }
 
@@ -162,14 +162,14 @@ function private archetypemonkeyonanimscriptedcallback(entity) {
 }
 
 function private initmonkeybehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("monkeyTargetService", & monkeytargetservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("monkeyShouldGroundHit", & monkeyshouldgroundhit);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("monkeyShouldThrowBackRun", & monkeyshouldthrowbackrun);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("monkeyShouldThrowBackStill", & monkeyshouldthrowbackstill);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("monkeyGroundHitStart", & monkeygroundhitstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("monkeyGroundHitTerminate", & monkeygroundhitterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("monkeyThrowBackTerminate", & monkeythrowbackterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("monkeyGrenadeTauntTerminate", & monkeygrenadetauntterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("monkeyTargetService", &monkeytargetservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("monkeyShouldGroundHit", &monkeyshouldgroundhit);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("monkeyShouldThrowBackRun", &monkeyshouldthrowbackrun);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("monkeyShouldThrowBackStill", &monkeyshouldthrowbackstill);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("monkeyGroundHitStart", &monkeygroundhitstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("monkeyGroundHitTerminate", &monkeygroundhitterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("monkeyThrowBackTerminate", &monkeythrowbackterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("monkeyGrenadeTauntTerminate", &monkeygrenadetauntterminate);
 }
 
 function monkeytargetservice(entity) {
@@ -275,10 +275,10 @@ function function_4c8046f8() {
   level._effect["monkey_death"] = "dlc5/cosmo/fx_zmb_monkey_death";
   level._effect["monkey_spawn"] = "dlc5/cosmo/fx_zombie_ape_spawn_dust";
   if(!isDefined(level.monkey_zombie_spawn_heuristic)) {
-    level.monkey_zombie_spawn_heuristic = & monkey_zombie_default_spawn_heuristic;
+    level.monkey_zombie_spawn_heuristic = &monkey_zombie_default_spawn_heuristic;
   }
   if(!isDefined(level.monkey_zombie_enter_level)) {
-    level.monkey_zombie_enter_level = & monkey_zombie_default_enter_level;
+    level.monkey_zombie_enter_level = &monkey_zombie_default_enter_level;
   }
   level.num_monkey_zombies = 0;
   level.monkey_zombie_spawners = getEntArray("monkey_zombie_spawner", "targetname");
@@ -332,9 +332,9 @@ function function_4c8046f8() {
   level flag::init("perk_bought");
   level flag::init("monkey_free_perk");
   level thread monkey_round_tracker();
-  level.perk_lost_func = & monkey_perk_lost;
-  level.perk_bought_func = & monkey_perk_bought;
-  level.revive_solo_fx_func = & monkey_revive_solo_fx;
+  level.perk_lost_func = &monkey_perk_lost;
+  level.perk_bought_func = &monkey_perk_bought;
+  level.revive_solo_fx_func = &monkey_revive_solo_fx;
 }
 
 function monkey_prespawn() {
@@ -369,12 +369,12 @@ function monkey_prespawn() {
   self.meleedamage = 40;
   self.no_powerups = 1;
   self.no_gib = 1;
-  self.custom_damage_func = & monkey_custom_damage;
+  self.custom_damage_func = &monkey_custom_damage;
   self.chest_beat = 0;
   self.machine_damage = level.machine_damage_min;
   self.dropped = 1;
   self allowpitchangle(1);
-  self.thundergun_fling_func = & monkey_fling;
+  self.thundergun_fling_func = &monkey_fling;
   self monkey_zombie_set_state("default");
   self.nochangeduringmelee = 1;
   if(isDefined(level.monkey_prespawn)) {
@@ -439,7 +439,7 @@ function monkey_zombie_spawn(pack) {
     monkey_zombie.script_noteworthy = self.script_noteworthy;
     monkey_zombie.targetname = self.targetname;
     monkey_zombie.target = self.target;
-    monkey_zombie.deathfunction = & monkey_zombie_die;
+    monkey_zombie.deathfunction = &monkey_zombie_die;
     monkey_zombie.animname = "monkey_zombie";
     monkey_zombie.pack = pack;
     monkey_zombie.perk = pack.perk;
@@ -860,8 +860,8 @@ function monkey_round_tracker() {
       level.monkey_save_wait_func = level.round_wait_func;
       level thread zm_audio::sndmusicsystem_playstate("monkey_round_start");
       monkey_round_start();
-      level.round_spawn_func = & monkey_round_spawning;
-      level.round_wait_func = & monkey_round_wait;
+      level.round_spawn_func = &monkey_round_spawning;
+      level.round_wait_func = &monkey_round_wait;
       level.prev_monkey_round = level.next_monkey_round;
       level.next_monkey_round = level.round_number + randomintrange(4, 6);
       monkey_print("next monkey round at " + level.next_monkey_round);

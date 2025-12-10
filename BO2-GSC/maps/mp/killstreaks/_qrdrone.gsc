@@ -88,7 +88,7 @@ init() {
   shouldtimeout = setdvar("scr_qrdrone_no_timeout", 0);
   maps\mp\killstreaks\_killstreaks::registerkillstreak("qrdrone_mp", "killstreak_qrdrone_mp", "killstreak_qrdrone", "qrdrone_used", ::tryuseqrdrone);
   maps\mp\killstreaks\_killstreaks::registerkillstreakaltweapon("qrdrone_mp", "qrdrone_turret_mp");
-  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("qrdrone_mp", & "KILLSTREAK_EARNED_QRDRONE", & "KILLSTREAK_QRDRONE_NOT_AVAILABLE", & "KILLSTREAK_QRDRONE_INBOUND");
+  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("qrdrone_mp", &"KILLSTREAK_EARNED_QRDRONE", &"KILLSTREAK_QRDRONE_NOT_AVAILABLE", &"KILLSTREAK_QRDRONE_INBOUND");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("qrdrone_mp", "mpl_killstreak_qrdrone", "kls_recondrone_used", "", "kls_recondrone_enemy", "", "kls_recondrone_ready");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("qrdrone_mp", "scr_giveqrdrone");
   maps\mp\killstreaks\_killstreaks::overrideentitycameraindemo("qrdrone_mp", 1);

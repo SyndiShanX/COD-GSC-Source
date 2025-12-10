@@ -422,7 +422,7 @@ open_cleanup() {
 }
 open_exit(trigger, objective_id) {
   trigger thread open_cleanup();
-  objective_add(objective_id, "active", & "EXIT", trigger.origin);
+  objective_add(objective_id, "active", &"EXIT", trigger.origin);
   objective_set3d(objective_id, true, "default", "*");
   objective_current(objective_id);
   trigger waittill("opened");

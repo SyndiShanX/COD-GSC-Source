@@ -19,7 +19,7 @@
 #namespace debug;
 
 function autoexec __init__sytem__() {
-  system::register("", & __init__, undefined, undefined);
+  system::register("", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -358,10 +358,10 @@ function debugdvars() {
     }
     if(getdvarstring("") == "") {
       setdvar("", "");
-      array::thread_all(getaiarray(), & debugmisstime);
+      array::thread_all(getaiarray(), &debugmisstime);
     } else if(getdvarstring("") == "") {
       setdvar("", "");
-      array::thread_all(getaiarray(), & debugmisstimeoff);
+      array::thread_all(getaiarray(), &debugmisstimeoff);
     }
     if(getdvarstring("") == "") {
       thread deathspawnerpreview();
@@ -391,7 +391,7 @@ function debugdvars() {
       noanimscripts = 1;
     }
     if(noanimscripts && getdvarstring("") == "") {
-      anim.defaultexception = & util::empty;
+      anim.defaultexception = &util::empty;
       anim notify("hash_9a6633d5");
       noanimscripts = 0;
     }
@@ -634,7 +634,7 @@ function debugthreatcalc() {
     return;
   }
   entitygroup = entity getthreatbiasgroup();
-  array::thread_all(ai, & displaythreat, entity, entitygroup);
+  array::thread_all(ai, &displaythreat, entity, entitygroup);
   players[0] thread displaythreat(entity, entitygroup);
 }
 
@@ -820,7 +820,7 @@ function debug_animsound() {
   }
   level.animsounds_thisframe = [];
   arrayremovevalue(level.animsounds, undefined);
-  array::thread_all(level.animsounds, & display_animsound);
+  array::thread_all(level.animsounds, &display_animsound);
   players = getplayers();
   if(level.animsound_locked) {
     for(i = 0; i < level.animsounds_thisframe.size; i++) {

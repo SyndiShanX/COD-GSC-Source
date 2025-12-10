@@ -15,16 +15,16 @@
 #namespace _gadget_ravage_core;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_ravage_core", & __init__, undefined, undefined);
+  system::register("gadget_ravage_core", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(22, & gadget_ravage_core_on, & gadget_ravage_core_off);
-  ability_player::register_gadget_possession_callbacks(22, & gadget_ravage_core_on_give, & gadget_ravage_core_on_take);
-  ability_player::register_gadget_flicker_callbacks(22, & gadget_ravage_core_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(22, & gadget_ravage_core_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(22, & gadget_ravage_core_is_flickering);
-  callback::on_connect( & gadget_ravage_core_on_connect);
+  ability_player::register_gadget_activation_callbacks(22, &gadget_ravage_core_on, &gadget_ravage_core_off);
+  ability_player::register_gadget_possession_callbacks(22, &gadget_ravage_core_on_give, &gadget_ravage_core_on_take);
+  ability_player::register_gadget_flicker_callbacks(22, &gadget_ravage_core_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(22, &gadget_ravage_core_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(22, &gadget_ravage_core_is_flickering);
+  callback::on_connect(&gadget_ravage_core_on_connect);
 }
 
 function gadget_ravage_core_is_inuse(slot) {

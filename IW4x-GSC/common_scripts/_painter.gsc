@@ -167,10 +167,6 @@ hack_start(painter_spmp) {
 
   precachemenu(painter_spmp);
 
-
-
-
-
   flag_init("user_alive");
   while(!isDefined(get_player()))
     wait .05;
@@ -214,7 +210,6 @@ hud_update_placed_model_count() {
 hud_init() {
   flag_init("user_hud_active");
   flag_wait("user_alive");
-
 
   listsize = 7;
   if(is_mp())
@@ -267,7 +262,6 @@ hud_init() {
   crossHair _settext(".");
   level.crosshair = crossHair;
 
-
   crossHair = _newhudelem();
   crossHair.location = 0;
   crossHair.alignX = "center";
@@ -304,7 +298,6 @@ hint_buttons_main() {
   controler_hud_update_text("helplbrb", "^8Remove ^7 / Place");
   controler_hud_update_text("helpdpl", "^8zOffset Clear ^7 / Set");
   controler_hud_update_text("helpdpu", "^8Rotation Clear ^7 / Set");
-
 }
 
 hint_buttons_zoffset() {
@@ -656,7 +649,6 @@ player_view_trace() {
 
 Orienttoplayeryrot() {
   self addyaw(level.painter_player getplayerangles()[1] - flat_angle(self.angles)[1]);
-
 }
 
 getcurrent_groupstruct() {

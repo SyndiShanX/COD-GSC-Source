@@ -13,7 +13,7 @@
 #namespace zm_bgb_unbearable;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_unbearable", & __init__, undefined, undefined);
+  system::register("zm_bgb_unbearable", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -21,7 +21,7 @@ function __init__() {
     return;
   }
   bgb::register("zm_bgb_unbearable", "event");
-  clientfield::register("zbarrier", "zm_bgb_unbearable", 1, 1, "counter", & function_cd297226, 0, 0);
+  clientfield::register("zbarrier", "zm_bgb_unbearable", 1, 1, "counter", &function_cd297226, 0, 0);
   level._effect["zm_bgb_unbearable"] = "zombie/fx_bgb_unbearable_box_flash_zmb";
 }
 

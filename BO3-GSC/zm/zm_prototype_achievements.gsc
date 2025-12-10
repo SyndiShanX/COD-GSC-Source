@@ -18,15 +18,15 @@
 #namespace zm_prototype_achievements;
 
 function autoexec __init__sytem__() {
-  system::register("zm_theater_achievements", & __init__, undefined, undefined);
+  system::register("zm_theater_achievements", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  level.achievement_sound_func = & achievement_sound_func;
+  level.achievement_sound_func = &achievement_sound_func;
   level thread function_dab290f5();
   level thread function_94bb4bfb();
-  zm_spawner::register_zombie_death_event_callback( & function_1abfde35);
-  callback::on_connect( & onplayerconnect);
+  zm_spawner::register_zombie_death_event_callback(&function_1abfde35);
+  callback::on_connect(&onplayerconnect);
 }
 
 function achievement_sound_func(achievement_name_lower) {
@@ -58,9 +58,9 @@ function function_dab290f5() {
 
 function function_2d04250a() {
   assert(isDefined(level.zombie_spawners), "");
-  array::thread_all(level.zombie_spawners, & spawner::add_spawn_function, & function_c97e69a9);
+  array::thread_all(level.zombie_spawners, &spawner::add_spawn_function, &function_c97e69a9);
   level util::waittill_any("i_said_were_closed_failed", "i_said_were_closed_completed");
-  array::run_all(level.zombie_spawners, & spawner::remove_spawn_function, & function_c97e69a9);
+  array::run_all(level.zombie_spawners, &spawner::remove_spawn_function, &function_c97e69a9);
 }
 
 function function_c97e69a9() {

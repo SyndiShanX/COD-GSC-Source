@@ -16,14 +16,14 @@
 #namespace zm_bgb_eye_candy;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_eye_candy", & __init__, undefined, "bgb");
+  system::register("zm_bgb_eye_candy", &__init__, undefined, "bgb");
 }
 
 function __init__() {
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_eye_candy", "activated", 5, undefined, undefined, & validation, & activation);
+  bgb::register("zm_bgb_eye_candy", "activated", 5, undefined, undefined, &validation, &activation);
   if(!isDefined(level.vsmgr_prio_visionset_zm_bgb_eye_candy_1)) {
     level.vsmgr_prio_visionset_zm_bgb_eye_candy_1 = 113;
   }
@@ -61,7 +61,7 @@ function __init__() {
   clientfield::register("toplayer", "eye_candy_render", 21000, n_bits, "int");
   clientfield::register("actor", "eye_candy_active", 21000, 1, "int");
   clientfield::register("vehicle", "eye_candy_active", 21000, 1, "int");
-  spawner::add_global_spawn_function("axis", & function_b390826f);
+  spawner::add_global_spawn_function("axis", &function_b390826f);
 }
 
 function validation() {

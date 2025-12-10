@@ -38,8 +38,8 @@ init() {
   level.transferriotshield = ::transferriotshield;
   level.cantransferriotshield = ::cantransferriotshield;
   maps\mp\zombies\_zm_spawner::register_zombie_damage_callback(::riotshield_zombie_damage_response);
-  maps\mp\zombies\_zm_equipment::register_equipment("riotshield_zm", & "ZOMBIE_EQUIP_RIOTSHIELD_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_RIOTSHIELD_HOWTO", "riotshield_zm_icon", "riotshield", ::riotshield_activation_watcher_thread, undefined, ::dropshield, ::pickupshield);
-  maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("riotshield", & "ZOMBIE_EQUIP_RIOTSHIELD_PICKUP_HINT_STRING");
+  maps\mp\zombies\_zm_equipment::register_equipment("riotshield_zm", &"ZOMBIE_EQUIP_RIOTSHIELD_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_RIOTSHIELD_HOWTO", "riotshield_zm_icon", "riotshield", ::riotshield_activation_watcher_thread, undefined, ::dropshield, ::pickupshield);
+  maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("riotshield", &"ZOMBIE_EQUIP_RIOTSHIELD_PICKUP_HINT_STRING");
   onplayerconnect_callback(::onplayerconnect);
 }
 

@@ -42,7 +42,7 @@ function skipto_dogleg_1_init(str_objective, b_starting) {
     load::function_73adcefc();
     vengeance_util::skipto_baseline(str_objective, b_starting);
     vengeance_util::init_hero("hendricks", str_objective);
-    callback::on_spawned( & vengeance_util::give_hero_weapon);
+    callback::on_spawned(&vengeance_util::give_hero_weapon);
     level.ai_hendricks ai::set_ignoreall(1);
     level.ai_hendricks ai::set_ignoreme(1);
     level.ai_hendricks colors::disable();
@@ -74,7 +74,7 @@ function dogleg_1_main(str_objective, b_starting) {
   level.var_831ab6b2 = struct::get("quadtank_alley_intro_org");
   level.var_831ab6b2 scene::init("cin_ven_04_30_quadalleydoor_1st");
   level thread function_6236563e();
-  level.dogleg_1_patroller_spawners = spawner::simple_spawn("dogleg_1_patroller_spawners", & vengeance_util::setup_patroller);
+  level.dogleg_1_patroller_spawners = spawner::simple_spawn("dogleg_1_patroller_spawners", &vengeance_util::setup_patroller);
   level thread dogleg_1_vo(b_starting);
   level thread function_1909c582();
   level thread function_6fdd2184();
@@ -221,7 +221,7 @@ function setup_dogleg_1_hendricks() {
 }
 
 function function_4326839a() {
-  level.var_4326839a = spawner::simple_spawn("dogleg_1_wasps", & function_b5dfff73);
+  level.var_4326839a = spawner::simple_spawn("dogleg_1_wasps", &function_b5dfff73);
   level.var_4843e321 = level.var_4326839a.size;
   namespace_523da15d::function_cae14a51();
 }
@@ -237,9 +237,9 @@ function function_b5dfff73() {
 
 function cafe_execution_setup() {
   level.cafe_execution_org = struct::get("cafe_execution_org");
-  spawner::add_spawn_function_group("cafe_execution_civ_spawners", "script_noteworthy", & cafe_execution_civ_spawn_func);
-  spawner::add_spawn_function_group("cafe_execution_thug_spawners", "script_noteworthy", & cafe_exeuction_thug_spawn_func);
-  spawner::add_spawn_function_group("cafe_execution_thug_spawners", "script_noteworthy", & cafe_exeuction_thug_death_watcher_spawn_func);
+  spawner::add_spawn_function_group("cafe_execution_civ_spawners", "script_noteworthy", &cafe_execution_civ_spawn_func);
+  spawner::add_spawn_function_group("cafe_execution_thug_spawners", "script_noteworthy", &cafe_exeuction_thug_spawn_func);
+  spawner::add_spawn_function_group("cafe_execution_thug_spawners", "script_noteworthy", &cafe_exeuction_thug_death_watcher_spawn_func);
   level.cafe_execution_org scene::init("cin_ven_04_20_cafeexecution_vign_intro");
   while(!level scene::is_ready("cin_ven_04_20_cafeexecution_vign_intro")) {
     wait(0.05);
@@ -317,17 +317,17 @@ function function_dbe2f523() {
 
 function cafe_burning_setup() {
   level.cafe_burning_org = struct::get("cafe_burning_org");
-  spawner::add_spawn_function_group("cafe_burning_54i_thug_a", "targetname", & function_8b8b9516);
-  spawner::add_spawn_function_group("cafe_burning_54i_thug_b", "targetname", & function_97ac3293);
-  spawner::add_spawn_function_group("cafe_burning_civ_01", "targetname", & cafe_burning_civ_spawn_func);
-  spawner::add_spawn_function_group("cafe_burning_civ_02", "targetname", & cafe_burning_civ_spawn_func);
-  spawner::add_spawn_function_group("cafe_burning_civ_03", "targetname", & cafe_burning_civ_spawn_func);
-  scene::add_scene_func("cin_ven_04_20_cafeburning_vign_loop", & function_924af258, "init", 1);
+  spawner::add_spawn_function_group("cafe_burning_54i_thug_a", "targetname", &function_8b8b9516);
+  spawner::add_spawn_function_group("cafe_burning_54i_thug_b", "targetname", &function_97ac3293);
+  spawner::add_spawn_function_group("cafe_burning_civ_01", "targetname", &cafe_burning_civ_spawn_func);
+  spawner::add_spawn_function_group("cafe_burning_civ_02", "targetname", &cafe_burning_civ_spawn_func);
+  spawner::add_spawn_function_group("cafe_burning_civ_03", "targetname", &cafe_burning_civ_spawn_func);
+  scene::add_scene_func("cin_ven_04_20_cafeburning_vign_loop", &function_924af258, "init", 1);
   level.cafe_burning_org scene::init("cin_ven_04_20_cafeburning_vign_loop");
 }
 
 function function_e9e34547() {
-  scene::add_scene_func("cin_ven_04_20_cafeburning_vign_loop", & function_924af258, "play");
+  scene::add_scene_func("cin_ven_04_20_cafeburning_vign_loop", &function_924af258, "play");
   level.cafe_burning_org thread scene::play("cin_ven_04_20_cafeburning_vign_loop");
   wait(1);
   level.var_b6fadac7 = getent("cafe_burning_54i_thug_a_ai", "targetname", 1);
@@ -516,7 +516,7 @@ function function_dc4e86b5(enemy_array) {
 function cafe_molotov_setup() {
   level endon("hash_e9ff59d5");
   level.cafe_molotov_org = struct::get("cafe_molotov_org");
-  spawner::add_spawn_function_group("cafe_molotov_civ_spawners", "script_noteworthy", & function_147bbbbf);
+  spawner::add_spawn_function_group("cafe_molotov_civ_spawners", "script_noteworthy", &function_147bbbbf);
   var_932d1fc6 = [];
   var_932d1fc6[0] = spawner::simple_spawn_single("cafe_molotov_thug_a", undefined, undefined, undefined, undefined, undefined, undefined, 1);
   var_932d1fc6[1] = util::spawn_anim_model("p7_emergency_flare");
@@ -611,7 +611,7 @@ function function_6236563e() {
   }
   objectives::hide("cp_level_vengeance_goto_quadtank_alley");
   var_23b47afc triggerenable(1);
-  e_door_use_object = util::init_interactive_gameobject(var_23b47afc, & "cp_prompt_enter_ven_gate", & "CP_MI_SING_VENGEANCE_HINT_OPEN", & function_9c72eea2);
+  e_door_use_object = util::init_interactive_gameobject(var_23b47afc, &"cp_prompt_enter_ven_gate", &"CP_MI_SING_VENGEANCE_HINT_OPEN", &function_9c72eea2);
   objectives::set("cp_level_vengeance_open_quadtank_alley_menu");
   level thread vengeance_util::stealth_combat_toggle_trigger_and_objective(var_23b47afc, undefined, "cp_level_vengeance_open_quadtank_alley_menu", "start_quadtank_alley_intro", "cp_level_vengeance_clear_area", e_door_use_object);
   level flag::wait_till("start_quadtank_alley_intro");
@@ -667,7 +667,7 @@ function skipto_dogleg_1_done(str_objective, b_starting, b_direct, player) {
   if(!isDefined(b_starting) || (isDefined(b_starting) && b_starting == 0)) {
     vengeance_util::init_hero("hendricks", str_objective);
     vengeance_util::co_op_teleport_on_igc_end("cin_ven_04_30_quadalleydoor_1st", "quadalleydoor_igc_teleport");
-    spawner::add_spawn_function_group("quadteaser_qt", "script_noteworthy", & vengeance_quadtank_alley::quadtank_alley_quadtank_setup);
+    spawner::add_spawn_function_group("quadteaser_qt", "script_noteworthy", &vengeance_quadtank_alley::quadtank_alley_quadtank_setup);
     level thread vengeance_quadtank_alley::function_32620a97();
     level thread vengeance_quadtank_alley::function_323d0a39();
     level util::waittill_notify_or_timeout("quadtank_alley_activated", 1);
@@ -692,8 +692,8 @@ function skipto_dogleg_1_done(str_objective, b_starting, b_direct, player) {
 }
 
 function cleanup_dogleg_1() {
-  array::thread_all(getaiteamarray("axis"), & util::self_delete);
-  array::run_all(getcorpsearray(), & delete);
+  array::thread_all(getaiteamarray("axis"), &util::self_delete);
+  array::run_all(getcorpsearray(), &delete);
   if(isDefined(level.var_4326839a)) {
     foreach(enemy in level.var_4326839a) {
       if(isDefined(enemy)) {

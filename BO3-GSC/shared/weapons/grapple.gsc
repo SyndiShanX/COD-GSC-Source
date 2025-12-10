@@ -15,11 +15,11 @@
 #namespace grapple;
 
 function autoexec __init__sytem__() {
-  system::register("grapple", & __init__, & __main__, undefined);
+  system::register("grapple", &__init__, &__main__, undefined);
 }
 
 function __init__() {
-  callback::on_spawned( & watch_for_grapple);
+  callback::on_spawned(&watch_for_grapple);
 }
 
 function __main__() {

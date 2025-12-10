@@ -49,7 +49,7 @@ function setupwaterfallmist(localclientnum) {
       localplayer = trigplayer;
     }
     filter::init_filter_sprite_rain(localplayer);
-    trigger thread trigger::function_d1278be0(localplayer, & trig_enter_waterfall_mist, & trig_leave_waterfall_mist);
+    trigger thread trigger::function_d1278be0(localplayer, &trig_enter_waterfall_mist, &trig_leave_waterfall_mist);
   }
 }
 
@@ -68,7 +68,7 @@ function setupwaterfall(localclientnum, localowner) {
     } else {
       localplayer = trigplayer;
     }
-    trigger thread trigger::function_d1278be0(localplayer, & trig_enter_waterfall, & trig_leave_waterfall);
+    trigger thread trigger::function_d1278be0(localplayer, &trig_enter_waterfall, &trig_leave_waterfall);
   }
 }
 

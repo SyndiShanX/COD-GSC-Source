@@ -14,12 +14,12 @@
 #namespace zm_island_side_ee_spore_hallucinations;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_side_ee_spore_hallucinations", & __init__, undefined, undefined);
+  system::register("zm_island_side_ee_spore_hallucinations", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "hallucinate_bloody_walls", 9000, 1, "int", & hallucinate_bloody_walls, 0, 0);
-  clientfield::register("toplayer", "hallucinate_spooky_sounds", 9000, 1, "int", & hallucinate_spooky_sounds, 0, 0);
+  clientfield::register("toplayer", "hallucinate_bloody_walls", 9000, 1, "int", &hallucinate_bloody_walls, 0, 0);
+  clientfield::register("toplayer", "hallucinate_spooky_sounds", 9000, 1, "int", &hallucinate_spooky_sounds, 0, 0);
   var_68003f28 = findvolumedecalindexarray("side_ee_horror_room_lab_a");
   var_da07ae63 = findvolumedecalindexarray("side_ee_horror_room_lab_b");
   var_b40533fa = findvolumedecalindexarray("side_ee_horror_room_operation");

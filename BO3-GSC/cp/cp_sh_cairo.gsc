@@ -35,7 +35,7 @@ function main() {
 }
 
 function setup_skiptos() {
-  skipto::add_dev("dev_no_bunk", & function_d525a88c, "No Bunk Start");
+  skipto::add_dev("dev_no_bunk", &function_d525a88c, "No Bunk Start");
 }
 
 function function_d525a88c(str_objective, b_starting) {

@@ -31,11 +31,11 @@
 #namespace zm_genesis_radios;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_radios", & __init__, & __main__, undefined);
+  system::register("zm_genesis_radios", &__init__, &__main__, undefined);
 }
 
 function __init__() {
-  callback::on_disconnect( & on_player_disconnect);
+  callback::on_disconnect(&on_player_disconnect);
 }
 
 function __main__() {
@@ -64,7 +64,7 @@ function function_a999a42a() {
   var_ff34523e = array(5, 8, 10, 11, 12, 13);
   for(i = 0; i < level.a_s_radios.size; i++) {
     level.a_s_radios[i].clip = arraygetclosest(level.a_s_radios[i].origin, var_64dfb3ba);
-    s_unitrigger = level.a_s_radios[i] zm_unitrigger::create_unitrigger(&"", 64, & function_2c776a2a);
+    s_unitrigger = level.a_s_radios[i] zm_unitrigger::create_unitrigger(&"", 64, &function_2c776a2a);
     s_unitrigger.require_look_at = 1;
     s_unitrigger.b_on = 1;
     level.a_s_radios[i] thread function_795f4e6();
@@ -153,32 +153,32 @@ function function_94b3b616(n_range = 800) {
 }
 
 function function_9ef4291() {
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_418d5e87);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_dda18b8e);
-  level thread zm_genesis_util::setup_devgui_func("", "", 2, & function_418d5e87);
-  level thread zm_genesis_util::setup_devgui_func("", "", 2, & function_dda18b8e);
-  level thread zm_genesis_util::setup_devgui_func("", "", 3, & function_418d5e87);
-  level thread zm_genesis_util::setup_devgui_func("", "", 3, & function_dda18b8e);
-  level thread zm_genesis_util::setup_devgui_func("", "", 4, & function_418d5e87);
-  level thread zm_genesis_util::setup_devgui_func("", "", 4, & function_dda18b8e);
-  level thread zm_genesis_util::setup_devgui_func("", "", 5, & function_418d5e87);
-  level thread zm_genesis_util::setup_devgui_func("", "", 5, & function_dda18b8e);
-  level thread zm_genesis_util::setup_devgui_func("", "", 6, & function_418d5e87);
-  level thread zm_genesis_util::setup_devgui_func("", "", 6, & function_dda18b8e);
-  level thread zm_genesis_util::setup_devgui_func("", "", 7, & function_418d5e87);
-  level thread zm_genesis_util::setup_devgui_func("", "", 7, & function_dda18b8e);
-  level thread zm_genesis_util::setup_devgui_func("", "", 8, & function_418d5e87);
-  level thread zm_genesis_util::setup_devgui_func("", "", 8, & function_dda18b8e);
-  level thread zm_genesis_util::setup_devgui_func("", "", 9, & function_418d5e87);
-  level thread zm_genesis_util::setup_devgui_func("", "", 9, & function_dda18b8e);
-  level thread zm_genesis_util::setup_devgui_func("", "", 10, & function_418d5e87);
-  level thread zm_genesis_util::setup_devgui_func("", "", 10, & function_dda18b8e);
-  level thread zm_genesis_util::setup_devgui_func("", "", 11, & function_418d5e87);
-  level thread zm_genesis_util::setup_devgui_func("", "", 11, & function_dda18b8e);
-  level thread zm_genesis_util::setup_devgui_func("", "", 12, & function_418d5e87);
-  level thread zm_genesis_util::setup_devgui_func("", "", 12, & function_dda18b8e);
-  level thread zm_genesis_util::setup_devgui_func("", "", 13, & function_418d5e87);
-  level thread zm_genesis_util::setup_devgui_func("", "", 13, & function_dda18b8e);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_418d5e87);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_dda18b8e);
+  level thread zm_genesis_util::setup_devgui_func("", "", 2, &function_418d5e87);
+  level thread zm_genesis_util::setup_devgui_func("", "", 2, &function_dda18b8e);
+  level thread zm_genesis_util::setup_devgui_func("", "", 3, &function_418d5e87);
+  level thread zm_genesis_util::setup_devgui_func("", "", 3, &function_dda18b8e);
+  level thread zm_genesis_util::setup_devgui_func("", "", 4, &function_418d5e87);
+  level thread zm_genesis_util::setup_devgui_func("", "", 4, &function_dda18b8e);
+  level thread zm_genesis_util::setup_devgui_func("", "", 5, &function_418d5e87);
+  level thread zm_genesis_util::setup_devgui_func("", "", 5, &function_dda18b8e);
+  level thread zm_genesis_util::setup_devgui_func("", "", 6, &function_418d5e87);
+  level thread zm_genesis_util::setup_devgui_func("", "", 6, &function_dda18b8e);
+  level thread zm_genesis_util::setup_devgui_func("", "", 7, &function_418d5e87);
+  level thread zm_genesis_util::setup_devgui_func("", "", 7, &function_dda18b8e);
+  level thread zm_genesis_util::setup_devgui_func("", "", 8, &function_418d5e87);
+  level thread zm_genesis_util::setup_devgui_func("", "", 8, &function_dda18b8e);
+  level thread zm_genesis_util::setup_devgui_func("", "", 9, &function_418d5e87);
+  level thread zm_genesis_util::setup_devgui_func("", "", 9, &function_dda18b8e);
+  level thread zm_genesis_util::setup_devgui_func("", "", 10, &function_418d5e87);
+  level thread zm_genesis_util::setup_devgui_func("", "", 10, &function_dda18b8e);
+  level thread zm_genesis_util::setup_devgui_func("", "", 11, &function_418d5e87);
+  level thread zm_genesis_util::setup_devgui_func("", "", 11, &function_dda18b8e);
+  level thread zm_genesis_util::setup_devgui_func("", "", 12, &function_418d5e87);
+  level thread zm_genesis_util::setup_devgui_func("", "", 12, &function_dda18b8e);
+  level thread zm_genesis_util::setup_devgui_func("", "", 13, &function_418d5e87);
+  level thread zm_genesis_util::setup_devgui_func("", "", 13, &function_dda18b8e);
 }
 
 function function_dda18b8e(n_val) {

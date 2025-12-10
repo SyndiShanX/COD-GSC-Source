@@ -25,7 +25,7 @@
 #namespace clean;
 
 function autoexec __init__sytem__() {
-  system::register("clean", & __init__, undefined, undefined);
+  system::register("clean", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -53,12 +53,12 @@ function main() {
   level.scoreroundwinbased = 1;
   level.teambased = 1;
   level.overrideteamscore = 1;
-  level.onprecachegametype = & onprecachegametype;
-  level.onstartgametype = & onstartgametype;
-  level.onspawnplayer = & onspawnplayer;
-  level.onplayerkilled = & onplayerkilled;
-  level.onroundswitch = & onroundswitch;
-  level.onroundendgame = & onroundendgame;
+  level.onprecachegametype = &onprecachegametype;
+  level.onstartgametype = &onstartgametype;
+  level.onspawnplayer = &onspawnplayer;
+  level.onplayerkilled = &onplayerkilled;
+  level.onroundswitch = &onroundswitch;
+  level.onroundendgame = &onroundendgame;
   level.var_83033207 = getweapon("clean_drop");
   if(!sessionmodeissystemlink() && !sessionmodeisonlinegame() && issplitscreen()) {
     globallogic::setvisiblescoreboardcolumns("score", "kills", "cleandeposits", "cleandenies", "deaths");
@@ -79,12 +79,12 @@ function onstartgametype() {
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
   foreach(team in level.teams) {
-    util::setobjectivetext(team, & "OBJECTIVES_CLEAN");
-    util::setobjectivehinttext(team, & "OBJECTIVES_CLEAN_HINT");
+    util::setobjectivetext(team, &"OBJECTIVES_CLEAN");
+    util::setobjectivehinttext(team, &"OBJECTIVES_CLEAN_HINT");
     if(level.splitscreen) {
-      util::setobjectivescoretext(team, & "OBJECTIVES_CLEAN");
+      util::setobjectivescoretext(team, &"OBJECTIVES_CLEAN");
     } else {
-      util::setobjectivescoretext(team, & "OBJECTIVES_CLEAN_SCORE");
+      util::setobjectivescoretext(team, &"OBJECTIVES_CLEAN_SCORE");
     }
     spawnlogic::add_spawn_points(team, "mp_tdm_spawn");
     spawnlogic::place_spawn_points(spawning::gettdmstartspawnname(team));
@@ -261,11 +261,11 @@ function function_54bb534d() {
 function function_18b49ff3() {
   visuals = [];
   trigger = spawn("trigger_radius", (0, 0, 0), 0, 32, 32);
-  taco = gameobjects::create_use_object("any", trigger, visuals, undefined, & "");
+  taco = gameobjects::create_use_object("any", trigger, visuals, undefined, &"");
   taco notsolid();
   taco ghost();
   taco gameobjects::set_use_time(0);
-  taco.onuse = & function_9629206a;
+  taco.onuse = &function_9629206a;
   objective_add(taco.objectiveid, "invisible", (0, 0, 0));
   objective_icon(taco.objectiveid, "t7_hud_waypoints_stockpile_dropped");
   return taco;
@@ -294,7 +294,7 @@ function function_992fbc7a(victim, attacker, pos, yawangle) {
   objective_setinvisibletoall(self.objectiveid);
   objective_team(self.objectiveid, attacker.team);
   objective_state(self.objectiveid, "active");
-  objective_setcolor(self.objectiveid, & "EnemyOrange");
+  objective_setcolor(self.objectiveid, &"EnemyOrange");
   objective_setvisibletoplayer(self.objectiveid, attacker);
   self gameobjects::allow_use("any");
   if(isDefined(self.var_88b94427)) {
@@ -417,12 +417,12 @@ function function_afb9f455() {
 function function_4c41767e(origin) {
   trigger = spawn("trigger_radius", origin, 0, 80, 108);
   visuals[0] = spawn("script_model", trigger.origin);
-  var_12b94c16 = gameobjects::create_use_object("neutral", trigger, visuals, undefined, & "clean_deposit");
+  var_12b94c16 = gameobjects::create_use_object("neutral", trigger, visuals, undefined, &"clean_deposit");
   var_12b94c16 gameobjects::set_use_time(0);
   var_12b94c16 gameobjects::allow_use("none");
   var_12b94c16 gameobjects::set_visible_team("none");
-  var_12b94c16.onuse = & function_f6b1cbad;
-  var_12b94c16.canuseobject = & function_52f9b039;
+  var_12b94c16.onuse = &function_f6b1cbad;
+  var_12b94c16.canuseobject = &function_52f9b039;
   var_12b94c16.effectorigin = trigger.origin + (0, 0, 0);
   var_12b94c16 spawning::create_influencer("clean_deposit_hub", var_12b94c16.origin, 0);
   var_12b94c16 spawning::enable_influencers(0);
@@ -512,7 +512,7 @@ function function_a293cd04(var_1bc0e62e = -1) {
       return (var_1bc0e62e + 1) % level.cleandeposithubs.size;
     }
     case 1: {
-      return function_d844a988(var_1bc0e62e, & function_e458e18d);
+      return function_d844a988(var_1bc0e62e, &function_e458e18d);
     }
   }
   return function_e458e18d(var_1bc0e62e);
@@ -674,7 +674,7 @@ function function_2f8f0719(player, victim) {
   }
 }
 
-function function_3b21342e( & times, time_threshold) {
+function function_3b21342e(&times, time_threshold) {
   for(i = 0; i < times.size; i++) {
     if(times[i] < time_threshold) {
       times[i] = 0;

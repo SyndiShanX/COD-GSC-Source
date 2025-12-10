@@ -114,7 +114,7 @@ class cmobilearmory {
   }
 
   function function_afd39ac7(e_player) {
-    var_ab455203.gameobject.caninteractwithplayer = & function_66708329;
+    var_ab455203.gameobject.caninteractwithplayer = &function_66708329;
     var_ab455203.gameobject.var_3df2554f = e_player;
     wait(0.25);
     var_ab455203.gameobject.caninteractwithplayer = undefined;
@@ -257,15 +257,15 @@ class cmobilearmory {
     mdl_mobile_armory hidepart("tag_weapons_02_jnt");
     mdl_mobile_armory hidepart("tag_weapons_03_jnt");
     mdl_mobile_armory hidepart("tag_weapons_04_jnt");
-    s_mobile_armory_object = gameobjects::create_use_object("any", t_use, array(mdl_mobile_armory), vectorscale((0, 0, 1), 68), & "cp_mobile_armory");
+    s_mobile_armory_object = gameobjects::create_use_object("any", t_use, array(mdl_mobile_armory), vectorscale((0, 0, 1), 68), &"cp_mobile_armory");
     s_mobile_armory_object gameobjects::allow_use("any");
     s_mobile_armory_object gameobjects::set_use_time(0.35);
     s_mobile_armory_object gameobjects::set_use_text(&"COOP_SELECT_LOADOUT");
     s_mobile_armory_object gameobjects::set_owner_team("allies");
     s_mobile_armory_object gameobjects::set_visible_team("any");
-    s_mobile_armory_object.onuse = & onuse;
-    s_mobile_armory_object.onbeginuse = & onbeginuse;
-    s_mobile_armory_object.onenduse = & onenduse;
+    s_mobile_armory_object.onuse = &onuse;
+    s_mobile_armory_object.onbeginuse = &onbeginuse;
+    s_mobile_armory_object.onenduse = &onenduse;
     s_mobile_armory_object.onuse_thread = 1;
     s_mobile_armory_object.useweapon = undefined;
     s_mobile_armory_object.single_use = 0;
@@ -291,7 +291,7 @@ class cmobilearmory {
 #namespace mobile_armory;
 
 function autoexec __init__sytem__() {
-  system::register("cp_mobile_armory", & __init__, & __main__, undefined);
+  system::register("cp_mobile_armory", &__init__, &__main__, undefined);
 }
 
 function __init__() {

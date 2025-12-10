@@ -15,10 +15,10 @@
 function main() {
   mp_metro_fx::main();
   mp_metro_sound::main();
-  clientfield::register("scriptmover", "mp_metro_train_timer", 1, 1, "int", & traintimerspawned, 1, 0);
+  clientfield::register("scriptmover", "mp_metro_train_timer", 1, 1, "int", &traintimerspawned, 1, 0);
   load::main();
-  level.domflagbasefxoverride = & dom_flag_base_fx_override;
-  level.domflagcapfxoverride = & dom_flag_cap_fx_override;
+  level.domflagbasefxoverride = &dom_flag_base_fx_override;
+  level.domflagcapfxoverride = &dom_flag_cap_fx_override;
   util::waitforclient(0);
   level.endgamexcamname = "ui_cam_endgame_mp_metro";
   setdvar("phys_buoyancy", 1);

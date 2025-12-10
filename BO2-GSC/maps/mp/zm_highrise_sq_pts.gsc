@@ -359,7 +359,7 @@ pts_putdown_trigs_create_for_spot(s_lion_spot, player) {
   if(isDefined(s_lion_spot.which_ball) || isDefined(s_lion_spot.springpad_buddy) && isDefined(s_lion_spot.springpad_buddy.which_ball)) {
     return;
   }
-  t_place_ball = sq_pts_create_use_trigger(s_lion_spot.origin, 16, 70, & "ZM_HIGHRISE_SQ_PUTDOWN_BALL");
+  t_place_ball = sq_pts_create_use_trigger(s_lion_spot.origin, 16, 70, &"ZM_HIGHRISE_SQ_PUTDOWN_BALL");
   player clientclaimtrigger(t_place_ball);
   t_place_ball.owner = player;
   player thread place_ball_think(t_place_ball, s_lion_spot);

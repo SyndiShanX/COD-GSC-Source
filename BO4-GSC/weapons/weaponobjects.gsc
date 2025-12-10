@@ -677,7 +677,7 @@ weaponobjectdamage(watcher) {
     self.waschained = 1;
   }
 
-  if(isDefined(idflags) && idflags&8) {
+  if(isDefined(idflags) && idflags& 8) {
     self.wasdamagedfrombulletpenetration = 1;
   }
 
@@ -1913,7 +1913,7 @@ testkillbrushonstationary(a_killbrushes, player) {
         continue;
       }
 
-      if(!(isDefined(self.spawnflags) && (self.spawnflags&8) == 8) && !(isDefined(self.spawnflags) && (self.spawnflags&512) == 512) && !(isDefined(self.spawnflags) && (self.spawnflags&32768) == 32768)) {
+      if(!(isDefined(self.spawnflags) && (self.spawnflags& 8) == 8) && !(isDefined(self.spawnflags) && (self.spawnflags& 512) == 512) && !(isDefined(self.spawnflags) && (self.spawnflags& 32768) == 32768)) {
         continue;
       }
 
@@ -1945,7 +1945,7 @@ deleteonkillbrush(player) {
           continue;
         }
 
-        if(!(isDefined(self.spawnflags) && (self.spawnflags&8) == 8) && !(isDefined(self.spawnflags) && (self.spawnflags&512) == 512) && !(isDefined(self.spawnflags) && (self.spawnflags&32768) == 32768)) {
+        if(!(isDefined(self.spawnflags) && (self.spawnflags& 8) == 8) && !(isDefined(self.spawnflags) && (self.spawnflags& 512) == 512) && !(isDefined(self.spawnflags) && (self.spawnflags& 32768) == 32768)) {
           continue;
         }
 

@@ -8,15 +8,15 @@
 #namespace zm_ai_mechz_claw;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_mechz_claw", & __init__, undefined, undefined);
+  system::register("zm_ai_mechz_claw", &__init__, undefined, undefined);
 }
 
 function private __init__() {
-  clientfield::register("actor", "mechz_fx", 21000, 12, "int", & function_22b149ce, 0, 0);
-  clientfield::register("scriptmover", "mechz_claw", 21000, 1, "int", & function_2ad55883, 0, 0);
-  clientfield::register("actor", "mechz_wpn_source", 21000, 1, "int", & function_54ae128d, 0, 0);
-  clientfield::register("toplayer", "mechz_grab", 21000, 1, "int", & function_8dfa08c1, 0, 0);
-  level.mechz_detach_claw_override = & mechz_detach_claw_override;
+  clientfield::register("actor", "mechz_fx", 21000, 12, "int", &function_22b149ce, 0, 0);
+  clientfield::register("scriptmover", "mechz_claw", 21000, 1, "int", &function_2ad55883, 0, 0);
+  clientfield::register("actor", "mechz_wpn_source", 21000, 1, "int", &function_54ae128d, 0, 0);
+  clientfield::register("toplayer", "mechz_grab", 21000, 1, "int", &function_8dfa08c1, 0, 0);
+  level.mechz_detach_claw_override = &mechz_detach_claw_override;
 }
 
 function private __main__() {}

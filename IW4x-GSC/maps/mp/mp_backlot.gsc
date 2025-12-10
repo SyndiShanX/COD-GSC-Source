@@ -10,8 +10,6 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_backlot");
 
-
-
   ambientPlay("ambient_backlot_ext");
 
   game["attackers"] = "axis";

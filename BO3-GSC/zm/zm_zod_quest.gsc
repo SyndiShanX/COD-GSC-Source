@@ -41,12 +41,12 @@
 #namespace zm_zod_quest;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_quest", & __init__, undefined, undefined);
+  system::register("zm_zod_quest", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  level.pap_zbarrier_state_func = & function_b35b6cb3;
-  callback::on_connect( & on_player_connect);
+  level.pap_zbarrier_state_func = &function_b35b6cb3;
+  callback::on_connect(&on_player_connect);
   clientfield::register("toplayer", "ZM_ZOD_UI_SUMMONING_KEY_PICKUP", 1, 1, "int");
   clientfield::register("toplayer", "ZM_ZOD_UI_RITUAL_BUSY", 1, 1, "int");
   clientfield::register("world", "quest_key", 1, 1, "int");
@@ -91,7 +91,7 @@ function __init__() {
   n_bits = getminbitcountfornum(6);
   clientfield::register("toplayer", "used_quest_key", 1, n_bits, "int");
   clientfield::register("toplayer", "used_quest_key_location", 1, n_bits, "int");
-  visionset_mgr::register_info("visionset", "zod_ritual_dim", 1, 1, 15, 1, & visionset_mgr::ramp_in_out_thread_per_player, 0);
+  visionset_mgr::register_info("visionset", "zod_ritual_dim", 1, 1, 15, 1, &visionset_mgr::ramp_in_out_thread_per_player, 0);
   a_str_names = array("boxer", "detective", "femme", "magician");
   foreach(str_name in a_str_names) {
     relic_placed = getent(("quest_ritual_relic_" + str_name) + "_placed", "targetname");
@@ -171,7 +171,7 @@ function function_70a7429b(var_25bc1c51) {
 }
 
 function start_zod_quest() {
-  callback::on_connect( & player_death_watcher);
+  callback::on_connect(&player_death_watcher);
   level flag::wait_till("start_zombie_round_logic");
   prevent_theater_mode_spoilers();
   level thread setup_quest_key();
@@ -233,8 +233,8 @@ function create_quest_key_pickup_unitrigger(mdl_key) {
   mdl_key.unitrigger_stub.script_length = length;
   mdl_key.unitrigger_stub.require_look_at = 0;
   mdl_key.unitrigger_stub.mdl_key = mdl_key;
-  mdl_key.unitrigger_stub.prompt_and_visibility_func = & quest_key_trigger_visibility;
-  zm_unitrigger::register_static_unitrigger(mdl_key.unitrigger_stub, & quest_key_trigger_think);
+  mdl_key.unitrigger_stub.prompt_and_visibility_func = &quest_key_trigger_visibility;
+  zm_unitrigger::register_static_unitrigger(mdl_key.unitrigger_stub, &quest_key_trigger_think);
 }
 
 function quest_key_trigger_visibility(player) {
@@ -376,7 +376,7 @@ function function_984725d6(str_name) {
     ai = zombie_utility::spawn_zombie(var_d16bd3a3, "memento_keeper_zombie", s_spawn_point);
     if(isDefined(ai)) {
       ai thread function_2d0c5aa1(s_spawn_point);
-      ai.custom_location = & function_411c908f;
+      ai.custom_location = &function_411c908f;
       if(!isDefined(var_4480cf29)) {
         var_4480cf29 = [];
       } else if(!isarray(var_4480cf29)) {
@@ -409,7 +409,7 @@ function function_58fe842c() {
         ai = zombie_utility::spawn_zombie(e_spawner, "memento_keeper_zombie", s_spawn_point);
         if(isDefined(ai)) {
           ai thread function_2d0c5aa1(s_spawn_point);
-          ai.custom_location = & function_411c908f;
+          ai.custom_location = &function_411c908f;
           if(!isDefined(var_4480cf29)) {
             var_4480cf29 = [];
           } else if(!isarray(var_4480cf29)) {
@@ -447,7 +447,7 @@ function function_12370901(str_fieldname, n_place_index, b_on) {
   if(b_on) {
     n_val = n_val | (1 << n_place_index);
   } else {
-    n_val = n_val & (!(1 << n_place_index));
+    n_val = n_val &(!(1 << n_place_index));
   }
   level clientfield::set(str_fieldname, n_val);
 }
@@ -527,12 +527,12 @@ function setup_defend_areas() {
     setup_defend_area(str_name);
   }
   a_e_zombie_spawners = getEntArray("ritual_zombie_spawner", "targetname");
-  array::thread_all(a_e_zombie_spawners, & spawner::add_spawn_function, & zm_spawner::zombie_spawn_init);
+  array::thread_all(a_e_zombie_spawners, &spawner::add_spawn_function, &zm_spawner::zombie_spawn_init);
   level.a_o_defend_areas["pap"] = new careadefend();
   [[level.a_o_defend_areas["pap"]]] - > init("defend_area_" + "pap", "defend_area_spawn_point_" + "pap");
   [[level.a_o_defend_areas["pap"]]] - > set_luimenus("ZodRitualProgress", "ZodRitualReturn", "ZodRitualSucceeded", "ZodRitualFailed");
-  [[level.a_o_defend_areas["pap"]]] - > set_trigger_visibility_function( & altar_trigger_visibility);
-  [[level.a_o_defend_areas["pap"]]] - > set_external_functions( & ritual_prereq, & ritual_start, & ritual_succeed, & ritual_fail, "pap");
+  [[level.a_o_defend_areas["pap"]]] - > set_trigger_visibility_function(&altar_trigger_visibility);
+  [[level.a_o_defend_areas["pap"]]] - > set_external_functions(&ritual_prereq, &ritual_start, &ritual_succeed, &ritual_fail, "pap");
   [[level.a_o_defend_areas["pap"]]] - > set_volumes("defend_area_volume_" + "pap", "defend_area_volume_" + "pap");
   [[level.a_o_defend_areas["pap"]]] - > start();
 }
@@ -542,7 +542,7 @@ function setup_defend_area(str_name) {
   level.a_o_defend_areas[str_name] = new careadefend();
   [[level.a_o_defend_areas[str_name]]] - > init("defend_area_" + str_name, "defend_area_spawn_point_" + str_name);
   [[level.a_o_defend_areas[str_name]]] - > set_luimenus("ZodRitualProgress", "ZodRitualReturn", "ZodRitualSucceeded", "ZodRitualFailed");
-  [[level.a_o_defend_areas[str_name]]] - > set_external_functions( & ritual_prereq, & ritual_start, & ritual_succeed, & ritual_fail, str_name);
+  [[level.a_o_defend_areas[str_name]]] - > set_external_functions(&ritual_prereq, &ritual_start, &ritual_succeed, &ritual_fail, str_name);
   [[level.a_o_defend_areas[str_name]]] - > set_volumes("defend_area_volume_" + str_name, "defend_area_volume_" + str_name);
 }
 
@@ -976,9 +976,9 @@ function pap_door_watch_for_explosion() {
 
 function setup_pap_chamber() {
   level flag::wait_till("start_zombie_round_logic");
-  hint_string = & "ZM_ZOD_QUEST_RITUAL_NEED_RELIC";
-  func_trigger_visibility = & basin_trigger_visibility;
-  func_trigger_thread = & basin_trigger_thread;
+  hint_string = &"ZM_ZOD_QUEST_RITUAL_NEED_RELIC";
+  func_trigger_visibility = &basin_trigger_visibility;
+  func_trigger_thread = &basin_trigger_thread;
   for(i = 1; i < 5; i++) {
     create_ritual_unitrigger("pap_basin_" + i, hint_string, func_trigger_visibility, func_trigger_thread);
   }
@@ -1436,16 +1436,16 @@ function player_death_watcher() {
 }
 
 function quest_devgui() {
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_dc59b750);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & zm_zod_pods::function_3f95af32);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_7dda8ea9);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_6c6a5914);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_c0a29676);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_546835a);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_832e2eaa);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_11a2ca3b);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_1dadcc76);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_150df737);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_dc59b750);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &zm_zod_pods::function_3f95af32);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_7dda8ea9);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_6c6a5914);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_c0a29676);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_546835a);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_832e2eaa);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_11a2ca3b);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_1dadcc76);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_150df737);
 }
 
 function function_150df737(n_val) {
@@ -1501,7 +1501,7 @@ function function_c0a29676() {
 
 function function_11a2ca3b(val) {
   if(val) {
-    level.overridezombiespawn = & function_861cf6b3;
+    level.overridezombiespawn = &function_861cf6b3;
     setdvar("", 0);
   }
 }
@@ -1528,8 +1528,8 @@ function function_dc59b750(n_val) {
 }
 
 function function_83c8b6e8() {
-  zm_pap_util::set_move_in_func( & function_5630c228);
-  zm_pap_util::set_move_out_func( & function_ea272f07);
+  zm_pap_util::set_move_in_func(&function_5630c228);
+  zm_pap_util::set_move_out_func(&function_ea272f07);
   var_de243c38 = getent("vending_packapunch", "targetname");
   var_de243c38 ghost();
   var_4197ca83 = zm_pap_util::get_triggers();

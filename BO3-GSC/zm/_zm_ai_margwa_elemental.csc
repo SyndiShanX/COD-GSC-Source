@@ -12,13 +12,13 @@
 #namespace zm_ai_margwa_elemental;
 
 function autoexec init() {
-  callback::add_weapon_type("launcher_shadow_margwa", & function_894980af);
-  clientfield::register("actor", "margwa_elemental_type", 15000, 3, "int", & function_1fb4e300, 0, 0);
-  clientfield::register("actor", "margwa_defense_actor_appear_disappear_fx", 15000, 1, "int", & function_345693f6, 0, 0);
-  clientfield::register("scriptmover", "play_margwa_fire_attack_fx", 15000, 1, "counter", & function_c46381fc, 0, 0);
-  clientfield::register("scriptmover", "margwa_defense_hovering_fx", 15000, 3, "int", & function_abb174cf, 0, 0);
-  clientfield::register("actor", "shadow_margwa_attack_portal_fx", 15000, 1, "int", & shadow_margwa_attack_portal_fx, 0, 0);
-  clientfield::register("actor", "margwa_shock_fx", 15000, 1, "int", & death_ray_shock_fx, 0, 0);
+  callback::add_weapon_type("launcher_shadow_margwa", &function_894980af);
+  clientfield::register("actor", "margwa_elemental_type", 15000, 3, "int", &function_1fb4e300, 0, 0);
+  clientfield::register("actor", "margwa_defense_actor_appear_disappear_fx", 15000, 1, "int", &function_345693f6, 0, 0);
+  clientfield::register("scriptmover", "play_margwa_fire_attack_fx", 15000, 1, "counter", &function_c46381fc, 0, 0);
+  clientfield::register("scriptmover", "margwa_defense_hovering_fx", 15000, 3, "int", &function_abb174cf, 0, 0);
+  clientfield::register("actor", "shadow_margwa_attack_portal_fx", 15000, 1, "int", &shadow_margwa_attack_portal_fx, 0, 0);
+  clientfield::register("actor", "margwa_shock_fx", 15000, 1, "int", &death_ray_shock_fx, 0, 0);
   level._effect["margwa_fire_roar"] = "dlc4/genesis/fx_margwa_roar_fire";
   level._effect["margwa_fire_spawn"] = "dlc4/genesis/fx_margwa_spawn_fire";
   level._effect["margwa_fire_attack_explosion"] = "dlc4/genesis/fx_margwa_attack_fire";
@@ -99,7 +99,7 @@ function private function_fd0bfd3(localclientnum) {
   self.margwa_roar_effect = level._effect["margwa_fire_roar"];
   self.margwa_spawn_effect = level._effect["margwa_fire_spawn"];
   self.margwa_head_hit_fx = level._effect["margwa_fire_head_hit"];
-  self.margwa_play_spawn_effect = & function_740a099a;
+  self.margwa_play_spawn_effect = &function_740a099a;
 }
 
 function private function_8a262a34(localclientnum) {
@@ -111,7 +111,7 @@ function private function_ec63e97f(localclientnum) {
   self.margwa_roar_effect = level._effect["margwa_shadow_roar"];
   self.margwa_spawn_effect = level._effect["margwa_shadow_spawn"];
   self.margwa_head_hit_fx = level._effect["margwa_shadow_head_hit"];
-  self.margwa_play_spawn_effect = & function_740a099a;
+  self.margwa_play_spawn_effect = &function_740a099a;
 }
 
 function private function_78f9b77d(localclientnum) {

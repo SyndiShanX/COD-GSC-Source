@@ -63,7 +63,7 @@ init() {
 
 tryuseac130(param_00, param_01) {
   if(isDefined(level.ac130player) || level.ac130inuse) {
-    self iprintlnbold( & "KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+    self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
   }
 

@@ -31,7 +31,7 @@ cornered_destruct_pre_load() {
   precachestring(&"CORNERED_DEPLOY_CHUTE");
   precachestring(&"CORNERED_DEPLOY_CHUTE_CONSOLE");
   precachestring(&"CORNERED_PARACHUTE_FAIL");
-  maps\_utility::add_hint_string("chute_deploy", & "CORNERED_DEPLOY_CHUTE", ::parachute_break);
+  maps\_utility::add_hint_string("chute_deploy", &"CORNERED_DEPLOY_CHUTE", ::parachute_break);
   precacheshellshock("cornered_stairwell");
   precacheshellshock("cornered_horizontal_start");
   level.hvt_door_blocker = undefined;
@@ -313,7 +313,7 @@ hvt_office_fail() {
 
   while(!common_scripts\utility::flag("hvt_office_explosion")) {
     if(level.player istouching(var_0)) {
-      setdvar("ui_deadquote", & "CORNERED_FAIL_HVT_INTERROGATE");
+      setdvar("ui_deadquote", &"CORNERED_FAIL_HVT_INTERROGATE");
       maps\_utility::missionfailedwrapper();
     }
 
@@ -322,7 +322,7 @@ hvt_office_fail() {
 
   for(;;) {
     if(level.player istouching(var_0) || level.player istouching(var_1)) {
-      setdvar("ui_deadquote", & "CORNERED_FAIL_EXPLOSION");
+      setdvar("ui_deadquote", &"CORNERED_FAIL_EXPLOSION");
       maps\_utility::missionfailedwrapper();
     }
 
@@ -463,7 +463,7 @@ hvt_office_hvt_death() {
 
     if(isDefined(var_1) && isplayer(var_1) && var_4 != "MOD_IMPACT") {
       self kill();
-      setdvar("ui_deadquote", & "CORNERED_HVT_KILLED_FAIL");
+      setdvar("ui_deadquote", &"CORNERED_HVT_KILLED_FAIL");
       maps\_utility::missionfailedwrapper();
       self notify("hvt_dead");
     }
@@ -1429,7 +1429,7 @@ fall_player() {
     level.player lerpviewangleclamp(0.5, 0, 0, 0, 0, 0, 0);
     var_3 = getanimlength(level.fall_arms_and_legs[0] maps\_utility::getanim("cornered_exfil_fail_player"));
     wait(var_3 - 2.0);
-    setdvar("ui_deadquote", & "CORNERED_PARACHUTE_FAIL");
+    setdvar("ui_deadquote", &"CORNERED_PARACHUTE_FAIL");
     maps\_utility::missionfailedwrapper();
   }
 }

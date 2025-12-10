@@ -40,7 +40,7 @@ main() {
 setupLevelKillstreak() {
   config = spawnStruct();
   config.crateWeight = 85;
-  config.crateHint = & "MP_BATTERY3_VOLCANO_HINT";
+  config.crateHint = &"MP_BATTERY3_VOLCANO_HINT";
   config.debugName = "Volcano";
   config.id = "volcano";
   config.weaponName = "warhawk_mortar_mp";

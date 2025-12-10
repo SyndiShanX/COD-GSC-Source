@@ -679,7 +679,7 @@ freeway_cleanup() {
 }
 
 enter_cougar() {
-  set_objective(level.obj_drive, level.veh_player_cougar gettagorigin("tag_player") + vectorscale((0, 0, 1), 40.0), & "LA_SHARED_OBJ_DRIVE");
+  set_objective(level.obj_drive, level.veh_player_cougar gettagorigin("tag_player") + vectorscale((0, 0, 1), 40.0), &"LA_SHARED_OBJ_DRIVE");
   enter_dist = 10000;
   v_tag_pos = level.veh_player_cougar gettagorigin("tag_enter_driver");
   v_tag_ang = level.veh_player_cougar gettagangles("tag_enter_driver");
@@ -1606,7 +1606,7 @@ sniper_option() {
   level.player waittill_player_has_sniper_weapon();
   flag_set("player_has_sniper_weapon");
   t_sniper = getent("sniper_trigger", "targetname");
-  set_objective(level.obj_snipe, t_sniper.origin, & "LA_SHARED_OBJ_SNIPE");
+  set_objective(level.obj_snipe, t_sniper.origin, &"LA_SHARED_OBJ_SNIPE");
   t_sniper trigger_wait();
   level.player switch_player_to_sniper_weapon();
   flag_wait("grouprappel_done");
@@ -1616,7 +1616,7 @@ sniper_option() {
 
 exit_sniper() {
   level thread sniper_exit_vo();
-  set_objective(level.obj_rappel2, get_scene_start_pos("exit_sniper_player", "player_body"), & "LA_SHARED_OBJ_RAPPEL_3D");
+  set_objective(level.obj_rappel2, get_scene_start_pos("exit_sniper_player", "player_body"), &"LA_SHARED_OBJ_RAPPEL_3D");
   trigger_on("sniper_fastrope_trigger");
   trigger_wait("sniper_fastrope_trigger");
   exploder(311);
@@ -1668,9 +1668,9 @@ rappel_option() {
   t_rappel = getent("rappel_trigger", "targetname");
 
   if(level.player player_has_sniper_weapon())
-    set_objective(level.obj_rappel, t_rappel.origin, & "LA_SHARED_OBJ_RAPPEL");
+    set_objective(level.obj_rappel, t_rappel.origin, &"LA_SHARED_OBJ_RAPPEL");
   else
-    set_objective(level.obj_rappel, t_rappel.origin, & "LA_SHARED_RAPPEL");
+    set_objective(level.obj_rappel, t_rappel.origin, &"LA_SHARED_RAPPEL");
 
   t_rappel trigger_wait();
   level.player magic_bullet_shield();

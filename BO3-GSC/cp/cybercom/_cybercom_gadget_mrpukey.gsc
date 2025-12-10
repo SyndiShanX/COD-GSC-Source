@@ -33,14 +33,14 @@ function main() {
   cybercom_gadget::registerability(2, 64);
   level._effect["puke_reaction"] = "water/fx_liquid_vomit";
   level.cybercom.mrpukey = spawnStruct();
-  level.cybercom.mrpukey._is_flickering = & _is_flickering;
-  level.cybercom.mrpukey._on_flicker = & _on_flicker;
-  level.cybercom.mrpukey._on_give = & _on_give;
-  level.cybercom.mrpukey._on_take = & _on_take;
-  level.cybercom.mrpukey._on_connect = & _on_connect;
-  level.cybercom.mrpukey._on = & _on;
-  level.cybercom.mrpukey._off = & _off;
-  level.cybercom.mrpukey._is_primed = & _is_primed;
+  level.cybercom.mrpukey._is_flickering = &_is_flickering;
+  level.cybercom.mrpukey._on_flicker = &_on_flicker;
+  level.cybercom.mrpukey._on_give = &_on_give;
+  level.cybercom.mrpukey._on_take = &_on_take;
+  level.cybercom.mrpukey._on_connect = &_on_connect;
+  level.cybercom.mrpukey._on = &_on;
+  level.cybercom.mrpukey._off = &_off;
+  level.cybercom.mrpukey._is_primed = &_is_primed;
   level.cybercom.mrpukey.var_106f11dd = array("c_54i_cqb_head1", "c_nrc_cqb_head", "c_nrc_cqb_f_head", "c_54i_supp_head1", "c_54i_supp_head1", "c_nrc_sniper_head", "c_nrc_suppressor_head");
 }
 
@@ -55,8 +55,8 @@ function _on_give(slot, weapon) {
     self.cybercom.var_f72b478f = getdvarfloat("scr_pukey_upgraded_fov", 0.92);
     self.cybercom.var_110c156a = getdvarint("scr_mrpukey_target_count_upgraded", 5);
   }
-  self.cybercom.targetlockcb = & _get_valid_targets;
-  self.cybercom.targetlockrequirementcb = & _lock_requirement;
+  self.cybercom.targetlockcb = &_get_valid_targets;
+  self.cybercom.targetlockrequirementcb = &_lock_requirement;
   self thread cybercom::function_b5f4e597(weapon);
   self cybercom::function_8257bcb3("base_rifle", 5);
   self cybercom::function_8257bcb3("fem_rifle", 5);

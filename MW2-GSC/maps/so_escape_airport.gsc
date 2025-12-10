@@ -11,9 +11,9 @@
 
 /*------------------- tweakables -------------------*/
 
-CONST_regular_obj = & "SO_ESCAPE_AIRPORT_OBJ_REGULAR";
-CONST_hardened_obj = & "SO_ESCAPE_AIRPORT_OBJ_HARDENED";
-CONST_veteran_obj = & "SO_ESCAPE_AIRPORT_OBJ_VETERAN";
+CONST_regular_obj = &"SO_ESCAPE_AIRPORT_OBJ_REGULAR";
+CONST_hardened_obj = &"SO_ESCAPE_AIRPORT_OBJ_HARDENED";
+CONST_veteran_obj = &"SO_ESCAPE_AIRPORT_OBJ_VETERAN";
 
 /*------------------- tweakables -------------------*/
 

@@ -1029,7 +1029,7 @@ drone_outro_fail() {
   scene = "drone_outro_fail";
   level thread run_scene(scene);
   flag_wait(scene + "_started");
-  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, & "cctv_hud");
+  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, &"cctv_hud");
   maps\_so_rts_event::trigger_event("dlg_mission_fail_fps");
   screen_fade_in(2.5);
   maps\_so_rts_event::trigger_event("dlg_mission_fail");

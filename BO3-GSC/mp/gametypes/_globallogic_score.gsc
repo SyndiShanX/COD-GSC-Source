@@ -295,7 +295,7 @@ function giveplayermomentum(event, player, victim, descvalue, weapon) {
   }
   if(!isDefined(label)) {
     errormsg(event + "");
-    player giveplayermomentumnotification(score, & "SCORE_BLANK", descvalue, countstowardrampage, weapon, combatefficiencyscore);
+    player giveplayermomentumnotification(score, &"SCORE_BLANK", descvalue, countstowardrampage, weapon, combatefficiencyscore);
     return;
   }
   player giveplayermomentumnotification(score, label, descvalue, countstowardrampage, weapon, combatefficiencyscore);

@@ -250,7 +250,7 @@ claw_grapple() {
   self.m_claw setanim( % ai_zombie_mech_grapple_arm_closed_idle, 1, 0.2, 1);
   self.m_claw.fx_ent delete();
   self.m_claw.fx_ent = undefined;
-  self.fx_field = self.fx_field & ~256;
+  self.fx_field = self.fx_field &~256;
   self setclientfield("mechz_fx", self.fx_field);
   flag_clear("mechz_launching_claw");
 
@@ -467,8 +467,8 @@ mechz_kill_claw_watcher() {
 }
 
 mechz_claw_cleanup() {
-  self.fx_field = self.fx_field & ~256;
-  self.fx_field = self.fx_field & ~64;
+  self.fx_field = self.fx_field &~256;
+  self.fx_field = self.fx_field &~64;
   self setclientfield("mechz_fx", self.fx_field);
   self mechz_claw_release();
 

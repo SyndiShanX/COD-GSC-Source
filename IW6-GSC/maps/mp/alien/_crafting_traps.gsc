@@ -49,10 +49,10 @@ init() {
     var_4.item_damage_rate = float(tablelookup(level.alien_crafting_table, 0, var_2, 8));
     var_4.item_damage_radius = int(tablelookup(level.alien_crafting_table, 0, var_2, 7));
     var_4.item_damage_falloff = int(tablelookup(level.alien_crafting_table, 0, var_2, 11));
-    var_4.hintstring = & "ALIEN_CRAFTING_PICKUP_CRAFTED_ITEM";
-    var_4.placestring = & "ALIEN_CRAFTING_PLACE_CRAFTED_ITEM";
-    var_4.cannotplacestring = & "ALIEN_CRAFTING_CANNOT_PLACE";
-    var_4.placestringnocancel = & "ALIEN_CRAFTING_PLACE_CRAFTED_ITEM_NOCANCEL";
+    var_4.hintstring = &"ALIEN_CRAFTING_PICKUP_CRAFTED_ITEM";
+    var_4.placestring = &"ALIEN_CRAFTING_PLACE_CRAFTED_ITEM";
+    var_4.cannotplacestring = &"ALIEN_CRAFTING_CANNOT_PLACE";
+    var_4.placestringnocancel = &"ALIEN_CRAFTING_PLACE_CRAFTED_ITEM_NOCANCEL";
     var_4.headiconheight = 75;
     var_4.splashname = "used_placeable_barrier";
     var_4.lifespan = int(tablelookup(level.alien_crafting_table, 0, var_2, 10));
@@ -693,13 +693,13 @@ pet_trap_monitor(var_0) {
       var_0.disabled = 1;
 
       if(isDefined(var_0.owner) && isalive(var_0.owner))
-        var_0.owner maps\mp\_utility::setlowermessage("trap_disabled", & "ALIEN_CRAFTING_PETTRAP_DISABLED", 3);
+        var_0.owner maps\mp\_utility::setlowermessage("trap_disabled", &"ALIEN_CRAFTING_PETTRAP_DISABLED", 3);
 
       while(maps\mp\alien\_pillage::check_for_existing_pet_bombs() > 1)
         wait 1;
 
       if(isDefined(var_0.owner) && isalive(var_0.owner))
-        var_0.owner maps\mp\_utility::setlowermessage("trap_disabled", & "ALIEN_CRAFTING_PETTRAP_ENABLED", 3);
+        var_0.owner maps\mp\_utility::setlowermessage("trap_disabled", &"ALIEN_CRAFTING_PETTRAP_ENABLED", 3);
 
       playFXOnTag(level._effect["actuator_idle"], var_0, "tag_fx");
       var_0.disabled = 0;

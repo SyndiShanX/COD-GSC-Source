@@ -27,12 +27,12 @@
 #namespace namespace_19e79ea1;
 
 function autoexec __init__sytem__() {
-  system::register("zm_stalingrad_dragon_strike", & __init__, & __main__, undefined);
+  system::register("zm_stalingrad_dragon_strike", &__init__, &__main__, undefined);
 }
 
 function __init__() {
-  callback::on_spawned( & on_player_spawned);
-  zm::register_player_damage_callback( & function_43b5419a);
+  callback::on_spawned(&on_player_spawned);
+  zm::register_player_damage_callback(&function_43b5419a);
 }
 
 function __main__() {
@@ -170,8 +170,8 @@ function function_316be9a7() {
   s_unitrigger.radius = 100;
   s_unitrigger.height = 100;
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger, 1);
-  s_unitrigger.prompt_and_visibility_func = & function_10d61b3;
-  zm_unitrigger::register_static_unitrigger(s_unitrigger, & function_68299355);
+  s_unitrigger.prompt_and_visibility_func = &function_10d61b3;
+  zm_unitrigger::register_static_unitrigger(s_unitrigger, &function_68299355);
   var_620858e1 = s_unitrigger.var_f30d1f8f gettagorigin("tag_animate");
   var_14dae7af = s_unitrigger.var_f30d1f8f gettagangles("tag_animate");
   s_unitrigger.var_f30d1f8f.var_6306226 = util::spawn_model("tag_origin", var_620858e1, var_14dae7af);
@@ -181,11 +181,11 @@ function function_316be9a7() {
 
 function function_10d61b3(player) {
   if(level flag::get("draconite_available") && player zm_utility::get_player_placeable_mine() != getweapon("launcher_dragon_strike_upgraded")) {
-    self sethintstringforplayer(player, & "ZM_STALINGRAD_DRAGON_STRIKE_UPGRADED_PICKUP");
+    self sethintstringforplayer(player, &"ZM_STALINGRAD_DRAGON_STRIKE_UPGRADED_PICKUP");
     return true;
   }
   if(level flag::get("dragon_strike_quest_complete") && !level flag::get("draconite_available") && player zm_utility::get_player_placeable_mine() != getweapon("launcher_dragon_strike")) {
-    self sethintstringforplayer(player, & "ZM_STALINGRAD_DRAGON_STRIKE_PICKUP");
+    self sethintstringforplayer(player, &"ZM_STALINGRAD_DRAGON_STRIKE_PICKUP");
     return true;
   }
   if(level flag::get("dragon_strike_unlocked") && player zm_utility::get_player_placeable_mine() == getweapon("launcher_dragon_strike") && !level flag::get("dragon_stage3_started") || (level flag::get("dragon_strike_unlocked") && !level flag::get("dragon_strike_quest_complete")) || (level flag::get("draconite_available") && player zm_utility::get_player_placeable_mine() == getweapon("launcher_dragon_strike_upgraded")) || (!level flag::get("draconite_available") && level flag::get("dragon_stage4_started")) || level flag::get("special_round") || level.round_number == level.var_a78effc7 || level flag::get("scenario_active")) {
@@ -193,15 +193,15 @@ function function_10d61b3(player) {
     return false;
   }
   if(level flag::get("dragon_stage3_started") && !player flag::get("dragon_strike_lockbox_upgraded_trigger_used")) {
-    self sethintstringforplayer(player, & "ZM_STALINGRAD_DRAGON_STRIKE_UPGRADED_UNLOCK");
+    self sethintstringforplayer(player, &"ZM_STALINGRAD_DRAGON_STRIKE_UPGRADED_UNLOCK");
     return true;
   }
   if(player flag::get("dragon_strike_lockbox_trigger_used") && !level flag::get("dragon_strike_unlocked") || (player flag::get("dragon_strike_lockbox_upgraded_trigger_used") && !level flag::get("dragon_stage4_started"))) {
-    self sethintstringforplayer(player, & "ZM_STALINGRAD_DRAGON_STRIKE_UNLOCK_INCOMPLETE");
+    self sethintstringforplayer(player, &"ZM_STALINGRAD_DRAGON_STRIKE_UNLOCK_INCOMPLETE");
     return false;
   }
   if(!player flag::get("dragon_strike_lockbox_trigger_used") && !level flag::get("dragon_strike_unlocked")) {
-    self sethintstringforplayer(player, & "ZM_STALINGRAD_DRAGON_STRIKE_UNLOCK");
+    self sethintstringforplayer(player, &"ZM_STALINGRAD_DRAGON_STRIKE_UNLOCK");
     return true;
   }
 }
@@ -282,9 +282,9 @@ function function_56059128() {
 function function_93510b8b() {
   level flag::wait_till("dragon_strike_unlocked");
   level flag::set("dragon_stage1_started");
-  zm_spawner::register_zombie_death_event_callback( & function_2e107eef);
+  zm_spawner::register_zombie_death_event_callback(&function_2e107eef);
   level function_815a155e(20 + (10 * level.players.size));
-  zm_spawner::deregister_zombie_death_event_callback( & function_2e107eef);
+  zm_spawner::deregister_zombie_death_event_callback(&function_2e107eef);
   level function_e6794c49();
   level thread function_5cb61169();
   level flag::wait_till("dragon_stage3_started");
@@ -293,12 +293,12 @@ function function_93510b8b() {
     s_unitrigger.var_f30d1f8f function_8f02cb7e();
     level.var_d4286019 = 1;
     level function_af4562b1();
-    zm_spawner::register_zombie_death_event_callback( & function_2e107eef);
+    zm_spawner::register_zombie_death_event_callback(&function_2e107eef);
     level thread function_815a155e(15 + (5 * level.players.size));
     level thread function_46c8b621();
     level flag::wait_till("lockdown_active");
     level flag::wait_till("lockdown_complete");
-    zm_spawner::deregister_zombie_death_event_callback( & function_2e107eef);
+    zm_spawner::deregister_zombie_death_event_callback(&function_2e107eef);
     if(level flag::get("dragonstrike_stage_complete")) {
       break;
     } else {
@@ -360,7 +360,7 @@ function function_5cb61169() {
     var_47295c1[i] delete();
   }
   var_47295c1 = array::remove_undefined(var_47295c1, 0);
-  array::thread_all(var_47295c1, & function_75a7ba2d);
+  array::thread_all(var_47295c1, &function_75a7ba2d);
 }
 
 function function_75a7ba2d() {

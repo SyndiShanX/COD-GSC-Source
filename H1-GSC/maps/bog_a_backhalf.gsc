@@ -375,8 +375,8 @@ enemy_tank_encroach_mvmt() {
 }
 
 objectives() {
-  objective_add(1, "active", & "BOG_A_SECURE_THE_M1A1_ABRAMS", (4800, 1488, 32));
-  objective_add(5, "active", & "BOG_A_INTERCEPT_THE_ENEMY_BEFORE", (4800, 1488, 32));
+  objective_add(1, "active", &"BOG_A_SECURE_THE_M1A1_ABRAMS", (4800, 1488, 32));
+  objective_add(5, "active", &"BOG_A_INTERCEPT_THE_ENEMY_BEFORE", (4800, 1488, 32));
   objective_indentlevel(5, 1);
   objective_current(5);
   common_scripts\utility::flag_wait("tank_defense_completed");
@@ -386,18 +386,18 @@ objectives() {
   common_scripts\utility::flag_set("aa_zpu");
   objective_state(5, "done");
   maps\_utility::arcademode_checkpoint(4.5, "d");
-  objective_add(6, "active", & "BOG_A_DESTROY_THE_ZPU_ANTI", level.zpu.origin);
+  objective_add(6, "active", &"BOG_A_DESTROY_THE_ZPU_ANTI", level.zpu.origin);
   objective_indentlevel(6, 1);
   objective_current(6);
   common_scripts\utility::flag_wait("zpus_destroyed");
   common_scripts\utility::flag_clear("aa_zpu");
   objective_state(6, "done");
   var_0 = getent("southern_area_objective", "targetname");
-  objective_add(7, "active", & "BOG_A_SECURE_THE_SOUTHERN_SECTOR", var_0.origin);
+  objective_add(7, "active", &"BOG_A_SECURE_THE_SOUTHERN_SECTOR", var_0.origin);
   objective_indentlevel(7, 1);
   objective_current(7);
   common_scripts\utility::flag_wait("beacon_orders");
-  objective_add(7, "active", & "BOG_A_PLANT_THE_IR_BEACON_TO", level.beacon.origin);
+  objective_add(7, "active", &"BOG_A_PLANT_THE_IR_BEACON_TO", level.beacon.origin);
   objective_indentlevel(7, 1);
   var_1 = spawnfx(common_scripts\utility::getfx("beacon_glow"), level.beacon.origin);
   triggerfx(var_1);
@@ -407,14 +407,14 @@ objectives() {
   var_1 delete();
   maps\_utility::arcademode_checkpoint(3, "f");
   objective_delete(7);
-  objective_add(7, "active", & "BOG_A_WAIT_FOR_AIR_SUPPORT");
+  objective_add(7, "active", &"BOG_A_WAIT_FOR_AIR_SUPPORT");
   objective_indentlevel(7, 1);
   objective_current(7);
   common_scripts\utility::flag_wait("cobra_success");
   objective_state(7, "done");
   objective_state(1, "done");
   var_2 = (5099.6, 1602.45, -6.36579);
-  objective_add(9, "active", & "BOG_A_REGROUP_WITH_THE_SQUAD", var_2);
+  objective_add(9, "active", &"BOG_A_REGROUP_WITH_THE_SQUAD", var_2);
   objective_current(9);
   common_scripts\utility::flag_wait("reached_ending_area");
   objective_state(9, "done");
@@ -840,7 +840,7 @@ tank_destruction() {
 tank_missionfailure() {
   soundscripts\_snd::snd_message("start_tank_mission_failure");
   wait 2.25;
-  setdvar("ui_deadquote", & "BOG_A_THE_TANK_WAS_OVERRUN");
+  setdvar("ui_deadquote", &"BOG_A_THE_TANK_WAS_OVERRUN");
   maps\_utility::missionfailedwrapper();
 }
 

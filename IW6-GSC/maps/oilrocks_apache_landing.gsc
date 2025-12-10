@@ -52,7 +52,7 @@ _precache() {
 
 objective_player_clears_landing() {
   var_0 = maps\_utility::obj("apache_landing_killingeverythings");
-  objective_add(var_0, "active", & "OILROCKS_OBJ_CLEAR_THE_LANDING");
+  objective_add(var_0, "active", &"OILROCKS_OBJ_CLEAR_THE_LANDING");
   objective_current(var_0);
   objective_position(var_0, common_scripts\utility::getstruct("objective_pos_kill_everything", "targetname").origin);
   var_1 = maps\_utility::array_spawn_targetname("landing_spawn_wave1", undefined, 1, 1);

@@ -125,7 +125,7 @@ tryusehelicopter(param_00, param_01) {
   }
 
   if(isDefined(level.chopper) && var_03) {
-    self iprintlnbold( & "KILLSTREAKS_HELI_IN_QUEUE");
+    self iprintlnbold(&"KILLSTREAKS_HELI_IN_QUEUE");
     if(isDefined(param_01) && param_01 != "helicopter") {
       var_04 = "helicopter_" + param_01;
     } else {
@@ -150,7 +150,7 @@ tryusehelicopter(param_00, param_01) {
     var_07 = scripts\mp\utility::getkillstreakweapon("helicopter");
     return 0;
   } else if(scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + var_06 >= scripts\mp\utility::maxvehiclesallowed()) {
-    self iprintlnbold( & "KILLSTREAKS_TOO_MANY_VEHICLES");
+    self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
     return 0;
   }
 

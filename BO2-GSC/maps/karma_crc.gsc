@@ -252,7 +252,7 @@ breach_vo() {
 }
 
 crc_eye_scan() {
-  luinotifyevent(&"hud_update_vehicle_custom", 3, 1, & "retina_scanner", 3250);
+  luinotifyevent(&"hud_update_vehicle_custom", 3, 1, &"retina_scanner", 3250);
   level thread run_scene_and_delete("scene_p_eye_scan");
   level.player playSound("evt_eye_scan_boot_up");
   add_visor_text("KARMA_ACCESSING_SOURCE_DATA", 2, "orange");
@@ -333,34 +333,34 @@ crc_interact() {
 wait_for_input(str_input) {
   switch (str_input) {
     case "attack":
-      str_msg = & "KARMA_HINT_ATTACK";
+      str_msg = &"KARMA_HINT_ATTACK";
       break;
     case "melee":
-      str_msg = & "KARMA_HINT_MELEE";
+      str_msg = &"KARMA_HINT_MELEE";
       break;
     case "down":
-      str_msg = & "KARMA_HINT_MOVE_DOWN";
+      str_msg = &"KARMA_HINT_MOVE_DOWN";
       break;
     case "left":
-      str_msg = & "KARMA_HINT_MOVE_LEFT";
+      str_msg = &"KARMA_HINT_MOVE_LEFT";
       break;
     case "right":
-      str_msg = & "KARMA_HINT_MOVE_RIGHT";
+      str_msg = &"KARMA_HINT_MOVE_RIGHT";
       break;
     case "up":
-      str_msg = & "KARMA_HINT_MOVE_UP";
+      str_msg = &"KARMA_HINT_MOVE_UP";
       break;
     case "sprint":
-      str_msg = & "KARMA_HINT_SPRINT";
+      str_msg = &"KARMA_HINT_SPRINT";
       break;
     case "use":
-      str_msg = & "KARMA_HINT_USE";
+      str_msg = &"KARMA_HINT_USE";
       break;
     case "zoom":
-      str_msg = & "KARMA_HINT_ZOOM";
+      str_msg = &"KARMA_HINT_ZOOM";
       break;
     case "unzoom":
-      str_msg = & "KARMA_HINT_UNZOOM";
+      str_msg = &"KARMA_HINT_UNZOOM";
       break;
   }
 

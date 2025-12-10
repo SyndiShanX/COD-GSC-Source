@@ -83,8 +83,8 @@ cornered_interior_pre_load() {
   precachestring(&"CORNERED_STROBE_OFF");
   precachestring(&"CORNERED_DISABLE_ELEVATORS");
   precachestring(&"CORNERED_DISABLE_ELEVATORS_CONSOLE");
-  maps\_utility::add_hint_string("turn_on_strobe", & "CORNERED_STROBE_ON", ::strobe_on_hide_hint);
-  maps\_utility::add_hint_string("turn_off_strobe", & "CORNERED_STROBE_OFF", ::strobe_off_hide_hint);
+  maps\_utility::add_hint_string("turn_on_strobe", &"CORNERED_STROBE_ON", ::strobe_on_hide_hint);
+  maps\_utility::add_hint_string("turn_off_strobe", &"CORNERED_STROBE_OFF", ::strobe_off_hide_hint);
   level.combat_rappel_rope_coil_rorke = getent("combat_rappel_rope_coil_rorke", "targetname");
   level.combat_rappel_rope_coil_rorke hide();
   level.combat_rappel_rope_coil_player = getent("combat_rappel_rope_coil_player", "targetname");
@@ -2562,16 +2562,16 @@ mission_failed_watcher() {
 
   switch (var_0) {
     case "rorke_killed":
-      var_1 = & "CORNERED_RORKE_WAS_KILLED";
+      var_1 = &"CORNERED_RORKE_WAS_KILLED";
       break;
     case "rorke_killed_2":
-      var_1 = & "CORNERED_RORKE_WAS_KILLED";
+      var_1 = &"CORNERED_RORKE_WAS_KILLED";
       break;
     case "baker_killed":
-      var_1 = & "CORNERED_BAKER_WAS_KILLED";
+      var_1 = &"CORNERED_BAKER_WAS_KILLED";
       break;
     case "hvt_got_away":
-      var_1 = & "CORNERED_HVT_GOT_AWAY";
+      var_1 = &"CORNERED_HVT_GOT_AWAY";
       break;
   }
 

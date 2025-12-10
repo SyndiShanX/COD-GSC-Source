@@ -11,24 +11,24 @@
 #namespace zm_perk_electric_cherry;
 
 function autoexec __init__sytem__() {
-  system::register("zm_perk_electric_cherry", & __init__, undefined, undefined);
+  system::register("zm_perk_electric_cherry", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  zm_perks::register_perk_clientfields("specialty_electriccherry", & electric_cherry_client_field_func, & electric_cherry_code_callback_func);
+  zm_perks::register_perk_clientfields("specialty_electriccherry", &electric_cherry_client_field_func, &electric_cherry_code_callback_func);
   zm_perks::register_perk_effects("specialty_electriccherry", "electric_light");
-  zm_perks::register_perk_init_thread("specialty_electriccherry", & init_electric_cherry);
+  zm_perks::register_perk_init_thread("specialty_electriccherry", &init_electric_cherry);
 }
 
 function init_electric_cherry() {
   if(isDefined(level.enable_magic) && level.enable_magic) {
     level._effect["electric_light"] = "_t6/misc/fx_zombie_cola_revive_on";
   }
-  registerclientfield("allplayers", "electric_cherry_reload_fx", 1, 2, "int", & electric_cherry_reload_attack_fx, 0);
-  clientfield::register("actor", "tesla_death_fx", 1, 1, "int", & tesla_death_fx_callback, 0, 0);
-  clientfield::register("vehicle", "tesla_death_fx_veh", 10000, 1, "int", & tesla_death_fx_callback, 0, 0);
-  clientfield::register("actor", "tesla_shock_eyes_fx", 1, 1, "int", & tesla_shock_eyes_fx_callback, 0, 0);
-  clientfield::register("vehicle", "tesla_shock_eyes_fx_veh", 10000, 1, "int", & tesla_shock_eyes_fx_callback, 0, 0);
+  registerclientfield("allplayers", "electric_cherry_reload_fx", 1, 2, "int", &electric_cherry_reload_attack_fx, 0);
+  clientfield::register("actor", "tesla_death_fx", 1, 1, "int", &tesla_death_fx_callback, 0, 0);
+  clientfield::register("vehicle", "tesla_death_fx_veh", 10000, 1, "int", &tesla_death_fx_callback, 0, 0);
+  clientfield::register("actor", "tesla_shock_eyes_fx", 1, 1, "int", &tesla_shock_eyes_fx_callback, 0, 0);
+  clientfield::register("vehicle", "tesla_shock_eyes_fx_veh", 10000, 1, "int", &tesla_shock_eyes_fx_callback, 0, 0);
   level._effect["electric_cherry_explode"] = "dlc1/castle/fx_castle_electric_cherry_down";
   level._effect["electric_cherry_trail"] = "dlc1/castle/fx_castle_electric_cherry_trail";
   level._effect["tesla_death_cherry"] = "zombie/fx_tesla_shock_zmb";

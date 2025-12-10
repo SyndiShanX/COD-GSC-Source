@@ -93,7 +93,7 @@ function main() {
   assert(isDefined(level.first_frame), "");
   level thread util::servertime();
   level thread util::init_utility();
-  util::registersystem("levelNotify", & levelnotifyhandler);
+  util::registersystem("levelNotify", &levelnotifyhandler);
   register_clientfields();
   level.createfx_disable_fx = getdvarint("disable_fx") == 1;
   system::wait_till("all");
@@ -101,7 +101,7 @@ function main() {
 }
 
 function register_clientfields() {
-  clientfield::register("missile", "cf_m_proximity", 1, 1, "int", & callback::callback_proximity, 0, 0);
-  clientfield::register("missile", "cf_m_emp", 1, 1, "int", & callback::callback_emp, 0, 0);
-  clientfield::register("missile", "cf_m_stun", 1, 1, "int", & callback::callback_stunned, 0, 0);
+  clientfield::register("missile", "cf_m_proximity", 1, 1, "int", &callback::callback_proximity, 0, 0);
+  clientfield::register("missile", "cf_m_emp", 1, 1, "int", &callback::callback_emp, 0, 0);
+  clientfield::register("missile", "cf_m_stun", 1, 1, "int", &callback::callback_stunned, 0, 0);
 }

@@ -80,7 +80,7 @@ function function_2bb254bb() {
   var_b8fe8638 = struct::get_array("drop_pod_radio", "targetname");
   foreach(s_radio in var_b8fe8638) {
     s_radio.b_used = 0;
-    s_radio zm_unitrigger::create_unitrigger(&"ZM_STALINGRAD_DROP_POD_ACTIVATE", undefined, & function_f7b738bf);
+    s_radio zm_unitrigger::create_unitrigger(&"ZM_STALINGRAD_DROP_POD_ACTIVATE", undefined, &function_f7b738bf);
     s_radio thread function_5f435187();
   }
   var_45b3db60 = getent("drop_pod_terminal_library", "targetname");
@@ -247,19 +247,19 @@ function function_6b964717() {
   level.var_583e4a97.var_a622ee25 = 0;
   level.var_583e4a97.var_4bf647dc = "blue";
   level.var_583e4a97.var_a43689b5 = 10;
-  zm_powerups::register_powerup("code_cylinder_red", & function_86d9efb0);
-  zm_powerups::register_powerup("code_cylinder_yellow", & function_86d9efb0);
-  zm_powerups::register_powerup("code_cylinder_blue", & function_86d9efb0);
-  zm_powerups::add_zombie_powerup("code_cylinder_red", "p7_zm_sta_code_cylinder_red", & "ZM_STALINGRAD_CODE_CYLINER_HINT", undefined, 0, 0, 0);
-  zm_powerups::add_zombie_powerup("code_cylinder_yellow", "p7_zm_sta_code_cylinder_yellow", & "ZM_STALINGRAD_CODE_CYLINER_HINT", undefined, 0, 0, 0);
-  zm_powerups::add_zombie_powerup("code_cylinder_blue", "p7_zm_sta_code_cylinder", & "ZM_STALINGRAD_CODE_CYLINER_HINT", undefined, 0, 0, 0);
+  zm_powerups::register_powerup("code_cylinder_red", &function_86d9efb0);
+  zm_powerups::register_powerup("code_cylinder_yellow", &function_86d9efb0);
+  zm_powerups::register_powerup("code_cylinder_blue", &function_86d9efb0);
+  zm_powerups::add_zombie_powerup("code_cylinder_red", "p7_zm_sta_code_cylinder_red", &"ZM_STALINGRAD_CODE_CYLINER_HINT", undefined, 0, 0, 0);
+  zm_powerups::add_zombie_powerup("code_cylinder_yellow", "p7_zm_sta_code_cylinder_yellow", &"ZM_STALINGRAD_CODE_CYLINER_HINT", undefined, 0, 0, 0);
+  zm_powerups::add_zombie_powerup("code_cylinder_blue", "p7_zm_sta_code_cylinder", &"ZM_STALINGRAD_CODE_CYLINER_HINT", undefined, 0, 0, 0);
   zm_powerups::powerup_remove_from_regular_drops("code_cylinder_red");
   zm_powerups::powerup_remove_from_regular_drops("code_cylinder_yellow");
   zm_powerups::powerup_remove_from_regular_drops("code_cylinder_blue");
   zm_powerups::powerup_set_statless_powerup("code_cylinder_red");
   zm_powerups::powerup_set_statless_powerup("code_cylinder_yellow");
   zm_powerups::powerup_set_statless_powerup("code_cylinder_blue");
-  zm_spawner::register_zombie_death_event_callback( & function_1389d425);
+  zm_spawner::register_zombie_death_event_callback(&function_1389d425);
 }
 
 function function_855f59cb() {
@@ -383,7 +383,7 @@ function function_d1a91c4f(var_e7a36389) {
   foreach(e_player in level.activeplayers) {
     e_player function_7400750d();
   }
-  callback::on_connect( & function_7400750d);
+  callback::on_connect(&function_7400750d);
   level clientfield::set("drop_pod_streaming", 1);
   level.var_8cc024f2.var_b454101b thread function_e677d12();
   level scene::play("drop_pod_landing_" + str_location, "targetname", var_165d49f6);
@@ -421,7 +421,7 @@ function function_d1a91c4f(var_e7a36389) {
   level flag::set("drop_pod_spawned");
   level thread function_306f40e1(str_location);
   level thread function_ba5071c4();
-  zm_spawner::register_zombie_death_event_callback( & function_737e2ef4);
+  zm_spawner::register_zombie_death_event_callback(&function_737e2ef4);
 }
 
 function function_7400750d() {
@@ -680,7 +680,7 @@ function function_94bb84a1(var_e7a36389, var_51d4ce0d) {
   level notify("hash_94bb84a1");
   level flag::clear("drop_pod_active");
   level flag::clear("advance_drop_pod_round");
-  zm_spawner::deregister_zombie_death_event_callback( & function_737e2ef4);
+  zm_spawner::deregister_zombie_death_event_callback(&function_737e2ef4);
   level.var_8cc024f2.var_b454101b zm_attackables::deactivate();
   if(!var_51d4ce0d) {
     iprintlnbold("");

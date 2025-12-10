@@ -30,10 +30,10 @@ setSkill(reset, skill_override) {
     level.difficultyType[1] = "normal";
     level.difficultyType[2] = "hardened";
     level.difficultyType[3] = "veteran";
-    level.difficultyString["easy"] = & "GAMESKILL_EASY";
-    level.difficultyString["normal"] = & "GAMESKILL_NORMAL";
-    level.difficultyString["hardened"] = & "GAMESKILL_HARDENED";
-    level.difficultyString["veteran"] = & "GAMESKILL_VETERAN";
+    level.difficultyString["easy"] = &"GAMESKILL_EASY";
+    level.difficultyString["normal"] = &"GAMESKILL_NORMAL";
+    level.difficultyString["hardened"] = &"GAMESKILL_HARDENED";
+    level.difficultyString["veteran"] = &"GAMESKILL_VETERAN";
     level thread update_skill_on_change();
   }
   if(!isDefined(level.invulTime_onShield_multiplier)) {
@@ -956,7 +956,7 @@ old_style_health_overlay() {
   overlay.alpha = 0;
   wait(0.05);
   level.strings["take_cover"] = spawnStruct();
-  level.strings["take_cover"].text = & "GAME_GET_TO_COVER";
+  level.strings["take_cover"].text = &"GAME_GET_TO_COVER";
   self thread healthOverlay_remove(overlay);
   pulseTime = 0.8;
   for(;;) {

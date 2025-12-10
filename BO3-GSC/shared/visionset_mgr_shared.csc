@@ -12,7 +12,7 @@
 #namespace visionset_mgr;
 
 function autoexec __init__sytem__() {
-  system::register("visionset_mgr", & __init__, undefined, undefined);
+  system::register("visionset_mgr", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -22,11 +22,11 @@ function __init__() {
   level.vsmgr_states_inited = [];
   level.vsmgr_filter_custom_enable = [];
   level.vsmgr_filter_custom_disable = [];
-  level thread register_type("visionset", & visionset_slot_cb, & visionset_lerp_cb, & visionset_update_cb);
+  level thread register_type("visionset", &visionset_slot_cb, &visionset_lerp_cb, &visionset_update_cb);
   register_visionset_info(level.vsmgr_default_info_name, 1, 1, "undefined", "undefined");
-  level thread register_type("overlay", & overlay_slot_cb, & overlay_lerp_cb, & overlay_update_cb);
+  level thread register_type("overlay", &overlay_slot_cb, &overlay_lerp_cb, &overlay_update_cb);
   register_overlay_info_style_none(level.vsmgr_default_info_name, 1, 1);
-  callback::on_finalize_initialization( & finalize_initialization);
+  callback::on_finalize_initialization(&finalize_initialization);
   level thread monitor();
 }
 

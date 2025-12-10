@@ -97,23 +97,23 @@ onstartgametype() {
     game["dialog"]["defense_obj"] = "obj_destroy";
 
   maps\mp\gametypes\common_bomb_gameobject::loadbombfx();
-  maps\mp\_utility::setobjectivetext(game["attackers"], & "OBJECTIVES_DD_ATTACKER");
-  maps\mp\_utility::setobjectivetext(game["defenders"], & "OBJECTIVES_DD_DEFENDER");
+  maps\mp\_utility::setobjectivetext(game["attackers"], &"OBJECTIVES_DD_ATTACKER");
+  maps\mp\_utility::setobjectivetext(game["defenders"], &"OBJECTIVES_DD_DEFENDER");
 
   if(level.splitscreen) {
-    maps\mp\_utility::setobjectivescoretext(game["attackers"], & "OBJECTIVES_DD_ATTACKER");
-    maps\mp\_utility::setobjectivescoretext(game["defenders"], & "OBJECTIVES_DD_DEFENDER");
+    maps\mp\_utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_DD_ATTACKER");
+    maps\mp\_utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_DD_DEFENDER");
   } else {
-    maps\mp\_utility::setobjectivescoretext(game["attackers"], & "OBJECTIVES_DD_ATTACKER_SCORE");
-    maps\mp\_utility::setobjectivescoretext(game["defenders"], & "OBJECTIVES_DD_DEFENDER_SCORE");
+    maps\mp\_utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_DD_ATTACKER_SCORE");
+    maps\mp\_utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_DD_DEFENDER_SCORE");
   }
 
   if(maps\mp\_utility::inovertime()) {
-    maps\mp\_utility::setobjectivehinttext(game["attackers"], & "OBJECTIVES_DD_OVERTIME_HINT");
-    maps\mp\_utility::setobjectivehinttext(game["defenders"], & "OBJECTIVES_DD_OVERTIME_HINT");
+    maps\mp\_utility::setobjectivehinttext(game["attackers"], &"OBJECTIVES_DD_OVERTIME_HINT");
+    maps\mp\_utility::setobjectivehinttext(game["defenders"], &"OBJECTIVES_DD_OVERTIME_HINT");
   } else {
-    maps\mp\_utility::setobjectivehinttext(game["attackers"], & "OBJECTIVES_DD_ATTACKER_HINT");
-    maps\mp\_utility::setobjectivehinttext(game["defenders"], & "OBJECTIVES_DD_DEFENDER_HINT");
+    maps\mp\_utility::setobjectivehinttext(game["attackers"], &"OBJECTIVES_DD_ATTACKER_HINT");
+    maps\mp\_utility::setobjectivehinttext(game["defenders"], &"OBJECTIVES_DD_DEFENDER_HINT");
   }
 
   initspawns();

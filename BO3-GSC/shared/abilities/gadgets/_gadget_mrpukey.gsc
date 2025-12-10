@@ -15,16 +15,16 @@
 #namespace _gadget_mrpukey;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_mrpukey", & __init__, undefined, undefined);
+  system::register("gadget_mrpukey", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(38, & gadget_mrpukey_on, & gadget_mrpukey_off);
-  ability_player::register_gadget_possession_callbacks(38, & gadget_mrpukey_on_give, & gadget_mrpukey_on_take);
-  ability_player::register_gadget_flicker_callbacks(38, & gadget_mrpukey_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(38, & gadget_mrpukey_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(38, & gadget_mrpukey_is_flickering);
-  ability_player::register_gadget_primed_callbacks(38, & gadget_mrpukey_is_primed);
+  ability_player::register_gadget_activation_callbacks(38, &gadget_mrpukey_on, &gadget_mrpukey_off);
+  ability_player::register_gadget_possession_callbacks(38, &gadget_mrpukey_on_give, &gadget_mrpukey_on_take);
+  ability_player::register_gadget_flicker_callbacks(38, &gadget_mrpukey_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(38, &gadget_mrpukey_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(38, &gadget_mrpukey_is_flickering);
+  ability_player::register_gadget_primed_callbacks(38, &gadget_mrpukey_is_primed);
 }
 
 function gadget_mrpukey_is_inuse(slot) {

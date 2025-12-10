@@ -210,7 +210,7 @@ GlowStickUseListener(owner) {
   owner endon("disconnect");
 
   self setCursorHint("HINT_NOICON");
-  self setHintString( & "MP_PICKUP_TI");
+  self setHintString(&"MP_PICKUP_TI");
 
   self thread updateEnemyUse(owner);
 
@@ -263,7 +263,7 @@ GlowStickEnemyUseListener(owner) {
   owner endon("disconnect");
 
   self.enemyTrigger setCursorHint("HINT_NOICON");
-  self.enemyTrigger setHintString( & "LUA_SMASH_FLARE");
+  self.enemyTrigger setHintString(&"LUA_SMASH_FLARE");
   self.enemyTrigger maps\mp\_utility::makeEnemyUsable(owner);
 
   for(;;) {
@@ -867,7 +867,7 @@ omausebar(duration) {
   self endon("disconnect");
   var_1 = maps\mp\gametypes\_hud_util::createprimaryprogressbar(0, -25);
   var_2 = maps\mp\gametypes\_hud_util::createprimaryprogressbartext(0, -25);
-  var_2 settext( & "MPUI_CHANGING_KIT");
+  var_2 settext(&"MPUI_CHANGING_KIT");
   var_1 maps\mp\gametypes\_hud_util::updatebar(0, 1 / duration);
 
   for(var_3 = 0; var_3 < duration && isalive(self) && !level.gameended; var_3 += 0.05)

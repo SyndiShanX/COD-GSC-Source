@@ -10,7 +10,7 @@
 #namespace oob;
 
 function autoexec __init__sytem__() {
-  system::register("out_of_bounds", & __init__, undefined, undefined);
+  system::register("out_of_bounds", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -20,11 +20,11 @@ function __init__() {
   } else {
     level.oob_timelimit_ms = getdvarint("oob_timelimit_ms", 6000);
   }
-  clientfield::register("toplayer", "out_of_bounds", 1, 5, "int", & onoutofboundschange, 0, 1);
+  clientfield::register("toplayer", "out_of_bounds", 1, 5, "int", &onoutofboundschange, 0, 1);
   if(!sessionmodeiszombiesgame()) {
-    callback::on_localclient_connect( & on_localplayer_connect);
-    callback::on_localplayer_spawned( & on_localplayer_spawned);
-    callback::on_localclient_shutdown( & on_localplayer_shutdown);
+    callback::on_localclient_connect(&on_localplayer_connect);
+    callback::on_localplayer_spawned(&on_localplayer_spawned);
+    callback::on_localclient_shutdown(&on_localplayer_shutdown);
   }
 }
 

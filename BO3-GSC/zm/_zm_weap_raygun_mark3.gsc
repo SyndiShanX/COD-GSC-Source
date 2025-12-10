@@ -19,7 +19,7 @@
 #namespace _zm_weap_raygun_mark3;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_raygun_mark3", & __init__, & __main__, undefined);
+  system::register("zm_weap_raygun_mark3", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -29,15 +29,15 @@ function __init__() {
   level.w_raygun_mark3lh_upgraded = getweapon("raygun_mark3lh_upgraded");
   zm_utility::register_slowdown("raygun_mark3lh", 0.7, 2);
   zm_utility::register_slowdown("raygun_mark3lh_upgraded", 0.5, 3);
-  zm_spawner::register_zombie_damage_callback( & raygun_mark3_damage_response);
+  zm_spawner::register_zombie_damage_callback(&raygun_mark3_damage_response);
   clientfield::register("scriptmover", "slow_vortex_fx", 12000, 2, "int");
   clientfield::register("actor", "ai_disintegrate", 12000, 1, "int");
   clientfield::register("vehicle", "ai_disintegrate", 12000, 1, "int");
   clientfield::register("actor", "ai_slow_vortex_fx", 12000, 2, "int");
   clientfield::register("vehicle", "ai_slow_vortex_fx", 12000, 2, "int");
-  visionset_mgr::register_info("visionset", "raygun_mark3_vortex_visionset", 12000, 24, 30, 1, & visionset_mgr::ramp_in_out_thread_per_player, 1);
-  visionset_mgr::register_info("overlay", "raygun_mark3_vortex_blur", 12000, 24, 30, 1, & visionset_mgr::ramp_in_out_thread_per_player, 1);
-  callback::on_connect( & watch_raygun_impact);
+  visionset_mgr::register_info("visionset", "raygun_mark3_vortex_visionset", 12000, 24, 30, 1, &visionset_mgr::ramp_in_out_thread_per_player, 1);
+  visionset_mgr::register_info("overlay", "raygun_mark3_vortex_blur", 12000, 24, 30, 1, &visionset_mgr::ramp_in_out_thread_per_player, 1);
+  callback::on_connect(&watch_raygun_impact);
 }
 
 function __main__() {}

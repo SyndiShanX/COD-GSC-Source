@@ -13,13 +13,13 @@
 #namespace quadtank;
 
 function autoexec __init__sytem__() {
-  system::register("quadtank", & __init__, undefined, undefined);
+  system::register("quadtank", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_vehicletype_callback("quadtank", & _setup_);
-  clientfield::register("toplayer", "player_shock_fx", 1, 1, "int", & player_shock_fx_handler, 0, 0);
-  clientfield::register("vehicle", "quadtank_trophy_state", 1, 1, "int", & update_trophy_system_state, 0, 0);
+  vehicle::add_vehicletype_callback("quadtank", &_setup_);
+  clientfield::register("toplayer", "player_shock_fx", 1, 1, "int", &player_shock_fx_handler, 0, 0);
+  clientfield::register("vehicle", "quadtank_trophy_state", 1, 1, "int", &update_trophy_system_state, 0, 0);
 }
 
 function _setup_(localclientnum) {

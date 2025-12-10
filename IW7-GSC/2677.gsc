@@ -12,10 +12,10 @@ init() {
   var_0.modelplacement = "revocator";
   var_0.modelplacementfailed = "revocator_bad";
   var_0.placedmodel = "revocator";
-  var_0.hintstring = & "COOP_CRAFTABLES_PICKUP";
-  var_0.placestring = & "COOP_CRAFTABLES_PLACE";
-  var_0.cannotplacestring = & "COOP_CRAFTABLES_CANNOT_PLACE";
-  var_0.placecancelablestring = & "COOP_CRAFTABLES_PLACE_CANCELABLE";
+  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
+  var_0.placestring = &"COOP_CRAFTABLES_PLACE";
+  var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
+  var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
   var_0.placementheighttolerance = 30.0;
   var_0.placementradius = 24.0;
   var_0.carriedtrapoffset = (0, 0, 25);

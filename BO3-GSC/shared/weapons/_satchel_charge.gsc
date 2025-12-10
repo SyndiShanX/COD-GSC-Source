@@ -15,7 +15,7 @@
 function init_shared() {
   level._effect["satchel_charge_enemy_light"] = "weapon/fx_c4_light_orng";
   level._effect["satchel_charge_friendly_light"] = "weapon/fx_c4_light_blue";
-  callback::add_weapon_watcher( & createsatchelwatcher);
+  callback::add_weapon_watcher(&createsatchelwatcher);
 }
 
 function createsatchelwatcher() {
@@ -26,9 +26,9 @@ function createsatchelwatcher() {
   watcher.hackertoolradius = level.equipmenthackertoolradius;
   watcher.hackertooltimems = level.equipmenthackertooltimems;
   watcher.headicon = 0;
-  watcher.ondetonatecallback = & satcheldetonate;
-  watcher.onspawn = & satchelspawn;
-  watcher.onstun = & weaponobjects::weaponstun;
+  watcher.ondetonatecallback = &satcheldetonate;
+  watcher.onspawn = &satchelspawn;
+  watcher.onstun = &weaponobjects::weaponstun;
   watcher.stuntime = 1;
   watcher.altweapon = getweapon("satchel_charge_detonator");
   watcher.ownergetsassist = 1;

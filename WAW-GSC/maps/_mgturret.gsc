@@ -1116,7 +1116,7 @@ portable_mg_spot() {
   if(isDefined(self.isvehicleattached)) {
     return;
   }
-  if(self.spawnflags & turret_preplaced) {
+  if(self.spawnflags &turret_preplaced) {
     return;
   }
   hide_turret();

@@ -41,7 +41,7 @@ init() {
 onuse(param_00, param_01) {
   var_02 = scripts\mp\utility::getotherteam(self.team);
   if(isDefined(level.var_C22F)) {
-    self iprintlnbold( & "KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+    self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
   }
 

@@ -36,7 +36,6 @@ main() {
   level._effect["deathfx_bloodpool"] = loadfx("impacts/deathfx_bloodpool");
   level._effect["blood_drip"] = loadfx("impacts/blood_drip");
 
-
   level._effect["glass_dust_trail"] = loadfx("dust/glass_dust_trail_emitter");
 
   level._effect["pistol_muzzleflash"] = loadfx("muzzleflashes/pistolflash");

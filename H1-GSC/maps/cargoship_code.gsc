@@ -4477,18 +4477,18 @@ hint_setup() {
   }
   maps\_utility::set_console_status();
   level.actionbinds = [];
-  registeractionbinding("frag", "+frag", & "CARGOSHIP_HINT_FRAG");
-  registeractionbinding("crouch", "+stance", & "CARGOSHIP_HINT_CROUCH_STANCE");
+  registeractionbinding("frag", "+frag", &"CARGOSHIP_HINT_FRAG");
+  registeractionbinding("crouch", "+stance", &"CARGOSHIP_HINT_CROUCH_STANCE");
 
   if(!level.console) {
-    registeractionbinding("crouch", "+togglecrouch", & "PLATFORM_HINT_CROUCH_TOGGLE_COVER_PC");
-    registeractionbinding("crouch", "+movedown", & "PLATFORM_HINT_HOLD_CROUCH_COVER");
+    registeractionbinding("crouch", "+togglecrouch", &"PLATFORM_HINT_CROUCH_TOGGLE_COVER_PC");
+    registeractionbinding("crouch", "+movedown", &"PLATFORM_HINT_HOLD_CROUCH_COVER");
   }
 
-  registeractionbinding("crouch", "gocrouch", & "CARGOSHIP_HINT_CROUCH");
-  registeractionbinding("crouch", "togglecrouch", & "CARGOSHIP_HINT_CROUCH_TOGGLE");
-  registeractionbinding("stand", "+gostand", & "CARGOSHIP_HINT_STAND");
-  registeractionbinding("stand", "+stance", & "CARGOSHIP_HINT_STAND_STANCE");
+  registeractionbinding("crouch", "gocrouch", &"CARGOSHIP_HINT_CROUCH");
+  registeractionbinding("crouch", "togglecrouch", &"CARGOSHIP_HINT_CROUCH_TOGGLE");
+  registeractionbinding("stand", "+gostand", &"CARGOSHIP_HINT_STAND");
+  registeractionbinding("stand", "+stance", &"CARGOSHIP_HINT_STAND_STANCE");
   initkeys();
   updatekeysforbindings();
   thread nadehint();

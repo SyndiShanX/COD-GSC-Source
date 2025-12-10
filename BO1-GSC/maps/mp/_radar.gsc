@@ -23,19 +23,19 @@ init() {
   level.radarLongViewTime = 45;
   if(maps\mp\gametypes\_tweakables::getTweakableValue("killstreak", "allowradar")) {
     maps\mp\gametypes\_hardpoints::registerKillstreak("radar_mp", "radar_mp", "killstreak_spyplane", "uav_used", ::useKillstreakRadar);
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("radar_mp", & "KILLSTREAK_EARNED_RADAR", & "KILLSTREAK_RADAR_NOT_AVAILABLE", & "KILLSTREAK_RADAR_INBOUND");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("radar_mp", &"KILLSTREAK_EARNED_RADAR", &"KILLSTREAK_RADAR_NOT_AVAILABLE", &"KILLSTREAK_RADAR_INBOUND");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("radar_mp", "mpl_killstreak_radar", "kls_u2_used", "", "kls_u2_enemy", "", "kls_u2_ready");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("radar_mp", "scr_giveradar");
   }
   if(maps\mp\gametypes\_tweakables::getTweakableValue("killstreak", "allowcounteruav")) {
     maps\mp\gametypes\_hardpoints::registerKillstreak("counteruav_mp", "counteruav_mp", "killstreak_counteruav", "counteruav_used", ::useKillstreakCounterUAV);
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("counteruav_mp", & "KILLSTREAK_EARNED_COUNTERUAV", & "KILLSTREAK_COUNTERUAV_NOT_AVAILABLE", & "KILLSTREAK_COUNTERUAV_INBOUND");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("counteruav_mp", &"KILLSTREAK_EARNED_COUNTERUAV", &"KILLSTREAK_COUNTERUAV_NOT_AVAILABLE", &"KILLSTREAK_COUNTERUAV_INBOUND");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("counteruav_mp", "mpl_killstreak_radar", "kls_cu2_used", "", "kls_cu2_enemy", "", "kls_cu2_ready");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("counteruav_mp", "scr_givecounteruav");
   }
   if(maps\mp\gametypes\_tweakables::getTweakableValue("killstreak", "allowradardirection")) {
     maps\mp\gametypes\_hardpoints::registerKillstreak("radardirection_mp", "radardirection_mp", "killstreak_spyplane_direction", "uav_used", ::useKillstreakSatellite);
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("radardirection_mp", & "KILLSTREAK_EARNED_SATELLITE", & "KILLSTREAK_SATELLITE_NOT_AVAILABLE", & "KILLSTREAK_SATELLITE_INBOUND");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("radardirection_mp", &"KILLSTREAK_EARNED_SATELLITE", &"KILLSTREAK_SATELLITE_NOT_AVAILABLE", &"KILLSTREAK_SATELLITE_INBOUND");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("radardirection_mp", "mpl_killstreak_satellite", "kls_sat_used", "", "kls_sat_enemy", "", "kls_sat_ready");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("radardirection_mp", "scr_giveradardirection");
   }

@@ -72,15 +72,15 @@ main() {
   maps\_hud::init();
   maps\_hiding_door_anims::main();
   maps\_utility::default_start(::start_normal);
-  maps\_utility::add_start("chess", ::start_chess, & "STARTS_CHESS");
-  maps\_utility::add_start("field", ::start_field, & "STARTS_FIELD1");
-  maps\_utility::add_start("overlook", ::start_overlook, & "STARTS_OVERLOOK");
-  maps\_utility::add_start("cliff", ::start_cliff, & "STARTS_CLIFF");
-  maps\_utility::add_start("rappel", ::start_rappel, & "STARTS_RAPPEL");
-  maps\_utility::add_start("farmhouse", ::start_farmhouse, & "STARTS_FARMHOUSE");
-  maps\_utility::add_start("blackout", ::start_blackout, & "STARTS_BLACKOUT");
-  maps\_utility::add_start("rescue", ::start_rescue, & "STARTS_RESCUE");
-  level.strings["mantle"] = & "BLACKOUT_MANTLE";
+  maps\_utility::add_start("chess", ::start_chess, &"STARTS_CHESS");
+  maps\_utility::add_start("field", ::start_field, &"STARTS_FIELD1");
+  maps\_utility::add_start("overlook", ::start_overlook, &"STARTS_OVERLOOK");
+  maps\_utility::add_start("cliff", ::start_cliff, &"STARTS_CLIFF");
+  maps\_utility::add_start("rappel", ::start_rappel, &"STARTS_RAPPEL");
+  maps\_utility::add_start("farmhouse", ::start_farmhouse, &"STARTS_FARMHOUSE");
+  maps\_utility::add_start("blackout", ::start_blackout, &"STARTS_BLACKOUT");
+  maps\_utility::add_start("rescue", ::start_rescue, &"STARTS_RESCUE");
+  level.strings["mantle"] = &"BLACKOUT_MANTLE";
   maps\_hud_util::create_mantle();
   setsaveddvar("ai_eventDistProjImpact", "0");
   setsaveddvar("r_reactiveMotionWindAmplitudeScale", 3);
@@ -191,12 +191,12 @@ main() {
   common_scripts\utility::flag_set("gaz_goes_by_other_window");
   thread maps\blackout_code::set_high_alert();
   thread maps\blackout_code::hut_cleared();
-  maps\_utility::add_hint_string("nvg", & "SCRIPT_NIGHTVISION_USE", maps\_nightvision::shouldbreaknvghintprint);
-  maps\_utility::add_hint_string("grenade_launcher", & "SCRIPT_LEARN_GRENADE_LAUNCHER", maps\blackout_code::should_break_grenade_launcher_hint);
-  maps\_utility::add_hint_string("sniper_rifle", & "SCRIPT_LEARN_M14_SWITCH", maps\blackout_code::should_break_sniper_rifle_hint);
-  maps\_utility::add_hint_string("claymore_plant", & "SCRIPT_LEARN_CLAYMORES", maps\blackout_code::should_break_claymores);
-  maps\_utility::add_hint_string("disable_nvg", & "SCRIPT_NIGHTVISION_STOP_USE", maps\_nightvision::should_break_disable_nvg_print);
-  maps\_utility::add_hint_string("claymore_placement", & "SCRIPT_LEARN_CLAYMORE_PLACEMENT", maps\blackout_code::should_break_claymore_placement);
+  maps\_utility::add_hint_string("nvg", &"SCRIPT_NIGHTVISION_USE", maps\_nightvision::shouldbreaknvghintprint);
+  maps\_utility::add_hint_string("grenade_launcher", &"SCRIPT_LEARN_GRENADE_LAUNCHER", maps\blackout_code::should_break_grenade_launcher_hint);
+  maps\_utility::add_hint_string("sniper_rifle", &"SCRIPT_LEARN_M14_SWITCH", maps\blackout_code::should_break_sniper_rifle_hint);
+  maps\_utility::add_hint_string("claymore_plant", &"SCRIPT_LEARN_CLAYMORES", maps\blackout_code::should_break_claymores);
+  maps\_utility::add_hint_string("disable_nvg", &"SCRIPT_NIGHTVISION_STOP_USE", maps\_nightvision::should_break_disable_nvg_print);
+  maps\_utility::add_hint_string("claymore_placement", &"SCRIPT_LEARN_CLAYMORE_PLACEMENT", maps\blackout_code::should_break_claymore_placement);
   thread maps\blackout_code::grenade_hint_logic();
   common_scripts\utility::run_thread_on_targetname("second_shack_trigger", maps\blackout_code::second_shack_trigger);
   common_scripts\utility::run_thread_on_targetname("physics_launch", maps\blackout_code::physics_launch_think);
@@ -551,7 +551,7 @@ field_meeting() {
   common_scripts\utility::array_thread(var_8, maps\_utility::set_ignoreme, 1);
   common_scripts\utility::flag_set("go_to_overlook");
   thread overlook_mortars();
-  objective_add(3, "current", & "BLACKOUT_PROVIDE_SNIPER_SUPPORT", (-7587, -2233, 857));
+  objective_add(3, "current", &"BLACKOUT_PROVIDE_SNIPER_SUPPORT", (-7587, -2233, 857));
 
   if(getdvarint("use_old_meeting") != 1) {
     level.gaz.run_speed_state = "jog";
@@ -687,7 +687,7 @@ overlook_sniping() {
   }
 
   maps\_utility::objective_complete(3);
-  objective_add(4, "current", & "BLACKOUT_CUT_OFF_ENEMY_REINFORCEMENTS", maps\blackout_code::power_plant_org());
+  objective_add(4, "current", &"BLACKOUT_CUT_OFF_ENEMY_REINFORCEMENTS", maps\blackout_code::power_plant_org());
   common_scripts\utility::flag_wait("kamarov_moving_burning_house");
   common_scripts\utility::flag_set("go_through_burning_house");
   maps\_utility::arcademode_checkpoint(8, "b");
@@ -707,7 +707,7 @@ overlook_sniping() {
   level.gaz.baseaccuracy = 1;
   level.kamarov.baseaccuracy = 1;
   maps\_utility::objective_complete(4);
-  objective_add(5, "current", & "BLACKOUT_PROVIDE_SNIPER_SUPPORT1", maps\blackout_code::cliff_org());
+  objective_add(5, "current", &"BLACKOUT_PROVIDE_SNIPER_SUPPORT1", maps\blackout_code::cliff_org());
 }
 
 enemy_heli_riders() {
@@ -846,7 +846,7 @@ cliff_sniping() {
   maps\_utility::activate_trigger_with_targetname("friendlies_charge_farmhouse");
   soundscripts\_snd::snd_message("aud_stop_sniping_mix");
   maps\_utility::objective_complete(5);
-  objective_add(6, "current", & "BLACKOUT_FOLLOW_KAMAROV_TO_POWER_STATION", maps\blackout_code::rappel_org());
+  objective_add(6, "current", &"BLACKOUT_FOLLOW_KAMAROV_TO_POWER_STATION", maps\blackout_code::rappel_org());
   common_scripts\utility::flag_set("head_to_rappel_spot");
   maps\_utility::arcademode_checkpoint(10, "c");
   common_scripts\utility::flag_wait("final_raid_begins");
@@ -855,10 +855,10 @@ cliff_sniping() {
   maps\_utility::objective_complete(6);
   common_scripts\utility::flag_wait("kam_wants_more_sniping");
   common_scripts\utility::flag_wait("gaz_convinces_kam_otherwise");
-  objective_add(6, "current", & "BLACKOUT_RAPPEL_DOWN_FROM_THE", maps\blackout_code::rappel_org());
+  objective_add(6, "current", &"BLACKOUT_RAPPEL_DOWN_FROM_THE", maps\blackout_code::rappel_org());
   common_scripts\utility::flag_wait("player_rappels");
   maps\_utility::objective_complete(6);
-  objective_add(7, "current", & "BLACKOUT_RESCUE_THE_INFORMANT", maps\blackout_code::informant_org());
+  objective_add(7, "current", &"BLACKOUT_RESCUE_THE_INFORMANT", maps\blackout_code::informant_org());
   maps\_utility::autosave_by_name("attack_farmhouse");
 }
 
@@ -1083,7 +1083,7 @@ blackout_rescue() {
   common_scripts\utility::flag_wait("blackout_flashlightguy_dead");
   common_scripts\utility::flag_clear("heli_flies_by");
   maps\_utility::objective_complete(7);
-  objective_add(8, "current", & "BLACKOUT_EVAC_WITH_THE_INFORMANT", maps\blackout_code::get_evac_org());
+  objective_add(8, "current", &"BLACKOUT_EVAC_WITH_THE_INFORMANT", maps\blackout_code::get_evac_org());
   common_scripts\utility::flag_set("blackhawk_spawn_start");
   var_0 = maps\_vehicle::spawn_vehicle_from_targetname("rescue_blackhawk");
   var_0.script_disablevehicleaudio = 1;

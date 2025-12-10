@@ -21,11 +21,11 @@ init() {
   level.func_12A8D["mg_turret"].modelplacementfailed = "mp_remote_turret_placement_failed";
   level.func_12A8D["mg_turret"].modeldestroyed = "mp_remote_turret";
   level.func_12A8D["mg_turret"].teamsplash = "used_remote_mg_turret";
-  level.func_12A8D["mg_turret"].func_901A = & "KILLSTREAKS_ENTER_REMOTE_TURRET";
-  level.func_12A8D["mg_turret"].func_901B = & "KILLSTREAKS_EARLY_EXIT";
-  level.func_12A8D["mg_turret"].func_901F = & "KILLSTREAKS_DOUBLE_TAP_TO_CARRY";
-  level.func_12A8D["mg_turret"].placestring = & "KILLSTREAKS_TURRET_PLACE";
-  level.func_12A8D["mg_turret"].cannotplacestring = & "KILLSTREAKS_TURRET_CANNOT_PLACE";
+  level.func_12A8D["mg_turret"].func_901A = &"KILLSTREAKS_ENTER_REMOTE_TURRET";
+  level.func_12A8D["mg_turret"].func_901B = &"KILLSTREAKS_EARLY_EXIT";
+  level.func_12A8D["mg_turret"].func_901F = &"KILLSTREAKS_DOUBLE_TAP_TO_CARRY";
+  level.func_12A8D["mg_turret"].placestring = &"KILLSTREAKS_TURRET_PLACE";
+  level.func_12A8D["mg_turret"].cannotplacestring = &"KILLSTREAKS_TURRET_CANNOT_PLACE";
   level.func_12A8D["mg_turret"].vodestroyed = "remote_sentry_destroyed";
   level.func_12A8D["mg_turret"].func_A84D = "killstreak_remote_turret_laptop_mp";
   level.func_12A8D["mg_turret"].remotedetonatethink = "killstreak_remote_turret_remote_mp";
@@ -817,10 +817,10 @@ func_129FA() {
     if(var_04 == "MOD_MELEE")
       self.damagetaken = self.damagetaken + self.maxhealth;
 
-    if(isDefined(var_08) && var_08 & level.idflags_penetration)
+    if(isDefined(var_08) && var_08 &level.idflags_penetration)
       self.wasdamagedfrombulletpenetration = 1;
 
-    if(isDefined(var_08) && var_08 & level.idflags_no_team_protection)
+    if(isDefined(var_08) && var_08 &level.idflags_no_team_protection)
       self.wasdamagedfrombulletricochet = 1;
 
     self.wasdamaged = 1;

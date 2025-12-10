@@ -18,11 +18,11 @@
 #namespace killstreak_weapons;
 
 function init() {
-  killstreaks::register("minigun", "minigun", "killstreak_minigun", "minigun_used", & usecarriedkillstreakweapon, 0, 1, "MINIGUN_USED");
-  killstreaks::register_strings("minigun", & "KILLSTREAK_EARNED_MINIGUN", & "KILLSTREAK_MINIGUN_NOT_AVAILABLE", & "KILLSTREAK_MINIGUN_INBOUND", undefined, & "KILLSTREAK_MINIGUN_HACKED");
+  killstreaks::register("minigun", "minigun", "killstreak_minigun", "minigun_used", &usecarriedkillstreakweapon, 0, 1, "MINIGUN_USED");
+  killstreaks::register_strings("minigun", &"KILLSTREAK_EARNED_MINIGUN", &"KILLSTREAK_MINIGUN_NOT_AVAILABLE", &"KILLSTREAK_MINIGUN_INBOUND", undefined, &"KILLSTREAK_MINIGUN_HACKED");
   killstreaks::register_dialog("minigun", "mpl_killstreak_minigun", "kls_death_used", "", "kls_death_enemy", "", "kls_death_ready");
-  killstreaks::register("m32", "m32", "killstreak_m32", "m32_used", & usecarriedkillstreakweapon, 0, 1, "M32_USED");
-  killstreaks::register_strings("m32", & "KILLSTREAK_EARNED_M32", & "KILLSTREAK_M32_NOT_AVAILABLE", & "KILLSTREAK_M32_INBOUND", undefined, & "KILLSTREAK_M32_HACKED");
+  killstreaks::register("m32", "m32", "killstreak_m32", "m32_used", &usecarriedkillstreakweapon, 0, 1, "M32_USED");
+  killstreaks::register_strings("m32", &"KILLSTREAK_EARNED_M32", &"KILLSTREAK_M32_NOT_AVAILABLE", &"KILLSTREAK_M32_INBOUND", undefined, &"KILLSTREAK_M32_HACKED");
   killstreaks::register_dialog("m32", "mpl_killstreak_m32", "kls_mgl_used", "", "kls_mgl_enemy", "", "kls_mgl_ready");
   killstreaks::override_entity_camera_in_demo("m32", 1);
   level.killstreakicons["killstreak_minigun"] = "hud_ks_minigun";
@@ -30,7 +30,7 @@ function init() {
   level.killstreakicons["killstreak_m202_flash"] = "hud_ks_m202";
   level.killstreakicons["killstreak_m220_tow_drop"] = "hud_ks_tv_guided_marker";
   level.killstreakicons["killstreak_m220_tow"] = "hud_ks_tv_guided_missile";
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
   setdvar("scr_HeldKillstreak_Penalty", 0);
 }
 
@@ -64,7 +64,7 @@ function watchkillstreakweapondelay() {
       if(!timeleft) {
         timeleft = 1;
       }
-      self iprintlnbold(&"MP_UNAVAILABLE_FOR_N", (" " + timeleft) + " ", & "EXE_SECONDS");
+      self iprintlnbold(&"MP_UNAVAILABLE_FOR_N", (" " + timeleft) + " ", &"EXE_SECONDS");
       self switchtoweapon(currentweapon);
       wait(0.5);
     }

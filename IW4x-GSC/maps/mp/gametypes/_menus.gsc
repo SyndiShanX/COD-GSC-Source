@@ -58,7 +58,6 @@ init() {
 
       precacheMenu(game["menu_leavegame"]);
 
-
     }
 
     precacheMenu("scoreboard");
@@ -220,7 +219,6 @@ getTeamAssignment() {
   } else {
     playerCounts = self maps\mp\gametypes\_teams::CountPlayers();
 
-
     if(playerCounts["allies"] == playerCounts["axis"]) {
       if(getTeamScore("allies") == getTeamScore("axis"))
         assignment = teams[randomInt(2)];
@@ -272,10 +270,6 @@ beginClassChoice(forceNewChoice) {
 
   team = self.pers["team"];
 
-
-
-
-
   if(allowClassChoice())
     self openpopupMenu(game["menu_changeclass_" + team]);
   else
@@ -302,8 +296,6 @@ showMainMenuForTeam() {
 
   team = self.pers["team"];
 
-
-
   self openpopupMenu(game["menu_class_" + team]);
 }
 
@@ -315,7 +307,6 @@ menuAllies() {
       self openpopupMenu(game["menu_team"]);
       return;
     }
-
 
     if(level.inGracePeriod && !self.hasDoneCombat)
       self.hasSpawned = false;
@@ -345,7 +336,6 @@ menuAxis() {
       self openpopupMenu(game["menu_team"]);
       return;
     }
-
 
     if(level.inGracePeriod && !self.hasDoneCombat)
       self.hasSpawned = false;
@@ -391,14 +381,12 @@ menuSpectator() {
 menuClass(response) {
   self closeMenus();
 
-
   if(response == "demolitions_mp,0" && self getPlayerData("featureNew", "demolitions")) {
     self setPlayerData("featureNew", "demolitions", false);
   }
   if(response == "sniper_mp,0" && self getPlayerData("featureNew", "sniper")) {
     self setPlayerData("featureNew", "sniper", false);
   }
-
 
   if(!isDefined(self.pers["team"]) || (self.pers["team"] != "allies" && self.pers["team"] != "axis")) {
     return;
@@ -455,7 +443,6 @@ addToTeam(team, firstConnect) {
 
   self.team = team;
 
-
   if(!matchMakingGame() || isDefined(self.pers["isBot"]) || !allowTeamChoice()) {
     if(level.teamBased) {
       self.sessionteam = team;
@@ -467,14 +454,10 @@ addToTeam(team, firstConnect) {
     }
   }
 
-
   if(game["state"] != "postgame")
     self maps\mp\gametypes\_playerlogic::addToTeamCount();
 
   self updateObjectiveText();
-
-
-
 
   if(isDefined(firstConnect) && firstConnect)
     waittillframeend;

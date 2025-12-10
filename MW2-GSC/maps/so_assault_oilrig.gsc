@@ -311,15 +311,15 @@ hostage_evac_think() {
 }
 
 gameskill_regular() {
-  level.challenge_objective = & "SO_ASSAULT_OILRIG_OBJ_MAIN";
+  level.challenge_objective = &"SO_ASSAULT_OILRIG_OBJ_MAIN";
 }
 
 gameskill_hardened() {
-  level.challenge_objective = & "SO_ASSAULT_OILRIG_OBJ_MAIN";
+  level.challenge_objective = &"SO_ASSAULT_OILRIG_OBJ_MAIN";
 }
 
 gameskill_veteran() {
-  level.challenge_objective = & "SO_ASSAULT_OILRIG_OBJ_MAIN";
+  level.challenge_objective = &"SO_ASSAULT_OILRIG_OBJ_MAIN";
 }
 
 obj_main() {

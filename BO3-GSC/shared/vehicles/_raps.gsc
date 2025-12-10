@@ -18,14 +18,14 @@
 #namespace raps;
 
 function autoexec __init__sytem__() {
-  system::register("raps", & __init__, undefined, undefined);
+  system::register("raps", &__init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("vehicle", "raps_side_deathfx", 1, 1, "int");
-  vehicle::add_main_callback("raps", & raps_initialize);
+  vehicle::add_main_callback("raps", &raps_initialize);
   slow_triggers = getEntArray("raps_slow", "targetname");
-  array::thread_all(slow_triggers, & slow_raps_trigger);
+  array::thread_all(slow_triggers, &slow_raps_trigger);
 }
 
 function raps_initialize() {
@@ -45,9 +45,9 @@ function raps_initialize() {
   self.goalradius = 999999;
   self.goalheight = 999999;
   self setgoal(self.origin, 0, self.goalradius, self.goalheight);
-  self.overridevehicledamage = & raps_callback_damage;
-  self.allowfriendlyfiredamageoverride = & raps_allowfriendlyfiredamage;
-  self.do_death_fx = & do_death_fx;
+  self.overridevehicledamage = &raps_callback_damage;
+  self.allowfriendlyfiredamageoverride = &raps_allowfriendlyfiredamage;
+  self.do_death_fx = &do_death_fx;
   self thread vehicle_ai::nudge_collision();
   self thread sndfunctions();
   if(isDefined(level.vehicle_initializer_cb)) {
@@ -58,10 +58,10 @@ function raps_initialize() {
 
 function defaultrole() {
   self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("combat").update_func = & state_combat_update;
-  self vehicle_ai::get_state_callbacks("driving").update_func = & state_scripted_update;
-  self vehicle_ai::get_state_callbacks("death").update_func = & state_death_update;
-  self vehicle_ai::get_state_callbacks("emped").update_func = & state_emped_update;
+  self vehicle_ai::get_state_callbacks("combat").update_func = &state_combat_update;
+  self vehicle_ai::get_state_callbacks("driving").update_func = &state_scripted_update;
+  self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
+  self vehicle_ai::get_state_callbacks("emped").update_func = &state_emped_update;
   self vehicle_ai::call_custom_add_state_callbacks();
   vehicle_ai::startinitialstate("combat");
 }

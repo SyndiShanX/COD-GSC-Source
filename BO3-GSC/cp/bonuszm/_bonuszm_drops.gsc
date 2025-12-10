@@ -61,7 +61,7 @@ function autoexec main() {
   if(!sessionmodeiscampaignzombiesgame()) {
     return;
   }
-  level.bzmoncybercomoncallback = & bzmoncybercomoncallback;
+  level.bzmoncybercomoncallback = &bzmoncybercomoncallback;
   function_94c35cf8();
   level.var_61c4b2a6 = 0;
   level.var_c85f5b9b = [];

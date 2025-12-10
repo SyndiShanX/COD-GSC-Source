@@ -13,10 +13,10 @@ function main() {
 }
 
 function register_clientfields() {
-  clientfield::register("world", "rocket_trap_warning_smoke", 1, 1, "int", & rocket_trap_warning_smoke, 0, 0);
-  clientfield::register("world", "rocket_trap_warning_fire", 1, 1, "int", & rocket_trap_warning_fire, 0, 0);
-  clientfield::register("world", "sndRocketAlarm", 5000, 2, "int", & sndrocketalarm, 0, 0);
-  clientfield::register("world", "sndRocketTrap", 5000, 3, "int", & sndrockettrap, 0, 0);
+  clientfield::register("world", "rocket_trap_warning_smoke", 1, 1, "int", &rocket_trap_warning_smoke, 0, 0);
+  clientfield::register("world", "rocket_trap_warning_fire", 1, 1, "int", &rocket_trap_warning_fire, 0, 0);
+  clientfield::register("world", "sndRocketAlarm", 5000, 2, "int", &sndrocketalarm, 0, 0);
+  clientfield::register("world", "sndRocketTrap", 5000, 3, "int", &sndrockettrap, 0, 0);
 }
 
 function rocket_trap_warning_smoke(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

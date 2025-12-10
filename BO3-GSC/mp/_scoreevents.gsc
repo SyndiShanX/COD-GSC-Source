@@ -21,17 +21,17 @@
 #namespace scoreevents;
 
 function autoexec __init__sytem__() {
-  system::register("scoreevents", & __init__, undefined, undefined);
+  system::register("scoreevents", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
+  callback::on_start_gametype(&init);
 }
 
 function init() {
   level.scoreeventcallbacks = [];
-  level.scoreeventgameendcallback = & ongameend;
-  registerscoreeventcallback("playerKilled", & scoreeventplayerkill);
+  level.scoreeventgameendcallback = &ongameend;
+  registerscoreeventcallback("playerKilled", &scoreeventplayerkill);
 }
 
 function scoreeventtablelookupint(index, scoreeventcolumn) {

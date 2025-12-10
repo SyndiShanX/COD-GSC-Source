@@ -12,12 +12,12 @@
 #namespace zm_equip_gasmask;
 
 function autoexec __init__sytem__() {
-  system::register("zm_equip_gasmask", & __init__, undefined, undefined);
+  system::register("zm_equip_gasmask", &__init__, undefined, undefined);
 }
 
 function __init__() {
   zm_equipment::include("equip_gasmask");
-  clientfield::register("toplayer", "gasmaskoverlay", 21000, 1, "int", & gasmask_overlay_handler, 0, 0);
+  clientfield::register("toplayer", "gasmaskoverlay", 21000, 1, "int", &gasmask_overlay_handler, 0, 0);
   clientfield::register("clientuimodel", "hudItems.showDpadDown_PES", 21000, 1, "int", undefined, 0, 0);
   visionset_mgr::register_overlay_info_style_postfx_bundle("zm_gasmask_postfx", 21000, 32, "pstfx_moon_helmet", 3);
 }

@@ -41,17 +41,17 @@ main() {
   else
     maps\_utility::default_start(::look_training);
 
-  maps\_utility::add_start("inside", ::inside_start, & "STARTS_INSIDE");
-  maps\_utility::add_start("shoot", ::rifle_start, & "STARTS_SHOOT");
-  maps\_utility::add_start("timed", ::rifle_timed_start, & "STARTS_TIMED");
-  maps\_utility::add_start("sidearm", ::sidearm_start, & "STARTS_SIDEARM");
-  maps\_utility::add_start("frag", ::frag_start, & "STARTS_FRAG");
-  maps\_utility::add_start("launcher", ::launcher_start, & "STARTS_LAUNCHER");
-  maps\_utility::add_start("explosives", ::explosives_start, & "STARTS_C4");
-  maps\_utility::add_start("course", ::obstacle_start, & "STARTS_OBSTACLE");
-  maps\_utility::add_start("ship", ::reveal_start, & "STARTS_SHIP");
-  maps\_utility::add_start("mp5", ::cargoship_start, & "STARTS_MP5");
-  maps\_utility::add_start("debrief", ::debrief_start, & "STARTS_DEBRIEF");
+  maps\_utility::add_start("inside", ::inside_start, &"STARTS_INSIDE");
+  maps\_utility::add_start("shoot", ::rifle_start, &"STARTS_SHOOT");
+  maps\_utility::add_start("timed", ::rifle_timed_start, &"STARTS_TIMED");
+  maps\_utility::add_start("sidearm", ::sidearm_start, &"STARTS_SIDEARM");
+  maps\_utility::add_start("frag", ::frag_start, &"STARTS_FRAG");
+  maps\_utility::add_start("launcher", ::launcher_start, &"STARTS_LAUNCHER");
+  maps\_utility::add_start("explosives", ::explosives_start, &"STARTS_C4");
+  maps\_utility::add_start("course", ::obstacle_start, &"STARTS_OBSTACLE");
+  maps\_utility::add_start("ship", ::reveal_start, &"STARTS_SHIP");
+  maps\_utility::add_start("mp5", ::cargoship_start, &"STARTS_MP5");
+  maps\_utility::add_start("debrief", ::debrief_start, &"STARTS_DEBRIEF");
   precacheshader("objective");
   precacheshader("hud_icon_c4");
   precacheshader("hud_dpad");
@@ -936,7 +936,7 @@ navigationtraining() {
   common_scripts\utility::flag_set("aa_obj_training");
   level notify("navigationTraining_start");
   level.waters thread maps\killhouse_code::execdialog("illletyouin");
-  maps\killhouse_code::registerobjective("obj_enter_range", & "KILLHOUSE_USE_YOUR_OBJECTIVE_INDICATOR", getent("rifle_range_obj", "targetname"));
+  maps\killhouse_code::registerobjective("obj_enter_range", &"KILLHOUSE_USE_YOUR_OBJECTIVE_INDICATOR", getent("rifle_range_obj", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_enter_range", "current");
   wait 3;
   thread maps\killhouse_code::objective_hints("at_rifle_range");
@@ -957,7 +957,7 @@ inside_start() {
   wait 2.5;
   thread maps\_introscreen::introscreen_generic_fade_in("white", 0.1, 1.5);
   common_scripts\utility::flag_set("inside_firing_range");
-  savegame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", 1);
+  savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
   thread door_to_rifle_handler();
 }
 
@@ -1007,7 +1007,7 @@ rifletraining() {
   close_firing_range_door();
   maps\_utility::autosave_by_name("rifle_training");
   maps\killhouse_code::setobjectivestate("obj_rifle", "current");
-  maps\killhouse_code::setobjectivestring("obj_rifle", & "KILLHOUSE_ENTER_STATION_NUMBER");
+  maps\killhouse_code::setobjectivestring("obj_rifle", &"KILLHOUSE_ENTER_STATION_NUMBER");
   maps\killhouse_code::setobjectivelocation("obj_rifle", getent("obj_rifle_stall", "targetname"));
   thread maps\killhouse_code::gaz_animation("killhouse_gaz_idleA", 1.5);
   level.waters maps\killhouse_code::execdialog("youknowdrill");
@@ -1121,7 +1121,7 @@ shoot_ads_handler() {
   wait 0.1;
   maps\killhouse_code::raisetargetdummies("rifle", undefined, undefined);
   maps\killhouse_code::setobjectivestate("obj_rifle", "current");
-  thread maps\killhouse_code::setobjectivestring("obj_rifle", & "KILLHOUSE_SHOOT_EACH_TARGET_WHILE");
+  thread maps\killhouse_code::setobjectivestring("obj_rifle", &"KILLHOUSE_SHOOT_EACH_TARGET_WHILE");
   thread maps\killhouse_code::flag_when_lowered("ADS_targets_shot");
   common_scripts\utility::flag_wait("ADS_targets_shot");
   common_scripts\utility::flag_wait("ADS_shoot_dialog");
@@ -1135,7 +1135,7 @@ rifle_hip_shooting() {
   level.waters maps\killhouse_code::execdialog("firingfromhip");
   gaz_maybe_play_talk_anim();
   maps\killhouse_code::setobjectivestate_nomessage("obj_rifle", "current");
-  maps\killhouse_code::setobjectivestring("obj_rifle", & "KILLHOUSE_SHOOT_EACH_TARGET_WHILE1");
+  maps\killhouse_code::setobjectivestring("obj_rifle", &"KILLHOUSE_SHOOT_EACH_TARGET_WHILE1");
   wait 1;
   var_0 = 1;
 
@@ -1163,7 +1163,7 @@ rifle_hip_shooting() {
   common_scripts\utility::flag_wait("hip_targets_shot");
   level.hip_fire_required = 0;
   maps\killhouse_code::setobjectivestate("obj_rifle", "current");
-  maps\killhouse_code::setobjectivestring("obj_rifle", & "KILLHOUSE_SHOOT_EACH_TARGET_WHILE");
+  maps\killhouse_code::setobjectivestring("obj_rifle", &"KILLHOUSE_SHOOT_EACH_TARGET_WHILE");
   thread new_look_training_handler();
 }
 
@@ -1195,7 +1195,7 @@ rifle_penetration_shooting() {
   wait 0.5;
   maps\killhouse_code::raisetargetdummies_noassist("rifle", undefined, undefined);
   maps\killhouse_code::setobjectivestate_nomessage("obj_rifle", "current");
-  maps\killhouse_code::setobjectivestring("obj_rifle", & "KILLHOUSE_SHOOT_EACH_TARGET_THROUGH");
+  maps\killhouse_code::setobjectivestring("obj_rifle", &"KILLHOUSE_SHOOT_EACH_TARGET_THROUGH");
   wait 0.2;
   var_3 = maps\killhouse_code::gettargetdummies("rifle");
   var_4 = var_3.size;
@@ -1234,7 +1234,7 @@ rifle_timed_shooting() {
   level.waters maps\killhouse_code::execdialog("targetspop");
   gaz_maybe_play_talk_anim();
   level.waters maps\killhouse_code::execdialog("hitall");
-  maps\killhouse_code::registerobjective("obj_timed_rifle", & "KILLHOUSE_SHOOT_EACH_TARGET_AS", getent("obj_rifle_stall", "targetname"));
+  maps\killhouse_code::registerobjective("obj_timed_rifle", &"KILLHOUSE_SHOOT_EACH_TARGET_AS", getent("obj_rifle_stall", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_timed_rifle", "current");
 
   if(maps\killhouse_code::auto_aim()) {
@@ -1362,13 +1362,13 @@ sidearm_training() {
   common_scripts\utility::flag_set("spawn_sidearms");
   thread maps\killhouse_code::gaz_animation("killhouse_gaz_point_side");
   level.waters maps\killhouse_code::execdialog("getasidearm");
-  maps\killhouse_code::registerobjective("obj_sidearm", & "KILLHOUSE_GET_A_PISTOL_FROM_THE", getent("obj_rifle_ammo", "targetname"));
+  maps\killhouse_code::registerobjective("obj_sidearm", &"KILLHOUSE_GET_A_PISTOL_FROM_THE", getent("obj_rifle_ammo", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_sidearm", "current");
 
   while(!level.player hasweapon("usp"))
     wait 0.05;
 
-  maps\killhouse_code::setobjectivestring("obj_sidearm", & "KILLHOUSE_SWITCH_TO_YOUR_RIFLE");
+  maps\killhouse_code::setobjectivestring("obj_sidearm", &"KILLHOUSE_SWITCH_TO_YOUR_RIFLE");
   maps\killhouse_code::setobjectivestate("obj_sidearm", "current");
   level.waters maps\killhouse_code::execdialog("switchtorifle");
   gaz_maybe_play_talk_anim();
@@ -1401,7 +1401,7 @@ sidearm_training() {
 
 melee_training() {
   level notify("melee_training");
-  maps\killhouse_code::registerobjective("obj_melee", & "KILLHOUSE_MELEE_THE_WATERMELON", getent("scr_watermelon", "targetname"));
+  maps\killhouse_code::registerobjective("obj_melee", &"KILLHOUSE_MELEE_THE_WATERMELON", getent("scr_watermelon", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_melee", "current");
 
   if(!common_scripts\utility::flag("melee_complete"))
@@ -1456,11 +1456,11 @@ melee_training() {
     foreach(var_3 in var_1)
     var_3 hide();
 
-    maps\killhouse_code::registerobjective("obj_demolitions", & "KILLHOUSE_DEMOLITIONS_TRAINING", getent("obj_frag_ammo", "targetname"));
+    maps\killhouse_code::registerobjective("obj_demolitions", &"KILLHOUSE_DEMOLITIONS_TRAINING", getent("obj_frag_ammo", "targetname"));
     maps\killhouse_code::setobjectivestate("obj_demolitions", "active");
-    level thread optional_training_objective_manager("in_explosives_area", "obj_demolitions_subobj", getent("obj_frag_ammo", "targetname"), & "KILLHOUSE_PICK_UP_THE_FRAG_GRENADES");
+    level thread optional_training_objective_manager("in_explosives_area", "obj_demolitions_subobj", getent("obj_frag_ammo", "targetname"), &"KILLHOUSE_PICK_UP_THE_FRAG_GRENADES");
     maps\killhouse_code::setassubobjective("obj_demolitions_subobj", 2);
-    maps\killhouse_code::registerobjective("obj_obstacle", & "KILLHOUSE_RUN_THE_OBSTACLE_COURSE", getent("obstacleTraining_objective", "targetname"));
+    maps\killhouse_code::registerobjective("obj_obstacle", &"KILLHOUSE_RUN_THE_OBSTACLE_COURSE", getent("obstacleTraining_objective", "targetname"));
     maps\killhouse_code::setobjectivestate("obj_obstacle", "active");
   } else {
     level.waters maps\killhouse_code::execdialog("allgoodhere");
@@ -1767,7 +1767,7 @@ melee_run_dialog() {
 
 frag_start() {
   soundscripts\_snd::snd_message("start_frag_start_checkpoint");
-  maps\killhouse_code::registerobjective("obj_price", & "KILLHOUSE_REPORT_TO_CAPTAIN_PRICE", getent("obj_price", "targetname"));
+  maps\killhouse_code::registerobjective("obj_price", &"KILLHOUSE_REPORT_TO_CAPTAIN_PRICE", getent("obj_price", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_price", "current");
   var_0 = getent("frag_start", "targetname");
   level.player setorigin(var_0.origin);
@@ -1868,7 +1868,7 @@ frag_training() {
   thread maps\killhouse_code::frag_trigger_think("frag_target_2", getent("grenade_damage_trigger2", "targetname"));
   thread maps\killhouse_code::frag_trigger_think("frag_target_3", getent("grenade_damage_trigger3", "targetname"));
   maps\killhouse_code::setobjectivelocation("obj_demolitions_subobj", getent("safety_pit", "targetname"));
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_ENTER_THE_SAFETY_PIT");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_ENTER_THE_SAFETY_PIT");
   thread maps\killhouse_code::dialog_nag_till_in_pit();
   getent("safety_pit", "targetname") waittill("trigger");
   common_scripts\utility::flag_set("in_pit_with_frags");
@@ -1882,7 +1882,7 @@ frag_training() {
       var_2 notify("flip_to_red");
   }
 
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_THROW_A_GRENADE_INTO");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_THROW_A_GRENADE_INTO");
   maps\killhouse_code::setobjectivelocation("obj_demolitions_subobj", getent("safety_pit", "targetname"));
   wait 0.1;
   var_4 = 0;
@@ -1979,7 +1979,7 @@ gl_too_low_hint() {
 
 launcher_start() {
   soundscripts\_snd::snd_message("start_launcher_start_checkpoint");
-  maps\killhouse_code::registerobjective("obj_price", & "KILLHOUSE_REPORT_TO_CAPTAIN_PRICE", getent("obj_price", "targetname"));
+  maps\killhouse_code::registerobjective("obj_price", &"KILLHOUSE_REPORT_TO_CAPTAIN_PRICE", getent("obj_price", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_price", "current");
   var_0 = getent("frag_start", "targetname");
   level.player setorigin(var_0.origin);
@@ -2039,7 +2039,7 @@ launchertraining() {
     level.newcastle maps\killhouse_code::nwc_talk_animation("pickuplauncher");
 
   maps\_utility::flag_trigger_init("launcher_wall_target", getent("launcher_wall_trigger", "script_noteworthy"));
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_PICK_UP_THE_RIFLE_WITH");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_PICK_UP_THE_RIFLE_WITH");
   maps\killhouse_code::setobjectivelocation("obj_demolitions_subobj", getent("obj_frag_ammo", "targetname"));
 
   while(!level.player hasweapon("m16_grenadier"))
@@ -2048,7 +2048,7 @@ launchertraining() {
   level.player givemaxammo("alt_m16_grenadier");
   refreshhudammocounter();
   thread launcherammocheck();
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_RETURN_TO_THE_SAFETY");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_RETURN_TO_THE_SAFETY");
   maps\killhouse_code::setobjectivelocation("obj_demolitions_subobj", getent("safety_pit", "targetname"));
 
   if(!level.player istouching(getent("safety_pit", "targetname")))
@@ -2068,7 +2068,7 @@ launchertraining() {
 
   maps\killhouse_code::clear_hints();
   level.currentkeyhintactionname = "";
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_FIRE_AT_THE_WALL_WITH");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_FIRE_AT_THE_WALL_WITH");
   maps\killhouse_code::setobjectivelocation("obj_demolitions_subobj", getent("safety_pit", "targetname"));
   wait 0.1;
   level.newcastle maps\killhouse_code::nwc_talk_animation("firewall1");
@@ -2103,7 +2103,7 @@ launchertraining() {
   thread launcher_trigger_think("launcher_target_1", var_3, 0);
   thread launcher_trigger_think("launcher_target_2", var_4, 0);
   thread launcher_trigger_think("launcher_target_3", var_5, 0);
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_FIRE_YOUR_GRENADE_LAUNCHER");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_FIRE_YOUR_GRENADE_LAUNCHER");
   var_6 = 0;
 
   for(var_7 = 1; var_7 < 4; var_7++) {
@@ -2169,7 +2169,7 @@ launchertraining() {
 
 explosives_start() {
   soundscripts\_snd::snd_message("start_explosives_start_checkpoint");
-  maps\killhouse_code::registerobjective("obj_price", & "KILLHOUSE_REPORT_TO_CAPTAIN_PRICE", getent("obj_price", "targetname"));
+  maps\killhouse_code::registerobjective("obj_price", &"KILLHOUSE_REPORT_TO_CAPTAIN_PRICE", getent("obj_price", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_price", "current");
   var_0 = getent("c4_start", "targetname");
   level.player setorigin(var_0.origin);
@@ -2197,7 +2197,7 @@ c4_training() {
   for(var_2 = 0; var_2 < var_1.size; var_2++)
     var_1[var_2] show();
 
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_PICK_UP_THE_C4_EXPLOSIVE");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_PICK_UP_THE_C4_EXPLOSIVE");
   maps\killhouse_code::setobjectivelocation("obj_demolitions_subobj", var_0);
   level.newcastle thread maps\killhouse_code::nwc_talk_animation("c4offtable");
   level.newcastle thread maps\killhouse_code::jog_to(getnode("c4_give_node", "script_noteworthy"));
@@ -2215,7 +2215,7 @@ c4_training() {
   level.player giveweapon("c4");
   level.player setweaponammoclip("c4", 1);
   level.player setactionslot(2, "weapon", "c4");
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_EQUIP_C4");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_EQUIP_C4");
   maps\killhouse_code::setobjectivelocation("obj_demolitions_subobj", level.newcastle);
   refreshhudammocounter();
   thread flag_when_c4_thrown();
@@ -2237,7 +2237,7 @@ c4_training() {
   level.newcastle thread maps\killhouse_code::jog_to(getnode("c4_carshow_node", "script_noteworthy"));
   wait 0.5;
   level.newcastle thread maps\killhouse_code::nwc_talk_animation("followme2");
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_FOLLOW_SGTNEWCASTLE");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_FOLLOW_SGTNEWCASTLE");
   maps\killhouse_code::setobjectivelocation("obj_demolitions_subobj", getnode("c4_carshow_node", "script_noteworthy"));
   common_scripts\utility::flag_set("c4_equiped");
   level.currentkeyhintactionname = "";
@@ -2253,7 +2253,7 @@ c4_training() {
   var_6 maps\_c4::c4_location(undefined, undefined, undefined, var_6.origin);
   level thread maps\_utility::do_in_order(maps\_utility::waittill_msg, "c4_in_place", common_scripts\utility::flag_set, "C4_planted");
   wait 1.0;
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_PLANT_THE_C4_EXPLOSIVE");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_PLANT_THE_C4_EXPLOSIVE");
   maps\killhouse_code::setobjectivelocation("obj_demolitions_subobj", var_6);
   thread maps\killhouse_code::keyhint("plant_explosives", 9999, 1);
   level.currentkeyhintactionname = "plant_explosives";
@@ -2261,7 +2261,7 @@ c4_training() {
   level.currentkeyhintactionname = "";
   level.player setweaponammoclip("c4", 0);
   var_6 thread force_detonation();
-  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", & "KILLHOUSE_SAFE_DISTANCE");
+  maps\killhouse_code::setobjectivestring("obj_demolitions_subobj", &"KILLHOUSE_SAFE_DISTANCE");
   maps\killhouse_code::setobjectivelocation("obj_demolitions_subobj", var_6);
   maps\killhouse_code::clear_hints();
 
@@ -2323,7 +2323,7 @@ c4_complete_dialog() {
 
 obstacle_start() {
   soundscripts\_snd::snd_message("start_course_start_checkpoint");
-  maps\killhouse_code::registerobjective("obj_price", & "KILLHOUSE_REPORT_TO_CAPTAIN_PRICE", getent("obj_price", "targetname"));
+  maps\killhouse_code::registerobjective("obj_price", &"KILLHOUSE_REPORT_TO_CAPTAIN_PRICE", getent("obj_price", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_price", "current");
   var_0 = getent("start_obstacle_course", "targetname");
   level.player setorigin(var_0.origin);
@@ -2371,7 +2371,7 @@ obstacle_training() {
   var_7 = getent("ai_obstacle_shooter", "targetname");
   common_scripts\utility::flag_set("aa_obstacle");
   level notify("obstacleTraining_start");
-  level thread optional_training_objective_manager("in_obstacle_area", "obj_obstacle_subobj", getent("obstacleTraining_objective", "targetname"), & "KILLHOUSE_LINE_UP_AND_RUN_TO_THE_END");
+  level thread optional_training_objective_manager("in_obstacle_area", "obj_obstacle_subobj", getent("obstacleTraining_objective", "targetname"), &"KILLHOUSE_LINE_UP_AND_RUN_TO_THE_END");
   maps\killhouse_code::setassubobjective("obj_obstacle_subobj", 2);
   common_scripts\utility::flag_set("start_obstacle");
   maps\_utility::flag_trigger_init("prone_entered", getent("obstacleTraining_prone", "targetname"));
@@ -2504,7 +2504,7 @@ reveal_start() {
 report_to_price() {
   common_scripts\utility::flag_set("aa_cargoship");
   wait 0.1;
-  maps\killhouse_code::registerobjective("obj_price", & "KILLHOUSE_REPORT_TO_CAPTAIN_PRICE", getent("obj_price", "targetname"));
+  maps\killhouse_code::registerobjective("obj_price", &"KILLHOUSE_REPORT_TO_CAPTAIN_PRICE", getent("obj_price", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_price", "current");
   var_0 = getEntArray("ship_hanger_door", "targetname");
   level.price maps\_utility::gun_remove();
@@ -2534,7 +2534,7 @@ report_to_price() {
   common_scripts\utility::flag_wait("open_ship_hanger");
   var_0[0] playSound("door_hanger_metal_open");
   maps\killhouse_code::cqb_timer_setup();
-  thread maps\_utility::do_in_order(common_scripts\utility::flag_wait, "at_ladder", maps\killhouse_code::killhouse_hint, & "KILLHOUSE_HINT_LADDER");
+  thread maps\_utility::do_in_order(common_scripts\utility::flag_wait, "at_ladder", maps\killhouse_code::killhouse_hint, &"KILLHOUSE_HINT_LADDER");
 
   foreach(var_7 in var_0)
   var_7 movex(137.5, 10, 0.3, 0);
@@ -2570,7 +2570,7 @@ reveal_dialog_ladder(var_0) {
   if(!common_scripts\utility::flag("at_ladder"))
     level.price playSound("killhouse_pri_ladderthere");
 
-  maps\killhouse_code::setobjectivestring("obj_price", & "KILLHOUSE_CLIMB_THE_LADDER1");
+  maps\killhouse_code::setobjectivestring("obj_price", &"KILLHOUSE_CLIMB_THE_LADDER1");
   maps\killhouse_code::setobjectivelocation("obj_price", getent("top_of_ladder_trigger", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_price", "current");
   common_scripts\utility::flag_set("reveal_dialog_done");
@@ -2588,7 +2588,7 @@ cargoship_start() {
   level.player giveweapon("g36c");
   level.player giveweapon("m16_grenadier");
   level.player switchtoweapon("m16_grenadier");
-  maps\killhouse_code::registerobjective("obj_price", & "KILLHOUSE_CLIMB_THE_LADDER", getent("top_of_rope_trigger", "targetname"));
+  maps\killhouse_code::registerobjective("obj_price", &"KILLHOUSE_CLIMB_THE_LADDER", getent("top_of_rope_trigger", "targetname"));
   maps\killhouse_code::setobjectivestate("obj_price", "current");
   common_scripts\utility::flag_set("reveal_dialog_done");
   maps\killhouse_code::cqb_timer_setup();
@@ -2634,7 +2634,7 @@ cargoship_training() {
     if(var_15) {
       if(!(level.player getcurrentweapon() == "mp5") || level.player getweaponammostock("flash_grenade") < 4) {
         level.price thread maps\killhouse_code::execdialog("pickupmp5");
-        maps\killhouse_code::setobjectivestring("obj_price", & "KILLHOUSE_EQUIP_THE_MP5_AND_PICK");
+        maps\killhouse_code::setobjectivestring("obj_price", &"KILLHOUSE_EQUIP_THE_MP5_AND_PICK");
         maps\killhouse_code::setobjectivelocation("obj_price", getent("obj_flashes", "targetname"));
       }
     } else {
@@ -2689,7 +2689,7 @@ cargoship_training() {
 
     if(var_15) {
       thread movies_on_tvs();
-      maps\killhouse_code::setobjectivestring("obj_price", & "KILLHOUSE_CLEAR_THE_CARGOSHIP_BRIDGE");
+      maps\killhouse_code::setobjectivestring("obj_price", &"KILLHOUSE_CLEAR_THE_CARGOSHIP_BRIDGE");
       maps\killhouse_code::setobjectivelocation("obj_price", var_5);
       common_scripts\utility::flag_set("cargoshipTutoDone");
     }
@@ -2870,7 +2870,7 @@ debrief_start() {
 
 debrief() {
   var_0 = getent("debrief_trigger", "targetname");
-  maps\killhouse_code::registerobjective("obj_debrief", & "KILLHOUSE_DEBRIEF_WITH_CPT_PRICE", var_0);
+  maps\killhouse_code::registerobjective("obj_debrief", &"KILLHOUSE_DEBRIEF_WITH_CPT_PRICE", var_0);
   maps\killhouse_code::setobjectivestate("obj_debrief", "current");
   var_0 waittill("trigger");
   thread maps\killhouse_code::fail_if_friendlies_in_line_of_fire();
@@ -2892,7 +2892,7 @@ debrief() {
   level notify("okay_if_friendlies_in_line_of_fire");
 
   if(var_2 == "try_again") {
-    setdvar("ui_deadquote", & "KILLHOUSE_SHIP_TRY_AGAIN");
+    setdvar("ui_deadquote", &"KILLHOUSE_SHIP_TRY_AGAIN");
     maps\_utility::missionfailedwrapper();
   }
 

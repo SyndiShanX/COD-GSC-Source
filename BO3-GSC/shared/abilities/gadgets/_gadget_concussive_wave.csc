@@ -15,7 +15,7 @@
 #namespace _gadget_concussive_wave;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_concussive_wave", & __init__, undefined, undefined);
+  system::register("gadget_concussive_wave", &__init__, undefined, undefined);
 }
 
 function __init__() {}

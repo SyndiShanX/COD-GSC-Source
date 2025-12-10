@@ -30,7 +30,7 @@ function init() {
   level.var_ee516197 = getweapon("zombie_one_inch_punch_upgrade_flourish");
   level._effect["oneinch_impact"] = "dlc5/tomb/fx_one_inch_punch_impact";
   level._effect["punch_knockdown_ground"] = "dlc5/zmb_weapon/fx_thundergun_knockback_ground";
-  callback::on_connect( & one_inch_punch_take_think);
+  callback::on_connect(&one_inch_punch_take_think);
 }
 
 function widows_wine_knife_override() {
@@ -53,7 +53,7 @@ function one_inch_punch_melee_attack() {
     self flag::init("melee_punch_cooldown");
   }
   self.one_inch_punch_flag_has_been_init = 1;
-  self.widows_wine_knife_override = & widows_wine_knife_override;
+  self.widows_wine_knife_override = &widows_wine_knife_override;
   current_melee_weapon = self zm_utility::get_player_melee_weapon();
   self takeweapon(current_melee_weapon);
   if(isDefined(self.b_punch_upgraded) && self.b_punch_upgraded) {
@@ -172,7 +172,7 @@ function punch_cooldown() {
 
 function zombie_punch_damage(ai_zombie, n_mod) {
   self endon("disconnect");
-  ai_zombie.punch_handle_pain_notetracks = & handle_punch_pain_notetracks;
+  ai_zombie.punch_handle_pain_notetracks = &handle_punch_pain_notetracks;
   if(isDefined(n_mod)) {
     if(self hasperk("specialty_widowswine")) {
       n_mod = n_mod * 1.1;

@@ -26,7 +26,7 @@
 
 function autoexec init() {
   function_e84ffe9c();
-  spawner::add_archetype_spawn_function("margwa", & function_57c223eb);
+  spawner::add_archetype_spawn_function("margwa", &function_57c223eb);
   margwabehavior::adddirecthitweapon("turret_zm_genesis");
   margwabehavior::adddirecthitweapon("shotgun_energy");
   margwabehavior::adddirecthitweapon("shotgun_energy_upgraded");
@@ -53,10 +53,10 @@ function autoexec init() {
 }
 
 function private function_e84ffe9c() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMargwaVortexService", & function_96a94112);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMargwaSpiderService", & function_9f065361);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMargwaReactStunTerminate", & function_a5e64246);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMargwaReactIDGunTerminate", & function_a478da01);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMargwaVortexService", &function_96a94112);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMargwaSpiderService", &function_9f065361);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMargwaReactStunTerminate", &function_a5e64246);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMargwaReactIDGunTerminate", &function_a478da01);
 }
 
 function private function_96a94112(entity) {
@@ -89,12 +89,12 @@ function private function_a478da01(entity) {
 }
 
 function private function_57c223eb() {
-  self.var_5ffc5a7b = & function_c27412c6;
-  self.margwapainterminatecb = & function_cc95e566;
+  self.var_5ffc5a7b = &function_c27412c6;
+  self.margwapainterminatecb = &function_cc95e566;
   self thread function_e1f5236a();
-  self.idgun_damage_cb = & function_df77c1c3;
-  self.var_fbaea41d = & function_a8ffa66c;
-  self.var_c732138b = & function_f769285c;
+  self.idgun_damage_cb = &function_df77c1c3;
+  self.var_fbaea41d = &function_a8ffa66c;
+  self.var_c732138b = &function_f769285c;
   self.var_aa0a91dd = gettime();
   self.var_28763934 = gettime();
   self.var_15704e8d = gettime();

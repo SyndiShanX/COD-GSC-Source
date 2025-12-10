@@ -71,8 +71,8 @@ function function_3dd4e95e(str_rumble) {
 
 function function_e30ec73e() {
   s_start = struct::get("apothicon_intro_bundle");
-  scene::add_scene_func("cin_genesis_apothicon_papintro", & function_860971ff, "play");
-  scene::add_scene_func("cin_genesis_apothicon_papintro", & function_a2294b99, "done");
+  scene::add_scene_func("cin_genesis_apothicon_papintro", &function_860971ff, "play");
+  scene::add_scene_func("cin_genesis_apothicon_papintro", &function_a2294b99, "done");
   level thread scene::init("cin_genesis_apothicon_papintro");
   level waittill("start_zombie_round_logic");
   level thread function_4fa16b52();
@@ -96,12 +96,12 @@ function function_4fa16b52() {
     level flag::init(var_446599c2.script_flag);
   }
   var_446599c2 thread function_d5419c08();
-  var_cf61f0f8 = var_e80ed647 zm_unitrigger::create_unitrigger(&"ZM_GENESIS_APOTHICON_DOOR", 128, & function_d9879865, undefined, "unitrigger_radius");
+  var_cf61f0f8 = var_e80ed647 zm_unitrigger::create_unitrigger(&"ZM_GENESIS_APOTHICON_DOOR", 128, &function_d9879865, undefined, "unitrigger_radius");
   var_cf61f0f8 thread function_16d77af();
 }
 
 function function_d5419c08() {
-  s_unitrigger = self zm_unitrigger::create_dyn_unitrigger(&"ZM_GENESIS_APOTHICON_TRAP_READY", undefined, & function_f94d9124);
+  s_unitrigger = self zm_unitrigger::create_dyn_unitrigger(&"ZM_GENESIS_APOTHICON_TRAP_READY", undefined, &function_f94d9124);
   s_unitrigger.inactive_reassess_time = 0.1;
   a_e_parts = getEntArray(self.target, "targetname");
   foreach(e_part in a_e_parts) {

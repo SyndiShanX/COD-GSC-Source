@@ -42,7 +42,7 @@ start_so_crossing_timed() {
   flag_init("so_obj_crossing_start");
   flag_init("so_obj_crossing_complete");
 
-  level.challenge_objective = & "SO_CROSSING_SO_BRIDGE_OBJECTIVE";
+  level.challenge_objective = &"SO_CROSSING_SO_BRIDGE_OBJECTIVE";
 
   switch (level.gameSkill) {
     case 0: // Easy

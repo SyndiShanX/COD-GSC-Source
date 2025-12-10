@@ -23,14 +23,14 @@
 #namespace castle_achievements;
 
 function autoexec __init__sytem__() {
-  system::register("zm_castle_achievements", & __init__, undefined, undefined);
+  system::register("zm_castle_achievements", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level thread function_c190d113();
   level thread function_a7a00809();
-  callback::on_connect( & on_player_connect);
-  zm_spawner::register_zombie_death_event_callback( & function_1abfde35);
+  callback::on_connect(&on_player_connect);
+  zm_spawner::register_zombie_death_event_callback(&function_1abfde35);
 }
 
 function on_player_connect() {
@@ -46,14 +46,14 @@ function on_player_connect() {
 
 function function_c190d113() {
   level waittill("hash_b39ccbbf");
-  array::run_all(level.players, & giveachievement, "ZM_CASTLE_EE");
+  array::run_all(level.players, &giveachievement, "ZM_CASTLE_EE");
 }
 
 function function_a7a00809() {
   for(i = 0; i < 4; i++) {
     level waittill("hash_ea0c887b");
   }
-  array::run_all(level.players, & giveachievement, "ZM_CASTLE_ALL_BOWS");
+  array::run_all(level.players, &giveachievement, "ZM_CASTLE_ALL_BOWS");
 }
 
 function function_a54c1d45() {

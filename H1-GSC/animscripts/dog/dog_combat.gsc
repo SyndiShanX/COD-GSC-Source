@@ -575,10 +575,10 @@ checkendcombat(var_0) {
 
 prepareattackplayer() {
   if(is_hyena()) {
-    level.dog_death_quote = & "NEW_HYENA_DEATH_DO_NOTHING_ALT";
+    level.dog_death_quote = &"NEW_HYENA_DEATH_DO_NOTHING_ALT";
     level.so_dog_death_quote = "@NEW_HYENA_DEATH_DO_NOTHING_ALT";
   } else {
-    level.dog_death_quote = & "NEW_DOG_DEATH_DO_NOTHING_ALT";
+    level.dog_death_quote = &"NEW_DOG_DEATH_DO_NOTHING_ALT";
     level.so_dog_death_quote = "@NEW_DOG_DEATH_DO_NOTHING_ALT";
   }
 
@@ -645,7 +645,7 @@ show_prepare_dog_hint_h1() {
         if(var_4 == "count") {
           continue;
         }
-        if(var_3 == & "KEY_BUTTON_RSTICK" || var_3 == & "KEY_BUTTON_LSTICK") {
+        if(var_3 == &"KEY_BUTTON_RSTICK" || var_3 == &"KEY_BUTTON_LSTICK") {
           var_0 = 1.15;
           break;
         }
@@ -873,10 +873,10 @@ dog_melee_death() {
             self setanimlimited( % attack_player_late, 1, 0.2, 1);
 
             if(is_hyena()) {
-              level.dog_death_quote = & "NEW_HYENA_DEATH_TOO_LATE_ALT";
+              level.dog_death_quote = &"NEW_HYENA_DEATH_TOO_LATE_ALT";
               level.so_dog_death_quote = "@NEW_HYENA_DEATH_TOO_LATE_ALT";
             } else {
-              level.dog_death_quote = & "NEW_DOG_DEATH_TOO_LATE_ALT";
+              level.dog_death_quote = &"NEW_DOG_DEATH_TOO_LATE_ALT";
               level.so_dog_death_quote = "@NEW_DOG_DEATH_TOO_LATE_ALT";
             }
 
@@ -890,10 +890,10 @@ dog_melee_death() {
 
         if(self.meleeingplayer can_early_melee()) {
           if(is_hyena()) {
-            level.dog_death_quote = & "NEW_HYENA_DEATH_TOO_SOON_ALT";
+            level.dog_death_quote = &"NEW_HYENA_DEATH_TOO_SOON_ALT";
             level.so_dog_death_quote = "@NEW_HYENA_DEATH_TOO_SOON_ALT";
           } else {
-            level.dog_death_quote = & "NEW_DOG_DEATH_TOO_SOON_ALT";
+            level.dog_death_quote = &"NEW_DOG_DEATH_TOO_SOON_ALT";
             level.so_dog_death_quote = "@NEW_DOG_DEATH_TOO_SOON_ALT";
           }
 

@@ -39,23 +39,23 @@
 #namespace bot;
 
 function autoexec __init__sytem__() {
-  system::register("bot_mp", & __init__, undefined, undefined);
+  system::register("bot_mp", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
-  level.getbotsettings = & get_bot_settings;
-  level.onbotconnect = & on_bot_connect;
-  level.onbotspawned = & on_bot_spawned;
-  level.onbotkilled = & on_bot_killed;
-  level.botidle = & bot_idle;
-  level.botthreatlost = & bot_combat::chase_threat;
-  level.botprecombat = & bot_combat::mp_pre_combat;
-  level.botcombat = & bot_combat::combat_think;
-  level.botpostcombat = & bot_combat::mp_post_combat;
-  level.botignorethreat = & bot_combat::bot_ignore_threat;
-  level.enemyempactive = & emp::enemyempactive;
-  level.botdevguicmd = & function_682f20bc;
+  callback::on_start_gametype(&init);
+  level.getbotsettings = &get_bot_settings;
+  level.onbotconnect = &on_bot_connect;
+  level.onbotspawned = &on_bot_spawned;
+  level.onbotkilled = &on_bot_killed;
+  level.botidle = &bot_idle;
+  level.botthreatlost = &bot_combat::chase_threat;
+  level.botprecombat = &bot_combat::mp_pre_combat;
+  level.botcombat = &bot_combat::combat_think;
+  level.botpostcombat = &bot_combat::mp_post_combat;
+  level.botignorethreat = &bot_combat::bot_ignore_threat;
+  level.enemyempactive = &emp::enemyempactive;
+  level.botdevguicmd = &function_682f20bc;
   level thread system_devgui_gadget_think();
 }
 

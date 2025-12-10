@@ -24,24 +24,24 @@
 #namespace zm_altbody_beast;
 
 function autoexec __init__sytem__() {
-  system::register("zm_altbody_beast", & __init__, undefined, undefined);
+  system::register("zm_altbody_beast", &__init__, undefined, undefined);
 }
 
 function __init__() {
   if(!isDefined(level.bminteract)) {
     level.bminteract = [];
   }
-  clientfield::register("missile", "bminteract", 1, 2, "int", & bminteract_changed, 0, 0);
-  clientfield::register("scriptmover", "bminteract", 1, 2, "int", & bminteract_changed, 0, 0);
-  clientfield::register("actor", "bm_zombie_melee_kill", 1, 1, "int", & bm_zombie_melee_kill, 0, 0);
-  clientfield::register("actor", "bm_zombie_grapple_kill", 1, 1, "int", & bm_zombie_grapple_kill, 0, 0);
-  clientfield::register("toplayer", "beast_blood_on_player", 1, 1, "counter", & function_70f7f4d2, 0, 0);
+  clientfield::register("missile", "bminteract", 1, 2, "int", &bminteract_changed, 0, 0);
+  clientfield::register("scriptmover", "bminteract", 1, 2, "int", &bminteract_changed, 0, 0);
+  clientfield::register("actor", "bm_zombie_melee_kill", 1, 1, "int", &bm_zombie_melee_kill, 0, 0);
+  clientfield::register("actor", "bm_zombie_grapple_kill", 1, 1, "int", &bm_zombie_grapple_kill, 0, 0);
+  clientfield::register("toplayer", "beast_blood_on_player", 1, 1, "counter", &function_70f7f4d2, 0, 0);
   clientfield::register("world", "bm_superbeast", 1, 1, "int", undefined, 0, 0);
   function_10dcd1d5("beast_mode_kiosk");
   duplicate_render::set_dr_filter_offscreen("bmint", 35, "bminteract,bmplayer", undefined, 2, "mc/hud_keyline_beastmode", 0);
-  zm_altbody::init("beast_mode", "beast_mode_kiosk", & "ZM_ZOD_ENTER_BEAST_MODE", "zombie_beast_2", 123, & player_enter_beastmode, & player_exit_beastmode, & function_df3032fc, & function_da014198);
-  callback::on_localclient_connect( & player_on_connect);
-  callback::on_spawned( & player_on_spawned);
+  zm_altbody::init("beast_mode", "beast_mode_kiosk", &"ZM_ZOD_ENTER_BEAST_MODE", "zombie_beast_2", 123, &player_enter_beastmode, &player_exit_beastmode, &function_df3032fc, &function_da014198);
+  callback::on_localclient_connect(&player_on_connect);
+  callback::on_spawned(&player_on_spawned);
   level._effect["beast_kiosk_fx_reset"] = "zombie/fx_bmode_kiosk_fire_reset_zod_zmb";
   level._effect["beast_kiosk_fx_enabled"] = "zombie/fx_bmode_kiosk_fire_zod_zmb";
   level._effect["beast_kiosk_fx_disabled"] = "zombie/fx_bmode_kiosk_idle_zod_zmb";
@@ -283,12 +283,12 @@ function function_cce7ef03(localclientnum, onoff) {
 
 function player_update_beast_mode_objects(localclientnum, onoff) {
   bmo = get_script_noteworthy_array(localclientnum, "beast_mode", "script_noteworthy");
-  array::run_all(bmo, & entity_set_visible, localclientnum, self, onoff);
+  array::run_all(bmo, &entity_set_visible, localclientnum, self, onoff);
   bmho = get_script_noteworthy_array(localclientnum, "not_beast_mode", "script_noteworthy");
-  array::run_all(bmho, & entity_set_visible, localclientnum, self, !onoff);
+  array::run_all(bmho, &entity_set_visible, localclientnum, self, !onoff);
   wait(0.016);
   clean_deleted(level.bminteract[localclientnum]);
-  array::run_all(level.bminteract[localclientnum], & entity_set_bmplayer, localclientnum, onoff);
+  array::run_all(level.bminteract[localclientnum], &entity_set_bmplayer, localclientnum, onoff);
 }
 
 function entity_set_bmplayer(localclientnum, onoff) {
@@ -356,7 +356,7 @@ function entity_set_visible(localclientnum, player, onoff) {
   }
 }
 
-function add_remove_list( & a = [], on_off) {
+function add_remove_list(&a = [], on_off) {
   if(on_off) {
     if(!isinarray(a, self)) {
       arrayinsert(a, self, a.size);
@@ -366,7 +366,7 @@ function add_remove_list( & a = [], on_off) {
   }
 }
 
-function clean_deleted( & array) {
+function clean_deleted(&array) {
   done = 0;
   while(!done && array.size > 0) {
     done = 1;
@@ -435,7 +435,7 @@ function function_10dcd1d5(kiosk_name) {
     kiosk.var_39a60f4a = (kiosk_name + "_crs_") + kiosk.origin;
     level.var_dc56ce87[kiosk.var_80eeb471] = kiosk;
     level.var_104eabe[kiosk.var_39a60f4a] = kiosk;
-    clientfield::register("world", kiosk.var_80eeb471, 1, 4, "int", & function_fa828651, 0, 0);
+    clientfield::register("world", kiosk.var_80eeb471, 1, 4, "int", &function_fa828651, 0, 0);
   }
 }
 
@@ -481,7 +481,7 @@ function update_kiosk_state(localclientnum, oldval, newval, bnewent, binitialsna
   if(!isDefined(self.beast_kiosk_fx[localclientnum])) {
     self.beast_kiosk_fx[localclientnum] = [];
   }
-  if(newval & (1 << n_entnum)) {
+  if(newval &(1 << n_entnum)) {
     if(isDefined(self.beast_kiosk_fx[localclientnum]["disabled"])) {
       stopfx(localclientnum, self.beast_kiosk_fx[localclientnum]["disabled"]);
       self.beast_kiosk_fx[localclientnum]["disabled"] = undefined;

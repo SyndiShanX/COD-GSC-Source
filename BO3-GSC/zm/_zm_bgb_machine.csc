@@ -15,7 +15,7 @@
 #namespace bgb_machine;
 
 function autoexec __init__sytem__() {
-  system::register("bgb_machine", & __init__, undefined, undefined);
+  system::register("bgb_machine", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -23,11 +23,11 @@ function __init__() {
     return;
   }
   level.var_962d1590 = 0.016;
-  clientfield::register("zbarrier", "zm_bgb_machine", 1, 1, "int", & bgb_machine_init, 0, 0);
-  clientfield::register("zbarrier", "zm_bgb_machine_selection", 1, 8, "int", & bgb_machine_selection, 1, 0);
-  clientfield::register("zbarrier", "zm_bgb_machine_fx_state", 1, 3, "int", & bgb_machine_fx_state, 0, 0);
+  clientfield::register("zbarrier", "zm_bgb_machine", 1, 1, "int", &bgb_machine_init, 0, 0);
+  clientfield::register("zbarrier", "zm_bgb_machine_selection", 1, 8, "int", &bgb_machine_selection, 1, 0);
+  clientfield::register("zbarrier", "zm_bgb_machine_fx_state", 1, 3, "int", &bgb_machine_fx_state, 0, 0);
   clientfield::register("zbarrier", "zm_bgb_machine_ghost_ball", 1, 1, "int", undefined, 0, 0);
-  clientfield::register("toplayer", "zm_bgb_machine_round_buys", 10000, 3, "int", & function_27a93844, 0, 0);
+  clientfield::register("toplayer", "zm_bgb_machine_round_buys", 10000, 3, "int", &function_27a93844, 0, 0);
   level._effect["zm_bgb_machine_eye_away"] = "zombie/fx_bgb_machine_eye_away_zmb";
   level._effect["zm_bgb_machine_eye_activated"] = "zombie/fx_bgb_machine_eye_activated_zmb";
   level._effect["zm_bgb_machine_eye_event"] = "zombie/fx_bgb_machine_eye_event_zmb";
@@ -436,9 +436,9 @@ function function_b90b22b6() {
     level.var_f26edb66 = [];
   }
   if(!isDefined(level.var_6c7a96b4)) {
-    level.var_6c7a96b4 = & function_6c7a96b4;
+    level.var_6c7a96b4 = &function_6c7a96b4;
   }
-  callback::on_localplayer_spawned( & on_player_spawned);
+  callback::on_localplayer_spawned(&on_player_spawned);
 }
 
 function private on_player_spawned(localclientnum) {

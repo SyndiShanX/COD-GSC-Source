@@ -69,7 +69,7 @@ init() {
 
   //precacheItem( "remotemissile_projectile_mp" );
   precacheShader("ac130_overlay_grain");
-  precacheString( & "MP_CIVILIAN_AIR_TRAFFIC");
+  precacheString(&"MP_CIVILIAN_AIR_TRAFFIC");
   precacheShader("h2_overlays_predator_reticle");
   precacheMinimapIcon("remotemissile_target_friendly");
   precacheMinimapIcon("remotemissile_target_hostile");
@@ -83,7 +83,7 @@ init() {
 
 tryUsePredatorMissile(lifeId) {
   if(isDefined(level.civilianJetFlyBy)) {
-    self iprintlnbold( & "MP_CIVILIAN_AIR_TRAFFIC");
+    self iprintlnbold(&"MP_CIVILIAN_AIR_TRAFFIC");
     return false;
   }
 

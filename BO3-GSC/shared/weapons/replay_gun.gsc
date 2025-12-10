@@ -15,11 +15,11 @@
 #namespace replay_gun;
 
 function autoexec __init__sytem__() {
-  system::register("replay_gun", & __init__, undefined, undefined);
+  system::register("replay_gun", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_spawned( & watch_for_replay_gun);
+  callback::on_spawned(&watch_for_replay_gun);
 }
 
 function watch_for_replay_gun() {

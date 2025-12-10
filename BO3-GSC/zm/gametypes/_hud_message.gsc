@@ -14,19 +14,19 @@
 #namespace hud_message;
 
 function init() {
-  game["strings"]["draw"] = & "MP_DRAW_CAPS";
-  game["strings"]["round_draw"] = & "MP_ROUND_DRAW_CAPS";
-  game["strings"]["round_win"] = & "MP_ROUND_WIN_CAPS";
-  game["strings"]["round_loss"] = & "MP_ROUND_LOSS_CAPS";
-  game["strings"]["victory"] = & "MP_VICTORY_CAPS";
-  game["strings"]["defeat"] = & "MP_DEFEAT_CAPS";
-  game["strings"]["game_over"] = & "MP_GAME_OVER_CAPS";
-  game["strings"]["halftime"] = & "MP_HALFTIME_CAPS";
-  game["strings"]["overtime"] = & "MP_OVERTIME_CAPS";
-  game["strings"]["roundend"] = & "MP_ROUNDEND_CAPS";
-  game["strings"]["intermission"] = & "MP_INTERMISSION_CAPS";
-  game["strings"]["side_switch"] = & "MP_SWITCHING_SIDES_CAPS";
-  game["strings"]["match_bonus"] = & "MP_MATCH_BONUS_IS";
+  game["strings"]["draw"] = &"MP_DRAW_CAPS";
+  game["strings"]["round_draw"] = &"MP_ROUND_DRAW_CAPS";
+  game["strings"]["round_win"] = &"MP_ROUND_WIN_CAPS";
+  game["strings"]["round_loss"] = &"MP_ROUND_LOSS_CAPS";
+  game["strings"]["victory"] = &"MP_VICTORY_CAPS";
+  game["strings"]["defeat"] = &"MP_DEFEAT_CAPS";
+  game["strings"]["game_over"] = &"MP_GAME_OVER_CAPS";
+  game["strings"]["halftime"] = &"MP_HALFTIME_CAPS";
+  game["strings"]["overtime"] = &"MP_OVERTIME_CAPS";
+  game["strings"]["roundend"] = &"MP_ROUNDEND_CAPS";
+  game["strings"]["intermission"] = &"MP_INTERMISSION_CAPS";
+  game["strings"]["side_switch"] = &"MP_SWITCHING_SIDES_CAPS";
+  game["strings"]["match_bonus"] = &"MP_MATCH_BONUS_IS";
 }
 
 function teamoutcomenotify(winner, isround, endreasontext) {
@@ -299,7 +299,7 @@ function outcomenotify(winner, isroundend, endreasontext) {
   firsttitle.hidewheninmenu = 0;
   firsttitle.archived = 0;
   if(isDefined(players[0])) {
-    firsttitle.label = & "MP_FIRSTPLACE_NAME";
+    firsttitle.label = &"MP_FIRSTPLACE_NAME";
     firsttitle setplayernamestring(players[0]);
     firsttitle setcod7decodefx(175, duration, 600);
   }
@@ -310,7 +310,7 @@ function outcomenotify(winner, isroundend, endreasontext) {
   secondtitle.hidewheninmenu = 0;
   secondtitle.archived = 0;
   if(isDefined(players[1])) {
-    secondtitle.label = & "MP_SECONDPLACE_NAME";
+    secondtitle.label = &"MP_SECONDPLACE_NAME";
     secondtitle setplayernamestring(players[1]);
     secondtitle setcod7decodefx(175, duration, 600);
   }
@@ -322,7 +322,7 @@ function outcomenotify(winner, isroundend, endreasontext) {
   thirdtitle.hidewheninmenu = 0;
   thirdtitle.archived = 0;
   if(isDefined(players[2])) {
-    thirdtitle.label = & "MP_THIRDPLACE_NAME";
+    thirdtitle.label = &"MP_THIRDPLACE_NAME";
     thirdtitle setplayernamestring(players[2]);
     thirdtitle setcod7decodefx(175, duration, 600);
   }
@@ -415,7 +415,7 @@ function wageroutcomenotify(winner, endreasontext) {
       secondtitle.glowalpha = 1;
       secondtitle.hidewheninmenu = 0;
       secondtitle.archived = 0;
-      secondtitle.label = & "MP_WAGER_PLACE_NAME";
+      secondtitle.label = &"MP_WAGER_PLACE_NAME";
       secondtitle.playernum = i;
       secondtitle setplayernamestring(players[i]);
       playernamehudelems[playernamehudelems.size] = secondtitle;
@@ -425,7 +425,7 @@ function wageroutcomenotify(winner, endreasontext) {
       secondcp.glowalpha = 1;
       secondcp.hidewheninmenu = 0;
       secondcp.archived = 0;
-      secondcp.label = & "MENU_POINTS";
+      secondcp.label = &"MENU_POINTS";
       secondcp.currentvalue = 0;
       if(isDefined(players[i].wagerwinnings)) {
         secondcp.targetvalue = players[i].wagerwinnings;

@@ -15,7 +15,7 @@
 #namespace zm_prototype_barrels;
 
 function autoexec __init__sytem__() {
-  system::register("zm_prototype_barrels", & __init__, undefined, undefined);
+  system::register("zm_prototype_barrels", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -37,8 +37,8 @@ function __init__() {
   level.barrelingsound = "exp_redbarrel_ignition";
   level.barrelhealth = 350;
   level.barrelexplodingthisframe = 0;
-  array::thread_all(getEntArray("explodable_barrel", "targetname"), & explodable_barrel_think);
-  array::thread_all(getEntArray("explodable_barrel", "script_noteworthy"), & explodable_barrel_think);
+  array::thread_all(getEntArray("explodable_barrel", "targetname"), &explodable_barrel_think);
+  array::thread_all(getEntArray("explodable_barrel", "script_noteworthy"), &explodable_barrel_think);
   level thread function_28ed3370();
 }
 

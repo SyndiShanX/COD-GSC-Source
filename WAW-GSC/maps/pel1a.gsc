@@ -32,9 +32,9 @@ main() {
   maps\_mganim::main();
   setup_threatbiasgroups();
   setup_friends();
-  add_start("event2", ::event2_start, & "STARTS_PEL1A_EVENT2");
-  add_start("event3", ::event3_start, & "STARTS_PEL1A_EVENT3");
-  add_start("event4", ::event4_start, & "STARTS_PEL1A_EVENT4");
+  add_start("event2", ::event2_start, &"STARTS_PEL1A_EVENT2");
+  add_start("event3", ::event3_start, &"STARTS_PEL1A_EVENT3");
+  add_start("event4", ::event4_start, &"STARTS_PEL1A_EVENT4");
   default_start(::event1_start);
   maps\_load::main();
   maps\_treefall::main();
@@ -183,10 +183,10 @@ setup_friends() {
 set_objective(num, ent) {
   startplace = GetDvar("start");
   if(num == 1) {
-    Objective_Add(0, "active", & "PEL1A_OBJECTIVE1", (level.roebuck.origin));
+    Objective_Add(0, "active", &"PEL1A_OBJECTIVE1", (level.roebuck.origin));
   } else if(num == 2) {
     Objective_Add(1, "active");
-    Objective_String(1, & "PEL1A_OBJECTIVE2", level.mortar_crews);
+    Objective_String(1, &"PEL1A_OBJECTIVE2", level.mortar_crews);
     mortar_node1 = GetNode("auto2233", "targetname");
     objective_location = getstruct("mortar1_objective_location", "targetname");
     Objective_AdditionalPosition(1, 0, objective_location.origin);
@@ -200,7 +200,7 @@ set_objective(num, ent) {
     level thread objective_mortar_update("pit3_defenders", 2);
   } else if(num == 3) {
     struct = getstruct("regroup_objective_spot", "targetname");
-    Objective_Add(0, "active", & "PEL1A_OBJECTIVE3", struct.origin);
+    Objective_Add(0, "active", &"PEL1A_OBJECTIVE3", struct.origin);
     objective_current(0);
   } else if(num == 4) {
     objective_state(0, "done");
@@ -217,7 +217,7 @@ objective_mortar_update(mortar_aigroup, id) {
   if(level.mortar_crews == 0) {
     waittill_aigroupcleared("pit3_defenders");
     Objective_AdditionalPosition(1, id, (0, 0, 0));
-    Objective_String_NoMessage(1, & "PEL1A_OBJECTIVE2", level.mortar_crews);
+    Objective_String_NoMessage(1, &"PEL1A_OBJECTIVE2", level.mortar_crews);
     Objective_State(1, "done");
     set_objective(3);
   } else {
@@ -225,7 +225,7 @@ objective_mortar_update(mortar_aigroup, id) {
       level.roebuck anim_single_solo(level.roebuck, "first_mortar_pit4");
     }
     Objective_AdditionalPosition(1, id, (0, 0, 0));
-    Objective_String(1, & "PEL1A_OBJECTIVE2", level.mortar_crews);
+    Objective_String(1, &"PEL1A_OBJECTIVE2", level.mortar_crews);
   }
 }
 

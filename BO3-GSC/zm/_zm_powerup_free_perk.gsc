@@ -22,13 +22,13 @@
 #namespace zm_powerup_free_perk;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_free_perk", & __init__, undefined, undefined);
+  system::register("zm_powerup_free_perk", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  zm_powerups::register_powerup("free_perk", & grab_free_perk);
+  zm_powerups::register_powerup("free_perk", &grab_free_perk);
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("free_perk", "zombie_pickup_perk_bottle", & "ZOMBIE_POWERUP_FREE_PERK", & zm_powerups::func_should_never_drop, 0, 0, 0);
+    zm_powerups::add_zombie_powerup("free_perk", "zombie_pickup_perk_bottle", &"ZOMBIE_POWERUP_FREE_PERK", &zm_powerups::func_should_never_drop, 0, 0, 0);
   }
 }
 

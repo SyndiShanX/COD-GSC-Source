@@ -163,14 +163,14 @@ give_sq_bg_reward() {
   if(a_players.size == 1) {
     if(a_players[0] hasweapon("blundergat_zm")) {
       str_reward_weapon = "blundersplat_zm";
-      str_loc = & "ZM_PRISON_SQ_BS";
+      str_loc = &"ZM_PRISON_SQ_BS";
     } else {
       str_reward_weapon = "blundergat_zm";
-      str_loc = & "ZM_PRISON_SQ_BG";
+      str_loc = &"ZM_PRISON_SQ_BG";
     }
   } else {
     str_reward_weapon = "blundergat_zm";
-    str_loc = & "ZM_PRISON_SQ_BG";
+    str_loc = &"ZM_PRISON_SQ_BG";
   }
 
   m_reward_model = spawn_weapon_model(str_reward_weapon, undefined, s_reward_origin.origin, s_reward_origin.angles);

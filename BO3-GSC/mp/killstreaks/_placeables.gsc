@@ -62,7 +62,7 @@ function spawnplaceable(killstreakref, killstreakid, onplacecallback, oncancelca
   if(isDefined(health) && health > 0) {
     placeable.health = health;
     placeable setCanDamage(0);
-    placeable thread killstreaks::monitordamage(killstreakref, health, & ondeath, 0, undefined, empdamage, & onemp, 1);
+    placeable thread killstreaks::monitordamage(killstreakref, health, &ondeath, 0, undefined, empdamage, &onemp, 1);
   }
   player thread carryplaceable(placeable);
   level thread cancelongameend(placeable);
@@ -192,9 +192,9 @@ function watchplacement(placeable) {
         if(isDefined(placeable.timeout)) {
           if(!placeable.timeoutstarted) {
             placeable.timeoutstarted = 1;
-            placeable thread killstreaks::waitfortimeout(placeable.killstreakref, placeable.timeout, & ontimeout, "death", "cancelled");
+            placeable thread killstreaks::waitfortimeout(placeable.killstreakref, placeable.timeout, &ontimeout, "death", "cancelled");
           } else if(placeable.timedout) {
-            placeable thread killstreaks::waitfortimeout(placeable.killstreakref, 5000, & ontimeout, "cancelled");
+            placeable thread killstreaks::waitfortimeout(placeable.killstreakref, 5000, &ontimeout, "cancelled");
           }
         }
         if(isDefined(placeable.onplace)) {
@@ -229,7 +229,7 @@ function ontimeout() {
     return;
   }
   placeable notify("delete_placeable_trigger");
-  placeable thread killstreaks::waitfortimeout(placeable.killstreakref, 5000, & forceshutdown, "cancelled");
+  placeable thread killstreaks::waitfortimeout(placeable.killstreakref, 5000, &forceshutdown, "cancelled");
 }
 
 function ondeath(attacker, weapon) {

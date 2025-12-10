@@ -20,14 +20,14 @@
 #namespace zm_aat_turned;
 
 function autoexec __init__sytem__() {
-  system::register("zm_aat_turned", & __init__, undefined, "aat");
+  system::register("zm_aat_turned", &__init__, undefined, "aat");
 }
 
 function __init__() {
   if(!(isDefined(level.aat_in_use) && level.aat_in_use)) {
     return;
   }
-  aat::register("zm_aat_turned", 0.15, 0, 15, 8, 0, & result, "t7_hud_zm_aat_turned", "wpn_aat_turned_plr", & turned_zombie_validation);
+  aat::register("zm_aat_turned", 0.15, 0, 15, 8, 0, &result, "t7_hud_zm_aat_turned", "wpn_aat_turned_plr", &turned_zombie_validation);
   clientfield::register("actor", "zm_aat_turned", 1, 1, "int");
 }
 

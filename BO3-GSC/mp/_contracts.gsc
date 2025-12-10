@@ -19,11 +19,11 @@
 #namespace contracts;
 
 function autoexec __init__sytem__() {
-  system::register("contracts", & __init__, undefined, undefined);
+  system::register("contracts", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & start_gametype);
+  callback::on_start_gametype(&start_gametype);
   level thread watch_contract_debug();
 }
 
@@ -35,22 +35,22 @@ function start_gametype() {
   waittillframeend();
   if(can_process_contracts()) {
     execdevgui("");
-    challenges::registerchallengescallback("playerKilled", & contract_kills);
-    challenges::registerchallengescallback("gameEnd", & contract_game_ended);
-    globallogic_score::registercontractwinevent( & contract_win);
-    scoreevents::register_hero_ability_kill_event( & on_hero_ability_kill);
-    scoreevents::register_hero_ability_multikill_event( & on_hero_ability_multikill);
-    scoreevents::register_hero_weapon_multikill_event( & on_hero_weapon_multikill);
-    util::register_player_contract_event("score", & on_player_score, 1);
-    util::register_player_contract_event("killstreak_score", & on_killstreak_score, 2);
-    util::register_player_contract_event("offender_kill", & on_offender_kill);
-    util::register_player_contract_event("defender_kill", & on_defender_kill);
-    util::register_player_contract_event("headshot", & on_headshot_kill);
-    util::register_player_contract_event("killed_hero_ability_enemy", & on_killed_hero_ability_enemy);
-    util::register_player_contract_event("killed_hero_weapon_enemy", & on_killed_hero_weapon_enemy);
-    util::register_player_contract_event("earned_specialist_ability_medal", & on_hero_ability_medal);
+    challenges::registerchallengescallback("playerKilled", &contract_kills);
+    challenges::registerchallengescallback("gameEnd", &contract_game_ended);
+    globallogic_score::registercontractwinevent(&contract_win);
+    scoreevents::register_hero_ability_kill_event(&on_hero_ability_kill);
+    scoreevents::register_hero_ability_multikill_event(&on_hero_ability_multikill);
+    scoreevents::register_hero_weapon_multikill_event(&on_hero_weapon_multikill);
+    util::register_player_contract_event("score", &on_player_score, 1);
+    util::register_player_contract_event("killstreak_score", &on_killstreak_score, 2);
+    util::register_player_contract_event("offender_kill", &on_offender_kill);
+    util::register_player_contract_event("defender_kill", &on_defender_kill);
+    util::register_player_contract_event("headshot", &on_headshot_kill);
+    util::register_player_contract_event("killed_hero_ability_enemy", &on_killed_hero_ability_enemy);
+    util::register_player_contract_event("killed_hero_weapon_enemy", &on_killed_hero_weapon_enemy);
+    util::register_player_contract_event("earned_specialist_ability_medal", &on_hero_ability_medal);
   }
-  callback::on_connect( & on_player_connect);
+  callback::on_connect(&on_player_connect);
 }
 
 function on_killed_hero_ability_enemy() {
@@ -330,10 +330,10 @@ function add_active_stat(contract_index, delta = 1) {
   just_completed = 0;
   if(old_progress < target_value && target_value <= new_progress) {
     just_completed = 1;
-    event = & "mp_weekly_challenge_complete";
+    event = &"mp_weekly_challenge_complete";
     display_rewards = 0;
     if(slot == 2) {
-      event = & "mp_daily_challenge_complete";
+      event = &"mp_daily_challenge_complete";
       display_rewards = 1;
       self award_loot_xp_due(award_daily_contract());
       self set_contract_stat(2, "award_given", 1);
@@ -355,7 +355,7 @@ function add_active_stat(contract_index, delta = 1) {
           }
         }
       } else if(slot == 3) {
-        event = & "mp_special_contract_complete";
+        event = &"mp_special_contract_complete";
         display_rewards = 1;
         absolute_stat_path = self.pers["contracts"][contract_index].absolute_stat_path;
         if(absolute_stat_path != "") {
@@ -375,7 +375,7 @@ function add_active_stat(contract_index, delta = 1) {
     test_slot = getdvarint("", 9);
     if(slot == test_slot) {
       if(contract_index >= 1000 && contract_index <= 2999) {
-        event = & "";
+        event = &"";
       }
       display_rewards = 1;
     }

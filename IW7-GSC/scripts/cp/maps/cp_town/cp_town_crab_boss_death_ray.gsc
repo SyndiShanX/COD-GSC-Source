@@ -87,7 +87,7 @@ player_under_overhead_bridge(param_00) {
     return 0;
   }
 
-  return param_00.origin[1] >= -300 & param_00.origin[1] <= 1400;
+  return param_00.origin[1] >= -300 &param_00.origin[1] <= 1400;
 }
 
 player_near_left_or_right_cannon(param_00) {
@@ -205,7 +205,7 @@ set_up_death_ray_cannons() {
     var_03 makeunusable();
     var_03 setdefaultdroppitch(30);
     var_03 getvalidlocation();
-    var_03 sethintstring( & "CP_TOWN_USE_DEATH_RAY_CANNON");
+    var_03 sethintstring(&"CP_TOWN_USE_DEATH_RAY_CANNON");
     var_03.angles = var_02.angles;
     var_03 set_arc_value(var_03);
     var_03.not_ready_hint = set_up_not_ready_hint(var_03);
@@ -683,5 +683,5 @@ delay_player_shellshock() {
 }
 
 death_ray_hint_func(param_00, param_01) {
-  return & "CP_TOWN_DEATH_RAY_NOT_READY";
+  return &"CP_TOWN_DEATH_RAY_NOT_READY";
 }

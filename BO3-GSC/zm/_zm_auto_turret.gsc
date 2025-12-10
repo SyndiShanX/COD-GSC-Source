@@ -18,12 +18,12 @@
 #namespace zm_auto_turret;
 
 function autoexec __init__sytem__() {
-  system::register("zm_auto_turret", & __init__, & __main__, undefined);
+  system::register("zm_auto_turret", &__init__, &__main__, undefined);
 }
 
 function __init__() {
   level._effect["auto_turret_light"] = "dlc4/genesis/fx_light_turret_auto";
-  zm_spawner::register_zombie_death_event_callback( & death_check_for_challenge_updates);
+  zm_spawner::register_zombie_death_event_callback(&death_check_for_challenge_updates);
 }
 
 function __main__() {

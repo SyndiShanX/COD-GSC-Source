@@ -14,13 +14,13 @@
 #namespace zm_stats;
 
 function autoexec __init__sytem__() {
-  system::register("zm_stats", & __init__, undefined, undefined);
+  system::register("zm_stats", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  level.player_stats_init = & player_stats_init;
-  level.add_client_stat = & add_client_stat;
-  level.increment_client_stat = & increment_client_stat;
+  level.player_stats_init = &player_stats_init;
+  level.add_client_stat = &add_client_stat;
+  level.increment_client_stat = &increment_client_stat;
 }
 
 function player_stats_init() {

@@ -104,10 +104,10 @@ main() {
   array_thread(getEntArray("noprone", "targetname"), ::noprone);
 
   // Press ^3[{weapnext}]^7 to cycle through weapons.
-  add_hint_string("ac130_changed_weapons", & "AC130_HINT_CYCLE_WEAPONS", ::ShouldBreakAC130HintPrint);
+  add_hint_string("ac130_changed_weapons", &"AC130_HINT_CYCLE_WEAPONS", ::ShouldBreakAC130HintPrint);
 
   // Press ^3[{+actionslot 4}]^7 to use toggle laser targeting device.
-  add_hint_string("laser_hint", & "CO_HUNTED_HINT_LASER", ::ShouldBreakLaserHintPrint);
+  add_hint_string("laser_hint", &"CO_HUNTED_HINT_LASER", ::ShouldBreakLaserHintPrint);
 }
 
 gameplay_logic(gametype) {
@@ -166,7 +166,7 @@ gameplay_logic(gametype) {
   music_loop("so_ac130_co_hunted_music", 167);
 
   // Start
-  saveGame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", true);
+  saveGame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", true);
 
   thread open_all_doors();
   thread enemy_monitor();
@@ -292,7 +292,7 @@ ac130_change_weapon_hint() {
   if(!flag("player_changed_weapons"))
     level.ac130gunner thread display_hint("ac130_changed_weapons");
   // Press ^3[{weapnext}]^7 to cycle through weapons.
-  //hintPrint_coop( &"AC130_HINT_CYCLE_WEAPONS" );
+  //hintPrint_coop(&"AC130_HINT_CYCLE_WEAPONS" );
 }
 
 hintPrint_coop(string) {
@@ -598,17 +598,17 @@ objective(gametype) {
 
   switch (level.gameskill) {
     case 2:
-      objective_add(1, "current", & "SO_AC130_CO_HUNTED_OBJ_HARDENED");
+      objective_add(1, "current", &"SO_AC130_CO_HUNTED_OBJ_HARDENED");
       checkpoint_ent = getent("checkpoint_c", "targetname");
       flag_name = "checkpoint_c";
       break;
     case 3:
-      objective_add(1, "current", & "SO_AC130_CO_HUNTED_OBJ_VETERAN");
+      objective_add(1, "current", &"SO_AC130_CO_HUNTED_OBJ_VETERAN");
       checkpoint_ent = getent("checkpoint_barn", "targetname");
       flag_name = "checkpoint_barn";
       break;
     default:
-      objective_add(1, "current", & "SO_AC130_CO_HUNTED_OBJ_REGULAR");
+      objective_add(1, "current", &"SO_AC130_CO_HUNTED_OBJ_REGULAR");
       checkpoint_ent = getent("checkpoint_b", "targetname");
       flag_name = "checkpoint_b";
       break;

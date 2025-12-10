@@ -768,17 +768,17 @@ get_wall_buy_hint_func(param_00, param_01) {
     var_02 = param_01 getweaponslistall();
     foreach(var_04 in var_02) {
       if(issubstr(var_04, "venomx")) {
-        return & "COOP_INTERACTIONS_CANNOT_BUY";
+        return &"COOP_INTERACTIONS_CANNOT_BUY";
       }
     }
   }
 
   if(scripts\cp\utility::is_weapon_purchase_disabled()) {
-    return & "CP_ZMB_INTERACTIONS_WALL_BUY_DISABLED";
+    return &"CP_ZMB_INTERACTIONS_WALL_BUY_DISABLED";
   }
 
   if(!param_01 can_give_weapon(param_00)) {
-    return & "COOP_INTERACTIONS_CANNOT_BUY";
+    return &"COOP_INTERACTIONS_CANNOT_BUY";
   }
 
   var_06 = [

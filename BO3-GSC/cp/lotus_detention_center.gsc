@@ -47,7 +47,7 @@ function vtol_hallway_main(str_objective, b_starting) {
     scene::skipto_end("p7_fxanim_cp_lotus_monitor_security_bundle");
     scene::skipto_end_noai("cin_lot_04_09_security_1st_kickgrate");
     var_2820f5e9 = getEntArray("security_door_intact", "targetname");
-    array::run_all(var_2820f5e9, & delete);
+    array::run_all(var_2820f5e9, &delete);
     level flag::wait_till("all_players_spawned");
     skipto::teleport_ai(str_objective);
     level thread function_80318e87();
@@ -62,15 +62,15 @@ function vtol_hallway_main(str_objective, b_starting) {
   }
   level lotus_util::function_484bc3aa(0);
   battlechatter::function_d9f49fba(0);
-  spawner::add_spawn_function_group("zipline_guy", "script_noteworthy", & util::magic_bullet_shield);
-  spawner::add_spawn_function_group("zipline_guy", "script_noteworthy", & ai::set_behavior_attribute, "useGrenades", 0);
-  spawner::add_spawn_function_group("zipline_victims", "targetname", & function_cba3d0d4);
-  spawner::add_spawn_function_group("vtol_hallway_enemy", "script_noteworthy", & function_f2e34115);
-  spawner::add_spawn_function_group("vtol_shooting_victim", "targetname", & function_f2e34115);
-  spawner::add_spawn_function_group("vtol_shooting_victim_robot", "targetname", & function_f2e34115);
-  spawner::add_spawn_function_group("landing_area_ally_victim", "targetname", & function_959c5937);
-  vehicle::add_spawn_function("detention_center_vtol", & detention_center_vtol);
-  vehicle::add_spawn_function("lotus_vtol_hallway_destruction_vtol", & function_d3a1377e);
+  spawner::add_spawn_function_group("zipline_guy", "script_noteworthy", &util::magic_bullet_shield);
+  spawner::add_spawn_function_group("zipline_guy", "script_noteworthy", &ai::set_behavior_attribute, "useGrenades", 0);
+  spawner::add_spawn_function_group("zipline_victims", "targetname", &function_cba3d0d4);
+  spawner::add_spawn_function_group("vtol_hallway_enemy", "script_noteworthy", &function_f2e34115);
+  spawner::add_spawn_function_group("vtol_shooting_victim", "targetname", &function_f2e34115);
+  spawner::add_spawn_function_group("vtol_shooting_victim_robot", "targetname", &function_f2e34115);
+  spawner::add_spawn_function_group("landing_area_ally_victim", "targetname", &function_959c5937);
+  vehicle::add_spawn_function("detention_center_vtol", &detention_center_vtol);
+  vehicle::add_spawn_function("lotus_vtol_hallway_destruction_vtol", &function_d3a1377e);
   t_vtol_hallway_door = getent("vtol_hallway_open_door", "targetname");
   t_vtol_hallway_door triggerenable(0);
   level flag::set("prometheus_otr_cleared");
@@ -135,7 +135,7 @@ function function_80318e87(b_wait_for_flag = 0) {
   level thread function_9e1bef17();
   trigger::wait_till("vtol_fly_by");
   playsoundatposition("evt_vtolhallway_flyby", (-7235, 3447, 4079));
-  level scene::add_scene_func("p7_fxanim_cp_lotus_vtol_hallway_flyby_bundle", & function_bb4e63f9, "play");
+  level scene::add_scene_func("p7_fxanim_cp_lotus_vtol_hallway_flyby_bundle", &function_bb4e63f9, "play");
   level thread scene::play("p7_fxanim_cp_lotus_vtol_hallway_flyby_bundle");
 }
 
@@ -237,7 +237,7 @@ function function_613df5d9(var_9597a744) {
     var_5003a2bd = getent(var_e4b1b0d6 + n_index, "targetname");
     a_ai = [];
     a_ai = getaiteamarray("axis");
-    a_e_vtol_shooting_aoe_victims = array::filter(a_ai, 0, & filter_istouching, var_5003a2bd);
+    a_e_vtol_shooting_aoe_victims = array::filter(a_ai, 0, &filter_istouching, var_5003a2bd);
     foreach(ai_victim in a_e_vtol_shooting_aoe_victims) {
       if(isalive(ai_victim)) {
         if(isDefined(ai_victim.magic_bullet_shield) && ai_victim.magic_bullet_shield) {
@@ -249,14 +249,14 @@ function function_613df5d9(var_9597a744) {
         }
       }
     }
-    var_93abd77c = array::filter(level.players, 0, & filter_istouching, var_5003a2bd);
+    var_93abd77c = array::filter(level.players, 0, &filter_istouching, var_5003a2bd);
     foreach(player in var_93abd77c) {
       player dodamage(player.health, player.origin, undefined, undefined, undefined, "MOD_EXPLOSIVE");
     }
     var_446ac0ad = n_index - 1;
     var_446ac0ad = math::clamp(var_446ac0ad, 1, 13 - 1);
     var_ade4e252 = function_dbfa70cf(var_446ac0ad);
-    var_a8364a58 = array::filter(level.players, 0, & filter_istouching, var_ade4e252);
+    var_a8364a58 = array::filter(level.players, 0, &filter_istouching, var_ade4e252);
     foreach(player in var_a8364a58) {
       earthquake(1, 0.1, player.origin, 32, player);
       player playrumbleonentity("slide_loop");
@@ -330,7 +330,7 @@ function function_1e3790ff(n_delay) {
 
 function function_76bada8a(b_value) {
   level.ai_hendricks ai::set_behavior_attribute("sprint", b_value);
-  array::thread_all(getEntArray("zipline_guy", "script_noteworthy", 1), & ai::set_behavior_attribute, "sprint", b_value);
+  array::thread_all(getEntArray("zipline_guy", "script_noteworthy", 1), &ai::set_behavior_attribute, "sprint", b_value);
 }
 
 function function_f2e34115() {
@@ -344,7 +344,7 @@ function function_f2e34115() {
 function function_facc6349(n_max_delay) {
   trigger::wait_or_timeout(n_max_delay, "supplemental_vtol_hallway_victims");
   var_a08b9452 = getEntArray("supplemental_vtol_hallway_victim", "script_noteworthy");
-  spawner::simple_spawn(var_a08b9452, & function_f2e34115);
+  spawner::simple_spawn(var_a08b9452, &function_f2e34115);
 }
 
 function function_5d7e677d(n_delay) {
@@ -390,7 +390,7 @@ function function_2143f8c4() {
 }
 
 function vtol_hallway_done(str_objective, b_starting, b_direct, player) {
-  level thread util::delay(1, undefined, & lotus_util::function_6fc3995f);
+  level thread util::delay(1, undefined, &lotus_util::function_6fc3995f);
   getent("pursuit_oob", "targetname") triggerenable(0);
 }
 
@@ -570,7 +570,7 @@ function function_9a0b8bc1() {
   self thread fx::play("mobile_shop_fall_explosion", e_hatch.origin - vectorscale((0, 1, 0), 200), (0, 0, 0));
   level thread scene::play("p7_fxanim_cp_lotus_mobile_shops_merch_rpg_hit_bundle");
   earthquake(0.85, 1.75, e_hatch.origin, 1200);
-  array::run_all(level.players, & playrumbleonentity, "damage_heavy");
+  array::run_all(level.players, &playrumbleonentity, "damage_heavy");
   objectives::set("cp_waypoint_breadcrumb", struct::get("mobile_shop_ride2_last_objective"));
   level notify("hash_e0df7237");
   level thread scene::play("cin_lot_07_05_detcenter_vign_mantle_hatch");
@@ -685,7 +685,7 @@ function bridge_battle_main(str_objective, b_starting) {
   level thread function_44dd1b45();
   level thread function_94f75664();
   sp_enemy = getent("dc4_enemy_sponge", "script_noteworthy");
-  sp_enemy spawner::add_spawn_function( & dc4_enemy_sponge);
+  sp_enemy spawner::add_spawn_function(&dc4_enemy_sponge);
   level thread scene::play("bridge_battle_falling_shop1", "targetname");
   level flag::wait_till("bridge_battle_done");
   skipto::objective_completed("bridge_battle");
@@ -774,10 +774,10 @@ function function_10a2b6f2() {
   level thread function_e90c24f8();
   flag::wait_till("flag_grand_entrances");
   iprintlnbold("");
-  spawner::add_spawn_function_group("robo_entrant01", "targetname", & function_87c91b1b);
-  spawner::add_spawn_function_group("robo_entrant02", "targetname", & function_87c91b1b);
-  spawner::add_spawn_function_group("robo_entrant03", "targetname", & function_87c91b1b);
-  spawner::add_spawn_function_group("robo_entrant04", "targetname", & function_87c91b1b);
+  spawner::add_spawn_function_group("robo_entrant01", "targetname", &function_87c91b1b);
+  spawner::add_spawn_function_group("robo_entrant02", "targetname", &function_87c91b1b);
+  spawner::add_spawn_function_group("robo_entrant03", "targetname", &function_87c91b1b);
+  spawner::add_spawn_function_group("robo_entrant04", "targetname", &function_87c91b1b);
   level thread lotus_util::function_99514074("robo_entrance01", "robo_entrant01");
   wait(0.75);
   level thread lotus_util::function_99514074("robo_entrance02", "robo_entrant02");
@@ -817,7 +817,7 @@ function friendly_sacrifice() {
   ai_friendly ai::set_ignoreall(0);
   util::stop_magic_bullet_shield(ai_friendly);
   a_enemies = getaiteamarray("axis");
-  array::thread_all(a_enemies, & ai::shoot_at_target, "kill_within_time", ai_friendly, undefined, 0.05);
+  array::thread_all(a_enemies, &ai::shoot_at_target, "kill_within_time", ai_friendly, undefined, 0.05);
 }
 
 function open_police_station(b_trigger_wait) {
@@ -875,7 +875,7 @@ function up_to_detention_center_main(str_objective, b_starting) {
     level.ai_hendricks = util::get_hero("hendricks");
     skipto::teleport_ai(str_objective);
     sp_enemy = getent("dc4_enemy_sponge", "script_noteworthy");
-    sp_enemy spawner::add_spawn_function( & dc4_enemy_sponge);
+    sp_enemy spawner::add_spawn_function(&dc4_enemy_sponge);
     level thread open_police_station();
     level thread closing_rollunder_door();
     level thread function_e7a8c6b();
@@ -895,9 +895,9 @@ function up_to_detention_center_main(str_objective, b_starting) {
   level thread function_2ff2c34();
   level thread function_4753f046();
   level thread function_cb2b9cbf();
-  spawner::add_spawn_function_group("siegebot_hospital", "script_noteworthy", & function_fd8c0654);
-  spawner::add_spawn_function_group("siegebot_hospital", "script_noteworthy", & function_dce6e561);
-  spawner::add_spawn_function_group("siegebot_hospital", "script_noteworthy", & function_1cd5a72e);
+  spawner::add_spawn_function_group("siegebot_hospital", "script_noteworthy", &function_fd8c0654);
+  spawner::add_spawn_function_group("siegebot_hospital", "script_noteworthy", &function_dce6e561);
+  spawner::add_spawn_function_group("siegebot_hospital", "script_noteworthy", &function_1cd5a72e);
   level flag::init("hospital_door_up");
   level flag::init("dc4_dead_siegebots");
   foreach(player in level.players) {
@@ -1002,7 +1002,7 @@ function up_to_detention_center_done(str_objective, b_starting, b_direct, player
 function function_39a310be() {
   flag::wait_till("spawn_doomed_rapper");
   var_d031ee03 = spawner::simple_spawn_single("doomed_rapper");
-  var_d031ee03.overrideactordamage = & function_f0ce2a2f;
+  var_d031ee03.overrideactordamage = &function_f0ce2a2f;
   flag::wait_till("rapper_is_doomed");
   if(isalive(var_d031ee03)) {
     var_d031ee03 function_5c93563b();
@@ -1075,11 +1075,11 @@ function function_e7a8c6b() {
       level flag::wait_till("all_players_spawned");
     }
   }
-  util::delay(randomfloatrange(2, 4), undefined, & lotus_util::function_fe64b86b, "falling_nrc", struct::get("wallrun_corpse2"), 0);
+  util::delay(randomfloatrange(2, 4), undefined, &lotus_util::function_fe64b86b, "falling_nrc", struct::get("wallrun_corpse2"), 0);
   level thread scene::play("to_security_station_mobile_shop_fall", "targetname");
   level thread scene::play("cin_lot_07_05_detcenter_vign_wallrun_hendricks");
   level.ai_hendricks waittill("goal");
-  util::delay(randomfloat(2), undefined, & lotus_util::function_fe64b86b, "falling_nrc", struct::get("wallrun_corpse3"), 0);
+  util::delay(randomfloat(2), undefined, &lotus_util::function_fe64b86b, "falling_nrc", struct::get("wallrun_corpse3"), 0);
   t_up_to_detention = getent("trig_dc4_hendricks", "targetname");
   if(isDefined(t_up_to_detention)) {
     t_up_to_detention trigger::use();
@@ -1088,7 +1088,7 @@ function function_e7a8c6b() {
 }
 
 function dc4_enemy_sponge() {
-  self.overrideactordamage = & dc4_enemy_sponge_override;
+  self.overrideactordamage = &dc4_enemy_sponge_override;
 }
 
 function dc4_enemy_sponge_override(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, weapon, v_point, v_dir, str_hit_loc, psoffsettime, boneindex, n_model_index) {
@@ -1100,9 +1100,9 @@ function dc4_enemy_sponge_override(e_inflictor, e_attacker, n_damage, n_dflags, 
 
 function dc4_friendly_sacrifice() {
   ai_friendly = spawner::simple_spawn_single("dc4_friendly_sacrifice");
-  ai_friendly.overrideactordamage = & dc4_friendly_damage_override;
+  ai_friendly.overrideactordamage = &dc4_friendly_damage_override;
   ai_friendly ai::set_ignoreme(1);
-  var_9999ca8a = spawner::simple_spawn_single("dc4_deadly_rap", & function_ca258604);
+  var_9999ca8a = spawner::simple_spawn_single("dc4_deadly_rap", &function_ca258604);
   level scene::init("cin_lot_07_05_detcenter_vign_rapsdeath", array(var_9999ca8a, ai_friendly));
   flag::wait_till("dc4_friendly_sacrifice");
   level thread scene::skipto_end("cin_lot_07_05_detcenter_vign_rapsdeath", undefined, undefined, 0.4);
@@ -1365,5 +1365,5 @@ function detention_center_done(str_objective, b_starting, b_direct, player) {
 }
 
 function init() {
-  spawner::add_spawn_function_group("auto_delete", "script_string", & auto_delete);
+  spawner::add_spawn_function_group("auto_delete", "script_string", &auto_delete);
 }

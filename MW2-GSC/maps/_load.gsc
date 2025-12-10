@@ -1474,7 +1474,7 @@ player_special_death_hint() {
     level notify("new_quote_string");
     // You died holding a grenade for too long.
     // Holding ^3[{+frag}]^7 allows you to cook off live grenades.
-    thread grenade_death_text_hudelement(&"SCRIPT_GRENADE_SUICIDE_LINE1", & "SCRIPT_GRENADE_SUICIDE_LINE2");
+    thread grenade_death_text_hudelement(&"SCRIPT_GRENADE_SUICIDE_LINE1", &"SCRIPT_GRENADE_SUICIDE_LINE2");
     return;
   }
 
@@ -1702,7 +1702,7 @@ deprecatedTraverseThink() {
   pianoDamageThink() {
     org = self GetOrigin();
     //
-    // 	self SetHintString( &"SCRIPT_PLATFORM_PIANO" );
+    // 	self SetHintString(&"SCRIPT_PLATFORM_PIANO" );
     note[0] = "large";
     note[1] = "small";
     for(;;) {
@@ -3905,7 +3905,7 @@ arcademode_save() {
   wait 2.5;
   imagename = "levelshots / autosave / autosave_" + level.script + "start";
   // string not found for AUTOSAVE_LEVELSTART
-  SaveGame("levelstart", & "AUTOSAVE_LEVELSTART", imagename, true);
+  SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", imagename, true);
 }
 
 player_death_detection() {
@@ -4273,7 +4273,7 @@ claymore_pickup_think_global() {
   PreCacheItem("claymore");
   self endon("deleted");
   self SetCursorHint("HINT_NOICON");
-  // Press and hold &&1 to pickup claymore
+  // Press and hold && 1 to pickup claymore
   self SetHintString(&"WEAPON_CLAYMORE_PICKUP");
   self MakeUsable();
 
@@ -4343,7 +4343,7 @@ ammo_cache_think_global() {
   self.use_trigger setModel("tag_origin");
   self.use_trigger makeUsable();
   self.use_trigger SetCursorHint("HINT_NOICON");
-  // Press and hold &&1 to refill your ammo
+  // Press and hold && 1 to refill your ammo
   self.use_trigger setHintString(&"WEAPON_CACHE_USE_HINT");
 
   self thread ammo_icon_think();

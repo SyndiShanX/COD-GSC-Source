@@ -69,14 +69,14 @@ snowmobile_preLoad(playerHandModel, playerSnowmobileModel) {
   snowmobile_anims();
 
   // Hold ^3[{+speed_throw}]^7 to shoot.
-  add_hint_string("snowmobile_attack_player1", & "SCRIPT_PLATFORM_SNOWMOBILE_ATTACK", ::should_stop_snowmobile_attack_hint_player1);
-  add_hint_string("snowmobile_attack_player2", & "SCRIPT_PLATFORM_SNOWMOBILE_ATTACK", ::should_stop_snowmobile_attack_hint_player2);
+  add_hint_string("snowmobile_attack_player1", &"SCRIPT_PLATFORM_SNOWMOBILE_ATTACK", ::should_stop_snowmobile_attack_hint_player1);
+  add_hint_string("snowmobile_attack_player2", &"SCRIPT_PLATFORM_SNOWMOBILE_ATTACK", ::should_stop_snowmobile_attack_hint_player2);
   // Hold ^3[{+attack}]^7 to drive.
-  add_hint_string("snowmobile_drive_player1", & "SCRIPT_PLATFORM_SNOWMOBILE_DRIVE", ::should_stop_snowmobile_drive_hint_player1);
-  add_hint_string("snowmobile_drive_player2", & "SCRIPT_PLATFORM_SNOWMOBILE_DRIVE", ::should_stop_snowmobile_drive_hint_player2);
+  add_hint_string("snowmobile_drive_player1", &"SCRIPT_PLATFORM_SNOWMOBILE_DRIVE", ::should_stop_snowmobile_drive_hint_player1);
+  add_hint_string("snowmobile_drive_player2", &"SCRIPT_PLATFORM_SNOWMOBILE_DRIVE", ::should_stop_snowmobile_drive_hint_player2);
   // Press ^3[{+stance}]^7 to go in reverse.
-  add_hint_string("snowmobile_reverse_player1", & "SCRIPT_PLATFORM_SNOWMOBILE_REVERSE", ::should_stop_snowmobile_reverse_hint_player1);
-  add_hint_string("snowmobile_reverse_player2", & "SCRIPT_PLATFORM_SNOWMOBILE_REVERSE", ::should_stop_snowmobile_reverse_hint_player2);
+  add_hint_string("snowmobile_reverse_player1", &"SCRIPT_PLATFORM_SNOWMOBILE_REVERSE", ::should_stop_snowmobile_reverse_hint_player1);
+  add_hint_string("snowmobile_reverse_player2", &"SCRIPT_PLATFORM_SNOWMOBILE_REVERSE", ::should_stop_snowmobile_reverse_hint_player2);
 }
 
 drive_vehicle() {

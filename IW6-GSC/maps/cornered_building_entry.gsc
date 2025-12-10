@@ -123,10 +123,10 @@ cornered_building_entry_pre_load() {
   precachestring(&"CORNERED_EXIT_BUILDING_CONSOLE");
   precachestring(&"CORNERED_INVERTED_KILL");
   precachestring(&"CORNERED_KNIFE_THROW");
-  maps\_utility::add_hint_string("virus_upload", & "CORNERED_UPLOAD_VIRUS", ::should_break_virus_upload_hint);
-  maps\_utility::add_hint_string("virus_deploy", & "CORNERED_DEPLOY_VIRUS");
-  maps\_utility::add_hint_string("inverted_kill", & "CORNERED_INVERTED_KILL", ::should_break_inverted_kill_hint);
-  maps\_utility::add_hint_string("knife_throw", & "CORNERED_KNIFE_THROW");
+  maps\_utility::add_hint_string("virus_upload", &"CORNERED_UPLOAD_VIRUS", ::should_break_virus_upload_hint);
+  maps\_utility::add_hint_string("virus_deploy", &"CORNERED_DEPLOY_VIRUS");
+  maps\_utility::add_hint_string("inverted_kill", &"CORNERED_INVERTED_KILL", ::should_break_inverted_kill_hint);
+  maps\_utility::add_hint_string("knife_throw", &"CORNERED_KNIFE_THROW");
   level.clean_window_player = getent("clean_window_player", "targetname");
   level.clean_window_rorke = getent("clean_window_rorke", "targetname");
   level.start_inverted_rappel_trigger = getent("start_inverted_rappel_trigger", "targetname");

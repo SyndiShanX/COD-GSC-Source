@@ -72,7 +72,7 @@ function setlowermessage(text, time, combinemessageandtimer) {
   self.lowermessage settext(text);
   if(isDefined(time) && time > 0) {
     if(!isDefined(combinemessageandtimer) || !combinemessageandtimer) {
-      self.lowertimer.label = & "";
+      self.lowertimer.label = &"";
     } else {
       self.lowermessage settext("");
       self.lowertimer.label = text;
@@ -80,7 +80,7 @@ function setlowermessage(text, time, combinemessageandtimer) {
     self.lowertimer settimer(time);
   } else {
     self.lowertimer settext("");
-    self.lowertimer.label = & "";
+    self.lowertimer.label = &"";
   }
   if(self issplitscreen()) {
     self.lowermessage.fontscale = 1.4;
@@ -107,14 +107,14 @@ function setlowermessagevalue(text, value, combinemessage) {
   }
   if(isDefined(value) && value > 0) {
     if(!isDefined(combinemessage) || !combinemessage) {
-      self.lowertimer.label = & "";
+      self.lowertimer.label = &"";
     } else {
       self.lowertimer.label = text;
     }
     self.lowertimer setvalue(value);
   } else {
     self.lowertimer settext("");
-    self.lowertimer.label = & "";
+    self.lowertimer.label = &"";
   }
   if(self issplitscreen()) {
     self.lowermessage.fontscale = 1.4;
@@ -992,7 +992,7 @@ function teleport_players_igc(str_spots, coop_sort) {
   for(i = 0; i < (level.players.size - 1); i++) {
     level.players[i + 1] setorigin(a_spots[i].origin);
     if(isDefined(a_spots[i].angles)) {
-      level.players[i + 1] delay_network_frames(2, "disconnect", & setplayerangles, a_spots[i].angles);
+      level.players[i + 1] delay_network_frames(2, "disconnect", &setplayerangles, a_spots[i].angles);
     }
   }
 }

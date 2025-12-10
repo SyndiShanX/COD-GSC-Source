@@ -25,7 +25,7 @@
 #namespace zm_castle_teleporter;
 
 function autoexec __init__sytem__() {
-  system::register("zm_castle_teleporter", & __init__, & __main__, undefined);
+  system::register("zm_castle_teleporter", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -43,7 +43,7 @@ function __init__() {
   level.var_47f4765c = 0;
   level flag::init("castle_teleporter_used");
   visionset_mgr::register_info("overlay", "zm_factory_teleport", 5000, 61, 1, 1);
-  visionset_mgr::register_info("overlay", "zm_castle_transported", 1, 20, 15, 1, & visionset_mgr::duration_lerp_thread_per_player, 0);
+  visionset_mgr::register_info("overlay", "zm_castle_transported", 1, 20, 15, 1, &visionset_mgr::duration_lerp_thread_per_player, 0);
   clientfield::register("world", "ee_quest_time_travel_ready", 5000, 1, "int");
   clientfield::register("toplayer", "ee_quest_back_in_time_teleport_fx", 5000, 1, "int");
   clientfield::register("toplayer", "ee_quest_back_in_time_postfx", 5000, 1, "int");
@@ -59,14 +59,14 @@ function __main__() {
   level.no_dog_clip = 1;
   level.teleport_ae_funcs = [];
   if(!issplitscreen()) {
-    level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_fov;
+    level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_fov;
   }
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_shellshock;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_shellshock_electric;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_bw_vision;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_red_vision;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_flashy_vision;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_flare_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_shellshock;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_shellshock_electric;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_bw_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_red_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_flashy_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_flare_vision;
 }
 
 function pad_manager() {
@@ -75,7 +75,7 @@ function pad_manager() {
     t_trig teleport_trigger_invisible(0);
   }
   level.is_cooldown = 1;
-  array::thread_all(level.var_27b3c884, & function_68ebacd3);
+  array::thread_all(level.var_27b3c884, &function_68ebacd3);
   wait(level.n_teleport_cooldown);
   level.is_cooldown = 0;
   foreach(t_trig in level.var_27b3c884) {
@@ -230,7 +230,7 @@ function function_6b3344b4() {
 }
 
 function function_264f93ff(var_edc2ee2a = 0, var_66f7e6b9 = 0) {
-  array::thread_all(level.var_27b3c884, & teleport_trigger_invisible, 1);
+  array::thread_all(level.var_27b3c884, &teleport_trigger_invisible, 1);
   if(var_edc2ee2a && !var_66f7e6b9) {
     level.disable_nuke_delay_spawning = 1;
     level flag::clear("spawn_zombies");
@@ -332,7 +332,7 @@ function player_is_near_pad(player) {
 }
 
 function function_f5a06c(n_duration) {
-  array::thread_all(level.activeplayers, & teleport_pad_player_fx, self, n_duration);
+  array::thread_all(level.activeplayers, &teleport_pad_player_fx, self, n_duration);
 }
 
 function teleport_pad_player_fx(var_7d7ca0ea, n_duration) {

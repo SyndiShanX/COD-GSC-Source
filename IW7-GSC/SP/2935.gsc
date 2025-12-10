@@ -2169,7 +2169,7 @@ func_73D8(param_00) {
   param_00 endon("friendly_finished_using_mg42");
   self.var_369 = 1;
   self setcursorhint("HINT_NOICON");
-  self sethintstring( & "PLATFORM_USEAIONMG42");
+  self sethintstring(&"PLATFORM_USEAIONMG42");
   self waittill("trigger");
   self.var_369 = 0;
   self sethintstring("");

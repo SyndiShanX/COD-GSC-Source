@@ -57,8 +57,8 @@ init() {
       }
     }
 
-    precachestring( & "MP_HOST_ENDED_GAME");
-    precachestring( & "MP_HOST_ENDGAME_RESPONSE");
+    precachestring(&"MP_HOST_ENDED_GAME");
+    precachestring(&"MP_HOST_ENDGAME_RESPONSE");
   }
 
   level thread onplayerconnect();

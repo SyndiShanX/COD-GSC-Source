@@ -44,9 +44,9 @@ function main() {
   thread function_ee430caa();
   thread function_a1b52577();
   thread function_18af354a();
-  spawner::add_spawn_function_group("water_robots", "targetname", & robot_underwater_callback);
-  spawner::add_spawn_function_group("water_robots2", "targetname", & robot_underwater_callback);
-  spawner::add_spawn_function_group("water_robots3", "targetname", & robot_underwater_callback);
+  spawner::add_spawn_function_group("water_robots", "targetname", &robot_underwater_callback);
+  spawner::add_spawn_function_group("water_robots2", "targetname", &robot_underwater_callback);
+  spawner::add_spawn_function_group("water_robots3", "targetname", &robot_underwater_callback);
 }
 
 function init_flags() {
@@ -67,7 +67,7 @@ function function_60f7b1b6() {
 
 function function_1ecf48ef() {
   level endon("hash_47f08523");
-  scene::add_scene_func("cin_aqu_05_01_enter_1st_look", & function_3d8a313e, "play");
+  scene::add_scene_func("cin_aqu_05_01_enter_1st_look", &function_3d8a313e, "play");
   scene::init("cin_aqu_05_01_enter_1st_look");
   level waittill("hash_7e64f485");
   var_5b5cfed1 = trigger::wait_till("water_room_igc");

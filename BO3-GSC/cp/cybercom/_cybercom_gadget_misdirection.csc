@@ -19,8 +19,8 @@ function init() {
 }
 
 function init_clientfields() {
-  clientfield::register("toplayer", "misdirection_enable", 1, 1, "int", & function_ec87e5c5, 0, 0);
-  clientfield::register("scriptmover", "makedecoy", 1, 1, "int", & function_ac2a831d, 0, 0);
+  clientfield::register("toplayer", "misdirection_enable", 1, 1, "int", &function_ec87e5c5, 0, 0);
+  clientfield::register("scriptmover", "makedecoy", 1, 1, "int", &function_ac2a831d, 0, 0);
   duplicate_render::set_dr_filter_framebuffer_duplicate("armor_pl", 0, "armor_on", undefined, 1, "mc/mtl_power_armor", 0);
 }
 

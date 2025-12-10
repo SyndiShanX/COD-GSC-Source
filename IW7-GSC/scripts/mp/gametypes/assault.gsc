@@ -95,18 +95,18 @@ onstartgametype() {
   level._effect["bomb_explosion"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
   level._effect["vehicle_explosion"] = loadfx("vfx\core\expl\small_vehicle_explosion_new.vfx");
   level._effect["building_explosion"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
-  scripts\mp\utility::setobjectivetext(game["attackers"], & "OBJECTIVES_SD_ATTACKER");
-  scripts\mp\utility::setobjectivetext(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+  scripts\mp\utility::setobjectivetext(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
+  scripts\mp\utility::setobjectivetext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
   if(level.splitscreen) {
-    scripts\mp\utility::setobjectivescoretext(game["attackers"], & "OBJECTIVES_SD_ATTACKER");
-    scripts\mp\utility::setobjectivescoretext(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+    scripts\mp\utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
+    scripts\mp\utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
   } else {
-    scripts\mp\utility::setobjectivescoretext(game["attackers"], & "OBJECTIVES_SD_ATTACKER_SCORE");
-    scripts\mp\utility::setobjectivescoretext(game["defenders"], & "OBJECTIVES_SD_DEFENDER_SCORE");
+    scripts\mp\utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_SD_ATTACKER_SCORE");
+    scripts\mp\utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_SCORE");
   }
 
-  scripts\mp\utility::setobjectivehinttext(game["attackers"], & "OBJECTIVES_SD_ATTACKER_HINT");
-  scripts\mp\utility::setobjectivehinttext(game["defenders"], & "OBJECTIVES_SD_DEFENDER_HINT");
+  scripts\mp\utility::setobjectivehinttext(game["attackers"], &"OBJECTIVES_SD_ATTACKER_HINT");
+  scripts\mp\utility::setobjectivehinttext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_HINT");
   initspawns();
   var_02[0] = "sd";
   var_02[1] = "bombzone";

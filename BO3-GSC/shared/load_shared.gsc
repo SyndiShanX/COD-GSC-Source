@@ -25,7 +25,7 @@
 #namespace load;
 
 function autoexec __init__sytem__() {
-  system::register("load", & __init__, undefined, undefined);
+  system::register("load", &__init__, undefined, undefined);
 }
 
 function autoexec first_frame() {
@@ -68,10 +68,10 @@ function __init__() {
   level thread all_players_spawned();
   level thread keep_time();
   level thread count_network_frames();
-  callback::on_spawned( & on_spawned);
+  callback::on_spawned(&on_spawned);
   self thread playerdamagerumble();
-  array::thread_all(getEntArray("water", "targetname"), & water_think);
-  array::thread_all_ents(getEntArray("badplace", "targetname"), & badplace_think);
+  array::thread_all(getEntArray("water", "targetname"), &water_think);
+  array::thread_all_ents(getEntArray("badplace", "targetname"), &badplace_think);
   weapon_ammo();
   set_objective_text_colors();
   link_ents();

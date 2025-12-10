@@ -15,7 +15,7 @@
 #namespace zm_weap_elemental_bow;
 
 function autoexec __init__sytem__() {
-  system::register("_zm_weap_elemental_bow", & __init__, & __main__, undefined);
+  system::register("_zm_weap_elemental_bow", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -24,7 +24,7 @@ function __init__() {
   clientfield::register("toplayer", "elemental_bow" + "_ambient_bow_fx", 5000, 1, "int");
   clientfield::register("missile", "elemental_bow" + "_arrow_impact_fx", 5000, 1, "int");
   clientfield::register("missile", "elemental_bow4" + "_arrow_impact_fx", 5000, 1, "int");
-  callback::on_connect( & function_c45ac6ae);
+  callback::on_connect(&function_c45ac6ae);
   setdvar("bg_chargeShotUseOneAmmoForMultipleBullets", 0);
   setdvar("bg_zm_dlc1_chargeShotMultipleBulletsForFullCharge", 2);
   level.var_d6de2706 = new throttle();
@@ -36,7 +36,7 @@ function __main__() {}
 function function_c45ac6ae() {
   self thread function_982419bb("elemental_bow");
   self thread function_ececa597("elemental_bow", "elemental_bow4");
-  self thread function_7bc6b9d("elemental_bow", "elemental_bow4", & function_65347b70);
+  self thread function_7bc6b9d("elemental_bow", "elemental_bow4", &function_65347b70);
 }
 
 function function_65347b70(weapon, v_position, radius, attacker, normal) {
@@ -44,8 +44,8 @@ function function_65347b70(weapon, v_position, radius, attacker, normal) {
   if(weapon.name == "elemental_bow4") {
     attacker clientfield::set(var_2679aa6b + "_arrow_impact_fx", 1);
     var_852420bf = array::get_all_closest(v_position, getaiteamarray(level.zombie_team), undefined, undefined, 128);
-    var_852420bf = array::filter(var_852420bf, 0, & function_83f44f5, v_position);
-    array::thread_all(var_852420bf, & function_7fba300, self, v_position);
+    var_852420bf = array::filter(var_852420bf, 0, &function_83f44f5, v_position);
+    array::thread_all(var_852420bf, &function_7fba300, self, v_position);
   } else {
     attacker clientfield::set(var_2679aa6b + "_arrow_impact_fx", 1);
   }
@@ -225,7 +225,7 @@ function function_d2e32ed2(var_48369d98, v_position) {
   if(var_48369d98 === "elemental_bow_wolf_howl4") {
     return;
   }
-  array::thread_all(getaiarchetypearray("mechz"), & function_b78fcfc7, self, var_48369d98, v_position);
+  array::thread_all(getaiarchetypearray("mechz"), &function_b78fcfc7, self, var_48369d98, v_position);
 }
 
 function function_b78fcfc7(e_player, var_48369d98, v_position) {

@@ -33,11 +33,11 @@
 #namespace dragon_scale_shield;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_dragonshield", & __init__, & __main__, undefined);
+  system::register("zm_weap_dragonshield", &__init__, &__main__, undefined);
 }
 
 function __init__() {
-  zm_craft_shield::init("craft_shield_zm", "dragonshield", "wpn_t7_zmb_dlc3_dragon_shield_dmg0_world", & "ZOMBIE_DRAGON_SHIELD_CRAFT", & "ZOMBIE_DRAGON_SHIELD_TAKEN", & "ZOMBIE_DRAGON_SHIELD_PICKUP");
+  zm_craft_shield::init("craft_shield_zm", "dragonshield", "wpn_t7_zmb_dlc3_dragon_shield_dmg0_world", &"ZOMBIE_DRAGON_SHIELD_CRAFT", &"ZOMBIE_DRAGON_SHIELD_TAKEN", &"ZOMBIE_DRAGON_SHIELD_PICKUP");
   clientfield::register("allplayers", "ds_ammo", 12000, 1, "int");
   clientfield::register("allplayers", "burninate", 12000, 1, "counter");
   clientfield::register("allplayers", "burninate_upgraded", 12000, 1, "counter");
@@ -46,16 +46,16 @@ function __init__() {
   clientfield::register("actor", "dragonshield_snd_zombie_knockdown", 12000, 1, "counter");
   clientfield::register("vehicle", "dragonshield_snd_zombie_knockdown", 12000, 1, "counter");
   level flag::init("dragon_shield_used");
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
   level.weaponriotshield = getweapon("dragonshield");
-  zm_equipment::register("dragonshield", & "ZOMBIE_DRAGON_SHIELD_PICKUP", & "ZOMBIE_DRAGON_SHIELD_HINT", undefined, "riotshield");
+  zm_equipment::register("dragonshield", &"ZOMBIE_DRAGON_SHIELD_PICKUP", &"ZOMBIE_DRAGON_SHIELD_HINT", undefined, "riotshield");
   level.weaponriotshieldupgraded = getweapon("dragonshield_upgraded");
-  zm_equipment::register("dragonshield_upgraded", & "ZOMBIE_DRAGON_SHIELD_UPGRADE_PICKUP", & "ZOMBIE_DRAGON_SHIELD_HINT", undefined, "riotshield");
+  zm_equipment::register("dragonshield_upgraded", &"ZOMBIE_DRAGON_SHIELD_UPGRADE_PICKUP", &"ZOMBIE_DRAGON_SHIELD_HINT", undefined, "riotshield");
   level.var_7ba638ea = getweapon("dragonshield_projectile");
   level.var_855a12ba = getweapon("dragonshield_projectile_upgraded");
-  level.riotshield_melee_power = & function_71d88f26;
-  level.should_shield_absorb_damage = & should_shield_absorb_damage;
+  level.riotshield_melee_power = &function_71d88f26;
+  level.should_shield_absorb_damage = &should_shield_absorb_damage;
   zombie_utility::set_zombie_var("dragonshield_proximity_fling_radius", 96);
   zombie_utility::set_zombie_var("dragonshield_proximity_knockdown_radius", 128);
   zombie_utility::set_zombie_var("dragonshield_cylinder_radius", 180);
@@ -69,7 +69,7 @@ function __init__() {
   level.var_d73afd29[level.var_d73afd29.size] = "guts";
   level.var_d73afd29[level.var_d73afd29.size] = "right_arm";
   level.var_d73afd29[level.var_d73afd29.size] = "left_arm";
-  level.var_337d1ed2 = & zombie_knockdown;
+  level.var_337d1ed2 = &zombie_knockdown;
 }
 
 function __main__() {
@@ -110,8 +110,8 @@ function on_player_spawned() {
   self thread function_98962bde();
   self thread player_watch_ammo_change();
   self thread player_watch_max_ammo();
-  self.player_shield_apply_damage = & function_247d568b;
-  self.riotshield_damage_absorb_callback = & riotshield_damage_absorb_callback;
+  self.player_shield_apply_damage = &function_247d568b;
+  self.riotshield_damage_absorb_callback = &riotshield_damage_absorb_callback;
 }
 
 function function_98962bde() {
@@ -426,10 +426,10 @@ function zombie_knockdown(player, gib) {
   } else {
     damage = level.zombie_vars["dragonshield_knockdown_damage"];
     self clientfield::increment("dragonshield_snd_zombie_knockdown");
-    self.var_2a2a6dce = & function_21b74baa;
+    self.var_2a2a6dce = &function_21b74baa;
     self dodamage(damage, player.origin, player);
     if(!isvehicle(self)) {
-      self animcustom( & function_2d1a5562);
+      self animcustom(&function_2d1a5562);
     }
     if(self.health <= 0) {
       player.var_3a6322f2++;
@@ -512,7 +512,7 @@ function function_41f7c503(player, fling, gib, knockdown) {
 function function_a3a9c2dc() {
   level flagsys::wait_till("");
   wait(1);
-  zm_devgui::add_custom_devgui_callback( & function_6f901616);
+  zm_devgui::add_custom_devgui_callback(&function_6f901616);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -526,22 +526,22 @@ function function_6f901616(cmd) {
   retval = 0;
   switch (cmd) {
     case "": {
-      array::thread_all(players, & zm_devgui::zombie_devgui_equipment_give, "");
+      array::thread_all(players, &zm_devgui::zombie_devgui_equipment_give, "");
       retval = 1;
       break;
     }
     case "": {
-      array::thread_all(players, & zm_devgui::zombie_devgui_equipment_give, "");
+      array::thread_all(players, &zm_devgui::zombie_devgui_equipment_give, "");
       retval = 1;
       break;
     }
     case "": {
-      array::thread_all(players, & function_f685a6db);
+      array::thread_all(players, &function_f685a6db);
       retval = 1;
       break;
     }
     case "": {
-      array::thread_all(players, & function_eeac5a22);
+      array::thread_all(players, &function_eeac5a22);
       retval = 1;
       break;
     }

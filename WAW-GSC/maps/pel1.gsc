@@ -62,13 +62,13 @@ main() {
   maps\_drones::init();
   maps\_bayonet::init();
   maps\_mganim::main();
-  add_start("beach", ::start_beach, & "STARTS_PEL1_BEACH");
-  add_start("off_lvt", ::start_off_lvt, & "STARTS_PEL1_OFF_LVT");
-  add_start("1st_fight", ::start_first_fight, & "STARTS_FIGHT1");
-  add_start("2nd_fight_l", ::start_second_fight_left, & "STARTS_FIGHT2");
-  add_start("3rd_fight", ::start_third_fight, & "STARTS_FIGHT3");
-  add_start("mortars", ::start_mortars, & "STARTS_MORTARS");
-  add_start("ending", ::start_ending, & "STARTS_ENDING");
+  add_start("beach", ::start_beach, &"STARTS_PEL1_BEACH");
+  add_start("off_lvt", ::start_off_lvt, &"STARTS_PEL1_OFF_LVT");
+  add_start("1st_fight", ::start_first_fight, &"STARTS_FIGHT1");
+  add_start("2nd_fight_l", ::start_second_fight_left, &"STARTS_FIGHT2");
+  add_start("3rd_fight", ::start_third_fight, &"STARTS_FIGHT3");
+  add_start("mortars", ::start_mortars, &"STARTS_MORTARS");
+  add_start("ending", ::start_ending, &"STARTS_ENDING");
   default_start(::event1_setup);
   maps\_load::main();
   maps\_loadout::set_player_interactive_hands("viewmodel_usa_player");
@@ -985,7 +985,7 @@ fail_on_ff() {
     self.team = "allies";
     self.voice = "american";
     self maps\_names::get_name_for_nationality("american");
-    self setlookattext(self.name, & "WEAPON_RIFLEMAN");
+    self setlookattext(self.name, &"WEAPON_RIFLEMAN");
   }
   players = get_players();
   if(players.size > 1) {
@@ -3270,7 +3270,7 @@ event3_tanks() {
   level waittill("spawnvehiclegroup23");
   wait 0.05;
   Objective_Add(5, "current");
-  Objective_String(5, & "PEL1_OBJECTIVE2F");
+  Objective_String(5, &"PEL1_OBJECTIVE2F");
   setsaveddvar("compassMaxRange", 100);
   thread event3_tank_checker();
   level.rocket_barrage_max_x = 7500;
@@ -3413,15 +3413,15 @@ hide_players() {
 set_objective(num, ent) {
   startplace = getdvar("start");
   if(num == 0) {
-    objective_add(0, "active", & "PEL1_OBJECTIVE1", (3152, -7624, -256));
+    objective_add(0, "active", &"PEL1_OBJECTIVE1", (3152, -7624, -256));
     objective_current(0);
   } else if(num == 0.1) {
-    objective_string(0, & "PEL1_OBJECTIVE1A");
+    objective_string(0, &"PEL1_OBJECTIVE1A");
     objective_position(0, (2036, -10207, -295.9));
     objective_current(0);
   } else if(num == 0.3) {
     level.sarge notify("stop objective on entity");
-    objective_string(0, & "PEL1_OBJECTIVE2");
+    objective_string(0, &"PEL1_OBJECTIVE2");
     objective_position(0, (2066, -8670, -324.4));
     objective_current(0);
   } else if(num == 1) {
@@ -3429,7 +3429,7 @@ set_objective(num, ent) {
     trig = getent("bread_crumber_begin", "targetname");
     objective_state(0, "done");
     wait_network_frame();
-    objective_add(1, "active", & "PEL1_OBJECTIVE2A", (trig.origin));
+    objective_add(1, "active", &"PEL1_OBJECTIVE2A", (trig.origin));
     objective_current(1);
     while(1) {
       trig waittill("trigger");
@@ -3444,17 +3444,17 @@ set_objective(num, ent) {
   } else if(num == 2) {
     objective_state(1, "done");
     wait_network_frame();
-    objective_add(2, "current", & "PEL1_OBJECTIVE2B", (2897, -3763, -214));
+    objective_add(2, "current", &"PEL1_OBJECTIVE2B", (2897, -3763, -214));
     getent("obj_entrance_gained", "targetname") waittill("trigger");
     objective_state(2, "done");
     wait_network_frame();
-    objective_add(3, "current", & "PEL1_OBJECTIVE2C", (2838.3, -3879.7, -47.9));
+    objective_add(3, "current", &"PEL1_OBJECTIVE2C", (2838.3, -3879.7, -47.9));
     wait_network_frame();
     thread event3_stronghold_checker();
     flag_wait("mortars_cleared");
     flag_wait("stronghold_cleared");
     flag_wait("end_tanks_dead");
-    objective_add(6, "active", & "PEL1_OBJECTIVE2D", (2832, -3416, -40));
+    objective_add(6, "active", &"PEL1_OBJECTIVE2D", (2832, -3416, -40));
     objective_current(6);
     setsaveddvar("compassMaxRange", 800);
   }
@@ -3463,9 +3463,9 @@ set_objective(num, ent) {
 
 event3_tank_checker() {
   level waittill("end tank died");
-  objective_string(5, & "PEL1_OBJECTIVE2G");
+  objective_string(5, &"PEL1_OBJECTIVE2G");
   level waittill("end tank died");
-  objective_string(5, & "PEL1_OBJECTIVE2H");
+  objective_string(5, &"PEL1_OBJECTIVE2H");
 }
 
 event3_stronghold_checker() {
@@ -3476,7 +3476,7 @@ event3_stronghold_checker() {
 
 event3_mortar_checker() {
   trigger_wait("mortar_crew_spawn1", "script_noteworthy");
-  objective_add(4, "current", & "PEL1_OBJECTIVE2E", (4022, -3950, -165.1));
+  objective_add(4, "current", &"PEL1_OBJECTIVE2E", (4022, -3950, -165.1));
   waittill_aigroupcount("mortar_squads", 0);
   flag_set("mortars_cleared");
   objective_state(4, "done");

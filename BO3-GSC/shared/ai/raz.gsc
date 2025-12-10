@@ -31,8 +31,8 @@
 
 function autoexec init() {
   initrazbehaviorsandasm();
-  spawner::add_archetype_spawn_function("raz", & archetyperazblackboardinit);
-  spawner::add_archetype_spawn_function("raz", & razserverutils::razspawnsetup);
+  spawner::add_archetype_spawn_function("raz", &archetyperazblackboardinit);
+  spawner::add_archetype_spawn_function("raz", &razserverutils::razspawnsetup);
   clientfield::register("scriptmover", "raz_detonate_ground_torpedo", 12000, 1, "int");
   clientfield::register("scriptmover", "raz_torpedo_play_fx_on_self", 12000, 1, "int");
   clientfield::register("scriptmover", "raz_torpedo_play_trail", 12000, 1, "counter");
@@ -46,24 +46,24 @@ function autoexec init() {
 }
 
 function private initrazbehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razTargetService", & raztargetservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razSprintService", & razsprintservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldMelee", & razshouldmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldShowPain", & razshouldshowpain);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldShowSpecialPain", & razshouldshowspecialpain);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldShowShieldPain", & razshouldshowshieldpain);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldShootGroundTorpedo", & razshouldshootgroundtorpedo);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldGoBerserk", & razshouldgoberserk);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldTraverseWindow", & razshouldtraversewindow);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razStartMelee", & razstartmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razFinishMelee", & razfinishmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razFinishGroundTorpedo", & razfinishgroundtorpedo);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razGoneBerserk", & razgoneberserk);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razStartTraverseWindow", & razstarttraversewindow);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razFinishTraverseWindow", & razfinishtraversewindow);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razTookPain", & raztookpain);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("razStartDeath", & razstartdeath);
-  animationstatenetwork::registernotetrackhandlerfunction("mangler_fire", & raznotetrackshootgroundtorpedo);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razTargetService", &raztargetservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razSprintService", &razsprintservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldMelee", &razshouldmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldShowPain", &razshouldshowpain);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldShowSpecialPain", &razshouldshowspecialpain);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldShowShieldPain", &razshouldshowshieldpain);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldShootGroundTorpedo", &razshouldshootgroundtorpedo);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldGoBerserk", &razshouldgoberserk);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razShouldTraverseWindow", &razshouldtraversewindow);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razStartMelee", &razstartmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razFinishMelee", &razfinishmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razFinishGroundTorpedo", &razfinishgroundtorpedo);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razGoneBerserk", &razgoneberserk);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razStartTraverseWindow", &razstarttraversewindow);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razFinishTraverseWindow", &razfinishtraversewindow);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razTookPain", &raztookpain);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("razStartDeath", &razstartdeath);
+  animationstatenetwork::registernotetrackhandlerfunction("mangler_fire", &raznotetrackshootgroundtorpedo);
 }
 
 function private archetyperazblackboardinit() {
@@ -77,7 +77,7 @@ function private archetyperazblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_should_turn", "should_not_turn", & bb_getshouldturn);
+  blackboard::registerblackboardattribute(self, "_locomotion_should_turn", "should_not_turn", &bb_getshouldturn);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -89,7 +89,7 @@ function private archetyperazblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  self.___archetypeonanimscriptedcallback = & archetyperazonanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = &archetyperazonanimscriptedcallback;
   self finalizetrackedblackboardattributes();
 }
 
@@ -637,7 +637,7 @@ function private razknockdownzombies(target) {
     if(!isDefined(b_sprinting) || b_sprinting == 1) {
       predicted_pos = self.origin + move_vector;
       a_zombies = getaiarchetypearray("zombie");
-      a_filtered_zombies = array::filter(a_zombies, 0, & razzombieeligibleforknockdown, self, predicted_pos);
+      a_filtered_zombies = array::filter(a_zombies, 0, &razzombieeligibleforknockdown, self, predicted_pos);
     } else {
       wait(0.2);
       continue;
@@ -841,7 +841,7 @@ function private razspawnsetup() {
   self.canbetargetedbyturnedzombies = 1;
   self.no_widows_wine = 1;
   self.flame_fx_timeout = 3;
-  aiutility::addaioverridedamagecallback(self, & razdamagecallback);
+  aiutility::addaioverridedamagecallback(self, &razdamagecallback);
   self thread razgibzombiesonmelee();
 }
 

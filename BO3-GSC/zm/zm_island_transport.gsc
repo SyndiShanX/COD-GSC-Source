@@ -47,9 +47,9 @@ function init() {
   level thread function_daa052ec("zip_line", "flag_zipline_in_use", "ex_power_zipline");
   level thread function_daa052ec("sewer_interior", "flag_sewer_on_cooldown_interior", "ex_power_pipe_int");
   level thread function_daa052ec("sewer_exterior", "flag_sewer_on_cooldown_exterior", "ex_power_pipe");
-  array::thread_all(struct::get_array("transport_zip_line", "targetname"), & spawn_unitrigger);
-  array::thread_all(struct::get_array("transport_sewer_interior", "targetname"), & spawn_unitrigger);
-  array::thread_all(struct::get_array("transport_sewer_exterior", "targetname"), & spawn_unitrigger);
+  array::thread_all(struct::get_array("transport_zip_line", "targetname"), &spawn_unitrigger);
+  array::thread_all(struct::get_array("transport_sewer_interior", "targetname"), &spawn_unitrigger);
+  array::thread_all(struct::get_array("transport_sewer_exterior", "targetname"), &spawn_unitrigger);
 }
 
 function spawn_unitrigger() {
@@ -63,13 +63,13 @@ function spawn_unitrigger() {
   unitrigger_stub.e_parent = self;
   if(self.targetname == "transport_zip_line") {
     unitrigger_stub.hint_parm1 = 250;
-    unitrigger_stub.prompt_and_visibility_func = & function_1388fe2d;
-    zm_unitrigger::register_static_unitrigger(unitrigger_stub, & function_727b0365);
+    unitrigger_stub.prompt_and_visibility_func = &function_1388fe2d;
+    zm_unitrigger::register_static_unitrigger(unitrigger_stub, &function_727b0365);
   } else {
     unitrigger_stub.script_noteworthy = self.script_noteworthy;
     unitrigger_stub.hint_parm1 = 500;
-    unitrigger_stub.prompt_and_visibility_func = & function_da8a0706;
-    zm_unitrigger::register_static_unitrigger(unitrigger_stub, & function_32c54c4);
+    unitrigger_stub.prompt_and_visibility_func = &function_da8a0706;
+    zm_unitrigger::register_static_unitrigger(unitrigger_stub, &function_32c54c4);
   }
 }
 
@@ -210,7 +210,7 @@ function function_51885f3b(e_who, var_f7516332) {
   e_who thread function_8fda04e6(var_f7516332, 1);
   e_who thread player_rail_sequence_init(var_f7516332, 1);
   e_who thread zm_island_power::function_a7a30925();
-  level util::delay(3, undefined, & flag::clear, "flag_sewer_in_use_" + var_f7516332.script_noteworthy);
+  level util::delay(3, undefined, &flag::clear, "flag_sewer_in_use_" + var_f7516332.script_noteworthy);
 }
 
 function player_rail_sequence_init(s_start, var_b4b1932b) {

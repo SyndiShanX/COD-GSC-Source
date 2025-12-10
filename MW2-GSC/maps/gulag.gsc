@@ -118,16 +118,16 @@ main() {
   run_thread_on_targetname("helper_model", ::self_delete);
 
   // Press^3 [{+actionslot 3}] ^7to use the M203 Grenade Launcher.
-  add_hint_string("grenade_launcher", & "SCRIPT_LEARN_GRENADE_LAUNCHER", ::should_break_m203_hint);
+  add_hint_string("grenade_launcher", &"SCRIPT_LEARN_GRENADE_LAUNCHER", ::should_break_m203_hint);
 
   // Press^3 [{+actionslot 1}] ^7to use Night Vision Goggles.
-  add_hint_string("nvg", & "SCRIPT_NIGHTVISION_USE", maps\_nightvision::ShouldBreakNVGHintPrint);
+  add_hint_string("nvg", &"SCRIPT_NIGHTVISION_USE", maps\_nightvision::ShouldBreakNVGHintPrint);
 
   // Press^3 [{+actionslot 1}] ^7to disable Night Vision Goggles.
-  add_hint_string("disable_nvg", & "SCRIPT_NIGHTVISION_STOP_USE", maps\_nightvision::should_break_disable_nvg_print);
+  add_hint_string("disable_nvg", &"SCRIPT_NIGHTVISION_STOP_USE", maps\_nightvision::should_break_disable_nvg_print);
 
   // "Press ^3[{+melee}]^7 to bash."
-  add_hint_string("riot_bash", & "GULAG_HINT_MELEE", ::stop_bash_hint);
+  add_hint_string("riot_bash", &"GULAG_HINT_MELEE", ::stop_bash_hint);
 
   level.rioter_threat = 1000;
   level._pipe_fx_time = 2.5;
@@ -408,13 +408,13 @@ gulag_introscreen() {
 
   lines = [];
   //
-  lines[lines.size] = & "GULAG_INTROSCREEN_LINE_4"; // "SEAL Team Six, U.S.N."
+  lines[lines.size] = &"GULAG_INTROSCREEN_LINE_4"; // "SEAL Team Six, U.S.N."
   //
-  lines[lines.size] = & "GULAG_INTROSCREEN_LINE_3"; // "P03 'Roach' Silvers"
+  lines[lines.size] = &"GULAG_INTROSCREEN_LINE_3"; // "P03 'Roach' Silvers"
   //
-  lines["date"] = & "GULAG_INTROSCREEN_LINE_2"; // "Northern Russia - 09:20:[{FAKE_INTRO_SECONDS:02}] hrs"
+  lines["date"] = &"GULAG_INTROSCREEN_LINE_2"; // "Northern Russia - 09:20:[{FAKE_INTRO_SECONDS:02}] hrs"
   //
-  lines[lines.size] = & "GULAG_INTROSCREEN_LINE_1"; // "The Gulag"
+  lines[lines.size] = &"GULAG_INTROSCREEN_LINE_1"; // "The Gulag"
   level thread maps\_introscreen::introscreen_feed_lines(lines);
 
   wait(2);
@@ -593,20 +593,20 @@ gulag_approach() {
 
   wait(2.2);
   // string not found for AUTOSAVE_AUTOSAVE
-  SaveGame("approach", & "AUTOSAVE_AUTOSAVE", " ", true);
+  SaveGame("approach", &"AUTOSAVE_AUTOSAVE", " ", true);
 
   lines = [];
   // The Gulag""
-  lines[lines.size] = & "GULAG_INTROSCREEN_1";
+  lines[lines.size] = &"GULAG_INTROSCREEN_1";
   // Day 5 - 07:42:[{FAKE_INTRO_SECONDS:17}]
   // Day 5 - 07:42:[{FAKE_INTRO_SECONDS:17}]
-  lines[lines.size] = & "GULAG_INTROSCREEN_2";
+  lines[lines.size] = &"GULAG_INTROSCREEN_2";
   // Sgt. Gary 'Roach' Sanderson
-  lines[lines.size] = & "GULAG_INTROSCREEN_3";
+  lines[lines.size] = &"GULAG_INTROSCREEN_3";
   // Task Force 141
-  lines[lines.size] = & "GULAG_INTROSCREEN_4";
+  lines[lines.size] = &"GULAG_INTROSCREEN_4";
   // 40 miles east of Petropavlovsk, Russia
-  lines[lines.size] = & "GULAG_INTROSCREEN_5";
+  lines[lines.size] = &"GULAG_INTROSCREEN_5";
   thread maps\_introscreen::introscreen_feed_lines(lines);
 
   flag_wait("approach_dialogue");
@@ -2423,7 +2423,7 @@ gulag_objectives() {
   }
 
   // Rescue Prisoner #627.
-  Objective_Add(1, "current", & "GULAG_FIND_POW", pow_org());
+  Objective_Add(1, "current", &"GULAG_FIND_POW", pow_org());
   Objective_OnEntity(1, level.soap);
   Objective_Current(1);
 
@@ -2437,7 +2437,7 @@ gulag_objectives() {
       flag_wait("player_lands");
       setsaveddvar("ui_hidemap", 0);
       // Follow Captain MacTavish into the Gulag.
-      Objective_Add(2, "current", & "GULAG_FOLLOW_SOAP", (0, 0, 0));
+      Objective_Add(2, "current", &"GULAG_FOLLOW_SOAP", (0, 0, 0));
       Objective_Current(2);
       Objective_OnEntity(2, level.soap);
       flag_wait("postup_outside_gulag");
@@ -2463,7 +2463,7 @@ gulag_objectives() {
 
     case "armory":
       // Sweep the cells for the Prisoner.
-      Objective_Add(3, "current", & "GULAG_CELL_DUTY", cellblock_sweep_org());
+      Objective_Add(3, "current", &"GULAG_CELL_DUTY", cellblock_sweep_org());
       Objective_OnEntity(3, level.soap);
       Objective_Current(3);
       flag_wait("leaving_cellblock");
@@ -2487,7 +2487,7 @@ gulag_objectives() {
       wait(4);
       level notify("stop_objective_updating");
       // Plant the breaching charge.
-      Objective_Add(4, "current", & "GULAG_BREACH_THE_BATHROOM", breach_org());
+      Objective_Add(4, "current", &"GULAG_BREACH_THE_BATHROOM", breach_org());
       Objective_Current(4);
       SetSavedDvar("compass", "1");
       maps\_slowmo_breach::objective_breach(4, 2);
@@ -2528,7 +2528,7 @@ gulag_objectives() {
     case "cafe":
     case "evac":
       // Escape the gulag.
-      Objective_Add(6, "current", & "GULAG_ESCAPE", evac_obj_org());
+      Objective_Add(6, "current", &"GULAG_ESCAPE", evac_obj_org());
       Objective_Current(6);
 
       flag_wait("exit_collapses");

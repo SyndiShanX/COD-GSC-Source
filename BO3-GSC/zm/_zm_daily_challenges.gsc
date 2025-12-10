@@ -24,14 +24,14 @@
 #namespace zm_daily_challenges;
 
 function autoexec __init__sytem__() {
-  system::register("zm_daily_challenges", & __init__, & __main__, undefined);
+  system::register("zm_daily_challenges", &__init__, &__main__, undefined);
 }
 
 function __init__() {
-  callback::on_connect( & on_connect);
-  callback::on_spawned( & on_spawned);
-  callback::on_challenge_complete( & on_challenge_complete);
-  zm_spawner::register_zombie_death_event_callback( & death_check_for_challenge_updates);
+  callback::on_connect(&on_connect);
+  callback::on_spawned(&on_spawned);
+  callback::on_challenge_complete(&on_challenge_complete);
+  zm_spawner::register_zombie_death_event_callback(&death_check_for_challenge_updates);
 }
 
 function __main__() {

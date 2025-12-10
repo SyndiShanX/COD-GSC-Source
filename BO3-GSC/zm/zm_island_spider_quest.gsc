@@ -44,7 +44,7 @@ function init() {
   level thread function_83b9f02b();
   level thread function_2ff7183();
   level thread function_9c86c1bb();
-  array::thread_all(getEntArray("spider_lair_entrance_webs", "targetname"), & spider_lair_entrance_webs);
+  array::thread_all(getEntArray("spider_lair_entrance_webs", "targetname"), &spider_lair_entrance_webs);
   function_4f46a12();
 }
 
@@ -80,9 +80,9 @@ function function_83b9f02b() {
   var_85683d05 = util::spawn_anim_model("c_zom_dlc2_queen_spider");
   var_85683d05 clientfield::set("spider_queen_emissive_material", 1);
   var_85683d05 thread function_2a9d57ae();
-  array::thread_all(getEntArray("spider_leg_damage", "targetname"), & function_9d6e8018);
-  array::thread_all(getEntArray("spider_spit_damage", "targetname"), & function_1b11ad0);
-  array::thread_all(getEntArray("spider_spit_damage", "targetname"), & function_9ee2204c, var_85683d05);
+  array::thread_all(getEntArray("spider_leg_damage", "targetname"), &function_9d6e8018);
+  array::thread_all(getEntArray("spider_spit_damage", "targetname"), &function_1b11ad0);
+  array::thread_all(getEntArray("spider_spit_damage", "targetname"), &function_9ee2204c, var_85683d05);
   var_85683d05 function_c225d3aa();
   var_85683d05 thread function_f0c6c167();
   var_85683d05 thread function_7b31e716();
@@ -134,8 +134,8 @@ function function_c225d3aa() {
   level thread function_f7244a06(1);
   playsoundatposition("zmb_vocals_squeen_roar_start", (-5000, 932, -157));
   wait(1.5);
-  level util::delay(1, undefined, & function_f7244a06, 2);
-  level util::delay(5.23, undefined, & function_f7244a06, 3);
+  level util::delay(1, undefined, &function_f7244a06, 2);
+  level util::delay(5.23, undefined, &function_f7244a06, 3);
   level scene::play("cin_t7_ai_zm_dlc2_spider_queen_entrance", self);
   level thread scene::play("cin_t7_ai_zm_dlc2_spider_queen_idle", self);
 }
@@ -464,7 +464,7 @@ function function_9d6e8018() {
     level waittill(self.script_noteworthy + "_hitground");
     self thread function_9d331ff6();
     a_e_players = self array::get_touching(level.players);
-    array::thread_all(a_e_players, & function_8e1549bd);
+    array::thread_all(a_e_players, &function_8e1549bd);
   }
 }
 
@@ -519,7 +519,7 @@ function function_1b11ad0() {
     self playSound("zmb_foley_squeen_spit_impact");
     while(var_4c01b049 > 0) {
       a_e_players = self array::get_touching(level.players);
-      array::thread_all(a_e_players, & function_ae6c3ac5);
+      array::thread_all(a_e_players, &function_ae6c3ac5);
       var_4c01b049 = var_4c01b049 - 1;
       wait(1);
     }
@@ -762,7 +762,7 @@ function function_199d01b5() {
 }
 
 function function_4f46a12() {
-  zm_devgui::add_custom_devgui_callback( & function_a4e9dacc);
+  zm_devgui::add_custom_devgui_callback(&function_a4e9dacc);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -813,7 +813,7 @@ function function_a4e9dacc(cmd) {
       return true;
     }
     case "": {
-      array::thread_all(level.players, & function_10abb15e);
+      array::thread_all(level.players, &function_10abb15e);
       return true;
     }
   }
@@ -931,7 +931,7 @@ function function_f77f0da9() {
 
 function function_bccbf63c() {
   level.var_86ceb983 = struct::get("s_utrig_spiderqueen_free_ww", "targetname");
-  level.var_86ceb983 zm_unitrigger::create_unitrigger(&"ZM_ISLAND_SPIDER_QUEEN_WINE", 96, & function_65f4b50, & function_3039a61d);
+  level.var_86ceb983 zm_unitrigger::create_unitrigger(&"ZM_ISLAND_SPIDER_QUEEN_WINE", 96, &function_65f4b50, &function_3039a61d);
 }
 
 function function_65f4b50(player) {

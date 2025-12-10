@@ -44,21 +44,21 @@ function init() {
 function registerdefaultnotetrackhandlerfunctions() {}
 
 function registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("doaUpdateToGoal", & function_a1761846);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("doaUpdateSilverbackGoal", & function_3209ead3);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("doaActorShouldMelee", & function_f31da0d1);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("doaActorShouldMove", & function_d597e3fc);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("doaSilverbackShouldMove", & function_323b0769);
-  behaviortreenetworkutility::registerbehaviortreeaction("doaMeleeAction", & function_98fb0380, undefined, undefined);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("doawasKilledByTesla", & function_f8d04082);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("doaUpdateToGoal", &function_a1761846);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("doaUpdateSilverbackGoal", &function_3209ead3);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("doaActorShouldMelee", &function_f31da0d1);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("doaActorShouldMove", &function_d597e3fc);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("doaSilverbackShouldMove", &function_323b0769);
+  behaviortreenetworkutility::registerbehaviortreeaction("doaMeleeAction", &function_98fb0380, undefined, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("doawasKilledByTesla", &function_f8d04082);
   behaviortreenetworkutility::registerbehaviortreeaction("doaZombieMoveAction", undefined, undefined, undefined);
   behaviortreenetworkutility::registerbehaviortreeaction("doaZombieIdleAction", undefined, undefined, undefined);
-  behaviortreenetworkutility::registerbehaviortreeaction("doaLocomotionDeathAction", & function_98fb0380, undefined, undefined);
+  behaviortreenetworkutility::registerbehaviortreeaction("doaLocomotionDeathAction", &function_98fb0380, undefined, undefined);
   behaviortreenetworkutility::registerbehaviortreeaction("doavoidAction", undefined, undefined, undefined);
-  behaviortreenetworkutility::registerbehaviortreeaction("zombieTraverseAction", & zombietraverseaction, undefined, & zombietraverseactionterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("doaZombieTraversalDoesAnimationExist", & function_599c952d);
-  behaviortreenetworkutility::registerbehaviortreeaction("doaSpecialTraverseAction", & function_34a5b8e4, undefined, & function_f821465d);
-  animationstatenetwork::registeranimationmocomp("mocomp_doa_special_traversal", & function_e57c0c7b, undefined, & function_c97089da);
+  behaviortreenetworkutility::registerbehaviortreeaction("zombieTraverseAction", &zombietraverseaction, undefined, &zombietraverseactionterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("doaZombieTraversalDoesAnimationExist", &function_599c952d);
+  behaviortreenetworkutility::registerbehaviortreeaction("doaSpecialTraverseAction", &function_34a5b8e4, undefined, &function_f821465d);
+  animationstatenetwork::registeranimationmocomp("mocomp_doa_special_traversal", &function_e57c0c7b, undefined, &function_c97089da);
 }
 
 function function_f8d04082(behaviortreeentity) {
@@ -702,7 +702,7 @@ function function_a4e16560(sp_enemy, s_spawn_loc, force = 0) {
     ai_spawned.angles = s_spawn_loc.angles;
     return ai_spawned;
   }
-  ai_spawned.setgoaloverridecb = & function_d30fe558;
+  ai_spawned.setgoaloverridecb = &function_d30fe558;
   gibserverutils::togglespawngibs(ai_spawned, 1);
   if(isDefined(sp_enemy.script_noteworthy) && issubstr(sp_enemy.script_noteworthy, "has_eyes")) {
     ai_spawned.no_eye_glow = undefined;

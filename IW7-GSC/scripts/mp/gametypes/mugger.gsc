@@ -83,23 +83,23 @@ onprecachegametype() {
   precachesound("mugger_mega_drop");
   precachesound("mugger_muggernaut");
   precachesound("mugger_tags_banked");
-  precachestring( & "MPUI_MUGGER_JACKPOT");
+  precachestring(&"MPUI_MUGGER_JACKPOT");
 }
 
 onstartgametype() {
   setclientnamemode("auto_change");
-  scripts\mp\utility::setobjectivetext("allies", & "OBJECTIVES_MUGGER");
-  scripts\mp\utility::setobjectivetext("axis", & "OBJECTIVES_MUGGER");
+  scripts\mp\utility::setobjectivetext("allies", &"OBJECTIVES_MUGGER");
+  scripts\mp\utility::setobjectivetext("axis", &"OBJECTIVES_MUGGER");
   if(level.splitscreen) {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_MUGGER");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_MUGGER");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_MUGGER");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_MUGGER");
   } else {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_MUGGER_SCORE");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_MUGGER_SCORE");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_MUGGER_SCORE");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_MUGGER_SCORE");
   }
 
-  scripts\mp\utility::setobjectivehinttext("allies", & "OBJECTIVES_MUGGER_HINT");
-  scripts\mp\utility::setobjectivehinttext("axis", & "OBJECTIVES_MUGGER_HINT");
+  scripts\mp\utility::setobjectivehinttext("allies", &"OBJECTIVES_MUGGER_HINT");
+  scripts\mp\utility::setobjectivehinttext("axis", &"OBJECTIVES_MUGGER_HINT");
   scripts\mp\spawnlogic::setactivespawnlogic("FreeForAll");
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);

@@ -14,7 +14,7 @@ func_5C21() {
 
   if(self.team == "allies") {
     scripts\sp\names::func_7B05();
-    self _meth_8307(self.name, & "");
+    self _meth_8307(self.name, &"");
   }
 
   if(isDefined(level.func_5CA7))

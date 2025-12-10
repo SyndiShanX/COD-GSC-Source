@@ -408,9 +408,9 @@ show_claymore_hint(string) {
   self endon("disconnect");
 
   if(string == "claymore_purchased")
-    text = & "ZOMBIE_CLAYMORE_HOWTO";
+    text = &"ZOMBIE_CLAYMORE_HOWTO";
   else
-    text = & "ZOMBIE_CLAYMORE_ALREADY_PURCHASED";
+    text = &"ZOMBIE_CLAYMORE_ALREADY_PURCHASED";
 
   show_equipment_hint_text(text);
 }

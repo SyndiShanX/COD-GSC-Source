@@ -29,25 +29,25 @@
 
 function autoexec init() {
   initzmstalingradbehaviorsandasm();
-  level.zombie_init_done = & stalingrad_zombie_init_done;
+  level.zombie_init_done = &stalingrad_zombie_init_done;
   setdvar("scr_zm_use_code_enemy_selection", 0);
-  level.closest_player_override = & stalingrad_closest_player;
-  level.closest_player_targets_override = & function_6d4522d4;
-  level.is_valid_player_for_sentinel_drone = & function_5915f3d5;
+  level.closest_player_override = &stalingrad_closest_player;
+  level.closest_player_targets_override = &function_6d4522d4;
+  level.is_valid_player_for_sentinel_drone = &function_5915f3d5;
   level.pathdist_type = 2;
   level thread update_closest_player();
   level thread function_cec23cbf();
   level thread function_9b4d9341();
-  spawner::add_archetype_spawn_function("zombie", & function_7854f310);
-  spawner::add_archetype_spawn_function("sentinel_drone", & function_b10a912a);
-  spawner::add_archetype_spawn_function("raz", & function_ec1b37df);
+  spawner::add_archetype_spawn_function("zombie", &function_7854f310);
+  spawner::add_archetype_spawn_function("sentinel_drone", &function_b10a912a);
+  spawner::add_archetype_spawn_function("raz", &function_ec1b37df);
   level.var_dc87592f = 0;
   level.var_44d3a45c = struct::get("sentinel_back_door_goto", "targetname");
   level.var_ca793258 = struct::get("sentinel_back_door_teleport", "targetname");
 }
 
 function private initzmstalingradbehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("ZmStalingradAttackableObjectService", & zmstalingradattackableobjectservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("ZmStalingradAttackableObjectService", &zmstalingradattackableobjectservice);
 }
 
 function private zmstalingradattackableobjectservice(entity) {
@@ -62,7 +62,7 @@ function private zmstalingradattackableobjectservice(entity) {
 
 function private function_7854f310() {
   self ai::set_behavior_attribute("use_attackable", 1);
-  self.cant_move_cb = & function_c2866c1b;
+  self.cant_move_cb = &function_c2866c1b;
   self thread function_72fad482();
   self.attackable_goal_radius = 8;
 }
@@ -421,7 +421,7 @@ function function_9b4d9341() {
       }
     }
     if(var_a62c1873 > 0) {
-      level.var_809d579e = & function_8b981aa0;
+      level.var_809d579e = &function_8b981aa0;
       level thread function_a442e988(var_110db1be);
     } else {
       level.var_809d579e = undefined;

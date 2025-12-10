@@ -54,14 +54,14 @@ onStartGameType() {
     game["defenders"] = oldAttackers;
   }
 
-  setObjectiveText("allies", & "OBJECTIVES_CONF");
-  setObjectiveText("axis", & "OBJECTIVES_CONF");
+  setObjectiveText("allies", &"OBJECTIVES_CONF");
+  setObjectiveText("axis", &"OBJECTIVES_CONF");
 
-  setObjectiveScoreText("allies", & "OBJECTIVES_CONF_SCORE");
-  setObjectiveScoreText("axis", & "OBJECTIVES_CONF_SCORE");
+  setObjectiveScoreText("allies", &"OBJECTIVES_CONF_SCORE");
+  setObjectiveScoreText("axis", &"OBJECTIVES_CONF_SCORE");
 
-  setObjectiveHintText("allies", & "OBJECTIVES_CONF_HINT");
-  setObjectiveHintText("axis", & "OBJECTIVES_CONF_HINT");
+  setObjectiveHintText("allies", &"OBJECTIVES_CONF_HINT");
+  setObjectiveHintText("axis", &"OBJECTIVES_CONF_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -122,7 +122,6 @@ spawnDogTags(victim, attacker) {
 
     level.dogtags[victim.guid] = maps\mp\gametypes\_gameobjects::createUseObject("any", trigger, visuals, (0, 0, 16));
 
-
     _objective_delete(level.dogtags[victim.guid].objIDAllies);
     _objective_delete(level.dogtags[victim.guid].objIDAxis);
     maps\mp\gametypes\_objpoints::deleteObjPoint(level.dogtags[victim.guid].objPoints["allies"]);
@@ -154,10 +153,8 @@ spawnDogTags(victim, attacker) {
 
   level.dogtags[victim.guid].attacker = attacker;
 
-
   objective_position(level.dogtags[victim.guid].objId, pos);
   objective_state(level.dogtags[victim.guid].objId, "active");
-
 
   playSoundAtPos(pos, "mp_killconfirm_tags_drop");
 
@@ -195,12 +192,11 @@ onUse(player) {
 
     if(self.victim == player) {
       event = "tags_retrieved";
-      splash = & "SPLASHES_TAGS_RETRIEVED";
+      splash = &"SPLASHES_TAGS_RETRIEVED";
     } else {
       event = "kill_denied";
-      splash = & "SPLASHES_KILL_DENIED";
+      splash = &"SPLASHES_KILL_DENIED";
     }
-
 
     if(isDefined(self.attacker))
       self.attacker thread maps\mp\gametypes\_rank::xpEventPopup(&"SPLASHES_DENIED_KILL", (1, 0.5, 0.5));
@@ -210,8 +206,7 @@ onUse(player) {
     self.trigger playSound("mp_killconfirm_tags_pickup");
 
     event = "kill_confirmed";
-    splash = & "SPLASHES_KILL_CONFIRMED";
-
+    splash = &"SPLASHES_KILL_CONFIRMED";
 
     if(self.attacker != player)
       self.attacker onPickup(event, splash);
@@ -222,7 +217,6 @@ onUse(player) {
   }
 
   player onPickup(event, splash);
-
 
   self resetTags();
 }
@@ -311,15 +305,12 @@ clearOnVictimDisconnect(victim) {
   if(isDefined(level.dogtags[guid])) {
     level.dogtags[guid] maps\mp\gametypes\_gameobjects::allowUse("none");
 
-
     if(isDefined(level.dogtags[guid].attacker))
       level.dogtags[guid].attacker thread maps\mp\gametypes\_rank::xpEventPopup(&"SPLASHES_DENIED_KILL", (1, 0.5, 0.5));
-
 
     playFX(level.conf_fx["vanish"], level.dogtags[guid].curOrigin);
     level.dogtags[guid] notify("reset");
     wait(0.05);
-
 
     if(isDefined(level.dogtags[guid])) {
       objective_delete(level.dogtags[guid].objId);
@@ -327,7 +318,6 @@ clearOnVictimDisconnect(victim) {
       for(i = 0; i < level.dogtags[guid].visuals.size; i++)
         level.dogtags[guid].visuals[i] delete();
       level.dogtags[guid] notify("deleted");
-
 
       level.dogtags[guid] = undefined;
     }

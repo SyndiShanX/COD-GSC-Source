@@ -23,15 +23,15 @@ function init() {
   level._effect["box_light_flare"] = "zombie/fx_weapon_box_marker_fl_zod_zmb";
   level._effect["poltergeist"] = "tools/fx_null";
   level.chest_joker_model = "p7_zm_zod_magic_box_tentacle_teddy";
-  level.chest_joker_custom_movement = & custom_joker_movement;
-  level.custom_magic_box_timer_til_despawn = & custom_magic_box_timer_til_despawn;
-  level.custom_magic_box_do_weapon_rise = & custom_magic_box_do_weapon_rise;
-  level.custom_magic_box_weapon_wait = & custom_magic_box_weapon_wait;
-  level.custom_pandora_show_func = & custom_pandora_show_func;
-  level.custom_treasure_chest_glowfx = & custom_magic_box_fx;
+  level.chest_joker_custom_movement = &custom_joker_movement;
+  level.custom_magic_box_timer_til_despawn = &custom_magic_box_timer_til_despawn;
+  level.custom_magic_box_do_weapon_rise = &custom_magic_box_do_weapon_rise;
+  level.custom_magic_box_weapon_wait = &custom_magic_box_weapon_wait;
+  level.custom_pandora_show_func = &custom_pandora_show_func;
+  level.custom_treasure_chest_glowfx = &custom_magic_box_fx;
   level.custom_firesale_box_leave = 1;
   level.custom_magicbox_float_height = 40;
-  level.magic_box_zbarrier_state_func = & set_magic_box_zbarrier_state;
+  level.magic_box_zbarrier_state_func = &set_magic_box_zbarrier_state;
   level thread handle_fire_sale();
   level thread custom_magicbox_host_migration();
 }
@@ -87,7 +87,7 @@ function custom_pandora_fx_func() {
 function custom_pandora_show_func() {
   if(!isDefined(self.pandora_light)) {
     if(!isDefined(level.pandora_fx_func)) {
-      level.pandora_fx_func = & custom_pandora_fx_func;
+      level.pandora_fx_func = &custom_pandora_fx_func;
     }
     self thread[[level.pandora_fx_func]]();
   }
@@ -119,7 +119,7 @@ function set_magic_box_zbarrier_state(state) {
     case "initial": {
       self showzbarrierpiece(1);
       self thread magic_box_initial();
-      self thread zm_unitrigger::register_static_unitrigger(self.owner.unitrigger_stub, & zm_magicbox::magicbox_unitrigger_think);
+      self thread zm_unitrigger::register_static_unitrigger(self.owner.unitrigger_stub, &zm_magicbox::magicbox_unitrigger_think);
       self.state = "close";
       break;
     }

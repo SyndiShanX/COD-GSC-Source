@@ -12,7 +12,7 @@
 #namespace zm_bgb_secret_shopper;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_secret_shopper", & __init__, undefined, undefined);
+  system::register("zm_bgb_secret_shopper", &__init__, undefined, undefined);
 }
 
 function __init__() {

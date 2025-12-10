@@ -14,9 +14,9 @@
 #namespace zm_temple_sq_std;
 
 function init() {
-  zm_sidequests::declare_sidequest_stage("sq", "StD", & init_stage, & stage_logic, & exit_stage);
+  zm_sidequests::declare_sidequest_stage("sq", "StD", &init_stage, &stage_logic, &exit_stage);
   zm_sidequests::set_stage_time_limit("sq", "StD", 300);
-  zm_sidequests::declare_stage_asset_from_struct("sq", "StD", "sq_sad_trig", & function_3ea85f63);
+  zm_sidequests::declare_stage_asset_from_struct("sq", "StD", "sq_sad_trig", &function_3ea85f63);
   level flag::init("std_target_1");
   level flag::init("std_target_2");
   level flag::init("std_target_3");
@@ -95,7 +95,7 @@ function function_3ea85f63() {
   self playSound("evt_sq_std_spray_stop");
   level flag::set("std_target_" + self.script_int);
   util::clientnotify("S" + self.script_int);
-  util::delay(0.1, undefined, & function_4fdfc508);
+  util::delay(0.1, undefined, &function_4fdfc508);
   trigger delete();
 }
 

@@ -212,7 +212,7 @@ updateradiationdosimeter() {
   var_5.y = 360;
   var_5.alpha = 0;
   var_5.alignx = "right";
-  var_5.label = & "SCOUTSNIPER_MRHR";
+  var_5.label = &"SCOUTSNIPER_MRHR";
   var_5 thread updateradiationdosimetercolor(self);
 
   for(;;) {
@@ -327,7 +327,7 @@ radiation_kill() {
     return;
   }
   waittillframeend;
-  var_0 = & "SCRIPT_RADIATION_DEATH";
+  var_0 = &"SCRIPT_RADIATION_DEATH";
   setdvar("ui_deadquote", var_0);
 }
 

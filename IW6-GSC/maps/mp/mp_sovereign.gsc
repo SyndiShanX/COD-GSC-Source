@@ -500,7 +500,7 @@ sovereignCustomCrateFunc() {
   if(!allow_level_killstreak || game["player_holding_level_killstrek"]) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "sovereign_gas", SOVEREIGN_GAS_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), & "KILLSTREAKS_HINTS_SOVEREIGN_GAS");
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "sovereign_gas", SOVEREIGN_GAS_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), &"KILLSTREAKS_HINTS_SOVEREIGN_GAS");
   level thread watch_for_sovereign_gas_crate();
 }
 

@@ -109,7 +109,7 @@ hud_create_kill_counter() {
   level endon("special_op_terminated");
   self endon("hud_cleaned_up");
 
-  self.kill_hudelem = so_create_hud_item(3, so_hud_ypos(), & "SPECIAL_OPS_HOSTILES", self);
+  self.kill_hudelem = so_create_hud_item(3, so_hud_ypos(), &"SPECIAL_OPS_HOSTILES", self);
   self.kill_hudelem_score = so_create_hud_item(3, so_hud_ypos(), undefined, self);
   self.kill_hudelem_score.alignx = "left";
   self.kill_hudelem_score SetValue(level.points_counter);
@@ -143,7 +143,7 @@ hud_update_kill_counter() {
   // Success!
   if(level.points_counter <= 0) {
     self.kill_hudelem_score so_remove_hud_item(true);
-    self.kill_hudelem_score = so_create_hud_item(3, so_hud_ypos(), & "SPECIAL_OPS_DASHDASH", self);
+    self.kill_hudelem_score = so_create_hud_item(3, so_hud_ypos(), &"SPECIAL_OPS_DASHDASH", self);
     self.kill_hudelem_score.alignx = "left";
 
     self.kill_hudelem thread so_hud_pulse_success();
@@ -160,20 +160,20 @@ hud_update_kill_counter() {
 hud_create_civ_counter() {
   self endon("hud_cleaned_up");
 
-  self.civ_hudelem = so_create_hud_item(4, so_hud_ypos(), & "SO_KILLSPREE_FAVELA_CIVILIANS", self);
+  self.civ_hudelem = so_create_hud_item(4, so_hud_ypos(), &"SO_KILLSPREE_FAVELA_CIVILIANS", self);
   self.civ_hudelem_score = so_create_hud_item(4, so_hud_ypos(), undefined, self);
   self.civ_hudelem_score.alignx = "left";
   self.civ_hudelem_score SetValue(0);
   switch (level.gameskill) {
     case 0:
     case 1:
-      self.civ_hudelem_score.label = & "SO_KILLSPREE_FAVELA_CIV_COUNT_REGULAR";
+      self.civ_hudelem_score.label = &"SO_KILLSPREE_FAVELA_CIV_COUNT_REGULAR";
       break;
     case 2:
-      self.civ_hudelem_score.label = & "SO_KILLSPREE_FAVELA_CIV_COUNT_HARDENED";
+      self.civ_hudelem_score.label = &"SO_KILLSPREE_FAVELA_CIV_COUNT_HARDENED";
       break;
     case 3:
-      self.civ_hudelem_score.label = & "SO_KILLSPREE_FAVELA_CIV_COUNT_VETERAN";
+      self.civ_hudelem_score.label = &"SO_KILLSPREE_FAVELA_CIV_COUNT_VETERAN";
       break;
   }
 

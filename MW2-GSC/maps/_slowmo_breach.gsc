@@ -901,7 +901,7 @@ create_slowmo_breaches_from_entities() {
 =============
 */
 objective_breach(obj, breach_index1, breach_index2, breach_index3, breach_index4) {
-  Objective_SetPointerTextOverride(obj, & "SCRIPT_WAYPOINT_BREACH");
+  Objective_SetPointerTextOverride(obj, &"SCRIPT_WAYPOINT_BREACH");
   objective_position(obj, (0, 0, 0));
 
   breaches = [];
@@ -1128,7 +1128,7 @@ slowmo_breach_think(breach_array, breach_index) {
   array_thread(breach_coopenemy_spawners, ::add_spawn_function, ::breach_enemy_spawner_think);
   array_thread(breach_coophostage_spawners, ::add_spawn_function, ::breach_hostage_spawner_think);
 
-  // Hold &&1 to breach.
+  // Hold && 1 to breach.
   trigger SetHintString(&"SCRIPT_PLATFORM_BREACH_ACTIVATE");
   if(!isDefined(level.breach_use_triggers))
     level.breach_use_triggers = [];
@@ -1985,7 +1985,7 @@ flag_set_when_room_cleared(room_volume) {
 }
 
 take_prebreach_weapons() {
-  // give the usp_scripted weapon, which plays the charge setting and breaching viewmodel & camera animation
+  // give the usp_scripted weapon, which plays the charge setting and breaching viewmodel &camera animation
   self GiveWeapon("usp_scripted");
   self SwitchToWeaponImmediate("usp_scripted");
 
@@ -2628,7 +2628,7 @@ hostage_mission_fail() {
         //if( ( level.last_player_damage + 50 < GetTime() ) || ( level.last_player_damage == GetTime() ) )
         if(level.last_player_damage == GetTime()) {
           // Mission failed. You shot a hostage through an enemy.\nSome weapons have deep bullet penetration.
-          //breach_set_deadquote( &"SCRIPT_MISSIONFAIL_KILLEDHOSTAGE_THROUGH_ENEMY", "@SCRIPT_MISSIONFAIL_KILLEDHOSTAGE_THROUGH_ENEMY" );
+          //breach_set_deadquote(&"SCRIPT_MISSIONFAIL_KILLEDHOSTAGE_THROUGH_ENEMY", "@SCRIPT_MISSIONFAIL_KILLEDHOSTAGE_THROUGH_ENEMY" );
 
           // Mission failed. You killed a hostage.
           //(not doing bullet penetration anymore on any skill level, but will leave check here in case

@@ -36,12 +36,9 @@ main() {
 
   level._effect["hunted_vl_white_eql_a"] = loadfx("misc/hunted_vl_white_eql_a");
 
-
   level._effect["greenhouse_fog_spot_lit"] = loadfx("smoke/greenhouse_fog_spot_lit");
   level._effect["waterfall_hunted"] = loadfx("misc/waterfall_hunted");
   level._effect["stream_hunted"] = loadfx("misc/stream_hunted");
-
-
 
   setFootstepEffect("asphalt", loadfx("impacts/footstep_dust_dark"));
   setFootstepEffect("brick", loadfx("impacts/footstep_dust_dark"));
@@ -57,7 +54,6 @@ main() {
   setFootstepEffect("sand", loadfx("impacts/footstep_dust_dark"));
   setFootstepEffect("water", loadfx("impacts/footstep_water_dark"));
   setFootstepEffect("wood", loadfx("impacts/footstep_dust_dark"));
-
 
   level._effect["rain_mp_storm"] = loadfx("weather/rain_mp_storm");
   level._effect["rain_noise_splashes"] = loadfx("weather/rain_noise_splashes");

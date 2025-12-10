@@ -32,9 +32,9 @@ precacheLevelStuff() {
   precachestring(&"AC130_HUD_WEAPON_40MM");
   // 25 mm
   precachestring(&"AC130_HUD_WEAPON_25MM");
-  // &&1 AGL
+  // && 1 AGL
   precachestring(&"AC130_HUD_AGL");
-  // Friendlies: &&1
+  // Friendlies: && 1
   precachestring(&"AC130_DEBUG_FRIENDLY_COUNT");
   // Too many friendlies have been KIA. Mission failed.
   precachestring(&"AC130_FRIENDLIES_DEAD");

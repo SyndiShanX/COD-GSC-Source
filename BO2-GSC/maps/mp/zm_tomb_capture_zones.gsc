@@ -78,10 +78,10 @@ precache_everything() {
 }
 
 declare_objectives() {
-  objective_add(0, "invisible", (0, 0, 0), & "ZM_TOMB_OBJ_CAPTURE_1");
-  objective_add(1, "invisible", (0, 0, 0), & "ZM_TOMB_OBJ_RECAPTURE_2");
-  objective_add(2, "invisible", (0, 0, 0), & "ZM_TOMB_OBJ_CAPTURE_2");
-  objective_add(3, "invisible", (0, 0, 0), & "ZM_TOMB_OBJ_RECAPTURE_ZOMBIE");
+  objective_add(0, "invisible", (0, 0, 0), &"ZM_TOMB_OBJ_CAPTURE_1");
+  objective_add(1, "invisible", (0, 0, 0), &"ZM_TOMB_OBJ_RECAPTURE_2");
+  objective_add(2, "invisible", (0, 0, 0), &"ZM_TOMB_OBJ_CAPTURE_2");
+  objective_add(3, "invisible", (0, 0, 0), &"ZM_TOMB_OBJ_RECAPTURE_ZOMBIE");
 }
 
 init_pap_animtree() {
@@ -484,7 +484,7 @@ setup_generator_unitrigger() {
   s_unitrigger_stub.script_width = 128;
   s_unitrigger_stub.script_height = 128;
   s_unitrigger_stub.cursor_hint = "HINT_NOICON";
-  s_unitrigger_stub.hint_string = & "ZM_TOMB_CAP";
+  s_unitrigger_stub.hint_string = &"ZM_TOMB_CAP";
   s_unitrigger_stub.hint_parm1 = [[::get_generator_capture_start_cost]]();
   s_unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   s_unitrigger_stub.require_look_at = 1;
@@ -1845,9 +1845,9 @@ magic_box_stub_update_prompt(player) {
   self.stub.hint_parm1 = undefined;
 
   if(isDefined(self.stub.trigger_target.grab_weapon_hint) && self.stub.trigger_target.grab_weapon_hint)
-    self.stub.hint_string = & "ZOMBIE_TRADE_WEAPONS";
+    self.stub.hint_string = &"ZOMBIE_TRADE_WEAPONS";
   else if(!level.zone_capture.zones[self.stub.zone] ent_flag("player_controlled")) {
-    self.stub.hint_string = & "ZM_TOMB_ZC";
+    self.stub.hint_string = &"ZM_TOMB_ZC";
     return false;
   } else {
     self.stub.hint_parm1 = self.stub.trigger_target.zombie_cost;

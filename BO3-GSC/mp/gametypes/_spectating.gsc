@@ -9,14 +9,14 @@
 #namespace spectating;
 
 function autoexec __init__sytem__() {
-  system::register("spectating", & __init__, undefined, undefined);
+  system::register("spectating", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
-  callback::on_spawned( & set_permissions);
-  callback::on_joined_team( & set_permissions_for_machine);
-  callback::on_joined_spectate( & set_permissions_for_machine);
+  callback::on_start_gametype(&init);
+  callback::on_spawned(&set_permissions);
+  callback::on_joined_team(&set_permissions_for_machine);
+  callback::on_joined_spectate(&set_permissions_for_machine);
 }
 
 function init() {

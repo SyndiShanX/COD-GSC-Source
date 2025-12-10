@@ -201,16 +201,16 @@ function electric_trap_fx(name, side, trap_type) {
 
 function moon_fog_triggers_init(localclientnum) {
   exterior_array = getEntArray(localclientnum, "zombie_moonExterior", "targetname");
-  array::thread_all(exterior_array, & fog_trigger, & moon_exterior_fog_change);
+  array::thread_all(exterior_array, &fog_trigger, &moon_exterior_fog_change);
   moon_interior_array = getEntArray(localclientnum, "zombie_moonInterior", "targetname");
-  array::thread_all(moon_interior_array, & fog_trigger, & moon_interior_fog_change);
+  array::thread_all(moon_interior_array, &fog_trigger, &moon_interior_fog_change);
   moon_biodome_array = getEntArray(localclientnum, "zombie_moonBiodome", "targetname");
-  array::thread_all(moon_biodome_array, & fog_trigger, & moon_biodome_fog_change);
+  array::thread_all(moon_biodome_array, &fog_trigger, &moon_biodome_fog_change);
   moon_biodome_array = getEntArray(localclientnum, "zombie_moonTunnels", "targetname");
-  array::thread_all(moon_biodome_array, & fog_trigger, & moon_tunnels_fog_change);
+  array::thread_all(moon_biodome_array, &fog_trigger, &moon_tunnels_fog_change);
   nml_array = getEntArray(localclientnum, "zombie_nmlVision", "targetname");
   if(isDefined(nml_array) && nml_array.size > 0) {
-    array::thread_all(nml_array, & fog_trigger, & moon_nml_fog_change);
+    array::thread_all(nml_array, &fog_trigger, &moon_nml_fog_change);
   }
 }
 

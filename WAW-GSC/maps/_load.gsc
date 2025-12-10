@@ -807,7 +807,7 @@ player_special_death_hint() {
       return;
     }
     level notify("new_quote_string");
-    self thread grenade_death_text_hudelement(&"SCRIPT_GRENADE_SUICIDE_LINE1", & "SCRIPT_GRENADE_SUICIDE_LINE2");
+    self thread grenade_death_text_hudelement(&"SCRIPT_GRENADE_SUICIDE_LINE1", &"SCRIPT_GRENADE_SUICIDE_LINE2");
     return;
   }
   if(cause == "MOD_PROJECTILE" || cause == "MOD_PROJECTILE_SPLASH") {
@@ -1440,8 +1440,8 @@ create_start(start, index) {
 }
 
 start_menu() {
-  level.start_loc_string["default"] = & "STARTS_DEFAULT";
-  level.start_loc_string["cancel"] = & "STARTS_CANCEL";
+  level.start_loc_string["default"] = &"STARTS_DEFAULT";
+  level.start_loc_string["cancel"] = &"STARTS_CANCEL";
   for(;;) {
     if(GetDvarInt("debug_start")) {
       SetDvar("debug_start", 0);
@@ -1465,7 +1465,7 @@ display_starts() {
   title = create_start(&"STARTS_AVAILABLE_STARTS", -1);
   title.color = (1, 1, 1);
   elems = [];
-  level.start_loc_string = array_remove(level.start_loc_string, & "MISSING_LOC_STRING", true);
+  level.start_loc_string = array_remove(level.start_loc_string, &"MISSING_LOC_STRING", true);
   dvars = GetArrayKeys(level.start_loc_string);
   for(i = 0; i < dvars.size; i++) {
     elems[elems.size] = create_start(level.start_loc_string[dvars[i]], dvars.size - i);

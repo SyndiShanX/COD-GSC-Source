@@ -11,7 +11,7 @@
 #namespace burnplayer;
 
 function autoexec __init__sytem__() {
-  system::register("burnplayer", & __init__, undefined, undefined);
+  system::register("burnplayer", &__init__, undefined, undefined);
 }
 
 function __init__() {

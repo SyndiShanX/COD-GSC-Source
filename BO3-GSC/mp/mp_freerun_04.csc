@@ -20,7 +20,7 @@ function main() {
   setdvar("phys_ragdoll_buoyancy", 1);
   load::main();
   util::waitforclient(0);
-  callback::on_localplayer_spawned( & player_rain);
+  callback::on_localplayer_spawned(&player_rain);
 }
 
 function player_rain(localclientnum) {

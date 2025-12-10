@@ -38,28 +38,28 @@
 
 function init() {
   level._effect["rcbombexplosion"] = "killstreaks/fx_rcxd_exp";
-  killstreaks::register("rcbomb", "rcbomb", "killstreak_rcbomb", "rcbomb_used", & activatercbomb);
-  killstreaks::register_strings("rcbomb", & "KILLSTREAK_EARNED_RCBOMB", & "KILLSTREAK_RCBOMB_NOT_AVAILABLE", & "KILLSTREAK_RCBOMB_INBOUND", undefined, & "KILLSTREAK_RCBOMB_HACKED", 0);
+  killstreaks::register("rcbomb", "rcbomb", "killstreak_rcbomb", "rcbomb_used", &activatercbomb);
+  killstreaks::register_strings("rcbomb", &"KILLSTREAK_EARNED_RCBOMB", &"KILLSTREAK_RCBOMB_NOT_AVAILABLE", &"KILLSTREAK_RCBOMB_INBOUND", undefined, &"KILLSTREAK_RCBOMB_HACKED", 0);
   killstreaks::register_dialog("rcbomb", "mpl_killstreak_rcbomb", "rcBombDialogBundle", undefined, "friendlyRcBomb", "enemyRcBomb", "enemyRcBombMultiple", "friendlyRcBombHacked", "enemyRcBombHacked", "requestRcBomb");
   killstreaks::allow_assists("rcbomb", 1);
   killstreaks::register_alt_weapon("rcbomb", "killstreak_remote");
   killstreaks::register_alt_weapon("rcbomb", "rcbomb_turret");
-  remote_weapons::registerremoteweapon("rcbomb", & "", & startremotecontrol, & endremotecontrol, 0);
-  vehicle::add_main_callback("rc_car_mp", & initrcbomb);
+  remote_weapons::registerremoteweapon("rcbomb", &"", &startremotecontrol, &endremotecontrol, 0);
+  vehicle::add_main_callback("rc_car_mp", &initrcbomb);
   clientfield::register("vehicle", "rcbomb_stunned", 1, 1, "int");
 }
 
 function initrcbomb() {
   rcbomb = self;
   rcbomb clientfield::set("enemyvehicle", 1);
-  rcbomb.allowfriendlyfiredamageoverride = & rccarallowfriendlyfiredamage;
+  rcbomb.allowfriendlyfiredamageoverride = &rccarallowfriendlyfiredamage;
   rcbomb enableaimassist();
   rcbomb setdrawinfrared(1);
   rcbomb.delete_on_death = 1;
-  rcbomb.death_enter_cb = & waitremotecontrol;
+  rcbomb.death_enter_cb = &waitremotecontrol;
   rcbomb.disableremoteweaponswitch = 1;
-  rcbomb.overridevehicledamage = & ondamage;
-  rcbomb.overridevehicledeath = & ondeath;
+  rcbomb.overridevehicledamage = &ondamage;
+  rcbomb.overridevehicledeath = &ondeath;
   rcbomb.watch_remote_weapon_death = 1;
   rcbomb.watch_remote_weapon_death_duration = 0.3;
   if(issentient(rcbomb) == 0) {
@@ -131,8 +131,8 @@ function activatercbomb(hardpointtype) {
     return false;
   }
   rcbomb = spawnvehicle("rc_car_mp", placement.origin, placement.angles, "rcbomb");
-  rcbomb killstreaks::configure_team("rcbomb", killstreak_id, player, "small_vehicle", undefined, & configureteampost);
-  rcbomb killstreak_hacking::enable_hacking("rcbomb", & hackedprefunction, & hackedpostfunction);
+  rcbomb killstreaks::configure_team("rcbomb", killstreak_id, player, "small_vehicle", undefined, &configureteampost);
+  rcbomb killstreak_hacking::enable_hacking("rcbomb", &hackedprefunction, &hackedpostfunction);
   rcbomb.damagetaken = 0;
   rcbomb.abandoned = 0;
   rcbomb.killstreak_id = killstreak_id;
@@ -142,7 +142,7 @@ function activatercbomb(hardpointtype) {
   rcbomb.health = killstreak_bundles::get_max_health(hardpointtype);
   rcbomb.maxhealth = killstreak_bundles::get_max_health(hardpointtype);
   rcbomb.hackedhealth = killstreak_bundles::get_hacked_health(hardpointtype);
-  rcbomb.hackedhealthupdatecallback = & rcbomb_hacked_health_update;
+  rcbomb.hackedhealthupdatecallback = &rcbomb_hacked_health_update;
   rcbomb.ignore_vehicle_underneath_splash_scalar = 1;
   self thread killstreaks::play_killstreak_start_dialog("rcbomb", self.team, killstreak_id);
   self addweaponstat(getweapon("rcbomb"), "used", 1);
@@ -222,7 +222,7 @@ function watchownergameevents() {
 
 function watchtimeout() {
   rcbomb = self;
-  rcbomb thread killstreaks::waitfortimeout("rcbomb", 40000, & rc_shutdown, "rcbomb_shutdown");
+  rcbomb thread killstreaks::waitfortimeout("rcbomb", 40000, &rc_shutdown, "rcbomb_shutdown");
 }
 
 function rc_shutdown() {
@@ -331,7 +331,7 @@ function explode(attacker, weapon) {
     attacker challenges::destroyrcbomb(weapon);
     if(self.owner util::isenemyplayer(attacker)) {
       scoreevents::processscoreevent("destroyed_hover_rcxd", attacker, self.owner, weapon);
-      luinotifyevent(&"player_callout", 2, & "KILLSTREAK_DESTROYED_RCBOMB", attacker.entnum);
+      luinotifyevent(&"player_callout", 2, &"KILLSTREAK_DESTROYED_RCBOMB", attacker.entnum);
       if(isDefined(weapon) && weapon.isvalid) {
         weaponstatname = "destroyed";
         level.globalkillstreaksdestroyed++;

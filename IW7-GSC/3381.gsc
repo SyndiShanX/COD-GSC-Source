@@ -127,7 +127,7 @@ use_knife_throw(param_00, param_01) {
   param_01.playing_game = 1;
   param_01.pre_arcade_game_weapon = param_01 scripts\cp\zombies\arcade_game_utility::saveplayerpregameweapon(param_01);
   param_01 playlocalsound("arcade_insert_coin_02");
-  param_01 scripts\cp\utility::setlowermessage("knife_hint", & "CP_RAVE_KNIFE_HINT", 6);
+  param_01 scripts\cp\utility::setlowermessage("knife_hint", &"CP_RAVE_KNIFE_HINT", 6);
   param_01 setclientomnvar("zombie_arcade_game_time", 1);
   scripts\engine\utility::waitframe();
   param_00.destroynavrepulsor = 0;

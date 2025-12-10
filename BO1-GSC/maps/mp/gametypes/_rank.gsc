@@ -498,10 +498,10 @@ updateRankScoreHUD(amount) {
   wait(0.05);
   if(isDefined(self.hud_rankscroreupdate)) {
     if(self.rankUpdateTotal < 0) {
-      self.hud_rankscroreupdate.label = & "";
+      self.hud_rankscroreupdate.label = &"";
       self.hud_rankscroreupdate.color = (0.73, 0.19, 0.19);
     } else {
-      self.hud_rankscroreupdate.label = & "MP_PLUS";
+      self.hud_rankscroreupdate.label = &"MP_PLUS";
       self.hud_rankscroreupdate.color = (1, 1, 0.5);
     }
     self.hud_rankscroreupdate setValue(self.rankUpdateTotal);

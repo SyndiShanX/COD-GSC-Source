@@ -62,8 +62,8 @@ function init() {
 }
 
 function main() {
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
   cybercom_gadget_system_overload::main();
   cybercom_gadget_exosuitbreakdown::main();
   cybercom_gadget_surge::main();

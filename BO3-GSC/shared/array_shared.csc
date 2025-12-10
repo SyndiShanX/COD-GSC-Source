@@ -10,7 +10,7 @@
 #using scripts\shared\util_shared;
 #namespace array;
 
-function filter( & array, b_keep_keys, func_filter, arg1, arg2, arg3, arg4, arg5) {
+function filter(&array, b_keep_keys, func_filter, arg1, arg2, arg3, arg4, arg5) {
   a_new = [];
   foreach(key, val in array) {
     if(util::single_func(self, func_filter, val, arg1, arg2, arg3, arg4, arg5)) {
@@ -41,8 +41,8 @@ function remove_undefined(array, b_keep_keys) {
   return array;
 }
 
-function get_touching( & array, b_keep_keys) {
-  return filter(array, b_keep_keys, & istouching);
+function get_touching(&array, b_keep_keys) {
+  return filter(array, b_keep_keys, &istouching);
 }
 
 function remove_index(array, index, b_keep_keys) {
@@ -61,7 +61,7 @@ function remove_index(array, index, b_keep_keys) {
   return a_new;
 }
 
-function delete_all( & array, is_struct) {
+function delete_all(&array, is_struct) {
   foreach(ent in array) {
     if(isDefined(ent)) {
       if(isDefined(is_struct) && is_struct) {
@@ -78,13 +78,13 @@ function delete_all( & array, is_struct) {
   }
 }
 
-function notify_all( & array, str_notify) {
+function notify_all(&array, str_notify) {
   foreach(elem in array) {
     elem notify(str_notify);
   }
 }
 
-function thread_all( & entities, func, arg1, arg2, arg3, arg4, arg5, arg6) {
+function thread_all(&entities, func, arg1, arg2, arg3, arg4, arg5, arg6) {
   assert(isDefined(entities), "");
   assert(isDefined(func), "");
   if(isarray(entities)) {
@@ -132,7 +132,7 @@ function thread_all( & entities, func, arg1, arg2, arg3, arg4, arg5, arg6) {
   }
 }
 
-function thread_all_ents( & entities, func, arg1, arg2, arg3, arg4, arg5) {
+function thread_all_ents(&entities, func, arg1, arg2, arg3, arg4, arg5) {
   assert(isDefined(entities), "");
   assert(isDefined(func), "");
   if(isarray(entities)) {
@@ -147,7 +147,7 @@ function thread_all_ents( & entities, func, arg1, arg2, arg3, arg4, arg5) {
   }
 }
 
-function run_all( & entities, func, arg1, arg2, arg3, arg4, arg5, arg6) {
+function run_all(&entities, func, arg1, arg2, arg3, arg4, arg5, arg6) {
   assert(isDefined(entities), "");
   assert(isDefined(func), "");
   if(isarray(entities)) {
@@ -207,7 +207,7 @@ function exclude(array, array_exclude) {
   return newarray;
 }
 
-function add( & array, item, allow_dupes = 1) {
+function add(&array, item, allow_dupes = 1) {
   if(isDefined(item)) {
     if(allow_dupes || !isinarray(array, item)) {
       array[array.size] = item;
@@ -216,7 +216,7 @@ function add( & array, item, allow_dupes = 1) {
   return array;
 }
 
-function add_sorted( & array, item, allow_dupes = 1) {
+function add_sorted(&array, item, allow_dupes = 1) {
   if(isDefined(item)) {
     if(allow_dupes || !isinarray(array, item)) {
       for(i = 0; i <= array.size; i++) {
@@ -229,7 +229,7 @@ function add_sorted( & array, item, allow_dupes = 1) {
   }
 }
 
-function wait_till( & array, msg, n_timeout) {
+function wait_till(&array, msg, n_timeout) {
   if(isDefined(n_timeout)) {
     __s = spawnStruct();
     __s endon("timeout");
@@ -239,7 +239,7 @@ function wait_till( & array, msg, n_timeout) {
   s_tracker._wait_count = 0;
   foreach(ent in array) {
     if(isDefined(ent)) {
-      ent thread util::timeout(n_timeout, & util::_waitlogic, s_tracker, msg);
+      ent thread util::timeout(n_timeout, &util::_waitlogic, s_tracker, msg);
     }
   }
   if(s_tracker._wait_count > 0) {
@@ -247,7 +247,7 @@ function wait_till( & array, msg, n_timeout) {
   }
 }
 
-function flag_wait( & array, str_flag) {
+function flag_wait(&array, str_flag) {
   for(i = 0; i < array.size; i++) {
     ent = array[i];
     if(!ent flag::get(str_flag)) {
@@ -257,7 +257,7 @@ function flag_wait( & array, str_flag) {
   }
 }
 
-function flagsys_wait( & array, str_flag) {
+function flagsys_wait(&array, str_flag) {
   for(i = 0; i < array.size; i++) {
     ent = array[i];
     if(!ent flagsys::get(str_flag)) {
@@ -267,7 +267,7 @@ function flagsys_wait( & array, str_flag) {
   }
 }
 
-function flagsys_wait_any_flag( & array, ...) {
+function flagsys_wait_any_flag(&array, ...) {
   for(i = 0; i < array.size; i++) {
     ent = array[i];
     if(isDefined(ent)) {
@@ -286,7 +286,7 @@ function flagsys_wait_any_flag( & array, ...) {
   }
 }
 
-function flag_wait_clear( & array, str_flag) {
+function flag_wait_clear(&array, str_flag) {
   for(i = 0; i < array.size; i++) {
     ent = array[i];
     if(ent flag::get(str_flag)) {
@@ -296,7 +296,7 @@ function flag_wait_clear( & array, str_flag) {
   }
 }
 
-function flagsys_wait_clear( & array, str_flag) {
+function flagsys_wait_clear(&array, str_flag) {
   for(i = 0; i < array.size; i++) {
     ent = array[i];
     if(ent flagsys::get(str_flag)) {
@@ -317,7 +317,7 @@ function wait_any(array, msg, n_timeout) {
   foreach(ent in array) {
     if(isDefined(ent)) {
       s = spawnStruct();
-      s thread util::timeout(n_timeout, & _waitlogic2, s_tracker, ent, msg);
+      s thread util::timeout(n_timeout, &_waitlogic2, s_tracker, ent, msg);
       if(!isDefined(a_structs)) {
         a_structs = [];
       } else if(!isarray(a_structs)) {
@@ -380,7 +380,7 @@ function remove_keys(array) {
   return a_new;
 }
 
-function swap( & array, index1, index2) {
+function swap(&array, index1, index2) {
   assert(index1 < array.size, "");
   assert(index2 < array.size, "");
   temp = array[index1];
@@ -388,7 +388,7 @@ function swap( & array, index1, index2) {
   array[index2] = temp;
 }
 
-function pop( & array, index, b_keep_keys = 1) {
+function pop(&array, index, b_keep_keys = 1) {
   if(array.size > 0) {
     if(!isDefined(index)) {
       keys = getarraykeys(array);
@@ -402,13 +402,13 @@ function pop( & array, index, b_keep_keys = 1) {
   }
 }
 
-function pop_front( & array, b_keep_keys = 1) {
+function pop_front(&array, b_keep_keys = 1) {
   keys = getarraykeys(array);
   index = keys[keys.size - 1];
   return pop(array, index, b_keep_keys);
 }
 
-function push( & array, val, index) {
+function push(&array, val, index) {
   if(!isDefined(index)) {
     index = 0;
     foreach(key in getarraykeys(array)) {
@@ -420,15 +420,15 @@ function push( & array, val, index) {
   arrayinsert(array, val, index);
 }
 
-function push_front( & array, val) {
+function push_front(&array, val) {
   push(array, val, 0);
 }
 
-function get_closest(org, & array, dist = undefined) {
+function get_closest(org, &array, dist = undefined) {
   assert(0, "");
 }
 
-function get_farthest(org, & array, dist = undefined) {
+function get_farthest(org, &array, dist = undefined) {
   assert(0, "");
 }
 
@@ -440,7 +440,7 @@ function fartherfunc(dist1, dist2) {
   return dist1 <= dist2;
 }
 
-function get_all_farthest(org, & array, excluders, max) {
+function get_all_farthest(org, &array, excluders, max) {
   sorted_array = get_closest(org, array, excluders);
   if(isDefined(max)) {
     temp_array = [];
@@ -453,7 +453,7 @@ function get_all_farthest(org, & array, excluders, max) {
   return sorted_array;
 }
 
-function get_all_closest(org, & array, excluders = [], max = array.size, maxdist) {
+function get_all_closest(org, &array, excluders = [], max = array.size, maxdist) {
   maxdists2rd = undefined;
   if(isDefined(maxdist)) {
     maxdists2rd = maxdist * maxdist;
@@ -510,12 +510,12 @@ function get_all_closest(org, & array, excluders = [], max = array.size, maxdist
   return newarray;
 }
 
-function alphabetize( & array) {
+function alphabetize(&array) {
   return sort_by_value(array, 1);
 }
 
-function sort_by_value( & array, b_lowest_first = 0) {
-  return merge_sort(array, & _sort_by_value_compare_func, b_lowest_first);
+function sort_by_value(&array, b_lowest_first = 0) {
+  return merge_sort(array, &_sort_by_value_compare_func, b_lowest_first);
 }
 
 function _sort_by_value_compare_func(val1, val2, b_lowest_first) {
@@ -525,8 +525,8 @@ function _sort_by_value_compare_func(val1, val2, b_lowest_first) {
   return val1 > val2;
 }
 
-function sort_by_script_int( & a_ents, b_lowest_first = 0) {
-  return merge_sort(a_ents, & _sort_by_script_int_compare_func, b_lowest_first);
+function sort_by_script_int(&a_ents, b_lowest_first = 0) {
+  return merge_sort(a_ents, &_sort_by_script_int_compare_func, b_lowest_first);
 }
 
 function _sort_by_script_int_compare_func(e1, e2, b_lowest_first) {
@@ -536,7 +536,7 @@ function _sort_by_script_int_compare_func(e1, e2, b_lowest_first) {
   return e1.script_int > e2.script_int;
 }
 
-function merge_sort( & current_list, func_sort, param) {
+function merge_sort(&current_list, func_sort, param) {
   if(current_list.size <= 1) {
     return current_list;
   }
@@ -600,7 +600,7 @@ function merge(left, right, func_sort, param) {
   return result;
 }
 
-function spread_all( & entities, func, arg1, arg2, arg3, arg4, arg5) {
+function spread_all(&entities, func, arg1, arg2, arg3, arg4, arg5) {
   assert(isDefined(entities), "");
   assert(isDefined(func), "");
   if(isarray(entities)) {

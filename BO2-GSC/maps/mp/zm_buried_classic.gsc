@@ -41,11 +41,11 @@ precache() {
   maps\mp\zombies\_zm_ai_ghost::init_animtree();
   level thread lsat_trigger_tweak();
   setup_buildables();
-  maps\mp\zombies\_zm_equip_turbine::init(&"ZOMBIE_EQUIP_TURBINE_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_TURBINE_HOWTO");
+  maps\mp\zombies\_zm_equip_turbine::init(&"ZOMBIE_EQUIP_TURBINE_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_TURBINE_HOWTO");
   maps\mp\zombies\_zm_equip_turbine::init_animtree();
-  maps\mp\zombies\_zm_equip_springpad::init(&"ZM_BURIED_EQ_SP_PHS", & "ZM_BURIED_EQ_SP_HTS");
-  maps\mp\zombies\_zm_equip_subwoofer::init(&"ZM_BURIED_EQ_SW_PHS", & "ZM_BURIED_EQ_SW_HTS");
-  maps\mp\zombies\_zm_equip_headchopper::init(&"ZM_BURIED_EQ_HC_PHS", & "ZM_BURIED_EQ_HC_HTS");
+  maps\mp\zombies\_zm_equip_springpad::init(&"ZM_BURIED_EQ_SP_PHS", &"ZM_BURIED_EQ_SP_HTS");
+  maps\mp\zombies\_zm_equip_subwoofer::init(&"ZM_BURIED_EQ_SW_PHS", &"ZM_BURIED_EQ_SW_HTS");
+  maps\mp\zombies\_zm_equip_headchopper::init(&"ZM_BURIED_EQ_HC_PHS", &"ZM_BURIED_EQ_HC_HTS");
   level.springpad_attack_delay = 0.2;
   maps\mp\zm_buried_fountain::init_fountain();
   level thread perk_vulture_custom_scripts();

@@ -14,12 +14,12 @@
 #namespace drown;
 
 function autoexec __init__sytem__() {
-  system::register("drown", & __init__, undefined, undefined);
+  system::register("drown", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "drown_stage", 1, 3, "int", & drown_stage_callback, 0, 0);
-  callback::on_localplayer_spawned( & player_spawned);
+  clientfield::register("toplayer", "drown_stage", 1, 3, "int", &drown_stage_callback, 0, 0);
+  callback::on_localplayer_spawned(&player_spawned);
   level.playermaxhealth = getgametypesetting("playerMaxHealth");
   level.player_swim_damage_interval = getdvarfloat("player_swimDamagerInterval", 5000) * 1000;
   level.player_swim_damage = getdvarfloat("player_swimDamage", 5000);

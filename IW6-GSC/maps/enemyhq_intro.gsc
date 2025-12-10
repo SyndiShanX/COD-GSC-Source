@@ -493,7 +493,7 @@ player_failcase_road() {
 
     while(common_scripts\utility::flag("FLAG_player_failcase_road")) {
       if(var_1 > var_0.size - 1) {
-        setdvar("ui_deadquote", & "ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
+        setdvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
         maps\_utility::missionfailedwrapper();
         break;
       }
@@ -508,7 +508,7 @@ player_failcase_road() {
 player_failcase_road_overrun() {
   level endon("end_truck_nag");
   common_scripts\utility::flag_wait("FLAG_player_failcase_road_overrun");
-  setdvar("ui_deadquote", & "ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
+  setdvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -701,7 +701,7 @@ truck_bash_moment() {
     var_1.animname = "intro_jeep_ram";
     var_1 useanimtree(level.scr_animtree[var_1.animname]);
     var_0 thread maps\_anim::anim_single_solo(var_1, "jeep_ram");
-    setdvar("ui_deadquote", & "ENEMY_HQ_YOU_FAILED_TO_CREATE");
+    setdvar("ui_deadquote", &"ENEMY_HQ_YOU_FAILED_TO_CREATE");
     common_scripts\utility::flag_set("FLAG_clacked_the_clacker");
     maps\_utility::missionfailedwrapper();
   }
@@ -811,7 +811,7 @@ ehq_intro_flag_wait_all(var_0, var_1, var_2, var_3, var_4, var_5) {
 obj_getingetajaxgetout() {
   common_scripts\utility::flag_wait("FLAG_ehq_give_objective");
   level.rescueajax = maps\_utility::obj("rescueajax");
-  objective_add(level.rescueajax, "active", & "ENEMY_HQ_RESCUE_AJAX");
+  objective_add(level.rescueajax, "active", &"ENEMY_HQ_RESCUE_AJAX");
   objective_current(level.rescueajax);
   common_scripts\utility::flag_wait("obj_rescue_obj");
   maps\_utility::objective_complete(level.rescueajax);

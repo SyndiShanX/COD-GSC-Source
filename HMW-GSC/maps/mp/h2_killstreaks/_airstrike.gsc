@@ -45,7 +45,7 @@ h2_doAirstrike(lifeId, origin, yaw, owner, team) {
       playerteam = player.pers["team"];
       if(isDefined(playerteam)) {
         //if( playerteam == team && self.airStrikeType != "stealth" )
-        //player iprintln( &"MP_WAR_AIRSTRIKE_INBOUND", owner );
+        //player iprintln(&"MP_WAR_AIRSTRIKE_INBOUND", owner );
       }
     }
   } else {
@@ -98,8 +98,8 @@ h2_doAirstrike(lifeId, origin, yaw, owner, team) {
 
 init() {
   precacheLocationSelector("map_artillery_selector");
-  precacheString( & "MP_WAR_AIRSTRIKE_INBOUND_NEAR_YOUR_POSITION");
-  precacheString( & "MP_WAR_AIRSTRIKE_INBOUND");
+  precacheString(&"MP_WAR_AIRSTRIKE_INBOUND_NEAR_YOUR_POSITION");
+  precacheString(&"MP_WAR_AIRSTRIKE_INBOUND");
   //precacheItem( "stealth_bomb_mp" );
   //precacheItem( "artillery_mp" );
   //precacheItem("harrier_missile_mp"); // precaching this doesn't work
@@ -186,7 +186,7 @@ tryUseHarrierAirstrike(lifeId) {
 
 tryUseAirstrike(lifeId, airStrikeType) {
   if(isDefined(level.civilianJetFlyBy)) {
-    self iprintlnbold( & "MP_CIVILIAN_AIR_TRAFFIC");
+    self iprintlnbold(&"MP_CIVILIAN_AIR_TRAFFIC");
     return false;
   }
 
@@ -200,7 +200,7 @@ tryUseAirstrike(lifeId, airStrikeType) {
   switch (airStrikeType) {
     case "harrier":
       if(level.planes > 1) {
-        self iprintlnbold( & "LUA_KS_UNAVAILABLE_AIRSPACE");
+        self iprintlnbold(&"LUA_KS_UNAVAILABLE_AIRSPACE");
         return false;
       }
       break;
@@ -607,10 +607,8 @@ doPlaneStrike(lifeId, owner, requiredDeathCount, bombsite, startPoint, endPoint,
   plane thread playPlaneFx();
   plane moveTo(pathEnd, flyTime, 0, 0);
 
-
   if(getdvar("scr_airstrikedebug") == "1")
     thread airstrikeLine(pathStart, pathEnd, (1, 1, 1), 20);
-
 
     thread callStrike_planeSound(plane, bombsite);
   thread callStrike_bombEffect(plane, pathEnd, flyTime, bombTime - 1.0, owner, requiredDeathCount, typeOfStrike);
@@ -666,10 +664,8 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
   killCamEnt.angles = planedir;
   killCamEnt moveTo(pathEnd + (0, 0, 100), flyTime, 0, 0);
 
-
   if(getdvar("scr_airstrikedebug") == "1")
     bomb thread traceBomb();
-
 
     wait .4;
   //plane stoploopsound();
@@ -718,10 +714,8 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
     traceHit = trace["position"];
     hitpos += traceHit;
 
-
     if(getdvar("scr_airstrikedebug") == "1")
       thread airstrikeLine(bombOrigin, traceHit, (1, 0, 0), 40);
-
 
       thread losRadiusDamage(traceHit + (0, 0, 16), 512, 200, 30, owner, bomb, "artillery_mp"); // targetpos, radius, maxdamage, mindamage, player causing damage, entity that player used to cause damage
 
@@ -969,7 +963,7 @@ selectAirstrikeLocation(lifeId, airStrikeType) {
 
   if(airStrikeType == "harrier" && level.planes > 1) {
     self notify("cancel_location");
-    self iprintlnbold( & "LUA_KS_UNAVAILABLE_AIRSPACE");
+    self iprintlnbold(&"LUA_KS_UNAVAILABLE_AIRSPACE");
     return false;
   }
 

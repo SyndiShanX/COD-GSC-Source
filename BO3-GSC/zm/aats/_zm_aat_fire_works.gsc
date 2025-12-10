@@ -18,17 +18,17 @@
 #namespace zm_aat_fire_works;
 
 function autoexec __init__sytem__() {
-  system::register("zm_aat_fire_works", & __init__, undefined, "aat");
+  system::register("zm_aat_fire_works", &__init__, undefined, "aat");
 }
 
 function __init__() {
   if(!(isDefined(level.aat_in_use) && level.aat_in_use)) {
     return;
   }
-  aat::register("zm_aat_fire_works", 0.1, 0, 20, 10, 1, & result, "t7_hud_zm_aat_fireworks", "wpn_aat_fire_works_plr", & fire_works_zombie_validation);
+  aat::register("zm_aat_fire_works", 0.1, 0, 20, 10, 1, &result, "t7_hud_zm_aat_fireworks", "wpn_aat_fire_works_plr", &fire_works_zombie_validation);
   clientfield::register("scriptmover", "zm_aat_fire_works", 1, 1, "int");
-  zm_spawner::register_zombie_damage_callback( & zm_aat_fire_works_zombie_damage_response);
-  zm_spawner::register_zombie_death_event_callback( & zm_aat_fire_works_death_callback);
+  zm_spawner::register_zombie_damage_callback(&zm_aat_fire_works_zombie_damage_response);
+  zm_spawner::register_zombie_death_event_callback(&zm_aat_fire_works_death_callback);
 }
 
 function result(death, attacker, mod, weapon) {

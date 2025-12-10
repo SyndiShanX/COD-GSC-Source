@@ -14,7 +14,7 @@
 #namespace zm_jump_pad;
 
 function autoexec __init__sytem__() {
-  system::register("zm_jump_pad", & __init__, undefined, undefined);
+  system::register("zm_jump_pad", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -35,7 +35,7 @@ function jump_pad_init() {
     }
     jump_pad_triggers[i] thread jump_pad_think();
   }
-  callback::on_connect( & jump_pad_player_variables);
+  callback::on_connect(&jump_pad_player_variables);
 }
 
 function jump_pad_player_variables() {
@@ -72,7 +72,7 @@ function jump_pad_think() {
 function delayed_jump_pad_start(who) {
   wait(0.5);
   if(who istouching(self)) {
-    self thread trigger::function_d1278be0(who, & jump_pad_start, & jump_pad_cancel);
+    self thread trigger::function_d1278be0(who, &jump_pad_start, &jump_pad_cancel);
   }
 }
 

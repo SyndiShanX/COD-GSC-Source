@@ -33,7 +33,7 @@
 #namespace zm_ai_clone;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_clone", & __init__, & __main__, undefined);
+  system::register("zm_ai_clone", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -57,7 +57,7 @@ function precache() {}
 
 function function_78933fc2() {
   level flagsys::wait_till("");
-  zm_devgui::add_custom_devgui_callback( & clone_devgui_callback);
+  zm_devgui::add_custom_devgui_callback(&clone_devgui_callback);
 }
 
 function clone_devgui_callback(cmd) {

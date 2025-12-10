@@ -179,7 +179,7 @@ main() {
   wait 6.5;
   getent("player_spawn_safety_brush", "targetname") delete();
   wait 3.0;
-  objective_add(1, "current", & "BOG_B_OBJ_ESCORT_TANK", (4347, -4683, 130));
+  objective_add(1, "current", &"BOG_B_OBJ_ESCORT_TANK", (4347, -4683, 130));
 }
 
 makeminspec() {
@@ -2107,7 +2107,7 @@ seaknight() {
   objective_state(1, "done");
   wait 1.0;
   var_2 = getent("seaknight_wait_location", "script_noteworthy");
-  objective_add(2, "current", & "BOG_B_OBJ_SEAKNIGHT", var_2.origin);
+  objective_add(2, "current", &"BOG_B_OBJ_SEAKNIGHT", var_2.origin);
   thread dosavegame("seaknight");
   common_scripts\utility::flag_set("seaknight_start");
   thread disperse_allies_unevenly_to_seaknight();

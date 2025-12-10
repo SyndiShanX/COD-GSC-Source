@@ -762,7 +762,7 @@ genericbulletkill(data, victim, weapon) {
   player.pers["lastBulletKillTime"] = time;
 
   if(data.victim.idflagstime == time) {
-    if(data.victim.idflags & level.idflags_penetration) {
+    if(data.victim.idflags &level.idflags_penetration) {
       player addplayerstat("kill_enemy_through_wall", 1);
 
       if(isDefined(weapon) && weaponhasattachment(weapon, "fmj"))

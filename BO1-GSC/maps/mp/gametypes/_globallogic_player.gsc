@@ -535,9 +535,9 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
   }
   sWeapon = figureOutWeapon(sWeapon, eInflictor);
   pixendevent("END: PlayerDamage flags/tweaks");
-  if(iDFlags & level.iDFLAGS_PENETRATION && isplayer(eAttacker) && eAttacker hasPerk("specialty_bulletpenetration"))
+  if(iDFlags &level.iDFLAGS_PENETRATION && isplayer(eAttacker) && eAttacker hasPerk("specialty_bulletpenetration"))
     self thread maps\mp\gametypes\_battlechatter_mp::perkSpecificBattleChatter("deepimpact", true);
-  if(!(iDFlags & level.iDFLAGS_NO_PROTECTION)) {
+  if(!(iDFlags &level.iDFLAGS_NO_PROTECTION)) {
     if((isSubStr(sMeansOfDeath, "MOD_GRENADE") || isSubStr(sMeansOfDeath, "MOD_EXPLOSIVE") || isSubStr(sMeansOfDeath, "MOD_PROJECTILE") || isSubStr(sMeansOfDeath, "MOD_GAS")) &&
       isDefined(eInflictor)) {
       if((eInflictor.classname == "grenade" || sweapon == "tabun_gas_mp") && (self.lastSpawnTime + 3500) > getTime() && distance(eInflictor.origin, self.lastSpawnPoint.origin) < 250) {

@@ -22,7 +22,7 @@
 #namespace zm_genesis_timer;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_timer", & __init__, & __main__, undefined);
+  system::register("zm_genesis_timer", &__init__, &__main__, undefined);
 }
 
 function __init__() {}
@@ -34,7 +34,7 @@ function __main__() {
   foreach(s_wallbuy in level._spawned_wallbuys) {
     if(s_wallbuy.zombie_weapon_upgrade == "melee_nunchuks") {
       level.var_b9f3bf28 = s_wallbuy;
-      level.var_b9f3bf28.trigger_stub.prompt_and_visibility_func = & function_6ac3689a;
+      level.var_b9f3bf28.trigger_stub.prompt_and_visibility_func = &function_6ac3689a;
       break;
     }
   }

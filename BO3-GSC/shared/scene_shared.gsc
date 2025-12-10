@@ -397,7 +397,7 @@ class csceneobject: cscriptbundleobjectbase {
     player_rate = n_rate;
     player_time_frac = n_time;
     player_start_time = gettime();
-    callback::on_loadout( & _play_shared_player_anim_for_player, self);
+    callback::on_loadout(&_play_shared_player_anim_for_player, self);
     foreach(player in level.players) {
       if(player flagsys::get("loadout_given") && player.sessionstate !== "spectator") {
         self thread _play_shared_player_anim_for_player(player);
@@ -420,7 +420,7 @@ class csceneobject: cscriptbundleobjectbase {
       }
     }
     while(b_playing);
-    callback::remove_on_loadout( & _play_shared_player_anim_for_player, self);
+    callback::remove_on_loadout(&_play_shared_player_anim_for_player, self);
     thread[[_o_bundle]] - > _call_state_funcs("players_done");
   }
 
@@ -1659,7 +1659,7 @@ class cscene: cscriptbundlebase {
     }
   }
 
-  function wait_till_objects_ready( & array) {
+  function wait_till_objects_ready(&array) {
     do {
       recheck = 0;
       foreach(ent in array) {
@@ -2020,7 +2020,7 @@ class cscene: cscriptbundlebase {
       endcamanimscripted(player);
       player thread scene::scene_enable_player_stuff();
       if(!(isDefined(_s.linkxcamtooneplayer) && _s.linkxcamtooneplayer)) {
-        callback::remove_on_loadout( & _play_camera_anim_on_player_callback, self);
+        callback::remove_on_loadout(&_play_camera_anim_on_player_callback, self);
       }
     }
     if(isstring(_s.extracamswitcher1)) {
@@ -2117,25 +2117,25 @@ class cscene: cscriptbundlebase {
     }
     if(isstring(_s.cameraswitcher)) {
       if(!(isDefined(_s.linkxcamtooneplayer) && _s.linkxcamtooneplayer)) {
-        callback::on_loadout( & _play_camera_anim_on_player_callback, self);
+        callback::on_loadout(&_play_camera_anim_on_player_callback, self);
       }
       camera_v_origin = v_origin;
       camera_v_angles = v_angles;
       camera_start_time = gettime();
-      array::thread_all_ents(xcam_players, & _play_camera_anim_on_player, v_origin, v_angles, 0);
+      array::thread_all_ents(xcam_players, &_play_camera_anim_on_player, v_origin, v_angles, 0);
       display_dev_info();
     }
     if(isstring(_s.extracamswitcher1)) {
-      array::thread_all_ents(xcam_players, & _play_extracam_on_player, 0, _s.extracamswitcher1, v_origin, v_angles);
+      array::thread_all_ents(xcam_players, &_play_extracam_on_player, 0, _s.extracamswitcher1, v_origin, v_angles);
     }
     if(isstring(_s.extracamswitcher2)) {
-      array::thread_all_ents(xcam_players, & _play_extracam_on_player, 1, _s.extracamswitcher2, v_origin, v_angles);
+      array::thread_all_ents(xcam_players, &_play_extracam_on_player, 1, _s.extracamswitcher2, v_origin, v_angles);
     }
     if(isstring(_s.extracamswitcher3)) {
-      array::thread_all_ents(xcam_players, & _play_extracam_on_player, 2, _s.extracamswitcher3, v_origin, v_angles);
+      array::thread_all_ents(xcam_players, &_play_extracam_on_player, 2, _s.extracamswitcher3, v_origin, v_angles);
     }
     if(isstring(_s.extracamswitcher4)) {
-      array::thread_all_ents(xcam_players, & _play_extracam_on_player, 3, _s.extracamswitcher4, v_origin, v_angles);
+      array::thread_all_ents(xcam_players, &_play_extracam_on_player, 3, _s.extracamswitcher4, v_origin, v_angles);
     }
   }
 
@@ -2372,7 +2372,7 @@ class cscene: cscriptbundlebase {
     return isplayer(ent);
   }
 
-  function _assign_ents_by_type( & a_objects, & a_ents, str_type, func_test) {
+  function _assign_ents_by_type(&a_objects, &a_ents, str_type, func_test) {
     if(a_ents.size) {
       a_objects_of_type = get_objects(str_type);
       if(a_objects_of_type.size) {
@@ -2395,7 +2395,7 @@ class cscene: cscriptbundlebase {
     return a_ents.size;
   }
 
-  function _assign_ents_by_name( & a_objects, & a_ents) {
+  function _assign_ents_by_name(&a_objects, &a_ents) {
     if(a_ents.size) {
       foreach(str_name, e_ent in arraycopy(a_ents)) {
         foreach(i, o_obj in arraycopy(a_objects)) {
@@ -2422,9 +2422,9 @@ class cscene: cscriptbundlebase {
     }
     a_objects = arraycopy(_a_objects);
     if(_assign_ents_by_name(a_objects, a_ents)) {
-      if(_assign_ents_by_type(a_objects, a_ents, "player", & _is_ent_player)) {
-        if(_assign_ents_by_type(a_objects, a_ents, "actor", & _is_ent_actor)) {
-          if(_assign_ents_by_type(a_objects, a_ents, "vehicle", & _is_ent_vehicle)) {
+      if(_assign_ents_by_type(a_objects, a_ents, "player", &_is_ent_player)) {
+        if(_assign_ents_by_type(a_objects, a_ents, "actor", &_is_ent_actor)) {
+          if(_assign_ents_by_type(a_objects, a_ents, "vehicle", &_is_ent_vehicle)) {
             if(_assign_ents_by_type(a_objects, a_ents, "prop")) {
               foreach(ent in a_ents) {
                 obj = array::pop(a_objects);
@@ -2810,7 +2810,7 @@ function synced_delete() {
 }
 
 function autoexec __init__sytem__() {
-  system::register("scene", & __init__, & __main__, undefined);
+  system::register("scene", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -2895,8 +2895,8 @@ function __init__() {
   clientfield::register("actor", "player_scene_animation_skip", 1, 2, "counter");
   clientfield::register("vehicle", "player_scene_animation_skip", 1, 2, "counter");
   clientfield::register("scriptmover", "player_scene_animation_skip", 1, 2, "counter");
-  callback::on_connect( & on_player_connect);
-  callback::on_disconnect( & on_player_disconnect);
+  callback::on_connect(&on_player_connect);
+  callback::on_disconnect(&on_player_disconnect);
 }
 
 function remove_invalid_scene_objects(s_scenedef) {
@@ -3528,7 +3528,7 @@ function set_igc_active(b_in_igc) {
   if(b_in_igc) {
     n_players_in_igc_field = n_players_in_igc_field | (1 << n_ent_num);
   } else {
-    n_players_in_igc_field = n_players_in_igc_field & (~(1 << n_ent_num));
+    n_players_in_igc_field = n_players_in_igc_field &(~(1 << n_ent_num));
   }
   updateigcviewtime(b_in_igc);
   level clientfield::set("in_igc", n_players_in_igc_field);
@@ -3537,7 +3537,7 @@ function set_igc_active(b_in_igc) {
 function is_igc_active() {
   n_players_in_igc = level clientfield::get("in_igc");
   n_entnum = self getentitynumber();
-  return n_players_in_igc & (1 << n_entnum);
+  return n_players_in_igc &(1 << n_entnum);
 }
 
 function is_capture_mode() {

@@ -89,19 +89,19 @@ onstartgametype() {
     game["defenders"] = var_0;
   }
 
-  maps\mp\_utility::setobjectivetext("allies", & "OBJECTIVES_CONF");
-  maps\mp\_utility::setobjectivetext("axis", & "OBJECTIVES_CONF");
+  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_CONF");
+  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_CONF");
 
   if(level.splitscreen) {
-    maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_CONF");
-    maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_CONF");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_CONF");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_CONF");
   } else {
-    maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_CONF_SCORE");
-    maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_CONF_SCORE");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_CONF_SCORE");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_CONF_SCORE");
   }
 
-  maps\mp\_utility::setobjectivehinttext("allies", & "OBJECTIVES_CONF_HINT");
-  maps\mp\_utility::setobjectivehinttext("axis", & "OBJECTIVES_CONF_HINT");
+  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_CONF_HINT");
+  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_CONF_HINT");
   initspawns();
   level.dogtags = [];
   var_2[0] = level.gametype;

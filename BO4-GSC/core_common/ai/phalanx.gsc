@@ -380,7 +380,7 @@ class phalanx {
       orientedpos = _rotatevec(position, angles[1] - 90);
       navmeshposition = getclosestpointonnavmesh(phalanxposition + orientedpos, 200);
 
-      if(!(spawner.spawnflags&64)) {
+      if(!(spawner.spawnflags& 64)) {
         spawner.count++;
       }
 

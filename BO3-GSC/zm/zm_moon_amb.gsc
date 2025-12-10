@@ -22,12 +22,12 @@
 #namespace zm_moon_amb;
 
 function main() {
-  level._audio_custom_weapon_check = & weapon_type_check_custom;
-  level._custom_intro_vox = & no_intro_vox;
-  level._do_player_or_npc_playvox_override = & do_player_playvox_custom;
+  level._audio_custom_weapon_check = &weapon_type_check_custom;
+  level._custom_intro_vox = &no_intro_vox;
+  level._do_player_or_npc_playvox_override = &do_player_playvox_custom;
   level.player_4_vox_override = 0;
   level.been_to_moon_before = 0;
-  level.var_61f315ab = & function_3630300b;
+  level.var_61f315ab = &function_3630300b;
   level.audio_zones_breached = [];
   level.audio_zones_breached["1"] = 0;
   level.audio_zones_breached["2a"] = 0;
@@ -46,7 +46,7 @@ function main() {
   level thread radio_setup();
   level thread function_45b4acf2();
   level thread function_c844cebe();
-  callback::on_spawned( & function_10ffc7d7);
+  callback::on_spawned(&function_10ffc7d7);
   clientfield::register("allplayers", "beam_fx_audio", 21000, 1, "counter");
   clientfield::register("world", "teleporter_audio_sfx", 21000, 1, "counter");
 }
@@ -60,7 +60,7 @@ function function_10ffc7d7() {
 
 function radio_setup() {
   var_1a5f0b42 = struct::get_array("egg_radios", "targetname");
-  array::thread_all(var_1a5f0b42, & play_radio_eastereggs);
+  array::thread_all(var_1a5f0b42, &play_radio_eastereggs);
 }
 
 function play_radio_eastereggs() {
@@ -101,7 +101,7 @@ function checkfor_radio_override() {
 
 function eight_bit_easteregg() {
   structs = struct::get_array("8bitsongs", "targetname");
-  array::thread_all(structs, & waitfor_eightbit_use);
+  array::thread_all(structs, &waitfor_eightbit_use);
 }
 
 function waitfor_eightbit_use() {
@@ -458,7 +458,7 @@ function play_warning_vox() {
 
 function function_45b4acf2() {
   var_757351da = struct::get_array("zhdbuttons", "targetname");
-  array::thread_all(var_757351da, & function_1d6f553d);
+  array::thread_all(var_757351da, &function_1d6f553d);
   level thread function_e091daa4();
   var_22ee0088 = array(1, 2, 2, 3, 3, 2, 3, 4, 3, 4, 3, 2, 2, 4, 1);
   var_c957db9f = 0;

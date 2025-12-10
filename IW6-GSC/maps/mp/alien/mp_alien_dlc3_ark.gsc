@@ -1559,7 +1559,7 @@ wait_for_spawn_and_remove_forceteleport() {
 
 teleport_black_screen() {
   self endon("disconnect");
-  maps\mp\_utility::setlowermessage("cargo_teleport", & "MP_ALIEN_BEACON_CARGO_TELEPORT", 3);
+  maps\mp\_utility::setlowermessage("cargo_teleport", &"MP_ALIEN_BEACON_CARGO_TELEPORT", 3);
   self.teleport_overlay = newclienthudelem(self);
   self.teleport_overlay.x = 0;
   self.teleport_overlay.y = 0;

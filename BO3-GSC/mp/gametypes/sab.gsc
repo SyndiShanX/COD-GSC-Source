@@ -37,16 +37,16 @@ function main() {
   util::registernumlives(0, 100);
   util::registerroundwinlimit(0, 10);
   globallogic::registerfriendlyfiredelay(level.gametype, 15, 0, 1440);
-  level.onstartgametype = & onstartgametype;
-  level.onspawnplayer = & onspawnplayer;
-  level.onroundendgame = & onroundendgame;
+  level.onstartgametype = &onstartgametype;
+  level.onspawnplayer = &onspawnplayer;
+  level.onroundendgame = &onroundendgame;
   gameobjects::register_allowed_gameobject(level.gametype);
   if(!game["tiebreaker"]) {
-    level.onprecachegametype = & onprecachegametype;
-    level.ontimelimit = & ontimelimit;
-    level.ondeadevent = & ondeadevent;
-    level.onroundswitch = & onroundswitch;
-    level.onplayerkilled = & onplayerkilled;
+    level.onprecachegametype = &onprecachegametype;
+    level.ontimelimit = &ontimelimit;
+    level.ondeadevent = &ondeadevent;
+    level.onroundswitch = &onroundswitch;
+    level.onplayerkilled = &onplayerkilled;
     level.endgameonscorelimit = 0;
     game["dialog"]["gametype"] = "sab_start";
     game["dialog"]["gametype_hardcore"] = "hcsab_start";
@@ -55,7 +55,7 @@ function main() {
     game["dialog"]["sudden_death"] = "suddendeath";
     game["dialog"]["sudden_death_boost"] = "generic_boost";
   } else {
-    level.onendgame = & onendgame;
+    level.onendgame = &onendgame;
     level.endgameonscorelimit = 0;
     game["dialog"]["gametype"] = "sab_start";
     game["dialog"]["gametype_hardcore"] = "hcsab_start";
@@ -89,7 +89,7 @@ function onroundswitch() {
   }
   if(game["teamScores"]["allies"] == (level.scorelimit - 1) && game["teamScores"]["axis"] == (level.scorelimit - 1)) {
     level.halftimetype = "overtime";
-    level.halftimesubcaption = & "MP_TIE_BREAKER";
+    level.halftimesubcaption = &"MP_TIE_BREAKER";
     game["tiebreaker"] = 1;
   } else {
     level.halftimetype = "halftime";
@@ -102,31 +102,31 @@ function onstartgametype() {
     game["switchedsides"] = 0;
   }
   setclientnamemode("auto_change");
-  game["strings"]["target_destroyed"] = & "MP_TARGET_DESTROYED";
+  game["strings"]["target_destroyed"] = &"MP_TARGET_DESTROYED";
   if(!game["tiebreaker"]) {
-    util::setobjectivetext("allies", & "OBJECTIVES_SAB");
-    util::setobjectivetext("axis", & "OBJECTIVES_SAB");
+    util::setobjectivetext("allies", &"OBJECTIVES_SAB");
+    util::setobjectivetext("axis", &"OBJECTIVES_SAB");
     if(level.splitscreen) {
-      util::setobjectivescoretext("allies", & "OBJECTIVES_SAB");
-      util::setobjectivescoretext("axis", & "OBJECTIVES_SAB");
+      util::setobjectivescoretext("allies", &"OBJECTIVES_SAB");
+      util::setobjectivescoretext("axis", &"OBJECTIVES_SAB");
     } else {
-      util::setobjectivescoretext("allies", & "OBJECTIVES_SAB_SCORE");
-      util::setobjectivescoretext("axis", & "OBJECTIVES_SAB_SCORE");
+      util::setobjectivescoretext("allies", &"OBJECTIVES_SAB_SCORE");
+      util::setobjectivescoretext("axis", &"OBJECTIVES_SAB_SCORE");
     }
-    util::setobjectivehinttext("allies", & "OBJECTIVES_SAB_HINT");
-    util::setobjectivehinttext("axis", & "OBJECTIVES_SAB_HINT");
+    util::setobjectivehinttext("allies", &"OBJECTIVES_SAB_HINT");
+    util::setobjectivehinttext("axis", &"OBJECTIVES_SAB_HINT");
   } else {
-    util::setobjectivetext("allies", & "OBJECTIVES_TDM");
-    util::setobjectivetext("axis", & "OBJECTIVES_TDM");
+    util::setobjectivetext("allies", &"OBJECTIVES_TDM");
+    util::setobjectivetext("axis", &"OBJECTIVES_TDM");
     if(level.splitscreen) {
-      util::setobjectivescoretext("allies", & "OBJECTIVES_TDM");
-      util::setobjectivescoretext("axis", & "OBJECTIVES_TDM");
+      util::setobjectivescoretext("allies", &"OBJECTIVES_TDM");
+      util::setobjectivescoretext("axis", &"OBJECTIVES_TDM");
     } else {
-      util::setobjectivescoretext("allies", & "OBJECTIVES_TDM_SCORE");
-      util::setobjectivescoretext("axis", & "OBJECTIVES_TDM_SCORE");
+      util::setobjectivescoretext("allies", &"OBJECTIVES_TDM_SCORE");
+      util::setobjectivescoretext("axis", &"OBJECTIVES_TDM_SCORE");
     }
-    util::setobjectivehinttext("allies", & "OBJECTIVES_TDM_HINT");
-    util::setobjectivehinttext("axis", & "OBJECTIVES_TDM_HINT");
+    util::setobjectivehinttext("allies", &"OBJECTIVES_TDM_HINT");
+    util::setobjectivehinttext("axis", &"OBJECTIVES_TDM_HINT");
   }
   spawning::create_map_placed_influencers();
   level.spawnmins = (0, 0, 0);
@@ -165,7 +165,7 @@ function onovertime() {
   globallogic_audio::leader_dialog("sudden_death_boost");
   for(index = 0; index < level.players.size; index++) {
     level.players[index] notify("force_spawn");
-    level.players[index] thread hud_message::oldnotifymessage(&"MP_SUDDEN_DEATH", & "MP_NO_RESPAWN", undefined, (1, 0, 0), "mp_last_stand");
+    level.players[index] thread hud_message::oldnotifymessage(&"MP_SUDDEN_DEATH", &"MP_NO_RESPAWN", undefined, (1, 0, 0), "mp_last_stand");
     level.players[index] setclientuivisibilityflag("g_compassShowEnemies", 1);
   }
   setmatchtalkflag("DeadChatWithDead", 1);
@@ -217,7 +217,7 @@ function onspawnplayer(predictedspawn) {
   self.isdefusing = 0;
   self.isbombcarrier = 0;
   if(game["tiebreaker"]) {
-    self thread hud_message::oldnotifymessage(&"MP_TIE_BREAKER", & "MP_NO_RESPAWN", undefined, (1, 0, 0), "mp_last_stand");
+    self thread hud_message::oldnotifymessage(&"MP_TIE_BREAKER", &"MP_NO_RESPAWN", undefined, (1, 0, 0), "mp_last_stand");
     self setclientuivisibilityflag("g_compassShowEnemies", 1);
     setmatchtalkflag("DeadChatWithDead", 1);
     setmatchtalkflag("DeadChatWithTeam", 0);
@@ -258,8 +258,8 @@ function sabotage() {
   level.sabbomb gameobjects::set_carry_icon("hud_suitcase_bomb");
   level.sabbomb gameobjects::set_visible_team("any");
   level.sabbomb.objidpingenemy = 1;
-  level.sabbomb.onpickup = & onpickup;
-  level.sabbomb.ondrop = & ondrop;
+  level.sabbomb.onpickup = &onpickup;
+  level.sabbomb.ondrop = &ondrop;
   level.sabbomb.allowweapons = 1;
   level.sabbomb.objpoints["allies"].archived = 1;
   level.sabbomb.objpoints["axis"].archived = 1;
@@ -285,10 +285,10 @@ function createbombzone(team, trigger) {
   visuals = getEntArray(trigger.target, "targetname");
   bombzone = gameobjects::create_use_object(team, trigger, visuals, vectorscale((0, 0, 1), 64));
   bombzone resetbombsite();
-  bombzone.onuse = & onuse;
-  bombzone.onbeginuse = & onbeginuse;
-  bombzone.onenduse = & onenduse;
-  bombzone.oncantuse = & oncantuse;
+  bombzone.onuse = &onuse;
+  bombzone.onbeginuse = &onbeginuse;
+  bombzone.onenduse = &onenduse;
+  bombzone.oncantuse = &oncantuse;
   bombzone.useweapon = getweapon("briefcase_bomb");
   bombzone.visuals[0].killcament = spawn("script_model", bombzone.visuals[0].origin + vectorscale((0, 0, 1), 128));
   for(i = 0; i < visuals.size; i++) {

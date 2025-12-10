@@ -17,7 +17,7 @@
 #namespace oed;
 
 function autoexec __init__sytem__() {
-  system::register("oed", & __init__, & __main__, undefined);
+  system::register("oed", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -38,15 +38,15 @@ function __init__() {
   if(!isDefined(level.vsmgr_prio_visionset_tmode)) {
     level.vsmgr_prio_visionset_tmode = 50;
   }
-  visionset_mgr::register_info("visionset", "tac_mode", 1, level.vsmgr_prio_visionset_tmode, 15, 1, & visionset_mgr::ramp_in_out_thread_per_player, 0);
-  callback::on_spawned( & on_player_spawned);
-  spawner::add_global_spawn_function("axis", & enable_thermal_on_spawned);
-  spawner::add_global_spawn_function("allies", & enable_thermal_on_spawned);
+  visionset_mgr::register_info("visionset", "tac_mode", 1, level.vsmgr_prio_visionset_tmode, 15, 1, &visionset_mgr::ramp_in_out_thread_per_player, 0);
+  callback::on_spawned(&on_player_spawned);
+  spawner::add_global_spawn_function("axis", &enable_thermal_on_spawned);
+  spawner::add_global_spawn_function("allies", &enable_thermal_on_spawned);
   level.b_enhanced_vision_enabled = 1;
   level.b_tactical_mode_enabled = 1;
   level.b_player_scene_active = 0;
-  level.enable_thermal = & enable_thermal;
-  level.disable_thermal = & disable_thermal;
+  level.enable_thermal = &enable_thermal;
+  level.disable_thermal = &disable_thermal;
 }
 
 function __main__() {
@@ -56,7 +56,7 @@ function __main__() {
 function keyline_weapons() {
   waittillframeend();
   if(level.b_tactical_mode_enabled) {
-    array::thread_all(util::query_ents(associativearray("classname", "weapon_"), 1, [], 1, 1), & enable_keyline);
+    array::thread_all(util::query_ents(associativearray("classname", "weapon_"), 1, [], 1, 1), &enable_keyline);
   }
 }
 

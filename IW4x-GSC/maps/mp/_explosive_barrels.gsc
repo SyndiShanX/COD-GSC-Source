@@ -23,20 +23,10 @@ main() {
     level.breakables_fx["oilspill"]["spark"] = loadfx("impacts/small_metalhit_1");
   }
 
-
-
-
-
-
-
   level.barrelExpSound = "explo_metal_rand";
-
-
 
   level.barrelHealth = 150;
   maxBrokenPieces = 25;
-
-
 
   level.precachemodeltype = [];
   level.barrelExplodingThisFrame = false;
@@ -94,7 +84,6 @@ getClosestEnt(org, array) {
     return;
   }
 
-
   dist = 256;
   ent = undefined;
   for(i = 0; i < array.size; i++) {
@@ -115,7 +104,6 @@ oil_spill_burn_after() {
     break;
   }
   self.damageOwner = attacker;
-
 
   if(!isDefined(self.damageOwner))
     self radiusdamage(self.origin, 4, 10, 10);
@@ -206,7 +194,6 @@ oil_spill_burn_section(P) {
 explodable_barrel_think() {
   if(self.classname != "script_model")
     return;
-
 
   if(!isDefined(level.precachemodeltype["com_barrel_benzin"])) {
     level.precachemodeltype["com_barrel_benzin"] = true;
@@ -304,7 +291,6 @@ explodable_barrel_explode() {
   blastRadius = 250;
   if(isDefined(self.radius))
     blastRadius = self.radius;
-
 
   if(!isDefined(self.damageOwner))
     self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, undefined, "MOD_EXPLOSIVE", "barrel_mp");

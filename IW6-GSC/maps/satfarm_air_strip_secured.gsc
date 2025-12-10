@@ -6,11 +6,11 @@
 air_strip_secured_init() {
   level.start_point = "air_strip_secured";
   setdvar("debug_sat_view_pip", "1");
-  objective_add(maps\_utility::obj("rendesvouz"), "invisible", & "SATFARM_OBJ_RENDESVOUZ");
+  objective_add(maps\_utility::obj("rendesvouz"), "invisible", &"SATFARM_OBJ_RENDESVOUZ");
   objective_state_nomessage(maps\_utility::obj("rendesvouz"), "done");
-  objective_add(maps\_utility::obj("reach_air_strip"), "invisible", & "SATFARM_OBJ_REACH_AIR_STRIP");
+  objective_add(maps\_utility::obj("reach_air_strip"), "invisible", &"SATFARM_OBJ_REACH_AIR_STRIP");
   objective_state_nomessage(maps\_utility::obj("reach_air_strip"), "done");
-  objective_add(maps\_utility::obj("air_strip_defenses"), "invisible", & "SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES");
+  objective_add(maps\_utility::obj("air_strip_defenses"), "invisible", &"SATFARM_OBJ_DESTROY_AIR_STRIP_DEFENSES");
   objective_state_nomessage(maps\_utility::obj("air_strip_defenses"), "done");
   maps\satfarm_code::kill_spawners_per_checkpoint("air_strip_secured");
 }
@@ -230,9 +230,9 @@ air_strip_to_chopper() {
 switch_to_ghost_intro_screen() {
   level.introscreen.lines = [];
   level.introscreen.lines[0] = "";
-  level.introscreen.lines[1] = & "SATFARM_INTROSCREEN_GHOST_LINE_2";
-  level.introscreen.lines[2] = & "SATFARM_INTROSCREEN_GHOST_LINE_3";
-  level.introscreen.lines[3] = & "SATFARM_INTROSCREEN_GHOST_LINE_4";
+  level.introscreen.lines[1] = &"SATFARM_INTROSCREEN_GHOST_LINE_2";
+  level.introscreen.lines[2] = &"SATFARM_INTROSCREEN_GHOST_LINE_3";
+  level.introscreen.lines[3] = &"SATFARM_INTROSCREEN_GHOST_LINE_4";
   maps\_introscreen::introscreen(1);
 }
 
@@ -412,7 +412,7 @@ chopper_drive_in_vo() {
   wait 1.5;
   common_scripts\utility::flag_wait("start_control_room_combat");
   maps\_utility::autosave_by_name("chopper_ride_in_2");
-  objective_add(maps\_utility::obj("launch_missile"), "current", & "SATFARM_OBJ_LAUNCH_MISSILE");
+  objective_add(maps\_utility::obj("launch_missile"), "current", &"SATFARM_OBJ_LAUNCH_MISSILE");
   wait 1;
   common_scripts\utility::flag_set("ghost1_start_firing");
   thread maps\_utility::set_team_bcvoice("allies", "taskforce");

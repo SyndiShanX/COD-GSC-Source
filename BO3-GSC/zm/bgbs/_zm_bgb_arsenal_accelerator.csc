@@ -12,7 +12,7 @@
 #namespace zm_bgb_arsenal_accelerator;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_arsenal_accelerator", & __init__, undefined, undefined);
+  system::register("zm_bgb_arsenal_accelerator", &__init__, undefined, undefined);
 }
 
 function __init__() {

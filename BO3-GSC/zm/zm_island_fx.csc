@@ -12,15 +12,15 @@
 #namespace zm_island_fx;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_fx", & __init__, undefined, undefined);
+  system::register("zm_island_fx", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "do_fade_material", 9000, 3, "float", & do_fade_material, 0, 0);
-  clientfield::register("scriptmover", "do_fade_material_slow", 9000, 3, "float", & do_fade_material_slow, 0, 0);
-  clientfield::register("scriptmover", "do_fade_material_direct", 9000, 3, "float", & do_fade_material_direct, 0, 0);
-  clientfield::register("scriptmover", "do_emissive_material", 9000, 3, "float", & do_emissive_material, 0, 0);
-  clientfield::register("scriptmover", "do_emissive_material_direct", 9000, 3, "float", & do_emissive_material_direct, 0, 0);
+  clientfield::register("scriptmover", "do_fade_material", 9000, 3, "float", &do_fade_material, 0, 0);
+  clientfield::register("scriptmover", "do_fade_material_slow", 9000, 3, "float", &do_fade_material_slow, 0, 0);
+  clientfield::register("scriptmover", "do_fade_material_direct", 9000, 3, "float", &do_fade_material_direct, 0, 0);
+  clientfield::register("scriptmover", "do_emissive_material", 9000, 3, "float", &do_emissive_material, 0, 0);
+  clientfield::register("scriptmover", "do_emissive_material_direct", 9000, 3, "float", &do_emissive_material_direct, 0, 0);
 }
 
 function main() {

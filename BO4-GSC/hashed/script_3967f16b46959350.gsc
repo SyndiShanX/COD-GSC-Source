@@ -9,14 +9,14 @@
 #namespace namespace_54f635e5;
 
 autoexec __init__system__() {
-  system::register(#"hash_2dccaaff9ebe6851", & __init__, undefined, undefined);
+  system::register(#"hash_2dccaaff9ebe6851", &__init__, undefined, undefined);
 }
 
 __init__() {
   if(!zm_trial::is_trial_mode()) {
     return;
   }
-  zm_trial::register_challenge(#"hash_3a3072e83c70889c", & on_begin, & on_end);
+  zm_trial::register_challenge(#"hash_3a3072e83c70889c", &on_begin, &on_end);
 }
 
 private on_begin(var_bebb3c71) {

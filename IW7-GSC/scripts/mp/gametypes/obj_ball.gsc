@@ -2205,10 +2205,10 @@ givepracticemessage() {
   level endon("game_ended");
   if(scripts\engine\utility::is_player_gamepad_enabled()) {
     self notifyonplayercommand("call_ball", "+actionslot 3");
-    self iprintlnbold( & "PLATFORM_UPLINK_PRACTICE_SLOT3");
+    self iprintlnbold(&"PLATFORM_UPLINK_PRACTICE_SLOT3");
   } else {
     self notifyonplayercommand("call_ball", "+actionslot 7");
-    self iprintlnbold( & "PLATFORM_UPLINK_PRACTICE_SLOT7");
+    self iprintlnbold(&"PLATFORM_UPLINK_PRACTICE_SLOT7");
   }
 
   level.balls[0] waittill("score_event");

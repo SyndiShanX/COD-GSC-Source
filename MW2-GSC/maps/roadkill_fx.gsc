@@ -61,7 +61,7 @@ main() {
   level._effect["insects_carcass_runner"] = LoadFX("misc/insects_carcass_runner");
 
   /*-----------------------
-  MORTAR EFFECTS & SOUNDS
+  MORTAR EFFECTS &SOUNDS
   -------------------------*/
   //level._effect[ "mortar" ][ "bunker_ceiling" ]		 = loadfx( "dust/ceiling_dust_default" );
   level._effect["mortar_large"] = loadfx("explosions/artilleryExp_dirt_brown_2");

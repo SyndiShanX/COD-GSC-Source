@@ -54,7 +54,7 @@ function init() {
     return;
   }
   level thread setup_ee_main_devgui();
-  zm_sidequests::declare_sidequest("little_girl_lost", & init_sidequest, & sidequest_logic, & complete_sidequest, & generic_stage_start, & generic_stage_end);
+  zm_sidequests::declare_sidequest("little_girl_lost", &init_sidequest, &sidequest_logic, &complete_sidequest, &generic_stage_start, &generic_stage_end);
   zm_tomb_ee_main_step_1::init();
   zm_tomb_ee_main_step_2::init();
   zm_tomb_ee_main_step_3::init();
@@ -228,11 +228,11 @@ function complete_sidequest() {
   level thread function_ab51bfd();
   playsoundatposition("zmb_squest_whiteout", (0, 0, 0));
   level lui::screen_fade_out(1, "white", "starting_ee_screen");
-  util::delay(0.5, undefined, & remove_portal_beam);
+  util::delay(0.5, undefined, &remove_portal_beam);
   level thread lui::play_movie("zm_outro_tomb", "fullscreen", 0, 0, "");
   level lui::screen_fade_out(0, "black", "starting_ee_screen");
   level waittill("movie_done");
-  level.custom_intermission = & player_intermission_ee;
+  level.custom_intermission = &player_intermission_ee;
   level notify("end_game");
   level thread lui::screen_fade_in(2, "black", "starting_ee_screen");
   wait(1.5);
@@ -463,7 +463,7 @@ function watch_devgui_ee_main() {
       setdvar("", "");
       setdvar("", "");
       level flag::set("");
-      array::thread_all(getplayers(), & zm_weapons::weapon_give, "");
+      array::thread_all(getplayers(), &zm_weapons::weapon_give, "");
     }
     wait(0.05);
   }

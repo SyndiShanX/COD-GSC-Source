@@ -70,9 +70,9 @@ function_a9f676cf(str_notify) {
 
 function_49fb9a81(player, var_348e23ad, var_ef67aac3, var_2de72807 = 0) {
   player endon(#"disconnect", # "hash_660dedc4af5b4336");
-  level endoncallback( & function_a9f676cf, # "end_game");
+  level endoncallback(&function_a9f676cf, # "end_game");
   if(!var_2de72807) {
-    player endoncallback( & function_1c9127dd, # "hash_2a4a6c3c411261d8");
+    player endoncallback(&function_1c9127dd, # "hash_2a4a6c3c411261d8");
   }
   self function_4ba8fb9c(player);
   if(var_2de72807 || !isDefined(player.var_8f5fe43e)) {

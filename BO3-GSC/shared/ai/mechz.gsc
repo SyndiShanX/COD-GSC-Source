@@ -30,8 +30,8 @@
 
 function autoexec init() {
   initmechzbehaviorsandasm();
-  spawner::add_archetype_spawn_function("mechz", & archetypemechzblackboardinit);
-  spawner::add_archetype_spawn_function("mechz", & mechzserverutils::mechzspawnsetup);
+  spawner::add_archetype_spawn_function("mechz", &archetypemechzblackboardinit);
+  spawner::add_archetype_spawn_function("mechz", &mechzserverutils::mechzspawnsetup);
   clientfield::register("actor", "mechz_ft", 5000, 1, "int");
   clientfield::register("actor", "mechz_faceplate_detached", 5000, 1, "int");
   clientfield::register("actor", "mechz_powercap_detached", 5000, 1, "int");
@@ -46,32 +46,32 @@ function autoexec init() {
 }
 
 function private initmechzbehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzTargetService", & mechztargetservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzGrenadeService", & mechzgrenadeservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzBerserkKnockdownService", & mechzberserkknockdownservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldMelee", & mechzshouldmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldShowPain", & mechzshouldshowpain);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldShootGrenade", & mechzshouldshootgrenade);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldShootFlame", & mechzshouldshootflame);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldShootFlameSweep", & mechzshouldshootflamesweep);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldTurnBerserk", & mechzshouldturnberserk);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldStun", & mechzshouldstun);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldStumble", & mechzshouldstumble);
-  behaviortreenetworkutility::registerbehaviortreeaction("mechzStunLoop", & mechzstunstart, & mechzstunupdate, & mechzstunend);
-  behaviortreenetworkutility::registerbehaviortreeaction("mechzStumbleLoop", & mechzstumblestart, & mechzstumbleupdate, & mechzstumbleend);
-  behaviortreenetworkutility::registerbehaviortreeaction("mechzShootFlameAction", & mechzshootflameactionstart, & mechzshootflameactionupdate, & mechzshootflameactionend);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShootGrenade", & mechzshootgrenade);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShootFlame", & mechzshootflame);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzUpdateFlame", & mechzupdateflame);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzStopFlame", & mechzstopflame);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzPlayedBerserkIntro", & mechzplayedberserkintro);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzAttackStart", & mechzattackstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzDeathStart", & mechzdeathstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzIdleStart", & mechzidlestart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzPainStart", & mechzpainstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzPainTerminate", & mechzpainterminate);
-  animationstatenetwork::registernotetrackhandlerfunction("melee_soldat", & mechznotetrackmelee);
-  animationstatenetwork::registernotetrackhandlerfunction("fire_chaingun", & mechznotetrackshootgrenade);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzTargetService", &mechztargetservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzGrenadeService", &mechzgrenadeservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzBerserkKnockdownService", &mechzberserkknockdownservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldMelee", &mechzshouldmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldShowPain", &mechzshouldshowpain);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldShootGrenade", &mechzshouldshootgrenade);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldShootFlame", &mechzshouldshootflame);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldShootFlameSweep", &mechzshouldshootflamesweep);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldTurnBerserk", &mechzshouldturnberserk);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldStun", &mechzshouldstun);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShouldStumble", &mechzshouldstumble);
+  behaviortreenetworkutility::registerbehaviortreeaction("mechzStunLoop", &mechzstunstart, &mechzstunupdate, &mechzstunend);
+  behaviortreenetworkutility::registerbehaviortreeaction("mechzStumbleLoop", &mechzstumblestart, &mechzstumbleupdate, &mechzstumbleend);
+  behaviortreenetworkutility::registerbehaviortreeaction("mechzShootFlameAction", &mechzshootflameactionstart, &mechzshootflameactionupdate, &mechzshootflameactionend);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShootGrenade", &mechzshootgrenade);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzShootFlame", &mechzshootflame);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzUpdateFlame", &mechzupdateflame);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzStopFlame", &mechzstopflame);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzPlayedBerserkIntro", &mechzplayedberserkintro);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzAttackStart", &mechzattackstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzDeathStart", &mechzdeathstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzIdleStart", &mechzidlestart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzPainStart", &mechzpainstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("mechzPainTerminate", &mechzpainterminate);
+  animationstatenetwork::registernotetrackhandlerfunction("melee_soldat", &mechznotetrackmelee);
+  animationstatenetwork::registernotetrackhandlerfunction("fire_chaingun", &mechznotetrackshootgrenade);
 }
 
 function private archetypemechzblackboardinit() {
@@ -81,7 +81,7 @@ function private archetypemechzblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_should_turn", "should_not_turn", & bb_getshouldturn);
+  blackboard::registerblackboardattribute(self, "_locomotion_should_turn", "should_not_turn", &bb_getshouldturn);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -93,7 +93,7 @@ function private archetypemechzblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  self.___archetypeonanimscriptedcallback = & archetypemechzonanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = &archetypemechzonanimscriptedcallback;
   self finalizetrackedblackboardattributes();
 }
 
@@ -201,7 +201,7 @@ function private mechzgrenadeservice(entity) {
   }
   if(isDefined(level.a_electroball_grenades)) {
     level.a_electroball_grenades = array::remove_undefined(level.a_electroball_grenades);
-    a_active_grenades = array::filter(level.a_electroball_grenades, 0, & mechzfiltergrenadesbyowner, entity);
+    a_active_grenades = array::filter(level.a_electroball_grenades, 0, &mechzfiltergrenadesbyowner, entity);
     entity.activegrenades = a_active_grenades.size;
   } else {
     entity.activegrenades = 0;
@@ -223,7 +223,7 @@ function private mechzberserkknockdownservice(entity) {
   speed = move_dist_sq / predict_time;
   if(speed >= 10) {
     a_zombies = getaiarchetypearray("zombie");
-    a_filtered_zombies = array::filter(a_zombies, 0, & mechzzombieeligibleforberserkknockdown, entity, predicted_pos);
+    a_filtered_zombies = array::filter(a_zombies, 0, &mechzzombieeligibleforberserkknockdown, entity, predicted_pos);
     if(a_filtered_zombies.size > 0) {
       foreach(zombie in a_filtered_zombies) {
         zombie.knockdown = 1;

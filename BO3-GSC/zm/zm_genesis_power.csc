@@ -24,15 +24,15 @@
 #namespace zm_genesis_power;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_power", & __init__, undefined, undefined);
+  system::register("zm_genesis_power", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "power_zombie_soul", 15000, 1, "int", & function_cb47574e, 0, 0);
-  clientfield::register("scriptmover", "power_cables_shader", 15000, 1, "int", & power_cables_shader, 0, 0);
+  clientfield::register("scriptmover", "power_zombie_soul", 15000, 1, "int", &function_cb47574e, 0, 0);
+  clientfield::register("scriptmover", "power_cables_shader", 15000, 1, "int", &power_cables_shader, 0, 0);
   for(i = 1; i <= 4; i++) {
     str_name = "corruption_tower" + i;
-    clientfield::register("world", str_name, 15000, 7, "float", & corruption_tower, 0, 0);
+    clientfield::register("world", str_name, 15000, 7, "float", &corruption_tower, 0, 0);
   }
 }
 

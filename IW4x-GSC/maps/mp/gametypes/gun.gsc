@@ -13,7 +13,6 @@ main() {
   maps\mp\gametypes\_callbacksetup::SetupCallbacks();
   maps\mp\gametypes\_globallogic::SetupCallbacks();
 
-
   setGuns();
 
   registerTimeLimitDvar(level.gameType, 10);
@@ -46,14 +45,14 @@ onprecachegametype() {
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  setObjectiveText("allies", & "OBJECTIVES_DM");
-  setObjectiveText("axis", & "OBJECTIVES_DM");
+  setObjectiveText("allies", &"OBJECTIVES_DM");
+  setObjectiveText("axis", &"OBJECTIVES_DM");
 
-  setObjectiveScoreText("allies", & "OBJECTIVES_DM_SCORE");
-  setObjectiveScoreText("axis", & "OBJECTIVES_DM_SCORE");
+  setObjectiveScoreText("allies", &"OBJECTIVES_DM_SCORE");
+  setObjectiveScoreText("axis", &"OBJECTIVES_DM_SCORE");
 
-  setObjectiveHintText("allies", & "OBJECTIVES_DM_HINT");
-  setObjectiveHintText("axis", & "OBJECTIVES_DM_HINT");
+  setObjectiveHintText("allies", &"OBJECTIVES_DM_HINT");
+  setObjectiveHintText("axis", &"OBJECTIVES_DM_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -93,13 +92,11 @@ onStartGameType() {
   allowed = [];
   maps\mp\gametypes\_gameobjects::main(allowed);
 
-
   setDvar("ui_allow_classchange", 0);
   setdvar("ui_allow_teamchange", 0);
 
   level.QuickMessageToAll = true;
   level.blockWeaponDrops = true;
-
 
   level thread onPlayerConnect();
 
@@ -126,12 +123,10 @@ getSpawnPoint() {
   if(self.gun_firstSpawn) {
     self.gun_firstSpawn = false;
 
-
     self.pers["class"] = "gamemode";
     self.pers["lastClass"] = "";
     self.class = self.pers["class"];
     self.lastClass = self.pers["lastClass"];
-
 
     if(cointoss())
       self maps\mp\gametypes\_menus::addToTeam("axis", true);
@@ -167,7 +162,6 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
 
     if(sMeansOfDeath == "MOD_FALLING" || attacker == self || (sMeansOfDeath == "MOD_MELEE" && !isMeleeWeapon)) {
       self playLocalSound("mp_war_objective_lost");
-
 
       self.gunGamePrevGunIndex = self.gunGameGunIndex;
       self.gunGameGunIndex = int(max(0, self.gunGameGunIndex - 1));
@@ -217,13 +211,10 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
 giveNextGun(doSetSpawnWeapon) {
   newWeapon = level.gun_guns[self.gunGameGunIndex];
 
-
   newWeapon = addAttachments(newWeapon);
-
 
   self takeAllWeapons();
   _giveWeapon(newWeapon);
-
 
   if(isDefined(doSetSpawnWeapon))
     self setSpawnWeapon(newWeapon);
@@ -233,10 +224,8 @@ giveNextGun(doSetSpawnWeapon) {
   self.pers["primaryWeapon"] = weaponName;
   self.primaryWeapon = newWeapon;
 
-
   self GiveStartAmmo(newWeapon);
   self switchToWeapon(newWeapon);
-
 
   if(self.gunGamePrevGunIndex > self.gunGameGunIndex) {
     self thread maps\mp\gametypes\_rank::xpEventPopup(&"SPLASHES_DROPPED_GUN_RANK");
@@ -244,7 +233,6 @@ giveNextGun(doSetSpawnWeapon) {
     self thread maps\mp\gametypes\_rank::xpEventPopup(&"SPLASHES_GAINED_GUN_RANK");
   }
   self.gunGamePrevGunIndex = self.gunGameGunIndex;
-
 
   self updateGunHUD();
 }
@@ -376,7 +364,6 @@ hideOnGameEnd() {
 setGuns() {
   level.gun_guns = [];
 
-
   level.gun_guns[0] = "deserteagle";
 
   level.gun_guns[1] = "glock";
@@ -405,7 +392,6 @@ setGuns() {
 
   level.gun_guns[18] = "m79";
   level.gun_guns[19] = "javelin";
-
 
   level.gun_attachments = [];
 
@@ -502,8 +488,6 @@ setSpecialLoadout() {
   level.gun_loadouts["axis"]["loadoutPerk1"] = "specialty_null";
   level.gun_loadouts["axis"]["loadoutPerk2"] = "specialty_null";
   level.gun_loadouts["axis"]["loadoutPerk3"] = "specialty_null";
-
-
 
   level.gun_loadouts["allies"] = level.gun_loadouts["axis"];
 }

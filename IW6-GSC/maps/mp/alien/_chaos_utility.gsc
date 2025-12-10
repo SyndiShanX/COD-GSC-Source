@@ -206,8 +206,8 @@ transform_to_coordinate(text_string) {
 init_chaos_deployable(boxType, iconName, onUseCallback) {
   boxConfig = spawnStruct();
   boxConfig.modelBase = "mp_weapon_alien_crate";
-  boxConfig.hintString = & "ALIEN_CHAOS_BONUS_PICKUP";
-  boxConfig.capturingString = & "ALIEN_CHAOS_BONUS_TAKING";
+  boxConfig.hintString = &"ALIEN_CHAOS_BONUS_PICKUP";
+  boxConfig.capturingString = &"ALIEN_CHAOS_BONUS_TAKING";
   boxConfig.headIconOffset = 25;
   boxConfig.lifeSpan = 90.0;
   boxConfig.useXP = 0;

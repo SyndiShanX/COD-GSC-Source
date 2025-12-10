@@ -108,14 +108,14 @@ climb_init() {
   friendly_climb_anims();
 
   // Hold ^3[{+speed_throw}]^7 to swing your left icepick.
-  add_hint_string("left_icepick", & "CLIFFHANGER_LEFT_ICEPICK", ::should_stop_hanging_left_icepick_hint);
+  add_hint_string("left_icepick", &"CLIFFHANGER_LEFT_ICEPICK", ::should_stop_hanging_left_icepick_hint);
   // Hold ^3[{+attack}]^7 to swing your right icepick.
-  add_hint_string("right_icepick", & "CLIFFHANGER_RIGHT_ICEPICK", ::should_stop_hanging_right_icepick_hint);
+  add_hint_string("right_icepick", &"CLIFFHANGER_RIGHT_ICEPICK", ::should_stop_hanging_right_icepick_hint);
   // Approach the ice and hold ^3[{+attack}]^7 to climb.
-  add_hint_string("how_to_climb", & "CLIFFHANGER_HOW_TO_CLIMB", ::should_stop_how_to_climb_hint);
+  add_hint_string("how_to_climb", &"CLIFFHANGER_HOW_TO_CLIMB", ::should_stop_how_to_climb_hint);
 
   //trigger = GetEnt( "climb_trigger", "script_noteworthy" );
-  //trigger SetHintString( "Hold &&1 to climb" );
+  //trigger SetHintString( "Hold && 1 to climb" );
   //level.climb_use_trigger = trigger;
 
   flag_init("we_care_about_right_icepick");
@@ -218,11 +218,11 @@ death_trigger() {
     if(!flag("reached_top")) {
       if(GetDvarInt("hold_on_tight")) {
         // Hold on for dear life.
-        SetDvar("ui_deadquote", & "CLIFFHANGER_HOLD_ON_TIGHT");
+        SetDvar("ui_deadquote", &"CLIFFHANGER_HOLD_ON_TIGHT");
       } else {
         SetDvar("hold_on_tight", 1);
         // Nobody makes the first jump...
-        SetDvar("ui_deadquote", & "CLIFFHANGER_MAKES_FIRST_JUMP");
+        SetDvar("ui_deadquote", &"CLIFFHANGER_MAKES_FIRST_JUMP");
       }
       maps\_utility::missionFailedWrapper();
     }

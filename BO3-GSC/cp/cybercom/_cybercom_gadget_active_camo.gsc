@@ -26,14 +26,14 @@ function init() {}
 function main() {
   cybercom_gadget::registerability(1, 8, 1);
   level.cybercom.active_camo = spawnStruct();
-  level.cybercom.active_camo._on_flicker = & _on_flicker;
-  level.cybercom.active_camo._on_give = & _on_give;
-  level.cybercom.active_camo._on_take = & _on_take;
-  level.cybercom.active_camo._on_connect = & _on_connect;
-  level.cybercom.active_camo._on = & _on;
-  level.cybercom.active_camo._off = & _off;
+  level.cybercom.active_camo._on_flicker = &_on_flicker;
+  level.cybercom.active_camo._on_give = &_on_give;
+  level.cybercom.active_camo._on_take = &_on_take;
+  level.cybercom.active_camo._on_connect = &_on_connect;
+  level.cybercom.active_camo._on = &_on;
+  level.cybercom.active_camo._off = &_off;
   level.cybercom.active_cammo_upgraded_weap = getweapon("gadget_active_camo_upgraded");
-  callback::on_disconnect( & _on_disconnect);
+  callback::on_disconnect(&_on_disconnect);
 }
 
 function _on_flicker(slot, weapon) {}

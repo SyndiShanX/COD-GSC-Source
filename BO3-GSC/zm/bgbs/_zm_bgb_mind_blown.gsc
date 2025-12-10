@@ -18,7 +18,7 @@
 #namespace zm_bgb_mind_blown;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_mind_blown", & __init__, undefined, "bgb");
+  system::register("zm_bgb_mind_blown", &__init__, undefined, "bgb");
 }
 
 function __init__() {
@@ -27,7 +27,7 @@ function __init__() {
   }
   clientfield::register("actor", "zm_bgb_mind_pop_fx", 15000, 1, "int");
   clientfield::register("actor", "zm_bgb_mind_ray_fx", 15000, 1, "int");
-  bgb::register("zm_bgb_mind_blown", "activated", 3, undefined, undefined, & validation, & activation);
+  bgb::register("zm_bgb_mind_blown", "activated", 3, undefined, undefined, &validation, &activation);
   level.var_3e825919 = lightning_chain::create_lightning_chain_params(0, 1, 300, 20, 100, 0.11, 10, 0, 4, 1, 0, undefined, 1, 1);
 }
 
@@ -98,7 +98,7 @@ function function_1bb7ee0(ai) {
   ai.var_85934541 = 1;
   ai.no_powerups = 1;
   ai.deathpoints_already_given = 1;
-  ai.tesla_head_gib_func = & zombie_head_gib;
+  ai.tesla_head_gib_func = &zombie_head_gib;
   ai lightning_chain::arc_damage(ai, self, 1, level.var_3e825919);
 }
 

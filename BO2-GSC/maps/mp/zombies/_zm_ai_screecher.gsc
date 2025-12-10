@@ -641,7 +641,7 @@ screecher_first_seen_hint_think() {
   fade_time = 3.0;
   hudelem = self maps\mp\gametypes_zm\_hud_util::createfontstring("objective", 2);
   hudelem maps\mp\gametypes_zm\_hud_util::setpoint("TOP", undefined, 0, 200);
-  hudelem.label = & "ZOMBIE_SCREECHER_ATTACH_FIRST";
+  hudelem.label = &"ZOMBIE_SCREECHER_ATTACH_FIRST";
   hudelem.sort = 0.5;
   hudelem.alpha = 1;
   hudelem fadeovertime(fade_time);

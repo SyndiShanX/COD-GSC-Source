@@ -19,7 +19,7 @@
 #namespace incendiary;
 
 function autoexec __init__sytem__() {
-  system::register("incendiary_grenade", & init_shared, undefined, undefined);
+  system::register("incendiary_grenade", &init_shared, undefined, undefined);
 }
 
 function init_shared() {
@@ -30,7 +30,7 @@ function init_shared() {
   level.incendiarydamageradius = getdvarint("scr_incendiaryDamageRadius", 125);
   level.incendiaryfiredamageticktime = getdvarfloat("scr_incendiaryfireDamageTickTime", 1);
   level.incendiarydamagethistick = [];
-  callback::on_spawned( & create_incendiary_watcher);
+  callback::on_spawned(&create_incendiary_watcher);
 }
 
 function updateincendiaryfromdvars() {
@@ -44,7 +44,7 @@ function updateincendiaryfromdvars() {
 
 function create_incendiary_watcher() {
   watcher = self weaponobjects::createuseweaponobjectwatcher("incendiary_grenade", self.team);
-  watcher.onspawn = & incendiary_system_spawn;
+  watcher.onspawn = &incendiary_system_spawn;
 }
 
 function incendiary_system_spawn(watcher, player) {

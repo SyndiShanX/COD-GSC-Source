@@ -18,7 +18,7 @@
 #namespace zm_power;
 
 function autoexec __init__sytem__() {
-  system::register("zm_power", & __init__, & __main__, undefined);
+  system::register("zm_power", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -50,7 +50,7 @@ function electric_switch_init() {
   if(isDefined(level.temporary_power_switch_logic)) {
     array::thread_all(trigs, level.temporary_power_switch_logic, trigs);
   } else {
-    array::thread_all(trigs, & electric_switch, trigs);
+    array::thread_all(trigs, &electric_switch, trigs);
   }
 }
 
@@ -134,7 +134,7 @@ function standard_powered_items() {
   vending_triggers = getEntArray("zombie_vending", "targetname");
   foreach(trigger in vending_triggers) {
     powered_on = zm_perks::get_perk_machine_start_state(trigger.script_noteworthy);
-    powered_perk = add_powered_item( & perk_power_on, & perk_power_off, & perk_range, & cost_low_if_local, 0, powered_on, trigger);
+    powered_perk = add_powered_item(&perk_power_on, &perk_power_off, &perk_range, &cost_low_if_local, 0, powered_on, trigger);
     if(isDefined(trigger.script_int)) {
       powered_perk thread zone_controlled_perk(trigger.script_int);
     }
@@ -142,7 +142,7 @@ function standard_powered_items() {
   zombie_doors = getEntArray("zombie_door", "targetname");
   foreach(door in zombie_doors) {
     if(isDefined(door.script_noteworthy) && (door.script_noteworthy == "electric_door" || door.script_noteworthy == "electric_buyable_door")) {
-      add_powered_item( & door_power_on, & door_power_off, & door_range, & cost_door, 0, 0, door);
+      add_powered_item(&door_power_on, &door_power_off, &door_range, &cost_door, 0, 0, door);
       continue;
     }
     if(isDefined(door.script_noteworthy) && door.script_noteworthy == "local_electric_door") {
@@ -150,7 +150,7 @@ function standard_powered_items() {
       if(!(isDefined(level.power_local_doors_globally) && level.power_local_doors_globally)) {
         power_sources = 1;
       }
-      add_powered_item( & door_local_power_on, & door_local_power_off, & door_range, & cost_door, power_sources, 0, door);
+      add_powered_item(&door_local_power_on, &door_local_power_off, &door_range, &cost_door, power_sources, 0, door);
     }
   }
   thread watch_global_power();

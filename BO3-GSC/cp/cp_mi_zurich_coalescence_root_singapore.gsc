@@ -43,11 +43,11 @@ function main() {
   level._effect["dirt_impact_md"] = "dirt/fx_dust_furn_drop_md";
   level._effect["blood_impact_lg"] = "blood/fx_blood_splash_furn_drop_lg";
   level._effect["dirt_impact_lg"] = "dirt/fx_dust_furn_drop_lg";
-  scene::add_scene_func("p7_fxanim_cp_zurich_ferris_wheel_bundle", & zurich_util::function_9f90bc0f, "done", "root_singapore_start_done");
-  scene::add_scene_func("p7_fxanim_cp_zurich_container_collapse_bundle", & zurich_util::function_9f90bc0f, "done", "root_singapore_start_done");
-  scene::add_scene_func("p7_fxanim_cp_zurich_car_slide_bundle", & zurich_util::function_9f90bc0f, "done", "root_singapore_start_done");
-  scene::add_scene_func("p7_fxanim_cp_zurich_ferris_wheel_wave_bundle", & function_8fbe0681, "play");
-  scene::add_scene_func("p7_fxanim_cp_zurich_ferris_wheel_wave_bundle", & zurich_util::function_9f90bc0f, "done", "root_singapore_start_done");
+  scene::add_scene_func("p7_fxanim_cp_zurich_ferris_wheel_bundle", &zurich_util::function_9f90bc0f, "done", "root_singapore_start_done");
+  scene::add_scene_func("p7_fxanim_cp_zurich_container_collapse_bundle", &zurich_util::function_9f90bc0f, "done", "root_singapore_start_done");
+  scene::add_scene_func("p7_fxanim_cp_zurich_car_slide_bundle", &zurich_util::function_9f90bc0f, "done", "root_singapore_start_done");
+  scene::add_scene_func("p7_fxanim_cp_zurich_ferris_wheel_wave_bundle", &function_8fbe0681, "play");
+  scene::add_scene_func("p7_fxanim_cp_zurich_ferris_wheel_wave_bundle", &zurich_util::function_9f90bc0f, "done", "root_singapore_start_done");
 }
 
 function init_clientfields() {
@@ -65,8 +65,8 @@ function skipto_main(str_objective, b_starting) {
   videostart("cp_zurich_env_corvusmonitor", 1);
   var_4ccf970 = zurich_util::function_a00fa665(str_objective);
   zurich_util::enable_surreal_ai_fx(1, 0.5);
-  array::thread_all(level.players, & zurich_util::function_39af75ef, "singapore_root_completed");
-  spawner::add_spawn_function_group("raven_ambush_ai", "script_parameters", & zurich_util::function_aceff870);
+  array::thread_all(level.players, &zurich_util::function_39af75ef, "singapore_root_completed");
+  spawner::add_spawn_function_group("raven_ambush_ai", "script_parameters", &zurich_util::function_aceff870);
   level thread scene::init("p7_fxanim_cp_zurich_ferris_wheel_bundle");
   level thread function_29073d62();
   level thread function_eb271a4b(str_objective);
@@ -74,9 +74,9 @@ function skipto_main(str_objective, b_starting) {
   skipto::teleport_players(str_objective, 0);
   level thread function_23a51944();
   level thread function_54fbadd1();
-  array::thread_all(level.activeplayers, & function_db4d091);
-  callback::on_spawned( & function_db4d091);
-  level.var_1895e0f9 = & function_1aeafdf8;
+  array::thread_all(level.activeplayers, &function_db4d091);
+  callback::on_spawned(&function_db4d091);
+  level.var_1895e0f9 = &function_1aeafdf8;
   level thread function_4402ab63();
   level thread function_95353712();
   level thread function_8842e57d();
@@ -140,7 +140,7 @@ function function_95b88092(str_objective, b_starting) {
     load::function_73adcefc();
     load::function_a2995f22();
     skipto::teleport_players(str_objective, 0);
-    array::thread_all(level.players, & zurich_util::function_39af75ef, "singapore_root_completed");
+    array::thread_all(level.players, &zurich_util::function_39af75ef, "singapore_root_completed");
     level thread function_252e350();
     zurich_util::enable_surreal_ai_fx(1, 0.5);
     level thread zurich_util::function_c90e23b6(str_objective);
@@ -169,12 +169,12 @@ function function_95b88092(str_objective, b_starting) {
 function skipto_start_done(str_objective, b_starting, b_direct, player) {
   level thread function_c38b8260();
   a_e_cover = getEntArray("singapore_cover", "targetname");
-  array::run_all(a_e_cover, & delete);
+  array::run_all(a_e_cover, &delete);
 }
 
 function function_53a05865(str_objective, b_starting, b_direct, player) {
   level notify("hash_73b00182");
-  callback::remove_on_spawned( & function_db4d091);
+  callback::remove_on_spawned(&function_db4d091);
   level.var_1895e0f9 = undefined;
   level thread zurich_util::function_4a00a473("root_singapore");
 }
@@ -251,18 +251,18 @@ function function_54fbadd1() {
 }
 
 function function_c9c3556c(str_objective) {
-  array::run_all(level.players, & freezecontrols, 1);
-  array::run_all(level.players, & enableinvulnerability);
-  array::run_all(level.players, & util::show_hud, 0);
+  array::run_all(level.players, &freezecontrols, 1);
+  array::run_all(level.players, &enableinvulnerability);
+  array::run_all(level.players, &util::show_hud, 0);
   wait(2);
   level thread util::screen_fade_in(1);
-  array::thread_all(level.players, & clientfield::increment_to_player, "postfx_transition");
+  array::thread_all(level.players, &clientfield::increment_to_player, "postfx_transition");
   playsoundatposition("evt_clearing_trans_in", (0, 0, 0));
   level zurich_util::function_c90e23b6(str_objective, "breadcrumb_singroot_3");
   level.ai_taylor ai::set_ignoreall(1);
-  array::run_all(level.players, & freezecontrols, 0);
-  array::run_all(level.players, & disableinvulnerability);
-  array::run_all(level.players, & util::show_hud, 1);
+  array::run_all(level.players, &freezecontrols, 0);
+  array::run_all(level.players, &disableinvulnerability);
+  array::run_all(level.players, &util::show_hud, 1);
   util::clear_streamer_hint();
   savegame::checkpoint_save();
 }
@@ -313,7 +313,7 @@ function function_26f61e7c() {
 
 function function_8842e57d() {
   var_d5aeed2b = getEntArray("root_sing_cover", "targetname");
-  var_d5aeed2b = array::thread_all(var_d5aeed2b, & function_258afdfc);
+  var_d5aeed2b = array::thread_all(var_d5aeed2b, &function_258afdfc);
 }
 
 function function_258afdfc() {
@@ -384,7 +384,7 @@ function function_1bf4af4f() {
 
 function function_a0e6701b() {
   var_95ff9697 = getEntArray("sing_falling_destructible", "script_noteworthy");
-  array::thread_all(var_95ff9697, & function_514e0b2e);
+  array::thread_all(var_95ff9697, &function_514e0b2e);
 }
 
 function function_514e0b2e() {
@@ -526,7 +526,7 @@ function function_252e350() {
   level flag::set("sing_root_depthcharges");
   level thread namespace_e9d9fb34::function_62b0213a();
   var_8edc0313 = struct::get_array("singapore_depth_charge", "targetname");
-  array::thread_all(var_8edc0313, & create_depth_charge);
+  array::thread_all(var_8edc0313, &create_depth_charge);
   level thread function_1c297ab3();
 }
 

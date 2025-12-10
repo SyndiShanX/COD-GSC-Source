@@ -473,19 +473,19 @@ function codecallback_setactivecybercomability(new_ability) {
 
 function abort_level() {
   println("");
-  level.callbackstartgametype = & callback_void;
-  level.callbackplayerconnect = & callback_void;
-  level.callbackplayerdisconnect = & callback_void;
-  level.callbackplayerdamage = & callback_void;
-  level.callbackplayerkilled = & callback_void;
-  level.callbackplayerlaststand = & callback_void;
-  level.callbackplayermelee = & callback_void;
-  level.callbackactordamage = & callback_void;
-  level.callbackactorkilled = & callback_void;
-  level.callbackvehicledamage = & callback_void;
-  level.callbackvehiclekilled = & callback_void;
-  level.callbackactorspawned = & callback_void;
-  level.callbackbotentereduseredge = & callback_void;
+  level.callbackstartgametype = &callback_void;
+  level.callbackplayerconnect = &callback_void;
+  level.callbackplayerdisconnect = &callback_void;
+  level.callbackplayerdamage = &callback_void;
+  level.callbackplayerkilled = &callback_void;
+  level.callbackplayerlaststand = &callback_void;
+  level.callbackplayermelee = &callback_void;
+  level.callbackactordamage = &callback_void;
+  level.callbackactorkilled = &callback_void;
+  level.callbackvehicledamage = &callback_void;
+  level.callbackvehiclekilled = &callback_void;
+  level.callbackactorspawned = &callback_void;
+  level.callbackbotentereduseredge = &callback_void;
   if(isDefined(level._gametype_default)) {
     setdvar("g_gametype", level._gametype_default);
   }

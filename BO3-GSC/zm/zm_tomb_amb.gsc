@@ -22,8 +22,8 @@
 
 function init() {
   clientfield::register("toplayer", "sndEggElements", 21000, 1, "int");
-  level.var_61f315ab = & function_3630300b;
-  level.var_8229c449 = & function_231d9741;
+  level.var_61f315ab = &function_3630300b;
+  level.var_8229c449 = &function_231d9741;
   level.zmannouncerprefix = "vox_zmbat_";
 }
 
@@ -260,7 +260,7 @@ function snd115egg() {
   n_count = 0;
   level.var_69a8687 = 0;
   var_8bd44282 = struct::get_array("mus115", "targetname");
-  array::thread_all(var_8bd44282, & function_89a607c3);
+  array::thread_all(var_8bd44282, &function_89a607c3);
   while(n_count < 3) {
     level waittill("hash_34d7d690");
     n_count++;
@@ -272,7 +272,7 @@ function snd115egg() {
 function function_89a607c3() {
   level endon("hash_c598ee9d");
   var_169695f4 = array(1, 1, 5);
-  self thread zm_sidequests::fake_use("115_trig_activated", & function_f36e092d);
+  self thread zm_sidequests::fake_use("115_trig_activated", &function_f36e092d);
   self waittill("115_trig_activated");
   playsoundatposition("zmb_ee_mus_activate", self.origin);
   level.var_69a8687++;
@@ -315,7 +315,7 @@ function function_87c575b6() {
   if(var_e5e0779d.size <= 0) {
     return;
   }
-  array::thread_all(var_e5e0779d, & function_66aff463);
+  array::thread_all(var_e5e0779d, &function_66aff463);
   for(var_f2633d7f = 0; var_f2633d7f < var_e5e0779d.size; var_f2633d7f++) {
     level waittill("hash_556250a8");
   }

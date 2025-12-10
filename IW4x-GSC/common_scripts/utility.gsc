@@ -479,7 +479,6 @@ issuffix(msg, suffix) {
 flag_set(message, setter) {
   assertEx(isDefined(level.flag[message]), "Attempt to set a flag before calling flag_init: " + message);
 
-
   level.flag[message] = true;
   set_trigger_flag_permissions(message);
   if(isDefined(setter)) {
@@ -500,8 +499,6 @@ flag_wait(msg, entity) {
     other = undefined;
     level waittill(msg, other);
 
-
-
     if(isDefined(entity) && flag(msg, entity)) {
       break;
     }
@@ -512,7 +509,6 @@ flag_wait(msg, entity) {
 
 flag_clear(message) {
   assertEx(isDefined(level.flag[message]), "Attempt to set a flag before calling flag_init: " + message);
-
 
   if(!flag(message)) {
     return;
@@ -683,7 +679,6 @@ update_trigger_based_on_flags() {
     true_on = false;
     tokens = create_flags_and_return_tokens(self.script_flag_true);
 
-
     foreach(token in tokens) {
       if(flag(token)) {
         true_on = true;
@@ -695,7 +690,6 @@ update_trigger_based_on_flags() {
   false_on = true;
   if(isDefined(self.script_flag_false)) {
     tokens = create_flags_and_return_tokens(self.script_flag_false);
-
 
     foreach(token in tokens) {
       if(flag(token)) {
@@ -710,7 +704,6 @@ update_trigger_based_on_flags() {
 
 create_flags_and_return_tokens(flags) {
   tokens = strtok(flags, " ");
-
 
   for(i = 0; i < tokens.size; i++) {
     if(!isDefined(level.flag[tokens[i]])) {
@@ -1322,7 +1315,6 @@ draw_arrow(start, end, color) {
 cap_value(value, minValue, maxValue) {
   assert(isDefined(value));
 
-
   if(minValue > maxValue)
     return cap_value(value, maxValue, minValue);
 
@@ -1351,7 +1343,6 @@ print_csv_asset(asset, type) {
   if(isDefined(level.csv_lines[fileline]))
     return;
   level.csv_lines[fileline] = true;
-
 }
 
 fileprint_csv_start(file) {
@@ -1533,7 +1524,6 @@ fileprint_launcher_end_file(file_relative_to_game, bIsPerforceEnabled) {
   else
     fileprint_launcher("GAMEPRINTENDFILE:" + file_relative_to_game);
 
-
   TimeOut = gettime() + 4000;
   while(getdvarint("LAUNCHER_PRINT_SUCCESS") == 0 && getdvar("LAUNCHER_PRINT_FAIL") == "0" && gettime() < TimeOut)
     wait .05;
@@ -1689,9 +1679,6 @@ brush_throw() {
 
     }
 
-
-
-
     self.model PhysicsLaunchClient(contact_point, throw_vec);
     return;
   } else {
@@ -1715,7 +1702,6 @@ brush_throw() {
   self.v["exploder"] = undefined;
   wait(6);
   self.model Delete();
-
 }
 
 get_target_ent(target) {
@@ -1889,7 +1875,6 @@ cannon_effect() {
   }
   self exploder_delay();
 
-
   if(isDefined(self.looper))
     self.looper Delete();
 
@@ -1929,9 +1914,6 @@ fire_effect() {
     level thread loop_fx_sound(firefxSound, origin, ender, timeout);
 
   playFX(level._effect[firefx], self.v["origin"], forward, up);
-
-
-
 }
 
 loop_fx_sound(alias, origin, ender, timeout) {
@@ -1948,7 +1930,6 @@ loop_fx_sound(alias, origin, ender, timeout) {
   }
 
   wait(timeout);
-
 }
 
 loop_sound_delete(ender, ent) {
@@ -1971,7 +1952,6 @@ activate_exploder(num) {
   num += "";
 
   prof_begin("activate_exploder");
-
 
   level notify("exploding_" + num);
 
@@ -2175,9 +2155,7 @@ play_loop_sound_on_entity(alias, offset) {
     org LinkTo(self);
   }
 
-
   org playLoopSound(alias);
-
 
   self waittill("stop sound" + alias);
   org StopLoopSound(alias);

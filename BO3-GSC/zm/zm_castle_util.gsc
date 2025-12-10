@@ -11,7 +11,7 @@
 #using scripts\zm\_zm_zonemgr;
 #namespace zm_castle_util;
 
-function create_unitrigger(str_hint, n_radius = 64, func_prompt_and_visibility = & unitrigger_prompt_and_visibility, func_unitrigger_logic = & unitrigger_logic) {
+function create_unitrigger(str_hint, n_radius = 64, func_prompt_and_visibility = &unitrigger_prompt_and_visibility, func_unitrigger_logic = &unitrigger_logic) {
   s_unitrigger = spawnStruct();
   s_unitrigger.origin = self.origin;
   s_unitrigger.angles = self.angles;

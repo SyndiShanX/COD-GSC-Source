@@ -47,7 +47,7 @@ init() {
   game["end_reason"]["infected_eliminated"] = 99;
   game["end_reason"]["survivors_forfeited"] = 99;
   game["end_reason"]["infected_forfeited"] = 99;
-  game["strings"]["overtime"] = & "MP_OVERTIME";
+  game["strings"]["overtime"] = &"MP_OVERTIME";
   level.lua_splash_type_none = 0;
   level.lua_splash_type_killstreak = 1;
   level.lua_splash_type_medal = 2;
@@ -246,7 +246,7 @@ shownotifymessage(var_0) {
     if(isDefined(var_0.titlelabel))
       self.notifytitle.label = var_0.titlelabel;
     else
-      self.notifytitle.label = & "";
+      self.notifytitle.label = &"";
 
     if(isDefined(var_0.titlelabel) && !isDefined(var_0.titleisstring))
       self.notifytitle setvalue(var_0.titletext);
@@ -268,7 +268,7 @@ shownotifymessage(var_0) {
     if(isDefined(var_0.textlabel))
       self.notifytext.label = var_0.textlabel;
     else
-      self.notifytext.label = & "";
+      self.notifytext.label = &"";
 
     if(isDefined(var_0.textlabel) && !isDefined(var_0.textisstring))
       self.notifytext setvalue(var_0.notifytext);
@@ -290,7 +290,7 @@ shownotifymessage(var_0) {
     if(isDefined(var_0.text2label))
       self.notifytext2.label = var_0.text2label;
     else
-      self.notifytext2.label = & "";
+      self.notifytext2.label = &"";
 
     self.notifytext2 settext(var_0.notifytext2);
 

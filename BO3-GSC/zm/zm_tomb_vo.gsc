@@ -43,17 +43,17 @@ function init_level_specific_audio() {
   setdvar("zombie_kills", "5");
   setdvar("zombie_kill_timer", "6");
   if(zm_utility::is_classic()) {
-    level._audio_custom_response_line = & tomb_audio_custom_response_line;
-    level.audio_get_mod_type = & tomb_audio_get_mod_type_override;
-    level.custom_kill_damaged_vo = & zm_audio::custom_kill_damaged_vo;
-    level._custom_zombie_oh_shit_vox_func = & tomb_custom_zombie_oh_shit_vox;
-    level.gib_on_damage = & tomb_custom_crawler_spawned_vo;
-    level._audio_custom_weapon_check = & tomb_audio_custom_weapon_check;
-    level._magic_box_used_vo = & tomb_magic_box_used_vo;
+    level._audio_custom_response_line = &tomb_audio_custom_response_line;
+    level.audio_get_mod_type = &tomb_audio_get_mod_type_override;
+    level.custom_kill_damaged_vo = &zm_audio::custom_kill_damaged_vo;
+    level._custom_zombie_oh_shit_vox_func = &tomb_custom_zombie_oh_shit_vox;
+    level.gib_on_damage = &tomb_custom_crawler_spawned_vo;
+    level._audio_custom_weapon_check = &tomb_audio_custom_weapon_check;
+    level._magic_box_used_vo = &tomb_magic_box_used_vo;
     level thread start_narrative_vo();
     level thread first_magic_box_seen_vo();
     level thread start_samantha_intro_vo();
-    level.zombie_custom_craftable_built_vo = & tomb_drone_built_vo;
+    level.zombie_custom_craftable_built_vo = &tomb_drone_built_vo;
     level thread discover_dig_site_vo();
     level thread maxis_audio_logs();
     level thread discover_pack_a_punch();
@@ -663,7 +663,7 @@ function discover_dig_site_vo() {
   s_origin.unitrigger_stub.script_height = 256;
   s_origin.unitrigger_stub.script_unitrigger_type = "unitrigger_box";
   s_origin.unitrigger_stub.angles = (0, 0, 0);
-  zm_unitrigger::register_static_unitrigger(s_origin.unitrigger_stub, & discover_dig_site_trigger_touch);
+  zm_unitrigger::register_static_unitrigger(s_origin.unitrigger_stub, &discover_dig_site_trigger_touch);
 }
 
 function discover_dig_site_trigger_touch() {
@@ -687,11 +687,11 @@ function maxis_audio_logs() {
     s_origin.unitrigger_stub.radius = 36;
     s_origin.unitrigger_stub.height = 256;
     s_origin.unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
-    s_origin.unitrigger_stub.hint_string = & "ZM_TOMB_MAXIS_AUDIOLOG";
+    s_origin.unitrigger_stub.hint_string = &"ZM_TOMB_MAXIS_AUDIOLOG";
     s_origin.unitrigger_stub.cursor_hint = "HINT_NOICON";
     s_origin.unitrigger_stub.require_look_at = 1;
     s_origin.unitrigger_stub.script_int = s_origin.script_int;
-    zm_unitrigger::register_static_unitrigger(s_origin.unitrigger_stub, & maxis_audio_log_think);
+    zm_unitrigger::register_static_unitrigger(s_origin.unitrigger_stub, &maxis_audio_log_think);
   }
 }
 
@@ -767,7 +767,7 @@ function play_maxis_audio_log(v_trigger_origin, n_audiolog_id) {
       level flag::clear("maxis_audiolog_gr2_playing");
     }
   }
-  level thread zm_unitrigger::register_static_unitrigger(s_trigger.unitrigger_stub, & maxis_audio_log_think);
+  level thread zm_unitrigger::register_static_unitrigger(s_trigger.unitrigger_stub, &maxis_audio_log_think);
 }
 
 function reset_maxis_audiolog_unitrigger(n_robot_id) {
@@ -807,7 +807,7 @@ function restart_maxis_audiolog_unitrigger(n_robot_id) {
   foreach(s_origin in a_s_radios) {
     if(s_origin.script_int == n_script_int) {
       if(isDefined(s_origin.unitrigger_stub)) {
-        zm_unitrigger::register_static_unitrigger(s_origin.unitrigger_stub, & maxis_audio_log_think);
+        zm_unitrigger::register_static_unitrigger(s_origin.unitrigger_stub, &maxis_audio_log_think);
       }
     }
   }

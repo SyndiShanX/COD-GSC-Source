@@ -14,19 +14,19 @@
 #namespace blackboard;
 
 function registeractorblackboardattributes() {
-  registerblackboardattribute(self, "_tactical_arrival_facing_yaw", undefined, & bb_gettacticalarrivalfacingyaw);
+  registerblackboardattribute(self, "_tactical_arrival_facing_yaw", undefined, &bb_gettacticalarrivalfacingyaw);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  registerblackboardattribute(self, "_human_locomotion_movement_type", undefined, & bb_getlocomotionmovementtype);
+  registerblackboardattribute(self, "_human_locomotion_movement_type", undefined, &bb_getlocomotionmovementtype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  registerblackboardattribute(self, "_human_cover_flankability", undefined, & bb_getcoverflankability);
+  registerblackboardattribute(self, "_human_cover_flankability", undefined, &bb_getcoverflankability);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  registerblackboardattribute(self, "_arrival_type", undefined, & bb_getarrivaltype);
+  registerblackboardattribute(self, "_arrival_type", undefined, &bb_getarrivaltype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }

@@ -288,7 +288,7 @@ on_agent_generic_damaged(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath,
     return false;
 
   if(isDefined(eAttacker) && eAttacker != self && iDamage > 0 && (!isDefined(sHitLoc) || sHitLoc != "shield")) {
-    if(iDFlags & level.iDFLAGS_STUN)
+    if(iDFlags &level.iDFLAGS_STUN)
       typeHit = "stun";
     else if(!shouldWeaponFeedback(sWeapon))
       typeHit = "none";

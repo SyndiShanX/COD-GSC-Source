@@ -22,22 +22,22 @@
 #namespace zm_perk_quick_revive;
 
 function autoexec __init__sytem__() {
-  system::register("zm_perk_quick_revive", & __init__, undefined, undefined);
+  system::register("zm_perk_quick_revive", &__init__, undefined, undefined);
 }
 
 function __init__() {
   enable_quick_revive_perk_for_level();
-  level.check_quickrevive_hotjoin = & check_quickrevive_for_hotjoin;
+  level.check_quickrevive_hotjoin = &check_quickrevive_for_hotjoin;
 }
 
 function enable_quick_revive_perk_for_level() {
-  zm_perks::register_perk_basic_info("specialty_quickrevive", "revive", & revive_cost_override, & "ZOMBIE_PERK_QUICKREVIVE", getweapon("zombie_perk_bottle_revive"));
-  zm_perks::register_perk_precache_func("specialty_quickrevive", & quick_revive_precache);
-  zm_perks::register_perk_clientfields("specialty_quickrevive", & quick_revive_register_clientfield, & quick_revive_set_clientfield);
-  zm_perks::register_perk_machine("specialty_quickrevive", & quick_revive_perk_machine_setup);
-  zm_perks::register_perk_threads("specialty_quickrevive", & give_quick_revive_perk, & take_quick_revive_perk);
+  zm_perks::register_perk_basic_info("specialty_quickrevive", "revive", &revive_cost_override, &"ZOMBIE_PERK_QUICKREVIVE", getweapon("zombie_perk_bottle_revive"));
+  zm_perks::register_perk_precache_func("specialty_quickrevive", &quick_revive_precache);
+  zm_perks::register_perk_clientfields("specialty_quickrevive", &quick_revive_register_clientfield, &quick_revive_set_clientfield);
+  zm_perks::register_perk_machine("specialty_quickrevive", &quick_revive_perk_machine_setup);
+  zm_perks::register_perk_threads("specialty_quickrevive", &give_quick_revive_perk, &take_quick_revive_perk);
   zm_perks::register_perk_host_migration_params("specialty_quickrevive", "vending_revive", "revive_light");
-  zm_perks::register_perk_machine_power_override("specialty_quickrevive", & turn_revive_on);
+  zm_perks::register_perk_machine_power_override("specialty_quickrevive", &turn_revive_on);
   level flag::init("solo_revive");
 }
 
@@ -109,7 +109,7 @@ function turn_revive_on() {
       }
       level.quick_revive_machine = machine[i];
     }
-    array::thread_all(machine_triggers, & zm_perks::set_power_on, 0);
+    array::thread_all(machine_triggers, &zm_perks::set_power_on, 0);
     if(isDefined(level.initial_quick_revive_power_off) && level.initial_quick_revive_power_off) {
       level waittill("revive_on");
     } else if(!solo_mode) {
@@ -141,7 +141,7 @@ function turn_revive_on() {
     if(solo_mode && isDefined(machine_model) && (!(isDefined(machine_model.ishidden) && machine_model.ishidden))) {
       machine_model thread revive_solo_fx(machine_clip, blocker_model);
     }
-    array::thread_all(machine_triggers, & zm_perks::set_power_on, 1);
+    array::thread_all(machine_triggers, &zm_perks::set_power_on, 1);
     if(isDefined(level.machine_assets["specialty_quickrevive"].power_on_callback)) {
       array::thread_all(machine, level.machine_assets["specialty_quickrevive"].power_on_callback);
     }

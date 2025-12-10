@@ -31,10 +31,10 @@ function main() {
 
 function start_lights() {
   level waittill("pl1");
-  array::thread_all(struct::get_array("dyn_light", "targetname"), & light_sound);
-  array::thread_all(struct::get_array("switch_progress", "targetname"), & switch_progress_sound);
-  array::thread_all(struct::get_array("dyn_generator", "targetname"), & generator_sound);
-  array::thread_all(struct::get_array("dyn_breakers", "targetname"), & breakers_sound);
+  array::thread_all(struct::get_array("dyn_light", "targetname"), &light_sound);
+  array::thread_all(struct::get_array("switch_progress", "targetname"), &switch_progress_sound);
+  array::thread_all(struct::get_array("dyn_generator", "targetname"), &generator_sound);
+  array::thread_all(struct::get_array("dyn_breakers", "targetname"), &breakers_sound);
 }
 
 function light_sound() {
@@ -105,9 +105,9 @@ function teleport_pad_init(pad) {
   telepad_loop = struct::get_array(("telepad_" + pad) + "_looper", "targetname");
   homepad = struct::get_array("homepad", "targetname");
   level waittill("tp" + pad);
-  array::thread_all(telepad_loop, & telepad_loop);
-  array::thread_all(telepad, & teleportation_audio, pad);
-  array::thread_all(homepad, & teleportation_audio, pad);
+  array::thread_all(telepad_loop, &telepad_loop);
+  array::thread_all(telepad, &teleportation_audio, pad);
+  array::thread_all(homepad, &teleportation_audio, pad);
 }
 
 function telepad_loop() {

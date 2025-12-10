@@ -17,7 +17,7 @@ init() {
   level._effect["nuke_flash"] = loadfx("explosions/player_death_nuke_flash");
   level._effect["nuke_aftermath"] = loadfx("dust/nuke_aftermath_mp");
 
-  game["strings"]["nuclear_strike"] = & "MP_TACTICAL_NUKE";
+  game["strings"]["nuclear_strike"] = &"MP_TACTICAL_NUKE";
 
   level.killstreakFuncs["nuke"] = ::tryUseNuke;
 
@@ -83,7 +83,7 @@ doNuke(allowCancel) {
     	if( isDefined( playerteam ) )
     	{
     		if( playerteam == self.pers["team"] )
-    			player iprintln( &"MP_TACTICAL_NUKE_CALLED", self );
+    			player iprintln(&"MP_TACTICAL_NUKE_CALLED", self );
     	}
     }
     */

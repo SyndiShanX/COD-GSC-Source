@@ -27,14 +27,14 @@ function init() {}
 function main() {
   cybercom_gadget::registerability(0, 1);
   level.cybercom.system_overload = spawnStruct();
-  level.cybercom.system_overload._is_flickering = & _is_flickering;
-  level.cybercom.system_overload._on_flicker = & _on_flicker;
-  level.cybercom.system_overload._on_give = & _on_give;
-  level.cybercom.system_overload._on_take = & _on_take;
-  level.cybercom.system_overload._on_connect = & _on_connect;
-  level.cybercom.system_overload._on = & _on;
-  level.cybercom.system_overload._off = & _off;
-  level.cybercom.system_overload._is_primed = & _is_primed;
+  level.cybercom.system_overload._is_flickering = &_is_flickering;
+  level.cybercom.system_overload._on_flicker = &_on_flicker;
+  level.cybercom.system_overload._on_give = &_on_give;
+  level.cybercom.system_overload._on_take = &_on_take;
+  level.cybercom.system_overload._on_connect = &_on_connect;
+  level.cybercom.system_overload._on = &_on;
+  level.cybercom.system_overload._off = &_off;
+  level.cybercom.system_overload._is_primed = &_is_primed;
 }
 
 function _is_flickering(slot) {}
@@ -48,8 +48,8 @@ function _on_give(slot, weapon) {
     self.cybercom.var_110c156a = getdvarint("scr_system_overload_upgraded_count", 5);
     self.cybercom.system_overload_lifetime = getdvarfloat("scr_system_overload_upgraded_lifetime", 6.3) * 1000;
   }
-  self.cybercom.targetlockcb = & _get_valid_targets;
-  self.cybercom.targetlockrequirementcb = & _lock_requirement;
+  self.cybercom.targetlockcb = &_get_valid_targets;
+  self.cybercom.targetlockrequirementcb = &_lock_requirement;
   self thread cybercom::function_b5f4e597(weapon);
 }
 

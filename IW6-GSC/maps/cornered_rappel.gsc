@@ -47,7 +47,7 @@ cornered_rappel_pre_load() {
   precachemodel("cnd_garden_glass_entry_ally");
   precachemodel("cnd_garden_glass_entry_baker");
   precachemodel("cnd_garden_glass_entry_player");
-  maps\_utility::add_hint_string("rappel_down", & "CORNERED_RAPPEL_DOWN", ::player_combat_rappel_is_jumping);
+  maps\_utility::add_hint_string("rappel_down", &"CORNERED_RAPPEL_DOWN", ::player_combat_rappel_is_jumping);
   level.copymachine = getent("photocopier", "script_noteworthy");
   level.grenade_roll_grenade = getent("grenade_roll_grenade", "targetname");
   level.grenade_roll_grenade hide();
@@ -314,7 +314,7 @@ need_to_hold() {
 
   var_0 = getkeybinding("+gostand");
 
-  if(var_0["key1"] == & "KEY_MWHEELUP" || var_0["key2"] == & "KEY_MWHEELUP" || var_0["key1"] == & "KEY_MWHEELDOWN" || var_0["key2"] == & "KEY_MWHEELDOWN")
+  if(var_0["key1"] == &"KEY_MWHEELUP" || var_0["key2"] == &"KEY_MWHEELUP" || var_0["key1"] == &"KEY_MWHEELDOWN" || var_0["key2"] == &"KEY_MWHEELDOWN")
     return 0;
 
   return 1;

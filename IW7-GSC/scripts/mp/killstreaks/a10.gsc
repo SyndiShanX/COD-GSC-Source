@@ -53,7 +53,7 @@ init() {
 
 onuse(param_00, param_01) {
   if(isDefined(level.a10strafeactive)) {
-    self iprintlnbold( & "KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+    self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
   }
 

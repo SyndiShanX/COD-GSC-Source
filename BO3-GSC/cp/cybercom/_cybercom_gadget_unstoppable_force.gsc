@@ -25,14 +25,14 @@ function init() {}
 function main() {
   cybercom_gadget::registerability(1, 32, 1);
   level.cybercom.unstoppable_force = spawnStruct();
-  level.cybercom.unstoppable_force._is_flickering = & _is_flickering;
-  level.cybercom.unstoppable_force._on_flicker = & _on_flicker;
-  level.cybercom.unstoppable_force._on_give = & _on_give;
-  level.cybercom.unstoppable_force._on_take = & _on_take;
-  level.cybercom.unstoppable_force._on_connect = & _on_connect;
-  level.cybercom.unstoppable_force._on = & _on;
-  level.cybercom.unstoppable_force._off = & _off;
-  level.cybercom.unstoppable_force._is_primed = & _is_primed;
+  level.cybercom.unstoppable_force._is_flickering = &_is_flickering;
+  level.cybercom.unstoppable_force._on_flicker = &_on_flicker;
+  level.cybercom.unstoppable_force._on_give = &_on_give;
+  level.cybercom.unstoppable_force._on_take = &_on_take;
+  level.cybercom.unstoppable_force._on_connect = &_on_connect;
+  level.cybercom.unstoppable_force._on = &_on;
+  level.cybercom.unstoppable_force._off = &_off;
+  level.cybercom.unstoppable_force._is_primed = &_is_primed;
   level.cybercom.unstoppable_force.weapon = getweapon("gadget_unstoppable_force");
 }
 

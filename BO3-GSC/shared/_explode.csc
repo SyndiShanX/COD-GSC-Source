@@ -11,14 +11,14 @@
 #namespace explode;
 
 function autoexec __init__sytem__() {
-  system::register("explode", & __init__, undefined, undefined);
+  system::register("explode", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.dirt_enable_explosion = getdvarint("scr_dirt_enable_explosion", 1);
   level.dirt_enable_slide = getdvarint("scr_dirt_enable_slide", 1);
   level.dirt_enable_fall_damage = getdvarint("scr_dirt_enable_fall_damage", 1);
-  callback::on_localplayer_spawned( & localplayer_spawned);
+  callback::on_localplayer_spawned(&localplayer_spawned);
   level thread updatedvars();
 }
 

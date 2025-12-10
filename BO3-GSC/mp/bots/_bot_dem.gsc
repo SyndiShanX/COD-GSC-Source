@@ -15,9 +15,9 @@
 #namespace bot_dem;
 
 function init() {
-  level.botidle = & bot_idle;
-  level.botcombat = & combat_think;
-  level.botthreatlost = & function_211bcdc;
+  level.botidle = &bot_idle;
+  level.botcombat = &combat_think;
+  level.botthreatlost = &function_211bcdc;
 }
 
 function bot_idle() {

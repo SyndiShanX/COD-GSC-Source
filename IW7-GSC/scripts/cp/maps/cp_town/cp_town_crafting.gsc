@@ -5,28 +5,28 @@
 ********************************************************/
 
 register_crafting() {
-  level.interaction_hintstrings["crafting_station"] = & "CP_TOWN_INTERACTIONS_CRAFTING_MISSING_BLUEPRINT";
-  level.interaction_hintstrings["crafting_station_add_part"] = & "CP_TOWN_INTERACTIONS_ADD_PART";
-  level.interaction_hintstrings["crafting_station_add_blueprint"] = & "CP_TOWN_INTERACTIONS_ADD_BLUEPRINT";
+  level.interaction_hintstrings["crafting_station"] = &"CP_TOWN_INTERACTIONS_CRAFTING_MISSING_BLUEPRINT";
+  level.interaction_hintstrings["crafting_station_add_part"] = &"CP_TOWN_INTERACTIONS_ADD_PART";
+  level.interaction_hintstrings["crafting_station_add_blueprint"] = &"CP_TOWN_INTERACTIONS_ADD_BLUEPRINT";
   level.interaction_hintstrings["crafting_piece"] = "";
   scripts\cp\cp_interaction::register_interaction("crafting_station", "crafting", undefined, ::crafting_station_hint, ::use_crafting_station, 0, 0);
   scripts\cp\cp_interaction::register_interaction("crafting_station_chem", "crafting", undefined, ::crafting_station_chem_hint, ::use_crafting_station_chem_set, 0, 0);
   scripts\cp\cp_interaction::register_interaction("crafting_piece", "crafting", undefined, undefined, ::pickup_crafting_piece, 0, 0);
   level.interactions["crafting_piece"].disable_guided_interactions = 1;
-  level.interaction_hintstrings["violetray_blueprint"] = & "CP_TOWN_INTERACTIONS_VIOLETRAY_BLUEPRINT";
+  level.interaction_hintstrings["violetray_blueprint"] = &"CP_TOWN_INTERACTIONS_VIOLETRAY_BLUEPRINT";
   scripts\cp\cp_interaction::register_interaction("violetray_blueprint", "crafting", undefined, undefined, ::pickup_crafting_blueprint, 0, 0);
   level.interactions["violetray_blueprint"].disable_guided_interactions = 1;
   scripts\cp\cp_interaction::register_interaction("portal_blueprint", "crafting", undefined, undefined, ::pickup_crafting_blueprint, 0, 0);
-  level.interaction_hintstrings["seismic_blueprint"] = & "CP_TOWN_INTERACTIONS_SEISMIC_BLUEPRINT";
+  level.interaction_hintstrings["seismic_blueprint"] = &"CP_TOWN_INTERACTIONS_SEISMIC_BLUEPRINT";
   scripts\cp\cp_interaction::register_interaction("seismic_blueprint", "crafting", undefined, undefined, ::pickup_crafting_blueprint, 0, 0);
   level.interactions["seismic_blueprint"].disable_guided_interactions = 1;
-  level.interaction_hintstrings["mindcontrol_blueprint"] = & "CP_TOWN_INTERACTIONS_MINDCONTROL_BLUEPRINT";
+  level.interaction_hintstrings["mindcontrol_blueprint"] = &"CP_TOWN_INTERACTIONS_MINDCONTROL_BLUEPRINT";
   scripts\cp\cp_interaction::register_interaction("mindcontrol_blueprint", "crafting", undefined, undefined, ::pickup_crafting_blueprint, 0, 0);
   level.interactions["mindcontrol_blueprint"].disable_guided_interactions = 1;
-  level.interaction_hintstrings["hypnosis_blueprint"] = & "CP_TOWN_INTERACTIONS_HYPNOSIS_BLUEPRINT";
+  level.interaction_hintstrings["hypnosis_blueprint"] = &"CP_TOWN_INTERACTIONS_HYPNOSIS_BLUEPRINT";
   scripts\cp\cp_interaction::register_interaction("hypnosis_blueprint", "crafting", undefined, undefined, ::pickup_crafting_blueprint, 0, 0);
   level.interactions["hypnosis_blueprint"].disable_guided_interactions = 1;
-  level.interaction_hintstrings["create_chemistry_set"] = & "CP_TOWN_INTERACTIONS_TAKE_PORTAL";
+  level.interaction_hintstrings["create_chemistry_set"] = &"CP_TOWN_INTERACTIONS_TAKE_PORTAL";
   scripts\cp\cp_interaction::register_interaction("create_chemistry_set", "crafting", undefined, undefined, ::use_crafting_station_chem_set, 0, 0);
   level.interactions["create_chemistry_set"].disable_guided_interactions = 1;
 }
@@ -526,7 +526,7 @@ crafting_station_chem_hint(param_00, param_01) {
 
 crafting_station_hint(param_00, param_01) {
   if(scripts\engine\utility::istrue(param_00.cooling_down)) {
-    return & "COOP_INTERACTIONS_COOLDOWN";
+    return &"COOP_INTERACTIONS_COOLDOWN";
   }
 
   if(scripts\engine\utility::istrue(param_00.blueprint_added)) {
@@ -537,19 +537,19 @@ crafting_station_hint(param_00, param_01) {
     if(isDefined(param_00.parts_added) && param_00.parts_added == 3) {
       switch (param_00.active_blueprint) {
         case "violetray":
-          return & "CP_TOWN_INTERACTIONS_TAKE_VIOLETRAY";
+          return &"CP_TOWN_INTERACTIONS_TAKE_VIOLETRAY";
 
         case "portal":
-          return & "CP_TOWN_INTERACTIONS_TAKE_PORTAL";
+          return &"CP_TOWN_INTERACTIONS_TAKE_PORTAL";
 
         case "seismic":
-          return & "CP_TOWN_INTERACTIONS_TAKE_SEISMIC";
+          return &"CP_TOWN_INTERACTIONS_TAKE_SEISMIC";
 
         case "mindcontrol":
-          return & "CP_TOWN_INTERACTIONS_TAKE_MINDCONTROL";
+          return &"CP_TOWN_INTERACTIONS_TAKE_MINDCONTROL";
 
         case "hypnosis":
-          return & "CP_TOWN_INTERACTIONS_TAKE_HYPNOSIS";
+          return &"CP_TOWN_INTERACTIONS_TAKE_HYPNOSIS";
       }
 
       return;
@@ -559,7 +559,7 @@ crafting_station_hint(param_00, param_01) {
   }
 
   if(!isDefined(param_01.has_blueprint)) {
-    return & "CP_TOWN_INTERACTIONS_CRAFTING_MISSING_BLUEPRINT";
+    return &"CP_TOWN_INTERACTIONS_CRAFTING_MISSING_BLUEPRINT";
   }
 
   return level.interaction_hintstrings["crafting_station_add_blueprint"];

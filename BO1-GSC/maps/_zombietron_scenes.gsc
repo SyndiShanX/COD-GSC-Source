@@ -202,16 +202,16 @@ loc_random_offset(loc) {
 game_tutorial_go() {
   level endon("exit_taken");
   level thread game_skipPage_watcher();
-  level game_tutorial_render_instructions(1, 8, & "ZOMBIETRON_INSTRUCTION1", & "ZOMBIETRON_INSTRUCTION2", & "ZOMBIETRON_INSTRUCTION3");
-  level game_tutorial_render_instructions(2, 8, & "ZOMBIETRON_INSTRUCTION4", & "ZOMBIETRON_INSTRUCTION5");
-  level game_tutorial_render_instructions(3, 8, & "ZOMBIETRON_INSTRUCTION6", & "ZOMBIETRON_INSTRUCTION7");
+  level game_tutorial_render_instructions(1, 8, &"ZOMBIETRON_INSTRUCTION1", &"ZOMBIETRON_INSTRUCTION2", &"ZOMBIETRON_INSTRUCTION3");
+  level game_tutorial_render_instructions(2, 8, &"ZOMBIETRON_INSTRUCTION4", &"ZOMBIETRON_INSTRUCTION5");
+  level game_tutorial_render_instructions(3, 8, &"ZOMBIETRON_INSTRUCTION6", &"ZOMBIETRON_INSTRUCTION7");
   loc = loc_random_offset(maps\_zombietron_pickups::get_random_pickup_location().origin);
   maps\_zombietron_pickups::spawn_pickup("bomb", loc);
   loc = loc_random_offset(maps\_zombietron_pickups::get_random_pickup_location().origin);
   maps\_zombietron_pickups::spawn_pickup("bomb", loc);
   loc = loc_random_offset(maps\_zombietron_pickups::get_random_pickup_location().origin);
   maps\_zombietron_pickups::spawn_pickup("bomb", loc);
-  level game_tutorial_render_instructions(4, 8, & "ZOMBIETRON_INSTRUCTION8");
+  level game_tutorial_render_instructions(4, 8, &"ZOMBIETRON_INSTRUCTION8");
   maps\_zombietron_pickups::clear_all_pickups();
   loc = loc_random_offset(maps\_zombietron_pickups::get_random_pickup_location().origin);
   maps\_zombietron_pickups::spawn_pickup("booster", loc);
@@ -219,12 +219,12 @@ game_tutorial_go() {
   maps\_zombietron_pickups::spawn_pickup("booster", loc);
   loc = loc_random_offset(maps\_zombietron_pickups::get_random_pickup_location().origin);
   maps\_zombietron_pickups::spawn_pickup("booster", loc);
-  level game_tutorial_render_instructions(5, 8, & "ZOMBIETRON_INSTRUCTION9");
+  level game_tutorial_render_instructions(5, 8, &"ZOMBIETRON_INSTRUCTION9");
   maps\_zombietron_pickups::clear_all_pickups();
   level thread maps\_zombietron_pickups::spawn_treasure(level.zombie_vars["zombie_treasure_boss"]);
-  level game_tutorial_render_instructions(6, 8, & "ZOMBIETRON_INSTRUCTION10", & "ZOMBIETRON_INSTRUCTION11", undefined, undefined, level.zombie_vars["extra_life_at_every"]);
-  level game_tutorial_render_instructions(7, 8, & "ZOMBIETRON_INSTRUCTION12");
-  level game_tutorial_render_instructions(8, 8, & "ZOMBIETRON_INSTRUCTION13");
+  level game_tutorial_render_instructions(6, 8, &"ZOMBIETRON_INSTRUCTION10", &"ZOMBIETRON_INSTRUCTION11", undefined, undefined, level.zombie_vars["extra_life_at_every"]);
+  level game_tutorial_render_instructions(7, 8, &"ZOMBIETRON_INSTRUCTION12");
+  level game_tutorial_render_instructions(8, 8, &"ZOMBIETRON_INSTRUCTION13");
 }
 
 begin_game_tutorial() {
@@ -265,9 +265,9 @@ begin_game_tutorial() {
   teleporter setModel("zombie_teleporter_pad");
   playsoundatposition("zmb_teleporter_spawn", teleporter.origin);
   trigger = spawn("trigger_radius", location.origin, 0, 10, 50);
-  objective_add(2, "active", & "ZOMBIETRON_TUTORIAL3", trigger.origin);
-  Objective_String(2, & "ZOMBIETRON_TUTORIAL3");
-  objective_set3d(2, true, "default", & "ZOMBIETRON_TUTORIAL3");
+  objective_add(2, "active", &"ZOMBIETRON_TUTORIAL3", trigger.origin);
+  Objective_String(2, &"ZOMBIETRON_TUTORIAL3");
+  objective_set3d(2, true, "default", &"ZOMBIETRON_TUTORIAL3");
   objective_current(2);
   level thread tutorial_exit_watch(trigger);
   trigger waittill_any("trigger");

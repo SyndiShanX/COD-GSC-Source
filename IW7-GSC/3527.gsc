@@ -481,10 +481,10 @@ damagetracker() {
       if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_01)) {
         continue;
       }
-      if(isDefined(var_08) && var_08 & level.idflags_penetration)
+      if(isDefined(var_08) && var_08 &level.idflags_penetration)
         self.wasdamagedfrombulletpenetration = 1;
 
-      if(isDefined(var_08) && var_08 & level.idflags_no_team_protection)
+      if(isDefined(var_08) && var_08 &level.idflags_no_team_protection)
         self.wasdamagedfrombulletricochet = 1;
 
       self.wasdamaged = 1;

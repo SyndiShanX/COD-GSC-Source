@@ -90,7 +90,7 @@ func_BED3() {
 func_BED4() {
   func_BED6();
   func_10778();
-  func_BEBD(level.neil, & "CP_ZMB_INTERACTIONS_MISSING_BATTERY");
+  func_BEBD(level.neil, &"CP_ZMB_INTERACTIONS_MISSING_BATTERY");
   for(;;) {
     level.neil.var_13084 waittill("trigger", var_00);
     if(!var_00 scripts\cp\utility::is_valid_player() || !isDefined(level.var_BEB0)) {
@@ -135,7 +135,7 @@ func_BED7() {
 func_BED8() {
   func_BEDA();
   func_10779();
-  func_BEBD(level.neil, & "CP_ZMB_INTERACTIONS_MISSING_FLOPPY");
+  func_BEBD(level.neil, &"CP_ZMB_INTERACTIONS_MISSING_FLOPPY");
   for(;;) {
     level.neil.var_13084 waittill("trigger", var_00);
     if(!var_00 scripts\cp\utility::is_valid_player() || !isDefined(level.var_BEC3)) {
@@ -193,7 +193,7 @@ func_BEBD(param_00, param_01, param_02) {
 
   param_00.var_13084 makeusable();
   if(!isDefined(param_01)) {
-    param_01 = & "CP_ZMB_CHALLENGES_USE_NEIL";
+    param_01 = &"CP_ZMB_CHALLENGES_USE_NEIL";
   }
 
   param_00.var_13084 sethintstring(param_01);
@@ -380,15 +380,15 @@ func_BEB5(param_00) {
 
   switch (level.var_3C16) {
     case 1:
-      level thread func_BEB8(param_00, var_01, & "CP_ZMB_CHALLENGES_NEIL_3");
+      level thread func_BEB8(param_00, var_01, &"CP_ZMB_CHALLENGES_NEIL_3");
       break;
 
     case 2:
-      level thread func_BEB8(param_00, "iw7_erad_zm+eradpap1", & "CP_ZMB_CHALLENGES_NEIL_3");
+      level thread func_BEB8(param_00, "iw7_erad_zm+eradpap1", &"CP_ZMB_CHALLENGES_NEIL_3");
       break;
 
     case 3:
-      level thread func_BEB8(param_00, "iw7_erad_zm+eradpap2", & "CP_ZMB_CHALLENGES_NEIL_3");
+      level thread func_BEB8(param_00, "iw7_erad_zm+eradpap2", &"CP_ZMB_CHALLENGES_NEIL_3");
       break;
   }
 
@@ -1172,7 +1172,7 @@ pickup_battery(param_00, param_01) {
 
   level.var_BEB0 = 1;
   level scripts\cp\utility::set_quest_icon(8);
-  level.neil.var_13084 sethintstring( & "CP_ZMB_INTERACTIONS_LOAD_BATTERY");
+  level.neil.var_13084 sethintstring(&"CP_ZMB_INTERACTIONS_LOAD_BATTERY");
 }
 
 pickup_firmware(param_00, param_01) {
@@ -1189,7 +1189,7 @@ pickup_firmware(param_00, param_01) {
 
   level.var_BEC3 = 1;
   level scripts\cp\utility::set_quest_icon(9);
-  level.neil.var_13084 sethintstring( & "CP_ZMB_INTERACTIONS_LOAD_FLOPPY");
+  level.neil.var_13084 sethintstring(&"CP_ZMB_INTERACTIONS_LOAD_FLOPPY");
 }
 
 func_9696(param_00) {
@@ -1254,7 +1254,7 @@ func_1077A() {
 
 func_BE86() {
   self endon("disconnect");
-  self forceusehinton( & "COOP_INTERACTIONS_NEED_MONEY");
+  self forceusehinton(&"COOP_INTERACTIONS_NEED_MONEY");
   wait(1);
   self getrigindexfromarchetyperef();
 }
@@ -1299,12 +1299,12 @@ func_BEAC() {
   level.neil.var_6265 = 0;
   level.neil.cooldown = 1;
   level.neil.var_13084 makeusable();
-  level.neil.var_13084 sethintstring( & "CP_ZMB_CHALLENGES_REBOOTING");
+  level.neil.var_13084 sethintstring(&"CP_ZMB_CHALLENGES_REBOOTING");
   var_00 = 120;
   wait(var_00);
   level.neil.var_13084 setuserange(90);
   level.neil.var_13084 setusefov(180);
-  func_BEBD(level.neil, & "CP_ZMB_CHALLENGES_BUY_NEIL");
+  func_BEBD(level.neil, &"CP_ZMB_CHALLENGES_BUY_NEIL");
   level.neil.cooldown = undefined;
 }
 
@@ -1413,22 +1413,22 @@ func_4EFA() {
 
 neil_repair_hintstring_logic(param_00, param_01) {
   if(isDefined(level.var_BEC7)) {
-    return & "CP_ZMB_INTERACTIONS_ATTACH_HEAD";
+    return &"CP_ZMB_INTERACTIONS_ATTACH_HEAD";
   }
 
   if(isDefined(level.var_BEB0)) {
-    return & "CP_ZMB_INTERACTIONS_LOAD_BATTERY";
+    return &"CP_ZMB_INTERACTIONS_LOAD_BATTERY";
   }
 
   if(isDefined(level.var_BEC3)) {
-    return & "CP_ZMB_INTERACTIONS_LOAD_FLOPPY";
+    return &"CP_ZMB_INTERACTIONS_LOAD_FLOPPY";
   }
 
   if(!isDefined(level.var_BEC7)) {
-    return & "CP_ZMB_INTERACTIONS_MISSING_HEAD";
+    return &"CP_ZMB_INTERACTIONS_MISSING_HEAD";
   }
 
-  return & "CP_ZMB_INTERACTIONS_REPAR_NEIL";
+  return &"CP_ZMB_INTERACTIONS_REPAR_NEIL";
 }
 
 add_part_to_neil(param_00, param_01) {
@@ -1496,7 +1496,7 @@ func_1C5F() {
   level endon("neil_enabled_changed");
   level.var_1C3F = 1;
   for(;;) {
-    func_BEBD(level.neil, & "CP_ZMB_INTERACTIONS_PAUSE_CHALLENGES", 1);
+    func_BEBD(level.neil, &"CP_ZMB_INTERACTIONS_PAUSE_CHALLENGES", 1);
     for(;;) {
       level.neil.var_13084 waittill("trigger", var_00);
       if(!var_00 scripts\cp\utility::is_valid_player()) {
@@ -1511,7 +1511,7 @@ func_1C5F() {
     level thread scripts\cp\cp_challenge::func_C9B9();
     level.neil.upper_body thread func_BECD("n31l_spawn_assembly");
     wait(5);
-    func_BEBD(level.neil, & "CP_ZMB_CHALLENGES_RESUME_CHALLENGE", 1);
+    func_BEBD(level.neil, &"CP_ZMB_CHALLENGES_RESUME_CHALLENGE", 1);
     for(;;) {
       level.neil.var_13084 waittill("trigger", var_00);
       if(!var_00 scripts\cp\utility::is_valid_player()) {
@@ -1537,7 +1537,7 @@ func_BEC0() {
   scripts\engine\utility::flag_set("pause_challenges");
   level waittill("next_challenge_starting");
   level.var_1C3F = undefined;
-  func_BEBD(level.neil, & "CP_ZMB_CHALLENGES_RESUME_CHALLENGE");
+  func_BEBD(level.neil, &"CP_ZMB_CHALLENGES_RESUME_CHALLENGE");
   for(;;) {
     level.neil.var_13084 waittill("trigger", var_00);
     if(!var_00 scripts\cp\utility::is_valid_player()) {
@@ -1552,7 +1552,7 @@ func_BEC0() {
   level.var_6ACC = 0;
   level.neil.upper_body thread func_BECD("n31l_spawn_assembly");
   wait(6);
-  func_BEBD(level.neil, & "CP_ZMB_INTERACTIONS_PAUSE_CHALLENGES");
+  func_BEBD(level.neil, &"CP_ZMB_INTERACTIONS_PAUSE_CHALLENGES");
   if(!isDefined(level.var_1C3F)) {
     level.neil thread func_1C5F();
   }

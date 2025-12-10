@@ -42,8 +42,8 @@ function function_41b278b3() {
   self.script_width = 32;
   self.script_height = 128;
   self.script_length = 32;
-  self.prompt_and_visibility_func = & function_fbea6a64;
-  zm_unitrigger::register_static_unitrigger(self, & function_335dff5e);
+  self.prompt_and_visibility_func = &function_fbea6a64;
+  zm_unitrigger::register_static_unitrigger(self, &function_335dff5e);
 }
 
 function function_fbea6a64(e_player) {

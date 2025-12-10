@@ -26,8 +26,8 @@
 #namespace zm_island_bgb;
 
 function init() {
-  level.var_2c12d9a6 = & function_fa778ca4;
-  level.var_2d0e5eb6 = & function_2d0e5eb6;
+  level.var_2c12d9a6 = &function_fa778ca4;
+  level.var_2d0e5eb6 = &function_2d0e5eb6;
 }
 
 function function_fa778ca4() {

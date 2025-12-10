@@ -65,7 +65,7 @@ function function_b27f5ad5() {
   level flag::wait_till("skull_quest_complete");
   level flag::wait_till("ww3_found");
   level.var_1821d194 = 0;
-  level.var_2aacffb1 = & function_78b57752;
+  level.var_2aacffb1 = &function_78b57752;
   level flag::wait_till("spiders_from_mars_round");
   level.var_2aacffb1 = undefined;
 }
@@ -189,7 +189,7 @@ function function_69f5a9c5(var_1cdfa0f4) {
 }
 
 function function_901514b1() {
-  level._powerup_timeout_custom_time = & function_3321a018;
+  level._powerup_timeout_custom_time = &function_3321a018;
   var_93eb638b = zm_powerups::specific_powerup_drop(undefined, level.var_1a139831.origin - vectorscale((0, 0, 1), 110));
   var_93eb638b linkto(level.var_1a139831);
   level._powerup_timeout_custom_time = undefined;
@@ -224,7 +224,7 @@ function spiders_from_mars_round() {
     level flag::wait_till("spider_round_in_progress");
     if(level flag::get("spider_round")) {
       level flag::set("spiders_from_mars_round");
-      callback::on_ai_spawned( & function_49fac1ac);
+      callback::on_ai_spawned(&function_49fac1ac);
       level waittill("end_of_round");
       level thread function_2176e192();
       break;
@@ -246,13 +246,13 @@ function function_7855f232() {
     level.var_39b24700[i].script_forcespawn = 1;
   }
   assert(level.var_39b24700.size > 0);
-  array::thread_all(level.var_39b24700, & spawner::add_spawn_function, & zm_ai_spiders::function_7c1ef59b);
+  array::thread_all(level.var_39b24700, &spawner::add_spawn_function, &zm_ai_spiders::function_7c1ef59b);
 }
 
 function function_2176e192() {
   level flag::set("spider_ee_quest_complete");
   level flag::clear("spiders_from_mars_round");
-  callback::remove_on_ai_spawned( & function_49fac1ac);
+  callback::remove_on_ai_spawned(&function_49fac1ac);
   var_30ff0d6c = util::spawn_model("p7_zm_isl_cocoon_standing", level.var_1a139831.origin - vectorscale((0, 0, 1), 110), level.var_1a139831.angles);
   var_30ff0d6c linkto(level.var_1a139831);
   level.var_f5ad590f = undefined;
@@ -270,8 +270,8 @@ function function_2176e192() {
   var_1f71eb1.script_width = 128;
   var_1f71eb1.script_length = 130;
   var_1f71eb1.script_height = 100;
-  var_1f71eb1.prompt_and_visibility_func = & function_bf0f2293;
-  zm_unitrigger::register_static_unitrigger(var_1f71eb1, & function_2818665b);
+  var_1f71eb1.prompt_and_visibility_func = &function_bf0f2293;
+  zm_unitrigger::register_static_unitrigger(var_1f71eb1, &function_2818665b);
   var_f78dfee = struct::get("spider_cage_control");
   zm_unitrigger::unregister_unitrigger(var_f78dfee.trigger);
   level notify("hash_d8d0f829");
@@ -307,7 +307,7 @@ function function_2818665b() {
 }
 
 function function_315620f9() {
-  zm_devgui::add_custom_devgui_callback( & function_acbe4aed);
+  zm_devgui::add_custom_devgui_callback(&function_acbe4aed);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");

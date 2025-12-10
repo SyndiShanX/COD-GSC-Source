@@ -60,7 +60,6 @@ killcam(
       camtime = .05;
   }
 
-
   if(getdvar("scr_killcam_posttime") == "")
     postdelay = 2;
   else {
@@ -70,7 +69,6 @@ killcam(
   }
 
   killcamlength = camtime + postdelay;
-
 
   if(isDefined(maxtime) && killcamlength > maxtime) {
     if(maxtime < 2) {
@@ -82,7 +80,6 @@ killcam(
       postdelay = 1;
       camtime = maxtime - 1;
     }
-
 
     killcamlength = camtime + postdelay;
   }
@@ -101,7 +98,6 @@ killcam(
   self.killcamlength = killcamlength;
   self.psoffsettime = offsetTime;
 
-
   self allowSpectateTeam("allies", true);
   self allowSpectateTeam("axis", true);
   self allowSpectateTeam("freelook", true);
@@ -114,7 +110,6 @@ killcam(
   }
 
   self thread endedKillcamCleanup();
-
 
   wait 0.05;
 
@@ -157,9 +152,9 @@ killcam(
     if(timeUntilRespawn > 0)
       setLowerMessage("kc_info", game["strings"]["waiting_to_spawn"], timeUntilRespawn);
     else
-      setLowerMessage("kc_info", & "PLATFORM_PRESS_TO_SKIP");
+      setLowerMessage("kc_info", &"PLATFORM_PRESS_TO_SKIP");
   } else if(!level.gameEnded) {
-    setLowerMessage("kc_info", & "PLATFORM_PRESS_TO_RESPAWN");
+    setLowerMessage("kc_info", &"PLATFORM_PRESS_TO_RESPAWN");
   }
 
   if(!level.showingFinalKillcam)
@@ -393,7 +388,6 @@ killcamCleanup(clearState) {
 cancelKillCamOnUse() {
   self.cancelKillcam = false;
   self thread cancelKillCamOnUse_specificButton(::cancelKillCamUseButton, ::cancelKillCamCallback);
-
 }
 
 cancelKillCamUseButton() {

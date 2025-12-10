@@ -8,8 +8,8 @@
 #namespace _zm_weap_one_inch_punch;
 
 function init() {
-  clientfield::register("allplayers", "oneinchpunch_impact", 21000, 1, "int", & oneinchpunch_impact, 0, 0);
-  clientfield::register("actor", "oneinchpunch_physics_launchragdoll", 21000, 1, "int", & oneinchpunch_physics_launchragdoll, 0, 0);
+  clientfield::register("allplayers", "oneinchpunch_impact", 21000, 1, "int", &oneinchpunch_impact, 0, 0);
+  clientfield::register("actor", "oneinchpunch_physics_launchragdoll", 21000, 1, "int", &oneinchpunch_physics_launchragdoll, 0, 0);
 }
 
 function oneinchpunch_impact(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

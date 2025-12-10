@@ -962,9 +962,9 @@ turn_on_radiation() {
 
 hud_bonuses_create() {
   ypos = so_hud_ypos();
-  stealth_title = so_create_hud_item(3, ypos, & "SO_HIDDEN_SO_GHILLIES_KILL_STEALTH", self);
-  nofire_title = so_create_hud_item(4, ypos, & "SO_HIDDEN_SO_GHILLIES_KILL_NOFIRE", self);
-  basic_title = so_create_hud_item(5, ypos, & "SO_HIDDEN_SO_GHILLIES_KILL_BASIC", self);
+  stealth_title = so_create_hud_item(3, ypos, &"SO_HIDDEN_SO_GHILLIES_KILL_STEALTH", self);
+  nofire_title = so_create_hud_item(4, ypos, &"SO_HIDDEN_SO_GHILLIES_KILL_NOFIRE", self);
+  basic_title = so_create_hud_item(5, ypos, &"SO_HIDDEN_SO_GHILLIES_KILL_BASIC", self);
 
   stealth_kills = so_create_hud_item(3, ypos, undefined, self);
   nofire_kills = so_create_hud_item(4, ypos, undefined, self);

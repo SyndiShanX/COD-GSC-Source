@@ -16,7 +16,7 @@ preload() {
   level.remotemissile_fx["explode"] = loadfx("explosions/fx_exp_bomb_huge");
   maps\sp_killstreaks\_killstreaks::registerkillstreak("remote_missile_sp", "remote_missile_sp", "killstreak_remote_missile", "remote_missle_used", ::tryusepredatormissile, 1);
   maps\sp_killstreaks\_killstreaks::registerkillstreakaltweapon("remote_missile_sp", "remote_missile_missile_sp");
-  maps\sp_killstreaks\_killstreaks::registerkillstreakstrings("remote_missile_sp", & "KILLSTREAK_EARNED_REMOTE_MISSILE", & "KILLSTREAK_REMOTE_MISSILE_NOT_AVAILABLE", & "KILLSTREAK_REMOTE_MISSILE_INBOUND");
+  maps\sp_killstreaks\_killstreaks::registerkillstreakstrings("remote_missile_sp", &"KILLSTREAK_EARNED_REMOTE_MISSILE", &"KILLSTREAK_REMOTE_MISSILE_NOT_AVAILABLE", &"KILLSTREAK_REMOTE_MISSILE_INBOUND");
   maps\sp_killstreaks\_killstreaks::registerkillstreakdialog("remote_missile_sp", "mpl_killstreak_rmissile_strt", "kls_remote_missile_used", "", "kls_remote_missile_enemy", "", "kls_remote_missile_ready");
   maps\sp_killstreaks\_killstreaks::registerkillstreakdevdvar("remote_missile_sp", "scr_givemissileremote");
 }

@@ -151,7 +151,7 @@ player_puts_on_helmet(e_player_body) {
   level.player visionsetnaked("helmet_f35_low", 0.5);
   level thread f35_hide_outer_model_parts(1, 0.25);
   screen_fade_out(0.25);
-  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, & "plane_f35_player_vtol");
+  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, &"plane_f35_player_vtol");
   stop_exploder(102);
   exploder(103);
   screen_fade_in(0.25);

@@ -231,7 +231,7 @@ function_cfa794ca(mutators, itementry) {
 
   if(isDefined(weapon)) {
     if(weapon.name == #"eq_tripwire") {
-      if(mutators&32768) {
+      if(mutators& 32768) {
         return 8;
       }
 

@@ -10,12 +10,12 @@
 #namespace zm_weap_staff;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_staff", & __init__, undefined, undefined);
+  system::register("zm_weap_staff", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.var_27b5be99 = [];
-  callback::on_localplayer_spawned( & function_d10163c2);
+  callback::on_localplayer_spawned(&function_d10163c2);
 }
 
 function function_4be5e665(w_weapon, fx) {

@@ -94,7 +94,7 @@ _objective_perk_volume(n_objective) {
   while(true) {
     while(isDefined(b_touching) && !b_touching) {
       if(level.player istouching(self)) {
-        objective_set3d(n_objective, 1, "white", & "SP_OBJECTIVES_INTERACT");
+        objective_set3d(n_objective, 1, "white", &"SP_OBJECTIVES_INTERACT");
         b_touching = 1;
       }
 
@@ -161,7 +161,7 @@ objectives() {
       } else if(isDefined(level.objective_pos))
         objective_position(n_objective, level.objective_pos);
 
-      if(level.a_objectives[n_objective] != & "")
+      if(level.a_objectives[n_objective] != &"")
         objective_string(n_objective, level.a_objectives[n_objective], level.n_objective_targets);
     } else if(n_current_obj != n_objective || !is_objective_pos_the_same(level.objective_pos, pos)) {
       if(isDefined(level.objective_pos) && (!isstring(level.str_objective_type) || level.str_objective_type != "remove" && level.str_objective_type != "active")) {
@@ -280,16 +280,16 @@ objective_type(n_timer) {
 
       break;
     case "interact":
-      objective_set3d_prethink(n_objective, 1, "white", & "SP_OBJECTIVES_INTERACT", n_timer);
+      objective_set3d_prethink(n_objective, 1, "white", &"SP_OBJECTIVES_INTERACT", n_timer);
       setsaveddvar("cg_objectiveIndicatorPerkFarFadeDist", 1024);
       objective_setflag(n_objective, "perk", 1);
       break;
     case "defend":
-      objective_set3d_prethink(n_objective, 1, "default", & "SP_OBJECTIVES_DEFEND", n_timer);
+      objective_set3d_prethink(n_objective, 1, "default", &"SP_OBJECTIVES_DEFEND", n_timer);
       objective_setflag(n_objective, "fadeoutonscreen", 1);
       break;
     case "follow":
-      objective_set3d_prethink(n_objective, 1, "default", & "SP_OBJECTIVES_FOLLOW", n_timer);
+      objective_set3d_prethink(n_objective, 1, "default", &"SP_OBJECTIVES_FOLLOW", n_timer);
       objective_setflag(n_objective, "fadeoutonscreen", 1);
       break;
     case "*":

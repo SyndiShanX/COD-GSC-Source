@@ -51,7 +51,7 @@
 #namespace ability_player;
 
 function autoexec __init__sytem__() {
-  system::register("ability_player", & __init__, undefined, undefined);
+  system::register("ability_player", &__init__, undefined, undefined);
 }
 
 function __init__() {}

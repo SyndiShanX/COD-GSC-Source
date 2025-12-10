@@ -10,12 +10,12 @@
 #namespace zm_weap_staff_fire;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_staff_fire", & __init__, undefined, undefined);
+  system::register("zm_weap_staff_fire", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("actor", "fire_char_fx", 21000, 1, "int", & function_657b61e3, 0, 0);
-  clientfield::register("toplayer", "fire_muzzle_fx", 21000, 1, "counter", & fire_muzzle_fx, 0, 0);
+  clientfield::register("actor", "fire_char_fx", 21000, 1, "int", &function_657b61e3, 0, 0);
+  clientfield::register("toplayer", "fire_muzzle_fx", 21000, 1, "counter", &fire_muzzle_fx, 0, 0);
   level._effect["fire_muzzle"] = "dlc5/zmb_weapon/fx_staff_fire_muz_flash_1p";
   level._effect["fire_muzzle_ug"] = "dlc5/zmb_weapon/fx_staff_fire_muz_flash_1p_ug";
   zm_weap_staff::function_4be5e665(getweapon("staff_fire_upgraded"), "dlc5/zmb_weapon/fx_staff_charge_fire_lv1");

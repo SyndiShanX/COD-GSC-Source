@@ -29,13 +29,13 @@ func_128EE(var_00, var_01) {
   var_03 = 1;
 
   if(isDefined(level.func_AD89) || scripts\mp\killstreaks\helicopter::exceededmaxlittlebirds(var_02)) {
-    self iprintlnbold( & "KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+    self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
   } else if(!level.func_1A66.size) {
-    self iprintlnbold( & "KILLSTREAKS_UNAVAILABLE_IN_LEVEL");
+    self iprintlnbold(&"KILLSTREAKS_UNAVAILABLE_IN_LEVEL");
     return 0;
   } else if(scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount + var_03 >= scripts\mp\utility\game::maxvehiclesallowed()) {
-    self iprintlnbold( & "KILLSTREAKS_TOO_MANY_VEHICLES");
+    self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
     return 0;
   }
 
@@ -325,10 +325,10 @@ func_AAD4() {
     if(!isDefined(self)) {
       return;
     }
-    if(isDefined(var_08) && var_08 & level.idflags_penetration)
+    if(isDefined(var_08) && var_08 &level.idflags_penetration)
       self.wasdamagedfrombulletpenetration = 1;
 
-    if(isDefined(var_08) && var_08 & level.idflags_no_team_protection)
+    if(isDefined(var_08) && var_08 &level.idflags_no_team_protection)
       self.wasdamagedfrombulletricochet = 1;
 
     self.wasdamaged = 1;

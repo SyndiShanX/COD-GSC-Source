@@ -735,7 +735,7 @@ func_7FD7(param_00, param_01, param_02, param_03) {
     param_03 = 1;
   }
 
-  var_05 = param_00 & param_00 - 1;
+  var_05 = param_00 &param_00 - 1;
   if(var_05 > 0) {
     if(param_02 < 1) {
       var_06 = randomint(24);
@@ -747,7 +747,7 @@ func_7FD7(param_00, param_01, param_02, param_03) {
         var_0B = int(var_07 / var_09);
         var_07 = var_0A + var_0B >> 2 * var_09;
         var_0C = 1 << var_0B & 3;
-        if(param_00 & var_0C != 0 && isDefined(func_2C18(param_01 | var_04 | var_0C))) {
+        if(param_00 &var_0C != 0 && isDefined(func_2C18(param_01 | var_04 | var_0C))) {
           if(randomfloat(1) > func_3C3B(var_0C) * param_03) {
             var_04 = var_04 | var_0C;
           }
@@ -840,7 +840,7 @@ func_BDFB(param_00, param_01, param_02, param_03, param_04) {
   }
 
   if(param_00 != self.var_B8BA) {
-    var_07 = ~self.var_B8BA & param_00;
+    var_07 = ~self.var_B8BA &param_00;
     if(scripts\cp\utility::is_codxp()) {
       if(!scripts\engine\utility::istrue(self.entered_playspace)) {
         return 0;

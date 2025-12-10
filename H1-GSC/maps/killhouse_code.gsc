@@ -46,7 +46,7 @@ rope_obj(var_0) {
   level endon("starting_cargoship_obj");
 
   if(var_0) {
-    setobjectivestring("obj_price", & "KILLHOUSE_SLIDE_DOWN_THE_ROPE");
+    setobjectivestring("obj_price", &"KILLHOUSE_SLIDE_DOWN_THE_ROPE");
     setobjectivestate("obj_price", "current");
     var_1 = getent("top_of_rope", "targetname");
     setobjectivelocation("obj_price", var_1);
@@ -84,7 +84,7 @@ ambient_trucks() {
 }
 
 delay_objective_after_intro() {
-  registerobjective("obj_rifle", & "KILLHOUSE_PICK_UP_A_RIFLE_FROM", getent("obj_rifle_ammo", "targetname"));
+  registerobjective("obj_rifle", &"KILLHOUSE_PICK_UP_A_RIFLE_FROM", getent("obj_rifle_ammo", "targetname"));
   wait 3;
   setobjectivestate("obj_rifle", "current");
 }
@@ -319,7 +319,7 @@ fail_if_friendlies_in_line_of_fire() {
 
       if(var_6 && var_7 < 1000) {
         level notify("mission failed");
-        setdvar("ui_deadquote", & "KILLHOUSE_FIRED_NEAR_FRIENDLY");
+        setdvar("ui_deadquote", &"KILLHOUSE_FIRED_NEAR_FRIENDLY");
         maps\_utility::missionfailedwrapper();
       }
     }
@@ -419,7 +419,7 @@ deck_training() {
     thread maps\_utility::autosave_by_name("starting_deck_attack");
 
     if(var_8) {
-      registerobjective("obj_deck", & "KILLHOUSE_COMPLETE_THE_DECK_MOCKUP", getent("area_two_one", "targetname"));
+      registerobjective("obj_deck", &"KILLHOUSE_COMPLETE_THE_DECK_MOCKUP", getent("area_two_one", "targetname"));
       var_8 = 0;
     }
 
@@ -461,7 +461,7 @@ check_deck_training_quit() {
   level endon("test_cleared");
   self waittill("trigger");
   level notify("mission failed");
-  setdvar("ui_deadquote", & "KILLHOUSE_SHIP_MUST_CLEAR_DECK_MOCK_UP");
+  setdvar("ui_deadquote", &"KILLHOUSE_SHIP_MUST_CLEAR_DECK_MOCK_UP");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -522,9 +522,9 @@ jumpoff_monitor() {
   level notify("mission failed");
 
   if(common_scripts\utility::flag("activate_rope"))
-    setdvar("ui_deadquote", & "KILLHOUSE_SHIP_JUMPED_OFF");
+    setdvar("ui_deadquote", &"KILLHOUSE_SHIP_JUMPED_OFF");
   else
-    setdvar("ui_deadquote", & "KILLHOUSE_SHIP_JUMPED_TOO_EARLY");
+    setdvar("ui_deadquote", &"KILLHOUSE_SHIP_JUMPED_TOO_EARLY");
 
   maps\_utility::missionfailedwrapper();
 }
@@ -541,7 +541,7 @@ flashbang_ammo_monitor(var_0) {
 
     if(level.player getweaponammostock("flash_grenade") < var_3) {
       level notify("mission failed");
-      setdvar("ui_deadquote", & "KILLHOUSE_SHIP_OUT_OF_FLASH");
+      setdvar("ui_deadquote", &"KILLHOUSE_SHIP_OUT_OF_FLASH");
       maps\_utility::missionfailedwrapper();
     }
   }
@@ -749,7 +749,7 @@ rope() {
 fail_if_damage_waiter() {
   self endon("pop_down");
   self waittill("damage", var_0, var_1, var_2, var_3, var_4);
-  setdvar("ui_deadquote", & "KILLHOUSE_HIT_FRIENDLY");
+  setdvar("ui_deadquote", &"KILLHOUSE_HIT_FRIENDLY");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -772,7 +772,7 @@ starttimer(var_0) {
   level.hudtimerindex = 20;
   thread cqb_timer_think();
   level.updated_timer = maps\_hud_util::get_countdown_hud();
-  level.updated_timer.text.label = & "KILLHOUSE_YOUR_TIME";
+  level.updated_timer.text.label = &"KILLHOUSE_YOUR_TIME";
   level.updated_timer settenthstimerup(0.05);
   wait(var_0);
   maps\_hud_util::destroy_countdown_hud(level.updated_timer);
@@ -909,9 +909,9 @@ mission_failed_out_of_time() {
   level notify("mission failed");
 
   if(!common_scripts\utility::flag("at_finish"))
-    setdvar("ui_deadquote", & "KILLHOUSE_SHIP_TOO_SLOW");
+    setdvar("ui_deadquote", &"KILLHOUSE_SHIP_TOO_SLOW");
   else
-    setdvar("ui_deadquote", & "KILLHOUSE_SHIP_DIDNT_SPRINT");
+    setdvar("ui_deadquote", &"KILLHOUSE_SHIP_DIDNT_SPRINT");
 
   maps\_utility::missionfailedwrapper();
 }
@@ -922,7 +922,7 @@ mission_failed_quit_training() {
       level.player endon("death");
       level endon("kill_timer");
       level notify("mission failed");
-      setdvar("ui_deadquote", & "KILLHOUSE_SHIP_MUST_CLEAR_DECK_MOCK_UP");
+      setdvar("ui_deadquote", &"KILLHOUSE_SHIP_MUST_CLEAR_DECK_MOCK_UP");
       maps\_utility::missionfailedwrapper();
     }
 
@@ -1033,19 +1033,19 @@ killtimer(var_0, var_1) {
 
   if(getdvarint("loc_language", 0) == 12) {
     level.time = maps\_hud_util::get_stats_display_hud(var_7, 82, undefined, undefined, 1);
-    level.time_text = maps\_hud_util::get_stats_display_hud(var_8, 82, undefined, undefined, 1, & "KILLHOUSE_YOUR_TIME");
+    level.time_text = maps\_hud_util::get_stats_display_hud(var_8, 82, undefined, undefined, 1, &"KILLHOUSE_YOUR_TIME");
     level.time_text.alignx = "right";
   } else {
     level.time = maps\_hud_util::get_stats_display_hud(var_8, 82, undefined, undefined, 1);
     level.time.alignx = "right";
-    level.time_text = maps\_hud_util::get_stats_display_hud(var_7, 82, undefined, undefined, 1, & "KILLHOUSE_YOUR_TIME");
+    level.time_text = maps\_hud_util::get_stats_display_hud(var_7, 82, undefined, undefined, 1, &"KILLHOUSE_YOUR_TIME");
   }
 
   level.time setvalue(var_10);
   level waittill("accuracy_bonus");
   var_11 = var_10 - level.bonus_time;
   level.final_time = maps\_hud_util::get_stats_display_hud(var_9, 146, undefined, undefined, 1.6);
-  level.final_time_text = maps\_hud_util::get_stats_display_hud(var_9, 126, undefined, undefined, 1, & "KILLHOUSE_YOUR_FINAL_TIME");
+  level.final_time_text = maps\_hud_util::get_stats_display_hud(var_9, 126, undefined, undefined, 1, &"KILLHOUSE_YOUR_FINAL_TIME");
   level.final_time_text.alignx = "center";
   level.final_time.alignx = "center";
   level.final_time setvalue(var_11);
@@ -1054,9 +1054,9 @@ killtimer(var_0, var_1) {
     level.iw_best = maps\_hud_util::get_stats_display_hud(var_7, 68, undefined, undefined, 1);
 
     if(var_1)
-      level.iw_best_text = maps\_hud_util::get_stats_display_hud(var_8, 68, undefined, undefined, 1, & "KILLHOUSE_IW_DECK_TIME");
+      level.iw_best_text = maps\_hud_util::get_stats_display_hud(var_8, 68, undefined, undefined, 1, &"KILLHOUSE_IW_DECK_TIME");
     else
-      level.iw_best_text = maps\_hud_util::get_stats_display_hud(var_8, 68, undefined, undefined, 1, & "KILLHOUSE_IW_BEST_TIME");
+      level.iw_best_text = maps\_hud_util::get_stats_display_hud(var_8, 68, undefined, undefined, 1, &"KILLHOUSE_IW_BEST_TIME");
 
     level.iw_best_text.alignx = "right";
   } else {
@@ -1064,9 +1064,9 @@ killtimer(var_0, var_1) {
     level.iw_best.alignx = "right";
 
     if(var_1)
-      level.iw_best_text = maps\_hud_util::get_stats_display_hud(var_7, 68, undefined, undefined, 1, & "KILLHOUSE_IW_DECK_TIME");
+      level.iw_best_text = maps\_hud_util::get_stats_display_hud(var_7, 68, undefined, undefined, 1, &"KILLHOUSE_IW_DECK_TIME");
     else
-      level.iw_best_text = maps\_hud_util::get_stats_display_hud(var_7, 68, undefined, undefined, 1, & "KILLHOUSE_IW_BEST_TIME");
+      level.iw_best_text = maps\_hud_util::get_stats_display_hud(var_7, 68, undefined, undefined, 1, &"KILLHOUSE_IW_BEST_TIME");
   }
 
   level.iw_best setvalue(var_0);
@@ -1075,22 +1075,22 @@ killtimer(var_0, var_1) {
     wait 5;
     clear_timer_elems();
   } else {
-    level.recommended_label = maps\_hud_util::get_stats_display_hud(var_9, 174, undefined, undefined, 1, & "KILLHOUSE_RECOMMENDED_LABEL");
+    level.recommended_label = maps\_hud_util::get_stats_display_hud(var_9, 174, undefined, undefined, 1, &"KILLHOUSE_RECOMMENDED_LABEL");
     level.recommended_label.alignx = "center";
     thread clearhud_after10sec();
 
     if(var_11 > 40) {
       setdvar("recommended_gameskill", "0");
-      level.recommended = maps\_hud_util::get_stats_display_hud(var_9, 192, undefined, undefined, 1.6, & "KILLHOUSE_RECOMMENDED_EASY");
+      level.recommended = maps\_hud_util::get_stats_display_hud(var_9, 192, undefined, undefined, 1.6, &"KILLHOUSE_RECOMMENDED_EASY");
     } else if(var_11 > 26) {
       setdvar("recommended_gameskill", "1");
-      level.recommended = maps\_hud_util::get_stats_display_hud(var_9, 192, undefined, undefined, 1.6, & "KILLHOUSE_RECOMMENDED_NORMAL");
+      level.recommended = maps\_hud_util::get_stats_display_hud(var_9, 192, undefined, undefined, 1.6, &"KILLHOUSE_RECOMMENDED_NORMAL");
     } else if(var_11 > 20) {
       setdvar("recommended_gameskill", "2");
-      level.recommended = maps\_hud_util::get_stats_display_hud(var_9, 192, undefined, undefined, 1.6, & "KILLHOUSE_RECOMMENDED_HARD");
+      level.recommended = maps\_hud_util::get_stats_display_hud(var_9, 192, undefined, undefined, 1.6, &"KILLHOUSE_RECOMMENDED_HARD");
     } else {
       setdvar("recommended_gameskill", "3");
-      level.recommended = maps\_hud_util::get_stats_display_hud(var_9, 192, undefined, undefined, 1.6, & "KILLHOUSE_RECOMMENDED_VETERAN");
+      level.recommended = maps\_hud_util::get_stats_display_hud(var_9, 192, undefined, undefined, 1.6, &"KILLHOUSE_RECOMMENDED_VETERAN");
     }
 
     level.recommended.alignx = "center";
@@ -1129,12 +1129,12 @@ accuracy_bonus() {
   level.bonus_time = common_scripts\utility::ter_op(level.bonus_time > 0, level.bonus_time, 0);
 
   if(getdvarint("loc_language", 0) == 12) {
-    level.bonus_text = maps\_hud_util::get_stats_display_hud(-50, 97, undefined, undefined, 1, & "KILLHOUSE_ACCURACY_BONUS");
+    level.bonus_text = maps\_hud_util::get_stats_display_hud(-50, 97, undefined, undefined, 1, &"KILLHOUSE_ACCURACY_BONUS");
     level.bonus = maps\_hud_util::get_stats_display_hud(-232, 97, undefined, undefined, 1);
     level.bonus.alignx = "left";
     level.bonus_text.alignx = "right";
   } else {
-    level.bonus_text = maps\_hud_util::get_stats_display_hud(-232, 97, undefined, undefined, 1, & "KILLHOUSE_ACCURACY_BONUS");
+    level.bonus_text = maps\_hud_util::get_stats_display_hud(-232, 97, undefined, undefined, 1, &"KILLHOUSE_ACCURACY_BONUS");
     level.bonus = maps\_hud_util::get_stats_display_hud(-50, 97, undefined, undefined, 1);
     level.bonus.alignx = "right";
   }
@@ -1937,84 +1937,84 @@ glowing_rope() {
 
 registeractions() {
   level.actionbinds = [];
-  registeractionbinding("objectives", "pause", & "KILLHOUSE_HINT_CHECK_OBJECTIVES_PAUSED");
-  registeractionbinding("objectives_pc", "+scores", & "KILLHOUSE_HINT_CHECK_OBJECTIVES_SCORES");
-  registeractionbinding("pc_attack", "+attack", & "KILLHOUSE_HINT_ATTACK_PC");
-  registeractionbinding("pc_attack", "+attack_akimbo_accessible", & "TRAINER_HINT_HIP_ATTACK_PC");
-  registeractionbinding("pc_hip_attack", "+attack", & "KILLHOUSE_HINT_HIP_ATTACK_PC");
-  registeractionbinding("pc_hip_attack", "+attack_akimbo_accessible", & "TRAINER_HINT_HIP_ATTACK_PC");
-  registeractionbinding("hip_attack", "+attack", & "KILLHOUSE_HINT_HIP_ATTACK");
-  registeractionbinding("hip_attack", "+attack_akimbo_accessible", & "TRAINER_HINT_HIP_ATTACK_PC");
-  registeractionbinding("attack", "+attack", & "KILLHOUSE_HINT_ATTACK");
-  registeractionbinding("attack", "+attack_akimbo_accessible", & "TRAINER_HINT_HIP_ATTACK_PC");
-  registeractionbinding("stop_ads", "+speed_throw", & "KILLHOUSE_HINT_STOP_ADS_THROW");
-  registeractionbinding("stop_ads", "+speed", & "KILLHOUSE_HINT_STOP_ADS");
-  registeractionbinding("stop_ads", "+toggleads_throw", & "KILLHOUSE_HINT_STOP_ADS_TOGGLE_THROW");
-  registeractionbinding("stop_ads", "toggleads", & "KILLHOUSE_HINT_STOP_ADS_TOGGLE");
-  registeractionbinding("ads_360", "+speed_throw", & "KILLHOUSE_HINT_ADS_THROW_360");
-  registeractionbinding("ads_360", "+speed", & "KILLHOUSE_HINT_ADS_360");
-  registeractionbinding("ads", "+speed_throw", & "KILLHOUSE_HINT_ADS_THROW");
-  registeractionbinding("ads", "+speed", & "KILLHOUSE_HINT_ADS");
-  registeractionbinding("ads", "+toggleads_throw", & "KILLHOUSE_HINT_ADS_TOGGLE_THROW");
-  registeractionbinding("ads", "toggleads", & "KILLHOUSE_HINT_ADS_TOGGLE");
-  registeractionbinding("ads_switch", "+speed_throw", & "KILLHOUSE_HINT_ADS_SWITCH_THROW");
-  registeractionbinding("ads_switch", "+speed", & "KILLHOUSE_HINT_ADS_SWITCH");
-  registeractionbinding("ads_switch_shoulder", "+speed_throw", & "KILLHOUSE_HINT_ADS_SWITCH_THROW_SHOULDER");
-  registeractionbinding("ads_switch_shoulder", "+speed", & "KILLHOUSE_HINT_ADS_SWITCH_SHOULDER");
-  registeractionbinding("breath", "+melee_breath", & "KILLHOUSE_HINT_BREATH_MELEE");
-  registeractionbinding("breath", "+breath_sprint", & "KILLHOUSE_HINT_BREATH_SPRINT");
-  registeractionbinding("breath", "+holdbreath", & "KILLHOUSE_HINT_BREATH");
-  registeractionbinding("melee", "+melee", & "KILLHOUSE_HINT_MELEE");
-  registeractionbinding("melee", "+melee_breath", & "KILLHOUSE_HINT_MELEE");
-  registeractionbinding("melee", "+melee_zoom", & "KILLHOUSE_HINT_MELEE");
-  registeractionbinding("prone", "goprone", & "KILLHOUSE_HINT_PRONE");
-  registeractionbinding("prone", "+stance", & "KILLHOUSE_HINT_PRONE_STANCE");
-  registeractionbinding("prone", "toggleprone", & "KILLHOUSE_HINT_PRONE_TOGGLE");
-  registeractionbinding("prone", "+prone", & "KILLHOUSE_HINT_PRONE_HOLD");
-  registeractionbinding("prone", "lowerstance", & "KILLHOUSE_HINT_PRONE_DOUBLE");
-  registeractionbinding("crouch", "gocrouch", & "KILLHOUSE_HINT_CROUCH");
-  registeractionbinding("crouch", "+stance", & "KILLHOUSE_HINT_CROUCH_STANCE");
+  registeractionbinding("objectives", "pause", &"KILLHOUSE_HINT_CHECK_OBJECTIVES_PAUSED");
+  registeractionbinding("objectives_pc", "+scores", &"KILLHOUSE_HINT_CHECK_OBJECTIVES_SCORES");
+  registeractionbinding("pc_attack", "+attack", &"KILLHOUSE_HINT_ATTACK_PC");
+  registeractionbinding("pc_attack", "+attack_akimbo_accessible", &"TRAINER_HINT_HIP_ATTACK_PC");
+  registeractionbinding("pc_hip_attack", "+attack", &"KILLHOUSE_HINT_HIP_ATTACK_PC");
+  registeractionbinding("pc_hip_attack", "+attack_akimbo_accessible", &"TRAINER_HINT_HIP_ATTACK_PC");
+  registeractionbinding("hip_attack", "+attack", &"KILLHOUSE_HINT_HIP_ATTACK");
+  registeractionbinding("hip_attack", "+attack_akimbo_accessible", &"TRAINER_HINT_HIP_ATTACK_PC");
+  registeractionbinding("attack", "+attack", &"KILLHOUSE_HINT_ATTACK");
+  registeractionbinding("attack", "+attack_akimbo_accessible", &"TRAINER_HINT_HIP_ATTACK_PC");
+  registeractionbinding("stop_ads", "+speed_throw", &"KILLHOUSE_HINT_STOP_ADS_THROW");
+  registeractionbinding("stop_ads", "+speed", &"KILLHOUSE_HINT_STOP_ADS");
+  registeractionbinding("stop_ads", "+toggleads_throw", &"KILLHOUSE_HINT_STOP_ADS_TOGGLE_THROW");
+  registeractionbinding("stop_ads", "toggleads", &"KILLHOUSE_HINT_STOP_ADS_TOGGLE");
+  registeractionbinding("ads_360", "+speed_throw", &"KILLHOUSE_HINT_ADS_THROW_360");
+  registeractionbinding("ads_360", "+speed", &"KILLHOUSE_HINT_ADS_360");
+  registeractionbinding("ads", "+speed_throw", &"KILLHOUSE_HINT_ADS_THROW");
+  registeractionbinding("ads", "+speed", &"KILLHOUSE_HINT_ADS");
+  registeractionbinding("ads", "+toggleads_throw", &"KILLHOUSE_HINT_ADS_TOGGLE_THROW");
+  registeractionbinding("ads", "toggleads", &"KILLHOUSE_HINT_ADS_TOGGLE");
+  registeractionbinding("ads_switch", "+speed_throw", &"KILLHOUSE_HINT_ADS_SWITCH_THROW");
+  registeractionbinding("ads_switch", "+speed", &"KILLHOUSE_HINT_ADS_SWITCH");
+  registeractionbinding("ads_switch_shoulder", "+speed_throw", &"KILLHOUSE_HINT_ADS_SWITCH_THROW_SHOULDER");
+  registeractionbinding("ads_switch_shoulder", "+speed", &"KILLHOUSE_HINT_ADS_SWITCH_SHOULDER");
+  registeractionbinding("breath", "+melee_breath", &"KILLHOUSE_HINT_BREATH_MELEE");
+  registeractionbinding("breath", "+breath_sprint", &"KILLHOUSE_HINT_BREATH_SPRINT");
+  registeractionbinding("breath", "+holdbreath", &"KILLHOUSE_HINT_BREATH");
+  registeractionbinding("melee", "+melee", &"KILLHOUSE_HINT_MELEE");
+  registeractionbinding("melee", "+melee_breath", &"KILLHOUSE_HINT_MELEE");
+  registeractionbinding("melee", "+melee_zoom", &"KILLHOUSE_HINT_MELEE");
+  registeractionbinding("prone", "goprone", &"KILLHOUSE_HINT_PRONE");
+  registeractionbinding("prone", "+stance", &"KILLHOUSE_HINT_PRONE_STANCE");
+  registeractionbinding("prone", "toggleprone", &"KILLHOUSE_HINT_PRONE_TOGGLE");
+  registeractionbinding("prone", "+prone", &"KILLHOUSE_HINT_PRONE_HOLD");
+  registeractionbinding("prone", "lowerstance", &"KILLHOUSE_HINT_PRONE_DOUBLE");
+  registeractionbinding("crouch", "gocrouch", &"KILLHOUSE_HINT_CROUCH");
+  registeractionbinding("crouch", "+stance", &"KILLHOUSE_HINT_CROUCH_STANCE");
 
   if(!level.console) {
-    registeractionbinding("crouch", "+togglecrouch", & "PLATFORM_HINT_CROUCH_TOGGLE_PC");
-    registeractionbinding("crouch", "+movedown", & "PLATFORM_HINT_HOLD_CROUCH");
+    registeractionbinding("crouch", "+togglecrouch", &"PLATFORM_HINT_CROUCH_TOGGLE_PC");
+    registeractionbinding("crouch", "+movedown", &"PLATFORM_HINT_HOLD_CROUCH");
   }
 
-  registeractionbinding("crouch", "togglecrouch", & "KILLHOUSE_HINT_CROUCH_TOGGLE");
-  registeractionbinding("stand", "+gostand", & "KILLHOUSE_HINT_STAND");
-  registeractionbinding("stand", "+stance", & "KILLHOUSE_HINT_STAND_STANCE");
-  registeractionbinding("jump", "+gostand", & "KILLHOUSE_HINT_JUMP_STAND");
-  registeractionbinding("jump", "+moveup", & "KILLHOUSE_HINT_JUMP");
-  registeractionbinding("sprint", "+breath_sprint", & "KILLHOUSE_HINT_SPRINT");
-  registeractionbinding("sprint", "+sprint", & "KILLHOUSE_HINT_SPRINT");
-  registeractionbinding("sprint", "+sprint_zoom", & "KILLHOUSE_HINT_SPRINT");
-  registeractionbinding("sprint_pc", "+breath_sprint", & "KILLHOUSE_HINT_SPRINT_PC");
-  registeractionbinding("sprint_pc", "+sprint", & "KILLHOUSE_HINT_SPRINT_PC");
-  registeractionbinding("sprint_pc", "+sprint_zoom", & "KILLHOUSE_HINT_SPRINT_PC");
-  registeractionbinding("sprint2", "+breath_sprint", & "KILLHOUSE_HINT_HOLDING_SPRINT");
-  registeractionbinding("sprint2", "+sprint", & "KILLHOUSE_HINT_HOLDING_SPRINT");
-  registeractionbinding("sprint2", "+sprint_zoom", & "KILLHOUSE_HINT_HOLDING_SPRINT");
-  registeractionbinding("reload", "+reload", & "KILLHOUSE_HINT_RELOAD");
-  registeractionbinding("reload", "+usereload", & "KILLHOUSE_HINT_RELOAD_USE");
-  registeractionbinding("mantle", "+gostand", & "KILLHOUSE_HINT_MANTLE");
-  registeractionbinding("sidearm", "weapnext", & "KILLHOUSE_HINT_SIDEARM_SWAP");
-  registeractionbinding("primary", "weapnext", & "KILLHOUSE_HINT_PRIMARY_SWAP");
-  registeractionbinding("frag", "+frag", & "KILLHOUSE_HINT_FRAG");
-  registeractionbinding("flash", "+smoke", & "KILLHOUSE_HINT_FLASH");
-  registeractionbinding("swap_launcher", "+activate", & "KILLHOUSE_HINT_SWAP");
-  registeractionbinding("swap_launcher", "+usereload", & "KILLHOUSE_HINT_SWAP_RELOAD");
-  registeractionbinding("firemode", "+actionslot 2", & "KILLHOUSE_HINT_FIREMODE");
-  registeractionbinding("attack_launcher", "+attack", & "KILLHOUSE_HINT_LAUNCHER_ATTACK");
-  registeractionbinding("pc_attack_launcher", "+attack", & "KILLHOUSE_HINT_LAUNCHER_ATTACK_PC");
-  registeractionbinding("swap_explosives", "+activate", & "KILLHOUSE_HINT_EXPLOSIVES");
-  registeractionbinding("swap_explosives", "+usereload", & "KILLHOUSE_HINT_EXPLOSIVES_RELOAD");
-  registeractionbinding("plant_explosives", "+activate", & "KILLHOUSE_HINT_EXPLOSIVES_PLANT");
-  registeractionbinding("plant_explosives", "+usereload", & "KILLHOUSE_HINT_EXPLOSIVES_PLANT");
-  registeractionbinding("equip_C4", "+actionslot 4", & "KILLHOUSE_HINT_EQUIP_C4");
-  registeractionbinding("throw_C4", "+toggleads_throw", & "KILLHOUSE_HINT_THROW_C4_TOGGLE");
-  registeractionbinding("throw_C4", "+speed_throw", & "KILLHOUSE_HINT_THROW_C4_SPEED");
-  registeractionbinding("throw_C4", "+throw", & "KILLHOUSE_HINT_THROW_C4");
-  registeractionbinding("detonate_C4", "+attack", & "KILLHOUSE_DETONATE_C4");
+  registeractionbinding("crouch", "togglecrouch", &"KILLHOUSE_HINT_CROUCH_TOGGLE");
+  registeractionbinding("stand", "+gostand", &"KILLHOUSE_HINT_STAND");
+  registeractionbinding("stand", "+stance", &"KILLHOUSE_HINT_STAND_STANCE");
+  registeractionbinding("jump", "+gostand", &"KILLHOUSE_HINT_JUMP_STAND");
+  registeractionbinding("jump", "+moveup", &"KILLHOUSE_HINT_JUMP");
+  registeractionbinding("sprint", "+breath_sprint", &"KILLHOUSE_HINT_SPRINT");
+  registeractionbinding("sprint", "+sprint", &"KILLHOUSE_HINT_SPRINT");
+  registeractionbinding("sprint", "+sprint_zoom", &"KILLHOUSE_HINT_SPRINT");
+  registeractionbinding("sprint_pc", "+breath_sprint", &"KILLHOUSE_HINT_SPRINT_PC");
+  registeractionbinding("sprint_pc", "+sprint", &"KILLHOUSE_HINT_SPRINT_PC");
+  registeractionbinding("sprint_pc", "+sprint_zoom", &"KILLHOUSE_HINT_SPRINT_PC");
+  registeractionbinding("sprint2", "+breath_sprint", &"KILLHOUSE_HINT_HOLDING_SPRINT");
+  registeractionbinding("sprint2", "+sprint", &"KILLHOUSE_HINT_HOLDING_SPRINT");
+  registeractionbinding("sprint2", "+sprint_zoom", &"KILLHOUSE_HINT_HOLDING_SPRINT");
+  registeractionbinding("reload", "+reload", &"KILLHOUSE_HINT_RELOAD");
+  registeractionbinding("reload", "+usereload", &"KILLHOUSE_HINT_RELOAD_USE");
+  registeractionbinding("mantle", "+gostand", &"KILLHOUSE_HINT_MANTLE");
+  registeractionbinding("sidearm", "weapnext", &"KILLHOUSE_HINT_SIDEARM_SWAP");
+  registeractionbinding("primary", "weapnext", &"KILLHOUSE_HINT_PRIMARY_SWAP");
+  registeractionbinding("frag", "+frag", &"KILLHOUSE_HINT_FRAG");
+  registeractionbinding("flash", "+smoke", &"KILLHOUSE_HINT_FLASH");
+  registeractionbinding("swap_launcher", "+activate", &"KILLHOUSE_HINT_SWAP");
+  registeractionbinding("swap_launcher", "+usereload", &"KILLHOUSE_HINT_SWAP_RELOAD");
+  registeractionbinding("firemode", "+actionslot 2", &"KILLHOUSE_HINT_FIREMODE");
+  registeractionbinding("attack_launcher", "+attack", &"KILLHOUSE_HINT_LAUNCHER_ATTACK");
+  registeractionbinding("pc_attack_launcher", "+attack", &"KILLHOUSE_HINT_LAUNCHER_ATTACK_PC");
+  registeractionbinding("swap_explosives", "+activate", &"KILLHOUSE_HINT_EXPLOSIVES");
+  registeractionbinding("swap_explosives", "+usereload", &"KILLHOUSE_HINT_EXPLOSIVES_RELOAD");
+  registeractionbinding("plant_explosives", "+activate", &"KILLHOUSE_HINT_EXPLOSIVES_PLANT");
+  registeractionbinding("plant_explosives", "+usereload", &"KILLHOUSE_HINT_EXPLOSIVES_PLANT");
+  registeractionbinding("equip_C4", "+actionslot 4", &"KILLHOUSE_HINT_EQUIP_C4");
+  registeractionbinding("throw_C4", "+toggleads_throw", &"KILLHOUSE_HINT_THROW_C4_TOGGLE");
+  registeractionbinding("throw_C4", "+speed_throw", &"KILLHOUSE_HINT_THROW_C4_SPEED");
+  registeractionbinding("throw_C4", "+throw", &"KILLHOUSE_HINT_THROW_C4");
+  registeractionbinding("detonate_C4", "+attack", &"KILLHOUSE_DETONATE_C4");
   initkeys();
   updatekeysforbindings();
 }
@@ -2106,7 +2106,7 @@ killhouse_hint(var_0, var_1, var_2) {
   level endon("clearing_hints");
   maps\_utility::hint(var_0, undefined, undefined, var_2);
 
-  if(var_0 == & "KILLHOUSE_HINT_LADDER")
+  if(var_0 == &"KILLHOUSE_HINT_LADDER")
     var_1 = 5;
 
   if(isDefined(var_1))

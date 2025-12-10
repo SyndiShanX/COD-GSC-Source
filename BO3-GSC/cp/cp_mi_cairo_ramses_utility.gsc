@@ -34,7 +34,7 @@
 #namespace ramses_util;
 
 function autoexec __init__sytem__() {
-  system::register("ramses_util", & __init__, undefined, undefined);
+  system::register("ramses_util", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -87,20 +87,20 @@ function function_1903e7dc() {
 }
 
 function function_2f9e262a() {
-  scene::add_scene_func("p7_fxanim_cp_ramses_arena_billboard_bundle", & function_1c347e72, "init", "arena_billboard_static1");
-  scene::add_scene_func("p7_fxanim_cp_ramses_arena_billboard_bundle", & function_a72c2dda, "done", "arena_billboard_static2");
-  scene::add_scene_func("p7_fxanim_cp_ramses_arena_billboard_02_bundle", & function_1c347e72, "init", "arena_billboard_02_static1");
-  scene::add_scene_func("p7_fxanim_cp_ramses_arena_billboard_02_bundle", & function_a72c2dda, "done", "arena_billboard_02_static2");
-  scene::add_scene_func("p7_fxanim_cp_ramses_cinema_collapse_bundle", & function_1c347e72, "init", "cinema_collapse_static1");
-  scene::add_scene_func("p7_fxanim_cp_ramses_cinema_collapse_bundle", & function_a72c2dda, "done", "cinema_collapse_static2");
-  scene::add_scene_func("p7_fxanim_cp_ramses_quadtank_statue_bundle", & function_1c347e72, "init", "quadtank_statue_static1");
-  scene::add_scene_func("p7_fxanim_cp_ramses_quadtank_statue_bundle", & function_a72c2dda, "done", "quadtank_statue_static2");
-  scene::add_scene_func("p7_fxanim_cp_ramses_quadtank_plaza_building_rocket_bundle", & function_1c347e72, "init", "rocket_static1");
-  scene::add_scene_func("p7_fxanim_cp_ramses_quadtank_plaza_building_rocket_bundle", & function_a72c2dda, "done", "rocket_static2");
-  scene::add_scene_func("p7_fxanim_cp_ramses_quadtank_plaza_glass_building_bundle", & function_1c347e72, "init", "glass_building_static1");
-  scene::add_scene_func("p7_fxanim_cp_ramses_quadtank_plaza_glass_building_bundle", & function_a72c2dda, "done", "glass_building_static2");
-  scene::add_scene_func("p7_fxanim_cp_ramses_qt_plaza_palace_wall_collapse_bundle", & function_1c347e72, "init", "wall_collapse_static1");
-  scene::add_scene_func("p7_fxanim_cp_ramses_qt_plaza_palace_wall_collapse_bundle", & function_a72c2dda, "done", "wall_collapse_static2");
+  scene::add_scene_func("p7_fxanim_cp_ramses_arena_billboard_bundle", &function_1c347e72, "init", "arena_billboard_static1");
+  scene::add_scene_func("p7_fxanim_cp_ramses_arena_billboard_bundle", &function_a72c2dda, "done", "arena_billboard_static2");
+  scene::add_scene_func("p7_fxanim_cp_ramses_arena_billboard_02_bundle", &function_1c347e72, "init", "arena_billboard_02_static1");
+  scene::add_scene_func("p7_fxanim_cp_ramses_arena_billboard_02_bundle", &function_a72c2dda, "done", "arena_billboard_02_static2");
+  scene::add_scene_func("p7_fxanim_cp_ramses_cinema_collapse_bundle", &function_1c347e72, "init", "cinema_collapse_static1");
+  scene::add_scene_func("p7_fxanim_cp_ramses_cinema_collapse_bundle", &function_a72c2dda, "done", "cinema_collapse_static2");
+  scene::add_scene_func("p7_fxanim_cp_ramses_quadtank_statue_bundle", &function_1c347e72, "init", "quadtank_statue_static1");
+  scene::add_scene_func("p7_fxanim_cp_ramses_quadtank_statue_bundle", &function_a72c2dda, "done", "quadtank_statue_static2");
+  scene::add_scene_func("p7_fxanim_cp_ramses_quadtank_plaza_building_rocket_bundle", &function_1c347e72, "init", "rocket_static1");
+  scene::add_scene_func("p7_fxanim_cp_ramses_quadtank_plaza_building_rocket_bundle", &function_a72c2dda, "done", "rocket_static2");
+  scene::add_scene_func("p7_fxanim_cp_ramses_quadtank_plaza_glass_building_bundle", &function_1c347e72, "init", "glass_building_static1");
+  scene::add_scene_func("p7_fxanim_cp_ramses_quadtank_plaza_glass_building_bundle", &function_a72c2dda, "done", "glass_building_static2");
+  scene::add_scene_func("p7_fxanim_cp_ramses_qt_plaza_palace_wall_collapse_bundle", &function_1c347e72, "init", "wall_collapse_static1");
+  scene::add_scene_func("p7_fxanim_cp_ramses_qt_plaza_palace_wall_collapse_bundle", &function_a72c2dda, "done", "wall_collapse_static2");
 }
 
 function function_1c347e72(a_ents, str_targetname) {
@@ -933,7 +933,7 @@ function function_f08afb37(b_on = 1, var_eebad467 = 0.1) {
   if(isalive(self) && issentient(self)) {
     if(b_on) {
       self.attackeraccuracy = var_eebad467;
-      self.overrideactordamage = & function_74e97bfe;
+      self.overrideactordamage = &function_74e97bfe;
       self notify("hash_4ef4ba2d");
     } else {
       self.attackeraccuracy = var_eebad467;
@@ -1141,7 +1141,7 @@ function scene_model_streamer_hint(a_ents) {
     }
   }
   if(isDefined(self.scenes[0]._s.nextscenebundle)) {
-    scene::add_scene_func(self.scenes[0]._s.nextscenebundle, & scene_model_streamer_hint, "play");
+    scene::add_scene_func(self.scenes[0]._s.nextscenebundle, &scene_model_streamer_hint, "play");
   }
 }
 
@@ -1152,7 +1152,7 @@ function force_stream_1stpersonplayer(n_hint_time = 5) {
 function co_op_teleport_on_igc_end(str_scene, str_teleport_name) {
   assert(isDefined(str_scene), "");
   assert(isDefined(str_teleport_name), "");
-  scene::add_scene_func(str_scene, & teleport_co_op_players_on_scene_done, "players_done");
+  scene::add_scene_func(str_scene, &teleport_co_op_players_on_scene_done, "players_done");
   level thread wait_for_scene_done(str_scene, str_teleport_name);
 }
 

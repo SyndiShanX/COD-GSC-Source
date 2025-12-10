@@ -2357,9 +2357,9 @@ price_death() {
   var_1 = undefined;
 
   if(isplayer(var_0))
-    var_1 = & "SCOUTSNIPER_FRIENDLY_FIRE_WILL_NOT";
+    var_1 = &"SCOUTSNIPER_FRIENDLY_FIRE_WILL_NOT";
   else
-    var_1 = & "SCOUTSNIPER_YOUR_ACTIONS_GOT_CPT";
+    var_1 = &"SCOUTSNIPER_YOUR_ACTIONS_GOT_CPT";
 
   setdvar("ui_deadquote", var_1);
   thread maps\_utility::missionfailedwrapper();
@@ -2367,7 +2367,7 @@ price_death() {
 
 price_left_behind() {
   maps\_utility::radio_dialogue_stop();
-  var_0 = & "SCOUTSNIPER_LEFT_BEHIND";
+  var_0 = &"SCOUTSNIPER_LEFT_BEHIND";
   setdvar("ui_deadquote", var_0);
   thread maps\_utility::missionfailedwrapper();
 }
@@ -3178,11 +3178,11 @@ hint_setup() {
   precachestring(&"SCOUTSNIPER_HINT_PRONE_HOLD");
   precachestring(&"SCOUTSNIPER_HINT_PRONE_DOUBLE");
   level.actionbinds = [];
-  registeractionbinding("prone", "+stance", & "SCOUTSNIPER_HINT_PRONE_STANCE");
-  registeractionbinding("prone", "goprone", & "SCOUTSNIPER_HINT_PRONE");
-  registeractionbinding("prone", "toggleprone", & "SCOUTSNIPER_HINT_PRONE_TOGGLE");
-  registeractionbinding("prone", "+prone", & "SCOUTSNIPER_HINT_PRONE_HOLD");
-  registeractionbinding("prone", "lowerstance", & "SCOUTSNIPER_HINT_PRONE_DOUBLE");
+  registeractionbinding("prone", "+stance", &"SCOUTSNIPER_HINT_PRONE_STANCE");
+  registeractionbinding("prone", "goprone", &"SCOUTSNIPER_HINT_PRONE");
+  registeractionbinding("prone", "toggleprone", &"SCOUTSNIPER_HINT_PRONE_TOGGLE");
+  registeractionbinding("prone", "+prone", &"SCOUTSNIPER_HINT_PRONE_HOLD");
+  registeractionbinding("prone", "lowerstance", &"SCOUTSNIPER_HINT_PRONE_DOUBLE");
   initkeys();
   updatekeysforbindings();
   maps\_utility::delaythread(1, ::pronehint);

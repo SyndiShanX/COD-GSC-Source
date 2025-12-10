@@ -546,16 +546,16 @@ boxCaptureThink(player) {
         case "tank_skill":
         case "engineer_skill":
           if(is_true(tiggerer.hasChaosClassSkill)) {
-            tiggerer maps\mp\_utility::setLowerMessage("cant_use", & "ALIEN_CHAOS_CANT_PICKUP_BONUS", 3);
+            tiggerer maps\mp\_utility::setLowerMessage("cant_use", &"ALIEN_CHAOS_CANT_PICKUP_BONUS", 3);
             continue;
           } else if(is_true(tiggerer.chaosClassSkillInUse)) {
-            tiggerer maps\mp\_utility::setLowerMessage("skill_in_use", & "ALIEN_CHAOS_SKILL_IN_USE", 3);
+            tiggerer maps\mp\_utility::setLowerMessage("skill_in_use", &"ALIEN_CHAOS_SKILL_IN_USE", 3);
             continue;
           }
           break;
         case "combo_freeze":
           if(is_true(tiggerer.hasComboFreeze)) {
-            tiggerer maps\mp\_utility::setLowerMessage("cant_use", & "ALIEN_CHAOS_CANT_PICKUP_BONUS", 3);
+            tiggerer maps\mp\_utility::setLowerMessage("cant_use", &"ALIEN_CHAOS_CANT_PICKUP_BONUS", 3);
             continue;
           }
           break;

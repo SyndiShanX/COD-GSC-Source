@@ -158,7 +158,7 @@ function function_d0c69425(var_30d383f5) {
   level thread function_c85960dd();
 }
 
-function getclosestto(origin, & entarray, maxdist = 2048) {
+function getclosestto(origin, &entarray, maxdist = 2048) {
   if(!isDefined(entarray)) {
     return;
   }
@@ -171,7 +171,7 @@ function getclosestto(origin, & entarray, maxdist = 2048) {
   return arraygetclosest(origin, entarray, maxdist);
 }
 
-function getarrayitemswithin(origin, & entarray, minsq) {
+function getarrayitemswithin(origin, &entarray, minsq) {
   items = [];
   if(isDefined(entarray) && entarray.size) {
     for(i = 0; i < entarray.size; i++) {
@@ -187,7 +187,7 @@ function getarrayitemswithin(origin, & entarray, minsq) {
   return items;
 }
 
-function getclosesttome( & entarray) {
+function getclosesttome(&entarray) {
   return getclosestto(self.origin, entarray);
 }
 

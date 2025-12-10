@@ -20,7 +20,7 @@
 #namespace zm_weap_staff_water;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_staff_water", & __init__, undefined, undefined);
+  system::register("zm_weap_staff_water", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -31,12 +31,12 @@ function __init__() {
   clientfield::register("actor", "anim_rate", 21000, 2, "float");
   clientfield::register("actor", "attach_bullet_model", 21000, 1, "int");
   clientfield::register("actor", "staff_shatter_fx", 21000, 1, "int");
-  callback::on_spawned( & onplayerspawned);
+  callback::on_spawned(&onplayerspawned);
   level flag::init("blizzard_active");
   init_tag_array();
   level thread water_dart_cleanup();
-  zm_spawner::register_zombie_death_event_callback( & staff_water_death_event);
-  zm_spawner::add_custom_zombie_spawn_logic( & staff_water_on_zombie_spawned);
+  zm_spawner::register_zombie_death_event_callback(&staff_water_death_event);
+  zm_spawner::add_custom_zombie_spawn_logic(&staff_water_on_zombie_spawned);
 }
 
 function init_tag_array() {
@@ -126,7 +126,7 @@ function _network_safe_play_fx(fx, v_origin) {
 
 function network_safe_play_fx(id, max, fx, v_origin) {
   zm_net::network_safe_init(id, max);
-  zm_net::network_choke_action(id, & _network_safe_play_fx, fx, v_origin);
+  zm_net::network_choke_action(id, &_network_safe_play_fx, fx, v_origin);
 }
 
 function frozen_zombie_shatter() {

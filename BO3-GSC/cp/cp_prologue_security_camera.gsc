@@ -38,7 +38,7 @@
 function security_camera_start(str_objective) {
   security_camera_precache();
   level notify("hash_84f95272");
-  array::run_all(level.players, & util::set_low_ready, 1);
+  array::run_all(level.players, &util::set_low_ready, 1);
   level util::clientnotify("sndStopFiretruck");
   level thread security_camera_main();
 }
@@ -167,7 +167,7 @@ function activate_player_video_screens(var_3675dd99, str_player_use_struct, extr
   level.var_ab82ba6d = 0;
   level flag::wait_till("everyone_in_camera_room");
   t_interact triggerenable(1);
-  e_object = util::init_interactive_gameobject(t_interact, & "cp_prompt_dni_prologue_security_camera", & "CP_MI_ETH_PROLOGUE_USE_SECURITY_CAMERA", & function_b85fc83f);
+  e_object = util::init_interactive_gameobject(t_interact, &"cp_prompt_dni_prologue_security_camera", &"CP_MI_ETH_PROLOGUE_USE_SECURITY_CAMERA", &function_b85fc83f);
   e_object.s_player_use = s_player_use;
   e_object.extra_cam_index = extra_cam_index;
   e_object thread check_for_video_cam_disable();
@@ -257,8 +257,8 @@ function function_d8d1298e(str_name, str_scene, var_b5991f0e = 0) {
   var_1ca98eed.str_scene = str_scene;
   var_1ca98eed.var_2cc1a0a1 = 1;
   var_1ca98eed.var_a1a1b35e = scene::get_actor_count(str_scene);
-  level scene::add_scene_func(str_scene, & function_c41806ee, "init", var_1ca98eed.n_index);
-  level scene::add_scene_func(str_scene, & function_48f438fd, "init");
+  level scene::add_scene_func(str_scene, &function_c41806ee, "init", var_1ca98eed.n_index);
+  level scene::add_scene_func(str_scene, &function_48f438fd, "init");
   level scene::init(str_scene);
   if(var_b5991f0e) {
     var_1ca98eed.var_2cc1a0a1 = 0;
@@ -496,7 +496,7 @@ function hendricks_security_camera() {
   level thread namespace_21b2c1f2::function_973b77f9();
   level notify("hash_fa5c41eb");
   exploder::exploder("light_exploder_cameraroom");
-  level thread scene::add_scene_func("cin_pro_05_01_securitycam_1st_stealth_kill", & function_2b60c70b);
+  level thread scene::add_scene_func("cin_pro_05_01_securitycam_1st_stealth_kill", &function_2b60c70b);
   level thread namespace_21b2c1f2::function_fd00a4f2();
   level scene::play("cin_pro_05_01_securitycam_1st_stealth_kill");
   level notify("hash_af8926a2");
@@ -513,9 +513,9 @@ function hendricks_security_camera() {
   level scene::play("cin_pro_05_01_securitycam_1st_stealth_kill_notice");
   level waittill("hash_fd656b57");
   level thread function_2e16b263("none");
-  level scene::add_scene_func("cin_pro_05_01_securitycam_1st_stealth_kill_movetodoor", & function_8f6060f7, "play");
+  level scene::add_scene_func("cin_pro_05_01_securitycam_1st_stealth_kill_movetodoor", &function_8f6060f7, "play");
   level scene::play("cin_pro_05_01_securitycam_1st_stealth_kill_movetodoor");
-  array::run_all(level.players, & util::set_low_ready, 0);
+  array::run_all(level.players, &util::set_low_ready, 0);
   level flag::wait_till("player_past_security_room");
   level notify("hash_81d6c615");
   level scene::play("cin_pro_05_01_securitycam_1st_stealth_kill_exit");

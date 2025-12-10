@@ -14,7 +14,7 @@
 #namespace newworld_util;
 
 function autoexec __init__sytem__() {
-  system::register("newworld_util", & __init__, undefined, undefined);
+  system::register("newworld_util", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -22,30 +22,30 @@ function __init__() {
 }
 
 function init_clientfields() {
-  clientfield::register("actor", "derez_ai_deaths", 1, 1, "int", & callback_derez_fx, 0, 0);
-  clientfield::register("actor", "cs_rez_in_fx", 1, 2, "counter", & function_9b9abce4, 0, 0);
-  clientfield::register("actor", "cs_rez_out_fx", 1, 2, "counter", & function_be66c05b, 0, 0);
-  clientfield::register("actor", "chase_suspect_fx", 1, 1, "int", & function_6e7d0ca2, 0, 0);
-  clientfield::register("actor", "wall_run_fx", 1, 1, "int", & function_752d4412, 0, 0);
-  clientfield::register("scriptmover", "derez_ai_deaths", 1, 1, "int", & callback_derez_fx, 0, 0);
-  clientfield::register("scriptmover", "truck_explosion_fx", 1, 1, "int", & function_258012a1, 0, 0);
-  clientfield::register("scriptmover", "derez_model_deaths", 1, 1, "int", & callback_derez_fx, 0, 0);
-  clientfield::register("scriptmover", "emp_door_fx", 1, 1, "int", & function_ddee6a4e, 0, 0);
-  clientfield::register("scriptmover", "smoke_grenade_fx", 1, 1, "int", & function_ce461171, 0, 0);
-  clientfield::register("scriptmover", "frag_grenade_fx", 1, 1, "int", & function_1e4e8925, 0, 0);
-  clientfield::register("scriptmover", "wall_break_fx", 1, 1, "int", & function_c8c87ed0, 0, 0);
-  clientfield::register("scriptmover", "train_explosion_fx", 1, 1, "int", & function_8d759480, 0, 0);
-  clientfield::register("scriptmover", "wasp_hack_fx", 1, 1, "int", & function_ec9960ef, 0, 0);
-  clientfield::register("vehicle", "wasp_hack_fx", 1, 1, "int", & function_ec9960ef, 0, 0);
-  clientfield::register("vehicle", "emp_vehicles_fx", 1, 1, "int", & function_ddee6a4e, 0, 0);
-  clientfield::register("world", "player_snow_fx", 1, 4, "int", & callback_player_snow_fx, 0, 0);
-  clientfield::register("allplayers", "player_spawn_fx", 1, 1, "int", & callback_ally_spawn_fx, 0, 0);
-  clientfield::register("scriptmover", "emp_generator_fx", 1, 1, "int", & function_aad321ae, 0, 0);
-  clientfield::register("scriptmover", "train_fx_occlude", 1, 1, "int", & function_73c10276, 0, 0);
-  clientfield::register("world", "waterplant_rotate_fans", 1, 1, "int", & function_1e2a542f, 0, 0);
-  clientfield::register("world", "train_main_fx_occlude", 1, 1, "int", & function_4f8cc662, 0, 0);
-  clientfield::register("toplayer", "train_rumble_loop", 1, 1, "int", & function_b45c2459, 0, 0);
-  clientfield::register("toplayer", "postfx_futz", 1, 1, "counter", & postfx_futz, 0, 0);
+  clientfield::register("actor", "derez_ai_deaths", 1, 1, "int", &callback_derez_fx, 0, 0);
+  clientfield::register("actor", "cs_rez_in_fx", 1, 2, "counter", &function_9b9abce4, 0, 0);
+  clientfield::register("actor", "cs_rez_out_fx", 1, 2, "counter", &function_be66c05b, 0, 0);
+  clientfield::register("actor", "chase_suspect_fx", 1, 1, "int", &function_6e7d0ca2, 0, 0);
+  clientfield::register("actor", "wall_run_fx", 1, 1, "int", &function_752d4412, 0, 0);
+  clientfield::register("scriptmover", "derez_ai_deaths", 1, 1, "int", &callback_derez_fx, 0, 0);
+  clientfield::register("scriptmover", "truck_explosion_fx", 1, 1, "int", &function_258012a1, 0, 0);
+  clientfield::register("scriptmover", "derez_model_deaths", 1, 1, "int", &callback_derez_fx, 0, 0);
+  clientfield::register("scriptmover", "emp_door_fx", 1, 1, "int", &function_ddee6a4e, 0, 0);
+  clientfield::register("scriptmover", "smoke_grenade_fx", 1, 1, "int", &function_ce461171, 0, 0);
+  clientfield::register("scriptmover", "frag_grenade_fx", 1, 1, "int", &function_1e4e8925, 0, 0);
+  clientfield::register("scriptmover", "wall_break_fx", 1, 1, "int", &function_c8c87ed0, 0, 0);
+  clientfield::register("scriptmover", "train_explosion_fx", 1, 1, "int", &function_8d759480, 0, 0);
+  clientfield::register("scriptmover", "wasp_hack_fx", 1, 1, "int", &function_ec9960ef, 0, 0);
+  clientfield::register("vehicle", "wasp_hack_fx", 1, 1, "int", &function_ec9960ef, 0, 0);
+  clientfield::register("vehicle", "emp_vehicles_fx", 1, 1, "int", &function_ddee6a4e, 0, 0);
+  clientfield::register("world", "player_snow_fx", 1, 4, "int", &callback_player_snow_fx, 0, 0);
+  clientfield::register("allplayers", "player_spawn_fx", 1, 1, "int", &callback_ally_spawn_fx, 0, 0);
+  clientfield::register("scriptmover", "emp_generator_fx", 1, 1, "int", &function_aad321ae, 0, 0);
+  clientfield::register("scriptmover", "train_fx_occlude", 1, 1, "int", &function_73c10276, 0, 0);
+  clientfield::register("world", "waterplant_rotate_fans", 1, 1, "int", &function_1e2a542f, 0, 0);
+  clientfield::register("world", "train_main_fx_occlude", 1, 1, "int", &function_4f8cc662, 0, 0);
+  clientfield::register("toplayer", "train_rumble_loop", 1, 1, "int", &function_b45c2459, 0, 0);
+  clientfield::register("toplayer", "postfx_futz", 1, 1, "counter", &postfx_futz, 0, 0);
 }
 
 function callback_derez_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -311,7 +311,7 @@ function function_ce461171(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_1e4e8925(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     e_origin = util::spawn_model(localclientnum, "tag_origin", self.origin);
-    e_origin util::delay(30, undefined, & delete);
+    e_origin util::delay(30, undefined, &delete);
     e_origin fx_play_on_tag(localclientnum, "frag_grenade", "explosions/fx_exp_grenade_default", "tag_origin");
   } else {
     self fx_clear(localclientnum, "frag_grenade", "explosions/fx_exp_grenade_default");
@@ -321,7 +321,7 @@ function function_1e4e8925(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_c8c87ed0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     e_origin = util::spawn_model(localclientnum, "tag_origin", self.origin);
-    e_origin util::delay(5, undefined, & delete);
+    e_origin util::delay(5, undefined, &delete);
     e_origin fx_play_on_tag(localclientnum, "wall_break", "destruct/fx_dest_wall_nworld", "tag_origin");
   } else {
     self fx_clear(localclientnum, "wall_break", "destruct/fx_dest_wall_nworld");

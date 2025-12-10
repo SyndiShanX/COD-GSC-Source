@@ -22,19 +22,19 @@
 #namespace zm_island_portals;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_portals", & __init__, undefined, undefined);
+  system::register("zm_island_portals", &__init__, undefined, undefined);
 }
 
 function __init__() {
   visionset_mgr::register_overlay_info_style_transported("zm_zod", 9000, 15, 2);
   n_bits = getminbitcountfornum(3);
-  clientfield::register("toplayer", "player_stargate_fx", 9000, 1, "int", & player_stargate_fx, 0, 0);
-  clientfield::register("world", "portal_state_ending_0", 9000, 1, "int", & portal_state_ending_0, 0, 0);
-  clientfield::register("world", "portal_state_ending_1", 9000, 1, "int", & portal_state_ending_1, 0, 0);
-  clientfield::register("world", "portal_state_ending_2", 9000, 1, "int", & portal_state_ending_2, 0, 0);
-  clientfield::register("world", "portal_state_ending_3", 9000, 1, "int", & portal_state_ending_3, 0, 0);
-  clientfield::register("world", "pulse_ee_boat_portal_top", 9000, 1, "counter", & function_b040f607, 0, 0);
-  clientfield::register("world", "pulse_ee_boat_portal_bottom", 9000, 1, "counter", & function_bfbf92fb, 0, 0);
+  clientfield::register("toplayer", "player_stargate_fx", 9000, 1, "int", &player_stargate_fx, 0, 0);
+  clientfield::register("world", "portal_state_ending_0", 9000, 1, "int", &portal_state_ending_0, 0, 0);
+  clientfield::register("world", "portal_state_ending_1", 9000, 1, "int", &portal_state_ending_1, 0, 0);
+  clientfield::register("world", "portal_state_ending_2", 9000, 1, "int", &portal_state_ending_2, 0, 0);
+  clientfield::register("world", "portal_state_ending_3", 9000, 1, "int", &portal_state_ending_3, 0, 0);
+  clientfield::register("world", "pulse_ee_boat_portal_top", 9000, 1, "counter", &function_b040f607, 0, 0);
+  clientfield::register("world", "pulse_ee_boat_portal_bottom", 9000, 1, "counter", &function_bfbf92fb, 0, 0);
 }
 
 function player_stargate_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

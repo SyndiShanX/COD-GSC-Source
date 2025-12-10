@@ -23,30 +23,30 @@ function autoexec init() {
     return;
   }
   namespace_f4f2fcc8::init_voice();
-  level.bzm_aquiferdialogue1callback = & function_cd2a65c3;
-  level.bzm_aquiferdialogue1_1callback = & function_5bdad1f3;
-  level.bzm_aquiferdialogue1_2callback = & function_e9d362b8;
-  level.bzm_aquiferdialogue1_3callback = & function_fd5dd21;
-  level.bzm_aquiferdialogue1_4callback = & function_cde2412e;
-  level.bzm_aquiferdialogue1_4_1callback = & function_f2c44c1e;
-  level.bzm_aquiferdialogue1_5callback = & function_f3e4bb97;
-  level.bzm_aquiferdialogue1_6callback = & function_81dd4c5c;
-  level.bzm_aquiferdialogue1_7callback = & function_a7dfc6c5;
-  level.bzm_aquiferdialogue2callback = & function_5b22f688;
-  level.bzm_aquiferdialogue2_1callback = & function_3b59ac54;
-  level.bzm_aquiferdialogue3callback = & function_812570f1;
-  level.bzm_aquiferdialogue3_1callback = & function_7aa9c8b5;
-  level.bzm_aquiferdialogue4callback = & function_3f31d4fe;
-  level.bzm_aquiferdialogue4_1callback = & function_fd9ec2ee;
-  level.bzm_aquiferdialogue5callback = & function_65344f67;
-  level.bzm_aquiferdialogue6callback = & function_f32ce02c;
-  level.bzm_aquiferdialogue7callback = & function_192f5a95;
-  level.bzm_aquiferdialogue7_1callback = & function_c8750131;
+  level.bzm_aquiferdialogue1callback = &function_cd2a65c3;
+  level.bzm_aquiferdialogue1_1callback = &function_5bdad1f3;
+  level.bzm_aquiferdialogue1_2callback = &function_e9d362b8;
+  level.bzm_aquiferdialogue1_3callback = &function_fd5dd21;
+  level.bzm_aquiferdialogue1_4callback = &function_cde2412e;
+  level.bzm_aquiferdialogue1_4_1callback = &function_f2c44c1e;
+  level.bzm_aquiferdialogue1_5callback = &function_f3e4bb97;
+  level.bzm_aquiferdialogue1_6callback = &function_81dd4c5c;
+  level.bzm_aquiferdialogue1_7callback = &function_a7dfc6c5;
+  level.bzm_aquiferdialogue2callback = &function_5b22f688;
+  level.bzm_aquiferdialogue2_1callback = &function_3b59ac54;
+  level.bzm_aquiferdialogue3callback = &function_812570f1;
+  level.bzm_aquiferdialogue3_1callback = &function_7aa9c8b5;
+  level.bzm_aquiferdialogue4callback = &function_3f31d4fe;
+  level.bzm_aquiferdialogue4_1callback = &function_fd9ec2ee;
+  level.bzm_aquiferdialogue5callback = &function_65344f67;
+  level.bzm_aquiferdialogue6callback = &function_f32ce02c;
+  level.bzm_aquiferdialogue7callback = &function_192f5a95;
+  level.bzm_aquiferdialogue7_1callback = &function_c8750131;
   function_3a602f83();
 }
 
 function private function_3a602f83() {
-  callback::on_spawned( & function_89d4327a);
+  callback::on_spawned(&function_89d4327a);
 }
 
 function function_89d4327a() {}

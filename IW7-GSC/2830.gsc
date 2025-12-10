@@ -39,14 +39,14 @@ func_3D54() {
 }
 
 func_7E6B() {
-  return & "AUTOSAVE_AUTOSAVE";
+  return &"AUTOSAVE_AUTOSAVE";
 }
 
 func_7FD9(var_00) {
   if(var_00 == 0)
-    var_01 = & "AUTOSAVE_GAME";
+    var_01 = &"AUTOSAVE_GAME";
   else
-    var_01 = & "AUTOSAVE_NOGAME";
+    var_01 = &"AUTOSAVE_NOGAME";
 
   return var_01;
 }
@@ -90,7 +90,7 @@ immediatelevelstartsave() {
     return;
   }
   var_03 = "levelshots / autosave / autosave_" + level.script + "immediate_start";
-  _savegame("immediatelevelstart", & "AUTOSAVE_LEVELSTART", var_03, 1);
+  _savegame("immediatelevelstart", &"AUTOSAVE_LEVELSTART", var_03, 1);
   setdvar("ui_grenade_death", "0");
   level.player _meth_8591(0);
   scripts\engine\utility::flag_clear("game_saving");
@@ -129,7 +129,7 @@ func_2A6E() {
   if(!isalive(level.player)) {
     return;
   }
-  _savegame("levelstart", & "AUTOSAVE_LEVELSTART", var_00, 1);
+  _savegame("levelstart", &"AUTOSAVE_LEVELSTART", var_00, 1);
   setdvar("ui_grenade_death", "0");
   level.player _meth_8591(0);
   scripts\engine\utility::flag_clear("game_saving");

@@ -18,16 +18,16 @@ function init() {
   level._effect["bottle_jugg"] = "zombie/fx_bottle_break_glow_jugg_zmb";
   level._effect["bottle_dtap"] = "zombie/fx_bottle_break_glow_dtap_zmb";
   level._effect["bottle_speed"] = "zombie/fx_bottle_break_glow_speed_zmb";
-  clientfield::register("world", "perk_light_speed_cola", 1, 2, "int", & perk_light_speed_cola, 0, 0);
-  clientfield::register("world", "perk_light_juggernog", 1, 2, "int", & perk_light_juggernog, 0, 0);
-  clientfield::register("world", "perk_light_doubletap", 1, 2, "int", & perk_light_doubletap, 0, 0);
-  clientfield::register("world", "perk_light_quick_revive", 1, 1, "int", & perk_light_quick_revive, 0, 0);
-  clientfield::register("world", "perk_light_widows_wine", 1, 1, "int", & perk_light_widows_wine, 0, 0);
-  clientfield::register("world", "perk_light_mule_kick", 1, 1, "int", & perk_light_mule_kick, 0, 0);
-  clientfield::register("world", "perk_light_staminup", 1, 1, "int", & perk_light_staminup, 0, 0);
-  clientfield::register("scriptmover", "perk_bottle_speed_cola_fx", 1, 1, "int", & perk_bottle_speed_cola_fx, 0, 0);
-  clientfield::register("scriptmover", "perk_bottle_juggernog_fx", 1, 1, "int", & perk_bottle_juggernog_fx, 0, 0);
-  clientfield::register("scriptmover", "perk_bottle_doubletap_fx", 1, 1, "int", & perk_bottle_doubletap_fx, 0, 0);
+  clientfield::register("world", "perk_light_speed_cola", 1, 2, "int", &perk_light_speed_cola, 0, 0);
+  clientfield::register("world", "perk_light_juggernog", 1, 2, "int", &perk_light_juggernog, 0, 0);
+  clientfield::register("world", "perk_light_doubletap", 1, 2, "int", &perk_light_doubletap, 0, 0);
+  clientfield::register("world", "perk_light_quick_revive", 1, 1, "int", &perk_light_quick_revive, 0, 0);
+  clientfield::register("world", "perk_light_widows_wine", 1, 1, "int", &perk_light_widows_wine, 0, 0);
+  clientfield::register("world", "perk_light_mule_kick", 1, 1, "int", &perk_light_mule_kick, 0, 0);
+  clientfield::register("world", "perk_light_staminup", 1, 1, "int", &perk_light_staminup, 0, 0);
+  clientfield::register("scriptmover", "perk_bottle_speed_cola_fx", 1, 1, "int", &perk_bottle_speed_cola_fx, 0, 0);
+  clientfield::register("scriptmover", "perk_bottle_juggernog_fx", 1, 1, "int", &perk_bottle_juggernog_fx, 0, 0);
+  clientfield::register("scriptmover", "perk_bottle_doubletap_fx", 1, 1, "int", &perk_bottle_doubletap_fx, 0, 0);
 }
 
 function perk_light_speed_cola(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

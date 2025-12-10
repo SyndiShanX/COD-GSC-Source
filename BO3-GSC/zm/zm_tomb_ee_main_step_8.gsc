@@ -18,12 +18,12 @@
 #namespace zm_tomb_ee_main_step_8;
 
 function init() {
-  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_8", & init_stage, & stage_logic, & exit_stage);
+  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_8", &init_stage, &stage_logic, &exit_stage);
 }
 
 function init_stage() {
   level._cur_stage_name = "step_8";
-  level.quadrotor_custom_behavior = & move_into_portal;
+  level.quadrotor_custom_behavior = &move_into_portal;
 }
 
 function stage_logic() {
@@ -49,7 +49,7 @@ function stage_logic() {
   s_pos = struct::get("player_portal_final", "targetname");
   t_portal = zm_tomb_utility::tomb_spawn_trigger_radius(s_pos.origin, 100, 1);
   t_portal.require_look_at = 1;
-  t_portal.hint_string = & "ZM_TOMB_TELE";
+  t_portal.hint_string = &"ZM_TOMB_TELE";
   t_portal thread waittill_player_activates();
   level.ee_ending_beam_fx = spawn("script_model", s_pos.origin + (vectorscale((0, 0, -1), 300)));
   level.ee_ending_beam_fx.angles = vectorscale((0, 1, 0), 90);

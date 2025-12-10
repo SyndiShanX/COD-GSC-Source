@@ -43,7 +43,7 @@ function hack_boards() {
     struct.no_touch_check = 1;
     struct.last_hacked_round = 0;
     struct.num_hacks = 0;
-    zm_equip_hacker::register_pooled_hackable_struct(struct, & board_hack, & board_qualifier);
+    zm_equip_hacker::register_pooled_hackable_struct(struct, &board_hack, &board_qualifier);
   }
 }
 
@@ -97,7 +97,7 @@ function board_hack(hacker) {
       wait(0.05);
     }
   }
-  zm_equip_hacker::register_pooled_hackable_struct(self, & board_hack, & board_qualifier);
+  zm_equip_hacker::register_pooled_hackable_struct(self, &board_hack, &board_qualifier);
   self.window notify("blocker_hacked");
   self.window notify("hash_46d36511");
 }

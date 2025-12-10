@@ -13,7 +13,7 @@
 #namespace zm_bgb_danger_closest;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_danger_closest", & __init__, undefined, "bgb");
+  system::register("zm_bgb_danger_closest", &__init__, undefined, "bgb");
 }
 
 function __init__() {

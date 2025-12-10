@@ -183,7 +183,7 @@ func_B8E6(var_00) {
   var_02 = self.func_D8B1;
   var_03 = 8 * (self.func_1097C % 4);
   var_04 = ~(255 << var_03);
-  var_02 = var_02 & var_04;
+  var_02 = var_02 &var_04;
   var_05 = var_01 << var_03;
   var_02 = var_02 | var_05;
   self setclientomnvar("ui_spectating_award_event_bitfield", var_02);

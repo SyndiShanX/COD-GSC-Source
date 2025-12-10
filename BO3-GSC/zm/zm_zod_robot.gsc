@@ -29,7 +29,7 @@
 #namespace zm_zod_robot;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_robot", & __init__, undefined, undefined);
+  system::register("zm_zod_robot", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -43,13 +43,13 @@ function init() {
   level flag::init("police_box_hide");
   level.ai_robot_remaining_cost = 2000;
   level flag::wait_till("initial_blackscreen_passed");
-  zombie_utility::add_zombie_gib_weapon_callback("ar_standard_companion", & gib_check, & gib_head_check);
+  zombie_utility::add_zombie_gib_weapon_callback("ar_standard_companion", &gib_check, &gib_head_check);
   level.zombie_robot_spawners = getEntArray("zombie_robot_spawner", "script_noteworthy");
   level.var_c1b7d765 = getEntArray("zombie_robot_gold_spawner", "script_noteworthy");
   a_e_triggers = getEntArray("robot_activate_trig", "targetname");
   level.a_robot_areanames = array("junction", "slums", "canal", "theater");
   foreach(str_areaname in level.a_robot_areanames) {
-    create_callbox_unitrigger(str_areaname, & robot_callbox_trigger_visibility, & robot_callbox_trigger_think);
+    create_callbox_unitrigger(str_areaname, &robot_callbox_trigger_visibility, &robot_callbox_trigger_think);
   }
   level thread monitor_robot_power();
   level thread function_63fe1ddd();
@@ -117,19 +117,19 @@ function robot_callbox_trigger_visibility(player) {
     if(isDefined(level.ai_robot)) {
       switch (level.ai_robot_area_called) {
         case "junction": {
-          hintstring_areaname = & "ZM_ZOD_AREA_NAME_JUNCTION";
+          hintstring_areaname = &"ZM_ZOD_AREA_NAME_JUNCTION";
           break;
         }
         case "slums": {
-          hintstring_areaname = & "ZM_ZOD_AREA_NAME_SLUMS";
+          hintstring_areaname = &"ZM_ZOD_AREA_NAME_SLUMS";
           break;
         }
         case "canal": {
-          hintstring_areaname = & "ZM_ZOD_AREA_NAME_CANAL";
+          hintstring_areaname = &"ZM_ZOD_AREA_NAME_CANAL";
           break;
         }
         case "theater": {
-          hintstring_areaname = & "ZM_ZOD_AREA_NAME_THEATER";
+          hintstring_areaname = &"ZM_ZOD_AREA_NAME_THEATER";
           break;
         }
       }
@@ -193,7 +193,7 @@ function robot_callbox_trigger_think() {
 
 function spawn_robot(player, trig_stub, n_spawn_delay) {
   a_s_start_pos = struct::get_array("robot_start_pos", "targetname");
-  a_s_start_pos = array::filter(a_s_start_pos, 0, & filter_callbox_name, trig_stub.str_areaname);
+  a_s_start_pos = array::filter(a_s_start_pos, 0, &filter_callbox_name, trig_stub.str_areaname);
   robot_start_pos = a_s_start_pos[0];
   trace = bulletTrace(robot_start_pos.origin, robot_start_pos.origin + (vectorscale((0, 0, -1), 256)), 0, robot_start_pos);
   v_ground_position = trace["position"];

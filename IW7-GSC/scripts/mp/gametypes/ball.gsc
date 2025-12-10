@@ -110,18 +110,18 @@ onstartgametype() {
     game["defenders"] = var_03;
   }
 
-  scripts\mp\utility::setobjectivetext("allies", & "OBJECTIVES_BALL");
-  scripts\mp\utility::setobjectivetext("axis", & "OBJECTIVES_BALL");
+  scripts\mp\utility::setobjectivetext("allies", &"OBJECTIVES_BALL");
+  scripts\mp\utility::setobjectivetext("axis", &"OBJECTIVES_BALL");
   if(level.splitscreen) {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_BALL");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_BALL");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_BALL");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_BALL");
   } else {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_BALL_SCORE");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_BALL_SCORE");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_BALL_SCORE");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_BALL_SCORE");
   }
 
-  scripts\mp\utility::setobjectivehinttext("allies", & "OBJECTIVES_BALL_HINT");
-  scripts\mp\utility::setobjectivehinttext("axis", & "OBJECTIVES_BALL_HINT");
+  scripts\mp\utility::setobjectivehinttext("allies", &"OBJECTIVES_BALL_HINT");
+  scripts\mp\utility::setobjectivehinttext("axis", &"OBJECTIVES_BALL_HINT");
   setclientnamemode("auto_change");
   scripts\mp\gametypes\obj_ball::ball_default_origins();
   var_05[0] = level.gametype;

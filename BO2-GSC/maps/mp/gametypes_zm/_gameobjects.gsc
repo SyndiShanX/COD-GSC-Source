@@ -192,7 +192,7 @@ createcarryobject(ownerteam, trigger, visuals, offset, objectivename) {
   if(isDefined(objectivename))
     carryobject.newstyle = 1;
   else
-    objectivename = & "";
+    objectivename = &"";
 
   for(index = 0; index < visuals.size; index++) {
     visuals[index].baseorigin = visuals[index].origin;
@@ -779,7 +779,7 @@ createuseobject(ownerteam, trigger, visuals, offset, objectivename) {
   if(isDefined(objectivename))
     useobject.newstyle = 1;
   else
-    objectivename = & "";
+    objectivename = &"";
 
   useobject.compassicons = [];
   useobject.objid = [];
@@ -1593,7 +1593,7 @@ updateobjective() {
     objective_visibleteams(self.objectiveid, level.spawnsystem.ispawn_teammask[self.ownerteam]);
   } else if(self.visibleteam == "enemy") {
     objective_state(self.objectiveid, "active");
-    objective_visibleteams(self.objectiveid, level.spawnsystem.ispawn_teammask["all"] & ~level.spawnsystem.ispawn_teammask[self.ownerteam]);
+    objective_visibleteams(self.objectiveid, level.spawnsystem.ispawn_teammask["all"] &~level.spawnsystem.ispawn_teammask[self.ownerteam]);
   } else {
     objective_state(self.objectiveid, "invisible");
     objective_visibleteams(self.objectiveid, 0);

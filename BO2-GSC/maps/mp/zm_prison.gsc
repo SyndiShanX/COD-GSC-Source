@@ -692,38 +692,38 @@ offhand_weapon_give_override(str_weapon) {
 }
 
 custom_add_weapons() {
-  add_zombie_weapon_prison("m1911_zm", "m1911_upgraded_zm", & "ZOMBIE_WEAPON_M1911", 50, "wpck_crappy", "", undefined);
-  add_zombie_weapon_prison("judge_zm", "judge_upgraded_zm", & "ZOMBIE_WEAPON_JUDGE", 50, "wpck_pistol", "", undefined, 1);
-  add_zombie_weapon_prison("fiveseven_zm", "fiveseven_upgraded_zm", & "ZOMBIE_WEAPON_FIVESEVEN", 50, "wpck_pistol", "", undefined, 1);
-  add_zombie_weapon_prison("beretta93r_zm", "beretta93r_upgraded_zm", & "ZOMBIE_WEAPON_BERETTA93r", 900, "wpck_pistol", "", undefined);
-  add_zombie_weapon_prison("fivesevendw_zm", "fivesevendw_upgraded_zm", & "ZOMBIE_WEAPON_FIVESEVENDW", 50, "wpck_dual", "", undefined, 1);
-  add_zombie_weapon_prison("uzi_zm", "uzi_upgraded_zm", & "ZOMBIE_WEAPON_UZI", 1500, "wpck_smg", "", undefined);
-  add_zombie_weapon_prison("thompson_zm", "thompson_upgraded_zm", & "ZMWEAPON_THOMPSON_WALLBUY", 1500, "wpck_smg", "", 800);
-  add_zombie_weapon_prison("mp5k_zm", "mp5k_upgraded_zm", & "ZOMBIE_WEAPON_MP5K", 1000, "wpck_smg", "", 500);
-  add_zombie_weapon_prison("pdw57_zm", "pdw57_upgraded_zm", & "ZOMBIE_WEAPON_MP5K", 1200, "wpck_crappy", "", undefined, 1);
-  add_zombie_weapon_prison("870mcs_zm", "870mcs_upgraded_zm", & "ZOMBIE_WEAPON_870MCS", 1200, "wpck_shot", "", undefined);
-  add_zombie_weapon_prison("rottweil72_zm", "rottweil72_upgraded_zm", & "ZOMBIE_WEAPON_ROTTWEIL72", 500, "wpck_shot", "", undefined);
-  add_zombie_weapon_prison("saiga12_zm", "saiga12_upgraded_zm", & "ZOMBIE_WEAPON_SAIGA12", 50, "wpck_shot", "", undefined, 1);
-  add_zombie_weapon_prison("blundergat_zm", "blundergat_upgraded_zm", & "ZOMBIE_WEAPON_BLUNDERGAT", 500, "wpck_shot", "", undefined, 1);
-  add_zombie_weapon_prison("blundersplat_zm", "blundersplat_upgraded_zm", & "ZOMBIE_WEAPON_BLUNDERGAT", 500, "wpck_shot", "", undefined);
-  add_zombie_weapon_prison("ak47_zm", "ak47_upgraded_zm", & "ZOMBIE_WEAPON_AK47", 500, "wpck_mg", "", undefined, 1);
-  add_zombie_weapon_prison("m14_zm", "m14_upgraded_zm", & "ZOMBIE_WEAPON_M14", 500, "wpck_mg", "", undefined);
-  add_zombie_weapon_prison("tar21_zm", "tar21_upgraded_zm", & "ZOMBIE_WEAPON_TAR21", 50, "wpck_mg", "", undefined, 1);
-  add_zombie_weapon_prison("galil_zm", "galil_upgraded_zm", & "ZOMBIE_WEAPON_GALIL", 50, "wpck_mg", "", undefined, 1);
-  add_zombie_weapon_prison("fnfal_zm", "fnfal_upgraded_zm", & "ZOMBIE_WEAPON_FNFAL", 50, "wpck_shot", "", undefined, 1);
-  add_zombie_weapon_prison("dsr50_zm", "dsr50_upgraded_zm", & "ZOMBIE_WEAPON_DR50", 50, "wpck_snipe", "", undefined, 1);
-  add_zombie_weapon_prison("barretm82_zm", "barretm82_upgraded_zm", & "ZOMBIE_WEAPON_BARRETM82", 50, "wpck_snipe", "", undefined, 1);
-  add_zombie_weapon_prison("minigun_alcatraz_zm", "minigun_alcatraz_upgraded_zm", & "ZOMBIE_WEAPON_RPD", 50, "wpck_mg", "", undefined, 1);
-  add_zombie_weapon_prison("lsat_zm", "lsat_upgraded_zm", & "ZOMBIE_WEAPON_RPD", 50, "wpck_mg", "", undefined, 1);
-  add_zombie_weapon_prison("frag_grenade_zm", undefined, & "ZOMBIE_WEAPON_FRAG_GRENADE", 250, "grenade", "", 250);
-  add_zombie_weapon_prison("claymore_zm", undefined, & "ZOMBIE_WEAPON_CLAYMORE", 1500, "grenade", "", undefined);
-  add_zombie_weapon_prison("willy_pete_zm", undefined, & "ZOMBIE_WEAPON_SMOKE_GRENADE", 250, "grenade", "", 250);
-  add_zombie_weapon_prison("usrpg_zm", "usrpg_upgraded_zm", & "ZOMBIE_WEAPON_USRPG", 50, "wpck_rpg", "", undefined, 1);
-  add_zombie_weapon_prison("bouncing_tomahawk_zm", "upgraded_tomahawk_zm", & "ZOMBIE_WEAPON_SATCHEL_2000", 2000, "", "", undefined, 1);
-  add_zombie_weapon_prison("ray_gun_zm", "ray_gun_upgraded_zm", & "ZOMBIE_WEAPON_RAYGUN", 10000, "wpck_ray", "", undefined, 1);
+  add_zombie_weapon_prison("m1911_zm", "m1911_upgraded_zm", &"ZOMBIE_WEAPON_M1911", 50, "wpck_crappy", "", undefined);
+  add_zombie_weapon_prison("judge_zm", "judge_upgraded_zm", &"ZOMBIE_WEAPON_JUDGE", 50, "wpck_pistol", "", undefined, 1);
+  add_zombie_weapon_prison("fiveseven_zm", "fiveseven_upgraded_zm", &"ZOMBIE_WEAPON_FIVESEVEN", 50, "wpck_pistol", "", undefined, 1);
+  add_zombie_weapon_prison("beretta93r_zm", "beretta93r_upgraded_zm", &"ZOMBIE_WEAPON_BERETTA93r", 900, "wpck_pistol", "", undefined);
+  add_zombie_weapon_prison("fivesevendw_zm", "fivesevendw_upgraded_zm", &"ZOMBIE_WEAPON_FIVESEVENDW", 50, "wpck_dual", "", undefined, 1);
+  add_zombie_weapon_prison("uzi_zm", "uzi_upgraded_zm", &"ZOMBIE_WEAPON_UZI", 1500, "wpck_smg", "", undefined);
+  add_zombie_weapon_prison("thompson_zm", "thompson_upgraded_zm", &"ZMWEAPON_THOMPSON_WALLBUY", 1500, "wpck_smg", "", 800);
+  add_zombie_weapon_prison("mp5k_zm", "mp5k_upgraded_zm", &"ZOMBIE_WEAPON_MP5K", 1000, "wpck_smg", "", 500);
+  add_zombie_weapon_prison("pdw57_zm", "pdw57_upgraded_zm", &"ZOMBIE_WEAPON_MP5K", 1200, "wpck_crappy", "", undefined, 1);
+  add_zombie_weapon_prison("870mcs_zm", "870mcs_upgraded_zm", &"ZOMBIE_WEAPON_870MCS", 1200, "wpck_shot", "", undefined);
+  add_zombie_weapon_prison("rottweil72_zm", "rottweil72_upgraded_zm", &"ZOMBIE_WEAPON_ROTTWEIL72", 500, "wpck_shot", "", undefined);
+  add_zombie_weapon_prison("saiga12_zm", "saiga12_upgraded_zm", &"ZOMBIE_WEAPON_SAIGA12", 50, "wpck_shot", "", undefined, 1);
+  add_zombie_weapon_prison("blundergat_zm", "blundergat_upgraded_zm", &"ZOMBIE_WEAPON_BLUNDERGAT", 500, "wpck_shot", "", undefined, 1);
+  add_zombie_weapon_prison("blundersplat_zm", "blundersplat_upgraded_zm", &"ZOMBIE_WEAPON_BLUNDERGAT", 500, "wpck_shot", "", undefined);
+  add_zombie_weapon_prison("ak47_zm", "ak47_upgraded_zm", &"ZOMBIE_WEAPON_AK47", 500, "wpck_mg", "", undefined, 1);
+  add_zombie_weapon_prison("m14_zm", "m14_upgraded_zm", &"ZOMBIE_WEAPON_M14", 500, "wpck_mg", "", undefined);
+  add_zombie_weapon_prison("tar21_zm", "tar21_upgraded_zm", &"ZOMBIE_WEAPON_TAR21", 50, "wpck_mg", "", undefined, 1);
+  add_zombie_weapon_prison("galil_zm", "galil_upgraded_zm", &"ZOMBIE_WEAPON_GALIL", 50, "wpck_mg", "", undefined, 1);
+  add_zombie_weapon_prison("fnfal_zm", "fnfal_upgraded_zm", &"ZOMBIE_WEAPON_FNFAL", 50, "wpck_shot", "", undefined, 1);
+  add_zombie_weapon_prison("dsr50_zm", "dsr50_upgraded_zm", &"ZOMBIE_WEAPON_DR50", 50, "wpck_snipe", "", undefined, 1);
+  add_zombie_weapon_prison("barretm82_zm", "barretm82_upgraded_zm", &"ZOMBIE_WEAPON_BARRETM82", 50, "wpck_snipe", "", undefined, 1);
+  add_zombie_weapon_prison("minigun_alcatraz_zm", "minigun_alcatraz_upgraded_zm", &"ZOMBIE_WEAPON_RPD", 50, "wpck_mg", "", undefined, 1);
+  add_zombie_weapon_prison("lsat_zm", "lsat_upgraded_zm", &"ZOMBIE_WEAPON_RPD", 50, "wpck_mg", "", undefined, 1);
+  add_zombie_weapon_prison("frag_grenade_zm", undefined, &"ZOMBIE_WEAPON_FRAG_GRENADE", 250, "grenade", "", 250);
+  add_zombie_weapon_prison("claymore_zm", undefined, &"ZOMBIE_WEAPON_CLAYMORE", 1500, "grenade", "", undefined);
+  add_zombie_weapon_prison("willy_pete_zm", undefined, &"ZOMBIE_WEAPON_SMOKE_GRENADE", 250, "grenade", "", 250);
+  add_zombie_weapon_prison("usrpg_zm", "usrpg_upgraded_zm", &"ZOMBIE_WEAPON_USRPG", 50, "wpck_rpg", "", undefined, 1);
+  add_zombie_weapon_prison("bouncing_tomahawk_zm", "upgraded_tomahawk_zm", &"ZOMBIE_WEAPON_SATCHEL_2000", 2000, "", "", undefined, 1);
+  add_zombie_weapon_prison("ray_gun_zm", "ray_gun_upgraded_zm", &"ZOMBIE_WEAPON_RAYGUN", 10000, "wpck_ray", "", undefined, 1);
 
   if(isDefined(level.raygun2_included) && level.raygun2_included)
-    add_zombie_weapon_prison("raygun_mark2_zm", "raygun_mark2_upgraded_zm", & "ZOMBIE_WEAPON_RAYGUN_MARK2", 10000, "raygun_mark2", "", undefined);
+    add_zombie_weapon_prison("raygun_mark2_zm", "raygun_mark2_upgraded_zm", &"ZOMBIE_WEAPON_RAYGUN_MARK2", 10000, "raygun_mark2", "", undefined);
 }
 
 include_weapons() {

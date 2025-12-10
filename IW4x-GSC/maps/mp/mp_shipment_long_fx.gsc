@@ -8,7 +8,6 @@ main() {
   level._effect["cloud_bank_far"] = loadfx("weather/jeepride_cloud_bank_far");
   level._effect["mist_hunted_fav"] = loadfx("weather/mist_hunted_fav");
 
-
   level._effect["rain_mp_storm"] = loadfx("weather/rain_mp_storm");
   level._effect["rain_noise_splashes_fade"] = loadfx("weather/rain_noise_splashes_fade");
   level._effect["rain_splash_lite_64x64"] = loadfx("weather/rain_splash_lite_64x64");

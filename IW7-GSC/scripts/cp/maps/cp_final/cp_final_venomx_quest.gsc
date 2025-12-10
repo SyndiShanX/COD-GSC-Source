@@ -1302,7 +1302,7 @@ containmentinteractionusefunc(param_00, param_01) {
 
 containmentinteractionhintfunc(param_00, param_01) {
   if(scripts\engine\utility::flag("disablesecurity_step3")) {
-    return & "CP_FINAL_CONTAINMENT_CHAMBER";
+    return &"CP_FINAL_CONTAINMENT_CHAMBER";
   }
 
   return "";
@@ -1338,7 +1338,7 @@ master_pcinteractionusefunc(param_00, param_01) {
 
 master_pcinteractionhintfunc(param_00, param_01) {
   if(scripts\engine\utility::flag("disablesecurity_step3") && !scripts\engine\utility::flag("completepuzzles_step4")) {
-    return & "CP_FINAL_SUPER_USER";
+    return &"CP_FINAL_SUPER_USER";
   }
 
   return "";
@@ -2340,7 +2340,7 @@ venomx_pickup_hint_func(param_00, param_01) {
   }
 
   if(scripts\engine\utility::istrue(var_02)) {
-    return & "CP_FINAL_VENOMX_AMMO";
+    return &"CP_FINAL_VENOMX_AMMO";
   }
 
   return "";
@@ -2424,7 +2424,7 @@ venomx_add_ammo(param_00, param_01) {
     return;
   }
 
-  param_01 scripts\cp\utility::setlowermessage("max_ammo", & "COOP_GAME_PLAY_AMMO_MAX", 3);
+  param_01 scripts\cp\utility::setlowermessage("max_ammo", &"COOP_GAME_PLAY_AMMO_MAX", 3);
   param_01 playlocalsound("perk_machine_deny");
 }
 

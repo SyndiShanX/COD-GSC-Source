@@ -15,7 +15,7 @@
 #namespace zod_cleanup;
 
 function autoexec __init__sytem__() {
-  system::register("zod_cleanup", & __init__, & __main__, undefined);
+  system::register("zod_cleanup", &__init__, &__main__, undefined);
 }
 
 function __init__() {

@@ -798,108 +798,108 @@ _meth_8228(var_00) {
 
   switch (var_01) {
     case "iw7_udm45":
-      return & "CP_ZMB_WEAPONS_UDM45";
+      return &"CP_ZMB_WEAPONS_UDM45";
     case "iw7_rvn":
-      return & "CP_ZMB_WEAPONS_RVN";
+      return &"CP_ZMB_WEAPONS_RVN";
     case "iw7_ake":
-      return & "CP_ZMB_WEAPONS_AKE";
+      return &"CP_ZMB_WEAPONS_AKE";
     case "iw7_lmg03":
-      return & "CP_ZMB_WEAPONS_LMG03";
+      return &"CP_ZMB_WEAPONS_LMG03";
     case "iw7_ar57":
-      return & "CP_ZMB_WEAPONS_AR57";
+      return &"CP_ZMB_WEAPONS_AR57";
     case "iw7_arclassic":
-      return & "CP_ZMB_WEAPONS_ARCLASSIC";
+      return &"CP_ZMB_WEAPONS_ARCLASSIC";
     case "iw7_axe":
-      return & "CP_ZMB_WEAPONS_AXE";
+      return &"CP_ZMB_WEAPONS_AXE";
     case "iw7_lockon":
-      return & "CP_ZMB_WEAPONS_LOCKON";
+      return &"CP_ZMB_WEAPONS_LOCKON";
     case "iw7_chargeshot":
-      return & "CP_ZMB_WEAPONS_CHARGESHOT";
+      return &"CP_ZMB_WEAPONS_CHARGESHOT";
     case "iw7_cheytacc":
-      return & "CP_ZMB_WEAPONS_CHEYTACC";
+      return &"CP_ZMB_WEAPONS_CHEYTACC";
     case "iw7_cheytac":
-      return & "CP_ZMB_WEAPONS_CHEYTAC";
+      return &"CP_ZMB_WEAPONS_CHEYTAC";
     case "iw7_crb":
-      return & "CP_ZMB_WEAPONS_CRB";
+      return &"CP_ZMB_WEAPONS_CRB";
     case "iw7_devastator":
-      return & "CP_ZMB_WEAPONS_DEVASTATOR";
+      return &"CP_ZMB_WEAPONS_DEVASTATOR";
     case "iw7_dischord":
-      return & "CP_ZMB_WEAPONS_DISCHORD";
+      return &"CP_ZMB_WEAPONS_DISCHORD";
     case "iw7_emc":
-      return & "CP_ZMB_WEAPONS_EMC";
+      return &"CP_ZMB_WEAPONS_EMC";
     case "iw7_erad":
-      return & "CP_ZMB_WEAPONS_ERAD";
+      return &"CP_ZMB_WEAPONS_ERAD";
     case "iw7_facemelter":
-      return & "CP_ZMB_WEAPONS_FACE_MELTER";
+      return &"CP_ZMB_WEAPONS_FACE_MELTER";
     case "iw7_fhr":
-      return & "CP_ZMB_WEAPONS_FHR";
+      return &"CP_ZMB_WEAPONS_FHR";
     case "iw7_fmg":
-      return & "CP_ZMB_WEAPONS_FMG";
+      return &"CP_ZMB_WEAPONS_FMG";
     case "iw7_forgefreeze":
-      return & "CP_ZMB_WEAPONS_FORGE_FREEZE";
+      return &"CP_ZMB_WEAPONS_FORGE_FREEZE";
     case "iw7_g18c":
-      return & "CP_ZMB_WEAPONS_G18C";
+      return &"CP_ZMB_WEAPONS_G18C";
     case "iw7_g18":
-      return & "CP_ZMB_WEAPONS_G18";
+      return &"CP_ZMB_WEAPONS_G18";
     case "iw7_glprox":
-      return & "CP_ZMB_WEAPONS_GLPROX";
+      return &"CP_ZMB_WEAPONS_GLPROX";
     case "iw7_headcutter":
-      return & "CP_ZMB_WEAPONS_HEAD_CUTTER";
+      return &"CP_ZMB_WEAPONS_HEAD_CUTTER";
     case "iw7_kbs":
-      return & "CP_ZMB_WEAPONS_KBS";
+      return &"CP_ZMB_WEAPONS_KBS";
     case "iw7_m1":
-      return & "CP_ZMB_WEAPONS_M1";
+      return &"CP_ZMB_WEAPONS_M1";
     case "iw7_m1c":
-      return & "CP_ZMB_WEAPONS_M1C";
+      return &"CP_ZMB_WEAPONS_M1C";
     case "iw7_m4":
-      return & "CP_ZMB_WEAPONS_M4";
+      return &"CP_ZMB_WEAPONS_M4";
     case "iw7_m8":
-      return & "CP_ZMB_WEAPONS_M8";
+      return &"CP_ZMB_WEAPONS_M8";
     case "iw7_mauler":
-      return & "CP_ZMB_WEAPONS_MAULER";
+      return &"CP_ZMB_WEAPONS_MAULER";
     case "iw7_nrg":
-      return & "CP_ZMB_WEAPONS_NRG";
+      return &"CP_ZMB_WEAPONS_NRG";
     case "iw7_revolver":
-      return & "CP_ZMB_WEAPONS_REVOLVER";
+      return &"CP_ZMB_WEAPONS_REVOLVER";
     case "iw7_ripper":
-      return & "CP_ZMB_WEAPONS_RIPPER";
+      return &"CP_ZMB_WEAPONS_RIPPER";
     case "iw7_sdfar":
-      return & "CP_ZMB_WEAPONS_SDFAR";
+      return &"CP_ZMB_WEAPONS_SDFAR";
     case "iw7_sdflmg":
-      return & "CP_ZMB_WEAPONS_SDFLMG";
+      return &"CP_ZMB_WEAPONS_SDFLMG";
     case "iw7_sdfshotty":
-      return & "CP_ZMB_WEAPONS_SDFSHOTTY";
+      return &"CP_ZMB_WEAPONS_SDFSHOTTY";
     case "iw7_shredder":
-      return & "CP_ZMB_WEAPONS_SHREDDER";
+      return &"CP_ZMB_WEAPONS_SHREDDER";
     case "iw7_sonic":
-      return & "CP_ZMB_WEAPONS_SONIC";
+      return &"CP_ZMB_WEAPONS_SONIC";
     case "iw7_spasc":
-      return & "CP_ZMB_WEAPONS_SPASC";
+      return &"CP_ZMB_WEAPONS_SPASC";
     case "iw7_spas":
-      return & "CP_ZMB_WEAPONS_SPAS";
+      return &"CP_ZMB_WEAPONS_SPAS";
     case "iw7_steeldragon":
-      return & "CP_ZMB_WEAPONS_STEEL_DRAGON";
+      return &"CP_ZMB_WEAPONS_STEEL_DRAGON";
     case "iw7_ump45c":
-      return & "CP_ZMB_WEAPONS_UMP45C";
+      return &"CP_ZMB_WEAPONS_UMP45C";
     case "iw7_ump45":
-      return & "CP_ZMB_WEAPONS_UMP45";
+      return &"CP_ZMB_WEAPONS_UMP45";
     case "iw7_vr":
-      return & "CP_ZMB_WEAPONS_VR";
+      return &"CP_ZMB_WEAPONS_VR";
     case "iw7_crdb":
-      return & "CP_ZMB_WEAPONS_CRDB";
+      return &"CP_ZMB_WEAPONS_CRDB";
     case "iw7_minilmg":
-      return & "CP_ZMB_WEAPONS_MINILMG";
+      return &"CP_ZMB_WEAPONS_MINILMG";
     case "iw7_mp28":
-      return & "CP_ZMB_WEAPONS_MP28";
+      return &"CP_ZMB_WEAPONS_MP28";
     case "iw7_mod2187":
-      return & "CP_ZMB_WEAPONS_MOD2187";
+      return &"CP_ZMB_WEAPONS_MOD2187";
     case "iw7_ba50cal":
-      return & "CP_ZMB_WEAPONS_BA50CAL";
+      return &"CP_ZMB_WEAPONS_BA50CAL";
     case "iw7_longshot":
-      return & "CP_ZMB_WEAPONS_LONGSHOT";
+      return &"CP_ZMB_WEAPONS_LONGSHOT";
     case "iw7_cutie":
     case "iw7_cutie_zm":
-      return & "CP_ZMB_WEAPONS_MAD";
+      return &"CP_ZMB_WEAPONS_MAD";
     default:
       if(isDefined(level.custom_weaponnamestring_func)) {
         return [
@@ -908,7 +908,7 @@ _meth_8228(var_00) {
         return;
       }
 
-      return & "CP_ZMB_WEAPONS_GENERIC";
+      return &"CP_ZMB_WEAPONS_GENERIC";
       return;
   }
 }
@@ -924,7 +924,7 @@ func_F422(var_00, var_01) {
     self.interaction_trigger sethintstring(var_02);
 
   if(interaction_is_weapon_buy(var_01)) {
-    if(isDefined(var_02) && !isstring(var_02) && var_02 == & "COOP_INTERACTIONS_PURCHASE_AMMO") {
+    if(isDefined(var_02) && !isstring(var_02) && var_02 == &"COOP_INTERACTIONS_PURCHASE_AMMO") {
       var_03 = scripts\cp\utility::getrawbaseweaponname(var_1.script_noteworthy);
       var_04 = scripts\cp\cp_weapon::get_weapon_level(var_03);
       var_05 = _meth_8228(var_1.script_noteworthy);
@@ -989,10 +989,10 @@ func_7A49(var_00, var_01) {
     return [[level.interactions[var_0.script_noteworthy].hint_func]](var_00, var_01);
 
   if(isDefined(var_0.cooling_down))
-    return & "COOP_INTERACTIONS_COOLDOWN";
+    return &"COOP_INTERACTIONS_COOLDOWN";
 
   if(var_0.requires_power && !var_0.powered_on)
-    return & "COOP_INTERACTIONS_REQUIRES_POWER";
+    return &"COOP_INTERACTIONS_REQUIRES_POWER";
 
   if(interaction_is_weapon_buy(var_00)) {
     if(!scripts\cp\utility::coop_mode_has("wall_buys"))
@@ -1416,14 +1416,14 @@ func_7DBA(var_00, var_01) {
 
   switch (var_02) {
     case 250:
-      return & "CP_ZMB_INTERACTIONS_TICKETS_AMMO";
+      return &"CP_ZMB_INTERACTIONS_TICKETS_AMMO";
     case 1500:
     case 1250:
     case 1000:
     case 500:
-      return & "COOP_INTERACTIONS_PURCHASE_AMMO";
+      return &"COOP_INTERACTIONS_PURCHASE_AMMO";
     default:
-      return & "COOP_INTERACTIONS_PURCHASE_AMMO";
+      return &"COOP_INTERACTIONS_PURCHASE_AMMO";
   }
 }
 

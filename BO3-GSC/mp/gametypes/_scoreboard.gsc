@@ -9,11 +9,11 @@
 #namespace scoreboard;
 
 function autoexec __init__sytem__() {
-  system::register("scoreboard", & __init__, undefined, undefined);
+  system::register("scoreboard", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
+  callback::on_start_gametype(&init);
 }
 
 function init() {

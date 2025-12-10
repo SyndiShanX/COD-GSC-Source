@@ -968,10 +968,10 @@ street_main() {
   level.foley thread dialogue_queue("dcemp_fly_seekshelter");
   //flag_set( "dc_emp_afternath" );
 
-  objective_add(level.objnum, "active", & "DCEMP_OBJ_CRASH_SITE");
+  objective_add(level.objnum, "active", &"DCEMP_OBJ_CRASH_SITE");
   objective_state(level.objnum, "done");
   level.objnum++;
-  objective_add(level.objnum, "active", & "DCEMP_OBJ_FIND_SHELTER");
+  objective_add(level.objnum, "active", &"DCEMP_OBJ_FIND_SHELTER");
   objective_onentity(level.objnum, level.dunn, (0, 0, 70));
   objective_current(level.objnum);
 
@@ -1335,7 +1335,7 @@ corner_main() {
 
   objective_state(level.objnum, "done");
   level.objnum++;
-  objective_add(level.objnum, "active", & "DCEMP_OBJ_FOLLOW_SGT_FOLEY", level.foley.origin);
+  objective_add(level.objnum, "active", &"DCEMP_OBJ_FOLLOW_SGT_FOLEY", level.foley.origin);
   objective_current(level.objnum);
   objective_onentity(level.objnum, level.foley, (0, 0, 70));
 
@@ -1955,7 +1955,7 @@ lobby_main() {
 
   wait 1.5;
 
-  objective_string_NoMessage(level.objnum, & "DCEMP_OBJ_WHISKEY_HOTEL");
+  objective_string_NoMessage(level.objnum, &"DCEMP_OBJ_WHISKEY_HOTEL");
 
   lobby_moveout();
 
@@ -3918,7 +3918,7 @@ start_corner() {
   thread flag_set_delayed("corner_main", .5);
   thread flag_set_delayed("street_crash_heli_done", .5);
 
-  objective_add(level.objnum, "active", & "DCEMP_OBJ_FIND_SHELTER", getstruct("hide_obj", "targetname").origin);
+  objective_add(level.objnum, "active", &"DCEMP_OBJ_FIND_SHELTER", getstruct("hide_obj", "targetname").origin);
   objective_current(level.objnum);
 }
 
@@ -3951,7 +3951,7 @@ start_meetup() {
 
   thread flag_set_delayed("meetup_main", .5);
 
-  objective_add(level.objnum, "active", & "DCEMP_OBJ_FOLLOW_SGT_FOLEY", level.foley.origin);
+  objective_add(level.objnum, "active", &"DCEMP_OBJ_FOLLOW_SGT_FOLEY", level.foley.origin);
   objective_current(level.objnum);
   objective_onentity(level.objnum, level.foley, (0, 0, 70));
 }
@@ -4000,7 +4000,7 @@ start_lobby() {
   thread maps\_weather::rainMedium(1);
   delaythread(1, maps\_weather::lightning, maps\dcemp_fx::lightning_normal, maps\dcemp_fx::lightning_flash);
 
-  objective_add(level.objnum, "active", & "DCEMP_OBJ_WHISKEY_HOTEL", level.foley.origin);
+  objective_add(level.objnum, "active", &"DCEMP_OBJ_WHISKEY_HOTEL", level.foley.origin);
   objective_current(level.objnum);
   objective_onentity(level.objnum, level.foley, (0, 0, 70));
 }
@@ -4053,7 +4053,7 @@ start_office() {
   thread maps\_weather::rainHard(1);
   delaythread(1, maps\_weather::lightning, maps\dcemp_fx::lightning_normal, maps\dcemp_fx::lightning_flash);
 
-  objective_add(level.objnum, "active", & "DCEMP_OBJ_WHISKEY_HOTEL", level.foley.origin);
+  objective_add(level.objnum, "active", &"DCEMP_OBJ_WHISKEY_HOTEL", level.foley.origin);
   objective_current(level.objnum);
   objective_onentity(level.objnum, level.foley, (0, 0, 70));
 }
@@ -4082,7 +4082,7 @@ start_parking() {
   thread maps\_weather::rainHard(.05);
   delaythread(.05, maps\_weather::lightning, maps\dcemp_fx::lightning_normal, maps\dcemp_fx::lightning_flash);
 
-  objective_add(level.objnum, "active", & "DCEMP_OBJ_WHISKEY_HOTEL", level.foley.origin);
+  objective_add(level.objnum, "active", &"DCEMP_OBJ_WHISKEY_HOTEL", level.foley.origin);
   objective_current(level.objnum);
   objective_onentity(level.objnum, level.foley, (0, 0, 70));
   //sun shadow optimization
@@ -4127,7 +4127,7 @@ start_plaza() {
   thread maps\_weather::rainHard(.05);
   delaythread(.05, maps\_weather::lightning, maps\dcemp_fx::lightning_normal, maps\dcemp_fx::lightning_flash);
 
-  objective_add(level.objnum, "active", & "DCEMP_OBJ_WHISKEY_HOTEL", level.foley.origin);
+  objective_add(level.objnum, "active", &"DCEMP_OBJ_WHISKEY_HOTEL", level.foley.origin);
   objective_current(level.objnum);
   objective_onentity(level.objnum, level.foley, (0, 0, 70));
   //sun shadow optimization

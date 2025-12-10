@@ -27,10 +27,10 @@ function init() {}
 function main() {
   cybercom_gadget::registerability(1, 16);
   level.cybercom.overdrive = spawnStruct();
-  level.cybercom.overdrive._on_give = & _on_give;
-  level.cybercom.overdrive._on_take = & _on_take;
-  level.cybercom.overdrive._on = & _on;
-  level.cybercom.overdrive._off = & _off;
+  level.cybercom.overdrive._on_give = &_on_give;
+  level.cybercom.overdrive._on_take = &_on_take;
+  level.cybercom.overdrive._on = &_on;
+  level.cybercom.overdrive._off = &_off;
 }
 
 function _on_flicker(slot, weapon) {}

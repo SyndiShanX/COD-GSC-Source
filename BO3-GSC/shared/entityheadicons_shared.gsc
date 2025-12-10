@@ -11,7 +11,7 @@
 #namespace entityheadicons;
 
 function init_shared() {
-  callback::on_start_gametype( & start_gametype);
+  callback::on_start_gametype(&start_gametype);
 }
 
 function start_gametype() {
@@ -25,7 +25,7 @@ function start_gametype() {
     return;
   }
   if(!isDefined(level.setentityheadicon)) {
-    level.setentityheadicon = & setentityheadicon;
+    level.setentityheadicon = &setentityheadicon;
   }
   level.entitieswithheadicons = [];
 }
@@ -128,7 +128,7 @@ function updateentityheadteamobjective(entity, team, objective, constant_size) {
   headiconobjectiveid = gameobjects::get_next_obj_id();
   objective_add(headiconobjectiveid, "active", entity, objective);
   objective_team(headiconobjectiveid, team);
-  objective_setcolor(headiconobjectiveid, & "FriendlyBlue");
+  objective_setcolor(headiconobjectiveid, &"FriendlyBlue");
   entity.entityheadobjectives[entity.entityheadobjectives.size] = headiconobjectiveid;
 }
 
@@ -137,7 +137,7 @@ function updateentityheadclientobjective(entity, objective, constant_size) {
   objective_add(headiconobjectiveid, "active", entity, objective);
   objective_setinvisibletoall(headiconobjectiveid);
   objective_setvisibletoplayer(headiconobjectiveid, self);
-  objective_setcolor(headiconobjectiveid, & "FriendlyBlue");
+  objective_setcolor(headiconobjectiveid, &"FriendlyBlue");
   entity.entityheadobjectives[entity.entityheadobjectives.size] = headiconobjectiveid;
 }
 

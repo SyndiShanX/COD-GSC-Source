@@ -13,9 +13,9 @@ init() {
   var_0.modelplacementfailed = "ims_scorpion_body_iw6_placement_failed";
   var_0.modeldestroyed = "ims_scorpion_body_iw6";
   var_0.modelbombsquad = "ims_scorpion_body_iw6_bombsquad";
-  var_0.hintstring = & "KILLSTREAKS_HINTS_IMS_PICKUP_TO_MOVE";
-  var_0.placestring = & "KILLSTREAKS_HINTS_IMS_PLACE";
-  var_0.cannotplacestring = & "KILLSTREAKS_HINTS_IMS_CANNOT_PLACE";
+  var_0.hintstring = &"KILLSTREAKS_HINTS_IMS_PICKUP_TO_MOVE";
+  var_0.placestring = &"KILLSTREAKS_HINTS_IMS_PLACE";
+  var_0.cannotplacestring = &"KILLSTREAKS_HINTS_IMS_CANNOT_PLACE";
   var_0.streakname = "ims";
   var_0.func_10A38 = "used_ims";
   var_0.maxhealth = 670;

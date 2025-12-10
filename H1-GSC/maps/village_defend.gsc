@@ -76,15 +76,15 @@ main() {
   precacherumble("generic_attack_heavy_1000");
   maps\air_support_shared::air_support_precache();
   maps\_utility::set_console_status();
-  maps\_utility::add_start("southern_hill", ::start_southern_hill, & "STARTS_SOUTHERNHILL");
-  maps\_utility::add_start("minigun_fallback", ::start_minigun_fallback, & "STARTS_MINIGUNFALLBACK");
-  maps\_utility::add_start("minigun", ::start_minigun, & "STARTS_MINIGUN");
-  maps\_utility::add_start("helidrop", ::start_helidrop, & "STARTS_HELIDROP");
-  maps\_utility::add_start("clackers", ::start_clackers, & "STARTS_CLACKERS");
-  maps\_utility::add_start("field_fallback", ::start_field_fallback, & "STARTS_FIELDFALLBACK");
-  maps\_utility::add_start("javelin", ::start_javelin, & "STARTS_JAVELIN");
-  maps\_utility::add_start("final_battle", ::start_final_battle, & "STARTS_FINALBATTLE");
-  maps\_utility::add_start("seaknight", ::start_seaknight, & "STARTS_SEAKNIGHT1");
+  maps\_utility::add_start("southern_hill", ::start_southern_hill, &"STARTS_SOUTHERNHILL");
+  maps\_utility::add_start("minigun_fallback", ::start_minigun_fallback, &"STARTS_MINIGUNFALLBACK");
+  maps\_utility::add_start("minigun", ::start_minigun, &"STARTS_MINIGUN");
+  maps\_utility::add_start("helidrop", ::start_helidrop, &"STARTS_HELIDROP");
+  maps\_utility::add_start("clackers", ::start_clackers, &"STARTS_CLACKERS");
+  maps\_utility::add_start("field_fallback", ::start_field_fallback, &"STARTS_FIELDFALLBACK");
+  maps\_utility::add_start("javelin", ::start_javelin, &"STARTS_JAVELIN");
+  maps\_utility::add_start("final_battle", ::start_final_battle, &"STARTS_FINALBATTLE");
+  maps\_utility::add_start("seaknight", ::start_seaknight, &"STARTS_SEAKNIGHT1");
   maps\_utility::default_start(::start_village_defend);
   createthreatbiasgroup("player");
   level.weaponclipmodels = [];
@@ -302,8 +302,8 @@ main() {
   var_0[3] = 1.2;
   level.village_diff = var_0;
   level thread return_trip_enemy_acc_prep();
-  maps\_utility::add_hint_string("minigun_spin_left_trigger", & "SCRIPT_PLATFORM_SPOOL_MINIGUN", ::should_break_minigun_spin_hint);
-  maps\_utility::add_hint_string("minigun_spin_keyboard", & "SCRIPT_PLATFORM_SPOOL_MINIGUN_KEYBOARD", ::should_break_minigun_spin_hint);
+  maps\_utility::add_hint_string("minigun_spin_left_trigger", &"SCRIPT_PLATFORM_SPOOL_MINIGUN", ::should_break_minigun_spin_hint);
+  maps\_utility::add_hint_string("minigun_spin_keyboard", &"SCRIPT_PLATFORM_SPOOL_MINIGUN_KEYBOARD", ::should_break_minigun_spin_hint);
   level.playersafetyblocker = getent("helo_safety_blocker", "targetname");
   level.playersafetyblocker notsolid();
   level.playerheliblocker = getent("heli_blocker", "targetname");
@@ -2115,7 +2115,7 @@ clacker_fire(var_0, var_1, var_2) {
 
   var_1 delete();
   objective_delete(5);
-  objective_add(5, "active", & "VILLAGE_DEFEND_USE_THE_DETONATORS_IN1");
+  objective_add(5, "active", &"VILLAGE_DEFEND_USE_THE_DETONATORS_IN1");
   objective_current(5);
 
   for(var_6 = 0; var_6 < var_7.size; var_6++) {
@@ -2278,7 +2278,7 @@ tanks_deploy(var_0) {
   if(level.tankpop) {
     objective_delete(8);
     objective_add(8, "active", "");
-    objective_string(8, & "VILLAGE_DEFEND_DESTROY_THE_INCOMING", level.tankpop);
+    objective_string(8, &"VILLAGE_DEFEND_DESTROY_THE_INCOMING", level.tankpop);
     objective_current(8);
     level notify("tank_objectives_update");
     maps\_utility::autosave_or_timeout("save_tank_destroyed_with_javelin", 10);
@@ -2484,19 +2484,19 @@ objectives() {
 
   common_scripts\utility::flag_wait("objective_price_orders_southern_hill");
   common_scripts\utility::flag_set("aa_southernhill");
-  objective_add(2, "active", & "VILLAGE_DEFEND_TAKE_UP_A_DEFENSIVE_POSITION", (-732, -1473, 188));
+  objective_add(2, "active", &"VILLAGE_DEFEND_TAKE_UP_A_DEFENSIVE_POSITION", (-732, -1473, 188));
   objective_current(2);
   common_scripts\utility::flag_wait("objective_player_on_ridgeline");
   wait 3;
   objective_state(2, "done");
-  objective_add(3, "active", & "VILLAGE_DEFEND_DEFEND_THE_SOUTHERN_HILL", (-732, -1473, 188));
+  objective_add(3, "active", &"VILLAGE_DEFEND_DEFEND_THE_SOUTHERN_HILL", (-732, -1473, 188));
   objective_current(3);
   maps\_utility::autosave_by_name("ready_for_ambush");
   common_scripts\utility::flag_wait("objective_price_orders_minigun");
   objective_state(3, "done");
   common_scripts\utility::flag_clear("aa_southernhill");
   common_scripts\utility::flag_set("aa_minigun");
-  objective_add(4, "active", & "VILLAGE_DEFEND_FALL_BACK_AND_DEFEND", var_0.origin);
+  objective_add(4, "active", &"VILLAGE_DEFEND_FALL_BACK_AND_DEFEND", var_0.origin);
   objective_current(4);
   maps\_utility::arcademode_checkpoint(4, "a");
   maps\_utility::autosave_by_name("minigun_defense");
@@ -2504,7 +2504,7 @@ objectives() {
   objective_state(4, "done");
   common_scripts\utility::flag_clear("aa_minigun");
   common_scripts\utility::flag_set("aa_detonators");
-  objective_add(5, "active", & "VILLAGE_DEFEND_USE_THE_DETONATORS_IN", var_1[0].origin);
+  objective_add(5, "active", &"VILLAGE_DEFEND_USE_THE_DETONATORS_IN", var_1[0].origin);
   objective_current(5);
   maps\_utility::arcademode_checkpoint(5, "b");
   maps\_utility::autosave_by_name("detonator_defense");
@@ -2519,7 +2519,7 @@ objectives() {
   common_scripts\utility::flag_clear("aa_detonators");
   common_scripts\utility::flag_set("aa_fallback");
   maps\_utility::autosave_by_name("detonators_all_used_up");
-  objective_add(6, "active", & "VILLAGE_DEFEND_FALL_BACK_TO_THE_FARM", var_2.origin);
+  objective_add(6, "active", &"VILLAGE_DEFEND_FALL_BACK_TO_THE_FARM", var_2.origin);
   objective_current(6);
   maps\_utility::arcademode_checkpoint(3.5, "c");
   thread farm_javelin_nag();
@@ -2532,7 +2532,7 @@ objectives() {
   common_scripts\utility::flag_clear("aa_fallback");
   common_scripts\utility::flag_set("aa_javelin");
   maps\_utility::autosave_by_name("player_got_to_the_farm");
-  objective_add(7, "active", & "VILLAGE_DEFEND_GET_THE_JAVELIN_IN_THE", (1021.1, 7309.2, 1006));
+  objective_add(7, "active", &"VILLAGE_DEFEND_GET_THE_JAVELIN_IN_THE", (1021.1, 7309.2, 1006));
   objective_current(7);
   maps\_utility::arcademode_checkpoint(2, "d");
   common_scripts\utility::flag_wait("got_the_javelin");
@@ -2540,24 +2540,24 @@ objectives() {
   maps\_utility::autosave_by_name("got_javelin");
   thread early_chopper();
   objective_add(8, "active", "");
-  objective_string(8, & "VILLAGE_DEFEND_DESTROY_THE_INCOMING", 4);
+  objective_string(8, &"VILLAGE_DEFEND_DESTROY_THE_INCOMING", 4);
   objective_current(8);
   maps\_utility::arcademode_checkpoint(4, "e");
   common_scripts\utility::flag_wait("objective_all_tanks_destroyed");
   level.playersafetyblocker solid();
   level.playerheliblocker solid();
-  objective_string(8, & "VILLAGE_DEFEND_DESTROY_THE_INCOMING1");
+  objective_string(8, &"VILLAGE_DEFEND_DESTROY_THE_INCOMING1");
   objective_state(8, "done");
   common_scripts\utility::flag_clear("aa_javelin");
   common_scripts\utility::flag_set("aa_returntrip");
   maps\_utility::autosave_by_name("tanks_cleared");
   common_scripts\utility::flag_set("arm_delaying_action");
-  objective_add(9, "active", & "VILLAGE_DEFEND_SURVIVE_UNTIL_THE_HELICOPTER");
+  objective_add(9, "active", &"VILLAGE_DEFEND_SURVIVE_UNTIL_THE_HELICOPTER");
   objective_current(9);
   maps\_utility::arcademode_checkpoint(3, "f");
   common_scripts\utility::flag_set("start_final_battle");
   common_scripts\utility::flag_wait("objective_get_to_lz");
-  objective_add(9, "active", & "VILLAGE_DEFEND_GET_TO_THE_LZ", var_3.origin);
+  objective_add(9, "active", &"VILLAGE_DEFEND_GET_TO_THE_LZ", var_3.origin);
   objective_current(9);
   maps\_utility::autosave_by_name("get_to_the_choppah");
   maps\_utility::arcademode_checkpoint(7, "g");
@@ -2582,11 +2582,11 @@ objectives() {
   level notify("stop_airstrike_reminders");
   thread maps\village_defend_code::friendly_pushplayer("on");
   objective_state(9, "done");
-  objective_add(10, "active", & "VILLAGE_DEFEND_SURVIVE_UNTIL_THE_HELICOPTER");
+  objective_add(10, "active", &"VILLAGE_DEFEND_SURVIVE_UNTIL_THE_HELICOPTER");
   objective_current(10);
   common_scripts\utility::flag_wait("seaknight_can_be_boarded");
   objective_state(10, "done");
-  objective_add(11, "active", & "VILLAGE_DEFEND_BOARD_THE_HELICOPTER", var_3.origin);
+  objective_add(11, "active", &"VILLAGE_DEFEND_BOARD_THE_HELICOPTER", var_3.origin);
   objective_current(11);
   common_scripts\utility::flag_wait("player_made_it");
   maps\_utility::arcademode_checkpoint(1.75, "h");
@@ -2647,7 +2647,7 @@ objective_stopwatch() {
 
   level.hudelem = maps\_hud_util::get_countdown_hud(undefined, undefined, undefined, undefined, var_0);
   level.hudelem setpulsefx(30, 900000, 700);
-  level.hudelem.text.label = & "VILLAGE_DEFEND_HELICOPTER_EXTRACTION";
+  level.hudelem.text.label = &"VILLAGE_DEFEND_HELICOPTER_EXTRACTION";
   level.hudelem settenthstimer(var_0);
   wait(level.stopwatch * 60);
   maps\_hud_util::destroy_countdown_hud(level.hudelem);
@@ -2660,7 +2660,7 @@ lz_warning_timer() {
   level.hudelem = maps\_hud_util::get_countdown_hud(undefined, undefined, undefined, undefined, var_0);
   level.hudelem setpulsefx(30, level.lz_warning_time * 1000, 700);
   level.hudelem thread warning_effect();
-  level.hudelem.text.label = & "VILLAGE_DEFEND_HELICOPTER_WARNING";
+  level.hudelem.text.label = &"VILLAGE_DEFEND_HELICOPTER_WARNING";
   level.hudelem settenthstimer(var_0);
   common_scripts\utility::flag_wait_or_timeout("player_made_it", level.lz_warning_time);
   level.hudelem notify("stop_LZ_warning");
@@ -2810,7 +2810,7 @@ countdown_events() {
     wait 3;
 
     if(!common_scripts\utility::flag("player_made_it") && isalive(level.player)) {
-      setdvar("ui_deadquote", & "VILLAGE_DEFEND_YOU_DIDNT_REACH_THE_HELICOPTER");
+      setdvar("ui_deadquote", &"VILLAGE_DEFEND_YOU_DIDNT_REACH_THE_HELICOPTER");
       maps\_utility::missionfailedwrapper();
     }
   }

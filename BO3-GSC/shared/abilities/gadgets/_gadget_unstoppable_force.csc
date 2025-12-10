@@ -16,12 +16,12 @@
 #namespace _gadget_unstoppable_force;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_unstoppable_force", & __init__, undefined, undefined);
+  system::register("gadget_unstoppable_force", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_localclient_shutdown( & on_localplayer_shutdown);
-  clientfield::register("toplayer", "unstoppableforce_state", 1, 1, "int", & player_unstoppableforce_handler, 0, 1);
+  callback::on_localclient_shutdown(&on_localplayer_shutdown);
+  clientfield::register("toplayer", "unstoppableforce_state", 1, 1, "int", &player_unstoppableforce_handler, 0, 1);
 }
 
 function on_localplayer_shutdown(localclientnum) {

@@ -41,8 +41,8 @@ func_F990() {
 }
 
 func_1355F() {
-  precachestring( & "SHIPCRIB_VR_TUT_LEAVE");
-  scripts\sp\utility::func_16EB("vr_tut_leave", & "SHIPCRIB_VR_TUT_LEAVE", ::func_13569);
+  precachestring(&"SHIPCRIB_VR_TUT_LEAVE");
+  scripts\sp\utility::func_16EB("vr_tut_leave", &"SHIPCRIB_VR_TUT_LEAVE", ::func_13569);
 }
 
 func_13569() {

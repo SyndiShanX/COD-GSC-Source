@@ -20,14 +20,14 @@
 #namespace zm_powerup_nuke;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_nuke", & __init__, undefined, undefined);
+  system::register("zm_powerup_nuke", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  zm_powerups::register_powerup("nuke", & grab_nuke);
+  zm_powerups::register_powerup("nuke", &grab_nuke);
   clientfield::register("actor", "zm_nuked", 1000, 1, "counter");
   clientfield::register("vehicle", "zm_nuked", 1000, 1, "counter");
-  zm_powerups::add_zombie_powerup("nuke", "p7_zm_power_up_nuke", & "ZOMBIE_POWERUP_NUKE", & zm_powerups::func_should_always_drop, 0, 0, 0, "zombie/fx_powerup_nuke_zmb");
+  zm_powerups::add_zombie_powerup("nuke", "p7_zm_power_up_nuke", &"ZOMBIE_POWERUP_NUKE", &zm_powerups::func_should_always_drop, 0, 0, 0, "zombie/fx_powerup_nuke_zmb");
 }
 
 function grab_nuke(player) {

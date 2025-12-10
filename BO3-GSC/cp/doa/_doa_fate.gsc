@@ -443,35 +443,35 @@ function awardfate(type, rock) {
   self.doa.fate = type;
   switch (type) {
     case 1: {
-      level thread function_17fb777b(self, getweaponworldmodel(level.doa.var_e00fcc77), 2.1, & function_b6841741);
+      level thread function_17fb777b(self, getweaponworldmodel(level.doa.var_e00fcc77), 2.1, &function_b6841741);
       break;
     }
     case 2: {
-      level thread function_17fb777b(self, "zombietron_ruby", 4, & function_d30f9791);
+      level thread function_17fb777b(self, "zombietron_ruby", 4, &function_d30f9791);
       break;
     }
     case 4: {
-      level thread function_17fb777b(self, level.doa.var_f7277ad6, 4, & function_2a2ab6f9);
+      level thread function_17fb777b(self, level.doa.var_f7277ad6, 4, &function_2a2ab6f9);
       break;
     }
     case 3: {
-      level thread function_17fb777b(self, level.doa.var_a7cfb7eb, 4, & function_4c552db8);
+      level thread function_17fb777b(self, level.doa.var_a7cfb7eb, 4, &function_4c552db8);
       break;
     }
     case 10: {
-      level thread function_17fb777b(self, "zombietron_statue_fury", 1, & function_8c9288de);
+      level thread function_17fb777b(self, "zombietron_statue_fury", 1, &function_8c9288de);
       break;
     }
     case 11: {
-      level thread function_17fb777b(self, "zombietron_statue_fortitude", 1, & function_47b8a2a2);
+      level thread function_17fb777b(self, "zombietron_statue_fortitude", 1, &function_47b8a2a2);
       break;
     }
     case 12: {
-      level thread function_17fb777b(self, "zombietron_statue_favor", 1, & function_78c32d42);
+      level thread function_17fb777b(self, "zombietron_statue_favor", 1, &function_78c32d42);
       break;
     }
     case 13: {
-      level thread function_17fb777b(self, "zombietron_statue_force", 1, & function_c8508847);
+      level thread function_17fb777b(self, "zombietron_statue_force", 1, &function_c8508847);
       break;
     }
     default: {

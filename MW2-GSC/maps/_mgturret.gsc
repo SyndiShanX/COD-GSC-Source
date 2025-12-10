@@ -1701,7 +1701,7 @@ portable_mg_spot() {
   self.reserved = undefined;
   if(isDefined(self.isvehicleattached))
     return; // nate
-  if(self.spawnflags & turret_preplaced)
+  if(self.spawnflags &turret_preplaced)
     return;
 
   // a spot where a gun could be placed

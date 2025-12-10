@@ -180,7 +180,7 @@ function function_1adaa876(var_e4230c26, var_f4132a83) {
     return;
   }
   var_d66f8a9e = int(self getdstat("PlayerStatsList", "LAST_CYBERCOM_EQUIPPED", "statValue"));
-  var_2324b7c = var_d66f8a9e & (1024 - 1);
+  var_2324b7c = var_d66f8a9e &(1024 - 1);
   var_768ee804 = var_d66f8a9e >> 10;
   self function_1e4531c7(var_e4230c26);
   if(isDefined(var_f4132a83) && var_f4132a83 && var_2324b7c > 99 && var_2324b7c < 142) {
@@ -531,7 +531,7 @@ function targetisvalid(target, weapon, lockreq = 1) {
     result = self[[self.cybercom.targetlockrequirementcb]](target);
   }
   if(result && isDefined(level.var_732e9c7d)) {
-    result = result & [[level.var_732e9c7d]](self, target, weapon);
+    result = result &[[level.var_732e9c7d]](self, target, weapon);
   }
   if(isDefined(target.var_fb7ce72a)) {
     temp_result = target[[target.var_fb7ce72a]](self, weapon);
@@ -782,13 +782,13 @@ function weapon_lock_getslot(target, force = 0) {
     var_f72b478f = (isDefined(self.cybercom.var_f72b478f) ? self.cybercom.var_f72b478f : 0.83);
     if(newitem.dot > var_f72b478f) {
       newitem.target = locktarget;
-      array::insertion_sort(dots, & targetinsertionsortcompare, newitem);
+      array::insertion_sort(dots, &targetinsertionsortcompare, newitem);
     }
   }
   newitem = spawnStruct();
   newitem.dot = vectordot(playerforward, vectornormalize(target.origin - self.origin));
   newitem.target = target;
-  array::insertion_sort(dots, & targetinsertionsortcompare, newitem);
+  array::insertion_sort(dots, &targetinsertionsortcompare, newitem);
   worsttarget = dots[dots.size - 1].target;
   if(!force && worsttarget == target) {
     return -1;
@@ -976,7 +976,7 @@ function function_17fea3ed(slot, weapon, maxtargets) {
       newitem = spawnStruct();
       newitem.dot = target.var_4ddba9ea;
       newitem.target = target;
-      array::insertion_sort(dots, & targetinsertionsortcompare, newitem);
+      array::insertion_sort(dots, &targetinsertionsortcompare, newitem);
     }
     if(dots.size) {
       i = 0;
@@ -1122,7 +1122,7 @@ function cybercom_aiclearoptout(name) {
   if(!isDefined(flag)) {
     return;
   }
-  self.cybercom.optoutflags = self.cybercom.optoutflags & (~flag);
+  self.cybercom.optoutflags = self.cybercom.optoutflags &(~flag);
 }
 
 function cybercom_aicheckoptout(name) {
@@ -1137,7 +1137,7 @@ function cybercom_aicheckoptout(name) {
   if(!isDefined(flag)) {
     return false;
   }
-  if(self.cybercom.optoutflags & flag) {
+  if(self.cybercom.optoutflags &flag) {
     return true;
   }
   return false;

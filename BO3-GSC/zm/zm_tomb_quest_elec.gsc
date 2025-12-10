@@ -19,7 +19,7 @@
 #namespace zm_tomb_quest_elec;
 
 function main() {
-  callback::on_connect( & onplayerconnect);
+  callback::on_connect(&onplayerconnect);
   level flag::init("electric_puzzle_1_complete");
   level flag::init("electric_puzzle_2_complete");
   level flag::init("electric_upgrade_available");
@@ -73,7 +73,7 @@ function electric_puzzle_1_init() {
 function electric_puzzle_1_run() {
   a_piano_keys = struct::get_array("piano_key", "script_noteworthy");
   level.a_piano_keys_playing = [];
-  array::thread_all(a_piano_keys, & piano_key_run);
+  array::thread_all(a_piano_keys, &piano_key_run);
   level thread piano_run_chords();
 }
 
@@ -204,7 +204,7 @@ function electric_puzzle_2_init() {
   foreach(e_switch in a_switches) {
     level.electric_relays[e_switch.script_string].e_switch = e_switch;
   }
-  array::thread_all(level.electric_relays, & relay_switch_run);
+  array::thread_all(level.electric_relays, &relay_switch_run);
 }
 
 function electric_puzzle_2_run() {
@@ -305,7 +305,7 @@ function relay_switch_run() {
   self.trigger_stub.hint_string = "";
   self.trigger_stub.script_unitrigger_type = "unitrigger_radius_use";
   self.trigger_stub.require_look_at = 1;
-  zm_unitrigger::register_unitrigger(self.trigger_stub, & relay_unitrigger_think);
+  zm_unitrigger::register_unitrigger(self.trigger_stub, &relay_unitrigger_think);
   level endon("electric_puzzle_2_complete");
   self thread update_relay_rotation();
   n_tries = 0;

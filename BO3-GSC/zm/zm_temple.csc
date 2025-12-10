@@ -87,8 +87,8 @@ function main() {
   load::main();
   _zm_weap_cymbal_monkey::init();
   level thread power_watch();
-  callback::on_localclient_connect( & temple_player_connect);
-  callback::on_localplayer_spawned( & temple_player_spawned);
+  callback::on_localclient_connect(&temple_player_connect);
+  callback::on_localplayer_spawned(&temple_player_spawned);
   level thread temple_light_model_swap_init();
   level thread sq_std_watcher();
   level._in_eclipse = 0;
@@ -107,22 +107,22 @@ function function_6ac83719() {
 }
 
 function function_80cb4231() {
-  clientfield::register("actor", "ragimpactgib", 21000, 1, "int", & ragdoll_impact_watch_start, 0, 0);
-  clientfield::register("scriptmover", "spiketrap", 21000, 1, "int", & spike_trap_move, 0, 0);
-  clientfield::register("scriptmover", "mazewall", 21000, 1, "int", & maze_wall_move, 0, 0);
-  clientfield::register("scriptmover", "weaksauce", 21000, 1, "int", & crystal_weaksauce_start, 0, 0);
-  clientfield::register("scriptmover", "hotsauce", 21000, 1, "int", & crystal_hotsauce_start, 0, 0);
-  clientfield::register("scriptmover", "sauceend", 21000, 1, "int", & crystal_sauce_end, 0, 0);
-  clientfield::register("scriptmover", "watertrail", 21000, 1, "int", & water_trail_monitor, 0, 0);
-  clientfield::register("toplayer", "floorrumble", 21000, 1, "int", & maze_floor_controller_rumble, 0, 0);
-  clientfield::register("toplayer", "minecart_rumble", 21000, 1, "int", & function_425904c0, 0, 0);
-  clientfield::register("world", "papspinners", 21000, 4, "int", & function_9fe44296, 0, 0);
-  clientfield::register("world", "water_wheel_right", 21000, 1, "int", & water_wheel_right, 0, 0);
-  clientfield::register("world", "water_wheel_left", 21000, 1, "int", & water_wheel_left, 0, 0);
-  clientfield::register("world", "waterfall_trap", 21000, 1, "int", & waterfall_watcher, 0, 0);
-  clientfield::register("world", "time_transition", 21000, 1, "int", & timetravel_watcher, 0, 1);
-  clientfield::register("allplayers", "player_legs_hide", 21000, 1, "int", & player_legs_hide, 0, 0);
-  clientfield::register("scriptmover", "zombie_has_eyes", 21000, 1, "int", & zm::zombie_eyes_clientfield_cb, 0, 0);
+  clientfield::register("actor", "ragimpactgib", 21000, 1, "int", &ragdoll_impact_watch_start, 0, 0);
+  clientfield::register("scriptmover", "spiketrap", 21000, 1, "int", &spike_trap_move, 0, 0);
+  clientfield::register("scriptmover", "mazewall", 21000, 1, "int", &maze_wall_move, 0, 0);
+  clientfield::register("scriptmover", "weaksauce", 21000, 1, "int", &crystal_weaksauce_start, 0, 0);
+  clientfield::register("scriptmover", "hotsauce", 21000, 1, "int", &crystal_hotsauce_start, 0, 0);
+  clientfield::register("scriptmover", "sauceend", 21000, 1, "int", &crystal_sauce_end, 0, 0);
+  clientfield::register("scriptmover", "watertrail", 21000, 1, "int", &water_trail_monitor, 0, 0);
+  clientfield::register("toplayer", "floorrumble", 21000, 1, "int", &maze_floor_controller_rumble, 0, 0);
+  clientfield::register("toplayer", "minecart_rumble", 21000, 1, "int", &function_425904c0, 0, 0);
+  clientfield::register("world", "papspinners", 21000, 4, "int", &function_9fe44296, 0, 0);
+  clientfield::register("world", "water_wheel_right", 21000, 1, "int", &water_wheel_right, 0, 0);
+  clientfield::register("world", "water_wheel_left", 21000, 1, "int", &water_wheel_left, 0, 0);
+  clientfield::register("world", "waterfall_trap", 21000, 1, "int", &waterfall_watcher, 0, 0);
+  clientfield::register("world", "time_transition", 21000, 1, "int", &timetravel_watcher, 0, 1);
+  clientfield::register("allplayers", "player_legs_hide", 21000, 1, "int", &player_legs_hide, 0, 0);
+  clientfield::register("scriptmover", "zombie_has_eyes", 21000, 1, "int", &zm::zombie_eyes_clientfield_cb, 0, 0);
   visionset_mgr::register_overlay_info_style_postfx_bundle("zm_waterfall_postfx", 21000, 32, "pstfx_waterfall_soft", 3);
   visionset_mgr::register_overlay_info_style_postfx_bundle("zm_temple_eclipse", 21000, 1, "pstfx_temple_eclipse_in", 3);
 }
@@ -505,9 +505,9 @@ function include_weapons() {
 }
 
 function _init_magic_box() {
-  level._custom_box_monitor = & temple_box_monitor;
+  level._custom_box_monitor = &temple_box_monitor;
   level._box_locations = array("waterfall_upper_chest", "blender_chest", "pressure_chest", "bridge_chest", "caves_water_chest", "power_chest", "caves1_chest", "caves2_chest", "caves3_chest");
-  callback::on_localclient_connect( & _init_indicators);
+  callback::on_localclient_connect(&_init_indicators);
   level.cachedinfo = [];
   level.initialized = [];
 }
@@ -554,7 +554,7 @@ function temple_box_monitor(clientnum, state, oldstate) {
 
 function _delete_location(clientnum, location) {
   structs = struct::get_array(location, "script_noteworthy");
-  array::thread_all(structs, & _setup_view_model, clientnum, undefined);
+  array::thread_all(structs, &_setup_view_model, clientnum, undefined);
 }
 
 function _delete_all_locations(clientnum) {
@@ -566,7 +566,7 @@ function _delete_all_locations(clientnum) {
 
 function _show_location(clientnum, location) {
   structs = struct::get_array(location, "script_noteworthy");
-  array::thread_all(structs, & _setup_view_model, clientnum, "zt_map_knife");
+  array::thread_all(structs, &_setup_view_model, clientnum, "zt_map_knife");
 }
 
 function _setup_location(clientnum, location) {
@@ -644,11 +644,11 @@ function _set_num_visible_spinners(clientnum, num) {
     if(num >= pow) {
       num = num - pow;
       println((((("" + clientnum) + "") + i) + "") + level.spinners[clientnum][i].size);
-      array::thread_all(level.spinners[clientnum][i], & spin_to_start);
+      array::thread_all(level.spinners[clientnum][i], &spin_to_start);
       continue;
     }
     println((((("" + clientnum) + "") + i) + "") + level.spinners[clientnum][i].size);
-    array::thread_all(level.spinners[clientnum][i], & spin_forever);
+    array::thread_all(level.spinners[clientnum][i], &spin_forever);
   }
 }
 
@@ -718,7 +718,7 @@ function floating_boards_init() {
   for(i = 0; i < players.size; i++) {
     boards = arraycombine(boards, getEntArray(i, "plank_water", "targetname"), 1, 0);
   }
-  array::thread_all(boards, & float_board);
+  array::thread_all(boards, &float_board);
 }
 
 function float_board() {
@@ -778,7 +778,7 @@ function _init_pap_spinners(cnum) {
   for(i = 0; i < level.spinners[cnum].size; i++) {
     spinners = getEntArray(cnum, "pap_spinner" + (i + 1), "targetname");
     println((((("" + cnum) + "") + i) + "") + spinners.size);
-    array::thread_all(spinners, & init_spinner, i + 1);
+    array::thread_all(spinners, &init_spinner, i + 1);
     level.spinners[cnum][i] = spinners;
   }
 }

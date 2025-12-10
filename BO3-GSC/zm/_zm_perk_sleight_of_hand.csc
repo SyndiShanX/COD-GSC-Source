@@ -11,7 +11,7 @@
 #namespace zm_perk_sleight_of_hand;
 
 function autoexec __init__sytem__() {
-  system::register("zm_perk_sleight_of_hand", & __init__, undefined, undefined);
+  system::register("zm_perk_sleight_of_hand", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -19,9 +19,9 @@ function __init__() {
 }
 
 function enable_sleight_of_hand_perk_for_level() {
-  zm_perks::register_perk_clientfields("specialty_fastreload", & sleight_of_hand_client_field_func, & sleight_of_hand_code_callback_func);
+  zm_perks::register_perk_clientfields("specialty_fastreload", &sleight_of_hand_client_field_func, &sleight_of_hand_code_callback_func);
   zm_perks::register_perk_effects("specialty_fastreload", "sleight_light");
-  zm_perks::register_perk_init_thread("specialty_fastreload", & init_sleight_of_hand);
+  zm_perks::register_perk_init_thread("specialty_fastreload", &init_sleight_of_hand);
 }
 
 function init_sleight_of_hand() {

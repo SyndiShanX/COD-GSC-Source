@@ -14,11 +14,11 @@
 #namespace helicopter_sounds;
 
 function autoexec __init__sytem__() {
-  system::register("helicopter_sounds", & __init__, undefined, undefined);
+  system::register("helicopter_sounds", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  level._entityshutdowncbfunc = & heli_linkto_sound_ents_delete;
+  level._entityshutdowncbfunc = &heli_linkto_sound_ents_delete;
   level.helisoundvalues = [];
   init_heli_sound_values("cobra", "turbine", 65, 0.6, 0.8, 65, 1, 1.1);
   init_heli_sound_values("cobra", "top_rotor", 45, 0.7, 1, 45, 0.95, 1.1);

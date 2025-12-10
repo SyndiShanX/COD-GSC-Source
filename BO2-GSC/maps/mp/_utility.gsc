@@ -401,7 +401,7 @@ setlowermessage(text, time, combinemessageandtimer) {
   if(!isDefined(self.lowermessage)) {
     return;
   }
-  if(isDefined(self.lowermessageoverride) && text != & "") {
+  if(isDefined(self.lowermessageoverride) && text != &"") {
     text = self.lowermessageoverride;
     time = undefined;
   }
@@ -411,7 +411,7 @@ setlowermessage(text, time, combinemessageandtimer) {
 
   if(isDefined(time) && time > 0) {
     if(!isDefined(combinemessageandtimer) || !combinemessageandtimer)
-      self.lowertimer.label = & "";
+      self.lowertimer.label = &"";
     else {
       self.lowermessage settext("");
       self.lowertimer.label = text;
@@ -420,7 +420,7 @@ setlowermessage(text, time, combinemessageandtimer) {
     self.lowertimer settimer(time);
   } else {
     self.lowertimer settext("");
-    self.lowertimer.label = & "";
+    self.lowertimer.label = &"";
   }
 
   if(self issplitscreen())
@@ -436,7 +436,7 @@ setlowermessagevalue(text, value, combinemessage) {
   if(!isDefined(self.lowermessage)) {
     return;
   }
-  if(isDefined(self.lowermessageoverride) && text != & "") {
+  if(isDefined(self.lowermessageoverride) && text != &"") {
     text = self.lowermessageoverride;
     time = undefined;
   }
@@ -450,14 +450,14 @@ setlowermessagevalue(text, value, combinemessage) {
 
   if(isDefined(value) && value > 0) {
     if(!isDefined(combinemessage) || !combinemessage)
-      self.lowertimer.label = & "";
+      self.lowertimer.label = &"";
     else
       self.lowertimer.label = text;
 
     self.lowertimer setvalue(value);
   } else {
     self.lowertimer settext("");
-    self.lowertimer.label = & "";
+    self.lowertimer.label = &"";
   }
 
   if(self issplitscreen())
@@ -558,12 +558,12 @@ printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendl
       playerteam = player.pers["team"];
 
       if(isDefined(playerteam)) {
-        if(playerteam == team && isDefined(printfriendly) && printfriendly != & "") {
+        if(playerteam == team && isDefined(printfriendly) && printfriendly != &"") {
           player iprintln(printfriendly, printarg);
           continue;
         }
 
-        if(isDefined(printenemy) && printenemy != & "") {
+        if(isDefined(printenemy) && printenemy != &"") {
           if(isDefined(enemyteam) && playerteam == enemyteam) {
             player iprintln(printenemy, printarg);
             continue;
@@ -589,7 +589,7 @@ printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendl
 
         if(isDefined(playerteam)) {
           if(playerteam == team) {
-            if(isDefined(printfriendly) && printfriendly != & "")
+            if(isDefined(printfriendly) && printfriendly != &"")
               player iprintln(printfriendly, printarg);
 
             player playlocalsound(soundfriendly);
@@ -597,7 +597,7 @@ printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendl
           }
 
           if(isDefined(enemyteam) && playerteam == enemyteam || !isDefined(enemyteam) && playerteam != team) {
-            if(isDefined(printenemy) && printenemy != & "")
+            if(isDefined(printenemy) && printenemy != &"")
               player iprintln(printenemy, printarg);
 
             player playlocalsound(soundenemy);
@@ -611,14 +611,14 @@ printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendl
 
         if(isDefined(playerteam)) {
           if(playerteam == team) {
-            if(isDefined(printfriendly) && printfriendly != & "")
+            if(isDefined(printfriendly) && printfriendly != &"")
               player iprintln(printfriendly, printarg);
 
             player playlocalsound(soundfriendly);
             continue;
           }
 
-          if(isDefined(printenemy) && printenemy != & "") {
+          if(isDefined(printenemy) && printenemy != &"") {
             if(isDefined(enemyteam) && playerteam == enemyteam) {
               player iprintln(printenemy, printarg);
               continue;

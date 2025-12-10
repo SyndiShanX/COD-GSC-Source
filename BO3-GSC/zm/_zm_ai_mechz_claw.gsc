@@ -44,16 +44,16 @@
 #namespace zm_ai_mechz_claw;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_mechz_claw", & __init__, & __main__, undefined);
+  system::register("zm_ai_mechz_claw", &__init__, &__main__, undefined);
 }
 
 function __init__() {
   function_f20c04a4();
-  spawner::add_archetype_spawn_function("mechz", & function_1aacf7d4);
+  spawner::add_archetype_spawn_function("mechz", &function_1aacf7d4);
   level.mechz_claw_cooldown_time = 7000;
-  level.mechz_left_arm_damage_callback = & function_671deda5;
-  level.mechz_explosive_damage_reaction_callback = & function_6028875a;
-  level.mechz_powercap_destroyed_callback = & function_d6f31ed2;
+  level.mechz_left_arm_damage_callback = &function_671deda5;
+  level.mechz_explosive_damage_reaction_callback = &function_6028875a;
+  level.mechz_powercap_destroyed_callback = &function_d6f31ed2;
   level flag::init("mechz_launching_claw");
   level flag::init("mechz_claw_move_complete");
   clientfield::register("actor", "mechz_fx", 21000, 12, "int");
@@ -65,14 +65,14 @@ function __init__() {
 function private __main__() {}
 
 function private function_f20c04a4() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMechzShouldShootClaw", & function_bdc90f38);
-  behaviortreenetworkutility::registerbehaviortreeaction("zmMechzShootClawAction", & function_86ac6346, & function_a94df749, & function_1b118e5);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMechzShootClaw", & function_456e76fa);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMechzUpdateClaw", & function_a844c266);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMechzStopClaw", & function_75278fab);
-  animationstatenetwork::registernotetrackhandlerfunction("muzzleflash", & function_de3abdba);
-  animationstatenetwork::registernotetrackhandlerfunction("start_ft", & function_48c03479);
-  animationstatenetwork::registernotetrackhandlerfunction("stop_ft", & function_235008e3);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMechzShouldShootClaw", &function_bdc90f38);
+  behaviortreenetworkutility::registerbehaviortreeaction("zmMechzShootClawAction", &function_86ac6346, &function_a94df749, &function_1b118e5);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMechzShootClaw", &function_456e76fa);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMechzUpdateClaw", &function_a844c266);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMechzStopClaw", &function_75278fab);
+  animationstatenetwork::registernotetrackhandlerfunction("muzzleflash", &function_de3abdba);
+  animationstatenetwork::registernotetrackhandlerfunction("start_ft", &function_48c03479);
+  animationstatenetwork::registernotetrackhandlerfunction("stop_ft", &function_235008e3);
 }
 
 function private function_bdc90f38(entity) {
@@ -244,8 +244,8 @@ function private function_31c4b972() {
 }
 
 function private function_90832db7() {
-  self.fx_field = self.fx_field & (~256);
-  self.fx_field = self.fx_field & (~64);
+  self.fx_field = self.fx_field &(~256);
+  self.fx_field = self.fx_field &(~64);
   self clientfield::set("mechz_fx", self.fx_field);
   self function_9bfd96c8();
   if(isDefined(self.m_claw)) {
@@ -544,7 +544,7 @@ function private function_672f9804() {
   self.m_claw setanim( % mechz_claw::ai_zombie_mech_grapple_arm_closed_idle, 1, 0.2, 1);
   self.m_claw.fx_ent delete();
   self.m_claw.fx_ent = undefined;
-  self.fx_field = self.fx_field & (~256);
+  self.fx_field = self.fx_field &(~256);
   self clientfield::set("mechz_fx", self.fx_field);
   self clientfield::set("mechz_wpn_source", 0);
   level flag::clear("mechz_launching_claw");

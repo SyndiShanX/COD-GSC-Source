@@ -74,18 +74,18 @@ onPrecacheGameType() {
 }
 
 onStartGameType() {
-  setObjectiveText("allies", & "OBJECTIVES_DOM");
-  setObjectiveText("axis", & "OBJECTIVES_DOM");
+  setObjectiveText("allies", &"OBJECTIVES_DOM");
+  setObjectiveText("axis", &"OBJECTIVES_DOM");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", & "OBJECTIVES_DOM");
-    setObjectiveScoreText("axis", & "OBJECTIVES_DOM");
+    setObjectiveScoreText("allies", &"OBJECTIVES_DOM");
+    setObjectiveScoreText("axis", &"OBJECTIVES_DOM");
   } else {
-    setObjectiveScoreText("allies", & "OBJECTIVES_DOM_SCORE");
-    setObjectiveScoreText("axis", & "OBJECTIVES_DOM_SCORE");
+    setObjectiveScoreText("allies", &"OBJECTIVES_DOM_SCORE");
+    setObjectiveScoreText("axis", &"OBJECTIVES_DOM_SCORE");
   }
-  setObjectiveHintText("allies", & "OBJECTIVES_DOM_HINT");
-  setObjectiveHintText("axis", & "OBJECTIVES_DOM_HINT");
+  setObjectiveHintText("allies", &"OBJECTIVES_DOM_HINT");
+  setObjectiveHintText("axis", &"OBJECTIVES_DOM_HINT");
 
   setClientNameMode("auto_change");
 
@@ -177,8 +177,6 @@ getSpawnPoint() {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_allies_start);
   }
 
-
-
   assert(isDefined(spawnpoint));
 
   return spawnpoint;
@@ -254,7 +252,6 @@ domFlags() {
 
     domFlag.baseeffectpos = trace["position"];
 
-
     level.flags[index].useObj = domFlag;
     level.flags[index].adjflags = [];
     level.flags[index].nearbyspawns = [];
@@ -263,7 +260,6 @@ domFlags() {
 
     level.domFlags[level.domFlags.size] = domFlag;
   }
-
 
   level.bestSpawnFlag = [];
   level.bestSpawnFlag["allies"] = getUnownedFlagNearestStart("allies", undefined);
@@ -415,8 +411,6 @@ onUse(player) {
   } else {
     thread printAndSoundOnEveryone(team, oldTeam, undefined, undefined, "mp_war_objective_taken", "mp_war_objective_lost", player);
 
-
-
     if(getTeamFlagCount(team) == level.flags.size) {
       statusDialog("secure_all", team);
       statusDialog("lost_all", oldTeam);
@@ -489,7 +483,6 @@ updateDomScores() {
         maps\mp\gametypes\_gamescore::giveTeamScoreForObjective(team, 1);
       }
     }
-
 
     if((((getTimePassed() / 1000) > 120 && domFlags.size < 2) || ((getTimePassed() / 1000) > 300 && domFlags.size < 3)) && matchMakingGame()) {
       thread maps\mp\gametypes\_gamelogic::endGame("none", game["strings"]["time_limit_reached"]);
@@ -679,7 +672,6 @@ flagSetup() {
   maperrors = [];
   descriptorsByLinkname = [];
 
-
   descriptors = getEntArray("flag_descriptor", "targetname");
 
   flags = level.flags;
@@ -729,7 +721,6 @@ flagSetup() {
       }
     }
   }
-
 
   spawnpoints = maps\mp\gametypes\_spawnlogic::getSpawnpointArray("mp_dom_spawn");
   for(i = 0; i < spawnpoints.size; i++) {

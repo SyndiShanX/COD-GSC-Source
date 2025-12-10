@@ -18,13 +18,13 @@
 #namespace _gadget_heat_wave;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_heat_wave", & __init__, undefined, undefined);
+  system::register("gadget_heat_wave", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "heatwave_fx", 1, 1, "int", & set_heatwave_fx, 0, 0);
-  clientfield::register("allplayers", "heatwave_victim", 1, 1, "int", & update_victim, 0, 0);
-  clientfield::register("toplayer", "heatwave_activate", 1, 1, "int", & update_activate, 0, 0);
+  clientfield::register("scriptmover", "heatwave_fx", 1, 1, "int", &set_heatwave_fx, 0, 0);
+  clientfield::register("allplayers", "heatwave_victim", 1, 1, "int", &update_victim, 0, 0);
+  clientfield::register("toplayer", "heatwave_activate", 1, 1, "int", &update_activate, 0, 0);
   level.debug_heat_wave_traces = getdvarint("scr_debug_heat_wave_traces", 0);
   visionset_mgr::register_visionset_info("heatwave", 1, 16, undefined, "heatwave");
   visionset_mgr::register_visionset_info("charred", 1, 16, undefined, "charred");

@@ -19,11 +19,11 @@
 #namespace wager;
 
 function autoexec __init__sytem__() {
-  system::register("wager", & __init__, undefined, undefined);
+  system::register("wager", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
+  callback::on_start_gametype(&init);
 }
 
 function init() {
@@ -37,8 +37,8 @@ function init() {
     game["dialog"]["wm_in_the_money"] = "boost_gen_06";
     game["dialog"]["wm_oot_money"] = "boost_gen_07";
     level.poweruplist = [];
-    callback::on_disconnect( & on_disconnect);
-    callback::on_spawned( & init_player);
+    callback::on_disconnect(&on_disconnect);
+    callback::on_spawned(&init_player);
     level thread help_game_end();
   } else {
     level.wagermatch = 0;
@@ -393,7 +393,7 @@ function help_game_end() {
     }
     if(playersleft == 2) {
       for(i = 0; i < players.size; i++) {
-        players[i] queue_popup(&"MP_HEADS_UP", 0, & "MP_U2_ONLINE", "wm_u2_online");
+        players[i] queue_popup(&"MP_HEADS_UP", 0, &"MP_U2_ONLINE", "wm_u2_online");
         players[i].pers["hasRadar"] = 1;
         players[i].hasspyplane = 1;
         if(level.teambased) {
@@ -646,7 +646,7 @@ function show_powerup_message(powerupindex, doanimation) {
   self.powerups[powerupindex].hud_elem_icon.archived = 0;
   self.powerups[powerupindex].hud_elem_icon.alpha = 1;
   if(!wasinprematch && doanimation) {
-    self thread queue_popup(self.powerups[powerupindex].displayname, 0, & "MP_BONUS_ACQUIRED");
+    self thread queue_popup(self.powerups[powerupindex].displayname, 0, &"MP_BONUS_ACQUIRED");
   }
   pulsetime = 0.5;
   if(doanimation) {
@@ -668,7 +668,7 @@ function show_powerup_message(powerupindex, doanimation) {
     wait(pulsetime);
   }
   if(wasinprematch && doanimation) {
-    self thread queue_popup(self.powerups[powerupindex].displayname, 0, & "MP_BONUS_ACQUIRED");
+    self thread queue_popup(self.powerups[powerupindex].displayname, 0, &"MP_BONUS_ACQUIRED");
   }
   wait(1.5);
   for(i = 0; i <= powerupindex; i++) {

@@ -147,12 +147,12 @@ init_palm_trees() {
 
 init_starts() {
   default_start(::start_outside_castle);
-  add_start("mortar_pits", ::start_by_mortar_pits, & "OKI3_STARTS_MORTARPITS");
-  add_start("planters", ::start_by_planters, & "OKI3_STARTS_PLANTERS");
-  add_start("ambush", ::start_ambush, & "OKI3_STARTS_AMBUSH");
-  add_start("planters_end", ::start_planters_end, & "OKI3_STARTS_PLANTERS_END");
-  add_start("courtyard", ::start_in_courtyard, & "OKI3_STARTS_COURTYARD");
-  add_start("outro", ::start_at_outro, & "OKI3_STARTS_OUTRO");
+  add_start("mortar_pits", ::start_by_mortar_pits, &"OKI3_STARTS_MORTARPITS");
+  add_start("planters", ::start_by_planters, &"OKI3_STARTS_PLANTERS");
+  add_start("ambush", ::start_ambush, &"OKI3_STARTS_AMBUSH");
+  add_start("planters_end", ::start_planters_end, &"OKI3_STARTS_PLANTERS_END");
+  add_start("courtyard", ::start_in_courtyard, &"OKI3_STARTS_COURTYARD");
+  add_start("outro", ::start_at_outro, &"OKI3_STARTS_OUTRO");
 }
 
 init_spawn_functions() {
@@ -355,7 +355,7 @@ start_planters_end() {
   level thread do_castle_dialogue();
   level.sarge set_force_color("o");
   level thread maps\oki3_courtyard::main();
-  objective_add(6, "current", & "OKI3_OBJ1");
+  objective_add(6, "current", &"OKI3_OBJ1");
   objective_position(6, (8203, -2236, 157));
   getent("planter_door_end", "targetname") notify("trigger");
   kill_beginning_guys();
@@ -554,7 +554,7 @@ event1_regroup() {
   level.sniper_pawn.goalradius = 32;
   level.polonsky setgoalnode(nodes[0]);
   level.sniper_pawn setgoalnode(nodes[1]);
-  objective_add(2, "current", & "OKI3_OBJ4", (5717.5, 3154.5, -754));
+  objective_add(2, "current", &"OKI3_OBJ4", (5717.5, 3154.5, -754));
   level.sarge set_force_color("y");
   level.polonsky set_force_color("y");
   level.sniper_pawn set_force_color("g");
@@ -960,7 +960,7 @@ planter_battle() {
   for(i = 0; i < friends.size; i++) {
     friends[i] set_force_color("o");
   }
-  objective_add(5, "current", & "OKI3_REGROUP", (6031, -4012.5, 128));
+  objective_add(5, "current", &"OKI3_REGROUP", (6031, -4012.5, 128));
   trig notify("trigger");
   getent("regroup_after_planters", "targetname") trigger_on();
   getent("regroup_after_planters", "targetname") waittill("trigger");
@@ -984,7 +984,7 @@ do_planter_dialogue() {
   level.sarge do_dialogue("both_sides");
   level.sarge do_dialogue("hunt_down");
   battlechatter_on("allies");
-  objective_add(5, "current", & "OKI3_OBJ6A", (5694, -4694.5, 160.8));
+  objective_add(5, "current", &"OKI3_OBJ6A", (5694, -4694.5, 160.8));
   objective_ring(5);
   setmusicstate("PLANTERS");
 }
@@ -1239,9 +1239,9 @@ mortar_objective() {
   level thread dialogue_more_mortars();
   level thread spawn_grass_guys();
   level waittill("mortar_guys_dead");
-  objective_string(5, & "OKI3_OBJ2");
+  objective_string(5, &"OKI3_OBJ2");
   objective_state(5, "done");
-  objective_add(6, "current", & "OKI3_OBJ1", (6031, -4012.5, 128));
+  objective_add(6, "current", &"OKI3_OBJ1", (6031, -4012.5, 128));
   level notify("stop_trench_mortars");
   autosave_by_name("mortarpits_cleared");
 }
@@ -1258,16 +1258,16 @@ update_mortar_objectives() {
   if(isDefined(guys) && guys.size > 0) {
     switch (guys.size) {
       case 1:
-        objective_string(5, & "OKI3_OBJ2_1");
+        objective_string(5, &"OKI3_OBJ2_1");
         break;
       case 2:
-        objective_string(5, & "OKI3_OBJ2_2");
+        objective_string(5, &"OKI3_OBJ2_2");
         break;
       case 3:
-        objective_string(5, & "OKI3_OBJ2_3");
+        objective_string(5, &"OKI3_OBJ2_3");
         break;
       case 4:
-        objective_string(5, & "OKI3_OBJ2_4");
+        objective_string(5, &"OKI3_OBJ2_4");
         break;
     }
     for(i = 0; i < guys.size; i++) {
@@ -1514,7 +1514,7 @@ event1_tree_sniper_ambush() {
   level.sarge do_dialogue("incoming");
   if(!flag("bunker_entered")) {
     objective_state(2, "done");
-    objective_add(3, "current", & "OKI3_TAKE_COVER", getent("bunker_entered", "targetname").origin);
+    objective_add(3, "current", &"OKI3_TAKE_COVER", getent("bunker_entered", "targetname").origin);
     level.bunker_objective = true;
   }
   level thread find_bunker_tunnel();
@@ -2103,7 +2103,7 @@ supply_drop_objective() {
   level thread take_ammo_from_supplydrop();
   event1_warp_supplydrop();
   level notify("safe_to_snipe");
-  objective_string(2, & "OKI3_OBJ5");
+  objective_string(2, &"OKI3_OBJ5");
   objective_current(2);
   autosave_by_name("supply_drop_secured");
   level thread setup_waving_guy();
@@ -2520,7 +2520,7 @@ players_cleared_bunker() {
   level notify("all_out_bunker");
   autosave_by_name("all_out_bunker");
   objective_state(4, "done");
-  objective_add(5, "current", & "OKI3_OBJ1", (3626.5, -91.5, -449.3));
+  objective_add(5, "current", &"OKI3_OBJ1", (3626.5, -91.5, -449.3));
   objective_ring(5);
 }
 

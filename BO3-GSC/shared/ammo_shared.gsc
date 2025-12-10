@@ -27,7 +27,7 @@ function dropaiammo() {
   droppedweapon = shared::throwweapon(self.ammopouch, "tag_stowed_back", 1);
   if(isDefined(droppedweapon)) {
     droppedweapon thread ammo_pouch_think();
-    droppedweapon setcontents(droppedweapon setcontents(0) & (~(((32768 | 67108864) | 8388608) | 33554432)));
+    droppedweapon setcontents(droppedweapon setcontents(0) &(~(((32768 | 67108864) | 8388608) | 33554432)));
   }
 }
 

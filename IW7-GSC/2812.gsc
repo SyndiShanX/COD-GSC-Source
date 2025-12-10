@@ -3228,10 +3228,10 @@ func_3343() {
   if(isDefined(var_05) && (issubstr(var_05, "MOD_GRENADE") || issubstr(var_05, "MOD_EXPLOSIVE")))
     self.waschained = 1;
 
-  if(isDefined(var_09) && var_09 & level.idflags_penetration)
+  if(isDefined(var_09) && var_09 &level.idflags_penetration)
     self.wasdamagedfrombulletpenetration = 1;
 
-  if(isDefined(var_09) && var_09 & level.idflags_no_team_protection)
+  if(isDefined(var_09) && var_09 &level.idflags_no_team_protection)
     self.wasdamagedfrombulletricochet = 1;
 
   self.wasdamaged = 1;
@@ -3557,16 +3557,16 @@ watchexplosiveusable() {
 
   switch (self.weapon_name) {
     case "c4_mp":
-      var_01 sethintstring( & "MP_PICKUP_C4");
+      var_01 sethintstring(&"MP_PICKUP_C4");
       break;
     case "cryo_mine_mp":
-      var_01 sethintstring( & "MP_PICKUP_CRYO_MINE");
+      var_01 sethintstring(&"MP_PICKUP_CRYO_MINE");
       break;
     case "trip_mine_mp":
-      var_01 sethintstring( & "MP_PICKUP_TRIP_MINE");
+      var_01 sethintstring(&"MP_PICKUP_TRIP_MINE");
       break;
     case "trophy_mp":
-      var_01 sethintstring( & "MP_PICKUP_TROPHY");
+      var_01 sethintstring(&"MP_PICKUP_TROPHY");
       break;
   }
 
@@ -3607,16 +3607,16 @@ makeexplosiveusabletag(var_00, var_01) {
 
   switch (var_03) {
     case "c4_mp":
-      self sethintstring( & "MP_PICKUP_C4");
+      self sethintstring(&"MP_PICKUP_C4");
       break;
     case "cryo_mine_mp":
-      self sethintstring( & "MP_PICKUP_CRYO_MINE");
+      self sethintstring(&"MP_PICKUP_CRYO_MINE");
       break;
     case "trip_mine_mp":
-      self sethintstring( & "MP_PICKUP_TRIP_MINE");
+      self sethintstring(&"MP_PICKUP_TRIP_MINE");
       break;
     case "trophy_mp":
-      self sethintstring( & "MP_PICKUP_TROPHY");
+      self sethintstring(&"MP_PICKUP_TROPHY");
       break;
   }
 
@@ -4910,10 +4910,10 @@ minedamagemonitor() {
   if(isDefined(var_07) && (issubstr(var_07, "MOD_GRENADE") || issubstr(var_07, "MOD_EXPLOSIVE")))
     self.waschained = 1;
 
-  if(isDefined(var_11) && var_11 & level.idflags_penetration)
+  if(isDefined(var_11) && var_11 &level.idflags_penetration)
     self.wasdamagedfrombulletpenetration = 1;
 
-  if(isDefined(var_11) && var_11 & level.idflags_no_team_protection)
+  if(isDefined(var_11) && var_11 &level.idflags_no_team_protection)
     self.wasdamagedfrombulletricochet = 1;
 
   self.wasdamaged = 1;
@@ -6482,7 +6482,7 @@ watchaxeuse(var_00, var_01) {
   var_02 makeusable();
   var_02 setcursorhint("HINT_NOICON");
   var_02 _meth_84A9("show");
-  var_02 sethintstring( & "WEAPON_PICKUP_AXE");
+  var_02 sethintstring(&"WEAPON_PICKUP_AXE");
   var_02 _meth_84A6(360);
   var_02 setusefov(360);
   var_02 _meth_84A4(64);

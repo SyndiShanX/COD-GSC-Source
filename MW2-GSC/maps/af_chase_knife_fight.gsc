@@ -32,13 +32,13 @@ add_knife_fight_starts() {
 
 init_ending() {
   // ^3[{+usereload}]^7
-  add_hint_string("knife", & "AF_CHASE_PRESS_USE", ::stop_pressing_use);
+  add_hint_string("knife", &"AF_CHASE_PRESS_USE", ::stop_pressing_use);
   // ^3[{+attack}]^7
-  add_hint_string("hint_crawl_right", & "AF_CHASE_HINT_CRAWL_RIGHT", ::hint_crawl_right);
+  add_hint_string("hint_crawl_right", &"AF_CHASE_HINT_CRAWL_RIGHT", ::hint_crawl_right);
   // ^3[{+speed_throw}]^7
-  add_hint_string("hint_crawl_left", & "AF_CHASE_HINT_CRAWL_LEFT", ::hint_crawl_left);
+  add_hint_string("hint_crawl_left", &"AF_CHASE_HINT_CRAWL_LEFT", ::hint_crawl_left);
 
-  add_hint_string("hint_melee", & "AF_CHASE_HINT_MELEE_EMPTY", ::stop_melee_hint);
+  add_hint_string("hint_melee", &"AF_CHASE_HINT_MELEE_EMPTY", ::stop_melee_hint);
 
   flag_init("player_learned_melee");
 
@@ -216,7 +216,7 @@ wakeup_after_crash() {
 
   anim_node anim_first_frame_solo(player_rig, scene);
   level.player PlayerLinkToDelta(player_rig, "tag_player", 1, 0, 0, 0, 0, true);
-  SaveGame(scene, & "AUTOSAVE_LEVELSTART", "shot", true);
+  SaveGame(scene, &"AUTOSAVE_LEVELSTART", "shot", true);
   level.player FreezeControls(true);
 
   array_spawn_function_targetname("crawling_spawner", ::crawling_guy_crawls);
@@ -529,7 +529,7 @@ start_gun_crawl() {
 }
 
 gun_crawl() {
-  SaveGame("crawl", & "AUTOSAVE_LEVELSTART", "shot", true);
+  SaveGame("crawl", &"AUTOSAVE_LEVELSTART", "shot", true);
   beat_up_prices_head();
   //	SetSavedDvar( "cg_fov", 40 );
   level.fov_ent.origin = (40, 0, 0);
@@ -830,7 +830,7 @@ start_knife_pullout() {
 
 knife_pullout() {
   flag_set("player_heartbeat_sound");
-  SaveGame("pullout", & "AUTOSAVE_LEVELSTART", "shot", true);
+  SaveGame("pullout", &"AUTOSAVE_LEVELSTART", "shot", true);
 
   thread spawn_fake_wrestlers(); // so we can jump to the midpoint of an anim more smoothly
 
@@ -1002,7 +1002,7 @@ knife_kill() {
 
   maps\af_chase_anim::add_fighte_animsounds();
   flag_set("player_heartbeat_sound");
-  SaveGame("kill", & "AUTOSAVE_LEVELSTART", "shot", true);
+  SaveGame("kill", &"AUTOSAVE_LEVELSTART", "shot", true);
   fight_c_animnode = GetEnt("end_scene_org_fight_C", "targetname");
   anim_node = get_anim_node_rotated();
   player_rig = get_player_rig();
@@ -1283,7 +1283,7 @@ end_credits() {
 
 knife_fight_objectives() {
   // Kill Shepherd.
-  Objective_Add(obj("get_shepherd"), "current", & "AF_CHASE_KILL_SHEPHERD");
+  Objective_Add(obj("get_shepherd"), "current", &"AF_CHASE_KILL_SHEPHERD");
 
   flag_wait("shepherd_killed");
   wait(3.1);

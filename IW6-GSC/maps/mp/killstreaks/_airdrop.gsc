@@ -42,57 +42,57 @@ init() {
   level.crateTypes = [];
   level.crateMaxVal = [];
 
-  addCrateType("airdrop_assault", "uplink", 25, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_UPLINK_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_assault", "ims", 25, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_IMS_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_assault", "guard_dog", 20, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_GUARD_DOG_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_assault", "drone_hive", 20, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_DRONE_HIVE_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_assault", "sentry", 10, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_SENTRY_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_assault", "helicopter", 10, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_HELICOPTER_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_assault", "ball_drone_backup", 4, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_BALL_DRONE_BACKUP_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_assault", "vanguard", 4, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_VANGUARD_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_assault", "airdrop_juggernaut_maniac", 3, ::juggernautCrateThink, FRIENDLY_JUGGERNAUT_CRATE_MODEL, ENEMY_JUGGERNAUT_CRATE_MODEL, & "KILLSTREAKS_HINTS_JUGGERNAUT_MANIAC_PICKUP", DUMMY_JUGGERNAUT_CRATE_MODEL);
-  addCrateType("airdrop_assault", "airdrop_juggernaut", 2, ::juggernautCrateThink, FRIENDLY_JUGGERNAUT_CRATE_MODEL, ENEMY_JUGGERNAUT_CRATE_MODEL, & "KILLSTREAKS_HINTS_JUGGERNAUT_PICKUP", DUMMY_JUGGERNAUT_CRATE_MODEL);
-  addCrateType("airdrop_assault", "heli_pilot", 1, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_HELI_PILOT_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_assault", "odin_assault", 1, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_ODIN_ASSAULT_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_assault", "uplink", 25, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_UPLINK_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_assault", "ims", 25, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_IMS_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_assault", "guard_dog", 20, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_GUARD_DOG_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_assault", "drone_hive", 20, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_DRONE_HIVE_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_assault", "sentry", 10, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_SENTRY_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_assault", "helicopter", 10, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_HELICOPTER_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_assault", "ball_drone_backup", 4, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_BALL_DRONE_BACKUP_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_assault", "vanguard", 4, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_VANGUARD_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_assault", "airdrop_juggernaut_maniac", 3, ::juggernautCrateThink, FRIENDLY_JUGGERNAUT_CRATE_MODEL, ENEMY_JUGGERNAUT_CRATE_MODEL, &"KILLSTREAKS_HINTS_JUGGERNAUT_MANIAC_PICKUP", DUMMY_JUGGERNAUT_CRATE_MODEL);
+  addCrateType("airdrop_assault", "airdrop_juggernaut", 2, ::juggernautCrateThink, FRIENDLY_JUGGERNAUT_CRATE_MODEL, ENEMY_JUGGERNAUT_CRATE_MODEL, &"KILLSTREAKS_HINTS_JUGGERNAUT_PICKUP", DUMMY_JUGGERNAUT_CRATE_MODEL);
+  addCrateType("airdrop_assault", "heli_pilot", 1, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_HELI_PILOT_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_assault", "odin_assault", 1, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_ODIN_ASSAULT_PICKUP", DUMMY_CRATE_MODEL);
 
-  addCrateType("airdrop_support", "uplink_support", 25, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_UPLINK_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_support", "deployable_vest", 25, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_DEPLOYABLE_VEST_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_support", "deployable_ammo", 20, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_DEPLOYABLE_AMMO_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_support", "ball_drone_radar", 20, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_BALL_DRONE_RADAR_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_support", "aa_launcher", 10, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_AA_LAUNCHER_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_support", "jammer", 10, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_JAMMER_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_support", "air_superiority", 4, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_AIR_SUPERIORITY_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_support", "recon_agent", 4, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_RECON_AGENT_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_support", "heli_sniper", 4, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_HELI_SNIPER_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_support", "uav_3dping", 3, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_UAV_3DPING_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_support", "airdrop_juggernaut_recon", 1, ::juggernautCrateThink, FRIENDLY_JUGGERNAUT_CRATE_MODEL, ENEMY_JUGGERNAUT_CRATE_MODEL, & "KILLSTREAKS_HINTS_JUGGERNAUT_RECON_PICKUP", DUMMY_JUGGERNAUT_CRATE_MODEL);
-  addCrateType("airdrop_support", "odin_support", 1, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_ODIN_SUPPORT_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_support", "uplink_support", 25, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_UPLINK_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_support", "deployable_vest", 25, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_DEPLOYABLE_VEST_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_support", "deployable_ammo", 20, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_DEPLOYABLE_AMMO_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_support", "ball_drone_radar", 20, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_BALL_DRONE_RADAR_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_support", "aa_launcher", 10, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_AA_LAUNCHER_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_support", "jammer", 10, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_JAMMER_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_support", "air_superiority", 4, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_AIR_SUPERIORITY_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_support", "recon_agent", 4, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_RECON_AGENT_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_support", "heli_sniper", 4, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_HELI_SNIPER_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_support", "uav_3dping", 3, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_UAV_3DPING_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_support", "airdrop_juggernaut_recon", 1, ::juggernautCrateThink, FRIENDLY_JUGGERNAUT_CRATE_MODEL, ENEMY_JUGGERNAUT_CRATE_MODEL, &"KILLSTREAKS_HINTS_JUGGERNAUT_RECON_PICKUP", DUMMY_JUGGERNAUT_CRATE_MODEL);
+  addCrateType("airdrop_support", "odin_support", 1, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_ODIN_SUPPORT_PICKUP", DUMMY_CRATE_MODEL);
 
-  addCrateType("airdrop_juggernaut", "airdrop_juggernaut", 100, ::juggernautCrateThink, FRIENDLY_JUGGERNAUT_CRATE_MODEL, ENEMY_JUGGERNAUT_CRATE_MODEL, & "KILLSTREAKS_HINTS_JUGGERNAUT_PICKUP", DUMMY_JUGGERNAUT_CRATE_MODEL);
-  addCrateType("airdrop_juggernaut_recon", "airdrop_juggernaut_recon", 100, ::juggernautCrateThink, FRIENDLY_JUGGERNAUT_CRATE_MODEL, ENEMY_JUGGERNAUT_CRATE_MODEL, & "KILLSTREAKS_HINTS_JUGGERNAUT_RECON_PICKUP", DUMMY_JUGGERNAUT_CRATE_MODEL);
-  addCrateType("airdrop_juggernaut_maniac", "airdrop_juggernaut_maniac", 100, ::juggernautCrateThink, FRIENDLY_JUGGERNAUT_CRATE_MODEL, ENEMY_JUGGERNAUT_CRATE_MODEL, & "KILLSTREAKS_HINTS_JUGGERNAUT_MANIAC_PICKUP", DUMMY_JUGGERNAUT_CRATE_MODEL);
+  addCrateType("airdrop_juggernaut", "airdrop_juggernaut", 100, ::juggernautCrateThink, FRIENDLY_JUGGERNAUT_CRATE_MODEL, ENEMY_JUGGERNAUT_CRATE_MODEL, &"KILLSTREAKS_HINTS_JUGGERNAUT_PICKUP", DUMMY_JUGGERNAUT_CRATE_MODEL);
+  addCrateType("airdrop_juggernaut_recon", "airdrop_juggernaut_recon", 100, ::juggernautCrateThink, FRIENDLY_JUGGERNAUT_CRATE_MODEL, ENEMY_JUGGERNAUT_CRATE_MODEL, &"KILLSTREAKS_HINTS_JUGGERNAUT_RECON_PICKUP", DUMMY_JUGGERNAUT_CRATE_MODEL);
+  addCrateType("airdrop_juggernaut_maniac", "airdrop_juggernaut_maniac", 100, ::juggernautCrateThink, FRIENDLY_JUGGERNAUT_CRATE_MODEL, ENEMY_JUGGERNAUT_CRATE_MODEL, &"KILLSTREAKS_HINTS_JUGGERNAUT_MANIAC_PICKUP", DUMMY_JUGGERNAUT_CRATE_MODEL);
 
-  addCrateType("airdrop_grnd", "uplink", 25, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_UPLINK_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_grnd", "ims", 25, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_IMS_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_grnd", "guard_dog", 20, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_GUARD_DOG_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_grnd", "drone_hive", 20, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_DRONE_HIVE_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_grnd", "sentry", 10, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_SENTRY_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_grnd", "helicopter", 10, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_HELICOPTER_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_grnd", "ball_drone_backup", 4, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_BALL_DRONE_BACKUP_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_grnd", "vanguard", 4, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_VANGUARD_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_grnd", "airdrop_juggernaut_maniac", 3, ::juggernautCrateThink, FRIENDLY_JUGGERNAUT_CRATE_MODEL, ENEMY_JUGGERNAUT_CRATE_MODEL, & "KILLSTREAKS_HINTS_JUGGERNAUT_MANIAC_PICKUP", DUMMY_JUGGERNAUT_CRATE_MODEL);
-  addCrateType("airdrop_grnd", "airdrop_juggernaut", 2, ::juggernautCrateThink, FRIENDLY_JUGGERNAUT_CRATE_MODEL, ENEMY_JUGGERNAUT_CRATE_MODEL, & "KILLSTREAKS_HINTS_JUGGERNAUT_PICKUP", DUMMY_JUGGERNAUT_CRATE_MODEL);
-  addCrateType("airdrop_grnd", "heli_pilot", 1, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_HELI_PILOT_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_grnd", "deployable_vest", 25, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_DEPLOYABLE_VEST_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_grnd", "deployable_ammo", 20, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_DEPLOYABLE_AMMO_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_grnd", "ball_drone_radar", 20, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_BALL_DRONE_RADAR_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_grnd", "aa_launcher", 20, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_AA_LAUNCHER_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_grnd", "jammer", 10, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_JAMMER_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_grnd", "air_superiority", 10, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_AIR_SUPERIORITY_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_grnd", "recon_agent", 15, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_RECON_AGENT_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_grnd", "heli_sniper", 10, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_HELI_SNIPER_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_grnd", "uav_3dping", 5, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, & "KILLSTREAKS_HINTS_UAV_3DPING_PICKUP", DUMMY_CRATE_MODEL);
-  addCrateType("airdrop_grnd", "airdrop_juggernaut_recon", 5, ::juggernautCrateThink, FRIENDLY_JUGGERNAUT_CRATE_MODEL, ENEMY_JUGGERNAUT_CRATE_MODEL, & "KILLSTREAKS_HINTS_JUGGERNAUT_RECON_PICKUP", DUMMY_JUGGERNAUT_CRATE_MODEL);
+  addCrateType("airdrop_grnd", "uplink", 25, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_UPLINK_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_grnd", "ims", 25, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_IMS_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_grnd", "guard_dog", 20, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_GUARD_DOG_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_grnd", "drone_hive", 20, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_DRONE_HIVE_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_grnd", "sentry", 10, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_SENTRY_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_grnd", "helicopter", 10, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_HELICOPTER_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_grnd", "ball_drone_backup", 4, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_BALL_DRONE_BACKUP_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_grnd", "vanguard", 4, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_VANGUARD_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_grnd", "airdrop_juggernaut_maniac", 3, ::juggernautCrateThink, FRIENDLY_JUGGERNAUT_CRATE_MODEL, ENEMY_JUGGERNAUT_CRATE_MODEL, &"KILLSTREAKS_HINTS_JUGGERNAUT_MANIAC_PICKUP", DUMMY_JUGGERNAUT_CRATE_MODEL);
+  addCrateType("airdrop_grnd", "airdrop_juggernaut", 2, ::juggernautCrateThink, FRIENDLY_JUGGERNAUT_CRATE_MODEL, ENEMY_JUGGERNAUT_CRATE_MODEL, &"KILLSTREAKS_HINTS_JUGGERNAUT_PICKUP", DUMMY_JUGGERNAUT_CRATE_MODEL);
+  addCrateType("airdrop_grnd", "heli_pilot", 1, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_HELI_PILOT_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_grnd", "deployable_vest", 25, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_DEPLOYABLE_VEST_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_grnd", "deployable_ammo", 20, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_DEPLOYABLE_AMMO_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_grnd", "ball_drone_radar", 20, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_BALL_DRONE_RADAR_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_grnd", "aa_launcher", 20, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_AA_LAUNCHER_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_grnd", "jammer", 10, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_JAMMER_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_grnd", "air_superiority", 10, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_AIR_SUPERIORITY_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_grnd", "recon_agent", 15, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_RECON_AGENT_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_grnd", "heli_sniper", 10, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_HELI_SNIPER_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_grnd", "uav_3dping", 5, ::killstreakCrateThink, FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL, &"KILLSTREAKS_HINTS_UAV_3DPING_PICKUP", DUMMY_CRATE_MODEL);
+  addCrateType("airdrop_grnd", "airdrop_juggernaut_recon", 5, ::juggernautCrateThink, FRIENDLY_JUGGERNAUT_CRATE_MODEL, ENEMY_JUGGERNAUT_CRATE_MODEL, &"KILLSTREAKS_HINTS_JUGGERNAUT_RECON_PICKUP", DUMMY_JUGGERNAUT_CRATE_MODEL);
 
   if(isDefined(level.customCrateFunc))
     [[level.customCrateFunc]](FRIENDLY_CRATE_MODEL, ENEMY_CRATE_MODEL);
@@ -1648,7 +1648,7 @@ killstreakCrateThink(dropType) {
   if(isDefined(game["strings"][self.crateType + "_hint"]))
     crateHint = game["strings"][self.crateType + "_hint"];
   else
-    crateHint = & "PLATFORM_GET_KILLSTREAK";
+    crateHint = &"PLATFORM_GET_KILLSTREAK";
 
   crateSetupForUse(crateHint, getKillstreakOverheadIcon(self.crateType));
 

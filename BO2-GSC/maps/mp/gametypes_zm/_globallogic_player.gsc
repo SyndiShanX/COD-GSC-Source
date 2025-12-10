@@ -722,12 +722,12 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sw
       }
     }
 
-    if(idflags & level.idflags_shield_explosive_impact) {
+    if(idflags &level.idflags_shield_explosive_impact) {
       shitloc = "none";
 
-      if(!(idflags & level.idflags_shield_explosive_impact_huge))
+      if(!(idflags &level.idflags_shield_explosive_impact_huge))
         idamage = idamage * 0.0;
-    } else if(idflags & level.idflags_shield_explosive_splash) {
+    } else if(idflags &level.idflags_shield_explosive_splash) {
       if(isDefined(einflictor) && isDefined(einflictor.stucktoplayer) && einflictor.stucktoplayer == self)
         idamage = 101;
 
@@ -839,7 +839,7 @@ isaikillstreakdamage(sweapon, einflictor) {
 finishplayerdamagewrapper(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex) {
   pixbeginevent("finishPlayerDamageWrapper");
 
-  if(!level.console && idflags & level.idflags_penetration && isplayer(eattacker)) {
+  if(!level.console && idflags &level.idflags_penetration && isplayer(eattacker)) {
     println("penetrated:" + self getentitynumber() + " health:" + self.health + " attacker:" + eattacker.clientid + " inflictor is player:" + isplayer(einflictor) + " damage:" + idamage + " hitLoc:" + shitloc);
 
     eattacker addplayerstat("penetration_shots", 1);

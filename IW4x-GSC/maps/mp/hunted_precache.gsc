@@ -8,7 +8,6 @@ main() {
   common_scripts\_destructible_types_anim_airconditioner::main();
   common_scripts\_destructible_types_anim_light_fluo_single::main();
 
-
   maps\animated_models\foliage_dead_pine_lg_sway2::main();
   maps\animated_models\foliage_dead_pine_med_sway2::main();
   maps\animated_models\foliage_tree_oak_1::main();

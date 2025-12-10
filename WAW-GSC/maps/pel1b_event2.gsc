@@ -423,29 +423,29 @@ outro_animate_radio_model(goal_node) {
 }
 
 setup_objectives() {
-  objective_add(3, "current", & "PEL1B_OBJECTIVE_EV2_FLANK", (43393.7, 4060.1, 168.2));
+  objective_add(3, "current", &"PEL1B_OBJECTIVE_EV2_FLANK", (43393.7, 4060.1, 168.2));
   trigger = getent("ev2_initial_plane_spawn", "targetname");
   trigger waittill("trigger");
   objective_state(3, "done");
   objective_delete(3);
   autosave_by_name("airstrike done");
-  objective_add(4, "current", & "PEL1B_OBJECTIVE_EV2_FOLLOW_FLAME");
+  objective_add(4, "current", &"PEL1B_OBJECTIVE_EV2_FOLLOW_FLAME");
   Objective_additionalPosition(4, 0, level.flametank);
   level.flametank thread objective_follow_me(4, "tank_destroyed");
   level thread trigger_wait_with_notify("cave_entrance_trigger", "targetname", "tank_destroyed");
   level waittill("tank_destroyed");
   objective_state(4, "done");
   autosave_by_name("flametank dead");
-  objective_add(5, "current", & "PEL1B_OBJECTIVE_EV2_ASSAULT_CAVE");
+  objective_add(5, "current", &"PEL1B_OBJECTIVE_EV2_ASSAULT_CAVE");
   cave_entrance_trigger = getent("cave_entrance", "targetname");
   cave_entrance_trigger waittill("trigger");
   objective_state(5, "done");
   autosave_by_name("cave entrance");
-  objective_add(6, "current", & "PEL1B_OBJECTIVE_EV2_CAVE_CLEAR", (40871.2, -218.9, 885.508));
+  objective_add(6, "current", &"PEL1B_OBJECTIVE_EV2_CAVE_CLEAR", (40871.2, -218.9, 885.508));
   final_trigger = getent("last_cave_room_reached", "targetname");
   final_trigger waittill("trigger");
   autosave_by_name("artillery room");
-  objective_string(6, & "PEL1B_OBJECTIVE_EV2_ART_CLEAR");
+  objective_string(6, &"PEL1B_OBJECTIVE_EV2_ART_CLEAR");
   final_room = getent("final_room_trigger", "targetname");
   wait(5);
   while(1) {
@@ -464,7 +464,7 @@ setup_objectives() {
   objective_state(6, "done");
   thread battlechatter_off("allies");
   thread battlechatter_off("axis");
-  objective_add(7, "current", & "PEL1B_OBJECTIVE_FOLLOW_SQUAD", (41063.2, -538.3, 857.6));
+  objective_add(7, "current", &"PEL1B_OBJECTIVE_FOLLOW_SQUAD", (41063.2, -538.3, 857.6));
   level thread pel1b_outro();
 }
 

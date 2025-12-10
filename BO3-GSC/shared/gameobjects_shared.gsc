@@ -17,15 +17,15 @@
 #namespace gameobjects;
 
 function autoexec __init__sytem__() {
-  system::register("gameobjects", & __init__, undefined, undefined);
+  system::register("gameobjects", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.numgametypereservedobjectives = 0;
   level.releasedobjectives = [];
-  callback::on_spawned( & on_player_spawned);
-  callback::on_disconnect( & on_disconnect);
-  callback::on_laststand( & on_player_last_stand);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_disconnect(&on_disconnect);
+  callback::on_laststand(&on_player_last_stand);
 }
 
 function main() {
@@ -195,7 +195,7 @@ function create_carry_object(ownerteam, trigger, visuals, offset, objectivename,
       carryobject.newstyle = 1;
     }
   } else {
-    objectivename = & "";
+    objectivename = &"";
   }
   for(index = 0; index < visuals.size; index++) {
     visuals[index].baseorigin = visuals[index].origin;
@@ -280,7 +280,7 @@ function create_carry_object(ownerteam, trigger, visuals, offset, objectivename,
     carryobject.decayprogress = 0;
     carryobject.teamusetimes = [];
     carryobject.teamusetexts = [];
-    carryobject.onuse = & set_picked_up;
+    carryobject.onuse = &set_picked_up;
     carryobject thread use_object_prox_think();
   }
   carryobject thread update_carry_object_origin();
@@ -937,7 +937,7 @@ function create_use_object(ownerteam, trigger, visuals, offset, objectivename, a
   if(isDefined(objectivename)) {
     useobject.newstyle = 1;
   } else {
-    objectivename = & "";
+    objectivename = &"";
   }
   useobject.compassicons = [];
   useobject.objid = [];
@@ -1860,7 +1860,7 @@ function update_objective() {
     } else {
       if(self.visibleteam == "enemy") {
         objective_state(self.objectiveid, "active");
-        objective_visibleteams(self.objectiveid, level.spawnsystem.ispawn_teammask["all"] & (~level.spawnsystem.ispawn_teammask[self.ownerteam]));
+        objective_visibleteams(self.objectiveid, level.spawnsystem.ispawn_teammask["all"] &(~level.spawnsystem.ispawn_teammask[self.ownerteam]));
       } else {
         objective_state(self.objectiveid, "invisible");
         objective_visibleteams(self.objectiveid, 0);
@@ -2685,7 +2685,7 @@ function create_pack_object(ownerteam, trigger, visuals, offset, objectivename) 
       packobject.newstyle = 1;
     }
   } else {
-    objectivename = & "";
+    objectivename = &"";
   }
   for(index = 0; index < visuals.size; index++) {
     visuals[index].baseorigin = visuals[index].origin;
@@ -2761,7 +2761,7 @@ function create_pack_object(ownerteam, trigger, visuals, offset, objectivename) 
     packobject.decayprogress = 0;
     packobject.teamusetimes = [];
     packobject.teamusetexts = [];
-    packobject.onuse = & set_picked_up;
+    packobject.onuse = &set_picked_up;
     packobject thread use_object_prox_think();
   }
   packobject thread update_carry_object_origin();

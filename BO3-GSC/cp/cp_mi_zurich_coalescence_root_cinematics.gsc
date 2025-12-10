@@ -31,7 +31,7 @@ function init_clientfields() {
 
 function play_scene(str_objective, e_player) {
   a_ai = getaiteamarray("axis");
-  array::thread_all(a_ai, & zurich_util::function_48463818);
+  array::thread_all(a_ai, &zurich_util::function_48463818);
   if(isDefined(level.var_65070634)) {
     level.var_65070634 notify("hash_11a8c313");
   }
@@ -80,7 +80,7 @@ function function_c7ab7e12(str_movie) {
     }
   }
   level waittill("movie_done");
-  array::thread_all(level.players, & scene::clear_scene_skipping_ui);
+  array::thread_all(level.players, &scene::clear_scene_skipping_ui);
 }
 
 function function_4b299142(str_movie) {
@@ -190,7 +190,7 @@ function function_6cc3b883() {
 }
 
 function function_33367f39() {
-  level.overrideplayerdamage = & player_callback_damage;
+  level.overrideplayerdamage = &player_callback_damage;
   level thread zurich_util::delete_all_ai();
   foreach(player in level.players) {
     player.e_anchor = util::spawn_model("tag_origin", player.origin, player.angles);
@@ -231,8 +231,8 @@ function function_32b529d8(str_objective, e_player) {
       break;
     }
   }
-  scene::add_scene_func(var_470af250, & function_2fbd0bea, "play");
-  scene::add_scene_func(var_470af250, & zurich_util::function_9f90bc0f, "done", "root_scene_completed");
+  scene::add_scene_func(var_470af250, &function_2fbd0bea, "play");
+  scene::add_scene_func(var_470af250, &zurich_util::function_9f90bc0f, "done", "root_scene_completed");
   level scene::init(var_470af250);
   level thread function_98192f84(var_f9202c4e, var_470af250, str_exploder);
   level thread scene::play(str_player_scene, e_player);

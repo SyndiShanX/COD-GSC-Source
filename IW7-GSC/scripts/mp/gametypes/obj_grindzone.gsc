@@ -39,7 +39,7 @@ setupobjective(param_00) {
   var_04 scripts\mp\gameobjects::setvisibleteam("any");
   var_04 scripts\mp\gameobjects::cancontestclaim(1);
   var_04 scripts\mp\gameobjects::mustmaintainclaim(1);
-  var_04 scripts\mp\gameobjects::setusetext( & "MP_SECURING_POSITION");
+  var_04 scripts\mp\gameobjects::setusetext(&"MP_SECURING_POSITION");
   var_05 = var_04 scripts\mp\gameobjects::getlabel();
   var_04.label = var_05;
   var_04.onbeginuse = ::zone_onusebegin;

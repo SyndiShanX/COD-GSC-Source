@@ -338,7 +338,7 @@ streaknotify(streakval) {
   self waittill("playerKilledChallengesProcessed");
   wait 0.05;
   notifydata = spawnStruct();
-  notifydata.titlelabel = & "MP_KILLSTREAK_N";
+  notifydata.titlelabel = &"MP_KILLSTREAK_N";
   notifydata.titletext = streakval;
   notifydata.iconheight = 32;
   self maps\mp\gametypes\_hud_message::notifymessage(notifydata);
@@ -1087,7 +1087,7 @@ triggerkillstreak(killstreaktype, isfrominventory) {
     if(!timeleft)
       timeleft = 1;
 
-    self iprintlnbold(&"MP_UNAVAILABLE_FOR_N", " " + timeleft + " ", & "EXE_SECONDS");
+    self iprintlnbold(&"MP_UNAVAILABLE_FOR_N", " " + timeleft + " ", &"EXE_SECONDS");
   } else if([[level.killstreaks[killstreaktype].usefunction]](killstreaktype)) {
     if(isDefined(self)) {
       if(!isDefined(self.pers[level.killstreaks[killstreaktype].usagekey]))

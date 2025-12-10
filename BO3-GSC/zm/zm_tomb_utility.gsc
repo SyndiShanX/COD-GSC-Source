@@ -67,7 +67,7 @@ function setup_devgui() {
   setdvar("", "");
   setdvar("", "");
   execdevgui("");
-  zm_devgui::add_custom_devgui_callback( & zombie_devgui_tomb);
+  zm_devgui::add_custom_devgui_callback(&zombie_devgui_tomb);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -561,13 +561,13 @@ function dug_zombie_spawn_init(animname_set = 0) {
       self thread zombie_utility::delayed_zombie_eye_glow();
     }
   }
-  self.deathfunction = & zm_spawner::zombie_death_animscript;
+  self.deathfunction = &zm_spawner::zombie_death_animscript;
   self.flame_damage_time = 0;
   self.meleedamage = 60;
   self.no_powerups = 1;
   self zm_spawner::zombie_history(("zombie_spawn_init -> Spawned = ") + self.origin);
   self.thundergun_knockdown_func = level.basic_zombie_thundergun_knockdown;
-  self.tesla_head_gib_func = & zm_spawner::zombie_tesla_head_gib;
+  self.tesla_head_gib_func = &zm_spawner::zombie_tesla_head_gib;
   self.team = level.zombie_team;
   if(isDefined(zm_utility::get_gamemode_var("post_init_zombie_spawn_func"))) {
     self[[zm_utility::get_gamemode_var("post_init_zombie_spawn_func")]]();
@@ -685,7 +685,7 @@ function dug_zombie_complete_emerging_into_playable_area() {
   self thread zm_spawner::zombie_free_cam_allowed();
 }
 
-function dug_zombie_rise(spot, func_rise_fx = & zm_spawner::zombie_rise_fx) {
+function dug_zombie_rise(spot, func_rise_fx = &zm_spawner::zombie_rise_fx) {
   self endon("death");
   self.in_the_ground = 1;
   self.no_eye_glow = 1;
@@ -937,7 +937,7 @@ function tomb_trigger_update_message(func_per_player_msg) {
 function set_unitrigger_hint_string(str_message) {
   self.hint_string = str_message;
   zm_unitrigger::unregister_unitrigger(self);
-  zm_unitrigger::register_unitrigger(self, & tomb_unitrigger_think);
+  zm_unitrigger::register_unitrigger(self, &tomb_unitrigger_think);
 }
 
 function tomb_spawn_trigger_radius(origin, radius, use_trigger = 0, var_3fe858d9, func_visibility) {
@@ -957,7 +957,7 @@ function tomb_spawn_trigger_radius(origin, radius, use_trigger = 0, var_3fe858d9
   if(isDefined(func_visibility)) {
     trigger_stub.prompt_and_visibility_func = func_visibility;
   }
-  zm_unitrigger::register_unitrigger(trigger_stub, & tomb_unitrigger_think);
+  zm_unitrigger::register_unitrigger(trigger_stub, &tomb_unitrigger_think);
   return trigger_stub;
 }
 
@@ -1040,7 +1040,7 @@ function init_weather_manager() {
   level.weather_vision = 0;
   level thread weather_manager();
   level thread rotate_skydome();
-  callback::on_connect( & set_weather_to_player);
+  callback::on_connect(&set_weather_to_player);
   level.force_weather = [];
   level.force_weather[1] = "none";
   if(math::cointoss()) {
@@ -1354,13 +1354,13 @@ function capture_zombie_spawn_init(animname_set = 0) {
       self thread zombie_utility::delayed_zombie_eye_glow();
     }
   }
-  self.deathfunction = & zm_spawner::zombie_death_animscript;
+  self.deathfunction = &zm_spawner::zombie_death_animscript;
   self.flame_damage_time = 0;
   self.meleedamage = 60;
   self.no_powerups = 1;
   self zm_spawner::zombie_history(("zombie_spawn_init -> Spawned = ") + self.origin);
   self.thundergun_knockdown_func = level.basic_zombie_thundergun_knockdown;
-  self.tesla_head_gib_func = & zm_spawner::zombie_tesla_head_gib;
+  self.tesla_head_gib_func = &zm_spawner::zombie_tesla_head_gib;
   self.team = level.zombie_team;
   if(isDefined(zm_utility::get_gamemode_var("post_init_zombie_spawn_func"))) {
     self[[zm_utility::get_gamemode_var("post_init_zombie_spawn_func")]]();
@@ -1449,7 +1449,7 @@ function whirlwind_rumble_nearby_players(str_active_flag) {
 
 function clean_up_bunker_doors() {
   a_door_models = getEntArray("bunker_door", "script_noteworthy");
-  array::thread_all(a_door_models, & bunker_door_clean_up);
+  array::thread_all(a_door_models, &bunker_door_clean_up);
 }
 
 function bunker_door_clean_up() {
@@ -1460,9 +1460,9 @@ function bunker_door_clean_up() {
 function adjustments_for_solo() {
   if(isDefined(level.is_forever_solo_game) && level.is_forever_solo_game) {
     a_door_buys = getEntArray("zombie_door", "targetname");
-    array::thread_all(a_door_buys, & door_price_reduction_for_solo);
+    array::thread_all(a_door_buys, &door_price_reduction_for_solo);
     a_debris_buys = getEntArray("zombie_debris", "targetname");
-    array::thread_all(a_debris_buys, & door_price_reduction_for_solo);
+    array::thread_all(a_debris_buys, &door_price_reduction_for_solo);
   }
 }
 
@@ -1495,9 +1495,9 @@ function zone_capture_powerup() {
         foreach(uts_box in level.a_uts_challenge_boxes) {
           if(uts_box.str_location == "start_bunker") {
             if(level.players.size == 1) {
-              level thread zm_challenges_tomb::open_box(undefined, uts_box, & zm_tomb_challenges::reward_powerup_double_points, -1);
+              level thread zm_challenges_tomb::open_box(undefined, uts_box, &zm_tomb_challenges::reward_powerup_double_points, -1);
             } else {
-              level thread zm_challenges_tomb::open_box(undefined, uts_box, & zm_tomb_challenges::reward_powerup_zombie_blood, -1);
+              level thread zm_challenges_tomb::open_box(undefined, uts_box, &zm_tomb_challenges::reward_powerup_zombie_blood, -1);
             }
             return;
           }
@@ -1564,11 +1564,11 @@ function do_damage_network_safe(e_attacker, n_amount, w_damage, str_mod) {
     if(n_amount < self.health) {
       self.kill_damagetype = str_mod;
       zm_net::network_safe_init("dodamage", 6);
-      self zm_net::network_choke_action("dodamage", & _damage_zombie_network_safe_internal, e_attacker, w_damage, n_amount);
+      self zm_net::network_choke_action("dodamage", &_damage_zombie_network_safe_internal, e_attacker, w_damage, n_amount);
     } else {
       self.kill_damagetype = str_mod;
       zm_net::network_safe_init("dodamage_kill", 4);
-      self zm_net::network_choke_action("dodamage_kill", & _kill_zombie_network_safe_internal, e_attacker, w_damage);
+      self zm_net::network_choke_action("dodamage_kill", &_kill_zombie_network_safe_internal, e_attacker, w_damage);
     }
   }
 }

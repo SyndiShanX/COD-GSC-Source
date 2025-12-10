@@ -59,7 +59,7 @@ __main__() {
         ents[i] hide();
         ents[i] notsolid();
 
-        if(isDefined(ents[i].spawnflags) && (ents[i].spawnflags&1) == 1) {
+        if(isDefined(ents[i].spawnflags) && (ents[i].spawnflags& 1) == 1) {
           ents[i] connectpaths();
         }
       }

@@ -109,8 +109,8 @@ function autoexec opt_in() {
 function gamemode_callback_setup() {}
 
 function setup_rex_starts() {
-  zm_utility::add_gametype("zclassic", & dummy, "zclassic", & dummy);
-  zm_utility::add_gameloc("default", & dummy, "default", & dummy);
+  zm_utility::add_gametype("zclassic", &dummy, "zclassic", &dummy);
+  zm_utility::add_gameloc("default", &dummy, "default", &dummy);
 }
 
 function dummy() {}
@@ -170,26 +170,26 @@ function main() {
   level.default_game_mode = "zclassic";
   level.b_crossbow_bolt_destroy_on_impact = 1;
   level.b_create_upgraded_crossbow_watchers = 1;
-  callback::on_connect( & on_player_connect);
-  level.precachecustomcharacters = & precachecustomcharacters;
-  level.givecustomcharacters = & givecustomcharacters;
+  callback::on_connect(&on_player_connect);
+  level.precachecustomcharacters = &precachecustomcharacters;
+  level.givecustomcharacters = &givecustomcharacters;
   initcharacterstartindex();
-  level.custom_game_over_hud_elem = & function_f7b7d070;
-  level.register_offhand_weapons_for_level_defaults_override = & function_c2cd1f49;
-  level.zombiemode_offhand_weapon_give_override = & offhand_weapon_give_override;
-  level._zombie_custom_add_weapons = & custom_add_weapons;
+  level.custom_game_over_hud_elem = &function_f7b7d070;
+  level.register_offhand_weapons_for_level_defaults_override = &function_c2cd1f49;
+  level.zombiemode_offhand_weapon_give_override = &offhand_weapon_give_override;
+  level._zombie_custom_add_weapons = &custom_add_weapons;
   level._allow_melee_weapon_switching = 1;
   level.zombiemode_reusing_pack_a_punch = 1;
   level._no_vending_machine_auto_collision = 1;
   level.var_36b5dab = 1;
   level.b_show_single_intermission = 1;
   level.hotjoin_extra_blackscreen_time = 1.5;
-  level.check_player_is_ready_for_ammo = & check_player_is_ready_for_ammo;
-  level.no_target_override = & no_target_override;
+  level.check_player_is_ready_for_ammo = &check_player_is_ready_for_ammo;
+  level.no_target_override = &no_target_override;
   zm_craftables::init();
   zm_stalingrad_craftables::include_craftables();
   zm_stalingrad_craftables::init_craftables();
-  level.var_9cef605e = & dragon::function_aaf7e575;
+  level.var_9cef605e = &dragon::function_aaf7e575;
   level thread dragon::function_90d81e44();
   include_weapons();
   function_42795aca();
@@ -214,28 +214,28 @@ function main() {
   zombie_utility::set_zombie_var("zombie_powerup_drop_max_per_round", 4);
   zm_stalingrad_util::function_4da6e8(1);
   umbragate_set("umbragate1", 1);
-  level.round_wait_func = & function_df57d237;
+  level.round_wait_func = &function_df57d237;
   load::main();
   level thread zm_stalingrad_fx::fx_overrides();
   level thread function_80eaf8a();
-  level.var_2c12d9a6 = & function_277575cc;
-  level.var_2d0e5eb6 = & function_2d0e5eb6;
-  level.var_b6d13a4e = & function_13df0656;
-  level.var_464197de = & function_90cae0a9;
+  level.var_2c12d9a6 = &function_277575cc;
+  level.var_2d0e5eb6 = &function_2d0e5eb6;
+  level.var_b6d13a4e = &function_13df0656;
+  level.var_464197de = &function_90cae0a9;
   level thread zm_stalingrad_wearables::function_eed58360();
   level thread zm_stalingrad_audio::main();
   level thread namespace_19e79ea1::function_56059128();
   level thread namespace_5132b4d6::function_19458e73();
   _zm_weap_cymbal_monkey::init();
-  level._round_start_func = & zm::round_start;
-  level.fn_custom_round_ai_spawn = & function_33aa4940;
-  level.var_c7da0559 = & function_58a468e4;
-  level.func_custom_sentinel_drone_cleanup_check = & function_b9d3803a;
+  level._round_start_func = &zm::round_start;
+  level.fn_custom_round_ai_spawn = &function_33aa4940;
+  level.var_c7da0559 = &function_58a468e4;
+  level.func_custom_sentinel_drone_cleanup_check = &function_b9d3803a;
   level thread zm_ai_sentinel_drone::function_2f7416e5();
-  level.player_intersection_tracker_override = & dragon::player_intersection_tracker_override;
-  level.powerup_grab_get_players_override = & powerup_grab_get_players_override;
+  level.player_intersection_tracker_override = &dragon::player_intersection_tracker_override;
+  level.powerup_grab_get_players_override = &powerup_grab_get_players_override;
   level.zones = [];
-  level.zone_manager_init_func = & zm_stalingrad_zones::init;
+  level.zone_manager_init_func = &zm_stalingrad_zones::init;
   init_zones[0] = "start_A_zone";
   thread zm_stalingrad_powered_bridge::main();
   level thread zm_zonemgr::manage_zones(init_zones);
@@ -243,7 +243,7 @@ function main() {
   level thread dragon::function_b4d22afe();
   level thread dragon::function_285a7d29();
   level.disable_kill_thread = 1;
-  level.player_out_of_playable_area_monitor_callback = & function_f9248bb;
+  level.player_out_of_playable_area_monitor_callback = &function_f9248bb;
   level thread sndfunctions();
   level thread zm_stalingrad_pap::function_2fcaffe2();
   level thread zm_stalingrad_util::main();
@@ -253,7 +253,7 @@ function main() {
   level thread zm_stalingrad_finger_trap::main();
   level thread zm_stalingrad_nikolai::main();
   level thread function_897d1ccc();
-  level.zm_custom_spawn_location_selection = & function_ff18dfdd;
+  level.zm_custom_spawn_location_selection = &function_ff18dfdd;
   level thread function_12a6d70c();
   level thread function_9273a671();
   level thread zm_stalingrad_pap::function_5efc91a4();
@@ -623,8 +623,8 @@ function function_898d7758() {
 function function_42795aca() {
   level.random_pandora_box_start = 1;
   level.start_chest_name = "dept_store_upper_chest";
-  level.magicbox_should_upgrade_weapon_override = & function_87a3ff60;
-  level.customrandomweaponweights = & function_659c2324;
+  level.magicbox_should_upgrade_weapon_override = &function_87a3ff60;
+  level.customrandomweaponweights = &function_659c2324;
   level.var_12d3a848 = 0;
   level.open_chest_location = [];
   level.open_chest_location[0] = "dept_store_upper_chest";
@@ -694,7 +694,7 @@ function include_perks_in_random_rotation() {
   zm_perk_random::include_perk_in_random_rotation("specialty_deadshot");
   zm_perk_random::include_perk_in_random_rotation("specialty_electriccherry");
   zm_perk_random::include_perk_in_random_rotation("specialty_widowswine");
-  level.custom_random_perk_weights = & function_dded17b1;
+  level.custom_random_perk_weights = &function_dded17b1;
 }
 
 function function_dded17b1() {
@@ -1162,7 +1162,7 @@ function function_cde49635() {
   level zm_stalingrad_vo::function_8141c730();
   level notify("hash_423907c1");
   wait(0.75);
-  callback::on_spawned( & function_c2ad8318);
+  callback::on_spawned(&function_c2ad8318);
   level thread function_a1369011();
   while(true) {
     e_player = arraygetclosest(level.var_a090a655.origin, level.activeplayers);
@@ -1200,7 +1200,7 @@ function function_fa9b2a93() {
 
 function function_a1369011() {
   level waittill("hash_deeb3634");
-  callback::remove_on_spawned( & function_c2ad8318);
+  callback::remove_on_spawned(&function_c2ad8318);
 }
 
 function function_f9248bb() {

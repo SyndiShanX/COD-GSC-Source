@@ -95,7 +95,7 @@ function intro_street_vignette_setup() {
   var_6a07eb6c[1] = "dead_civ2";
   var_6a07eb6c[2] = "dead_civ3";
   var_6a07eb6c[3] = "dead_civ4";
-  scene::add_scene_func("cin_ven_01_20_introstreet_bodies_vign", & vengeance_util::function_65a61b78, "play", var_6a07eb6c);
+  scene::add_scene_func("cin_ven_01_20_introstreet_bodies_vign", &vengeance_util::function_65a61b78, "play", var_6a07eb6c);
   var_4254e946 = [];
   var_4254e946[0] = "outside_dead_body_01";
   var_4254e946[1] = "outside_dead_body_02";
@@ -107,12 +107,12 @@ function intro_street_vignette_setup() {
   var_4254e946[7] = "outside_dead_body_08";
   var_4254e946[8] = "outside_dead_body_09";
   var_4254e946[9] = "outside_dead_body_10";
-  scene::add_scene_func("cin_ven_01_25_outside_apt_bodies_vign", & vengeance_util::function_65a61b78, "play", var_4254e946);
+  scene::add_scene_func("cin_ven_01_25_outside_apt_bodies_vign", &vengeance_util::function_65a61b78, "play", var_4254e946);
   var_685763af = [];
   var_685763af[0] = "inside_dead_body_01";
   var_685763af[1] = "inside_dead_body_02";
   var_685763af[2] = "inside_dead_body_03";
-  scene::add_scene_func("cin_ven_02_05_inside_apt_bodies_vign", & vengeance_util::function_65a61b78, "play", var_685763af);
+  scene::add_scene_func("cin_ven_02_05_inside_apt_bodies_vign", &vengeance_util::function_65a61b78, "play", var_685763af);
   level thread scene::play("cin_ven_01_20_introstreet_bodies_vign");
   level thread scene::play("cin_ven_01_25_outside_apt_bodies_vign");
   level thread scene::play("cin_ven_02_05_inside_apt_bodies_vign");
@@ -131,7 +131,7 @@ function intro_screen(str_objective) {
   level thread intro_street_vignette_setup();
   level thread intro_street_ambient_vehicles();
   load::function_c32ba481();
-  util::do_chyron_text(&"CP_MI_SING_VENGEANCE_INTRO_LINE_1_FULL", & "CP_MI_SING_VENGEANCE_INTRO_LINE_1_SHORT", & "CP_MI_SING_VENGEANCE_INTRO_LINE_2_FULL", & "CP_MI_SING_VENGEANCE_INTRO_LINE_2_SHORT", & "CP_MI_SING_VENGEANCE_INTRO_LINE_3_FULL", & "CP_MI_SING_VENGEANCE_INTRO_LINE_3_SHORT", & "CP_MI_SING_VENGEANCE_INTRO_LINE_4_FULL", & "CP_MI_SING_VENGEANCE_INTRO_LINE_4_SHORT");
+  util::do_chyron_text(&"CP_MI_SING_VENGEANCE_INTRO_LINE_1_FULL", &"CP_MI_SING_VENGEANCE_INTRO_LINE_1_SHORT", &"CP_MI_SING_VENGEANCE_INTRO_LINE_2_FULL", &"CP_MI_SING_VENGEANCE_INTRO_LINE_2_SHORT", &"CP_MI_SING_VENGEANCE_INTRO_LINE_3_FULL", &"CP_MI_SING_VENGEANCE_INTRO_LINE_3_SHORT", &"CP_MI_SING_VENGEANCE_INTRO_LINE_4_FULL", &"CP_MI_SING_VENGEANCE_INTRO_LINE_4_SHORT");
   thread cp_mi_sing_vengeance_sound::function_4368969a();
   if(isDefined(level.bzm_vengeancedialogue1callback)) {
     level thread[[level.bzm_vengeancedialogue1callback]]();
@@ -171,8 +171,8 @@ function function_a1d4e729(endon_flag, wait_flag, breadcrumb) {
 
 function intro_street_ambient_vehicles() {
   level endon("takedown_begin");
-  vehicle::add_spawn_function("intro_street_technical", & give_riders);
-  vehicle::add_spawn_function("intro_street_technical2", & give_riders);
+  vehicle::add_spawn_function("intro_street_technical", &give_riders);
+  vehicle::add_spawn_function("intro_street_technical2", &give_riders);
   level flag::wait_till("send_hendricks_to_apartment_entrance");
   level thread cp_mi_sing_vengeance_sound::function_6dcacaf4();
   wait(1);
@@ -186,8 +186,8 @@ function intro_street_ambient_vehicles() {
 function function_3b2e29a() {
   level endon("takedown_begin");
   count = 0;
-  vehicle::add_spawn_function("intro_street_technical", & give_riders);
-  vehicle::add_spawn_function("intro_street_technical2", & give_riders);
+  vehicle::add_spawn_function("intro_street_technical", &give_riders);
+  vehicle::add_spawn_function("intro_street_technical2", &give_riders);
   while(count <= 75) {
     if(math::cointoss()) {
       intro_street_technical = vehicle::simple_spawn_single_and_drive("intro_street_technical");
@@ -255,7 +255,7 @@ function intro_hendricks() {
   level.var_469a8d0d = struct::get("hendricks_apartment_anim_struct", "targetname");
   var_6a07eb6c = [];
   var_6a07eb6c[0] = "dead_door_civilian";
-  scene::add_scene_func("cin_ven_02_10_apthorror_enterbldg_vign", & vengeance_util::function_65a61b78, "init", var_6a07eb6c);
+  scene::add_scene_func("cin_ven_02_10_apthorror_enterbldg_vign", &vengeance_util::function_65a61b78, "init", var_6a07eb6c);
   level.var_469a8d0d scene::init("cin_ven_02_10_apthorror_enterbldg_vign");
   level.var_af857373 = struct::get("hendricks_street_anim_struct", "targetname");
   level.var_469a8d0d scene::play("cin_ven_01_15_introstreet_walk_vign");
@@ -278,7 +278,7 @@ function function_8fc34056() {
   level thread function_d5df9cca("breadcrumb_apartment3_triggered", "set_breadcrumb_apartment3");
   var_6a07eb6c = [];
   var_6a07eb6c[0] = "dead_door_civilian";
-  scene::add_scene_func("cin_ven_02_10_apthorror_enterbldg_vign", & vengeance_util::function_65a61b78, "play", var_6a07eb6c);
+  scene::add_scene_func("cin_ven_02_10_apthorror_enterbldg_vign", &vengeance_util::function_65a61b78, "play", var_6a07eb6c);
   level.var_469a8d0d scene::play("cin_ven_02_10_apthorror_enterbldg_vign");
   if(!level flag::get("breadcrumb_apartment1_triggered")) {
     level flag::wait_till("breadcrumb_apartment1_triggered");
@@ -469,9 +469,9 @@ function function_5ef7fdc2() {
   trigger::wait_till("apartment_light_fire_trigger");
   level.var_1dca7888 = [];
   var_71e5f989 = getEntArray("apartment_enemy", "script_noteworthy");
-  var_6a00e3c4 = spawner::simple_spawn(var_71e5f989, & function_1f707d1e);
+  var_6a00e3c4 = spawner::simple_spawn(var_71e5f989, &function_1f707d1e);
   var_12d51ad2 = getEntArray("apartment_civilian", "script_noteworthy");
-  var_c5b87ef7 = spawner::simple_spawn(var_12d51ad2, & function_a645cfd9);
+  var_c5b87ef7 = spawner::simple_spawn(var_12d51ad2, &function_a645cfd9);
   var_1cef4611 = getent("bedroom_door_right", "targetname");
   var_59f550ce = getent("bedroom_door_right_clip", "targetname");
   var_59f550ce linkto(var_1cef4611);
@@ -1013,7 +1013,7 @@ function function_44b7b533() {
 }
 
 function function_9c3eb25d() {
-  vehicle::add_spawn_function("takedown_backup_truck", & function_296cfddf);
+  vehicle::add_spawn_function("takedown_backup_truck", &function_296cfddf);
   var_235588b9 = vehicle::simple_spawn_single_and_drive("takedown_backup_truck");
   var_235588b9 vehicle::lights_off();
   level.var_e7c1ffa = [];
@@ -1256,7 +1256,7 @@ function takedown_scene_setup() {
   level.var_d9f6d6 = [];
   level.takedown_ai_spawners = getEntArray("takedown_ai", "script_noteworthy");
   foreach(spawner in level.takedown_ai_spawners) {
-    spawner spawner::add_spawn_function( & takedown_ai_setup);
+    spawner spawner::add_spawn_function(&takedown_ai_setup);
     spawner spawner::spawn();
   }
   level notify("takedown_scene_setup");

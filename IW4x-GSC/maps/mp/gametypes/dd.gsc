@@ -110,26 +110,26 @@ onStartGameType() {
 
   setClientNameMode("manual_change");
 
-  game["strings"]["target_destroyed"] = & "MP_TARGET_DESTROYED";
-  game["strings"]["bomb_defused"] = & "MP_BOMB_DEFUSED";
+  game["strings"]["target_destroyed"] = &"MP_TARGET_DESTROYED";
+  game["strings"]["bomb_defused"] = &"MP_BOMB_DEFUSED";
 
   precacheString(game["strings"]["target_destroyed"]);
   precacheString(game["strings"]["bomb_defused"]);
 
   level._effect["bombexplosion"] = loadfx("explosions/tanker_explosion");
 
-  setObjectiveText(game["attackers"], & "OBJECTIVES_DD_ATTACKER");
-  setObjectiveText(game["defenders"], & "OBJECTIVES_DD_DEFENDER");
+  setObjectiveText(game["attackers"], &"OBJECTIVES_DD_ATTACKER");
+  setObjectiveText(game["defenders"], &"OBJECTIVES_DD_DEFENDER");
 
   if(level.splitscreen) {
-    setObjectiveScoreText(game["attackers"], & "OBJECTIVES_DD_ATTACKER");
-    setObjectiveScoreText(game["defenders"], & "OBJECTIVES_DD_DEFENDER");
+    setObjectiveScoreText(game["attackers"], &"OBJECTIVES_DD_ATTACKER");
+    setObjectiveScoreText(game["defenders"], &"OBJECTIVES_DD_DEFENDER");
   } else {
-    setObjectiveScoreText(game["attackers"], & "OBJECTIVES_DD_ATTACKER_SCORE");
-    setObjectiveScoreText(game["defenders"], & "OBJECTIVES_DD_DEFENDER_SCORE");
+    setObjectiveScoreText(game["attackers"], &"OBJECTIVES_DD_ATTACKER_SCORE");
+    setObjectiveScoreText(game["defenders"], &"OBJECTIVES_DD_DEFENDER_SCORE");
   }
-  setObjectiveHintText(game["attackers"], & "OBJECTIVES_DD_ATTACKER_HINT");
-  setObjectiveHintText(game["defenders"], & "OBJECTIVES_DD_DEFENDER_HINT");
+  setObjectiveHintText(game["attackers"], &"OBJECTIVES_DD_ATTACKER_HINT");
+  setObjectiveHintText(game["defenders"], &"OBJECTIVES_DD_DEFENDER_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -572,7 +572,6 @@ bombHandler(player, destType) {
 
   setDvar("ui_bombtimer" + self.label, -1);
 
-
   if(level.gameEnded) {
     return;
   }
@@ -621,9 +620,6 @@ bombHandler(player, destType) {
   {
     player notify("bomb_defused");
     self notify("defused");
-
-
-
 
     leaderDialog("bomb_defused");
 
@@ -704,8 +700,6 @@ BombTimerWait(siteLoc) {
   while(siteLoc.waitTime >= 0) {
     siteLoc.waitTime--;
     setDvar("ui_bombtimer" + siteLoc.label, siteLoc.waitTime);
-
-
 
     if(siteLoc.waitTime >= 0)
       wait(1);

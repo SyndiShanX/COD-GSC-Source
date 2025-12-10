@@ -17,7 +17,7 @@ func_128ED(var_00, var_01) {
   var_02 = 5;
 
   if(func_8DB7() || scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\utility\game::maxvehiclesallowed()) {
-    self iprintlnbold( & "KILLSTREAKS_TOO_MANY_VEHICLES");
+    self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
     return 0;
   }
 
@@ -61,7 +61,7 @@ func_F1C9(var_00, var_01) {
   self waittill("confirm_location", var_02, var_03);
 
   if(func_8DB7() || scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount >= scripts\mp\utility\game::maxvehiclesallowed()) {
-    self iprintlnbold( & "KILLSTREAKS_TOO_MANY_VEHICLES");
+    self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
     self notify("cancel_location");
     return 0;
   }
@@ -300,10 +300,10 @@ func_3758(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   if(!scripts\mp\weapons::friendlyfirecheck(self.owner, var_01)) {
     return;
   }
-  if(isDefined(var_03) && var_03 & level.idflags_penetration)
+  if(isDefined(var_03) && var_03 &level.idflags_penetration)
     self.wasdamagedfrombulletpenetration = 1;
 
-  if(isDefined(var_03) && var_03 & level.idflags_no_team_protection)
+  if(isDefined(var_03) && var_03 &level.idflags_no_team_protection)
     self.wasdamagedfrombulletricochet = 1;
 
   self.wasdamaged = 1;

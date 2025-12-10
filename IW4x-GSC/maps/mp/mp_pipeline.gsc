@@ -10,9 +10,7 @@ main() {
 
   maps\mp\_compass::setupMiniMap("compass_map_mp_pipeline");
 
-
   ambientPlay("ambient_pipeline");
-
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";

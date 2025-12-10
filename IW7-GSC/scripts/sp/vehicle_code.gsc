@@ -279,7 +279,7 @@ func_131F6(param_00) {
   param_00 thread func_740E();
   param_00 thread scripts\sp\vehicle_aianim::func_88AE();
   if(isDefined(param_00.var_EDB8)) {
-    param_00 setvehiclelookattext(param_00.var_EDB8, & "");
+    param_00 setvehiclelookattext(param_00.var_EDB8, &"");
   }
 
   param_00 thread func_131EC();

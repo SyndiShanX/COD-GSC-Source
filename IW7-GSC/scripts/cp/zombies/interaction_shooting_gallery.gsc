@@ -769,7 +769,7 @@ func_5555(param_00) {
 }
 
 register_interactions() {
-  level.interaction_hintstrings["shooting_gallery_afterlife"] = & "CP_ZOMBIE_AFTERLIFE_ARCADE_PLAY_GAME";
+  level.interaction_hintstrings["shooting_gallery_afterlife"] = &"CP_ZOMBIE_AFTERLIFE_ARCADE_PLAY_GAME";
   scripts\cp\cp_interaction::register_interaction("shooting_gallery", "arcade_game", undefined, ::scripts\cp\zombies\arcade_game_utility::arcade_game_hint_func, ::func_13010, 0, 1, ::func_973E);
   scripts\cp\cp_interaction::register_interaction("shooting_gallery_afterlife", "afterlife_game", undefined, undefined, ::func_13010, 0, 0, ::func_94DA);
 }

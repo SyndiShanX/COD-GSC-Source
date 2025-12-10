@@ -22,11 +22,11 @@
 #namespace zm_genesis_shadowman;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_shadowman", & __init__, undefined, undefined);
+  system::register("zm_genesis_shadowman", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "shadowman_fx", 15000, 3, "int", & shadowman_fx, 0, 0);
+  clientfield::register("scriptmover", "shadowman_fx", 15000, 3, "int", &shadowman_fx, 0, 0);
 }
 
 function shadowman_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

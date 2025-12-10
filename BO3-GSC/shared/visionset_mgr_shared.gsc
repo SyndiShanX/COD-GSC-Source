@@ -11,7 +11,7 @@
 #namespace visionset_mgr;
 
 function autoexec __init__sytem__() {
-  system::register("visionset_mgr", & __init__, undefined, undefined);
+  system::register("visionset_mgr", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -20,9 +20,9 @@ function __init__() {
   level.vsmgr = [];
   level thread register_type("visionset");
   level thread register_type("overlay");
-  callback::on_finalize_initialization( & finalize_clientfields);
+  callback::on_finalize_initialization(&finalize_clientfields);
   level thread monitor();
-  callback::on_connect( & on_player_connect);
+  callback::on_connect(&on_player_connect);
 }
 
 function register_info(type, name, version, priority, lerp_step_count, should_activate_per_player, lerp_thread, ref_count_lerp_thread) {

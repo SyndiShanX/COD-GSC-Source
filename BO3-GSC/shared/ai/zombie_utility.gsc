@@ -718,7 +718,7 @@ function setfootstepeffect(name, fx) {
   }
   anim.optionalstepeffects[anim.optionalstepeffects.size] = name;
   level._effect["step_" + name] = fx;
-  anim.optionalstepeffectfunction = & zombie_shared::playfootstepeffect;
+  anim.optionalstepeffectfunction = &zombie_shared::playfootstepeffect;
 }
 
 function persistentdebugline(start, end) {

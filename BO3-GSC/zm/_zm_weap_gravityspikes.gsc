@@ -36,7 +36,7 @@
 #namespace zm_weap_gravityspikes;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_gravityspikes", & __init__, undefined, undefined);
+  system::register("zm_weap_gravityspikes", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -48,12 +48,12 @@ function __init__() {
   level.ai_spikes_chop_throttle = new throttle();
   [[level.ai_spikes_chop_throttle]] - > initialize(6, 0.1);
   register_clientfields();
-  callback::on_connect( & on_connect_func_for_gravityspikes);
+  callback::on_connect(&on_connect_func_for_gravityspikes);
   zm_hero_weapon::register_hero_weapon("hero_gravityspikes_melee");
-  zm_hero_weapon::register_hero_weapon_wield_unwield_callbacks("hero_gravityspikes_melee", & wield_gravityspikes, & unwield_gravityspikes);
-  zm_hero_weapon::register_hero_weapon_power_callbacks("hero_gravityspikes_melee", undefined, & gravityspikes_power_expired);
-  zm::register_player_damage_callback( & player_invulnerable_during_gravityspike_slam);
-  zm_hero_weapon::register_hero_recharge_event(getweapon("hero_gravityspikes_melee"), & gravityspikes_power_override);
+  zm_hero_weapon::register_hero_weapon_wield_unwield_callbacks("hero_gravityspikes_melee", &wield_gravityspikes, &unwield_gravityspikes);
+  zm_hero_weapon::register_hero_weapon_power_callbacks("hero_gravityspikes_melee", undefined, &gravityspikes_power_expired);
+  zm::register_player_damage_callback(&player_invulnerable_during_gravityspike_slam);
+  zm_hero_weapon::register_hero_recharge_event(getweapon("hero_gravityspikes_melee"), &gravityspikes_power_override);
   level thread function_81889ac5();
 }
 
@@ -482,8 +482,8 @@ function gravity_trap_loop(v_gravity_trap_pos, wpn_gravityspikes) {
   while(true) {
     if(self zm_hero_weapon::is_hero_weapon_in_use() && self.hero_power > 0) {
       a_zombies = getaiteamarray(level.zombie_team);
-      a_zombies = array::filter(a_zombies, 0, & gravityspikes_target_filtering);
-      array::thread_all(a_zombies, & gravity_trap_check, self);
+      a_zombies = array::filter(a_zombies, 0, &gravityspikes_target_filtering);
+      array::thread_all(a_zombies, &gravity_trap_check, self);
     } else if(is_gravity_trap_fx_on) {
       self gravity_trap_fx_off();
       is_gravity_trap_fx_on = 0;
@@ -606,8 +606,8 @@ function create_gravity_trap_unitrigger(v_origin, wpn_gravityspikes) {
   unitrigger_stub.wpn_gravityspikes = wpn_gravityspikes;
   self.gravity_trap_unitrigger_stub = unitrigger_stub;
   zm_unitrigger::unitrigger_force_per_player_triggers(unitrigger_stub, 1);
-  unitrigger_stub.prompt_and_visibility_func = & gravity_trap_trigger_visibility;
-  zm_unitrigger::register_static_unitrigger(unitrigger_stub, & gravity_trap_trigger_think);
+  unitrigger_stub.prompt_and_visibility_func = &gravity_trap_trigger_visibility;
+  zm_unitrigger::register_static_unitrigger(unitrigger_stub, &gravity_trap_trigger_think);
 }
 
 function gravity_trap_trigger_visibility(player) {
@@ -818,7 +818,7 @@ function private do_zombie_explode() {
     self zombie_utility::zombie_eye_glow_stop();
     self clientfield::increment("gravity_spike_zombie_explode_fx");
     self ghost();
-    self util::delay(0.25, undefined, & zm_utility::self_delete);
+    self util::delay(0.25, undefined, &zm_utility::self_delete);
   }
 }
 
@@ -834,11 +834,11 @@ function knockdown_zombies_slam() {
   v_forward = anglesToForward(self getplayerangles());
   v_pos = self.origin + vectorscale(v_forward, 24);
   a_ai = getaiteamarray(level.zombie_team);
-  a_ai = array::filter(a_ai, 0, & gravityspikes_target_filtering);
+  a_ai = array::filter(a_ai, 0, &gravityspikes_target_filtering);
   a_ai_kill_zombies = arraysortclosest(a_ai, v_pos, a_ai.size, 0, 200);
-  array::thread_all(a_ai_kill_zombies, & gravity_spike_melee_kill, v_pos, self);
+  array::thread_all(a_ai_kill_zombies, &gravity_spike_melee_kill, v_pos, self);
   a_ai_slam_zombies = arraysortclosest(a_ai, v_pos, a_ai.size, 200, 400);
-  array::thread_all(a_ai_slam_zombies, & zombie_slam_direction, v_pos);
+  array::thread_all(a_ai_slam_zombies, &zombie_slam_direction, v_pos);
   self thread play_slam_fx(v_pos);
 }
 

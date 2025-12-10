@@ -11,12 +11,12 @@
 #namespace zm_weap_microwavegun;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_microwavegun", & __init__, undefined, undefined);
+  system::register("zm_weap_microwavegun", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("actor", "toggle_microwavegun_hit_response", 21000, 1, "int", & microwavegun_zombie_initial_hit_response, 0, 0);
-  clientfield::register("actor", "toggle_microwavegun_expand_response", 21000, 1, "int", & microwavegun_zombie_expand_response, 0, 0);
+  clientfield::register("actor", "toggle_microwavegun_hit_response", 21000, 1, "int", &microwavegun_zombie_initial_hit_response, 0, 0);
+  clientfield::register("actor", "toggle_microwavegun_expand_response", 21000, 1, "int", &microwavegun_zombie_expand_response, 0, 0);
   clientfield::register("clientuimodel", "hudItems.showDpadLeft_WaveGun", 21000, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "hudItems.dpadLeftAmmo", 21000, 5, "int", undefined, 0, 0);
   level._effect["microwavegun_sizzle_blood_eyes"] = "dlc5/zmb_weapon/fx_sizzle_blood_eyes";

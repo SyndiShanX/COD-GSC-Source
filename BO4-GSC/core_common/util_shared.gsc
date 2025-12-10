@@ -2420,7 +2420,7 @@ auto_delete(n_mode = 1, n_min_time_alive = 0, n_dist_horizontal = 0, n_dist_vert
     return;
   }
 
-  if(n_mode&16 || n_mode == 1 || n_mode == 8) {
+  if(n_mode& 16 || n_mode == 1 || n_mode == 8) {
     n_mode |= 2;
     n_mode |= 4;
   }
@@ -2429,7 +2429,7 @@ auto_delete(n_mode = 1, n_min_time_alive = 0, n_dist_horizontal = 0, n_dist_vert
   n_tests_to_do = 2;
   n_dot_check = 0;
 
-  if(n_mode&16) {
+  if(n_mode& 16) {
     n_think_time = 0.2;
     n_tests_to_do = 1;
     n_dot_check = 0.4;
@@ -2463,7 +2463,7 @@ auto_delete(n_mode = 1, n_min_time_alive = 0, n_dist_horizontal = 0, n_dist_vert
       v_eye = player getplayercamerapos();
       b_behind = 0;
 
-      if(n_mode&2) {
+      if(n_mode& 2) {
         v_facing = anglesToForward(player getplayerangles());
         v_to_ent = vectornormalize(self.origin - v_eye);
         n_dot = vectordot(v_facing, v_to_ent);
@@ -2471,16 +2471,16 @@ auto_delete(n_mode = 1, n_min_time_alive = 0, n_dist_horizontal = 0, n_dist_vert
         if(n_dot < n_dot_check) {
           b_behind = 1;
 
-          if(!(n_mode&1)) {
+          if(!(n_mode& 1)) {
             n_tests_passed++;
             continue;
           }
         }
       }
 
-      if(n_mode&4) {
+      if(n_mode& 4) {
         if(!self sightconetrace(v_eye, isDefined(player getvehicleoccupied()) ? player getvehicleoccupied() : player)) {
-          if(b_behind || !(n_mode&1)) {
+          if(b_behind || !(n_mode& 1)) {
             n_tests_passed++;
           }
         }

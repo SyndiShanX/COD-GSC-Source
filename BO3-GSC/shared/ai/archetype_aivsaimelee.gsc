@@ -36,14 +36,14 @@ function autoexec main() {
 }
 
 function registeraivsaimeleebehaviorfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("hasAIvsAIEnemy", & hasaivsaienemy);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("decideInitiator", & decideinitiator);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isInitiator", & isinitiator);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("hasCloseAIvsAIEnemy", & hascloseaivsaienemy);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("chooseAIvsAIMeleeAnimations", & chooseaivsaimeleeanimations);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isCloseEnoughForAIvsAIMelee", & iscloseenoughforaivsaimelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("hasPotentalAIvsAIMeleeEnemy", & haspotentalaivsaimeleeenemy);
-  behaviortreenetworkutility::registerbehaviortreeaction("AIvsAIMeleeAction", & aivsaimeleeinitialize, undefined, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("hasAIvsAIEnemy", &hasaivsaienemy);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("decideInitiator", &decideinitiator);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isInitiator", &isinitiator);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("hasCloseAIvsAIEnemy", &hascloseaivsaienemy);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("chooseAIvsAIMeleeAnimations", &chooseaivsaimeleeanimations);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isCloseEnoughForAIvsAIMelee", &iscloseenoughforaivsaimelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("hasPotentalAIvsAIMeleeEnemy", &haspotentalaivsaimeleeenemy);
+  behaviortreenetworkutility::registerbehaviortreeaction("AIvsAIMeleeAction", &aivsaimeleeinitialize, undefined, undefined);
 }
 
 function haspotentalaivsaimeleeenemy(behaviortreeentity) {
@@ -260,26 +260,26 @@ function private chooseaivsaimeleeanimations(behaviortreeentity) {
   possiblemelees = [];
   if(abs(yawtoenemy) > 120) {
     if(isDefined(behaviortreeentity.__forceaiflipmelee)) {
-      possiblemelees[possiblemelees.size] = & chooseaivsaimeleefrontflipanimations;
+      possiblemelees[possiblemelees.size] = &chooseaivsaimeleefrontflipanimations;
     } else {
       if(isDefined(behaviortreeentity.__forceaiwrestlemelee)) {
-        possiblemelees[possiblemelees.size] = & chooseaivsaimeleefrontwrestleanimations;
+        possiblemelees[possiblemelees.size] = &chooseaivsaimeleefrontwrestleanimations;
       } else {
-        possiblemelees[possiblemelees.size] = & chooseaivsaimeleefrontflipanimations;
-        possiblemelees[possiblemelees.size] = & chooseaivsaimeleefrontwrestleanimations;
+        possiblemelees[possiblemelees.size] = &chooseaivsaimeleefrontflipanimations;
+        possiblemelees[possiblemelees.size] = &chooseaivsaimeleefrontwrestleanimations;
       }
     }
   } else {
     if(abs(yawtoenemy) < 60) {
-      possiblemelees[possiblemelees.size] = & chooseaivsaimeleebackanimations;
+      possiblemelees[possiblemelees.size] = &chooseaivsaimeleebackanimations;
     } else {
       rightvec = vectornormalize(anglestoright(behaviortreeentity.enemy.angles));
       toattackervec = vectornormalize(behaviortreeentity.origin - behaviortreeentity.enemy.origin);
       rdot = vectordot(toattackervec, rightvec);
       if(rdot > 0) {
-        possiblemelees[possiblemelees.size] = & chooseaivsaimeleerightanimations;
+        possiblemelees[possiblemelees.size] = &chooseaivsaimeleerightanimations;
       } else {
-        possiblemelees[possiblemelees.size] = & chooseaivsaimeleeleftanimations;
+        possiblemelees[possiblemelees.size] = &chooseaivsaimeleeleftanimations;
       }
     }
   }

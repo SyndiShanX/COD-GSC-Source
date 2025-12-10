@@ -70,7 +70,7 @@ private function_b8f6e02f() {
 }
 
 private function_67189b6b(localclientnum, newval) {
-  stashitem = (newval&4) != 0;
+  stashitem = (newval& 4) != 0;
   newval &= -5;
 
   if(newval == 0) {

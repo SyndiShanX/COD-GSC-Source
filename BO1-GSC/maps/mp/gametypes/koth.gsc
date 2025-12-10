@@ -90,7 +90,7 @@ getRespawnDelay() {
     if(!level.spawnDelay)
       return undefined;
     if(level.spawnDelay >= level.hqAutoDestroyTime)
-      self.lowerMessageOverride = & "MP_WAITING_FOR_HQ";
+      self.lowerMessageOverride = &"MP_WAITING_FOR_HQ";
     if(level.delayPlayer) {
       return min(level.spawnDelay, timeRemaining);
     } else {
@@ -99,19 +99,19 @@ getRespawnDelay() {
   }
 }
 onStartGameType() {
-  maps\mp\gametypes\_globallogic_ui::setObjectiveText("allies", & "OBJECTIVES_KOTH");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveText("axis", & "OBJECTIVES_KOTH");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveText("allies", &"OBJECTIVES_KOTH");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveText("axis", &"OBJECTIVES_KOTH");
   if(level.splitscreen) {
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", & "OBJECTIVES_KOTH");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", & "OBJECTIVES_KOTH");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", &"OBJECTIVES_KOTH");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", &"OBJECTIVES_KOTH");
   } else {
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", & "OBJECTIVES_KOTH_SCORE");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", & "OBJECTIVES_KOTH_SCORE");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", &"OBJECTIVES_KOTH_SCORE");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", &"OBJECTIVES_KOTH_SCORE");
   }
-  level.objectiveHintPrepareHQ = & "MP_CONTROL_HQ";
-  level.objectiveHintCaptureHQ = & "MP_CAPTURE_HQ";
-  level.objectiveHintDestroyHQ = & "MP_DESTROY_HQ";
-  level.objectiveHintDefendHQ = & "MP_DEFEND_HQ";
+  level.objectiveHintPrepareHQ = &"MP_CONTROL_HQ";
+  level.objectiveHintCaptureHQ = &"MP_CAPTURE_HQ";
+  level.objectiveHintDestroyHQ = &"MP_DESTROY_HQ";
+  level.objectiveHintDefendHQ = &"MP_DEFEND_HQ";
   precacheString(level.objectiveHintPrepareHQ);
   precacheString(level.objectiveHintCaptureHQ);
   precacheString(level.objectiveHintDestroyHQ);
@@ -172,13 +172,13 @@ spawn_next_radio() {
 HQMainLoop() {
   level endon("game_ended");
   level.hqRevealTime = -100000;
-  hqSpawningInStr = & "MP_HQ_AVAILABLE_IN";
+  hqSpawningInStr = &"MP_HQ_AVAILABLE_IN";
   if(level.kothmode) {
-    hqDestroyedInFriendlyStr = & "MP_HQ_DESPAWN_IN";
-    hqDestroyedInEnemyStr = & "MP_HQ_DESPAWN_IN";
+    hqDestroyedInFriendlyStr = &"MP_HQ_DESPAWN_IN";
+    hqDestroyedInEnemyStr = &"MP_HQ_DESPAWN_IN";
   } else {
-    hqDestroyedInFriendlyStr = & "MP_HQ_REINFORCEMENTS_IN";
-    hqDestroyedInEnemyStr = & "MP_HQ_DESPAWN_IN";
+    hqDestroyedInFriendlyStr = &"MP_HQ_REINFORCEMENTS_IN";
+    hqDestroyedInEnemyStr = &"MP_HQ_DESPAWN_IN";
   }
   precacheString(hqSpawningInStr);
   precacheString(hqDestroyedInFriendlyStr);
@@ -340,7 +340,7 @@ onEndUse(team, player, success) {
 onRadioCapture(player) {
   team = player.pers["team"];
   player logString("radio captured");
-  string = & "MP_HQ_CAPTURED_BY";
+  string = &"MP_HQ_CAPTURED_BY";
   thread give_capture_credit(self.touchList[team], string);
   oldTeam = maps\mp\gametypes\_gameobjects::getOwnerTeam();
   self maps\mp\gametypes\_gameobjects::setOwnerTeam(team);

@@ -738,7 +738,7 @@ busupdatenearzombies() {
           self.zombies_near_bus++;
         }
 
-        if(self.zombies_near_bus && !self.zombiesinside && !self.zombiesatwindow && !self.zombies_climbing & !self.zombiesonroof)
+        if(self.zombies_near_bus && !self.zombiesinside && !self.zombiesatwindow && !self.zombies_climbing &!self.zombiesonroof)
           level.bus_driver_focused = 1;
         else
           level.bus_driver_focused = 0;

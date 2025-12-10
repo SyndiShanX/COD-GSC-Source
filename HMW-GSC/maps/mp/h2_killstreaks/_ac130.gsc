@@ -32,7 +32,7 @@ init() {
 
 tryUseAC130(lifeID) {
   if(level.ac130InUse) {
-    self iprintlnbold( & "LUA_KS_UNAVAILABLE_AIRSPACE");
+    self iprintlnbold(&"LUA_KS_UNAVAILABLE_AIRSPACE");
     return false;
   }
 
@@ -372,7 +372,7 @@ customOverlay() {
   overlay.alpha = 1;
 
   reloadText = self createFontString("default", 1.5);
-  reloadText setText( & "LUA_AC130_RELOADING");
+  reloadText setText(&"LUA_AC130_RELOADING");
   reloadText setPoint("CENTER", "CENTER", 0, 150);
   reloadText.alpha = 0;
 
@@ -651,7 +651,7 @@ ac130_damage_tracker() {
     if(!maps\mp\gametypes\_weapons::friendlyFireCheck(self.owner, attacker))
       continue;
 
-    if(isDefined(iDFlags) && (iDFlags & level.iDFLAGS_PENETRATION))
+    if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION))
       self.wasDamagedFromBulletPenetration = true;
 
     self.wasDamaged = true;

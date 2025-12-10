@@ -21,14 +21,14 @@
 #namespace zm_bgb_disorderly_combat;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_disorderly_combat", & __init__, & __main__, "bgb");
+  system::register("zm_bgb_disorderly_combat", &__init__, &__main__, "bgb");
 }
 
 function __init__() {
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_disorderly_combat", "time", 300, & enable, & disable, undefined, undefined);
+  bgb::register("zm_bgb_disorderly_combat", "time", 300, &enable, &disable, undefined, undefined);
   bgb::function_2060b89("zm_bgb_disorderly_combat");
   level.var_8fcdc919 = [];
   level.var_5013e65c = [];
@@ -80,7 +80,7 @@ function function_7039f685() {
   level.var_8fcdc919 = array::randomize(level.var_8fcdc919);
   self setperk("specialty_ammodrainsfromstockfirst");
   self thread disable_weapons();
-  self.get_player_weapon_limit = & function_7087df78;
+  self.get_player_weapon_limit = &function_7087df78;
   self util::waittill_either("weapon_change_complete", "bgb_flavor_hexed_give_zm_bgb_disorderly_combat");
   if(!isDefined(self.var_fe555a38)) {
     self.var_fe555a38 = self getcurrentweapon();

@@ -13,15 +13,15 @@
 #namespace zm_bgb_profit_sharing;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_profit_sharing", & __init__, undefined, undefined);
+  system::register("zm_bgb_profit_sharing", &__init__, undefined, undefined);
 }
 
 function __init__() {
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  clientfield::register("allplayers", "zm_bgb_profit_sharing_3p_fx", 15000, 1, "int", & function_df72a623, 0, 0);
-  clientfield::register("toplayer", "zm_bgb_profit_sharing_1p_fx", 15000, 1, "int", & function_f683a0e1, 0, 1);
+  clientfield::register("allplayers", "zm_bgb_profit_sharing_3p_fx", 15000, 1, "int", &function_df72a623, 0, 0);
+  clientfield::register("toplayer", "zm_bgb_profit_sharing_1p_fx", 15000, 1, "int", &function_f683a0e1, 0, 1);
   bgb::register("zm_bgb_profit_sharing", "time");
   level.var_75dff42 = [];
 }

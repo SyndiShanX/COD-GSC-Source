@@ -29,8 +29,8 @@ function init() {
 }
 
 function init_clientfields() {
-  clientfield::register("vehicle", "firefly_state", 1, 4, "int", & firefly_state, 0, 0);
-  clientfield::register("actor", "firefly_state", 1, 4, "int", & actor_firefly_state, 0, 0);
+  clientfield::register("vehicle", "firefly_state", 1, 4, "int", &firefly_state, 0, 0);
+  clientfield::register("actor", "firefly_state", 1, 4, "int", &actor_firefly_state, 0, 0);
 }
 
 function firefly_state(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

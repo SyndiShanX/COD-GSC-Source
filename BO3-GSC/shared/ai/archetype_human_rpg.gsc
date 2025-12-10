@@ -24,7 +24,7 @@
 #namespace archetype_human_rpg;
 
 function autoexec main() {
-  spawner::add_archetype_spawn_function("human_rpg", & humanrpgbehavior::archetypehumanrpgblackboardinit);
+  spawner::add_archetype_spawn_function("human_rpg", &humanrpgbehavior::archetypehumanrpgblackboardinit);
   humanrpgbehavior::registerbehaviorscriptfunctions();
   humanrpginterface::registerhumanrpginterfaceattributes();
 }
@@ -38,7 +38,7 @@ function private archetypehumanrpgblackboardinit() {
   blackboard::createblackboardforentity(entity);
   ai::createinterfaceforentity(entity);
   entity aiutility::registerutilityblackboardattributes();
-  self.___archetypeonanimscriptedcallback = & archetypehumanrpgonanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = &archetypehumanrpgonanimscriptedcallback;
   entity finalizetrackedblackboardattributes();
   entity asmchangeanimmappingtable(1);
 }

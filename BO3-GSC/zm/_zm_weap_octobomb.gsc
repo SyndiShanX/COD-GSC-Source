@@ -26,7 +26,7 @@
 #namespace _zm_weap_octobomb;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_octobomb", & __init__, & __main__, undefined);
+  system::register("zm_weap_octobomb", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -47,8 +47,8 @@ function __main__() {
     return;
   }
   level._effect["grenade_samantha_steal"] = "zombie/fx_monkey_lightning_zmb";
-  zm_weapons::register_zombie_weapon_callback(level.w_octobomb, & player_give_octobomb);
-  zm_weapons::register_zombie_weapon_callback(level.w_octobomb_upgraded, & player_give_octobomb_upgraded);
+  zm_weapons::register_zombie_weapon_callback(level.w_octobomb, &player_give_octobomb);
+  zm_weapons::register_zombie_weapon_callback(level.w_octobomb_upgraded, &player_give_octobomb_upgraded);
   level.octobombs = [];
 }
 
@@ -723,9 +723,9 @@ function octobomb_exists() {
 
 function octobomb_devgui() {
   for(i = 0; i < 4; i++) {
-    level thread setup_devgui_func(("ZM/Weapons/Offhand/Octobomb/Give") + i, "zod_give_octobomb", i, & devgui_octobomb_give);
+    level thread setup_devgui_func(("ZM/Weapons/Offhand/Octobomb/Give") + i, "zod_give_octobomb", i, &devgui_octobomb_give);
   }
-  level thread setup_devgui_func("ZM/Weapons/Offhand/Octobomb/Give to All", "zod_give_octobomb", 4, & devgui_octobomb_give);
+  level thread setup_devgui_func("ZM/Weapons/Offhand/Octobomb/Give to All", "zod_give_octobomb", 4, &devgui_octobomb_give);
 }
 
 function private setup_devgui_func(str_devgui_path, str_dvar, n_value, func, n_base_value = -1) {

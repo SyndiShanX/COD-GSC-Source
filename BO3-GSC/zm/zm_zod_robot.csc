@@ -19,13 +19,13 @@
 #namespace zm_zod_robot;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_robot", & __init__, undefined, undefined);
+  system::register("zm_zod_robot", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "robot_switch", 1, 1, "int", & robot_switch, 0, 0);
-  clientfield::register("world", "robot_lights", 1, 2, "int", & robot_lights, 0, 0);
-  ai::add_archetype_spawn_function("zod_companion", & function_a0b7ccbf);
+  clientfield::register("scriptmover", "robot_switch", 1, 1, "int", &robot_switch, 0, 0);
+  clientfield::register("world", "robot_lights", 1, 2, "int", &robot_lights, 0, 0);
+  ai::add_archetype_spawn_function("zod_companion", &function_a0b7ccbf);
 }
 
 function private function_a0b7ccbf(localclientnum) {

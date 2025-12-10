@@ -37,8 +37,8 @@ main() {
   level thread setup_objectives();
   level thread maps\_objectives::objectives();
   level._vehicle_load_lights = 1;
-  add_hint_string("player_jump_hint", & "PANAMA_PLAYER_JUMP_PROMPT");
-  add_hint_string("docks_warning", & "PANAMA_DOCKS_WARNING");
+  add_hint_string("player_jump_hint", &"PANAMA_PLAYER_JUMP_PROMPT");
+  add_hint_string("docks_warning", &"PANAMA_DOCKS_WARNING");
 }
 
 on_player_connect() {

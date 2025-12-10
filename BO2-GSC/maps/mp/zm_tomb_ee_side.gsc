@@ -62,7 +62,7 @@ quadrotor_medallions() {
   playFXOnTag(level._effect["special_glow"], m_mg_model, "tag_origin");
   t_weapon_swap = tomb_spawn_trigger_radius(v_spawnpt, 100, 1);
   t_weapon_swap.require_look_at = 1;
-  t_weapon_swap.hint_string = & "ZM_TOMB_X2PU";
+  t_weapon_swap.hint_string = &"ZM_TOMB_X2PU";
   t_weapon_swap.hint_parm1 = getweapondisplayname("mg08_upgraded_zm");
 
   for(b_retrieved = 0; !b_retrieved; b_retrieved = swap_mg(e_player))

@@ -193,26 +193,26 @@ onStartGameType() {
 
   setClientNameMode("manual_change");
 
-  game["strings"]["target_destroyed"] = & "MP_TARGET_DESTROYED";
-  game["strings"]["bomb_defused"] = & "MP_BOMB_DEFUSED";
+  game["strings"]["target_destroyed"] = &"MP_TARGET_DESTROYED";
+  game["strings"]["bomb_defused"] = &"MP_BOMB_DEFUSED";
 
   precacheString(game["strings"]["target_destroyed"]);
   precacheString(game["strings"]["bomb_defused"]);
 
   level._effect["bombexplosion"] = loadfx("explosions/tanker_explosion");
 
-  setObjectiveText(game["attackers"], & "OBJECTIVES_DD_ATTACKER");
-  setObjectiveText(game["defenders"], & "OBJECTIVES_DD_DEFENDER");
+  setObjectiveText(game["attackers"], &"OBJECTIVES_DD_ATTACKER");
+  setObjectiveText(game["defenders"], &"OBJECTIVES_DD_DEFENDER");
 
   if(level.splitscreen) {
-    setObjectiveScoreText(game["attackers"], & "OBJECTIVES_DD_ATTACKER");
-    setObjectiveScoreText(game["defenders"], & "OBJECTIVES_DD_DEFENDER");
+    setObjectiveScoreText(game["attackers"], &"OBJECTIVES_DD_ATTACKER");
+    setObjectiveScoreText(game["defenders"], &"OBJECTIVES_DD_DEFENDER");
   } else {
-    setObjectiveScoreText(game["attackers"], & "OBJECTIVES_DD_ATTACKER_SCORE");
-    setObjectiveScoreText(game["defenders"], & "OBJECTIVES_DD_DEFENDER_SCORE");
+    setObjectiveScoreText(game["attackers"], &"OBJECTIVES_DD_ATTACKER_SCORE");
+    setObjectiveScoreText(game["defenders"], &"OBJECTIVES_DD_DEFENDER_SCORE");
   }
-  setObjectiveHintText(game["attackers"], & "OBJECTIVES_DD_ATTACKER_HINT");
-  setObjectiveHintText(game["defenders"], & "OBJECTIVES_DD_DEFENDER_HINT");
+  setObjectiveHintText(game["attackers"], &"OBJECTIVES_DD_ATTACKER_HINT");
+  setObjectiveHintText(game["defenders"], &"OBJECTIVES_DD_DEFENDER_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -472,7 +472,7 @@ onUseObject(player) {
     player playSound("mp_bomb_plant");
 
     thread teamPlayerCardSplash("callout_bombplanted", player);
-    //iPrintLn( &"MP_EXPLOSIVES_PLANTED_BY", player );
+    //iPrintLn(&"MP_EXPLOSIVES_PLANTED_BY", player );
     leaderDialog("bomb_planted");
 
     player thread maps\mp\gametypes\_hud_message::SplashNotify("plant", maps\mp\gametypes\_rank::getScoreInfoValue("plant"));
@@ -669,7 +669,7 @@ bombHandler(player, destType) {
     self notify("defused");
 
     //		if( !level.hardcoreMode )
-    //			iPrintLn( &"MP_EXPLOSIVES_DEFUSED_BY", player );
+    //			iPrintLn(&"MP_EXPLOSIVES_DEFUSED_BY", player );
 
     leaderDialog("bomb_defused");
 

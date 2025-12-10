@@ -178,7 +178,7 @@ function function_1f8cb1fa() {
   }
 }
 
-function function_64bc2503( & queue, flag, waitfunc, var_a6cc22d4 = 0) {
+function function_64bc2503(&queue, flag, waitfunc, var_a6cc22d4 = 0) {
   self endon("death");
   if(!var_a6cc22d4) {
     self notify("fxProcessQueue_" + flag);
@@ -223,7 +223,7 @@ function turnofffx(name) {
   if(!isinarray(self.var_350c7e91, name)) {
     self.var_350c7e91[self.var_350c7e91.size] = name;
   }
-  self function_64bc2503(self.var_350c7e91, "off_fx", & function_1f8cb1fa);
+  self function_64bc2503(self.var_350c7e91, "off_fx", &function_1f8cb1fa);
   level notify("hash_67a1310c");
 }
 
@@ -247,7 +247,7 @@ function function_285a2999(name) {
     arrayremovevalue(self.var_350c7e91, name);
   }
   self.var_3930cdff[self.var_3930cdff.size] = name;
-  self function_64bc2503(self.var_3930cdff, "play_fx", & function_81e169ac);
+  self function_64bc2503(self.var_3930cdff, "play_fx", &function_81e169ac);
 }
 
 function function_2fc7e62f(victim, damage, attacker, dir, smeansofdeath, weapon) {

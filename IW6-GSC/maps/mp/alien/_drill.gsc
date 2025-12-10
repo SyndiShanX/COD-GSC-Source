@@ -76,7 +76,7 @@ drill_out_of_playable() {
         drop_drill(level.last_drill_pickup_origin, level.last_drill_pickup_angles);
 
         foreach(player in level.players) {
-          player setLowerMessage("drill_overboard", & "ALIEN_COLLECTIBLES_DRILL_OUTOFPLAY", 4);
+          player setLowerMessage("drill_overboard", &"ALIEN_COLLECTIBLES_DRILL_OUTOFPLAY", 4);
         }
       }
     }
@@ -225,12 +225,12 @@ drill_pickup_listener(marker) {
     use_trig waittill("trigger", owner);
 
     if(owner is_holding_deployable()) {
-      owner setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+      owner setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
       continue;
     }
 
     if(owner GetStance() == "prone" || owner GetStance() == "crouch") {
-      owner setLowerMessage("change_stance", & "ALIENS_PATCH_CHANGE_STANCE", 3);
+      owner setLowerMessage("change_stance", &"ALIENS_PATCH_CHANGE_STANCE", 3);
       continue;
     }
     if(is_true(owner.picking_up_item)) {
@@ -341,7 +341,7 @@ drop_drill_on_disconnect() {
     if(player == self) {
       continue;
     }
-    player setLowerMessage("drill_overboard", & "ALIEN_COLLECTIBLES_DRILL_OUTOFPLAY", 4);
+    player setLowerMessage("drill_overboard", &"ALIEN_COLLECTIBLES_DRILL_OUTOFPLAY", 4);
   }
 
 }
@@ -1622,13 +1622,13 @@ check_for_player_near_hive_with_drill() {
         }
         if(distancesquared(destroy_loc.origin, self.origin) < check_distance) {
           if((!isDefined(level.drill_carrier)) || isDefined(level.drill_carrier) && level.drill_carrier != self) {
-            self setLowerMessage("need_drill", & "ALIEN_COLLECTIBLES_NEED_DRILL", undefined, 10);
+            self setLowerMessage("need_drill", &"ALIEN_COLLECTIBLES_NEED_DRILL", undefined, 10);
             while(player_should_see_drill_hint(destroy_loc, check_distance, true)) {
               wait(.05);
             }
             self clearLowerMessage("need_drill");
           } else {
-            self setLowerMessage("plant_drill", & "ALIEN_COLLECTIBLES_PLANT_BOMB", undefined, 10);
+            self setLowerMessage("plant_drill", &"ALIEN_COLLECTIBLES_PLANT_BOMB", undefined, 10);
             while(player_should_see_drill_hint(destroy_loc, check_distance, false)) {
               wait(.05);
             }
@@ -1701,7 +1701,7 @@ wait_for_drill_plant() {
     self waittill("trigger", player);
 
     if(!is_true(level.automatic_drill) && (!isDefined(level.drill_carrier) || level.drill_carrier != player)) {
-      player setLowerMessage("no_bomb", & "ALIEN_COLLECTIBLES_NO_BOMB", 5);
+      player setLowerMessage("no_bomb", &"ALIEN_COLLECTIBLES_NO_BOMB", 5);
       wait 0.05;
       continue;
     }

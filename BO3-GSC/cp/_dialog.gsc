@@ -16,13 +16,13 @@
 #namespace dialog;
 
 function autoexec __init__sytem__() {
-  system::register("dialog", & __init__, undefined, undefined);
+  system::register("dialog", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.vo = spawnStruct();
   level.vo.nag_groups = [];
-  callback::on_spawned( & dialog_onplayerspawned);
+  callback::on_spawned(&dialog_onplayerspawned);
 }
 
 function dialog_onplayerspawned() {
@@ -39,7 +39,7 @@ function add(str_dialog_name, str_vox_file) {
     level.scr_sound["generic"] = [];
   }
   level.scr_sound["generic"][str_dialog_name] = str_vox_file;
-  animation::add_global_notetrack_handler("vox#" + str_dialog_name, & notetrack_say, 0, str_dialog_name);
+  animation::add_global_notetrack_handler("vox#" + str_dialog_name, &notetrack_say, 0, str_dialog_name);
 }
 
 function notetrack_say(str_vo_line) {
@@ -153,44 +153,44 @@ function remote(str_vo_line, n_delay, str_type = "dni", e_to_player, var_43937b2
     str_who = undefined;
     switch (a_script_id[a_script_id.size - 1]) {
       case "diaz": {
-        str_who = & "CPUI_DIAZ_SEBASTIAN";
+        str_who = &"CPUI_DIAZ_SEBASTIAN";
         break;
       }
       case "ecmd": {
-        str_who = & "CPUI_EGYPTIAN_COMMAND";
+        str_who = &"CPUI_EGYPTIAN_COMMAND";
         break;
       }
       case "xiul": {
-        str_who = & "CPUI_GOH_XIULAN";
+        str_who = &"CPUI_GOH_XIULAN";
         break;
       }
       case "hend": {
-        str_who = & "CPUI_HENDRICKS_JACOB";
+        str_who = &"CPUI_HENDRICKS_JACOB";
         break;
       }
       case "khal": {
-        str_who = & "CPUI_KHALIL_ZEYAD";
+        str_who = &"CPUI_KHALIL_ZEYAD";
         break;
       }
       case "mare": {
-        str_who = & "CPUI_MARETTI_PETER";
+        str_who = &"CPUI_MARETTI_PETER";
         break;
       }
       case "kane": {
-        str_who = & "CPUI_KANE_RACHEL";
+        str_who = &"CPUI_KANE_RACHEL";
         break;
       }
       case "hall": {
-        str_who = & "CPUI_HALL_SARAH";
+        str_who = &"CPUI_HALL_SARAH";
         break;
       }
       case "tayr": {
-        str_who = & "CPUI_TAYLOR_JOHN";
+        str_who = &"CPUI_TAYLOR_JOHN";
         break;
       }
       case "vtpl":
       case "wapl": {
-        str_who = & "CPUI_VTOL_PILOT";
+        str_who = &"CPUI_VTOL_PILOT";
         break;
       }
       default: {

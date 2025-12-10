@@ -34,21 +34,21 @@ init() {
   precacheMiniMapIcon("compass_objpoint_c130_friendly");
   precacheMiniMapIcon("compass_objpoint_c130_enemy");
 
-  game["strings"]["ammo_hint"] = & "MP_AMMO_PICKUP";
-  game["strings"]["uav_hint"] = & "MP_UAV_PICKUP";
-  game["strings"]["counter_uav_hint"] = & "MP_COUNTER_UAV_PICKUP";
-  game["strings"]["sentry_hint"] = & "MP_SENTRY_PICKUP";
-  game["strings"]["predator_missile_hint"] = & "MP_PREDATOR_MISSILE_PICKUP";
-  game["strings"]["airstrike_hint"] = & "MP_AIRSTRIKE_PICKUP";
-  game["strings"]["precision_airstrike_hint"] = & "MP_PRECISION_AIRSTRIKE_PICKUP";
-  game["strings"]["harrier_airstrike_hint"] = & "MP_HARRIER_AIRSTRIKE_PICKUP";
-  game["strings"]["helicopter_hint"] = & "MP_HELICOPTER_PICKUP";
-  game["strings"]["helicopter_flares_hint"] = & "MP_HELICOPTER_FLARES_PICKUP";
-  game["strings"]["stealth_airstrike_hint"] = & "MP_STEALTH_AIRSTRIKE_PICKUP";
-  game["strings"]["helicopter_minigun_hint"] = & "MP_HELICOPTER_MINIGUN_PICKUP";
-  game["strings"]["ac130_hint"] = & "MP_AC130_PICKUP";
-  game["strings"]["emp_hint"] = & "MP_EMP_PICKUP";
-  game["strings"]["nuke_hint"] = & "MP_NUKE_PICKUP";
+  game["strings"]["ammo_hint"] = &"MP_AMMO_PICKUP";
+  game["strings"]["uav_hint"] = &"MP_UAV_PICKUP";
+  game["strings"]["counter_uav_hint"] = &"MP_COUNTER_UAV_PICKUP";
+  game["strings"]["sentry_hint"] = &"MP_SENTRY_PICKUP";
+  game["strings"]["predator_missile_hint"] = &"MP_PREDATOR_MISSILE_PICKUP";
+  game["strings"]["airstrike_hint"] = &"MP_AIRSTRIKE_PICKUP";
+  game["strings"]["precision_airstrike_hint"] = &"MP_PRECISION_AIRSTRIKE_PICKUP";
+  game["strings"]["harrier_airstrike_hint"] = &"MP_HARRIER_AIRSTRIKE_PICKUP";
+  game["strings"]["helicopter_hint"] = &"MP_HELICOPTER_PICKUP";
+  game["strings"]["helicopter_flares_hint"] = &"MP_HELICOPTER_FLARES_PICKUP";
+  game["strings"]["stealth_airstrike_hint"] = &"MP_STEALTH_AIRSTRIKE_PICKUP";
+  game["strings"]["helicopter_minigun_hint"] = &"MP_HELICOPTER_MINIGUN_PICKUP";
+  game["strings"]["ac130_hint"] = &"MP_AC130_PICKUP";
+  game["strings"]["emp_hint"] = &"MP_EMP_PICKUP";
+  game["strings"]["nuke_hint"] = &"MP_NUKE_PICKUP";
 
   level.airDropCrates = getEntArray("care_package", "targetname");
   level.oldAirDropCrates = getEntArray("airdrop_crate", "targetname");
@@ -1096,7 +1096,7 @@ killstreakCrateThink(dropType) {
   if(isDefined(game["strings"][self.crateType + "_hint"]))
     crateHint = game["strings"][self.crateType + "_hint"];
   else
-    crateHint = & "PLATFORM_GET_KILLSTREAK";
+    crateHint = &"PLATFORM_GET_KILLSTREAK";
 
   crateSetupForUse(crateHint, "all", maps\mp\killstreaks\_killstreaks::getKillstreakCrateIcon(self.crateType));
 

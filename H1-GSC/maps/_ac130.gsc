@@ -761,21 +761,21 @@ changeweapons() {
   level.ac130_weapon[0].overlay = "ac130_overlay_105mm";
   level.ac130_weapon[0].fov = "55";
   level.ac130_weapon[0].name = "105mm";
-  level.ac130_weapon[0].string = & "AC130_HUD_WEAPON_105MM";
+  level.ac130_weapon[0].string = &"AC130_HUD_WEAPON_105MM";
   level.ac130_weapon[0].hudelem_y = -20;
   level.ac130_weapon[0].blur = "h1_ac130_blur_105mm";
   level.ac130_weapon[1] = spawnStruct();
   level.ac130_weapon[1].overlay = "ac130_overlay_40mm";
   level.ac130_weapon[1].fov = "25";
   level.ac130_weapon[1].name = "40mm";
-  level.ac130_weapon[1].string = & "AC130_HUD_WEAPON_40MM";
+  level.ac130_weapon[1].string = &"AC130_HUD_WEAPON_40MM";
   level.ac130_weapon[1].hudelem_y = -40;
   level.ac130_weapon[1].blur = "h1_ac130_blur_40mm";
   level.ac130_weapon[2] = spawnStruct();
   level.ac130_weapon[2].overlay = "ac130_overlay_25mm";
   level.ac130_weapon[2].fov = "10";
   level.ac130_weapon[2].name = "25mm";
-  level.ac130_weapon[2].string = & "AC130_HUD_WEAPON_25MM";
+  level.ac130_weapon[2].string = &"AC130_HUD_WEAPON_25MM";
   level.ac130_weapon[2].hudelem_y = -60;
   level.ac130_weapon[2].blur = "h1_ac130_blur_25mm";
 
@@ -1695,7 +1695,7 @@ debug_friendly_count() {
     level.friendlycounthudelem.aligny = "bottom";
     level.friendlycounthudelem.horzalign = "left";
     level.friendlycounthudelem.vertalign = "bottom";
-    level.friendlycounthudelem.label = & "AC130_DEBUG_FRIENDLY_COUNT";
+    level.friendlycounthudelem.label = &"AC130_DEBUG_FRIENDLY_COUNT";
     level.friendlycounthudelem.alpha = 1;
   }
 

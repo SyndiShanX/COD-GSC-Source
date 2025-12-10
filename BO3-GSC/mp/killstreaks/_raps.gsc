@@ -34,15 +34,15 @@ function init() {
   assert(isDefined(level.raps_settings));
   level.raps = [];
   level.raps_helicopters = [];
-  level.raps_force_get_enemies = & forcegetenemies;
-  killstreaks::register("raps", "raps", "killstreak_raps", "raps_used", & activaterapskillstreak, 1);
-  killstreaks::register_strings("raps", & "KILLSTREAK_EARNED_RAPS", & "KILLSTREAK_RAPS_NOT_AVAILABLE", & "KILLSTREAK_RAPS_INBOUND", undefined, & "KILLSTREAK_RAPS_HACKED");
+  level.raps_force_get_enemies = &forcegetenemies;
+  killstreaks::register("raps", "raps", "killstreak_raps", "raps_used", &activaterapskillstreak, 1);
+  killstreaks::register_strings("raps", &"KILLSTREAK_EARNED_RAPS", &"KILLSTREAK_RAPS_NOT_AVAILABLE", &"KILLSTREAK_RAPS_INBOUND", undefined, &"KILLSTREAK_RAPS_HACKED");
   killstreaks::register_dialog("raps", "mpl_killstreak_raps", "rapsHelicopterDialogBundle", "rapsHelicopterPilotDialogBundle", "friendlyRaps", "enemyRaps", "enemyRapsMultiple", "friendlyRapsHacked", "enemyRapsHacked", "requestRaps", "threatRaps");
   killstreaks::allow_assists("raps", 1);
   killstreaks::register_dev_debug_dvar("raps");
   killstreak_bundles::register_killstreak_bundle("raps_drone");
   inithelicopterpositions();
-  callback::on_connect( & onplayerconnect);
+  callback::on_connect(&onplayerconnect);
   clientfield::register("vehicle", "monitor_raps_drop_landing", 1, 1, "int");
   clientfield::register("vehicle", "raps_heli_low_health", 1, 1, "int");
   clientfield::register("vehicle", "raps_heli_extra_low_health", 1, 1, "int");
@@ -221,7 +221,7 @@ function activaterapskillstreak(hardpointtype) {
     player iprintlnbold(&"KILLSTREAK_RAPS_NOT_AVAILABLE");
     return false;
   }
-  player thread teams::waituntilteamchange(player, & onteamchanged, player.entnum, "raps_complete");
+  player thread teams::waituntilteamchange(player, &onteamchanged, player.entnum, "raps_complete");
   level thread watchrapskillstreakend(killstreakid, player.entnum, player.team);
   helicopter = player spawnrapshelicopter(killstreakid);
   helicopter.killstreakid = killstreakid;
@@ -488,7 +488,7 @@ function spawnrapshelicopter(killstreakid) {
   helicopter = spawnhelicopter(player, spawnorigin, (0, 0, 0), "heli_raps_mp", "veh_t7_mil_vtol_dropship_raps");
   helicopter.prepickeddroplocation = prepickeddroplocation;
   helicopter.assigned_fly_height = assigned_fly_height;
-  helicopter killstreaks::configure_team("raps", killstreakid, player, undefined, undefined, & configurechopperteampost);
+  helicopter killstreaks::configure_team("raps", killstreakid, player, undefined, undefined, &configurechopperteampost);
   helicopter killstreak_hacking::enable_hacking("raps");
   helicopter.droppingraps = 0;
   helicopter.isleaving = 0;
@@ -506,13 +506,13 @@ function spawnrapshelicopter(killstreakid) {
   helicopter.maxhealth = killstreak_bundles::get_max_health("raps");
   helicopter.lowhealth = killstreak_bundles::get_low_health("raps");
   helicopter.extra_low_health = helicopter.lowhealth * 0.5;
-  helicopter.extra_low_health_callback = & onextralowhealth;
+  helicopter.extra_low_health_callback = &onextralowhealth;
   helicopter setCanDamage(1);
-  helicopter thread killstreaks::monitordamage("raps", helicopter.maxhealth, & ondeath, helicopter.lowhealth, & onlowhealth, 0, undefined, 1);
+  helicopter thread killstreaks::monitordamage("raps", helicopter.maxhealth, &ondeath, helicopter.lowhealth, &onlowhealth, 0, undefined, 1);
   helicopter.rocketdamage = (helicopter.maxhealth / 4) + 1;
   helicopter.remotemissiledamage = (helicopter.maxhealth / 1) + 1;
   helicopter.hackertooldamage = (helicopter.maxhealth / 2) + 1;
-  helicopter.detonateviaemp = & raps::detonate_damage_monitored;
+  helicopter.detonateviaemp = &raps::detonate_damage_monitored;
   target_set(helicopter, vectorscale((0, 0, 1), 100));
   helicopter setdrawinfrared(1);
   helicopter thread waitforhelicoptershutdown();
@@ -581,7 +581,7 @@ function ondeath(attacker, weapon) {
     if(isDefined(helicopter.droppedraps) && helicopter.droppedraps == 0) {
       attacker addplayerstat("destroy_raps_before_drop", 1);
     }
-    luinotifyevent(&"player_callout", 2, & "KILLSTREAK_DESTROYED_RAPS_DEPLOY_SHIP", attacker.entnum);
+    luinotifyevent(&"player_callout", 2, &"KILLSTREAK_DESTROYED_RAPS_DEPLOY_SHIP", attacker.entnum);
     helicopter notify("raps_helicopter_shutdown", 1);
   }
   if(helicopter.isleaving !== 1) {
@@ -861,7 +861,7 @@ function spawnraps(origin, angles) {
     level.raps[originalownerentnum].raps = array(level.raps[originalownerentnum].raps);
   }
   level.raps[originalownerentnum].raps[level.raps[originalownerentnum].raps.size] = raps;
-  raps killstreaks::configure_team("raps", "raps", originalowner, undefined, undefined, & configureteampost);
+  raps killstreaks::configure_team("raps", "raps", originalowner, undefined, undefined, &configureteampost);
   raps killstreak_hacking::enable_hacking("raps");
   raps clientfield::set("enemyvehicle", 1);
   raps.soundmod = "raps";
@@ -874,7 +874,7 @@ function spawnraps(origin, angles) {
   raps vehicle::toggle_sounds(0);
   raps thread watchrapskills(originalowner);
   raps thread watchrapsdeath(originalowner);
-  raps thread killstreaks::waitfortimeout("raps", raps.settings.max_duration * 1000, & onrapstimeout, "death");
+  raps thread killstreaks::waitfortimeout("raps", raps.settings.max_duration * 1000, &onrapstimeout, "death");
 }
 
 function configureteampost(owner, ishacked) {

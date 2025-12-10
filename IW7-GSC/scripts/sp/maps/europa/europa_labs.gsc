@@ -57,8 +57,8 @@ func_A79C() {
   scripts\engine\utility::flag_init("base_entrance_platform_enemies_engaged");
   scripts\sp\utility::func_22C9("seeker_enemies_ai", ::func_F11F);
   level.player scripts\sp\utility::func_65E0("threw_seeker");
-  scripts\sp\utility::func_16EB("seeker_hint", & "EUROPA_SEEKER_HINT", ::func_F15C);
-  precachestring( & "EUROPA_DBL_JUMP1");
+  scripts\sp\utility::func_16EB("seeker_hint", &"EUROPA_SEEKER_HINT", ::func_F15C);
+  precachestring(&"EUROPA_DBL_JUMP1");
   level.player scripts\sp\utility::func_65E0("pressed_jump_once");
   level.player scripts\sp\utility::func_65E0("pressed_jump_twice");
   var_00 = getent("office_breach_door", "targetname");
@@ -76,7 +76,7 @@ func_56B2() {
     return;
   }
 
-  level.player sethudtutorialmessage( & "EUROPA_DBL_JUMP1");
+  level.player sethudtutorialmessage(&"EUROPA_DBL_JUMP1");
   func_137DC();
   wait(0.5);
   level.player clearhudtutorialmessage();
@@ -94,7 +94,7 @@ func_12B8F() {
   scripts\sp\maps\europa\europa_util::func_EBC7();
   scripts\sp\utility::func_F5AF("drop_landing_start", [level.var_EBBB, level.var_EBBC, level.player]);
   scripts\sp\utility::func_15F5("squad_lands");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "current", & "EUROPA_OBJECTIVE_ACCESS", "entering_seeker_room");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "current", &"EUROPA_OBJECTIVE_ACCESS", "entering_seeker_room");
 }
 
 func_12B8C() {
@@ -173,7 +173,7 @@ func_1146B() {
   scripts\engine\utility::flag_set("takedown_approach");
   scripts\sp\utility::func_15F5("c6_robot_event_color_move");
   level thread scripts\sp\maps\europa\europa_util::func_5F7C(level.var_EBCA);
-  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "current", & "EUROPA_OBJECTIVE_ACCESS", "entering_seeker_room");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "current", &"EUROPA_OBJECTIVE_ACCESS", "entering_seeker_room");
 }
 
 func_1145E() {
@@ -536,7 +536,7 @@ func_A780() {
   scripts\sp\utility::func_F5AF("lab_exterior_start", [level.var_EBBB, level.var_EBBC, level.player]);
   scripts\engine\utility::flag_set_delayed("takedown_vo_complete", 2);
   thread func_A781();
-  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "current", & "EUROPA_OBJECTIVE_ACCESS", "entering_seeker_room");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "current", &"EUROPA_OBJECTIVE_ACCESS", "entering_seeker_room");
 }
 
 func_A77D() {
@@ -1026,7 +1026,7 @@ func_A770() {
   thread func_F156();
   scripts\sp\utility::func_F5AF("breach_room_start", [level.var_EBBB, level.var_EBBC, level.player]);
   scripts\engine\utility::flag_set("scars_in_lab");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "current", & "EUROPA_OBJECTIVE_ACCESS", "entering_seeker_room");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "current", &"EUROPA_OBJECTIVE_ACCESS", "entering_seeker_room");
 }
 
 func_A76D() {
@@ -1214,7 +1214,7 @@ func_F156() {
 
   scripts\engine\utility::flag_wait("entering_seeker_room");
   level.player.dontmelee = 1;
-  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", & "EUROPA_OBJECTIVE_FSPAR", "tram_move");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", &"EUROPA_OBJECTIVE_FSPAR", "tram_move");
   var_04 = getent("seeker_room_vol", "targetname");
   var_05 = var_04 scripts\sp\utility::func_77E3("axis");
   var_06 = scripts\engine\utility::random(var_05).origin;
@@ -1808,8 +1808,8 @@ func_A746() {
   scripts\sp\utility::func_F5AF("lab_airlock_start", [level.var_EBBB, level.var_EBBC, level.player]);
   wait(0.1);
   scripts\sp\utility::func_15F5("enter_airlock_color_move");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", & "EUROPA_OBJECTIVE_ACCESS");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", & "EUROPA_OBJECTIVE_FSPAR", "tram_move");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", &"EUROPA_OBJECTIVE_ACCESS");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", &"EUROPA_OBJECTIVE_FSPAR", "tram_move");
 }
 
 func_A744() {
@@ -2203,8 +2203,8 @@ func_A797() {
   scripts\sp\maps\europa\europa_util::func_EBC7();
   scripts\sp\utility::func_F5AF("lab_walk_start", [level.var_EBBB, level.var_EBBC, level.player]);
   scripts\sp\utility::func_15F5("after_two_kill_color_move");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", & "EUROPA_OBJECTIVE_ACCESS");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", & "EUROPA_OBJECTIVE_FSPAR", "tram_move");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", &"EUROPA_OBJECTIVE_ACCESS");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", &"EUROPA_OBJECTIVE_FSPAR", "tram_move");
   scripts\engine\utility::flag_set("straggler_dead");
 }
 
@@ -2316,8 +2316,8 @@ func_E1C7() {
   scripts\sp\utility::func_F5AF("research_start", [level.var_EBBB, level.var_EBBC, level.player]);
   scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_F415, 1);
   thread func_13DA2();
-  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", & "EUROPA_OBJECTIVE_ACCESS");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", & "EUROPA_OBJECTIVE_FSPAR", "tram_move");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", &"EUROPA_OBJECTIVE_ACCESS");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", &"EUROPA_OBJECTIVE_FSPAR", "tram_move");
 }
 
 func_E1C3() {
@@ -2504,8 +2504,8 @@ func_A788() {
   scripts\engine\utility::delaythread(1, ::scripts\sp\maps\europa\europa_util::func_10690, "office_fight");
   scripts\sp\utility::func_15F5("office_door_color_trig");
   scripts\sp\utility::func_15F5("spawn_back_office_enemies");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", & "EUROPA_OBJECTIVE_ACCESS");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", & "EUROPA_OBJECTIVE_FSPAR", "tram_move");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", &"EUROPA_OBJECTIVE_ACCESS");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", &"EUROPA_OBJECTIVE_FSPAR", "tram_move");
 }
 
 func_A786() {
@@ -2841,8 +2841,8 @@ func_A76C() {
   scripts\engine\utility::flag_set("entering_office_exit");
   scripts\engine\utility::delaythread(1, ::scripts\sp\maps\europa\europa_util::func_10690, "office_fight");
   scripts\sp\utility::func_15F5("engineer_office_color_move");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", & "EUROPA_OBJECTIVE_ACCESS");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", & "EUROPA_OBJECTIVE_FSPAR", "tram_move");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", &"EUROPA_OBJECTIVE_ACCESS");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", &"EUROPA_OBJECTIVE_FSPAR", "tram_move");
 }
 
 func_A767() {

@@ -24,7 +24,7 @@
 #namespace zm_tomb_challenges;
 
 function challenges_init() {
-  level.challenges_add_stats = & tomb_challenges_add_stats;
+  level.challenges_add_stats = &tomb_challenges_add_stats;
 }
 
 function tomb_challenges_add_stats() {
@@ -38,10 +38,10 @@ function tomb_challenges_add_stats() {
     n_points_spent = 500;
     n_boxes_filled = 1;
   }
-  zm_challenges_tomb::add_stat("zc_headshots", 0, & "ZM_TOMB_CH1", n_kills, undefined, & reward_packed_weapon);
-  zm_challenges_tomb::add_stat("zc_zone_captures", 0, & "ZM_TOMB_CH2", n_zone_caps, undefined, & reward_powerup_max_ammo);
-  zm_challenges_tomb::add_stat("zc_points_spent", 0, & "ZM_TOMB_CH3", n_points_spent, undefined, & reward_double_tap, & track_points_spent);
-  zm_challenges_tomb::add_stat("zc_boxes_filled", 1, & "ZM_TOMB_CHT", n_boxes_filled, undefined, & reward_one_inch_punch, & init_box_footprints);
+  zm_challenges_tomb::add_stat("zc_headshots", 0, &"ZM_TOMB_CH1", n_kills, undefined, &reward_packed_weapon);
+  zm_challenges_tomb::add_stat("zc_zone_captures", 0, &"ZM_TOMB_CH2", n_zone_caps, undefined, &reward_powerup_max_ammo);
+  zm_challenges_tomb::add_stat("zc_points_spent", 0, &"ZM_TOMB_CH3", n_points_spent, undefined, &reward_double_tap, &track_points_spent);
+  zm_challenges_tomb::add_stat("zc_boxes_filled", 1, &"ZM_TOMB_CHT", n_boxes_filled, undefined, &reward_one_inch_punch, &init_box_footprints);
 }
 
 function track_points_spent() {
@@ -56,7 +56,7 @@ function init_box_footprints() {
   level flag::init("vo_soul_box_intro_played");
   level flag::init("vo_soul_box_continue_played");
   a_boxes = getEntArray("foot_box", "script_noteworthy");
-  array::thread_all(a_boxes, & box_footprint_think);
+  array::thread_all(a_boxes, &box_footprint_think);
 }
 
 function box_footprint_think() {
@@ -76,9 +76,9 @@ function box_footprint_think() {
     self.n_souls_absorbed++;
     if(self.n_souls_absorbed == 1) {
       self thread scene::play("p7_fxanim_zm_ori_challenge_box_open_bundle", self);
-      self util::delay(1, undefined, & clientfield::set, "foot_print_box_glow", 1);
+      self util::delay(1, undefined, &clientfield::set, "foot_print_box_glow", 1);
       if(isDefined(player) && !level flag::get("vo_soul_box_intro_played")) {
-        player util::delay(1.5, undefined, & zm_tomb_vo::richtofenrespondvoplay, "zm_box_start", 0, "vo_soul_box_intro_played");
+        player util::delay(1.5, undefined, &zm_tomb_vo::richtofenrespondvoplay, "zm_box_start", 0, "vo_soul_box_intro_played");
       }
     }
     if(self.n_souls_absorbed == (floor(n_souls_required / 4))) {
@@ -101,7 +101,7 @@ function box_footprint_think() {
   self scene::stop("p7_fxanim_zm_ori_challenge_box_close_bundle", self);
   e_volume = getent(self.target, "targetname");
   e_volume delete();
-  self util::delay(0.5, undefined, & clientfield::set, "foot_print_box_glow", 0);
+  self util::delay(0.5, undefined, &clientfield::set, "foot_print_box_glow", 0);
   wait(2);
   self stopanimscripted();
   v_start_angles = self.angles;
@@ -319,7 +319,7 @@ function reward_beacon(player, s_stat) {
     return false;
   }
   player zm_weapons::weapon_give(level.w_beacon);
-  if(isDefined(level.zombie_include_weapons[level.w_beacon]) & !level.zombie_include_weapons[level.w_beacon]) {
+  if(isDefined(level.zombie_include_weapons[level.w_beacon]) &!level.zombie_include_weapons[level.w_beacon]) {
     level.zombie_include_weapons[level.w_beacon] = 1;
     level.zombie_weapons[level.w_beacon].is_in_box = 1;
   }

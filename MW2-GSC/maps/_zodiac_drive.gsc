@@ -61,11 +61,11 @@ zodiac_preLoad(playerHandModel) {
   zodiac_anims();
 
   // Hold ^3[{+speed_throw}]^7 to shoot.
-  add_hint_string("zodiac_attack", & "SCRIPT_PLATFORM_SNOWMOBILE_ATTACK", ::should_stop_zodiac_attack_hint);
+  add_hint_string("zodiac_attack", &"SCRIPT_PLATFORM_SNOWMOBILE_ATTACK", ::should_stop_zodiac_attack_hint);
   // Hold ^3[{+attack}]^7 to drive.
-  add_hint_string("zodiac_drive", & "SCRIPT_PLATFORM_SNOWMOBILE_DRIVE", ::should_stop_zodiac_drive_hint);
+  add_hint_string("zodiac_drive", &"SCRIPT_PLATFORM_SNOWMOBILE_DRIVE", ::should_stop_zodiac_drive_hint);
 
-  add_hint_string("zodiac_reverse", & "SCRIPT_PLATFORM_SNOWMOBILE_REVERSE", ::should_stop_zodiac_reverse_hint);
+  add_hint_string("zodiac_reverse", &"SCRIPT_PLATFORM_SNOWMOBILE_REVERSE", ::should_stop_zodiac_reverse_hint);
 }
 
 drive_vehicle() {

@@ -20,15 +20,15 @@
 #namespace zm_challenges_tomb;
 
 function autoexec __init__sytem__() {
-  system::register("zm_challenges_tomb", & __init__, & __main__, undefined);
+  system::register("zm_challenges_tomb", &__init__, &__main__, undefined);
 }
 
 function __init__() {
   level._challenges = spawnStruct();
   level.a_m_challenge_boards = [];
   level.a_uts_challenge_boxes = [];
-  callback::on_connect( & onplayerconnect);
-  callback::on_spawned( & onplayerspawned);
+  callback::on_connect(&onplayerconnect);
+  callback::on_spawned(&onplayerspawned);
   n_bits = getminbitcountfornum(14);
   clientfield::register("toplayer", "challenges.challenge_complete_1", 21000, 2, "int");
   clientfield::register("toplayer", "challenges.challenge_complete_2", 21000, 2, "int");
@@ -40,7 +40,7 @@ function __init__() {
 function __main__() {
   stats_init();
   a_m_challenge_boxes = getEntArray("challenge_box", "targetname");
-  array::thread_all(a_m_challenge_boxes, & box_init);
+  array::thread_all(a_m_challenge_boxes, &box_init);
 }
 
 function onplayerconnect() {
@@ -98,7 +98,7 @@ function stats_init() {
   team_stats_init();
 }
 
-function add_stat(str_name, b_team = 0, str_hint = & "", n_goal = 1, str_reward_model, fp_give_reward, fp_init_stat) {
+function add_stat(str_name, b_team = 0, str_hint = &"", n_goal = 1, str_reward_model, fp_give_reward, fp_init_stat) {
   stat = spawnStruct();
   stat.str_name = str_name;
   stat.b_team = b_team;
@@ -206,7 +206,7 @@ function set_stat(str_stat, n_set) {
 }
 
 function function_fbbc8608(str_hint, var_7ca2c2ae) {
-  self luinotifyevent(&"trial_complete", 3, & "ZM_TOMB_CHALLENGE_COMPLETED", str_hint, var_7ca2c2ae);
+  self luinotifyevent(&"trial_complete", 3, &"ZM_TOMB_CHALLENGE_COMPLETED", str_hint, var_7ca2c2ae);
 }
 
 function check_stat_complete(s_stat) {
@@ -343,9 +343,9 @@ function box_init() {
   s_unitrigger_stub.script_width = 64;
   s_unitrigger_stub.script_height = 64;
   s_unitrigger_stub.cursor_hint = "HINT_NOICON";
-  s_unitrigger_stub.hint_string = & "";
+  s_unitrigger_stub.hint_string = &"";
   s_unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
-  s_unitrigger_stub.prompt_and_visibility_func = & box_prompt_and_visiblity;
+  s_unitrigger_stub.prompt_and_visibility_func = &box_prompt_and_visiblity;
   s_unitrigger_stub flag::init("waiting_for_grab");
   s_unitrigger_stub flag::init("reward_timeout");
   s_unitrigger_stub.b_busy = 0;
@@ -365,7 +365,7 @@ function box_init() {
     level.a_uts_challenge_boxes = array(level.a_uts_challenge_boxes);
   }
   level.a_uts_challenge_boxes[level.a_uts_challenge_boxes.size] = s_unitrigger_stub;
-  zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, & box_think);
+  zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, &box_think);
 }
 
 function box_prompt_and_visiblity(player) {
@@ -377,8 +377,8 @@ function box_prompt_and_visiblity(player) {
 }
 
 function update_box_prompt(player) {
-  str_hint = & "";
-  str_old_hint = & "";
+  str_hint = &"";
+  str_old_hint = &"";
   m_board = self.stub.m_board;
   self sethintstring(str_hint);
   s_hint_tag = undefined;
@@ -386,12 +386,12 @@ function update_box_prompt(player) {
   self.b_can_open = 0;
   if(self.stub.b_busy) {
     if(self.stub flag::get("waiting_for_grab") && (!isDefined(self.stub.player_using) || self.stub.player_using == player)) {
-      str_hint = & "ZM_TOMB_CH_G";
+      str_hint = &"ZM_TOMB_CH_G";
     } else {
-      str_hint = & "";
+      str_hint = &"";
     }
   } else {
-    str_hint = & "";
+    str_hint = &"";
     player.s_lookat_stat = undefined;
     n_closest_dot = 0.996;
     v_eye_origin = player getplayercamerapos();
@@ -412,7 +412,7 @@ function update_box_prompt(player) {
         if(s_tag.n_character_index == player.characterindex || s_tag.n_character_index == 4) {
           player.s_lookat_stat = s_tag.s_stat;
           if(stat_reward_available(s_tag.s_stat, player)) {
-            str_hint = & "ZM_TOMB_CH_S";
+            str_hint = &"ZM_TOMB_CH_S";
             b_showing_stat = 0;
             self.b_can_open = 1;
           }
@@ -423,10 +423,10 @@ function update_box_prompt(player) {
       s_player = level._challenges.a_players[player.characterindex];
       s_team = level._challenges.s_team;
       if(s_player.n_medals_held > 0 || player player_has_unclaimed_team_reward()) {
-        str_hint = & "ZM_TOMB_CH_O";
+        str_hint = &"ZM_TOMB_CH_O";
         self.b_can_open = 1;
       } else {
-        str_hint = & "ZM_TOMB_CH_V";
+        str_hint = &"ZM_TOMB_CH_V";
       }
     }
   }
@@ -470,7 +470,7 @@ function box_think() {
       continue;
     }
     if(self.b_can_open) {
-      self.stub.hint_string = & "";
+      self.stub.hint_string = &"";
       self sethintstring(self.stub.hint_string);
       level thread open_box(player, self.stub);
     }
@@ -510,7 +510,7 @@ function open_box(player, ut_stub, fp_reward_override, param1) {
     s_select_stat = player.s_lookat_stat;
   }
   m_box thread scene::play("p7_fxanim_zm_ori_challenge_box_open_bundle", m_box);
-  m_box util::delay(0.75, undefined, & clientfield::set, "foot_print_box_glow", 1);
+  m_box util::delay(0.75, undefined, &clientfield::set, "foot_print_box_glow", 1);
   wait(0.5);
   if(isDefined(fp_reward_override)) {
     ut_stub[[fp_reward_override]](player, param1);
@@ -519,7 +519,7 @@ function open_box(player, ut_stub, fp_reward_override, param1) {
   }
   wait(1);
   m_box thread scene::play("p7_fxanim_zm_ori_challenge_box_close_bundle", m_box);
-  m_box util::delay(0.75, undefined, & clientfield::set, "foot_print_box_glow", 0);
+  m_box util::delay(0.75, undefined, &clientfield::set, "foot_print_box_glow", 0);
   wait(2);
   ut_stub.b_busy = 0;
   ut_stub.player_using = undefined;

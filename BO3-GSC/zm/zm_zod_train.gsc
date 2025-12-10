@@ -262,7 +262,7 @@ class czmtrain {
     ai endon("death");
     ai endon("released_from_train");
     zm_net::network_safe_init("train_fall_check", 1);
-    while(self zm_net::network_choke_action("train_fall_check", & is_touching_train, ai)) {
+    while(self zm_net::network_choke_action("train_fall_check", &is_touching_train, ai)) {
       wait(2);
     }
     remove_zombie_locked_in(ai);
@@ -1268,7 +1268,7 @@ class czmtrain {
 #namespace zm_train;
 
 function autoexec __init__sytem__() {
-  system::register("zm_train", & __init__, undefined, undefined);
+  system::register("zm_train", &__init__, undefined, undefined);
 }
 
 function onplayerconnect() {
@@ -1276,16 +1276,16 @@ function onplayerconnect() {
 }
 
 function __init__() {
-  callback::on_connect( & onplayerconnect);
-  callback::on_spawned( & player_on_spawned);
-  zm_zod_util::on_zombie_killed( & remove_dead_zombie);
-  zm_zod_util::add_zod_zombie_spawn_func( & zombie_init);
+  callback::on_connect(&onplayerconnect);
+  callback::on_spawned(&player_on_spawned);
+  zm_zod_util::on_zombie_killed(&remove_dead_zombie);
+  zm_zod_util::add_zod_zombie_spawn_func(&zombie_init);
   clientfield::register("vehicle", "train_switch_light", 1, 2, "int");
   clientfield::register("scriptmover", "train_callbox_light", 1, 2, "int");
   clientfield::register("scriptmover", "train_map_light", 1, 2, "int");
   clientfield::register("vehicle", "train_rain_fx_occluder", 1, 1, "int");
   clientfield::register("world", "sndTrainVox", 1, 4, "int");
-  level.player_intemission_spawn_callback = & player_intemission_spawn_callback;
+  level.player_intemission_spawn_callback = &player_intemission_spawn_callback;
   thread initialize_train();
   thread function_eb0db7bc();
   thread train_devgui();
@@ -1407,19 +1407,19 @@ function function_2e9b7fc1(player, weapon = self.weapon) {
     cost = zm_weapons::get_weapon_cost(weapon);
     if(isDefined(level.weapon_cost_client_filled) && level.weapon_cost_client_filled) {
       if(player bgb::is_enabled("zm_bgb_secret_shopper") && !zm_weapons::is_wonder_weapon(player.currentweapon)) {
-        hint_string = & "ZOMBIE_WEAPONCOSTONLY_CFILL_BGB_SECRET_SHOPPER";
+        hint_string = &"ZOMBIE_WEAPONCOSTONLY_CFILL_BGB_SECRET_SHOPPER";
         self sethintstringforplayer(player, hint_string);
       } else {
-        hint_string = & "ZOMBIE_WEAPONCOSTONLY_CFILL";
+        hint_string = &"ZOMBIE_WEAPONCOSTONLY_CFILL";
         self sethintstringforplayer(player, hint_string);
       }
     } else {
       if(player bgb::is_enabled("zm_bgb_secret_shopper") && !zm_weapons::is_wonder_weapon(player.currentweapon)) {
-        hint_string = & "ZOMBIE_WEAPONCOSTONLYFILL_BGB_SECRET_SHOPPER";
+        hint_string = &"ZOMBIE_WEAPONCOSTONLYFILL_BGB_SECRET_SHOPPER";
         n_bgb_cost = player zm_weapons::get_ammo_cost_for_weapon(player.currentweapon);
         self sethintstringforplayer(player, hint_string, cost, n_bgb_cost);
       } else {
-        hint_string = & "ZOMBIE_WEAPONCOSTONLYFILL";
+        hint_string = &"ZOMBIE_WEAPONCOSTONLYFILL";
         self sethintstringforplayer(player, hint_string, cost);
       }
     }
@@ -1435,19 +1435,19 @@ function function_2e9b7fc1(player, weapon = self.weapon) {
     }
     if(isDefined(level.weapon_cost_client_filled) && level.weapon_cost_client_filled) {
       if(player bgb::is_enabled("zm_bgb_secret_shopper") && !zm_weapons::is_wonder_weapon(player.currentweapon)) {
-        hint_string = & "ZOMBIE_WEAPONAMMOONLY_CFILL_BGB_SECRET_SHOPPER";
+        hint_string = &"ZOMBIE_WEAPONAMMOONLY_CFILL_BGB_SECRET_SHOPPER";
         self sethintstringforplayer(player, hint_string);
       } else {
-        hint_string = & "ZOMBIE_WEAPONAMMOONLY_CFILL";
+        hint_string = &"ZOMBIE_WEAPONAMMOONLY_CFILL";
         self sethintstringforplayer(player, hint_string);
       }
     } else {
       if(player bgb::is_enabled("zm_bgb_secret_shopper") && !zm_weapons::is_wonder_weapon(player.currentweapon)) {
-        hint_string = & "ZOMBIE_WEAPONAMMOONLY_BGB_SECRET_SHOPPER";
+        hint_string = &"ZOMBIE_WEAPONAMMOONLY_BGB_SECRET_SHOPPER";
         n_bgb_cost = player zm_weapons::get_ammo_cost_for_weapon(player.currentweapon);
         self sethintstringforplayer(player, hint_string, ammo_cost, n_bgb_cost);
       } else {
-        hint_string = & "ZOMBIE_WEAPONAMMOONLY";
+        hint_string = &"ZOMBIE_WEAPONAMMOONLY";
         self sethintstringforplayer(player, hint_string, ammo_cost);
       }
     }

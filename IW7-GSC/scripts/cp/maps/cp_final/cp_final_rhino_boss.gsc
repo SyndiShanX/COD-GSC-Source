@@ -2332,7 +2332,7 @@ restorelnfinteractions() {
 }
 
 empconsolehint(param_00, param_01) {
-  return & "CP_FINAL_ACTIVATE_RITUAL_CIRCLE";
+  return &"CP_FINAL_ACTIVATE_RITUAL_CIRCLE";
 }
 
 empconsoleuse(param_00, param_01) {

@@ -1901,13 +1901,13 @@ headhintfunc(param_00, param_01) {
     }
   }
 
-  return & "CP_FINAL_PICKUP_ITEM";
+  return &"CP_FINAL_PICKUP_ITEM";
 }
 
 puzzlepiecehintfunc(param_00, param_01) {
   if(!isDefined(param_01.haspuzzlepiece) || isDefined(param_01.haspuzzlepiece) && param_01.haspuzzlepiece != param_00.state) {
     if(isDefined(level.phantomdisk) && param_00.state == level.phantomdisk) {
-      return & "CP_FINAL_PICKUP_ITEM";
+      return &"CP_FINAL_PICKUP_ITEM";
     }
 
     return "";
@@ -2014,7 +2014,7 @@ headusefunc(param_00, param_01) {
 fusepuzzlehintfunc(param_00, param_01) {
   if(isDefined(param_01.haspuzzlepiece)) {
     param_01.interaction_trigger sethintstringparams(int(param_00.name));
-    return & "CP_FINAL_INSERT_DISK";
+    return &"CP_FINAL_INSERT_DISK";
   }
 
   param_01 thread scripts\cp\cp_vo::try_to_play_vo("missing_item_misc", "zmb_comment_vo");
@@ -2759,15 +2759,15 @@ constructbridgehint(param_00, param_01) {
   }
 
   if(level.bridgepiecesfound.size >= 3) {
-    return & "CP_FINAL_INTERACTIONS_FINISH_BRIDGE";
+    return &"CP_FINAL_INTERACTIONS_FINISH_BRIDGE";
   }
 
   if(level.bridgepiecesfound.size > level.bridgepiecesplaced) {
-    return & "CP_FINAL_INTERACTIONS_ADD_BRIDGE_PIECE";
+    return &"CP_FINAL_INTERACTIONS_ADD_BRIDGE_PIECE";
   }
 
   param_01 thread scripts\cp\cp_vo::try_to_play_vo("missing_item_misc", "zmb_comment_vo");
-  return & "CP_FINAL_INTERACTIONS_NEED_PIECES";
+  return &"CP_FINAL_INTERACTIONS_NEED_PIECES";
 }
 
 bridgeconstructionfeedback(param_00, param_01) {

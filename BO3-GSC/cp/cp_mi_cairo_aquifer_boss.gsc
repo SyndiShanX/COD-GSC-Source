@@ -363,7 +363,7 @@ function end_battle() {
   level flag::set("boss_finale_ready");
   trig = getent("boss_finale_trigger", "targetname");
   trig triggerenable(1);
-  trig.var_611ccff1 = util::init_interactive_gameobject(trig, & "cp_level_aquifer_capture_door", & "CP_MI_CAIRO_AQUIFER_BREACH", & function_479374a3);
+  trig.var_611ccff1 = util::init_interactive_gameobject(trig, &"cp_level_aquifer_capture_door", &"CP_MI_CAIRO_AQUIFER_BREACH", &function_479374a3);
   trig.var_611ccff1 gameobjects::set_use_time(0.35);
   level waittill("start_finale");
   trig.var_611ccff1 gameobjects::disable_object();
@@ -381,7 +381,7 @@ function function_479374a3() {
   if(isDefined(level.bzm_forceaicleanup)) {
     [[level.bzm_forceaicleanup]]();
   }
-  array::thread_all(guys, & aquifer_util::delete_me);
+  array::thread_all(guys, &aquifer_util::delete_me);
   struct = getent("hyperion_death_origin", "targetname");
   if(isDefined(level.bzm_aquiferdialogue6callback)) {
     level thread[[level.bzm_aquiferdialogue6callback]]();
@@ -400,14 +400,14 @@ function function_479374a3() {
   }
   a_ents[a_ents.size] = self.trigger.who;
   a_ents["hyperion"] = level.sniper_boss;
-  scene::add_scene_func("cin_aqu_07_01_maretti_1st_dropit", & function_f3ee81ce, "skip_started");
+  scene::add_scene_func("cin_aqu_07_01_maretti_1st_dropit", &function_f3ee81ce, "skip_started");
   struct scene::play("cin_aqu_07_01_maretti_1st_dropit", a_ents);
   aquifer_util::toggle_door("boss_death_models", 1);
   thread function_2a39915e();
   level util::clientnotify("start_boss_tree");
   exploder::exploder("lgt_tree_glow_01");
   if(!level flag::get("sniper_boss_skipped")) {
-    array::thread_all(level.activeplayers, & aquifer_util::function_89eaa1b3, 0.5);
+    array::thread_all(level.activeplayers, &aquifer_util::function_89eaa1b3, 0.5);
   }
   if(isDefined(level.bzm_forceaicleanup)) {
     [[level.bzm_forceaicleanup]]();
@@ -444,7 +444,7 @@ function function_f3ee81ce(a_ents) {
 function function_2a39915e() {
   level waittill("hash_6f76bd0d");
   if(!level flag::get("sniper_boss_skipped")) {
-    array::thread_all(level.activeplayers, & aquifer_util::function_89eaa1b3, 1);
+    array::thread_all(level.activeplayers, &aquifer_util::function_89eaa1b3, 1);
   }
 }
 
@@ -558,13 +558,13 @@ function function_6800ac1d() {
   trig triggerenable(1);
   trig2 triggerenable(0);
   aquifer_obj::objectives_set("cp_level_aquifer_boss");
-  trig.var_611ccff1 = trig hacking::init_hack_trigger(5, & "cp_level_aquifer_boss_gen1", & "CP_MI_CAIRO_AQUIFER_HOLD_OVERLOAD", & function_e9c4785f);
+  trig.var_611ccff1 = trig hacking::init_hack_trigger(5, &"cp_level_aquifer_boss_gen1", &"CP_MI_CAIRO_AQUIFER_HOLD_OVERLOAD", &function_e9c4785f);
   thread function_a354fb63(1);
   level.var_fc9a3509 = 1;
   level waittill("hash_e9c4785f");
   thread savegame::checkpoint_save();
   trig.var_611ccff1 gameobjects::disable_object();
-  trig2.var_611ccff1 = trig2 hacking::init_hack_trigger(5, & "cp_level_aquifer_boss_gen2", & "CP_MI_CAIRO_AQUIFER_HOLD_OVERLOAD", & function_e9c4785f);
+  trig2.var_611ccff1 = trig2 hacking::init_hack_trigger(5, &"cp_level_aquifer_boss_gen2", &"CP_MI_CAIRO_AQUIFER_HOLD_OVERLOAD", &function_e9c4785f);
   thread function_a354fb63(2);
   scene::init("cin_aqu_07_01_maretti_1st_dropit");
   level waittill("hash_e9c4785f");
@@ -594,9 +594,9 @@ function function_dae6fcbf(name) {
     wait(delay);
     flickers = randomint(5) + 2;
     for(i = 0; i < flickers; i++) {
-      array::run_all(panels, & hide);
+      array::run_all(panels, &hide);
       wait(randomfloatrange(0.05, 0.2));
-      array::run_all(panels, & show);
+      array::run_all(panels, &show);
       wait(randomfloatrange(0.05, 0.2));
     }
     delay = delay / 2;
@@ -628,7 +628,7 @@ function function_a354fb63(num) {
         case 1: {
           exploder::exploder("lighting_sniper_boss_off_set01");
           panels = getEntArray("reactor_lights_01", "targetname");
-          array::run_all(panels, & hide);
+          array::run_all(panels, &hide);
           wait(1);
           function_339776e2("bossbarrel_right01");
           wait(1.5);
@@ -641,7 +641,7 @@ function function_a354fb63(num) {
           clientfield::set("toggle_fog_banks", 1);
           clientfield::set("toggle_pbg_banks", 1);
           panels = getEntArray("reactor_lights_02", "targetname");
-          array::run_all(panels, & hide);
+          array::run_all(panels, &hide);
           wait(1.5);
           function_339776e2("bossbarrel_left03");
           wait(1);

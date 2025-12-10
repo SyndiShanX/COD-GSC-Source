@@ -887,8 +887,8 @@ function_f29e63ea(node) {
     return undefined;
   }
 
-  var_208965cf = node.spawnflags&262144;
-  var_a26a51ba = node.spawnflags&524288;
+  var_208965cf = node.spawnflags& 262144;
+  var_a26a51ba = node.spawnflags& 524288;
 
   if(!var_208965cf && !var_a26a51ba) {
     return undefined;

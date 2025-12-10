@@ -88,10 +88,10 @@ main() {
       level.acolornodetriggers = common_scripts\utility::array_add(level.acolornodetriggers, var_0[var_1]);
   }
 
-  maps\_utility::add_start("container", ::start_container, & "STARTS_CONTAINER");
-  maps\_utility::add_start("tarmac", ::start_tarmac, & "STARTS_TARMAC");
-  maps\_utility::add_start("gate", ::start_gate, & "STARTS_GATE");
-  maps\_utility::add_start("vents", ::start_vents, & "STARTS_VENTS");
+  maps\_utility::add_start("container", ::start_container, &"STARTS_CONTAINER");
+  maps\_utility::add_start("tarmac", ::start_tarmac, &"STARTS_TARMAC");
+  maps\_utility::add_start("gate", ::start_gate, &"STARTS_GATE");
+  maps\_utility::add_start("vents", ::start_vents, &"STARTS_VENTS");
   maps\_utility::default_start(::start_default);
   level.weaponclipmodels = [];
   level.weaponclipmodels[0] = "weapon_m16_clip";
@@ -2368,7 +2368,7 @@ lid_kill(var_0, var_1) {
 
     if(level.player istouching(self.trigger)) {
       level notify("new_quote_string");
-      setdvar("ui_deadquote", & "LAUNCHFACILITY_A_DEADQUOTE_KILLED_BY_LID");
+      setdvar("ui_deadquote", &"LAUNCHFACILITY_A_DEADQUOTE_KILLED_BY_LID");
       level.player kill();
     }
   }
@@ -2448,7 +2448,7 @@ obj_gain_access() {
   common_scripts\utility::flag_wait("obj_gain_access_given");
   var_0 = 1;
   var_1 = getent("obj_gain_access", "targetname");
-  objective_add(var_0, "active", & "LAUNCHFACILITY_A_OBJ_GAIN_ACCESS", var_1.origin);
+  objective_add(var_0, "active", &"LAUNCHFACILITY_A_OBJ_GAIN_ACCESS", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("obj_gain_access_complete");
   objective_state(var_0, "done");
@@ -2456,9 +2456,9 @@ obj_gain_access() {
 
 obj_enemy_armor() {
   common_scripts\utility::flag_wait("obj_enemy_armor_given");
-  objective_add(10, "invisible", & "LAUNCHFACILITY_A_OBJ_ENEMY_ARMOR");
+  objective_add(10, "invisible", &"LAUNCHFACILITY_A_OBJ_ENEMY_ARMOR");
   objective_state(10, "active");
-  objective_string(10, & "LAUNCHFACILITY_A_OBJ_ENEMY_ARMOR", level.enemyarmor.size);
+  objective_string(10, &"LAUNCHFACILITY_A_OBJ_ENEMY_ARMOR", level.enemyarmor.size);
   objective_current(10);
   common_scripts\utility::flag_wait("obj_enemy_armor_complete");
   objective_state(10, "done");
@@ -2468,12 +2468,12 @@ obj_enemy_armor_vehicle_think() {
   level.enemyarmorindex++;
   var_0 = level.enemyarmorindex;
   level.enemyarmor = common_scripts\utility::array_add(level.enemyarmor, self);
-  objective_string(10, & "LAUNCHFACILITY_A_OBJ_ENEMY_ARMOR", level.enemyarmor.size);
+  objective_string(10, &"LAUNCHFACILITY_A_OBJ_ENEMY_ARMOR", level.enemyarmor.size);
   objective_additionalposition(10, var_0, self.origin);
 
   if(level.enemyarmorindex == 2) {
     wait 1;
-    objective_string(10, & "LAUNCHFACILITY_A_OBJ_ENEMY_ARMOR", level.enemyarmor.size);
+    objective_string(10, &"LAUNCHFACILITY_A_OBJ_ENEMY_ARMOR", level.enemyarmor.size);
   }
 
   thread obj_enemy_armor_vehicle_death(var_0);
@@ -2492,7 +2492,7 @@ obj_enemy_armor_vehicle_death(var_0) {
     common_scripts\utility::flag_clear("aa_tarmac_bmp02_section");
   }
 
-  objective_string(10, & "LAUNCHFACILITY_A_OBJ_ENEMY_ARMOR", level.enemyarmor.size);
+  objective_string(10, &"LAUNCHFACILITY_A_OBJ_ENEMY_ARMOR", level.enemyarmor.size);
 }
 
 obj_enemy_armor_vehicle_position(var_0) {
@@ -2503,7 +2503,7 @@ obj_north_tarmac() {
   common_scripts\utility::flag_wait("obj_north_tarmac_given");
   var_0 = 11;
   var_1 = getent("obj_north_tarmac", "targetname");
-  objective_add(var_0, "active", & "LAUNCHFACILITY_A_OBJ_NORTH_TARMAC", var_1.origin);
+  objective_add(var_0, "active", &"LAUNCHFACILITY_A_OBJ_NORTH_TARMAC", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("obj_north_tarmac_complete");
   objective_state(var_0, "done");
@@ -2513,7 +2513,7 @@ obj_rappel() {
   common_scripts\utility::flag_wait("obj_rappel_given");
   var_0 = 12;
   var_1 = getent("obj_rappel", "targetname");
-  objective_add(var_0, "active", & "LAUNCHFACILITY_A_OBJ_RAPPEL", var_1.origin);
+  objective_add(var_0, "active", &"LAUNCHFACILITY_A_OBJ_RAPPEL", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("obj_rappel_complete");
   objective_state(var_0, "done");
@@ -2579,7 +2579,7 @@ vehicle_bmp_death_wait() {
 }
 
 vehicle_bmp_think(var_0) {
-  maps\_utility::add_hint_string("armor_damage", & "SCRIPT_ARMOR_DAMAGE", undefined, 1);
+  maps\_utility::add_hint_string("armor_damage", &"SCRIPT_ARMOR_DAMAGE", undefined, 1);
   var_1 = maps\_vehicle::waittill_vehiclespawn(var_0);
   target_set(var_1, (0, 0, 0));
   target_setjavelinonly(var_1, 1);

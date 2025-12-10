@@ -4,14 +4,14 @@
 *****************************************************/
 
 section_main() {
-  maps\_utility::add_hint_string("swept_hint", & "FLOOD_SWEPT_MOVE", ::no_swept_hint);
-  maps\_utility::add_hint_string("swept_hint_no_glyph", & "FLOOD_SWEPT_MOVE_NO_GLYPH", ::no_swept_hint);
-  maps\_utility::add_hint_string("control_slide", & "FLOOD_SLIDE_HINT", ::no_swept_hint);
-  maps\_utility::add_hint_string("control_slide_l", & "FLOOD_SLIDE_HINT_L", ::no_swept_hint);
-  maps\_utility::add_hint_string("control_slide_gamepad", & "FLOOD_SLIDE_HINT_GAMEPAD", ::no_swept_hint);
-  maps\_utility::add_hint_string("control_slide_gamepad_no_glyph", & "FLOOD_SLIDE_HINT_GAMEPAD_NO_GLYPH", ::no_swept_hint);
-  maps\_utility::add_hint_string("control_slide_gamepad_l", & "FLOOD_SLIDE_HINT_GAMEPAD_L", ::no_swept_hint);
-  maps\_utility::add_hint_string("control_slide_gamepad_l_no_glyph", & "FLOOD_SLIDE_HINT_GAMEPAD_L_NO_GLYPH", ::no_swept_hint);
+  maps\_utility::add_hint_string("swept_hint", &"FLOOD_SWEPT_MOVE", ::no_swept_hint);
+  maps\_utility::add_hint_string("swept_hint_no_glyph", &"FLOOD_SWEPT_MOVE_NO_GLYPH", ::no_swept_hint);
+  maps\_utility::add_hint_string("control_slide", &"FLOOD_SLIDE_HINT", ::no_swept_hint);
+  maps\_utility::add_hint_string("control_slide_l", &"FLOOD_SLIDE_HINT_L", ::no_swept_hint);
+  maps\_utility::add_hint_string("control_slide_gamepad", &"FLOOD_SLIDE_HINT_GAMEPAD", ::no_swept_hint);
+  maps\_utility::add_hint_string("control_slide_gamepad_no_glyph", &"FLOOD_SLIDE_HINT_GAMEPAD_NO_GLYPH", ::no_swept_hint);
+  maps\_utility::add_hint_string("control_slide_gamepad_l", &"FLOOD_SLIDE_HINT_GAMEPAD_L", ::no_swept_hint);
+  maps\_utility::add_hint_string("control_slide_gamepad_l_no_glyph", &"FLOOD_SLIDE_HINT_GAMEPAD_L_NO_GLYPH", ::no_swept_hint);
 }
 
 section_precache() {

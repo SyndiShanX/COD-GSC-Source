@@ -9,7 +9,7 @@
 #namespace namespace_c30ca5c1;
 
 autoexec __init__system__() {
-  system::register(#"hash_5e3c6106d1627261", & __init__, undefined, # "character_unlock");
+  system::register(#"hash_5e3c6106d1627261", &__init__, undefined, # "character_unlock");
 }
 
 __init__() {

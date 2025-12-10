@@ -26,11 +26,11 @@
 #namespace zm_castle_flingers;
 
 function function_976c9217() {
-  zm::register_player_damage_callback( & function_4b3d145d);
+  zm::register_player_damage_callback(&function_4b3d145d);
   var_fa27add4 = struct::get_array("115_flinger_pad_aimer", "targetname");
-  array::thread_all(var_fa27add4, & function_5ecbd7cb);
+  array::thread_all(var_fa27add4, &function_5ecbd7cb);
   var_a6e47643 = struct::get_array("115_flinger_landing_pad", "targetname");
-  array::thread_all(var_a6e47643, & function_cc8f94df);
+  array::thread_all(var_a6e47643, &function_cc8f94df);
   level thread function_979004a();
   register_clientfields();
   level._effect["flinger_land_kill"] = "zombie/fx_bgb_anywhere_but_here_teleport_aoe_kill_zmb";
@@ -57,8 +57,8 @@ function function_5ecbd7cb() {
   s_unitrigger_stub.cursor_hint = "HINT_NOICON";
   s_unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger_stub, 1);
-  s_unitrigger_stub.prompt_and_visibility_func = & function_485001bf;
-  zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, & function_4029cf56);
+  s_unitrigger_stub.prompt_and_visibility_func = &function_485001bf;
+  zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, &function_4029cf56);
   var_81b99a73 = self.script_noteworthy;
   s_unitrigger_stub thread function_52d18d43(var_81b99a73, 500);
   var_3432399a = var_845e036a.target + "_spline";
@@ -89,13 +89,13 @@ function function_5ecbd7cb() {
       a_ai_zombies = zombie_utility::get_zombie_array();
       a_ai_zombies = function_3dcd0982(a_ai_zombies, vol_fling);
       if(a_ai_zombies.size) {
-        array::thread_all(a_ai_zombies, & function_e9d3c391, vol_fling, v_fling, nd_start);
+        array::thread_all(a_ai_zombies, &function_e9d3c391, vol_fling, v_fling, nd_start);
       } else {
         var_7092e170 = function_3dcd0982(level.activeplayers, vol_fling);
         if(var_7092e170.size > 1) {
           var_7092e170 thread function_f7842163(vol_fling, v_fling, nd_start, var_845e036a, var_df826fd8);
         } else {
-          array::thread_all(var_7092e170, & function_e9d3c391, vol_fling, v_fling, nd_start, var_845e036a, var_df826fd8);
+          array::thread_all(var_7092e170, &function_e9d3c391, vol_fling, v_fling, nd_start, var_845e036a, var_df826fd8);
         }
       }
       n_timer = n_timer + 0.1;
@@ -104,7 +104,7 @@ function function_5ecbd7cb() {
     var_845e036a thread function_5205dda3(var_df826fd8);
     wait(15);
     s_unitrigger_stub notify("hash_7edb4c9b");
-    zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, & function_4029cf56);
+    zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, &function_4029cf56);
     var_df826fd8 setModel("p7_zm_ctl_jumpsphere_landing_pad_snow_blue");
     var_df826fd8 playSound("zmb_fling_activate");
   }
@@ -144,7 +144,7 @@ function function_e2ae5aa6(str_message, param1) {
   self.hint_string = str_message;
   self.hint_parm1 = param1;
   zm_unitrigger::unregister_unitrigger(self);
-  zm_unitrigger::register_static_unitrigger(self, & unitrigger_think);
+  zm_unitrigger::register_static_unitrigger(self, &unitrigger_think);
 }
 
 function unitrigger_think() {
@@ -160,8 +160,8 @@ function unitrigger_refresh_message() {
   self zm_unitrigger::run_visibility_function_for_all_triggers();
 }
 
-function function_3dcd0982( & array, var_8d88ae81) {
-  return array::filter(array, 0, & function_a78c631a, var_8d88ae81);
+function function_3dcd0982(&array, var_8d88ae81) {
+  return array::filter(array, 0, &function_a78c631a, var_8d88ae81);
 }
 
 function function_a78c631a(val, var_8d88ae81) {
@@ -488,7 +488,7 @@ function function_53f4df() {
 function function_44659337(nd_target, var_ca34f349, v_fling) {
   a_ai = getaiteamarray(level.zombie_team);
   a_sorted_ai = arraysortclosest(a_ai, nd_target.origin, a_ai.size, 0, 512);
-  array::thread_all(a_sorted_ai, & function_1a4837ab, nd_target, self, var_ca34f349, v_fling);
+  array::thread_all(a_sorted_ai, &function_1a4837ab, nd_target, self, var_ca34f349, v_fling);
 }
 
 function function_1a4837ab(nd_target, e_target, var_ca34f349, v_fling) {
@@ -573,7 +573,7 @@ function function_4b3d145d(einflictor, eattacker, idamage, idflags, smeansofdeat
 }
 
 function function_485001bf() {
-  str_msg = & "";
+  str_msg = &"";
   str_msg = self.stub.hint_string;
   param1 = self.stub.hint_parm1;
   if(level flag::get("rocket_firing") && self.stub.in_zone === "zone_rooftop") {
@@ -618,8 +618,8 @@ function function_cc8f94df() {
   s_unitrigger_stub.cursor_hint = "HINT_NOICON";
   s_unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
   s_unitrigger_stub.flag_name = var_9ca35935;
-  s_unitrigger_stub.prompt_and_visibility_func = & function_485001bf;
-  zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, & function_4029cf56);
+  s_unitrigger_stub.prompt_and_visibility_func = &function_485001bf;
+  zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, &function_4029cf56);
   s_unitrigger_stub function_e2ae5aa6(&"ZM_CASTLE_ENABLE_LANDING_PAD");
   s_unitrigger_stub waittill("trigger", e_who);
   var_1143aa58 playSound("evt_launchpad_on");

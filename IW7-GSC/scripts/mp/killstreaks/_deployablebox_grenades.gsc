@@ -8,8 +8,8 @@ init() {
   var_00 = spawnStruct();
   var_00.var_39B = "deployable_vest_marker_mp";
   var_00.modelbase = "afr_mortar_ammo_01";
-  var_00.pow = & "KILLSTREAKS_HINTS_DEPLOYABLE_GRENADES_PICKUP";
-  var_00.var_3A41 = & "KILLSTREAKS_DEPLOYABLE_GRENADES_TAKING";
+  var_00.pow = &"KILLSTREAKS_HINTS_DEPLOYABLE_GRENADES_PICKUP";
+  var_00.var_3A41 = &"KILLSTREAKS_DEPLOYABLE_GRENADES_TAKING";
   var_00.var_67E5 = "deployable_grenades_taken";
   var_00.streakname = "deployable_grenades";
   var_00.var_10A38 = "used_deployable_grenades";

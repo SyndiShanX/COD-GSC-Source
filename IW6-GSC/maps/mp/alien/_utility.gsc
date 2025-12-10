@@ -1894,7 +1894,7 @@ wait_for_player_to_dismount_turret() {
   self endon("death");
   self endon("disconnect");
 
-  self setLowerMessage("disengage_turret", & "ALIEN_COLLECTIBLES_DISENGAGE_TURRET", 0);
+  self setLowerMessage("disengage_turret", &"ALIEN_COLLECTIBLES_DISENGAGE_TURRET", 0);
   while(self IsUsingTurret())
     wait .5;
 

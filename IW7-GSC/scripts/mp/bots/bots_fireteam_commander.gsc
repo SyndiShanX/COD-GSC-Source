@@ -319,7 +319,7 @@ commander_hint() {
 
   self.commanderhintelem = scripts\mp\hud_util::createfontstring("default", 3);
   self.commanderhintelem.color = (1, 1, 1);
-  self.commanderhintelem settext( & "MPUI_COMMANDER_HINT");
+  self.commanderhintelem settext(&"MPUI_COMMANDER_HINT");
   self.commanderhintelem.x = 0;
   self.commanderhintelem.y = 20;
   self.commanderhintelem.alignx = "center";

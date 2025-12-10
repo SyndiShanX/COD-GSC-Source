@@ -148,11 +148,11 @@ class cstair {
     m_a_e_clip = getEntArray("stair_clip", "targetname");
     var_f2f66550 = struct::get_array("stair_staircase", "targetname");
     var_39624e3b = struct::get_array("stair_gate", "targetname");
-    m_a_e_steps = array::filter(m_a_e_steps, 0, & filter_areaname, str_areaname);
-    m_a_e_blockers = array::filter(m_a_e_blockers, 0, & filter_areaname, str_areaname);
-    m_a_e_clip = array::filter(m_a_e_clip, 0, & filter_areaname, str_areaname);
-    var_f2f66550 = array::filter(var_f2f66550, 0, & filter_areaname, str_areaname);
-    var_39624e3b = array::filter(var_39624e3b, 0, & filter_areaname, str_areaname);
+    m_a_e_steps = array::filter(m_a_e_steps, 0, &filter_areaname, str_areaname);
+    m_a_e_blockers = array::filter(m_a_e_blockers, 0, &filter_areaname, str_areaname);
+    m_a_e_clip = array::filter(m_a_e_clip, 0, &filter_areaname, str_areaname);
+    var_f2f66550 = array::filter(var_f2f66550, 0, &filter_areaname, str_areaname);
+    var_39624e3b = array::filter(var_39624e3b, 0, &filter_areaname, str_areaname);
     m_n_power_index = n_power_index;
     m_b_discovered = 0;
   }
@@ -162,7 +162,7 @@ class cstair {
 #namespace zm_zod_stairs;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_stairs", undefined, & __main__, undefined);
+  system::register("zm_zod_stairs", undefined, &__main__, undefined);
 }
 
 function __main__() {

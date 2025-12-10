@@ -29,12 +29,12 @@
 #namespace zm_castle_vo;
 
 function autoexec __init__sytem__() {
-  system::register("zm_castle_vo", & __init__, undefined, undefined);
+  system::register("zm_castle_vo", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
   level.a_e_speakers = [];
   level.var_82118499 = 0;
   level.var_169991e1 = 0;
@@ -49,7 +49,7 @@ function __init__() {
   level thread function_68089900();
   level thread function_1bc76ea3();
   level thread function_fbe2f6cb();
-  level.audio_get_mod_type = & custom_get_mod_type;
+  level.audio_get_mod_type = &custom_get_mod_type;
   level flag::init("story_playing");
 }
 
@@ -1051,7 +1051,7 @@ function function_65c13c89() {
   level.var_5307e651[2] = array(0, 2);
   level.var_5307e651[3] = array(1, 2);
   wait(1);
-  array::thread_all(level.bgb_machines, & function_1d8b909c);
+  array::thread_all(level.bgb_machines, &function_1d8b909c);
 }
 
 function function_1d8b909c() {
@@ -1080,9 +1080,9 @@ function function_a1e1ab31() {
   level.var_aea601e7[3] = 5;
   while(true) {
     level flag::wait_till("low_grav_on");
-    zm_spawner::register_zombie_death_event_callback( & function_e58d3756);
+    zm_spawner::register_zombie_death_event_callback(&function_e58d3756);
     level flag::wait_till_clear("low_grav_on");
-    zm_spawner::deregister_zombie_death_event_callback( & function_e58d3756);
+    zm_spawner::deregister_zombie_death_event_callback(&function_e58d3756);
   }
 }
 
@@ -1224,7 +1224,7 @@ function function_8d44c804() {
   level.var_e1855a03[1]["elemental_bow_wolf_howl4"] = 7;
   level.var_e1855a03[2]["elemental_bow_wolf_howl4"] = 10;
   level.var_e1855a03[3]["elemental_bow_wolf_howl4"] = 8;
-  zm_spawner::register_zombie_death_event_callback( & function_1d0c9f25);
+  zm_spawner::register_zombie_death_event_callback(&function_1d0c9f25);
 }
 
 function function_1d0c9f25(e_attacker) {
@@ -1322,7 +1322,7 @@ function function_9f848cca() {
   level.var_a2636bd5[2] = 5;
   level.var_a2636bd5[3] = 5;
   level waittill("hash_71de5140");
-  zm_spawner::register_zombie_death_event_callback( & function_1c7c6e63);
+  zm_spawner::register_zombie_death_event_callback(&function_1c7c6e63);
 }
 
 function function_1c7c6e63(e_attacker) {
@@ -1598,7 +1598,7 @@ function function_5e426b67() {
 function function_1bc76ea3() {
   level.var_275b3aff = 0;
   var_9b37fac5 = struct::get_array("vo_room_intro", "targetname");
-  array::thread_all(var_9b37fac5, & function_59fdea16);
+  array::thread_all(var_9b37fac5, &function_59fdea16);
 }
 
 function function_59fdea16() {
@@ -1609,7 +1609,7 @@ function function_59fdea16() {
     self.origin = (4608, -2304, -2280);
     self.radius = 600;
   }
-  zm_unitrigger::register_static_unitrigger(self, & function_88db2665);
+  zm_unitrigger::register_static_unitrigger(self, &function_88db2665);
 }
 
 function function_88db2665() {

@@ -13,18 +13,18 @@
 
 init_buildables() {
   level.buildable_piece_count = 27;
-  add_zombie_buildable("riotshield_zm", & "ZOMBIE_BUILD_RIOT", & "ZOMBIE_BUILDING_RIOT", & "ZOMBIE_BOUGHT_RIOT");
-  add_zombie_buildable("jetgun_zm", & "ZOMBIE_BUILD_JETGUN", & "ZOMBIE_BUILDING_JETGUN", & "ZOMBIE_BOUGHT_JETGUN");
-  add_zombie_buildable("turret", & "ZOMBIE_BUILD_TURRET", & "ZOMBIE_BUILDING_TURRET", & "ZOMBIE_BOUGHT_TURRET");
-  add_zombie_buildable("electric_trap", & "ZOMBIE_BUILD_ELECTRIC_TRAP", & "ZOMBIE_BUILDING_ELECTRIC_TRAP", & "ZOMBIE_BOUGHT_ELECTRIC_TRAP");
-  add_zombie_buildable("cattlecatcher", & "ZOMBIE_BUILD_CATTLE_CATCHER", & "ZOMBIE_BUILDING_CATTLE_CATCHER");
-  add_zombie_buildable("bushatch", & "ZOMBIE_BUILD_BUSHATCH", & "ZOMBIE_BUILDING_BUSHATCH");
-  add_zombie_buildable("dinerhatch", & "ZOMBIE_BUILD_DINERHATCH", & "ZOMBIE_BUILDING_DINERHATCH");
-  add_zombie_buildable("busladder", & "ZOMBIE_BUILD_BUSLADDER", & "ZOMBIE_BUILDING_BUSLADDER");
-  add_zombie_buildable("powerswitch", & "ZOMBIE_BUILD_POWER_SWITCH", & "ZOMBIE_BUILDING_POWER_SWITCH");
-  add_zombie_buildable("pap", & "ZOMBIE_BUILD_PAP", & "ZOMBIE_BUILDING_PAP");
-  add_zombie_buildable("turbine", & "ZOMBIE_BUILD_TURBINE", & "ZOMBIE_BUILDING_TURBINE", & "ZOMBIE_BOUGHT_TURBINE");
-  add_zombie_buildable("sq_common", & "ZOMBIE_BUILD_SQ_COMMON", & "ZOMBIE_BUILDING_SQ_COMMON");
+  add_zombie_buildable("riotshield_zm", &"ZOMBIE_BUILD_RIOT", &"ZOMBIE_BUILDING_RIOT", &"ZOMBIE_BOUGHT_RIOT");
+  add_zombie_buildable("jetgun_zm", &"ZOMBIE_BUILD_JETGUN", &"ZOMBIE_BUILDING_JETGUN", &"ZOMBIE_BOUGHT_JETGUN");
+  add_zombie_buildable("turret", &"ZOMBIE_BUILD_TURRET", &"ZOMBIE_BUILDING_TURRET", &"ZOMBIE_BOUGHT_TURRET");
+  add_zombie_buildable("electric_trap", &"ZOMBIE_BUILD_ELECTRIC_TRAP", &"ZOMBIE_BUILDING_ELECTRIC_TRAP", &"ZOMBIE_BOUGHT_ELECTRIC_TRAP");
+  add_zombie_buildable("cattlecatcher", &"ZOMBIE_BUILD_CATTLE_CATCHER", &"ZOMBIE_BUILDING_CATTLE_CATCHER");
+  add_zombie_buildable("bushatch", &"ZOMBIE_BUILD_BUSHATCH", &"ZOMBIE_BUILDING_BUSHATCH");
+  add_zombie_buildable("dinerhatch", &"ZOMBIE_BUILD_DINERHATCH", &"ZOMBIE_BUILDING_DINERHATCH");
+  add_zombie_buildable("busladder", &"ZOMBIE_BUILD_BUSLADDER", &"ZOMBIE_BUILDING_BUSLADDER");
+  add_zombie_buildable("powerswitch", &"ZOMBIE_BUILD_POWER_SWITCH", &"ZOMBIE_BUILDING_POWER_SWITCH");
+  add_zombie_buildable("pap", &"ZOMBIE_BUILD_PAP", &"ZOMBIE_BUILDING_PAP");
+  add_zombie_buildable("turbine", &"ZOMBIE_BUILD_TURBINE", &"ZOMBIE_BUILDING_TURBINE", &"ZOMBIE_BOUGHT_TURBINE");
+  add_zombie_buildable("sq_common", &"ZOMBIE_BUILD_SQ_COMMON", &"ZOMBIE_BUILDING_SQ_COMMON");
 }
 
 include_buildables() {
@@ -194,7 +194,7 @@ papbuildable() {
 }
 
 riotshieldbuildable() {
-  maps\mp\zombies\_zm_buildables::buildable_trigger_think("riotshield_zm_buildable_trigger", "riotshield_zm", "riotshield_zm", & "ZOMBIE_GRAB_RIOTSHIELD", 1, 1);
+  maps\mp\zombies\_zm_buildables::buildable_trigger_think("riotshield_zm_buildable_trigger", "riotshield_zm", "riotshield_zm", &"ZOMBIE_GRAB_RIOTSHIELD", 1, 1);
 }
 
 powerswitchbuildable() {
@@ -202,19 +202,19 @@ powerswitchbuildable() {
 }
 
 turbinebuildable() {
-  level.turbine_buildable = maps\mp\zombies\_zm_buildables::buildable_trigger_think("turbine_buildable_trigger", "turbine", "equip_turbine_zm", & "ZOMBIE_GRAB_TURBINE_PICKUP_HINT_STRING", 1, 1);
+  level.turbine_buildable = maps\mp\zombies\_zm_buildables::buildable_trigger_think("turbine_buildable_trigger", "turbine", "equip_turbine_zm", &"ZOMBIE_GRAB_TURBINE_PICKUP_HINT_STRING", 1, 1);
 }
 
 turretbuildable() {
-  maps\mp\zombies\_zm_buildables::buildable_trigger_think("turret_buildable_trigger", "turret", "equip_turret_zm", & "ZOMBIE_GRAB_TURRET_PICKUP_HINT_STRING", 1, 1);
+  maps\mp\zombies\_zm_buildables::buildable_trigger_think("turret_buildable_trigger", "turret", "equip_turret_zm", &"ZOMBIE_GRAB_TURRET_PICKUP_HINT_STRING", 1, 1);
 }
 
 electrictrapbuildable() {
-  maps\mp\zombies\_zm_buildables::buildable_trigger_think("electric_trap_buildable_trigger", "electric_trap", "equip_electrictrap_zm", & "ZOMBIE_GRAB_ELECTRICTRAP", 1, 1);
+  maps\mp\zombies\_zm_buildables::buildable_trigger_think("electric_trap_buildable_trigger", "electric_trap", "equip_electrictrap_zm", &"ZOMBIE_GRAB_ELECTRICTRAP", 1, 1);
 }
 
 jetgunbuildable() {
-  level.jetgun_buildable = maps\mp\zombies\_zm_buildables::buildable_trigger_think("jetgun_zm_buildable_trigger", "jetgun_zm", "jetgun_zm", & "ZOMBIE_GRAB_JETGUN", 1, 1);
+  level.jetgun_buildable = maps\mp\zombies\_zm_buildables::buildable_trigger_think("jetgun_zm_buildable_trigger", "jetgun_zm", "jetgun_zm", &"ZOMBIE_GRAB_JETGUN", 1, 1);
 }
 
 ondrop_common(player) {

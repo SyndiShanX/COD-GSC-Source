@@ -134,7 +134,7 @@ init() {
     maps\mp\gametypes\_rank::registerxpeventinfo(streakName + "_earned", 100);
   }
 
-  precachestring( & "MP_KILLSTREAK_N");
+  precachestring(&"MP_KILLSTREAK_N");
 
   level.numhardpointreservedobjectives = 0;
 
@@ -540,7 +540,7 @@ triggerhardpoint() {
     return (false);
 
   if(self maps\mp\_utility::isEMPed()) {
-    self iprintlnbold( & "LUA_KS_UNAVAILABLE_EMP_FOR_N", level.empTimeRemaining);
+    self iprintlnbold(&"LUA_KS_UNAVAILABLE_EMP_FOR_N", level.empTimeRemaining);
     return (false);
   }
 
@@ -560,7 +560,7 @@ triggerhardpoint() {
       if(!var_2)
         var_2 = 1;
 
-      self iprintlnbold( & "MP_UNAVAILABLE_FOR_N", var_2);
+      self iprintlnbold(&"MP_UNAVAILABLE_FOR_N", var_2);
       return 0;
     }
   }
@@ -578,12 +578,12 @@ triggerhardpoint() {
     return (false);
 
   if(self IsUsingTurret()) {
-    self iprintlnbold( & "LUA_KS_UNAVAILABLE_TURRET");
+    self iprintlnbold(&"LUA_KS_UNAVAILABLE_TURRET");
     return (false);
   }
 
   if(isDefined(self.lastStand)) {
-    self iprintlnbold( & "LUA_KS_UNAVAILABLE_LASTSTAND");
+    self iprintlnbold(&"LUA_KS_UNAVAILABLE_LASTSTAND");
     return (false);
   }
 

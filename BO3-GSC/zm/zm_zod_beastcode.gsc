@@ -81,8 +81,8 @@ class cbeastcode {
   function keycode_input_prompt(player) {
     self endon("kill_trigger");
     player endon("death_or_disconnect");
-    str_hint = & "";
-    str_old_hint = & "";
+    str_hint = &"";
+    str_old_hint = &"";
     a_s_input_button_tags = [[stub.o_keycode]] - > get_tags_from_input_device();
     while(true) {
       n_state = [
@@ -90,19 +90,19 @@ class cbeastcode {
       ] - > get_keycode_device_state();
       switch (n_state) {
         case 2: {
-          str_hint = & "ZM_ZOD_KEYCODE_TRYING";
+          str_hint = &"ZM_ZOD_KEYCODE_TRYING";
           break;
         }
         case 3: {
-          str_hint = & "ZM_ZOD_KEYCODE_SUCCESS";
+          str_hint = &"ZM_ZOD_KEYCODE_SUCCESS";
           break;
         }
         case 4: {
-          str_hint = & "ZM_ZOD_KEYCODE_FAIL";
+          str_hint = &"ZM_ZOD_KEYCODE_FAIL";
           break;
         }
         case 0: {
-          str_hint = & "ZM_ZOD_KEYCODE_UNAVAILABLE";
+          str_hint = &"ZM_ZOD_KEYCODE_UNAVAILABLE";
           break;
         }
         case 1: {
@@ -120,12 +120,12 @@ class cbeastcode {
             }
           }
           if(!isDefined(player.n_keycode_lookat_tag)) {
-            str_hint = & "";
+            str_hint = &"";
           } else {
             if(player.n_keycode_lookat_tag < 3) {
-              str_hint = & "ZM_ZOD_KEYCODE_INCREMENT_NUMBER";
+              str_hint = &"ZM_ZOD_KEYCODE_INCREMENT_NUMBER";
             } else {
-              str_hint = & "ZM_ZOD_KEYCODE_ACTIVATE";
+              str_hint = &"ZM_ZOD_KEYCODE_ACTIVATE";
             }
           }
           break;
@@ -190,8 +190,8 @@ class cbeastcode {
     m_mdl_input.unitrigger_stub.script_length = length;
     m_mdl_input.unitrigger_stub.require_look_at = 0;
     m_mdl_input.unitrigger_stub.o_keycode = self;
-    m_mdl_input.unitrigger_stub.prompt_and_visibility_func = & keycode_input_visibility;
-    zm_unitrigger::register_static_unitrigger(m_mdl_input.unitrigger_stub, & keycode_input_trigger_think);
+    m_mdl_input.unitrigger_stub.prompt_and_visibility_func = &keycode_input_visibility;
+    zm_unitrigger::register_static_unitrigger(m_mdl_input.unitrigger_stub, &keycode_input_trigger_think);
   }
 
   function test_current_code_against_this_code(a_code) {
@@ -352,7 +352,7 @@ class cbeastcode {
 #namespace zm_zod_beastcode;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_beastcode", & __init__, undefined, undefined);
+  system::register("zm_zod_beastcode", &__init__, undefined, undefined);
 }
 
 function __init__() {}
@@ -373,7 +373,7 @@ function init() {
   }
   var_4582f16d = getEntArray("keeper_sword_locker_clue_lookat", "targetname");
   level.o_canal_beastcode = new cbeastcode();
-  [[level.o_canal_beastcode]] - > init(a_mdl_inputs, a_t_inputs, var_4582f16d, & keeper_sword_locker_open_locker);
+  [[level.o_canal_beastcode]] - > init(a_mdl_inputs, a_t_inputs, var_4582f16d, &keeper_sword_locker_open_locker);
   a_code = [[level.o_canal_beastcode]] - > get_code();
   [[level.o_canal_beastcode]] - > set_clue_numbers_for_code(a_mdl_clues);
 }

@@ -40,11 +40,11 @@ function main() {
   level.doprematch = 1;
   level.overrideteamscore = 1;
   level.scoreroundwinbased = 1;
-  level.onstartgametype = & onstartgametype;
-  level.playerspawnedcb = & koth_playerspawnedcb;
-  level.onroundswitch = & onroundswitch;
-  level.onplayerkilled = & onplayerkilled;
-  level.onendgame = & onendgame;
+  level.onstartgametype = &onstartgametype;
+  level.playerspawnedcb = &koth_playerspawnedcb;
+  level.onroundswitch = &onroundswitch;
+  level.onplayerkilled = &onplayerkilled;
+  level.onendgame = &onendgame;
   level.hqautodestroytime = getgametypesetting("autoDestroyTime");
   level.hqspawntime = getgametypesetting("objectiveSpawnTime");
   level.kothmode = getgametypesetting("kothMode");
@@ -54,7 +54,7 @@ function main() {
   level.randomhqspawn = getgametypesetting("randomObjectiveLocations");
   level.maxrespawndelay = getgametypesetting("timeLimit") * 60;
   level.iconoffset = vectorscale((0, 0, 1), 32);
-  level.onrespawndelay = & getrespawndelay;
+  level.onrespawndelay = &getrespawndelay;
   gameobjects::register_allowed_gameobject(level.gametype);
   game["dialog"]["gametype"] = "hq_start";
   game["dialog"]["gametype_hardcore"] = "hchq_start";
@@ -101,7 +101,7 @@ function getrespawndelay() {
       return undefined;
     }
     if(level.playerobjectiveheldrespawndelay >= level.hqautodestroytime) {
-      self.lowermessageoverride = & "MP_WAITING_FOR_HQ";
+      self.lowermessageoverride = &"MP_WAITING_FOR_HQ";
     }
     if(level.delayplayer) {
       return min(level.spawndelay, timeremaining);
@@ -122,17 +122,17 @@ function onstartgametype() {
   }
   globallogic_score::resetteamscores();
   foreach(team in level.teams) {
-    util::setobjectivetext(team, & "OBJECTIVES_KOTH");
+    util::setobjectivetext(team, &"OBJECTIVES_KOTH");
     if(level.splitscreen) {
-      util::setobjectivescoretext(team, & "OBJECTIVES_HQ");
+      util::setobjectivescoretext(team, &"OBJECTIVES_HQ");
       continue;
     }
-    util::setobjectivescoretext(team, & "OBJECTIVES_HQ_SCORE");
+    util::setobjectivescoretext(team, &"OBJECTIVES_HQ_SCORE");
   }
-  level.objectivehintpreparehq = & "MP_CONTROL_HQ";
-  level.objectivehintcapturehq = & "MP_CAPTURE_HQ";
-  level.objectivehintdestroyhq = & "MP_DESTROY_HQ";
-  level.objectivehintdefendhq = & "MP_DEFEND_HQ";
+  level.objectivehintpreparehq = &"MP_CONTROL_HQ";
+  level.objectivehintcapturehq = &"MP_CAPTURE_HQ";
+  level.objectivehintdestroyhq = &"MP_DESTROY_HQ";
+  level.objectivehintdefendhq = &"MP_DEFEND_HQ";
   if(level.kothmode) {
     level.objectivehintdestroyhq = level.objectivehintcapturehq;
   }
@@ -191,13 +191,13 @@ function spawn_next_radio() {
 function hqmainloop() {
   level endon("game_ended");
   level.hqrevealtime = -100000;
-  hqspawninginstr = & "MP_HQ_AVAILABLE_IN";
+  hqspawninginstr = &"MP_HQ_AVAILABLE_IN";
   if(level.kothmode) {
-    hqdestroyedinfriendlystr = & "MP_HQ_DESPAWN_IN";
-    hqdestroyedinenemystr = & "MP_HQ_DESPAWN_IN";
+    hqdestroyedinfriendlystr = &"MP_HQ_DESPAWN_IN";
+    hqdestroyedinenemystr = &"MP_HQ_DESPAWN_IN";
   } else {
-    hqdestroyedinfriendlystr = & "MP_HQ_REINFORCEMENTS_IN";
-    hqdestroyedinenemystr = & "MP_HQ_DESPAWN_IN";
+    hqdestroyedinfriendlystr = &"MP_HQ_REINFORCEMENTS_IN";
+    hqdestroyedinenemystr = &"MP_HQ_DESPAWN_IN";
   }
   spawn_first_radio();
   objective_name = istring("objective");
@@ -252,15 +252,15 @@ function hqmainloop() {
     updateobjectivehintmessage(level.objectivehintcapturehq);
     sound::play_on_players("mpl_hq_cap_us");
     level.radio.gameobject gameobjects::enable_object();
-    level.radio.gameobject.onupdateuserate = & onupdateuserate;
+    level.radio.gameobject.onupdateuserate = &onupdateuserate;
     level.radio.gameobject gameobjects::allow_use("any");
     level.radio.gameobject gameobjects::set_use_time(level.capturetime);
     level.radio.gameobject gameobjects::set_use_text(&"MP_CAPTURING_HQ");
     level.radio.gameobject gameobjects::set_visible_team("any");
     level.radio.gameobject gameobjects::set_model_visibility(1);
-    level.radio.gameobject.onuse = & onradiocapture;
-    level.radio.gameobject.onbeginuse = & onbeginuse;
-    level.radio.gameobject.onenduse = & onenduse;
+    level.radio.gameobject.onuse = &onradiocapture;
+    level.radio.gameobject.onbeginuse = &onbeginuse;
+    level.radio.gameobject.onenduse = &onenduse;
     level waittill("hq_captured");
     ownerteam = level.radio.gameobject gameobjects::get_owner_team();
     if(level.hqautodestroytime) {
@@ -280,7 +280,7 @@ function hqmainloop() {
       if(!level.kothmode) {
         level.radio.gameobject gameobjects::set_use_text(&"MP_DESTROYING_HQ");
       }
-      level.radio.gameobject.onuse = & onradiodestroy;
+      level.radio.gameobject.onuse = &onradiodestroy;
       if(level.hqautodestroytime) {
         foreach(team in level.teams) {
           if(team == ownerteam) {
@@ -352,7 +352,7 @@ function onenduse(team, player, success) {
 function onradiocapture(player) {
   capture_team = player.pers["team"];
   print("");
-  string = & "MP_HQ_CAPTURED_BY";
+  string = &"MP_HQ_CAPTURED_BY";
   level.usestartspawns = 0;
   thread give_capture_credit(self.touchlist[capture_team], string);
   oldteam = gameobjects::get_owner_team();
@@ -425,11 +425,11 @@ function onradiodestroy(firstplayer) {
       player.destructions = player.pers["destructions"];
     }
   }
-  destroyteammessage = & "MP_HQ_DESTROYED_BY";
-  otherteammessage = & "MP_HQ_DESTROYED_BY_ENEMY";
+  destroyteammessage = &"MP_HQ_DESTROYED_BY";
+  otherteammessage = &"MP_HQ_DESTROYED_BY_ENEMY";
   if(level.kothmode) {
-    destroyteammessage = & "MP_HQ_CAPTURED_BY";
-    otherteammessage = & "MP_HQ_CAPTURED_BY_ENEMY";
+    destroyteammessage = &"MP_HQ_CAPTURED_BY";
+    otherteammessage = &"MP_HQ_CAPTURED_BY_ENEMY";
   }
   level thread popups::displayteammessagetoall(destroyteammessage, player);
   foreach(team in level.teams) {

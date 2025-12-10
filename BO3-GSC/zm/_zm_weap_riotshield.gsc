@@ -26,7 +26,7 @@
 #namespace riotshield;
 
 function autoexec __init__sytem__() {
-  system::register("zm_equip_riotshield", & __init__, & __main__, undefined);
+  system::register("zm_equip_riotshield", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -51,28 +51,28 @@ function __init__() {
   level.riotshield_gib_refs[level.riotshield_gib_refs.size] = "guts";
   level.riotshield_gib_refs[level.riotshield_gib_refs.size] = "right_arm";
   level.riotshield_gib_refs[level.riotshield_gib_refs.size] = "left_arm";
-  zm::register_player_damage_callback( & player_damage_override_callback);
+  zm::register_player_damage_callback(&player_damage_override_callback);
   if(!isDefined(level.riotshield_melee)) {
-    level.riotshield_melee = & riotshield_melee;
+    level.riotshield_melee = &riotshield_melee;
   }
   if(!isDefined(level.riotshield_melee_power)) {
-    level.riotshield_melee_power = & riotshield_melee;
+    level.riotshield_melee_power = &riotshield_melee;
   }
   if(!isDefined(level.riotshield_damage_callback)) {
-    level.riotshield_damage_callback = & player_damage_shield;
+    level.riotshield_damage_callback = &player_damage_shield;
   }
   if(!isDefined(level.should_shield_absorb_damage)) {
-    level.should_shield_absorb_damage = & should_shield_absorb_damage;
+    level.should_shield_absorb_damage = &should_shield_absorb_damage;
   }
-  callback::on_connect( & on_player_connect);
+  callback::on_connect(&on_player_connect);
 }
 
 function __main__() {}
 
 function on_player_connect() {
-  self.player_shield_reset_health = & player_init_shield_health;
+  self.player_shield_reset_health = &player_init_shield_health;
   if(!isDefined(self.player_shield_apply_damage)) {
-    self.player_shield_apply_damage = & player_damage_shield;
+    self.player_shield_apply_damage = &player_damage_shield;
   }
   self thread player_watch_weapon_change();
   self thread player_watch_shield_melee();

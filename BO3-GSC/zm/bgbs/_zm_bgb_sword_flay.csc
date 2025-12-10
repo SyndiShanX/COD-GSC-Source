@@ -12,7 +12,7 @@
 #namespace zm_bgb_sword_flay;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_sword_flay", & __init__, undefined, undefined);
+  system::register("zm_bgb_sword_flay", &__init__, undefined, undefined);
 }
 
 function __init__() {

@@ -542,7 +542,7 @@ makereviveentity(param_00, param_01, param_02, param_03, param_04) {
   param_01 = scripts\engine\utility::drop_to_ground(param_01 + var_05, 32, -64);
   var_06 = spawn("script_model", param_01);
   var_06 setcursorhint("HINT_NOICON");
-  var_06 sethintstring( & "PLATFORM_REVIVE");
+  var_06 sethintstring(&"PLATFORM_REVIVE");
   var_06.triggerportableradarping = param_00;
   var_06.inuse = 0;
   var_06.var_336 = "revive_trigger";

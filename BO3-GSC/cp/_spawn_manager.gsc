@@ -16,7 +16,7 @@
 #namespace spawn_manager;
 
 function autoexec __init__sytem__() {
-  system::register("spawn_manager", & __init__, undefined, undefined);
+  system::register("spawn_manager", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -26,9 +26,9 @@ function __init__() {
   level.spawn_manager_auto_targetname_num = 0;
   level.spawn_managers = [];
   level.spawn_managers = getEntArray("spawn_manager", "classname");
-  array::thread_all(level.spawn_managers, & spawn_manager_think);
+  array::thread_all(level.spawn_managers, &spawn_manager_think);
   start_triggers();
-  callback::on_connect( & on_player_connect);
+  callback::on_connect(&on_player_connect);
   level thread spawn_manager_debug();
 }
 

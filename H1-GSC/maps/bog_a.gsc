@@ -81,14 +81,14 @@ main() {
   maps\bog_a_precache::main();
   maps\bog_a_fx::main();
   maps\_javelin::init();
-  maps\_utility::add_start("melee", maps\bog_a_code::start_melee, & "STARTS_MELEE");
-  maps\_utility::add_start("breach", maps\bog_a_code::start_breach, & "STARTS_BREACH1");
-  maps\_utility::add_start("alley", maps\bog_a_code::start_alley, & "STARTS_ALLEY");
-  maps\_utility::add_start("shanty", maps\bog_a_code::start_alley, & "STARTS_SHANTY");
-  maps\_utility::add_start("bog", maps\bog_a_code::start_bog, & "STARTS_BOG");
-  maps\_utility::add_start("zpu", maps\bog_a_backhalf::start_zpu, & "STARTS_ZPU");
-  maps\_utility::add_start("cobras", maps\bog_a_backhalf::start_cobras, & "STARTS_COBRAS");
-  maps\_utility::add_start("end", maps\bog_a_backhalf::start_end, & "STARTS_END1");
+  maps\_utility::add_start("melee", maps\bog_a_code::start_melee, &"STARTS_MELEE");
+  maps\_utility::add_start("breach", maps\bog_a_code::start_breach, &"STARTS_BREACH1");
+  maps\_utility::add_start("alley", maps\bog_a_code::start_alley, &"STARTS_ALLEY");
+  maps\_utility::add_start("shanty", maps\bog_a_code::start_alley, &"STARTS_SHANTY");
+  maps\_utility::add_start("bog", maps\bog_a_code::start_bog, &"STARTS_BOG");
+  maps\_utility::add_start("zpu", maps\bog_a_backhalf::start_zpu, &"STARTS_ZPU");
+  maps\_utility::add_start("cobras", maps\bog_a_backhalf::start_cobras, &"STARTS_COBRAS");
+  maps\_utility::add_start("end", maps\bog_a_backhalf::start_end, &"STARTS_END1");
   maps\_utility::default_start(::ambush);
   level.flare_fog = "bog_a_flare";
   level.flare_fog_return = "bog_a";
@@ -112,9 +112,9 @@ main() {
   maps\_helicopter_globals::init_helicopters();
   thread maps\bog_a_code::debug_player_damage();
   maps\_utility::battlechatter_off("allies");
-  maps\_utility::add_hint_string("nvg", & "SCRIPT_NIGHTVISION_USE", maps\_nightvision::shouldbreaknvghintprint);
-  maps\_utility::add_hint_string("disable_nvg", & "SCRIPT_NIGHTVISION_STOP_USE", maps\_nightvision::should_break_disable_nvg_print);
-  maps\_utility::add_hint_string("c4_use", & "SCRIPT_C4_USE", maps\bog_a_backhalf::dont_show_c4_hint);
+  maps\_utility::add_hint_string("nvg", &"SCRIPT_NIGHTVISION_USE", maps\_nightvision::shouldbreaknvghintprint);
+  maps\_utility::add_hint_string("disable_nvg", &"SCRIPT_NIGHTVISION_STOP_USE", maps\_nightvision::should_break_disable_nvg_print);
+  maps\_utility::add_hint_string("c4_use", &"SCRIPT_C4_USE", maps\bog_a_backhalf::dont_show_c4_hint);
   thread maps\bog_a_code::disable_nvg();
   level.aim_targets = getEntArray("aim_target", "targetname");
   createthreatbiasgroup("upstairs_unreachable_enemies");
@@ -256,7 +256,7 @@ ambush() {
   var_3 maps\_utility::delaythread(1.5, maps\_anim::anim_single_solo, var_3, "spin");
   maps\_utility::delaythread(5.5, ::price_blends_into_run);
   common_scripts\utility::flag_wait("safe_for_objectives");
-  objective_add(1, "active", & "BOG_A_SECURE_THE_M1A2_ABRAMS", (4800, 1488, 32));
+  objective_add(1, "active", &"BOG_A_SECURE_THE_M1A2_ABRAMS", (4800, 1488, 32));
   objective_current(1);
 }
 
@@ -327,7 +327,7 @@ friendlies_advance_up_the_bridge() {
   common_scripts\_exploder::exploder(1);
   var_12 = getent("underground_obj_org", "targetname");
   common_scripts\utility::run_thread_on_targetname("update_underground_obj_trigger", maps\bog_a_code::update_apartment_objective_position);
-  objective_add(2, "active", & "BOG_A_ELIMINATE_ENEMY_FORCES", var_12.origin);
+  objective_add(2, "active", &"BOG_A_ELIMINATE_ENEMY_FORCES", var_12.origin);
   objective_indentlevel(2, 1);
   objective_current(2);
 
@@ -924,7 +924,7 @@ javelin_guy_runs_in() {
   }
 
   thread price_reminds_player_about_javelin();
-  objective_add(4, "active", & "BOG_A_GET_THE_JAVELIN", var_5);
+  objective_add(4, "active", &"BOG_A_GET_THE_JAVELIN", var_5);
   objective_indentlevel(4, 1);
   objective_current(4);
 
@@ -1218,7 +1218,7 @@ defend_the_roof_with_javelin() {
   var_7 rotateyaw(100, 1, 0.5, 0);
   thread maps\bog_a_code::update_obj_on_dropped_jav(var_5.origin);
   level.price maps\_utility::delaythread(1, maps\_anim::anim_single_queue, level.price, "second_floor_hint_2");
-  objective_add(4, "active", & "BOG_A_DESTROY_THE_ARMORED_VEHICLES", var_5.origin);
+  objective_add(4, "active", &"BOG_A_DESTROY_THE_ARMORED_VEHICLES", var_5.origin);
   objective_indentlevel(4, 1);
   objective_current(4);
   common_scripts\utility::flag_wait("overpass_baddies_flee");

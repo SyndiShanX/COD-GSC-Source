@@ -27,7 +27,7 @@
 #namespace zm_stalingrad_devgui;
 
 function function_91912a79() {
-  zm_devgui::add_custom_devgui_callback( & function_17d8768b);
+  zm_devgui::add_custom_devgui_callback(&function_17d8768b);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");

@@ -13,24 +13,24 @@
 #namespace zm_genesis_util;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_util", & __init__, & __main__, undefined);
+  system::register("zm_genesis_util", &__init__, &__main__, undefined);
 }
 
 function __init__() {
   n_bits = getminbitcountfornum(8);
-  clientfield::register("toplayer", "player_rumble_and_shake", 15000, n_bits, "int", & player_rumble_and_shake, 0, 0);
+  clientfield::register("toplayer", "player_rumble_and_shake", 15000, n_bits, "int", &player_rumble_and_shake, 0, 0);
   n_bits = getminbitcountfornum(4);
-  clientfield::register("scriptmover", "emit_smoke", 15000, n_bits, "int", & emit_smoke, 0, 0);
+  clientfield::register("scriptmover", "emit_smoke", 15000, n_bits, "int", &emit_smoke, 0, 0);
   n_bits = getminbitcountfornum(4);
-  clientfield::register("scriptmover", "fire_trap", 15000, n_bits, "int", & fire_trap, 0, 0);
-  clientfield::register("actor", "fire_trap_ignite_enemy", 15000, 1, "int", & fire_trap_ignite_enemy, 0, 0);
-  clientfield::register("scriptmover", "rq_gateworm_magic", 15000, 1, "int", & rq_gateworm_magic, 0, 0);
-  clientfield::register("scriptmover", "rq_gateworm_dissolve_finish", 15000, 1, "int", & rq_gateworm_dissolve_finish, 0, 0);
-  clientfield::register("scriptmover", "rq_rune_glow", 15000, 1, "int", & rq_rune_glow, 0, 0);
-  registerclientfield("world", "gen_rune_electricity", 15000, 1, "int", & zm_utility::setsharedinventoryuimodels, 0, 1);
-  registerclientfield("world", "gen_rune_fire", 15000, 1, "int", & zm_utility::setsharedinventoryuimodels, 0, 1);
-  registerclientfield("world", "gen_rune_light", 15000, 1, "int", & zm_utility::setsharedinventoryuimodels, 0, 1);
-  registerclientfield("world", "gen_rune_shadow", 15000, 1, "int", & zm_utility::setsharedinventoryuimodels, 0, 1);
+  clientfield::register("scriptmover", "fire_trap", 15000, n_bits, "int", &fire_trap, 0, 0);
+  clientfield::register("actor", "fire_trap_ignite_enemy", 15000, 1, "int", &fire_trap_ignite_enemy, 0, 0);
+  clientfield::register("scriptmover", "rq_gateworm_magic", 15000, 1, "int", &rq_gateworm_magic, 0, 0);
+  clientfield::register("scriptmover", "rq_gateworm_dissolve_finish", 15000, 1, "int", &rq_gateworm_dissolve_finish, 0, 0);
+  clientfield::register("scriptmover", "rq_rune_glow", 15000, 1, "int", &rq_rune_glow, 0, 0);
+  registerclientfield("world", "gen_rune_electricity", 15000, 1, "int", &zm_utility::setsharedinventoryuimodels, 0, 1);
+  registerclientfield("world", "gen_rune_fire", 15000, 1, "int", &zm_utility::setsharedinventoryuimodels, 0, 1);
+  registerclientfield("world", "gen_rune_light", 15000, 1, "int", &zm_utility::setsharedinventoryuimodels, 0, 1);
+  registerclientfield("world", "gen_rune_shadow", 15000, 1, "int", &zm_utility::setsharedinventoryuimodels, 0, 1);
   clientfield::register("clientuimodel", "zmInventory.widget_rune_parts", 15000, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.player_rune_quest", 15000, 1, "int", undefined, 0, 0);
 }

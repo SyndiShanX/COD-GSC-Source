@@ -137,7 +137,7 @@ main() {
   level.stryker thread stryker_damage_monitor();
   level.stryker thread stryker_threats_eliminated_dialog_1();
   level.stryker thread stryker_threats_eliminated_dialog_2();
-  level.stryker setVehicleLookAtText("Honey Badger", & "");
+  level.stryker setVehicleLookAtText("Honey Badger", &"");
   level.stryker.missileAttractor = spawn("script_origin", level.stryker.origin + (0, 0, 70));
   level.stryker.missileAttractor LinkTo(level.stryker);
   missile_CreateAttractorEnt(level.stryker.missileAttractor, 10000, 3000);
@@ -162,8 +162,8 @@ main() {
   run_thread_on_noteworthy("checkpoing_clear_activate", ::force_trigger_on_flag, "checkpoint_enemies_dead");
   run_thread_on_noteworthy("checkpoing_clear_activate", ::undo_cull_dist);
 
-  add_hint_string("use_laser", & "ARCADIA_LASER_HINT", ::should_stop_laser_hint);
-  add_hint_string("use_laser_golf", & "ARCADIA_LASER_HINT_GOLFCOURSE", ::should_stop_laser_golf_hint);
+  add_hint_string("use_laser", &"ARCADIA_LASER_HINT", ::should_stop_laser_hint);
+  add_hint_string("use_laser_golf", &"ARCADIA_LASER_HINT_GOLFCOURSE", ::should_stop_laser_golf_hint);
 
   //--------------------------------
   // Level threads
@@ -439,7 +439,7 @@ startCrash() {
 }
 
 objective_aa_guns() {
-  objective_add(0, "current", & "ARCADIA_OBJECTIVE_AA_GUNS");
+  objective_add(0, "current", &"ARCADIA_OBJECTIVE_AA_GUNS");
   objective_onentity(0, level.foley);
 }
 
@@ -476,7 +476,7 @@ objective_brookmere_road() {
   thread brookmere_road_dialog();
 
   location = getent("objective_brookmere_location", "targetname");
-  objective_add(1, "current", & "ARCADIA_OBJECTIVE_BROOKMERE", location.origin);
+  objective_add(1, "current", &"ARCADIA_OBJECTIVE_BROOKMERE", location.origin);
 
   flag_wait("brookmere_house");
 
@@ -487,7 +487,7 @@ objective_brookmere_road() {
 
 objective_intel() {
   location = getent("objective_intel_location", "targetname");
-  objective_add(2, "current", & "ARCADIA_OBJECTIVE_INTEL", location.origin);
+  objective_add(2, "current", &"ARCADIA_OBJECTIVE_INTEL", location.origin);
 }
 
 brookmere_road_dialog() {

@@ -20,10 +20,10 @@ init() {
   precachemodel("p6_anim_zm_buildable_turret");
   precacheturret("zombie_bullet_crouch_zm");
   level.turret_name = "equip_turret_zm";
-  maps\mp\zombies\_zm_equipment::register_equipment("equip_turret_zm", & "ZOMBIE_EQUIP_TURRET_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_TURRET_HOWTO", "turret_zm_icon", "turret", undefined, ::transferturret, ::dropturret, ::pickupturret, ::placeturret);
+  maps\mp\zombies\_zm_equipment::register_equipment("equip_turret_zm", &"ZOMBIE_EQUIP_TURRET_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_TURRET_HOWTO", "turret_zm_icon", "turret", undefined, ::transferturret, ::dropturret, ::pickupturret, ::placeturret);
   maps\mp\zombies\_zm_equipment::add_placeable_equipment("equip_turret_zm", "p6_anim_zm_buildable_turret");
   level thread onplayerconnect();
-  maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("equip_turret", & "ZOMBIE_EQUIP_TURRET_PICKUP_HINT_STRING");
+  maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("equip_turret", &"ZOMBIE_EQUIP_TURRET_PICKUP_HINT_STRING");
 }
 
 onplayerconnect() {

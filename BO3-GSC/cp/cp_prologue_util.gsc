@@ -284,7 +284,7 @@ function function_40e4b0cf(str_spawn_manager, str_spawners, var_c5690501) {
   a_spawners = getEntArray(str_spawners, "targetname");
   e_volume = getent(var_c5690501, "targetname");
   foreach(sp_spawner in a_spawners) {
-    sp_spawner spawner::add_spawn_function( & set_goal_volume, e_volume);
+    sp_spawner spawner::add_spawn_function(&set_goal_volume, e_volume);
   }
   spawn_manager::enable(str_spawn_manager);
 }

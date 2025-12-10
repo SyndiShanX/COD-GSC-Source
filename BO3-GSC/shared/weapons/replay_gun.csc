@@ -14,7 +14,7 @@
 #namespace replay_gun;
 
 function autoexec __init__sytem__() {
-  system::register("replay_gun", & __init__, undefined, undefined);
+  system::register("replay_gun", &__init__, undefined, undefined);
 }
 
 function __init__() {

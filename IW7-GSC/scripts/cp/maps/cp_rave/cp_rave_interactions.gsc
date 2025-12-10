@@ -5,25 +5,25 @@
 ************************************************************/
 
 register_interactions() {
-  level.interaction_hintstrings["debris_350"] = & "CP_RAVE_PURCHASE_AREA";
-  level.interaction_hintstrings["debris_1000"] = & "CP_RAVE_PURCHASE_AREA";
-  level.interaction_hintstrings["debris_1500"] = & "CP_RAVE_PURCHASE_AREA";
-  level.interaction_hintstrings["debris_2000"] = & "CP_RAVE_PURCHASE_AREA";
-  level.interaction_hintstrings["debris_2500"] = & "CP_RAVE_PURCHASE_AREA";
-  level.interaction_hintstrings["debris_1250"] = & "CP_RAVE_PURCHASE_AREA";
-  level.interaction_hintstrings["debris_750"] = & "CP_RAVE_PURCHASE_AREA";
-  level.interaction_hintstrings["power_door_sliding"] = & "COOP_INTERACTIONS_REQUIRES_POWER";
-  level.interaction_hintstrings["weapon_upgrade"] = & "CP_RAVE_UPGRADE_WEAPON";
-  level.interaction_hintstrings["interaction_packboat"] = & "CP_RAVE_USEBOAT";
-  level.interaction_hintstrings["fast_travel"] = & "CP_RAVE_ENTER_PORTAL";
-  level.interaction_hintstrings["interaction_woodchipper"] = & "CP_RAVE_TRAP_GENERIC";
-  level.interaction_hintstrings["trap_loudspeaker"] = & "CP_RAVE_TRAP_GENERIC";
-  level.interaction_hintstrings["trap_electric"] = & "CP_RAVE_TRAP_FISH";
-  level.interaction_hintstrings["trap_logswing"] = & "CP_RAVE_TRAP_LOGSWING";
-  level.interaction_hintstrings["trap_waterfall"] = & "CP_RAVE_TRAP_GENERIC";
-  level.interaction_hintstrings["atm_deposit"] = & "CP_RAVE_ATM_DEPOSIT";
-  level.interaction_hintstrings["atm_withdrawal"] = & "CP_RAVE_ATM_WITHDRAWAL";
-  level.interaction_hintstrings["fix_pap"] = & "CP_RAVE_FIX_PAP";
+  level.interaction_hintstrings["debris_350"] = &"CP_RAVE_PURCHASE_AREA";
+  level.interaction_hintstrings["debris_1000"] = &"CP_RAVE_PURCHASE_AREA";
+  level.interaction_hintstrings["debris_1500"] = &"CP_RAVE_PURCHASE_AREA";
+  level.interaction_hintstrings["debris_2000"] = &"CP_RAVE_PURCHASE_AREA";
+  level.interaction_hintstrings["debris_2500"] = &"CP_RAVE_PURCHASE_AREA";
+  level.interaction_hintstrings["debris_1250"] = &"CP_RAVE_PURCHASE_AREA";
+  level.interaction_hintstrings["debris_750"] = &"CP_RAVE_PURCHASE_AREA";
+  level.interaction_hintstrings["power_door_sliding"] = &"COOP_INTERACTIONS_REQUIRES_POWER";
+  level.interaction_hintstrings["weapon_upgrade"] = &"CP_RAVE_UPGRADE_WEAPON";
+  level.interaction_hintstrings["interaction_packboat"] = &"CP_RAVE_USEBOAT";
+  level.interaction_hintstrings["fast_travel"] = &"CP_RAVE_ENTER_PORTAL";
+  level.interaction_hintstrings["interaction_woodchipper"] = &"CP_RAVE_TRAP_GENERIC";
+  level.interaction_hintstrings["trap_loudspeaker"] = &"CP_RAVE_TRAP_GENERIC";
+  level.interaction_hintstrings["trap_electric"] = &"CP_RAVE_TRAP_FISH";
+  level.interaction_hintstrings["trap_logswing"] = &"CP_RAVE_TRAP_LOGSWING";
+  level.interaction_hintstrings["trap_waterfall"] = &"CP_RAVE_TRAP_GENERIC";
+  level.interaction_hintstrings["atm_deposit"] = &"CP_RAVE_ATM_DEPOSIT";
+  level.interaction_hintstrings["atm_withdrawal"] = &"CP_RAVE_ATM_WITHDRAWAL";
+  level.interaction_hintstrings["fix_pap"] = &"CP_RAVE_FIX_PAP";
   scripts\cp\cp_interaction::register_interaction("pap_portal", "fast_travel", undefined, ::scripts\cp\maps\cp_rave\cp_rave_boat::pap_portal_hint_logic, ::scripts\cp\maps\cp_rave\cp_rave_boat::pap_portal_use_func, 0, 0);
   scripts\cp\cp_interaction::register_interaction("fix_pap", "pap", undefined, ::scripts\cp\maps\cp_rave\cp_rave_boat::pap_repair_hint_func, ::scripts\cp\maps\cp_rave\cp_rave_boat::fix_pap, 0);
   scripts\cp\cp_interaction::register_interaction("interaction_packboat", "door_buy", undefined, ::scripts\cp\maps\cp_rave\cp_rave_boat::packboat_hint_func, ::scripts\cp\maps\cp_rave\cp_rave_boat::use_packboat, 0, 0, ::scripts\cp\maps\cp_rave\cp_rave_boat::init_pap_boat);
@@ -89,11 +89,11 @@ atm_withdrawal(param_00, param_01) {
 
 atm_withdrawal_hint_logic(param_00, param_01) {
   if(param_00.requires_power && !param_00.powered_on) {
-    return & "COOP_INTERACTIONS_REQUIRES_POWER";
+    return &"COOP_INTERACTIONS_REQUIRES_POWER";
   }
 
   if(isDefined(level.atm_amount_deposited) && level.atm_amount_deposited < 1000) {
-    return & "CP_RAVE_ATM_INSUFFICIENT_FUNDS";
+    return &"CP_RAVE_ATM_INSUFFICIENT_FUNDS";
   }
 
   return level.interaction_hintstrings[param_00.script_noteworthy];
@@ -158,7 +158,7 @@ item_keep_rotating(param_00) {
 fuse_pick_up_monitor(param_00, param_01) {
   param_00 endon("death");
   param_00 makeusable();
-  param_00 sethintstring( & "CP_RAVE_PICKUP_ITEM");
+  param_00 sethintstring(&"CP_RAVE_PICKUP_ITEM");
   for(;;) {
     param_00 waittill("trigger", var_02);
     if(isplayer(var_02)) {
@@ -182,49 +182,49 @@ blank_hint_func(param_00, param_01) {
 }
 
 register_challenges() {
-  level.interaction_hintstrings["challenge_repulsor"] = & "CP_RAVE_CHALLENGES_REPULSOR_CHALLENGE";
+  level.interaction_hintstrings["challenge_repulsor"] = &"CP_RAVE_CHALLENGES_REPULSOR_CHALLENGE";
   scripts\cp\cp_interaction::register_interaction("challenge_repulsor", "wall_buy", undefined, ::scripts\cp\maps\cp_rave\cp_rave_challenges::repulsor_challenge_hint, ::scripts\cp\maps\cp_rave\cp_rave_challenges::activate_repulsor_challenge, 0);
-  level.interaction_hintstrings["challenge_tripmine"] = & "CP_RAVE_CHALLENGES_ARMAGEDDON_CHALLENGE";
+  level.interaction_hintstrings["challenge_tripmine"] = &"CP_RAVE_CHALLENGES_ARMAGEDDON_CHALLENGE";
   scripts\cp\cp_interaction::register_interaction("challenge_armageddon", "wall_buy", undefined, ::scripts\cp\maps\cp_rave\cp_rave_challenges::armageddon_challenge_hint, ::scripts\cp\maps\cp_rave\cp_rave_challenges::activate_armageddon_challenge, 0);
-  level.interaction_hintstrings["challenge_blackhole"] = & "CP_RAVE_CHALLENGES_BLACKHOLE_CHALLENGE";
+  level.interaction_hintstrings["challenge_blackhole"] = &"CP_RAVE_CHALLENGES_BLACKHOLE_CHALLENGE";
   scripts\cp\cp_interaction::register_interaction("challenge_blackhole", "wall_buy", undefined, ::scripts\cp\maps\cp_rave\cp_rave_challenges::blackhole_challenge_hint, ::scripts\cp\maps\cp_rave\cp_rave_challenges::activate_blackhole_challenge, 0);
-  level.interaction_hintstrings["challenge_transponder"] = & "CP_RAVE_CHALLENGES_TRANSPONDER_CHALLENGE";
+  level.interaction_hintstrings["challenge_transponder"] = &"CP_RAVE_CHALLENGES_TRANSPONDER_CHALLENGE";
   scripts\cp\cp_interaction::register_interaction("challenge_transponder", "wall_buy", undefined, ::scripts\cp\maps\cp_rave\cp_rave_challenges::transponder_challenge_hint, ::scripts\cp\maps\cp_rave\cp_rave_challenges::activate_transponder_challenge, 0);
-  level.interaction_hintstrings["challenge_rewind"] = & "CP_RAVE_CHALLENGES_REWIND_CHALLENGE";
+  level.interaction_hintstrings["challenge_rewind"] = &"CP_RAVE_CHALLENGES_REWIND_CHALLENGE";
   scripts\cp\cp_interaction::register_interaction("challenge_rewind", "wall_buy", undefined, ::scripts\cp\maps\cp_rave\cp_rave_challenges::rewind_challenge_hint, ::scripts\cp\maps\cp_rave\cp_rave_challenges::activate_rewind_challenge, 0);
   level thread init_challenge_stations();
 }
 
 register_wall_buys() {
-  level.interaction_hintstrings["iw7_devastator_zm"] = & "CP_RAVE_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_ar57_zm"] = & "CP_RAVE_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_m4_zm"] = & "CP_RAVE_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_fmg_zm"] = & "CP_RAVE_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_ake_zml"] = & "CP_RAVE_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_sonic_zmr"] = & "CP_RAVE_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_revolver_zm"] = & "CP_RAVE_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_m1_zm"] = & "CP_RAVE_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_m1c_zm"] = & "CP_RAVE_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_spas_zmr"] = & "CP_RAVE_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_crb_zml"] = & "CP_RAVE_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_erad_zm"] = & "CP_RAVE_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_kbs_zm"] = & "CP_RAVE_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_ripper_zmr"] = & "CP_RAVE_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_ump45_zml"] = & "CP_RAVE_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_m8_zm"] = & "CP_RAVE_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_cheytac_zmr"] = & "CP_RAVE_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_two_headed_axe_mp"] = & "CP_RAVE_PICKUP_WEAPON";
-  level.interaction_hintstrings["iw7_golf_club_mp"] = & "CP_RAVE_PICKUP_WEAPON";
-  level.interaction_hintstrings["iw7_spiked_bat_mp"] = & "CP_RAVE_PICKUP_WEAPON";
-  level.interaction_hintstrings["iw7_machete_mp"] = & "CP_RAVE_PICKUP_WEAPON";
-  level.interaction_hintstrings["iw7_g18_zmr"] = & "CP_RAVE_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_axe_zm"] = & "CP_RAVE_BUY_WEAPON";
-  level.interaction_hintstrings["iw7_slasher_zm"] = & "CP_RAVE_PICKUP_WEAPON";
-  level.interaction_hintstrings["iw7_harpoon_zm"] = & "CP_RAVE_PICKUP_WEAPON";
-  level.interaction_hintstrings["iw7_harpoon1_zm"] = & "CP_RAVE_PICKUP_WEAPON";
-  level.interaction_hintstrings["iw7_harpoon2_zm"] = & "CP_RAVE_PICKUP_WEAPON";
-  level.interaction_hintstrings["iw7_harpoon3_zm+akimbo"] = & "CP_RAVE_PICKUP_WEAPON";
-  level.interaction_hintstrings["iw7_harpoon4_zm"] = & "CP_RAVE_PICKUP_WEAPON";
+  level.interaction_hintstrings["iw7_devastator_zm"] = &"CP_RAVE_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_ar57_zm"] = &"CP_RAVE_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_m4_zm"] = &"CP_RAVE_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_fmg_zm"] = &"CP_RAVE_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_ake_zml"] = &"CP_RAVE_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_sonic_zmr"] = &"CP_RAVE_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_revolver_zm"] = &"CP_RAVE_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_m1_zm"] = &"CP_RAVE_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_m1c_zm"] = &"CP_RAVE_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_spas_zmr"] = &"CP_RAVE_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_crb_zml"] = &"CP_RAVE_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_erad_zm"] = &"CP_RAVE_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_kbs_zm"] = &"CP_RAVE_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_ripper_zmr"] = &"CP_RAVE_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_ump45_zml"] = &"CP_RAVE_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_m8_zm"] = &"CP_RAVE_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_cheytac_zmr"] = &"CP_RAVE_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_two_headed_axe_mp"] = &"CP_RAVE_PICKUP_WEAPON";
+  level.interaction_hintstrings["iw7_golf_club_mp"] = &"CP_RAVE_PICKUP_WEAPON";
+  level.interaction_hintstrings["iw7_spiked_bat_mp"] = &"CP_RAVE_PICKUP_WEAPON";
+  level.interaction_hintstrings["iw7_machete_mp"] = &"CP_RAVE_PICKUP_WEAPON";
+  level.interaction_hintstrings["iw7_g18_zmr"] = &"CP_RAVE_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_axe_zm"] = &"CP_RAVE_BUY_WEAPON";
+  level.interaction_hintstrings["iw7_slasher_zm"] = &"CP_RAVE_PICKUP_WEAPON";
+  level.interaction_hintstrings["iw7_harpoon_zm"] = &"CP_RAVE_PICKUP_WEAPON";
+  level.interaction_hintstrings["iw7_harpoon1_zm"] = &"CP_RAVE_PICKUP_WEAPON";
+  level.interaction_hintstrings["iw7_harpoon2_zm"] = &"CP_RAVE_PICKUP_WEAPON";
+  level.interaction_hintstrings["iw7_harpoon3_zm+akimbo"] = &"CP_RAVE_PICKUP_WEAPON";
+  level.interaction_hintstrings["iw7_harpoon4_zm"] = &"CP_RAVE_PICKUP_WEAPON";
   scripts\cp\cp_interaction::register_interaction("iw7_harpoon_zm", "wall_buy", undefined, ::harpoon_hint_func, ::interaction_pickup_harpoon_weapon, 0);
   scripts\cp\cp_interaction::register_interaction("iw7_harpoon1_zm", "wall_buy", undefined, ::harpoon_hint_func, ::interaction_pickup_harpoon_weapon, 0);
   scripts\cp\cp_interaction::register_interaction("iw7_harpoon2_zm", "wall_buy", undefined, ::harpoon_hint_func, ::interaction_pickup_harpoon_weapon, 0);
@@ -256,11 +256,11 @@ register_wall_buys() {
 }
 
 register_afterlife_games() {
-  level.interaction_hintstrings["basketball_game_afterlife"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["laughingclown_afterlife"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["bowling_for_planets_afterlife"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["clown_tooth_game_afterlife"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["game_race"] = & "COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["basketball_game_afterlife"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["laughingclown_afterlife"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["bowling_for_planets_afterlife"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["clown_tooth_game_afterlife"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["game_race"] = &"COOP_INTERACTIONS_PLAY_GAME";
   scripts\cp\cp_interaction::register_interaction("basketball_game_afterlife", "afterlife_game", undefined, undefined, ::scripts\cp\zombies\interaction_basketball::use_basketball_game, 0, 0, ::scripts\cp\zombies\interaction_basketball::init_afterlife_basketball_game);
   scripts\cp\cp_interaction::register_interaction("clown_tooth_game_afterlife", "afterlife_game", undefined, undefined, ::scripts\cp\zombies\interaction_clowntooth::use_clowntooth_game, 0, 0, ::scripts\cp\zombies\interaction_clowntooth::init_afterlife_clowntooth_game);
   scripts\cp\cp_interaction::register_interaction("laughingclown_afterlife", "afterlife_game", undefined, undefined, ::scripts\cp\zombies\interaction_laughingclown::laughing_clown, 0, 0, ::scripts\cp\zombies\interaction_laughingclown::init_all_afterlife_laughing_clowns);
@@ -270,11 +270,11 @@ register_afterlife_games() {
 
 rave_wall_buy_hint_func(param_00, param_01) {
   if(scripts\cp\utility::is_weapon_purchase_disabled()) {
-    return & "CP_RAVE_WALL_BUY_DISABLED";
+    return &"CP_RAVE_WALL_BUY_DISABLED";
   }
 
   if(!param_01 scripts\cp\zombies\coop_wall_buys::can_give_weapon(param_00)) {
-    return & "COOP_INTERACTIONS_CANNOT_BUY";
+    return &"COOP_INTERACTIONS_CANNOT_BUY";
   }
 
   var_02 = weapon_hint_func(param_00, param_01);
@@ -288,7 +288,7 @@ rave_wall_buy_hint_func(param_00, param_01) {
 
 weapon_hint_func(param_00, param_01) {
   if(param_01 scripts\cp\cp_weapon::has_weapon_variation(param_00.script_noteworthy)) {
-    return & "COOP_INTERACTIONS_PURCHASE_AMMO";
+    return &"COOP_INTERACTIONS_PURCHASE_AMMO";
   }
 
   return undefined;
@@ -296,7 +296,7 @@ weapon_hint_func(param_00, param_01) {
 
 harpoon_hint_func(param_00, param_01) {
   if(param_01 hasweapon(param_00.script_noteworthy)) {
-    return & "COOP_GAME_PLAY_RESTRICTED";
+    return &"COOP_GAME_PLAY_RESTRICTED";
   }
 
   return level.interaction_hintstrings[param_00.script_noteworthy];
@@ -422,22 +422,22 @@ melee_weapon_init() {
 }
 
 register_crafting_interactions() {
-  level.interaction_hintstrings["crafting_pickup"] = & "CP_RAVE_PICKUP_OFFERING";
-  level.interaction_hintstrings["crafting_item_swap"] = & "CP_RAVE_CRAFTING_ITEM_SWAP";
-  level.interaction_hintstrings["crafting_station"] = & "CP_RAVE_ADD_CRAFTING_ITEM";
-  level.interaction_hintstrings["crafting_nopiece"] = & "CP_RAVE_NEED_OFFERING";
-  level.interaction_hintstrings["crafted_windowtrap"] = & "ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_LASERTRAP";
-  level.interaction_hintstrings["crafted_autosentry"] = & "ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_AUTOSENTRY";
-  level.interaction_hintstrings["crafted_ims"] = & "ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_IMS";
-  level.interaction_hintstrings["crafted_medusa"] = & "ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_MEDUSA";
-  level.interaction_hintstrings["crafted_electric_trap"] = & "ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_ELECTRIC_TRAP";
-  level.interaction_hintstrings["crafted_boombox"] = & "ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_BOOMBOX";
-  level.interaction_hintstrings["crafted_revocator"] = & "ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_REVOCATOR";
-  level.interaction_hintstrings["crafted_gascan"] = & "ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_GASCAN";
-  level.interaction_hintstrings["crafted_trap_mower"] = & "CP_RAVE_EQUIP_MOWER";
-  level.interaction_hintstrings["crafted_trap_balloon"] = & "CP_RAVE_EQUIP_BALLOONS";
+  level.interaction_hintstrings["crafting_pickup"] = &"CP_RAVE_PICKUP_OFFERING";
+  level.interaction_hintstrings["crafting_item_swap"] = &"CP_RAVE_CRAFTING_ITEM_SWAP";
+  level.interaction_hintstrings["crafting_station"] = &"CP_RAVE_ADD_CRAFTING_ITEM";
+  level.interaction_hintstrings["crafting_nopiece"] = &"CP_RAVE_NEED_OFFERING";
+  level.interaction_hintstrings["crafted_windowtrap"] = &"ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_LASERTRAP";
+  level.interaction_hintstrings["crafted_autosentry"] = &"ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_AUTOSENTRY";
+  level.interaction_hintstrings["crafted_ims"] = &"ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_IMS";
+  level.interaction_hintstrings["crafted_medusa"] = &"ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_MEDUSA";
+  level.interaction_hintstrings["crafted_electric_trap"] = &"ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_ELECTRIC_TRAP";
+  level.interaction_hintstrings["crafted_boombox"] = &"ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_BOOMBOX";
+  level.interaction_hintstrings["crafted_revocator"] = &"ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_REVOCATOR";
+  level.interaction_hintstrings["crafted_gascan"] = &"ZOMBIE_CRAFTING_SOUVENIRS_CRAFTED_GASCAN";
+  level.interaction_hintstrings["crafted_trap_mower"] = &"CP_RAVE_EQUIP_MOWER";
+  level.interaction_hintstrings["crafted_trap_balloon"] = &"CP_RAVE_EQUIP_BALLOONS";
   level.interaction_hintstrings["lair_secret_door"] = "";
-  level.interaction_hintstrings["survivor_interaction"] = & "CP_RAVE_KEVIN";
+  level.interaction_hintstrings["survivor_interaction"] = &"CP_RAVE_KEVIN";
   scripts\cp\cp_interaction::register_interaction("crafting_station", "souvenir_station", undefined, undefined, ::scripts\cp\maps\cp_rave\cp_rave_crafting::use_crafting_station, 0, 1, ::scripts\cp\maps\cp_rave\cp_rave_crafting::init_crafting_station);
   scripts\cp\cp_interaction::register_interaction("crafting_pickup", "souvenir_coin", undefined, undefined, ::scripts\cp\maps\cp_rave\cp_rave_crafting::crafting_item_pickup, 0);
   scripts\cp\cp_interaction::register_interaction("crafted_autosentry", "craftable", undefined, undefined, ::scripts\cp\cp_weapon_autosentry::give_crafted_sentry, 0);
@@ -664,7 +664,7 @@ init_boat_quest() {
 }
 
 boat_quest_hint_func(param_00, param_01) {
-  return & "CP_RAVE_INSPECT_ITEM";
+  return &"CP_RAVE_INSPECT_ITEM";
 }
 
 boat_quest_use_func(param_00, param_01) {
@@ -732,14 +732,14 @@ pap_quest_use_func(param_00, param_01) {
 }
 
 register_arcade_rom_games() {
-  level.interaction_hintstrings["arcade_atlantis"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_beamrid"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_boombang"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_command"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_kaboom"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_ghostbu"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_hero"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_megaman"] = & "COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_atlantis"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_beamrid"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_boombang"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_command"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_kaboom"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_ghostbu"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_hero"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_megaman"] = &"COOP_INTERACTIONS_PLAY_GAME";
   scripts\cp\cp_interaction::register_interaction("arcade_atlantis", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
   scripts\cp\cp_interaction::register_interaction("arcade_beamrid", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
   scripts\cp\cp_interaction::register_interaction("arcade_boombang", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
@@ -748,13 +748,13 @@ register_arcade_rom_games() {
   scripts\cp\cp_interaction::register_interaction("arcade_ghostbu", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
   scripts\cp\cp_interaction::register_interaction("arcade_hero", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
   scripts\cp\cp_interaction::register_interaction("arcade_megaman", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
-  level.interaction_hintstrings["arcade_icehock"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_seaques"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_boxing"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_oink"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_keyston"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_plaque"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_crackpo"] = & "COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_icehock"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_seaques"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_boxing"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_oink"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_keyston"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_plaque"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_crackpo"] = &"COOP_INTERACTIONS_PLAY_GAME";
   scripts\cp\cp_interaction::register_interaction("arcade_icehock", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
   scripts\cp\cp_interaction::register_interaction("arcade_seaques", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
   scripts\cp\cp_interaction::register_interaction("arcade_boxing", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
@@ -911,7 +911,7 @@ resetmushroompatchaftercooldown(param_00) {
 mushroom_patch_hint_func(param_00, param_01) {
   if(scripts\engine\utility::istrue(param_01.rave_mode)) {
     if(isDefined(param_00.currentlyownedby[param_01.name])) {
-      return & "CP_RAVE_USE_FAIRIES";
+      return &"CP_RAVE_USE_FAIRIES";
     }
 
     return "";
@@ -930,10 +930,10 @@ delay_use_for_time(param_00, param_01) {
 
 rave_ritual_stone_hint(param_00, param_01) {
   if(!scripts\engine\utility::istrue(param_01.has_rave_dust)) {
-    return & "CP_RAVE_NEED_POUCH";
+    return &"CP_RAVE_NEED_POUCH";
   }
 
-  return & "CP_RAVE_THROW_POUCH";
+  return &"CP_RAVE_THROW_POUCH";
 }
 
 use_rave_ritual_stone(param_00, param_01) {
@@ -1006,12 +1006,12 @@ exit_rave_on_laststand() {
 }
 
 register_mini_games() {
-  level.interaction_hintstrings["interaction_knife_throw"] = & "COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["interaction_knife_throw"] = &"COOP_INTERACTIONS_PLAY_GAME";
   scripts\cp\cp_interaction::register_interaction("interaction_knife_throw", "arcade_game", undefined, undefined, ::scripts\cp\zombies\interaction_knife_throw::use_knife_throw, 0, 0, ::scripts\cp\zombies\interaction_knife_throw::init_knifethrow_game);
 }
 
 register_super_slasher_fight_interactions() {
-  level.interaction_hintstrings["memory_trap_trigger"] = & "COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["memory_trap_trigger"] = &"COOP_INTERACTIONS_PLAY_GAME";
   scripts\cp\cp_interaction::register_interaction("memory_trap_trigger", "memory_trap_trigger", undefined, undefined, ::scripts\cp\maps\cp_rave\cp_rave_super_slasher_fight::use_memory_trap, 0, 0, ::scripts\cp\maps\cp_rave\cp_rave_super_slasher_fight::init_memory_traps);
 }
 
@@ -1165,13 +1165,13 @@ cp_rave_wait_for_interaction_triggered(param_00) {
         continue;
       }
     } else if(scripts\cp\cp_interaction::interaction_is_souvenir(param_00) && scripts\cp\cp_interaction::player_has_souvenir(param_00, self)) {
-      scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_ALREADY_HAVE");
+      scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_ALREADY_HAVE");
       wait(0.1);
       continue;
     } else if(param_00.script_noteworthy == "dj_quest_speaker") {
       var_03 = self canplayerplacesentry(1, 24);
       if(!self isonground() || !var_03["result"] || abs(param_00.origin[2] - self.origin[2]) > 24) {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_NOT_ENOUGH_SPACE");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_NOT_ENOUGH_SPACE");
         wait(0.1);
         continue;
       }
@@ -1202,7 +1202,7 @@ cp_rave_wait_for_interaction_triggered(param_00) {
         var_02 = 0;
       } else if(scripts\engine\utility::istrue(var_01.has_zis_soul_key) || scripts\engine\utility::istrue(level.placed_alien_fuses)) {
         if(var_05 == 3) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_UPGRADE_MAXED");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_UPGRADE_MAXED");
           wait(0.1);
           continue;
         } else if(scripts\cp\cp_weapon::can_upgrade(var_04)) {
@@ -1212,12 +1212,12 @@ cp_rave_wait_for_interaction_triggered(param_00) {
             var_02 = 10000;
           }
         } else {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "CP_RAVE_UPGRADE_WEAPON_FAIL");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"CP_RAVE_UPGRADE_WEAPON_FAIL");
           wait(0.1);
           continue;
         }
       } else if(var_05 == level.pap_max) {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_UPGRADE_MAXED");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_UPGRADE_MAXED");
         wait(0.1);
         continue;
       } else if(scripts\cp\cp_weapon::can_upgrade(var_04)) {
@@ -1227,20 +1227,20 @@ cp_rave_wait_for_interaction_triggered(param_00) {
           var_02 = 10000;
         }
       } else {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "CP_RAVE_UPGRADE_WEAPON_FAIL");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"CP_RAVE_UPGRADE_WEAPON_FAIL");
         wait(0.1);
         continue;
       }
     } else if(isDefined(param_00.script_noteworthy) && param_00.script_noteworthy == "spawned_essence") {
       if(!scripts\cp\utility::weaponhasattachment(var_01 getcurrentweapon(), "arcane_base")) {
         thread scripts\cp\cp_vo::try_to_play_vo("quest_arcane_nocore_fail", "zmb_comment_vo", "medium", 10, 0, 0, 1, 100);
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "CP_QUEST_WOR_CANNOT_PICKUP_ESSENCE");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"CP_QUEST_WOR_CANNOT_PICKUP_ESSENCE");
         wait(0.1);
         continue;
       }
     } else if(scripts\cp\cp_interaction::interaction_is_white_ark(param_00)) {
       if(!scripts\cp\utility::weaponhasattachment(var_01 getcurrentweapon(), "arcane_base")) {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "CP_QUEST_WOR_CANNOT_PICKUP_ESSENCE");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"CP_QUEST_WOR_CANNOT_PICKUP_ESSENCE");
         wait(0.1);
         continue;
       }
@@ -1254,7 +1254,7 @@ cp_rave_wait_for_interaction_triggered(param_00) {
       var_07 = scripts\cp\utility::getbaseweaponname(var_06);
       if(param_00.script_parameters == "tickets") {
         if(self hasweapon(param_00.script_noteworthy)) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_ALREADY_HAVE");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_ALREADY_HAVE");
           wait(0.1);
           continue;
         }
@@ -1265,7 +1265,7 @@ cp_rave_wait_for_interaction_triggered(param_00) {
 
       if(scripts\cp\cp_weapon::has_weapon_variation(param_00.script_noteworthy)) {
         if(!scripts\cp\cp_interaction::can_purchase_ammo(param_00.script_noteworthy)) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_GAME_PLAY_AMMO_MAX");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_GAME_PLAY_AMMO_MAX");
           wait(0.1);
           continue;
         } else {
@@ -1298,20 +1298,20 @@ cp_rave_wait_for_interaction_triggered(param_00) {
       if(param_00.script_noteworthy == "large_ticket_prize") {
         var_09 = scripts\cp\utility::get_attachment_from_interaction(param_00);
         if(scripts\cp\utility::weaponhasattachment(self getcurrentweapon(), var_09)) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_ALREADY_HAVE");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_ALREADY_HAVE");
           wait(0.1);
           continue;
         }
 
         if(!scripts\cp\cp_weapon::can_use_attachment(var_09)) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_PILLAGE_CANT_USE");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_PILLAGE_CANT_USE");
           wait(0.1);
           continue;
         }
       } else if(param_00.script_noteworthy == "arcade_counter_grenade") {
         var_0A = scripts\cp\powers\coop_powers::what_power_is_in_slot("primary");
         if(self.powers[var_0A].charges >= level.powers[var_0A].maxcharges) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_EQUIPMENT_FULL");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_EQUIPMENT_FULL");
           wait(0.1);
           continue;
         }
@@ -1326,7 +1326,7 @@ cp_rave_wait_for_interaction_triggered(param_00) {
           }
 
           if(var_0C) {
-            scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_GAME_PLAY_AMMO_MAX");
+            scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_GAME_PLAY_AMMO_MAX");
             wait(0.1);
             continue;
           }
@@ -1335,7 +1335,7 @@ cp_rave_wait_for_interaction_triggered(param_00) {
     } else if(scripts\cp\cp_interaction::interaction_is_fortune_teller(param_00)) {
       if(!scripts\engine\utility::istrue(level.unlimited_fnf)) {
         if(var_01.card_refills == 2) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_NO_MORE_CARDS_OWNED");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_NO_MORE_CARDS_OWNED");
           wait(0.1);
           continue;
         }
@@ -1352,7 +1352,7 @@ cp_rave_wait_for_interaction_triggered(param_00) {
       }
 
       if(isDefined(self.powers[param_00.power_name]) && self.powers[param_00.power_name].charges >= level.powers[param_00.power_name].maxcharges) {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_EQUIPMENT_FULL");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_EQUIPMENT_FULL");
         wait(0.1);
         continue;
       }
@@ -1369,10 +1369,10 @@ cp_rave_wait_for_interaction_triggered(param_00) {
     if(!scripts\cp\cp_interaction::can_purchase_interaction(param_00, var_02, level.interactions[param_00.script_noteworthy].spend_type)) {
       level notify("interaction", "purchase_denied", level.interactions[param_00.script_noteworthy], self);
       if((scripts\cp\utility::isplayingsolo() || level.only_one_player) && scripts\cp\cp_interaction::interaction_is_perk(param_00) && param_00.perk_type == "perk_machine_revive" && var_01.self_revives_purchased >= var_01.max_self_revive_machine_use) {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_CANNOT_BUY_SELF_REVIVE");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_CANNOT_BUY_SELF_REVIVE");
       } else {
         thread scripts\cp\cp_vo::try_to_play_vo("no_cash", "zmb_comment_vo", "high", 10, 0, 0, 1, 50);
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_NEED_MONEY");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_NEED_MONEY");
       }
 
       wait(0.1);
@@ -1382,7 +1382,7 @@ cp_rave_wait_for_interaction_triggered(param_00) {
     if(param_00.script_noteworthy == "atm_withdrawal") {
       if(isDefined(level.atm_transaction_amount)) {
         if(level.atm_amount_deposited < level.atm_transaction_amount) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_NEED_MONEY");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_NEED_MONEY");
           wait(0.1);
           continue;
         }

@@ -19,11 +19,11 @@
 #namespace dev;
 
 function autoexec __init__sytem__() {
-  system::register("", & __init__, undefined, "");
+  system::register("", &__init__, undefined, "");
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
+  callback::on_start_gametype(&init);
 }
 
 function init() {
@@ -70,7 +70,7 @@ function init() {
       }
     }
   }
-  callback::on_connect( & on_player_connect);
+  callback::on_connect(&on_player_connect);
   for(;;) {
     updatedevsettings();
     wait(0.5);
@@ -646,7 +646,7 @@ function devgui_increase_momentum(score) {
     if(player.sessionstate != "") {
       continue;
     }
-    player globallogic_score::giveplayermomentumnotification(score, & "", "", 0);
+    player globallogic_score::giveplayermomentumnotification(score, &"", "", 0);
   }
 }
 

@@ -84,16 +84,16 @@ function main() {
   setclearanceceiling(17);
   zm_factory_fx::main();
   init_clientfields();
-  scene::add_scene_func("p7_fxanim_zm_factory_bridge_lft_bundle", & bridge_disconnect, "init");
-  scene::add_scene_func("p7_fxanim_zm_factory_bridge_lft_bundle", & bridge_connect, "done");
-  scene::add_scene_func("p7_fxanim_zm_factory_bridge_rt_bundle", & bridge_disconnect, "init");
-  scene::add_scene_func("p7_fxanim_zm_factory_bridge_rt_bundle", & bridge_connect, "done");
+  scene::add_scene_func("p7_fxanim_zm_factory_bridge_lft_bundle", &bridge_disconnect, "init");
+  scene::add_scene_func("p7_fxanim_zm_factory_bridge_lft_bundle", &bridge_connect, "done");
+  scene::add_scene_func("p7_fxanim_zm_factory_bridge_rt_bundle", &bridge_disconnect, "init");
+  scene::add_scene_func("p7_fxanim_zm_factory_bridge_rt_bundle", &bridge_connect, "done");
   level._uses_sticky_grenades = 1;
   level._uses_taser_knuckles = 1;
   zm::init_fx();
   level util::set_lighting_state(1);
-  callback::on_connect( & function_7cb67075);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&function_7cb67075);
+  callback::on_spawned(&on_player_spawned);
   level._effect["eye_glow"] = "zombie/fx_glow_eye_orange";
   level._effect["headshot"] = "zombie/fx_bul_flesh_head_fatal_zmb";
   level._effect["headshot_nochunks"] = "zombie/fx_bul_flesh_head_nochunks_zmb";
@@ -101,7 +101,7 @@ function main() {
   level._effect["animscript_gib_fx"] = "zombie/fx_blood_torso_explo_zmb";
   level._effect["animscript_gibtrail_fx"] = "trail/fx_trail_blood_streak";
   level._effect["switch_sparks"] = "electric/fx_elec_sparks_directional_orange";
-  level.var_9cef605e = & function_81abed86;
+  level.var_9cef605e = &function_81abed86;
   level.default_start_location = "start_room";
   level.default_game_mode = "zclassic";
   zm::spawn_life_brush((700, -986, 280), 128, 128);
@@ -112,31 +112,31 @@ function main() {
     level.start_chest_name = "chest_4";
     clock_snow = getent("clock_snow", "targetname");
     clock_snow ghost();
-    scene::add_scene_func("cin_der_01_intro_3rd_sh050", & clock_shot, "play");
+    scene::add_scene_func("cin_der_01_intro_3rd_sh050", &clock_shot, "play");
     level thread cinematic();
   } else {
     clock = getent("factory_clock", "targetname");
     clock thread scene::play("p7_fxanim_zm_factory_clock_bundle");
   }
   level.has_richtofen = 0;
-  level.powerup_special_drop_override = & powerup_special_drop_override;
-  level.precachecustomcharacters = & precachecustomcharacters;
-  level.givecustomcharacters = & givecustomcharacters;
+  level.powerup_special_drop_override = &powerup_special_drop_override;
+  level.precachecustomcharacters = &precachecustomcharacters;
+  level.givecustomcharacters = &givecustomcharacters;
   level thread setup_personality_character_exerts();
   initcharacterstartindex();
-  level.register_offhand_weapons_for_level_defaults_override = & offhand_weapon_overrride;
-  level.zombiemode_offhand_weapon_give_override = & offhand_weapon_give_override;
-  level._zombie_custom_add_weapons = & custom_add_weapons;
+  level.register_offhand_weapons_for_level_defaults_override = &offhand_weapon_overrride;
+  level.zombiemode_offhand_weapon_give_override = &offhand_weapon_give_override;
+  level._zombie_custom_add_weapons = &custom_add_weapons;
   level thread custom_add_vox();
   level._allow_melee_weapon_switching = 1;
-  level.enemy_location_override_func = & enemy_location_override;
-  level.no_target_override = & no_target_override;
+  level.enemy_location_override_func = &enemy_location_override;
+  level.no_target_override = &no_target_override;
   zm_pap_util::enable_swap_attachments();
   level thread function_e0f73644();
   include_weapons();
   include_powerups();
   include_perks();
-  level.zm_custom_spawn_location_selection = & factory_custom_spawn_location_selection;
+  level.zm_custom_spawn_location_selection = &factory_custom_spawn_location_selection;
   load::main();
   fx_overrides();
   compass::setupminimap("compass_map_zm_factory");
@@ -148,21 +148,21 @@ function main() {
   level.debug_keyline_zombies = 0;
   level.burning_zombies = [];
   level.max_barrier_search_dist_override = 400;
-  level.door_dialog_function = & zm::play_door_dialog;
+  level.door_dialog_function = &zm::play_door_dialog;
   script_anims_init();
-  level.zombie_anim_override = & anim_override_func;
+  level.zombie_anim_override = &anim_override_func;
   level.dog_rounds_allowed = getgametypesetting("allowdogs");
   if(level.dog_rounds_allowed) {
     zm_ai_dogs::enable_dog_rounds();
   }
-  level.fn_custom_round_ai_spawn = & function_33aa4940;
-  level._round_start_func = & zm::round_start;
+  level.fn_custom_round_ai_spawn = &function_33aa4940;
+  level._round_start_func = &zm::round_start;
   init_sounds();
   init_achievement();
   level thread power_electric_switch();
   level thread magic_box_init();
   level.zones = [];
-  level.zone_manager_init_func = & factory_zone_init;
+  level.zone_manager_init_func = &factory_zone_init;
   init_zones[0] = "receiver_zone";
   level thread zm_zonemgr::manage_zones(init_zones);
   level function_a1d5988d();
@@ -170,9 +170,9 @@ function main() {
   level thread jump_from_bridge();
   level lock_additional_player_spawner();
   level thread bridge_init();
-  level.grenade_planted = & function_6ea54e62;
+  level.grenade_planted = &function_6ea54e62;
   level thread sndfunctions();
-  level.sndtrapfunc = & sndpa_traps;
+  level.sndtrapfunc = &sndpa_traps;
   level.monk_scream_trig = getent("monk_scream_trig", "targetname");
   zombie_utility::set_zombie_var("zombie_powerup_drop_max_per_round", 4);
   a_t_audio = getEntArray("audio_bump_trigger", "targetname");
@@ -182,9 +182,9 @@ function main() {
     }
   }
   trigs = getEntArray("trig_ee", "targetname");
-  array::thread_all(trigs, & extra_events);
+  array::thread_all(trigs, &extra_events);
   level.use_powerup_volumes = 1;
-  level.var_9aaae7ae = & function_869d6f66;
+  level.var_9aaae7ae = &function_869d6f66;
   level thread function_6d012317();
   level thread flytrap();
   level thread function_5d386c43();
@@ -736,7 +736,7 @@ function power_electric_switch() {
   playFX(level._effect["switch_sparks"], s_switch.origin, forward);
   zm_zonemgr::connect_zones("outside_east_zone", "outside_south_zone");
   zm_zonemgr::connect_zones("outside_west_zone", "outside_south_zone", 1);
-  level util::delay(19, undefined, & zm_audio::sndmusicsystem_playstate, "power_on");
+  level util::delay(19, undefined, &zm_audio::sndmusicsystem_playstate, "power_on");
 }
 
 function check_for_change() {
@@ -1195,7 +1195,7 @@ function sndspecialradiosetup(alias_prefix, origin1, origin2, origin3) {
 
 function sndradiowait(origin, radio, num) {
   temp_ent = spawn("script_origin", origin);
-  temp_ent thread zm_audio::secretuse("sndRadioHit", vectorscale((1, 0, 0), 255), & zm_audio::sndradio_override, radio);
+  temp_ent thread zm_audio::secretuse("sndRadioHit", vectorscale((1, 0, 0), 255), &zm_audio::sndradio_override, radio);
   temp_ent waittill("sndradiohit", player);
   if(isDefined(level.sndradioa) && level.sndradioa == player) {
     if(num == 1) {
@@ -1504,7 +1504,7 @@ function create_unitrigger(str_hint) {
   s_unitrigger.related_parent = self;
   s_unitrigger.radius = 64;
   self.s_unitrigger = s_unitrigger;
-  zm_unitrigger::register_static_unitrigger(s_unitrigger, & unitrigger_logic);
+  zm_unitrigger::register_static_unitrigger(s_unitrigger, &unitrigger_logic);
 }
 
 function unitrigger_logic() {
@@ -1635,11 +1635,11 @@ function function_4bc4a18d() {
 
 function function_e0f73644() {
   if(math::cointoss()) {
-    level._custom_perks["specialty_staminup"].perk_machine_power_override_thread = & function_384be1c4;
-    level._custom_perks["specialty_deadshot"].perk_machine_power_override_thread = & function_49e223a9;
+    level._custom_perks["specialty_staminup"].perk_machine_power_override_thread = &function_384be1c4;
+    level._custom_perks["specialty_deadshot"].perk_machine_power_override_thread = &function_49e223a9;
   } else {
-    level._custom_perks["specialty_deadshot"].perk_machine_power_override_thread = & function_16d38a15;
-    level._custom_perks["specialty_staminup"].perk_machine_power_override_thread = & function_6000324c;
+    level._custom_perks["specialty_deadshot"].perk_machine_power_override_thread = &function_16d38a15;
+    level._custom_perks["specialty_staminup"].perk_machine_power_override_thread = &function_6000324c;
   }
 }
 
@@ -1678,7 +1678,7 @@ function function_f8f36ff3(str_key, s_custom_perk) {
     machine[i] thread zm_perks::play_loop_on_machine();
   }
   level notify(str_key + "_power_on");
-  array::thread_all(machine_triggers, & zm_perks::set_power_on, 1);
+  array::thread_all(machine_triggers, &zm_perks::set_power_on, 1);
   if(isDefined(level.machine_assets[str_key].power_on_callback)) {
     array::thread_all(machine, level.machine_assets[str_key].power_on_callback);
   }
@@ -1799,14 +1799,14 @@ function function_dafe334() {
 }
 
 function function_afea638c() {
-  level thread setup_devgui_func("", "", 1, & function_75baeb50);
-  level thread setup_devgui_func("", "", 1, & function_5e65cea5);
-  level thread setup_devgui_func("", "", 1, & function_71fe81);
-  level thread setup_devgui_func("", "", 1, & function_dafe334);
-  level thread setup_devgui_func("", "", 1, & function_dabc4be1);
-  level thread setup_devgui_func("", "", 1, & function_35372e3f);
-  level thread setup_devgui_func("", "", 1, & function_7c3a679c);
-  level thread setup_devgui_func("", "", 1, & function_1196e483);
+  level thread setup_devgui_func("", "", 1, &function_75baeb50);
+  level thread setup_devgui_func("", "", 1, &function_5e65cea5);
+  level thread setup_devgui_func("", "", 1, &function_71fe81);
+  level thread setup_devgui_func("", "", 1, &function_dafe334);
+  level thread setup_devgui_func("", "", 1, &function_dabc4be1);
+  level thread setup_devgui_func("", "", 1, &function_35372e3f);
+  level thread setup_devgui_func("", "", 1, &function_7c3a679c);
+  level thread setup_devgui_func("", "", 1, &function_1196e483);
 }
 
 function setup_devgui_func(str_devgui_path, str_dvar, n_value, func, n_base_value) {

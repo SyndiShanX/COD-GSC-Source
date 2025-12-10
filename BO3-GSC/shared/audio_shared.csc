@@ -14,13 +14,13 @@
 #namespace audio;
 
 function autoexec __init__sytem__() {
-  system::register("audio", & __init__, undefined, undefined);
+  system::register("audio", &__init__, undefined, undefined);
 }
 
 function __init__() {
   snd_snapshot_init();
-  callback::on_localclient_connect( & player_init);
-  callback::on_localplayer_spawned( & local_player_spawn);
+  callback::on_localclient_connect(&player_init);
+  callback::on_localplayer_spawned(&local_player_spawn);
   level thread register_clientfields();
   level thread sndkillcam();
   level thread setpfxcontext();
@@ -29,17 +29,17 @@ function __init__() {
 }
 
 function register_clientfields() {
-  clientfield::register("world", "sndMatchSnapshot", 1, 2, "int", & sndmatchsnapshot, 1, 0);
-  clientfield::register("world", "sndFoleyContext", 1, 1, "int", & sndfoleycontext, 0, 0);
-  clientfield::register("scriptmover", "sndRattle", 1, 1, "int", & sndrattle_server, 1, 0);
-  clientfield::register("toplayer", "sndMelee", 1, 1, "int", & weapon_butt_sounds, 1, 1);
-  clientfield::register("vehicle", "sndSwitchVehicleContext", 1, 3, "int", & sndswitchvehiclecontext, 0, 0);
-  clientfield::register("toplayer", "sndCCHacking", 1, 2, "int", & sndcchacking, 1, 1);
-  clientfield::register("toplayer", "sndTacRig", 1, 1, "int", & sndtacrig, 0, 1);
-  clientfield::register("toplayer", "sndLevelStartSnapOff", 1, 1, "int", & sndlevelstartsnapoff, 0, 1);
-  clientfield::register("world", "sndIGCsnapshot", 1, 4, "int", & sndigcsnapshot, 1, 0);
-  clientfield::register("world", "sndChyronLoop", 1, 1, "int", & sndchyronloop, 0, 0);
-  clientfield::register("world", "sndZMBFadeIn", 1, 1, "int", & sndzmbfadein, 1, 0);
+  clientfield::register("world", "sndMatchSnapshot", 1, 2, "int", &sndmatchsnapshot, 1, 0);
+  clientfield::register("world", "sndFoleyContext", 1, 1, "int", &sndfoleycontext, 0, 0);
+  clientfield::register("scriptmover", "sndRattle", 1, 1, "int", &sndrattle_server, 1, 0);
+  clientfield::register("toplayer", "sndMelee", 1, 1, "int", &weapon_butt_sounds, 1, 1);
+  clientfield::register("vehicle", "sndSwitchVehicleContext", 1, 3, "int", &sndswitchvehiclecontext, 0, 0);
+  clientfield::register("toplayer", "sndCCHacking", 1, 2, "int", &sndcchacking, 1, 1);
+  clientfield::register("toplayer", "sndTacRig", 1, 1, "int", &sndtacrig, 0, 1);
+  clientfield::register("toplayer", "sndLevelStartSnapOff", 1, 1, "int", &sndlevelstartsnapoff, 0, 1);
+  clientfield::register("world", "sndIGCsnapshot", 1, 4, "int", &sndigcsnapshot, 1, 0);
+  clientfield::register("world", "sndChyronLoop", 1, 1, "int", &sndchyronloop, 0, 0);
+  clientfield::register("world", "sndZMBFadeIn", 1, 1, "int", &sndzmbfadein, 1, 0);
 }
 
 function local_player_spawn(localclientnum) {
@@ -352,22 +352,22 @@ function init_audio_triggers(localclientnum) {
     println(("" + steptrigs.size) + "");
     println(("" + materialtrigs.size) + "");
   }
-  array::thread_all(steptrigs, & audio_step_trigger, localclientnum);
-  array::thread_all(materialtrigs, & audio_material_trigger, localclientnum);
+  array::thread_all(steptrigs, &audio_step_trigger, localclientnum);
+  array::thread_all(materialtrigs, &audio_material_trigger, localclientnum);
 }
 
 function audio_step_trigger(localclientnum) {
   self._localclientnum = localclientnum;
   for(;;) {
     self waittill("trigger", trigplayer);
-    self thread trigger::function_d1278be0(trigplayer, & trig_enter_audio_step_trigger, & trig_leave_audio_step_trigger);
+    self thread trigger::function_d1278be0(trigplayer, &trig_enter_audio_step_trigger, &trig_leave_audio_step_trigger);
   }
 }
 
 function audio_material_trigger(trig) {
   for(;;) {
     self waittill("trigger", trigplayer);
-    self thread trigger::function_d1278be0(trigplayer, & trig_enter_audio_material_trigger, & trig_leave_audio_material_trigger);
+    self thread trigger::function_d1278be0(trigplayer, &trig_enter_audio_material_trigger, &trig_leave_audio_material_trigger);
   }
 }
 
@@ -454,7 +454,7 @@ function thread_bump_trigger(localclientnum) {
   self._localclientnum = localclientnum;
   for(;;) {
     self waittill("trigger", trigplayer);
-    self thread trigger::function_d1278be0(trigplayer, & trig_enter_bump, & trig_leave_bump);
+    self thread trigger::function_d1278be0(trigplayer, &trig_enter_bump, &trig_leave_bump);
   }
 }
 

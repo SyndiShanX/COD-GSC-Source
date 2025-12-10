@@ -17,7 +17,7 @@
 #namespace electroball_grenade;
 
 function autoexec __init__sytem__() {
-  system::register("electroball_grenade", & __init__, undefined, undefined);
+  system::register("electroball_grenade", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -33,9 +33,9 @@ function __init__() {
   if(!isDefined(level.spawnprotectiontimems)) {
     level.spawnprotectiontimems = 0;
   }
-  callback::on_spawned( & on_player_spawned);
-  callback::on_ai_spawned( & on_ai_spawned);
-  zm::register_actor_damage_callback( & function_f338543f);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_ai_spawned(&on_ai_spawned);
+  zm::register_actor_damage_callback(&function_f338543f);
 }
 
 function register() {
@@ -63,13 +63,13 @@ function function_b0f1e452() {
   watcher.immediatedetonation = 1;
   watcher.detectiongraceperiod = 0.05;
   watcher.detonateradius = 64;
-  watcher.onstun = & weaponobjects::weaponstun;
+  watcher.onstun = &weaponobjects::weaponstun;
   watcher.stuntime = 1;
-  watcher.ondetonatecallback = & proximitydetonate;
+  watcher.ondetonatecallback = &proximitydetonate;
   watcher.activationdelay = 0.05;
   watcher.activatesound = "wpn_claymore_alert";
   watcher.immunespecialty = "specialty_immunetriggershock";
-  watcher.onspawn = & function_f424c33d;
+  watcher.onspawn = &function_f424c33d;
 }
 
 function function_f424c33d(watcher, owner) {

@@ -41,7 +41,7 @@
 #namespace zm_genesis_power;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_power", & __init__, & __main__, undefined);
+  system::register("zm_genesis_power", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -54,7 +54,7 @@ function __init__() {
   level flag::init(level.var_63ceb0b2);
   level thread function_62072a94();
   if(-1) {
-    zm_spawner::register_zombie_death_event_callback( & function_9cc9b090);
+    zm_spawner::register_zombie_death_event_callback(&function_9cc9b090);
   }
   function_f29a5d3a();
   level thread function_bcac2659();
@@ -82,7 +82,7 @@ function function_f29a5d3a() {
 function function_bcac2659() {
   level waittill("start_zombie_round_logic");
   var_5d7a99d0 = getEntArray("power_grid_display", "targetname");
-  array::thread_all(var_5d7a99d0, & function_11da2524);
+  array::thread_all(var_5d7a99d0, &function_11da2524);
   level thread function_28753fd1();
 }
 
@@ -229,7 +229,7 @@ function function_79774b04() {
       }
       if(var_cebeadd5) {
         if(!isDefined(e_player.var_e3e6c76a)) {
-          e_player.var_e3e6c76a = zm_genesis_util::function_89067abe(e_player, & "ZM_GENESIS_POWER_COST", undefined, 100);
+          e_player.var_e3e6c76a = zm_genesis_util::function_89067abe(e_player, &"ZM_GENESIS_POWER_COST", undefined, 100);
         }
       } else if(isDefined(e_player.var_e3e6c76a)) {
         e_player.var_e3e6c76a destroy();
@@ -485,7 +485,7 @@ function function_b016efbe() {
   self thread function_5168ed24();
   wait(2.3);
   level.var_7b91fc17 = self;
-  level.get_closest_valid_player_override = & get_closest_valid_player_override;
+  level.get_closest_valid_player_override = &get_closest_valid_player_override;
   self function_1d9b9b7b();
   level thread function_5003c1cd(1, 0);
   level thread kill_wasps();

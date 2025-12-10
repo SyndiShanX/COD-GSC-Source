@@ -69,7 +69,7 @@ func_95B5(param_00) {
   if(isDefined(level.enter_area_hint)) {
     param_00 sethintstringparams(level.enter_area_hint, var_05);
   } else {
-    param_00 sethintstringparams( & "CP_ZMB_INTERACTIONS_ENTER_THIS_AREA", var_05);
+    param_00 sethintstringparams(&"CP_ZMB_INTERACTIONS_ENTER_THIS_AREA", var_05);
   }
 
   if(isDefined(level.door_properties_func)) {
@@ -157,7 +157,7 @@ func_7E81(param_00) {
 func_100F4() {
   self endon("disconnect");
   thread scripts\cp\cp_vo::try_to_play_vo("no_cash", "zmb_comment_vo", "high", 30, 0, 0, 1, 50);
-  self forceusehinton( & "COOP_INTERACTIONS_NEED_MONEY");
+  self forceusehinton(&"COOP_INTERACTIONS_NEED_MONEY");
   wait(1);
   self getrigindexfromarchetyperef();
 }
@@ -431,7 +431,7 @@ chi_door_think() {
   if(isDefined(level.enter_area_hint)) {
     self sethintstringparams(level.enter_area_hint, var_07);
   } else {
-    self sethintstringparams( & "CP_ZMB_INTERACTIONS_ENTER_THIS_AREA", var_07);
+    self sethintstringparams(&"CP_ZMB_INTERACTIONS_ENTER_THIS_AREA", var_07);
   }
 
   if(isDefined(level.door_properties_func)) {

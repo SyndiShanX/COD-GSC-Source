@@ -33,7 +33,7 @@ function main() {
   namespace_4cda09f7::main();
   level.remotemissile_kill_z = -175 + 50;
   level.team_free_targeting = 1;
-  level.update_escort_robot_path = & update_escort_robot_path;
+  level.update_escort_robot_path = &update_escort_robot_path;
   load::main();
   compass::setupminimap("compass_map_mp_nuketown_x");
   setdvar("compassmaxrange", "2100");
@@ -47,11 +47,11 @@ function main() {
   level.end_game_video.duration = 5;
   level.headless_mannequin_count = 0;
   level.var_ce9a2d1f = 0;
-  level.destructible_callbacks["headless"] = & mannequin_headless;
-  level.destructible_callbacks["right_arm_lower"] = & function_2b3d2035;
-  level.destructible_callbacks["right_arm_upper"] = & function_33cfa2;
-  level.destructible_callbacks["left_arm_lower"] = & function_576ab778;
-  level.destructible_callbacks["left_arm_upper"] = & function_952db647;
+  level.destructible_callbacks["headless"] = &mannequin_headless;
+  level.destructible_callbacks["right_arm_lower"] = &function_2b3d2035;
+  level.destructible_callbacks["right_arm_upper"] = &function_33cfa2;
+  level.destructible_callbacks["left_arm_lower"] = &function_576ab778;
+  level.destructible_callbacks["left_arm_upper"] = &function_952db647;
   level thread function_33a60aeb();
   level.cleandepositpoints = array((21.4622, 133.075, -65.875), (976.601, 630.604, -56.875), (-787.35, 508.411, -59.875), (32.424, 952.018, -60.875));
   level thread nuked_mannequin_init();
@@ -467,6 +467,6 @@ function function_33a60aeb() {
   setenablenode(nodes[0], 0);
 }
 
-function update_escort_robot_path( & patharray) {
+function update_escort_robot_path(&patharray) {
   arrayinsert(patharray, (929, 626, -56.875), 10);
 }

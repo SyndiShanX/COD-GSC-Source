@@ -696,7 +696,7 @@ attach_tunnel_lid(guy) {
   level.sarge do_dialogue("clear_out");
   tunnel = getent("tunnel_entered", "targetname");
   objective_state(2, "done");
-  objective_add(4, "current", & "OKI3_OBJ4_A", tunnel.origin);
+  objective_add(4, "current", &"OKI3_OBJ4_A", tunnel.origin);
 }
 
 detach_tunnel_lid(guy) {

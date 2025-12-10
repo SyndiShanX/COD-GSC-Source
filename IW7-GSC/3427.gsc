@@ -747,10 +747,10 @@ weapon_watch_hint() {
 
   for(;;) {
     if(isDefined(var_00) && var_00 == "iw7_axe_zm" && self.axe_hint_display < 3) {
-      scripts\cp\utility::setlowermessage("msg_axe_hint", & "CP_ZOMBIE_AXE_HINT", 4);
+      scripts\cp\utility::setlowermessage("msg_axe_hint", &"CP_ZOMBIE_AXE_HINT", 4);
       self.axe_hint_display = self.axe_hint_display + 1;
     } else if(isDefined(var_00) && var_00 == "iw7_forgefreeze_zm" && self.forgefreeze_hint_display < 5) {
-      scripts\cp\utility::setlowermessage("msg_axe_hint", & "CP_ZOMBIE_FORGEFREEZE_HINT", 4);
+      scripts\cp\utility::setlowermessage("msg_axe_hint", &"CP_ZOMBIE_FORGEFREEZE_HINT", 4);
       self.forgefreeze_hint_display = self.forgefreeze_hint_display + 1;
     }
 

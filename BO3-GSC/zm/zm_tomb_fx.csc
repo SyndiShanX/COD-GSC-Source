@@ -163,12 +163,12 @@ function setup_prop_anims() {
 
 function play_fx_prop_anims() {
   fxanim_props = struct::get_array("fxanim_chamber_rocks", "targetname");
-  array::thread_all(fxanim_props, & function_1c1d65fb);
+  array::thread_all(fxanim_props, &function_1c1d65fb);
 }
 
 function function_1c1d65fb() {
   self endon("delete");
-  scene::add_scene_func(self.scriptbundlename, & function_b9b12551, "done");
+  scene::add_scene_func(self.scriptbundlename, &function_b9b12551, "done");
   while(true) {
     self scene::play(self.scriptbundlename);
     wait(randomfloatrange(10, 30));

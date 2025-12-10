@@ -828,11 +828,11 @@ persistentdebugline(start, end) {
 }
 
 isnodedontstand() {
-  return (self.spawnflags&4) == 4;
+  return (self.spawnflags& 4) == 4;
 }
 
 isnodedontcrouch() {
-  return (self.spawnflags&8) == 8;
+  return (self.spawnflags& 8) == 8;
 }
 
 doesnodeallowstance(stance) {

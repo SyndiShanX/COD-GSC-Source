@@ -19,12 +19,12 @@
 #namespace zm_zod_traps;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_traps", & __init__, undefined, undefined);
+  system::register("zm_zod_traps", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "trap_chain_state", 1, 2, "int", & update_chain_anims, 0, 0);
-  clientfield::register("scriptmover", "trap_chain_location", 1, 2, "int", & location_func, 0, 0);
+  clientfield::register("scriptmover", "trap_chain_state", 1, 2, "int", &update_chain_anims, 0, 0);
+  clientfield::register("scriptmover", "trap_chain_location", 1, 2, "int", &location_func, 0, 0);
 }
 
 function update_chain_anims(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -36,9 +36,9 @@ function update_chain_anims(localclientnum, oldval, newval, bnewent, binitialsna
   int_location = self clientfield::get("trap_chain_location");
   str_areaname = a_str_areaname[int_location];
   a_mdl_chain_active = getEntArray(localclientnum, "fxanim_chain_trap", "targetname");
-  a_mdl_chain_active = array::filter(a_mdl_chain_active, 0, & filter_areaname, str_areaname);
+  a_mdl_chain_active = array::filter(a_mdl_chain_active, 0, &filter_areaname, str_areaname);
   if(a_mdl_chain_active.size > 0) {
-    array::thread_all(a_mdl_chain_active, & update_active_chain_anims, localclientnum, oldval, newval, bnewent, binitialsnap, fieldname);
+    array::thread_all(a_mdl_chain_active, &update_active_chain_anims, localclientnum, oldval, newval, bnewent, binitialsnap, fieldname);
   }
 }
 

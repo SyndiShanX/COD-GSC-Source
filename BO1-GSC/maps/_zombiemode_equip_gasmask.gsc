@@ -12,7 +12,7 @@ init() {
     return;
   }
   level._CF_PLAYER_GASMASK_OVERLAY = 9;
-  maps\_zombiemode_equipment::register_equipment("equip_gasmask_zm", & "ZOMBIE_EQUIP_GASMASK_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_GASMASK_HOWTO", "gasmask", ::gasmask_activation_watcher_thread);
+  maps\_zombiemode_equipment::register_equipment("equip_gasmask_zm", &"ZOMBIE_EQUIP_GASMASK_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_GASMASK_HOWTO", "gasmask", ::gasmask_activation_watcher_thread);
   PreCacheItem("lower_equip_gasmask_zm");
   level thread gasmask_on_player_connect();
 }

@@ -44,21 +44,21 @@ init_craftables() {
   flag_init("staff_lightning_zm_enabled");
   flag_init("staff_water_zm_enabled");
   register_clientfields();
-  add_zombie_craftable("equip_dieseldrone_zm", & "ZM_TOMB_CRQ", & "ZM_TOMB_CRQ", & "ZM_TOMB_TQ", ::onfullycrafted_quadrotor, 1);
+  add_zombie_craftable("equip_dieseldrone_zm", &"ZM_TOMB_CRQ", &"ZM_TOMB_CRQ", &"ZM_TOMB_TQ", ::onfullycrafted_quadrotor, 1);
   add_zombie_craftable_vox_category("equip_dieseldrone_zm", "build_dd");
   make_zombie_craftable_open("equip_dieseldrone_zm", "veh_t6_dlc_zm_quadrotor", (0, 0, 0), (0, -4, 10));
-  add_zombie_craftable("tomb_shield_zm", & "ZM_TOMB_CRRI", undefined, & "ZOMBIE_BOUGHT_RIOT", undefined, 1);
+  add_zombie_craftable("tomb_shield_zm", &"ZM_TOMB_CRRI", undefined, &"ZOMBIE_BOUGHT_RIOT", undefined, 1);
   add_zombie_craftable_vox_category("tomb_shield_zm", "build_zs");
   make_zombie_craftable_open("tomb_shield_zm", "t6_wpn_zmb_shield_dlc4_dmg0_world", vectorscale((0, -1, 0), 90.0), (0, 0, level.riotshield_placement_zoffset));
-  add_zombie_craftable("elemental_staff_fire", & "ZM_TOMB_CRF", & "ZM_TOMB_INS", & "ZM_TOMB_BOF", ::staff_fire_fullycrafted, 1);
+  add_zombie_craftable("elemental_staff_fire", &"ZM_TOMB_CRF", &"ZM_TOMB_INS", &"ZM_TOMB_BOF", ::staff_fire_fullycrafted, 1);
   add_zombie_craftable_vox_category("elemental_staff_fire", "fire_staff");
-  add_zombie_craftable("elemental_staff_air", & "ZM_TOMB_CRA", & "ZM_TOMB_INS", & "ZM_TOMB_BOA", ::staff_air_fullycrafted, 1);
+  add_zombie_craftable("elemental_staff_air", &"ZM_TOMB_CRA", &"ZM_TOMB_INS", &"ZM_TOMB_BOA", ::staff_air_fullycrafted, 1);
   add_zombie_craftable_vox_category("elemental_staff_air", "air_staff");
-  add_zombie_craftable("elemental_staff_lightning", & "ZM_TOMB_CRL", & "ZM_TOMB_INS", & "ZM_TOMB_BOL", ::staff_lightning_fullycrafted, 1);
+  add_zombie_craftable("elemental_staff_lightning", &"ZM_TOMB_CRL", &"ZM_TOMB_INS", &"ZM_TOMB_BOL", ::staff_lightning_fullycrafted, 1);
   add_zombie_craftable_vox_category("elemental_staff_lightning", "light_staff");
-  add_zombie_craftable("elemental_staff_water", & "ZM_TOMB_CRW", & "ZM_TOMB_INS", & "ZM_TOMB_BOW", ::staff_water_fullycrafted, 1);
+  add_zombie_craftable("elemental_staff_water", &"ZM_TOMB_CRW", &"ZM_TOMB_INS", &"ZM_TOMB_BOW", ::staff_water_fullycrafted, 1);
   add_zombie_craftable_vox_category("elemental_staff_water", "ice_staff");
-  add_zombie_craftable("gramophone", & "ZM_TOMB_CRAFT_GRAMOPHONE", & "ZM_TOMB_CRAFT_GRAMOPHONE", & "ZM_TOMB_BOUGHT_GRAMOPHONE", undefined, 0);
+  add_zombie_craftable("gramophone", &"ZM_TOMB_CRAFT_GRAMOPHONE", &"ZM_TOMB_CRAFT_GRAMOPHONE", &"ZM_TOMB_BOUGHT_GRAMOPHONE", undefined, 0);
   add_zombie_craftable_vox_category("gramophone", "gramophone");
   level.zombie_craftable_persistent_weapon = ::tomb_check_crafted_weapon_persistence;
   level.custom_craftable_validation = ::tomb_custom_craftable_validation;
@@ -400,14 +400,14 @@ tomb_staff_update_prompt(player, b_set_hint_string_now, trigger) {
   if(isDefined(self.crafted) && self.crafted)
     return true;
 
-  self.hint_string = & "ZOMBIE_BUILD_PIECE_MORE";
+  self.hint_string = &"ZOMBIE_BUILD_PIECE_MORE";
 
   if(isDefined(player)) {
     if(!isDefined(player.current_craftable_piece))
       return false;
 
     if(!self.craftablespawn craftable_has_piece(player.current_craftable_piece)) {
-      self.hint_string = & "ZOMBIE_BUILD_PIECE_WRONG";
+      self.hint_string = &"ZOMBIE_BUILD_PIECE_WRONG";
       return false;
     }
   }
@@ -440,37 +440,37 @@ craftable_wait_your_turn() {
 
 quadrotorcraftable() {
   craftable_wait_your_turn();
-  maps\mp\zombies\_zm_craftables::craftable_trigger_think("quadrotor_zm_craftable_trigger", "equip_dieseldrone_zm", "equip_dieseldrone_zm", & "ZM_TOMB_TQ", 1, 1);
+  maps\mp\zombies\_zm_craftables::craftable_trigger_think("quadrotor_zm_craftable_trigger", "equip_dieseldrone_zm", "equip_dieseldrone_zm", &"ZM_TOMB_TQ", 1, 1);
 }
 
 riotshieldcraftable() {
   craftable_wait_your_turn();
-  maps\mp\zombies\_zm_craftables::craftable_trigger_think("riotshield_zm_craftable_trigger", "tomb_shield_zm", "tomb_shield_zm", & "ZOMBIE_GRAB_RIOTSHIELD", 1, 1);
+  maps\mp\zombies\_zm_craftables::craftable_trigger_think("riotshield_zm_craftable_trigger", "tomb_shield_zm", "tomb_shield_zm", &"ZOMBIE_GRAB_RIOTSHIELD", 1, 1);
 }
 
 staffcraftable_air() {
   craftable_wait_your_turn();
-  maps\mp\zombies\_zm_craftables::craftable_trigger_think("staff_air_craftable_trigger", "elemental_staff_air", "staff_air_zm", & "ZM_TOMB_PUAS", 1, 1);
+  maps\mp\zombies\_zm_craftables::craftable_trigger_think("staff_air_craftable_trigger", "elemental_staff_air", "staff_air_zm", &"ZM_TOMB_PUAS", 1, 1);
 }
 
 staffcraftable_fire() {
   craftable_wait_your_turn();
-  maps\mp\zombies\_zm_craftables::craftable_trigger_think("staff_fire_craftable_trigger", "elemental_staff_fire", "staff_fire_zm", & "ZM_TOMB_PUFS", 1, 1);
+  maps\mp\zombies\_zm_craftables::craftable_trigger_think("staff_fire_craftable_trigger", "elemental_staff_fire", "staff_fire_zm", &"ZM_TOMB_PUFS", 1, 1);
 }
 
 staffcraftable_lightning() {
   craftable_wait_your_turn();
-  maps\mp\zombies\_zm_craftables::craftable_trigger_think("staff_lightning_craftable_trigger", "elemental_staff_lightning", "staff_lightning_zm", & "ZM_TOMB_PULS", 1, 1);
+  maps\mp\zombies\_zm_craftables::craftable_trigger_think("staff_lightning_craftable_trigger", "elemental_staff_lightning", "staff_lightning_zm", &"ZM_TOMB_PULS", 1, 1);
 }
 
 staffcraftable_water() {
   craftable_wait_your_turn();
-  maps\mp\zombies\_zm_craftables::craftable_trigger_think("staff_water_craftable_trigger", "elemental_staff_water", "staff_water_zm", & "ZM_TOMB_PUIS", 1, 1);
+  maps\mp\zombies\_zm_craftables::craftable_trigger_think("staff_water_craftable_trigger", "elemental_staff_water", "staff_water_zm", &"ZM_TOMB_PUIS", 1, 1);
 }
 
 gramophonecraftable() {
   craftable_wait_your_turn();
-  maps\mp\zombies\_zm_craftables::craftable_trigger_think("gramophone_craftable_trigger", "gramophone", "gramophone", & "ZOMBIE_GRAB_GRAMOPHONE", 1, 1);
+  maps\mp\zombies\_zm_craftables::craftable_trigger_think("gramophone_craftable_trigger", "gramophone", "gramophone", &"ZOMBIE_GRAB_GRAMOPHONE", 1, 1);
 }
 
 tankcraftableupdateprompt(player, sethintstringnow, buildabletrigger) {

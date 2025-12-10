@@ -286,7 +286,7 @@ enable_bossfight_magicwheel() {
   level.bossfight_magicwheel setusefov(60);
   level.bossfight_magicwheel setuserange(72);
   level.current_active_wheel = level.bossfight_magicwheel;
-  level.bossfight_magicwheel sethintstring( & "CP_FINAL_SPIN_WHEEL_FREE");
+  level.bossfight_magicwheel sethintstring(&"CP_FINAL_SPIN_WHEEL_FREE");
 }
 
 start_boss_fight() {
@@ -483,13 +483,13 @@ ritualcirclehintfunc(param_00, param_01) {
   var_02 = param_00.circle;
   if(var_02.state == "ACTIVE") {
     if(level.fbd.bossstate == "FRENZIED") {
-      return & "CP_FINAL_ACTIVATE_TALISMAN";
+      return &"CP_FINAL_ACTIVATE_TALISMAN";
     }
 
-    return & "CP_FINAL_TALISMANS_NOTREADY";
+    return &"CP_FINAL_TALISMANS_NOTREADY";
   }
 
-  return & "CP_FINAL_PLACE_TALISMAN";
+  return &"CP_FINAL_PLACE_TALISMAN";
 }
 
 registeractionstocircles() {

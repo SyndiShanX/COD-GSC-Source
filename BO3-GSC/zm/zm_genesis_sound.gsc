@@ -29,11 +29,11 @@
 #namespace zm_genesis_sound;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_sound", & __init__, undefined, undefined);
+  system::register("zm_genesis_sound", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  level.sndplaystateoverride = & function_de04b701;
+  level.sndplaystateoverride = &function_de04b701;
 }
 
 function main() {
@@ -167,7 +167,7 @@ function function_ae93bb6d() {
   if(!isDefined(var_8e47507d)) {
     return;
   }
-  array::thread_all(var_8e47507d, & function_d75eac4e);
+  array::thread_all(var_8e47507d, &function_d75eac4e);
 }
 
 function function_d75eac4e() {
@@ -271,7 +271,7 @@ function function_4b776d12() {
 function function_7624a208() {
   level.var_51d5c50c = 0;
   level.var_c911c0a2 = struct::get_array("side_ee_song_bear", "targetname");
-  array::thread_all(level.var_c911c0a2, & function_4b02c768);
+  array::thread_all(level.var_c911c0a2, &function_4b02c768);
   while(true) {
     level waittill("hash_c3f82290");
     if(level.var_51d5c50c == level.var_c911c0a2.size) {
@@ -334,7 +334,7 @@ function function_d73dcf42() {
 
 function function_c2fa1ebc() {
   vending_triggers = getEntArray("zombie_vending", "targetname");
-  array::thread_all(vending_triggers, & function_1d3f00e6);
+  array::thread_all(vending_triggers, &function_1d3f00e6);
 }
 
 function function_1d3f00e6() {

@@ -12,10 +12,10 @@ init() {
   scripts\engine\utility::flag_init("yellow_crystal_placed");
   scripts\engine\utility::flag_init("dj_wor_use_nag_init");
   scripts\engine\utility::flag_wait("pre_game_over");
-  level.ww_hintstrings["iw7_headcutter_zm"] = & "CP_QUEST_WOR_TAKE_HC";
-  level.ww_hintstrings["iw7_shredder_zm"] = & "CP_QUEST_WOR_TAKE_SHREDDER";
-  level.ww_hintstrings["iw7_facemelter_zm"] = & "CP_QUEST_WOR_TAKE_FACEMELTER";
-  level.ww_hintstrings["iw7_dischord_zm"] = & "CP_QUEST_WOR_TAKE_DISCHORD";
+  level.ww_hintstrings["iw7_headcutter_zm"] = &"CP_QUEST_WOR_TAKE_HC";
+  level.ww_hintstrings["iw7_shredder_zm"] = &"CP_QUEST_WOR_TAKE_SHREDDER";
+  level.ww_hintstrings["iw7_facemelter_zm"] = &"CP_QUEST_WOR_TAKE_FACEMELTER";
+  level.ww_hintstrings["iw7_dischord_zm"] = &"CP_QUEST_WOR_TAKE_DISCHORD";
   level thread init_wor_items();
   level.head_cutter_trap_kills = 0;
   level.angry_mike_trap_kills = 0;
@@ -155,14 +155,14 @@ standee_hint_logic(param_00, param_01) {
   }
 
   if(level.wor_items_picked_up[var_02.script_noteworthy]["toy"] && !level.wor_items_placed[var_02.script_noteworthy]["toy"]) {
-    return & "CP_QUEST_WOR_PLACE_PART";
+    return &"CP_QUEST_WOR_PLACE_PART";
   } else if(level.wor_items_picked_up[var_02.script_noteworthy]["battery"] && !level.wor_items_placed[var_02.script_noteworthy]["battery"]) {
-    return & "CP_QUEST_WOR_PLACE_PART";
+    return &"CP_QUEST_WOR_PLACE_PART";
   } else if(level.wor_items_picked_up[var_02.script_noteworthy]["crystal"] && !level.wor_items_placed[var_02.script_noteworthy]["crystal"]) {
-    return & "CP_QUEST_WOR_PLACE_PART";
+    return &"CP_QUEST_WOR_PLACE_PART";
   }
 
-  return & "CP_QUEST_WOR_ASSEMBLY";
+  return &"CP_QUEST_WOR_ASSEMBLY";
 }
 
 standee_activate_logic(param_00, param_01) {
@@ -297,7 +297,7 @@ fake_crystal_logic(param_00, param_01, param_02, param_03, param_04) {
   param_00 setuserange(64);
   param_00 setusefov(120);
   var_07 = playFXOnTag(var_06, param_00, "tag_origin");
-  param_00 sethintstring( & "CP_QUEST_WOR_PART");
+  param_00 sethintstring(&"CP_QUEST_WOR_PART");
   param_00 waittill("trigger", var_08);
   stopFXOnTag(var_06, param_00, "tag_origin");
   level.wor_items_picked_up[param_01.gun][param_04] = 1;
@@ -811,7 +811,7 @@ run_battery_logic(param_00, param_01, param_02, param_03, param_04) {
   param_00 makeusable();
   param_00 setuserange(64);
   param_00 setusefov(120);
-  param_00 sethintstring( & "CP_QUEST_WOR_PART");
+  param_00 sethintstring(&"CP_QUEST_WOR_PART");
   param_00 waittill("trigger", var_07);
   var_07 thread scripts\cp\cp_vo::try_to_play_vo("quest_" + var_06 + "_battery", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
   param_00 setscriptablepartstate("pickup_piece", "pickup_piece");
@@ -880,7 +880,7 @@ run_toy_logic(param_00, param_01, param_02, param_03, param_04) {
   param_00 makeusable();
   param_00 setuserange(64);
   param_00 setusefov(120);
-  param_00 sethintstring( & "CP_QUEST_WOR_PART");
+  param_00 sethintstring(&"CP_QUEST_WOR_PART");
   param_00 thread spin_toy();
   param_00 waittill("trigger", var_0A);
   switch (param_00.model) {
@@ -1100,7 +1100,7 @@ init_headcutter_data() {
   self.starting_move_structs = scripts\engine\utility::getstructarray("hc_start_struct", "targetname");
   self.charge_distance = 750;
   self.crystal_slot = 0;
-  self.place_on_standee_string = & "CP_QUEST_WOR_PLACE_HC";
+  self.place_on_standee_string = &"CP_QUEST_WOR_PLACE_HC";
 }
 
 init_facemelter_data() {
@@ -1117,7 +1117,7 @@ init_facemelter_data() {
   self.starting_move_structs = scripts\engine\utility::getstructarray("fm_start_struct", "targetname");
   self.charge_distance = 750;
   self.crystal_slot = 1;
-  self.place_on_standee_string = & "CP_QUEST_WOR_PLACE_FACEMELTER";
+  self.place_on_standee_string = &"CP_QUEST_WOR_PLACE_FACEMELTER";
 }
 
 init_dischord_data() {
@@ -1134,7 +1134,7 @@ init_dischord_data() {
   self.starting_move_structs = scripts\engine\utility::getstructarray("dischord_start_struct", "targetname");
   self.charge_distance = 750;
   self.crystal_slot = 2;
-  self.place_on_standee_string = & "CP_QUEST_WOR_PLACE_DISCHORD";
+  self.place_on_standee_string = &"CP_QUEST_WOR_PLACE_DISCHORD";
 }
 
 init_shredder_data() {
@@ -1151,7 +1151,7 @@ init_shredder_data() {
   self.starting_move_structs = scripts\engine\utility::getstructarray("shredder_start_struct", "targetname");
   self.charge_distance = 750;
   self.crystal_slot = 3;
-  self.place_on_standee_string = & "CP_QUEST_WOR_PLACE_SHREDDER";
+  self.place_on_standee_string = &"CP_QUEST_WOR_PLACE_SHREDDER";
 }
 
 get_part_name(param_00) {
@@ -1810,7 +1810,7 @@ wor_quest_pillage_func() {
 wor_quest_specific_pillage_show_func(param_00, param_01, param_02) {
   playFX(level._effect["souvenir_pickup"], param_02.origin + (0, 0, 30));
   param_00 give_glasses_power();
-  param_00 scripts\cp\utility::setlowermessage("msg_power_hint", & "CP_QUEST_WOR_GLASSES_TOGGLE", 4);
+  param_00 scripts\cp\utility::setlowermessage("msg_power_hint", &"CP_QUEST_WOR_GLASSES_TOGGLE", 4);
   param_02 notify("all_players_searched");
 }
 
@@ -1982,7 +1982,7 @@ delete_glasses_after_time(param_00) {
 pick_up_knocked_off_glasses() {
   self hudoutlineenable(2, 1, 0);
   self makeusable();
-  var_00 = & "CP_QUEST_WOR_PART";
+  var_00 = &"CP_QUEST_WOR_PART";
   self sethintstring(var_00);
 }
 

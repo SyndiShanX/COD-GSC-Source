@@ -32,14 +32,14 @@ function callback_actorspawnedfrontend(spawner) {
 }
 
 function main() {
-  level.callbackstartgametype = & callback_void;
-  level.callbackplayerconnect = & callback_playerconnect;
-  level.callbackplayerdisconnect = & callback_void;
-  level.callbackentityspawned = & callback_void;
-  level.callbackactorspawned = & callback_actorspawnedfrontend;
+  level.callbackstartgametype = &callback_void;
+  level.callbackplayerconnect = &callback_playerconnect;
+  level.callbackplayerdisconnect = &callback_void;
+  level.callbackentityspawned = &callback_void;
+  level.callbackactorspawned = &callback_actorspawnedfrontend;
   level.orbis = getdvarstring("orbisGame") == "true";
   level.durango = getdvarstring("durangoGame") == "true";
-  scene::add_scene_func("sb_frontend_black_market", & black_market_play, "play");
+  scene::add_scene_func("sb_frontend_black_market", &black_market_play, "play");
   clientfield::register("world", "first_time_flow", 1, getminbitcountfornum(1), "int");
   clientfield::register("world", "cp_bunk_anim_type", 1, getminbitcountfornum(1), "int");
   clientfield::register("actor", "zombie_has_eyes", 1, 1, "int");

@@ -47,7 +47,7 @@ main() {
     game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
   }
 
-  game["strings"]["overtime_hint"] = & "MP_FIRST_BLOOD";
+  game["strings"]["overtime_hint"] = &"MP_FIRST_BLOOD";
 }
 
 initializematchrules() {
@@ -70,18 +70,18 @@ onstartgametype() {
     game["defenders"] = var_00;
   }
 
-  scripts\mp\utility::setobjectivetext("allies", & "OBJECTIVES_WAR");
-  scripts\mp\utility::setobjectivetext("axis", & "OBJECTIVES_WAR");
+  scripts\mp\utility::setobjectivetext("allies", &"OBJECTIVES_WAR");
+  scripts\mp\utility::setobjectivetext("axis", &"OBJECTIVES_WAR");
   if(level.splitscreen) {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_WAR");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_WAR");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_WAR");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_WAR");
   } else {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_WAR_SCORE");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_WAR_SCORE");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_WAR_SCORE");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_WAR_SCORE");
   }
 
-  scripts\mp\utility::setobjectivehinttext("allies", & "OBJECTIVES_WAR_HINT");
-  scripts\mp\utility::setobjectivehinttext("axis", & "OBJECTIVES_WAR_HINT");
+  scripts\mp\utility::setobjectivehinttext("allies", &"OBJECTIVES_WAR_HINT");
+  scripts\mp\utility::setobjectivehinttext("axis", &"OBJECTIVES_WAR_HINT");
   initspawns();
   var_02[0] = level.gametype;
   scripts\mp\gameobjects::main(var_02);

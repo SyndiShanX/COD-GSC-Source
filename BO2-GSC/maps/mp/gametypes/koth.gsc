@@ -125,7 +125,7 @@ getrespawndelay() {
       return undefined;
 
     if(level.playerobjectiveheldrespawndelay >= level.zoneautomovetime)
-      self.lowermessageoverride = & "MP_WAITING_FOR_HQ";
+      self.lowermessageoverride = &"MP_WAITING_FOR_HQ";
 
     if(level.delayplayer)
       return min(level.spawndelay, timeremaining);
@@ -148,19 +148,19 @@ onstartgametype() {
   maps\mp\gametypes\_globallogic_score::resetteamscores();
 
   foreach(team in level.teams) {
-    setobjectivetext(team, & "OBJECTIVES_KOTH");
+    setobjectivetext(team, &"OBJECTIVES_KOTH");
 
     if(level.splitscreen) {
-      setobjectivescoretext(team, & "OBJECTIVES_KOTH");
+      setobjectivescoretext(team, &"OBJECTIVES_KOTH");
       continue;
     }
 
-    setobjectivescoretext(team, & "OBJECTIVES_KOTH_SCORE");
+    setobjectivescoretext(team, &"OBJECTIVES_KOTH_SCORE");
   }
 
-  level.objectivehintpreparezone = & "MP_CONTROL_KOTH";
-  level.objectivehintcapturezone = & "MP_CAPTURE_KOTH";
-  level.objectivehintdefendhq = & "MP_DEFEND_KOTH";
+  level.objectivehintpreparezone = &"MP_CONTROL_KOTH";
+  level.objectivehintcapturezone = &"MP_CAPTURE_KOTH";
+  level.objectivehintdefendhq = &"MP_DEFEND_KOTH";
   precachestring(level.objectivehintpreparezone);
   precachestring(level.objectivehintcapturezone);
   precachestring(level.objectivehintdefendhq);
@@ -310,14 +310,14 @@ kothcaptureloop() {
 kothmainloop() {
   level endon("game_ended");
   level.zonerevealtime = -100000;
-  zonespawninginstr = & "MP_KOTH_AVAILABLE_IN";
+  zonespawninginstr = &"MP_KOTH_AVAILABLE_IN";
 
   if(level.kothmode) {
-    zonedestroyedinfriendlystr = & "MP_HQ_DESPAWN_IN";
-    zonedestroyedinenemystr = & "MP_KOTH_MOVING_IN";
+    zonedestroyedinfriendlystr = &"MP_HQ_DESPAWN_IN";
+    zonedestroyedinenemystr = &"MP_KOTH_MOVING_IN";
   } else {
-    zonedestroyedinfriendlystr = & "MP_HQ_REINFORCEMENTS_IN";
-    zonedestroyedinenemystr = & "MP_HQ_DESPAWN_IN";
+    zonedestroyedinfriendlystr = &"MP_HQ_REINFORCEMENTS_IN";
+    zonedestroyedinenemystr = &"MP_HQ_DESPAWN_IN";
   }
 
   precachestring(zonespawninginstr);
@@ -465,7 +465,7 @@ onzonecapture(player) {
   capture_team = player.pers["team"];
   capturetime = gettime();
   player logstring("zone captured");
-  string = & "MP_KOTH_CAPTURED_BY";
+  string = &"MP_KOTH_CAPTURED_BY";
   level.zone.gameobject.iscontested = 0;
   level.usestartspawns = 0;
 
@@ -580,12 +580,12 @@ onzonedestroy(player) {
     player.destructions = player.pers["destructions"];
   }
 
-  destroyteammessage = & "MP_HQ_DESTROYED_BY";
-  otherteammessage = & "MP_HQ_DESTROYED_BY_ENEMY";
+  destroyteammessage = &"MP_HQ_DESTROYED_BY";
+  otherteammessage = &"MP_HQ_DESTROYED_BY_ENEMY";
 
   if(level.kothmode) {
-    destroyteammessage = & "MP_KOTH_CAPTURED_BY";
-    otherteammessage = & "MP_KOTH_CAPTURED_BY_ENEMY";
+    destroyteammessage = &"MP_KOTH_CAPTURED_BY";
+    otherteammessage = &"MP_KOTH_CAPTURED_BY_ENEMY";
   }
 
   level thread maps\mp\_popups::displayteammessagetoall(destroyteammessage, player);

@@ -10,11 +10,11 @@
 #namespace zm_powerup_genesis_random_weapon;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_genesis_random_weapon", & __init__, undefined, undefined);
+  system::register("zm_powerup_genesis_random_weapon", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "random_weap_fx", 15000, 1, "int", & function_1913104f, 0, 0);
+  clientfield::register("scriptmover", "random_weap_fx", 15000, 1, "int", &function_1913104f, 0, 0);
   zm_powerups::include_zombie_powerup("genesis_random_weapon");
   zm_powerups::add_zombie_powerup("genesis_random_weapon");
 }

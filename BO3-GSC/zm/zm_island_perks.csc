@@ -26,12 +26,12 @@
 #namespace zm_island_perks;
 
 function init() {
-  clientfield::register("world", "perk_light_speed_cola", 1, 3, "int", & perk_light_speed_cola, 0, 0);
-  clientfield::register("world", "perk_light_doubletap", 1, 3, "int", & perk_light_doubletap, 0, 0);
-  clientfield::register("world", "perk_light_quick_revive", 1, 3, "int", & perk_light_quick_revive, 0, 0);
-  clientfield::register("world", "perk_light_staminup", 1, 3, "int", & perk_light_staminup, 0, 0);
-  clientfield::register("world", "perk_light_juggernog", 1, 3, "int", & perk_light_juggernog, 0, 0);
-  clientfield::register("world", "perk_light_mule_kick", 1, 1, "int", & perk_light_mule_kick, 0, 0);
+  clientfield::register("world", "perk_light_speed_cola", 1, 3, "int", &perk_light_speed_cola, 0, 0);
+  clientfield::register("world", "perk_light_doubletap", 1, 3, "int", &perk_light_doubletap, 0, 0);
+  clientfield::register("world", "perk_light_quick_revive", 1, 3, "int", &perk_light_quick_revive, 0, 0);
+  clientfield::register("world", "perk_light_staminup", 1, 3, "int", &perk_light_staminup, 0, 0);
+  clientfield::register("world", "perk_light_juggernog", 1, 3, "int", &perk_light_juggernog, 0, 0);
+  clientfield::register("world", "perk_light_mule_kick", 1, 1, "int", &perk_light_mule_kick, 0, 0);
 }
 
 function perk_light_speed_cola(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

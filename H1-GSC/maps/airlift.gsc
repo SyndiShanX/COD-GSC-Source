@@ -108,11 +108,11 @@ main() {
       level.acolornodetriggers = common_scripts\utility::array_add(level.acolornodetriggers, var_0[var_1]);
   }
 
-  maps\_utility::add_start("debug", ::start_debug, & "STARTS_DEBUG");
-  maps\_utility::add_start("smoketown", ::start_smoketown, & "STARTS_SMOKETOWN");
-  maps\_utility::add_start("cobraflight", ::start_cobraflight, & "STARTS_COBRAFLIGHT");
-  maps\_utility::add_start("cobrastreets", ::start_cobrastreets, & "STARTS_COBRASTREETS");
-  maps\_utility::add_start("nuke", ::start_nuke, & "STARTS_STARTSCOBRASTREETS");
+  maps\_utility::add_start("debug", ::start_debug, &"STARTS_DEBUG");
+  maps\_utility::add_start("smoketown", ::start_smoketown, &"STARTS_SMOKETOWN");
+  maps\_utility::add_start("cobraflight", ::start_cobraflight, &"STARTS_COBRAFLIGHT");
+  maps\_utility::add_start("cobrastreets", ::start_cobrastreets, &"STARTS_COBRASTREETS");
+  maps\_utility::add_start("nuke", ::start_nuke, &"STARTS_STARTSCOBRASTREETS");
   maps\_utility::default_start(::start_default);
   vehicle_scripts\_mig29::setmig29fxoverride("contrail", "fx\smoke\jet_contrail_airlift");
   vehicle_scripts\_mig29::setmig29fxoverride("contrail_02", "fx\smoke\jet_contrail_airlift");
@@ -2830,7 +2830,7 @@ obj_plaza_clear() {
   common_scripts\utility::flag_wait("obj_plaza_clear_given");
   var_0 = 2;
   var_1 = getent("obj_rescue_pilot", "targetname");
-  objective_add(var_0, "active", & "AIRLIFT_OBJ_PLAZA_CLEAR", var_1.origin);
+  objective_add(var_0, "active", &"AIRLIFT_OBJ_PLAZA_CLEAR", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("obj_plaza_clear_complete");
   objective_state(var_0, "done");
@@ -2840,7 +2840,7 @@ obj_extract_team() {
   common_scripts\utility::flag_wait("obj_extract_team_given");
   var_0 = 4;
   var_1 = getent("obj_extract_team", "targetname");
-  objective_add(var_0, "active", & "AIRLIFT_OBJ_EXTRACT_TEAM", var_1.origin);
+  objective_add(var_0, "active", &"AIRLIFT_OBJ_EXTRACT_TEAM", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("obj_extract_team_complete");
   objective_state(var_0, "done");
@@ -2850,7 +2850,7 @@ obj_extract_to_lz() {
   common_scripts\utility::flag_wait("obj_extract_to_lz_given");
   var_0 = 6;
   var_1 = getent("obj_lz_handhold", "targetname");
-  objective_add(var_0, "active", & "AIRLIFT_OBJ_EXTRACT_TO_LZ", var_1.origin);
+  objective_add(var_0, "active", &"AIRLIFT_OBJ_EXTRACT_TO_LZ", var_1.origin);
   objective_current(var_0);
   var_1 = getent("obj_extract_to_lz", "targetname");
   common_scripts\utility::flag_wait_either("obj_extract_to_lz_complete", "seaknight_back_at_smoketown_lz");
@@ -2865,7 +2865,7 @@ obj_get_on_mark_19() {
   var_0 = 7;
   wait 0.05;
   var_1 = getent("trigger_seaknight_gun", "targetname");
-  objective_add(var_0, "active", & "AIRLIFT_OBJ_GET_ON_MARK_19", var_1.origin);
+  objective_add(var_0, "active", &"AIRLIFT_OBJ_GET_ON_MARK_19", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("obj_get_on_mark_19_complete");
   objective_state(var_0, "done");
@@ -2875,7 +2875,7 @@ obj_rescue_pilot() {
   common_scripts\utility::flag_wait("obj_rescue_pilot_given");
   var_0 = 8;
   var_1 = getent("obj_rescue_pilot", "targetname");
-  objective_add(var_0, "active", & "AIRLIFT_OBJ_RESCUE_PILOT", var_1.origin);
+  objective_add(var_0, "active", &"AIRLIFT_OBJ_RESCUE_PILOT", var_1.origin);
   objective_current(var_0);
   common_scripts\_exploder::exploder(989);
   common_scripts\utility::flag_wait("obj_rescue_pilot_complete");
@@ -2886,7 +2886,7 @@ obj_return_pilot() {
   common_scripts\utility::flag_wait("obj_return_pilot_given");
   var_0 = 9;
   var_1 = getent("obj_rescue_pilot_putdown", "targetname");
-  objective_add(var_0, "active", & "AIRLIFT_OBJ_RETURN_PILOT", var_1.origin);
+  objective_add(var_0, "active", &"AIRLIFT_OBJ_RETURN_PILOT", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("obj_return_pilot_complete");
   objective_state(var_0, "done");
@@ -2896,7 +2896,7 @@ obj_safe_distance() {
   common_scripts\utility::flag_wait("obj_safe_distance_given");
   var_0 = 10;
   var_1 = getent("obj_rescue_pilot", "targetname");
-  objective_add(var_0, "active", & "AIRLIFT_OBJ_SAFE_DISTANCE", var_1.origin);
+  objective_add(var_0, "active", &"AIRLIFT_OBJ_SAFE_DISTANCE", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("obj_safe_distance_complete");
   objective_state(var_0, "done");
@@ -3679,7 +3679,7 @@ rescue_timer(var_0) {
   level.hudtimerindex = 20;
   level.timer = maps\_hud_util::get_countdown_hud(undefined, undefined, undefined, undefined, var_0);
   level.timer setpulsefx(30, 900000, 700);
-  level.timer.text.label = & "AIRLIFT_TIME_REMAINING";
+  level.timer.text.label = &"AIRLIFT_TIME_REMAINING";
   level.timer settenthstimer(var_0);
   thread timer_tick();
   wait(var_0);
@@ -3702,7 +3702,7 @@ mission_failed_out_of_time() {
   level notify("mission failed");
   soundscripts\_snd::snd_message("aud_add_failure_mix");
   musicstop(1);
-  setdvar("ui_deadquote", & "AIRLIFT_RAN_OUT_OF_TIME");
+  setdvar("ui_deadquote", &"AIRLIFT_RAN_OUT_OF_TIME");
   maps\_utility::missionfailedwrapper();
   level notify("kill_timer");
 }

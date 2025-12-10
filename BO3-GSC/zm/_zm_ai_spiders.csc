@@ -14,7 +14,7 @@
 #namespace zm_ai_spiders;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_spiders", & __init__, & __main__, undefined);
+  system::register("zm_ai_spiders", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -28,21 +28,21 @@ function __init__() {
   level._effect["spider_web_doorbuy_tear_complete"] = "dlc2/island/fx_web_barrier_reveal";
   level._effect["spider_web_tear_explosive"] = "dlc2/island/fx_web_impact_rocket";
   register_clientfields();
-  vehicle::add_vehicletype_callback("spider", & function_7c1ef59b);
+  vehicle::add_vehicletype_callback("spider", &function_7c1ef59b);
   visionset_mgr::register_visionset_info("zm_isl_parasite_spider_visionset", 9000, 16, undefined, "zm_isl_parasite_spider");
 }
 
 function __main__() {}
 
 function register_clientfields() {
-  clientfield::register("toplayer", "spider_round_fx", 9000, 1, "counter", & spider_round_fx, 0, 0);
-  clientfield::register("toplayer", "spider_round_ring_fx", 9000, 1, "counter", & spider_round_ring_fx, 0, 0);
-  clientfield::register("toplayer", "spider_end_of_round_reset", 9000, 1, "counter", & spider_end_of_round_reset, 0, 0);
-  clientfield::register("scriptmover", "set_fade_material", 9000, 1, "int", & set_fade_material, 0, 0);
-  clientfield::register("scriptmover", "web_fade_material", 9000, 3, "float", & web_fade_material, 0, 0);
-  clientfield::register("missile", "play_grenade_stuck_in_web_fx", 9000, 1, "int", & play_grenade_stuck_in_web_fx, 0, 0);
-  clientfield::register("scriptmover", "play_spider_web_tear_fx", 9000, getminbitcountfornum(4), "int", & play_spider_web_tear_fx, 0, 0);
-  clientfield::register("scriptmover", "play_spider_web_tear_complete_fx", 9000, getminbitcountfornum(4), "int", & play_spider_web_tear_complete_fx, 0, 0);
+  clientfield::register("toplayer", "spider_round_fx", 9000, 1, "counter", &spider_round_fx, 0, 0);
+  clientfield::register("toplayer", "spider_round_ring_fx", 9000, 1, "counter", &spider_round_ring_fx, 0, 0);
+  clientfield::register("toplayer", "spider_end_of_round_reset", 9000, 1, "counter", &spider_end_of_round_reset, 0, 0);
+  clientfield::register("scriptmover", "set_fade_material", 9000, 1, "int", &set_fade_material, 0, 0);
+  clientfield::register("scriptmover", "web_fade_material", 9000, 3, "float", &web_fade_material, 0, 0);
+  clientfield::register("missile", "play_grenade_stuck_in_web_fx", 9000, 1, "int", &play_grenade_stuck_in_web_fx, 0, 0);
+  clientfield::register("scriptmover", "play_spider_web_tear_fx", 9000, getminbitcountfornum(4), "int", &play_spider_web_tear_fx, 0, 0);
+  clientfield::register("scriptmover", "play_spider_web_tear_complete_fx", 9000, getminbitcountfornum(4), "int", &play_spider_web_tear_complete_fx, 0, 0);
 }
 
 function function_7c1ef59b(localclientnum) {

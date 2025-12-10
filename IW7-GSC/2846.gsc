@@ -27,12 +27,12 @@ func_59CB() {
   scripts\engine\utility::flag_init("show_peek_hint");
   scripts\engine\utility::flag_init("stopping_doorpeek_gesture");
   scripts\engine\utility::flag_init("doorpeek_hand_on_door");
-  scripts\sp\utility::func_16EB("peek_hint", & "SCRIPT_DOORPEEK_HINT", ::func_C9F7);
-  scripts\sp\utility::func_16EB("peek_hint_pc", & "SCRIPT_DOORPEEK_HINT_PC", ::func_C9F7);
-  scripts\sp\utility::func_16EB("peek_hint_shove", & "SCRIPT_DOORPEEK_HINT_SHOVE", ::func_C9F7);
-  scripts\sp\utility::func_16EB("peek_hint_shove_pc", & "SCRIPT_DOORPEEK_HINT_SHOVE_PC", ::func_C9F7);
-  scripts\sp\utility::func_16EB("peek_only_hint", & "SCRIPT_DOORPEEK_HINT_PEEK_ONLY", ::func_C9F7);
-  scripts\sp\utility::func_16EB("peek_only_hint_pc", & "SCRIPT_DOORPEEK_HINT_PEEK_ONLY_PC", ::func_C9F7);
+  scripts\sp\utility::func_16EB("peek_hint", &"SCRIPT_DOORPEEK_HINT", ::func_C9F7);
+  scripts\sp\utility::func_16EB("peek_hint_pc", &"SCRIPT_DOORPEEK_HINT_PC", ::func_C9F7);
+  scripts\sp\utility::func_16EB("peek_hint_shove", &"SCRIPT_DOORPEEK_HINT_SHOVE", ::func_C9F7);
+  scripts\sp\utility::func_16EB("peek_hint_shove_pc", &"SCRIPT_DOORPEEK_HINT_SHOVE_PC", ::func_C9F7);
+  scripts\sp\utility::func_16EB("peek_only_hint", &"SCRIPT_DOORPEEK_HINT_PEEK_ONLY", ::func_C9F7);
+  scripts\sp\utility::func_16EB("peek_only_hint_pc", &"SCRIPT_DOORPEEK_HINT_PEEK_ONLY_PC", ::func_C9F7);
 }
 
 func_C9F7() {
@@ -310,7 +310,7 @@ func_11F8(var_00, var_01) {
     var_02 = level.func_5A23[var_00].func_4C27;
 
   var_2.ogorigin = var_2.origin;
-  var_02 func_0E46::func_48C4(undefined, (0, 0, 0), & "SCRIPT_DOORPEEK_OPEN", undefined, 512);
+  var_02 func_0E46::func_48C4(undefined, (0, 0, 0), &"SCRIPT_DOORPEEK_OPEN", undefined, 512);
   var_02 thread func_13B2(var_00, var_01);
   var_02 thread func_11F6(var_00);
   var_03 = 0;

@@ -20,15 +20,15 @@
 #namespace challenges;
 
 function autoexec __init__sytem__() {
-  system::register("challenges", & __init__, undefined, undefined);
+  system::register("challenges", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & start_gametype);
-  callback::on_spawned( & on_player_spawn);
-  level.heroabilityactivateneardeath = & heroabilityactivateneardeath;
-  level.callbackendherospecialistemp = & callbackendherospecialistemp;
-  level.capturedobjectivefunction = & capturedobjectivefunction;
+  callback::on_start_gametype(&start_gametype);
+  callback::on_spawned(&on_player_spawn);
+  level.heroabilityactivateneardeath = &heroabilityactivateneardeath;
+  level.callbackendherospecialistemp = &callbackendherospecialistemp;
+  level.capturedobjectivefunction = &capturedobjectivefunction;
 }
 
 function start_gametype() {
@@ -40,10 +40,10 @@ function start_gametype() {
     registerchallengescallback("gameEnd", level.scoreeventgameendcallback);
   }
   if(canprocesschallenges()) {
-    registerchallengescallback("playerKilled", & challengekills);
-    registerchallengescallback("gameEnd", & challengegameendmp);
+    registerchallengescallback("playerKilled", &challengekills);
+    registerchallengescallback("gameEnd", &challengegameendmp);
   }
-  callback::on_connect( & on_player_connect);
+  callback::on_connect(&on_player_connect);
 }
 
 function on_player_connect() {

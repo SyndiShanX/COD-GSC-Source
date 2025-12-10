@@ -15,18 +15,18 @@
 #namespace _zm_weap_elemental_bow_storm;
 
 function autoexec __init__sytem__() {
-  system::register("_zm_weap_elemental_bow_storm", & __init__, undefined, undefined);
+  system::register("_zm_weap_elemental_bow_storm", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "elemental_bow_storm" + "_ambient_bow_fx", 5000, 1, "int", & function_e73829fb, 0, 0);
-  clientfield::register("missile", "elemental_bow_storm" + "_arrow_impact_fx", 5000, 1, "int", & function_93740776, 0, 0);
-  clientfield::register("missile", "elemental_bow_storm4" + "_arrow_impact_fx", 5000, 1, "int", & function_c50a03db, 0, 0);
-  clientfield::register("scriptmover", "elem_storm_fx", 5000, 1, "int", & elem_storm_fx, 0, 0);
-  clientfield::register("toplayer", "elem_storm_whirlwind_rumble", 1, 1, "int", & elem_storm_whirlwind_rumble, 0, 0);
-  clientfield::register("scriptmover", "elem_storm_bolt_fx", 5000, 1, "int", & elem_storm_bolt_fx, 0, 0);
-  clientfield::register("scriptmover", "elem_storm_zap_ambient", 5000, 1, "int", & elem_storm_zap_ambient, 0, 0);
-  clientfield::register("actor", "elem_storm_shock_fx", 5000, 2, "int", & elem_storm_shock_fx, 0, 0);
+  clientfield::register("toplayer", "elemental_bow_storm" + "_ambient_bow_fx", 5000, 1, "int", &function_e73829fb, 0, 0);
+  clientfield::register("missile", "elemental_bow_storm" + "_arrow_impact_fx", 5000, 1, "int", &function_93740776, 0, 0);
+  clientfield::register("missile", "elemental_bow_storm4" + "_arrow_impact_fx", 5000, 1, "int", &function_c50a03db, 0, 0);
+  clientfield::register("scriptmover", "elem_storm_fx", 5000, 1, "int", &elem_storm_fx, 0, 0);
+  clientfield::register("toplayer", "elem_storm_whirlwind_rumble", 1, 1, "int", &elem_storm_whirlwind_rumble, 0, 0);
+  clientfield::register("scriptmover", "elem_storm_bolt_fx", 5000, 1, "int", &elem_storm_bolt_fx, 0, 0);
+  clientfield::register("scriptmover", "elem_storm_zap_ambient", 5000, 1, "int", &elem_storm_zap_ambient, 0, 0);
+  clientfield::register("actor", "elem_storm_shock_fx", 5000, 2, "int", &elem_storm_shock_fx, 0, 0);
   level._effect["elem_storm_ambient_bow"] = "dlc1/zmb_weapon/fx_bow_storm_ambient_1p_zmb";
   level._effect["elem_storm_arrow_impact"] = "dlc1/zmb_weapon/fx_bow_storm_impact_zmb";
   level._effect["elem_storm_arrow_charged_impact"] = "dlc1/zmb_weapon/fx_bow_storm_impact_ug_zmb";

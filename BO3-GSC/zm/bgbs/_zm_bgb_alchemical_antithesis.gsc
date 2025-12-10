@@ -13,16 +13,16 @@
 #namespace zm_bgb_alchemical_antithesis;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_alchemical_antithesis", & __init__, undefined, "bgb");
+  system::register("zm_bgb_alchemical_antithesis", &__init__, undefined, "bgb");
 }
 
 function __init__() {
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_alchemical_antithesis", "activated", 2, undefined, undefined, & validation, & activation);
+  bgb::register("zm_bgb_alchemical_antithesis", "activated", 2, undefined, undefined, &validation, &activation);
   bgb::function_336ffc4e("zm_bgb_alchemical_antithesis");
-  bgb::function_ff4b2998("zm_bgb_alchemical_antithesis", & add_to_player_score_override, 0);
+  bgb::function_ff4b2998("zm_bgb_alchemical_antithesis", &add_to_player_score_override, 0);
 }
 
 function validation() {

@@ -29,13 +29,13 @@ func_128EE(param_00, param_01) {
   var_02 = "littlebird_support";
   var_03 = 1;
   if(isDefined(level.var_AD89) || scripts\mp\killstreaks\_helicopter::exceededmaxlittlebirds(var_02)) {
-    self iprintlnbold( & "KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+    self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
   } else if(!level.var_1A66.size) {
-    self iprintlnbold( & "KILLSTREAKS_UNAVAILABLE_IN_LEVEL");
+    self iprintlnbold(&"KILLSTREAKS_UNAVAILABLE_IN_LEVEL");
     return 0;
   } else if(scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + var_03 >= scripts\mp\utility::maxvehiclesallowed()) {
-    self iprintlnbold( & "KILLSTREAKS_TOO_MANY_VEHICLES");
+    self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
     return 0;
   }
 
@@ -318,11 +318,11 @@ func_AAD4() {
       return;
     }
 
-    if(isDefined(var_08) && var_08 & level.idflags_penetration) {
+    if(isDefined(var_08) && var_08 &level.idflags_penetration) {
       self.wasdamagedfrombulletpenetration = 1;
     }
 
-    if(isDefined(var_08) && var_08 & level.idflags_ricochet) {
+    if(isDefined(var_08) && var_08 &level.idflags_ricochet) {
       self.wasdamagedfrombulletricochet = 1;
     }
 

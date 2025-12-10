@@ -17,7 +17,7 @@ function autoexec main() {
   }
   level thread watch_level_drops();
   wait(0.05);
-  callback::on_actor_killed( & actor_killed_check_drops);
+  callback::on_actor_killed(&actor_killed_check_drops);
 }
 
 function add_drop(name, model, callback) {

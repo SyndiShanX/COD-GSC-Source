@@ -34,7 +34,7 @@
 #namespace zm_ai_mechz;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_mechz", & __init__, & __main__, undefined);
+  system::register("zm_ai_mechz", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -57,9 +57,9 @@ function __init__() {
   level.mechz_round_count = 0;
   level.mechz_spawners = getEntArray("zombie_mechz_spawner", "script_noteworthy");
   level.mechz_locations = struct::get_array("mechz_location", "script_noteworthy");
-  spawner::add_archetype_spawn_function("mechz", & function_3d5df242);
-  zm::register_player_damage_callback( & function_ed70c868);
-  level.mechz_flamethrower_ai_callback = & function_1add8026;
+  spawner::add_archetype_spawn_function("mechz", &function_3d5df242);
+  zm::register_player_damage_callback(&function_ed70c868);
+  level.mechz_flamethrower_ai_callback = &function_1add8026;
   level thread aat::register_immunity("zm_aat_blast_furnace", "mechz", 0, 1, 1);
   level thread aat::register_immunity("zm_aat_dead_wire", "mechz", 1, 1, 1);
   level thread aat::register_immunity("zm_aat_fire_works", "mechz", 1, 1, 1);
@@ -73,12 +73,12 @@ function private __main__() {
   if(!isDefined(level.var_98b48f9c)) {
     level.var_98b48f9c = 80;
   }
-  visionset_mgr::register_info("overlay", "mechz_player_burn", 5000, level.var_98b48f9c, 15, 1, & visionset_mgr::duration_lerp_thread_per_player, 0);
+  visionset_mgr::register_info("overlay", "mechz_player_burn", 5000, level.var_98b48f9c, 15, 1, &visionset_mgr::duration_lerp_thread_per_player, 0);
   level.var_e7b9aac8 = 1;
 }
 
 function private function_f20c04a4() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMechzTargetService", & function_c28caf48);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMechzTargetService", &function_c28caf48);
 }
 
 function private function_c28caf48(entity) {
@@ -144,12 +144,12 @@ function private function_3d5df242() {
   self.is_mechz = 1;
   self.n_start_health = self.health;
   self.team = level.zombie_team;
-  self.zombie_lift_override = & function_817c85eb;
-  self.thundergun_fling_func = & function_9bac2f00;
-  self.thundergun_knockdown_func = & function_19b9b682;
-  self.var_23340a5d = & function_9bac2f00;
-  self.var_e1dbd63 = & function_19b9b682;
-  self.var_48cabef5 = & function_48cabef5;
+  self.zombie_lift_override = &function_817c85eb;
+  self.thundergun_fling_func = &function_9bac2f00;
+  self.thundergun_knockdown_func = &function_19b9b682;
+  self.var_23340a5d = &function_9bac2f00;
+  self.var_e1dbd63 = &function_19b9b682;
+  self.var_48cabef5 = &function_48cabef5;
   level thread zm_spawner::zombie_death_event(self);
 }
 
@@ -206,9 +206,9 @@ function spawn_mechz(s_location, flyin = 0) {
       ai thread function_ef1ba7e5();
       ai thread function_949a3fdf();
       ai thread function_75a79bb5();
-      ai.actor_damage_func = & mechzserverutils::mechzdamagecallback;
-      ai.damage_scoring_function = & function_b03abc02;
-      ai.mechz_melee_knockdown_function = & function_55483494;
+      ai.actor_damage_func = &mechzserverutils::mechzdamagecallback;
+      ai.damage_scoring_function = &function_b03abc02;
+      ai.mechz_melee_knockdown_function = &function_55483494;
       ai.health = level.mechz_health;
       ai.faceplate_health = level.mechz_faceplate_health;
       ai.powercap_cover_health = level.mechz_powercap_cover_health;
@@ -543,7 +543,7 @@ function function_75a79bb5() {
 
 function private function_fbad70fd() {
   level flagsys::wait_till("");
-  zm_devgui::add_custom_devgui_callback( & function_94a24a91);
+  zm_devgui::add_custom_devgui_callback(&function_94a24a91);
 }
 
 function private function_94a24a91(cmd) {

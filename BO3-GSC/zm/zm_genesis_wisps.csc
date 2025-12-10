@@ -21,12 +21,12 @@
 #namespace zm_genesis_wisps;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_wisps", & __init__, & __main__, undefined);
+  system::register("zm_genesis_wisps", &__init__, &__main__, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "set_funfact_fx", 15000, 3, "int", & set_funfact_fx, 0, 0);
-  clientfield::register("scriptmover", "wisp_fx", 15000, 2, "int", & wisp_fx, 0, 0);
+  clientfield::register("toplayer", "set_funfact_fx", 15000, 3, "int", &set_funfact_fx, 0, 0);
+  clientfield::register("scriptmover", "wisp_fx", 15000, 2, "int", &wisp_fx, 0, 0);
 }
 
 function __main__() {}

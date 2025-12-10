@@ -378,7 +378,7 @@ func_12EFB() {
     var_04 = level.players[var_03];
     var_05 = var_04.pers["team"];
     if(isDefined(var_05) && var_05 == var_00) {
-      var_04 iprintln( & "RANK_PLAYER_WAS_PROMOTED", self, var_01 + 1);
+      var_04 iprintln(&"RANK_PLAYER_WAS_PROMOTED", self, var_01 + 1);
     }
   }
 }

@@ -24,7 +24,7 @@
 #namespace zm_perk_electric_cherry;
 
 function autoexec __init__sytem__() {
-  system::register("zm_perk_electric_cherry", & __init__, undefined, undefined);
+  system::register("zm_perk_electric_cherry", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -32,12 +32,12 @@ function __init__() {
 }
 
 function enable_electric_cherry_perk_for_level() {
-  zm_perks::register_perk_basic_info("specialty_electriccherry", "electric_cherry", 10, & "ZOMBIE_PERK_WIDOWSWINE", getweapon("zombie_perk_bottle_cherry"));
-  zm_perks::register_perk_precache_func("specialty_electriccherry", & electric_cherry_precache);
-  zm_perks::register_perk_clientfields("specialty_electriccherry", & electric_cherry_register_clientfield, & electric_cherry_set_clientfield);
-  zm_perks::register_perk_machine("specialty_electriccherry", & electric_cherry_perk_machine_setup);
+  zm_perks::register_perk_basic_info("specialty_electriccherry", "electric_cherry", 10, &"ZOMBIE_PERK_WIDOWSWINE", getweapon("zombie_perk_bottle_cherry"));
+  zm_perks::register_perk_precache_func("specialty_electriccherry", &electric_cherry_precache);
+  zm_perks::register_perk_clientfields("specialty_electriccherry", &electric_cherry_register_clientfield, &electric_cherry_set_clientfield);
+  zm_perks::register_perk_machine("specialty_electriccherry", &electric_cherry_perk_machine_setup);
   zm_perks::register_perk_host_migration_params("specialty_electriccherry", "vending_electriccherry", "electric_cherry_light");
-  zm_perks::register_perk_threads("specialty_electriccherry", & electric_cherry_reload_attack, & electric_cherry_perk_lost);
+  zm_perks::register_perk_threads("specialty_electriccherry", &electric_cherry_reload_attack, &electric_cherry_perk_lost);
   if(isDefined(level.custom_electric_cherry_perk_threads) && level.custom_electric_cherry_perk_threads) {
     level thread[[level.custom_electric_cherry_perk_threads]]();
   }
@@ -78,7 +78,7 @@ function electric_cherry_perk_machine_setup(use_trigger, perk_machine, bump_trig
 
 function init_electric_cherry() {
   level._effect["electric_cherry_explode"] = "dlc1/castle/fx_castle_electric_cherry_down";
-  level.custom_laststand_func = & electric_cherry_laststand;
+  level.custom_laststand_func = &electric_cherry_laststand;
   zombie_utility::set_zombie_var("tesla_head_gib_chance", 50);
   clientfield::register("allplayers", "electric_cherry_reload_fx", 1, 2, "int");
   clientfield::register("actor", "tesla_death_fx", 1, 1, "int");
@@ -96,7 +96,7 @@ function electric_cherry_perk_machine_think() {
       machine[i] setModel("p7_zm_vending_nuke");
     }
     level thread zm_perks::do_initial_power_off_callback(machine, "electriccherry");
-    array::thread_all(machine_triggers, & zm_perks::set_power_on, 0);
+    array::thread_all(machine_triggers, &zm_perks::set_power_on, 0);
     level waittill("electric_cherry_on");
     for(i = 0; i < machine.size; i++) {
       machine[i] setModel("p7_zm_vending_nuke");
@@ -106,9 +106,9 @@ function electric_cherry_perk_machine_think() {
       machine[i] thread zm_perks::play_loop_on_machine();
     }
     level notify("specialty_grenadepulldeath_power_on");
-    array::thread_all(machine_triggers, & zm_perks::set_power_on, 1);
+    array::thread_all(machine_triggers, &zm_perks::set_power_on, 1);
     level waittill("electric_cherry_off");
-    array::thread_all(machine_triggers, & zm_perks::turn_perk_off);
+    array::thread_all(machine_triggers, &zm_perks::turn_perk_off);
   }
 }
 

@@ -464,7 +464,6 @@ makeType(destructibleType) {
       destructible_electrical_transformer_large(destructibleType);
       break;
 
-
     default:
       assertMsg("Destructible object 'destructible_type' key/value of '" + destructibleType + "' is not valid");
       break;
@@ -485,7 +484,6 @@ getInfoIndex(destructibleType) {
     if(destructibleType == level.destructible_type[i].v["type"])
       return i;
   }
-
 
   return -1;
 }
@@ -683,7 +681,6 @@ toy_electricbox2(destructibleType) {
 
   destructible_part("tag_fx", "me_electricbox2_door", undefined, undefined, undefined, undefined, 1.0, 1.0);
 
-
   destructible_part("tag_door_upper", "me_electricbox2_door_upper", undefined, undefined, undefined, undefined, 1.0, 1.0);
 }
 
@@ -696,7 +693,6 @@ toy_electricbox2_tropical(destructibleType) {
   destructible_state(undefined, "me_electricbox2_dest_tropical", undefined, undefined, "no_melee");
 
   destructible_part("tag_fx", "me_electricbox2_door_tropical", undefined, undefined, undefined, undefined, 1.0, 1.0);
-
 
   destructible_part("tag_door_upper", "me_electricbox2_door_upper_tropical", undefined, undefined, undefined, undefined, 1.0, 1.0);
 }
@@ -849,7 +845,6 @@ toy_copier(destructibleType) {
   destructible_explode(7000, 8000, 96, 96, 32, 48);
   destructible_state(undefined, "prop_photocopier_destroyed", undefined, undefined, "no_melee");
 
-
   destructible_part("tag_left_feeder", "prop_photocopier_destroyed_left_feeder", 4, undefined, undefined, undefined, 1.0, 1.0);
 
   destructible_part("tag_right_shelf", "prop_photocopier_destroyed_right_shelf", 4, undefined, undefined, undefined, 1.0, 1.0);
@@ -871,7 +866,6 @@ toy_firehydrant(destructibleType) {
   destructible_explode(17000, 18000, 96, 96, 32, 48);
   destructible_state(undefined, "com_firehydrant_dest", undefined, undefined, "no_melee");
 
-
   destructible_part("tag_fx", "com_firehydrant_dam", undefined, undefined, undefined, undefined, 1.0, 1.0);
 
   destructible_part("tag_cap", "com_firehydrant_cap", undefined, undefined, undefined, undefined, 1.0, 1.0);
@@ -885,7 +879,6 @@ toy_parkingmeter(destructibleType) {
   destructible_explode(2800, 3000, 64, 64, 0, 0, true);
   destructible_state(undefined, "com_parkingmeter_damaged", 20, undefined, undefined, "splash");
   destructible_state(undefined, "com_parkingmeter_destroyed", undefined, undefined, undefined, undefined, undefined, true);
-
 
   destructible_part("tag_cap", "com_parkingmeter_cap", undefined, undefined, undefined, undefined, 1.0, 1.0);
 }
@@ -909,7 +902,6 @@ toy_mailbox2(color) {
   destructible_state(undefined, "mailbox_" + color + "_dam", 20, undefined, undefined, "splash");
   destructible_state(undefined, "mailbox_black_dest", undefined, undefined, undefined, undefined, undefined, true);
 
-
   destructible_part("tag_door", "mailbox_" + color + "_door", undefined, undefined, undefined, undefined, 1.0, 1.0);
   destructible_part("tag_flag", "mailbox_black_flag", undefined, undefined, undefined, undefined, 1.0, 1.0);
 }
@@ -923,7 +915,6 @@ toy_newspaper_stand_red(destructibleType) {
   destructible_fx("tag_fx", "props/news_stand_explosion", true, "splash");
   destructible_state(undefined, "com_newspaperbox_red_des", undefined, undefined, undefined, undefined, undefined, false);
 
-
   destructible_part("tag_door", "com_newspaperbox_red_door", undefined, undefined, undefined, undefined, 1.0, 1.0);
 }
 
@@ -935,7 +926,6 @@ toy_newspaper_stand_blue(destructibleType) {
   destructible_state(undefined, "com_newspaperbox_blue_dam", 20, undefined, undefined, "splash");
   destructible_fx("tag_fx", "props/news_stand_explosion", true, "splash");
   destructible_state(undefined, "com_newspaperbox_blue_des", undefined, undefined, undefined, undefined, undefined, false);
-
 
   destructible_part("tag_door", "com_newspaperbox_blue_door", undefined, undefined, undefined, undefined, 1.0, 1.0);
 }
@@ -949,7 +939,6 @@ toy_filecabinet(destructibleType) {
   destructible_sound("exp_filecabinet");
   destructible_physics("tag_drawer_upper", (50, -10, 5));
   destructible_state(undefined, "com_filecabinetblackclosed_des", undefined, undefined, undefined, undefined, undefined, false);
-
 
   destructible_part("tag_drawer_upper", "com_filecabinetblackclosed_drawer", undefined, undefined, undefined, undefined, 1.0, 1.0);
 }
@@ -1205,14 +1194,12 @@ vehicle_bus_destructible() {
   destructible_sound("veh_glass_break_large");
   destructible_state(undefined);
 
-
   tag = "tag_window_front_right";
   destructible_part(tag, undefined, 99, undefined, undefined, undefined, undefined, undefined, true);
   destructible_state(tag + "_d", undefined, 200, undefined, undefined, undefined, true);
   destructible_fx(tag, "props/car_glass_large");
   destructible_sound("veh_glass_break_large");
   destructible_state(undefined);
-
 
   tag = "tag_window_driver";
   destructible_part(tag, undefined, 99, undefined, undefined, undefined, undefined, undefined, true);
@@ -1221,14 +1208,12 @@ vehicle_bus_destructible() {
   destructible_sound("veh_glass_break_large");
   destructible_state(undefined);
 
-
   tag = "tag_window_back";
   destructible_part(tag, undefined, 99, undefined, undefined, undefined, undefined, undefined, true);
   destructible_state(tag + "_d", undefined, 200, undefined, undefined, undefined, true);
   destructible_fx(tag, "props/car_glass_large");
   destructible_sound("veh_glass_break_large");
   destructible_state(undefined);
-
 
   tag = "tag_window_side_1";
   destructible_part(tag, undefined, 99, undefined, undefined, undefined, undefined, undefined, true);
@@ -1237,14 +1222,12 @@ vehicle_bus_destructible() {
   destructible_sound("veh_glass_break_large");
   destructible_state(undefined);
 
-
   tag = "tag_window_side_2";
   destructible_part(tag, undefined, 99, undefined, undefined, undefined, undefined, undefined, true);
   destructible_state(tag + "_d", undefined, 200, undefined, undefined, undefined, true);
   destructible_fx(tag, "props/car_glass_large");
   destructible_sound("veh_glass_break_large");
   destructible_state(undefined);
-
 
   tag = "tag_window_side_3";
   destructible_part(tag, undefined, 99, undefined, undefined, undefined, undefined, undefined, true);
@@ -1253,14 +1236,12 @@ vehicle_bus_destructible() {
   destructible_sound("veh_glass_break_large");
   destructible_state(undefined);
 
-
   tag = "tag_window_side_4";
   destructible_part(tag, undefined, 99, undefined, undefined, undefined, undefined, undefined, true);
   destructible_state(tag + "_d", undefined, 200, undefined, undefined, undefined, true);
   destructible_fx(tag, "props/car_glass_large");
   destructible_sound("veh_glass_break_large");
   destructible_state(undefined);
-
 
   tag = "tag_window_side_5";
   destructible_part(tag, undefined, 99, undefined, undefined, undefined, undefined, undefined, true);
@@ -1269,14 +1250,12 @@ vehicle_bus_destructible() {
   destructible_sound("veh_glass_break_large");
   destructible_state(undefined);
 
-
   tag = "tag_window_side_6";
   destructible_part(tag, undefined, 99, undefined, undefined, undefined, undefined, undefined, true);
   destructible_state(tag + "_d", undefined, 200, undefined, undefined, undefined, true);
   destructible_fx(tag, "props/car_glass_large");
   destructible_sound("veh_glass_break_large");
   destructible_state(undefined);
-
 
   tag = "tag_window_side_7";
   destructible_part(tag, undefined, 99, undefined, undefined, undefined, undefined, undefined, true);
@@ -1285,14 +1264,12 @@ vehicle_bus_destructible() {
   destructible_sound("veh_glass_break_large");
   destructible_state(undefined);
 
-
   tag = "tag_window_side_8";
   destructible_part(tag, undefined, 99, undefined, undefined, undefined, undefined, undefined, true);
   destructible_state(tag + "_d", undefined, 200, undefined, undefined, undefined, true);
   destructible_fx(tag, "props/car_glass_large");
   destructible_sound("veh_glass_break_large");
   destructible_state(undefined);
-
 
   tag = "tag_window_side_9";
   destructible_part(tag, undefined, 99, undefined, undefined, undefined, undefined, undefined, true);
@@ -1301,14 +1278,12 @@ vehicle_bus_destructible() {
   destructible_sound("veh_glass_break_large");
   destructible_state(undefined);
 
-
   tag = "tag_window_side_10";
   destructible_part(tag, undefined, 99, undefined, undefined, undefined, undefined, undefined, true);
   destructible_state(tag + "_d", undefined, 200, undefined, undefined, undefined, true);
   destructible_fx(tag, "props/car_glass_large");
   destructible_sound("veh_glass_break_large");
   destructible_state(undefined);
-
 
   tag = "tag_window_side_11";
   destructible_part(tag, undefined, 99, undefined, undefined, undefined, undefined, undefined, true);
@@ -2208,9 +2183,6 @@ vehicle_moving_truck(destructibleType) {
   destructible_fx("tag_glass_right_front_fx", "props/car_glass_med");
   destructible_sound("veh_glass_break_large");
   destructible_state(undefined);
-
-
-
 }
 
 vehicle_luxurysedan(color) {
@@ -2413,9 +2385,6 @@ vehicle_motorcycle(number) {
   explode_anim = undefined;
   explode_anim = get_precached_anim("vehicle_motorcycle_destroy_" + number);
 
-
-
-
   destructible_create("vehicle_motorcycle_" + number, "body_animate_jnt", 250, undefined, 32, "no_melee");
 
   destructible_loopfx("tag_death_fx", "smoke/car_damage_whitesmoke", 0.4);
@@ -2437,10 +2406,7 @@ vehicle_motorcycle(number) {
 
   destructible_part("front_wheel", "vehicle_motorcycle_01_front_wheel_d", 20, undefined, undefined, "no_melee", undefined, 1.7);
 
-
   destructible_part("rear_wheel", "vehicle_motorcycle_01_rear_wheel_d", 20, undefined, undefined, "no_melee", undefined, 1.7);
-
-
 }
 
 vehicle_subcompact(color) {
@@ -2840,7 +2806,6 @@ destructible_gaspump(destructibleType) {
   destructible_explode(6000, 8000, 210, 300, 50, 300, undefined, undefined, 0.3, 500);
   destructible_state(undefined, "furniture_gaspump01_destroyed", undefined, undefined, "no_melee");
 
-
   destructible_part("tag_panel_front01", "furniture_gaspump01_panel01", 80, undefined, undefined, undefined, 1.0, 1.0, undefined, 1.0);
   destructible_physics();
 
@@ -2851,7 +2816,6 @@ destructible_gaspump(destructibleType) {
   destructible_sound("exp_gaspump_sparks");
   destructible_fx("tag_panel_front03", "props/electricbox4_explode");
   destructible_physics();
-
 
   destructible_part("tag_panel_back01", "furniture_gaspump01_panel01", 110, undefined, undefined, undefined, 1.0, 1.0, undefined, 1.0);
   destructible_physics();
@@ -2889,34 +2853,27 @@ destructible_electrical_transformer_large(destructibleType) {
   destructible_explode(6000, 8000, 210, 300, 20, 300, undefined, undefined, 0.3, 500);
   destructible_state(undefined, "com_electrical_transformer_large_des", undefined, undefined, "no_melee");
 
-
   destructible_part("tag_door1", "com_electrical_transformer_large_dam_door1", 1500, undefined, undefined, undefined, 0, 1.0, undefined, 1);
   destructible_sound("electrical_transformer01_explode_detail");
   destructible_fx("tag_door1", "explosions/generator_explosion");
   destructible_physics();
 
-
   destructible_part("tag_door2", "com_electrical_transformer_large_dam_door2", 150, undefined, undefined, undefined, 0, 1.0, undefined, 1);
   destructible_physics();
-
 
   destructible_part("tag_door3", "com_electrical_transformer_large_dam_door3", 150, undefined, undefined, undefined, 0, 1.0, undefined, 1);
   destructible_physics();
 
-
   destructible_part("tag_door4", "com_electrical_transformer_large_dam_door4", 150, undefined, undefined, undefined, 0, 1.0, undefined, 1);
   destructible_physics();
-
 
   destructible_part("tag_door5", "com_electrical_transformer_large_dam_door5", 1500, undefined, undefined, undefined, 0, 1.0, undefined, 1);
   destructible_sound("electrical_transformer01_explode_detail");
   destructible_fx("tag_door5", "explosions/generator_explosion");
   destructible_physics();
 
-
   destructible_part("tag_door6", "com_electrical_transformer_large_dam_door6", 150, undefined, undefined, undefined, 0, 1.0, undefined, 1);
   destructible_physics();
-
 
   destructible_part("tag_door7", "com_electrical_transformer_large_dam_door7", 150, undefined, undefined, undefined, 0, 1.0, undefined, 1);
   destructible_loopsound("electrical_transformer_sparks");
@@ -3788,7 +3745,6 @@ t5_vehicle_ultimate_jeep_pristine(destructibleType) {
   destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "t5_veh_ultimate_jeep_d", undefined, 32, "no_melee");
 
-
   destructible_part("right_wheel_01_jnt", "t5_vehicle_ultimate_jeep_wheel_rf", 20, undefined, undefined, "no_melee", undefined, 1.7);
   destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
@@ -3799,7 +3755,6 @@ t5_vehicle_ultimate_jeep_pristine(destructibleType) {
   destructible_fx("tag_glass_left_front_fx", "props/car_glass_med");
   destructible_sound("veh_glass_break_large");
   destructible_state(undefined);
-
 
   tag = "tag_glass_right_front";
   destructible_part(tag, undefined, 20, undefined, undefined, undefined, undefined, undefined, true);

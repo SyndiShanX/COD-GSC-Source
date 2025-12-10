@@ -13,7 +13,7 @@
 #namespace ai_sniper;
 
 function autoexec __init__sytem__() {
-  system::register("ai_sniper", & __init__, undefined, undefined);
+  system::register("ai_sniper", &__init__, undefined, undefined);
 }
 
 function __init__() {

@@ -29,19 +29,19 @@
 
 function autoexec init() {
   function_e9b3dfb0();
-  spawner::add_archetype_spawn_function("zombie_quad", & function_5076473f);
+  spawner::add_archetype_spawn_function("zombie_quad", &function_5076473f);
 }
 
 function private function_e9b3dfb0() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("quadPhasingService", & quadphasingservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldPhase", & shouldphase);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("phaseActionStart", & phaseactionstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("phaseActionTerminate", & phaseactionterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("moonQuadKilledByMicrowaveGunDw", & killedbymicrowavegundw);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("moonQuadKilledByMicrowaveGun", & killedbymicrowavegun);
-  animationstatenetwork::registernotetrackhandlerfunction("phase_start", & function_51ab54f7);
-  animationstatenetwork::registernotetrackhandlerfunction("phase_end", & function_428f351c);
-  animationstatenetwork::registeranimationmocomp("quad_phase", & function_4e0a671e, undefined, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("quadPhasingService", &quadphasingservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldPhase", &shouldphase);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("phaseActionStart", &phaseactionstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("phaseActionTerminate", &phaseactionterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("moonQuadKilledByMicrowaveGunDw", &killedbymicrowavegundw);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("moonQuadKilledByMicrowaveGun", &killedbymicrowavegun);
+  animationstatenetwork::registernotetrackhandlerfunction("phase_start", &function_51ab54f7);
+  animationstatenetwork::registernotetrackhandlerfunction("phase_end", &function_428f351c);
+  animationstatenetwork::registeranimationmocomp("quad_phase", &function_4e0a671e, undefined, undefined);
 }
 
 function private quadphasingservice(entity) {
@@ -184,8 +184,8 @@ function moon_quad_prespawn() {
   self.no_gib = 1;
   self.zombie_can_sidestep = 1;
   self.zombie_can_forwardstep = 1;
-  self.sidestepfunc = & moon_quad_sidestep;
-  self.fastsprintfunc = & moon_quad_fastsprint;
+  self.sidestepfunc = &moon_quad_sidestep;
+  self.fastsprintfunc = &moon_quad_fastsprint;
 }
 
 function moon_quad_sidestep(animname, stepanim) {

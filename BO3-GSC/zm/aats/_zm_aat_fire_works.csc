@@ -9,7 +9,7 @@
 #namespace zm_aat_fire_works;
 
 function autoexec __init__sytem__() {
-  system::register("zm_aat_fire_works", & __init__, undefined, undefined);
+  system::register("zm_aat_fire_works", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -17,7 +17,7 @@ function __init__() {
     return;
   }
   aat::register("zm_aat_fire_works", "zmui_zm_aat_fire_works", "t7_icon_zm_aat_fire_works");
-  clientfield::register("scriptmover", "zm_aat_fire_works", 1, 1, "int", & zm_aat_fire_works_summon, 0, 0);
+  clientfield::register("scriptmover", "zm_aat_fire_works", 1, 1, "int", &zm_aat_fire_works_summon, 0, 0);
   level._effect["zm_aat_fire_works"] = "zombie/fx_aat_fireworks_zmb";
 }
 

@@ -13,7 +13,6 @@ main() {
   level._effect["brick"] = loadfx("explosions/grenadeExp_concrete_1");
   level._effect["coolaidmanbrick"] = loadfx("explosions/grenadeExp_concrete_1");
 
-
   level._effect["hallway_smoke"] = loadfx("smoke/hallway_smoke_light");
   level._effect["light_shaft_dust_large"] = loadfx("dust/light_shaft_dust_large");
   level._effect["room_dust_200"] = loadfx("dust/room_dust_200_blend");

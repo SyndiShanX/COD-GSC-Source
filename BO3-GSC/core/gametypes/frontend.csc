@@ -1565,20 +1565,20 @@ class cmegachewbuttons {
 #namespace frontend;
 
 function main() {
-  level.callbackentityspawned = & entityspawned;
-  level.callbacklocalclientconnect = & localclientconnect;
+  level.callbackentityspawned = &entityspawned;
+  level.callbacklocalclientconnect = &localclientconnect;
   level.mpvignettepostfxactive = 0;
   if(!isDefined(level.str_current_safehouse)) {
     level.str_current_safehouse = "mobile";
   }
   level.orbis = getdvarstring("orbisGame") == "true";
   level.durango = getdvarstring("durangoGame") == "true";
-  clientfield::register("world", "first_time_flow", 1, getminbitcountfornum(1), "int", & first_time_flow, 0, 1);
-  clientfield::register("world", "cp_bunk_anim_type", 1, getminbitcountfornum(1), "int", & cp_bunk_anim_type, 0, 1);
+  clientfield::register("world", "first_time_flow", 1, getminbitcountfornum(1), "int", &first_time_flow, 0, 1);
+  clientfield::register("world", "cp_bunk_anim_type", 1, getminbitcountfornum(1), "int", &cp_bunk_anim_type, 0, 1);
   customclass::init();
   level.cameras_active = 0;
-  clientfield::register("actor", "zombie_has_eyes", 1, 1, "int", & zombie_eyes_clientfield_cb, 0, 1);
-  clientfield::register("scriptmover", "dni_eyes", 1000, 1, "int", & dni_eyes, 0, 0);
+  clientfield::register("actor", "zombie_has_eyes", 1, 1, "int", &zombie_eyes_clientfield_cb, 0, 1);
+  clientfield::register("scriptmover", "dni_eyes", 1000, 1, "int", &dni_eyes, 0, 0);
   level._effect["eye_glow"] = "zombie/fx_glow_eye_orange_frontend";
   level._effect["bgb_machine_available"] = "zombie/fx_bgb_machine_available_zmb";
   level._effect["doa_frontend_cigar_lit"] = "fire/fx_cigar_getting_lit";
@@ -1597,38 +1597,38 @@ function cp_bunk_anim_type(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function setupclientmenus(localclientnum) {
   lui::initmenudata(localclientnum);
-  lui::createcustomcameramenu("Main", localclientnum, & lobby_main, 1);
-  lui::createcameramenu("Inspection", localclientnum, "spawn_char_lobbyslide", "cac_main_lobby_camera_01", "cam1", undefined, & start_character_rotating_any, & end_character_rotating_any);
+  lui::createcustomcameramenu("Main", localclientnum, &lobby_main, 1);
+  lui::createcameramenu("Inspection", localclientnum, "spawn_char_lobbyslide", "cac_main_lobby_camera_01", "cam1", undefined, &start_character_rotating_any, &end_character_rotating_any);
   lui::linktocustomcharacter("Inspection", localclientnum, "inspection_character");
   data_struct = lui::getcharacterdataformenu("Inspection", localclientnum);
   data_struct.allow_showcase_weapons = 1;
-  lui::createcameramenu("CPConfirmSelection", localclientnum, "spawn_char_custom", "c_fe_confirm_selection_cam", "cam1", undefined, & open_choose_head_menu, & close_choose_head_menu);
+  lui::createcameramenu("CPConfirmSelection", localclientnum, "spawn_char_custom", "c_fe_confirm_selection_cam", "cam1", undefined, &open_choose_head_menu, &close_choose_head_menu);
   lui::addmenuexploders("CPConfirmSelection", localclientnum, array("char_customization", "char_custom_bg"));
   lui::linktocustomcharacter("CPConfirmSelection", localclientnum, "character_customization");
-  lui::createcustomcameramenu("PersonalizeCharacter", localclientnum, & personalize_characters_watch, 0, & start_character_rotating, & end_character_rotating);
+  lui::createcustomcameramenu("PersonalizeCharacter", localclientnum, &personalize_characters_watch, 0, &start_character_rotating, &end_character_rotating);
   lui::addmenuexploders("PersonalizeCharacter", localclientnum, array("char_customization", "char_custom_bg"));
   lui::linktocustomcharacter("PersonalizeCharacter", localclientnum, "character_customization");
-  lui::createcustomcameramenu("ChooseTaunts", localclientnum, & choose_taunts_camera_watch, 0);
+  lui::createcustomcameramenu("ChooseTaunts", localclientnum, &choose_taunts_camera_watch, 0);
   lui::addmenuexploders("ChooseTaunts", localclientnum, array("char_customization", "char_custom_bg"));
   lui::linktocustomcharacter("ChooseTaunts", localclientnum, "character_customization");
   lui::createcameramenu("OutfitsMainMenu", localclientnum, "spawn_char_custom", "ui_cam_character_customization", "cam_preview");
   lui::addmenuexploders("OutfitsMainMenu", localclientnum, array("char_customization", "char_custom_bg"));
   lui::linktocustomcharacter("OutfitsMainMenu", localclientnum, "character_customization");
-  lui::createcameramenu("ChooseOutfit", localclientnum, "spawn_char_custom", "ui_cam_character_customization", "cam_preview", undefined, & start_character_rotating, & end_character_rotating);
+  lui::createcameramenu("ChooseOutfit", localclientnum, "spawn_char_custom", "ui_cam_character_customization", "cam_preview", undefined, &start_character_rotating, &end_character_rotating);
   lui::addmenuexploders("ChooseOutfit", localclientnum, array("char_customization", "char_custom_bg"));
   lui::linktocustomcharacter("ChooseOutfit", localclientnum, "character_customization");
-  lui::createcameramenu("ChooseHead", localclientnum, "spawn_char_custom", "ui_cam_character_customization", "cam_helmet", undefined, & open_choose_head_menu, & close_choose_head_menu);
+  lui::createcameramenu("ChooseHead", localclientnum, "spawn_char_custom", "ui_cam_character_customization", "cam_helmet", undefined, &open_choose_head_menu, &close_choose_head_menu);
   lui::addmenuexploders("ChooseHead", localclientnum, array("char_customization", "char_custom_bg"));
   lui::linktocustomcharacter("ChooseHead", localclientnum, "character_customization");
-  lui::createcameramenu("ChoosePersonalizationCharacter", localclientnum, "room2_frontend_camera", "ui_cam_char_selection_background", "cam1", undefined, & open_choose_loadout_menu, & close_choose_loadout_menu);
-  lui::createcustomextracamxcamdata("ChoosePersonalizationCharacter", localclientnum, 1, & choose_loadout_extracam_watch);
+  lui::createcameramenu("ChoosePersonalizationCharacter", localclientnum, "room2_frontend_camera", "ui_cam_char_selection_background", "cam1", undefined, &open_choose_loadout_menu, &close_choose_loadout_menu);
+  lui::createcustomextracamxcamdata("ChoosePersonalizationCharacter", localclientnum, 1, &choose_loadout_extracam_watch);
   lui::linktocustomcharacter("ChoosePersonalizationCharacter", localclientnum, "character_customization");
-  lui::createcameramenu("ChooseCharacterLoadout", localclientnum, "room2_frontend_camera", "ui_cam_char_selection_background", "cam1", undefined, & open_choose_loadout_menu, & close_choose_loadout_menu);
+  lui::createcameramenu("ChooseCharacterLoadout", localclientnum, "room2_frontend_camera", "ui_cam_char_selection_background", "cam1", undefined, &open_choose_loadout_menu, &close_choose_loadout_menu);
   lui::linktocustomcharacter("ChooseCharacterLoadout", localclientnum, "character_customization");
   lui::createcameramenu("ChooseGender", localclientnum, "room2_frontend_camera", "ui_cam_char_selection_background", "cam1");
   lui::addmenuexploders("ChooseGender", localclientnum, array("char_customization", "char_custom_bg"));
   lui::linktocustomcharacter("ChooseGender", localclientnum, "character_customization");
-  lui::createcameramenu("chooseClass", localclientnum, "spawn_char_cac_choose", "ui_cam_cac_specialist", "cam_specialist", undefined, & open_choose_class, & close_choose_class);
+  lui::createcameramenu("chooseClass", localclientnum, "spawn_char_cac_choose", "ui_cam_cac_specialist", "cam_specialist", undefined, &open_choose_class, &close_choose_class);
   lui::addmenuexploders("chooseClass", localclientnum, array("char_customization", "lights_paintshop", "weapon_kick", "char_custom_bg"));
   lui::linktocustomcharacter("chooseClass", localclientnum, "character_customization");
   lui::createcustomcameramenu("Paintshop", localclientnum, undefined, 0, undefined, undefined);
@@ -1651,25 +1651,25 @@ function setupclientmenus(localclientnum) {
   lui::addmenuexploders("GroupHeadquarters", localclientnum, array("char_customization", "char_custom_bg"));
   lui::createcustomcameramenu("MediaManager", localclientnum, undefined, 0, undefined, undefined);
   lui::addmenuexploders("MediaManager", localclientnum, array("char_customization", "char_custom_bg"));
-  lui::createcameramenu("WeaponBuildKits", localclientnum, "zm_weapon_position", "ui_cam_cac_specialist", "cam_specialist", undefined, & open_zm_bgb, & close_zm_bgb);
+  lui::createcameramenu("WeaponBuildKits", localclientnum, "zm_weapon_position", "ui_cam_cac_specialist", "cam_specialist", undefined, &open_zm_bgb, &close_zm_bgb);
   lui::addmenuexploders("WeaponBuildKits", localclientnum, array("zm_weapon_kick", "zm_weapon_room"));
-  lui::createcameramenu("CombatRecordWeaponsZM", localclientnum, "zm_weapon_position", "ui_cam_cac_specialist", "cam_specialist", undefined, & open_zm_bgb, & close_zm_bgb);
+  lui::createcameramenu("CombatRecordWeaponsZM", localclientnum, "zm_weapon_position", "ui_cam_cac_specialist", "cam_specialist", undefined, &open_zm_bgb, &close_zm_bgb);
   lui::addmenuexploders("CombatRecordWeaponsZM", localclientnum, array("zm_weapon_kick", "zm_weapon_room"));
-  lui::createcameramenu("BubblegumBuffs", localclientnum, "zm_loadout_position", "c_fe_zm_megachew_vign_camera_2", "c_fe_zm_megachew_vign_camera_2", undefined, & open_zm_bgb, & close_zm_bgb);
+  lui::createcameramenu("BubblegumBuffs", localclientnum, "zm_loadout_position", "c_fe_zm_megachew_vign_camera_2", "c_fe_zm_megachew_vign_camera_2", undefined, &open_zm_bgb, &close_zm_bgb);
   lui::addmenuexploders("BubblegumBuffs", localclientnum, array("zm_gum_kick", "zm_gum_room", "zm_gumball_room_2"));
   playFX(localclientnum, level._effect["bgb_machine_available"], (-2542, 3996, 62) + (64, -1168, 0), anglesToForward(vectorscale((0, 1, 0), 330)), anglestoup(vectorscale((0, 1, 0), 330)));
   lui::createcameramenu("BubblegumPacks", localclientnum, "zm_loadout_position_shift", "c_fe_zm_megachew_vign_camera_2", "c_fe_zm_megachew_vign_camera_2");
   lui::addmenuexploders("BubblegumPacks", localclientnum, array("zm_gum_kick", "zm_gum_room", "zm_gumball_room_2"));
-  lui::createcustomcameramenu("BubblegumPackEdit", localclientnum, undefined, undefined, & open_zm_buildkits, & close_zm_buildkits);
+  lui::createcustomcameramenu("BubblegumPackEdit", localclientnum, undefined, undefined, &open_zm_buildkits, &close_zm_buildkits);
   lui::addmenuexploders("BubblegumPackEdit", localclientnum, array("zm_weapon_kick", "zm_weapon_room", "zm_gumball_room_3"));
-  lui::createcustomcameramenu("BubblegumBuffSelect", localclientnum, undefined, undefined, & open_zm_buildkits, & close_zm_buildkits);
+  lui::createcustomcameramenu("BubblegumBuffSelect", localclientnum, undefined, undefined, &open_zm_buildkits, &close_zm_buildkits);
   lui::addmenuexploders("BubblegumBuffSelect", localclientnum, array("zm_weapon_kick", "zm_weapon_room", "zm_gumball_room_3"));
-  lui::createcustomcameramenu("CombatRecordBubblegumBuffs", localclientnum, undefined, undefined, & open_zm_buildkits, & close_zm_buildkits);
+  lui::createcustomcameramenu("CombatRecordBubblegumBuffs", localclientnum, undefined, undefined, &open_zm_buildkits, &close_zm_buildkits);
   lui::addmenuexploders("CombatRecordBubblegumBuffs", localclientnum, array("zm_weapon_kick", "zm_weapon_room", "zm_gumball_room_3"));
-  lui::createcameramenu("MegaChewFactory", localclientnum, "zm_gum_position", "c_fe_zm_megachew_vign_camera", "default", undefined, & open_zm_bgb_factory, & close_zm_bgb_factory);
+  lui::createcameramenu("MegaChewFactory", localclientnum, "zm_gum_position", "c_fe_zm_megachew_vign_camera", "default", undefined, &open_zm_bgb_factory, &close_zm_bgb_factory);
   lui::addmenuexploders("MegaChewFactory", localclientnum, array("zm_gum_kick", "zm_gum_room"));
-  lui::createcustomcameramenu("Pregame_Main", localclientnum, & lobby_main, 1);
-  lui::createcameramenu("BlackMarket", localclientnum, "mp_frontend_blackmarket", "ui_cam_frontend_blackmarket", "cam_mpmain", undefined, & open_blackmarket, & close_blackmarket);
+  lui::createcustomcameramenu("Pregame_Main", localclientnum, &lobby_main, 1);
+  lui::createcameramenu("BlackMarket", localclientnum, "mp_frontend_blackmarket", "ui_cam_frontend_blackmarket", "cam_mpmain", undefined, &open_blackmarket, &close_blackmarket);
   lui::createcustomcameramenu("CombatRecordWeapons", localclientnum, undefined, 0, undefined, undefined);
   lui::addmenuexploders("CombatRecordWeapons", localclientnum, array("char_customization", "char_custom_bg"));
   lui::createcustomcameramenu("CombatRecordEquipment", localclientnum, undefined, 0, undefined, undefined);
@@ -1678,7 +1678,7 @@ function setupclientmenus(localclientnum) {
   lui::addmenuexploders("CombatRecordCybercore", localclientnum, array("char_customization", "char_custom_bg"));
   lui::createcustomcameramenu("CombatRecordCollectibles", localclientnum, undefined, 0, undefined, undefined);
   lui::addmenuexploders("CombatRecordCollectibles", localclientnum, array("char_customization", "char_custom_bg"));
-  lui::createcameramenu("CombatRecordSpecialists", localclientnum, "spawn_char_cac_choose", "ui_cam_cac_specialist", "cam_specialist", undefined, & open_choose_class, & close_choose_class);
+  lui::createcameramenu("CombatRecordSpecialists", localclientnum, "spawn_char_cac_choose", "ui_cam_cac_specialist", "cam_specialist", undefined, &open_choose_class, &close_choose_class);
   lui::addmenuexploders("CombatRecordSpecialists", localclientnum, array("char_customization", "lights_paintshop", "weapon_kick", "char_custom_bg"));
   lui::linktocustomcharacter("CombatRecordSpecialists", localclientnum, "character_customization");
 }
@@ -2632,11 +2632,11 @@ function doa_lobby_room_effects(a_ents, localclientnum) {
     stopfx(localclientnum, cigar.fx_ambient_id);
   }
   cigar.fx_ambient_id = playFXOnTag(localclientnum, level._effect["doa_frontend_cigar_ambient"], cigar, "tag_fx_smoke");
-  animation::add_global_notetrack_handler("inhale", & doa_lobby_room_effects_cigar_inhale, localclientnum, cigar);
-  animation::add_global_notetrack_handler("puff", & doa_lobby_room_effects_cigar_puff, localclientnum, cigar);
-  animation::add_global_notetrack_handler("flick", & doa_lobby_room_effects_cigar_flick, localclientnum, cigar);
+  animation::add_global_notetrack_handler("inhale", &doa_lobby_room_effects_cigar_inhale, localclientnum, cigar);
+  animation::add_global_notetrack_handler("puff", &doa_lobby_room_effects_cigar_puff, localclientnum, cigar);
+  animation::add_global_notetrack_handler("flick", &doa_lobby_room_effects_cigar_flick, localclientnum, cigar);
   ape = a_ents["zombie"];
-  animation::add_global_notetrack_handler("exhale", & doa_lobby_room_effects_ape_exhale, localclientnum, ape);
+  animation::add_global_notetrack_handler("exhale", &doa_lobby_room_effects_ape_exhale, localclientnum, ape);
 }
 
 function doa_lobby_room(localclientnum) {
@@ -2721,7 +2721,7 @@ function doa_lobby_room(localclientnum) {
     }
     killradiantexploder(0, level.a_str_bunk_scene_exploders[i]);
   }
-  scene::add_scene_func(s_scene.name, & doa_lobby_room_effects, "play", localclientnum);
+  scene::add_scene_func(s_scene.name, &doa_lobby_room_effects, "play", localclientnum);
   s_params = spawnStruct();
   s_params.scene = s_scene.name;
   s_params.sessionmode = 2;

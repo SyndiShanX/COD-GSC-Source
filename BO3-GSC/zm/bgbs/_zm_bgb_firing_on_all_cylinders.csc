@@ -12,7 +12,7 @@
 #namespace zm_bgb_firing_on_all_cylinders;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_firing_on_all_cylinders", & __init__, undefined, undefined);
+  system::register("zm_bgb_firing_on_all_cylinders", &__init__, undefined, undefined);
 }
 
 function __init__() {

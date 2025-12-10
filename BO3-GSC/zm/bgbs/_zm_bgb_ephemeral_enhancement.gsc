@@ -17,14 +17,14 @@
 #namespace zm_bgb_ephemeral_enhancement;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_ephemeral_enhancement", & __init__, undefined, "bgb");
+  system::register("zm_bgb_ephemeral_enhancement", &__init__, undefined, "bgb");
 }
 
 function __init__() {
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_ephemeral_enhancement", "activated", 2, undefined, undefined, & validation, & activation);
+  bgb::register("zm_bgb_ephemeral_enhancement", "activated", 2, undefined, undefined, &validation, &activation);
   bgb::function_f132da9c("zm_bgb_ephemeral_enhancement");
   bgb::function_336ffc4e("zm_bgb_ephemeral_enhancement");
 }

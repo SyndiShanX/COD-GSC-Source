@@ -15,7 +15,7 @@ function testmenu() {
   for(;;) {
     wait(10);
     notifydata = spawnStruct();
-    notifydata.titletext = & "MP_CHALLENGE_COMPLETED";
+    notifydata.titletext = &"MP_CHALLENGE_COMPLETED";
     notifydata.notifytext = "wheee";
     notifydata.sound = "mp_challenge_complete";
     self thread hud_message::notifymessage(notifydata);

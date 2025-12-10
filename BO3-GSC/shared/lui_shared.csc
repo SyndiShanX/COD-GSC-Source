@@ -14,12 +14,12 @@
 #namespace lui;
 
 function autoexec __init__sytem__() {
-  system::register("lui_shared", & __init__, undefined, undefined);
+  system::register("lui_shared", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.client_menus = associativearray();
-  callback::on_localclient_connect( & on_player_connect);
+  callback::on_localclient_connect(&on_player_connect);
 }
 
 function on_player_connect(localclientnum) {

@@ -21,7 +21,7 @@
 #namespace zm_zod_transformer;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_transformer", undefined, & __main__, undefined);
+  system::register("zm_zod_transformer", undefined, &__main__, undefined);
 }
 
 function __main__() {

@@ -1348,7 +1348,7 @@ is_node_script_origin(pathnode) {
 node_trigger_process() {
   processtrigger = 0;
 
-  if(isDefined(self.spawnflags) && (self.spawnflags&1) == 1) {
+  if(isDefined(self.spawnflags) && (self.spawnflags& 1) == 1) {
     if(isDefined(self.script_crashtype)) {
       level.vehicle_crashpaths[level.vehicle_crashpaths.size] = self;
     }

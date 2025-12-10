@@ -8,10 +8,10 @@
 #namespace animation_selector_table_evaluators;
 
 function autoexec registerastscriptfunctions() {
-  animationselectortable::registeranimationselectortableevaluator("testFunction", & testfunction);
-  animationselectortable::registeranimationselectortableevaluator("evaluateBlockedAnimations", & evaluateblockedanimations);
-  animationselectortable::registeranimationselectortableevaluator("evaluateHumanTurnAnimations", & evaluatehumanturnanimations);
-  animationselectortable::registeranimationselectortableevaluator("evaluateHumanExposedArrivalAnimations", & evaluatehumanexposedarrivalanimations);
+  animationselectortable::registeranimationselectortableevaluator("testFunction", &testfunction);
+  animationselectortable::registeranimationselectortableevaluator("evaluateBlockedAnimations", &evaluateblockedanimations);
+  animationselectortable::registeranimationselectortableevaluator("evaluateHumanTurnAnimations", &evaluatehumanturnanimations);
+  animationselectortable::registeranimationselectortableevaluator("evaluateHumanExposedArrivalAnimations", &evaluatehumanexposedarrivalanimations);
 }
 
 function testfunction(entity, animations) {
@@ -119,7 +119,7 @@ function private evaluator_findfirstvalidanimation(entity, animations, tests) {
 
 function private evaluateblockedanimations(entity, animations) {
   if(animations.size > 0) {
-    return evaluator_findfirstvalidanimation(entity, animations, array( & evaluator_checkanimationagainstgeo, & evaluator_checkanimationforovershootinggoal));
+    return evaluator_findfirstvalidanimation(entity, animations, array(&evaluator_checkanimationagainstgeo, &evaluator_checkanimationforovershootinggoal));
   }
   return undefined;
 }
@@ -130,7 +130,7 @@ function private evaluatehumanturnanimations(entity, animations) {
   }
   record3dtext(("" + gettime()) + "", entity.origin, (1, 0.5, 0), "", entity);
   if(animations.size > 0) {
-    return evaluator_findfirstvalidanimation(entity, animations, array( & evaluator_checkanimationforovershootinggoal, & evaluator_checkanimationagainstgeo, & evaluator_checkanimationagainstnavmesh));
+    return evaluator_findfirstvalidanimation(entity, animations, array(&evaluator_checkanimationforovershootinggoal, &evaluator_checkanimationagainstgeo, &evaluator_checkanimationagainstnavmesh));
   }
   return undefined;
 }
@@ -140,7 +140,7 @@ function private evaluatehumanexposedarrivalanimations(entity, animations) {
     return undefined;
   }
   if(animations.size > 0) {
-    return evaluator_findfirstvalidanimation(entity, animations, array( & evaluator_checkanimationarrivalposition));
+    return evaluator_findfirstvalidanimation(entity, animations, array(&evaluator_checkanimationarrivalposition));
   }
   return undefined;
 }

@@ -8,7 +8,7 @@
 #namespace zm_ai_sonic;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_sonic", & __init__, undefined, undefined);
+  system::register("zm_ai_sonic", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -16,7 +16,7 @@ function __init__() {
 }
 
 function init_clientfields() {
-  clientfield::register("actor", "issonic", 21000, 1, "int", & sonic_zombie_callback, 0, 0);
+  clientfield::register("actor", "issonic", 21000, 1, "int", &sonic_zombie_callback, 0, 0);
 }
 
 function sonic_zombie_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

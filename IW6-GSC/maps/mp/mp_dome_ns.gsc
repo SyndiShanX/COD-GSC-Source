@@ -730,7 +730,7 @@ dome_nsCustomCrateFunc() {
   if(!allowLevelKillstreaks() || game["player_holding_level_killstreak"]) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "dome_seekers", DOME_NS_ALIEN_DOG_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), & "MP_DOME_NS_SEEKERS_PICKUP");
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "dome_seekers", DOME_NS_ALIEN_DOG_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), &"MP_DOME_NS_SEEKERS_PICKUP");
 
   level thread watch_for_dome_ns_alien_dog_crate();
 }

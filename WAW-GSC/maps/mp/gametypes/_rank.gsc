@@ -487,7 +487,7 @@ updateRankAnnounceHUD() {
   self notify("reset_outcome");
   newRankName = self getRankInfoFull(self.pers["rank"]);
   notifyData = spawnStruct();
-  notifyData.titleText = & "RANK_PROMOTED";
+  notifyData.titleText = &"RANK_PROMOTED";
   notifyData.iconName = self getRankInfoIcon(self.pers["rank"], self.pers["prestige"]);
   notifyData.sound = "mp_level_up";
   notifyData.duration = 4.0;
@@ -495,15 +495,15 @@ updateRankAnnounceHUD() {
   subRank = int(rank_char[rank_char.size - 1]);
   if(subRank == 2) {
     notifyData.textLabel = newRankName;
-    notifyData.notifyText = & "RANK_ROMANI";
+    notifyData.notifyText = &"RANK_ROMANI";
     notifyData.textIsString = true;
   } else if(subRank == 3) {
     notifyData.textLabel = newRankName;
-    notifyData.notifyText = & "RANK_ROMANII";
+    notifyData.notifyText = &"RANK_ROMANII";
     notifyData.textIsString = true;
   } else if(subRank == 4) {
     notifyData.textLabel = newRankName;
-    notifyData.notifyText = & "RANK_ROMANIII";
+    notifyData.notifyText = &"RANK_ROMANIII";
     notifyData.textIsString = true;
   } else {
     notifyData.notifyText = newRankName;
@@ -599,7 +599,7 @@ unlockCamoSingular(refString) {
   addon = Tok[1];
   weaponStat = int(tableLookup("mp/statstable.csv", 4, baseWeapon, 1));
   addonMask = int(tableLookup("mp/attachmenttable.csv", 4, addon, 10));
-  if(self getStat(weaponStat) & addonMask) {
+  if(self getStat(weaponStat) &addonMask) {
     return;
   }
   setstatto = (self getStat(weaponStat) | addonMask) | (addonMask << 16) | (1 << 16);
@@ -628,7 +628,7 @@ unlockAttachmentSingular(refString) {
   addonIndex = getAttachmentSlot(baseWeapon, addon);
   addonMask = 1 << (addonIndex + 1);
   weaponStat = int(tableLookup("mp/statstable.csv", 4, baseWeapon, 1));
-  if(self getStat(weaponStat) & addonMask) {
+  if(self getStat(weaponStat) &addonMask) {
     return;
   }
   setstatto = (self getStat(weaponStat) | addonMask) | (addonMask << 16) | (1 << 16);
@@ -810,10 +810,10 @@ updateRankScoreHUD(amount) {
   wait(0.05);
   if(isDefined(self.hud_rankscroreupdate)) {
     if(self.rankUpdateTotal < 0) {
-      self.hud_rankscroreupdate.label = & "";
+      self.hud_rankscroreupdate.label = &"";
       self.hud_rankscroreupdate.color = (1, 0, 0);
     } else {
-      self.hud_rankscroreupdate.label = & "MP_PLUS";
+      self.hud_rankscroreupdate.label = &"MP_PLUS";
       self.hud_rankscroreupdate.color = (1, 1, 0.5);
     }
     self.hud_rankscroreupdate setValue(self.rankUpdateTotal);

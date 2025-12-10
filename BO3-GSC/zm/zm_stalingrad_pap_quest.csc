@@ -16,13 +16,13 @@
 #namespace zm_stalingrad_pap;
 
 function autoexec __init__sytem__() {
-  system::register("zm_stalingrad_pap", & __init__, undefined, undefined);
+  system::register("zm_stalingrad_pap", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("world", "lockdown_lights_west", 12000, 1, "int", & lockdown_lights_west, 0, 0);
-  clientfield::register("world", "lockdown_lights_north", 12000, 1, "int", & lockdown_lights_north, 0, 0);
-  clientfield::register("world", "lockdown_lights_east", 12000, 1, "int", & lockdown_lights_east, 0, 0);
+  clientfield::register("world", "lockdown_lights_west", 12000, 1, "int", &lockdown_lights_west, 0, 0);
+  clientfield::register("world", "lockdown_lights_north", 12000, 1, "int", &lockdown_lights_north, 0, 0);
+  clientfield::register("world", "lockdown_lights_east", 12000, 1, "int", &lockdown_lights_east, 0, 0);
 }
 
 function lockdown_lights_west(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

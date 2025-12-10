@@ -91,7 +91,7 @@ function on_spawn_retrieve_trigger(watcher, player) {
   }
   pickup_trigger.owner = player;
   retrievable_model.retrievabletrigger = pickup_trigger;
-  hint_string = & "WEAPON_BALLISTIC_KNIFE_PICKUP";
+  hint_string = &"WEAPON_BALLISTIC_KNIFE_PICKUP";
   if(isDefined(hint_string)) {
     pickup_trigger sethintstring(hint_string);
   } else {
@@ -108,7 +108,7 @@ function on_spawn_retrieve_trigger(watcher, player) {
   if(isDefined(level.knife_planted)) {
     [[level.knife_planted]](retrievable_model, pickup_trigger, prey);
   }
-  retrievable_model thread watch_use_trigger(pickup_trigger, retrievable_model, & pick_up, watcher.weapon, watcher.pickupsoundplayer, watcher.pickupsound);
+  retrievable_model thread watch_use_trigger(pickup_trigger, retrievable_model, &pick_up, watcher.weapon, watcher.pickupsoundplayer, watcher.pickupsound);
   player thread watch_shutdown(pickup_trigger, retrievable_model);
 }
 

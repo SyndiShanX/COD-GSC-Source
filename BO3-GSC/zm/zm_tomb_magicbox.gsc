@@ -13,7 +13,7 @@
 #namespace tomb_magicbox;
 
 function autoexec __init__sytem__() {
-  system::register("tomb_magicbox", & __init__, undefined, undefined);
+  system::register("tomb_magicbox", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -21,14 +21,14 @@ function __init__() {
   clientfield::register("zbarrier", "magicbox_amb_fx", 21000, 2, "int");
   clientfield::register("zbarrier", "magicbox_open_fx", 21000, 1, "int");
   clientfield::register("zbarrier", "magicbox_leaving_fx", 21000, 1, "int");
-  level.chest_joker_custom_movement = & custom_joker_movement;
-  level.custom_magic_box_timer_til_despawn = & custom_magic_box_timer_til_despawn;
-  level.custom_magic_box_do_weapon_rise = & custom_magic_box_do_weapon_rise;
-  level.custom_magic_box_weapon_wait = & custom_magic_box_weapon_wait;
+  level.chest_joker_custom_movement = &custom_joker_movement;
+  level.custom_magic_box_timer_til_despawn = &custom_magic_box_timer_til_despawn;
+  level.custom_magic_box_do_weapon_rise = &custom_magic_box_do_weapon_rise;
+  level.custom_magic_box_weapon_wait = &custom_magic_box_weapon_wait;
   level.custom_magicbox_float_height = 50;
-  level.custom_magic_box_fx = & function_61903aae;
-  level.custom_treasure_chest_glowfx = & function_e4e60ea;
-  level.magic_box_zbarrier_state_func = & set_magic_box_zbarrier_state;
+  level.custom_magic_box_fx = &function_61903aae;
+  level.custom_treasure_chest_glowfx = &function_e4e60ea;
+  level.magic_box_zbarrier_state_func = &set_magic_box_zbarrier_state;
   level thread wait_then_create_base_magic_box_fx();
   level thread handle_fire_sale();
 }
@@ -105,7 +105,7 @@ function set_magic_box_zbarrier_state(state) {
     case "initial": {
       self showzbarrierpiece(1);
       self thread magic_box_initial();
-      thread zm_unitrigger::register_static_unitrigger(self.owner.unitrigger_stub, & zm_magicbox::magicbox_unitrigger_think);
+      thread zm_unitrigger::register_static_unitrigger(self.owner.unitrigger_stub, &zm_magicbox::magicbox_unitrigger_think);
       self.state = "close";
       break;
     }

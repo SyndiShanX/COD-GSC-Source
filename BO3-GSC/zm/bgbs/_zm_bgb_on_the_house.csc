@@ -12,7 +12,7 @@
 #namespace zm_bgb_on_the_house;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_on_the_house", & __init__, undefined, undefined);
+  system::register("zm_bgb_on_the_house", &__init__, undefined, undefined);
 }
 
 function __init__() {

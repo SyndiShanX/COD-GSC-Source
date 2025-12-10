@@ -72,7 +72,7 @@
 #namespace bonuszm;
 
 function autoexec __init__sytem__() {
-  system::register("bonuszm", & __init__, & __main__, undefined);
+  system::register("bonuszm", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -109,28 +109,28 @@ function __init__() {
   function_6889d515();
   namespace_37cacec1::function_9cb5d4c9();
   level.zombie_team = "axis";
-  callback::on_spawned( & function_36a89e89);
-  callback::on_player_killed( & function_f98bc462);
-  callback::on_finalize_initialization( & function_3550da52);
-  callback::on_loadout( & function_fcf02f23);
-  callback::on_vehicle_damage( & onvehicledamagecallback);
-  callback::on_vehicle_killed( & onvehiclekilledcallback);
-  callback::on_ai_spawned( & function_40f80ade);
-  level.var_26b4fb80 = & function_96fc5f48;
+  callback::on_spawned(&function_36a89e89);
+  callback::on_player_killed(&function_f98bc462);
+  callback::on_finalize_initialization(&function_3550da52);
+  callback::on_loadout(&function_fcf02f23);
+  callback::on_vehicle_damage(&onvehicledamagecallback);
+  callback::on_vehicle_killed(&onvehiclekilledcallback);
+  callback::on_ai_spawned(&function_40f80ade);
+  level.var_26b4fb80 = &function_96fc5f48;
   level.var_9a25f386 = [];
-  level.zombielevelspecifictargetcallback = & function_3ca31ff8;
+  level.zombielevelspecifictargetcallback = &function_3ca31ff8;
   level.var_9f14c2b8 = getEntArray("zombie_spawner", "script_noteworthy");
   level.var_b1955bd6 = 0;
   level.var_d0e37460 = 0;
-  level.bzmutil_waitforallzombiestodie = & bzmutil_waitforallzombiestodie;
-  level.bzmwaitforobjectivecompletioncallback = & function_11692fba;
-  level.bzmstartobjectivecallback = & function_88adb698;
-  level.bzm_forceaicleanup = & bzm_forceaicleanup;
-  level.zombiemeleesuicidecallback = & function_2ffffb72;
-  level.zombiemeleesuicidedonecallback = & function_26a65116;
-  level.bzmloadoutchangecallback = & bzmloadoutchangecallback;
-  level.var_652674d2 = & function_652674d2;
-  level.bzm_waitforstreamerortimeout = & bzm_waitforstreamerortimeout;
+  level.bzmutil_waitforallzombiestodie = &bzmutil_waitforallzombiestodie;
+  level.bzmwaitforobjectivecompletioncallback = &function_11692fba;
+  level.bzmstartobjectivecallback = &function_88adb698;
+  level.bzm_forceaicleanup = &bzm_forceaicleanup;
+  level.zombiemeleesuicidecallback = &function_2ffffb72;
+  level.zombiemeleesuicidedonecallback = &function_26a65116;
+  level.bzmloadoutchangecallback = &bzmloadoutchangecallback;
+  level.var_652674d2 = &function_652674d2;
+  level.bzm_waitforstreamerortimeout = &bzm_waitforstreamerortimeout;
   level flag::init("bzmObjectiveEnabled");
   level flag::init("bzmExtraZombieCleared", 1);
   level.var_31f73a8d = "";
@@ -373,7 +373,7 @@ function function_2527b827() {
 
 function function_aaa07980() {
   if(level.var_a9e78bf7["zombifyenabled"]) {
-    level.run_custom_function_on_ai = & function_aed40969;
+    level.run_custom_function_on_ai = &function_aed40969;
   } else {
     level.run_custom_function_on_ai = undefined;
   }
@@ -394,9 +394,9 @@ function function_aed40969(var_c3afa726, str_targetname, force_spawn) {
   self.badplaceawareness = 0;
   self setrepairpaths(0);
   self.holdfire = 1;
-  aiutility::addaioverridedamagecallback(self, & function_48cb1ad1);
+  aiutility::addaioverridedamagecallback(self, &function_48cb1ad1);
   flag::init("bzm_zombie_attack");
-  self.closest_player_override = & function_8421a595;
+  self.closest_player_override = &function_8421a595;
   self thread zombie_utility::zombie_gib_on_damage();
   self thread function_a608d09();
   self thread zombie_death_event(self);

@@ -11,14 +11,14 @@
 #namespace zm_trap_electric;
 
 function autoexec __init__sytem__() {
-  system::register("zm_trap_electric", & __init__, undefined, undefined);
+  system::register("zm_trap_electric", &__init__, undefined, undefined);
 }
 
 function __init__() {
   visionset_mgr::register_overlay_info_style_electrified("zm_trap_electric", 1, 15, 1.25);
   a_traps = struct::get_array("trap_electric", "targetname");
   foreach(trap in a_traps) {
-    clientfield::register("world", trap.script_noteworthy, 1, 1, "int", & trap_fx_monitor, 0, 0);
+    clientfield::register("world", trap.script_noteworthy, 1, 1, "int", &trap_fx_monitor, 0, 0);
   }
 }
 

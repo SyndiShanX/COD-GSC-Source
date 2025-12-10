@@ -22,15 +22,15 @@
 #namespace zm_genesis_boss;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_boss", & __init__, undefined, undefined);
+  system::register("zm_genesis_boss", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level._effect["boss_shield"] = "zombie/fx_ee_shadowman_shield_loop_zod";
   level._effect["powerup_column"] = "dlc4/genesis/fx_darkarena_powerup_pillar";
-  clientfield::register("scriptmover", "boss_clone_fx", 15000, getminbitcountfornum(3), "int", & boss_clone_fx, 0, 0);
-  clientfield::register("world", "sophia_state", 15000, getminbitcountfornum(4), "int", & sophia_state, 0, 1);
-  clientfield::register("world", "boss_beam_state", 15000, 1, "int", & boss_beam_state, 0, 1);
+  clientfield::register("scriptmover", "boss_clone_fx", 15000, getminbitcountfornum(3), "int", &boss_clone_fx, 0, 0);
+  clientfield::register("world", "sophia_state", 15000, getminbitcountfornum(4), "int", &sophia_state, 0, 1);
+  clientfield::register("world", "boss_beam_state", 15000, 1, "int", &boss_beam_state, 0, 1);
 }
 
 function boss_clone_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

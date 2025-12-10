@@ -370,10 +370,10 @@ updateSentryPlacement(sentryGun) {
     if(sentryGun.canBePlaced != lastCanPlaceSentry) {
       if(sentryGun.canBePlaced) {
         sentryGun setModel(level.sentrySettings[sentryGun.sentryType].modelPlacement);
-        self ForceUseHintOn( & "MP_TURRET_PLACE");
+        self ForceUseHintOn(&"MP_TURRET_PLACE");
       } else {
         sentryGun setModel(level.sentrySettings[sentryGun.sentryType].modelPlacementFailed);
-        self ForceUseHintOn( & "MP_TURRET_CANNOT_PLACE");
+        self ForceUseHintOn(&"MP_TURRET_CANNOT_PLACE");
       }
     }
 
@@ -416,7 +416,7 @@ sentry_setActive() {
   self setMode(SENTRY_MODE_ON);
 
   self setCursorHint("HINT_NOICON");
-  self setHintString( & "SENTRY_PICKUP");
+  self setHintString(&"SENTRY_PICKUP");
 
   self makeUsable();
 

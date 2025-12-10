@@ -21,7 +21,7 @@
 #namespace zm_weap_staff_air;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_staff_air", & __init__, undefined, undefined);
+  system::register("zm_weap_staff_air", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -29,10 +29,10 @@ function __init__() {
   clientfield::register("scriptmover", "whirlwind_play_fx", 21000, 1, "int");
   clientfield::register("actor", "air_staff_launch", 21000, 1, "int");
   clientfield::register("allplayers", "air_staff_source", 21000, 1, "int");
-  callback::on_spawned( & onplayerspawned);
+  callback::on_spawned(&onplayerspawned);
   level flag::init("whirlwind_active");
-  zm_spawner::register_zombie_damage_callback( & staff_air_zombie_damage_response);
-  zm_spawner::register_zombie_death_event_callback( & staff_air_death_event);
+  zm_spawner::register_zombie_damage_callback(&staff_air_zombie_damage_response);
+  zm_spawner::register_zombie_death_event_callback(&staff_air_death_event);
   level.w_staff_air = getweapon("staff_air");
   level.w_staff_air_upgraded = getweapon("staff_air_upgraded");
 }

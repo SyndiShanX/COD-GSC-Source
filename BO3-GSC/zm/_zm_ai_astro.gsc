@@ -27,13 +27,13 @@
 
 function autoexec init() {
   initastrobehaviorsandasm();
-  spawner::add_archetype_spawn_function("astronaut", & archetypeastroblackboardinit);
-  spawner::add_archetype_spawn_function("astronaut", & astrospawnsetup);
-  animationstatenetwork::registernotetrackhandlerfunction("headbutt_start", & astro_zombie_headbutt_release);
-  animationstatenetwork::registernotetrackhandlerfunction("astro_melee", & astro_zombie_headbutt);
+  spawner::add_archetype_spawn_function("astronaut", &archetypeastroblackboardinit);
+  spawner::add_archetype_spawn_function("astronaut", &astrospawnsetup);
+  animationstatenetwork::registernotetrackhandlerfunction("headbutt_start", &astro_zombie_headbutt_release);
+  animationstatenetwork::registernotetrackhandlerfunction("astro_melee", &astro_zombie_headbutt);
   init_astro_zombie_fx();
   if(!isDefined(level.astro_zombie_enter_level)) {
-    level.astro_zombie_enter_level = & astro_zombie_default_enter_level;
+    level.astro_zombie_enter_level = &astro_zombie_default_enter_level;
   }
   level.num_astro_zombies = 0;
   level.astro_zombie_spawners = getEntArray("astronaut_zombie", "targetname");
@@ -52,23 +52,23 @@ function autoexec init() {
   level.astro_headbutt_delay = 2000;
   level.astro_headbutt_radius_sqr = 4096;
   level.zombie_total_update = 0;
-  level.zombie_total_set_func = & astro_zombie_total_update;
-  zm_spawner::register_zombie_damage_callback( & astro_damage_callback);
+  level.zombie_total_set_func = &astro_zombie_total_update;
+  zm_spawner::register_zombie_damage_callback(&astro_damage_callback);
   while(!isDefined(level.custom_ai_spawn_check_funcs)) {
     wait(0.05);
   }
-  zm::register_custom_ai_spawn_check("astro", & astro_spawn_check, & get_astro_spawners, & get_astro_locations);
+  zm::register_custom_ai_spawn_check("astro", &astro_spawn_check, &get_astro_spawners, &get_astro_locations);
 }
 
 function archetypeastroblackboardinit() {
   blackboard::createblackboardforentity(self);
   self aiutility::registerutilityblackboardattributes();
   ai::createinterfaceforentity(self);
-  blackboard::registerblackboardattribute(self, "_locomotion_speed", "locomotion_speed_walk", & zombiebehavior::bb_getlocomotionspeedtype);
+  blackboard::registerblackboardattribute(self, "_locomotion_speed", "locomotion_speed_walk", &zombiebehavior::bb_getlocomotionspeedtype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  self.___archetypeonanimscriptedcallback = & archetypeastroonanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = &archetypeastroonanimscriptedcallback;
   self finalizetrackedblackboardattributes();
 }
 
@@ -78,8 +78,8 @@ function private archetypeastroonanimscriptedcallback(entity) {
 }
 
 function private initastrobehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("astroTargetService", & astrotargetservice);
-  behaviortreenetworkutility::registerbehaviortreeaction("moonAstroProceduralTraversal", & astrotraversestart, & robotsoldierbehavior::robotproceduraltraversalupdate, & astrotraverseend);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("astroTargetService", &astrotargetservice);
+  behaviortreenetworkutility::registerbehaviortreeaction("moonAstroProceduralTraversal", &astrotraversestart, &robotsoldierbehavior::robotproceduraltraversalupdate, &astrotraverseend);
 }
 
 function astrospawnsetup() {
@@ -185,10 +185,10 @@ function astro_prespawn() {
   self.no_powerups = 1;
   self.no_gib = 1;
   self.ignorelocationaldamage = 1;
-  self.actor_damage_func = & astro_actor_damage;
-  self.nuke_damage_func = & astro_nuke_damage;
-  self.custom_damage_func = & astro_custom_damage;
-  self.microwavegun_sizzle_func = & astro_microwavegun_sizzle;
+  self.actor_damage_func = &astro_actor_damage;
+  self.nuke_damage_func = &astro_nuke_damage;
+  self.custom_damage_func = &astro_custom_damage;
+  self.microwavegun_sizzle_func = &astro_microwavegun_sizzle;
   self.ignore_cleanup_mgr = 1;
   self.ignore_distance_tracking = 1;
   self.ignore_enemy_count = 1;
@@ -220,7 +220,7 @@ function astro_zombie_spawn(astro_zombie) {
   astro_zombie.has_legs = 1;
   self.count = 100;
   playsoundatposition("evt_astro_spawn", self.origin);
-  astro_zombie.deathfunction = & astro_zombie_die;
+  astro_zombie.deathfunction = &astro_zombie_die;
   astro_zombie.animname = "astro_zombie";
   astro_zombie.loopsound = "evt_astro_gasmask_loop";
   astro_zombie thread astro_zombie_think();

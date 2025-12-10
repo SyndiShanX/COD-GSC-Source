@@ -16,13 +16,13 @@
 #namespace empgrenade;
 
 function autoexec __init__sytem__() {
-  system::register("empgrenade", & __init__, undefined, undefined);
+  system::register("empgrenade", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "empd", 1, 1, "int", & onempchanged, 0, 1);
-  clientfield::register("toplayer", "empd_monitor_distance", 1, 1, "int", & onempmonitordistancechanged, 0, 0);
-  callback::on_spawned( & on_player_spawned);
+  clientfield::register("toplayer", "empd", 1, 1, "int", &onempchanged, 0, 1);
+  clientfield::register("toplayer", "empd_monitor_distance", 1, 1, "int", &onempmonitordistancechanged, 0, 0);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function onempchanged(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

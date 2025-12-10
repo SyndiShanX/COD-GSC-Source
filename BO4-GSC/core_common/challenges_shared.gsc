@@ -370,7 +370,7 @@ genericbulletkill(data, victim, weapon) {
   time = data.time;
 
   if(data.victim.idflagstime == time) {
-    if(data.victim.idflags&8) {
+    if(data.victim.idflags& 8) {
       player stats::function_dad108fa(#"kill_enemy_through_objects", 1);
 
       if(isDefined(weapon) && weaponhasattachment(weapon, "fmj")) {

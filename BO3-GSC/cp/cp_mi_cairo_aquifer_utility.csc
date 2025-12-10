@@ -21,13 +21,13 @@
 #namespace aquifer_util;
 
 function autoexec __init__sytem__() {
-  system::register("aquifer_util", & __init__, undefined, undefined);
+  system::register("aquifer_util", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_vehicletype_callback("veh_bo3_mil_vtol_fighter_player_agile", & vtol_spawned);
-  vehicle::add_vehicletype_callback("veh_bo3_mil_vtol_fighter_dogfight_enemy", & function_d996daca);
-  callback::on_spawned( & on_player_spawned);
+  vehicle::add_vehicletype_callback("veh_bo3_mil_vtol_fighter_player_agile", &vtol_spawned);
+  vehicle::add_vehicletype_callback("veh_bo3_mil_vtol_fighter_dogfight_enemy", &function_d996daca);
+  callback::on_spawned(&on_player_spawned);
   init_clientfields();
   duplicate_render::set_dr_filter_offscreen("weakpoint_keyline", 100, "weakpoint_keyline_show_z", "weakpoint_keyline_hide_z", 2, "mc/hud_outline_model_z_orange", 1);
   thread function_3e82b262();
@@ -35,29 +35,29 @@ function __init__() {
 }
 
 function init_clientfields() {
-  clientfield::register("toplayer", "play_body_loop", 1, 1, "int", & function_d00289ef, 0, 0);
-  clientfield::register("toplayer", "player_snow_fx", 1, 1, "int", & callback_player_snow_fx_logic, 0, 0);
-  clientfield::register("toplayer", "player_bubbles_fx", 1, 1, "int", & function_a0fd353d, 0, 0);
-  clientfield::register("toplayer", "player_dust_fx", 1, 1, "int", & function_779fd2e3, 0, 0);
-  clientfield::register("toplayer", "water_motes", 1, 1, "int", & function_5c9a971, 0, 0);
-  clientfield::register("toplayer", "frost_post_fx", 1, 1, "int", & function_d823aea7, 0, 0);
-  clientfield::register("toplayer", "splash_post_fx", 1, 1, "int", & function_90020e42, 0, 0);
-  clientfield::register("toplayer", "highlight_ai", 1, 1, "int", & callback_vtol_highlight_ai, 0, 0);
-  clientfield::register("actor", "robot_bubbles_fx", 1, 1, "int", & function_a57705db, 0, 0);
-  clientfield::register("actor", "kane_bubbles_fx", 1, 1, "int", & function_a57705db, 0, 0);
-  clientfield::register("actor", "toggle_enemy_highlight", 1, 1, "int", & function_af7432f, 0, 0);
-  clientfield::register("vehicle", "vtol_dogfighting", 1, 1, "int", & function_1f92134d, 0, 0);
-  clientfield::register("vehicle", "vtol_show_damage_stages", 1, 1, "int", & function_ae9fc4ae, 0, 0);
-  clientfield::register("vehicle", "vtol_canopy_state", 1, 1, "int", & function_4aa99a51, 0, 0);
-  clientfield::register("vehicle", "vtol_engines_state", 1, 1, "int", & function_c289f3ee, 0, 0);
-  clientfield::register("vehicle", "vtol_enable_wash_fx", 1, 1, "int", & function_efde18b9, 0, 0);
-  clientfield::register("vehicle", "vtol_damage_state", 1, 2, "int", & function_31d10546, 0, 0);
-  clientfield::register("vehicle", "vtol_set_active_landing_zone_num", 1, 4, "int", & function_791c5d3e, 0, 0);
-  clientfield::register("vehicle", "vtol_set_missile_lock_percent", 1, 8, "float", & function_58e7b684, 0, 0);
-  clientfield::register("vehicle", "vtol_show_missile_lock", 1, 1, "int", & function_ec8280b9, 0, 0);
-  clientfield::register("vehicle", "vtol_screen_shake", 1, 1, "int", & function_51990240, 0, 0);
-  clientfield::register("world", "toggle_fog_banks", 1, 1, "int", & function_34474782, 0, 0);
-  clientfield::register("world", "toggle_pbg_banks", 1, 1, "int", & function_5240a6bb, 0, 0);
+  clientfield::register("toplayer", "play_body_loop", 1, 1, "int", &function_d00289ef, 0, 0);
+  clientfield::register("toplayer", "player_snow_fx", 1, 1, "int", &callback_player_snow_fx_logic, 0, 0);
+  clientfield::register("toplayer", "player_bubbles_fx", 1, 1, "int", &function_a0fd353d, 0, 0);
+  clientfield::register("toplayer", "player_dust_fx", 1, 1, "int", &function_779fd2e3, 0, 0);
+  clientfield::register("toplayer", "water_motes", 1, 1, "int", &function_5c9a971, 0, 0);
+  clientfield::register("toplayer", "frost_post_fx", 1, 1, "int", &function_d823aea7, 0, 0);
+  clientfield::register("toplayer", "splash_post_fx", 1, 1, "int", &function_90020e42, 0, 0);
+  clientfield::register("toplayer", "highlight_ai", 1, 1, "int", &callback_vtol_highlight_ai, 0, 0);
+  clientfield::register("actor", "robot_bubbles_fx", 1, 1, "int", &function_a57705db, 0, 0);
+  clientfield::register("actor", "kane_bubbles_fx", 1, 1, "int", &function_a57705db, 0, 0);
+  clientfield::register("actor", "toggle_enemy_highlight", 1, 1, "int", &function_af7432f, 0, 0);
+  clientfield::register("vehicle", "vtol_dogfighting", 1, 1, "int", &function_1f92134d, 0, 0);
+  clientfield::register("vehicle", "vtol_show_damage_stages", 1, 1, "int", &function_ae9fc4ae, 0, 0);
+  clientfield::register("vehicle", "vtol_canopy_state", 1, 1, "int", &function_4aa99a51, 0, 0);
+  clientfield::register("vehicle", "vtol_engines_state", 1, 1, "int", &function_c289f3ee, 0, 0);
+  clientfield::register("vehicle", "vtol_enable_wash_fx", 1, 1, "int", &function_efde18b9, 0, 0);
+  clientfield::register("vehicle", "vtol_damage_state", 1, 2, "int", &function_31d10546, 0, 0);
+  clientfield::register("vehicle", "vtol_set_active_landing_zone_num", 1, 4, "int", &function_791c5d3e, 0, 0);
+  clientfield::register("vehicle", "vtol_set_missile_lock_percent", 1, 8, "float", &function_58e7b684, 0, 0);
+  clientfield::register("vehicle", "vtol_show_missile_lock", 1, 1, "int", &function_ec8280b9, 0, 0);
+  clientfield::register("vehicle", "vtol_screen_shake", 1, 1, "int", &function_51990240, 0, 0);
+  clientfield::register("world", "toggle_fog_banks", 1, 1, "int", &function_34474782, 0, 0);
+  clientfield::register("world", "toggle_pbg_banks", 1, 1, "int", &function_5240a6bb, 0, 0);
 }
 
 function on_player_spawned(localclientnum) {

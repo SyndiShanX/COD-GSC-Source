@@ -27,7 +27,7 @@ precache() {
     s_data.fire_func = ::quadrotors_find_player_target;
     s_data.valid_target_func = ::_is_target_area_valid;
     s_data.time_last_used = 0;
-    s_data.str_hint = & "SCRIPT_FIRE_DIRECTION";
+    s_data.str_hint = &"SCRIPT_FIRE_DIRECTION";
     s_data.notify_grid_on = "grid_shader_on";
     s_data.notify_grid_off = "grid_shader_off";
     level._fire_direction.a_weapons["quadrotor_glove_sp"] = s_data;
@@ -48,7 +48,7 @@ claw_precache() {
     s_data.fire_func = undefined;
     s_data.valid_target_func = ::_is_target_area_valid;
     s_data.time_last_used = 0;
-    s_data.str_hint = & "SCRIPT_FIRE_DIRECTION_CLAW";
+    s_data.str_hint = &"SCRIPT_FIRE_DIRECTION_CLAW";
     s_data.notify_grid_on = "grid_shader_on";
     s_data.notify_grid_off = "grid_shader_off";
     level._fire_direction.a_weapons["claw_glove_sp"] = s_data;
@@ -74,9 +74,9 @@ rod_precache() {
     s_data.notify_grid_off = "grid_shader_off_god_rod";
 
     if(isDefined(level.wiiu))
-      s_data.str_hint = & "SCRIPT_GOD_ROD_WIIU";
+      s_data.str_hint = &"SCRIPT_GOD_ROD_WIIU";
     else
-      s_data.str_hint = & "SCRIPT_GOD_ROD";
+      s_data.str_hint = &"SCRIPT_GOD_ROD";
 
     level._fire_direction.a_weapons["god_rod_glove_sp"] = s_data;
   }

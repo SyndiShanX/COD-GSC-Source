@@ -177,7 +177,7 @@ defalco_reaches_end() {
     if(!flag("cancel_helipad_pip"))
       level thread defalco_helipad_pip();
 
-    set_objective(level.obj_stop_defalco, level.ai_defalco, & "KARMA_2_OBJ_3D_DEFALCO", undefined, 0, 0.05);
+    set_objective(level.obj_stop_defalco, level.ai_defalco, &"KARMA_2_OBJ_3D_DEFALCO", undefined, 0, 0.05);
     exploder(2);
   }
 }
@@ -197,7 +197,7 @@ defalco_escape_defalco() {
   self.moveplaybackrate = 1.8;
   self.a.movement = "run";
   self thread follow_path("defalco_end_path", 1);
-  set_objective(level.obj_stop_defalco, self, & "KARMA_2_OBJ_3D_DEFALCO", undefined, 1, 40);
+  set_objective(level.obj_stop_defalco, self, &"KARMA_2_OBJ_3D_DEFALCO", undefined, 1, 40);
   self waittill_any_array_endon(array("damage", "player_detected"), level, "defalco_stopped");
   flag_set("defalco_stopped");
   self waittill("player_detected");
@@ -207,7 +207,7 @@ defalco_escape_defalco() {
     level thread defalco_zoom(self);
 
   level notify("stop_naglines");
-  set_objective(level.obj_stop_defalco, self, & "KARMA_2_OBJ_3D_DEFALCO", undefined, 1, 0.05);
+  set_objective(level.obj_stop_defalco, self, &"KARMA_2_OBJ_3D_DEFALCO", undefined, 1, 0.05);
   self.has_ir = 1;
   self.moveplaybackrate = 1;
   self.anim_defalco_react = % ch_karma_11_ending_defalco_reaction;
@@ -565,7 +565,7 @@ defalco_helipad_pip(str_structname, str_scene_name) {
 
 set_objective_on_vtol() {
   level.ai_defalco waittill("death");
-  set_objective(level.obj_stop_defalco, level.vh_vtol, & "KARMA_2_OBJ_3D_DEFALCO", undefined, 0, 0.05);
+  set_objective(level.obj_stop_defalco, level.vh_vtol, &"KARMA_2_OBJ_3D_DEFALCO", undefined, 0, 0.05);
 }
 
 defalco_escape_vehicle_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {

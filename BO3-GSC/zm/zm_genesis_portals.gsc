@@ -30,7 +30,7 @@
 #namespace zm_genesis_portals;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_portals", & __init__, undefined, undefined);
+  system::register("zm_genesis_portals", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -49,7 +49,7 @@ function __init__() {
   clientfield::register("toplayer", "hint_sheffield_portal_bottom", 15000, 1, "int");
   clientfield::register("toplayer", "hint_prison_portal_top", 15000, 1, "int");
   clientfield::register("toplayer", "hint_prison_portal_bottom", 15000, 1, "int");
-  callback::on_connect( & function_cfc89ca);
+  callback::on_connect(&function_cfc89ca);
 }
 
 function function_16616103() {
@@ -270,7 +270,7 @@ function portal_teleport_player(show_fx = 1, a_s_port_locs, str_zone, var_6d359b
   stand_offset = (0, 0, 0);
   a_ai_enemies = getaiteamarray("axis");
   a_ai_enemies = arraysort(a_ai_enemies, var_6d359b2e, 1, 99, 768);
-  array::thread_all(a_ai_enemies, & ai_delay_cleanup);
+  array::thread_all(a_ai_enemies, &ai_delay_cleanup);
   level.n_cleanup_manager_restart_time = 4 + 15;
   level.n_cleanup_manager_restart_time = level.n_cleanup_manager_restart_time + (gettime() / 1000);
   image_room = struct::get("teleport_room_" + n_pos, "targetname");

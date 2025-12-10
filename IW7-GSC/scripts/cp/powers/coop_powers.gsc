@@ -1679,154 +1679,154 @@ power_watch_hint(param_00) {
     switch (var_01) {
       case "power_transponder":
         if(self.var_1268B < 3 && !param_00) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "CP_ZMB_INTERACTIONS_HINT_TRANSPONDER", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"CP_ZMB_INTERACTIONS_HINT_TRANSPONDER", 4);
           self.var_1268B = self.var_1268B + 1;
         }
         break;
 
       case "power_rewind":
         if(self.var_E4C6 < 3 && !param_00) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "CP_ZMB_INTERACTIONS_HINT_REWIND", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"CP_ZMB_INTERACTIONS_HINT_REWIND", 4);
           self.var_E4C6 = self.var_E4C6 + 1;
         }
         break;
 
       case "power_microTurret":
         if(self.var_B702 < 3 && !param_00) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "CP_ZMB_INTERACTIONS_HINT_MICROTURRET", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"CP_ZMB_INTERACTIONS_HINT_MICROTURRET", 4);
           self.var_B702 = self.var_B702 + 1;
         }
         break;
 
       case "power_siegeMode":
         if(self.var_F18D < 3 && !param_00) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "CP_ZMB_INTERACTIONS_HINT_SIEGEMODE", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"CP_ZMB_INTERACTIONS_HINT_SIEGEMODE", 4);
           self.var_F18D = self.var_F18D + 1;
         }
         break;
 
       case "power_phaseShift":
         if(self.var_CAAB < 3 && !param_00) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "CP_ZMB_INTERACTIONS_HINT_PHASESHIFT", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"CP_ZMB_INTERACTIONS_HINT_PHASESHIFT", 4);
           self.var_CAAB = self.var_CAAB + 1;
         }
         break;
 
       case "power_chargeMode":
         if(self.var_3CE6 < 3 && !param_00) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "CP_ZMB_INTERACTIONS_HINT_CHARGEMODE", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"CP_ZMB_INTERACTIONS_HINT_CHARGEMODE", 4);
           self.var_3CE6 = self.var_3CE6 + 1;
         }
         break;
 
       case "power_armageddon":
         if(self.var_2176 < 3 && !param_00) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "CP_ZMB_INTERACTIONS_HINT_ARMAGEDDON", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"CP_ZMB_INTERACTIONS_HINT_ARMAGEDDON", 4);
           self.var_2176 = self.var_2176 + 1;
         }
         break;
 
       case "power_kineticPulse":
         if(self.var_A6D6 < 3 && !param_00) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "CP_ZMB_INTERACTIONS_HINT_KINETICPULSE", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"CP_ZMB_INTERACTIONS_HINT_KINETICPULSE", 4);
           self.var_A6D6 = self.var_A6D6 + 1;
         }
         break;
 
       case "crafted_windowtrap":
         if(self.var_A871 < 3) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "ZOMBIE_CRAFTING_SOUVENIRS_HINT_LASER_WINDOW_TRAP", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"ZOMBIE_CRAFTING_SOUVENIRS_HINT_LASER_WINDOW_TRAP", 4);
           self.var_A871 = self.var_A871 + 1;
         }
         break;
 
       case "crafted_autosentry":
         if(self.var_2690 < 3) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "ZOMBIE_CRAFTING_SOUVENIRS_HINT_AUTOSENTRY", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"ZOMBIE_CRAFTING_SOUVENIRS_HINT_AUTOSENTRY", 4);
           self.var_2690 = self.var_2690 + 1;
         }
         break;
 
       case "crafted_ims":
         if(self.var_936B < 3) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "ZOMBIE_CRAFTING_SOUVENIRS_HINT_IMS", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"ZOMBIE_CRAFTING_SOUVENIRS_HINT_IMS", 4);
           self.var_936B = self.var_936B + 1;
         }
         break;
 
       case "crafted_medusa":
         if(self.var_B53E < 3) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "ZOMBIE_CRAFTING_SOUVENIRS_HINT_MEDUSA", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"ZOMBIE_CRAFTING_SOUVENIRS_HINT_MEDUSA", 4);
           self.var_B53E = self.var_B53E + 1;
         }
         break;
 
       case "crafted_electric_trap":
         if(self.var_6018 < 3) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "ZOMBIE_CRAFTING_SOUVENIRS_HINT_ELECTRICTRAP", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"ZOMBIE_CRAFTING_SOUVENIRS_HINT_ELECTRICTRAP", 4);
           self.var_6018 = self.var_6018 + 1;
         }
         break;
 
       case "crafted_boombox":
         if(self.var_2C9F < 3) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "ZOMBIE_CRAFTING_SOUVENIRS_HINT_BOOMBOX", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"ZOMBIE_CRAFTING_SOUVENIRS_HINT_BOOMBOX", 4);
           self.var_6018 = self.var_6018 + 1;
         }
         break;
 
       case "crafted_revocator":
         if(self.var_E4B3 < 3) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "ZOMBIE_CRAFTING_SOUVENIRS_HINT_REVOCATOR", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"ZOMBIE_CRAFTING_SOUVENIRS_HINT_REVOCATOR", 4);
           self.var_E4B3 = self.var_E4B3 + 1;
         }
         break;
 
       case "crafted_gascan":
         if(self.var_76C6 < 3) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "ZOMBIE_CRAFTING_SOUVENIRS_HINT_GASCAN", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"ZOMBIE_CRAFTING_SOUVENIRS_HINT_GASCAN", 4);
           self.var_76C6 = self.var_76C6 + 1;
         }
         break;
 
       case "crafted_trap_mower":
         if(self.mower_hint_displayed < 2) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "CP_RAVE_HINT_MOWER", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"CP_RAVE_HINT_MOWER", 4);
           self.mower_hint_displayed = self.mower_hint_displayed + 1;
         }
         break;
 
       case "crafted_trap_balloon":
         if(self.balloon_hint_displayed < 2) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "CP_RAVE_HINT_BALLOONS", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"CP_RAVE_HINT_BALLOONS", 4);
           self.balloon_hint_displayed = self.balloon_hint_displayed + 1;
         }
         break;
 
       case "crafted_robot":
         if(self.robot_hint_displayed < 2) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "CP_DISCO_USE_ROBOT", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"CP_DISCO_USE_ROBOT", 4);
           self.robot_hint_displayed = self.robot_hint_displayed + 1;
         }
         break;
 
       case "crafted_lavalamp":
         if(self.lavalamp_hint_displayed < 2) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "CP_DISCO_USE_LAVA_LAMP", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"CP_DISCO_USE_LAVA_LAMP", 4);
           self.lavalamp_hint_displayed = self.lavalamp_hint_displayed + 1;
         }
         break;
 
       case "crafted_rad_extractor":
         if(self.rad_extractor_hint_displayed < 2) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "CP_DISCO_USE_LAVA_LAMP", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"CP_DISCO_USE_LAVA_LAMP", 4);
           self.rad_extractor_hint_displayed = self.rad_extractor_hint_displayed + 1;
         }
         break;
 
       case "crafted_zombgone":
         if(self.zombgone_hint_displayed < 2) {
-          scripts\cp\utility::setlowermessage("msg_power_hint", & "CP_DISCO_USE_ZOMBGONE", 4);
+          scripts\cp\utility::setlowermessage("msg_power_hint", &"CP_DISCO_USE_ZOMBGONE", 4);
           self.zombgone_hint_displayed = self.zombgone_hint_displayed + 1;
         }
         break;

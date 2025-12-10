@@ -498,7 +498,7 @@ func_4A09(param_00) {
   var_03 setcursorhint("HINT_BUTTON");
   var_03 setuserange(50);
   var_03 _meth_84A4(100);
-  var_03 sethintstring( & "SCRIPT_C12_RODEO_MELEE");
+  var_03 sethintstring(&"SCRIPT_C12_RODEO_MELEE");
   return var_03;
 }
 

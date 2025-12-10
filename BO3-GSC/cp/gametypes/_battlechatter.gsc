@@ -13,17 +13,17 @@
 #namespace battlechatter;
 
 function autoexec __init__sytem__() {
-  system::register("battlechatter", & __init__, undefined, undefined);
+  system::register("battlechatter", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
+  callback::on_start_gametype(&init);
   aispawnerarray = getactorspawnerarray();
-  callback::on_ai_spawned( & on_joined_ai);
+  callback::on_ai_spawned(&on_joined_ai);
 }
 
 function init() {
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
   level.battlechatter_init = 1;
   level.allowbattlechatter = [];
   level.allowbattlechatter["bc"] = 1;
@@ -289,7 +289,7 @@ function bc_ainotifyconvert() {
         if(randomintrange(0, 100) <= 50) {
           alliesguy = get_closest_ai_to_object("allies", self);
           if(isDefined(alliesguy)) {
-            level util::delay(1, undefined, & bc_makeline, alliesguy, "firefly_response");
+            level util::delay(1, undefined, &bc_makeline, alliesguy, "firefly_response");
           }
         }
         break;

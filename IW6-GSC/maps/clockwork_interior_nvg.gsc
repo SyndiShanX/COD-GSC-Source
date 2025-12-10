@@ -80,7 +80,7 @@ setup_interior() {
   common_scripts\utility::flag_set("interior_start_point");
   common_scripts\utility::flag_set("start_garage_ambience");
   common_scripts\utility::flag_set("jeep_intro_ride_done");
-  thread maps\clockwork_intro::blackout_timer(41, & "CLOCKWORK_POWERDOWN", 0, 1);
+  thread maps\clockwork_intro::blackout_timer(41, &"CLOCKWORK_POWERDOWN", 0, 1);
   maps\clockwork_audio::checkpoint_interior();
 
   if(level.woof) {
@@ -169,12 +169,12 @@ disconnect_paths_at_end_anim(var_0) {
 }
 
 mission_failed_garage() {
-  setdvar("ui_deadquote", & "CLOCKWORK_QUOTE_KEEP_UP");
+  setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_KEEP_UP");
   maps\_utility::missionfailedwrapper();
 }
 
 mission_failed_garage_provoke() {
-  setdvar("ui_deadquote", & "CLOCKWORK_QUOTE_COMPROMISE");
+  setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_COMPROMISE");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -1158,7 +1158,7 @@ control_nvg_staticscreens_on() {
 
 player_failcase_leave_garage() {
   common_scripts\utility::flag_wait("FLAG_player_leave_garage");
-  setdvar("ui_deadquote", & "CLOCKWORK_QUOTE_LEFT_TEAM");
+  setdvar("ui_deadquote", &"CLOCKWORK_QUOTE_LEFT_TEAM");
   maps\_utility::missionfailedwrapper();
 }
 

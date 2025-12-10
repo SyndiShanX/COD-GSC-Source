@@ -9,14 +9,14 @@
 #namespace serverfaceanim;
 
 function autoexec __init__sytem__() {
-  system::register("serverfaceanim", & __init__, undefined, undefined);
+  system::register("serverfaceanim", &__init__, undefined, undefined);
 }
 
 function __init__() {
   if(!(isDefined(level._use_faceanim) && level._use_faceanim)) {
     return;
   }
-  callback::on_spawned( & init_serverfaceanim);
+  callback::on_spawned(&init_serverfaceanim);
 }
 
 function init_serverfaceanim() {

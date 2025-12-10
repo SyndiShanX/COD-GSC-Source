@@ -1294,7 +1294,7 @@ angry_flood_finishing_move(var_0) {
     level.player freezecontrols(1);
     thread maps\flood_fx::water_death_fx();
     level.player dodamage(var_0, level.player.origin);
-    setdvar("ui_deadquote", & "FLOOD_SKYBRIDGE_FAIL");
+    setdvar("ui_deadquote", &"FLOOD_SKYBRIDGE_FAIL");
     level thread maps\_utility::missionfailedwrapper();
   }
 }

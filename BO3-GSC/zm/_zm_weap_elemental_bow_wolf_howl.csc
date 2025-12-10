@@ -17,21 +17,21 @@
 #namespace _zm_weap_elemental_bow_wolf_howl;
 
 function autoexec __init__sytem__() {
-  system::register("_zm_weap_elemental_bow_wolf_howl", & __init__, undefined, undefined);
+  system::register("_zm_weap_elemental_bow_wolf_howl", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "elemental_bow_wolf_howl" + "_ambient_bow_fx", 5000, 1, "int", & function_cb5344d7, 0, 0);
-  clientfield::register("missile", "elemental_bow_wolf_howl" + "_arrow_impact_fx", 5000, 1, "int", & function_6974030a, 0, 0);
-  clientfield::register("scriptmover", "elemental_bow_wolf_howl4" + "_arrow_impact_fx", 5000, 1, "int", & function_644da66f, 0, 0);
-  clientfield::register("toplayer", "wolf_howl_muzzle_flash", 5000, 1, "int", & wolf_howl_muzzle_flash, 0, 0);
-  clientfield::register("scriptmover", "wolf_howl_arrow_charged_trail", 5000, 1, "int", & function_76bb77a6, 0, 0);
-  clientfield::register("scriptmover", "wolf_howl_arrow_charged_spiral", 5000, 1, "int", & function_714aa0e1, 0, 0);
-  clientfield::register("actor", "wolf_howl_slow_snow_fx", 5000, 1, "int", & wolf_howl_slow_snow_fx, 0, 0);
-  clientfield::register("actor", "zombie_hit_by_wolf_howl_charge", 5000, 1, "int", & zombie_hit_by_wolf_howl_charge, 0, 0);
-  clientfield::register("actor", "zombie_explode_fx", 5000, 1, "counter", & wolf_howl_zombie_explode_fx, 0, 0);
-  clientfield::register("actor", "zombie_explode_fx", -8000, 1, "counter", & wolf_howl_zombie_explode_fx, 0, 0);
-  clientfield::register("actor", "wolf_howl_zombie_explode_fx", 8000, 1, "counter", & wolf_howl_zombie_explode_fx, 0, 0);
+  clientfield::register("toplayer", "elemental_bow_wolf_howl" + "_ambient_bow_fx", 5000, 1, "int", &function_cb5344d7, 0, 0);
+  clientfield::register("missile", "elemental_bow_wolf_howl" + "_arrow_impact_fx", 5000, 1, "int", &function_6974030a, 0, 0);
+  clientfield::register("scriptmover", "elemental_bow_wolf_howl4" + "_arrow_impact_fx", 5000, 1, "int", &function_644da66f, 0, 0);
+  clientfield::register("toplayer", "wolf_howl_muzzle_flash", 5000, 1, "int", &wolf_howl_muzzle_flash, 0, 0);
+  clientfield::register("scriptmover", "wolf_howl_arrow_charged_trail", 5000, 1, "int", &function_76bb77a6, 0, 0);
+  clientfield::register("scriptmover", "wolf_howl_arrow_charged_spiral", 5000, 1, "int", &function_714aa0e1, 0, 0);
+  clientfield::register("actor", "wolf_howl_slow_snow_fx", 5000, 1, "int", &wolf_howl_slow_snow_fx, 0, 0);
+  clientfield::register("actor", "zombie_hit_by_wolf_howl_charge", 5000, 1, "int", &zombie_hit_by_wolf_howl_charge, 0, 0);
+  clientfield::register("actor", "zombie_explode_fx", 5000, 1, "counter", &wolf_howl_zombie_explode_fx, 0, 0);
+  clientfield::register("actor", "zombie_explode_fx", -8000, 1, "counter", &wolf_howl_zombie_explode_fx, 0, 0);
+  clientfield::register("actor", "wolf_howl_zombie_explode_fx", 8000, 1, "counter", &wolf_howl_zombie_explode_fx, 0, 0);
   level._effect["wolf_howl_ambient_bow"] = "dlc1/zmb_weapon/fx_bow_wolf_ambient_1p_zmb";
   level._effect["wolf_howl_arrow_impact"] = "dlc1/zmb_weapon/fx_bow_wolf_impact_zmb";
   level._effect["wolf_howl_arrow_charged_impact"] = "dlc1/zmb_weapon/fx_bow_wolf_impact_ug_zmb";

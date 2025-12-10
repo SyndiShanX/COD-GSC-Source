@@ -14,7 +14,7 @@ function autoexec main() {
   if(sessionmodeiscampaigndeadopsgame() && getdvarint("splitscreen_playerCount") > 2) {
     return;
   }
-  ai::add_ai_spawn_function( & initializenotetrackhandlers);
+  ai::add_ai_spawn_function(&initializenotetrackhandlers);
 }
 
 function private initializenotetrackhandlers(localclientnum) {

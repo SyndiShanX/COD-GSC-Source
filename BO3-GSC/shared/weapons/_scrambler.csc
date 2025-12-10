@@ -21,7 +21,7 @@ function init_shared() {
   level.scramblesoundalert = "mpl_scrambler_alert";
   level.scramblesoundping = "mpl_scrambler_ping";
   level.scramblesoundburst = "mpl_scrambler_burst";
-  clientfield::register("missile", "scrambler", 1, 1, "int", & spawnedscrambler, 0, 0);
+  clientfield::register("missile", "scrambler", 1, 1, "int", &spawnedscrambler, 0, 0);
   level.scramblers = [];
   level.playerpersistent = [];
   localclientnum = 0;
@@ -71,7 +71,7 @@ function spawned(localclientnum, set, islocalized) {
   level.scramblers[size].sndpingid = -1;
   players = level.localplayers;
   owner = self getowner(localclientnum);
-  util::local_players_entity_thread(self, & spawnedperclient, islocalized, scramblerhandle);
+  util::local_players_entity_thread(self, &spawnedperclient, islocalized, scramblerhandle);
   level thread cleanupscramblerondelete(self, scramblerhandle, islocalized, localclientnum);
 }
 

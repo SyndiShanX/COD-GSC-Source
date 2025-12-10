@@ -13,7 +13,7 @@
 #namespace zm_bgb_respin_cycle;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_respin_cycle", & __init__, undefined, undefined);
+  system::register("zm_bgb_respin_cycle", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -21,7 +21,7 @@ function __init__() {
     return;
   }
   bgb::register("zm_bgb_respin_cycle", "activated");
-  clientfield::register("zbarrier", "zm_bgb_respin_cycle", 1, 1, "counter", & function_74ecbbd7, 0, 0);
+  clientfield::register("zbarrier", "zm_bgb_respin_cycle", 1, 1, "counter", &function_74ecbbd7, 0, 0);
   level._effect["zm_bgb_respin_cycle"] = "zombie/fx_bgb_respin_cycle_box_flash_zmb";
 }
 

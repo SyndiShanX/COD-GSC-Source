@@ -124,19 +124,19 @@ reinitializescorelimitonmigration() {
 
 onstartgametype() {
   setclientnamemode("auto_change");
-  maps\mp\_utility::setobjectivetext("allies", & "OBJECTIVES_GUN");
-  maps\mp\_utility::setobjectivetext("axis", & "OBJECTIVES_GUN");
+  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_GUN");
+  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_GUN");
 
   if(level.splitscreen) {
-    maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_GUN");
-    maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_GUN");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_GUN");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_GUN");
   } else {
-    maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_GUN_SCORE");
-    maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_GUN_SCORE");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_GUN_SCORE");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_GUN_SCORE");
   }
 
-  maps\mp\_utility::setobjectivehinttext("allies", & "OBJECTIVES_GUN_HINT");
-  maps\mp\_utility::setobjectivehinttext("axis", & "OBJECTIVES_GUN_HINT");
+  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_GUN_HINT");
+  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_GUN_HINT");
   initspawns();
   var_0 = [];
   maps\mp\gametypes\_gameobjects::main(var_0);

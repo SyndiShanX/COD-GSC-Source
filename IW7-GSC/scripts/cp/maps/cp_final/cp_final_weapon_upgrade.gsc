@@ -622,36 +622,36 @@ remove_invalid_wm_attachments(param_00) {
 
 weapon_upgrade_hint_func(param_00, param_01) {
   if(scripts\engine\utility::istrue(level.has_picked_up_fuses) && !isDefined(level.placed_alien_fuses)) {
-    return & "CP_FINAL_INTERACTIONS_ADD_CHARGED_FUSE";
+    return &"CP_FINAL_INTERACTIONS_ADD_CHARGED_FUSE";
   }
 
   var_02 = param_01 getcurrentweapon();
   var_03 = scripts\cp\cp_weapon::get_weapon_level(var_02);
   if(scripts\engine\utility::istrue(level.placed_alien_fuses)) {
     if(issubstr(var_02, "venomx_zm_pap1") && scripts\engine\utility::istrue(level.completed_venomx_pap2_challenges)) {
-      return & "CP_FINAL_INTERACTIONS_UPGRADE_WEAPON";
+      return &"CP_FINAL_INTERACTIONS_UPGRADE_WEAPON";
     } else if(var_03 == 3) {
-      return & "COOP_INTERACTIONS_UPGRADE_MAXED";
+      return &"COOP_INTERACTIONS_UPGRADE_MAXED";
     } else if(!can_upgrade(var_02)) {
-      return & "CP_FINAL_INTERACTIONS_UPGRADE_WEAPON_FAIL";
+      return &"CP_FINAL_INTERACTIONS_UPGRADE_WEAPON_FAIL";
     } else {
-      return & "CP_FINAL_INTERACTIONS_UPGRADE_WEAPON";
+      return &"CP_FINAL_INTERACTIONS_UPGRADE_WEAPON";
     }
 
-    return & "CP_FINAL_INTERACTIONS_UPGRADE_WEAPON_FAIL";
+    return &"CP_FINAL_INTERACTIONS_UPGRADE_WEAPON_FAIL";
   }
 
   if(var_03 == level.pap_max) {
-    return & "COOP_INTERACTIONS_UPGRADE_MAXED";
+    return &"COOP_INTERACTIONS_UPGRADE_MAXED";
   } else if(param_01 scripts\cp\utility::is_melee_weapon(var_02, 1)) {
     return "";
   } else if(!can_upgrade(var_02)) {
-    return & "CP_FINAL_INTERACTIONS_UPGRADE_WEAPON_FAIL";
+    return &"CP_FINAL_INTERACTIONS_UPGRADE_WEAPON_FAIL";
   } else {
-    return & "CP_FINAL_INTERACTIONS_UPGRADE_WEAPON";
+    return &"CP_FINAL_INTERACTIONS_UPGRADE_WEAPON";
   }
 
-  return & "CP_FINAL_INTERACTIONS_UPGRADE_WEAPON_FAIL";
+  return &"CP_FINAL_INTERACTIONS_UPGRADE_WEAPON_FAIL";
 }
 
 can_upgrade(param_00, param_01) {

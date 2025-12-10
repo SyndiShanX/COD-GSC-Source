@@ -111,10 +111,10 @@ armageddon_challenge_success_func(param_00) {
 
 armageddon_challenge_hint(param_00, param_01) {
   if(!scripts\engine\utility::istrue(param_01.has_armageddon_badge)) {
-    return & "CP_RAVE_CHALLENGES_ARMAGEDDON_CHALLENGE";
+    return &"CP_RAVE_CHALLENGES_ARMAGEDDON_CHALLENGE";
   }
 
-  return & "CP_RAVE_CHALLENGES_PURCHASE_ARMAGEDDON";
+  return &"CP_RAVE_CHALLENGES_PURCHASE_ARMAGEDDON";
 }
 
 activate_repulsor_challenge(param_00, param_01) {
@@ -154,10 +154,10 @@ repulsor_challenge_success_func(param_00) {
 
 repulsor_challenge_hint(param_00, param_01) {
   if(!scripts\engine\utility::istrue(param_01.has_repulsor_badge)) {
-    return & "CP_RAVE_CHALLENGES_REPULSOR_CHALLENGE";
+    return &"CP_RAVE_CHALLENGES_REPULSOR_CHALLENGE";
   }
 
-  return & "CP_RAVE_CHALLENGES_PURCHASE_REPULSOR";
+  return &"CP_RAVE_CHALLENGES_PURCHASE_REPULSOR";
 }
 
 activate_blackhole_challenge(param_00, param_01) {
@@ -184,10 +184,10 @@ activate_blackhole_challenge(param_00, param_01) {
 
 blackhole_challenge_hint(param_00, param_01) {
   if(!scripts\engine\utility::istrue(param_01.has_blackhole_badge)) {
-    return & "CP_RAVE_CHALLENGES_BLACKHOLE_CHALLENGE";
+    return &"CP_RAVE_CHALLENGES_BLACKHOLE_CHALLENGE";
   }
 
-  return & "CP_RAVE_CHALLENGES_PURCHASE_BLACKHOLE";
+  return &"CP_RAVE_CHALLENGES_PURCHASE_BLACKHOLE";
 }
 
 blackhole_challenge_success_func(param_00) {
@@ -227,10 +227,10 @@ activate_transponder_challenge(param_00, param_01) {
 
 transponder_challenge_hint(param_00, param_01) {
   if(!scripts\engine\utility::istrue(param_01.has_transponder_badge)) {
-    return & "CP_RAVE_CHALLENGES_TRANSPONDER_CHALLENGE";
+    return &"CP_RAVE_CHALLENGES_TRANSPONDER_CHALLENGE";
   }
 
-  return & "CP_RAVE_CHALLENGES_PURCHASE_TRANSPONDER";
+  return &"CP_RAVE_CHALLENGES_PURCHASE_TRANSPONDER";
 }
 
 transponder_challenge_success_func(param_00) {
@@ -270,10 +270,10 @@ activate_rewind_challenge(param_00, param_01) {
 
 rewind_challenge_hint(param_00, param_01) {
   if(!scripts\engine\utility::istrue(param_01.has_rewind_badge)) {
-    return & "CP_RAVE_CHALLENGES_REWIND_CHALLENGE";
+    return &"CP_RAVE_CHALLENGES_REWIND_CHALLENGE";
   }
 
-  return & "CP_RAVE_CHALLENGES_PURCAHSE_REWIND";
+  return &"CP_RAVE_CHALLENGES_PURCAHSE_REWIND";
 }
 
 rewind_challenge_success_func(param_00) {

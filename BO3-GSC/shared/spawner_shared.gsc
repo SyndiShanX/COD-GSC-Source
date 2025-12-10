@@ -18,7 +18,7 @@
 #namespace spawner;
 
 function autoexec __init__sytem__() {
-  system::register("spawner", & __init__, & __main__, undefined);
+  system::register("spawner", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -54,19 +54,19 @@ function __init__() {
   goal_volume_init();
   level thread spawner_targets_init();
   level.ai = [];
-  add_global_spawn_function("axis", & global_ai_array);
-  add_global_spawn_function("allies", & global_ai_array);
-  add_global_spawn_function("team3", & global_ai_array);
+  add_global_spawn_function("axis", &global_ai_array);
+  add_global_spawn_function("allies", &global_ai_array);
+  add_global_spawn_function("team3", &global_ai_array);
   level thread update_nav_triggers();
 }
 
 function __main__() {
   waittillframeend();
   ai = getaispeciesarray("all");
-  array::thread_all(ai, & living_ai_prethink);
+  array::thread_all(ai, &living_ai_prethink);
   foreach(ai_guy in ai) {
     if(isalive(ai_guy)) {
-      ai_guy.overrideactorkilled = & callback_track_dead_npcs_by_type;
+      ai_guy.overrideactorkilled = &callback_track_dead_npcs_by_type;
       ai_guy thread spawn_think();
     }
   }
@@ -191,8 +191,8 @@ function spawn_guys_until_death_or_no_count() {
 
 function flood_spawner_scripted(spawners) {
   assert(isDefined(spawners) && spawners.size, "");
-  array::thread_all(spawners, & flood_spawner_init);
-  array::thread_all(spawners, & flood_spawner_think);
+  array::thread_all(spawners, &flood_spawner_init);
+  array::thread_all(spawners, &flood_spawner_think);
 }
 
 function reincrement_count_if_deleted(spawner) {
@@ -581,7 +581,7 @@ function go_to_node(node, goal_type, optional_arrived_at_node_func) {
     return;
   }
   if(!isDefined(optional_arrived_at_node_func)) {
-    optional_arrived_at_node_func = & util::empty;
+    optional_arrived_at_node_func = &util::empty;
   }
   go_to_node_using_funcs(array["node"], array["get_target_func"], array["set_goal_func_quits"], optional_arrived_at_node_func);
 }
@@ -874,12 +874,12 @@ function crawl_target_and_init_flags(ent, get_func) {
 }
 
 function get_node_funcs_based_on_target(node, goal_type) {
-  get_target_func["origin"] = & get_target_ents;
-  get_target_func["node"] = & get_target_nodes;
-  get_target_func["struct"] = & get_target_structs;
-  set_goal_func_quits["origin"] = & go_to_node_set_goal_pos;
-  set_goal_func_quits["struct"] = & go_to_node_set_goal_pos;
-  set_goal_func_quits["node"] = & go_to_node_set_goal_node;
+  get_target_func["origin"] = &get_target_ents;
+  get_target_func["node"] = &get_target_nodes;
+  get_target_func["struct"] = &get_target_structs;
+  set_goal_func_quits["origin"] = &go_to_node_set_goal_pos;
+  set_goal_func_quits["struct"] = &go_to_node_set_goal_pos;
+  set_goal_func_quits["node"] = &go_to_node_set_goal_node;
   if(!isDefined(goal_type)) {
     goal_type = "node";
   }
@@ -1308,10 +1308,10 @@ function flood_trigger_think(trigger) {
   for(i = 0; i < floodspawners.size; i++) {
     floodspawners[i].script_trigger = trigger;
   }
-  array::thread_all(floodspawners, & flood_spawner_init);
+  array::thread_all(floodspawners, &flood_spawner_init);
   trigger waittill("trigger");
   floodspawners = getEntArray(trigger.target, "targetname");
-  array::thread_all(floodspawners, & flood_spawner_think, trigger);
+  array::thread_all(floodspawners, &flood_spawner_think, trigger);
 }
 
 function flood_spawner_init(spawner) {
@@ -1779,21 +1779,21 @@ function add_spawn_function_group(str_value, str_key = "targetname", func_spawn,
   assert(isDefined(str_value), "");
   assert(isDefined(func_spawn), "");
   a_spawners = getspawnerarray(str_value, str_key);
-  array::run_all(a_spawners, & add_spawn_function, func_spawn, param_1, param_2, param_3, param_4, param_5);
+  array::run_all(a_spawners, &add_spawn_function, func_spawn, param_1, param_2, param_3, param_4, param_5);
 }
 
 function add_spawn_function_ai_group(str_aigroup, func_spawn, param_1, param_2, param_3, param_4, param_5) {
   assert(isDefined(str_aigroup), "");
   assert(isDefined(func_spawn), "");
   a_spawners = getspawnerarray(str_aigroup, "script_aigroup");
-  array::run_all(a_spawners, & add_spawn_function, func_spawn, param_1, param_2, param_3, param_4, param_5);
+  array::run_all(a_spawners, &add_spawn_function, func_spawn, param_1, param_2, param_3, param_4, param_5);
 }
 
 function remove_spawn_function_ai_group(str_aigroup, func_spawn, param_1, param_2, param_3, param_4, param_5) {
   assert(isDefined(str_aigroup), "");
   assert(isDefined(func_spawn), "");
   a_spawners = getspawnerarray(str_aigroup, "script_aigroup");
-  array::run_all(a_spawners, & remove_spawn_function, func_spawn);
+  array::run_all(a_spawners, &remove_spawn_function, func_spawn);
 }
 
 function simple_flood_spawn(name, spawn_func, spawn_func_2) {
@@ -1876,10 +1876,10 @@ function getscoreinfoxp(type) {
 function autoexec init_npcdeathtracking() {
   level.a_npcdeaths = [];
   level.str_killsoutput = "";
-  callback::add_callback("hash_8c38c12e", & track_npc_deaths);
-  callback::add_callback("hash_acb66515", & track_vehicle_deaths);
-  callback::add_callback("hash_7b543e98", & show_actor_damage);
-  callback::add_callback("hash_9bd1e27f", & show_vehicle_damage);
+  callback::add_callback("hash_8c38c12e", &track_npc_deaths);
+  callback::add_callback("hash_acb66515", &track_vehicle_deaths);
+  callback::add_callback("hash_7b543e98", &show_actor_damage);
+  callback::add_callback("hash_9bd1e27f", &show_vehicle_damage);
   setdvar("", 0);
   setdvar("", 0);
   setdvar("", 0);

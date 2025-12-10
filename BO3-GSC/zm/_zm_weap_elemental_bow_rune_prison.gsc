@@ -27,7 +27,7 @@
 #namespace _zm_weap_elemental_bow_rune_prison;
 
 function autoexec __init__sytem__() {
-  system::register("_zm_weap_elemental_bow_rune_prison", & __init__, & __main__, undefined);
+  system::register("_zm_weap_elemental_bow_rune_prison", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -42,7 +42,7 @@ function __init__() {
   clientfield::register("actor", "runeprison_lava_geyser_dot_fx", 5000, 1, "int");
   clientfield::register("actor", "runeprison_zombie_charring", 5000, 1, "int");
   clientfield::register("actor", "runeprison_zombie_death_skull", 5000, 1, "int");
-  callback::on_connect( & function_4d344d97);
+  callback::on_connect(&function_4d344d97);
 }
 
 function __main__() {}
@@ -50,7 +50,7 @@ function __main__() {}
 function function_4d344d97() {
   self thread zm_weap_elemental_bow::function_982419bb("elemental_bow_rune_prison");
   self thread zm_weap_elemental_bow::function_ececa597("elemental_bow_rune_prison", "elemental_bow_rune_prison4");
-  self thread zm_weap_elemental_bow::function_7bc6b9d("elemental_bow_rune_prison", "elemental_bow_rune_prison4", & function_c8b11b89);
+  self thread zm_weap_elemental_bow::function_7bc6b9d("elemental_bow_rune_prison", "elemental_bow_rune_prison4", &function_c8b11b89);
 }
 
 function function_c8b11b89(weapon, position, radius, attacker, normal) {
@@ -63,13 +63,13 @@ function function_c8b11b89(weapon, position, radius, attacker, normal) {
 
 function function_94ba3a15(e_player, v_hit_origin, str_weapon_name, var_3fee16b8, var_df033097, var_8b30ffd9) {
   if(var_df033097) {
-    e_player.var_d96b65c1 = & function_1ed3d96d;
+    e_player.var_d96b65c1 = &function_1ed3d96d;
     v_spawn_pos = e_player zm_weap_elemental_bow::function_866906f(v_hit_origin, str_weapon_name, var_3fee16b8, 48, e_player.var_d96b65c1);
     if(var_df033097) {
       var_289e02fc = (isDefined(v_spawn_pos) ? v_spawn_pos : v_hit_origin);
       var_852420bf = array::get_all_closest(var_289e02fc, getaiteamarray(level.zombie_team), undefined, undefined, 256);
-      var_852420bf = array::filter(var_852420bf, 0, & zm_weap_elemental_bow::function_5aec3adc);
-      var_852420bf = array::filter(var_852420bf, 0, & function_71c4b12e, var_289e02fc);
+      var_852420bf = array::filter(var_852420bf, 0, &zm_weap_elemental_bow::function_5aec3adc);
+      var_852420bf = array::filter(var_852420bf, 0, &function_71c4b12e, var_289e02fc);
       if(getdvarint("splitscreen_playerCount") > 2) {
         var_852420bf = array::clamp_size(var_852420bf, 6);
       } else {
@@ -136,8 +136,8 @@ function function_94ba3a15(e_player, v_hit_origin, str_weapon_name, var_3fee16b8
     self unlink();
   }
   var_852420bf = array::get_all_closest(var_c8bd3127.origin, getaiteamarray(level.zombie_team), undefined, undefined, 96);
-  var_852420bf = array::filter(var_852420bf, 0, & zm_weap_elemental_bow::function_5aec3adc);
-  var_852420bf = array::filter(var_852420bf, 0, & function_e381ab3a);
+  var_852420bf = array::filter(var_852420bf, 0, &zm_weap_elemental_bow::function_5aec3adc);
+  var_852420bf = array::filter(var_852420bf, 0, &function_e381ab3a);
   foreach(var_b4aadf6b in var_852420bf) {
     var_b4aadf6b dodamage(var_b4aadf6b.health, var_c8bd3127.origin, e_player, e_player, undefined, "MOD_BURNED", 0, level.var_791ba87b);
   }
@@ -149,8 +149,8 @@ function function_94ba3a15(e_player, v_hit_origin, str_weapon_name, var_3fee16b8
 function function_378db90d(v_pos) {
   wait(0.1);
   var_852420bf = array::get_all_closest(v_pos, getaiteamarray(level.zombie_team), undefined, undefined, 96);
-  var_852420bf = array::filter(var_852420bf, 0, & zm_weap_elemental_bow::function_5aec3adc);
-  var_852420bf = array::filter(var_852420bf, 0, & function_cece5ffb);
+  var_852420bf = array::filter(var_852420bf, 0, &zm_weap_elemental_bow::function_5aec3adc);
+  var_852420bf = array::filter(var_852420bf, 0, &function_cece5ffb);
   var_852420bf = array::clamp_size(var_852420bf, 2);
   foreach(var_b4aadf6b in var_852420bf) {
     var_b4aadf6b thread zm_weap_elemental_bow::function_d1e69389(v_pos);
@@ -201,9 +201,9 @@ function function_48899f7(e_player, v_hit_origin, str_weapon_name, var_3fee16b8)
   var_4275176f = [];
   while(n_timer < 3) {
     var_852420bf = array::get_all_closest(var_3c817f0d.origin, getaiteamarray(level.zombie_team), undefined, undefined, 48);
-    var_852420bf = array::filter(var_852420bf, 0, & zm_weap_elemental_bow::function_5aec3adc);
-    var_852420bf = array::filter(var_852420bf, 0, & function_6a1a0b32, var_3c817f0d);
-    array::thread_all(var_852420bf, & function_e7abbbb8, var_3c817f0d, e_player);
+    var_852420bf = array::filter(var_852420bf, 0, &zm_weap_elemental_bow::function_5aec3adc);
+    var_852420bf = array::filter(var_852420bf, 0, &function_6a1a0b32, var_3c817f0d);
+    array::thread_all(var_852420bf, &function_e7abbbb8, var_3c817f0d, e_player);
     wait(0.05);
     n_timer = n_timer + 0.05;
   }

@@ -32,14 +32,14 @@ function init() {}
 function main() {
   cybercom_gadget::registerability(0, 8);
   level.cybercom.surge = spawnStruct();
-  level.cybercom.surge._is_flickering = & _is_flickering;
-  level.cybercom.surge._on_flicker = & _on_flicker;
-  level.cybercom.surge._on_give = & _on_give;
-  level.cybercom.surge._on_take = & _on_take;
-  level.cybercom.surge._on_connect = & _on_connect;
-  level.cybercom.surge._on = & _on;
-  level.cybercom.surge._off = & _off;
-  level.cybercom.surge._is_primed = & _is_primed;
+  level.cybercom.surge._is_flickering = &_is_flickering;
+  level.cybercom.surge._on_flicker = &_on_flicker;
+  level.cybercom.surge._on_give = &_on_give;
+  level.cybercom.surge._on_take = &_on_take;
+  level.cybercom.surge._on_connect = &_on_connect;
+  level.cybercom.surge._on = &_on;
+  level.cybercom.surge._off = &_off;
+  level.cybercom.surge._is_primed = &_is_primed;
 }
 
 function _is_flickering(slot) {}
@@ -48,8 +48,8 @@ function _on_flicker(slot, weapon) {}
 
 function _on_give(slot, weapon) {
   self.cybercom.var_110c156a = getdvarint("scr_surge_target_count", 1);
-  self.cybercom.targetlockcb = & _get_valid_targets;
-  self.cybercom.targetlockrequirementcb = & _lock_requirement;
+  self.cybercom.targetlockcb = &_get_valid_targets;
+  self.cybercom.targetlockrequirementcb = &_lock_requirement;
   self thread cybercom::function_b5f4e597(weapon);
 }
 
@@ -437,7 +437,7 @@ function ai_activatesurge(target, var_9bc2efcb = 1, upgraded = 0) {
   }
 }
 
-function private _tryfindpathtobest( & enemies, maxattempts = 3) {
+function private _tryfindpathtobest(&enemies, maxattempts = 3) {
   while(maxattempts > 0 && enemies.size > 0) {
     maxattempts--;
     closest = arraygetclosest(self.origin, enemies);

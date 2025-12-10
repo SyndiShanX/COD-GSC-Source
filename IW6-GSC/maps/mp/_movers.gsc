@@ -19,7 +19,7 @@ main() {
   level.script_mover_defaults["usable"] = 0;
   level.script_mover_defaults["hintstring"] = "activate";
 
-  script_mover_add_hintString("activate", & "MP_ACTIVATE_MOVER");
+  script_mover_add_hintString("activate", &"MP_ACTIVATE_MOVER");
 
   script_mover_add_parameters("none", "");
 

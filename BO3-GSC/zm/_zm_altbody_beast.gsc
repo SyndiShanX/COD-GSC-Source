@@ -37,7 +37,7 @@
 #namespace zm_altbody_beast;
 
 function autoexec __init__sytem__() {
-  system::register("zm_altbody_beast", & __init__, & __main__, undefined);
+  system::register("zm_altbody_beast", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -51,10 +51,10 @@ function __init__() {
   loadout = array("zombie_beast_grapple_dwr", "zombie_beast_lightning_dwl", "zombie_beast_lightning_dwl2", "zombie_beast_lightning_dwl3");
   beastmode_loadout = zm_weapons::create_loadout(loadout);
   var_55affbc1 = array("zm_bgb_disorderly_combat");
-  zm_altbody::init("beast_mode", "beast_mode_kiosk", & "ZM_ZOD_ENTER_BEAST_MODE", "zombie_beast_2", 123, beastmode_loadout, 4, & player_enter_beastmode, & player_exit_beastmode, & player_allow_beastmode, & "ZM_ZOD_CANT_ENTER_BEAST_MODE", var_55affbc1);
-  callback::on_connect( & player_on_connect);
-  callback::on_spawned( & player_on_spawned);
-  callback::on_player_killed( & player_on_killed);
+  zm_altbody::init("beast_mode", "beast_mode_kiosk", &"ZM_ZOD_ENTER_BEAST_MODE", "zombie_beast_2", 123, beastmode_loadout, 4, &player_enter_beastmode, &player_exit_beastmode, &player_allow_beastmode, &"ZM_ZOD_CANT_ENTER_BEAST_MODE", var_55affbc1);
+  callback::on_connect(&player_on_connect);
+  callback::on_spawned(&player_on_spawned);
+  callback::on_player_killed(&player_on_killed);
   level.var_87ee6f27 = 4;
   level._effect["human_disappears"] = "zombie/fx_bmode_transition_zmb";
   level._effect["zombie_disappears"] = "zombie/fx_bmode_transition_zmb";
@@ -66,12 +66,12 @@ function __init__() {
   level._effect["beast_return_aoe_kill"] = "zombie/fx_bmode_attack_grapple_zod_zmb";
   level._effect["beast_shock_aoe"] = "zombie/fx_bmode_shock_lvl3_zod_zmb";
   level._effect["beast_3p_trail"] = "zombie/fx_bmode_trail_3p_zod_zmb";
-  level.grapple_valid_target_check = & grapple_valid_target_check;
-  level.get_grapple_targets = & get_grapple_targets;
+  level.grapple_valid_target_check = &grapple_valid_target_check;
+  level.get_grapple_targets = &get_grapple_targets;
   level.grapple_notarget_distance = 120;
   level.grapple_notarget_enabled = 0;
-  zm_spawner::register_zombie_damage_callback( & lightning_zombie_damage_response);
-  zm_spawner::register_zombie_death_event_callback( & beast_mode_death_watch);
+  zm_spawner::register_zombie_damage_callback(&lightning_zombie_damage_response);
+  zm_spawner::register_zombie_death_event_callback(&beast_mode_death_watch);
   thread beastmode_devgui();
   triggers = getEntArray("trig_beast_mode_kiosk", "targetname");
   foreach(trigger in triggers) {
@@ -88,7 +88,7 @@ function __main__() {
   thread hide_ooze_triggers();
   thread kiosk_cooldown();
   thread make_powerups_grapplable();
-  zm_spawner::add_custom_zombie_spawn_logic( & zombie_on_spawn);
+  zm_spawner::add_custom_zombie_spawn_logic(&zombie_on_spawn);
   create_lightning_params();
   level.weaponbeastrevivetool = getweapon("syrette_zod_beast");
 }
@@ -118,9 +118,9 @@ function player_enter_beastmode(name, trigger) {
   }
   self player_disappear_in_flash(1);
   self.overrideplayerdamage_original = self.overrideplayerdamage;
-  self.overrideplayerdamage = & player_damage_override_beast_mode;
+  self.overrideplayerdamage = &player_damage_override_beast_mode;
   self.weaponrevivetool = level.weaponbeastrevivetool;
-  self.get_revive_time = & player_get_revive_time;
+  self.get_revive_time = &player_get_revive_time;
   self zm_utility::increment_ignoreme();
   self.beastmode = 1;
   self.inhibit_scoring_from_zombies = 1;
@@ -199,7 +199,7 @@ function player_enter_superbeastmode() {
   self.superbeastmana = 1;
   self.see_kiosks_in_altbody = 1;
   self.trigger_kiosks_in_altbody = 1;
-  self.custom_altbody_callback = & player_recharge_superbeastmode;
+  self.custom_altbody_callback = &player_recharge_superbeastmode;
   self disableinvulnerability();
   self thread superbeastmode_override_hp();
   bb::logplayerevent(self, "enter_superbeast_mode");
@@ -439,7 +439,7 @@ function update_kiosk_effects() {
       if(kiosk_allowed(kiosk)) {
         n_players_allowed = n_players_allowed | (1 << n_ent_num);
       } else {
-        n_players_allowed = n_players_allowed & (~(1 << n_ent_num));
+        n_players_allowed = n_players_allowed &(~(1 << n_ent_num));
       }
       level clientfield::set(kiosk.var_80eeb471, n_players_allowed);
     }
@@ -459,7 +459,7 @@ function get_number_of_available_kiosks() {
 
 function function_f6014f2c(v_origin, var_8ebf7724) {
   a_kiosks = arraysortclosest(level.beast_kiosks, v_origin);
-  a_kiosks = array::filter(a_kiosks, 0, & function_b7520b09);
+  a_kiosks = array::filter(a_kiosks, 0, &function_b7520b09);
   for(i = 0; i < a_kiosks.size && i < var_8ebf7724; i++) {
     zm_zod_util::function_5cc835d6(v_origin, a_kiosks[i].origin, 1);
     a_kiosks[i].is_cooling_down = 0;
@@ -536,10 +536,10 @@ function player_watch_cancel() {
 }
 
 function beast_cancel_hint() {
-  hint = & "ZM_ZOD_EXIT_BEAST_MODE_HINT";
+  hint = &"ZM_ZOD_EXIT_BEAST_MODE_HINT";
   y = 315;
   if(level.players.size > 1) {
-    hint = & "ZM_ZOD_EXIT_BEAST_MODE_HINT_COOP";
+    hint = &"ZM_ZOD_EXIT_BEAST_MODE_HINT_COOP";
     y = 285;
   }
   self thread watch_beast_hint_use(12, 12.05);
@@ -772,11 +772,11 @@ function player_on_killed() {
 function hide_ooze_triggers() {
   level flagsys::wait_till("start_zombie_round_logic");
   ooo = getEntArray("ooze_only", "script_noteworthy");
-  array::thread_all(ooo, & trigger_ooze_only);
+  array::thread_all(ooo, &trigger_ooze_only);
   moo = getEntArray("beast_melee_only", "script_noteworthy");
-  array::thread_all(moo, & trigger_melee_only);
+  array::thread_all(moo, &trigger_melee_only);
   goo = getEntArray("beast_grapple_only", "script_noteworthy");
-  array::thread_all(goo, & trigger_grapple_only);
+  array::thread_all(goo, &trigger_grapple_only);
 }
 
 function player_update_beast_mode_objects(onoff) {
@@ -785,13 +785,13 @@ function player_update_beast_mode_objects(onoff) {
     more_bmo = [[level.get_beast_mode_objects]]();
     bmo = arraycombine(bmo, more_bmo, 0, 0);
   }
-  array::run_all(bmo, & entity_set_visible, self, onoff);
+  array::run_all(bmo, &entity_set_visible, self, onoff);
   bmho = getEntArray("not_beast_mode", "script_noteworthy");
   if(isDefined(level.get_beast_mode_hide_objects)) {
     more_bmho = [[level.get_beast_mode_hide_objects]]();
     bmho = arraycombine(bmho, more_bmho, 0, 0);
   }
-  array::run_all(bmho, & entity_set_visible, self, !onoff);
+  array::run_all(bmho, &entity_set_visible, self, !onoff);
 }
 
 function entity_set_visible(player, onoff) {
@@ -1413,7 +1413,7 @@ function function_d7b8b2f5() {
 function beastmode_devgui() {
   level flagsys::wait_till("");
   wait(1);
-  zm_devgui::add_custom_devgui_callback( & beastmode_devgui_callback);
+  zm_devgui::add_custom_devgui_callback(&beastmode_devgui_callback);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -1441,12 +1441,12 @@ function beastmode_devgui_callback(cmd) {
       break;
     }
     case "": {
-      array::thread_all(players, & player_zombie_devgui_beast_mode);
+      array::thread_all(players, &player_zombie_devgui_beast_mode);
       retval = 1;
       break;
     }
     case "": {
-      array::thread_all(players, & player_zombie_devgui_superbeast_mode);
+      array::thread_all(players, &player_zombie_devgui_superbeast_mode);
       retval = 1;
       break;
     }
@@ -1497,7 +1497,7 @@ function beastmode_devgui_callback(cmd) {
       break;
     }
     case "": {
-      array::thread_all(players, & player_zombie_devgui_beast_mode_preserve);
+      array::thread_all(players, &player_zombie_devgui_beast_mode_preserve);
       retval = 1;
       break;
     }

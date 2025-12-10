@@ -15,8 +15,8 @@
 #namespace zm_temple_sq_bttp2;
 
 function init() {
-  zm_sidequests::declare_sidequest_stage("sq", "bttp2", & init_stage, & stage_logic, & exit_stage);
-  zm_sidequests::set_stage_time_limit("sq", "bttp2", 300, & function_e9d67422);
+  zm_sidequests::declare_sidequest_stage("sq", "bttp2", &init_stage, &stage_logic, &exit_stage);
+  zm_sidequests::set_stage_time_limit("sq", "bttp2", 300, &function_e9d67422);
 }
 
 function init_stage() {
@@ -24,7 +24,7 @@ function init_stage() {
   level.var_64d74143 = 0;
   dials = getEntArray("sq_bttp2_dial", "targetname");
   level.var_83becb0e = dials.size;
-  array::thread_all(dials, & function_5ac3fada);
+  array::thread_all(dials, &function_5ac3fada);
   zm_temple_sq_brock::delete_radio();
   if(level flag::get("radio_7_played")) {
     level thread delayed_start_skit("tt7a");
@@ -91,11 +91,11 @@ function stage_logic() {
 
 function exit_stage(success) {
   dials = getEntArray("sq_bttp2_dial", "targetname");
-  array::thread_all(dials, & dud_dial_handler);
+  array::thread_all(dials, &dud_dial_handler);
   if(success) {
     zm_temple_sq_brock::create_radio(8);
   } else {
-    zm_temple_sq_brock::create_radio(7, & zm_temple_sq_brock::radio7_override);
+    zm_temple_sq_brock::create_radio(7, &zm_temple_sq_brock::radio7_override);
     level thread zm_temple_sq_skits::fail_skit();
   }
 }

@@ -99,7 +99,7 @@ onSpawnRetrieveTrigger(watcher, player) {
   pickup_trigger SetCursorHint("HINT_NOICON", watcher.weapon);
   pickup_trigger.owner = player;
   retrievable_model.pickUpTrigger = pickup_trigger;
-  hint_string = & "MP_BALLISTIC_KNIFE_PICKUP";
+  hint_string = &"MP_BALLISTIC_KNIFE_PICKUP";
   if(isDefined(hint_string)) {
     pickup_trigger SetHintString(hint_string);
   } else {

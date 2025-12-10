@@ -20,17 +20,17 @@
 
 function autoexec init() {
   initzmfactorybehaviorsandasm();
-  level.zombie_init_done = & function_f06eec12;
+  level.zombie_init_done = &function_f06eec12;
   setdvar("scr_zm_use_code_enemy_selection", 0);
-  level.closest_player_override = & factory_closest_player;
+  level.closest_player_override = &factory_closest_player;
   level thread update_closest_player();
   level.move_valid_poi_to_navmesh = 1;
   level.pathdist_type = 2;
 }
 
 function private initzmfactorybehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("ZmFactoryTraversalService", & zmfactorytraversalservice);
-  animationstatenetwork::registeranimationmocomp("mocomp_idle_special_factory", & mocompidlespecialfactorystart, undefined, & mocompidlespecialfactoryterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("ZmFactoryTraversalService", &zmfactorytraversalservice);
+  animationstatenetwork::registeranimationmocomp("mocomp_idle_special_factory", &mocompidlespecialfactorystart, undefined, &mocompidlespecialfactoryterminate);
 }
 
 function zmfactorytraversalservice(entity) {

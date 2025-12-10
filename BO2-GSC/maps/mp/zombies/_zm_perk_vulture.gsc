@@ -18,7 +18,7 @@
 #include maps\mp\zombies\_zm_perk_vulture;
 
 enable_vulture_perk_for_level() {
-  maps\mp\zombies\_zm_perks::register_perk_basic_info("specialty_nomotionsensor", "vulture", 3000, & "ZOMBIE_PERK_VULTURE", "zombie_perk_bottle_vulture");
+  maps\mp\zombies\_zm_perks::register_perk_basic_info("specialty_nomotionsensor", "vulture", 3000, &"ZOMBIE_PERK_VULTURE", "zombie_perk_bottle_vulture");
   maps\mp\zombies\_zm_perks::register_perk_precache_func("specialty_nomotionsensor", ::vulture_precache);
   maps\mp\zombies\_zm_perks::register_perk_clientfields("specialty_nomotionsensor", ::vulture_register_clientfield, ::vulture_set_clientfield);
   maps\mp\zombies\_zm_perks::register_perk_threads("specialty_nomotionsensor", ::give_vulture_perk, ::take_vulture_perk);
@@ -935,7 +935,7 @@ vulture_clientfield_scriptmover_set(str_field_name) {
 vulture_clientfield_scriptmover_clear(str_field_name) {
   assert(isDefined(level.perk_vulture.clientfields.scriptmovers[str_field_name]), str_field_name + " is not a valid client field for vulture perk!");
   n_value = self getclientfield("vulture_perk_scriptmover");
-  n_value = n_value & ~(1 << level.perk_vulture.clientfields.scriptmovers[str_field_name]);
+  n_value = n_value &~(1 << level.perk_vulture.clientfields.scriptmovers[str_field_name]);
   self setclientfield("vulture_perk_scriptmover", n_value);
 }
 
@@ -949,7 +949,7 @@ vulture_clientfield_actor_set(str_field_name) {
 vulture_clientfield_actor_clear(str_field_name) {
   assert(isDefined(level.perk_vulture.clientfields.actors[str_field_name]), str_field_name + " is not a valid field for vulture_clientfield_actor_clear!");
   n_value = getclientfield("vulture_perk_actor");
-  n_value = n_value & ~(1 << level.perk_vulture.clientfields.actors[str_field_name]);
+  n_value = n_value &~(1 << level.perk_vulture.clientfields.actors[str_field_name]);
   self setclientfield("vulture_perk_actor", n_value);
 }
 
@@ -963,7 +963,7 @@ vulture_clientfield_toplayer_set(str_field_name) {
 vulture_clientfield_toplayer_clear(str_field_name) {
   assert(isDefined(level.perk_vulture.clientfields.toplayer[str_field_name]), str_field_name + " is not a valid client field for vulture perk!");
   n_value = self getclientfieldtoplayer("vulture_perk_toplayer");
-  n_value = n_value & ~(1 << level.perk_vulture.clientfields.toplayer[str_field_name]);
+  n_value = n_value &~(1 << level.perk_vulture.clientfields.toplayer[str_field_name]);
   self setclientfieldtoplayer("vulture_perk_toplayer", n_value);
 }
 

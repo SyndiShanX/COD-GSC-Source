@@ -66,15 +66,15 @@ main() {
   precachemodel("weapon_rpg7_no_rocket");
   setomnvar("ui_jeepride_init", 1);
   maps\_utility::default_start(::ride_start);
-  maps\_utility::add_start("start", ::ride_start, & "STARTS_START");
-  maps\_utility::add_start("first_hind", ::start_first_hind, & "STARTS_FIRSTHIND");
-  maps\_utility::add_start("against_traffic", ::wip_start, & "STARTS_AGAINSTTRAFFIC");
-  maps\_utility::add_start("final_stretch", ::wip_start, & "STARTS_FINALSTRETCH");
-  maps\_utility::add_start("bridge_explode", ::bridge_explode_start, & "STARTS_BRIDGEEXPLODE");
-  maps\_utility::add_start("bridge_combat", ::bridge_combat, & "STARTS_BRIDGECOMBAT");
-  maps\_utility::add_start("bridge_zak", ::bridge_zak, & "STARTS_BRIDGEZAK");
-  maps\_utility::add_start("bridge_rescue", ::bridge_rescue_start, & "STARTS_BRIDGERESCUE");
-  maps\_utility::add_start("nowhere", ::start_nowhere, & "STARTS_NOWHERE");
+  maps\_utility::add_start("start", ::ride_start, &"STARTS_START");
+  maps\_utility::add_start("first_hind", ::start_first_hind, &"STARTS_FIRSTHIND");
+  maps\_utility::add_start("against_traffic", ::wip_start, &"STARTS_AGAINSTTRAFFIC");
+  maps\_utility::add_start("final_stretch", ::wip_start, &"STARTS_FINALSTRETCH");
+  maps\_utility::add_start("bridge_explode", ::bridge_explode_start, &"STARTS_BRIDGEEXPLODE");
+  maps\_utility::add_start("bridge_combat", ::bridge_combat, &"STARTS_BRIDGECOMBAT");
+  maps\_utility::add_start("bridge_zak", ::bridge_zak, &"STARTS_BRIDGEZAK");
+  maps\_utility::add_start("bridge_rescue", ::bridge_rescue_start, &"STARTS_BRIDGERESCUE");
+  maps\_utility::add_start("nowhere", ::start_nowhere, &"STARTS_NOWHERE");
 
   if(getdvar("jeepride_smoke_shadow") == "")
     setdvar("jeepride_smoke_shadow", "off");
@@ -1360,7 +1360,7 @@ ignoreall_for_running_away() {
 objectives() {
   common_scripts\utility::flag_init("objective_off_the_bridge");
   common_scripts\utility::flag_init("objective_finishedthelevel");
-  objective_add(1, "active", & "JEEPRIDE_SURVIVE_THE_ESCAPE");
+  objective_add(1, "active", &"JEEPRIDE_SURVIVE_THE_ESCAPE");
   objective_current(1);
   common_scripts\utility::flag_wait("objective_finishedthelevel");
   objective_state(1, "done");

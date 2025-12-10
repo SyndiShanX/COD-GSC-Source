@@ -36,7 +36,7 @@ collectibleHandler(clientNum, state, oldState) {
 
 has_collectible(collectible_value) {
   found_collectibles = GetDvarInt("cheat_items_set1");
-  return ((found_collectibles & (1 << collectible_value)) != 0);
+  return ((found_collectibles &(1 << collectible_value)) != 0);
 }
 
 give_collectible(client_num, collectible_value) {

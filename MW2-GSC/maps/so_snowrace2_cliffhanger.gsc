@@ -16,7 +16,7 @@ FLAG_TIME_VALUE_VETERAN = 3.0;
 
 main() {
   precacheString(&"SO_SNOWRACE1_CLIFFHANGER_COOPFAIL_HINT1");
-  level.objective_desc = & "SO_SNOWRACE1_CLIFFHANGER_OBJ_FINISHLINE_GATES";
+  level.objective_desc = &"SO_SNOWRACE1_CLIFFHANGER_OBJ_FINISHLINE_GATES";
   precacheString(level.objective_desc);
 
   init_snow_race();
@@ -45,7 +45,7 @@ main() {
   level.challenge_time_hurry = 3;
   thread manage_timer();
   level.challenge_time_force_on = true;
-  thread enable_challenge_timer("race_started", "finish_line", & "SO_SNOWRACE1_CLIFFHANGER_SPECOP_TIMER");
+  thread enable_challenge_timer("race_started", "finish_line", &"SO_SNOWRACE1_CLIFFHANGER_SPECOP_TIMER");
 
   thread special_coop_fail_quotes();
 }
@@ -100,7 +100,7 @@ gate_think() {
 
   level notify("new_challenge_timer");
   level.challenge_time_limit += flag_time;
-  thread enable_challenge_timer("race_started", "finish_line", & "SO_SNOWRACE1_CLIFFHANGER_SPECOP_TIMER");
+  thread enable_challenge_timer("race_started", "finish_line", &"SO_SNOWRACE1_CLIFFHANGER_SPECOP_TIMER");
 }
 
 gate_splash() {
@@ -108,7 +108,7 @@ gate_splash() {
   level endon("gate_splash");
 
   if(!isDefined(level.time_splash)) {
-    level.time_splash = so_create_hud_item(2, 0, & "SO_SNOWRACE1_CLIFFHANGER_TIMESPLASH");
+    level.time_splash = so_create_hud_item(2, 0, &"SO_SNOWRACE1_CLIFFHANGER_TIMESPLASH");
     level.time_splash.alignx = "center";
     level.time_splash.horzAlign = "center";
     level.time_splash set_hud_yellow();

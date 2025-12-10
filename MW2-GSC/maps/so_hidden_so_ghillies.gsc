@@ -241,7 +241,7 @@ start_so_hidden_gogogo(start_id) {
 
 so_hidden_setup_regular() {
   obj = getstruct("so_hidden_obj_church", "script_noteworthy");
-  objective_add(1, "current", & "SO_HIDDEN_SO_GHILLIES_OBJ_REGULAR", obj.origin);
+  objective_add(1, "current", &"SO_HIDDEN_SO_GHILLIES_OBJ_REGULAR", obj.origin);
 
   level.coop_difficulty_scalar = 0.75;
 
@@ -264,7 +264,7 @@ so_hidden_setup_regular() {
 
 so_hidden_setup_hardened() {
   obj = getstruct("so_hidden_obj_church", "script_noteworthy");
-  objective_add(1, "current", & "SO_HIDDEN_SO_GHILLIES_OBJ_HARDENED", obj.origin);
+  objective_add(1, "current", &"SO_HIDDEN_SO_GHILLIES_OBJ_HARDENED", obj.origin);
 
   level.coop_difficulty_scalar = 0.33;
 
@@ -287,7 +287,7 @@ so_hidden_setup_hardened() {
 
 so_hidden_setup_veteran() {
   obj = getstruct("so_hidden_obj_church", "script_noteworthy");
-  objective_add(1, "current", & "SO_HIDDEN_SO_GHILLIES_OBJ_VETERAN", obj.origin);
+  objective_add(1, "current", &"SO_HIDDEN_SO_GHILLIES_OBJ_VETERAN", obj.origin);
 
   level.coop_difficulty_scalar = 0.25;
 

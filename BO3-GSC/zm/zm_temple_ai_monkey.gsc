@@ -37,8 +37,8 @@ function autoexec function_dafa313c() {
 }
 
 function private initmonkeybehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("templeMonkeyTargetService", & templemonkeytargetservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("templeMonkeyDeathStart", & templemonkeydeathstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("templeMonkeyTargetService", &templemonkeytargetservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("templeMonkeyDeathStart", &templemonkeydeathstart);
 }
 
 function private templemonkeytargetservice(entity) {
@@ -312,9 +312,9 @@ function _monkey_templethinkinternal(spawner) {
   spawner.last_spawn_time = gettime();
   playFX(level._effect["monkey_death"], self.origin);
   playsoundatposition("zmb_bolt", self.origin);
-  self.deathfunction = & _monkey_zombietempledeathcallback;
+  self.deathfunction = &_monkey_zombietempledeathcallback;
   self.spawnzone = spawner.script_noteworthy;
-  self.shrink_ray_fling = & _monkey_templefling;
+  self.shrink_ray_fling = &_monkey_templefling;
   self thread monkey_zombie_choose_sprint_temple();
   self thread _monkey_gotoboards();
 }
@@ -437,12 +437,12 @@ function _grab_powerup(powerup) {
   }
   monkey.ignore_enemy_count = 1;
   monkey.meleedamage = 10;
-  monkey.custom_damage_func = & monkey_temple_custom_damage;
+  monkey.custom_damage_func = &monkey_temple_custom_damage;
   location = monkey _monkey_getspawnlocation(powerup);
   monkey forceteleport(location, monkey.angles);
-  monkey.deathfunction = & _monkey_zombietempleescapedeathcallback;
-  monkey.shrink_ray_fling = & _monkey_templefling;
-  monkey.zombie_sliding = & _monkey_templesliding;
+  monkey.deathfunction = &_monkey_zombietempleescapedeathcallback;
+  monkey.shrink_ray_fling = &_monkey_templefling;
+  monkey.zombie_sliding = &_monkey_templesliding;
   monkey.no_shrink = 0;
   monkey.ignore_solo_last_stand = 1;
   spawner.count = 100;
@@ -697,7 +697,7 @@ function _monkey_zombietempleescapedeathcallback(einflictor, attacker, idamage, 
   }
   if(isDefined(self.do_gib_death) && self.do_gib_death) {
     self thread _monkey_gib();
-    self util::delay(0.05, undefined, & zm_utility::self_delete);
+    self util::delay(0.05, undefined, &zm_utility::self_delete);
   }
   return false;
 }
@@ -738,7 +738,7 @@ function _monkey_dropstolenpowerup() {
     self notify("powerup_dropped");
     self.powerup notify("stop_randomize");
     if(isDefined(self.powerup.fx_red)) {
-      self.powerup.fx_red util::delay(0.1, undefined, & zm_utility::self_delete);
+      self.powerup.fx_red util::delay(0.1, undefined, &zm_utility::self_delete);
       self.powerup.fx_red = undefined;
     }
     self.powerup.claimed = 0;

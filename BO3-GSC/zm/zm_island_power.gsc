@@ -42,7 +42,7 @@ function main() {
   level thread function_46ffc7b4();
   level thread function_801ffa37();
   level thread function_ae1e48b4();
-  callback::on_spawned( & function_45585311);
+  callback::on_spawned(&function_45585311);
   level thread function_662fba30();
   level thread function_c5751341();
   level thread function_83ead54e();
@@ -69,7 +69,7 @@ function function_d17ab8c6() {
 
 function function_bbe228f8() {
   level endon("connect_bunker_exterior_to_bunker_interior");
-  zm_utility::add_zombie_hint("bunker_door_text", & "ZM_ISLAND_BUNKER_DOOR_OPEN");
+  zm_utility::add_zombie_hint("bunker_door_text", &"ZM_ISLAND_BUNKER_DOOR_OPEN");
   var_25d5f24c = getent("door_bunker_main", "target");
   while(true) {
     level waittill("override_bunker_door_string");
@@ -199,8 +199,8 @@ function function_e9f46546() {
   level thread zm_island_vo::function_3bf2d62a("unblock_penstock", 0, 1, 0);
   var_e08b3d94 zm_ai_spiders::function_f375c6d9(0);
   arrayremovevalue(level.var_d3b40681, var_e08b3d94);
-  var_e08b3d94.var_1e831600 util::delay(5, undefined, & delete);
-  var_e08b3d94 util::delay(6, undefined, & delete);
+  var_e08b3d94.var_1e831600 util::delay(5, undefined, &delete);
+  var_e08b3d94 util::delay(6, undefined, &delete);
 }
 
 function function_ae1e48b4() {
@@ -365,20 +365,20 @@ function function_53f26a4c() {
   if(self.var_bb2fd41c === 3) {
     foreach(var_5972e249 in level.var_769c0729) {
       if(isDefined(var_5972e249)) {
-        var_5972e249 sethintstringforplayer(self, & "ZOMBIE_ELECTRIC_SWITCH");
+        var_5972e249 sethintstringforplayer(self, &"ZOMBIE_ELECTRIC_SWITCH");
       }
     }
   } else {
     if(self.var_bb2fd41c > 0) {
       foreach(var_5972e249 in level.var_769c0729) {
         if(isDefined(var_5972e249)) {
-          var_5972e249 sethintstringforplayer(self, & "ZM_ISLAND_POWER_SWITCH_NEEEDS_MORE_WATER");
+          var_5972e249 sethintstringforplayer(self, &"ZM_ISLAND_POWER_SWITCH_NEEEDS_MORE_WATER");
         }
       }
     } else {
       foreach(var_5972e249 in level.var_769c0729) {
         if(isDefined(var_5972e249)) {
-          var_5972e249 sethintstringforplayer(self, & "ZM_ISLAND_POWER_SWITCH_NEEEDS_WATER");
+          var_5972e249 sethintstringforplayer(self, &"ZM_ISLAND_POWER_SWITCH_NEEEDS_WATER");
         }
       }
     }
@@ -497,7 +497,7 @@ function function_662fba30() {
 function private function_75656c0a() {
   while(true) {
     self.model = util::spawn_model("p7_zm_isl_bucket_115", self.origin, self.angles);
-    self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, & function_16434440);
+    self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, &function_16434440);
     self.model clientfield::set("bucket_fx", 1);
     while(!isDefined(self.trigger)) {
       wait(0.05);
@@ -542,9 +542,9 @@ function function_4b057b64() {
 
 function private function_16434440(e_player) {
   if(e_player clientfield::get_to_player("bucket_held")) {
-    return & "";
+    return &"";
   }
-  return & "ZM_ISLAND_PICKUP_BUCKET";
+  return &"ZM_ISLAND_PICKUP_BUCKET";
 }
 
 function function_a84a1aec(var_c6cad973, var_350cfc56) {
@@ -698,7 +698,7 @@ function function_16ae5bf5() {
 }
 
 function function_5b3bc8() {
-  zm_devgui::add_custom_devgui_callback( & function_d8d81d72);
+  zm_devgui::add_custom_devgui_callback(&function_d8d81d72);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");

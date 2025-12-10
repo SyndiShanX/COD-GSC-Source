@@ -42,18 +42,18 @@ function main() {
   globallogic::registerfriendlyfiredelay(level.gametype, 15, 0, 1440);
   level.teambased = 1;
   level.overrideteamscore = 1;
-  level.onprecachegametype = & onprecachegametype;
-  level.onstartgametype = & onstartgametype;
-  level.onspawnplayer = & onspawnplayer;
-  level.playerspawnedcb = & sr_playerspawnedcb;
-  level.onplayerkilled = & onplayerkilled;
-  level.ondeadevent = & ondeadevent;
-  level.ononeleftevent = & ononeleftevent;
-  level.ontimelimit = & ontimelimit;
-  level.onroundswitch = & onroundswitch;
-  level.getteamkillpenalty = & sr_getteamkillpenalty;
-  level.getteamkillscore = & sr_getteamkillscore;
-  level.iskillboosting = & sr_iskillboosting;
+  level.onprecachegametype = &onprecachegametype;
+  level.onstartgametype = &onstartgametype;
+  level.onspawnplayer = &onspawnplayer;
+  level.playerspawnedcb = &sr_playerspawnedcb;
+  level.onplayerkilled = &onplayerkilled;
+  level.ondeadevent = &ondeadevent;
+  level.ononeleftevent = &ononeleftevent;
+  level.ontimelimit = &ontimelimit;
+  level.onroundswitch = &onroundswitch;
+  level.getteamkillpenalty = &sr_getteamkillpenalty;
+  level.getteamkillscore = &sr_getteamkillscore;
+  level.iskillboosting = &sr_iskillboosting;
   level.endgameonscorelimit = 0;
   gameobjects::register_allowed_gameobject("sd");
   gameobjects::register_allowed_gameobject("bombzone");
@@ -149,20 +149,20 @@ function onstartgametype() {
     game["defenders"] = oldattackers;
   }
   setclientnamemode("manual_change");
-  game["strings"]["target_destroyed"] = & "MP_TARGET_DESTROYED";
-  game["strings"]["bomb_defused"] = & "MP_BOMB_DEFUSED";
+  game["strings"]["target_destroyed"] = &"MP_TARGET_DESTROYED";
+  game["strings"]["bomb_defused"] = &"MP_BOMB_DEFUSED";
   level._effect["bombexplosion"] = "explosions/fx_exp_bomb_demo_mp";
-  util::setobjectivetext(game["attackers"], & "OBJECTIVES_SD_ATTACKER");
-  util::setobjectivetext(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+  util::setobjectivetext(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
+  util::setobjectivetext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
   if(level.splitscreen) {
-    util::setobjectivescoretext(game["attackers"], & "OBJECTIVES_SD_ATTACKER");
-    util::setobjectivescoretext(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+    util::setobjectivescoretext(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
+    util::setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
   } else {
-    util::setobjectivescoretext(game["attackers"], & "OBJECTIVES_SD_ATTACKER_SCORE");
-    util::setobjectivescoretext(game["defenders"], & "OBJECTIVES_SD_DEFENDER_SCORE");
+    util::setobjectivescoretext(game["attackers"], &"OBJECTIVES_SD_ATTACKER_SCORE");
+    util::setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_SCORE");
   }
-  util::setobjectivehinttext(game["attackers"], & "OBJECTIVES_SD_ATTACKER_HINT");
-  util::setobjectivehinttext(game["defenders"], & "OBJECTIVES_SD_DEFENDER_HINT");
+  util::setobjectivehinttext(game["attackers"], &"OBJECTIVES_SD_ATTACKER_HINT");
+  util::setobjectivehinttext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_HINT");
   level.alwaysusestartspawns = 1;
   dogtags::init();
   initspawns();
@@ -244,7 +244,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
   should_spawn_tags = self should_spawn_tags(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration);
   should_spawn_tags = should_spawn_tags && !globallogic_spawn::mayspawn();
   if(should_spawn_tags) {
-    level thread dogtags::spawn_dog_tag(self, attacker, & onusedogtag, 0);
+    level thread dogtags::spawn_dog_tag(self, attacker, &onusedogtag, 0);
   }
 }
 
@@ -410,15 +410,15 @@ function bombs() {
     return;
   }
   if(!level.multibomb) {
-    level.sdbomb = gameobjects::create_carry_object(game["attackers"], trigger, visuals, vectorscale((0, 0, 1), 32), & "sd_bomb");
+    level.sdbomb = gameobjects::create_carry_object(game["attackers"], trigger, visuals, vectorscale((0, 0, 1), 32), &"sd_bomb");
     level.sdbomb gameobjects::allow_carry("friendly");
     level.sdbomb gameobjects::set_2d_icon("friendly", "compass_waypoint_bomb");
     level.sdbomb gameobjects::set_3d_icon("friendly", "waypoint_bomb");
     level.sdbomb gameobjects::set_visible_team("friendly");
     level.sdbomb gameobjects::set_carry_icon("hud_suitcase_bomb");
     level.sdbomb.allowweapons = 1;
-    level.sdbomb.onpickup = & onpickup;
-    level.sdbomb.ondrop = & ondrop;
+    level.sdbomb.onpickup = &onpickup;
+    level.sdbomb.ondrop = &ondrop;
   } else {
     trigger delete();
     visuals[0] delete();
@@ -444,10 +444,10 @@ function bombs() {
     bombzone gameobjects::set_2d_icon("enemy", "compass_waypoint_target" + label);
     bombzone gameobjects::set_3d_icon("enemy", "waypoint_target" + label);
     bombzone gameobjects::set_visible_team("any");
-    bombzone.onbeginuse = & onbeginuse;
-    bombzone.onenduse = & onenduse;
-    bombzone.onuse = & onuseplantobject;
-    bombzone.oncantuse = & oncantuse;
+    bombzone.onbeginuse = &onbeginuse;
+    bombzone.onenduse = &onenduse;
+    bombzone.onuse = &onuseplantobject;
+    bombzone.oncantuse = &oncantuse;
     bombzone.useweapon = getweapon("briefcase_bomb");
     bombzone.visuals[0].killcament = spawn("script_model", bombzone.visuals[0].origin + vectorscale((0, 0, 1), 128));
     if(!level.multibomb) {
@@ -681,9 +681,9 @@ function bombplanted(destroyedobj, player) {
   defuseobject gameobjects::set_3d_icon("enemy", "waypoint_defend" + label);
   defuseobject gameobjects::set_flags(1);
   defuseobject.label = label;
-  defuseobject.onbeginuse = & onbeginuse;
-  defuseobject.onenduse = & onenduse;
-  defuseobject.onuse = & onusedefuseobject;
+  defuseobject.onbeginuse = &onbeginuse;
+  defuseobject.onenduse = &onenduse;
+  defuseobject.onuse = &onusedefuseobject;
   defuseobject.useweapon = getweapon("briefcase_bomb_defuse");
   player.isbombcarrier = 0;
   bombtimerwait();

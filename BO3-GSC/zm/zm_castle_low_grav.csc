@@ -19,13 +19,13 @@ function main() {
 }
 
 function register_clientfields() {
-  clientfield::register("scriptmover", "low_grav_powerup_triggered", 5000, 1, "counter", & function_69e96b4d, 0, 0);
-  clientfield::register("scriptmover", "zombie_wall_dust", 5000, 1, "counter", & wall_dust, 0, 0);
-  clientfield::register("toplayer", "player_postfx", 5000, 1, "int", & function_df81c23d, 0, 0);
-  clientfield::register("toplayer", "player_screen_fx", 5000, 1, "int", & player_screen_fx, 0, 1);
-  clientfield::register("scriptmover", "undercroft_emissives", 5000, 1, "int", & function_9a8a19ab, 0, 0);
-  clientfield::register("scriptmover", "undercroft_wall_panel_shutdown", 5000, 1, "counter", & function_a3279a5, 0, 0);
-  clientfield::register("scriptmover", "floor_panel_emissives_glow", 5000, 1, "int", & function_23861dfe, 0, 0);
+  clientfield::register("scriptmover", "low_grav_powerup_triggered", 5000, 1, "counter", &function_69e96b4d, 0, 0);
+  clientfield::register("scriptmover", "zombie_wall_dust", 5000, 1, "counter", &wall_dust, 0, 0);
+  clientfield::register("toplayer", "player_postfx", 5000, 1, "int", &function_df81c23d, 0, 0);
+  clientfield::register("toplayer", "player_screen_fx", 5000, 1, "int", &player_screen_fx, 0, 1);
+  clientfield::register("scriptmover", "undercroft_emissives", 5000, 1, "int", &function_9a8a19ab, 0, 0);
+  clientfield::register("scriptmover", "undercroft_wall_panel_shutdown", 5000, 1, "counter", &function_a3279a5, 0, 0);
+  clientfield::register("scriptmover", "floor_panel_emissives_glow", 5000, 1, "int", &function_23861dfe, 0, 0);
 }
 
 function function_554db684() {

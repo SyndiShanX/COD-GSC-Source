@@ -33,11 +33,11 @@ function init() {
 }
 
 function moon_jump_pad_overrides() {
-  level._jump_pad_override["biodome_logic"] = & moon_jump_pad_progression_end;
-  level._jump_pad_override["low_grav"] = & moon_low_gravity_velocity;
-  level._jump_pad_override["moon_vertical_jump"] = & moon_vertical_jump;
-  level._jump_pad_poi_start_override = & moon_zombie_run_change;
-  zm::register_player_damage_callback( & function_4b3d145d);
+  level._jump_pad_override["biodome_logic"] = &moon_jump_pad_progression_end;
+  level._jump_pad_override["low_grav"] = &moon_low_gravity_velocity;
+  level._jump_pad_override["moon_vertical_jump"] = &moon_vertical_jump;
+  level._jump_pad_poi_start_override = &moon_zombie_run_change;
+  zm::register_player_damage_callback(&function_4b3d145d);
   level flag::init("pad_allow_anim_change");
   level._jump_pad_anim_change = [];
   level flag::set("pad_allow_anim_change");
@@ -431,7 +431,7 @@ function moon_jump_pad_cushion_sound_init() {
   level flag::wait_till("start_zombie_round_logic");
   level.cushion_sound_triggers = getEntArray("trig_cushion_sound", "targetname");
   if(level.cushion_sound_triggers.size) {
-    array::thread_all(level.cushion_sound_triggers, & moon_jump_pad_cushion_play_sound);
+    array::thread_all(level.cushion_sound_triggers, &moon_jump_pad_cushion_play_sound);
   }
 }
 

@@ -456,8 +456,8 @@ hanger_main() {
   keyboard_trigger = getEntWithFlag("keyboard_used");
   keyboard_trigger trigger_off();
 
-  // Press and hold ^3&&1^7 to extract the DSM.
-  //keyboard_trigger setHintString( &"CLIFFHANGER_USE_SATELITE" );
+  // Press and hold ^3&& 1^7 to extract the DSM.
+  //keyboard_trigger setHintString(&"CLIFFHANGER_USE_SATELITE" );
 
   //level.price_targets = [];
 
@@ -487,7 +487,7 @@ hanger_main() {
   dsm waittill("trigger");
 
   if(maps\_autosave::autoSaveCheck()) {
-    SaveGame("keyboard_used", & "CLIFFHANGER_USE_SATELITE", "keyboard_used", false);
+    SaveGame("keyboard_used", &"CLIFFHANGER_USE_SATELITE", "keyboard_used", false);
   }
 
   thread play_sound_in_space("dsm_pickup", dsm.origin);
@@ -542,7 +542,7 @@ player_used_computer() {
   level.player.ignoreme = false;
   flag_wait("player_detonate");
 
-  saveID = SaveGameNoCommit("player_detonate", & "CLIFFHANGER_USE_SATELITE", "player_detonate", false);
+  saveID = SaveGameNoCommit("player_detonate", &"CLIFFHANGER_USE_SATELITE", "player_detonate", false);
   thread save_game_if_safe(saveID);
 
   wait(0.1);
@@ -687,7 +687,7 @@ cliffhanger_tarmac_main() {
   //music_loop( "cliffhanger_escape_music", DEFINE_ESCAPE_MUSIC_TIME );
 
   //	snowmobile_triggers = getEntArray( "snowmobile_trigger", "targetname" );
-  //	array_call( snowmobile_triggers, ::setHintString, "Press &&1 to mount" );
+  //	array_call( snowmobile_triggers, ::setHintString, "Press && 1 to mount" );
 
   run_thread_on_noteworthy("tarmac_hanger_gate", ::connect_and_delete);
 

@@ -13,16 +13,16 @@
 #namespace keepercompanionbehavior;
 
 function autoexec main() {
-  ai::add_archetype_spawn_function("keeper_companion", & function_bfd27b96);
-  clientfield::register("allplayers", "being_keeper_revived", 15000, 1, "int", & function_802744a7, 0, 0);
-  clientfield::register("actor", "keeper_reviving", 15000, 1, "int", & function_a9b854ea, 0, 0);
-  clientfield::register("actor", "kc_effects", 15000, 1, "int", & keeper_fx, 0, 0);
-  clientfield::register("world", "kc_callbox_lights", 15000, 2, "int", & function_b945954d, 0, 0);
-  clientfield::register("actor", "keeper_ai_death_effect", 15000, 1, "int", & function_2935ac4d, 0, 0);
-  clientfield::register("vehicle", "keeper_ai_death_effect", 15000, 1, "int", & function_2935ac4d, 0, 0);
-  clientfield::register("scriptmover", "keeper_ai_spawn_tell", 15000, 1, "int", & function_fa8bf98f, 0, 0);
-  clientfield::register("actor", "keeper_thunderwall", 15000, 1, "counter", & keeper_thunderwall, 0, 0);
-  clientfield::register("scriptmover", "keeper_thunderwall_360", 15000, 1, "counter", & keeper_thunderwall_360, 0, 0);
+  ai::add_archetype_spawn_function("keeper_companion", &function_bfd27b96);
+  clientfield::register("allplayers", "being_keeper_revived", 15000, 1, "int", &function_802744a7, 0, 0);
+  clientfield::register("actor", "keeper_reviving", 15000, 1, "int", &function_a9b854ea, 0, 0);
+  clientfield::register("actor", "kc_effects", 15000, 1, "int", &keeper_fx, 0, 0);
+  clientfield::register("world", "kc_callbox_lights", 15000, 2, "int", &function_b945954d, 0, 0);
+  clientfield::register("actor", "keeper_ai_death_effect", 15000, 1, "int", &function_2935ac4d, 0, 0);
+  clientfield::register("vehicle", "keeper_ai_death_effect", 15000, 1, "int", &function_2935ac4d, 0, 0);
+  clientfield::register("scriptmover", "keeper_ai_spawn_tell", 15000, 1, "int", &function_fa8bf98f, 0, 0);
+  clientfield::register("actor", "keeper_thunderwall", 15000, 1, "counter", &keeper_thunderwall, 0, 0);
+  clientfield::register("scriptmover", "keeper_thunderwall_360", 15000, 1, "counter", &keeper_thunderwall_360, 0, 0);
   level._effect["dlc4/genesis/fx_keeperprot_revive_kp"] = "dlc4/genesis/fx_keeperprot_revive_kp";
   level._effect["dlc4/genesis/fx_keeperprot_revive_player"] = "dlc4/genesis/fx_keeperprot_revive_player";
   level._effect["dlc4/genesis/fx_keeperprot_underlit_amb"] = "dlc4/genesis/fx_keeperprot_underlit_amb";

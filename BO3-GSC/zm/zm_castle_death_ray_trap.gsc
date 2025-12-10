@@ -62,8 +62,8 @@ function tesla_coil_activate() {
   unitrigger_stub.radius = 64;
   unitrigger_stub.require_look_at = 0;
   unitrigger_stub.var_42d723eb = self;
-  unitrigger_stub.prompt_and_visibility_func = & function_1b068db6;
-  zm_unitrigger::register_static_unitrigger(unitrigger_stub, & function_3d3feaa2);
+  unitrigger_stub.prompt_and_visibility_func = &function_1b068db6;
+  zm_unitrigger::register_static_unitrigger(unitrigger_stub, &function_3d3feaa2);
 }
 
 function function_66bab678() {
@@ -210,8 +210,8 @@ function function_98484afb() {
       array::add(var_1c7748, ai_zombie, 0);
     }
   }
-  var_1c7748 = array::filter(var_1c7748, 0, & function_172d425, self);
-  array::thread_all(var_1c7748, & function_9eaff330);
+  var_1c7748 = array::filter(var_1c7748, 0, &function_172d425, self);
+  array::thread_all(var_1c7748, &function_9eaff330);
   var_1c7748 = array::randomize(var_1c7748);
   var_d5157ddf = [];
   for(i = 0; i < 4; i++) {
@@ -337,7 +337,7 @@ function function_67cc41d(attacker, e_panel) {
     level notify("trap_kill", self, attacker);
   }
   self ghost();
-  self util::delay(0.25, undefined, & zm_utility::self_delete);
+  self util::delay(0.25, undefined, &zm_utility::self_delete);
 }
 
 function function_41ecbdf9() {

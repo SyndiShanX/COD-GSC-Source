@@ -17,16 +17,16 @@
 #namespace cic_turret;
 
 function autoexec __init__sytem__() {
-  system::register("cic_turret", & __init__, undefined, undefined);
+  system::register("cic_turret", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("turret_cic", & cic_turret_think);
-  vehicle::add_main_callback("turret_cic_world", & cic_turret_think);
-  vehicle::add_main_callback("turret_sentry", & cic_turret_think);
-  vehicle::add_main_callback("turret_sentry_world", & cic_turret_think);
-  vehicle::add_main_callback("turret_sentry_cic", & cic_turret_think);
-  vehicle::add_main_callback("turret_sentry_rts", & cic_turret_think);
+  vehicle::add_main_callback("turret_cic", &cic_turret_think);
+  vehicle::add_main_callback("turret_cic_world", &cic_turret_think);
+  vehicle::add_main_callback("turret_sentry", &cic_turret_think);
+  vehicle::add_main_callback("turret_sentry_world", &cic_turret_think);
+  vehicle::add_main_callback("turret_sentry_cic", &cic_turret_think);
+  vehicle::add_main_callback("turret_sentry_rts", &cic_turret_think);
   level._effect["cic_turret_damage01"] = "destruct/fx_dest_turret_1";
   level._effect["cic_turret_damage02"] = "destruct/fx_dest_turret_2";
   level._effect["sentry_turret_damage01"] = "destruct/fx_dest_turret_1";
@@ -46,8 +46,8 @@ function cic_turret_think() {
     self.default_pitch = 0;
   }
   self.state_machine = statemachine::create("brain", self);
-  main = self.state_machine statemachine::add_state("main", undefined, & cic_turret_main, undefined);
-  scripted = self.state_machine statemachine::add_state("scripted", undefined, & cic_turret_scripted, undefined);
+  main = self.state_machine statemachine::add_state("main", undefined, &cic_turret_main, undefined);
+  scripted = self.state_machine statemachine::add_state("scripted", undefined, &cic_turret_scripted, undefined);
   vehicle_ai::set_role("brain");
   vehicle_ai::add_interrupt_connection("main", "scripted", "enter_vehicle");
   vehicle_ai::add_interrupt_connection("main", "scripted", "scripted");
@@ -57,7 +57,7 @@ function cic_turret_think() {
   self thread cic_turret_death();
   self thread cic_turret_damage();
   self thread turret::track_lens_flare();
-  self.overridevehicledamage = & cicturretcallback_vehicledamage;
+  self.overridevehicledamage = &cicturretcallback_vehicledamage;
   if(isDefined(self.script_startstate)) {
     if(self.script_startstate == "off") {
       self cic_turret_off(self.angles);

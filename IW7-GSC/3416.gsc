@@ -136,13 +136,13 @@ jaroslav_hint_logic(param_00, param_01) {
     if(isDefined(level.needspowerstring)) {
       return level.needspowerstring;
     } else {
-      return & "COOP_INTERACTIONS_REQUIRES_POWER";
+      return &"COOP_INTERACTIONS_REQUIRES_POWER";
     }
   }
 
   level thread move_jaw(param_00, 1);
   if(param_01 scripts\cp\utility::are_any_consumables_active()) {
-    var_02 = & "COOP_INTERACTIONS_FNF_WHILE_ACTIVE";
+    var_02 = &"COOP_INTERACTIONS_FNF_WHILE_ACTIVE";
   } else {
     var_02 = level.interaction_hintstrings[param_01.script_noteworthy];
   }
@@ -161,7 +161,7 @@ jaroslav_hint_logic(param_00, param_01) {
       return var_02;
 
     default:
-      return & "COOP_INTERACTIONS_NO_MORE_CARDS_OWNED";
+      return &"COOP_INTERACTIONS_NO_MORE_CARDS_OWNED";
   }
 }
 
@@ -171,6 +171,6 @@ player_init(param_00) {
 }
 
 register_interactions() {
-  level.interaction_hintstrings["jaroslav_machine"] = & "COOP_INTERACTIONS_FNF";
+  level.interaction_hintstrings["jaroslav_machine"] = &"COOP_INTERACTIONS_FNF";
   scripts\cp\cp_interaction::register_interaction("jaroslav_machine", "wondercard_machine", 1, ::jaroslav_hint_logic, ::interaction_jaroslav, 3000, 1, ::init_jaroslav);
 }

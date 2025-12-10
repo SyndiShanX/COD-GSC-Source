@@ -10,7 +10,7 @@
 
 function init_shared() {
   level thread level_watch_for_fake_fire();
-  callback::add_weapon_type("nightingale", & spawned);
+  callback::add_weapon_type("nightingale", &spawned);
 }
 
 function spawned(localclientnum) {

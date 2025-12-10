@@ -63,14 +63,14 @@ function function_c27610f9(var_8e087689 = "dummy", var_70b01bd3, var_513753b4 = 
 }
 
 function function_89f596d9() {
-  callback::on_ai_killed( & function_eab778af);
+  callback::on_ai_killed(&function_eab778af);
   thread function_a8831ac1();
   thread function_f208dfd8();
-  callback::on_ai_killed( & function_e3e41d63);
-  callback::on_ai_killed( & function_c7122e75);
-  callback::on_ai_killed( & function_171499d7);
-  callback::on_ai_killed( & function_6be65617);
-  callback::on_vehicle_killed( & function_9cda9485);
+  callback::on_ai_killed(&function_e3e41d63);
+  callback::on_ai_killed(&function_c7122e75);
+  callback::on_ai_killed(&function_171499d7);
+  callback::on_ai_killed(&function_6be65617);
+  callback::on_vehicle_killed(&function_9cda9485);
   thread function_dcb19e2a();
   thread function_f42b5fa1();
 }
@@ -85,7 +85,7 @@ function function_171499d7(params) {
 
 function function_6be65617(params) {
   if(level flag::get("destroy_defenses2_completed")) {
-    callback::remove_on_ai_killed( & function_6be65617);
+    callback::remove_on_ai_killed(&function_6be65617);
     return;
   }
   if(isplayer(params.eattacker) && !isvehicle(self) && level flag::get("destroy_defenses2")) {
@@ -98,35 +98,35 @@ function function_6be65617(params) {
 function function_c7122e75(params) {
   if(isplayer(params.eattacker) && !isvehicle(self) && self.team !== "allies") {
     if(isDefined(params.eattacker.pvtol) && params.eattacker islinkedto(params.eattacker.pvtol)) {
-      params.eattacker function_c27610f9("aq_thirty_kill_vtol", & function_b49b24ca);
+      params.eattacker function_c27610f9("aq_thirty_kill_vtol", &function_b49b24ca);
     }
   }
 }
 
 function function_b49b24ca() {
-  callback::remove_on_ai_killed( & function_c7122e75);
+  callback::remove_on_ai_killed(&function_c7122e75);
 }
 
 function function_9cda9485(params) {
   if(isplayer(params.eattacker) && isDefined(self.archetype) && self.archetype == "hunter") {
     if(isDefined(params.eattacker.pvtol) && params.eattacker islinkedto(params.eattacker.pvtol)) {
-      params.eattacker function_c27610f9("aq_three_hunters_vtol", & function_ff25056a);
+      params.eattacker function_c27610f9("aq_three_hunters_vtol", &function_ff25056a);
     }
   }
 }
 
 function function_ff25056a() {
-  callback::remove_on_vehicle_killed( & function_9cda9485);
+  callback::remove_on_vehicle_killed(&function_9cda9485);
 }
 
 function function_a8831ac1() {
-  callback::on_vehicle_killed( & function_5ae2cb8a);
+  callback::on_vehicle_killed(&function_5ae2cb8a);
   level.var_67a0c1e2 = 0;
   flag::wait_till("destroy_defenses2_completed");
   if(level.var_67a0c1e2 == 0) {
     level function_c27610f9("aq_quads_only_guns");
   }
-  callback::remove_on_vehicle_killed( & function_5ae2cb8a);
+  callback::remove_on_vehicle_killed(&function_5ae2cb8a);
 }
 
 function function_5ae2cb8a(params) {
@@ -138,7 +138,7 @@ function function_5ae2cb8a(params) {
 }
 
 function function_282c46db() {
-  callback::remove_on_vehicle_killed( & function_9cda9485);
+  callback::remove_on_vehicle_killed(&function_9cda9485);
 }
 
 function function_eab778af(params) {
@@ -150,14 +150,14 @@ function function_eab778af(params) {
       }
       params.eattacker.var_eb0c14e++;
       if(params.eattacker.var_eb0c14e >= 5) {
-        params.eattacker function_c27610f9("aq_threefer_missile", & function_a3f650bc);
+        params.eattacker function_c27610f9("aq_threefer_missile", &function_a3f650bc);
       }
     }
   }
 }
 
 function function_a3f650bc() {
-  callback::remove_on_ai_killed( & function_eab778af);
+  callback::remove_on_ai_killed(&function_eab778af);
 }
 
 function function_e3e41d63(params) {
@@ -225,7 +225,7 @@ function function_f208dfd8() {
   level flag::wait_till("player_active_in_level");
   level flag::wait_till("intro_dogfight_completed");
   if(!level flag::get("destroy_defenses_completed")) {
-    array::thread_all(level.activeplayers, & function_deee0b62);
+    array::thread_all(level.activeplayers, &function_deee0b62);
   }
   level flag::wait_till("destroy_defenses_completed");
   foreach(player in level.activeplayers) {
@@ -255,11 +255,11 @@ function function_deee0b62(params) {
 function function_dcb19e2a() {
   flag::wait_till("player_active_in_level");
   flag::wait_till("destroy_defenses_completed");
-  callback::on_vehicle_killed( & function_3718be07);
+  callback::on_vehicle_killed(&function_3718be07);
   flag::wait_till("hack_terminal_left_completed");
   flag::wait_till("hack_terminal_right_completed");
   flag::wait_till("hack_terminals3_completed");
-  callback::remove_on_vehicle_killed( & function_3718be07);
+  callback::remove_on_vehicle_killed(&function_3718be07);
 }
 
 function function_3718be07(params) {

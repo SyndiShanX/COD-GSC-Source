@@ -33,7 +33,7 @@
 #namespace mirg2000;
 
 function autoexec __init__sytem__() {
-  system::register("mirg2000", & __init__, & __main__, undefined);
+  system::register("mirg2000", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -52,7 +52,7 @@ function __init__() {
 }
 
 function __main__() {
-  callback::on_connect( & function_182a023);
+  callback::on_connect(&function_182a023);
 }
 
 function function_182a023() {

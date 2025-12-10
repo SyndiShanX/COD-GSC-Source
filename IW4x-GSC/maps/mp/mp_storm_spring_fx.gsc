@@ -10,9 +10,6 @@ main() {
   level._effect["insects_carcass_flies_c"] = loadfx("misc/insects_carcass_flies_c");
   level._effect["oxygen_leak"] = loadfx("distortion/oxygen_leak");
 
-
-
-
   level._effect["bombexplosion"] = loadfx("explosions/tanker_explosion");
 
   if(getdvar("clientSideEffects") != "1")

@@ -413,7 +413,7 @@ DoStumble(iDFlags, damageDirection, hitLocation, iDamage, sMeansOfDeath, eAttack
   self.stateLocked = true;
   self.playing_pain_animation = true;
 
-  is_stun = (iDFlags & level.iDFLAGS_STUN);
+  is_stun = (iDFlags &level.iDFLAGS_STUN);
 
   if(sMeansOfDeath == "MOD_MELEE" || is_stun) {
     animState = "pain_pushback";

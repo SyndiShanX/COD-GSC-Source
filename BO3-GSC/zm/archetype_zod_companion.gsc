@@ -38,8 +38,8 @@
 
 function autoexec main() {
   clientfield::register("allplayers", "being_robot_revived", 1, 1, "int");
-  spawner::add_archetype_spawn_function("zod_companion", & zodcompanionbehavior::archetypezodcompanionblackboardinit);
-  spawner::add_archetype_spawn_function("zod_companion", & zodcompanionserverutils::zodcompanionsoldierspawnsetup);
+  spawner::add_archetype_spawn_function("zod_companion", &zodcompanionbehavior::archetypezodcompanionblackboardinit);
+  spawner::add_archetype_spawn_function("zod_companion", &zodcompanionserverutils::zodcompanionsoldierspawnsetup);
   zodcompanioninterface::registerzodcompanioninterfaceattributes();
   zodcompanionbehavior::registerbehaviorscriptfunctions();
 }
@@ -47,23 +47,23 @@ function autoexec main() {
 #namespace zodcompanionbehavior;
 
 function registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionTacticalWalkActionStart", & zodcompaniontacticalwalkactionstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionAbleToShoot", & zodcompanionabletoshootcondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionShouldTacticalWalk", & zodcompanionshouldtacticalwalk);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionMovement", & zodcompanionmovement);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionDelayMovement", & zodcompaniondelaymovement);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionSetDesiredStanceToStand", & zodcompanionsetdesiredstancetostand);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionFinishedSprintTransition", & zodcompanionfinishedsprinttransition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionSprintTransitioning", & zodcompanionsprinttransitioning);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionKeepsCurrentMovementMode", & zodcompanionkeepscurrentmovementmode);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionCanJuke", & zodcompanioncanjuke);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionCanPreemptiveJuke", & zodcompanioncanpreemptivejuke);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionJukeInitialize", & zodcompanionjukeinitialize);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionPreemptiveJukeTerminate", & zodcompanionpreemptivejuketerminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionTargetService", & zodcompaniontargetservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionTryReacquireService", & zodcompaniontryreacquireservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("manage_companion_movement", & manage_companion_movement);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionCollisionService", & zodcompanioncollisionservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionTacticalWalkActionStart", &zodcompaniontacticalwalkactionstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionAbleToShoot", &zodcompanionabletoshootcondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionShouldTacticalWalk", &zodcompanionshouldtacticalwalk);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionMovement", &zodcompanionmovement);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionDelayMovement", &zodcompaniondelaymovement);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionSetDesiredStanceToStand", &zodcompanionsetdesiredstancetostand);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionFinishedSprintTransition", &zodcompanionfinishedsprinttransition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionSprintTransitioning", &zodcompanionsprinttransitioning);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionKeepsCurrentMovementMode", &zodcompanionkeepscurrentmovementmode);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionCanJuke", &zodcompanioncanjuke);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionCanPreemptiveJuke", &zodcompanioncanpreemptivejuke);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionJukeInitialize", &zodcompanionjukeinitialize);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionPreemptiveJukeTerminate", &zodcompanionpreemptivejuketerminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionTargetService", &zodcompaniontargetservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionTryReacquireService", &zodcompaniontryreacquireservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("manage_companion_movement", &manage_companion_movement);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodCompanionCollisionService", &zodcompanioncollisionservice);
 }
 
 function private mocompignorepainfaceenemyinit(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
@@ -90,7 +90,7 @@ function private archetypezodcompanionblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_gibbed_limbs", undefined, & zodcompaniongetgibbedlimbs);
+  blackboard::registerblackboardattribute(self, "_gibbed_limbs", undefined, &zodcompaniongetgibbedlimbs);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -489,7 +489,7 @@ function private pick_new_movement_point() {
   queryresult = positionquery_source_navigation(self.companion_anchor_point, 96, 256, 256, 20, self);
   if(queryresult.data.size) {
     if(isDefined(self.enemy) && self.enemy.archetype == "parasite") {
-      array::filter(queryresult.data, 0, & function_ab299a53, self.enemy);
+      array::filter(queryresult.data, 0, &function_ab299a53, self.enemy);
     }
   }
   if(queryresult.data.size) {
@@ -764,9 +764,9 @@ function private zodcompanionsoldierspawnsetup() {
   entity.nextpreemptivejukeads = randomfloatrange(0.5, 0.95);
   entity.shouldpreemptivejuke = math::cointoss();
   entity.reviving_a_player = 0;
-  aiutility::addaioverridedamagecallback(entity, & destructserverutils::handledamage);
-  aiutility::addaioverridedamagecallback(entity, & zodcompaniondamageoverride);
-  aiutility::addaioverridedamagecallback(entity, & zodcompaniongibdamageoverride);
+  aiutility::addaioverridedamagecallback(entity, &destructserverutils::handledamage);
+  aiutility::addaioverridedamagecallback(entity, &zodcompaniondamageoverride);
+  aiutility::addaioverridedamagecallback(entity, &zodcompaniongibdamageoverride);
   entity.companion_anchor_point = entity.origin;
   entity.next_move_time = gettime();
   entity.allow_zombie_to_target_ai = 1;

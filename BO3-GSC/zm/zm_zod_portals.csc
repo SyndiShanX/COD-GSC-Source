@@ -22,7 +22,7 @@
 #namespace zm_zod_portals;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_portals", & __init__, undefined, undefined);
+  system::register("zm_zod_portals", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -35,17 +35,17 @@ function __init__() {
   level._effect["portal_shortcut_closed_base"] = "zombie/fx_quest_portal_closed_zod_zmb";
   level._effect["portal_shortcut_ending"] = "zombie/fx_quest_portal_close_igc_zod_zmb";
   n_bits = getminbitcountfornum(3);
-  clientfield::register("toplayer", "player_stargate_fx", 1, 1, "int", & player_stargate_fx, 0, 0);
-  clientfield::register("world", "portal_state_canal", 1, n_bits, "int", & portal_state_canal, 0, 1);
-  clientfield::register("world", "portal_state_slums", 1, n_bits, "int", & portal_state_slums, 0, 1);
-  clientfield::register("world", "portal_state_theater", 1, n_bits, "int", & portal_state_theater, 0, 1);
-  clientfield::register("world", "portal_state_ending", 1, 1, "int", & portal_state_ending, 0, 0);
-  clientfield::register("world", "pulse_canal_portal_top", 1, 1, "counter", & function_4bc7c0a1, 0, 0);
-  clientfield::register("world", "pulse_canal_portal_bottom", 1, 1, "counter", & function_bd6fa919, 0, 0);
-  clientfield::register("world", "pulse_slums_portal_top", 1, 1, "counter", & function_e66eb44e, 0, 0);
-  clientfield::register("world", "pulse_slums_portal_bottom", 1, 1, "counter", & function_9be42b84, 0, 0);
-  clientfield::register("world", "pulse_theater_portal_top", 1, 1, "counter", & function_7acc82f, 0, 0);
-  clientfield::register("world", "pulse_theater_portal_bottom", 1, 1, "counter", & function_8fbd3c13, 0, 0);
+  clientfield::register("toplayer", "player_stargate_fx", 1, 1, "int", &player_stargate_fx, 0, 0);
+  clientfield::register("world", "portal_state_canal", 1, n_bits, "int", &portal_state_canal, 0, 1);
+  clientfield::register("world", "portal_state_slums", 1, n_bits, "int", &portal_state_slums, 0, 1);
+  clientfield::register("world", "portal_state_theater", 1, n_bits, "int", &portal_state_theater, 0, 1);
+  clientfield::register("world", "portal_state_ending", 1, 1, "int", &portal_state_ending, 0, 0);
+  clientfield::register("world", "pulse_canal_portal_top", 1, 1, "counter", &function_4bc7c0a1, 0, 0);
+  clientfield::register("world", "pulse_canal_portal_bottom", 1, 1, "counter", &function_bd6fa919, 0, 0);
+  clientfield::register("world", "pulse_slums_portal_top", 1, 1, "counter", &function_e66eb44e, 0, 0);
+  clientfield::register("world", "pulse_slums_portal_bottom", 1, 1, "counter", &function_9be42b84, 0, 0);
+  clientfield::register("world", "pulse_theater_portal_top", 1, 1, "counter", &function_7acc82f, 0, 0);
+  clientfield::register("world", "pulse_theater_portal_bottom", 1, 1, "counter", &function_8fbd3c13, 0, 0);
 }
 
 function player_stargate_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

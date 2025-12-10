@@ -16,14 +16,14 @@
 #namespace zm_bgb_burned_out;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_burned_out", & __init__, undefined, "bgb");
+  system::register("zm_bgb_burned_out", &__init__, undefined, "bgb");
 }
 
 function __init__() {
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_burned_out", "event", & event, undefined, undefined, undefined);
+  bgb::register("zm_bgb_burned_out", "event", &event, undefined, undefined, undefined);
   clientfield::register("toplayer", ("zm_bgb_burned_out" + "_1p") + "toplayer", 1, 1, "counter");
   clientfield::register("allplayers", ("zm_bgb_burned_out" + "_3p") + "_allplayers", 1, 1, "counter");
   clientfield::register("actor", ("zm_bgb_burned_out" + "_fire_torso") + "_actor", 1, 1, "counter");

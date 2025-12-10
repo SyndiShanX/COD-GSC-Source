@@ -17,16 +17,16 @@
 #namespace zm_bgb_self_medication;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_self_medication", & __init__, undefined, "bgb");
+  system::register("zm_bgb_self_medication", &__init__, undefined, "bgb");
 }
 
 function __init__() {
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_self_medication", "event", & event, undefined, undefined, & validation);
-  bgb::register_actor_death_override("zm_bgb_self_medication", & actor_death_override);
-  bgb::register_lost_perk_override("zm_bgb_self_medication", & lost_perk_override, 0);
+  bgb::register("zm_bgb_self_medication", "event", &event, undefined, undefined, &validation);
+  bgb::register_actor_death_override("zm_bgb_self_medication", &actor_death_override);
+  bgb::register_lost_perk_override("zm_bgb_self_medication", &lost_perk_override, 0);
 }
 
 function event() {

@@ -419,7 +419,7 @@ function function_62c5a5a(player, origin) {
     amws thread function_43d18fa4(player, note);
     amws thread namespace_eaa992c::function_285a2999("turret_impact");
     amws thread namespace_1a381543::function_90118d8c("evt_turret_land");
-    amws.overridevehicledamage = & function_f3ee1c57;
+    amws.overridevehicledamage = &function_f3ee1c57;
     level.doa.var_1332e37a[level.doa.var_1332e37a.size] = amws;
     amws thread doa_pickups::function_9908c4ec();
   }

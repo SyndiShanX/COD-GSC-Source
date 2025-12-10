@@ -16,17 +16,17 @@
 #namespace _gadget_shock_field;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_shock_field", & __init__, undefined, undefined);
+  system::register("gadget_shock_field", &__init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("allplayers", "shock_field", 1, 1, "int");
-  ability_player::register_gadget_activation_callbacks(39, & gadget_shock_field_on, & gadget_shock_field_off);
-  ability_player::register_gadget_possession_callbacks(39, & gadget_shock_field_on_give, & gadget_shock_field_on_take);
-  ability_player::register_gadget_flicker_callbacks(39, & gadget_shock_field_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(39, & gadget_shock_field_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(39, & gadget_shock_field_is_flickering);
-  callback::on_connect( & gadget_shock_field_on_connect);
+  ability_player::register_gadget_activation_callbacks(39, &gadget_shock_field_on, &gadget_shock_field_off);
+  ability_player::register_gadget_possession_callbacks(39, &gadget_shock_field_on_give, &gadget_shock_field_on_take);
+  ability_player::register_gadget_flicker_callbacks(39, &gadget_shock_field_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(39, &gadget_shock_field_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(39, &gadget_shock_field_is_flickering);
+  callback::on_connect(&gadget_shock_field_on_connect);
 }
 
 function gadget_shock_field_is_inuse(slot) {

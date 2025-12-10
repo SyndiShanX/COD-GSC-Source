@@ -41,17 +41,17 @@
 function init() {
   bundle = struct::get_script_bundle("killstreak", "killstreak_" + "ai_tank_drop");
   level.ai_tank_minigun_flash_3p = "killstreaks/fx_agr_rocket_flash_3p";
-  killstreaks::register("ai_tank_drop", "ai_tank_marker", "killstreak_ai_tank_drop", "ai_tank_drop_used", & usekillstreakaitankdrop);
+  killstreaks::register("ai_tank_drop", "ai_tank_marker", "killstreak_ai_tank_drop", "ai_tank_drop_used", &usekillstreakaitankdrop);
   killstreaks::register_alt_weapon("ai_tank_drop", "amws_gun_turret");
   killstreaks::register_alt_weapon("ai_tank_drop", "amws_launcher_turret");
   killstreaks::register_alt_weapon("ai_tank_drop", "amws_gun_turret_mp_player");
   killstreaks::register_alt_weapon("ai_tank_drop", "amws_launcher_turret_mp_player");
   killstreaks::register_remote_override_weapon("ai_tank_drop", "killstreak_ai_tank");
-  killstreaks::register_strings("ai_tank_drop", & "KILLSTREAK_EARNED_AI_TANK_DROP", & "KILLSTREAK_AI_TANK_NOT_AVAILABLE", & "KILLSTREAK_AI_TANK_INBOUND", undefined, & "KILLSTREAK_AI_TANK_HACKED");
+  killstreaks::register_strings("ai_tank_drop", &"KILLSTREAK_EARNED_AI_TANK_DROP", &"KILLSTREAK_AI_TANK_NOT_AVAILABLE", &"KILLSTREAK_AI_TANK_INBOUND", undefined, &"KILLSTREAK_AI_TANK_HACKED");
   killstreaks::register_dialog("ai_tank_drop", "mpl_killstreak_ai_tank", "aiTankDialogBundle", "aiTankPilotDialogBundle", "friendlyAiTank", "enemyAiTank", "enemyAiTankMultiple", "friendlyAiTankHacked", "enemyAiTankHacked", "requestAiTank", "threatAiTank");
   killstreaks::devgui_scorestreak_command("ai_tank_drop", "Debug Routes", "set devgui_tank routes");
   level.killstreaks["ai_tank_drop"].threatonkill = 1;
-  remote_weapons::registerremoteweapon("killstreak_ai_tank", & "MP_REMOTE_USE_TANK", & starttankremotecontrol, & endtankremotecontrol, 0);
+  remote_weapons::registerremoteweapon("killstreak_ai_tank", &"MP_REMOTE_USE_TANK", &starttankremotecontrol, &endtankremotecontrol, 0);
   level.ai_tank_fov = cos(160);
   level.ai_tank_turret_weapon = getweapon("ai_tank_drone_gun");
   level.ai_tank_turret_fire_rate = level.ai_tank_turret_weapon.firetime;
@@ -71,7 +71,7 @@ function init() {
   if(!isDefined(bundle.ksweaponreloadtime)) {
     bundle.ksweaponreloadtime = 0.5;
   }
-  visionset_mgr::register_info("visionset", "agr_visionset", 1, 80, 16, 1, & visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
+  visionset_mgr::register_info("visionset", "agr_visionset", 1, 80, 16, 1, &visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
   level thread tank_devgui_think();
   thread register();
 }
@@ -102,8 +102,8 @@ function usekillstreakaitankdrop(hardpointtype) {
   context.max_dist_from_location = 4;
   context.perform_physics_trace = 1;
   context.check_same_floor = 1;
-  context.islocationgood = & is_location_good;
-  context.objective = & "airdrop_aitank";
+  context.islocationgood = &is_location_good;
+  context.objective = &"airdrop_aitank";
   context.killstreakref = hardpointtype;
   context.validlocationsound = level.killstreakcorebundle.ksvalidaitanklocationsound;
   context.tracemask = 1 | 4;
@@ -204,8 +204,8 @@ function ai_tank_killstreak_start(owner, origin, killstreak_id, category) {
   drone.customdamagemonitor = 1;
   drone.avoid_shooting_owner = 1;
   drone.avoid_shooting_owner_ref_tag = "tag_flash_gunner1";
-  drone killstreaks::configure_team("ai_tank_drop", killstreak_id, owner, "small_vehicle", undefined, & configureteampost);
-  drone killstreak_hacking::enable_hacking("ai_tank_drop", & hackedcallbackpre, & hackedcallbackpost);
+  drone killstreaks::configure_team("ai_tank_drop", killstreak_id, owner, "small_vehicle", undefined, &configureteampost);
+  drone killstreak_hacking::enable_hacking("ai_tank_drop", &hackedcallbackpre, &hackedcallbackpost);
   drone killstreaks::setup_health("ai_tank_drop", 1500, 0);
   drone.original_vehicle_type = drone.vehicletype;
   drone clientfield::set("enemyvehicle", 1);
@@ -375,7 +375,7 @@ function kill_monitor() {
 
 function tank_abort_think() {
   tank = self;
-  tank thread killstreaks::waitfortimeout("ai_tank_drop", 120000, & tank_timeout_callback, "death", "emp_jammed");
+  tank thread killstreaks::waitfortimeout("ai_tank_drop", 120000, &tank_timeout_callback, "death", "emp_jammed");
 }
 
 function tank_timeout_callback() {
@@ -436,7 +436,7 @@ function tank_damage_think() {
   self.maxhealth = 999999;
   self.health = self.maxhealth;
   self.isstunned = 0;
-  self.hackedhealthupdatecallback = & tank_hacked_health_update;
+  self.hackedhealthupdatecallback = &tank_hacked_health_update;
   self.hackedhealth = killstreak_bundles::get_hacked_health("ai_tank_drop");
   low_health = 0;
   self.damagetaken = 0;
@@ -640,7 +640,7 @@ function tank_death_think(hardpointname) {
   if(isDefined(attacker) && isplayer(attacker) && isDefined(self.owner) && attacker != self.owner) {
     if(self.owner util::isenemyplayer(attacker)) {
       scoreevents::processscoreevent("destroyed_aitank", attacker, self.owner, weapon);
-      luinotifyevent(&"player_callout", 2, & "KILLSTREAK_DESTROYED_AI_TANK", attacker.entnum);
+      luinotifyevent(&"player_callout", 2, &"KILLSTREAK_DESTROYED_AI_TANK", attacker.entnum);
       attacker addweaponstat(weapon, "destroyed_aitank", 1);
       controlled = 0;
       if(isDefined(self.wascontrollednowdead) && self.wascontrollednowdead) {

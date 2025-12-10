@@ -1534,13 +1534,13 @@ get_scaling_lock_cost(int_type, object) {
 get_lock_hint_string(cost) {
   switch (cost) {
     case 2000:
-      return & "ZOMBIE_LOCKED_COST_2000";
+      return &"ZOMBIE_LOCKED_COST_2000";
     case 4000:
-      return & "ZOMBIE_LOCKED_COST_4000";
+      return &"ZOMBIE_LOCKED_COST_4000";
     case 6000:
-      return & "ZOMBIE_LOCKED_COST_6000";
+      return &"ZOMBIE_LOCKED_COST_6000";
     default:
-      return & "ZOMBIE_LOCKED_COST";
+      return &"ZOMBIE_LOCKED_COST";
   }
 }
 

@@ -205,7 +205,7 @@ e2_objectives() {
   level.flak1_destroyed = false;
   level.flak2_destroyed = false;
   level.flak3_destroyed = false;
-  objective_add(3, "current", & "BER3_OBJ3_4", obj_struct0.origin);
+  objective_add(3, "current", &"BER3_OBJ3_4", obj_struct0.origin);
   objective_AdditionalPosition(3, 1, obj_struct1.origin);
   objective_AdditionalPosition(3, 2, obj_struct2.origin);
   objective_AdditionalPosition(3, 3, obj_struct3.origin);
@@ -217,20 +217,20 @@ e2_objectives_update_flak88() {
   if(isDefined(level.flaks_alive) && level.flaks_alive) {
     switch (level.flaks_alive) {
       case 1:
-        objective_string(3, & "BER3_OBJ3_1");
+        objective_string(3, &"BER3_OBJ3_1");
         thread e2_flak88_vo(level.flaks_alive);
         break;
       case 2:
-        objective_string(3, & "BER3_OBJ3_2");
+        objective_string(3, &"BER3_OBJ3_2");
         autosave_by_name("ber3 two flaks destroyed");
         thread e2_flak88_vo(level.flaks_alive);
         break;
       case 3:
-        objective_string(3, & "BER3_OBJ3_3");
+        objective_string(3, &"BER3_OBJ3_3");
         thread e2_flak88_vo(level.flaks_alive);
         break;
       case 4:
-        objective_string(3, & "BER3_OBJ3_4");
+        objective_string(3, &"BER3_OBJ3_4");
         thread e2_flak88_vo(level.flaks_alive);
         break;
     }
@@ -257,7 +257,7 @@ e2_objectives_update_flak88() {
       obj_index++;
     }
   } else {
-    objective_string(3, & "BER3_OBJ3");
+    objective_string(3, &"BER3_OBJ3");
     objective_state(3, "done");
     autosave_by_name("ber3 flaks destroyed");
   }

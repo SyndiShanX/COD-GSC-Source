@@ -20,9 +20,9 @@
 #namespace zm_temple_powerups;
 
 function init() {
-  level._zombiemode_special_powerup_setup = & temple_special_powerup_setup;
-  level._zombiemode_powerup_grab = & temple_powerup_grab;
-  zm_powerups::add_zombie_powerup("monkey_swarm", "zombie_pickup_monkey", & "ZOMBIE_POWERUP_MONKEY_SWARM");
+  level._zombiemode_special_powerup_setup = &temple_special_powerup_setup;
+  level._zombiemode_powerup_grab = &temple_powerup_grab;
+  zm_powerups::add_zombie_powerup("monkey_swarm", "zombie_pickup_monkey", &"ZOMBIE_POWERUP_MONKEY_SWARM");
   level.playable_area = getEntArray("player_volume", "script_noteworthy");
   level._effect["zombie_kill"] = "impacts/fx_flesh_hit_body_fatal_lg_exit_mp";
 }

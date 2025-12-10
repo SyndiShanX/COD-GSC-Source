@@ -11,14 +11,14 @@
 #namespace helicopter_gunner;
 
 function autoexec __init__sytem__() {
-  system::register("helicopter_gunner", & __init__, undefined, undefined);
+  system::register("helicopter_gunner", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("vehicle", "vtol_turret_destroyed_0", 1, 1, "int", & turret_destroyed_0, 0, 0);
-  clientfield::register("vehicle", "vtol_turret_destroyed_1", 1, 1, "int", & turret_destroyed_1, 0, 0);
-  clientfield::register("toplayer", "vtol_update_client", 1, 1, "counter", & update_client, 0, 0);
-  clientfield::register("toplayer", "fog_bank_2", 1, 1, "int", & fog_bank_2_callback, 0, 0);
+  clientfield::register("vehicle", "vtol_turret_destroyed_0", 1, 1, "int", &turret_destroyed_0, 0, 0);
+  clientfield::register("vehicle", "vtol_turret_destroyed_1", 1, 1, "int", &turret_destroyed_1, 0, 0);
+  clientfield::register("toplayer", "vtol_update_client", 1, 1, "counter", &update_client, 0, 0);
+  clientfield::register("toplayer", "fog_bank_2", 1, 1, "int", &fog_bank_2_callback, 0, 0);
   visionset_mgr::register_visionset_info("mothership_visionset", 1, 1, undefined, "mp_vehicles_mothership");
 }
 

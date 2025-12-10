@@ -53,8 +53,8 @@ function init() {
   level.crateownerusetime = 500;
   level.cratenonownerusetime = getgametypesetting("crateCaptureTime") * 1000;
   level.crate_headicon_offset = vectorscale((0, 0, 1), 15);
-  level.supplydropdisarmcrate = & "KILLSTREAK_SUPPLY_DROP_DISARM_HINT";
-  level.disarmingcrate = & "KILLSTREAK_SUPPLY_DROP_DISARMING_CRATE";
+  level.supplydropdisarmcrate = &"KILLSTREAK_SUPPLY_DROP_DISARM_HINT";
+  level.disarmingcrate = &"KILLSTREAK_SUPPLY_DROP_DISARMING_CRATE";
   level.supplydropcarepackageidleanim = % mp_vehicles::o_drone_supply_care_idle;
   level.supplydropcarepackagedropanim = % mp_vehicles::o_drone_supply_care_drop;
   level.supplydropaitankidleanim = % mp_vehicles::o_drone_supply_agr_idle;
@@ -68,8 +68,8 @@ function init() {
   clientfield::register("toplayer", "marker_state", 1, 2, "int");
   level._supply_drop_smoke_fx = "killstreaks/fx_supply_drop_smoke";
   level._supply_drop_explosion_fx = "explosions/fx_exp_grenade_default";
-  killstreaks::register("supply_drop", "supplydrop_marker", "killstreak_supply_drop", "supply_drop_used", & usekillstreaksupplydrop, undefined, 1);
-  killstreaks::register_strings("supply_drop", & "KILLSTREAK_EARNED_SUPPLY_DROP", & "KILLSTREAK_AIRSPACE_FULL", & "KILLSTREAK_SUPPLY_DROP_INBOUND", undefined, & "KILLSTREAK_SUPPLY_DROP_HACKED");
+  killstreaks::register("supply_drop", "supplydrop_marker", "killstreak_supply_drop", "supply_drop_used", &usekillstreaksupplydrop, undefined, 1);
+  killstreaks::register_strings("supply_drop", &"KILLSTREAK_EARNED_SUPPLY_DROP", &"KILLSTREAK_AIRSPACE_FULL", &"KILLSTREAK_SUPPLY_DROP_INBOUND", undefined, &"KILLSTREAK_SUPPLY_DROP_HACKED");
   killstreaks::register_dialog("supply_drop", "mpl_killstreak_supply", "supplyDropDialogBundle", "supplyDropPilotDialogBundle", "friendlySupplyDrop", "enemySupplyDrop", "enemySupplyDropMultiple", "friendlySupplyDropHacked", "enemySupplyDropHacked", "requestSupplyDrop", "threatSupplyDrop");
   killstreaks::register_alt_weapon("supply_drop", "mp40_blinged");
   killstreaks::register_alt_weapon("supply_drop", "supplydrop");
@@ -81,56 +81,56 @@ function init() {
   killstreak_bundles::register_killstreak_bundle("supply_drop_combat_robot");
   level.cratetypes = [];
   level.categorytypeweight = [];
-  registercratetype("supplydrop", "killstreak", "uav", 125, & "KILLSTREAK_RADAR_CRATE", & "PLATFORM_RADAR_GAMBLER", & givecratekillstreak);
-  registercratetype("supplydrop", "killstreak", "rcbomb", 105, & "KILLSTREAK_RCBOMB_CRATE", & "PLATFORM_RCBOMB_GAMBLER", & givecratekillstreak);
-  registercratetype("supplydrop", "killstreak", "counteruav", 115, & "KILLSTREAK_COUNTERU2_CRATE", & "PLATFORM_COUNTERU2_GAMBLER", & givecratekillstreak);
-  registercratetype("supplydrop", "killstreak", "remote_missile", 90, & "KILLSTREAK_REMOTE_MISSILE_CRATE", & "PLATFORM_REMOTE_MISSILE_GAMBLER", & givecratekillstreak);
-  registercratetype("supplydrop", "killstreak", "planemortar", 80, & "KILLSTREAK_PLANE_MORTAR_CRATE", & "PLATFORM_PLANE_MORTAR_GAMBLER", & givecratekillstreak);
-  registercratetype("supplydrop", "killstreak", "autoturret", 90, & "KILLSTREAK_AUTO_TURRET_CRATE", & "PLATFORM_AUTO_TURRET_GAMBLER", & givecratekillstreak);
-  registercratetype("supplydrop", "killstreak", "microwave_turret", 120, & "KILLSTREAK_MICROWAVE_TURRET_CRATE", & "PLATFORM_MICROWAVE_TURRET_GAMBLER", & givecratekillstreak);
-  registercratetype("supplydrop", "killstreak", "satellite", 20, & "KILLSTREAK_SATELLITE_CRATE", & "PLATFORM_SATELLITE_GAMBLER", & givecratekillstreak);
-  registercratetype("supplydrop", "killstreak", "drone_strike", 75, & "KILLSTREAK_DRONE_STRIKE_CRATE", & "PLATFORM_DRONE_STRIKE_GAMBLER", & givecratekillstreak);
-  registercratetype("supplydrop", "killstreak", "helicopter_comlink", 30, & "KILLSTREAK_HELICOPTER_CRATE", & "PLATFORM_HELICOPTER_GAMBLER", & givecratekillstreak);
-  registercratetype("supplydrop", "killstreak", "emp", 5, & "KILLSTREAK_EMP_CRATE", & "PLATFORM_EMP_GAMBLER", & givecratekillstreak);
-  registercratetype("supplydrop", "killstreak", "raps", 20, & "KILLSTREAK_RAPS_CRATE", & "PLATFORM_RAPS_GAMBLER", & givecratekillstreak);
-  registercratetype("supplydrop", "killstreak", "dart", 75, & "KILLSTREAK_DART_CRATE", & "PLATFORM_DART_GAMBLER", & givecratekillstreak);
-  registercratetype("supplydrop", "killstreak", "sentinel", 20, & "KILLSTREAK_SENTINEL_CRATE", & "PLATFORM_SENTINEL_GAMBLER", & givecratekillstreak);
-  registercratetype("supplydrop", "killstreak", "combat_robot", 5, & "KILLSTREAK_COMBAT_ROBOT_CRATE", & "PLATFORM_COMBAT_ROBOT_GAMBLER", & givecratekillstreak);
-  registercratetype("supplydrop", "killstreak", "ai_tank_drop", 25, & "KILLSTREAK_AI_TANK_CRATE", & "PLATFORM_AI_TANK_CRATE_GAMBLER", & givecratekillstreak);
-  registercratetype("inventory_supplydrop", "killstreak", "uav", 125, & "KILLSTREAK_RADAR_CRATE", & "PLATFORM_RADAR_GAMBLER", & givecratekillstreak);
-  registercratetype("inventory_supplydrop", "killstreak", "counteruav", 115, & "KILLSTREAK_COUNTERU2_CRATE", & "PLATFORM_COUNTERU2_GAMBLER", & givecratekillstreak);
-  registercratetype("inventory_supplydrop", "killstreak", "rcbomb", 105, & "KILLSTREAK_RCBOMB_CRATE", & "PLATFORM_RCBOMB_GAMBLER", & givecratekillstreak);
-  registercratetype("inventory_supplydrop", "killstreak", "remote_missile", 90, & "KILLSTREAK_REMOTE_MISSILE_CRATE", & "PLATFORM_REMOTE_MISSILE_GAMBLER", & givecratekillstreak);
-  registercratetype("inventory_supplydrop", "killstreak", "planemortar", 80, & "KILLSTREAK_PLANE_MORTAR_CRATE", & "PLATFORM_PLANE_MORTAR_GAMBLER", & givecratekillstreak);
-  registercratetype("inventory_supplydrop", "killstreak", "autoturret", 90, & "KILLSTREAK_AUTO_TURRET_CRATE", & "PLATFORM_AUTO_TURRET_GAMBLER", & givecratekillstreak);
-  registercratetype("inventory_supplydrop", "killstreak", "microwave_turret", 120, & "KILLSTREAK_MICROWAVE_TURRET_CRATE", & "PLATFORM_MICROWAVE_TURRET_GAMBLER", & givecratekillstreak);
-  registercratetype("inventory_supplydrop", "killstreak", "satellite", 20, & "KILLSTREAK_SATELLITE_CRATE", & "PLATFORM_SATELLITE_GAMBLER", & givecratekillstreak);
-  registercratetype("inventory_supplydrop", "killstreak", "helicopter_comlink", 30, & "KILLSTREAK_HELICOPTER_CRATE", & "PLATFORM_HELICOPTER_GAMBLER", & givecratekillstreak);
-  registercratetype("inventory_supplydrop", "killstreak", "emp", 5, & "KILLSTREAK_EMP_CRATE", & "PLATFORM_EMP_GAMBLER", & givecratekillstreak);
-  registercratetype("inventory_supplydrop", "killstreak", "raps", 20, & "KILLSTREAK_RAPS_CRATE", & "PLATFORM_RAPS_GAMBLER", & givecratekillstreak);
-  registercratetype("inventory_supplydrop", "killstreak", "dart", 75, & "KILLSTREAK_DART_CRATE", & "PLATFORM_DART_GAMBLER", & givecratekillstreak);
-  registercratetype("inventory_supplydrop", "killstreak", "sentinel", 20, & "KILLSTREAK_SENTINEL_CRATE", & "PLATFORM_SENTINEL_GAMBLER", & givecratekillstreak);
-  registercratetype("inventory_supplydrop", "killstreak", "combat_robot", 5, & "KILLSTREAK_COMBAT_ROBOT_CRATE", & "PLATFORM_COMBAT_ROBOT_GAMBLER", & givecratekillstreak);
-  registercratetype("inventory_supplydrop", "killstreak", "ai_tank_drop", 25, & "KILLSTREAK_AI_TANK_CRATE", & "PLATFORM_AI_TANK_CRATE_GAMBLER", & givecratekillstreak);
-  registercratetype("inventory_supplydrop", "killstreak", "drone_strike", 75, & "KILLSTREAK_DRONE_STRIKE_CRATE", & "PLATFORM_DRONE_STRIKE_GAMBLER", & givecratekillstreak);
-  registercratetype("inventory_ai_tank_drop", "killstreak", "ai_tank_drop", 75, & "KILLSTREAK_AI_TANK_CRATE", undefined, undefined, & ai_tank::crateland);
-  registercratetype("ai_tank_drop", "killstreak", "ai_tank_drop", 75, & "KILLSTREAK_AI_TANK_CRATE", undefined, undefined, & ai_tank::crateland);
-  registercratetype("gambler", "killstreak", "uav", 95, & "KILLSTREAK_RADAR_CRATE", undefined, & givecratekillstreak);
-  registercratetype("gambler", "killstreak", "counteruav", 85, & "KILLSTREAK_COUNTERU2_CRATE", undefined, & givecratekillstreak);
-  registercratetype("gambler", "killstreak", "rcbomb", 75, & "KILLSTREAK_RCBOMB_CRATE", undefined, & givecratekillstreak);
-  registercratetype("gambler", "killstreak", "microwave_turret", 110, & "KILLSTREAK_MICROWAVE_TURRET_CRATE", undefined, & givecratekillstreak);
-  registercratetype("gambler", "killstreak", "remote_missile", 100, & "KILLSTREAK_REMOTE_MISSILE_CRATE", undefined, & givecratekillstreak);
-  registercratetype("gambler", "killstreak", "planemortar", 80, & "KILLSTREAK_PLANE_MORTAR_CRATE", undefined, & givecratekillstreak);
-  registercratetype("gambler", "killstreak", "autoturret", 100, & "KILLSTREAK_AUTO_TURRET_CRATE", undefined, & givecratekillstreak);
-  registercratetype("gambler", "killstreak", "satellite", 30, & "KILLSTREAK_SATELLITE_CRATE", undefined, & givecratekillstreak);
-  registercratetype("gambler", "killstreak", "ai_tank_drop", 40, & "KILLSTREAK_AI_TANK_CRATE", undefined, & givecratekillstreak);
-  registercratetype("gambler", "killstreak", "helicopter_comlink", 45, & "KILLSTREAK_HELICOPTER_CRATE", undefined, & givecratekillstreak);
-  registercratetype("gambler", "killstreak", "emp", 10, & "KILLSTREAK_EMP_CRATE", undefined, & givecratekillstreak);
-  registercratetype("gambler", "killstreak", "raps", 35, & "KILLSTREAK_RAPS_CRATE", undefined, & givecratekillstreak);
-  registercratetype("gambler", "killstreak", "dart", 75, & "KILLSTREAK_DART_CRATE", undefined, & givecratekillstreak);
-  registercratetype("gambler", "killstreak", "sentinel", 35, & "KILLSTREAK_SENTINEL_CRATE", undefined, & givecratekillstreak);
-  registercratetype("gambler", "killstreak", "combat_robot", 10, & "KILLSTREAK_COMBAT_ROBOT_CRATE", undefined, & givecratekillstreak);
-  registercratetype("gambler", "killstreak", "drone_strike", 75, & "KILLSTREAK_DRONE_STRIKE_CRATE", undefined, & givecratekillstreak);
+  registercratetype("supplydrop", "killstreak", "uav", 125, &"KILLSTREAK_RADAR_CRATE", &"PLATFORM_RADAR_GAMBLER", &givecratekillstreak);
+  registercratetype("supplydrop", "killstreak", "rcbomb", 105, &"KILLSTREAK_RCBOMB_CRATE", &"PLATFORM_RCBOMB_GAMBLER", &givecratekillstreak);
+  registercratetype("supplydrop", "killstreak", "counteruav", 115, &"KILLSTREAK_COUNTERU2_CRATE", &"PLATFORM_COUNTERU2_GAMBLER", &givecratekillstreak);
+  registercratetype("supplydrop", "killstreak", "remote_missile", 90, &"KILLSTREAK_REMOTE_MISSILE_CRATE", &"PLATFORM_REMOTE_MISSILE_GAMBLER", &givecratekillstreak);
+  registercratetype("supplydrop", "killstreak", "planemortar", 80, &"KILLSTREAK_PLANE_MORTAR_CRATE", &"PLATFORM_PLANE_MORTAR_GAMBLER", &givecratekillstreak);
+  registercratetype("supplydrop", "killstreak", "autoturret", 90, &"KILLSTREAK_AUTO_TURRET_CRATE", &"PLATFORM_AUTO_TURRET_GAMBLER", &givecratekillstreak);
+  registercratetype("supplydrop", "killstreak", "microwave_turret", 120, &"KILLSTREAK_MICROWAVE_TURRET_CRATE", &"PLATFORM_MICROWAVE_TURRET_GAMBLER", &givecratekillstreak);
+  registercratetype("supplydrop", "killstreak", "satellite", 20, &"KILLSTREAK_SATELLITE_CRATE", &"PLATFORM_SATELLITE_GAMBLER", &givecratekillstreak);
+  registercratetype("supplydrop", "killstreak", "drone_strike", 75, &"KILLSTREAK_DRONE_STRIKE_CRATE", &"PLATFORM_DRONE_STRIKE_GAMBLER", &givecratekillstreak);
+  registercratetype("supplydrop", "killstreak", "helicopter_comlink", 30, &"KILLSTREAK_HELICOPTER_CRATE", &"PLATFORM_HELICOPTER_GAMBLER", &givecratekillstreak);
+  registercratetype("supplydrop", "killstreak", "emp", 5, &"KILLSTREAK_EMP_CRATE", &"PLATFORM_EMP_GAMBLER", &givecratekillstreak);
+  registercratetype("supplydrop", "killstreak", "raps", 20, &"KILLSTREAK_RAPS_CRATE", &"PLATFORM_RAPS_GAMBLER", &givecratekillstreak);
+  registercratetype("supplydrop", "killstreak", "dart", 75, &"KILLSTREAK_DART_CRATE", &"PLATFORM_DART_GAMBLER", &givecratekillstreak);
+  registercratetype("supplydrop", "killstreak", "sentinel", 20, &"KILLSTREAK_SENTINEL_CRATE", &"PLATFORM_SENTINEL_GAMBLER", &givecratekillstreak);
+  registercratetype("supplydrop", "killstreak", "combat_robot", 5, &"KILLSTREAK_COMBAT_ROBOT_CRATE", &"PLATFORM_COMBAT_ROBOT_GAMBLER", &givecratekillstreak);
+  registercratetype("supplydrop", "killstreak", "ai_tank_drop", 25, &"KILLSTREAK_AI_TANK_CRATE", &"PLATFORM_AI_TANK_CRATE_GAMBLER", &givecratekillstreak);
+  registercratetype("inventory_supplydrop", "killstreak", "uav", 125, &"KILLSTREAK_RADAR_CRATE", &"PLATFORM_RADAR_GAMBLER", &givecratekillstreak);
+  registercratetype("inventory_supplydrop", "killstreak", "counteruav", 115, &"KILLSTREAK_COUNTERU2_CRATE", &"PLATFORM_COUNTERU2_GAMBLER", &givecratekillstreak);
+  registercratetype("inventory_supplydrop", "killstreak", "rcbomb", 105, &"KILLSTREAK_RCBOMB_CRATE", &"PLATFORM_RCBOMB_GAMBLER", &givecratekillstreak);
+  registercratetype("inventory_supplydrop", "killstreak", "remote_missile", 90, &"KILLSTREAK_REMOTE_MISSILE_CRATE", &"PLATFORM_REMOTE_MISSILE_GAMBLER", &givecratekillstreak);
+  registercratetype("inventory_supplydrop", "killstreak", "planemortar", 80, &"KILLSTREAK_PLANE_MORTAR_CRATE", &"PLATFORM_PLANE_MORTAR_GAMBLER", &givecratekillstreak);
+  registercratetype("inventory_supplydrop", "killstreak", "autoturret", 90, &"KILLSTREAK_AUTO_TURRET_CRATE", &"PLATFORM_AUTO_TURRET_GAMBLER", &givecratekillstreak);
+  registercratetype("inventory_supplydrop", "killstreak", "microwave_turret", 120, &"KILLSTREAK_MICROWAVE_TURRET_CRATE", &"PLATFORM_MICROWAVE_TURRET_GAMBLER", &givecratekillstreak);
+  registercratetype("inventory_supplydrop", "killstreak", "satellite", 20, &"KILLSTREAK_SATELLITE_CRATE", &"PLATFORM_SATELLITE_GAMBLER", &givecratekillstreak);
+  registercratetype("inventory_supplydrop", "killstreak", "helicopter_comlink", 30, &"KILLSTREAK_HELICOPTER_CRATE", &"PLATFORM_HELICOPTER_GAMBLER", &givecratekillstreak);
+  registercratetype("inventory_supplydrop", "killstreak", "emp", 5, &"KILLSTREAK_EMP_CRATE", &"PLATFORM_EMP_GAMBLER", &givecratekillstreak);
+  registercratetype("inventory_supplydrop", "killstreak", "raps", 20, &"KILLSTREAK_RAPS_CRATE", &"PLATFORM_RAPS_GAMBLER", &givecratekillstreak);
+  registercratetype("inventory_supplydrop", "killstreak", "dart", 75, &"KILLSTREAK_DART_CRATE", &"PLATFORM_DART_GAMBLER", &givecratekillstreak);
+  registercratetype("inventory_supplydrop", "killstreak", "sentinel", 20, &"KILLSTREAK_SENTINEL_CRATE", &"PLATFORM_SENTINEL_GAMBLER", &givecratekillstreak);
+  registercratetype("inventory_supplydrop", "killstreak", "combat_robot", 5, &"KILLSTREAK_COMBAT_ROBOT_CRATE", &"PLATFORM_COMBAT_ROBOT_GAMBLER", &givecratekillstreak);
+  registercratetype("inventory_supplydrop", "killstreak", "ai_tank_drop", 25, &"KILLSTREAK_AI_TANK_CRATE", &"PLATFORM_AI_TANK_CRATE_GAMBLER", &givecratekillstreak);
+  registercratetype("inventory_supplydrop", "killstreak", "drone_strike", 75, &"KILLSTREAK_DRONE_STRIKE_CRATE", &"PLATFORM_DRONE_STRIKE_GAMBLER", &givecratekillstreak);
+  registercratetype("inventory_ai_tank_drop", "killstreak", "ai_tank_drop", 75, &"KILLSTREAK_AI_TANK_CRATE", undefined, undefined, &ai_tank::crateland);
+  registercratetype("ai_tank_drop", "killstreak", "ai_tank_drop", 75, &"KILLSTREAK_AI_TANK_CRATE", undefined, undefined, &ai_tank::crateland);
+  registercratetype("gambler", "killstreak", "uav", 95, &"KILLSTREAK_RADAR_CRATE", undefined, &givecratekillstreak);
+  registercratetype("gambler", "killstreak", "counteruav", 85, &"KILLSTREAK_COUNTERU2_CRATE", undefined, &givecratekillstreak);
+  registercratetype("gambler", "killstreak", "rcbomb", 75, &"KILLSTREAK_RCBOMB_CRATE", undefined, &givecratekillstreak);
+  registercratetype("gambler", "killstreak", "microwave_turret", 110, &"KILLSTREAK_MICROWAVE_TURRET_CRATE", undefined, &givecratekillstreak);
+  registercratetype("gambler", "killstreak", "remote_missile", 100, &"KILLSTREAK_REMOTE_MISSILE_CRATE", undefined, &givecratekillstreak);
+  registercratetype("gambler", "killstreak", "planemortar", 80, &"KILLSTREAK_PLANE_MORTAR_CRATE", undefined, &givecratekillstreak);
+  registercratetype("gambler", "killstreak", "autoturret", 100, &"KILLSTREAK_AUTO_TURRET_CRATE", undefined, &givecratekillstreak);
+  registercratetype("gambler", "killstreak", "satellite", 30, &"KILLSTREAK_SATELLITE_CRATE", undefined, &givecratekillstreak);
+  registercratetype("gambler", "killstreak", "ai_tank_drop", 40, &"KILLSTREAK_AI_TANK_CRATE", undefined, &givecratekillstreak);
+  registercratetype("gambler", "killstreak", "helicopter_comlink", 45, &"KILLSTREAK_HELICOPTER_CRATE", undefined, &givecratekillstreak);
+  registercratetype("gambler", "killstreak", "emp", 10, &"KILLSTREAK_EMP_CRATE", undefined, &givecratekillstreak);
+  registercratetype("gambler", "killstreak", "raps", 35, &"KILLSTREAK_RAPS_CRATE", undefined, &givecratekillstreak);
+  registercratetype("gambler", "killstreak", "dart", 75, &"KILLSTREAK_DART_CRATE", undefined, &givecratekillstreak);
+  registercratetype("gambler", "killstreak", "sentinel", 35, &"KILLSTREAK_SENTINEL_CRATE", undefined, &givecratekillstreak);
+  registercratetype("gambler", "killstreak", "combat_robot", 10, &"KILLSTREAK_COMBAT_ROBOT_CRATE", undefined, &givecratekillstreak);
+  registercratetype("gambler", "killstreak", "drone_strike", 75, &"KILLSTREAK_DRONE_STRIKE_CRATE", undefined, &givecratekillstreak);
   level.cratecategoryweights = [];
   level.cratecategorytypeweights = [];
   foreach(categorykey, category in level.cratetypes) {
@@ -469,8 +469,8 @@ function usekillstreaksupplydrop(killstreak) {
   context.dist_from_boundary = 12;
   context.max_dist_from_location = 4;
   context.perform_physics_trace = 1;
-  context.islocationgood = & islocationgood;
-  context.objective = & "airdrop_supplydrop";
+  context.islocationgood = &islocationgood;
+  context.objective = &"airdrop_supplydrop";
   context.validlocationsound = level.killstreakcorebundle.ksvalidcarepackagelocationsound;
   context.tracemask = 1 | 4;
   context.droptag = "tag_attach";
@@ -860,7 +860,7 @@ function crateactivate(hacker) {
   crateobjid = gameobjects::get_next_obj_id();
   objective_add(crateobjid, "invisible", self.origin);
   objective_icon(crateobjid, "compass_supply_drop_white");
-  objective_setcolor(crateobjid, & "FriendlyBlue");
+  objective_setcolor(crateobjid, &"FriendlyBlue");
   objective_state(crateobjid, "active");
   self.friendlyobjid = crateobjid;
   self.enemyobjid = [];
@@ -880,7 +880,7 @@ function crateactivate(hacker) {
         objective_icon(crateobjid, "compass_supply_drop_black");
       } else {
         objective_icon(crateobjid, "compass_supply_drop_white");
-        objective_setcolor(crateobjid, & "EnemyOrange");
+        objective_setcolor(crateobjid, &"EnemyOrange");
       }
       objective_team(crateobjid, team);
       objective_state(crateobjid, "active");
@@ -892,7 +892,7 @@ function crateactivate(hacker) {
       enemycrateobjid = gameobjects::get_next_obj_id();
       objective_add(enemycrateobjid, "invisible", self.origin);
       objective_icon(enemycrateobjid, "compass_supply_drop_white");
-      objective_setcolor(enemycrateobjid, & "EnemyOrange");
+      objective_setcolor(enemycrateobjid, &"EnemyOrange");
       objective_state(enemycrateobjid, "active");
       if(isplayer(self.owner)) {
         objective_setinvisibletoplayer(enemycrateobjid, self.owner);
@@ -1021,7 +1021,7 @@ function configureteampost(owner) {
 
 function cratespawn(killstreak, killstreakid, owner, team, drop_origin, drop_angle) {
   crate = spawn("script_model", drop_origin, 1);
-  crate killstreaks::configure_team(killstreak, killstreakid, owner, undefined, undefined, & configureteampost);
+  crate killstreaks::configure_team(killstreak, killstreakid, owner, undefined, undefined, &configureteampost);
   crate.angles = drop_angle;
   crate.visibletoall = 0;
   crate.script_noteworthy = "care_package";
@@ -1262,7 +1262,7 @@ function cratetimeoutthreader() {
 
 function cratetimeout(time) {
   crate = self;
-  self thread killstreaks::waitfortimeout("inventory_supply_drop", 90000, & cratedelete, "death");
+  self thread killstreaks::waitfortimeout("inventory_supply_drop", 90000, &cratedelete, "death");
 }
 
 function deleteonownerleave() {

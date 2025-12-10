@@ -38,7 +38,7 @@ function autoexec init() {
   level thread aat::register_immunity("zm_aat_fire_works", "margwa", 1, 1, 1);
   level thread aat::register_immunity("zm_aat_thunder_wall", "margwa", 0, 1, 1);
   level thread aat::register_immunity("zm_aat_turned", "margwa", 1, 1, 1);
-  spawner::add_archetype_spawn_function("margwa", & function_17627e34);
+  spawner::add_archetype_spawn_function("margwa", &function_17627e34);
   execdevgui("");
   thread function_cdd8baf7();
 }
@@ -53,21 +53,21 @@ function function_4092fa4d() {
 }
 
 function private function_e84ffe9c() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaTargetService", & function_c0fb414e);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaTeleportService", & function_5d11b2dc);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaZoneService", & function_6cc20647);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaPushService", & function_fa29651d);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaOctobombService", & function_d59056ec);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaVortexService", & function_6312be59);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldSmashAttack", & function_cbdc3798);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldSwipeAttack", & function_ec97fb1e);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldOctobombAttack", & function_f0e8cb2d);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldMove", & function_1c88d468);
-  behaviortreenetworkutility::registerbehaviortreeaction("zmMargwaSwipeAttackAction", & function_cd380e61, & function_edd2fa77, undefined);
-  behaviortreenetworkutility::registerbehaviortreeaction("zmMargwaOctobombAttackAction", & function_9fab0124, & function_c5832338, & function_7b2a3a90);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaSmashAttackTerminate", & function_7137a16);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaSwipeAttackTerminate", & function_137093c0);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaTeleportInTerminate", & function_743b10d2);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaTargetService", &function_c0fb414e);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaTeleportService", &function_5d11b2dc);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaZoneService", &function_6cc20647);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaPushService", &function_fa29651d);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaOctobombService", &function_d59056ec);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaVortexService", &function_6312be59);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldSmashAttack", &function_cbdc3798);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldSwipeAttack", &function_ec97fb1e);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldOctobombAttack", &function_f0e8cb2d);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldMove", &function_1c88d468);
+  behaviortreenetworkutility::registerbehaviortreeaction("zmMargwaSwipeAttackAction", &function_cd380e61, &function_edd2fa77, undefined);
+  behaviortreenetworkutility::registerbehaviortreeaction("zmMargwaOctobombAttackAction", &function_9fab0124, &function_c5832338, &function_7b2a3a90);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaSmashAttackTerminate", &function_7137a16);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaSwipeAttackTerminate", &function_137093c0);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaTeleportInTerminate", &function_743b10d2);
 }
 
 function private function_c0fb414e(entity) {
@@ -389,13 +389,13 @@ function private function_271a21d6() {
 }
 
 function private function_17627e34() {
-  self.destroyheadcb = & function_1f53b1a2;
-  self.bodyfallcb = & margwa_bodyfall;
-  self.var_16ec9b37 = & function_a89905c6;
-  self.chop_actor_cb = & function_89e37c9b;
-  self.var_a3b60c68 = & function_dbd9ba44;
-  self.var_de36fc8 = & function_2aa0209c;
-  self.smashattackcb = & margwa_smash_attack;
+  self.destroyheadcb = &function_1f53b1a2;
+  self.bodyfallcb = &margwa_bodyfall;
+  self.var_16ec9b37 = &function_a89905c6;
+  self.chop_actor_cb = &function_89e37c9b;
+  self.var_a3b60c68 = &function_dbd9ba44;
+  self.var_de36fc8 = &function_2aa0209c;
+  self.smashattackcb = &margwa_smash_attack;
   self.lightning_chain_immune = 1;
   self.ignore_game_over_death = 1;
   self.should_turn = 1;
@@ -464,17 +464,17 @@ function function_8a0708c2(s_location) {
     level.margwa_spawners[0].script_forcespawn = 1;
     ai = zombie_utility::spawn_zombie(level.margwa_spawners[0], "margwa", s_location);
     ai disableaimassist();
-    ai.actor_damage_func = & margwaserverutils::margwadamage;
+    ai.actor_damage_func = &margwaserverutils::margwadamage;
     ai.candamage = 0;
     ai.targetname = "margwa";
     ai.holdfire = 1;
     ai.n_start_health = self.health;
     ai.team = level.zombie_team;
     ai.canstun = 1;
-    ai.thundergun_fling_func = & function_7292417a;
-    ai.thundergun_knockdown_func = & function_94fd1710;
-    ai.var_23340a5d = & function_7292417a;
-    ai.var_e1dbd63 = & function_94fd1710;
+    ai.thundergun_fling_func = &function_7292417a;
+    ai.thundergun_knockdown_func = &function_94fd1710;
+    ai.var_23340a5d = &function_7292417a;
+    ai.var_e1dbd63 = &function_94fd1710;
     e_player = zm_utility::get_closest_player(s_location.origin);
     v_dir = e_player.origin - s_location.origin;
     v_dir = vectornormalize(v_dir);
@@ -708,7 +708,7 @@ function private function_f1358c65(zombie) {
 
 function private function_cdd8baf7() {
   level flagsys::wait_till("");
-  zm_devgui::add_custom_devgui_callback( & function_a2da506b);
+  zm_devgui::add_custom_devgui_callback(&function_a2da506b);
 }
 
 function private function_a2da506b(cmd) {

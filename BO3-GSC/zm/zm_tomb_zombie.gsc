@@ -33,24 +33,24 @@ function autoexec init() {
 }
 
 function private function_b5da43f3() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("wasKilledByWaterStaff", & function_901a96ec);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("wasKilledByFireStaff", & function_7ae408dd);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("wasKilledByLightningStaff", & function_a8b7161f);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("wasKilledOnTank", & waskilledontank);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("wasStunnedByFireStaff", & function_1beccbaf);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("wasStunnedByLightningStaff", & function_4638613d);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldWhirlwind", & zombieshouldwhirlwind);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieStunFireActionEnd", & zombiestunfireactionend);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieStunLightningActionEnd", & zombiestunlightningactionend);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tombSetFindFleshState", & tombsetfindfleshstate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tombClearFindFleshState", & tombclearfindfleshstate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tombOnTankDeathActionStart", & tombontankdeathactionstart);
-  spawner::add_archetype_spawn_function("zombie", & function_59f740e7);
-  animationstatenetwork::registernotetrackhandlerfunction("shatter", & function_e24c6a3f);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("wasKilledByWaterStaff", &function_901a96ec);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("wasKilledByFireStaff", &function_7ae408dd);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("wasKilledByLightningStaff", &function_a8b7161f);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("wasKilledOnTank", &waskilledontank);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("wasStunnedByFireStaff", &function_1beccbaf);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("wasStunnedByLightningStaff", &function_4638613d);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieShouldWhirlwind", &zombieshouldwhirlwind);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieStunFireActionEnd", &zombiestunfireactionend);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieStunLightningActionEnd", &zombiestunlightningactionend);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tombSetFindFleshState", &tombsetfindfleshstate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tombClearFindFleshState", &tombclearfindfleshstate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tombOnTankDeathActionStart", &tombontankdeathactionstart);
+  spawner::add_archetype_spawn_function("zombie", &function_59f740e7);
+  animationstatenetwork::registernotetrackhandlerfunction("shatter", &function_e24c6a3f);
 }
 
 function function_59f740e7() {
-  self.zombiemoveactioncallback = & tombsetfindfleshstate;
+  self.zombiemoveactioncallback = &tombsetfindfleshstate;
 }
 
 function function_e24c6a3f(entity) {

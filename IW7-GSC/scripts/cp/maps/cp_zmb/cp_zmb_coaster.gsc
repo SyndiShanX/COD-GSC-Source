@@ -205,7 +205,7 @@ use_coaster(param_00, param_01) {
   }
 
   if(scripts\engine\utility::istrue(param_01.coaster_ridden_this_round)) {
-    param_01 scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "CP_ZMB_INTERACTIONS_ALREADY_RIDDEN");
+    param_01 scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"CP_ZMB_INTERACTIONS_ALREADY_RIDDEN");
     wait(0.1);
     return;
   }
@@ -370,7 +370,7 @@ link_player_to_coaster(param_00, param_01) {
   param_00.targets_hit = 0;
   param_00.tickets_earned = 0;
   wait(5);
-  param_00 scripts\cp\utility::setlowermessage("coaster", & "CP_ZMB_INTERACTIONS_COASTER_HINT", 4);
+  param_00 scripts\cp\utility::setlowermessage("coaster", &"CP_ZMB_INTERACTIONS_COASTER_HINT", 4);
 }
 
 coaster_laststand_vos(param_00) {

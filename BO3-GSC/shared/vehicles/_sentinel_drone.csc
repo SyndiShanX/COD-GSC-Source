@@ -17,24 +17,24 @@
 #namespace sentinel_drone;
 
 function autoexec __init__sytem__() {
-  system::register("sentinel_drone", & __init__, undefined, undefined);
+  system::register("sentinel_drone", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "sentinel_drone_beam_set_target_id", 12000, 5, "int", & sentinel_drone_beam_set_target_id, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_beam_set_source_to_target", 12000, 5, "int", & sentinel_drone_beam_set_source_to_target, 0, 0);
-  clientfield::register("toplayer", "sentinel_drone_damage_player_fx", 12000, 1, "counter", & sentinel_drone_damage_player_fx, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_beam_fire1", 12000, 1, "int", & sentinel_drone_beam_fire1, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_beam_fire2", 12000, 1, "int", & sentinel_drone_beam_fire2, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_beam_fire3", 12000, 1, "int", & sentinel_drone_beam_fire3, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_arm_cut_1", 12000, 1, "int", & sentinel_drone_arm_cut_1, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_arm_cut_2", 12000, 1, "int", & sentinel_drone_arm_cut_2, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_arm_cut_3", 12000, 1, "int", & sentinel_drone_arm_cut_3, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_face_cut", 12000, 1, "int", & sentinel_drone_face_cut, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_beam_charge", 12000, 1, "int", & sentinel_drone_beam_charge, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_camera_scanner", 12000, 1, "int", & sentinel_drone_camera_scanner, 0, 0);
-  clientfield::register("vehicle", "sentinel_drone_camera_destroyed", 12000, 1, "int", & sentinel_drone_camera_destroyed, 0, 0);
-  clientfield::register("scriptmover", "sentinel_drone_deathfx", 1, 1, "int", & sentinel_drone_deathfx, 0, 0);
+  clientfield::register("scriptmover", "sentinel_drone_beam_set_target_id", 12000, 5, "int", &sentinel_drone_beam_set_target_id, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_beam_set_source_to_target", 12000, 5, "int", &sentinel_drone_beam_set_source_to_target, 0, 0);
+  clientfield::register("toplayer", "sentinel_drone_damage_player_fx", 12000, 1, "counter", &sentinel_drone_damage_player_fx, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_beam_fire1", 12000, 1, "int", &sentinel_drone_beam_fire1, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_beam_fire2", 12000, 1, "int", &sentinel_drone_beam_fire2, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_beam_fire3", 12000, 1, "int", &sentinel_drone_beam_fire3, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_arm_cut_1", 12000, 1, "int", &sentinel_drone_arm_cut_1, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_arm_cut_2", 12000, 1, "int", &sentinel_drone_arm_cut_2, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_arm_cut_3", 12000, 1, "int", &sentinel_drone_arm_cut_3, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_face_cut", 12000, 1, "int", &sentinel_drone_face_cut, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_beam_charge", 12000, 1, "int", &sentinel_drone_beam_charge, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_camera_scanner", 12000, 1, "int", &sentinel_drone_camera_scanner, 0, 0);
+  clientfield::register("vehicle", "sentinel_drone_camera_destroyed", 12000, 1, "int", &sentinel_drone_camera_destroyed, 0, 0);
+  clientfield::register("scriptmover", "sentinel_drone_deathfx", 1, 1, "int", &sentinel_drone_deathfx, 0, 0);
   level._sentinel_enemy_detected_taunts = [];
   if(!isDefined(level._sentinel_enemy_detected_taunts)) {
     level._sentinel_enemy_detected_taunts = [];

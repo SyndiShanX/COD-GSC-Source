@@ -2680,7 +2680,7 @@ func_11544(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
     }
 
     if(isstring(var_01))
-      self _meth_8307(var_01, & "");
+      self _meth_8307(var_01, &"");
     else
       self _meth_8307("", var_01);
 

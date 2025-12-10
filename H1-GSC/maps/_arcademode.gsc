@@ -182,7 +182,7 @@ arcademode_death_detection() {
 
   if(var_0 < 0) {
     wait 1.5;
-    level.arcademode_failurestring = & "SCRIPT_GAME_OVER";
+    level.arcademode_failurestring = &"SCRIPT_GAME_OVER";
     thread arcademode_ends();
     return;
   }
@@ -212,7 +212,7 @@ arcademode_update_timer() {
   var_1 = level.arcademode_time;
   var_0 settimer(var_1 - 0.1);
   wait(var_1);
-  level.arcademode_failurestring = & "SCRIPT_TIME_UP";
+  level.arcademode_failurestring = &"SCRIPT_TIME_UP";
   thread arcademode_ends();
   soundscripts\_snd::snd_message("player_death");
 }
@@ -232,7 +232,7 @@ arcademode_update_lives() {
       var_2 = getdvarint("arcademode_lives");
 
       if(var_2 < 0) {
-        level.arcademode_failurestring = & "SCRIPT_GAME_OVER";
+        level.arcademode_failurestring = &"SCRIPT_GAME_OVER";
         thread arcademode_ends();
         return;
       }
@@ -1012,7 +1012,7 @@ extra_lives_display(var_0) {
   var_1.fontscale = 1.7;
   var_1.vertalign = "top_adjustable";
   var_1 _meth_8347(-0.6, 0, 0, 0, (0.247, 0.439, 0.094), 0.5, -0.1, 0, (0.302, 0.588, 0.047), 0.75);
-  var_1.label = & "SCRIPT_EXTRA_LIFE";
+  var_1.label = &"SCRIPT_EXTRA_LIFE";
   var_1 setvalue(var_0);
   thread extra_lives_display_border();
   thread extra_lives_display_flare();
@@ -1183,12 +1183,12 @@ pointpulse(var_0) {
   wait 0.05;
 
   if(var_0 <= 0) {
-    var_1.label = & "";
+    var_1.label = &"";
     var_1.color = (1, 0, 0);
     var_1.glowcolor = (0, 0, 0);
     var_1.glowalpha = 0;
   } else {
-    var_1.label = & "SCRIPT_PLUS";
+    var_1.label = &"SCRIPT_PLUS";
     var_1.color = (1, 1, 1);
     var_1 _meth_8347(-0.6, 0, 0, 0, (0.247, 0.439, 0.094), 0.3, -0.1, 0, (0.302, 0.588, 0.047), 0.75);
   }
@@ -1707,7 +1707,7 @@ arcademode_ends() {
 
     if(getdvarint("arcademode_died") != 1 && level.gameskill >= 2) {
       var_34 = int(var_30);
-      arcademode_end_boost(var_30, var_22, var_34, & "SCRIPT_ZERO_DEATHS", "arcademode_zerodeaths", var_13, var_4, var_17);
+      arcademode_end_boost(var_30, var_22, var_34, &"SCRIPT_ZERO_DEATHS", "arcademode_zerodeaths", var_13, var_4, var_17);
       var_30 = var_30 + var_34;
       var_22 = var_22 + var_34;
     }
@@ -1724,11 +1724,11 @@ arcademode_ends() {
 
   if(var_51 > 1) {
     if(var_51 == 1.5)
-      var_52 = & "SCRIPT_DIFFICULTY_BONUS_ONEANDAHALF";
+      var_52 = &"SCRIPT_DIFFICULTY_BONUS_ONEANDAHALF";
     else if(var_51 == 3)
-      var_52 = & "SCRIPT_DIFFICULTY_BONUS_THREE";
+      var_52 = &"SCRIPT_DIFFICULTY_BONUS_THREE";
     else
-      var_52 = & "SCRIPT_DIFFICULTY_BONUS_FOUR";
+      var_52 = &"SCRIPT_DIFFICULTY_BONUS_FOUR";
 
     var_34 = int(ceil(var_30 * var_51) - var_30);
     arcademode_end_boost(var_30, var_22, var_34, var_52, "h1_arcademode_ending_diff_pts", var_13, var_4, var_17);
@@ -2207,7 +2207,7 @@ get_hud_multi() {
   var_1.color = level.arcademode_streak_color[level.arcademode_kill_streak_current_multiplier - 1];
   var_1 _meth_8347(-0.1, 0, 0, -0.001, (0, 0, 0), 0.5, -0.1, 0, (0, 0, 0), 0.75);
   var_1.sort = level.arcademode_hud_sort;
-  var_1.label = & "SCRIPT_X";
+  var_1.label = &"SCRIPT_X";
   var_1 setvalue(level.arcademode_kill_streak_current_multiplier);
   var_1 moveovertime(var_0);
   var_1.x = -21.6667;
@@ -2233,7 +2233,7 @@ get_hud_multi_emphasis() {
   var_0.color = level.arcademode_streak_color[level.arcademode_kill_streak_current_multiplier - 1];
   var_0 _meth_8347(-0.6, 0, 0, 0, (0, 0, 0), 0.0, -0.6, 0, var_0.color, 1.0);
   var_0.sort = level.arcademode_hud_sort;
-  var_0.label = & "SCRIPT_X";
+  var_0.label = &"SCRIPT_X";
   var_0 setvalue(level.arcademode_kill_streak_current_multiplier);
   var_0.alpha = 0.0;
   var_1 = 2;

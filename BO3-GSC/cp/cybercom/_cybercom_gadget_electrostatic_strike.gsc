@@ -37,20 +37,20 @@ function main() {
   level._effect["es_contact"] = "electric/fx_ability_elec_strike_impact";
   level._effect["es_arc"] = "electric/fx_ability_elec_strike_trail";
   level.cybercom.electro_strike = spawnStruct();
-  level.cybercom.electro_strike._is_flickering = & _is_flickering;
-  level.cybercom.electro_strike._on_flicker = & _on_flicker;
-  level.cybercom.electro_strike._on_give = & _on_give;
-  level.cybercom.electro_strike._on_take = & _on_take;
-  level.cybercom.electro_strike._on_connect = & _on_connect;
-  level.cybercom.electro_strike._on = & _on;
-  level.cybercom.electro_strike._off = & _off;
+  level.cybercom.electro_strike._is_flickering = &_is_flickering;
+  level.cybercom.electro_strike._on_flicker = &_on_flicker;
+  level.cybercom.electro_strike._on_give = &_on_give;
+  level.cybercom.electro_strike._on_take = &_on_take;
+  level.cybercom.electro_strike._on_connect = &_on_connect;
+  level.cybercom.electro_strike._on = &_on;
+  level.cybercom.electro_strike._off = &_off;
   level.cybercom.electro_strike.human_weapon = getweapon("gadget_es_strike");
   level.cybercom.electro_strike.var_bf0de5fb = getweapon("gadget_es_strike");
   level.cybercom.electro_strike.robot_weapon = getweapon("gadget_es_strike");
   level.cybercom.electro_strike.var_f492f9d5 = getweapon("emp_grenade");
   level.cybercom.electro_strike.vehicle_weapon = getweapon("emp_grenade");
   level.cybercom.electro_strike.other_weapon = getweapon("emp_grenade");
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function on_player_spawned() {}

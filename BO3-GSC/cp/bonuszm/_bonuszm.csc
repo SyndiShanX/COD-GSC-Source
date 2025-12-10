@@ -33,7 +33,7 @@
 #namespace bonuszm;
 
 function autoexec __init__sytem__() {
-  system::register("bonuszm", & __init__, undefined, undefined);
+  system::register("bonuszm", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -46,9 +46,9 @@ function __init__() {
   init_fx();
   setdvar("bg_friendlyFireMode", 0);
   level.setgibfxtoignorepause = 1;
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
   function_aea4686a();
-  vehicle::add_vehicletype_callback("raps", & function_938d1a68);
+  vehicle::add_vehicletype_callback("raps", &function_938d1a68);
 }
 
 function function_938d1a68(localclientnum) {
@@ -89,28 +89,28 @@ function function_9f75e681() {
 }
 
 function register_clientfields() {
-  clientfield::register("actor", "zombie_riser_fx", 1, 1, "int", & handle_zombie_risers, 0, 1);
-  clientfield::register("actor", "bonus_zombie_eye_color", 1, 3, "int", & zombie_eyes_clientfield_cb2, 0, 1);
-  clientfield::register("actor", "zombie_has_eyes", 1, 1, "int", & zombie_eyes_clientfield_cb, 0, 1);
-  clientfield::register("actor", "zombie_gut_explosion", 1, 1, "int", & zombie_gut_explosion_cb, 0, 1);
-  clientfield::register("actor", "bonuszm_zombie_on_fire_fx", 1, getminbitcountfornum(3), "int", & function_f83377d6, 0, 1);
-  clientfield::register("actor", "bonuszm_zombie_spark_fx", 1, getminbitcountfornum(2), "int", & function_4b335db, 0, 1);
-  clientfield::register("actor", "bonuszm_zombie_deimos_fx", 1, getminbitcountfornum(1), "int", & function_225fae17, 0, 1);
-  clientfield::register("vehicle", "bonuszm_meatball_death", 1, 1, "int", & function_1f4cd60d, 0, 1);
-  clientfield::register("actor", "zombie_riser_fx", 1, 1, "int", & handle_zombie_risers, 0, 1);
-  clientfield::register("actor", "bonuszm_zombie_death_fx", 1, getminbitcountfornum(5), "int", & function_e4d833e, 0, 1);
-  clientfield::register("actor", "zombie_appear_vanish_fx", 1, getminbitcountfornum(3), "int", & function_7fc0e06, 0, 1);
-  clientfield::register("scriptmover", "powerup_on_fx", 1, getminbitcountfornum(3), "int", & callback_powerup_on_fx, 0, 0);
-  clientfield::register("scriptmover", "powerup_grabbed_fx", 1, 1, "int", & function_50779600, 0, 0);
-  clientfield::register("scriptmover", "weapon_disappear_fx", 1, 1, "int", & function_42f6f16e, 0, 0);
-  clientfield::register("scriptmover", "sparky_trail_fx", 1, 1, "int", & function_ab68bae5, 0, 0);
-  clientfield::register("scriptmover", "sparky_attack_fx", 1, 1, "counter", & function_14312cfd, 0, 0);
-  clientfield::register("actor", "sparky_damaged_fx", 1, 1, "counter", & function_97590d4, 0, 0);
-  clientfield::register("actor", "fire_damaged_fx", 1, 1, "counter", & function_780c0a4, 0, 0);
-  clientfield::register("zbarrier", "magicbox_open_glow", 1, 1, "int", & magicbox_open_glow_callback, 0, 0);
-  clientfield::register("zbarrier", "magicbox_closed_glow", 1, 1, "int", & magicbox_closed_glow_callback, 0, 0);
-  clientfield::register("toplayer", "bonuszm_player_instakill_active_fx", 1, 1, "int", & function_bba3723b, 0, 0);
-  clientfield::register("world", "cpzm_song_suppression", 1, 1, "int", & function_2122d6fd, 0, 0);
+  clientfield::register("actor", "zombie_riser_fx", 1, 1, "int", &handle_zombie_risers, 0, 1);
+  clientfield::register("actor", "bonus_zombie_eye_color", 1, 3, "int", &zombie_eyes_clientfield_cb2, 0, 1);
+  clientfield::register("actor", "zombie_has_eyes", 1, 1, "int", &zombie_eyes_clientfield_cb, 0, 1);
+  clientfield::register("actor", "zombie_gut_explosion", 1, 1, "int", &zombie_gut_explosion_cb, 0, 1);
+  clientfield::register("actor", "bonuszm_zombie_on_fire_fx", 1, getminbitcountfornum(3), "int", &function_f83377d6, 0, 1);
+  clientfield::register("actor", "bonuszm_zombie_spark_fx", 1, getminbitcountfornum(2), "int", &function_4b335db, 0, 1);
+  clientfield::register("actor", "bonuszm_zombie_deimos_fx", 1, getminbitcountfornum(1), "int", &function_225fae17, 0, 1);
+  clientfield::register("vehicle", "bonuszm_meatball_death", 1, 1, "int", &function_1f4cd60d, 0, 1);
+  clientfield::register("actor", "zombie_riser_fx", 1, 1, "int", &handle_zombie_risers, 0, 1);
+  clientfield::register("actor", "bonuszm_zombie_death_fx", 1, getminbitcountfornum(5), "int", &function_e4d833e, 0, 1);
+  clientfield::register("actor", "zombie_appear_vanish_fx", 1, getminbitcountfornum(3), "int", &function_7fc0e06, 0, 1);
+  clientfield::register("scriptmover", "powerup_on_fx", 1, getminbitcountfornum(3), "int", &callback_powerup_on_fx, 0, 0);
+  clientfield::register("scriptmover", "powerup_grabbed_fx", 1, 1, "int", &function_50779600, 0, 0);
+  clientfield::register("scriptmover", "weapon_disappear_fx", 1, 1, "int", &function_42f6f16e, 0, 0);
+  clientfield::register("scriptmover", "sparky_trail_fx", 1, 1, "int", &function_ab68bae5, 0, 0);
+  clientfield::register("scriptmover", "sparky_attack_fx", 1, 1, "counter", &function_14312cfd, 0, 0);
+  clientfield::register("actor", "sparky_damaged_fx", 1, 1, "counter", &function_97590d4, 0, 0);
+  clientfield::register("actor", "fire_damaged_fx", 1, 1, "counter", &function_780c0a4, 0, 0);
+  clientfield::register("zbarrier", "magicbox_open_glow", 1, 1, "int", &magicbox_open_glow_callback, 0, 0);
+  clientfield::register("zbarrier", "magicbox_closed_glow", 1, 1, "int", &magicbox_closed_glow_callback, 0, 0);
+  clientfield::register("toplayer", "bonuszm_player_instakill_active_fx", 1, 1, "int", &function_bba3723b, 0, 0);
+  clientfield::register("world", "cpzm_song_suppression", 1, 1, "int", &function_2122d6fd, 0, 0);
 }
 
 function init_fx() {

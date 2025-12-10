@@ -217,7 +217,7 @@ challenge_timer_player_setup(start_flag, passed_flag, message) {
     self.hud_so_timer_time = maps\_specialops::so_create_hud_item(1, ypos, undefined /*convert_to_time_string( level.challenge_time_limit, true )*/ , self);
     self.hud_so_timer_time SetTenthsTimerStatic(level.challenge_time_limit);
   } else
-    self.hud_so_timer_time = maps\_specialops::so_create_hud_item(1, ypos, & "SPECIAL_OPS_TIME_NULL", self);
+    self.hud_so_timer_time = maps\_specialops::so_create_hud_item(1, ypos, &"SPECIAL_OPS_TIME_NULL", self);
   self.hud_so_timer_time.alignX = "left";
 
   thread maps\_specialops::info_hud_wait_for_player();
@@ -606,7 +606,7 @@ specialops_mission_over_setup_success() {
   if(isDefined(level.suppress_challenge_success_print))
     return;
 
-  passed_hud = maps\_specialops::so_create_hud_item(3, 0, & "SPECIAL_OPS_CHALLENGE_SUCCESS");
+  passed_hud = maps\_specialops::so_create_hud_item(3, 0, &"SPECIAL_OPS_CHALLENGE_SUCCESS");
   passed_hud.alignX = "center";
   passed_hud.horzAlign = "center";
   passed_hud set_hudelem_blue();
@@ -619,7 +619,7 @@ specialops_mission_over_setup_success() {
 specialops_mission_over_setup_failure() {
   flag_set("special_op_failed");
 
-  passed_hud = maps\_specialops::so_create_hud_item(3, 0, & "SPECIAL_OPS_CHALLENGE_FAILURE");
+  passed_hud = maps\_specialops::so_create_hud_item(3, 0, &"SPECIAL_OPS_CHALLENGE_FAILURE");
   passed_hud.hidewhendead = false;
   passed_hud.alignX = "center";
   passed_hud.horzAlign = "center";
@@ -1035,7 +1035,7 @@ create_waiting_message(player) {
   self notify("rebuilding_waiting_hud");
   self endon("rebuilding_waiting_hud");
 
-  waiting_hud = maps\_specialops::so_create_hud_item(3, 0, & "SPECIAL_OPS_WAITING_OTHER_PLAYER", player);
+  waiting_hud = maps\_specialops::so_create_hud_item(3, 0, &"SPECIAL_OPS_WAITING_OTHER_PLAYER", player);
   waiting_hud.alignX = "center";
   waiting_hud.horzAlign = "center";
   waiting_hud set_hudelem_blue();
@@ -1114,7 +1114,7 @@ ping_escape_warning() {
 
   self endon("death");
 
-  self.ping_escape_splash = maps\_specialops::so_create_hud_item(3.5, 0, & "SPECIAL_OPS_ESCAPE_WARNING", self);
+  self.ping_escape_splash = maps\_specialops::so_create_hud_item(3.5, 0, &"SPECIAL_OPS_ESCAPE_WARNING", self);
   self.ping_escape_splash.alignx = "center";
   self.ping_escape_splash.horzAlign = "center";
   //	self.ping_escape_splash set_hudelem_red();

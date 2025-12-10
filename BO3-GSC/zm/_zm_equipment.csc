@@ -9,14 +9,14 @@
 #namespace zm_equipment;
 
 function autoexec __init__sytem__() {
-  system::register("zm_equipment", & __init__, undefined, undefined);
+  system::register("zm_equipment", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level._equip_activated_callbacks = [];
   level.buildable_piece_count = 24;
   if(!(isDefined(level._no_equipment_activated_clientfield) && level._no_equipment_activated_clientfield)) {
-    clientfield::register("scriptmover", "equipment_activated", 1, 4, "int", & equipment_activated_clientfield_cb, 1, 0);
+    clientfield::register("scriptmover", "equipment_activated", 1, 4, "int", &equipment_activated_clientfield_cb, 1, 0);
   }
 }
 

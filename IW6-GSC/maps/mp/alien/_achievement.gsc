@@ -199,12 +199,12 @@ eggAllFoundForPack(packNum) {
     eggstra_award_flags = self GetCoopPlayerDataReservedInt("eggstra_award_flags");
     hasModifiedFlags = false;
 
-    if(legacyState == 1015 && ((eggstra_award_flags & (1 << 0)) != 1)) {
+    if(legacyState == 1015 && ((eggstra_award_flags &(1 << 0)) != 1)) {
       eggstra_award_flags |= (1 << 0);
       hasModifiedFlags = true;
     }
 
-    if((eggstra_award_flags & (1 << packNum)) == 0) {
+    if((eggstra_award_flags &(1 << packNum)) == 0) {
       eggstra_award_flags |= (1 << packNum);
       hasModifiedFlags = true;
 

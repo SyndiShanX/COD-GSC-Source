@@ -157,11 +157,11 @@ main() {
   maps\_potted_plant::potted_plant_init();
 
   // Press ^3[{weapnext}]^7 to switch to the Javelin
-  add_hint_string("learn_javelin", & "SCRIPT_LEARN_JAVELIN", ::player_learned_javelin);
+  add_hint_string("learn_javelin", &"SCRIPT_LEARN_JAVELIN", ::player_learned_javelin);
   // Press ^3[{+smoke}]^7 to throw a flash bang.
-  add_hint_string("learn_flash", & "SCRIPT_PLATFORM_HINT_FLASH", ::player_learned_flash);
+  add_hint_string("learn_flash", &"SCRIPT_PLATFORM_HINT_FLASH", ::player_learned_flash);
 
-  add_hint_string("learn_m203", & "SCRIPT_LEARN_GRENADE_LAUNCHER", ::player_learned_m203);
+  add_hint_string("learn_m203", &"SCRIPT_LEARN_GRENADE_LAUNCHER", ::player_learned_m203);
 
   add_global_spawn_function("allies", ::get_in_moving_vehicle);
   add_global_spawn_function("axis", ::balcony_check);

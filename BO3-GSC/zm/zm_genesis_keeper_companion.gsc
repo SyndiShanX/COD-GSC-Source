@@ -35,7 +35,7 @@
 #namespace zm_genesis_keeper_companion;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_companion", & __init__, undefined, undefined);
+  system::register("zm_genesis_companion", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -66,7 +66,7 @@ function main() {
   level.var_214b85da = getent("keeper_companion_spawner", "script_noteworthy");
   level thread function_2dc24f4b();
   if(!isDefined(level.powerup_grab_get_players_override)) {
-    level.powerup_grab_get_players_override = & powerup_grab_get_players_override;
+    level.powerup_grab_get_players_override = &powerup_grab_get_players_override;
   }
 }
 
@@ -83,10 +83,10 @@ function function_2dc24f4b() {
   level thread function_dbc32a6d();
   level.var_1e5eff79 = array("temple", "theater", "origins", "castle");
   foreach(str_areaname in level.var_1e5eff79) {
-    create_callbox_unitrigger(str_areaname, & function_adb2c149, & function_d6422d13);
+    create_callbox_unitrigger(str_areaname, &function_adb2c149, &function_d6422d13);
   }
   var_991fff06 = struct::get_array("companion_activate_trig", "targetname");
-  array::thread_all(var_991fff06, & function_4347fd68);
+  array::thread_all(var_991fff06, &function_4347fd68);
   level thread function_63fe1ddd();
 }
 
@@ -124,7 +124,7 @@ function function_85555c9() {
   level flag::init(self.var_fdb628a4 + "_found");
   mdl_part = util::spawn_model(self.model, self.origin, self.angles);
   mdl_part setscale(self.n_scale);
-  s_unitrigger = self zm_unitrigger::create_unitrigger(&"ZM_GENESIS_CALLBOX_PICKUP_PART", 64, & function_fe778474);
+  s_unitrigger = self zm_unitrigger::create_unitrigger(&"ZM_GENESIS_CALLBOX_PICKUP_PART", 64, &function_fe778474);
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger, 1);
   if(isDefined(self.v_offset)) {
     s_unitrigger.origin = s_unitrigger.origin + self.v_offset;
@@ -313,23 +313,23 @@ function function_adb2c149(e_player) {
   if(isDefined(level.ai_companion)) {
     switch (level.var_eb326880) {
       case "castle": {
-        hintstring_areaname = & "ZM_GENESIS_AREA_NAME_CASTLE";
+        hintstring_areaname = &"ZM_GENESIS_AREA_NAME_CASTLE";
         break;
       }
       case "origins": {
-        hintstring_areaname = & "ZM_GENESIS_AREA_NAME_ORIGINS";
+        hintstring_areaname = &"ZM_GENESIS_AREA_NAME_ORIGINS";
         break;
       }
       case "theater": {
-        hintstring_areaname = & "ZM_GENESIS_AREA_NAME_THEATER";
+        hintstring_areaname = &"ZM_GENESIS_AREA_NAME_THEATER";
         break;
       }
       case "temple": {
-        hintstring_areaname = & "ZM_GENESIS_AREA_NAME_TEMPLE";
+        hintstring_areaname = &"ZM_GENESIS_AREA_NAME_TEMPLE";
         break;
       }
       default: {
-        hintstring_areaname = & "";
+        hintstring_areaname = &"";
         break;
       }
     }
@@ -390,7 +390,7 @@ function function_d6422d13() {
         level.var_67d8db6f = 0;
       }
       a_s_start_pos = struct::get_array("companion_start_pos", "targetname");
-      a_s_start_pos = array::filter(a_s_start_pos, 0, & filter_callbox_name, self.stub.str_areaname);
+      a_s_start_pos = array::filter(a_s_start_pos, 0, &filter_callbox_name, self.stub.str_areaname);
       s_start_pos = a_s_start_pos[0];
       level thread function_ff7f239d(e_player, self.stub, s_start_pos);
       e_player notify("hash_2098781a");
@@ -574,13 +574,13 @@ function function_a36616b8() {
 
 function function_c90770b6() {
   level flagsys::wait_till("");
-  zm_devgui::add_custom_devgui_callback( & function_f2a74fd1);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_2fb1022e);
-  level thread zm_genesis_util::setup_devgui_func("", "", 2, & function_2fb1022e);
-  level thread zm_genesis_util::setup_devgui_func("", "", 3, & function_2fb1022e);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_a4b1c609);
-  level thread zm_genesis_util::setup_devgui_func("", "", 2, & function_a4b1c609);
-  level thread zm_genesis_util::setup_devgui_func("", "", 3, & function_a4b1c609);
+  zm_devgui::add_custom_devgui_callback(&function_f2a74fd1);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_2fb1022e);
+  level thread zm_genesis_util::setup_devgui_func("", "", 2, &function_2fb1022e);
+  level thread zm_genesis_util::setup_devgui_func("", "", 3, &function_2fb1022e);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_a4b1c609);
+  level thread zm_genesis_util::setup_devgui_func("", "", 2, &function_a4b1c609);
+  level thread zm_genesis_util::setup_devgui_func("", "", 3, &function_a4b1c609);
 }
 
 function function_a4b1c609(n_val) {

@@ -36,13 +36,13 @@ function registeranimationmocomp(mocompname, startfuncptr, updatefuncptr, termin
     assert(isfunctionptr(updatefuncptr), "");
     level._animationmocomps[mocompname]["asm_mocomp_update"] = updatefuncptr;
   } else {
-    level._animationmocomps[mocompname]["asm_mocomp_update"] = & animationmocompemptyfunc;
+    level._animationmocomps[mocompname]["asm_mocomp_update"] = &animationmocompemptyfunc;
   }
   if(isDefined(terminatefuncptr)) {
     assert(isfunctionptr(terminatefuncptr), "");
     level._animationmocomps[mocompname]["asm_mocomp_terminate"] = terminatefuncptr;
   } else {
-    level._animationmocomps[mocompname]["asm_mocomp_terminate"] = & animationmocompemptyfunc;
+    level._animationmocomps[mocompname]["asm_mocomp_terminate"] = &animationmocompemptyfunc;
   }
 }
 

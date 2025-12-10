@@ -173,7 +173,7 @@ function autoexec ignore_systems() {
 }
 
 function autoexec __init__sytem__() {
-  system::register("zm", & __init__, undefined, undefined);
+  system::register("zm", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -206,14 +206,14 @@ function init() {
   level.weaponzmdeaththroe = getweapon("death_throe");
   level.weaponzmfists = getweapon("zombie_fists");
   if(!isDefined(level.givecustomloadout)) {
-    level.givecustomloadout = & zm_weapons::give_start_weapons;
+    level.givecustomloadout = &zm_weapons::give_start_weapons;
   }
   level.projectiles_should_ignore_world_pause = 1;
   level.player_out_of_playable_area_monitor = 1;
   level.player_too_many_weapons_monitor = 1;
-  level.player_too_many_weapons_monitor_func = & player_too_many_weapons_monitor;
+  level.player_too_many_weapons_monitor_func = &player_too_many_weapons_monitor;
   level.player_too_many_players_check = 1;
-  level.player_too_many_players_check_func = & player_too_many_players_check;
+  level.player_too_many_players_check_func = &player_too_many_players_check;
   level._use_choke_weapon_hints = 1;
   level._use_choke_blockers = 1;
   level.speed_change_round = 15;
@@ -243,10 +243,10 @@ function init() {
   level.grenade_multiattack_bookmark_count = 1;
   demo::initactorbookmarkparams(3, 6000, 6000);
   if(!isDefined(level._zombies_round_spawn_failsafe)) {
-    level._zombies_round_spawn_failsafe = & zombie_utility::round_spawn_failsafe;
+    level._zombies_round_spawn_failsafe = &zombie_utility::round_spawn_failsafe;
   }
-  level.func_get_zombie_spawn_delay = & get_zombie_spawn_delay;
-  level.func_get_delay_between_rounds = & get_delay_between_rounds;
+  level.func_get_zombie_spawn_delay = &get_zombie_spawn_delay;
+  level.func_get_delay_between_rounds = &get_delay_between_rounds;
   level.zombie_visionset = "zombie_neutral";
   level.wait_and_revive = 0;
   if(getdvarstring("anim_intro") == "1") {
@@ -305,14 +305,14 @@ function init() {
       }
     }
   }
-  callback::on_connect( & zm_on_player_connect);
+  callback::on_connect(&zm_on_player_connect);
   zm_utility::set_demo_intermission_point();
   level thread zm_ffotd::main_end();
   level thread zm_utility::track_players_intersection_tracker();
   level thread onallplayersready();
   level thread startunitriggers();
   level thread function_83b0d780();
-  callback::on_spawned( & zm_on_player_spawned);
+  callback::on_spawned(&zm_on_player_spawned);
   printhashids();
 }
 
@@ -397,7 +397,7 @@ function fade_out_intro_screen_zm(hold_black_time, fade_out_time, destroyed_afte
   if(!isDefined(fade_out_time)) {
     fade_out_time = 1.5;
   }
-  array::thread_all(getplayers(), & initialblackend);
+  array::thread_all(getplayers(), &initialblackend);
   level clientfield::set("sndZMBFadeIn", 1);
   lui::screen_fade_in(fade_out_time, undefined);
   wait(1.6);
@@ -471,7 +471,7 @@ function onallplayersready() {
       level set_default_laststand_pistol(1);
     }
     level flag::set("initial_players_connected");
-    array::thread_all(getplayers(), & initialblack);
+    array::thread_all(getplayers(), &initialblack);
     while(!aretexturesloaded()) {
       wait(0.05);
     }
@@ -775,14 +775,14 @@ function init_shellshocks() {
 }
 
 function init_strings() {
-  zm_utility::add_zombie_hint("undefined", & "ZOMBIE_UNDEFINED");
-  zm_utility::add_zombie_hint("default_treasure_chest", & "ZOMBIE_RANDOM_WEAPON_COST");
-  zm_utility::add_zombie_hint("default_buy_barrier_piece_10", & "ZOMBIE_BUTTON_BUY_BACK_BARRIER_10");
-  zm_utility::add_zombie_hint("default_buy_barrier_piece_20", & "ZOMBIE_BUTTON_BUY_BACK_BARRIER_20");
-  zm_utility::add_zombie_hint("default_buy_barrier_piece_50", & "ZOMBIE_BUTTON_BUY_BACK_BARRIER_50");
-  zm_utility::add_zombie_hint("default_buy_barrier_piece_100", & "ZOMBIE_BUTTON_BUY_BACK_BARRIER_100");
-  zm_utility::add_zombie_hint("default_reward_barrier_piece", & "ZOMBIE_BUTTON_REWARD_BARRIER");
-  zm_utility::add_zombie_hint("default_buy_area", & "ZOMBIE_BUTTON_BUY_OPEN_AREA_COST");
+  zm_utility::add_zombie_hint("undefined", &"ZOMBIE_UNDEFINED");
+  zm_utility::add_zombie_hint("default_treasure_chest", &"ZOMBIE_RANDOM_WEAPON_COST");
+  zm_utility::add_zombie_hint("default_buy_barrier_piece_10", &"ZOMBIE_BUTTON_BUY_BACK_BARRIER_10");
+  zm_utility::add_zombie_hint("default_buy_barrier_piece_20", &"ZOMBIE_BUTTON_BUY_BACK_BARRIER_20");
+  zm_utility::add_zombie_hint("default_buy_barrier_piece_50", &"ZOMBIE_BUTTON_BUY_BACK_BARRIER_50");
+  zm_utility::add_zombie_hint("default_buy_barrier_piece_100", &"ZOMBIE_BUTTON_BUY_BACK_BARRIER_100");
+  zm_utility::add_zombie_hint("default_reward_barrier_piece", &"ZOMBIE_BUTTON_REWARD_BARRIER");
+  zm_utility::add_zombie_hint("default_buy_area", &"ZOMBIE_BUTTON_BUY_OPEN_AREA_COST");
 }
 
 function init_sounds() {
@@ -954,27 +954,27 @@ function init_dvars() {
 }
 
 function init_function_overrides() {
-  level.callbackplayerdamage = & callback_playerdamage;
-  level.overrideplayerdamage = & player_damage_override;
-  level.callbackplayerkilled = & player_killed_override;
-  level.playerlaststand_func = & player_laststand;
-  level.callbackplayerlaststand = & callback_playerlaststand;
-  level.prevent_player_damage = & player_prevent_damage;
-  level.callbackactorkilled = & actor_killed_override;
-  level.callbackactordamage = & actor_damage_override_wrapper;
-  level.callbackvehicledamage = & vehicle_damage_override;
-  level.callbackvehiclekilled = & globallogic_vehicle::callback_vehiclekilled;
-  level.callbackvehicleradiusdamage = & globallogic_vehicle::callback_vehicleradiusdamage;
-  level.custom_introscreen = & zombie_intro_screen;
-  level.custom_intermission = & player_intermission;
-  level.global_damage_func = & zm_spawner::zombie_damage;
-  level.global_damage_func_ads = & zm_spawner::zombie_damage_ads;
-  level.reset_clientdvars = & onplayerconnect_clientdvars;
-  level.zombie_last_stand = & last_stand_pistol_swap;
-  level.zombie_last_stand_pistol_memory = & last_stand_save_pistol_ammo;
-  level.zombie_last_stand_ammo_return = & last_stand_restore_pistol_ammo;
-  level.player_becomes_zombie = & zombify_player;
-  level.validate_enemy_path_length = & zm_utility::default_validate_enemy_path_length;
+  level.callbackplayerdamage = &callback_playerdamage;
+  level.overrideplayerdamage = &player_damage_override;
+  level.callbackplayerkilled = &player_killed_override;
+  level.playerlaststand_func = &player_laststand;
+  level.callbackplayerlaststand = &callback_playerlaststand;
+  level.prevent_player_damage = &player_prevent_damage;
+  level.callbackactorkilled = &actor_killed_override;
+  level.callbackactordamage = &actor_damage_override_wrapper;
+  level.callbackvehicledamage = &vehicle_damage_override;
+  level.callbackvehiclekilled = &globallogic_vehicle::callback_vehiclekilled;
+  level.callbackvehicleradiusdamage = &globallogic_vehicle::callback_vehicleradiusdamage;
+  level.custom_introscreen = &zombie_intro_screen;
+  level.custom_intermission = &player_intermission;
+  level.global_damage_func = &zm_spawner::zombie_damage;
+  level.global_damage_func_ads = &zm_spawner::zombie_damage_ads;
+  level.reset_clientdvars = &onplayerconnect_clientdvars;
+  level.zombie_last_stand = &last_stand_pistol_swap;
+  level.zombie_last_stand_pistol_memory = &last_stand_save_pistol_ammo;
+  level.zombie_last_stand_ammo_return = &last_stand_restore_pistol_ammo;
+  level.player_becomes_zombie = &zombify_player;
+  level.validate_enemy_path_length = &zm_utility::default_validate_enemy_path_length;
 }
 
 function callback_playerlaststand(einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
@@ -1147,7 +1147,7 @@ function init_client_field_callback_funcs() {
 }
 
 function init_fx() {
-  level.createfx_callback_thread = & delete_in_createfx;
+  level.createfx_callback_thread = &delete_in_createfx;
   level._effect["fx_zombie_bar_break"] = "_t6/maps/zombie/fx_zombie_bar_break";
   level._effect["fx_zombie_bar_break_lite"] = "_t6/maps/zombie/fx_zombie_bar_break_lite";
   if(!(isDefined(level.fx_exclude_edge_fog) && level.fx_exclude_edge_fog)) {
@@ -2153,7 +2153,7 @@ function spectators_respawn() {
 function spectator_respawn_player() {
   if(self.sessionstate == "spectator" && isDefined(self.spectator_respawn)) {
     if(!isDefined(level.custom_spawnplayer)) {
-      level.custom_spawnplayer = & spectator_respawn;
+      level.custom_spawnplayer = &spectator_respawn;
     }
     self[[level.spawnplayer]]();
     thread refresh_player_navcard_hud();
@@ -2519,7 +2519,7 @@ function get_zombie_count_for_round(n_round, n_player_count) {
     max = max + (int(((n_player_count - 1) * level.zombie_vars["zombie_ai_per_player"]) * multiplier));
   }
   if(!isDefined(level.max_zombie_func)) {
-    level.max_zombie_func = & zombie_utility::default_max_zombie_func;
+    level.max_zombie_func = &zombie_utility::default_max_zombie_func;
   }
   n_zombie_count = [[level.max_zombie_func]](max, n_round);
   return n_zombie_count;
@@ -2653,19 +2653,19 @@ function round_start() {
   }
   level flag::set("begin_spawning");
   if(!isDefined(level.round_spawn_func)) {
-    level.round_spawn_func = & round_spawning;
+    level.round_spawn_func = &round_spawning;
   }
   if(!isDefined(level.move_spawn_func)) {
-    level.move_spawn_func = & zm_utility::move_zombie_spawn_location;
+    level.move_spawn_func = &zm_utility::move_zombie_spawn_location;
   }
   if(getdvarint("")) {
-    level.round_spawn_func = & round_spawning_test;
+    level.round_spawn_func = &round_spawning_test;
   }
   if(!isDefined(level.round_wait_func)) {
-    level.round_wait_func = & round_wait;
+    level.round_wait_func = &round_wait;
   }
   if(!isDefined(level.round_think_func)) {
-    level.round_think_func = & round_think;
+    level.round_think_func = &round_think;
   }
   level thread[[level.round_think_func]]();
 }
@@ -2853,7 +2853,7 @@ function round_think(restart = 0) {
     }
     zm_powerups::powerup_round_start();
     players = getplayers();
-    array::thread_all(players, & zm_blockers::rebuild_barrier_reward_reset);
+    array::thread_all(players, &zm_blockers::rebuild_barrier_reward_reset);
     if(!(isDefined(level.headshots_only) && level.headshots_only) && !restart) {
       level thread award_grenades_for_survivors();
     }
@@ -2898,7 +2898,7 @@ function round_think(restart = 0) {
       level thread spectators_respawn();
     }
     players = getplayers();
-    array::thread_all(players, & zm_pers_upgrades_system::round_end);
+    array::thread_all(players, &zm_pers_upgrades_system::round_end);
     if(((int(level.round_number / 5)) * 5) == level.round_number) {
       level clientfield::set("round_complete_time", int(((level.time - level.n_gameplay_start_time) + 500) / 1000));
       level clientfield::set("round_complete_num", level.round_number);
@@ -4026,7 +4026,7 @@ function end_game() {
     }
   }
   level notify("stop_intermission");
-  array::thread_all(getplayers(), & player_exit_level);
+  array::thread_all(getplayers(), &player_exit_level);
   wait(1.5);
   players = getplayers();
   for(i = 0; i < players.size; i++) {

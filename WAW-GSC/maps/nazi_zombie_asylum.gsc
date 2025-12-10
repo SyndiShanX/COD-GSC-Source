@@ -14,7 +14,7 @@ main() {
   level.dogs_enabled = true;
   maps\_destructible_opel_blitz::init();
   precacheshellshock("electrocution");
-  maps\_zombiemode_weapons::add_zombie_weapon("mine_bouncing_betty", & "ZOMBIE_WEAPON_SATCHEL_2000", 2000);
+  maps\_zombiemode_weapons::add_zombie_weapon("mine_bouncing_betty", &"ZOMBIE_WEAPON_SATCHEL_2000", 2000);
   precachemodel("tag_origin");
   precachemodel("zombie_zapper_power_box");
   precachemodel("zombie_zapper_power_box_on");
@@ -871,9 +871,9 @@ show_betty_hint(string) {
   self endon("death");
   self endon("disconnect");
   if(string == "betty_purchased")
-    text = & "ZOMBIE_BETTY_HOWTO";
+    text = &"ZOMBIE_BETTY_HOWTO";
   else
-    text = & "ZOMBIE_BETTY_ALREADY_PURCHASED";
+    text = &"ZOMBIE_BETTY_ALREADY_PURCHASED";
   self setup_client_hintelem();
   self.hintelem setText(text);
   wait(3.5);

@@ -11,7 +11,7 @@
 #namespace ctf;
 
 function main() {
-  callback::on_localclient_connect( & on_localclient_connect);
+  callback::on_localclient_connect(&on_localclient_connect);
 }
 
 function on_localclient_connect(localclientnum) {

@@ -38,8 +38,8 @@ function init() {
   level._effect["tesla_viewmodel_tube2_upgraded"] = "zombie/fx_tesla_tube_view2_ug_zmb";
   level._effect["tesla_viewmodel_tube3_upgraded"] = "zombie/fx_tesla_tube_view3_ug_zmb";
   level._effect["tesla_shock_eyes"] = "zombie/fx_tesla_shock_eyes_zmb";
-  zm::register_zombie_damage_override_callback( & tesla_zombie_damage_response);
-  zm_spawner::register_zombie_death_animscript_callback( & tesla_zombie_death_response);
+  zm::register_zombie_damage_override_callback(&tesla_zombie_damage_response);
+  zm_spawner::register_zombie_death_animscript_callback(&tesla_zombie_death_response);
   zombie_utility::set_zombie_var("tesla_max_arcs", 5);
   zombie_utility::set_zombie_var("tesla_max_enemies_killed", 10);
   zombie_utility::set_zombie_var("tesla_radius_start", 300);
@@ -51,7 +51,7 @@ function init() {
   zombie_utility::set_zombie_var("tesla_network_death_choke", 4);
   level.tesla_lightning_params = lightning_chain::create_lightning_chain_params(level.zombie_vars["tesla_max_arcs"], level.zombie_vars["tesla_max_enemies_killed"], level.zombie_vars["tesla_radius_start"], level.zombie_vars["tesla_radius_decay"], level.zombie_vars["tesla_head_gib_chance"], level.zombie_vars["tesla_arc_travel_time"], level.zombie_vars["tesla_kills_for_powerup"], level.zombie_vars["tesla_min_fx_distance"], level.zombie_vars["tesla_network_death_choke"], undefined, undefined, "wpn_tesla_bounce");
   level thread tesla_devgui_dvar_think();
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function tesla_devgui_dvar_think() {

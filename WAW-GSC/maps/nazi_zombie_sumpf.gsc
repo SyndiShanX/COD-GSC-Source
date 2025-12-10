@@ -28,8 +28,8 @@ main() {
   level.burning_zombies = [];
   level.use_zombie_heroes = true;
   level thread maps\_callbacksetup::SetupCallbacks();
-  maps\_zombiemode_weapons::add_zombie_weapon("mine_bouncing_betty", & "ZOMBIE_WEAPON_SATCHEL_2000", 2000);
-  maps\_zombiemode_weapons::add_zombie_weapon("ptrs41_zombie", & "ZOMBIE_WEAPON_PTRS41_750", 750, "vox_sniper", 5);
+  maps\_zombiemode_weapons::add_zombie_weapon("mine_bouncing_betty", &"ZOMBIE_WEAPON_SATCHEL_2000", 2000);
+  maps\_zombiemode_weapons::add_zombie_weapon("ptrs41_zombie", &"ZOMBIE_WEAPON_PTRS41_750", 750, "vox_sniper", 5);
   precachestring(&"ZOMBIE_BETTY_HOWTO");
   precachemodel("zombie_zapper_cagelight_red");
   precachemodel("zombie_zapper_cagelight_green");

@@ -111,7 +111,7 @@ scriptcalls() {
   common_scripts\utility::array_thread(getEntArray("trigger_upstairs_guys", "targetname"), ::trigger_upstairs_guys);
   common_scripts\utility::array_thread(getEntArray("alasad_barn_deletable", "script_noteworthy"), ::alasad_deletable_hide);
   common_scripts\utility::array_thread(getEntArray("alasad_house_deletable", "script_noteworthy"), ::alasad_deletable_hide);
-  maps\_utility::add_hint_string("call_air_support2", & "SCRIPT_PLATFORM_LEARN_CHOPPER_AIR_SUPPORT2", ::should_delete_attack_coord_hint);
+  maps\_utility::add_hint_string("call_air_support2", &"SCRIPT_PLATFORM_LEARN_CHOPPER_AIR_SUPPORT2", ::should_delete_attack_coord_hint);
   thread chopper_air_support();
   thread vehicle_patrol_init();
   thread roaming_bmp();
@@ -121,7 +121,7 @@ scriptcalls() {
     thread disable_gameplay();
 
   wait 6.5;
-  objective_add(0, "current", & "VILLAGE_ASSAULT_OBJECTIVE_LOCATE_ALASAD", (0, 0, 0));
+  objective_add(0, "current", &"VILLAGE_ASSAULT_OBJECTIVE_LOCATE_ALASAD", (0, 0, 0));
 }
 
 disable_gameplay() {

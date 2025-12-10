@@ -12,11 +12,11 @@
 #include maps\so_rooftop_contingency_code;
 
 // Fend off three waves of enemy reinforcements.
-CONST_regular_obj = & "SO_ROOFTOP_CONTINGENCY_OBJ_REGULAR";
+CONST_regular_obj = &"SO_ROOFTOP_CONTINGENCY_OBJ_REGULAR";
 // Fend off four waves of enemy reinforcements.
-CONST_hardened_obj = & "SO_ROOFTOP_CONTINGENCY_OBJ_HARDENED";
+CONST_hardened_obj = &"SO_ROOFTOP_CONTINGENCY_OBJ_HARDENED";
 // Fend off five waves of enemy reinforcements.
-CONST_veteran_obj = & "SO_ROOFTOP_CONTINGENCY_OBJ_VETERAN";
+CONST_veteran_obj = &"SO_ROOFTOP_CONTINGENCY_OBJ_VETERAN";
 
 main() {
   level.so_compass_zoom = "far";
@@ -69,8 +69,8 @@ main() {
   flag_init("start_countdown");
 
   // Press^3 [{+actionslot 4}] ^7to control the Predator Drone.
-  add_hint_string("use_uav_4", & "HELLFIRE_USE_DRONE", maps\_remotemissile::should_break_use_drone);
-  add_hint_string("use_uav_2", & "HELLFIRE_USE_DRONE_2", maps\_remotemissile::should_break_use_drone);
+  add_hint_string("use_uav_4", &"HELLFIRE_USE_DRONE", maps\_remotemissile::should_break_use_drone);
+  add_hint_string("use_uav_2", &"HELLFIRE_USE_DRONE_2", maps\_remotemissile::should_break_use_drone);
 
   // delete certain non special ops entities
   so_delete_all_by_type(::type_vehicle_special, ::type_spawners, ::type_spawn_trigger);

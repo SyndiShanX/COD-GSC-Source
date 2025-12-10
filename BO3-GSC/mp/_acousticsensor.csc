@@ -12,7 +12,7 @@
 #namespace acousticsensor;
 
 function autoexec __init__sytem__() {
-  system::register("acousticsensor", & __init__, undefined, undefined);
+  system::register("acousticsensor", &__init__, undefined, undefined);
 }
 
 function __init__() {

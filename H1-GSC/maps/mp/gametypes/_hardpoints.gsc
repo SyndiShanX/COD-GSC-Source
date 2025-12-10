@@ -21,12 +21,12 @@ init() {
       level.maxkillstreakforaward = var_1;
   }
 
-  level.hardpointhints["radar_mp"] = & "MP_EARNED_RADAR";
-  level.hardpointhints["airstrike_mp"] = & "MP_EARNED_AIRSTRIKE";
-  level.hardpointhints["helicopter_mp"] = & "MP_EARNED_HELICOPTER";
-  level.hardpointhints["radar_mp_not_available"] = & "MP_RADAR_NOT_AVAILABLE";
-  level.hardpointhints["airstrike_mp_not_available"] = & "MP_AIRSTRIKE_NOT_AVAILABLE";
-  level.hardpointhints["helicopter_mp_not_available"] = & "MP_HELICOPTER_NOT_AVAILABLE";
+  level.hardpointhints["radar_mp"] = &"MP_EARNED_RADAR";
+  level.hardpointhints["airstrike_mp"] = &"MP_EARNED_AIRSTRIKE";
+  level.hardpointhints["helicopter_mp"] = &"MP_EARNED_HELICOPTER";
+  level.hardpointhints["radar_mp_not_available"] = &"MP_RADAR_NOT_AVAILABLE";
+  level.hardpointhints["airstrike_mp_not_available"] = &"MP_AIRSTRIKE_NOT_AVAILABLE";
+  level.hardpointhints["helicopter_mp_not_available"] = &"MP_HELICOPTER_NOT_AVAILABLE";
   level.hardpointinforms["radar_mp"] = "mp_killstreak_radar";
   level.hardpointinforms["airstrike_mp"] = "mp_killstreak_jet";
   level.hardpointinforms["helicopter_mp"] = "mp_killstreak_heli";
@@ -946,7 +946,7 @@ useteamuav(var_0, var_1) {
 
   if(isDefined(var_3) && var_3 == "expire") {
     setteamradarwrapper(var_0, 0);
-    maps\mp\_utility::printandsoundoneveryone(var_0, var_1, & "MP_WAR_RADAR_EXPIRED", & "MP_WAR_RADAR_EXPIRED_ENEMY", undefined, undefined, "");
+    maps\mp\_utility::printandsoundoneveryone(var_0, var_1, &"MP_WAR_RADAR_EXPIRED", &"MP_WAR_RADAR_EXPIRED_ENEMY", undefined, undefined, "");
   }
 
   var_2 removeactiveuav();

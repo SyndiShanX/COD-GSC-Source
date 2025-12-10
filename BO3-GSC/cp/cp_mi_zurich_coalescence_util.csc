@@ -17,7 +17,7 @@
 #namespace zurich_util;
 
 function autoexec __init__sytem__() {
-  system::register("zurich_util", & __init__, undefined, undefined);
+  system::register("zurich_util", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -32,36 +32,36 @@ function init_clientfields() {
   var_2d20335b = getminbitcountfornum(5);
   var_a9ef5da3 = getminbitcountfornum(6);
   visionset_mgr::register_visionset_info("cp_zurich_hallucination", 1, 1, "cp_zurich_hallucination", "cp_zurich_hallucination");
-  clientfield::register("actor", "exploding_ai_deaths", 1, 1, "int", & callback_exploding_death_fx, 0, 0);
-  clientfield::register("actor", "hero_spawn_fx", 1, 1, "int", & function_78bd19c4, 0, 0);
-  clientfield::register("scriptmover", "hero_spawn_fx", 1, 1, "int", & function_78bd19c4, 0, 0);
-  clientfield::register("scriptmover", "vehicle_spawn_fx", 1, 1, "int", & function_f026ccfa, 0, 0);
-  clientfield::register("toplayer", "set_world_fog", 1, 1, "int", & function_346468e3, 0, 0);
-  clientfield::register("scriptmover", "raven_juke_effect", 1, 1, "counter", & function_69d5dc62, 0, 0);
-  clientfield::register("actor", "raven_juke_limb_effect", 1, 1, "counter", & function_d559bc1d, 0, 0);
-  clientfield::register("scriptmover", "raven_teleport_effect", 1, 1, "counter", & function_cb609334, 0, 0);
-  clientfield::register("actor", "raven_teleport_limb_effect", 1, 1, "counter", & function_496c80db, 0, 0);
-  clientfield::register("scriptmover", "raven_teleport_in_effect", 1, 1, "counter", & function_c39ee0a8, 0, 0);
-  clientfield::register("toplayer", "player_weather", 1, var_2d20335b, "int", & function_6120ef33, 0, 0);
-  clientfield::register("toplayer", "vortex_teleport", 1, 1, "counter", & function_560fbdb4, 0, 0);
-  clientfield::register("toplayer", "postfx_futz", 1, 1, "counter", & postfx_futz, 0, 0);
-  clientfield::register("toplayer", "postfx_futz_mild", 1, 1, "counter", & postfx_futz_mild, 0, 0);
-  clientfield::register("toplayer", "postfx_transition", 1, 1, "counter", & function_edf5c801, 0, 0);
-  clientfield::register("world", "zurich_city_ambience", 1, 1, "int", & function_14b2ccdd, 0, 0);
-  clientfield::register("actor", "skin_transition_melt", 1, 1, "int", & function_28572b48, 0, 1);
-  clientfield::register("scriptmover", "corvus_body_fx", 1, 1, "int", & function_b5037219, 0, 0);
-  clientfield::register("actor", "raven_ai_rez", 1, 1, "int", & function_91c7508e, 0, 0);
-  clientfield::register("scriptmover", "raven_ai_rez", 1, 1, "int", & function_91c7508e, 0, 0);
-  clientfield::register("toplayer", "zurich_server_cam", 1, 1, "int", & function_9596c4e, 0, 0);
-  clientfield::register("world", "set_exposure_bank", 1, 1, "int", & function_1e832062, 0, 0);
-  clientfield::register("scriptmover", "corvus_tree_shader", 1, 1, "int", & function_51e77d4f, 0, 0);
-  clientfield::register("actor", "hero_cold_breath", 1, 1, "int", & function_33714f9b, 0, 0);
-  clientfield::register("world", "set_post_color_grade_bank", 1, 1, "int", & function_7b22d9c9, 0, 0);
-  clientfield::register("toplayer", "postfx_hallucinations", 1, 1, "counter", & function_6ec9825e, 0, 0);
-  clientfield::register("toplayer", "player_water_transition", 1, 1, "int", & function_70a9fa32, 0, 0);
-  clientfield::register("toplayer", "raven_hallucinations", 1, 1, "int", & function_8f5cd506, 0, 0);
-  clientfield::register("scriptmover", "quadtank_raven_explosion", 1, 1, "int", & function_45e22343, 0, 0);
-  clientfield::register("scriptmover", "raven_fade_out", 1, 1, "int", & function_629bf9a7, 0, 0);
+  clientfield::register("actor", "exploding_ai_deaths", 1, 1, "int", &callback_exploding_death_fx, 0, 0);
+  clientfield::register("actor", "hero_spawn_fx", 1, 1, "int", &function_78bd19c4, 0, 0);
+  clientfield::register("scriptmover", "hero_spawn_fx", 1, 1, "int", &function_78bd19c4, 0, 0);
+  clientfield::register("scriptmover", "vehicle_spawn_fx", 1, 1, "int", &function_f026ccfa, 0, 0);
+  clientfield::register("toplayer", "set_world_fog", 1, 1, "int", &function_346468e3, 0, 0);
+  clientfield::register("scriptmover", "raven_juke_effect", 1, 1, "counter", &function_69d5dc62, 0, 0);
+  clientfield::register("actor", "raven_juke_limb_effect", 1, 1, "counter", &function_d559bc1d, 0, 0);
+  clientfield::register("scriptmover", "raven_teleport_effect", 1, 1, "counter", &function_cb609334, 0, 0);
+  clientfield::register("actor", "raven_teleport_limb_effect", 1, 1, "counter", &function_496c80db, 0, 0);
+  clientfield::register("scriptmover", "raven_teleport_in_effect", 1, 1, "counter", &function_c39ee0a8, 0, 0);
+  clientfield::register("toplayer", "player_weather", 1, var_2d20335b, "int", &function_6120ef33, 0, 0);
+  clientfield::register("toplayer", "vortex_teleport", 1, 1, "counter", &function_560fbdb4, 0, 0);
+  clientfield::register("toplayer", "postfx_futz", 1, 1, "counter", &postfx_futz, 0, 0);
+  clientfield::register("toplayer", "postfx_futz_mild", 1, 1, "counter", &postfx_futz_mild, 0, 0);
+  clientfield::register("toplayer", "postfx_transition", 1, 1, "counter", &function_edf5c801, 0, 0);
+  clientfield::register("world", "zurich_city_ambience", 1, 1, "int", &function_14b2ccdd, 0, 0);
+  clientfield::register("actor", "skin_transition_melt", 1, 1, "int", &function_28572b48, 0, 1);
+  clientfield::register("scriptmover", "corvus_body_fx", 1, 1, "int", &function_b5037219, 0, 0);
+  clientfield::register("actor", "raven_ai_rez", 1, 1, "int", &function_91c7508e, 0, 0);
+  clientfield::register("scriptmover", "raven_ai_rez", 1, 1, "int", &function_91c7508e, 0, 0);
+  clientfield::register("toplayer", "zurich_server_cam", 1, 1, "int", &function_9596c4e, 0, 0);
+  clientfield::register("world", "set_exposure_bank", 1, 1, "int", &function_1e832062, 0, 0);
+  clientfield::register("scriptmover", "corvus_tree_shader", 1, 1, "int", &function_51e77d4f, 0, 0);
+  clientfield::register("actor", "hero_cold_breath", 1, 1, "int", &function_33714f9b, 0, 0);
+  clientfield::register("world", "set_post_color_grade_bank", 1, 1, "int", &function_7b22d9c9, 0, 0);
+  clientfield::register("toplayer", "postfx_hallucinations", 1, 1, "counter", &function_6ec9825e, 0, 0);
+  clientfield::register("toplayer", "player_water_transition", 1, 1, "int", &function_70a9fa32, 0, 0);
+  clientfield::register("toplayer", "raven_hallucinations", 1, 1, "int", &function_8f5cd506, 0, 0);
+  clientfield::register("scriptmover", "quadtank_raven_explosion", 1, 1, "int", &function_45e22343, 0, 0);
+  clientfield::register("scriptmover", "raven_fade_out", 1, 1, "int", &function_629bf9a7, 0, 0);
 }
 
 function init_effects() {

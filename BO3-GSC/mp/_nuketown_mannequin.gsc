@@ -42,7 +42,7 @@ function spawnmannequin(origin, angles, gender = "male", speed = undefined, weep
   mannequin.should_turn = 1;
   mannequin thread watch_game_ended();
   mannequin.team = "free";
-  mannequin.overrideactordamage = & mannequindamage;
+  mannequin.overrideactordamage = &mannequindamage;
   mannequins = getaiarchetypearray("mannequin");
   foreach(othermannequin in mannequins) {
     if(othermannequin.archetype == "mannequin") {

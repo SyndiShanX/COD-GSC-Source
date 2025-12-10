@@ -12,17 +12,17 @@
 #namespace deathicons;
 
 function autoexec __init__sytem__() {
-  system::register("deathicons", & __init__, undefined, undefined);
+  system::register("deathicons", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
-  callback::on_connect( & on_player_connect);
+  callback::on_start_gametype(&init);
+  callback::on_connect(&on_player_connect);
 }
 
 function init() {
   if(!isDefined(level.ragdoll_override)) {
-    level.ragdoll_override = & ragdoll_override;
+    level.ragdoll_override = &ragdoll_override;
   }
   if(!level.teambased) {
     return;
@@ -53,7 +53,7 @@ function add(entity, dyingplayer, team, timeout) {
     return;
   }
   deathiconobjid = gameobjects::get_next_obj_id();
-  objective_add(deathiconobjid, "active", iconorg, & "headicon_dead");
+  objective_add(deathiconobjid, "active", iconorg, &"headicon_dead");
   objective_team(deathiconobjid, team);
   level thread destroy_slowly(timeout, deathiconobjid);
 }

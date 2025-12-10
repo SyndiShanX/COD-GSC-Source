@@ -877,7 +877,7 @@ whitehouse_player_flare()
 {
 	level endon( "whitehouse_hammerdown_started" );
 
-	player_attached_use( &"SCRIPT_PLATFORM_HINTSTR_POPFLARE" );
+	player_attached_use(&"SCRIPT_PLATFORM_HINTSTR_POPFLARE" );
 
 	while( !level.player IsOnGround() )
 		wait 0.05;

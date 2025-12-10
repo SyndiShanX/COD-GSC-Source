@@ -23,38 +23,38 @@
 #namespace zm_genesis_arena;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_arena", & __init__, undefined, undefined);
+  system::register("zm_genesis_arena", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.var_51541120 = [];
-  clientfield::register("world", "arena_state", 15000, getminbitcountfornum(5), "int", & arena_state, 0, 0);
-  clientfield::register("world", "circle_state", 15000, getminbitcountfornum(6), "int", & circle_state, 0, 0);
+  clientfield::register("world", "arena_state", 15000, getminbitcountfornum(5), "int", &arena_state, 0, 0);
+  clientfield::register("world", "circle_state", 15000, getminbitcountfornum(6), "int", &circle_state, 0, 0);
   clientfield::register("world", "circle_challenge_identity", 15000, getminbitcountfornum(6), "int", undefined, 0, 0);
-  clientfield::register("world", "summoning_key_charge_state", 15000, getminbitcountfornum(4), "int", & summoning_key_charge_state, 0, 1);
-  clientfield::register("toplayer", "fire_postfx_set", 15000, 1, "int", & fire_postfx_set, 0, 0);
-  clientfield::register("scriptmover", "fire_column", 15000, 1, "int", & fire_column, 0, 0);
-  clientfield::register("scriptmover", "summoning_circle_fx", 15000, 1, "int", & summoning_circle_fx, 0, 0);
-  clientfield::register("toplayer", "darkness_postfx_set", 15000, 1, "int", & darkness_postfx_set, 0, 0);
-  clientfield::register("toplayer", "electricity_postfx_set", 15000, 1, "int", & electricity_postfx_set, 0, 0);
-  clientfield::register("world", "light_challenge_floor", 15000, 1, "int", & light_challenge_floor, 0, 0);
-  clientfield::register("actor", "arena_margwa_init", 15000, 1, "int", & arena_margwa_init, 0, 0);
-  clientfield::register("scriptmover", "arena_tornado", 15000, 1, "int", & arena_tornado, 0, 0);
-  clientfield::register("scriptmover", "arena_shadow_pillar", 15000, 1, "int", & arena_shadow_pillar, 0, 0);
-  clientfield::register("scriptmover", "elec_wall_tell", 15000, 1, "counter", & elec_wall_tell, 0, 0);
-  clientfield::register("world", "summoning_key_pickup", 15000, getminbitcountfornum(3), "int", & summoning_key_pickup, 0, 0);
-  clientfield::register("world", "arena_timeout_warning", 15000, 1, "int", & arena_timeout_warning, 0, 0);
-  clientfield::register("world", "basin_state_0", 15000, getminbitcountfornum(5), "int", & basin_state_0, 0, 1);
-  clientfield::register("world", "basin_state_1", 15000, getminbitcountfornum(5), "int", & basin_state_1, 0, 1);
-  clientfield::register("world", "basin_state_2", 15000, getminbitcountfornum(5), "int", & basin_state_2, 0, 1);
-  clientfield::register("world", "basin_state_3", 15000, getminbitcountfornum(5), "int", & basin_state_3, 0, 1);
-  clientfield::register("scriptmover", "runeprison_rock_fx", 5000, 1, "int", & runeprison_rock_fx, 0, 0);
-  clientfield::register("scriptmover", "runeprison_explode_fx", 5000, 1, "int", & runeprison_explode_fx, 0, 0);
+  clientfield::register("world", "summoning_key_charge_state", 15000, getminbitcountfornum(4), "int", &summoning_key_charge_state, 0, 1);
+  clientfield::register("toplayer", "fire_postfx_set", 15000, 1, "int", &fire_postfx_set, 0, 0);
+  clientfield::register("scriptmover", "fire_column", 15000, 1, "int", &fire_column, 0, 0);
+  clientfield::register("scriptmover", "summoning_circle_fx", 15000, 1, "int", &summoning_circle_fx, 0, 0);
+  clientfield::register("toplayer", "darkness_postfx_set", 15000, 1, "int", &darkness_postfx_set, 0, 0);
+  clientfield::register("toplayer", "electricity_postfx_set", 15000, 1, "int", &electricity_postfx_set, 0, 0);
+  clientfield::register("world", "light_challenge_floor", 15000, 1, "int", &light_challenge_floor, 0, 0);
+  clientfield::register("actor", "arena_margwa_init", 15000, 1, "int", &arena_margwa_init, 0, 0);
+  clientfield::register("scriptmover", "arena_tornado", 15000, 1, "int", &arena_tornado, 0, 0);
+  clientfield::register("scriptmover", "arena_shadow_pillar", 15000, 1, "int", &arena_shadow_pillar, 0, 0);
+  clientfield::register("scriptmover", "elec_wall_tell", 15000, 1, "counter", &elec_wall_tell, 0, 0);
+  clientfield::register("world", "summoning_key_pickup", 15000, getminbitcountfornum(3), "int", &summoning_key_pickup, 0, 0);
+  clientfield::register("world", "arena_timeout_warning", 15000, 1, "int", &arena_timeout_warning, 0, 0);
+  clientfield::register("world", "basin_state_0", 15000, getminbitcountfornum(5), "int", &basin_state_0, 0, 1);
+  clientfield::register("world", "basin_state_1", 15000, getminbitcountfornum(5), "int", &basin_state_1, 0, 1);
+  clientfield::register("world", "basin_state_2", 15000, getminbitcountfornum(5), "int", &basin_state_2, 0, 1);
+  clientfield::register("world", "basin_state_3", 15000, getminbitcountfornum(5), "int", &basin_state_3, 0, 1);
+  clientfield::register("scriptmover", "runeprison_rock_fx", 5000, 1, "int", &runeprison_rock_fx, 0, 0);
+  clientfield::register("scriptmover", "runeprison_explode_fx", 5000, 1, "int", &runeprison_explode_fx, 0, 0);
   var_29441edd = struct::get_array("powerup_visual", "targetname");
   foreach(s_powerup_loc in var_29441edd) {
     s_powerup_loc.var_90369c89 = [];
   }
-  clientfield::register("toplayer", "powerup_visual_marker", 15000, 2, "int", & function_b9c422c3, 0, 1);
+  clientfield::register("toplayer", "powerup_visual_marker", 15000, 2, "int", &function_b9c422c3, 0, 1);
 }
 
 function summoning_key_charge_state(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

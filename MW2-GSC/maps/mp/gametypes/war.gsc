@@ -68,7 +68,7 @@ main() {
   else if(getDvarInt("scr_" + level.gameType + "_promode"))
     game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
 
-  game["strings"]["overtime_hint"] = & "MP_FIRST_BLOOD";
+  game["strings"]["overtime_hint"] = &"MP_FIRST_BLOOD";
 }
 
 onStartGameType() {
@@ -84,18 +84,18 @@ onStartGameType() {
     game["defenders"] = oldAttackers;
   }
 
-  setObjectiveText("allies", & "OBJECTIVES_WAR");
-  setObjectiveText("axis", & "OBJECTIVES_WAR");
+  setObjectiveText("allies", &"OBJECTIVES_WAR");
+  setObjectiveText("axis", &"OBJECTIVES_WAR");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", & "OBJECTIVES_WAR");
-    setObjectiveScoreText("axis", & "OBJECTIVES_WAR");
+    setObjectiveScoreText("allies", &"OBJECTIVES_WAR");
+    setObjectiveScoreText("axis", &"OBJECTIVES_WAR");
   } else {
-    setObjectiveScoreText("allies", & "OBJECTIVES_WAR_SCORE");
-    setObjectiveScoreText("axis", & "OBJECTIVES_WAR_SCORE");
+    setObjectiveScoreText("allies", &"OBJECTIVES_WAR_SCORE");
+    setObjectiveScoreText("axis", &"OBJECTIVES_WAR_SCORE");
   }
-  setObjectiveHintText("allies", & "OBJECTIVES_WAR_HINT");
-  setObjectiveHintText("axis", & "OBJECTIVES_WAR_HINT");
+  setObjectiveHintText("allies", &"OBJECTIVES_WAR_HINT");
+  setObjectiveHintText("axis", &"OBJECTIVES_WAR_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);

@@ -15,18 +15,18 @@
 #namespace globallogic;
 
 function autoexec __init__sytem__() {
-  system::register("globallogic", & __init__, undefined, "visionset_mgr");
+  system::register("globallogic", &__init__, undefined, "visionset_mgr");
 }
 
 function __init__() {
   visionset_mgr::register_visionset_info("mpintro", 1, 31, undefined, "mpintro");
-  clientfield::register("world", "game_ended", 1, 1, "int", & game_ended, 1, 1);
-  clientfield::register("world", "post_game", 1, 1, "int", & post_game, 1, 1);
-  registerclientfield("playercorpse", "firefly_effect", 1, 2, "int", & firefly_effect_cb, 0);
-  registerclientfield("playercorpse", "annihilate_effect", 1, 1, "int", & annihilate_effect_cb, 0);
-  registerclientfield("playercorpse", "pineapplegun_effect", 1, 1, "int", & pineapplegun_effect_cb, 0);
-  registerclientfield("actor", "annihilate_effect", 1, 1, "int", & annihilate_effect_cb, 0);
-  registerclientfield("actor", "pineapplegun_effect", 1, 1, "int", & pineapplegun_effect_cb, 0);
+  clientfield::register("world", "game_ended", 1, 1, "int", &game_ended, 1, 1);
+  clientfield::register("world", "post_game", 1, 1, "int", &post_game, 1, 1);
+  registerclientfield("playercorpse", "firefly_effect", 1, 2, "int", &firefly_effect_cb, 0);
+  registerclientfield("playercorpse", "annihilate_effect", 1, 1, "int", &annihilate_effect_cb, 0);
+  registerclientfield("playercorpse", "pineapplegun_effect", 1, 1, "int", &pineapplegun_effect_cb, 0);
+  registerclientfield("actor", "annihilate_effect", 1, 1, "int", &annihilate_effect_cb, 0);
+  registerclientfield("actor", "pineapplegun_effect", 1, 1, "int", &pineapplegun_effect_cb, 0);
   level._effect["annihilate_explosion"] = "weapon/fx_hero_annhilatr_death_blood";
   level._effect["pineapplegun_explosion"] = "weapon/fx_hero_pineapple_death_blood";
   level.gameended = 0;

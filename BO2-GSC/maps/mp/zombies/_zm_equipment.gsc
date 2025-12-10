@@ -855,7 +855,7 @@ placed_equipment_think(model, equipname, origin, angles, tradius, toffset) {
   if(isDefined(level.retrievehints[watchername]))
     hint = level.retrievehints[watchername].hint;
   else
-    hint = & "MP_GENERIC_PICKUP";
+    hint = &"MP_GENERIC_PICKUP";
 
   icon = get_equipment_icon(equipname);
 
@@ -973,7 +973,7 @@ dropped_equipment_think(model, equipname, origin, angles, tradius, toffset) {
   if(isDefined(level.retrievehints[watchername]))
     hint = level.retrievehints[watchername].hint;
   else
-    hint = & "MP_GENERIC_PICKUP";
+    hint = &"MP_GENERIC_PICKUP";
 
   icon = get_equipment_icon(equipname);
 

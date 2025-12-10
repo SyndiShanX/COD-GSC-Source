@@ -45,7 +45,7 @@ function spawn_player_clone(player, origin = player.origin, forceweapon, forcemo
   clone.is_inert = 1;
   clone.zombie_move_speed = "walk";
   clone.script_noteworthy = "corpse_clone";
-  clone.actor_damage_func = & clone_damage_func;
+  clone.actor_damage_func = &clone_damage_func;
   return clone;
 }
 

@@ -17,11 +17,11 @@
 #namespace wasp;
 
 function autoexec __init__sytem__() {
-  system::register("wasp", & __init__, undefined, undefined);
+  system::register("wasp", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("wasp", & wasp_initialize);
+  vehicle::add_main_callback("wasp", &wasp_initialize);
   clientfield::register("vehicle", "rocket_wasp_hijacked", 1, 1, "int");
 }
 
@@ -45,8 +45,8 @@ function wasp_initialize() {
   if(issubstr(self.vehicletype, "rocket")) {
     self.variant = "rocket";
   }
-  self.overridevehicledamage = & drone_callback_damage;
-  self.allowfriendlyfiredamageoverride = & drone_allowfriendlyfiredamage;
+  self.overridevehicledamage = &drone_callback_damage;
+  self.allowfriendlyfiredamageoverride = &drone_allowfriendlyfiredamage;
   self thread vehicle_ai::nudge_collision();
   if(isDefined(level.vehicle_initializer_cb)) {
     [[level.vehicle_initializer_cb]](self);
@@ -61,13 +61,13 @@ function wasp_initialize() {
 
 function defaultrole() {
   self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("combat").enter_func = & state_combat_enter;
-  self vehicle_ai::get_state_callbacks("combat").update_func = & state_combat_update;
-  self vehicle_ai::get_state_callbacks("death").update_func = & state_death_update;
-  self vehicle_ai::get_state_callbacks("driving").update_func = & wasp_driving;
-  self vehicle_ai::get_state_callbacks("emped").update_func = & state_emped_update;
-  self vehicle_ai::add_state("guard", & state_guard_enter, & state_guard_update, & state_guard_exit);
-  vehicle_ai::add_utility_connection("combat", "guard", & state_guard_can_enter);
+  self vehicle_ai::get_state_callbacks("combat").enter_func = &state_combat_enter;
+  self vehicle_ai::get_state_callbacks("combat").update_func = &state_combat_update;
+  self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
+  self vehicle_ai::get_state_callbacks("driving").update_func = &wasp_driving;
+  self vehicle_ai::get_state_callbacks("emped").update_func = &state_emped_update;
+  self vehicle_ai::add_state("guard", &state_guard_enter, &state_guard_update, &state_guard_exit);
+  vehicle_ai::add_utility_connection("combat", "guard", &state_guard_can_enter);
   vehicle_ai::add_utility_connection("guard", "combat");
   vehicle_ai::add_interrupt_connection("guard", "emped", "emped");
   vehicle_ai::add_interrupt_connection("guard", "surge", "surge");

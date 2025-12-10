@@ -41,15 +41,15 @@ main() {
   level.friendlies = [];
   level.tango_down_dialog = 0;
   maps\_utility::default_start(::landed_start);
-  maps\_utility::add_start("landed", ::landed_start, & "STARTS_LANDED");
-  maps\_utility::add_start("basement", ::basement_start, & "STARTS_BASEMENT");
-  maps\_utility::add_start("house2", ::house2_start, & "STARTS_HOUSE2");
-  maps\_utility::add_start("rescued", ::rescued_start, & "STARTS_RESCUED");
-  maps\_utility::add_start("tower", ::tower_start, & "STARTS_TOWER");
-  maps\_utility::add_start("fense", ::fense_start, & "STARTS_FENSE");
-  maps\_utility::add_start("base", ::base_start, & "STARTS_BASE");
-  maps\_utility::add_start("base2", ::base2_start, & "STARTS_BASE2");
-  maps\_utility::add_start("launch", ::launch_start, & "STARTS_LAUNCH");
+  maps\_utility::add_start("landed", ::landed_start, &"STARTS_LANDED");
+  maps\_utility::add_start("basement", ::basement_start, &"STARTS_BASEMENT");
+  maps\_utility::add_start("house2", ::house2_start, &"STARTS_HOUSE2");
+  maps\_utility::add_start("rescued", ::rescued_start, &"STARTS_RESCUED");
+  maps\_utility::add_start("tower", ::tower_start, &"STARTS_TOWER");
+  maps\_utility::add_start("fense", ::fense_start, &"STARTS_FENSE");
+  maps\_utility::add_start("base", ::base_start, &"STARTS_BASE");
+  maps\_utility::add_start("base2", ::base2_start, &"STARTS_BASE2");
+  maps\_utility::add_start("launch", ::launch_start, &"STARTS_LAUNCH");
   precachemodel("wpn_h1_melee_combat_knife_vm");
   precacheitem("m4m203_silencer_reflex");
   precacheitem("m4m203_silencer");
@@ -70,7 +70,7 @@ main() {
   precachestring(&"ICBM_PLANT_C4_ON_TOWER_LEGS");
   precachestring(&"ICBM_GET_TO_A_SAFE_DISTANCE");
   precachestring(&"ICBM_MISSIONFAIL_ICBM_CHOPPERS_SHOT");
-  maps\_utility::add_hint_string("one_more_c4", & "ICBM_ONE_MORE_C4", undefined);
+  maps\_utility::add_hint_string("one_more_c4", &"ICBM_ONE_MORE_C4", undefined);
   setsaveddvar("r_reactiveMotionWindAmplitudeScale", 3);
   setsaveddvar("r_reactiveMotionWindStrength", 1);
   setsaveddvar("r_reactiveMotionWindFrequencyScale", 3);
@@ -308,7 +308,7 @@ setup_bm21_deathanim() {
 objectives() {
   common_scripts\utility::flag_wait("first_obj");
   var_0 = getent("obj_grigsby", "targetname");
-  objective_add(2, "active", & "ICBM_LOCATE_SSGTGRIGGS", var_0.origin);
+  objective_add(2, "active", &"ICBM_LOCATE_SSGTGRIGGS", var_0.origin);
   objective_current(2);
   var_1 = getent("house01_basement_door_model", "targetname");
   objective_position(2, var_1.origin + (50, 33, 0));
@@ -323,13 +323,13 @@ objectives() {
   objective_state(2, "done");
   common_scripts\utility::flag_wait("griggs_is_good");
   var_0 = getent("obj_tower", "targetname");
-  objective_add(3, "active", & "ICBM_DESTROY_THE_POWER_TRANSMISSION", var_0.origin);
+  objective_add(3, "active", &"ICBM_DESTROY_THE_POWER_TRANSMISSION", var_0.origin);
   objective_current(3);
   common_scripts\utility::flag_wait("tower_destroyed");
   objective_state(3, "done");
   common_scripts\utility::flag_wait("tower_blown");
   var_0 = getent("second_squad", "targetname");
-  objective_add(4, "active", & "ICBM_REGROUP_WITH_SECOND_SQUAD", var_0.origin);
+  objective_add(4, "active", &"ICBM_REGROUP_WITH_SECOND_SQUAD", var_0.origin);
   objective_current(4);
   common_scripts\utility::flag_wait("objective_regroup_complete");
   objective_state(4, "done");
@@ -786,7 +786,7 @@ flyover_to_tower_handler() {
   var_2.multiple_c4 = 1;
   var_3 = var_2 maps\_c4::c4_location("tag_origin", (-185.75, -178, 57.87), (288, 270, 0));
   var_4 = var_2 maps\_c4::c4_location("tag_origin", (184.3, -178.1, 57.9), (288, 270, 0));
-  objective_string(3, & "ICBM_PLANT_C4_ON_TOWER_LEGS", 2);
+  objective_string(3, &"ICBM_PLANT_C4_ON_TOWER_LEGS", 2);
   objective_position(3, var_0.origin);
   objective_additionalposition(3, 1, var_1.origin);
   level thread maps\icbm_code::base_lights();
@@ -801,13 +801,13 @@ flyover_to_tower_handler() {
   } else
     objective_additionalposition(3, 1, (0, 0, 0));
 
-  objective_string(3, & "ICBM_PLANT_C4_ON_TOWER_LEGS", 1);
+  objective_string(3, &"ICBM_PLANT_C4_ON_TOWER_LEGS", 1);
   thread second_c4_plant_check();
   level waittill("c4_in_place", var_5);
   common_scripts\utility::flag_set("c4_planted");
   var_7 = getent("obj_get_clear", "targetname");
   objective_additionalposition(3, var_6, var_7.origin);
-  objective_string(3, & "ICBM_GET_TO_A_SAFE_DISTANCE");
+  objective_string(3, &"ICBM_GET_TO_A_SAFE_DISTANCE");
   level thread c4_set();
   var_2 waittill("c4_detonation");
   common_scripts\utility::flag_set("music_endon_tower_collapse");

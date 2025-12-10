@@ -59,8 +59,6 @@ givePlayerScore(event, player, victim, overrideCheckPlayerScoreLimitSoon, overri
   if(!level.teambased)
     thread sendUpdatedDMScores();
 
-
-
   if(!overrideCheckPlayerScoreLimitSoon)
     player maps\mp\gametypes\_gamelogic::checkPlayerScoreLimitSoon();
 
@@ -164,8 +162,6 @@ updateTeamScore(team) {
     teamScore = game["roundsWon"][team];
 
   setTeamScore(team, teamScore);
-
-
 }
 
 _getTeamScore(team) {
@@ -266,8 +262,6 @@ getBetterPlayer(playerA, playerB) {
 
   if(playerB.deaths < playerA.deaths)
     return playerB;
-
-
 
   if(cointoss())
     return playerA;

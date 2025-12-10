@@ -203,40 +203,40 @@ onstartgametype() {
   }
 
   setclientnamemode("manual_change");
-  game["strings"]["target_destroyed"] = & "MP_TARGET_DESTROYED";
-  game["strings"]["bomb_defused"] = & "MP_BOMB_DEFUSED";
+  game["strings"]["target_destroyed"] = &"MP_TARGET_DESTROYED";
+  game["strings"]["bomb_defused"] = &"MP_BOMB_DEFUSED";
   precachestring(game["strings"]["target_destroyed"]);
   precachestring(game["strings"]["bomb_defused"]);
   level._effect["bombexplosion"] = loadfx("maps/mp_maps/fx_mp_exp_bomb");
 
   if(isDefined(game["overtime_round"])) {
-    setobjectivetext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER");
-    setobjectivetext(game["defenders"], & "OBJECTIVES_DEM_ATTACKER");
+    setobjectivetext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER");
+    setobjectivetext(game["defenders"], &"OBJECTIVES_DEM_ATTACKER");
 
     if(level.splitscreen) {
-      setobjectivescoretext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER");
-      setobjectivescoretext(game["defenders"], & "OBJECTIVES_DEM_ATTACKER");
+      setobjectivescoretext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER");
+      setobjectivescoretext(game["defenders"], &"OBJECTIVES_DEM_ATTACKER");
     } else {
-      setobjectivescoretext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER_SCORE");
-      setobjectivescoretext(game["defenders"], & "OBJECTIVES_DEM_ATTACKER_SCORE");
+      setobjectivescoretext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER_SCORE");
+      setobjectivescoretext(game["defenders"], &"OBJECTIVES_DEM_ATTACKER_SCORE");
     }
 
-    setobjectivehinttext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER_HINT");
-    setobjectivehinttext(game["defenders"], & "OBJECTIVES_DEM_ATTACKER_HINT");
+    setobjectivehinttext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER_HINT");
+    setobjectivehinttext(game["defenders"], &"OBJECTIVES_DEM_ATTACKER_HINT");
   } else {
-    setobjectivetext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER");
-    setobjectivetext(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+    setobjectivetext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER");
+    setobjectivetext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
 
     if(level.splitscreen) {
-      setobjectivescoretext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER");
-      setobjectivescoretext(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+      setobjectivescoretext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER");
+      setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
     } else {
-      setobjectivescoretext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER_SCORE");
-      setobjectivescoretext(game["defenders"], & "OBJECTIVES_SD_DEFENDER_SCORE");
+      setobjectivescoretext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER_SCORE");
+      setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_SCORE");
     }
 
-    setobjectivehinttext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER_HINT");
-    setobjectivehinttext(game["defenders"], & "OBJECTIVES_SD_DEFENDER_HINT");
+    setobjectivehinttext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER_HINT");
+    setobjectivehinttext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_HINT");
   }
 
   level.dembombzonename = "bombzone_dem";

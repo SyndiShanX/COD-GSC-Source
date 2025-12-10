@@ -15,7 +15,6 @@ main() {
   maps\mp\gametypes\_callbacksetup::SetupCallbacks();
   maps\mp\gametypes\_globallogic::SetupCallbacks();
 
-
   level.teamBased = true;
 
   registerRoundSwitchDvar(level.gameType, 0, 0, 9);
@@ -99,21 +98,21 @@ onStartGameType() {
 
   setClientNameMode("auto_change");
 
-  game["strings"]["target_destroyed"] = & "MP_TARGET_DESTROYED";
-  game["strings"]["target_defended"] = & "MP_TARGET_DEDEFEND";
+  game["strings"]["target_destroyed"] = &"MP_TARGET_DESTROYED";
+  game["strings"]["target_defended"] = &"MP_TARGET_DEDEFEND";
 
-  setObjectiveText("allies", & "OBJECTIVES_SAB");
-  setObjectiveText("axis", & "OBJECTIVES_SAB");
+  setObjectiveText("allies", &"OBJECTIVES_SAB");
+  setObjectiveText("axis", &"OBJECTIVES_SAB");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", & "OBJECTIVES_SAB");
-    setObjectiveScoreText("axis", & "OBJECTIVES_SAB");
+    setObjectiveScoreText("allies", &"OBJECTIVES_SAB");
+    setObjectiveScoreText("axis", &"OBJECTIVES_SAB");
   } else {
-    setObjectiveScoreText("allies", & "OBJECTIVES_SAB_SCORE");
-    setObjectiveScoreText("axis", & "OBJECTIVES_SAB_SCORE");
+    setObjectiveScoreText("allies", &"OBJECTIVES_SAB_SCORE");
+    setObjectiveScoreText("axis", &"OBJECTIVES_SAB_SCORE");
   }
-  setObjectiveHintText("allies", & "OBJECTIVES_SAB_HINT");
-  setObjectiveHintText("axis", & "OBJECTIVES_SAB_HINT");
+  setObjectiveHintText("allies", &"OBJECTIVES_SAB_HINT");
+  setObjectiveHintText("axis", &"OBJECTIVES_SAB_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -204,7 +203,6 @@ onSpawnPlayer() {
 
 printOTHint() {
   self endon("disconnect");
-
 
   wait(0.25);
 
@@ -297,7 +295,6 @@ scoreThread() {
   threatDistance = (level.bombDistance / 2) - 384;
 
   bombEnt = level.sabBomb.trigger;
-
 
   if(threatDistance > bombEnt distanceToSite("allies") || threatDistance > bombEnt distanceToSite("axis"))
     threatDistance = bombEnt distanceToSite(bombEnt getClosestSite()) - 128;
@@ -399,7 +396,6 @@ onPickup(player) {
   }
   player.isBombCarrier = true;
 
-
   if(team == self maps\mp\gametypes\_gameobjects::getOwnerTeam()) {
     playSoundOnPlayers(game["bomb_recovered_sound"], team);
   } else {
@@ -445,7 +441,6 @@ abandonmentThink(delay) {
   else
     otherTeam = "allies";
 
-
   playSoundOnPlayers(game["bomb_dropped_sound"], otherTeam);
 
   self maps\mp\gametypes\_gameobjects::setOwnerTeam("neutral");
@@ -478,7 +473,6 @@ onUse(player) {
     player incPlayerStat("bombsplanted", 1);
     player thread maps\mp\_matchdata::logGameEvent("plant", player.origin);
     player.bombPlantedTime = getTime();
-
 
     level thread bombPlanted(self, player.pers["team"]);
 
@@ -535,7 +529,6 @@ bombPlanted(destroyedObj, team) {
   level.timeLimitOverride = true;
   level.scoreLimitOverride = true;
   setDvar("ui_bomb_timer", 1);
-
 
   setGameEndTime(int(getTime() + (level.bombTimer * 1000)));
 
@@ -623,7 +616,6 @@ giveLastOnTeamWarning() {
   level thread teamPlayerCardSplash("callout_lastteammemberalive", self, self.pers["team"]);
   level thread teamPlayerCardSplash("callout_lastenemyalive", self, otherTeam);
   level notify("last_alive", self);
-
 }
 
 onTimeLimit() {

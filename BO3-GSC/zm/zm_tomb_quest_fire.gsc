@@ -23,7 +23,7 @@ function main() {
   level flag::init("fire_puzzle_1_complete");
   level flag::init("fire_puzzle_2_complete");
   level flag::init("fire_upgrade_available");
-  callback::on_connect( & onplayerconnect);
+  callback::on_connect(&onplayerconnect);
   fire_puzzle_1_init();
   fire_puzzle_2_init();
   zm_tomb_vo::add_puzzle_completion_line(1, "vox_sam_fire_puz_solve_0");
@@ -52,7 +52,7 @@ function fire_puzzle_1_run() {
   level.sacrifice_volumes = getEntArray("fire_sacrifice_volume", "targetname");
   level.clone_list = [];
   level thread clone_cleanup_watch_player_presence();
-  array::thread_all(level.sacrifice_volumes, & init_sacrifice_volume);
+  array::thread_all(level.sacrifice_volumes, &init_sacrifice_volume);
   b_any_volumes_unfinished = 1;
   while(b_any_volumes_unfinished) {
     level waittill("fire_sacrifice_completed");
@@ -118,7 +118,7 @@ function run_sacrifice_ignition(e_volume) {
   }
   level endon("fire_puzzle_1_complete");
   a_torch_pos = struct::get_array(self.target, "targetname");
-  array::thread_all(a_torch_pos, & run_sacrifice_plinth, e_volume);
+  array::thread_all(a_torch_pos, &run_sacrifice_plinth, e_volume);
   sndorigin = a_torch_pos[0].origin;
   if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
@@ -253,7 +253,7 @@ function fire_puzzle_2_init() {
     a_ternary[0] ghost();
   }
   a_torches = struct::get_array("church_torch_target", "script_noteworthy");
-  array::thread_all(a_torches, & fire_puzzle_torch_run);
+  array::thread_all(a_torches, &fire_puzzle_torch_run);
 }
 
 function fire_puzzle_2_run() {

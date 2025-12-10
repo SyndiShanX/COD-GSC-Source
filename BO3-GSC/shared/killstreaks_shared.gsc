@@ -289,7 +289,7 @@ function destroyactivevehicles(attacker, team, weapon) {
     if(robot.allowdeath !== 0 && robot.magic_bullet_shield !== 1 && isDefined(team) && robot.team == team) {
       if(isDefined(attacker) && (!isDefined(robot.owner) || robot.owner util::isenemyplayer(attacker))) {
         scoreevents::processscoreevent("destroyed_combat_robot", attacker, robot.owner, weapon);
-        luinotifyevent(&"player_callout", 2, & "KILLSTREAK_DESTROYED_COMBAT_ROBOT", attacker.entnum);
+        luinotifyevent(&"player_callout", 2, &"KILLSTREAK_DESTROYED_COMBAT_ROBOT", attacker.entnum);
       }
       robot kill();
     }

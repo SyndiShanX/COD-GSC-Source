@@ -9,8 +9,8 @@
 #namespace gibclientutils;
 
 function autoexec main() {
-  clientfield::register("actor", "gib_state", 1, 9, "int", & _gibhandler, 0, 0);
-  clientfield::register("playercorpse", "gib_state", 1, 15, "int", & _gibhandler, 0, 0);
+  clientfield::register("actor", "gib_state", 1, 9, "int", &_gibhandler, 0, 0);
+  clientfield::register("playercorpse", "gib_state", 1, 15, "int", &_gibhandler, 0, 0);
   gibdefinitions = struct::get_script_bundles("gibcharacterdef");
   gibpiecelookup = [];
   gibpiecelookup[2] = "annihilate";
@@ -163,13 +163,13 @@ function private _gibentity(localclientnum, gibflags, shouldspawngibs) {
   currentgibflag = 2;
   gibdir = undefined;
   if(entity isplayer() || entity isplayercorpse()) {
-    yaw_bits = (gibflags >> 9) & (8 - 1);
+    yaw_bits = (gibflags >> 9) &(8 - 1);
     yaw = getanglefrombits(yaw_bits, 3);
     gibdir = anglesToForward((0, yaw, 0));
   }
   gibbundle = struct::get_script_bundle("gibcharacterdef", _getgibdef(entity));
   while(gibflags >= currentgibflag) {
-    if(gibflags & currentgibflag) {
+    if(gibflags &currentgibflag) {
       gibpiece = gibbundle.gibs[currentgibflag];
       if(isDefined(gibpiece)) {
         if(shouldspawngibs) {
@@ -189,7 +189,7 @@ function private _gibentity(localclientnum, gibflags, shouldspawngibs) {
 }
 
 function private _setgibbed(localclientnum, entity, gibflag) {
-  gib_state = _getgibbedstate(localclientnum, entity) | (gibflag & (512 - 1));
+  gib_state = _getgibbedstate(localclientnum, entity) | (gibflag &(512 - 1));
   if(isDefined(entity.gib_data)) {
     entity.gib_data.gib_state = gib_state;
   } else {
@@ -464,7 +464,7 @@ function createscriptmodelofentity(localclientnum, entity) {
 }
 
 function isgibbed(localclientnum, entity, gibflag) {
-  return _getgibbedstate(localclientnum, entity) & gibflag;
+  return _getgibbedstate(localclientnum, entity) &gibflag;
 }
 
 function isundamaged(localclientnum, entity) {
@@ -473,7 +473,7 @@ function isundamaged(localclientnum, entity) {
 
 function gibentity(localclientnum, gibflags) {
   self _gibentity(localclientnum, gibflags, 1);
-  self.gib_state = _getgibbedstate(localclientnum, self) | (gibflags & (512 - 1));
+  self.gib_state = _getgibbedstate(localclientnum, self) | (gibflags &(512 - 1));
 }
 
 function handlegibnotetracks(localclientnum) {

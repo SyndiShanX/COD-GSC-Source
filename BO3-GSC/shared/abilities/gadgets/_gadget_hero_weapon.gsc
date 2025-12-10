@@ -15,16 +15,16 @@
 #namespace _gadget_hero_weapon;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_hero_weapon", & __init__, undefined, undefined);
+  system::register("gadget_hero_weapon", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(14, & gadget_hero_weapon_on_activate, & gadget_hero_weapon_on_off);
-  ability_player::register_gadget_possession_callbacks(14, & gadget_hero_weapon_on_give, & gadget_hero_weapon_on_take);
-  ability_player::register_gadget_flicker_callbacks(14, & gadget_hero_weapon_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(14, & gadget_hero_weapon_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(14, & gadget_hero_weapon_is_flickering);
-  ability_player::register_gadget_ready_callbacks(14, & gadget_hero_weapon_ready);
+  ability_player::register_gadget_activation_callbacks(14, &gadget_hero_weapon_on_activate, &gadget_hero_weapon_on_off);
+  ability_player::register_gadget_possession_callbacks(14, &gadget_hero_weapon_on_give, &gadget_hero_weapon_on_take);
+  ability_player::register_gadget_flicker_callbacks(14, &gadget_hero_weapon_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(14, &gadget_hero_weapon_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(14, &gadget_hero_weapon_is_flickering);
+  ability_player::register_gadget_ready_callbacks(14, &gadget_hero_weapon_ready);
 }
 
 function gadget_hero_weapon_is_inuse(slot) {

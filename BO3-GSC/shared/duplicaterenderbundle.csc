@@ -13,11 +13,11 @@
 #namespace duplicate_render_bundle;
 
 function autoexec __init__sytem__() {
-  system::register("duplicate_render_bundle", & __init__, undefined, undefined);
+  system::register("duplicate_render_bundle", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_localplayer_spawned( & localplayer_duplicate_render_bundle_init);
+  callback::on_localplayer_spawned(&localplayer_duplicate_render_bundle_init);
 }
 
 function localplayer_duplicate_render_bundle_init(localclientnum) {
@@ -119,7 +119,7 @@ function playduprenderbundle(playbundlename) {
     accumtime = 0;
     prevtime = self getclienttime();
     while(loopingstage || accumtime < stagelength && !self.forcestopduprenderbundle) {
-      gfx::setstage(localclientnum, bundle, undefined, stageprefix, stagelength, accumtime, totalaccumtime, & setshaderconstants);
+      gfx::setstage(localclientnum, bundle, undefined, stageprefix, stagelength, accumtime, totalaccumtime, &setshaderconstants);
       wait(0.016);
       currtime = self getclienttime();
       deltatime = currtime - prevtime;

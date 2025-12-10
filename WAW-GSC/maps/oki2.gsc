@@ -69,10 +69,10 @@ give_players_satchel_charge_and_threatbiasgroup() {
 }
 
 oki2_init() {
-  add_start("event3_bash", ::e3_startpoint_bash, & "STARTS_OKI2_FINALBUNKER_BASH");
-  add_start("event3", ::e3_startpoint, & "STARTS_OKI2_FINALBUNKER");
-  add_start("event2", ::e2_startpoint, & "STARTS_OKI2_CANYON");
-  add_start("outro", ::outro_startpoint, & "STARTS_OKI2_OUTRO");
+  add_start("event3_bash", ::e3_startpoint_bash, &"STARTS_OKI2_FINALBUNKER_BASH");
+  add_start("event3", ::e3_startpoint, &"STARTS_OKI2_FINALBUNKER");
+  add_start("event2", ::e2_startpoint, &"STARTS_OKI2_CANYON");
+  add_start("outro", ::outro_startpoint, &"STARTS_OKI2_OUTRO");
   default_start(::e1_startpoint);
   level.tanks = 0;
   maps\_sherman::main("vehicle_usa_tracked_shermanm4a3_green_w");
@@ -116,30 +116,30 @@ oki2_init() {
 }
 
 oki2_objectives() {
-  objective_add(0, "current", & "OKI2_OBJ_1", (4612, 3740, -256));
+  objective_add(0, "current", &"OKI2_OBJ_1", (4612, 3740, -256));
   objective_current(0);
   level waittill("OBJ_1_UPDATEPOS");
   objective_position(0, (620, 700, -192));
   level waittill("OBJ_1_COMPLETE");
   objective_state(0, "done");
-  objective_add(1, "current", & "OKI2_OBJ_2_3", level.gun1_org);
+  objective_add(1, "current", &"OKI2_OBJ_2_3", level.gun1_org);
   objective_additionalposition(1, 1, level.gun2_org);
   objective_additionalposition(1, 2, level.gun4_org);
   objective_current(1);
   level waittill("OBJ_2_COMPLETE");
-  objective_string_nomessage(1, & "OKI2_OBJ_2");
+  objective_string_nomessage(1, &"OKI2_OBJ_2");
   objective_state(1, "done");
-  objective_add(2, "current", & "OKI2_OBJ_3", getent("move_to_hill", "targetname").origin);
+  objective_add(2, "current", &"OKI2_OBJ_3", getent("move_to_hill", "targetname").origin);
   objective_current(2);
   level waittill("OBJ_3_COMPLETE");
   objective_state(2, "done");
-  objective_add(3, "current", & "OKI2_OBJ_4", (-4866, -4595, 393));
+  objective_add(3, "current", &"OKI2_OBJ_4", (-4866, -4595, 393));
   objective_current(3);
   level waittill("OBJ_4_UPDATEPOS");
   objective_position(3, (-6170, -6168, 332.1));
   level waittill("OBJ_4_COMPLETE");
   objective_state(3, "done");
-  objective_add(4, "current", & "OKI2_OBJ_5", (-4866, -4595, 393));
+  objective_add(4, "current", &"OKI2_OBJ_5", (-4866, -4595, 393));
   objective_current(4);
   level waittill("OBJ_5_COMPLETE");
   objective_state(4, "done");

@@ -123,21 +123,21 @@ onStartGameType() {
 
   setClientNameMode("auto_change");
 
-  game["strings"]["target_destroyed"] = & "MP_TARGET_DESTROYED";
-  game["strings"]["target_defended"] = & "MP_TARGET_DEDEFEND";
+  game["strings"]["target_destroyed"] = &"MP_TARGET_DESTROYED";
+  game["strings"]["target_defended"] = &"MP_TARGET_DEDEFEND";
 
-  setObjectiveText("allies", & "OBJECTIVES_SAB");
-  setObjectiveText("axis", & "OBJECTIVES_SAB");
+  setObjectiveText("allies", &"OBJECTIVES_SAB");
+  setObjectiveText("axis", &"OBJECTIVES_SAB");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", & "OBJECTIVES_SAB");
-    setObjectiveScoreText("axis", & "OBJECTIVES_SAB");
+    setObjectiveScoreText("allies", &"OBJECTIVES_SAB");
+    setObjectiveScoreText("axis", &"OBJECTIVES_SAB");
   } else {
-    setObjectiveScoreText("allies", & "OBJECTIVES_SAB_SCORE");
-    setObjectiveScoreText("axis", & "OBJECTIVES_SAB_SCORE");
+    setObjectiveScoreText("allies", &"OBJECTIVES_SAB_SCORE");
+    setObjectiveScoreText("axis", &"OBJECTIVES_SAB_SCORE");
   }
-  setObjectiveHintText("allies", & "OBJECTIVES_SAB_HINT");
-  setObjectiveHintText("axis", & "OBJECTIVES_SAB_HINT");
+  setObjectiveHintText("allies", &"OBJECTIVES_SAB_HINT");
+  setObjectiveHintText("axis", &"OBJECTIVES_SAB_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -413,10 +413,10 @@ onPickup(player) {
 
   // recovered the bomb before abandonment timer elapsed
   if(team == self maps\mp\gametypes\_gameobjects::getOwnerTeam()) {
-    //printOnTeamArg( &"MP_EXPLOSIVES_RECOVERED_BY", team, player );
+    //printOnTeamArg(&"MP_EXPLOSIVES_RECOVERED_BY", team, player );
     playSoundOnPlayers(game["bomb_recovered_sound"], team);
   } else {
-    //printOnTeamArg( &"MP_EXPLOSIVES_RECOVERED_BY", team, player );
+    //printOnTeamArg(&"MP_EXPLOSIVES_RECOVERED_BY", team, player );
     playSoundOnPlayers(game["bomb_recovered_sound"]);
   }
 
@@ -459,7 +459,7 @@ abandonmentThink(delay) {
   else
     otherTeam = "allies";
 
-  //	printOnTeamArg( &"MP_EXPLOSIVES_DROPPED_BY", otherTeam, &"MP_THE_ENEMY" );
+  //	printOnTeamArg(&"MP_EXPLOSIVES_DROPPED_BY", otherTeam, &"MP_THE_ENEMY" );
   playSoundOnPlayers(game["bomb_dropped_sound"], otherTeam);
 
   self maps\mp\gametypes\_gameobjects::setOwnerTeam("neutral");

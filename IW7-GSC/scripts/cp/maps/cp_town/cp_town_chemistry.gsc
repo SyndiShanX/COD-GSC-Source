@@ -92,7 +92,7 @@ discard_chemical_from_player(param_00, param_01) {
 
 discard_hint_func(param_00, param_01) {
   if(isDefined(param_01.chemical_base_picked) && param_01.chemical_base_picked != "") {
-    return & "CP_TOWN_DISCARD_ONLY";
+    return &"CP_TOWN_DISCARD_ONLY";
   }
 
   return "";
@@ -101,10 +101,10 @@ discard_hint_func(param_00, param_01) {
 beaker_hint_func(param_00, param_01) {
   if(isDefined(param_01.chemical_base_picked) && param_01.chemical_base_picked != "") {
     if(param_00.chemical_contained == "") {
-      return & "CP_TOWN_CHEM_PLACE_DISCARD";
+      return &"CP_TOWN_CHEM_PLACE_DISCARD";
     }
 
-    return & "CP_TOWN_SWAP_DISCARD";
+    return &"CP_TOWN_SWAP_DISCARD";
   }
 
   return "";
@@ -112,7 +112,7 @@ beaker_hint_func(param_00, param_01) {
 
 compound_hint_func(param_00, param_01) {
   if(param_00.compound_contained != "") {
-    return & "CP_TOWN_ADD_COMPOUND";
+    return &"CP_TOWN_ADD_COMPOUND";
   }
 
   return "";
@@ -273,7 +273,7 @@ show_hint_for_time(param_00, param_01) {
   param_01 endon("disconnect");
   param_01 notify("end_thread_instance");
   param_01 endon("end_thread_instance");
-  param_01 forceusehinton( & "CP_TOWN_INTERACTIONS_PUSH_BOMB");
+  param_01 forceusehinton(&"CP_TOWN_INTERACTIONS_PUSH_BOMB");
   wait(param_00);
   param_01 getrigindexfromarchetyperef();
 }
@@ -883,7 +883,7 @@ show_reaction_hint_for_time(param_00, param_01) {
   param_01 endon("disconnect");
   param_01 notify("end_thread_instance");
   param_01 endon("end_thread_instance");
-  param_01 forceusehinton( & "CP_TOWN_INTERACTIONS_START_REACTION");
+  param_01 forceusehinton(&"CP_TOWN_INTERACTIONS_START_REACTION");
   wait(param_00);
   param_01 getrigindexfromarchetyperef();
 }
@@ -1904,7 +1904,7 @@ radios_activation_function(param_00, param_01) {
     case "chem_radio_1":
       if(isDefined(level.chem_radio_1_wave)) {
         if(level.chem_radio_1_wave >= level.wave_num) {
-          param_01 scripts\cp\utility::setlowermessage("rewinding_tape", & "CP_TOWN_TAPE_REWINDING", 3);
+          param_01 scripts\cp\utility::setlowermessage("rewinding_tape", &"CP_TOWN_TAPE_REWINDING", 3);
           scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
           return;
         }
@@ -1932,7 +1932,7 @@ radios_activation_function(param_00, param_01) {
     case "chem_radio_2":
       if(isDefined(level.chem_radio_2_wave)) {
         if(level.chem_radio_2_wave >= level.wave_num) {
-          param_01 scripts\cp\utility::setlowermessage("rewinding_tape", & "CP_TOWN_TAPE_REWINDING", 3);
+          param_01 scripts\cp\utility::setlowermessage("rewinding_tape", &"CP_TOWN_TAPE_REWINDING", 3);
           scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
           return;
         }
@@ -1960,7 +1960,7 @@ radios_activation_function(param_00, param_01) {
     case "chem_radio_3":
       if(isDefined(level.chem_radio_3_wave)) {
         if(level.chem_radio_3_wave >= level.wave_num) {
-          param_01 scripts\cp\utility::setlowermessage("rewinding_tape", & "CP_TOWN_TAPE_REWINDING", 3);
+          param_01 scripts\cp\utility::setlowermessage("rewinding_tape", &"CP_TOWN_TAPE_REWINDING", 3);
           scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
           return;
         }
@@ -1988,7 +1988,7 @@ radios_activation_function(param_00, param_01) {
     case "chem_radio_4":
       if(isDefined(level.chem_radio_4_wave)) {
         if(level.chem_radio_4_wave >= level.wave_num) {
-          param_01 scripts\cp\utility::setlowermessage("rewinding_tape", & "CP_TOWN_TAPE_REWINDING", 3);
+          param_01 scripts\cp\utility::setlowermessage("rewinding_tape", &"CP_TOWN_TAPE_REWINDING", 3);
           scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
           return;
         }
@@ -2016,7 +2016,7 @@ radios_activation_function(param_00, param_01) {
     case "chem_radio_5":
       if(isDefined(level.chem_radio_5_wave)) {
         if(level.chem_radio_5_wave >= level.wave_num) {
-          param_01 scripts\cp\utility::setlowermessage("rewinding_tape", & "CP_TOWN_TAPE_REWINDING", 3);
+          param_01 scripts\cp\utility::setlowermessage("rewinding_tape", &"CP_TOWN_TAPE_REWINDING", 3);
           scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
           return;
         }
@@ -2044,7 +2044,7 @@ radios_activation_function(param_00, param_01) {
     case "chem_radio_6":
       if(isDefined(level.chem_radio_6_wave)) {
         if(level.chem_radio_6_wave >= level.wave_num) {
-          param_01 scripts\cp\utility::setlowermessage("rewinding_tape", & "CP_TOWN_TAPE_REWINDING", 3);
+          param_01 scripts\cp\utility::setlowermessage("rewinding_tape", &"CP_TOWN_TAPE_REWINDING", 3);
           scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
           return;
         }
@@ -2072,7 +2072,7 @@ radios_activation_function(param_00, param_01) {
     case "chem_radio_7":
       if(isDefined(level.chem_radio_7_wave)) {
         if(level.chem_radio_7_wave >= level.wave_num) {
-          param_01 scripts\cp\utility::setlowermessage("rewinding_tape", & "CP_TOWN_TAPE_REWINDING", 3);
+          param_01 scripts\cp\utility::setlowermessage("rewinding_tape", &"CP_TOWN_TAPE_REWINDING", 3);
           scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
           return;
         }
@@ -2080,11 +2080,11 @@ radios_activation_function(param_00, param_01) {
 
       if(!scripts\engine\utility::istrue(level.chem_radio_7_fixed)) {
         if(!scripts\engine\utility::istrue(param_01.has_battery)) {
-          param_01 scripts\cp\utility::setlowermessage("needs_battery", & "CP_TOWN_NEED_BATTERY", 4);
+          param_01 scripts\cp\utility::setlowermessage("needs_battery", &"CP_TOWN_NEED_BATTERY", 4);
           scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
           return;
         } else {
-          param_01 scripts\cp\utility::setlowermessage("insert_battery", & "CP_TOWN_INSERT_BATTERY", 4);
+          param_01 scripts\cp\utility::setlowermessage("insert_battery", &"CP_TOWN_INSERT_BATTERY", 4);
           level.chem_radio_7_fixed = 1;
           param_01.has_battery = 0;
           level.chem_radios_fixed = level.chem_radios_fixed + 1;
@@ -2115,13 +2115,13 @@ radios_activation_function(param_00, param_01) {
         }
       }
 
-      param_01 getrigindexfromarchetyperef( & "CP_TOWN_INSERT_BATTERY");
+      param_01 getrigindexfromarchetyperef(&"CP_TOWN_INSERT_BATTERY");
       break;
 
     case "chem_radio_8":
       if(isDefined(level.chem_radio_8_wave)) {
         if(level.chem_radio_8_wave >= level.wave_num) {
-          param_01 scripts\cp\utility::setlowermessage("rewinding_tape", & "CP_TOWN_TAPE_REWINDING", 3);
+          param_01 scripts\cp\utility::setlowermessage("rewinding_tape", &"CP_TOWN_TAPE_REWINDING", 3);
           scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
           return;
         }
@@ -2129,11 +2129,11 @@ radios_activation_function(param_00, param_01) {
 
       if(!scripts\engine\utility::istrue(level.chem_radio_8_fixed)) {
         if(!scripts\engine\utility::istrue(param_01.has_battery)) {
-          param_01 scripts\cp\utility::setlowermessage("needs_battery", & "CP_TOWN_NEED_BATTERY", 4);
+          param_01 scripts\cp\utility::setlowermessage("needs_battery", &"CP_TOWN_NEED_BATTERY", 4);
           scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
           return;
         } else {
-          param_01 scripts\cp\utility::setlowermessage("insert_battery", & "CP_TOWN_INSERT_BATTERY", 4);
+          param_01 scripts\cp\utility::setlowermessage("insert_battery", &"CP_TOWN_INSERT_BATTERY", 4);
           level.chem_radio_8_fixed = 1;
           param_01.has_battery = 0;
           level.chem_radios_fixed = level.chem_radios_fixed + 1;

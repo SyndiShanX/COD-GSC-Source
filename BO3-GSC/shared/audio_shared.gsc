@@ -13,15 +13,15 @@
 #namespace audio;
 
 function autoexec __init__sytem__() {
-  system::register("audio", & __init__, undefined, undefined);
+  system::register("audio", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_spawned( & sndresetsoundsettings);
-  callback::on_spawned( & missilelockwatcher);
-  callback::on_spawned( & missilefirewatcher);
-  callback::on_player_killed( & on_player_killed);
-  callback::on_vehicle_spawned( & vehiclespawncontext);
+  callback::on_spawned(&sndresetsoundsettings);
+  callback::on_spawned(&missilelockwatcher);
+  callback::on_spawned(&missilefirewatcher);
+  callback::on_player_killed(&on_player_killed);
+  callback::on_vehicle_spawned(&vehiclespawncontext);
   level thread register_clientfields();
   level thread sndchyronwatcher();
   level thread sndigcskipwatcher();

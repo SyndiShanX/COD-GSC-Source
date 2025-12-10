@@ -60,7 +60,7 @@ function zombie_cave_slide_init() {
   level thread slide_anim_change_throttle();
   level flag::set("slide_anim_change_allowed");
   slide_trigs = getEntArray("zombie_cave_slide", "targetname");
-  array::thread_all(slide_trigs, & slide_trig_watch);
+  array::thread_all(slide_trigs, &slide_trig_watch);
   level thread slide_player_enter_watch();
   level thread slide_player_exit_watch();
   level thread zombie_caveslide_anim_failsafe();

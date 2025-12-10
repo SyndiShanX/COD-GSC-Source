@@ -23,9 +23,9 @@ function setskill(reset, skill_override) {
     if(isDefined(level.b_gameskillset) && level.b_gameskillset) {
       return;
     }
-    level.global_damage_func_ads = & empty_kill_func;
-    level.global_damage_func = & empty_kill_func;
-    level.global_kill_func = & empty_kill_func;
+    level.global_damage_func_ads = &empty_kill_func;
+    level.global_damage_func = &empty_kill_func;
+    level.global_kill_func = &empty_kill_func;
     util::set_console_status();
     thread playerhealthdebug();
     if(util::coopgame()) {
@@ -48,7 +48,7 @@ function setskill(reset, skill_override) {
   }
   anim.run_accuracy = 0.5;
   level.auto_adjust_threatbias = 1;
-  anim.pain_test = & pain_protection;
+  anim.pain_test = &pain_protection;
   set_difficulty_from_locked_settings();
 }
 
@@ -78,7 +78,7 @@ function apply_threat_bias_to_all_players(difficulty_func) {
 function coop_damage_and_accuracy_scaling(difficulty_func) {}
 
 function set_difficulty_from_locked_settings() {
-  apply_difficulty_var_with_func( & get_locked_difficulty_val);
+  apply_difficulty_var_with_func(&get_locked_difficulty_val);
 }
 
 function get_locked_difficulty_val(msg, ignored) {

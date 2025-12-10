@@ -51,7 +51,7 @@ function callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeanso
       weapon = getweapon("destructible_car");
     }
   }
-  if(!idflags & level.idflags_no_protection) {
+  if(!idflags &level.idflags_no_protection) {
     if(self isvehicleimmunetodamage(idflags, smeansofdeath, weapon)) {
       if(isDefined(self.overridevehicledamage)) {
         idamage = self[[self.overridevehicledamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal);
@@ -193,7 +193,7 @@ function callback_vehicleradiusdamage(einflictor, eattacker, idamage, finnerdama
     return;
   }
   friendly = 0;
-  if(!idflags & level.idflags_no_protection) {
+  if(!idflags &level.idflags_no_protection) {
     if(self isvehicleimmunetodamage(idflags, smeansofdeath, weapon)) {
       return;
     }

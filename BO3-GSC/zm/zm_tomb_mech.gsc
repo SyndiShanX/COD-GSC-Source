@@ -99,17 +99,17 @@ function init() {
   } else {
     level thread mechz_spawning_logic();
   }
-  level.mechz_flamethrower_player_callback = & function_8166f050;
-  level.mechz_flamethrower_ai_callback = & function_eeec66f5;
-  level.mechz_staff_damage_override = & mechz_staff_damage_override;
-  spawner::add_archetype_spawn_function("mechz", & function_8d3603b3);
-  level.var_e1e49cc1 = & function_dbf487d9;
+  level.mechz_flamethrower_player_callback = &function_8166f050;
+  level.mechz_flamethrower_ai_callback = &function_eeec66f5;
+  level.mechz_staff_damage_override = &mechz_staff_damage_override;
+  spawner::add_archetype_spawn_function("mechz", &function_8d3603b3);
+  level.var_e1e49cc1 = &function_dbf487d9;
 }
 
 function private function_8d3603b3() {
-  self.non_attacker_func = & function_4d1bc672;
+  self.non_attacker_func = &function_4d1bc672;
   self.non_attack_func_takes_attacker = 1;
-  self.instakill_func = & mechz_instakill_override;
+  self.instakill_func = &mechz_instakill_override;
   self.completed_emerging_into_playable_area = 1;
   self function_a3dfb444();
   self.no_damage_points = 1;
@@ -134,7 +134,7 @@ function private function_a3dfb444() {
 }
 
 function private function_dbf487d9() {
-  self.actor_damage_func = & mechz_damage_override;
+  self.actor_damage_func = &mechz_damage_override;
   self.faceplate_health = level.mechz_health * level.mechz_helmet_health_percentage;
   self.mechz_explosive_dmg_to_cancel_claw = level.mechz_health * level.mechz_explosive_dmg_to_cancel_claw_percentage;
   self.powercap_cover_health = level.mechz_health * level.mechz_powerplant_expose_health_percentage;
@@ -173,28 +173,28 @@ function mechz_setup_armor_pieces() {
 }
 
 function private function_e597e389() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzGetTankTagService", & function_b6ebb97d);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzGetJumpPosService", & function_4f9821c3);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzShouldJump", & function_c9cd5bdd);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzShouldShootFlameAtTank", & function_9ea85604);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzWasKnockedDownByTank", & function_b47192a9);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzWasRobotStomped", & function_4bbd0723);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzShouldShowPain", & mechzshouldshowpain);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzJumpUpActionStart", & function_6f434f2b);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzJumpUpActionTerminate", & function_e3577caa);
-  behaviortreenetworkutility::registerbehaviortreeaction("tombMechzJumpHoverAction", undefined, & function_7efad7ec, undefined);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzJumpDownActionStart", & function_58e29f36);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzJumpDownActionTerminate", & function_647ea967);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzRobotStompActionStart", & function_13bab4e7);
-  behaviortreenetworkutility::registerbehaviortreeaction("tombMechzRobotStompActionLoop", undefined, & function_a833c7b2, undefined);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzRobotStompActionEnd", & function_e260a84c);
-  behaviortreenetworkutility::registerbehaviortreeaction("tombMechzShootFlameAtTankAction", & function_84bcf2d9, & mechzbehavior::mechzshootflameactionupdate, & function_f10762);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzTankKnockdownActionStart", & function_f7a84bd6);
-  behaviortreenetworkutility::registerbehaviortreeaction("tombMechzTankKnockdownActionLoop", undefined, & function_9dc92f99, undefined);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzTankKnockdownActionEnd", & function_5276dd35);
-  animationstatenetwork::registeranimationmocomp("mocomp_face_tank@mechz", & function_744a18d6, undefined, undefined);
-  animationstatenetwork::registeranimationmocomp("mocomp_jump_tank@mechz", & function_6024ae49, undefined, undefined);
-  animationstatenetwork::registeranimationmocomp("mocomp_tomb_mechz_traversal@mechz", & function_3b00a84, undefined, & function_5e254e4f);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzGetTankTagService", &function_b6ebb97d);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzGetJumpPosService", &function_4f9821c3);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzShouldJump", &function_c9cd5bdd);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzShouldShootFlameAtTank", &function_9ea85604);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzWasKnockedDownByTank", &function_b47192a9);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzWasRobotStomped", &function_4bbd0723);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzShouldShowPain", &mechzshouldshowpain);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzJumpUpActionStart", &function_6f434f2b);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzJumpUpActionTerminate", &function_e3577caa);
+  behaviortreenetworkutility::registerbehaviortreeaction("tombMechzJumpHoverAction", undefined, &function_7efad7ec, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzJumpDownActionStart", &function_58e29f36);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzJumpDownActionTerminate", &function_647ea967);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzRobotStompActionStart", &function_13bab4e7);
+  behaviortreenetworkutility::registerbehaviortreeaction("tombMechzRobotStompActionLoop", undefined, &function_a833c7b2, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzRobotStompActionEnd", &function_e260a84c);
+  behaviortreenetworkutility::registerbehaviortreeaction("tombMechzShootFlameAtTankAction", &function_84bcf2d9, &mechzbehavior::mechzshootflameactionupdate, &function_f10762);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzTankKnockdownActionStart", &function_f7a84bd6);
+  behaviortreenetworkutility::registerbehaviortreeaction("tombMechzTankKnockdownActionLoop", undefined, &function_9dc92f99, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tombMechzTankKnockdownActionEnd", &function_5276dd35);
+  animationstatenetwork::registeranimationmocomp("mocomp_face_tank@mechz", &function_744a18d6, undefined, undefined);
+  animationstatenetwork::registeranimationmocomp("mocomp_jump_tank@mechz", &function_6024ae49, undefined, undefined);
+  animationstatenetwork::registeranimationmocomp("mocomp_tomb_mechz_traversal@mechz", &function_3b00a84, undefined, &function_5e254e4f);
 }
 
 function private function_b6ebb97d(entity) {
@@ -916,7 +916,7 @@ function mechz_jump_vo() {
     if(distancesquared(self.origin, player.origin) < 1000000) {
       if(player zm_utility::is_player_looking_at(self.origin + vectorscale((0, 0, 1), 60), 0.5)) {
         if(!(isDefined(player.dontspeak) && player.dontspeak)) {
-          player util::delay(3, undefined, & zm_audio::create_and_play_dialog, "general", "rspnd_mech_jump");
+          player util::delay(3, undefined, &zm_audio::create_and_play_dialog, "general", "rspnd_mech_jump");
           return;
         }
       }

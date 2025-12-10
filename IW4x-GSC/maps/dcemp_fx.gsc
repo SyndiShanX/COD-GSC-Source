@@ -11,7 +11,6 @@ main() {
   level._effect["groundflare"] = loadfx("misc/dcemp_groundflare");
   level._effect["killshot"] = loadfx("impacts/flesh_hit_body_fatal_exit");
 
-
   level._effect["nouse"] = loadfx("props/news_stand_paper_spill");
   level._effect["nouse"] = loadfx("props/news_stand_explosion");
   level._effect["nouse"] = loadfx("props/news_stand_paper_spill_shatter");
@@ -25,7 +24,6 @@ main() {
   level._effect["nouse"] = loadfx("misc/light_blowout_swinging_runner");
   level.breakables_fx["tv_explode"] = LoadFX("explosions/tv_explosion");
 
-
   level._effect["dcemp_sun"] = loadfx("misc/dcemp_sun");
   level._effect["dcemp_icbm_trail"] = loadfx("misc/dcemp_icbm_trail");
   level._effect["space_nuke"] = loadfx("explosions/space_nuke");
@@ -35,11 +33,9 @@ main() {
   level._effect["space_explosion_small"] = loadfx("explosions/space_explosion_small");
   level._effect["dcemp_water_nuke_glow"] = loadfx("misc/dcemp_water_nuke_glow");
 
-
   level._effect["dlight_blue"] = loadfx("misc/dlight_blue");
   level._effect["headshot3"] = loadfx("impacts/flesh_hit_body_fatal_exit");
   level._effect["ground_smoke_dcburning1200x1200"] = loadfx("smoke/ground_smoke1200x1200_dcburning");
-
 
   if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0")
     level._effect["_attack_heli_spotlight"] = loadfx("misc/hunted_spotlight_model_dim");
@@ -51,7 +47,6 @@ main() {
   level._effect["spotlight_lightning"] = loadfx("misc/spotlight_lightning");
   level._effect["space_helmet_spot_light"] = loadfx("misc/space_helmet_spot_light");
 
-
   level._effect["transformer_spark_runner"] = loadfx("explosions/transformer_spark_runner");
   level._effect["dcemp_glass_74x44"] = loadfx("props/dcemp_glass_74x44");
   level._effect["bodyfall_dust_high"] = loadfx("impacts/bodyfall_dust_high");
@@ -62,10 +57,8 @@ main() {
   level._effect["space_emp_crashsite"] = loadfx("explosions/space_emp_crashsite");
   level._effect["space_nuke_crashsite"] = loadfx("explosions/space_nuke_crashsite");
 
-
   level._effect["helicopter_explosion"] = loadfx("explosions/helicopter_explosion_dcemp");
   level._effect["small_vehicle_explosion"] = loadfx("explosions/small_vehicle_explosion");
-
 
   level._effect["window_fire_large"] = loadfx("fire/window_fire_large");
   level._effect["firelp_large_pm"] = loadfx("fire/firelp_large_pm");
@@ -87,15 +80,11 @@ main() {
   level._effect["fire_falling_runner_point"] = loadfx("fire/fire_falling_runner_point_infrequent");
   level._effect["fire_tree_embers"] = loadfx("fire/fire_tree_embers");
 
-
-
   level._effect["jet_crash"] = loadfx("explosions/jet_crash_dcemp");
-
 
   level._effect["bird_pm"] = loadfx("misc/bird_pm");
   level._effect["leaves_a"] = loadfx("misc/leaves_a");
   level._effect["fire_embers_directional"] = loadfx("fire/fire_embers_directional");
-
 
   level._effect["waterfall_drainage_short"] = loadfx("water/waterfall_drainage_short_physics_dcemp");
   level._effect["waterfall_drainage_splash"] = loadfx("water/waterfall_drainage_splash_dcemp");
@@ -117,20 +106,16 @@ main() {
   level._effect["rain_splash_lite_64x64"] = loadfx("weather/rain_splash_lite_64x64");
   level._effect["rain_splash_lite_128x128"] = loadfx("weather/rain_splash_lite_128x128");
 
-
   level._effect["fire_tree_slow_longrange"] = loadfx("fire/fire_tree_slow_longrange");
   level._effect["green_flare"] = loadfx("misc/flare_ambient_green");
   level._effect["player_flare"] = loadfx("impacts/small_metalhit");
   level._effect["carpetbomb"] = loadfx("explosions/helicopter_explosion");
 
-
   level._effect["wire_spark"] = loadfx("explosions/transformer_spark_runner");
-
 
   level._effect["lightning"] = loadfx("weather/lightning");
   level._effect["lightning_bolt"] = loadfx("weather/lightning_bolt");
   level._effect["lightning_bolt_lrg"] = loadfx("weather/lightning_bolt_lrg");
-
 
   level._effect["rain_10"] = loadfx("weather/rain_heavy_mist");
   level._effect["rain_9"] = loadfx("weather/rain_9_lite");

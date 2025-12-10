@@ -12,7 +12,7 @@
 #namespace zm_ai_napalm;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_napalm", & __init__, undefined, undefined);
+  system::register("zm_ai_napalm", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -21,10 +21,10 @@ function __init__() {
 }
 
 function init_clientfields() {
-  clientfield::register("actor", "napalmwet", 21000, 1, "int", & napalm_zombie_wet_callback, 0, 0);
-  clientfield::register("actor", "napalmexplode", 21000, 1, "int", & napalm_zombie_explode_callback, 0, 0);
-  clientfield::register("actor", "isnapalm", 21000, 1, "int", & napalm_zombie_spawn, 0, 0);
-  clientfield::register("toplayer", "napalm_pstfx_burn", 21000, 1, "int", & function_8b5f66c2, 0, 0);
+  clientfield::register("actor", "napalmwet", 21000, 1, "int", &napalm_zombie_wet_callback, 0, 0);
+  clientfield::register("actor", "napalmexplode", 21000, 1, "int", &napalm_zombie_explode_callback, 0, 0);
+  clientfield::register("actor", "isnapalm", 21000, 1, "int", &napalm_zombie_spawn, 0, 0);
+  clientfield::register("toplayer", "napalm_pstfx_burn", 21000, 1, "int", &function_8b5f66c2, 0, 0);
 }
 
 function init_napalm_zombie() {
@@ -162,7 +162,7 @@ function _napalm_zombie_runweteffects(localclientnum) {
 
 function set_footstep_override_for_napalm_zombie(set) {
   if(set) {
-    level._footstepcbfuncs[self.archetype] = & function_3753bc33;
+    level._footstepcbfuncs[self.archetype] = &function_3753bc33;
     self.step_sound = "zmb_napalm_step";
   } else {
     level._footstepcbfuncs[self.archetype] = undefined;

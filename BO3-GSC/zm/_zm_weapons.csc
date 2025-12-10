@@ -13,13 +13,13 @@
 #namespace zm_weapons;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weapons", & __init__, & __main__, undefined);
+  system::register("zm_weapons", &__init__, &__main__, undefined);
 }
 
 function __init__() {
   level flag::init("weapon_table_loaded");
   level flag::init("weapon_wallbuys_created");
-  callback::on_localclient_connect( & on_player_connect);
+  callback::on_localclient_connect(&on_player_connect);
 }
 
 function __main__() {}
@@ -161,18 +161,18 @@ function init() {
     if(isDefined(level._wallbuy_override_num_bits)) {
       numbits = level._wallbuy_override_num_bits;
     }
-    clientfield::register("world", spawn_list[i].script_label, 1, numbits, "int", & wallbuy_callback, 0, 1);
+    clientfield::register("world", spawn_list[i].script_label, 1, numbits, "int", &wallbuy_callback, 0, 1);
     target_struct = struct::get(spawn_list[i].target, "targetname");
     if(spawn_list[i].targetname == "buildable_wallbuy") {
       bits = 4;
       if(isDefined(level.buildable_wallbuy_weapons)) {
         bits = getminbitcountfornum(level.buildable_wallbuy_weapons.size + 1);
       }
-      clientfield::register("world", spawn_list[i].script_label + "_idx", 1, bits, "int", & wallbuy_callback_idx, 0, 1);
+      clientfield::register("world", spawn_list[i].script_label + "_idx", 1, bits, "int", &wallbuy_callback_idx, 0, 1);
     }
   }
   level flag::set("weapon_wallbuys_created");
-  callback::on_localclient_connect( & wallbuy_player_connect);
+  callback::on_localclient_connect(&wallbuy_player_connect);
 }
 
 function is_wallbuy(w_to_check) {

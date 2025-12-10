@@ -82,15 +82,15 @@ givecustomloadout() {
 
 onstartgametype() {
   setclientnamemode("auto_change");
-  setobjectivetext("allies", & "OBJECTIVES_DM");
-  setobjectivetext("axis", & "OBJECTIVES_DM");
+  setobjectivetext("allies", &"OBJECTIVES_DM");
+  setobjectivetext("axis", &"OBJECTIVES_DM");
 
   if(level.splitscreen) {
-    setobjectivescoretext("allies", & "OBJECTIVES_DM");
-    setobjectivescoretext("axis", & "OBJECTIVES_DM");
+    setobjectivescoretext("allies", &"OBJECTIVES_DM");
+    setobjectivescoretext("axis", &"OBJECTIVES_DM");
   } else {
-    setobjectivescoretext("allies", & "OBJECTIVES_DM_SCORE");
-    setobjectivescoretext("axis", & "OBJECTIVES_DM_SCORE");
+    setobjectivescoretext("allies", &"OBJECTIVES_DM_SCORE");
+    setobjectivescoretext("axis", &"OBJECTIVES_DM_SCORE");
   }
 
   allowed[0] = "oic";
@@ -123,8 +123,8 @@ onstartgametype() {
   }
 
   level thread watchelimination();
-  setobjectivehinttext("allies", & "OBJECTIVES_OIC_HINT");
-  setobjectivehinttext("axis", & "OBJECTIVES_OIC_HINT");
+  setobjectivehinttext("allies", &"OBJECTIVES_OIC_HINT");
+  setobjectivehinttext("axis", &"OBJECTIVES_OIC_HINT");
 }
 
 onspawnplayerunified() {
@@ -226,7 +226,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
     attackerammo = attacker getammocount("kard_wager_mp");
     victimammo = self getammocount("kard_wager_mp");
     attacker giveammo(1);
-    attacker thread maps\mp\gametypes\_wager::queuewagerpopup(&"MPUI_PLAYER_KILLED", 0, & "MP_PLUS_ONE_BULLET");
+    attacker thread maps\mp\gametypes\_wager::queuewagerpopup(&"MPUI_PLAYER_KILLED", 0, &"MP_PLUS_ONE_BULLET");
     attacker playlocalsound("mpl_oic_bullet_pickup");
 
     if(smeansofdeath == "MOD_MELEE") {

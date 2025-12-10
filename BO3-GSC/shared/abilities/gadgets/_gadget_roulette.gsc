@@ -21,20 +21,20 @@
 #namespace roulette;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_roulette", & __init__, undefined, undefined);
+  system::register("gadget_roulette", &__init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("toplayer", "roulette_state", 11000, 2, "int");
-  ability_player::register_gadget_activation_callbacks(43, & gadget_roulette_on_activate, & gadget_roulette_on_deactivate);
-  ability_player::register_gadget_possession_callbacks(43, & gadget_roulette_on_give, & gadget_roulette_on_take);
-  ability_player::register_gadget_flicker_callbacks(43, & gadget_roulette_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(43, & gadget_roulette_is_inuse);
-  ability_player::register_gadget_ready_callbacks(43, & gadget_roulette_is_ready);
-  ability_player::register_gadget_is_flickering_callbacks(43, & gadget_roulette_is_flickering);
+  ability_player::register_gadget_activation_callbacks(43, &gadget_roulette_on_activate, &gadget_roulette_on_deactivate);
+  ability_player::register_gadget_possession_callbacks(43, &gadget_roulette_on_give, &gadget_roulette_on_take);
+  ability_player::register_gadget_flicker_callbacks(43, &gadget_roulette_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(43, &gadget_roulette_is_inuse);
+  ability_player::register_gadget_ready_callbacks(43, &gadget_roulette_is_ready);
+  ability_player::register_gadget_is_flickering_callbacks(43, &gadget_roulette_is_flickering);
   ability_player::register_gadget_should_notify(43, 0);
-  callback::on_connect( & gadget_roulette_on_connect);
-  callback::on_spawned( & gadget_roulette_on_player_spawn);
+  callback::on_connect(&gadget_roulette_on_connect);
+  callback::on_spawned(&gadget_roulette_on_player_spawn);
   if(sessionmodeismultiplayergame()) {
     level.gadgetrouletteprobabilities = [];
     level.gadgetrouletteprobabilities[0] = 0;

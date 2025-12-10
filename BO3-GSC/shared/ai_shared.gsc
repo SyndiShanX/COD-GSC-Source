@@ -110,7 +110,7 @@ function waittill_dead(guys, num, timeoutlength) {
   if(isDefined(num) && num < ent.count) {
     ent.count = num;
   }
-  array::thread_all(guys, & waittill_dead_thread, ent);
+  array::thread_all(guys, &waittill_dead_thread, ent);
   while(ent.count > 0) {
     ent waittill("hash_27bc4415");
   }
@@ -133,7 +133,7 @@ function waittill_dead_or_dying(guys, num, timeoutlength) {
   if(isDefined(num) && num < ent.count) {
     ent.count = num;
   }
-  array::thread_all(guys, & waittill_dead_or_dying_thread, ent);
+  array::thread_all(guys, &waittill_dead_or_dying_thread, ent);
   while(ent.count > 0) {
     ent waittill("waittill_dead_guy_dead_or_dying");
   }

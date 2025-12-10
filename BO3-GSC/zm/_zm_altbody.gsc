@@ -27,7 +27,7 @@
 #namespace zm_altbody;
 
 function autoexec __init__sytem__() {
-  system::register("zm_altbody", & __init__, undefined, undefined);
+  system::register("zm_altbody", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -218,7 +218,7 @@ function private player_apply_loadout(name) {
   if(isDefined(loadout)) {
     self disableweaponcycling();
     assert(!isDefined(self.get_player_weapon_limit));
-    self.get_player_weapon_limit = & get_altbody_weapon_limit;
+    self.get_player_weapon_limit = &get_altbody_weapon_limit;
     self.altbody_loadout[name] = zm_weapons::player_get_loadout();
     self zm_weapons::player_give_loadout(loadout, 0, 1);
     if(!isDefined(self.altbody_loadout_ever_had)) {
@@ -264,7 +264,7 @@ function private player_restore_loadout(name, trigger) {
       self util::waittill_any_timeout(1, "weapon_change_complete");
     }
     self zm_weapons::player_take_loadout(loadout);
-    assert(self.get_player_weapon_limit == ( & get_altbody_weapon_limit));
+    assert(self.get_player_weapon_limit == (&get_altbody_weapon_limit));
     self.get_player_weapon_limit = undefined;
     self resetanimations();
     self enableweaponcycling();
@@ -308,8 +308,8 @@ function function_9621c06b(kiosk, name, trigger_hint, notrigger_hint) {
   unitrigger_stub.altbody_name = name;
   unitrigger_stub.trigger_hint = trigger_hint;
   unitrigger_stub.notrigger_hint = notrigger_hint;
-  unitrigger_stub.prompt_and_visibility_func = & kiosk_trigger_visibility;
-  zm_unitrigger::register_static_unitrigger(unitrigger_stub, & kiosk_trigger_think);
+  unitrigger_stub.prompt_and_visibility_func = &kiosk_trigger_visibility;
+  zm_unitrigger::register_static_unitrigger(unitrigger_stub, &kiosk_trigger_think);
 }
 
 function kiosk_trigger_visibility(player) {
@@ -345,7 +345,7 @@ function private watch_kiosk_triggers(name, trigger_name, trigger_hint, whenvisi
   if(!triggers.size) {
     triggers = getEntArray(trigger_name, "script_noteworthy");
   }
-  array::thread_all(triggers, & trigger_watch_kiosk, name, trigger_name, trigger_hint, whenvisible);
+  array::thread_all(triggers, &trigger_watch_kiosk, name, trigger_name, trigger_hint, whenvisible);
 }
 
 function private trigger_watch_kiosk(name, trigger_name, trigger_hint, whenvisible) {

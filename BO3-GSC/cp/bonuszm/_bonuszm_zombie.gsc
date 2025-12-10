@@ -31,9 +31,9 @@
 #namespace namespace_9c39c8b3;
 
 function autoexec init() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("bonuszmZombieTraversalDoesAnimationExist", & function_6de9fa37);
-  behaviortreenetworkutility::registerbehaviortreeaction("bonuszmSpecialTraverseAction", & function_88e9d5da, undefined, & function_dd1fc89b);
-  animationstatenetwork::registeranimationmocomp("mocomp_bonuszm_special_traversal", & function_26c42b09, undefined, & function_47268b78);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("bonuszmZombieTraversalDoesAnimationExist", &function_6de9fa37);
+  behaviortreenetworkutility::registerbehaviortreeaction("bonuszmSpecialTraverseAction", &function_88e9d5da, undefined, &function_dd1fc89b);
+  animationstatenetwork::registeranimationmocomp("mocomp_bonuszm_special_traversal", &function_26c42b09, undefined, &function_47268b78);
 }
 
 function private function_6de9fa37(entity) {

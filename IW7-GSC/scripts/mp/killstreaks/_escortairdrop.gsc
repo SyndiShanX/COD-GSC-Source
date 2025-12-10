@@ -13,8 +13,8 @@ init() {
   level.var_C73F["escort_airdrop"].var_11415 = "tag_le_door_attach";
   level.var_C73F["escort_airdrop"].var_11416 = "tag_ri_door_attach";
   level.var_C73F["escort_airdrop"].var_113F0 = "tag_turret_attach";
-  level.var_C73F["escort_airdrop"].var_DA71 = & "KILLSTREAKS_DEFEND_AIRDROP_PACKAGES";
-  level.var_C73F["escort_airdrop"].name = & "KILLSTREAKS_ESCORT_AIRDROP";
+  level.var_C73F["escort_airdrop"].var_DA71 = &"KILLSTREAKS_DEFEND_AIRDROP_PACKAGES";
+  level.var_C73F["escort_airdrop"].name = &"KILLSTREAKS_ESCORT_AIRDROP";
   level.var_C73F["escort_airdrop"].var_39B = "osprey_minigun_mp";
   level.var_C73F["escort_airdrop"].helitype = "osprey";
   level.var_C73F["escort_airdrop"].droptype = "airdrop_escort";
@@ -27,8 +27,8 @@ init() {
   level.var_C73F["osprey_gunner"].var_11415 = "tag_le_door_attach";
   level.var_C73F["osprey_gunner"].var_11416 = "tag_ri_door_attach";
   level.var_C73F["osprey_gunner"].var_113F0 = "tag_turret_attach";
-  level.var_C73F["osprey_gunner"].var_DA71 = & "KILLSTREAKS_DEFEND_AIRDROP_PACKAGES";
-  level.var_C73F["osprey_gunner"].name = & "KILLSTREAKS_OSPREY_GUNNER";
+  level.var_C73F["osprey_gunner"].var_DA71 = &"KILLSTREAKS_DEFEND_AIRDROP_PACKAGES";
+  level.var_C73F["osprey_gunner"].name = &"KILLSTREAKS_OSPREY_GUNNER";
   level.var_C73F["osprey_gunner"].var_39B = "osprey_player_minigun_mp";
   level.var_C73F["osprey_gunner"].helitype = "osprey_gunner";
   level.var_C73F["osprey_gunner"].droptype = "airdrop_osprey_gunner";
@@ -59,12 +59,12 @@ init() {
 tryuseescortairdrop(param_00, param_01) {
   var_02 = 1;
   if(isDefined(level.chopper)) {
-    self iprintlnbold( & "KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+    self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
   }
 
   if(scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\utility::maxvehiclesallowed()) {
-    self iprintlnbold( & "KILLSTREAKS_TOO_MANY_VEHICLES");
+    self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
     return 0;
   }
 
@@ -79,17 +79,17 @@ tryuseescortairdrop(param_00, param_01) {
 func_128F3(param_00, param_01) {
   var_02 = 1;
   if(isDefined(level.chopper)) {
-    self iprintlnbold( & "KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+    self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
   }
 
   if(scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\utility::maxvehiclesallowed()) {
-    self iprintlnbold( & "KILLSTREAKS_TOO_MANY_VEHICLES");
+    self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
     return 0;
   }
 
   scripts\mp\utility::incrementfauxvehiclecount();
-  var_04 = func_F1AD(param_00, "osprey_gunner", "compass_objpoint_osprey_friendly", "compass_objpoint_osprey_enemy", & "KILLSTREAKS_SELECT_MOBILE_MORTAR_LOCATION");
+  var_04 = func_F1AD(param_00, "osprey_gunner", "compass_objpoint_osprey_friendly", "compass_objpoint_osprey_enemy", &"KILLSTREAKS_SELECT_MOBILE_MORTAR_LOCATION");
   if(!isDefined(var_04) || !var_04) {
     scripts\mp\utility::decrementfauxvehiclecount();
     return 0;
@@ -171,11 +171,11 @@ func_F1AD(param_00, param_01, param_02, param_03, param_04) {
 
   if(isDefined(level.chopper)) {
     scripts\mp\utility::clearusingremote();
-    self iprintlnbold( & "KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+    self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
   } else if(scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount >= scripts\mp\utility::maxvehiclesallowed()) {
     scripts\mp\utility::clearusingremote();
-    self iprintlnbold( & "KILLSTREAKS_TOO_MANY_VEHICLES");
+    self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
     return 0;
   }
 

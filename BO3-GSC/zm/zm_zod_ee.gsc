@@ -54,12 +54,12 @@
 #namespace zm_zod_ee;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_ee", & __init__, undefined, undefined);
+  system::register("zm_zod_ee", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
   n_bits = getminbitcountfornum(5);
   clientfield::register("world", "ee_quest_state", 1, n_bits, "int");
   n_bits = getminbitcountfornum(6);
@@ -124,7 +124,7 @@ function function_7a1d4697() {
 }
 
 function function_189ed812() {
-  callback::on_connect( & function_7a1d4697);
+  callback::on_connect(&function_7a1d4697);
   function_1b6ee215();
   level flag::wait_till("ritual_pap_complete");
   function_8a05e65();
@@ -261,7 +261,7 @@ function function_db49b939() {
   zm_zod_quest::set_ritual_barrier("pap", 1);
   var_a21704fb = [];
   var_a21704fb[0] = spawnStruct();
-  var_a21704fb[0].func = & zm_zod_shadowman::function_b4b792ef;
+  var_a21704fb[0].func = &zm_zod_shadowman::function_b4b792ef;
   var_a21704fb[0].probability = 1;
   var_a21704fb[0].n_move_duration = randomfloatrange(6, 12);
   level.var_dbc3a0ef = level thread zm_zod_shadowman::function_f3805c8a("ee_shadowman_8", undefined, var_a21704fb, 6, 12);
@@ -809,7 +809,7 @@ function ee_ending() {
   scene::init("cin_zod_vign_summoning_key");
   level clientfield::set("ee_quest_state", 4);
   zm_zod_vo::function_218256bd(1);
-  scene::add_scene_func("cin_zod_vign_summoning_key", & function_e186ed49);
+  scene::add_scene_func("cin_zod_vign_summoning_key", &function_e186ed49);
   level thread zm_zod_shadowman::function_f38a6a2a(0);
   level notify("hash_223edfde");
   function_c5f8b004(0);
@@ -889,8 +889,8 @@ function function_e6341733(s_loc) {
   s_loc.unitrigger_stub.script_height = height;
   s_loc.unitrigger_stub.script_length = length;
   s_loc.unitrigger_stub.require_look_at = 0;
-  s_loc.unitrigger_stub.prompt_and_visibility_func = & function_19cf5463;
-  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, & function_e30b3505);
+  s_loc.unitrigger_stub.prompt_and_visibility_func = &function_19cf5463;
+  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, &function_e30b3505);
 }
 
 function function_19cf5463(player) {
@@ -952,8 +952,8 @@ function function_f75d6374() {
   s_loc.unitrigger_stub.script_height = height;
   s_loc.unitrigger_stub.script_length = length;
   s_loc.unitrigger_stub.require_look_at = 0;
-  s_loc.unitrigger_stub.prompt_and_visibility_func = & function_6bd33d28;
-  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, & function_f3d23e2c);
+  s_loc.unitrigger_stub.prompt_and_visibility_func = &function_6bd33d28;
+  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, &function_f3d23e2c);
   if(!isDefined(level.var_f86952c7)) {
     level.var_f86952c7 = [];
   }
@@ -1182,8 +1182,8 @@ function function_676d671(n_char_index) {
   s_loc.unitrigger_stub.require_look_at = 0;
   s_loc.unitrigger_stub.n_char_index = n_char_index;
   s_loc.unitrigger_stub.str_charname = str_charname;
-  s_loc.unitrigger_stub.prompt_and_visibility_func = & function_9207a201;
-  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, & function_5eae8cbb);
+  s_loc.unitrigger_stub.prompt_and_visibility_func = &function_9207a201;
+  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, &function_5eae8cbb);
   if(!isDefined(level.var_f86952c7)) {
     level.var_f86952c7 = [];
   }
@@ -1270,7 +1270,7 @@ function function_4bcb6826() {
     level notify("hash_b6c7fd80");
     level.var_dbc3a0ef.n_script_int = 0;
     a_s_spawnpoints = struct::get_array("ee_shadowman_8", "targetname");
-    a_s_spawnpoints = array::filter(a_s_spawnpoints, 0, & zm_zod_shadowman::function_726d4cc4, 0);
+    a_s_spawnpoints = array::filter(a_s_spawnpoints, 0, &zm_zod_shadowman::function_726d4cc4, 0);
     level.var_dbc3a0ef.s_spawnpoint = a_s_spawnpoints[0];
     zm_zod_shadowman::function_284b1884(level.var_dbc3a0ef, level.var_dbc3a0ef.s_spawnpoint, 0.1);
     level.var_dbc3a0ef zm_zod_shadowman::function_a3821eb5(0.1, 4);
@@ -1316,9 +1316,9 @@ function function_1e8f02dd() {
   s_loc.unitrigger_stub.script_height = height;
   s_loc.unitrigger_stub.script_length = length;
   s_loc.unitrigger_stub.require_look_at = 0;
-  s_loc.unitrigger_stub.hint_string = & "";
-  s_loc.unitrigger_stub.prompt_and_visibility_func = & function_a683d8ab;
-  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, & function_96ac6f7d);
+  s_loc.unitrigger_stub.hint_string = &"";
+  s_loc.unitrigger_stub.prompt_and_visibility_func = &function_a683d8ab;
+  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, &function_96ac6f7d);
   if(!isDefined(level.var_f86952c7)) {
     level.var_f86952c7 = [];
   }
@@ -1467,8 +1467,8 @@ function function_fe31ce39(var_1652ac62) {
   var_1652ac62.unitrigger_stub.var_4cf62d2c setModel("t7_zm_zod_keepers_totem");
   var_1652ac62.unitrigger_stub.var_4cf62d2c hidepart("j_totem");
   var_1652ac62.unitrigger_stub.var_4cf62d2c clientfield::set("totem_state_fx", 2);
-  var_1652ac62.unitrigger_stub.prompt_and_visibility_func = & function_51ca11ba;
-  zm_unitrigger::register_static_unitrigger(var_1652ac62.unitrigger_stub, & function_943c90e6);
+  var_1652ac62.unitrigger_stub.prompt_and_visibility_func = &function_51ca11ba;
+  zm_unitrigger::register_static_unitrigger(var_1652ac62.unitrigger_stub, &function_943c90e6);
 }
 
 function function_51ca11ba(player) {
@@ -1554,7 +1554,7 @@ function function_f016ad0d(trig_stub, player) {
   trig_stub.var_4cf62d2c clientfield::set("totem_state_fx", 3);
   var_a21704fb = [];
   var_a21704fb[0] = spawnStruct();
-  var_a21704fb[0].func = & zm_zod_shadowman::function_4a41b207;
+  var_a21704fb[0].func = &zm_zod_shadowman::function_4a41b207;
   var_a21704fb[0].probability = 0.5;
   var_a21704fb[0].n_move_duration = 3;
   str_targetname = "ee_shadowman_totem";
@@ -2036,35 +2036,35 @@ function function_37dc5568(inflictor, attacker, damage, dflags, mod, weapon, poi
 }
 
 function function_80d91769() {
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_b44200f1);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_7a0bffae);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_54098545);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_d2f61efa);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_bdd0041e);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_932267b5);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_3089f820);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_fdcb978b);
-  level thread zm_zod_util::setup_devgui_func("", "", 2, & function_fdcb978b);
-  level thread zm_zod_util::setup_devgui_func("", "", 3, & function_fdcb978b);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_892e1f69);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_656b9ef0);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_690f9751);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_7787c089);
-  level thread zm_zod_util::setup_devgui_func("", "", 2, & function_7787c089);
-  level thread zm_zod_util::setup_devgui_func("", "", 3, & function_7787c089);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_1c4c22d9);
-  level thread zm_zod_util::setup_devgui_func("", "", 2, & function_1c4c22d9);
-  level thread zm_zod_util::setup_devgui_func("", "", 3, & function_1c4c22d9);
-  level thread zm_zod_util::setup_devgui_func("", "", 4, & function_1c4c22d9);
-  level thread zm_zod_util::setup_devgui_func("", "", 5, & function_1c4c22d9);
-  level thread zm_zod_util::setup_devgui_func("", "", 6, & function_1c4c22d9);
-  level thread zm_zod_util::setup_devgui_func("", "", 7, & function_1c4c22d9);
-  level thread zm_zod_util::setup_devgui_func("", "", 8, & function_1c4c22d9);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_2a306df);
-  level thread zm_zod_util::setup_devgui_func("", "", 2, & function_2a306df);
-  level thread zm_zod_util::setup_devgui_func("", "", 3, & function_2a306df);
-  level thread zm_zod_util::setup_devgui_func("", "", 4, & function_2a306df);
-  level thread zm_zod_util::setup_devgui_func("", "", 5, & function_2a306df);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_b44200f1);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_7a0bffae);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_54098545);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_d2f61efa);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_bdd0041e);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_932267b5);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_3089f820);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_fdcb978b);
+  level thread zm_zod_util::setup_devgui_func("", "", 2, &function_fdcb978b);
+  level thread zm_zod_util::setup_devgui_func("", "", 3, &function_fdcb978b);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_892e1f69);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_656b9ef0);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_690f9751);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_7787c089);
+  level thread zm_zod_util::setup_devgui_func("", "", 2, &function_7787c089);
+  level thread zm_zod_util::setup_devgui_func("", "", 3, &function_7787c089);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_1c4c22d9);
+  level thread zm_zod_util::setup_devgui_func("", "", 2, &function_1c4c22d9);
+  level thread zm_zod_util::setup_devgui_func("", "", 3, &function_1c4c22d9);
+  level thread zm_zod_util::setup_devgui_func("", "", 4, &function_1c4c22d9);
+  level thread zm_zod_util::setup_devgui_func("", "", 5, &function_1c4c22d9);
+  level thread zm_zod_util::setup_devgui_func("", "", 6, &function_1c4c22d9);
+  level thread zm_zod_util::setup_devgui_func("", "", 7, &function_1c4c22d9);
+  level thread zm_zod_util::setup_devgui_func("", "", 8, &function_1c4c22d9);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_2a306df);
+  level thread zm_zod_util::setup_devgui_func("", "", 2, &function_2a306df);
+  level thread zm_zod_util::setup_devgui_func("", "", 3, &function_2a306df);
+  level thread zm_zod_util::setup_devgui_func("", "", 4, &function_2a306df);
+  level thread zm_zod_util::setup_devgui_func("", "", 5, &function_2a306df);
 }
 
 function function_690f9751(n_val) {

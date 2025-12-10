@@ -41,12 +41,12 @@ wait_for_tesla_switch_activation(var_0) {
       continue;
     }
     if(var_1 maps\mp\alien\_utility::is_holding_deployable() || var_1 maps\mp\alien\_utility::has_special_weapon()) {
-      var_1 maps\mp\_utility::setlowermessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+      var_1 maps\mp\_utility::setlowermessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
       continue;
     }
 
     if(!var_1 maps\mp\alien\_persistence::player_has_enough_currency(750)) {
-      var_1 maps\mp\_utility::setlowermessage("no_money", & "ALIEN_COLLECTIBLES_NO_MONEY", 3);
+      var_1 maps\mp\_utility::setlowermessage("no_money", &"ALIEN_COLLECTIBLES_NO_MONEY", 3);
       continue;
     }
 
@@ -75,7 +75,7 @@ wait_for_tesla_switch_activation(var_0) {
       self stoploopsound("alien_fence_gen_lp");
 
     if(isDefined(var_0[0].owner) && isalive(var_0[0].owner) && var_0[0].owner.sessionstate == "playing")
-      var_0[0].owner maps\mp\_utility::setlowermessage("electric_fence_offline", & "ALIENS_PATCH_ELECTRIC_TRAP_OFFLINE", 3);
+      var_0[0].owner maps\mp\_utility::setlowermessage("electric_fence_offline", &"ALIENS_PATCH_ELECTRIC_TRAP_OFFLINE", 3);
 
     foreach(var_3 in var_0) {
       var_3 notify("trap_done");

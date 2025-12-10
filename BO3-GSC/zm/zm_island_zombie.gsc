@@ -24,20 +24,20 @@
 function autoexec init() {
   initzmislandbehaviorsandasm();
   setdvar("scr_zm_use_code_enemy_selection", 0);
-  level.closest_player_override = & island_closest_player;
+  level.closest_player_override = &island_closest_player;
   level thread update_closest_player();
   level.pathdist_type = 2;
-  zm_utility::register_custom_spawner_entry("quick_riser_location", & function_50565360);
-  spawner::add_archetype_spawn_function("zombie", & function_1d7e9058);
+  zm_utility::register_custom_spawner_entry("quick_riser_location", &function_50565360);
+  spawner::add_archetype_spawn_function("zombie", &function_1d7e9058);
 }
 
 function private initzmislandbehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("ZmIslandAttackableObjectService", & zmislandattackableobjectservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("ZmIslandAttackableObjectService", &zmislandattackableobjectservice);
 }
 
 function private function_1d7e9058() {
   self ai::set_behavior_attribute("use_attackable", 1);
-  self.cant_move_cb = & island_cant_move_cb;
+  self.cant_move_cb = &island_cant_move_cb;
 }
 
 function private island_cant_move_cb() {
@@ -49,7 +49,7 @@ function private island_cant_move_cb() {
     }
   }
   a_ai = getaiteamarray(level.zombie_team);
-  var_125a7575 = self array::filter(a_ai, 0, & function_b3de8aa4, 32);
+  var_125a7575 = self array::filter(a_ai, 0, &function_b3de8aa4, 32);
   foreach(ai in var_125a7575) {
     if(isDefined(ai.attackable) && (isDefined(ai.attackable.is_active) && ai.attackable.is_active) && (isDefined(ai.is_at_attackable) && ai.is_at_attackable)) {
       self pushactors(0);

@@ -7,7 +7,7 @@
 #namespace tweakables;
 
 function autoexec __init__sytem__() {
-  system::register("tweakables", & __init__, undefined, undefined);
+  system::register("tweakables", &__init__, undefined, undefined);
 }
 
 function __init__() {

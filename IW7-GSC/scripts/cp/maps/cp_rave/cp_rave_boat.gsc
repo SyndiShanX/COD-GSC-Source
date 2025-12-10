@@ -60,7 +60,7 @@ turn_on_room_exit_portal() {
 
 teleport_from_hidden_room_before_time_up(param_00) {
   param_00 makeusable();
-  param_00 sethintstring( & "CP_RAVE_HIDDEN_LEAVE");
+  param_00 sethintstring(&"CP_RAVE_HIDDEN_LEAVE");
   param_00.portal_is_open = 1;
   for(;;) {
     param_00 waittill("trigger", var_01);
@@ -80,10 +80,10 @@ pap_portal_hint_logic(param_00, param_01) {
   }
 
   if(isDefined(param_00.cooling_down)) {
-    return & "COOP_INTERACTIONS_COOLDOWN";
+    return &"COOP_INTERACTIONS_COOLDOWN";
   }
 
-  return & "CP_RAVE_HIDDEN_TELEPORT";
+  return &"CP_RAVE_HIDDEN_TELEPORT";
 }
 
 pap_portal_use_func(param_00, param_01) {
@@ -306,7 +306,7 @@ packboat_hint_func(param_00, param_01) {
     return "";
   }
 
-  return & "CP_RAVE_USEBOAT";
+  return &"CP_RAVE_USEBOAT";
 }
 
 use_packboat(param_00, param_01) {
@@ -615,10 +615,10 @@ pap_repair_hint_func(param_00, param_01) {
   }
 
   if(!scripts\engine\utility::flag("pap_fixed")) {
-    return & "CP_RAVE_FIX_PAP";
+    return &"CP_RAVE_FIX_PAP";
   }
 
-  return & "CP_RAVE_USE_PAP";
+  return &"CP_RAVE_USE_PAP";
 }
 
 fix_pap(param_00, param_01) {

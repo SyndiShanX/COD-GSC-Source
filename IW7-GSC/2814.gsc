@@ -11,8 +11,8 @@ init() {
     var_03 = scripts\mp\gameobjects::createuseobject("neutral", var_1[var_02], var_00, (0, 0, 0));
     var_03 scripts\mp\gameobjects::allowuse("any");
     var_03 scripts\mp\gameobjects::setusetime(0.25);
-    var_03 scripts\mp\gameobjects::setusetext( & "MP_ZIPLINE_USE");
-    var_03 scripts\mp\gameobjects::setusehinttext( & "MP_ZIPLINE_USE");
+    var_03 scripts\mp\gameobjects::setusetext(&"MP_ZIPLINE_USE");
+    var_03 scripts\mp\gameobjects::setusehinttext(&"MP_ZIPLINE_USE");
     var_03 scripts\mp\gameobjects::setvisibleteam("any");
     var_3.onbeginuse = ::onbeginuse;
     var_3.onuse = ::onuse;

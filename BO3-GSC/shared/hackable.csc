@@ -12,11 +12,11 @@
 #namespace hackable;
 
 function autoexec __init__sytem__() {
-  system::register("hackable", & init, undefined, undefined);
+  system::register("hackable", &init, undefined, undefined);
 }
 
 function init() {
-  callback::on_localclient_connect( & on_player_connect);
+  callback::on_localclient_connect(&on_player_connect);
 }
 
 function on_player_connect(localclientnum) {

@@ -96,32 +96,32 @@ onStartGameType() {
 
   if(level.splitscreen) {
     if(inOvertime()) {
-      setObjectiveScoreText(game["attackers"], & "OBJECTIVES_GRAB_FLAG");
-      setObjectiveScoreText(game["defenders"], & "OBJECTIVES_GRAB_FLAG");
+      setObjectiveScoreText(game["attackers"], &"OBJECTIVES_GRAB_FLAG");
+      setObjectiveScoreText(game["defenders"], &"OBJECTIVES_GRAB_FLAG");
     } else {
-      setObjectiveScoreText(game["attackers"], & "OBJECTIVES_ONE_FLAG_ATTACKER");
-      setObjectiveScoreText(game["defenders"], & "OBJECTIVES_ONE_FLAG_DEFENDER");
+      setObjectiveScoreText(game["attackers"], &"OBJECTIVES_ONE_FLAG_ATTACKER");
+      setObjectiveScoreText(game["defenders"], &"OBJECTIVES_ONE_FLAG_DEFENDER");
     }
   } else {
     if(inOvertime()) {
-      setObjectiveScoreText(game["attackers"], & "OBJECTIVES_GRAB_FLAG_SCORE");
-      setObjectiveScoreText(game["defenders"], & "OBJECTIVES_GRAB_FLAG_SCORE");
+      setObjectiveScoreText(game["attackers"], &"OBJECTIVES_GRAB_FLAG_SCORE");
+      setObjectiveScoreText(game["defenders"], &"OBJECTIVES_GRAB_FLAG_SCORE");
     } else {
-      setObjectiveScoreText(game["attackers"], & "OBJECTIVES_ONE_FLAG_ATTACKER_SCORE");
-      setObjectiveScoreText(game["defenders"], & "OBJECTIVES_ONE_FLAG_DEFENDER_SCORE");
+      setObjectiveScoreText(game["attackers"], &"OBJECTIVES_ONE_FLAG_ATTACKER_SCORE");
+      setObjectiveScoreText(game["defenders"], &"OBJECTIVES_ONE_FLAG_DEFENDER_SCORE");
     }
   }
 
   if(inOvertime()) {
-    setObjectiveText(game["attackers"], & "OBJECTIVES_OVERTIME_CTF");
-    setObjectiveText(game["defenders"], & "OBJECTIVES_OVERTIME_CTF");
-    setObjectiveHintText(game["attackers"], & "OBJECTIVES_GRAB_FLAG_HINT");
-    setObjectiveHintText(game["defenders"], & "OBJECTIVES_GRAB_FLAG_HINT");
+    setObjectiveText(game["attackers"], &"OBJECTIVES_OVERTIME_CTF");
+    setObjectiveText(game["defenders"], &"OBJECTIVES_OVERTIME_CTF");
+    setObjectiveHintText(game["attackers"], &"OBJECTIVES_GRAB_FLAG_HINT");
+    setObjectiveHintText(game["defenders"], &"OBJECTIVES_GRAB_FLAG_HINT");
   } else {
-    setObjectiveText(game["attackers"], & "OBJECTIVES_CTF");
-    setObjectiveText(game["defenders"], & "OBJECTIVES_CTF");
-    setObjectiveHintText(game["attackers"], & "OBJECTIVES_ONE_FLAG_ATTACKER_HINT");
-    setObjectiveHintText(game["defenders"], & "OBJECTIVES_ONE_FLAG_DEFENDER_HINT");
+    setObjectiveText(game["attackers"], &"OBJECTIVES_CTF");
+    setObjectiveText(game["defenders"], &"OBJECTIVES_CTF");
+    setObjectiveHintText(game["attackers"], &"OBJECTIVES_ONE_FLAG_ATTACKER_HINT");
+    setObjectiveHintText(game["defenders"], &"OBJECTIVES_ONE_FLAG_DEFENDER_HINT");
   }
 
   level.spawnMins = (0, 0, 0);
@@ -164,9 +164,6 @@ getSpawnPoint() {
   else
     spawnTeam = game["defenders"];
 
-
-
-
   if(level.inGracePeriod) {
     if(getDvar("mapname") == "mp_shipment_long") {
       spawnPoints = getEntArray("mp_cha_spawn_" + spawnteam + "_start", "classname");
@@ -208,36 +205,30 @@ ctf() {
   precacheShader(level.iconEscort3D);
   precacheShader(level.iconEscort2D);
 
-
   level.iconKill3D = "waypoint_kill";
   level.iconKill2D = "waypoint_kill";
   precacheShader(level.iconKill3D);
   precacheShader(level.iconKill2D);
-
 
   level.iconCaptureFlag3D = "waypoint_capture_flag";
   level.iconCaptureFlag2D = "waypoint_capture_flag";
   precacheShader(level.iconCaptureFlag3D);
   precacheShader(level.iconCaptureFlag2D);
 
-
   level.iconDefendFlag3D = "waypoint_defend_flag";
   level.iconDefendFlag2D = "waypoint_defend_flag";
   precacheShader(level.iconDefendFlag3D);
   precacheShader(level.iconDefendFlag2D);
-
 
   level.iconReturnFlag3D = "waypoint_return_flag";
   level.iconReturnFlag2D = "waypoint_return_flag";
   precacheShader(level.iconReturnFlag3D);
   precacheShader(level.iconReturnFlag2D);
 
-
   level.iconWaitForFlag3D = "waypoint_waitfor_flag";
   level.iconWaitForFlag2D = "waypoint_waitfor_flag";
   precacheShader(level.iconWaitForFlag3D);
   precacheShader(level.iconWaitForFlag2D);
-
 
   precacheShader(level.icon2D["axis"]);
   precacheShader(level.icon2D["allies"]);
@@ -355,8 +346,8 @@ createTeamFlag(team, entityTeam) {
   teamFlag = maps\mp\gametypes\_gameobjects::createCarryObject(team, trigger, visuals, (0, 0, 85));
   teamFlag maps\mp\gametypes\_gameobjects::setTeamUseTime("friendly", 0.5);
   teamFlag maps\mp\gametypes\_gameobjects::setTeamUseTime("enemy", 0.5);
-  teamFlag maps\mp\gametypes\_gameobjects::setTeamUseText("enemy", & "MP_GRABBING_FLAG");
-  teamFlag maps\mp\gametypes\_gameobjects::setTeamUseText("friendly", & "MP_RETURNING_FLAG");
+  teamFlag maps\mp\gametypes\_gameobjects::setTeamUseText("enemy", &"MP_GRABBING_FLAG");
+  teamFlag maps\mp\gametypes\_gameobjects::setTeamUseText("friendly", &"MP_RETURNING_FLAG");
   teamFlag maps\mp\gametypes\_gameobjects::allowCarry("enemy");
 
   teamFlag maps\mp\gametypes\_gameobjects::setVisibleTeam("none");
@@ -460,7 +451,7 @@ onPickup(player) {
     player incPlayerStat("flagsreturned", 1);
     player thread maps\mp\_matchdata::logGameEvent("return", player.origin);
 
-    printAndSoundOnEveryone(team, getOtherTeam(team), & "MP_FLAG_RETURNED", & "MP_ENEMY_FLAG_RETURNED", "mp_obj_returned", "mp_obj_returned", "");
+    printAndSoundOnEveryone(team, getOtherTeam(team), &"MP_FLAG_RETURNED", &"MP_ENEMY_FLAG_RETURNED", "mp_obj_returned", "mp_obj_returned", "");
     leaderDialog("enemy_flag_returned", otherteam, "status");
     leaderDialog("flag_returned", team, "status");
 
@@ -485,8 +476,6 @@ onPickup(player) {
 
       level.flagCaptured = true;
 
-
-
       maps\mp\gametypes\_gamescore::giveTeamScoreForObjective(team, 1);
       thread maps\mp\gametypes\_gamelogic::endGame("winner", game["strings"]["grabbed_flag"]);
     }
@@ -510,8 +499,6 @@ onPickup(player) {
     level.capZones[otherTeam] maps\mp\gametypes\_gameobjects::allowUse("none");
     level.capZones[otherTeam] maps\mp\gametypes\_gameobjects::setVisibleTeam("none");
 
-
-
     if(!level.teamFlags[team] maps\mp\gametypes\_gameobjects::isHome()) {
       level.capZones[team].trigger maps\mp\_entityheadIcons::setHeadIcon(player, level.iconWaitForFlag3D, (0, 0, 85));
 
@@ -519,7 +506,7 @@ onPickup(player) {
         level.capZones[otherTeam].trigger maps\mp\_entityheadIcons::setHeadIcon(level.teamFlags[team].carrier, level.iconWaitForFlag3D, (0, 0, 85));
     }
 
-    printAndSoundOnEveryone(team, otherteam, & "MP_ENEMY_FLAG_TAKEN_BY", & "MP_FLAG_TAKEN_BY", "mp_obj_taken", "mp_enemy_obj_taken", player);
+    printAndSoundOnEveryone(team, otherteam, &"MP_ENEMY_FLAG_TAKEN_BY", &"MP_FLAG_TAKEN_BY", "mp_obj_taken", "mp_enemy_obj_taken", player);
 
     leaderDialog("enemy_flag_taken", team, "status");
     leaderDialog("flag_taken", otherteam, "status");
@@ -561,7 +548,7 @@ onDrop(player) {
     if(isDefined(player.carryFlag))
       player detachFlag();
 
-    printAndSoundOnEveryone(otherTeam, "none", & "MP_ENEMY_FLAG_DROPPED_BY", "", "mp_war_objective_lost", "", player);
+    printAndSoundOnEveryone(otherTeam, "none", &"MP_ENEMY_FLAG_DROPPED_BY", "", "mp_war_objective_lost", "", player);
   } else {
     playSoundOnPlayers("mp_war_objective_lost", otherTeam);
   }
@@ -628,7 +615,7 @@ onUse(player) {
   player notify("objective", "captured");
   player thread maps\mp\_matchdata::logGameEvent("capture", player.origin);
 
-  printAndSoundOnEveryone(team, otherteam, & "MP_ENEMY_FLAG_CAPTURED_BY", & "MP_FLAG_CAPTURED_BY", "mp_obj_captured", "mp_enemy_obj_captured", player);
+  printAndSoundOnEveryone(team, otherteam, &"MP_ENEMY_FLAG_CAPTURED_BY", &"MP_FLAG_CAPTURED_BY", "mp_obj_captured", "mp_enemy_obj_captured", player);
 
   if(isDefined(player.carryFlag))
     player detachFlag();

@@ -97,7 +97,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
     if(isDefined(eattacker) && !attackerishittingself && (isalive(eattacker) || eattacker util::isusingremote())) {
       if(damagefeedback::dodamagefeedback(weapon, einflictor, idamage, smeansofdeath)) {
         if(idamage > 0 && self.health > 0) {
-          perkfeedback = function_e512b988(self, weapon, smeansofdeath, einflictor, idflags&2048);
+          perkfeedback = function_e512b988(self, weapon, smeansofdeath, einflictor, idflags& 2048);
         }
 
         eattacker thread damagefeedback::update(smeansofdeath, einflictor, perkfeedback, weapon, self, psoffsettime, shitloc, 0, idflags);
@@ -121,7 +121,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
   idamage = armor_damage.idamage;
   idflags = armor_damage.idflags;
   idamage = function_74a5d514(eattacker, idamage, smeansofdeath, weapon, shitloc);
-  idamage = make_sure_damage_is_not_zero(idamage, idflags&2048);
+  idamage = make_sure_damage_is_not_zero(idamage, idflags& 2048);
   params = {
     #einflictor: einflictor,
     #eattacker: eattacker,
@@ -226,7 +226,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
   if(isDefined(eattacker) && !attackerishittingself && (isalive(eattacker) || eattacker util::isusingremote())) {
     if(damagefeedback::dodamagefeedback(weapon, einflictor, idamage, smeansofdeath)) {
       if(idamage > 0 && self.health > 0) {
-        perkfeedback = function_e512b988(self, weapon, smeansofdeath, einflictor, idflags&2048);
+        perkfeedback = function_e512b988(self, weapon, smeansofdeath, einflictor, idflags& 2048);
       }
 
       eattacker thread damagefeedback::update(smeansofdeath, einflictor, perkfeedback, weapon, self, psoffsettime, shitloc, fatal, idflags);
@@ -339,7 +339,7 @@ private function_a31ab50c(var_7c61c7a1) {
 private function_961fe569(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, boneindex, vsurfacenormal) {
   pixbeginevent(#"hash_161ca565ac88c256");
 
-  if(!level.console && idflags&8 && isplayer(eattacker)) {
+  if(!level.console && idflags& 8 && isplayer(eattacker)) {
     println("<dev string:x38>" + self getentitynumber() + "<dev string:x46>" + self.health + "<dev string:x51>" + eattacker.clientid + "<dev string:x5e>" + isplayer(einflictor) + "<dev string:x76>" + idamage + "<dev string:x81>" + shitloc);
     eattacker stats::function_dad108fa(#"penetration_shots", 1);
   }
@@ -619,7 +619,7 @@ private function_b5dadafc(einflictor, eattacker, idamage, idflags, smeansofdeath
 
   if(damagefeedback::dodamagefeedback(weapon, einflictor, idamage, smeansofdeath)) {
     if(idamage > 0) {
-      perkfeedback = function_e512b988(self, weapon, smeansofdeath, einflictor, idflags&2048);
+      perkfeedback = function_e512b988(self, weapon, smeansofdeath, einflictor, idflags& 2048);
     }
 
     eattacker = figure_out_attacker(eattacker);
@@ -670,7 +670,7 @@ private function_e3242ae4(weapon, einflictor) {
 }
 
 private does_player_completely_avoid_damage(idflags, shitloc, weapon, friendlyfire, attackerishittingself, smeansofdeath, vpoint, idamage, einflictor, eattacker) {
-  if(idflags&8192) {
+  if(idflags& 8192) {
     return idamage;
   }
 
@@ -683,7 +683,7 @@ private does_player_completely_avoid_damage(idflags, shitloc, weapon, friendlyfi
   }
 
   if(shitloc == "riotshield") {
-    if(!(idflags&160)) {
+    if(!(idflags& 160)) {
       return 0;
     }
   }
@@ -871,7 +871,7 @@ private should_do_player_damage(eattacker, einflictor, weapon, smeansofdeath, id
     return 0;
   }
 
-  if(idflags&8 && self is_spawn_protected()) {
+  if(idflags& 8 && self is_spawn_protected()) {
     return 0;
   }
 
@@ -1006,11 +1006,11 @@ private modify_player_damage(einflictor, eattacker, idamage, idflags, smeansofde
   }
 
   if(shitloc == "riotshield") {
-    if(idflags&32) {
-      if(!(idflags&64)) {
+    if(idflags& 32) {
+      if(!(idflags& 64)) {
         idamage *= 0;
       }
-    } else if(idflags&128) {
+    } else if(idflags& 128) {
       if(isDefined(einflictor) && isDefined(einflictor.stucktoplayer) && einflictor.stucktoplayer == self) {
         idamage = self.maxhealth + 1;
       }

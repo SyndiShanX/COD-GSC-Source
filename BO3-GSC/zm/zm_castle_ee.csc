@@ -19,14 +19,14 @@ function main() {
 
 function register_clientfields() {
   n_bits = getminbitcountfornum(4);
-  clientfield::register("toplayer", "player_ee_cs_circle", 5000, n_bits, "int", & function_2a1f20f9, 0, 0);
-  clientfield::register("actor", "ghost_actor", 1, 1, "int", & ghost_actor, 0, 0);
-  clientfield::register("scriptmover", "channeling_stone_glow", 5000, 2, "int", & channeling_stone_glow, 0, 0);
-  clientfield::register("world", "flip_skybox", 5000, 1, "int", & flip_skybox, 0, 0);
-  clientfield::register("scriptmover", "pod_monitor_enable", 5000, 1, "int", & function_3c1114e8, 0, 0);
-  clientfield::register("world", "sndDeathRayToMoon", 5000, 1, "int", & snddeathraytomoon, 0, 0);
-  clientfield::register("toplayer", "outro_lighting_banks", 5000, 1, "int", & outro_lighting_banks, 0, 0);
-  clientfield::register("toplayer", "moon_explosion_bank", 5000, 1, "int", & moon_explosion_bank, 0, 0);
+  clientfield::register("toplayer", "player_ee_cs_circle", 5000, n_bits, "int", &function_2a1f20f9, 0, 0);
+  clientfield::register("actor", "ghost_actor", 1, 1, "int", &ghost_actor, 0, 0);
+  clientfield::register("scriptmover", "channeling_stone_glow", 5000, 2, "int", &channeling_stone_glow, 0, 0);
+  clientfield::register("world", "flip_skybox", 5000, 1, "int", &flip_skybox, 0, 0);
+  clientfield::register("scriptmover", "pod_monitor_enable", 5000, 1, "int", &function_3c1114e8, 0, 0);
+  clientfield::register("world", "sndDeathRayToMoon", 5000, 1, "int", &snddeathraytomoon, 0, 0);
+  clientfield::register("toplayer", "outro_lighting_banks", 5000, 1, "int", &outro_lighting_banks, 0, 0);
+  clientfield::register("toplayer", "moon_explosion_bank", 5000, 1, "int", &moon_explosion_bank, 0, 0);
 }
 
 function ghost_actor(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

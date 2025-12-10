@@ -28,17 +28,17 @@
 #namespace zm_island_zones;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_zones", & __init__, undefined, undefined);
+  system::register("zm_island_zones", &__init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("scriptmover", "vine_door_play_fx", 9000, 1, "int");
-  scene::add_scene_func("p7_fxanim_zm_island_vine_gate_bundle", & function_6ed87461, "init");
+  scene::add_scene_func("p7_fxanim_zm_island_vine_gate_bundle", &function_6ed87461, "init");
 }
 
 function main() {
   level.zones = [];
-  level.zone_manager_init_func = & function_45a8888c;
+  level.zone_manager_init_func = &function_45a8888c;
   init_zones[0] = "zone_start_water";
   level thread zm_zonemgr::manage_zones(init_zones);
 }
@@ -102,7 +102,7 @@ function function_45a8888c() {
     }
   }
   var_7be3ca60 = getEntArray("delete_door_model_when_finished", "script_noteworthy");
-  array::thread_all(var_7be3ca60, & function_afc937e7);
+  array::thread_all(var_7be3ca60, &function_afc937e7);
   level thread function_8b7501aa();
 }
 

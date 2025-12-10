@@ -79,18 +79,18 @@ onStartGameType() {
     game["defenders"] = oldAttackers;
   }
 
-  setObjectiveText("allies", & "OBJECTIVES_VIP");
-  setObjectiveText("axis", & "OBJECTIVES_VIP");
+  setObjectiveText("allies", &"OBJECTIVES_VIP");
+  setObjectiveText("axis", &"OBJECTIVES_VIP");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", & "OBJECTIVES_VIP");
-    setObjectiveScoreText("axis", & "OBJECTIVES_VIP");
+    setObjectiveScoreText("allies", &"OBJECTIVES_VIP");
+    setObjectiveScoreText("axis", &"OBJECTIVES_VIP");
   } else {
-    setObjectiveScoreText("allies", & "OBJECTIVES_VIP_SCORE");
-    setObjectiveScoreText("axis", & "OBJECTIVES_VIP_SCORE");
+    setObjectiveScoreText("allies", &"OBJECTIVES_VIP_SCORE");
+    setObjectiveScoreText("axis", &"OBJECTIVES_VIP_SCORE");
   }
-  setObjectiveHintText("allies", & "OBJECTIVES_VIP_HINT");
-  setObjectiveHintText("axis", & "OBJECTIVES_VIP_HINT");
+  setObjectiveHintText("allies", &"OBJECTIVES_VIP_HINT");
+  setObjectiveHintText("axis", &"OBJECTIVES_VIP_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -107,7 +107,6 @@ onStartGameType() {
   allowed[2] = "airdrop_pallet";
   allowed[3] = "gtnw";
   allowed[4] = "gtnw_zone";
-
 
   maps\mp\gametypes\_gameobjects::main(allowed);
 
@@ -174,7 +173,7 @@ onNormalDeath(victim, attacker, lifeId) {
   team = victim.team;
 
   if(isDefined(victim.isVip) && victim.isVip) {
-    level thread vip_endGame(game["attackers"], & "MP_ELIMINATED_VIP");
+    level thread vip_endGame(game["attackers"], &"MP_ELIMINATED_VIP");
     attacker.finalKill = true;
   }
 }
@@ -271,16 +270,13 @@ setupVip(vipPlayer) {
   vipPlayer giveWeapon("riotshield_mp");
   vipPlayer switchToWeapon("riotshield_mp");
 
-
   vipPlayer _setPerk("specialty_finalstand");
 
   vipPlayer iPrintlnBold("You Are the VIP");
-
 }
 
 extractionZone() {
   extractionZones = getEntArray("extraction_vip", "targetname");
-
 
   if(!extractionZones.size) {
     println("WARNING: no extraction zone specified");
@@ -357,8 +353,7 @@ handleTimer(player) {
   setGameEndTime(int(getTime() + (level.extractionTime * 1000)));
   wait level.extractionTime;
 
-
-  level thread vip_endGame(game["defenders"], & "MP_DEFENDED_VIP");
+  level thread vip_endGame(game["defenders"], &"MP_DEFENDED_VIP");
 }
 
 onEndUse(team, player, success) {

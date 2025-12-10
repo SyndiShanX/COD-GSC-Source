@@ -13,7 +13,7 @@
 #namespace trigger;
 
 function autoexec __init__sytem__() {
-  system::register("trigger", & __init__, undefined, undefined);
+  system::register("trigger", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -24,22 +24,22 @@ function __init__() {
     init_flags();
   }
   trigger_funcs = [];
-  trigger_funcs["trigger_unlock"] = & trigger_unlock;
-  trigger_funcs["flag_set"] = & flag_set_trigger;
-  trigger_funcs["flag_clear"] = & flag_clear_trigger;
-  trigger_funcs["flag_set_touching"] = & flag_set_touching;
-  trigger_funcs["friendly_respawn_trigger"] = & friendly_respawn_trigger;
-  trigger_funcs["friendly_respawn_clear"] = & friendly_respawn_clear;
-  trigger_funcs["trigger_delete"] = & trigger_turns_off;
-  trigger_funcs["trigger_delete_on_touch"] = & trigger_delete_on_touch;
-  trigger_funcs["trigger_off"] = & trigger_turns_off;
-  trigger_funcs["delete_link_chain"] = & delete_link_chain;
-  trigger_funcs["no_crouch_or_prone"] = & no_crouch_or_prone_think;
-  trigger_funcs["no_prone"] = & no_prone_think;
-  trigger_funcs["flood_spawner"] = & spawner::flood_trigger_think;
-  trigger_funcs["trigger_spawner"] = & trigger_spawner;
-  trigger_funcs["trigger_hint"] = & trigger_hint;
-  trigger_funcs["exploder"] = & trigger_exploder;
+  trigger_funcs["trigger_unlock"] = &trigger_unlock;
+  trigger_funcs["flag_set"] = &flag_set_trigger;
+  trigger_funcs["flag_clear"] = &flag_clear_trigger;
+  trigger_funcs["flag_set_touching"] = &flag_set_touching;
+  trigger_funcs["friendly_respawn_trigger"] = &friendly_respawn_trigger;
+  trigger_funcs["friendly_respawn_clear"] = &friendly_respawn_clear;
+  trigger_funcs["trigger_delete"] = &trigger_turns_off;
+  trigger_funcs["trigger_delete_on_touch"] = &trigger_delete_on_touch;
+  trigger_funcs["trigger_off"] = &trigger_turns_off;
+  trigger_funcs["delete_link_chain"] = &delete_link_chain;
+  trigger_funcs["no_crouch_or_prone"] = &no_crouch_or_prone_think;
+  trigger_funcs["no_prone"] = &no_prone_think;
+  trigger_funcs["flood_spawner"] = &spawner::flood_trigger_think;
+  trigger_funcs["trigger_spawner"] = &trigger_spawner;
+  trigger_funcs["trigger_hint"] = &trigger_hint;
+  trigger_funcs["exploder"] = &trigger_exploder;
   foreach(trig in get_all("trigger_radius", "trigger_multiple", "trigger_once", "trigger_box")) {
     if(isDefined(trig.spawnflags) && (trig.spawnflags & 256) == 256) {
       level thread trigger_look(trig);
@@ -102,9 +102,9 @@ function trigger_unlock(trigger) {
   target_triggers = getEntArray(trigger.target, "targetname");
   trigger thread trigger_unlock_death(trigger.target);
   while(true) {
-    array::run_all(target_triggers, & triggerenable, 0);
+    array::run_all(target_triggers, &triggerenable, 0);
     trigger waittill("trigger");
-    array::run_all(target_triggers, & triggerenable, 1);
+    array::run_all(target_triggers, &triggerenable, 1);
     wait_for_an_unlocked_trigger(target_triggers, noteworthy);
     array::notify_all(target_triggers, "relock");
   }
@@ -113,7 +113,7 @@ function trigger_unlock(trigger) {
 function trigger_unlock_death(target) {
   self waittill("death");
   target_triggers = getEntArray(target, "targetname");
-  array::run_all(target_triggers, & triggerenable, 0);
+  array::run_all(target_triggers, &triggerenable, 0);
 }
 
 function wait_for_an_unlocked_trigger(triggers, noteworthy) {
@@ -318,7 +318,7 @@ function trigger_turns_off(trigger) {
   }
   tokens = strtok(trigger.script_linkto, " ");
   for(i = 0; i < tokens.size; i++) {
-    array::run_all(getEntArray(tokens[i], "script_linkname"), & triggerenable, 0);
+    array::run_all(getEntArray(tokens[i], "script_linkname"), &triggerenable, 0);
   }
 }
 
@@ -607,7 +607,7 @@ function wait_till(str_name, str_key = "targetname", e_entity, b_assert = 1) {
         trigger_hit _trigger_wait(e_entity);
       } else {
         s_tracker = spawnStruct();
-        array::thread_all(triggers, & _trigger_wait_think, s_tracker, e_entity);
+        array::thread_all(triggers, &_trigger_wait_think, s_tracker, e_entity);
         s_tracker waittill("trigger", e_other, trigger_hit);
         trigger_hit.who = e_other;
       }
@@ -705,7 +705,7 @@ function set_flag_permissions(msg) {
     return;
   }
   level.trigger_flags[msg] = array::remove_undefined(level.trigger_flags[msg]);
-  array::thread_all(level.trigger_flags[msg], & update_based_on_flags);
+  array::thread_all(level.trigger_flags[msg], &update_based_on_flags);
 }
 
 function update_based_on_flags() {
@@ -854,12 +854,12 @@ function get_script_linkto_targets() {
 function delete_link_chain(trigger) {
   trigger waittill("trigger");
   targets = trigger get_script_linkto_targets();
-  array::thread_all(targets, & delete_links_then_self);
+  array::thread_all(targets, &delete_links_then_self);
 }
 
 function delete_links_then_self() {
   targets = get_script_linkto_targets();
-  array::thread_all(targets, & delete_links_then_self);
+  array::thread_all(targets, &delete_links_then_self);
   self delete();
 }
 

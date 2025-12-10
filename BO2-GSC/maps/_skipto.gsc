@@ -143,7 +143,7 @@ handle_skiptos() {
   thread skipto_menu();
 
   if(!is_default_skipto())
-    savegame("levelstart", 0, & "AUTOSAVE_LEVELSTART", "", 1);
+    savegame("levelstart", 0, &"AUTOSAVE_LEVELSTART", "", 1);
 
   skipto_array = level.skipto_arrays[level.skipto_point];
 

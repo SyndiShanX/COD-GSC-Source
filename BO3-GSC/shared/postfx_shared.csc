@@ -14,11 +14,11 @@
 #namespace postfx;
 
 function autoexec __init__sytem__() {
-  system::register("postfx_bundle", & __init__, undefined, undefined);
+  system::register("postfx_bundle", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_localplayer_spawned( & localplayer_postfx_bundle_init);
+  callback::on_localplayer_spawned(&localplayer_postfx_bundle_init);
 }
 
 function localplayer_postfx_bundle_init(localclientnum) {
@@ -159,7 +159,7 @@ function playpostfxbundle(playbundlename) {
     accumtime = 0;
     prevtime = self getclienttime();
     while(loopingstage || accumtime < stagelength && !self.forcestoppostfxbundle) {
-      gfx::setstage(localclientnum, bundle, filterid, stageprefix, stagelength, accumtime, totalaccumtime, & setfilterconstants);
+      gfx::setstage(localclientnum, bundle, filterid, stageprefix, stagelength, accumtime, totalaccumtime, &setfilterconstants);
       wait(0.016);
       currtime = self getclienttime();
       deltatime = currtime - prevtime;

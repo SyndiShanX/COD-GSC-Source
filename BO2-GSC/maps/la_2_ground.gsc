@@ -257,7 +257,7 @@ required_vehicle_death() {
   if(flag("player_in_f35")) {
     return;
   }
-  setdvar("ui_deadquote", & "LA_2_REQUIRED_VEHICLE_DEAD");
+  setdvar("ui_deadquote", &"LA_2_REQUIRED_VEHICLE_DEAD");
   missionfailed();
 }
 
@@ -645,7 +645,7 @@ kill_player_if_under_crane(n_timeout) {
   level delay_thread(n_timeout, "crane_collapse_done");
   self waittill("trigger");
   level.deadquote_override = 1;
-  setdvar("ui_deadquote", & "LA_2_F35_DEAD_CRANE");
+  setdvar("ui_deadquote", &"LA_2_F35_DEAD_CRANE");
   level.f35 do_vehicle_damage(level.f35.health_regen.health, self);
 }
 
@@ -2338,7 +2338,7 @@ near_convoy_fail_watcher() {
     n_dist = distance2dsquared(v_convoy_vehicle.origin, self.origin);
 
     if(n_dist < n_fail_dist) {
-      setdvar("ui_deadquote", & "LA_2_OBJ_PROTECT_FAIL");
+      setdvar("ui_deadquote", &"LA_2_OBJ_PROTECT_FAIL");
       missionfailed();
     }
 

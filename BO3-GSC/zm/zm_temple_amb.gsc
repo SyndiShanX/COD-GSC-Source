@@ -14,9 +14,9 @@
 #namespace zm_temple_amb;
 
 function main() {
-  level._audio_custom_weapon_check = & weapon_type_check_custom;
-  level._custom_intro_vox = & intro_vox_or_skit;
-  level._audio_alias_override = & audio_alias_override;
+  level._audio_custom_weapon_check = &weapon_type_check_custom;
+  level._custom_intro_vox = &intro_vox_or_skit;
+  level._audio_alias_override = &audio_alias_override;
   level thread setup_music_egg();
   level thread visual_trigger_vox("location_maze");
   level thread visual_trigger_vox("location_waterfall");
@@ -111,7 +111,7 @@ function visual_trigger_vox(place) {
 
 function function_45b4acf2() {
   var_18d6690a = getEntArray("zhdsnd_pans", "targetname");
-  array::thread_all(var_18d6690a, & function_19277046);
+  array::thread_all(var_18d6690a, &function_19277046);
   n_count = 0;
   var_6932cc13 = array(1, 1, 5);
   if(var_18d6690a.size <= 0) {

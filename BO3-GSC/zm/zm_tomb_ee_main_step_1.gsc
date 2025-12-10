@@ -21,7 +21,7 @@
 #namespace zm_tomb_ee_main_step_1;
 
 function init() {
-  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_1", & init_stage, & stage_logic, & exit_stage);
+  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_1", &init_stage, &stage_logic, &exit_stage);
 }
 
 function init_stage() {

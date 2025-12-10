@@ -82,7 +82,6 @@ precacheFX() {
 
   level._effect["sub_surface_runner"] = loadfx("water/sub_surface_runner");
 
-
   if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0")
     level._effect["spotlight"] = loadfx("misc/hunted_spotlight_model");
   else

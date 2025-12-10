@@ -51,10 +51,10 @@ function getgametyperules() {
   gametype = level.gametype;
   switch (gametype) {
     case "gun": {
-      return & gun_rules;
+      return &gun_rules;
     }
     default: {
-      return & default_rules;
+      return &default_rules;
     }
   }
 }

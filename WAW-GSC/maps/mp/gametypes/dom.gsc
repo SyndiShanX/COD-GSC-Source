@@ -81,17 +81,17 @@ onPrecacheGameType() {
 }
 
 onStartGameType() {
-  maps\mp\gametypes\_globallogic::setObjectiveText("allies", & "OBJECTIVES_DOM");
-  maps\mp\gametypes\_globallogic::setObjectiveText("axis", & "OBJECTIVES_DOM");
+  maps\mp\gametypes\_globallogic::setObjectiveText("allies", &"OBJECTIVES_DOM");
+  maps\mp\gametypes\_globallogic::setObjectiveText("axis", &"OBJECTIVES_DOM");
   if(level.splitscreen) {
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", & "OBJECTIVES_DOM");
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", & "OBJECTIVES_DOM");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", &"OBJECTIVES_DOM");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", &"OBJECTIVES_DOM");
   } else {
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", & "OBJECTIVES_DOM_SCORE");
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", & "OBJECTIVES_DOM_SCORE");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", &"OBJECTIVES_DOM_SCORE");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", &"OBJECTIVES_DOM_SCORE");
   }
-  maps\mp\gametypes\_globallogic::setObjectiveHintText("allies", & "OBJECTIVES_DOM_HINT");
-  maps\mp\gametypes\_globallogic::setObjectiveHintText("axis", & "OBJECTIVES_DOM_HINT");
+  maps\mp\gametypes\_globallogic::setObjectiveHintText("allies", &"OBJECTIVES_DOM_HINT");
+  maps\mp\gametypes\_globallogic::setObjectiveHintText("axis", &"OBJECTIVES_DOM_HINT");
   setClientNameMode("auto_change");
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -387,7 +387,7 @@ onUse(player) {
   assert(team != "neutral");
   if(oldTeam == "neutral") {
     otherTeam = getOtherTeam(team);
-    thread printAndSoundOnEveryone(team, otherTeam, & "MP_NEUTRAL_FLAG_CAPTURED_BY", & "MP_NEUTRAL_FLAG_CAPTURED_BY", "mp_war_objective_taken", undefined, player);
+    thread printAndSoundOnEveryone(team, otherTeam, &"MP_NEUTRAL_FLAG_CAPTURED_BY", &"MP_NEUTRAL_FLAG_CAPTURED_BY", "mp_war_objective_taken", undefined, player);
     thread playSoundOnPlayers("mx_DOM_captured" + "_" + level.teamPrefix[team]);
     squadID = getplayersquadid(player);
     if(isDefined(squadID))
@@ -396,7 +396,7 @@ onUse(player) {
       statusDialog("secured" + self.label, team);
     statusDialog("enemy_has" + self.label, otherTeam);
   } else {
-    thread printAndSoundOnEveryone(team, oldTeam, & "MP_ENEMY_FLAG_CAPTURED_BY", & "MP_FRIENDLY_FLAG_CAPTURED_BY", "mp_war_objective_taken", "mp_war_objective_lost", player);
+    thread printAndSoundOnEveryone(team, oldTeam, &"MP_ENEMY_FLAG_CAPTURED_BY", &"MP_FRIENDLY_FLAG_CAPTURED_BY", "mp_war_objective_taken", "mp_war_objective_lost", player);
     thread playSoundOnPlayers("mx_DOM_captured" + "_" + level.teamPrefix[team]);
     if(getTeamFlagCount(team) == level.flags.size) {
       statusDialog("secure_all", team);

@@ -19,11 +19,11 @@
 #namespace killcam;
 
 function autoexec __init__sytem__() {
-  system::register("killcam", & __init__, undefined, undefined);
+  system::register("killcam", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
+  callback::on_start_gametype(&init);
 }
 
 function init() {
@@ -384,7 +384,7 @@ function cancel_safe_spawn_callback() {
 }
 
 function cancel_on_use() {
-  self thread cancel_on_use_specific_button( & cancel_use_button, & cancel_callback);
+  self thread cancel_on_use_specific_button(&cancel_use_button, &cancel_callback);
 }
 
 function cancel_on_use_specific_button(pressingbuttonfunc, finishedfunc) {

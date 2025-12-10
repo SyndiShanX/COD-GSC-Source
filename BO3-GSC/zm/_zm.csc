@@ -152,9 +152,9 @@ function init() {
   level.enable_magic = getgametypesetting("magic");
   level.headshots_only = getgametypesetting("headshotsonly");
   level.disable_equipment_team_object = 1;
-  util::register_system("lsm", & last_stand_monitor);
-  level.clientvoicesetup = & zm_audio::clientvoicesetup;
-  level.playerfalldamagesound = & zm_audio::playerfalldamagesound;
+  util::register_system("lsm", &last_stand_monitor);
+  level.clientvoicesetup = &zm_audio::clientvoicesetup;
+  level.playerfalldamagesound = &zm_audio::playerfalldamagesound;
   println("");
   init_clientfields();
   zm_perks::init();
@@ -167,14 +167,14 @@ function init() {
   level.gibmaxcount = 3;
   level.gibtimer = 0;
   level.gibcount = 0;
-  level._gibeventcbfunc = & on_gib_event;
+  level._gibeventcbfunc = &on_gib_event;
   level thread resetgibcounter();
   level thread zpo_listener();
   level thread zpoff_listener();
   level._box_indicator_no_lights = -1;
   level._box_indicator_flash_lights_moving = 99;
   level._box_indicator = level._box_indicator_no_lights;
-  util::register_system("box_indicator", & box_monitor);
+  util::register_system("box_indicator", &box_monitor);
   level._zombie_gib_piece_index_all = 0;
   level._zombie_gib_piece_index_right_arm = 1;
   level._zombie_gib_piece_index_left_arm = 2;
@@ -183,10 +183,10 @@ function init() {
   level._zombie_gib_piece_index_head = 5;
   level._zombie_gib_piece_index_guts = 6;
   level._zombie_gib_piece_index_hat = 7;
-  callback::add_callback("hash_da8d7d74", & basic_player_connect);
-  callback::on_spawned( & player_duplicaterender);
-  callback::on_spawned( & player_umbrahotfixes);
-  level.update_aat_hud = & update_aat_hud;
+  callback::add_callback("hash_da8d7d74", &basic_player_connect);
+  callback::on_spawned(&player_duplicaterender);
+  callback::on_spawned(&player_umbrahotfixes);
+  level.update_aat_hud = &update_aat_hud;
   if(isDefined(level.setupcustomcharacterexerts)) {
     [[level.setupcustomcharacterexerts]]();
   }
@@ -311,33 +311,33 @@ function init_riser_fx() {
 
 function init_clientfields() {
   println("");
-  clientfield::register("actor", "zombie_riser_fx", 1, 1, "int", & handle_zombie_risers, 1, 1);
+  clientfield::register("actor", "zombie_riser_fx", 1, 1, "int", &handle_zombie_risers, 1, 1);
   if(isDefined(level.use_water_risers) && level.use_water_risers) {
-    clientfield::register("actor", "zombie_riser_fx_water", 1, 1, "int", & handle_zombie_risers_water, 1, 1);
+    clientfield::register("actor", "zombie_riser_fx_water", 1, 1, "int", &handle_zombie_risers_water, 1, 1);
   }
   if(isDefined(level.use_foliage_risers) && level.use_foliage_risers) {
-    clientfield::register("actor", "zombie_riser_fx_foliage", 1, 1, "int", & handle_zombie_risers_foliage, 1, 1);
+    clientfield::register("actor", "zombie_riser_fx_foliage", 1, 1, "int", &handle_zombie_risers_foliage, 1, 1);
   }
   if(isDefined(level.use_low_gravity_risers) && level.use_low_gravity_risers) {
-    clientfield::register("actor", "zombie_riser_fx_lowg", 1, 1, "int", & handle_zombie_risers_lowg, 1, 1);
+    clientfield::register("actor", "zombie_riser_fx_lowg", 1, 1, "int", &handle_zombie_risers_lowg, 1, 1);
   }
-  clientfield::register("actor", "zombie_has_eyes", 1, 1, "int", & zombie_eyes_clientfield_cb, 0, 1);
-  clientfield::register("actor", "zombie_ragdoll_explode", 1, 1, "int", & zombie_ragdoll_explode_cb, 0, 1);
-  clientfield::register("actor", "zombie_gut_explosion", 1, 1, "int", & zombie_gut_explosion_cb, 0, 1);
-  clientfield::register("actor", "sndZombieContext", -1, 1, "int", & zm_audio::sndsetzombiecontext, 0, 1);
-  clientfield::register("actor", "zombie_keyline_render", 1, 1, "int", & zombie_zombie_keyline_render_clientfield_cb, 0, 1);
+  clientfield::register("actor", "zombie_has_eyes", 1, 1, "int", &zombie_eyes_clientfield_cb, 0, 1);
+  clientfield::register("actor", "zombie_ragdoll_explode", 1, 1, "int", &zombie_ragdoll_explode_cb, 0, 1);
+  clientfield::register("actor", "zombie_gut_explosion", 1, 1, "int", &zombie_gut_explosion_cb, 0, 1);
+  clientfield::register("actor", "sndZombieContext", -1, 1, "int", &zm_audio::sndsetzombiecontext, 0, 1);
+  clientfield::register("actor", "zombie_keyline_render", 1, 1, "int", &zombie_zombie_keyline_render_clientfield_cb, 0, 1);
   bits = 4;
   power = struct::get_array("elec_switch_fx", "script_noteworthy");
   if(isDefined(power)) {
     bits = getminbitcountfornum(power.size + 1);
   }
-  clientfield::register("world", "zombie_power_on", 1, bits, "int", & zombie_power_clientfield_on, 1, 1);
-  clientfield::register("world", "zombie_power_off", 1, bits, "int", & zombie_power_clientfield_off, 1, 1);
-  clientfield::register("world", "round_complete_time", 1, 20, "int", & round_complete_time, 0, 1);
-  clientfield::register("world", "round_complete_num", 1, 8, "int", & round_complete_num, 0, 1);
-  clientfield::register("world", "game_end_time", 1, 20, "int", & game_end_time, 0, 1);
-  clientfield::register("world", "quest_complete_time", 1, 20, "int", & quest_complete_time, 0, 1);
-  clientfield::register("world", "game_start_time", 15001, 20, "int", & game_start_time, 0, 1);
+  clientfield::register("world", "zombie_power_on", 1, bits, "int", &zombie_power_clientfield_on, 1, 1);
+  clientfield::register("world", "zombie_power_off", 1, bits, "int", &zombie_power_clientfield_off, 1, 1);
+  clientfield::register("world", "round_complete_time", 1, 20, "int", &round_complete_time, 0, 1);
+  clientfield::register("world", "round_complete_num", 1, 8, "int", &round_complete_num, 0, 1);
+  clientfield::register("world", "game_end_time", 1, 20, "int", &game_end_time, 0, 1);
+  clientfield::register("world", "quest_complete_time", 1, 20, "int", &quest_complete_time, 0, 1);
+  clientfield::register("world", "game_start_time", 15001, 20, "int", &game_start_time, 0, 1);
 }
 
 function box_monitor(clientnum, state, oldstate) {

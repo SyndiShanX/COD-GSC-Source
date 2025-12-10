@@ -15,7 +15,7 @@
 #namespace zm_cosmodrome_amb;
 
 function main() {
-  level._blackhole_bomb_valid_area_check = & function_a0f14d15;
+  level._blackhole_bomb_valid_area_check = &function_a0f14d15;
   level thread function_5b4692c9();
   level thread monkey_round_announcer();
   level thread radio_easter_eggs();
@@ -100,7 +100,7 @@ function monkey_round_announcer() {
 
 function radio_easter_eggs() {
   var_385d0c76 = struct::get_array("radio_egg", "targetname");
-  array::thread_all(var_385d0c76, & function_5fd10b57);
+  array::thread_all(var_385d0c76, &function_5fd10b57);
 }
 
 function function_5fd10b57() {

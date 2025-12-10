@@ -12,7 +12,7 @@
 #namespace zm_stalingrad_challenges;
 
 function autoexec __init__sytem__() {
-  system::register("zm_stalingrad_challenges", & __init__, undefined, undefined);
+  system::register("zm_stalingrad_challenges", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -24,16 +24,16 @@ function __init__() {
   level._effect["grave_fire"] = "dlc3/stalingrad/fx_grave_stone_glow";
   level._effect["grave_arm_fx"] = "dlc3/stalingrad/fx_dirt_hand_burst_challenges";
   level._effect["pr_c_fx"] = "fire/fx_fire_candle_flame_tall";
-  clientfield::register("toplayer", "challenge_grave_fire", 12000, 2, "int", & function_6f749a23, 0, 1);
-  clientfield::register("scriptmover", "challenge_arm_reveal", 12000, 1, "counter", & function_87a462eb, 0, 0);
-  clientfield::register("toplayer", "pr_b", 12000, 3, "int", & function_93efc4ef, 0, 1);
-  clientfield::register("toplayer", "pr_c", 12000, 3, "int", & function_553225f, 0, 1);
-  clientfield::register("toplayer", "pr_l_c", 12000, 1, "int", & function_20880e24, 0, 0);
-  clientfield::register("missile", "pr_gm_e_fx", 12000, 1, "int", & function_e28f1c4a, 0, 0);
-  clientfield::register("scriptmover", "pr_g_c_fx", 12000, 1, "int", & function_d4db02b2, 0, 0);
-  clientfield::register("toplayer", "challenge1state", 14000, 2, "int", & function_4ff59189, 0, 0);
-  clientfield::register("toplayer", "challenge2state", 14000, 2, "int", & function_4ff59189, 0, 0);
-  clientfield::register("toplayer", "challenge3state", 14000, 2, "int", & function_4ff59189, 0, 0);
+  clientfield::register("toplayer", "challenge_grave_fire", 12000, 2, "int", &function_6f749a23, 0, 1);
+  clientfield::register("scriptmover", "challenge_arm_reveal", 12000, 1, "counter", &function_87a462eb, 0, 0);
+  clientfield::register("toplayer", "pr_b", 12000, 3, "int", &function_93efc4ef, 0, 1);
+  clientfield::register("toplayer", "pr_c", 12000, 3, "int", &function_553225f, 0, 1);
+  clientfield::register("toplayer", "pr_l_c", 12000, 1, "int", &function_20880e24, 0, 0);
+  clientfield::register("missile", "pr_gm_e_fx", 12000, 1, "int", &function_e28f1c4a, 0, 0);
+  clientfield::register("scriptmover", "pr_g_c_fx", 12000, 1, "int", &function_d4db02b2, 0, 0);
+  clientfield::register("toplayer", "challenge1state", 14000, 2, "int", &function_4ff59189, 0, 0);
+  clientfield::register("toplayer", "challenge2state", 14000, 2, "int", &function_4ff59189, 0, 0);
+  clientfield::register("toplayer", "challenge3state", 14000, 2, "int", &function_4ff59189, 0, 0);
 }
 
 function function_5d17d17c() {

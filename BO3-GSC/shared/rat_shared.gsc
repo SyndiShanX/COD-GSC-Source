@@ -13,10 +13,10 @@ function init() {
     level.rat = spawnStruct();
     level.rat.common = spawnStruct();
     level.rat.script_command_list = [];
-    addratscriptcmd("", & rscteleport);
-    addratscriptcmd("", & rscteleportenemies);
-    addratscriptcmd("", & rscsimulatescripterror);
-    addratscriptcmd("", & rscrecteleport);
+    addratscriptcmd("", &rscteleport);
+    addratscriptcmd("", &rscteleportenemies);
+    addratscriptcmd("", &rscsimulatescripterror);
+    addratscriptcmd("", &rscrecteleport);
   }
 }
 

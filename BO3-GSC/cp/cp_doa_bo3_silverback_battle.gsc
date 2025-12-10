@@ -99,7 +99,7 @@ function function_fc48f9f3() {
   }
   level thread namespace_cdb9a8fe::function_87703158(1);
   var_e5c8b9e7 = level.doa.var_bc9b7c71;
-  level.doa.var_bc9b7c71 = & function_8b1dfb44;
+  level.doa.var_bc9b7c71 = &function_8b1dfb44;
   foreach(player in namespace_831a4a7c::function_5eb6e4d1()) {
     player notify("hash_d28ba89d");
   }
@@ -181,7 +181,7 @@ function function_fc48f9f3() {
   wait(6.5);
   doa_utility::function_44eb090b();
   level.doa.var_635342b0 hide();
-  array::thread_all(getplayers(), & namespace_831a4a7c::function_82e3b1cb);
+  array::thread_all(getplayers(), &namespace_831a4a7c::function_82e3b1cb);
   level thread doa_pickups::function_c1869ec8();
   level thread doa_utility::clearallcorpses();
   if(isDefined(level.doa.var_6fb37836)) {
@@ -347,7 +347,7 @@ function private function_b90daa04(delay) {
   silverback thread namespace_eaa992c::turnofffx("silverback_intro_trail2");
   playrumbleonposition("explosion_generic", org.origin);
   playsoundatposition("zmb_ape_spawn", org.origin);
-  silverback.aioverridedamage = & function_ae39e30a;
+  silverback.aioverridedamage = &function_ae39e30a;
   level.doa.var_155f5b81[level.doa.var_155f5b81.size] = silverback;
   silverback thread function_19b9f1d6();
   silverback thread namespace_4973e019::function_ce73145c();

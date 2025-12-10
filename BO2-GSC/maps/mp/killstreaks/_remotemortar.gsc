@@ -33,7 +33,7 @@ init() {
   level.remote_mortar_fx["missileExplode"] = loadfx("weapon/remote_mortar/fx_rmt_mortar_explosion");
   registerkillstreak("remote_mortar_mp", "remote_mortar_mp", "killstreak_remote_mortar", "remote_mortar_used", ::remote_mortar_killstreak, 1);
   registerkillstreakaltweapon("remote_mortar_mp", "remote_mortar_missile_mp");
-  registerkillstreakstrings("remote_mortar_mp", & "KILLSTREAK_EARNED_REMOTE_MORTAR", & "KILLSTREAK_REMOTE_MORTAR_NOT_AVAILABLE", & "KILLSTREAK_REMOTE_MORTAR_INBOUND");
+  registerkillstreakstrings("remote_mortar_mp", &"KILLSTREAK_EARNED_REMOTE_MORTAR", &"KILLSTREAK_REMOTE_MORTAR_NOT_AVAILABLE", &"KILLSTREAK_REMOTE_MORTAR_INBOUND");
   registerkillstreakdialog("remote_mortar_mp", "mpl_killstreak_planemortar", "kls_reaper_used", "", "kls_reaper_enemy", "", "kls_reaper_ready");
   registerkillstreakdevdvar("remote_mortar_mp", "scr_givemortarremote");
   setkillstreakteamkillpenaltyscale("remote_mortar_mp", level.teamkillreducedpenalty);
@@ -239,7 +239,7 @@ remote_mortar_spawn() {
   anglevector = anglevector * 6100;
   remote linkto(level.remotemortarrig, "tag_origin", anglevector, (0, angle - 90, 0));
   remoteobjidfriendly = maps\mp\gametypes\_gameobjects::getnextobjid();
-  objective_add(remoteobjidfriendly, "invisible", remote.origin, & "remotemortar", self);
+  objective_add(remoteobjidfriendly, "invisible", remote.origin, &"remotemortar", self);
   objective_state(remoteobjidfriendly, "active");
   objective_onentity(remoteobjidfriendly, remote);
   objective_team(remoteobjidfriendly, self.team);

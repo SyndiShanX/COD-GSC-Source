@@ -13,12 +13,12 @@
 #namespace zm_moon_ai_astro;
 
 function init() {
-  level.astro_zombie_enter_level = & moon_astro_enter_level;
-  level.aat["zm_aat_blast_furnace"].validation_func = & function_82c2a8f1;
-  level.aat["zm_aat_dead_wire"].validation_func = & function_82c2a8f1;
-  level.aat["zm_aat_fire_works"].validation_func = & function_82c2a8f1;
-  level.aat["zm_aat_thunder_wall"].validation_func = & function_82c2a8f1;
-  level.aat["zm_aat_turned"].validation_func = & function_82c2a8f1;
+  level.astro_zombie_enter_level = &moon_astro_enter_level;
+  level.aat["zm_aat_blast_furnace"].validation_func = &function_82c2a8f1;
+  level.aat["zm_aat_dead_wire"].validation_func = &function_82c2a8f1;
+  level.aat["zm_aat_fire_works"].validation_func = &function_82c2a8f1;
+  level.aat["zm_aat_thunder_wall"].validation_func = &function_82c2a8f1;
+  level.aat["zm_aat_turned"].validation_func = &function_82c2a8f1;
 }
 
 function zombie_set_fake_playername() {

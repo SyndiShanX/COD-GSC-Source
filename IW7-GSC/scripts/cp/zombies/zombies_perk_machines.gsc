@@ -5,18 +5,18 @@
 ********************************************************/
 
 register_interactions() {
-  level.interaction_hintstrings["perk_machine_revive"] = & "COOP_PERK_MACHINES_1500";
-  level.interaction_hintstrings["perk_machine_tough"] = & "COOP_PERK_MACHINES_2500";
-  level.interaction_hintstrings["perk_machine_flash"] = & "COOP_PERK_MACHINES_3000";
-  level.interaction_hintstrings["perk_machine_more"] = & "COOP_PERK_MACHINES_4000";
-  level.interaction_hintstrings["perk_machine_rat_a_tat"] = & "COOP_PERK_MACHINES_2000";
-  level.interaction_hintstrings["perk_machine_run"] = & "COOP_PERK_MACHINES_RUN";
-  level.interaction_hintstrings["perk_machine_fwoosh"] = & "COOP_PERK_MACHINES_FWOOSH";
-  level.interaction_hintstrings["perk_machine_smack"] = & "COOP_PERK_MACHINES_SMACK";
-  level.interaction_hintstrings["perk_machine_zap"] = & "COOP_PERK_MACHINES_ZAP";
-  level.interaction_hintstrings["perk_machine_boom"] = & "COOP_PERK_MACHINES_BOOM";
-  level.interaction_hintstrings["perk_machine_deadeye"] = & "COOP_PERK_MACHINES_1000";
-  level.interaction_hintstrings["perk_machine_change"] = & "COOP_PERK_MACHINES_DLC3_CHANGE";
+  level.interaction_hintstrings["perk_machine_revive"] = &"COOP_PERK_MACHINES_1500";
+  level.interaction_hintstrings["perk_machine_tough"] = &"COOP_PERK_MACHINES_2500";
+  level.interaction_hintstrings["perk_machine_flash"] = &"COOP_PERK_MACHINES_3000";
+  level.interaction_hintstrings["perk_machine_more"] = &"COOP_PERK_MACHINES_4000";
+  level.interaction_hintstrings["perk_machine_rat_a_tat"] = &"COOP_PERK_MACHINES_2000";
+  level.interaction_hintstrings["perk_machine_run"] = &"COOP_PERK_MACHINES_RUN";
+  level.interaction_hintstrings["perk_machine_fwoosh"] = &"COOP_PERK_MACHINES_FWOOSH";
+  level.interaction_hintstrings["perk_machine_smack"] = &"COOP_PERK_MACHINES_SMACK";
+  level.interaction_hintstrings["perk_machine_zap"] = &"COOP_PERK_MACHINES_ZAP";
+  level.interaction_hintstrings["perk_machine_boom"] = &"COOP_PERK_MACHINES_BOOM";
+  level.interaction_hintstrings["perk_machine_deadeye"] = &"COOP_PERK_MACHINES_1000";
+  level.interaction_hintstrings["perk_machine_change"] = &"COOP_PERK_MACHINES_DLC3_CHANGE";
   scripts\cp\cp_interaction::register_interaction("perk_machine_run", "perk", 1, ::hint_string_func, ::activate_perk_machine, 0, 1, ::init_run_machines_func);
   scripts\cp\cp_interaction::register_interaction("perk_machine_revive", "perk", 1, ::hint_string_func, ::activate_perk_machine, 0, 1, ::init_revive_machines_func);
   scripts\cp\cp_interaction::register_interaction("perk_machine_rat_a_tat", "perk", 1, ::hint_string_func, ::activate_perk_machine_gesture_second, 0, 1, ::init_rat_a_tat_machines_func);
@@ -739,7 +739,7 @@ hint_string_func(param_00, param_01) {
     if(isDefined(level.needspowerstring)) {
       return level.needspowerstring;
     } else {
-      return & "COOP_INTERACTIONS_REQUIRES_POWER";
+      return &"COOP_INTERACTIONS_REQUIRES_POWER";
     }
   }
 
@@ -748,15 +748,15 @@ hint_string_func(param_00, param_01) {
   }
 
   if(param_01 scripts\cp\utility::has_zombie_perk(param_00.perk_type)) {
-    return & "COOP_PERK_MACHINES_REMOVE_PERK";
+    return &"COOP_PERK_MACHINES_REMOVE_PERK";
   }
 
   if(isDefined(self.zombies_perks) && self.zombies_perks.size > 4 && !scripts\engine\utility::istrue(self.have_gns_perk)) {
-    return & "COOP_PERK_MACHINES_PERK_SLOTS_FULL";
+    return &"COOP_PERK_MACHINES_PERK_SLOTS_FULL";
   }
 
   if(param_00.script_noteworthy == "perk_machine_revive" && scripts\cp\utility::isplayingsolo() || level.only_one_player) {
-    return & "COOP_PERK_MACHINES_SELF_REVIVE";
+    return &"COOP_PERK_MACHINES_SELF_REVIVE";
   }
 
   return level.interaction_hintstrings[param_00.script_noteworthy];

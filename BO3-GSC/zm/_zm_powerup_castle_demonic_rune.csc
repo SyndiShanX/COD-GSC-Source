@@ -10,11 +10,11 @@
 #namespace zm_powerup_demonic_rune;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_demonic_rune", & __init__, undefined, undefined);
+  system::register("zm_powerup_demonic_rune", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "demonic_rune_fx", 5000, 1, "int", & function_4a94c040, 0, 0);
+  clientfield::register("scriptmover", "demonic_rune_fx", 5000, 1, "int", &function_4a94c040, 0, 0);
   zm_powerups::include_zombie_powerup("demonic_rune_lor");
   zm_powerups::add_zombie_powerup("demonic_rune_lor");
   zm_powerups::include_zombie_powerup("demonic_rune_ulla");

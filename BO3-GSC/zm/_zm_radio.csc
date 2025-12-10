@@ -8,7 +8,7 @@
 #namespace zm_radio;
 
 function autoexec __init__sytem__() {
-  system::register("zm_radio", & __init__, & __main__, undefined);
+  system::register("zm_radio", &__init__, &__main__, undefined);
 }
 
 function __init__() {}

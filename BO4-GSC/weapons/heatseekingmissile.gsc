@@ -41,7 +41,7 @@ clearirtarget() {
     self.stingertarget notify(#"missile_unlocked");
     clientnum = self getentitynumber();
 
-    if((self.stingertarget.locked_on&1 << clientnum) != 0) {
+    if((self.stingertarget.locked_on& 1 << clientnum) != 0) {
       self notify(#"hash_41e93a518427847c");
     }
 
@@ -777,7 +777,7 @@ lockingon(target, lock) {
   clientnum = self getentitynumber();
 
   if(lock) {
-    if((target.locking_on&1 << clientnum) == 0) {
+    if((target.locking_on& 1 << clientnum) == 0) {
       target notify(#"locking on");
       target.locking_on |= 1 << clientnum;
       self thread watchclearlockingon(target, clientnum);
@@ -806,7 +806,7 @@ lockedon(target, lock) {
   clientnum = self getentitynumber();
 
   if(lock) {
-    if((target.locked_on&1 << clientnum) == 0) {
+    if((target.locked_on& 1 << clientnum) == 0) {
       target.locked_on |= 1 << clientnum;
       self notify(#"lock_on_acquired");
       self thread watchclearlockedon(target, clientnum);

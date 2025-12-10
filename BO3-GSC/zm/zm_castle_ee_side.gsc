@@ -316,7 +316,7 @@ class class_d7100ae3 {
 #namespace zm_castle_ee_side;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_ee_side", & __init__, undefined, undefined);
+  system::register("zm_zod_ee_side", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -326,12 +326,12 @@ function __init__() {
   clientfield::register("world", "sndUEB", 5000, 1, "int");
   clientfield::register("actor", "plunger_exploding_ai", 5000, 1, "int");
   clientfield::register("toplayer", "plunger_charged_strike", 5000, 1, "counter");
-  zm::register_player_damage_callback( & function_b98927d4);
-  zm::register_actor_damage_callback( & function_f10f1879);
+  zm::register_player_damage_callback(&function_b98927d4);
+  zm::register_actor_damage_callback(&function_f10f1879);
 }
 
 function main() {
-  level.gravity_trap_spike_watcher = & gravity_trap_spike_watcher;
+  level.gravity_trap_spike_watcher = &gravity_trap_spike_watcher;
   level thread function_e437a08f();
   init_flags();
   level waittill("start_zombie_round_logic");
@@ -491,7 +491,7 @@ function function_7998107() {
   foreach(player in players) {
     player thread function_5c351802();
   }
-  callback::on_spawned( & function_5c351802);
+  callback::on_spawned(&function_5c351802);
 }
 
 function function_5c351802() {
@@ -736,7 +736,7 @@ function function_90b13c3d() {
     player function_d249c76c();
   }
   level flag::set("ee_claw_hat");
-  callback::on_spawned( & function_d249c76c);
+  callback::on_spawned(&function_d249c76c);
 }
 
 function function_b8645c20() {
@@ -996,8 +996,8 @@ function function_56e07512(s_loc) {
   s_loc.unitrigger_stub.script_height = 128;
   s_loc.unitrigger_stub.script_length = 128;
   s_loc.unitrigger_stub.require_look_at = 1;
-  s_loc.unitrigger_stub.prompt_and_visibility_func = & function_dbab79d5;
-  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, & function_6527501a);
+  s_loc.unitrigger_stub.prompt_and_visibility_func = &function_dbab79d5;
+  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, &function_6527501a);
 }
 
 function function_dbab79d5(player) {
@@ -1041,19 +1041,19 @@ function function_b7365949(trig_stub, player) {
   level notify("hash_4811d22b");
   level.var_163864b7 delete();
   function_421bb7db();
-  zm_spawner::register_zombie_death_event_callback( & function_8d95ec46);
+  zm_spawner::register_zombie_death_event_callback(&function_8d95ec46);
   players = level.activeplayers;
   foreach(player in level.activeplayers) {
     if(isDefined(player) && isalive(player)) {
       player thread function_45b9eba4();
     }
   }
-  callback::on_spawned( & function_45b9eba4);
+  callback::on_spawned(&function_45b9eba4);
   trig_stub zm_unitrigger::run_visibility_function_for_all_triggers();
 }
 
 function function_45b9eba4() {
-  self.widows_wine_knife_override = & function_9ce92341;
+  self.widows_wine_knife_override = &function_9ce92341;
   self zm_melee_weapon::award_melee_weapon("knife_plunger");
   self thread function_9daec9e3();
   self thread function_1fcb04d7();
@@ -1121,13 +1121,13 @@ function function_beeeab78() {
   self zombie_utility::zombie_eye_glow_stop();
   wait(0.15);
   self ghost();
-  self util::delay(0.15, undefined, & zm_utility::self_delete);
+  self util::delay(0.15, undefined, &zm_utility::self_delete);
 }
 
 function function_5c600852() {
   level.var_89ad28cd = 0;
   var_d959ac05 = getEntArray("hs_gramophone", "targetname");
-  array::thread_all(var_d959ac05, & function_db46cccd);
+  array::thread_all(var_d959ac05, &function_db46cccd);
   while(true) {
     level waittill("hash_9c9fb305");
     if(level.var_89ad28cd == var_d959ac05.size) {
@@ -1160,7 +1160,7 @@ function function_db46cccd() {
 function function_553b8e23() {
   level.var_51d5c50c = 0;
   var_c911c0a2 = struct::get_array("hs_bear", "targetname");
-  array::thread_all(var_c911c0a2, & function_4b02c768);
+  array::thread_all(var_c911c0a2, &function_4b02c768);
   while(true) {
     level waittill("hash_c3f82290");
     if(level.var_51d5c50c == var_c911c0a2.size) {
@@ -1214,23 +1214,23 @@ function check_for_change() {
 }
 
 function function_d6026710() {
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_3d627178);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_f0dc1bf3);
-  level thread zm_castle_util::setup_devgui_func("", "", 0, & function_3388f3a3);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_3388f3a3);
-  level thread zm_castle_util::setup_devgui_func("", "", 2, & function_3388f3a3);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_239f31ac);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_8f84cfff);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_e6679107);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_71626c1a);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_c8b68402);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_14004ce0);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_5b000c75);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_4e8ebeb2);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_d40e8eab);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_ce8b131c);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_71bd024b);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_ad9da95f);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_3d627178);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_f0dc1bf3);
+  level thread zm_castle_util::setup_devgui_func("", "", 0, &function_3388f3a3);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_3388f3a3);
+  level thread zm_castle_util::setup_devgui_func("", "", 2, &function_3388f3a3);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_239f31ac);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_8f84cfff);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_e6679107);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_71626c1a);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_c8b68402);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_14004ce0);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_5b000c75);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_4e8ebeb2);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_d40e8eab);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_ce8b131c);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_71bd024b);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_ad9da95f);
 }
 
 function function_f0dc1bf3(n_val) {
@@ -1242,7 +1242,7 @@ function function_3d627178(n_val) {
 }
 
 function function_ce8b131c(n_val) {
-  zm_spawner::register_zombie_death_event_callback( & function_8d95ec46);
+  zm_spawner::register_zombie_death_event_callback(&function_8d95ec46);
   players = level.activeplayers;
   foreach(player in players) {
     player thread function_45b9eba4();

@@ -97,24 +97,24 @@ weapons_get_dvar(dvar, def) {
 }
 
 setupretrievablehintstrings() {
-  createretrievablehint("hatchet", & "MP_HATCHET_PICKUP");
-  createretrievablehint("claymore", & "MP_CLAYMORE_PICKUP");
-  createretrievablehint("bouncingbetty", & "MP_BOUNCINGBETTY_PICKUP");
-  createretrievablehint("trophy_system", & "MP_TROPHY_SYSTEM_PICKUP");
-  createretrievablehint("acoustic_sensor", & "MP_ACOUSTIC_SENSOR_PICKUP");
-  createretrievablehint("camera_spike", & "MP_CAMERA_SPIKE_PICKUP");
-  createretrievablehint("satchel_charge", & "MP_SATCHEL_CHARGE_PICKUP");
-  createretrievablehint("scrambler", & "MP_SCRAMBLER_PICKUP");
-  createretrievablehint("proximity_grenade", & "MP_SHOCK_CHARGE_PICKUP");
-  createdestroyhint("trophy_system", & "MP_TROPHY_SYSTEM_DESTROY");
-  createdestroyhint("sensor_grenade", & "MP_SENSOR_GRENADE_DESTROY");
-  createhackerhint("claymore_mp", & "MP_CLAYMORE_HACKING");
-  createhackerhint("bouncingbetty_mp", & "MP_BOUNCINGBETTY_HACKING");
-  createhackerhint("trophy_system_mp", & "MP_TROPHY_SYSTEM_HACKING");
-  createhackerhint("acoustic_sensor_mp", & "MP_ACOUSTIC_SENSOR_HACKING");
-  createhackerhint("camera_spike_mp", & "MP_CAMERA_SPIKE_HACKING");
-  createhackerhint("satchel_charge_mp", & "MP_SATCHEL_CHARGE_HACKING");
-  createhackerhint("scrambler_mp", & "MP_SCRAMBLER_HACKING");
+  createretrievablehint("hatchet", &"MP_HATCHET_PICKUP");
+  createretrievablehint("claymore", &"MP_CLAYMORE_PICKUP");
+  createretrievablehint("bouncingbetty", &"MP_BOUNCINGBETTY_PICKUP");
+  createretrievablehint("trophy_system", &"MP_TROPHY_SYSTEM_PICKUP");
+  createretrievablehint("acoustic_sensor", &"MP_ACOUSTIC_SENSOR_PICKUP");
+  createretrievablehint("camera_spike", &"MP_CAMERA_SPIKE_PICKUP");
+  createretrievablehint("satchel_charge", &"MP_SATCHEL_CHARGE_PICKUP");
+  createretrievablehint("scrambler", &"MP_SCRAMBLER_PICKUP");
+  createretrievablehint("proximity_grenade", &"MP_SHOCK_CHARGE_PICKUP");
+  createdestroyhint("trophy_system", &"MP_TROPHY_SYSTEM_DESTROY");
+  createdestroyhint("sensor_grenade", &"MP_SENSOR_GRENADE_DESTROY");
+  createhackerhint("claymore_mp", &"MP_CLAYMORE_HACKING");
+  createhackerhint("bouncingbetty_mp", &"MP_BOUNCINGBETTY_HACKING");
+  createhackerhint("trophy_system_mp", &"MP_TROPHY_SYSTEM_HACKING");
+  createhackerhint("acoustic_sensor_mp", &"MP_ACOUSTIC_SENSOR_HACKING");
+  createhackerhint("camera_spike_mp", &"MP_CAMERA_SPIKE_HACKING");
+  createhackerhint("satchel_charge_mp", &"MP_SATCHEL_CHARGE_HACKING");
+  createhackerhint("scrambler_mp", &"MP_SCRAMBLER_HACKING");
 }
 
 onplayerconnect() {
@@ -594,7 +594,7 @@ weaponobjectdamage(watcher) {
   if(isDefined(type) && (issubstr(type, "MOD_GRENADE_SPLASH") || issubstr(type, "MOD_GRENADE") || issubstr(type, "MOD_EXPLOSIVE")))
     self.waschained = 1;
 
-  if(isDefined(idflags) && idflags & level.idflags_penetration)
+  if(isDefined(idflags) && idflags &level.idflags_penetration)
     self.wasdamagedfrombulletpenetration = 1;
 
   self.wasdamaged = 1;

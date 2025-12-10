@@ -23,7 +23,7 @@
 #namespace zm_zod_quest;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_quest", & __init__, undefined, undefined);
+  system::register("zm_zod_quest", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -59,48 +59,48 @@ function __init__() {
   level._effect["shadowman_smoke"] = "zombie/fx_shdw_floating_smk_zod_zmb";
   level._effect["footprint_l"] = "player/fx_plyr_footstep_tracker_lf_zmb";
   level._effect["footprint_r"] = "player/fx_plyr_footstep_tracker_rf_zmb";
-  clientfield::register("toplayer", "ZM_ZOD_UI_SUMMONING_KEY_PICKUP", 1, 1, "int", & zm_utility::zm_ui_infotext, 0, 1);
-  clientfield::register("toplayer", "ZM_ZOD_UI_RITUAL_BUSY", 1, 1, "int", & zm_utility::zm_ui_infotext, 0, 1);
-  clientfield::register("world", "quest_key", 1, 1, "int", & zm_utility::setsharedinventoryuimodels, 0, 1);
-  clientfield::register("world", "ritual_progress", 1, 7, "float", & ritual_progress, 0, 0);
+  clientfield::register("toplayer", "ZM_ZOD_UI_SUMMONING_KEY_PICKUP", 1, 1, "int", &zm_utility::zm_ui_infotext, 0, 1);
+  clientfield::register("toplayer", "ZM_ZOD_UI_RITUAL_BUSY", 1, 1, "int", &zm_utility::zm_ui_infotext, 0, 1);
+  clientfield::register("world", "quest_key", 1, 1, "int", &zm_utility::setsharedinventoryuimodels, 0, 1);
+  clientfield::register("world", "ritual_progress", 1, 7, "float", &ritual_progress, 0, 0);
   clientfield::register("world", "ritual_current", 1, 3, "int", undefined, 0, 0);
   n_bits = getminbitcountfornum(5);
-  clientfield::register("world", "ritual_state_boxer", 1, n_bits, "int", & ritual_state_boxer, 0, 1);
-  clientfield::register("world", "ritual_state_detective", 1, n_bits, "int", & ritual_state_detective, 0, 1);
-  clientfield::register("world", "ritual_state_femme", 1, n_bits, "int", & ritual_state_femme, 0, 1);
-  clientfield::register("world", "ritual_state_magician", 1, n_bits, "int", & ritual_state_magician, 0, 1);
-  clientfield::register("world", "ritual_state_pap", 1, n_bits, "int", & ritual_state_pap, 0, 1);
-  clientfield::register("world", "keeper_spawn_portals", 1, 4, "int", & keeper_spawn_portals, 0, 0);
-  clientfield::register("world", "keeper_subway_fx", 1, 1, "int", & function_af8eff6d, 0, 0);
-  clientfield::register("scriptmover", "cursetrap_fx", 1, 1, "int", & cursetrap_fx, 0, 0);
-  clientfield::register("scriptmover", "mini_cursetrap_fx", 1, 1, "int", & mini_cursetrap_fx, 0, 0);
-  clientfield::register("scriptmover", "curse_tell_fx", 1, 1, "int", & curse_tell_fx, 0, 0);
-  clientfield::register("scriptmover", "darkportal_fx", 1, 1, "int", & darkportal_fx, 0, 0);
-  clientfield::register("scriptmover", "boss_shield_fx", 1, 1, "int", & boss_shield_fx, 0, 0);
-  clientfield::register("scriptmover", "keeper_symbol_fx", 1, 1, "int", & keeper_symbol_fx, 0, 0);
+  clientfield::register("world", "ritual_state_boxer", 1, n_bits, "int", &ritual_state_boxer, 0, 1);
+  clientfield::register("world", "ritual_state_detective", 1, n_bits, "int", &ritual_state_detective, 0, 1);
+  clientfield::register("world", "ritual_state_femme", 1, n_bits, "int", &ritual_state_femme, 0, 1);
+  clientfield::register("world", "ritual_state_magician", 1, n_bits, "int", &ritual_state_magician, 0, 1);
+  clientfield::register("world", "ritual_state_pap", 1, n_bits, "int", &ritual_state_pap, 0, 1);
+  clientfield::register("world", "keeper_spawn_portals", 1, 4, "int", &keeper_spawn_portals, 0, 0);
+  clientfield::register("world", "keeper_subway_fx", 1, 1, "int", &function_af8eff6d, 0, 0);
+  clientfield::register("scriptmover", "cursetrap_fx", 1, 1, "int", &cursetrap_fx, 0, 0);
+  clientfield::register("scriptmover", "mini_cursetrap_fx", 1, 1, "int", &mini_cursetrap_fx, 0, 0);
+  clientfield::register("scriptmover", "curse_tell_fx", 1, 1, "int", &curse_tell_fx, 0, 0);
+  clientfield::register("scriptmover", "darkportal_fx", 1, 1, "int", &darkportal_fx, 0, 0);
+  clientfield::register("scriptmover", "boss_shield_fx", 1, 1, "int", &boss_shield_fx, 0, 0);
+  clientfield::register("scriptmover", "keeper_symbol_fx", 1, 1, "int", &keeper_symbol_fx, 0, 0);
   n_bits = getminbitcountfornum(6);
-  clientfield::register("scriptmover", "totem_state_fx", 1, n_bits, "int", & totem_state_fx, 0, 0);
-  clientfield::register("scriptmover", "totem_damage_fx", 1, 3, "int", & totem_damage_fx, 0, 0);
-  clientfield::register("scriptmover", "set_fade_material", 1, 1, "int", & set_fade_material, 0, 0);
-  clientfield::register("scriptmover", "set_subway_wall_dissolve", 1, 1, "int", & set_subway_wall_dissolve, 0, 0);
+  clientfield::register("scriptmover", "totem_state_fx", 1, n_bits, "int", &totem_state_fx, 0, 0);
+  clientfield::register("scriptmover", "totem_damage_fx", 1, 3, "int", &totem_damage_fx, 0, 0);
+  clientfield::register("scriptmover", "set_fade_material", 1, 1, "int", &set_fade_material, 0, 0);
+  clientfield::register("scriptmover", "set_subway_wall_dissolve", 1, 1, "int", &set_subway_wall_dissolve, 0, 0);
   n_bits = getminbitcountfornum(3);
-  clientfield::register("actor", "status_fx", 1, n_bits, "int", & status_fx, 0, 0);
+  clientfield::register("actor", "status_fx", 1, n_bits, "int", &status_fx, 0, 0);
   n_bits = getminbitcountfornum(3);
-  clientfield::register("vehicle", "veh_status_fx", 1, n_bits, "int", & veh_status_fx, 0, 0);
-  clientfield::register("actor", "keeper_fx", 1, 1, "int", & keeper_fx, 0, 0);
-  clientfield::register("scriptmover", "item_glow_fx", 1, 3, "int", & item_glow_fx, 0, 0);
+  clientfield::register("vehicle", "veh_status_fx", 1, n_bits, "int", &veh_status_fx, 0, 0);
+  clientfield::register("actor", "keeper_fx", 1, 1, "int", &keeper_fx, 0, 0);
+  clientfield::register("scriptmover", "item_glow_fx", 1, 3, "int", &item_glow_fx, 0, 0);
   n_bits = getminbitcountfornum(7);
-  clientfield::register("scriptmover", "shadowman_fx", 1, n_bits, "int", & shadowman_fx, 0, 0);
+  clientfield::register("scriptmover", "shadowman_fx", 1, n_bits, "int", &shadowman_fx, 0, 0);
   clientfield::register("world", "devgui_gateworm", 1, 1, "int", undefined, 0, 0);
-  clientfield::register("scriptmover", "gateworm_basin_fx", 1, 2, "int", & gateworm_basin_fx, 0, 0);
-  clientfield::register("world", "wallrun_footprints", 1, 2, "int", & function_1fea37a4, 0, 0);
+  clientfield::register("scriptmover", "gateworm_basin_fx", 1, 2, "int", &gateworm_basin_fx, 0, 0);
+  clientfield::register("world", "wallrun_footprints", 1, 2, "int", &function_1fea37a4, 0, 0);
   a_str_names = array("boxer", "detective", "femme", "magician");
   for(i = 0; i < 4; i++) {
-    clientfield::register("toplayer", ("check_" + a_str_names[i]) + "_memento", 1, 1, "int", & zm_utility::setinventoryuimodels, 0, 0);
+    clientfield::register("toplayer", ("check_" + a_str_names[i]) + "_memento", 1, 1, "int", &zm_utility::setinventoryuimodels, 0, 0);
   }
   n_bits = getminbitcountfornum(6);
-  clientfield::register("toplayer", "used_quest_key", 1, n_bits, "int", & zm_utility::setsharedinventoryuimodels, 0, 0);
-  clientfield::register("toplayer", "used_quest_key_location", 1, n_bits, "int", & zm_utility::setsharedinventoryuimodels, 0, 0);
+  clientfield::register("toplayer", "used_quest_key", 1, n_bits, "int", &zm_utility::setsharedinventoryuimodels, 0, 0);
+  clientfield::register("toplayer", "used_quest_key_location", 1, n_bits, "int", &zm_utility::setsharedinventoryuimodels, 0, 0);
   visionset_mgr::register_visionset_info("zod_ritual_dim", 1, 15, "zm_zod", "zod_ritual_dim");
   flag::init("set_ritual_finished_flag");
   flag::init("set_ritual_key_closed_flag");

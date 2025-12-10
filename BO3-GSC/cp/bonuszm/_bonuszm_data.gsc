@@ -13,9 +13,9 @@ function autoexec function_dc036a7c() {
     return;
   }
   level.var_a432d965 = struct::get_script_bundle("bonuszmdata", getdvarstring("mapname"));
-  level.bzm_overridelocomotion = & bzm_overridelocomotion;
-  level.bzm_overridehealth = & bzm_overridehealth;
-  level.bzm_overridesuicidalchance = & bzm_overridesuicidalchance;
+  level.bzm_overridelocomotion = &bzm_overridelocomotion;
+  level.bzm_overridehealth = &bzm_overridehealth;
+  level.bzm_overridesuicidalchance = &bzm_overridesuicidalchance;
 }
 
 function function_da5f2c0d(mapname, checkpointname) {

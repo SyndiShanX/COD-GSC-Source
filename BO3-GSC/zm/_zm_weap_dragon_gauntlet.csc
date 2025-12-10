@@ -12,11 +12,11 @@
 #namespace zm_weap_dragon_gauntlet;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_dragon_gauntlet", & __init__, undefined, undefined);
+  system::register("zm_weap_dragon_gauntlet", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_localplayer_spawned( & player_on_spawned);
+  callback::on_localplayer_spawned(&player_on_spawned);
 }
 
 function player_on_spawned(localclientnum) {

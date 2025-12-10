@@ -10,7 +10,7 @@
 #namespace fx;
 
 function autoexec __init__sytem__() {
-  system::register("fx", & __init__, undefined, undefined);
+  system::register("fx", &__init__, undefined, undefined);
 }
 
 function __init__() {}

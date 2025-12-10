@@ -344,8 +344,8 @@ private robotcalcproceduraltraversal(entity, asmstatename) {
   traversal.minimumspeed = 18;
   traversal.startnode = entity.traversestartnode;
   traversal.endnode = entity.traverseendnode;
-  startiswallrun = traversal.startnode.spawnflags&2048;
-  endiswallrun = traversal.endnode.spawnflags&2048;
+  startiswallrun = traversal.startnode.spawnflags& 2048;
+  endiswallrun = traversal.endnode.spawnflags& 2048;
   traversal.startpoint1 = entity.origin;
   traversal.endpoint1 = traversal.endnode.origin;
 
@@ -478,7 +478,7 @@ private robottraverseragdollondeath(entity, asmstatename) {
 
 private robotshouldproceduraltraverse(entity) {
   if(isDefined(entity.traversestartnode) && isDefined(entity.traverseendnode)) {
-    isprocedural = entity ai::get_behavior_attribute("traversals") == "procedural" || entity.traversestartnode.spawnflags&1024 || entity.traverseendnode.spawnflags&1024;
+    isprocedural = entity ai::get_behavior_attribute("traversals") == "procedural" || entity.traversestartnode.spawnflags& 1024 || entity.traverseendnode.spawnflags& 1024;
     return isprocedural;
   }
 
@@ -490,8 +490,8 @@ private robotwallruntraverse(entity) {
   endnode = entity.traverseendnode;
 
   if(isDefined(startnode) && isDefined(endnode) && entity shouldstarttraversal()) {
-    startiswallrun = startnode.spawnflags&2048;
-    endiswallrun = endnode.spawnflags&2048;
+    startiswallrun = startnode.spawnflags& 2048;
+    endiswallrun = endnode.spawnflags& 2048;
     return (startiswallrun || endiswallrun);
   }
 
@@ -547,9 +547,9 @@ private calculatecubicbezier(t, p1, p2, p3, p4) {
 
 private mocomprobotstarttraversalinit(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   startnode = entity.traversestartnode;
-  startiswallrun = startnode.spawnflags&2048;
+  startiswallrun = startnode.spawnflags& 2048;
   endnode = entity.traverseendnode;
-  endiswallrun = endnode.spawnflags&2048;
+  endiswallrun = endnode.spawnflags& 2048;
 
   if(!endiswallrun) {
     angletoend = vectortoangles(entity.traverseendnode.origin - entity.traversestartnode.origin);
@@ -614,7 +614,7 @@ private mocomprobotproceduraltraversalupdate(entity, mocompanim, mocompanimblend
       return;
     }
 
-    endiswallrun = traversal.endnode.spawnflags&2048;
+    endiswallrun = traversal.endnode.spawnflags& 2048;
     realt = (gettime() - traversal.starttime) / traversal.totaltime;
     t = min(realt, 1);
 
@@ -638,7 +638,7 @@ private mocomprobotproceduraltraversalterminate(entity, mocompanim, mocompanimbl
   traversal = entity.traversal;
 
   if(isDefined(traversal) && gettime() >= traversal.endtime) {
-    endiswallrun = traversal.endnode.spawnflags&2048;
+    endiswallrun = traversal.endnode.spawnflags& 2048;
 
     if(!endiswallrun) {
       entity pathmode("move allowed");
@@ -700,8 +700,8 @@ private robotsetupwallrunjump() {
   traversaltype = "unknown";
 
   if(isDefined(startnode) && isDefined(endnode)) {
-    startiswallrun = startnode.spawnflags&2048;
-    endiswallrun = endnode.spawnflags&2048;
+    startiswallrun = startnode.spawnflags& 2048;
+    endiswallrun = endnode.spawnflags& 2048;
 
     if(endiswallrun) {
       direction = _calculatewallrundirection(startnode.origin, endnode.origin);
@@ -749,8 +749,8 @@ private robotstartjumpdirection() {
   endnode = entity.traverseendnode;
 
   if(isDefined(startnode) && isDefined(endnode)) {
-    startiswallrun = startnode.spawnflags&2048;
-    endiswallrun = endnode.spawnflags&2048;
+    startiswallrun = startnode.spawnflags& 2048;
+    endiswallrun = endnode.spawnflags& 2048;
 
     if(startiswallrun) {
       abslengthtoend = distance2d(startnode.origin, endnode.origin);
@@ -772,8 +772,8 @@ private robotendjumpdirection() {
   endnode = entity.traverseendnode;
 
   if(isDefined(startnode) && isDefined(endnode)) {
-    startiswallrun = startnode.spawnflags&2048;
-    endiswallrun = endnode.spawnflags&2048;
+    startiswallrun = startnode.spawnflags& 2048;
+    endiswallrun = endnode.spawnflags& 2048;
 
     if(endiswallrun) {
       abslengthtoend = distance2d(startnode.origin, endnode.origin);
@@ -791,7 +791,7 @@ private robotendjumpdirection() {
 
 private robottraversaltype(node) {
   if(isDefined(node)) {
-    if(node.spawnflags&2048) {
+    if(node.spawnflags& 2048) {
       return "wall";
     }
 
@@ -1291,7 +1291,7 @@ private robotisatcovercondition(entity) {
 
 private robotsupportsovercover(entity) {
   if(isDefined(entity.node)) {
-    if(isDefined(entity.node.spawnflags) && (entity.node.spawnflags&4) == 4) {
+    if(isDefined(entity.node.spawnflags) && (entity.node.spawnflags& 4) == 4) {
       return (entity.node.type == #"cover stand" || entity.node.type == #"conceal stand");
     }
 

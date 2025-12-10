@@ -15,17 +15,17 @@
 #namespace _gadget_security_breach;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_security_breach", & __init__, undefined, undefined);
+  system::register("gadget_security_breach", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(23, & gadget_security_breach_on, & gadget_security_breach_off);
-  ability_player::register_gadget_possession_callbacks(23, & gadget_security_breach_on_give, & gadget_security_breach_on_take);
-  ability_player::register_gadget_flicker_callbacks(23, & gadget_security_breach_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(23, & gadget_security_breach_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(23, & gadget_security_breach_is_flickering);
-  ability_player::register_gadget_primed_callbacks(23, & gadget_security_breach_is_primed);
-  callback::on_connect( & gadget_security_breach_on_connect);
+  ability_player::register_gadget_activation_callbacks(23, &gadget_security_breach_on, &gadget_security_breach_off);
+  ability_player::register_gadget_possession_callbacks(23, &gadget_security_breach_on_give, &gadget_security_breach_on_take);
+  ability_player::register_gadget_flicker_callbacks(23, &gadget_security_breach_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(23, &gadget_security_breach_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(23, &gadget_security_breach_is_flickering);
+  ability_player::register_gadget_primed_callbacks(23, &gadget_security_breach_is_primed);
+  callback::on_connect(&gadget_security_breach_on_connect);
 }
 
 function gadget_security_breach_is_inuse(slot) {

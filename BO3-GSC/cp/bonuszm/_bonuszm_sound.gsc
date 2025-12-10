@@ -58,11 +58,11 @@ function autoexec init() {
   level.var_af2fbbad = spawn("script_origin", (0, 0, 0));
   level.var_e96fb1cb = spawn("script_origin", (0, 0, 0));
   level.var_971e6055 = spawn("script_origin", (0, 0, 0));
-  level.var_c9205007 = & function_cf21d35c;
-  level.var_9b1300c2 = & function_ef0ce9fb;
-  level.var_c75c7dba = & function_b4a3e925;
-  level.var_4f24fec0 = & function_45809471;
-  level.bzm_sceneseqendedcallback = & bzm_sceneseqended;
+  level.var_c9205007 = &function_cf21d35c;
+  level.var_9b1300c2 = &function_ef0ce9fb;
+  level.var_c75c7dba = &function_b4a3e925;
+  level.var_4f24fec0 = &function_45809471;
+  level.bzm_sceneseqendedcallback = &bzm_sceneseqended;
 }
 
 function bzm_sceneseqended(scenename) {

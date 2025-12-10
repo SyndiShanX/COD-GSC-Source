@@ -22,9 +22,9 @@ main() {
   }
 
   maps\village_assault_code::precachelevelstuff();
-  maps\_utility::add_start("town", ::start_town, & "STARTS_TOWN");
-  maps\_utility::add_start("alasad_barn", ::start_alasad_barn, & "STARTS_ALASADBARN");
-  maps\_utility::add_start("alasad_house", ::start_alasad_house, & "STARTS_ALASADHOUSE");
+  maps\_utility::add_start("town", ::start_town, &"STARTS_TOWN");
+  maps\_utility::add_start("alasad_barn", ::start_alasad_barn, &"STARTS_ALASADBARN");
+  maps\_utility::add_start("alasad_house", ::start_alasad_house, &"STARTS_ALASADHOUSE");
   maps\_utility::default_start(::start_start);
   maps\village_assault_precache::main();
   maps\createart\village_assault_art::main();
@@ -44,7 +44,7 @@ main() {
   maps\village_assault_lighting::main();
   maps\village_assault_aud::main();
   thread maps\village_assault_code::scriptcalls();
-  maps\_utility::add_hint_string("armor_damage", & "SCRIPT_ARMOR_DAMAGE", undefined);
+  maps\_utility::add_hint_string("armor_damage", &"SCRIPT_ARMOR_DAMAGE", undefined);
   thread maps\village_assault_code::add_objective_building("1");
   thread maps\village_assault_code::add_objective_building("2");
   thread maps\village_assault_code::add_objective_building("3");

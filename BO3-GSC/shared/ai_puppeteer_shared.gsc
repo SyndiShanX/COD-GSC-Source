@@ -13,7 +13,7 @@
 #namespace ai_puppeteer;
 
 function autoexec __init__sytem__() {
-  system::register("ai_puppeteer", & __init__, undefined, undefined);
+  system::register("ai_puppeteer", &__init__, undefined, undefined);
 }
 
 function __init__() {

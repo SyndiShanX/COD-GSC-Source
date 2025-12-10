@@ -1091,7 +1091,7 @@ pers_nube_ammo_hint_string(player, weapon) {
   if(!ammo_cost)
     return false;
 
-  self.stub.hint_string = & "ZOMBIE_WEAPONAMMOONLY";
+  self.stub.hint_string = &"ZOMBIE_WEAPONAMMOONLY";
   self sethintstring(self.stub.hint_string, ammo_cost);
   return true;
 }

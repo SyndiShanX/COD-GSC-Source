@@ -23,7 +23,7 @@ function init_shared() {
   trophydeployanim = % mp_trophy_system::o_trophy_deploy;
   trophyspinanim = % mp_trophy_system::o_trophy_spin;
   level thread register();
-  callback::on_spawned( & createtrophysystemwatcher);
+  callback::on_spawned(&createtrophysystemwatcher);
 }
 
 function register() {
@@ -36,7 +36,7 @@ function createtrophysystemwatcher() {
     return;
   }
   watcher = self weaponobjects::createuseweaponobjectwatcher("trophy_system", self.team);
-  watcher.ondetonatecallback = & trophysystemdetonate;
+  watcher.ondetonatecallback = &trophysystemdetonate;
   watcher.activatesound = "wpn_claymore_alert";
   watcher.hackable = 1;
   watcher.hackertoolradius = level.equipmenthackertoolradius;
@@ -46,10 +46,10 @@ function createtrophysystemwatcher() {
   watcher.activationdelay = 0.1;
   watcher.headicon = 0;
   watcher.enemydestroy = 1;
-  watcher.onspawn = & ontrophysystemspawn;
-  watcher.ondamage = & watchtrophysystemdamage;
-  watcher.ondestroyed = & ontrophysystemsmashed;
-  watcher.onstun = & weaponobjects::weaponstun;
+  watcher.onspawn = &ontrophysystemspawn;
+  watcher.ondamage = &watchtrophysystemdamage;
+  watcher.ondestroyed = &ontrophysystemsmashed;
+  watcher.onstun = &weaponobjects::weaponstun;
   watcher.stuntime = 1;
 }
 

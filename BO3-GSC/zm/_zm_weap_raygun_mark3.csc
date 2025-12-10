@@ -14,7 +14,7 @@
 #namespace _zm_weap_raygun_mark3;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_raygun_mark3", & __init__, undefined, undefined);
+  system::register("zm_weap_raygun_mark3", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -24,15 +24,15 @@ function __init__() {
   level._effect["raygun_ai_slow_vortex_large"] = "dlc3/stalingrad/fx_raygun_l_projectile_blackhole_lg_hit";
   level._effect["raygun_slow_vortex_small"] = "dlc3/stalingrad/fx_raygun_l_projectile_blackhole_sm";
   level._effect["raygun_slow_vortex_large"] = "dlc3/stalingrad/fx_raygun_l_projectile_blackhole_lg";
-  clientfield::register("scriptmover", "slow_vortex_fx", 12000, 2, "int", & slow_vortex_fx, 0, 0);
-  clientfield::register("actor", "ai_disintegrate", 12000, 1, "int", & ai_disintegrate, 0, 0);
-  clientfield::register("vehicle", "ai_disintegrate", 12000, 1, "int", & ai_disintegrate, 0, 0);
-  clientfield::register("actor", "ai_slow_vortex_fx", 12000, 2, "int", & ai_slow_vortex_fx, 0, 0);
-  clientfield::register("vehicle", "ai_slow_vortex_fx", 12000, 2, "int", & ai_slow_vortex_fx, 0, 0);
+  clientfield::register("scriptmover", "slow_vortex_fx", 12000, 2, "int", &slow_vortex_fx, 0, 0);
+  clientfield::register("actor", "ai_disintegrate", 12000, 1, "int", &ai_disintegrate, 0, 0);
+  clientfield::register("vehicle", "ai_disintegrate", 12000, 1, "int", &ai_disintegrate, 0, 0);
+  clientfield::register("actor", "ai_slow_vortex_fx", 12000, 2, "int", &ai_slow_vortex_fx, 0, 0);
+  clientfield::register("vehicle", "ai_slow_vortex_fx", 12000, 2, "int", &ai_slow_vortex_fx, 0, 0);
   visionset_mgr::register_visionset_info("raygun_mark3_vortex_visionset", 1, 30, undefined, "zm_idgun_vortex");
   visionset_mgr::register_overlay_info_style_speed_blur("raygun_mark3_vortex_blur", 1, 30, 0.08, 0.75, 0.9);
   duplicate_render::set_dr_filter_framebuffer("dissolve", 10, "dissolve_on", undefined, 0, "mc/mtl_c_zom_dlc3_zombie_dissolve_base", 0);
-  callback::on_localclient_connect( & monitor_raygun_mark3);
+  callback::on_localclient_connect(&monitor_raygun_mark3);
 }
 
 function is_beam_raygun(weapon) {

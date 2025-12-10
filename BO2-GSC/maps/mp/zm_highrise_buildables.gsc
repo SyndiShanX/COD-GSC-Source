@@ -14,11 +14,11 @@
 
 init_buildables() {
   level.buildable_piece_count = 13;
-  add_zombie_buildable("springpad_zm", & "ZM_HIGHRISE_BUILD_SPRINGPAD", & "ZM_HIGHRISE_BUILDING_SPRINGPAD", & "ZM_HIGHRISE_BOUGHT_SPRINGPAD");
-  add_zombie_buildable("slipgun_zm", & "ZM_HIGHRISE_BUILD_SLIPGUN", & "ZM_HIGHRISE_BUILDING_SLIPGUN", & "ZM_HIGHRISE_BOUGHT_SLIPGUN");
-  add_zombie_buildable("keys_zm", & "ZM_HIGHRISE_BUILD_KEYS", & "ZM_HIGHRISE_BUILDING_KEYS", & "ZM_HIGHRISE_BOUGHT_KEYS");
-  add_zombie_buildable("ekeys_zm", & "ZM_HIGHRISE_BUILD_KEYS", & "ZM_HIGHRISE_BUILDING_KEYS", & "ZM_HIGHRISE_BOUGHT_KEYS");
-  add_zombie_buildable("sq_common", & "ZOMBIE_BUILD_SQ_COMMON", & "ZOMBIE_BUILDING_SQ_COMMON");
+  add_zombie_buildable("springpad_zm", &"ZM_HIGHRISE_BUILD_SPRINGPAD", &"ZM_HIGHRISE_BUILDING_SPRINGPAD", &"ZM_HIGHRISE_BOUGHT_SPRINGPAD");
+  add_zombie_buildable("slipgun_zm", &"ZM_HIGHRISE_BUILD_SLIPGUN", &"ZM_HIGHRISE_BUILDING_SLIPGUN", &"ZM_HIGHRISE_BOUGHT_SLIPGUN");
+  add_zombie_buildable("keys_zm", &"ZM_HIGHRISE_BUILD_KEYS", &"ZM_HIGHRISE_BUILDING_KEYS", &"ZM_HIGHRISE_BOUGHT_KEYS");
+  add_zombie_buildable("ekeys_zm", &"ZM_HIGHRISE_BUILD_KEYS", &"ZM_HIGHRISE_BUILDING_KEYS", &"ZM_HIGHRISE_BOUGHT_KEYS");
+  add_zombie_buildable("sq_common", &"ZOMBIE_BUILD_SQ_COMMON", &"ZOMBIE_BUILDING_SQ_COMMON");
 }
 
 include_buildables() {
@@ -84,7 +84,7 @@ include_buildables() {
 }
 
 springpadbuildable() {
-  maps\mp\zombies\_zm_buildables::buildable_trigger_think("springpad_zm_buildable_trigger", "springpad_zm", "equip_springpad_zm", & "ZM_HIGHRISE_GRAB_SPRINGPAD", 1, 1);
+  maps\mp\zombies\_zm_buildables::buildable_trigger_think("springpad_zm_buildable_trigger", "springpad_zm", "equip_springpad_zm", &"ZM_HIGHRISE_GRAB_SPRINGPAD", 1, 1);
 }
 
 slipgunbuildable() {
@@ -95,7 +95,7 @@ slipgunbuildable() {
   else
     persist = 1;
 
-  maps\mp\zombies\_zm_buildables::buildable_trigger_think("slipgun_zm_buildable_trigger", "slipgun_zm", "slipgun_zm", & "ZM_HIGHRISE_GRAB_SLIPGUN", 1, persist);
+  maps\mp\zombies\_zm_buildables::buildable_trigger_think("slipgun_zm_buildable_trigger", "slipgun_zm", "slipgun_zm", &"ZM_HIGHRISE_GRAB_SLIPGUN", 1, persist);
 }
 
 keysbuildable() {

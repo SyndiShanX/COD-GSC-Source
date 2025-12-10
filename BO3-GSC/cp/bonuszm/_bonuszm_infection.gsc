@@ -24,30 +24,30 @@ function autoexec init() {
   }
   level.riser_type = "snow";
   namespace_6ff07a70::init_voice();
-  level.bzm_infectiondialogue1callback = & function_c7784263;
-  level.bzm_infectiondialogue2callback = & function_5570d328;
-  level.bzm_infectiondialogue3callback = & function_7b734d91;
-  level.bzm_infectiondialogue4callback = & function_397fb19e;
-  level.bzm_infectiondialogue5callback = & function_5f822c07;
-  level.bzm_infectiondialogue6callback = & function_ed7abccc;
-  level.bzm_infectiondialogue7callback = & function_137d3735;
-  level.bzm_infectiondialogue8callback = & function_7161f4b2;
-  level.bzm_infectiondialogue8_1callback = & function_b0c5d8fa;
-  level.bzm_infectiondialogue9callback = & function_97646f1b;
-  level.bzm_infectiondialogue10callback = & function_44d98e29;
-  level.bzm_infectiondialogue11callback = & function_1ed713c0;
-  level.bzm_infectiondialogue12callback = & function_90de82fb;
-  level.bzm_infectiondialogue13callback = & function_6adc0892;
-  level.bzm_infectiondialogue14callback = & function_dce377cd;
-  level.bzm_infectiondialogue15callback = & function_b6e0fd64;
-  level.bzm_infectiondialogue16callback = & function_28e86c9f;
-  level.bzm_infectiondialogue17callback = & function_2e5f236;
-  level.bzm_infectiondialogue18callback = & function_74ed6171;
-  level.bzm_infectiondialogue19callback = & function_4eeae708;
-  level.bzm_infectiondialogue20callback = & function_88257448;
-  level.bzm_infectiondialogue21callback = & function_ae27eeb1;
-  level.bzm_infectiondialogue22callback = & function_d42a691a;
-  level.bzm_infectiondialogue23callback = & function_fa2ce383;
+  level.bzm_infectiondialogue1callback = &function_c7784263;
+  level.bzm_infectiondialogue2callback = &function_5570d328;
+  level.bzm_infectiondialogue3callback = &function_7b734d91;
+  level.bzm_infectiondialogue4callback = &function_397fb19e;
+  level.bzm_infectiondialogue5callback = &function_5f822c07;
+  level.bzm_infectiondialogue6callback = &function_ed7abccc;
+  level.bzm_infectiondialogue7callback = &function_137d3735;
+  level.bzm_infectiondialogue8callback = &function_7161f4b2;
+  level.bzm_infectiondialogue8_1callback = &function_b0c5d8fa;
+  level.bzm_infectiondialogue9callback = &function_97646f1b;
+  level.bzm_infectiondialogue10callback = &function_44d98e29;
+  level.bzm_infectiondialogue11callback = &function_1ed713c0;
+  level.bzm_infectiondialogue12callback = &function_90de82fb;
+  level.bzm_infectiondialogue13callback = &function_6adc0892;
+  level.bzm_infectiondialogue14callback = &function_dce377cd;
+  level.bzm_infectiondialogue15callback = &function_b6e0fd64;
+  level.bzm_infectiondialogue16callback = &function_28e86c9f;
+  level.bzm_infectiondialogue17callback = &function_2e5f236;
+  level.bzm_infectiondialogue18callback = &function_74ed6171;
+  level.bzm_infectiondialogue19callback = &function_4eeae708;
+  level.bzm_infectiondialogue20callback = &function_88257448;
+  level.bzm_infectiondialogue21callback = &function_ae27eeb1;
+  level.bzm_infectiondialogue22callback = &function_d42a691a;
+  level.bzm_infectiondialogue23callback = &function_fa2ce383;
 }
 
 function function_c7784263() {

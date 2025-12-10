@@ -14,16 +14,16 @@
 #namespace zm_tomb_ee;
 
 function init() {
-  clientfield::register("world", "wagon_1_fire", 21000, 1, "int", & function_6db69694, 0, 0);
-  clientfield::register("world", "wagon_2_fire", 21000, 1, "int", & function_6db69694, 0, 0);
-  clientfield::register("world", "wagon_3_fire", 21000, 1, "int", & function_6db69694, 0, 0);
-  clientfield::register("world", "ee_sam_portal", 21000, 2, "int", & function_aff1c5b2, 0, 0);
-  clientfield::register("actor", "ee_zombie_fist_fx", 21000, 1, "int", & function_64b44f6b, 0, 0);
-  clientfield::register("actor", "ee_zombie_soul_portal", 21000, 1, "int", & function_a8fdf631, 0, 0);
-  clientfield::register("actor", "ee_zombie_tablet_fx", 21000, 1, "int", & function_74610c8a, 0, 0);
-  clientfield::register("vehicle", "ee_plane_fx", 21000, 1, "int", & function_19452a40, 0, 0);
-  clientfield::register("toplayer", "ee_beacon_reward", 21000, 1, "int", & function_b628a101, 0, 0);
-  clientfield::register("world", "TombEndGameBlackScreen", 21000, 1, "int", & function_13792d2, 0, 0);
+  clientfield::register("world", "wagon_1_fire", 21000, 1, "int", &function_6db69694, 0, 0);
+  clientfield::register("world", "wagon_2_fire", 21000, 1, "int", &function_6db69694, 0, 0);
+  clientfield::register("world", "wagon_3_fire", 21000, 1, "int", &function_6db69694, 0, 0);
+  clientfield::register("world", "ee_sam_portal", 21000, 2, "int", &function_aff1c5b2, 0, 0);
+  clientfield::register("actor", "ee_zombie_fist_fx", 21000, 1, "int", &function_64b44f6b, 0, 0);
+  clientfield::register("actor", "ee_zombie_soul_portal", 21000, 1, "int", &function_a8fdf631, 0, 0);
+  clientfield::register("actor", "ee_zombie_tablet_fx", 21000, 1, "int", &function_74610c8a, 0, 0);
+  clientfield::register("vehicle", "ee_plane_fx", 21000, 1, "int", &function_19452a40, 0, 0);
+  clientfield::register("toplayer", "ee_beacon_reward", 21000, 1, "int", &function_b628a101, 0, 0);
+  clientfield::register("world", "TombEndGameBlackScreen", 21000, 1, "int", &function_13792d2, 0, 0);
   zm_tomb_ee_lights::main();
 }
 

@@ -781,7 +781,7 @@ debug_character_count() {
   drones.alignY = "middle";
   drones.x = 620;
   drones.y = 275;
-  drones.label = & "DEBUG_DRONES";
+  drones.label = &"DEBUG_DRONES";
   drones.alpha = 0;
   drones.fontscale = 1.2;
   allies = NewDebugHudElem();
@@ -789,7 +789,7 @@ debug_character_count() {
   allies.alignY = "middle";
   allies.x = 620;
   allies.y = 290;
-  allies.label = & "DEBUG_ALLIES";
+  allies.label = &"DEBUG_ALLIES";
   allies.alpha = 0;
   allies.fontscale = 1.2;
   axis = NewDebugHudElem();
@@ -797,7 +797,7 @@ debug_character_count() {
   axis.alignY = "middle";
   axis.x = 620;
   axis.y = 305;
-  axis.label = & "DEBUG_AXIS";
+  axis.label = &"DEBUG_AXIS";
   axis.alpha = 0;
   axis.fontscale = 1.2;
   vehicles = NewDebugHudElem();
@@ -805,7 +805,7 @@ debug_character_count() {
   vehicles.alignY = "middle";
   vehicles.x = 620;
   vehicles.y = 320;
-  vehicles.label = & "DEBUG_VEHICLES";
+  vehicles.label = &"DEBUG_VEHICLES";
   vehicles.alpha = 0;
   vehicles.fontscale = 1.2;
   total = NewDebugHudElem();
@@ -813,7 +813,7 @@ debug_character_count() {
   total.alignY = "middle";
   total.x = 620;
   total.y = 335;
-  total.label = & "DEBUG_TOTAL";
+  total.label = &"DEBUG_TOTAL";
   total.alpha = 0;
   total.fontscale = 1.2;
   lastdvar = "off";

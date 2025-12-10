@@ -43,14 +43,14 @@ init() {
   registerkillstreakaltweapon("inventory_ai_tank_drop_mp", "ai_tank_drone_gun_mp");
   registerkillstreakaltweapon("inventory_ai_tank_drop_mp", "ai_tank_drone_rocket_mp");
   registerkillstreakremoteoverrideweapon("inventory_ai_tank_drop_mp", "killstreak_ai_tank_mp");
-  registerkillstreakstrings("inventory_ai_tank_drop_mp", & "KILLSTREAK_EARNED_AI_TANK_DROP", & "KILLSTREAK_AI_TANK_NOT_AVAILABLE", & "KILLSTREAK_AI_TANK_INBOUND");
+  registerkillstreakstrings("inventory_ai_tank_drop_mp", &"KILLSTREAK_EARNED_AI_TANK_DROP", &"KILLSTREAK_AI_TANK_NOT_AVAILABLE", &"KILLSTREAK_AI_TANK_INBOUND");
   registerkillstreakdialog("inventory_ai_tank_drop_mp", "mpl_killstreak_ai_tank", "kls_aitank_used", "", "kls_aitank_enemy", "", "kls_aitank_ready");
   registerkillstreakdevdvar("inventory_ai_tank_drop_mp", "scr_giveaitankdrop");
   registerkillstreak("ai_tank_drop_mp", "ai_tank_drop_mp", "killstreak_ai_tank_drop", "ai_tank_drop_used", ::usekillstreakaitankdrop);
   registerkillstreakaltweapon("ai_tank_drop_mp", "ai_tank_drone_gun_mp");
   registerkillstreakaltweapon("ai_tank_drop_mp", "ai_tank_drone_rocket_mp");
   registerkillstreakremoteoverrideweapon("ai_tank_drop_mp", "killstreak_ai_tank_mp");
-  registerkillstreakstrings("ai_tank_drop_mp", & "KILLSTREAK_EARNED_AI_TANK_DROP", & "KILLSTREAK_AI_TANK_NOT_AVAILABLE", & "KILLSTREAK_AI_TANK_INBOUND");
+  registerkillstreakstrings("ai_tank_drop_mp", &"KILLSTREAK_EARNED_AI_TANK_DROP", &"KILLSTREAK_AI_TANK_NOT_AVAILABLE", &"KILLSTREAK_AI_TANK_INBOUND");
   registerkillstreakdialog("ai_tank_drop_mp", "mpl_killstreak_ai_tank", "kls_aitank_used", "", "kls_aitank_enemy", "", "kls_aitank_ready");
   level.ai_tank_fov = cos(160);
   level.ai_tank_turret_fire_rate = weaponfiretime("ai_tank_drone_gun_mp");

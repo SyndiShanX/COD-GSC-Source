@@ -13,7 +13,7 @@
 #namespace zm_elemental_zombie;
 
 function autoexec __init__sytem__() {
-  system::register("zm_elemental_zombie", & __init__, undefined, undefined);
+  system::register("zm_elemental_zombie", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -31,12 +31,12 @@ function init_fx() {
 }
 
 function register_clientfields() {
-  clientfield::register("actor", "sparky_zombie_spark_fx", 1, 1, "int", & function_de563d9b, 0, 0);
-  clientfield::register("actor", "sparky_zombie_death_fx", 1, 1, "int", & function_d0886efe, 0, 0);
-  clientfield::register("actor", "napalm_zombie_death_fx", 1, 1, "int", & function_56ad3a27, 0, 0);
-  clientfield::register("actor", "sparky_damaged_fx", 1, 1, "counter", & function_86aaed61, 0, 0);
-  clientfield::register("actor", "napalm_damaged_fx", 1, 1, "counter", & function_16467cb6, 0, 0);
-  clientfield::register("actor", "napalm_sfx", 11000, 1, "int", & function_b542950d, 0, 0);
+  clientfield::register("actor", "sparky_zombie_spark_fx", 1, 1, "int", &function_de563d9b, 0, 0);
+  clientfield::register("actor", "sparky_zombie_death_fx", 1, 1, "int", &function_d0886efe, 0, 0);
+  clientfield::register("actor", "napalm_zombie_death_fx", 1, 1, "int", &function_56ad3a27, 0, 0);
+  clientfield::register("actor", "sparky_damaged_fx", 1, 1, "counter", &function_86aaed61, 0, 0);
+  clientfield::register("actor", "napalm_damaged_fx", 1, 1, "counter", &function_16467cb6, 0, 0);
+  clientfield::register("actor", "napalm_sfx", 11000, 1, "int", &function_b542950d, 0, 0);
 }
 
 function function_56ad3a27(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

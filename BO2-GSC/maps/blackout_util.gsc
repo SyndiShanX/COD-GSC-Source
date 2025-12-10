@@ -819,7 +819,7 @@ set_player_menendez() {
   level.player_interactive_model = "c_mul_menendez_captured_viewbody";
   level.player_viewmodel = "c_mul_menendez_captured_viewbody";
   level.player setviewmodel("c_mul_menendez_captured_viewhands");
-  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, & "menendez_no_hud");
+  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, &"menendez_no_hud");
   maps\_friendlyfire::turnoff();
 }
 
@@ -3317,7 +3317,7 @@ save_restored_callback() {
 
   if(isDefined(level.player_is_menendez) && level.player_is_menendez) {
     wait 1;
-    luinotifyevent(&"hud_update_vehicle_custom", 2, 1, & "menendez_no_hud");
+    luinotifyevent(&"hud_update_vehicle_custom", 2, 1, &"menendez_no_hud");
   }
 }
 

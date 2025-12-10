@@ -32,15 +32,15 @@
 
 function autoexec init() {
   initzombiebehaviorsandasm();
-  spawner::add_archetype_spawn_function("zombie_quad", & archetypequadblackboardinit);
-  spawner::add_archetype_spawn_function("zombie_quad", & quadspawnsetup);
+  spawner::add_archetype_spawn_function("zombie_quad", &archetypequadblackboardinit);
+  spawner::add_archetype_spawn_function("zombie_quad", &quadspawnsetup);
 }
 
 function archetypequadblackboardinit() {
   blackboard::createblackboardforentity(self);
   self aiutility::registerutilityblackboardattributes();
   ai::createinterfaceforentity(self);
-  blackboard::registerblackboardattribute(self, "_locomotion_speed", "locomotion_speed_walk", & zombiebehavior::bb_getlocomotionspeedtype);
+  blackboard::registerblackboardattribute(self, "_locomotion_speed", "locomotion_speed_walk", &zombiebehavior::bb_getlocomotionspeedtype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -56,7 +56,7 @@ function archetypequadblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  self.___archetypeonanimscriptedcallback = & archetypequadonanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = &archetypequadonanimscriptedcallback;
   self finalizetrackedblackboardattributes();
 }
 
@@ -66,7 +66,7 @@ function private archetypequadonanimscriptedcallback(entity) {
 }
 
 function private initzombiebehaviorsandasm() {
-  animationstatenetwork::registeranimationmocomp("mocomp_teleport_traversal@zombie_quad", & quadteleporttraversalmocompstart, undefined, undefined);
+  animationstatenetwork::registeranimationmocomp("mocomp_teleport_traversal@zombie_quad", &quadteleporttraversalmocompstart, undefined, undefined);
 }
 
 function quadspawnsetup() {

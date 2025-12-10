@@ -36,7 +36,7 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, s
       sweapon = "destructible_car_mp";
   }
 
-  if(!(idflags & level.idflags_no_protection)) {
+  if(!(idflags &level.idflags_no_protection)) {
     if(self isvehicleimmunetodamage(idflags, smeansofdeath, sweapon)) {
       return;
     }
@@ -177,7 +177,7 @@ callback_vehicleradiusdamage(einflictor, eattacker, idamage, finnerdamage, foute
   }
   friendly = 0;
 
-  if(!(idflags & level.idflags_no_protection)) {
+  if(!(idflags &level.idflags_no_protection)) {
     if(self isvehicleimmunetodamage(idflags, smeansofdeath, sweapon)) {
       return;
     }

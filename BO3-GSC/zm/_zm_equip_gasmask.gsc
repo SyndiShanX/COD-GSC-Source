@@ -15,16 +15,16 @@
 #namespace zm_equip_gasmask;
 
 function autoexec __init__sytem__() {
-  system::register("zm_equip_gasmask", & __init__, & __main__, undefined);
+  system::register("zm_equip_gasmask", &__init__, &__main__, undefined);
 }
 
 function __init__() {
   clientfield::register("toplayer", "gasmaskoverlay", 21000, 1, "int");
   clientfield::register("clientuimodel", "hudItems.showDpadDown_PES", 21000, 1, "int");
-  zm_equipment::register("equip_gasmask", & "ZOMBIE_EQUIP_GASMASK_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_GASMASK_HOWTO", undefined, "gasmask");
-  zm_equipment::register_slot_watcher_override("equip_gasmask", & function_7cb416b);
+  zm_equipment::register("equip_gasmask", &"ZOMBIE_EQUIP_GASMASK_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_GASMASK_HOWTO", undefined, "gasmask");
+  zm_equipment::register_slot_watcher_override("equip_gasmask", &function_7cb416b);
   visionset_mgr::register_info("overlay", "zm_gasmask_postfx", 21000, 501, 32, 1);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
   level.var_f486078e = getweapon("equip_gasmask");
 }
 

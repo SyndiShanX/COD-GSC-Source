@@ -103,7 +103,7 @@ class class_b454dc63 {
 #namespace zm_zod_ee;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_ee", & __init__, undefined, undefined);
+  system::register("zm_zod_ee", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -120,28 +120,28 @@ function __init__() {
   level._effect["zombie/fx_ee_keeper_beam_shield1_fail_zod_zmb"] = "zombie/fx_ee_keeper_beam_shield1_fail_zod_zmb";
   level._effect["zombie/fx_ee_keeper_beam_shield2_fail_zod_zmb"] = "zombie/fx_ee_keeper_beam_shield2_fail_zod_zmb";
   n_bits = getminbitcountfornum(5);
-  clientfield::register("world", "ee_quest_state", 1, n_bits, "int", & function_f2a0dbdc, 0, 0);
+  clientfield::register("world", "ee_quest_state", 1, n_bits, "int", &function_f2a0dbdc, 0, 0);
   n_bits = getminbitcountfornum(6);
   clientfield::register("world", "ee_totem_state", 1, n_bits, "int", undefined, 0, 0);
   n_bits = getminbitcountfornum(10);
-  clientfield::register("world", "ee_keeper_boxer_state", 1, n_bits, "int", & ee_keeper_boxer_state, 0, 0);
-  clientfield::register("world", "ee_keeper_detective_state", 1, n_bits, "int", & ee_keeper_detective_state, 0, 0);
-  clientfield::register("world", "ee_keeper_femme_state", 1, n_bits, "int", & ee_keeper_femme_state, 0, 0);
-  clientfield::register("world", "ee_keeper_magician_state", 1, n_bits, "int", & ee_keeper_magician_state, 0, 0);
-  clientfield::register("world", "ee_shadowman_battle_active", 1, 1, "int", & ee_shadowman_battle_active, 0, 0);
+  clientfield::register("world", "ee_keeper_boxer_state", 1, n_bits, "int", &ee_keeper_boxer_state, 0, 0);
+  clientfield::register("world", "ee_keeper_detective_state", 1, n_bits, "int", &ee_keeper_detective_state, 0, 0);
+  clientfield::register("world", "ee_keeper_femme_state", 1, n_bits, "int", &ee_keeper_femme_state, 0, 0);
+  clientfield::register("world", "ee_keeper_magician_state", 1, n_bits, "int", &ee_keeper_magician_state, 0, 0);
+  clientfield::register("world", "ee_shadowman_battle_active", 1, 1, "int", &ee_shadowman_battle_active, 0, 0);
   n_bits = getminbitcountfornum(5);
-  clientfield::register("world", "ee_superworm_state", 1, n_bits, "int", & ee_superworm_state, 0, 0);
-  clientfield::register("scriptmover", "near_apothigod_active", 1, 1, "int", & near_apothigod_active, 0, 0);
-  clientfield::register("scriptmover", "far_apothigod_active", 1, 1, "int", & far_apothigod_active, 0, 0);
-  clientfield::register("scriptmover", "near_apothigod_roar", 1, 1, "counter", & near_apothigod_active, 0, 0);
-  clientfield::register("scriptmover", "far_apothigod_roar", 1, 1, "counter", & far_apothigod_active, 0, 0);
-  clientfield::register("scriptmover", "apothigod_death", 1, 1, "counter", & apothigod_death, 0, 0);
+  clientfield::register("world", "ee_superworm_state", 1, n_bits, "int", &ee_superworm_state, 0, 0);
+  clientfield::register("scriptmover", "near_apothigod_active", 1, 1, "int", &near_apothigod_active, 0, 0);
+  clientfield::register("scriptmover", "far_apothigod_active", 1, 1, "int", &far_apothigod_active, 0, 0);
+  clientfield::register("scriptmover", "near_apothigod_roar", 1, 1, "counter", &near_apothigod_active, 0, 0);
+  clientfield::register("scriptmover", "far_apothigod_roar", 1, 1, "counter", &far_apothigod_active, 0, 0);
+  clientfield::register("scriptmover", "apothigod_death", 1, 1, "counter", &apothigod_death, 0, 0);
   n_bits = getminbitcountfornum(3);
-  clientfield::register("world", "ee_keeper_beam_state", 1, n_bits, "int", & ee_keeper_beam_state, 0, 0);
-  clientfield::register("world", "ee_final_boss_shields", 1, 1, "int", & ee_final_boss_shields, 0, 0);
-  clientfield::register("toplayer", "ee_final_boss_attack_tell", 1, 1, "int", & ee_final_boss_attack_tell, 0, 0);
-  clientfield::register("scriptmover", "ee_rail_electricity_state", 1, 1, "int", & ee_rail_electricity_state, 0, 0);
-  clientfield::register("world", "sndEndIGC", 1, 1, "int", & sndendigc, 0, 0);
+  clientfield::register("world", "ee_keeper_beam_state", 1, n_bits, "int", &ee_keeper_beam_state, 0, 0);
+  clientfield::register("world", "ee_final_boss_shields", 1, 1, "int", &ee_final_boss_shields, 0, 0);
+  clientfield::register("toplayer", "ee_final_boss_attack_tell", 1, 1, "int", &ee_final_boss_attack_tell, 0, 0);
+  clientfield::register("scriptmover", "ee_rail_electricity_state", 1, 1, "int", &ee_rail_electricity_state, 0, 0);
+  clientfield::register("world", "sndEndIGC", 1, 1, "int", &sndendigc, 0, 0);
 }
 
 function sndendigc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

@@ -85,9 +85,9 @@ defuse_objectives() {
 
   // each index corresponds to a script_index key on the bomb in radiant.
   level.objective_arr = [];
-  level.objective_arr[0] = & "SO_DEFUSE_FAVELA_ESCAPE_OBJ_BOMB_MARKET";
-  level.objective_arr[1] = & "SO_DEFUSE_FAVELA_ESCAPE_OBJ_BOMB_APARTMENT";
-  level.objective_arr[2] = & "SO_DEFUSE_FAVELA_ESCAPE_OBJ_BOMB_STORE";
+  level.objective_arr[0] = &"SO_DEFUSE_FAVELA_ESCAPE_OBJ_BOMB_MARKET";
+  level.objective_arr[1] = &"SO_DEFUSE_FAVELA_ESCAPE_OBJ_BOMB_APARTMENT";
+  level.objective_arr[2] = &"SO_DEFUSE_FAVELA_ESCAPE_OBJ_BOMB_STORE";
 
   defuse_location_arr = getEntArray("defuse_briefcase", "targetname");
   array_thread(defuse_location_arr, ::defuse_location_handler);
@@ -125,7 +125,7 @@ obj_switch_text(dist, obj_id) {
     }
 
     if(close) {
-      Objective_SetPointerTextOverride(obj_id, & "SO_DEFUSE_FAVELA_ESCAPE_OBJ_TEXT");
+      Objective_SetPointerTextOverride(obj_id, &"SO_DEFUSE_FAVELA_ESCAPE_OBJ_TEXT");
       dist = 800;
     } else {
       Objective_SetPointerTextOverride(obj_id, "");

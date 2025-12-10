@@ -270,7 +270,7 @@ create_highlight_hud(x, y, value) {
     hud.color = (0.21, 0, 0);
   } else {
     hud.color = (0.9, 0.9, 0.0);
-    hud.label = & "SCRIPT_PLUS";
+    hud.label = &"SCRIPT_PLUS";
   }
   hud.hidewheninmenu = false;
   hud SetValue(value);

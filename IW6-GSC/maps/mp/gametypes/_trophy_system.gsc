@@ -133,7 +133,7 @@ trophyUseListener(owner) {
           ](offhandweapon))) {
           ammo_count = owner GetAmmoCount(offhandweapon);
           if(ammo_count > 0) {
-            owner setLowerMessage("slots_full", & "ALIEN_COLLECTIBLES_TACTICAL_FULL", 3);
+            owner setLowerMessage("slots_full", &"ALIEN_COLLECTIBLES_TACTICAL_FULL", 3);
             cannot_pick_up = true;
             break;
           }

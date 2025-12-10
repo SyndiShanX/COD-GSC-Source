@@ -692,7 +692,7 @@ gaz_victim_fail() {
 }
 
 drone_gaz_melee_fail() {
-  setdvar("ui_deadquote", & "PAKISTAN_SHARED_KILLED_BY_DRONE");
+  setdvar("ui_deadquote", &"PAKISTAN_SHARED_KILLED_BY_DRONE");
   level thread maps\pakistan_anthem::drone_death_hud(level.player);
   s_spawnpt = getstruct("drone_gaz_melee", "targetname");
   s_goal1 = getstruct("drone_gaz_melee_goal1", "targetname");

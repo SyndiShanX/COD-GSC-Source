@@ -1263,7 +1263,7 @@ vehicle_init(var_0) {
   var_0 thread maps\_vehicle_aianim::handle_attached_guys();
 
   if(isDefined(var_0.script_friendname))
-    var_0 setvehiclelookattext(var_0.script_friendname, & "");
+    var_0 setvehiclelookattext(var_0.script_friendname, &"");
 
   if(!var_0 ischeap())
     var_0 thread vehicle_handleunloadevent();

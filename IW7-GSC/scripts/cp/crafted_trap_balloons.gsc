@@ -11,12 +11,12 @@ init() {
   var_00.modelbase = "equipment_tank_nitrogen_zmb";
   var_00.modelplacement = "equipment_tank_nitrogen_zmb";
   var_00.modelplacementfailed = "equipment_tank_nitrogen_zmb";
-  var_00.pow = & "COOP_CRAFTABLES_PICKUP";
+  var_00.pow = &"COOP_CRAFTABLES_PICKUP";
   var_00.var_9F43 = 0;
-  var_00.pow = & "COOP_CRAFTABLES_PICKUP";
-  var_00.placestring = & "COOP_CRAFTABLES_PLACE";
-  var_00.cannotplacestring = & "COOP_CRAFTABLES_CANNOT_PLACE";
-  var_00.placecancelablestring = & "COOP_CRAFTABLES_PLACE_CANCELABLE";
+  var_00.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_00.placestring = &"COOP_CRAFTABLES_PLACE";
+  var_00.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
+  var_00.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
   var_00.placementheighttolerance = 48;
   var_00.placementradius = 32;
   var_00.carriedtrapoffset = (0, 0, 10);

@@ -40,10 +40,10 @@ main() {
   level.hintprintduration = 4.5;
   level.minimumfriendlycount = 3;
   level.minimumautosavefriendlycount = 5;
-  maps\_utility::add_start("church", ::start_church, & "STARTS_CHURCH");
-  maps\_utility::add_start("field", ::start_field, & "STARTS_FIELD");
-  maps\_utility::add_start("hijack", ::start_hijack, & "STARTS_HIJACK");
-  maps\_utility::add_start("junkyard", ::start_junkyard, & "STARTS_JUNKYARD");
+  maps\_utility::add_start("church", ::start_church, &"STARTS_CHURCH");
+  maps\_utility::add_start("field", ::start_field, &"STARTS_FIELD");
+  maps\_utility::add_start("hijack", ::start_hijack, &"STARTS_HIJACK");
+  maps\_utility::add_start("junkyard", ::start_junkyard, &"STARTS_JUNKYARD");
   maps\_utility::default_start(::start_start);
   maps\ac130_code::scriptcalls();
   precachemodel("vehicle_pickup_roobars_thermal");
@@ -53,7 +53,7 @@ main() {
   common_scripts\utility::array_thread(vehicle_getarray(), maps\_ac130::vehicle_thermal_models);
   thread maps\_spawner::override_random_tire("com_junktire_ac130");
   wait 10;
-  objective_add(1, "current", & "AC130_OBJECTIVE_SUPPORT_FRIENDLIES", (0, 0, 0));
+  objective_add(1, "current", &"AC130_OBJECTIVE_SUPPORT_FRIENDLIES", (0, 0, 0));
 }
 
 start_start() {

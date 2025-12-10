@@ -300,7 +300,7 @@ enable_escape_exit_interaction() {
   make_waypoint_on_escape_exit(var_01);
   var_02 = spawn("script_origin", var_01.origin);
   var_02 makeusable();
-  var_02 sethintstring( & "CP_ZMB_INTERACTIONS_ESCAPE_THE_PARK");
+  var_02 sethintstring(&"CP_ZMB_INTERACTIONS_ESCAPE_THE_PARK");
   var_02 thread wait_for_escape_exit(var_01);
 }
 

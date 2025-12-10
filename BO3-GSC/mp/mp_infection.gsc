@@ -21,8 +21,8 @@ function main() {
   level.uav_z_offset = 4500;
   level.satellite_spawn_from_angle_min = 10;
   level.satellite_spawn_from_angle_max = 11;
-  level.add_raps_omit_locations = & add_raps_omit_locations;
-  level.add_raps_drop_locations = & add_raps_drop_locations;
+  level.add_raps_omit_locations = &add_raps_omit_locations;
+  level.add_raps_drop_locations = &add_raps_drop_locations;
   level.remotemissile_kill_z = -800;
   namespace_5d379c9::main();
   namespace_83fbe97c::main();
@@ -74,7 +74,7 @@ function main() {
 
 function precache() {}
 
-function add_raps_omit_locations( & omit_locations) {
+function add_raps_omit_locations(&omit_locations) {
   if(!isDefined(omit_locations)) {
     omit_locations = [];
   } else if(!isarray(omit_locations)) {
@@ -101,7 +101,7 @@ function add_raps_omit_locations( & omit_locations) {
   omit_locations[omit_locations.size] = (1139, -2779, -20);
 }
 
-function add_raps_drop_locations( & drop_candidate_array) {
+function add_raps_drop_locations(&drop_candidate_array) {
   if(!isDefined(drop_candidate_array)) {
     drop_candidate_array = [];
   } else if(!isarray(drop_candidate_array)) {

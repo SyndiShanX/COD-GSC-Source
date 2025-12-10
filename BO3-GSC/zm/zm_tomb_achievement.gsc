@@ -18,8 +18,8 @@ function init() {
   level thread achievement_tomb_sidequest();
   level thread achievement_all_your_base();
   level thread achievement_playing_with_power();
-  level.achievement_sound_func = & achievement_sound_func;
-  callback::on_connect( & onplayerconnect);
+  level.achievement_sound_func = &achievement_sound_func;
+  callback::on_connect(&onplayerconnect);
 }
 
 function achievement_sound_func(achievement_name_lower) {

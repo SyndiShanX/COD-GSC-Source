@@ -26,9 +26,9 @@ function include_craftables() {
   level.craftable_piece_swap_allowed = 0;
   shared_pieces = getnumexpectedplayers() == 1;
   craftable_name = "dragonride";
-  var_67638a1e = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_transmitter", 64, 64, 0, undefined, & function_6545e739, undefined, & function_7de936c2, undefined, undefined, undefined, ("dragonride" + "_") + "part_transmitter", 1, undefined, undefined, & "ZM_STALINGRAD_DRAGONRIDE_TRANSMITTER", 1);
-  var_a4054f7d = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_codes", 64, 64, 0, undefined, & function_6545e739, undefined, & function_7de936c2, undefined, undefined, undefined, ("dragonride" + "_") + "part_codes", 1, undefined, undefined, & "ZM_STALINGRAD_DRAGONRIDE_CODES", 1);
-  var_a9ad06c5 = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_map", 64, 64, 0, undefined, & function_6545e739, undefined, & function_7de936c2, undefined, undefined, undefined, ("dragonride" + "_") + "part_map", 1, undefined, undefined, & "ZM_STALINGRAD_DRAGONRIDE_MAP", 1);
+  var_67638a1e = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_transmitter", 64, 64, 0, undefined, &function_6545e739, undefined, &function_7de936c2, undefined, undefined, undefined, ("dragonride" + "_") + "part_transmitter", 1, undefined, undefined, &"ZM_STALINGRAD_DRAGONRIDE_TRANSMITTER", 1);
+  var_a4054f7d = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_codes", 64, 64, 0, undefined, &function_6545e739, undefined, &function_7de936c2, undefined, undefined, undefined, ("dragonride" + "_") + "part_codes", 1, undefined, undefined, &"ZM_STALINGRAD_DRAGONRIDE_CODES", 1);
+  var_a9ad06c5 = zm_craftables::generate_zombie_craftable_piece(craftable_name, "part_map", 64, 64, 0, undefined, &function_6545e739, undefined, &function_7de936c2, undefined, undefined, undefined, ("dragonride" + "_") + "part_map", 1, undefined, undefined, &"ZM_STALINGRAD_DRAGONRIDE_MAP", 1);
   var_67638a1e.client_field_state = undefined;
   var_a4054f7d.client_field_state = undefined;
   var_a9ad06c5.client_field_state = undefined;
@@ -37,7 +37,7 @@ function include_craftables() {
   dragonride zm_craftables::add_craftable_piece(var_a4054f7d, "tag_dragon_network_console_part01_socket");
   dragonride zm_craftables::add_craftable_piece(var_67638a1e, "tag_dragon_network_console_part02_socket");
   dragonride zm_craftables::add_craftable_piece(var_a9ad06c5, "tag_dragon_network_console_part03_socket");
-  dragonride.triggerthink = & function_16bbd78d;
+  dragonride.triggerthink = &function_16bbd78d;
   zm_craftables::include_zombie_craftable(dragonride);
   level flag::init(((craftable_name + "_") + "part_transmitter") + "_found");
   level flag::init(((craftable_name + "_") + "part_codes") + "_found");
@@ -51,7 +51,7 @@ function function_16bbd78d() {
 
 function init_craftables() {
   register_clientfields();
-  zm_craftables::add_zombie_craftable("dragonride", & "ZM_STALINGRAD_DRAGONRIDE_CRAFT", "", "", & function_39c3c699);
+  zm_craftables::add_zombie_craftable("dragonride", &"ZM_STALINGRAD_DRAGONRIDE_CRAFT", "", "", &function_39c3c699);
   zm_craftables::set_build_time("dragonride", 0);
   level thread function_d7eb8f21();
 }

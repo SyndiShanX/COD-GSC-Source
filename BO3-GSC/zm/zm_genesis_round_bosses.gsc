@@ -43,7 +43,7 @@
 #namespace zm_genesis_round_bosses;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_round_bosses", & __init__, undefined, undefined);
+  system::register("zm_genesis_round_bosses", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -163,7 +163,7 @@ function spawn_boss(str_enemy, v_pos) {
     } else {
       var_33504256 = zm_ai_margwa_elemental::function_26efbc37(undefined, s_loc);
     }
-    var_33504256.var_26f9f957 = & function_26f9f957;
+    var_33504256.var_26f9f957 = &function_26f9f957;
     level.var_95981590 = var_33504256;
     level notify("hash_c484afcb");
     if(isDefined(var_33504256)) {

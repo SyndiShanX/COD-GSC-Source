@@ -12,8 +12,8 @@
 #namespace zm_island_side_ee_golden_bucket;
 
 function init() {
-  clientfield::register("world", "reveal_golden_bucket_planting_location", 9000, 1, "int", & reveal_golden_bucket_planting_location, 0, 0);
-  clientfield::register("scriptmover", "golden_bucket_glow_fx", 9000, 1, "int", & golden_bucket_glow_fx, 0, 0);
+  clientfield::register("world", "reveal_golden_bucket_planting_location", 9000, 1, "int", &reveal_golden_bucket_planting_location, 0, 0);
+  clientfield::register("scriptmover", "golden_bucket_glow_fx", 9000, 1, "int", &golden_bucket_glow_fx, 0, 0);
 }
 
 function reveal_golden_bucket_planting_location(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

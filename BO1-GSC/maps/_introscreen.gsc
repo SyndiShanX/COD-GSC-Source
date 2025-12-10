@@ -32,59 +32,59 @@ main() {
     case "cuba":
       break;
     case "vorkuta":
-      introscreen_delay(&"VORKUTA_INTROSCREEN_EXTRA", & "VORKUTA_INTROSCREEN_TITLE", & "VORKUTA_INTROSCREEN_PLACE", & "VORKUTA_INTROSCREEN_DATE");
+      introscreen_delay(&"VORKUTA_INTROSCREEN_EXTRA", &"VORKUTA_INTROSCREEN_TITLE", &"VORKUTA_INTROSCREEN_PLACE", &"VORKUTA_INTROSCREEN_DATE");
       break;
     case "quagmire":
     case "creek_1":
       introscreen_delay("", "", "", "", undefined, undefined, undefined, 4 + 7);
       break;
     case "kowloon":
-      introscreen_redact_delay(&"KOWLOON_INTROSCREEN_TITLE", & "KOWLOON_INTROSCREEN_PLACE", & "KOWLOON_INTROSCREEN_NAME", & "KOWLOON_INTROSCREEN_DATE", undefined, 1.0, undefined, undefined, undefined, 0.8);
+      introscreen_redact_delay(&"KOWLOON_INTROSCREEN_TITLE", &"KOWLOON_INTROSCREEN_PLACE", &"KOWLOON_INTROSCREEN_NAME", &"KOWLOON_INTROSCREEN_DATE", undefined, 1.0, undefined, undefined, undefined, 0.8);
       break;
     case "hue_city":
       break;
     case "khe_sanh":
-      introscreen_redact_delay(&"KHE_SANH_INTRO_LINE_ONE", & "KHE_SANH_INTRO_LINE_TWO", & "KHE_SANH_INTRO_LINE_THREE", & "KHE_SANH_INTRO_LINE_FOUR", & "KHE_SANH_INTRO_LINE_FIVE", 1, undefined, undefined, undefined, 0.8);
+      introscreen_redact_delay(&"KHE_SANH_INTRO_LINE_ONE", &"KHE_SANH_INTRO_LINE_TWO", &"KHE_SANH_INTRO_LINE_THREE", &"KHE_SANH_INTRO_LINE_FOUR", &"KHE_SANH_INTRO_LINE_FIVE", 1, undefined, undefined, undefined, 0.8);
       break;
     case "flashpoint":
-      introscreen_redact_delay(&"FLASHPOINT_INTROSCREEN_TITLE", & "FLASHPOINT_INTROSCREEN_PLACE", & "FLASHPOINT_INTROSCREEN_INFO", & "FLASHPOINT_INTROSCREEN_DATE", undefined);
+      introscreen_redact_delay(&"FLASHPOINT_INTROSCREEN_TITLE", &"FLASHPOINT_INTROSCREEN_PLACE", &"FLASHPOINT_INTROSCREEN_INFO", &"FLASHPOINT_INTROSCREEN_DATE", undefined);
       break;
     case "pow":
       level.introscreen_shader = "none";
-      introscreen_redact_delay(&"POW_REDACTED_ONE", & "POW_REDACTED_TWO", & "POW_REDACTED_THREE", & "POW_REDACTED_FOUR", & "POW_REDACTED_FIVE", undefined, undefined, undefined, undefined, undefined, (1, 1, 1));
+      introscreen_redact_delay(&"POW_REDACTED_ONE", &"POW_REDACTED_TWO", &"POW_REDACTED_THREE", &"POW_REDACTED_FOUR", &"POW_REDACTED_FIVE", undefined, undefined, undefined, undefined, undefined, (1, 1, 1));
       break;
     case "nazi_zombie_prototype":
       introscreen_delay();
       break;
     case "pentagon":
-      introscreen_redact_delay(&"PENTAGON_INTROSCREEN_0", & "PENTAGON_INTROSCREEN_1", & "PENTAGON_INTROSCREEN_2", & "PENTAGON_INTROSCREEN_3");
+      introscreen_redact_delay(&"PENTAGON_INTROSCREEN_0", &"PENTAGON_INTROSCREEN_1", &"PENTAGON_INTROSCREEN_2", &"PENTAGON_INTROSCREEN_3");
       break;
     case "fullahead":
       introscreen_delay();
       break;
     case "rebirth":
       if(!isDefined(level.start_point))
-        introscreen_redact_delay(&"REBIRTH_MASON_INTROSCREEN_1", & "REBIRTH_MASON_INTROSCREEN_2", & "REBIRTH_MASON_INTROSCREEN_3", & "REBIRTH_MASON_INTROSCREEN_4", & "REBIRTH_MASON_INTROSCREEN_5");
+        introscreen_redact_delay(&"REBIRTH_MASON_INTROSCREEN_1", &"REBIRTH_MASON_INTROSCREEN_2", &"REBIRTH_MASON_INTROSCREEN_3", &"REBIRTH_MASON_INTROSCREEN_4", &"REBIRTH_MASON_INTROSCREEN_5");
       else {
         if(level.start_point == "default" || level.start_point == "mason_stealth" || level.start_point == "mason_lab")
-          introscreen_redact_delay(&"REBIRTH_MASON_INTROSCREEN_1", & "REBIRTH_MASON_INTROSCREEN_2", & "REBIRTH_MASON_INTROSCREEN_3", & "REBIRTH_MASON_INTROSCREEN_4", & "REBIRTH_MASON_INTROSCREEN_5");
+          introscreen_redact_delay(&"REBIRTH_MASON_INTROSCREEN_1", &"REBIRTH_MASON_INTROSCREEN_2", &"REBIRTH_MASON_INTROSCREEN_3", &"REBIRTH_MASON_INTROSCREEN_4", &"REBIRTH_MASON_INTROSCREEN_5");
         else {
           if(level.start_point != "btr_rail")
-            introscreen_redact_delay(&"REBIRTH_MASON_INTROSCREEN_1", & "REBIRTH_HUDSON_INTROSCREEN_2", & "REBIRTH_HUDSON_INTROSCREEN_3", & "REBIRTH_HUDSON_INTROSCREEN_4");
+            introscreen_redact_delay(&"REBIRTH_MASON_INTROSCREEN_1", &"REBIRTH_HUDSON_INTROSCREEN_2", &"REBIRTH_HUDSON_INTROSCREEN_3", &"REBIRTH_HUDSON_INTROSCREEN_4");
         }
       }
       break;
     case "river":
-      introscreen_redact_delay(&"RIVER_INTROSCREEN_1", & "RIVER_INTROSCREEN_3", & "RIVER_INTROSCREEN_4", & "RIVER_INTROSCREEN_5", undefined);
+      introscreen_redact_delay(&"RIVER_INTROSCREEN_1", &"RIVER_INTROSCREEN_3", &"RIVER_INTROSCREEN_4", &"RIVER_INTROSCREEN_5", undefined);
       break;
     case "wmd_sr71":
-      introscreen_redact_delay(&"WMD_SR71_INTRO_LEVELNAME", & "WMD_SR71_INTRO_DATE", & "WMD_SR71_INTRO_EXTRA", & "WMD_SR71_INTRO_NAME", & "WMD_SR71_INTRO_LOCATION");
+      introscreen_redact_delay(&"WMD_SR71_INTRO_LEVELNAME", &"WMD_SR71_INTRO_DATE", &"WMD_SR71_INTRO_EXTRA", &"WMD_SR71_INTRO_NAME", &"WMD_SR71_INTRO_LOCATION");
       break;
     case "wmd":
-      introscreen_redact_delay(&"WMD_INTRO_LEVELNAME", & "WMD_INTRO_LOCATION", & "WMD_INTRO_EXTRA", & "WMD_INTRO_NAME", & "WMD_INTRO_DATE");
+      introscreen_redact_delay(&"WMD_INTRO_LEVELNAME", &"WMD_INTRO_LOCATION", &"WMD_INTRO_EXTRA", &"WMD_INTRO_NAME", &"WMD_INTRO_DATE");
       break;
     case "underwaterbase":
-      introscreen_redact_delay(&"UNDERWATERBASE_INTROSCREEN_1", & "UNDERWATERBASE_INTROSCREEN_2", & "UNDERWATERBASE_INTROSCREEN_3", & "UNDERWATERBASE_INTROSCREEN_4", & "UNDERWATERBASE_INTROSCREEN_5");
+      introscreen_redact_delay(&"UNDERWATERBASE_INTROSCREEN_1", &"UNDERWATERBASE_INTROSCREEN_2", &"UNDERWATERBASE_INTROSCREEN_3", &"UNDERWATERBASE_INTROSCREEN_4", &"UNDERWATERBASE_INTROSCREEN_5");
       break;
     default:
       wait(0.05);

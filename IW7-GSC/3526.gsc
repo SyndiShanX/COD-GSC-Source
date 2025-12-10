@@ -22,7 +22,7 @@ init() {
   level.func_117B0["thor"].func_1352D = "odin_target_killed";
   level.func_117B0["thor"].func_1352C = "odin_targets_killed";
   level.func_117B0["thor"].func_12B20 = 4;
-  level.func_117B0["thor"].func_12B80 = & "KILLSTREAKS_LOKI_UNAVAILABLE";
+  level.func_117B0["thor"].func_12B80 = &"KILLSTREAKS_LOKI_UNAVAILABLE";
   level.func_117B0["thor"].func_73BE = "compass_objpoint_airstrike_friendly";
   level.func_117B0["thor"].func_6485 = "compass_objpoint_airstrike_busy";
   level.func_117B0["thor"].weapon["missile"] = spawnStruct();

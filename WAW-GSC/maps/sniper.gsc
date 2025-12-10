@@ -57,19 +57,19 @@ main() {
     precacherumble("damage_light");
     stringrefs();
     default_start(maps\sniper_event1::event1_start);
-    add_start("event1b", maps\sniper_event1::event1_shooting_start, & "STARTS_SNIPER_EVENT1B");
-    add_start("event1c", maps\sniper_event1::event1_moveup_start, & "STARTS_SNIPER_EVENT1C");
-    add_start("event1d", maps\sniper_event1::event1d_start, & "STARTS_SNIPER_EVENT1D");
-    add_start("event2", maps\sniper_event2::event2_start, & "STARTS_SNIPER_EVENT2");
-    add_start("event2b", maps\sniper_event2::event2b_start, & "STARTS_SNIPER_EVENT2B");
-    add_start("event2c", maps\sniper_event2::event2c_start, & "STARTS_SNIPER_EVENT2C");
-    add_start("event2d", maps\sniper_event2::event2d_start, & "STARTS_SNIPER_EVENT2D");
-    add_start("event2e", maps\sniper_event2::event2e_start, & "STARTS_SNIPER_EVENT2E");
-    add_start("event3", maps\sniper_event3::event3_start, & "STARTS_SNIPER_EVENT3");
-    add_start("event3b", maps\sniper_event3::event3b_start, & "STARTS_SNIPER_EVENT3B");
-    add_start("event3c", maps\sniper_event3::event3c_start, & "STARTS_SNIPER_EVENT3C");
-    add_start("event4", maps\sniper_event4::event4_start, & "STARTS_SNIPER_EVENT4");
-    add_start("event5", maps\sniper_event4::event5_skipto, & "STARTS_SNIPER_EVENT5");
+    add_start("event1b", maps\sniper_event1::event1_shooting_start, &"STARTS_SNIPER_EVENT1B");
+    add_start("event1c", maps\sniper_event1::event1_moveup_start, &"STARTS_SNIPER_EVENT1C");
+    add_start("event1d", maps\sniper_event1::event1d_start, &"STARTS_SNIPER_EVENT1D");
+    add_start("event2", maps\sniper_event2::event2_start, &"STARTS_SNIPER_EVENT2");
+    add_start("event2b", maps\sniper_event2::event2b_start, &"STARTS_SNIPER_EVENT2B");
+    add_start("event2c", maps\sniper_event2::event2c_start, &"STARTS_SNIPER_EVENT2C");
+    add_start("event2d", maps\sniper_event2::event2d_start, &"STARTS_SNIPER_EVENT2D");
+    add_start("event2e", maps\sniper_event2::event2e_start, &"STARTS_SNIPER_EVENT2E");
+    add_start("event3", maps\sniper_event3::event3_start, &"STARTS_SNIPER_EVENT3");
+    add_start("event3b", maps\sniper_event3::event3b_start, &"STARTS_SNIPER_EVENT3B");
+    add_start("event3c", maps\sniper_event3::event3c_start, &"STARTS_SNIPER_EVENT3C");
+    add_start("event4", maps\sniper_event4::event4_start, &"STARTS_SNIPER_EVENT4");
+    add_start("event5", maps\sniper_event4::event5_skipto, &"STARTS_SNIPER_EVENT5");
     animscripts\dog_init::initDogAnimations();
     maps\sniper_anim::drone_custom_run_cycles();
     maps\_drones::init();
@@ -335,7 +335,7 @@ main() {
       return angles + (0, stumble_angles[1], 0);
     }
     do_custom_introscreen() {
-      custom_introscreen(&"SNIPER_INTROSCREEN_TITLE", & "SNIPER_INTROSCREEN_DATE", & "SNIPER_INTROSCREEN_PLACE", & "SNIPER_INTROSCREEN_INFO", & "SNIPER_INTROSCREEN_INFO2");
+      custom_introscreen(&"SNIPER_INTROSCREEN_TITLE", &"SNIPER_INTROSCREEN_DATE", &"SNIPER_INTROSCREEN_PLACE", &"SNIPER_INTROSCREEN_INFO", &"SNIPER_INTROSCREEN_INFO2");
     }
     custom_introscreen(string1, string2, string3, string4, string5) {
       if(GetDvar("introscreen") == "0") {
@@ -606,7 +606,7 @@ main() {
           level.friendlyfirecount++;
         }
         if(level.friendlyfirecount > 1) {
-          SetDvar("ui_deadquote", & "SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
+          SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
           missionfailed();
         }
       }

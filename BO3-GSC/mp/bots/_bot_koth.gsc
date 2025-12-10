@@ -13,9 +13,9 @@
 #namespace bot_koth;
 
 function init() {
-  level.onbotspawned = & on_bot_spawned;
-  level.botupdatethreatgoal = & bot_update_threat_goal;
-  level.botidle = & bot_idle;
+  level.onbotspawned = &on_bot_spawned;
+  level.botupdatethreatgoal = &bot_update_threat_goal;
+  level.botidle = &bot_idle;
 }
 
 function on_bot_spawned() {

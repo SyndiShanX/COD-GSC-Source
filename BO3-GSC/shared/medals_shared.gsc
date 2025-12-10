@@ -9,18 +9,18 @@
 #namespace medals;
 
 function autoexec __init__sytem__() {
-  system::register("medals", & __init__, undefined, undefined);
+  system::register("medals", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
+  callback::on_start_gametype(&init);
 }
 
 function init() {
   level.medalinfo = [];
   level.medalcallbacks = [];
   level.numkills = 0;
-  callback::on_connect( & on_player_connect);
+  callback::on_connect(&on_player_connect);
 }
 
 function on_player_connect() {

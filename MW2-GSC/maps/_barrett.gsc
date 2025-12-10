@@ -29,7 +29,7 @@ barrett_init() {
   //precacheitem( "barrett_fake" );
   precacheshellshock("barrett");
   // Press forwards or backwards to adjust zoom.
-  add_hint_string("barrett", & "WEAPON_PRESS_FORWARDS_OR_BACKWARDS", ::should_break_zoom_hint);
+  add_hint_string("barrett", &"WEAPON_PRESS_FORWARDS_OR_BACKWARDS", ::should_break_zoom_hint);
 
   flag_init("player_is_on_turret");
   flag_init("player_on_barret");
@@ -54,7 +54,7 @@ barrett_init() {
 
 exchange_barrett_trigger() {
   barrett_trigger = getent("barrett_trigger", "targetname");
-  // Press and hold^3 &&1 ^7to use the M82 .50 Caliber Sniper Rifle
+  // Press and hold^3 && 1 ^7to use the M82 .50 Caliber Sniper Rifle
   barrett_trigger sethintstring(&"WEAPON_BARRETT_USE");
   turret = getent("turret2", "targetname");
 

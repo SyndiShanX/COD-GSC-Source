@@ -19,7 +19,7 @@
 #namespace zm_weap_thundergun;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_thundergun", & __init__, & __main__, undefined);
+  system::register("zm_weap_thundergun", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -40,12 +40,12 @@ function __main__() {
   level.thundergun_gib_refs[level.thundergun_gib_refs.size] = "guts";
   level.thundergun_gib_refs[level.thundergun_gib_refs.size] = "right_arm";
   level.thundergun_gib_refs[level.thundergun_gib_refs.size] = "left_arm";
-  level.basic_zombie_thundergun_knockdown = & zombie_knockdown;
+  level.basic_zombie_thundergun_knockdown = &zombie_knockdown;
   if(!isDefined(level.override_thundergun_damage_func)) {
-    level.override_thundergun_damage_func = & override_thundergun_damage_func;
+    level.override_thundergun_damage_func = &override_thundergun_damage_func;
   }
   level thread thundergun_devgui_dvar_think();
-  callback::on_connect( & thundergun_on_player_connect);
+  callback::on_connect(&thundergun_on_player_connect);
 }
 
 function thundergun_devgui_dvar_think() {
@@ -238,9 +238,9 @@ function zombie_knockdown(player, gib) {
   } else {
     damage = level.zombie_vars["thundergun_knockdown_damage"];
     self playSound("fly_thundergun_forcehit");
-    self.thundergun_handle_pain_notetracks = & handle_thundergun_pain_notetracks;
+    self.thundergun_handle_pain_notetracks = &handle_thundergun_pain_notetracks;
     self dodamage(damage, player.origin, player);
-    self animcustom( & playthundergunpainanim);
+    self animcustom(&playthundergunpainanim);
   }
 }
 

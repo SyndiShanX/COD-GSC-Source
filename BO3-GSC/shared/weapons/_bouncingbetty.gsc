@@ -38,7 +38,7 @@ function init_shared() {
   level.bettybombletcount = 4;
   level thread register();
   level thread bouncingbettydvarupdate();
-  callback::add_weapon_watcher( & createbouncingbettywatcher);
+  callback::add_weapon_watcher(&createbouncingbettywatcher);
 }
 
 function register() {
@@ -66,9 +66,9 @@ function bouncingbettydvarupdate() {
 
 function createbouncingbettywatcher() {
   watcher = self weaponobjects::createproximityweaponobjectwatcher("bouncingbetty", self.team);
-  watcher.onspawn = & onspawnbouncingbetty;
+  watcher.onspawn = &onspawnbouncingbetty;
   watcher.watchforfire = 1;
-  watcher.ondetonatecallback = & bouncingbettydetonate;
+  watcher.ondetonatecallback = &bouncingbettydetonate;
   watcher.activatesound = "wpn_betty_alert";
   watcher.hackable = 1;
   watcher.hackertoolradius = level.equipmenthackertoolradius;
@@ -80,8 +80,8 @@ function createbouncingbettywatcher() {
   watcher.detectionmindist = level.bettymindist;
   watcher.detectiongraceperiod = level.bettygraceperiod;
   watcher.detonateradius = level.bettyradius;
-  watcher.onfizzleout = & onbouncingbettyfizzleout;
-  watcher.stun = & weaponobjects::weaponstun;
+  watcher.onfizzleout = &onbouncingbettyfizzleout;
+  watcher.stun = &weaponobjects::weaponstun;
   watcher.stuntime = level.bettystuntime;
   watcher.activationdelay = level.bettyactivationdelay;
 }

@@ -48,15 +48,15 @@ function init() {
   level.activeplayercounteruavs = [];
   level.counter_uav_entities = [];
   if(tweakables::gettweakablevalue("killstreak", "allowcounteruav")) {
-    killstreaks::register("counteruav", "counteruav", "killstreak_counteruav", "counteruav_used", & activatecounteruav);
-    killstreaks::register_strings("counteruav", & "KILLSTREAK_EARNED_COUNTERUAV", & "KILLSTREAK_COUNTERUAV_NOT_AVAILABLE", & "KILLSTREAK_COUNTERUAV_INBOUND", undefined, & "KILLSTREAK_COUNTERUAV_HACKED");
+    killstreaks::register("counteruav", "counteruav", "killstreak_counteruav", "counteruav_used", &activatecounteruav);
+    killstreaks::register_strings("counteruav", &"KILLSTREAK_EARNED_COUNTERUAV", &"KILLSTREAK_COUNTERUAV_NOT_AVAILABLE", &"KILLSTREAK_COUNTERUAV_INBOUND", undefined, &"KILLSTREAK_COUNTERUAV_HACKED");
     killstreaks::register_dialog("counteruav", "mpl_killstreak_radar", "counterUavDialogBundle", "counterUavPilotDialogBundle", "friendlyCounterUav", "enemyCounterUav", "enemyCounterUavMultiple", "friendlyCounterUavHacked", "enemyCounterUavHacked", "requestCounterUav", "threatCounterUav");
   }
   clientfield::register("toplayer", "counteruav", 1, 1, "int");
   level thread watchcounteruavs();
-  callback::on_connect( & onplayerconnect);
-  callback::on_spawned( & onplayerspawned);
-  callback::on_joined_team( & onplayerjoinedteam);
+  callback::on_connect(&onplayerconnect);
+  callback::on_spawned(&onplayerspawned);
+  callback::on_joined_team(&onplayerjoinedteam);
   if(getdvarint("")) {
     level thread waitanddebugdrawoffsetlist();
   }
@@ -197,12 +197,12 @@ function activatecounteruav() {
   counteruav setscale(1);
   counteruav clientfield::set("enemyvehicle", 1);
   counteruav.killstreak_id = killstreak_id;
-  counteruav thread killstreaks::waittillemp( & destroycounteruavbyemp);
-  counteruav thread killstreaks::waitfortimeout("counteruav", 30000, & ontimeout, "delete", "death", "crashing");
-  counteruav thread killstreaks::waitfortimecheck(30000 / 2, & ontimecheck, "delete", "death", "crashing");
-  counteruav thread util::waittillendonthreaded("death", & destroycounteruav, "delete", "leaving");
+  counteruav thread killstreaks::waittillemp(&destroycounteruavbyemp);
+  counteruav thread killstreaks::waitfortimeout("counteruav", 30000, &ontimeout, "delete", "death", "crashing");
+  counteruav thread killstreaks::waitfortimecheck(30000 / 2, &ontimecheck, "delete", "death", "crashing");
+  counteruav thread util::waittillendonthreaded("death", &destroycounteruav, "delete", "leaving");
   counteruav setCanDamage(1);
-  counteruav thread killstreaks::monitordamage("counteruav", 700, & destroycounteruav, 700 * 0.5, & onlowhealth, 0, undefined, 1);
+  counteruav thread killstreaks::monitordamage("counteruav", 700, &destroycounteruav, 700 * 0.5, &onlowhealth, 0, undefined, 1);
   counteruav playLoopSound("veh_uav_engine_loop", 1);
   counteruav thread listenformove();
   self killstreaks::play_killstreak_start_dialog("counteruav", self.team, killstreak_id);
@@ -221,8 +221,8 @@ function spawncounteruav(owner, killstreak_id) {
   minflyheight = airsupport::getminimumflyheight();
   cuav = spawnvehicle("veh_counteruav_mp", airsupport::getmapcenter() + (0, 0, minflyheight + (isDefined(level.counter_uav_position_z_offset) ? level.counter_uav_position_z_offset : 1000)), (0, 0, 0), "counteruav");
   cuav assignfirstavailableoffsetindex();
-  cuav killstreaks::configure_team("counteruav", killstreak_id, owner, undefined, undefined, & configureteampost);
-  cuav killstreak_hacking::enable_hacking("counteruav", & hackedprefunction, undefined);
+  cuav killstreaks::configure_team("counteruav", killstreak_id, owner, undefined, undefined, &configureteampost);
+  cuav killstreak_hacking::enable_hacking("counteruav", &hackedprefunction, undefined);
   cuav.targetname = "counteruav";
   killstreak_detect::killstreaktargetset(cuav);
   cuav thread heatseekingmissile::missiletarget_proximitydetonateincomingmissile("crashing", undefined, 1);
@@ -246,7 +246,7 @@ function configureteampost(owner, ishacked) {
   } else {
     cuav setvisibletoall();
   }
-  cuav thread teams::waituntilteamchangesingleton(owner, "CUAV_watch_team_change", & onteamchange, self.entnum, "death", "leaving", "crashing");
+  cuav thread teams::waituntilteamchangesingleton(owner, "CUAV_watch_team_change", &onteamchange, self.entnum, "death", "leaving", "crashing");
   cuav addactivecounteruav();
 }
 
@@ -327,7 +327,7 @@ function destroycounteruav(attacker, weapon) {
   if(isDefined(attacker) && (!isDefined(self.owner) || self.owner util::isenemyplayer(attacker))) {
     challenges::destroyedaircraft(attacker, weapon, 0);
     scoreevents::processscoreevent("destroyed_counter_uav", attacker, self.owner, weapon);
-    luinotifyevent(&"player_callout", 2, & "KILLSTREAK_DESTROYED_COUNTERUAV", attacker.entnum);
+    luinotifyevent(&"player_callout", 2, &"KILLSTREAK_DESTROYED_COUNTERUAV", attacker.entnum);
     attacker challenges::addflyswatterstat(weapon, self);
   }
   self playSound("evt_helicopter_midair_exp");

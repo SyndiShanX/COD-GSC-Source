@@ -19,28 +19,28 @@
 #namespace end_game_taunts;
 
 function autoexec __init__sytem__() {
-  system::register("end_game_taunts", & __init__, undefined, undefined);
+  system::register("end_game_taunts", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  animation::add_notetrack_func("taunts::hide", & hidemodel);
-  animation::add_notetrack_func("taunts::show", & showmodel);
-  animation::add_notetrack_func("taunts::cloneshaderon", & cloneshaderon);
-  animation::add_notetrack_func("taunts::cloneshaderoff", & cloneshaderoff);
-  animation::add_notetrack_func("taunts::camoshaderon", & camoshaderon);
-  animation::add_notetrack_func("taunts::camoshaderoff", & camoshaderoff);
-  animation::add_notetrack_func("taunts::spawncameraglass", & spawncameraglass);
-  animation::add_notetrack_func("taunts::deletecameraglass", & deletecameraglass);
-  animation::add_notetrack_func("taunts::reaperbulletglass", & reaperbulletglass);
-  animation::add_notetrack_func("taunts::centerbulletglass", & centerbulletglass);
-  animation::add_notetrack_func("taunts::talonbulletglassleft", & talonbulletglassleft);
-  animation::add_notetrack_func("taunts::talonbulletglassright", & talonbulletglassright);
-  animation::add_notetrack_func("taunts::fireweapon", & fireweapon);
-  animation::add_notetrack_func("taunts::stopfireweapon", & stopfireweapon);
-  animation::add_notetrack_func("taunts::firebeam", & firebeam);
-  animation::add_notetrack_func("taunts::stopfirebeam", & stopfirebeam);
-  animation::add_notetrack_func("taunts::playwinnerteamfx", & playwinnerteamfx);
-  animation::add_notetrack_func("taunts::playlocalteamfx", & playlocalteamfx);
+  animation::add_notetrack_func("taunts::hide", &hidemodel);
+  animation::add_notetrack_func("taunts::show", &showmodel);
+  animation::add_notetrack_func("taunts::cloneshaderon", &cloneshaderon);
+  animation::add_notetrack_func("taunts::cloneshaderoff", &cloneshaderoff);
+  animation::add_notetrack_func("taunts::camoshaderon", &camoshaderon);
+  animation::add_notetrack_func("taunts::camoshaderoff", &camoshaderoff);
+  animation::add_notetrack_func("taunts::spawncameraglass", &spawncameraglass);
+  animation::add_notetrack_func("taunts::deletecameraglass", &deletecameraglass);
+  animation::add_notetrack_func("taunts::reaperbulletglass", &reaperbulletglass);
+  animation::add_notetrack_func("taunts::centerbulletglass", &centerbulletglass);
+  animation::add_notetrack_func("taunts::talonbulletglassleft", &talonbulletglassleft);
+  animation::add_notetrack_func("taunts::talonbulletglassright", &talonbulletglassright);
+  animation::add_notetrack_func("taunts::fireweapon", &fireweapon);
+  animation::add_notetrack_func("taunts::stopfireweapon", &stopfireweapon);
+  animation::add_notetrack_func("taunts::firebeam", &firebeam);
+  animation::add_notetrack_func("taunts::stopfirebeam", &stopfirebeam);
+  animation::add_notetrack_func("taunts::playwinnerteamfx", &playwinnerteamfx);
+  animation::add_notetrack_func("taunts::playlocalteamfx", &playlocalteamfx);
   level.epictauntxmodels = array("gfx_p7_zm_asc_data_recorder_glass", "wpn_t7_hero_reaper_minigun_prop", "wpn_t7_loot_hero_reaper3_minigun_prop", "c_zsf_robot_grunt_body", "c_zsf_robot_grunt_head", "veh_t7_drone_raps_mp_lite", "veh_t7_drone_raps_mp_dark", "veh_t7_drone_attack_gun_litecolor", "veh_t7_drone_attack_gun_darkcolor", "wpn_t7_arm_blade_prop", "wpn_t7_hero_annihilator_prop", "wpn_t7_hero_bow_prop", "wpn_t7_hero_electro_prop_animate", "wpn_t7_hero_flamethrower_world", "wpn_t7_hero_mgl_world", "wpn_t7_hero_mgl_prop", "wpn_t7_hero_spike_prop", "wpn_t7_hero_seraph_machete_prop", "wpn_t7_loot_crowbar_world", "wpn_t7_spider_mine_world", "wpn_t7_zmb_katana_prop");
   stop_stream_epic_models();
 }

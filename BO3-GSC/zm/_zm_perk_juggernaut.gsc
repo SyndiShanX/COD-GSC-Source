@@ -20,7 +20,7 @@
 #namespace zm_perk_juggernaut;
 
 function autoexec __init__sytem__() {
-  system::register("zm_perk_juggernaut", & __init__, undefined, undefined);
+  system::register("zm_perk_juggernaut", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -28,11 +28,11 @@ function __init__() {
 }
 
 function enable_juggernaut_perk_for_level() {
-  zm_perks::register_perk_basic_info("specialty_armorvest", "juggernog", 2500, & "ZOMBIE_PERK_JUGGERNAUT", getweapon("zombie_perk_bottle_jugg"));
-  zm_perks::register_perk_precache_func("specialty_armorvest", & juggernaut_precache);
-  zm_perks::register_perk_clientfields("specialty_armorvest", & juggernaut_register_clientfield, & juggernaut_set_clientfield);
-  zm_perks::register_perk_machine("specialty_armorvest", & juggernaut_perk_machine_setup, & init_juggernaut);
-  zm_perks::register_perk_threads("specialty_armorvest", & give_juggernaut_perk, & take_juggernaut_perk);
+  zm_perks::register_perk_basic_info("specialty_armorvest", "juggernog", 2500, &"ZOMBIE_PERK_JUGGERNAUT", getweapon("zombie_perk_bottle_jugg"));
+  zm_perks::register_perk_precache_func("specialty_armorvest", &juggernaut_precache);
+  zm_perks::register_perk_clientfields("specialty_armorvest", &juggernaut_register_clientfield, &juggernaut_set_clientfield);
+  zm_perks::register_perk_machine("specialty_armorvest", &juggernaut_perk_machine_setup, &init_juggernaut);
+  zm_perks::register_perk_threads("specialty_armorvest", &give_juggernaut_perk, &take_juggernaut_perk);
   zm_perks::register_perk_host_migration_params("specialty_armorvest", "vending_jugg", "jugger_light");
 }
 

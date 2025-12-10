@@ -257,7 +257,7 @@ func_F141(param_00) {
 
   self.melee.var_B5FE = newclienthudelem(level.player);
   self.melee.var_B5FE.color = (1, 1, 1);
-  self.melee.var_B5FE settext( & "SCRIPT_PLATFORM_HINT_MELEE_TAP");
+  self.melee.var_B5FE settext(&"SCRIPT_PLATFORM_HINT_MELEE_TAP");
   self.melee.var_B5FE.x = 0;
   self.melee.var_B5FE.y = 20;
   self.melee.var_B5FE.alignx = "center";

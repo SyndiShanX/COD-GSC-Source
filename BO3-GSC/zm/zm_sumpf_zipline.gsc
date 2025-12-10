@@ -25,7 +25,7 @@
 #namespace zm_sumpf_zipline;
 
 function initzipline() {
-  callback::on_connect( & function_3c93cd15);
+  callback::on_connect(&function_3c93cd15);
   zipbuytrigger = getEntArray("zipline_buy_trigger", "targetname");
   nonstatictrig = undefined;
   statictrig = undefined;
@@ -91,7 +91,7 @@ function initzipline() {
   wait(waittime);
   statictrig thread recallzipswitch(-180);
   statictrig waittill("recallleverdone");
-  array::thread_all(zipbuytrigger, & zipthink);
+  array::thread_all(zipbuytrigger, &zipthink);
 }
 
 function zip_rope_audio() {

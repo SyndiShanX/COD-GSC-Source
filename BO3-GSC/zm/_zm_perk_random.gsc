@@ -20,7 +20,7 @@
 #namespace zm_perk_random;
 
 function autoexec __init__sytem__() {
-  system::register("zm_perk_random", & __init__, & __main__, undefined);
+  system::register("zm_perk_random", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -46,7 +46,7 @@ function __main__() {
     level.perk_random_machine_count = 1;
   }
   if(!isDefined(level.perk_random_machine_state_func)) {
-    level.perk_random_machine_state_func = & process_perk_random_machine_state;
+    level.perk_random_machine_state_func = &process_perk_random_machine_state;
   }
   level thread setup_devgui();
   level thread setup_perk_random_machines();
@@ -100,9 +100,9 @@ function create_perk_random_machine_unitrigger_stub() {
   self.unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   self.unitrigger_stub.trigger_target = self;
   zm_unitrigger::unitrigger_force_per_player_triggers(self.unitrigger_stub, 1);
-  self.unitrigger_stub.prompt_and_visibility_func = & perk_random_machine_trigger_update_prompt;
+  self.unitrigger_stub.prompt_and_visibility_func = &perk_random_machine_trigger_update_prompt;
   self.unitrigger_stub.script_int = self.script_int;
-  thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, & perk_random_unitrigger_think);
+  thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, &perk_random_unitrigger_think);
 }
 
 function perk_random_machine_trigger_update_prompt(player) {
@@ -125,13 +125,13 @@ function perk_random_machine_stub_update_prompt(player) {
   self.hint_parm1 = undefined;
   n_power_on = is_power_on(self.stub.script_int);
   if(!n_power_on) {
-    self.hint_string = & "ZOMBIE_NEED_POWER";
+    self.hint_string = &"ZOMBIE_NEED_POWER";
     return false;
   }
   if(self.stub.trigger_target.state == "idle" || self.stub.trigger_target.state == "vending") {
     n_purchase_limit = player zm_utility::get_player_perk_purchase_limit();
     if(!player zm_utility::can_player_purchase_perk()) {
-      self.hint_string = & "ZOMBIE_RANDOM_PERK_TOO_MANY";
+      self.hint_string = &"ZOMBIE_RANDOM_PERK_TOO_MANY";
       if(isDefined(n_purchase_limit)) {
         self.hint_parm1 = n_purchase_limit;
       }
@@ -139,7 +139,7 @@ function perk_random_machine_stub_update_prompt(player) {
     }
     if(isDefined(self.stub.trigger_target.machine_user)) {
       if(isDefined(self.stub.trigger_target.grab_perk_hint) && self.stub.trigger_target.grab_perk_hint) {
-        self.hint_string = & "ZOMBIE_RANDOM_PERK_PICKUP";
+        self.hint_string = &"ZOMBIE_RANDOM_PERK_PICKUP";
         return true;
       }
       self.hint_string = "";
@@ -147,17 +147,17 @@ function perk_random_machine_stub_update_prompt(player) {
     }
     n_purchase_limit = player zm_utility::get_player_perk_purchase_limit();
     if(!player zm_utility::can_player_purchase_perk()) {
-      self.hint_string = & "ZOMBIE_RANDOM_PERK_TOO_MANY";
+      self.hint_string = &"ZOMBIE_RANDOM_PERK_TOO_MANY";
       if(isDefined(n_purchase_limit)) {
         self.hint_parm1 = n_purchase_limit;
       }
       return false;
     }
-    self.hint_string = & "ZOMBIE_RANDOM_PERK_BUY";
+    self.hint_string = &"ZOMBIE_RANDOM_PERK_BUY";
     self.hint_parm1 = level._random_zombie_perk_cost;
     return true;
   }
-  self.hint_string = & "ZOMBIE_RANDOM_PERK_ELSEWHERE";
+  self.hint_string = &"ZOMBIE_RANDOM_PERK_ELSEWHERE";
   return false;
 }
 
@@ -626,7 +626,7 @@ function is_power_on(n_power_index) {
 }
 
 function setup_devgui() {
-  level.perk_random_devgui_callback = & wunderfizz_devgui_callback;
+  level.perk_random_devgui_callback = &wunderfizz_devgui_callback;
 }
 
 function wunderfizz_devgui_callback(cmd) {

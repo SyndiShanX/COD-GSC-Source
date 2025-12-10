@@ -10,12 +10,12 @@
 #namespace zm_ai_dogs;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_dogs", & __init__, undefined, undefined);
+  system::register("zm_ai_dogs", &__init__, undefined, undefined);
 }
 
 function __init__() {
   init_dog_fx();
-  clientfield::register("actor", "dog_fx", 1, 1, "int", & dog_fx, 0, 0);
+  clientfield::register("actor", "dog_fx", 1, 1, "int", &dog_fx, 0, 0);
 }
 
 function init_dog_fx() {

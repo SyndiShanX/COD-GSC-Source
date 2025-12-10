@@ -23,20 +23,20 @@
 #namespace zm_craft_shield;
 
 function autoexec __init__sytem__() {
-  system::register("zm_craft_shield", & __init__, & __main__, undefined);
+  system::register("zm_craft_shield", &__init__, &__main__, undefined);
 }
 
 function __init__() {}
 
-function init(shield_equipment, shield_weapon, shield_model, str_to_craft = & "ZOMBIE_CRAFT_RIOT", str_taken = & "ZOMBIE_BOUGHT_RIOT", str_grab = & "ZOMBIE_GRAB_RIOTSHIELD") {
+function init(shield_equipment, shield_weapon, shield_model, str_to_craft = &"ZOMBIE_CRAFT_RIOT", str_taken = &"ZOMBIE_BOUGHT_RIOT", str_grab = &"ZOMBIE_GRAB_RIOTSHIELD") {
   level.craftable_shield_equipment = shield_equipment;
   level.craftable_shield_weapon = shield_weapon;
   level.craftable_shield_model = shield_model;
   level.craftable_shield_grab = str_grab;
   level.riotshield_supports_deploy = 0;
-  riotshield_dolly = zm_craftables::generate_zombie_craftable_piece(level.craftable_shield_equipment, "dolly", 32, 64, 0, undefined, & on_pickup_common, & on_drop_common, undefined, undefined, undefined, undefined, "piece_riotshield_dolly", 1, "build_zs");
-  riotshield_door = zm_craftables::generate_zombie_craftable_piece(level.craftable_shield_equipment, "door", 48, 15, 25, undefined, & on_pickup_common, & on_drop_common, undefined, undefined, undefined, undefined, "piece_riotshield_door", 1, "build_zs");
-  riotshield_clamp = zm_craftables::generate_zombie_craftable_piece(level.craftable_shield_equipment, "clamp", 48, 15, 25, undefined, & on_pickup_common, & on_drop_common, undefined, undefined, undefined, undefined, "piece_riotshield_clamp", 1, "build_zs");
+  riotshield_dolly = zm_craftables::generate_zombie_craftable_piece(level.craftable_shield_equipment, "dolly", 32, 64, 0, undefined, &on_pickup_common, &on_drop_common, undefined, undefined, undefined, undefined, "piece_riotshield_dolly", 1, "build_zs");
+  riotshield_door = zm_craftables::generate_zombie_craftable_piece(level.craftable_shield_equipment, "door", 48, 15, 25, undefined, &on_pickup_common, &on_drop_common, undefined, undefined, undefined, undefined, "piece_riotshield_door", 1, "build_zs");
+  riotshield_clamp = zm_craftables::generate_zombie_craftable_piece(level.craftable_shield_equipment, "clamp", 48, 15, 25, undefined, &on_pickup_common, &on_drop_common, undefined, undefined, undefined, undefined, "piece_riotshield_clamp", 1, "build_zs");
   registerclientfield("world", "piece_riotshield_dolly", 1, 1, "int", undefined, 0);
   registerclientfield("world", "piece_riotshield_door", 1, 1, "int", undefined, 0);
   registerclientfield("world", "piece_riotshield_clamp", 1, 1, "int", undefined, 0);
@@ -48,10 +48,10 @@ function init(shield_equipment, shield_weapon, shield_model, str_to_craft = & "Z
   riotshield zm_craftables::add_craftable_piece(riotshield_dolly);
   riotshield zm_craftables::add_craftable_piece(riotshield_door);
   riotshield zm_craftables::add_craftable_piece(riotshield_clamp);
-  riotshield.onbuyweapon = & on_buy_weapon_riotshield;
-  riotshield.triggerthink = & riotshield_craftable;
+  riotshield.onbuyweapon = &on_buy_weapon_riotshield;
+  riotshield.triggerthink = &riotshield_craftable;
   zm_craftables::include_zombie_craftable(riotshield);
-  zm_craftables::add_zombie_craftable(level.craftable_shield_equipment, str_to_craft, "ERROR", str_taken, & on_fully_crafted, 1);
+  zm_craftables::add_zombie_craftable(level.craftable_shield_equipment, str_to_craft, "ERROR", str_taken, &on_fully_crafted, 1);
   zm_craftables::add_zombie_craftable_vox_category(level.craftable_shield_equipment, "build_zs");
   zm_craftables::make_zombie_craftable_open(level.craftable_shield_equipment, level.craftable_shield_model, vectorscale((0, -1, 0), 90), vectorscale((0, 0, 1), 26));
 }
@@ -127,7 +127,7 @@ function on_buy_weapon_riotshield(player) {
 function function_f3127c4f() {
   level flagsys::wait_till("");
   wait(1);
-  zm_devgui::add_custom_devgui_callback( & function_b6937313);
+  zm_devgui::add_custom_devgui_callback(&function_b6937313);
   setdvar("", 0);
   adddebugcommand(("" + level.craftable_shield_equipment) + "");
   adddebugcommand(("" + level.craftable_shield_equipment) + "");
@@ -139,7 +139,7 @@ function function_b6937313(cmd) {
   retval = 0;
   switch (cmd) {
     case "": {
-      array::thread_all(players, & function_2b0b208f);
+      array::thread_all(players, &function_2b0b208f);
       retval = 1;
       break;
     }
@@ -172,7 +172,7 @@ function function_b6937313(cmd) {
       break;
     }
     case "": {
-      array::thread_all(level.players, & function_70d7908d);
+      array::thread_all(level.players, &function_70d7908d);
       retval = 1;
       break;
     }

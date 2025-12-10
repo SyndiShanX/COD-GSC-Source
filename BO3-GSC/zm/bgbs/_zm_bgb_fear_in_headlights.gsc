@@ -13,14 +13,14 @@
 #namespace zm_bgb_fear_in_headlights;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_fear_in_headlights", & __init__, undefined, "bgb");
+  system::register("zm_bgb_fear_in_headlights", &__init__, undefined, "bgb");
 }
 
 function __init__() {
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_fear_in_headlights", "activated", 1, undefined, undefined, & validation, & activation);
+  bgb::register("zm_bgb_fear_in_headlights", "activated", 1, undefined, undefined, &validation, &activation);
 }
 
 function private function_b13c2f15() {

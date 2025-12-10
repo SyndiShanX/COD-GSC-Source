@@ -79,18 +79,18 @@ initializematchrules() {
 
 onstartgametype() {
   setclientnamemode("auto_change");
-  scripts\mp\utility::setobjectivetext("allies", & "OBJECTIVES_DM");
-  scripts\mp\utility::setobjectivetext("axis", & "OBJECTIVES_DM");
+  scripts\mp\utility::setobjectivetext("allies", &"OBJECTIVES_DM");
+  scripts\mp\utility::setobjectivetext("axis", &"OBJECTIVES_DM");
   if(level.splitscreen) {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_DM");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_DM");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_DM");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_DM");
   } else {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_DM_SCORE");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_DM_SCORE");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_DM_SCORE");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_DM_SCORE");
   }
 
-  scripts\mp\utility::setobjectivehinttext("allies", & "OBJECTIVES_DM_HINT");
-  scripts\mp\utility::setobjectivehinttext("axis", & "OBJECTIVES_DM_HINT");
+  scripts\mp\utility::setobjectivehinttext("allies", &"OBJECTIVES_DM_HINT");
+  scripts\mp\utility::setobjectivehinttext("axis", &"OBJECTIVES_DM_HINT");
   scripts\mp\spawnlogic::setactivespawnlogic("FreeForAll");
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
@@ -1067,11 +1067,11 @@ givehintmessage() {
   self endon("death");
   level endon("game_ended");
   if(scripts\engine\utility::is_player_gamepad_enabled()) {
-    self iprintlnbold( & "PLATFORM_GESTURE_MODE_HINT_SLOT3");
+    self iprintlnbold(&"PLATFORM_GESTURE_MODE_HINT_SLOT3");
     return;
   }
 
-  self iprintlnbold( & "PLATFORM_GESTURE_MODE_HINT_SLOT7");
+  self iprintlnbold(&"PLATFORM_GESTURE_MODE_HINT_SLOT7");
 }
 
 setspecialloadout() {

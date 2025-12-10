@@ -9,17 +9,17 @@
 #namespace zm_magicbox;
 
 function autoexec __init__sytem__() {
-  system::register("zm_magicbox", & __init__, undefined, undefined);
+  system::register("zm_magicbox", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level._effect["chest_light"] = "zombie/fx_weapon_box_open_glow_zmb";
   level._effect["chest_light_closed"] = "zombie/fx_weapon_box_closed_glow_zmb";
-  clientfield::register("zbarrier", "magicbox_open_glow", 1, 1, "int", & magicbox_open_glow_callback, 0, 0);
-  clientfield::register("zbarrier", "magicbox_closed_glow", 1, 1, "int", & magicbox_closed_glow_callback, 0, 0);
-  clientfield::register("zbarrier", "zbarrier_show_sounds", 1, 1, "counter", & magicbox_show_sounds_callback, 1, 0);
-  clientfield::register("zbarrier", "zbarrier_leave_sounds", 1, 1, "counter", & magicbox_leave_sounds_callback, 1, 0);
-  clientfield::register("scriptmover", "force_stream", 7000, 1, "int", & force_stream_changed, 0, 0);
+  clientfield::register("zbarrier", "magicbox_open_glow", 1, 1, "int", &magicbox_open_glow_callback, 0, 0);
+  clientfield::register("zbarrier", "magicbox_closed_glow", 1, 1, "int", &magicbox_closed_glow_callback, 0, 0);
+  clientfield::register("zbarrier", "zbarrier_show_sounds", 1, 1, "counter", &magicbox_show_sounds_callback, 1, 0);
+  clientfield::register("zbarrier", "zbarrier_leave_sounds", 1, 1, "counter", &magicbox_leave_sounds_callback, 1, 0);
+  clientfield::register("scriptmover", "force_stream", 7000, 1, "int", &force_stream_changed, 0, 0);
 }
 
 function force_stream_changed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

@@ -14,7 +14,6 @@ disableAimAssistForConnectedPlayers() {
   for(;;) {
     level waittill("connected", player);
 
-
     player setClientDvar("aim_lockon_enabled", 0);
     player setClientDvar("aim_slowdown_enabled", 0);
   }

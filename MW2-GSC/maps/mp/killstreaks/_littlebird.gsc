@@ -19,8 +19,8 @@ init() {
   precacheString(&"MP_AIR_SPACE_TOO_CROWDED");
 
   return;
-  //precacheString( &"MP_WAR_AIRSTRIKE_INBOUND_NEAR_YOUR_POSITION" );
-  //precacheString( &"MP_WAR_AIRSTRIKE_INBOUND" );
+  //precacheString(&"MP_WAR_AIRSTRIKE_INBOUND_NEAR_YOUR_POSITION" );
+  //precacheString(&"MP_WAR_AIRSTRIKE_INBOUND" );
 
   //precacheTurret( "minigun_littlebird_mp" );
   //precacheModel( "vehicle_little_bird_minigun_left" );

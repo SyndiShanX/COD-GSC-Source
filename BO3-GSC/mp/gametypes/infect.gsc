@@ -49,29 +49,29 @@ function main() {
   level.teamscoreperheadshot = getgametypesetting("teamScorePerHeadshot");
   level.teambased = 1;
   level.overrideteamscore = 1;
-  level.onstartgametype = & onstartgametype;
-  level.onendgame = & onendgame;
-  level.onspawnplayer = & onspawnplayer;
-  level.onroundendgame = & onroundendgame;
-  level.onroundswitch = & onroundswitch;
-  level.onplayerkilled = & onplayerkilled;
-  level.var_859df572 = & function_859df572;
-  level.gettimelimit = & gettimelimit;
-  level.var_ad0ac054 = & function_e7129db9;
-  callback::on_connect( & onplayerconnect);
-  callback::on_disconnect( & onplayerdisconnect);
-  callback::on_joined_team( & onplayerjoinedteam);
-  callback::on_joined_spectate( & function_27abe9eb);
+  level.onstartgametype = &onstartgametype;
+  level.onendgame = &onendgame;
+  level.onspawnplayer = &onspawnplayer;
+  level.onroundendgame = &onroundendgame;
+  level.onroundswitch = &onroundswitch;
+  level.onplayerkilled = &onplayerkilled;
+  level.var_859df572 = &function_859df572;
+  level.gettimelimit = &gettimelimit;
+  level.var_ad0ac054 = &function_e7129db9;
+  callback::on_connect(&onplayerconnect);
+  callback::on_disconnect(&onplayerdisconnect);
+  callback::on_joined_team(&onplayerjoinedteam);
+  callback::on_joined_spectate(&function_27abe9eb);
   gameobjects::register_allowed_gameobject(level.gametype);
   if(!sessionmodeissystemlink() && !sessionmodeisonlinegame() && issplitscreen()) {
     globallogic::setvisiblescoreboardcolumns("score", "kills", "infects", "deaths", "assists");
   } else {
     globallogic::setvisiblescoreboardcolumns("score", "kills", "deaths", "infects", "assists");
   }
-  level.givecustomloadout = & givecustomloadout;
-  level.var_485556b = & function_485556b;
-  level.ontimelimit = & ontimelimit;
-  level.maydropweapon = & maydropweapon;
+  level.givecustomloadout = &givecustomloadout;
+  level.var_485556b = &function_485556b;
+  level.ontimelimit = &ontimelimit;
+  level.maydropweapon = &maydropweapon;
   var_ad774848 = [];
   if(!isDefined(var_ad774848)) {
     var_ad774848 = [];
@@ -204,9 +204,9 @@ function onstartgametype() {
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
   foreach(team in level.teams) {
-    util::setobjectivetext(team, & "OBJECTIVES_INFECT");
-    util::setobjectivehinttext(team, & "OBJECTIVES_INFECT_HINT");
-    util::setobjectivescoretext(team, & "OBJECTIVES_INFECT");
+    util::setobjectivetext(team, &"OBJECTIVES_INFECT");
+    util::setobjectivehinttext(team, &"OBJECTIVES_INFECT_HINT");
+    util::setobjectivescoretext(team, &"OBJECTIVES_INFECT");
     spawnlogic::add_spawn_points(team, "mp_tdm_spawn");
     spawnlogic::place_spawn_points(spawning::gettdmstartspawnname(team));
   }
@@ -285,13 +285,13 @@ function function_22765af9(winningteam) {
 function inithud() {
   level.var_796fada2 = hud::createservertimer("objective", 1.5);
   level.var_796fada2 hud::setpoint("CENTER", undefined, 0, 50);
-  level.var_796fada2.label = & "MP_DRAFT_STARTS_IN";
+  level.var_796fada2.label = &"MP_DRAFT_STARTS_IN";
   level.var_796fada2.alpha = 0;
   level.var_796fada2.archived = 0;
   level.var_796fada2.hidewheninmenu = 1;
   level.var_a3c7456d = hud::createserverfontstring("objective", 1.5);
   level.var_a3c7456d hud::setpoint("CENTER", undefined, 0, 50);
-  level.var_a3c7456d.label = & "MP_INFECTED_TIME_EXTENDED";
+  level.var_a3c7456d.label = &"MP_INFECTED_TIME_EXTENDED";
   level.var_a3c7456d.alpha = 0;
   level.var_a3c7456d.archived = 0;
   level.var_a3c7456d.hidewheninmenu = 1;
@@ -433,9 +433,9 @@ function function_e523aca(victim, wassuicide) {
   if(var_7dc99dab > 1 && isDefined(victim)) {
     sound::play_on_players("mpl_flagget_sting_enemy", game["defenders"]);
     sound::play_on_players("mpl_flagget_sting_friend", game["attackers"]);
-    function_40cc7792(game["defenders"], & "MP_GOT_INFECTED", victim.entnum);
+    function_40cc7792(game["defenders"], &"MP_GOT_INFECTED", victim.entnum);
     if(!wassuicide) {
-      function_40cc7792(game["attackers"], & "SCORE_INFECTED_SURVIVOR", victim.entnum);
+      function_40cc7792(game["attackers"], &"SCORE_INFECTED_SURVIVOR", victim.entnum);
       survivors = getplayersonteam(game["defenders"]);
       foreach(survivor in survivors) {
         if(survivor != victim && survivor function_b3349c22()) {
@@ -471,7 +471,7 @@ function onfinalsurvivor() {
     }
     level.infect_awardedfinalsurvivor = 1;
   }
-  luinotifyevent(&"player_callout", 2, & "SCORE_FINAL_SURVIVOR", var_53fb74fd.entnum);
+  luinotifyevent(&"player_callout", 2, &"SCORE_FINAL_SURVIVOR", var_53fb74fd.entnum);
   var_e8414f44 = getdvarint("scr_infect_finaluav");
   if(var_e8414f44) {
     level thread finalsurvivoruav(var_53fb74fd);
@@ -719,7 +719,7 @@ function choosefirstinfected() {
   if(level.inprematchperiod) {
     level waittill("prematch_over");
   }
-  level.var_796fada2.label = & "MP_DRAFT_STARTS_IN";
+  level.var_796fada2.label = &"MP_DRAFT_STARTS_IN";
   level.var_796fada2 settimer(8);
   level.var_796fada2.alpha = 1;
   hostmigration::waitlongdurationwithhostmigrationpause(8);
@@ -823,7 +823,7 @@ function setfirstinfected() {
   } else {
     forcespawnteam(game["defenders"]);
   }
-  luinotifyevent(&"player_callout", 2, & "SCORE_FIRST_INFECTED", self.entnum);
+  luinotifyevent(&"player_callout", 2, &"SCORE_FIRST_INFECTED", self.entnum);
   scoreevents::processscoreevent("first_infected", self);
   sound::play_on_players("mpl_flagget_sting_enemy");
   level.infect_allowsuicide = 1;
@@ -1099,7 +1099,7 @@ function function_27ccd53(command, args) {
 }
 
 function function_897ac191() {
-  level thread function_fb550fe9("", & function_27ccd53);
+  level thread function_fb550fe9("", &function_27ccd53);
   level flag::wait_till("");
   var_126022b3 = "";
   adddebugcommand((((var_126022b3 + "") + "") + "") + "");

@@ -16,19 +16,19 @@
 #namespace _zm_weap_elemental_bow_rune_prison;
 
 function autoexec __init__sytem__() {
-  system::register("_zm_weap_elemental_bow_rune_prison", & __init__, undefined, undefined);
+  system::register("_zm_weap_elemental_bow_rune_prison", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "elemental_bow_rune_prison" + "_ambient_bow_fx", 5000, 1, "int", & function_8339cd3d, 0, 0);
-  clientfield::register("missile", "elemental_bow_rune_prison" + "_arrow_impact_fx", 5000, 1, "int", & function_4b59f7f4, 0, 0);
-  clientfield::register("missile", "elemental_bow_rune_prison4" + "_arrow_impact_fx", 5000, 1, "int", & function_ed22f261, 0, 0);
-  clientfield::register("scriptmover", "runeprison_rock_fx", 5000, 1, "int", & runeprison_rock_fx, 0, 0);
-  clientfield::register("scriptmover", "runeprison_explode_fx", 5000, 1, "int", & runeprison_explode_fx, 0, 0);
-  clientfield::register("scriptmover", "runeprison_lava_geyser_fx", 5000, 1, "int", & runeprison_lava_geyser_fx, 0, 0);
-  clientfield::register("actor", "runeprison_lava_geyser_dot_fx", 5000, 1, "int", & runeprison_lava_geyser_dot_fx, 0, 0);
-  clientfield::register("actor", "runeprison_zombie_charring", 5000, 1, "int", & runeprison_zombie_charring, 0, 0);
-  clientfield::register("actor", "runeprison_zombie_death_skull", 5000, 1, "int", & runeprison_zombie_death_skull, 0, 0);
+  clientfield::register("toplayer", "elemental_bow_rune_prison" + "_ambient_bow_fx", 5000, 1, "int", &function_8339cd3d, 0, 0);
+  clientfield::register("missile", "elemental_bow_rune_prison" + "_arrow_impact_fx", 5000, 1, "int", &function_4b59f7f4, 0, 0);
+  clientfield::register("missile", "elemental_bow_rune_prison4" + "_arrow_impact_fx", 5000, 1, "int", &function_ed22f261, 0, 0);
+  clientfield::register("scriptmover", "runeprison_rock_fx", 5000, 1, "int", &runeprison_rock_fx, 0, 0);
+  clientfield::register("scriptmover", "runeprison_explode_fx", 5000, 1, "int", &runeprison_explode_fx, 0, 0);
+  clientfield::register("scriptmover", "runeprison_lava_geyser_fx", 5000, 1, "int", &runeprison_lava_geyser_fx, 0, 0);
+  clientfield::register("actor", "runeprison_lava_geyser_dot_fx", 5000, 1, "int", &runeprison_lava_geyser_dot_fx, 0, 0);
+  clientfield::register("actor", "runeprison_zombie_charring", 5000, 1, "int", &runeprison_zombie_charring, 0, 0);
+  clientfield::register("actor", "runeprison_zombie_death_skull", 5000, 1, "int", &runeprison_zombie_death_skull, 0, 0);
   level._effect["rune_ambient_bow"] = "dlc1/zmb_weapon/fx_bow_rune_ambient_1p_zmb";
   level._effect["rune_arrow_impact"] = "dlc1/zmb_weapon/fx_bow_rune_impact_zmb";
   level._effect["rune_fire_pillar"] = "dlc1/zmb_weapon/fx_bow_rune_impact_ug_fire_zmb";

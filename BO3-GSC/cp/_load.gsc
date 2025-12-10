@@ -100,7 +100,7 @@ function main() {
   system::wait_till("all");
   art_review();
   level flagsys::set("load_main_complete");
-  level.var_732e9c7d = & function_13aa782f;
+  level.var_732e9c7d = &function_13aa782f;
   if(isDefined(level.skipto_point) && isDefined(level.default_skipto)) {
     if(level.skipto_point == level.default_skipto) {
       world.var_bf966ebd = undefined;
@@ -165,8 +165,8 @@ function function_dbd0026c(var_87423d00, v_color) {
   if(isDefined(level.var_75ba074a)) {
     wait(level.var_75ba074a);
   }
-  level util::delay(0.3, undefined, & flag::set, level.str_level_start_flag);
-  level util::delay(0.3, undefined, & lui::screen_fade_in, var_87423d00, v_color, "go_fade");
+  level util::delay(0.3, undefined, &flag::set, level.str_level_start_flag);
+  level util::delay(0.3, undefined, &lui::screen_fade_in, var_87423d00, v_color, "go_fade");
 }
 
 function function_f063419c() {
@@ -391,7 +391,7 @@ function end_game() {
     wait(15);
     level notify("stop_intermission");
   }
-  array::thread_all(getplayers(), & player_exit_level);
+  array::thread_all(getplayers(), &player_exit_level);
   wait(1.5);
   players = getplayers();
   for(i = 0; i < players.size; i++) {

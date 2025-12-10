@@ -14,20 +14,20 @@
 #namespace zm_bgb_idle_eyes;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_idle_eyes", & __init__, undefined, "bgb");
+  system::register("zm_bgb_idle_eyes", &__init__, undefined, "bgb");
 }
 
 function __init__() {
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_idle_eyes", "activated", 3, undefined, undefined, & validation, & activation);
+  bgb::register("zm_bgb_idle_eyes", "activated", 3, undefined, undefined, &validation, &activation);
   bgb::function_4cda71bf("zm_bgb_idle_eyes", 1);
   bgb::function_336ffc4e("zm_bgb_idle_eyes");
   if(!isDefined(level.vsmgr_prio_visionset_zm_bgb_idle_eyes)) {
     level.vsmgr_prio_visionset_zm_bgb_idle_eyes = 112;
   }
-  visionset_mgr::register_info("visionset", "zm_bgb_idle_eyes", 1, level.vsmgr_prio_visionset_zm_bgb_idle_eyes, 31, 1, & visionset_mgr::ramp_in_out_thread_per_player, 0);
+  visionset_mgr::register_info("visionset", "zm_bgb_idle_eyes", 1, level.vsmgr_prio_visionset_zm_bgb_idle_eyes, 31, 1, &visionset_mgr::ramp_in_out_thread_per_player, 0);
   if(!isDefined(level.vsmgr_prio_overlay_zm_bgb_idle_eyes)) {
     level.vsmgr_prio_overlay_zm_bgb_idle_eyes = 112;
   }
@@ -41,7 +41,7 @@ function validation() {
 function activation() {
   self endon("disconnect");
   var_7092e170 = arraycopy(level.activeplayers);
-  array::thread_all(var_7092e170, & zm_utility::increment_ignoreme);
+  array::thread_all(var_7092e170, &zm_utility::increment_ignoreme);
   self.bgb_idle_eyes_active = 1;
   if(!bgb::increment_ref_count("zm_bgb_idle_eyes")) {
     if(isDefined(level.no_target_override)) {
@@ -79,7 +79,7 @@ function function_1f57344e(var_e04844d6, var_7092e170) {
 
 function deactivate(var_7092e170) {
   var_7092e170 = array::remove_undefined(var_7092e170);
-  array::thread_all(var_7092e170, & zm_utility::decrement_ignoreme);
+  array::thread_all(var_7092e170, &zm_utility::decrement_ignoreme);
   if(bgb::decrement_ref_count("zm_bgb_idle_eyes")) {
     return;
   }

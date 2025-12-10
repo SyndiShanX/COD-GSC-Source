@@ -44,11 +44,11 @@ function function_83b903a6(a_ents) {
 }
 
 function function_84d3f32a() {
-  scene::add_scene_func("p7_fxanim_cp_lotus_mobile_shops_casino_ext_parts_bundle", & function_83b903a6);
-  scene::add_scene_func("p7_fxanim_cp_lotus_mobile_shops_medical_ext_parts_bundle", & function_83b903a6);
-  scene::add_scene_func("p7_fxanim_cp_lotus_mobile_shops_merchant_ext_parts_bundle", & function_83b903a6);
-  scene::add_scene_func("p7_fxanim_cp_lotus_mobile_shops_restaurant_ext_parts_bundle", & function_83b903a6);
-  scene::add_scene_func("p7_fxanim_cp_lotus_mobile_shops_tattoo_ext_parts_bundle", & function_83b903a6);
+  scene::add_scene_func("p7_fxanim_cp_lotus_mobile_shops_casino_ext_parts_bundle", &function_83b903a6);
+  scene::add_scene_func("p7_fxanim_cp_lotus_mobile_shops_medical_ext_parts_bundle", &function_83b903a6);
+  scene::add_scene_func("p7_fxanim_cp_lotus_mobile_shops_merchant_ext_parts_bundle", &function_83b903a6);
+  scene::add_scene_func("p7_fxanim_cp_lotus_mobile_shops_restaurant_ext_parts_bundle", &function_83b903a6);
+  scene::add_scene_func("p7_fxanim_cp_lotus_mobile_shops_tattoo_ext_parts_bundle", &function_83b903a6);
 }
 
 function function_50d69c96(var_7f004376 = 12) {
@@ -331,7 +331,7 @@ function player_frost_breath(localclientnum, oldval, newval, bnewent, binitialsn
       if(self islocalplayer() && self getlocalclientnumber() === localclientnum) {
         playfxoncamera(localclientnum, level._effect["player_breath"], (0, 0, 0), (1, 0, 0), (0, 0, 1));
       } else {
-        util::delay(randomfloatrange(5, 7), undefined, & playfxontag, localclientnum, level._effect["breath_third_person"], self, "j_head");
+        util::delay(randomfloatrange(5, 7), undefined, &playfxontag, localclientnum, level._effect["breath_third_person"], self, "j_head");
       }
       wait(randomintrange(5, 7));
     }

@@ -17,11 +17,11 @@
 #namespace _gadget_camo;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_camo", & __init__, undefined, undefined);
+  system::register("gadget_camo", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("allplayers", "camo_shader", 1, 3, "int", & ent_camo_material_callback, 0, 1);
+  clientfield::register("allplayers", "camo_shader", 1, 3, "int", &ent_camo_material_callback, 0, 1);
 }
 
 function ent_camo_material_callback(local_client_num, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

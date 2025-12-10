@@ -816,7 +816,7 @@ spawn_deck_spec_ops_battle() {
   while(!flag("spec_ops_passed") && !flag("spec_ops_started")) {
     if(player_has_sniper_weapon()) {
       s_snipe_obj = get_struct("struct_spec_op_obj", "targetname");
-      set_objective(level.obj_help_seals, s_snipe_obj.origin, & "BLACKOUT_OBJ_SNIPE");
+      set_objective(level.obj_help_seals, s_snipe_obj.origin, &"BLACKOUT_OBJ_SNIPE");
       flag_set("spec_ops_started");
       level thread spec_ops_killed();
       level thread spec_ops_battle_finish();

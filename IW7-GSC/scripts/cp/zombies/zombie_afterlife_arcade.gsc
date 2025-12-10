@@ -44,9 +44,9 @@ enter_afterlife_arcade(param_00) {
   param_00 increase_afterlife_count(param_00);
   if(isDefined(param_00)) {
     if(check_self_revive_attempts(param_00)) {
-      param_00 scripts\cp\utility::setlowermessage("welcome_to_afterlife", & "CP_ZOMBIE_AFTERLIFE_ARCADE_WELCOME", 6);
+      param_00 scripts\cp\utility::setlowermessage("welcome_to_afterlife", &"CP_ZOMBIE_AFTERLIFE_ARCADE_WELCOME", 6);
     } else {
-      param_00 scripts\cp\utility::setlowermessage("welcome_to_afterlife_no_self_revives", & "CP_ZOMBIE_AFTERLIFE_ARCADE_NO_REVIVES", 6);
+      param_00 scripts\cp\utility::setlowermessage("welcome_to_afterlife_no_self_revives", &"CP_ZOMBIE_AFTERLIFE_ARCADE_NO_REVIVES", 6);
     }
 
     scripts\cp\zombies\zombie_analytics::log_enteringafterlifearcade(1, param_00, level.wave_num, param_00.soul_power_earned, int(level.wave_num / 10) + 1 - param_00.times_self_revived);
@@ -430,7 +430,7 @@ init_selfrevive_door() {}
 
 use_spectate_door(param_00, param_01) {
   if(level.players.size == 1) {
-    param_01 scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "CP_ZOMBIE_AFTERLIFE_ARCADE_CANNOT_SPECTATE");
+    param_01 scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"CP_ZOMBIE_AFTERLIFE_ARCADE_CANNOT_SPECTATE");
     return;
   }
 
@@ -630,13 +630,13 @@ can_use_selfrevive_door(param_00, param_01) {
 get_self_revive_door_hint(param_00, param_01) {
   if(check_self_revive_attempts(param_01)) {
     if(has_self_revive_token(param_01) || scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player)) {
-      return & "CP_ZOMBIE_AFTERLIFE_ARCADE_SELFREVIVE_DOOR";
+      return &"CP_ZOMBIE_AFTERLIFE_ARCADE_SELFREVIVE_DOOR";
     }
 
-    return & "CP_ZOMBIE_AFTERLIFE_ARCADE_NEED_SELFREVIVE_TOKEN";
+    return &"CP_ZOMBIE_AFTERLIFE_ARCADE_NEED_SELFREVIVE_TOKEN";
   }
 
-  return & "CP_ZOMBIE_AFTERLIFE_ARCADE_NO_MORE_SELF_REVIVES";
+  return &"CP_ZOMBIE_AFTERLIFE_ARCADE_NO_MORE_SELF_REVIVES";
 }
 
 give_self_revive_token(param_00) {
@@ -841,7 +841,7 @@ get_soul_power_goal(param_00) {
 }
 
 register_interactions() {
-  level.interaction_hintstrings["afterlife_spectate_door"] = & "CP_ZOMBIE_AFTERLIFE_ARCADE_SPECTATE_DOOR";
+  level.interaction_hintstrings["afterlife_spectate_door"] = &"CP_ZOMBIE_AFTERLIFE_ARCADE_SPECTATE_DOOR";
   scripts\cp\cp_interaction::register_interaction("afterlife_spectate_door", undefined, undefined, undefined, ::use_spectate_door, 0, 0, ::init_spectate_door);
   scripts\cp\cp_interaction::register_interaction("afterlife_selfrevive_door", undefined, undefined, ::get_self_revive_door_hint, ::use_selfrevive_door, 0, 0, ::init_selfrevive_door, ::can_use_selfrevive_door);
 }

@@ -26,7 +26,7 @@ init() {
   level.func_C6D7["orbital_deployment"].func_1352D = "odin_target_killed";
   level.func_C6D7["orbital_deployment"].func_1352C = "odin_targets_killed";
   level.func_C6D7["orbital_deployment"].func_12B20 = 3;
-  level.func_C6D7["orbital_deployment"].func_12B80 = & "KILLSTREAKS_ODIN_UNAVAILABLE";
+  level.func_C6D7["orbital_deployment"].func_12B80 = &"KILLSTREAKS_ODIN_UNAVAILABLE";
   level.func_C6D7["orbital_deployment"].weapon["juggernaut"] = spawnStruct();
   level.func_C6D7["orbital_deployment"].weapon["juggernaut"].func_D5E4 = "null";
   level.func_C6D7["orbital_deployment"].weapon["juggernaut"].func_D5DD = "odin_jugg_launch";

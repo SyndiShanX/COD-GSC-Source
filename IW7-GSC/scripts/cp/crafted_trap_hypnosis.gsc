@@ -11,9 +11,9 @@ init() {
   var_00.modelplacement = "cp_town_hypnosis_device_good";
   var_00.modelplacementfailed = "cp_town_hypnosis_device_bad";
   var_00.placedmodel = "cp_town_hypnosis_device";
-  var_00.placestring = & "COOP_CRAFTABLES_PLACE";
-  var_00.cannotplacestring = & "COOP_CRAFTABLES_CANNOT_PLACE";
-  var_00.placecancelablestring = & "COOP_CRAFTABLES_PLACE_CANCELABLE";
+  var_00.placestring = &"COOP_CRAFTABLES_PLACE";
+  var_00.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
+  var_00.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
   var_00.placementheighttolerance = 30;
   var_00.placementradius = 16;
   var_00.carriedtrapoffset = (0, 0, 35);

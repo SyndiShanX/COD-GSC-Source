@@ -337,12 +337,12 @@ tryUseAirdrop(lifeId, kID, dropType) {
     return true;
 
   if(level.littleBirds >= 3 && dropType != "airdrop_mega_marker_mp") {
-    self iprintlnbold( & "LUA_KS_UNAVAILABLE_AIRSPACE");
+    self iprintlnbold(&"LUA_KS_UNAVAILABLE_AIRSPACE");
     return false;
   }
 
   if(isDefined(level.civilianJetFlyBy)) {
-    self iprintlnbold( & "MP_CIVILIAN_AIR_TRAFFIC");
+    self iprintlnbold(&"MP_CIVILIAN_AIR_TRAFFIC");
     return false;
   }
 
@@ -764,7 +764,6 @@ getFlyHeightOffset(dropSite) {
 
   if(!isDefined(heightEnt)) //old system
   {
-
     println("NO DEFINED AIRSTRIKE HEIGHT SCRIPT_ORIGIN IN LEVEL");
 
       if(isDefined(level.airstrikeHeightScale)) {
@@ -1230,43 +1229,43 @@ killstreakCrateThink(dropType) {
 getCrateHint(crateType) {
   switch (crateType) {
     case "radar_mp":
-      return & "LUA_GRAB_RADAR";
+      return &"LUA_GRAB_RADAR";
 
     case "counter_radar_mp":
-      return & "LUA_GRAB_COUNTER_RADAR";
+      return &"LUA_GRAB_COUNTER_RADAR";
 
     case "sentry_mp":
-      return & "LUA_GRAB_SENTRY";
+      return &"LUA_GRAB_SENTRY";
 
     case "predator_mp":
-      return & "LUA_GRAB_PREDATOR";
+      return &"LUA_GRAB_PREDATOR";
 
     case "airstrike_mp":
-      return & "LUA_GRAB_AIRSTRIKE";
+      return &"LUA_GRAB_AIRSTRIKE";
 
     case "helicopter_mp":
-      return & "LUA_GRAB_HELICOPTER";
+      return &"LUA_GRAB_HELICOPTER";
 
     case "harrier_airstrike_mp":
-      return & "LUA_GRAB_HARRIER";
+      return &"LUA_GRAB_HARRIER";
 
     case "pavelow_mp":
-      return & "LUA_GRAB_PAVELOW";
+      return &"LUA_GRAB_PAVELOW";
 
     case "stealth_airstrike_mp":
-      return & "LUA_GRAB_STEALTH_AIRSTRIKE";
+      return &"LUA_GRAB_STEALTH_AIRSTRIKE";
 
     case "chopper_gunner_mp":
-      return & "LUA_GRAB_CHOPPER_GUNNER";
+      return &"LUA_GRAB_CHOPPER_GUNNER";
 
     case "ac130_mp":
-      return & "LUA_GRAB_AC130";
+      return &"LUA_GRAB_AC130";
 
     case "emp_mp":
-      return & "LUA_GRAB_EMP";
+      return &"LUA_GRAB_EMP";
 
     case "nuke_mp":
-      return & "LUA_GRAB_NUKE";
+      return &"LUA_GRAB_NUKE";
 
     default:
       return "";
@@ -1279,7 +1278,7 @@ nukeCrateThink( dropType )
 self endon ( "death" );
 level endon("game_ended");
 
-crateSetupForUse( &"PLATFORM_CALL_NUKE", "nukeDrop", maps\mp\killstreaks\_killstreaks::getKillstreakCrateIcon( self.crateType ) );
+crateSetupForUse(&"PLATFORM_CALL_NUKE", "nukeDrop", maps\mp\killstreaks\_killstreaks::getKillstreakCrateIcon( self.crateType ) );
 
 self thread nukeCaptureThink();
 
@@ -1359,7 +1358,7 @@ ammoCrateThink(dropType) {
 
   self.usedBy = [];
 
-  crateSetupForUse( & "LUA_GRAB_AMMO", "all", "waypoint_ammo_friendly");
+  crateSetupForUse(&"LUA_GRAB_AMMO", "all", "waypoint_ammo_friendly");
 
   self thread crateOtherCaptureThink();
   self thread crateOwnerCaptureThink();
@@ -1446,7 +1445,7 @@ personalUseBar(object) {
 
   useBar = createPrimaryProgressBar(-25);
   useBarText = createPrimaryProgressBarText(-25);
-  useBarText setText( & "MP_CAPTURING_CRATE");
+  useBarText setText(&"MP_CAPTURING_CRATE");
 
   lastRate = -1;
   while(isReallyAlive(self) && isDefined(object) && object.inUse && !level.gameEnded) {

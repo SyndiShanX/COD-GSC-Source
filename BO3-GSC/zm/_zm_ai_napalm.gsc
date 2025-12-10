@@ -25,7 +25,7 @@
 #namespace zm_ai_napalm;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_napalm", & __init__, & __main__, undefined);
+  system::register("zm_ai_napalm", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -52,18 +52,18 @@ function __main__() {
   level.var_4e4c9791 = [];
   level.napalm_zombie_spawners = getEntArray("napalm_zombie_spawner", "script_noteworthy");
   level flag::init("zombie_napalm_force_spawn");
-  array::thread_all(level.napalm_zombie_spawners, & spawner::add_spawn_function, & napalm_zombie_spawn);
-  array::thread_all(level.napalm_zombie_spawners, & spawner::add_spawn_function, & zombie_utility::round_spawn_failsafe);
+  array::thread_all(level.napalm_zombie_spawners, &spawner::add_spawn_function, &napalm_zombie_spawn);
+  array::thread_all(level.napalm_zombie_spawners, &spawner::add_spawn_function, &zombie_utility::round_spawn_failsafe);
   _napalm_initsounds();
-  zm_spawner::register_zombie_damage_callback( & _napalm_damage_callback);
+  zm_spawner::register_zombie_damage_callback(&_napalm_damage_callback);
   level thread function_7cce5d95();
   println("" + level.nextnapalmspawnround);
 }
 
 function registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("napalmExplodeInitialize", & napalmexplodeinitialize);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("napalmExplodeTerminate", & napalmexplodeterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("napalmCanExplode", & napalmcanexplode);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("napalmExplodeInitialize", &napalmexplodeinitialize);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("napalmExplodeTerminate", &napalmexplodeterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("napalmCanExplode", &napalmcanexplode);
 }
 
 function get_napalm_spawners() {
@@ -176,7 +176,7 @@ function init_napalm_fx() {
 }
 
 function napalm_zombie_spawn(animname_set) {
-  self.custom_location = & function_8f86441a;
+  self.custom_location = &function_8f86441a;
   zm_spawner::zombie_spawn_init(animname_set);
   println("");
   setdvar("", 0);
@@ -191,15 +191,15 @@ function napalm_zombie_spawn(animname_set) {
   self.no_damage_points = 1;
   self.explosive_volume = 0;
   self.ignore_enemy_count = 1;
-  self.deathfunction = & napalm_zombie_death;
-  self.actor_full_damage_func = & _napalm_zombie_damage;
-  self.nuke_damage_func = & _napalm_nuke_damage;
+  self.deathfunction = &napalm_zombie_death;
+  self.actor_full_damage_func = &_napalm_zombie_damage;
+  self.nuke_damage_func = &_napalm_nuke_damage;
   self.instakill_func = undefined;
-  self._zombie_shrink_callback = & _napalm_shrink;
-  self._zombie_unshrink_callback = & _napalm_unshrink;
-  self.water_trigger_func = & napalm_enter_water_trigger;
-  self.custom_damage_func = & napalm_custom_damage;
-  self.monkey_bolt_taunts = & napalm_monkey_bolt_taunts;
+  self._zombie_shrink_callback = &_napalm_shrink;
+  self._zombie_unshrink_callback = &_napalm_unshrink;
+  self.water_trigger_func = &napalm_enter_water_trigger;
+  self.custom_damage_func = &napalm_custom_damage;
+  self.monkey_bolt_taunts = &napalm_monkey_bolt_taunts;
   self.canexplodetime = gettime() + 2000;
   self thread _zombie_watchstopeffects();
   self thread napalm_watch_for_sliding();

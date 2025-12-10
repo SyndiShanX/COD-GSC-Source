@@ -17,7 +17,7 @@ drone_give_soul() {
     maps\_names::get_name();
 
     if(isDefined(self.name))
-      self setlookattext(self.name, & "");
+      self setlookattext(self.name, &"");
   }
 
   if(isDefined(level.dronecallbackthread))

@@ -22,7 +22,7 @@
 #namespace zm_equipment;
 
 function autoexec __init__sytem__() {
-  system::register("zm_equipment", & __init__, & __main__, undefined);
+  system::register("zm_equipment", &__init__, &__main__, undefined);
 }
 
 function __init__() {

@@ -20,11 +20,6 @@ precache_createfx_fx() {
   level._effect["fx_mp_nuked_double_rainbow"] = loadfx("maps/mp_maps/fx_mp_nuked_double_rainbow");
   level._effect["fx_mp_nuked_double_rainbow_lg"] = loadfx("maps/mp_maps/fx_mp_nuked_double_rainbow_lg");
 
-
-
-
-
-
   level._effect["fx_mp_nuked_nuclear_explosion"] = loadfx("maps/mp_maps/fx_mp_nuked_nuclear_explosion");
 
   level._effect["fx_mp_nuked_sprinkler"] = loadfx("maps/mp_maps/fx_mp_nuked_sprinkler");
@@ -39,7 +34,6 @@ main() {
   precache_scripted_fx();
 
   maps\createfx\mp_nuked_fx::main();
-
 
   if(getdvar("clientSideEffects") != "1")
     maps\createfx\mp_nuked_fx::main();

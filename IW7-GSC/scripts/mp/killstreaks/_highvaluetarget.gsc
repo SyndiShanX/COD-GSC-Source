@@ -35,7 +35,7 @@ usehighvaluetarget(param_00, param_01) {
   }
 
   if(func_DD18() || isDefined(param_00.var_9264) && param_00.var_9264 >= 2) {
-    self iprintlnbold( & "KILLSTREAKS_HVT_MAX");
+    self iprintlnbold(&"KILLSTREAKS_HVT_MAX");
     return 0;
   }
 

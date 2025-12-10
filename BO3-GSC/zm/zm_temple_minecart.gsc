@@ -95,7 +95,7 @@ function function_807ee0b0() {
   self.speaker_right setModel("tag_origin");
   self.speaker_right linkto(self, "tag_origin", (0, -32, 40));
   blockers = getEntArray(self.targetname + "_blocker", "targetname");
-  array::thread_all(blockers, & blocker_think, self);
+  array::thread_all(blockers, &blocker_think, self);
   level.minecart_force_zone_active = 0;
   self function_b6cb1d5a("start");
   self function_f16a275();
@@ -174,7 +174,7 @@ function function_46d092ff() {
     closestent.claimed = 1;
     player.var_68072c39 = closestent;
   }
-  array::thread_all(var_c22b6489, & function_3ae7bd53, self);
+  array::thread_all(var_c22b6489, &function_3ae7bd53, self);
   level thread function_82d1ad64(var_c22b6489);
   zombies = getaispeciesarray("axis", "all");
   zombie_sort = util::get_array_of_closest(self.origin, zombies, undefined, undefined, 300);
@@ -207,7 +207,7 @@ function function_46d092ff() {
       self.var_54277932[self.var_54277932.size] = zombie;
     }
   }
-  array::thread_all(self.var_54277932, & function_a676846, self);
+  array::thread_all(self.var_54277932, &function_a676846, self);
 }
 
 function function_3ae7bd53(minecart) {
@@ -594,7 +594,7 @@ function function_a2aafac6() {
       player function_dd13ce12(360);
     }
     player enableinvulnerability();
-    player util::delay(2, undefined, & function_5724a279);
+    player util::delay(2, undefined, &function_5724a279);
     player.var_68072c39 movegravity(var_f127a043, time);
   }
   var_f127a043 = (0, 0, 0);

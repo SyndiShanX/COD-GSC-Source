@@ -16,7 +16,7 @@
 #namespace skipto;
 
 function autoexec __init__sytem__() {
-  system::register("skipto", & __init__, & __main__, undefined);
+  system::register("skipto", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -24,8 +24,8 @@ function __init__() {
   level flag::init("level_has_skiptos");
   level flag::init("level_has_skipto_branches");
   level.skipto_current_objective = [];
-  clientfield::register("toplayer", "catch_up_transition", 1, 1, "counter", & catch_up_transition, 0, 0);
-  clientfield::register("world", "set_last_map_dvar", 1, 1, "counter", & set_last_map_dvar, 0, 0);
+  clientfield::register("toplayer", "catch_up_transition", 1, 1, "counter", &catch_up_transition, 0, 0);
+  clientfield::register("world", "set_last_map_dvar", 1, 1, "counter", &set_last_map_dvar, 0, 0);
   add_internal("_default");
   add_internal("no_game");
   load_mission_table("gamedata/tables/cp/cp_mapmissions.csv", getdvarstring("mapname"));
@@ -318,7 +318,7 @@ function load_mission_table(table, levelname, sublevel = "") {
       end_before = row[4];
       end_before = convert_token(end_before, "+", ",");
       locstr = row[5];
-      add_branch(skipto, & load_mission_init, locstr, undefined, launch_after, end_before);
+      add_branch(skipto, &load_mission_init, locstr, undefined, launch_after, end_before);
     }
     index++;
     row = tablelookuprow(table, index);
@@ -335,7 +335,7 @@ function watch_players_connect() {
   if(!level flag::exists("skipto_player_connected")) {
     level flag::init("skipto_player_connected");
   }
-  callback::add_callback("hash_da8d7d74", & on_player_connect);
+  callback::add_callback("hash_da8d7d74", &on_player_connect);
 }
 
 function on_player_connect(localclientnum) {

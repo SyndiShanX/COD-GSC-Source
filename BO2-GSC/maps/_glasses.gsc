@@ -205,12 +205,12 @@ turn_on_extra_cam(str_shader_override, str_custom_notify, should_start_fullscree
   if(!isDefined(should_start_fullscreen))
     should_start_fullscreen = 0;
 
-  str_extracam_show = & "extracam_show";
+  str_extracam_show = &"extracam_show";
 
   if(isDefined(str_custom_notify))
     str_extracam_show = str_custom_notify;
 
-  str_shader = & "extracam_glasses";
+  str_shader = &"extracam_glasses";
 
   if(isDefined(str_shader_override))
     str_shader = str_shader_override;
@@ -229,12 +229,12 @@ turn_on_extra_cam(str_shader_override, str_custom_notify, should_start_fullscree
 
 turn_off_extra_cam(str_shader_override, str_custom_notify) {
   assert(isDefined(level.e_extra_cam), "level.e_extra_cam isn't defined, call _glasses::main");
-  str_extracam_hide = & "extracam_hide";
+  str_extracam_hide = &"extracam_hide";
 
   if(isDefined(str_custom_notify))
     str_extracam_hide = str_custom_notify;
 
-  str_shader = & "extracam_glasses";
+  str_shader = &"extracam_glasses";
 
   if(isDefined(str_shader_override))
     str_shader = str_shader_override;
@@ -263,7 +263,7 @@ play_bink_on_hud(str_bink_name, b_looping, b_in_memory, b_paused, b_sync_audio, 
     start_size = 0;
 
   assert(isDefined(str_bink_name), "Undefined Bink name");
-  luinotifyevent(&"cinematic_start", 7, & "cinematic2d", istring(str_bink_name), b_looping, b_in_memory, b_paused, b_sync_audio, start_size);
+  luinotifyevent(&"cinematic_start", 7, &"cinematic2d", istring(str_bink_name), b_looping, b_in_memory, b_paused, b_sync_audio, start_size);
   str_menu = "";
 
   while(str_menu != "cinematic")
@@ -298,7 +298,7 @@ stop_bink_on_hud() {
   level.pip_sound_bink_ent stoploopsound();
   level.pip_sound_bink_ent delete();
   thread _bink_timeout(1.5);
-  luinotifyevent(&"cinematic_stop", 1, & "cinematic2d");
+  luinotifyevent(&"cinematic_stop", 1, &"cinematic2d");
   str_menu = "";
 
   while(str_menu != "cinematic")

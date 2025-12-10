@@ -38,7 +38,7 @@
 #namespace ball;
 
 function autoexec __init__sytem__() {
-  system::register("ball", & __init__, undefined, undefined);
+  system::register("ball", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -78,19 +78,19 @@ function main() {
   level.overrideteamscore = 1;
   level.clampscorelimit = 0;
   level.doubleovertime = 1;
-  level.onprecachegametype = & onprecachegametype;
-  level.onstartgametype = & onstartgametype;
-  level.onspawnplayer = & onspawnplayer;
-  level.onplayerkilled = & onplayerkilled;
-  level.onroundswitch = & onroundswitch;
-  level.onroundscorelimit = & onroundscorelimit;
-  level.onendgame = & onendgame;
-  level.onroundendgame = & onroundendgame;
-  level.getteamkillpenalty = & ball_getteamkillpenalty;
-  level.getteamkillscore = & ball_getteamkillscore;
-  level.setmatchscorehudelemforteam = & setmatchscorehudelemforteam;
-  level.shouldplayovertimeround = & shouldplayovertimeround;
-  level.ontimelimit = & ball_ontimelimit;
+  level.onprecachegametype = &onprecachegametype;
+  level.onstartgametype = &onstartgametype;
+  level.onspawnplayer = &onspawnplayer;
+  level.onplayerkilled = &onplayerkilled;
+  level.onroundswitch = &onroundswitch;
+  level.onroundscorelimit = &onroundscorelimit;
+  level.onendgame = &onendgame;
+  level.onroundendgame = &onroundendgame;
+  level.getteamkillpenalty = &ball_getteamkillpenalty;
+  level.getteamkillscore = &ball_getteamkillscore;
+  level.setmatchscorehudelemforteam = &setmatchscorehudelemforteam;
+  level.shouldplayovertimeround = &shouldplayovertimeround;
+  level.ontimelimit = &ball_ontimelimit;
   gameobjects::register_allowed_gameobject(level.gametype);
   globallogic_audio::set_leader_gametype_dialog("startUplink", "hcStartUplink", "uplOrders", "uplOrders");
   if(!sessionmodeissystemlink() && !sessionmodeisonlinegame() && issplitscreen()) {
@@ -101,7 +101,7 @@ function main() {
 }
 
 function onprecachegametype() {
-  game["strings"]["score_limit_reached"] = & "MP_CAP_LIMIT_REACHED";
+  game["strings"]["score_limit_reached"] = &"MP_CAP_LIMIT_REACHED";
 }
 
 function onstartgametype() {
@@ -115,17 +115,17 @@ function onstartgametype() {
   if(level.scoreroundwinbased) {
     globallogic_score::resetteamscores();
   }
-  util::setobjectivetext("allies", & "OBJECTIVES_BALL");
-  util::setobjectivetext("axis", & "OBJECTIVES_BALL");
+  util::setobjectivetext("allies", &"OBJECTIVES_BALL");
+  util::setobjectivetext("axis", &"OBJECTIVES_BALL");
   if(level.splitscreen) {
-    util::setobjectivescoretext("allies", & "OBJECTIVES_BALL");
-    util::setobjectivescoretext("axis", & "OBJECTIVES_BALL");
+    util::setobjectivescoretext("allies", &"OBJECTIVES_BALL");
+    util::setobjectivescoretext("axis", &"OBJECTIVES_BALL");
   } else {
-    util::setobjectivescoretext("allies", & "OBJECTIVES_BALL_SCORE");
-    util::setobjectivescoretext("axis", & "OBJECTIVES_BALL_SCORE");
+    util::setobjectivescoretext("allies", &"OBJECTIVES_BALL_SCORE");
+    util::setobjectivescoretext("axis", &"OBJECTIVES_BALL_SCORE");
   }
-  util::setobjectivehinttext("allies", & "OBJECTIVES_BALL_HINT");
-  util::setobjectivehinttext("axis", & "OBJECTIVES_BALL_HINT");
+  util::setobjectivehinttext("allies", &"OBJECTIVES_BALL_HINT");
+  util::setobjectivehinttext("axis", &"OBJECTIVES_BALL_HINT");
   if(isDefined(game["overtime_round"])) {
     if(!isDefined(game["ball_game_score"])) {
       game["ball_game_score"] = [];
@@ -149,18 +149,18 @@ function onstartgametype() {
       util::registertimelimit(0, 1440);
     }
     if(game["overtime_round"] == 1) {
-      util::setobjectivehinttext("allies", & "MP_BALL_OVERTIME_ROUND_1");
-      util::setobjectivehinttext("axis", & "MP_BALL_OVERTIME_ROUND_1");
+      util::setobjectivehinttext("allies", &"MP_BALL_OVERTIME_ROUND_1");
+      util::setobjectivehinttext("axis", &"MP_BALL_OVERTIME_ROUND_1");
     } else {
       if(isDefined(game["ball_overtime_first_winner"])) {
-        level.ontimelimit = & ballovertimeround2_ontimelimit;
+        level.ontimelimit = &ballovertimeround2_ontimelimit;
         game["teamSuddenDeath"][game["ball_overtime_first_winner"]] = 1;
-        util::setobjectivehinttext(game["ball_overtime_first_winner"], & "MP_BALL_OVERTIME_ROUND_2_WINNER");
-        util::setobjectivehinttext(util::getotherteam(game["ball_overtime_first_winner"]), & "MP_BALL_OVERTIME_ROUND_2_LOSER");
+        util::setobjectivehinttext(game["ball_overtime_first_winner"], &"MP_BALL_OVERTIME_ROUND_2_WINNER");
+        util::setobjectivehinttext(util::getotherteam(game["ball_overtime_first_winner"]), &"MP_BALL_OVERTIME_ROUND_2_LOSER");
       } else {
-        level.ontimelimit = & ballovertimeround2_ontimelimit;
-        util::setobjectivehinttext("allies", & "MP_BALL_OVERTIME_ROUND_2_TIE");
-        util::setobjectivehinttext("axis", & "MP_BALL_OVERTIME_ROUND_2_TIE");
+        level.ontimelimit = &ballovertimeround2_ontimelimit;
+        util::setobjectivehinttext("allies", &"MP_BALL_OVERTIME_ROUND_2_TIE");
+        util::setobjectivehinttext("axis", &"MP_BALL_OVERTIME_ROUND_2_TIE");
       }
     }
   } else if(isDefined(game["round_time_to_beat"])) {
@@ -233,7 +233,7 @@ function freezeplayersforroundend() {
 function waitforallballstocometorest() {
   ball = anyballsintheair();
   if(isDefined(ball)) {
-    level.ontimelimit = & ball_ontimelimit_donothing;
+    level.ontimelimit = &ball_ontimelimit_donothing;
     ball waitforballtocometorest();
   }
 }
@@ -414,11 +414,11 @@ function onroundendgame(winningteam) {
         winningteam = game["ball_overtime_first_winner"];
       }
       if(game["ball_overtime_first_winner"] == winningteam) {
-        level.endvictoryreasontext = & "MPUI_BALL_OVERTIME_FASTEST_CAP_TIME";
-        level.enddefeatreasontext = & "MPUI_BALL_OVERTIME_DEFEAT_TIMELIMIT";
+        level.endvictoryreasontext = &"MPUI_BALL_OVERTIME_FASTEST_CAP_TIME";
+        level.enddefeatreasontext = &"MPUI_BALL_OVERTIME_DEFEAT_TIMELIMIT";
       } else {
-        level.endvictoryreasontext = & "MPUI_BALL_OVERTIME_FASTEST_CAP_TIME";
-        level.enddefeatreasontext = & "MPUI_BALL_OVERTIME_DEFEAT_DID_NOT_DEFEND";
+        level.endvictoryreasontext = &"MPUI_BALL_OVERTIME_FASTEST_CAP_TIME";
+        level.enddefeatreasontext = &"MPUI_BALL_OVERTIME_DEFEAT_DID_NOT_DEFEND";
       }
     } else if(!isDefined(winningteam) || winningteam == "tie") {
       updateteamscorebyroundswon();
@@ -553,8 +553,8 @@ function setup_goal(trigger, team) {
   foreach(ball in level.balls) {
     useobj gameobjects::set_key_object(ball);
   }
-  useobj.canuseobj = & can_use_goal;
-  useobj.onuse = & on_use_goal;
+  useobj.canuseobj = &can_use_goal;
+  useobj.onuse = &on_use_goal;
   useobj.ball_in_goal = 0;
   useobj.radiussq = trigger.radius * trigger.radius;
   useobj.center = trigger.origin + (0, 0, trigger.height * 0.5);
@@ -625,12 +625,12 @@ function spawn_ball(trigger) {
   ballobj.disallowremotecontrol = 1;
   ballobj.disallowplaceablepickup = 1;
   ballobj gameobjects::update_objective();
-  ballobj.canuseobject = & can_use_ball;
-  ballobj.onpickup = & on_pickup_ball;
-  ballobj.setdropped = & ball_set_dropped;
-  ballobj.onreset = & on_reset_ball;
-  ballobj.pickuptimeoutoverride = & ball_physics_timeout;
-  ballobj.carryweaponthink = & carry_think_ball;
+  ballobj.canuseobject = &can_use_ball;
+  ballobj.onpickup = &on_pickup_ball;
+  ballobj.setdropped = &ball_set_dropped;
+  ballobj.onreset = &on_reset_ball;
+  ballobj.pickuptimeoutoverride = &ball_physics_timeout;
+  ballobj.carryweaponthink = &carry_think_ball;
   ballobj.in_goal = 0;
   ballobj.lastcarrierscored = 0;
   ballobj.lastcarrierteam = "neutral";
@@ -1505,7 +1505,7 @@ function player_update_pass_target(ballobj) {
           possible_pass_targets[possible_pass_targets.size] = target;
         }
       }
-      possible_pass_targets = array::quicksort(possible_pass_targets, & compare_player_pass_dot);
+      possible_pass_targets = array::quicksort(possible_pass_targets, &compare_player_pass_dot);
       foreach(target in possible_pass_targets) {
         if(sighttracepassed(playereye, target.pass_origin, 0, target)) {
           new_target = target;

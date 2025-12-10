@@ -13,7 +13,7 @@
 #namespace bgb;
 
 function autoexec __init__sytem__() {
-  system::register("bgb", & __init__, & __main__, undefined);
+  system::register("bgb", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -21,16 +21,16 @@ function __init__() {
     return;
   }
   level.weaponbgbgrab = getweapon("zombie_bgb_grab");
-  callback::on_localclient_connect( & on_player_connect);
+  callback::on_localclient_connect(&on_player_connect);
   level.bgb = [];
   level.bgb_pack = [];
-  clientfield::register("clientuimodel", "bgb_current", 1, 8, "int", & function_cec2dbda, 0, 0);
+  clientfield::register("clientuimodel", "bgb_current", 1, 8, "int", &function_cec2dbda, 0, 0);
   clientfield::register("clientuimodel", "bgb_display", 1, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "bgb_timer", 1, 8, "float", undefined, 0, 0);
   clientfield::register("clientuimodel", "bgb_activations_remaining", 1, 3, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "bgb_invalid_use", 1, 1, "counter", undefined, 0, 0);
   clientfield::register("clientuimodel", "bgb_one_shot_use", 1, 1, "counter", undefined, 0, 0);
-  clientfield::register("toplayer", "bgb_blow_bubble", 1, 1, "counter", & bgb_blow_bubble, 0, 0);
+  clientfield::register("toplayer", "bgb_blow_bubble", 1, 1, "counter", &bgb_blow_bubble, 0, 0);
   level._effect["bgb_blow_bubble"] = "zombie/fx_bgb_bubble_blow_zmb";
 }
 

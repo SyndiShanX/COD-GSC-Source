@@ -26,18 +26,18 @@
 #namespace zm_powerup_castle_tram_token;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_castle_tram_token", & __init__, undefined, undefined);
+  system::register("zm_powerup_castle_tram_token", &__init__, undefined, undefined);
 }
 
 function __init__() {
   register_clientfields();
-  zm_powerups::register_powerup("castle_tram_token", & function_bcb6924e);
+  zm_powerups::register_powerup("castle_tram_token", &function_bcb6924e);
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("castle_tram_token", "p7_zm_ctl_115_fuse_pickup", & "ZM_CASTLE_TRAM_TOKEN_POWERUP", & function_56739ab1, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("castle_tram_token", "p7_zm_ctl_115_fuse_pickup", &"ZM_CASTLE_TRAM_TOKEN_POWERUP", &function_56739ab1, 1, 0, 0);
     zm_powerups::powerup_set_statless_powerup("castle_tram_token");
   }
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
   thread function_6dd86f90();
 }
 
@@ -134,7 +134,7 @@ function on_player_spawned() {}
 function function_6dd86f90() {
   level flagsys::wait_till("");
   wait(1);
-  zm_devgui::add_custom_devgui_callback( & function_9293606a);
+  zm_devgui::add_custom_devgui_callback(&function_9293606a);
   adddebugcommand("");
   adddebugcommand("");
 }

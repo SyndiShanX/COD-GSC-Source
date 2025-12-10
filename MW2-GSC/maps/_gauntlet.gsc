@@ -20,7 +20,7 @@ main(model, type) {
   //build_compassicon( "tank" );
   //build_frontarmor( .33 );// regens this much of the damage from attacks to the front
 
-  //like BTR80 it is destroyed by rockets & semtex but not frags or bullets
+  //like BTR80 it is destroyed by rockets &semtex but not frags or bullets
   build_bulletshield(true);
   build_grenadeshield(true);
 }

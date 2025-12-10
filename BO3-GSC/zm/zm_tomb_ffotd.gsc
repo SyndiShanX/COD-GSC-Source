@@ -19,7 +19,7 @@ function main_start() {
   level.added_initial_streamer_blackscreen = 2;
   level thread spawned_collision_ffotd();
   level thread function_3fd88dcb();
-  level.var_361ee139 = & function_acf1c4da;
+  level.var_361ee139 = &function_acf1c4da;
 }
 
 function main_end() {

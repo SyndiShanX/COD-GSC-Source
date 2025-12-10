@@ -12,13 +12,13 @@
 #namespace ball;
 
 function main() {
-  clientfield::register("allplayers", "ballcarrier", 1, 1, "int", & player_ballcarrier_changed, 0, 1);
-  clientfield::register("allplayers", "passoption", 1, 1, "int", & player_passoption_changed, 0, 0);
-  clientfield::register("world", "ball_away", 1, 1, "int", & world_ball_away_changed, 0, 1);
-  clientfield::register("world", "ball_score_allies", 1, 1, "int", & world_ball_score_allies, 0, 1);
-  clientfield::register("world", "ball_score_axis", 1, 1, "int", & world_ball_score_axis, 0, 1);
-  callback::on_localclient_connect( & on_localclient_connect);
-  callback::on_spawned( & on_player_spawned);
+  clientfield::register("allplayers", "ballcarrier", 1, 1, "int", &player_ballcarrier_changed, 0, 1);
+  clientfield::register("allplayers", "passoption", 1, 1, "int", &player_passoption_changed, 0, 0);
+  clientfield::register("world", "ball_away", 1, 1, "int", &world_ball_away_changed, 0, 1);
+  clientfield::register("world", "ball_score_allies", 1, 1, "int", &world_ball_score_allies, 0, 1);
+  clientfield::register("world", "ball_score_axis", 1, 1, "int", &world_ball_score_axis, 0, 1);
+  callback::on_localclient_connect(&on_localclient_connect);
+  callback::on_spawned(&on_player_spawned);
   if(!getdvarint("tu11_programaticallyColoredGameFX")) {
     level.effect_scriptbundles = [];
     level.effect_scriptbundles["goal"] = struct::get_script_bundle("teamcolorfx", "teamcolorfx_uplink_goal");
@@ -167,7 +167,7 @@ function clear_hud(localclientnum) {
   level.ball_carrier = undefined;
   setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballHeldByEnemy"), 0);
   setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballHeldByFriendly"), 0);
-  setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballStatusText"), & "MPUI_BALL_AWAY");
+  setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballStatusText"), &"MPUI_BALL_AWAY");
 }
 
 function watch_for_death(localclientnum) {

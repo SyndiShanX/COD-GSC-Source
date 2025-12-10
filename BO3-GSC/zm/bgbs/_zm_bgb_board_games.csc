@@ -12,7 +12,7 @@
 #namespace zm_bgb_board_games;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_board_games", & __init__, undefined, undefined);
+  system::register("zm_bgb_board_games", &__init__, undefined, undefined);
 }
 
 function __init__() {

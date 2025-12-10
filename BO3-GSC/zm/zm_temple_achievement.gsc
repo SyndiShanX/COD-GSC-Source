@@ -11,12 +11,12 @@
 #namespace zm_temple_achievement;
 
 function autoexec __init__sytem__() {
-  system::register("zm_temple_achievement", & __init__, undefined, undefined);
+  system::register("zm_temple_achievement", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level thread achievement_temple_sidequest();
-  callback::on_connect( & onplayerconnect);
+  callback::on_connect(&onplayerconnect);
 }
 
 function onplayerconnect() {

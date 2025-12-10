@@ -24,7 +24,7 @@ function main() {
 
 function init_code_triggers() {
   triggers = getEntArray("code_trigger", "targetname");
-  array::thread_all(triggers, & trigger_code);
+  array::thread_all(triggers, &trigger_code);
 }
 
 function trigger_code() {
@@ -187,7 +187,7 @@ function trigger_slow_touched_wait() {
   while(true) {
     self waittill("trigger", player);
     player notify("enter_slowtrigger");
-    self trigger::function_d1278be0(player, & trigger_slow_ent, & trigger_unslow_ent);
+    self trigger::function_d1278be0(player, &trigger_slow_ent, &trigger_unslow_ent);
     wait(0.1);
   }
 }
@@ -282,7 +282,7 @@ function water_drop_trigger_think() {
   while(true) {
     self waittill("trigger", who);
     if(isplayer(who)) {
-      self trigger::function_d1278be0(who, & water_drop_trig_entered, & water_drop_trig_exit);
+      self trigger::function_d1278be0(who, &water_drop_trig_entered, &water_drop_trig_exit);
     } else if(isDefined(who.water_trigger_func)) {
       who thread[[who.water_trigger_func]](self);
     }
@@ -370,7 +370,7 @@ function player_get_num_water_drops() {
 
 function init_code_structs() {
   structs = struct::get_array("code_struct", "targetname");
-  array::thread_all(structs, & structs_code);
+  array::thread_all(structs, &structs_code);
 }
 
 function structs_code() {

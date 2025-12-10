@@ -173,7 +173,7 @@ objective() {
   common_scripts\utility::flag_wait("awake");
   wait 4;
   var_0 = getent("radiac_equipment", "targetname");
-  objective_add(1, "active", & "AFTERMATH_OBJ_OFFICER", var_0.origin);
+  objective_add(1, "active", &"AFTERMATH_OBJ_OFFICER", var_0.origin);
   objective_current(1);
   var_1 = getent("officer", "targetname");
   var_1 waittill("trigger");
@@ -181,7 +181,7 @@ objective() {
   level.player thread player_jump_punishment();
   wait 3;
   var_0 = getent("overhead_cover", "targetname");
-  objective_add(2, "active", & "AFTERMATH_OBJ_SECURE_COVER", var_0.origin);
+  objective_add(2, "active", &"AFTERMATH_OBJ_SECURE_COVER", var_0.origin);
   objective_current(2);
   var_1 = getent("death_point", "targetname");
   var_1 waittill("trigger");

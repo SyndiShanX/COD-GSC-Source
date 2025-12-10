@@ -15,7 +15,7 @@
 #namespace zm_grappler;
 
 function autoexec __init__sytem__() {
-  system::register("zm_grappler", & __init__, & __main__, undefined);
+  system::register("zm_grappler", &__init__, &__main__, undefined);
 }
 
 function __init__() {

@@ -28,7 +28,7 @@
 #namespace zm_island_side_ee_distant_monster;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_side_ee_distant_monster", & __init__, undefined, undefined);
+  system::register("zm_island_side_ee_distant_monster", &__init__, undefined, undefined);
 }
 
 function __init__() {}
@@ -80,7 +80,7 @@ function function_549b07cb() {
 }
 
 function function_abe01b4d() {
-  zm_devgui::add_custom_devgui_callback( & function_603ad7e1);
+  zm_devgui::add_custom_devgui_callback(&function_603ad7e1);
   level.var_7b18dfab = 0;
   adddebugcommand("");
   adddebugcommand("");

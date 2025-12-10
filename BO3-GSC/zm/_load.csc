@@ -55,7 +55,7 @@ function main() {
   zm::init();
   level thread server_time();
   level thread util::init_utility();
-  util::register_system("levelNotify", & levelnotifyhandler);
+  util::register_system("levelNotify", &levelnotifyhandler);
   register_clientfields();
   level.createfx_disable_fx = getdvarint("disable_fx") == 1;
   if(isDefined(level._uses_sticky_grenades) && level._uses_sticky_grenades) {
@@ -74,7 +74,7 @@ function server_time() {
 }
 
 function register_clientfields() {
-  clientfield::register("allplayers", "zmbLastStand", 1, 1, "int", & zm::laststand, 0, 1);
+  clientfield::register("allplayers", "zmbLastStand", 1, 1, "int", &zm::laststand, 0, 1);
   clientfield::register("clientuimodel", "zmhud.swordEnergy", 1, 7, "float", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmhud.swordState", 1, 4, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmhud.swordChargeUpdate", 1, 1, "counter", undefined, 0, 0);

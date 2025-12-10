@@ -469,7 +469,7 @@ mechz_kill_flamethrower_watcher() {
 }
 
 mechz_flamethrower_cleanup() {
-  self.fx_field = self.fx_field & ~64;
+  self.fx_field = self.fx_field &~64;
   self setclientfield("mechz_fx", self.fx_field);
   self.firing = 0;
   self.doing_tank_sweep = 0;

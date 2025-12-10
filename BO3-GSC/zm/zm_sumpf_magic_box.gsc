@@ -16,7 +16,7 @@ function magic_box_init() {
   level thread waitfor_flag_open_chest_location("se_magic_box");
   level thread waitfor_flag_open_chest_location("sw_magic_box");
   level thread waitfor_flag_open_chest_location("start_zombie_round_logic");
-  level.pandora_fx_func = & swamp_pandora_fx_func;
+  level.pandora_fx_func = &swamp_pandora_fx_func;
 }
 
 function swamp_pandora_fx_func() {
@@ -103,5 +103,5 @@ function function_a0db1fb9() {
   }
   level flag::wait_till("nw_magic_box");
   zm_sumpf_trap_pendulum::initpendulumtrap();
-  array::thread_all(penbuytrigger, & zm_sumpf_trap_pendulum::penthink);
+  array::thread_all(penbuytrigger, &zm_sumpf_trap_pendulum::penthink);
 }

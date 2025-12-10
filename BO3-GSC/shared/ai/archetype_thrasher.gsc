@@ -34,14 +34,14 @@
 #namespace thrasherbehavior;
 
 function autoexec __init__sytem__() {
-  system::register("thrasher", & __init__, undefined, undefined);
+  system::register("thrasher", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  visionset_mgr::register_info("visionset", "zm_isl_thrasher_stomach_visionset", 9000, 30, 16, 1, & visionset_mgr::ramp_in_thread_per_player, 0);
+  visionset_mgr::register_info("visionset", "zm_isl_thrasher_stomach_visionset", 9000, 30, 16, 1, &visionset_mgr::ramp_in_thread_per_player, 0);
   initthrasherbehaviorsandasm();
-  spawner::add_archetype_spawn_function("thrasher", & archetypethrasherblackboardinit);
-  spawner::add_archetype_spawn_function("thrasher", & thrasherspawnsetup);
+  spawner::add_archetype_spawn_function("thrasher", &archetypethrasherblackboardinit);
+  spawner::add_archetype_spawn_function("thrasher", &thrasherspawnsetup);
   if(ai::shouldregisterclientfieldforarchetype("thrasher")) {
     clientfield::register("actor", "thrasher_spore_state", 5000, 3, "int");
     clientfield::register("actor", "thrasher_berserk_state", 5000, 1, "int");
@@ -55,28 +55,28 @@ function __init__() {
 }
 
 function private initthrasherbehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherRageService", & thrasherrageservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherTargetService", & thrashertargetservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherKnockdownService", & thrasherknockdownservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherAttackableObjectService", & thrasherattackableobjectservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherShouldBeStunned", & thrashershouldbestunned);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherShouldMelee", & thrashershouldmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherShouldShowPain", & thrashershouldshowpain);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherShouldTurnBerserk", & thrashershouldturnberserk);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherShouldTeleport", & thrashershouldteleport);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherShouldConsumePlayer", & thrashershouldconsumeplayer);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherShouldConsumeZombie", & thrashershouldconsumezombie);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherConsumePlayer", & thrasherconsumeplayer);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherConsumeZombie", & thrasherconsumezombie);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherPlayedBerserkIntro", & thrasherserverutils::thrasherplayedberserkintro);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherTeleport", & thrasherserverutils::thrasherteleport);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherTeleportOut", & thrasherserverutils::thrasherteleportout);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherDeath", & thrasherdeath);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherStartTraverse", & thrasherserverutils::thrasherstarttraverse);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherTerminateTraverse", & thrasherserverutils::thrasherterminatetraverse);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherStunInitialize", & thrasherserverutils::thrasherstuninitialize);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherStunUpdate", & thrasherserverutils::thrasherstunupdate);
-  animationstatenetwork::registernotetrackhandlerfunction("thrasher_melee", & thrashernotetrackmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherRageService", &thrasherrageservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherTargetService", &thrashertargetservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherKnockdownService", &thrasherknockdownservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherAttackableObjectService", &thrasherattackableobjectservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherShouldBeStunned", &thrashershouldbestunned);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherShouldMelee", &thrashershouldmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherShouldShowPain", &thrashershouldshowpain);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherShouldTurnBerserk", &thrashershouldturnberserk);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherShouldTeleport", &thrashershouldteleport);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherShouldConsumePlayer", &thrashershouldconsumeplayer);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherShouldConsumeZombie", &thrashershouldconsumezombie);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherConsumePlayer", &thrasherconsumeplayer);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherConsumeZombie", &thrasherconsumezombie);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherPlayedBerserkIntro", &thrasherserverutils::thrasherplayedberserkintro);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherTeleport", &thrasherserverutils::thrasherteleport);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherTeleportOut", &thrasherserverutils::thrasherteleportout);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherDeath", &thrasherdeath);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherStartTraverse", &thrasherserverutils::thrasherstarttraverse);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherTerminateTraverse", &thrasherserverutils::thrasherterminatetraverse);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherStunInitialize", &thrasherserverutils::thrasherstuninitialize);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("thrasherStunUpdate", &thrasherserverutils::thrasherstunupdate);
+  animationstatenetwork::registernotetrackhandlerfunction("thrasher_melee", &thrashernotetrackmelee);
 }
 
 function private archetypethrasherblackboardinit() {
@@ -92,7 +92,7 @@ function private archetypethrasherblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_should_turn", "should_not_turn", & bb_getshouldturn);
+  blackboard::registerblackboardattribute(self, "_locomotion_should_turn", "should_not_turn", &bb_getshouldturn);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -100,7 +100,7 @@ function private archetypethrasherblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  entity.___archetypeonanimscriptedcallback = & archetypethrasheronanimscriptedcallback;
+  entity.___archetypeonanimscriptedcallback = &archetypethrasheronanimscriptedcallback;
   entity finalizetrackedblackboardattributes();
 }
 
@@ -127,7 +127,7 @@ function private thrasherspawnsetup() {
   entity.thrasherragelevel = 1;
   thrasherinitspores();
   thrasherserverutils::thrasherhidespikes(entity, 1);
-  aiutility::addaioverridedamagecallback(entity, & thrasherserverutils::thrasherdamagecallback);
+  aiutility::addaioverridedamagecallback(entity, &thrasherserverutils::thrasherdamagecallback);
 }
 
 function private bb_getshouldturn() {
@@ -278,7 +278,7 @@ function private thrasherknockdownservice(entity) {
   speed = move_dist_sq / predict_time;
   if(speed >= 10) {
     a_zombies = getaiarchetypearray("zombie");
-    a_filtered_zombies = array::filter(a_zombies, 0, & thrasherzombieeligibleforknockdown, entity, predicted_pos);
+    a_filtered_zombies = array::filter(a_zombies, 0, &thrasherzombieeligibleforknockdown, entity, predicted_pos);
     if(a_filtered_zombies.size > 0) {
       foreach(zombie in a_filtered_zombies) {
         thrasherserverutils::thrasherknockdownzombie(entity, zombie);
@@ -661,7 +661,7 @@ function thrasherhidefromplayer(thrasher, player, hide) {
   if(hide) {
     hiddenplayers = currenthidden | entitybit;
   } else {
-    hiddenplayers = currenthidden & (~entitybit);
+    hiddenplayers = currenthidden &(~entitybit);
   }
   thrasher clientfield::set("thrasher_player_hide", hiddenplayers);
 }
@@ -684,7 +684,7 @@ function thrasherrestorepustule(entity) {
       sporestruct.health = sporestruct.maxhealth;
       entity.health = entity.health + (int(entity.maxhealth / array("tag_spore_chest", "tag_spore_back", "tag_spore_leg").size));
       destroyedspores = entity clientfield::get("thrasher_spore_state");
-      destroyedspores = destroyedspores & (~sporestruct.clientfield);
+      destroyedspores = destroyedspores &(~sporestruct.clientfield);
       entity clientfield::set("thrasher_spore_state", destroyedspores);
       break;
     }

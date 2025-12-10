@@ -31,7 +31,7 @@ function function_56aaef97() {
   level.var_adca2f3c = 0;
   level.var_7cba7005 = 0;
   level.var_a3ad836b = 50;
-  level.fn_custom_round_ai_spawn = & function_33aa4940;
+  level.fn_custom_round_ai_spawn = &function_33aa4940;
 }
 
 function function_33aa4940() {

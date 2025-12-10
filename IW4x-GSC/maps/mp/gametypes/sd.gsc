@@ -7,7 +7,6 @@
 #include maps\mp\_utility;
 #include maps\mp\gametypes\_hud_util;
 
-
 main() {
   if(getdvar("mapname") == "mp_background") {
     return;
@@ -93,26 +92,26 @@ onStartGameType() {
 
   setClientNameMode("manual_change");
 
-  game["strings"]["target_destroyed"] = & "MP_TARGET_DESTROYED";
-  game["strings"]["bomb_defused"] = & "MP_BOMB_DEFUSED";
+  game["strings"]["target_destroyed"] = &"MP_TARGET_DESTROYED";
+  game["strings"]["bomb_defused"] = &"MP_BOMB_DEFUSED";
 
   precacheString(game["strings"]["target_destroyed"]);
   precacheString(game["strings"]["bomb_defused"]);
 
   level._effect["bombexplosion"] = loadfx("explosions/tanker_explosion");
 
-  setObjectiveText(game["attackers"], & "OBJECTIVES_SD_ATTACKER");
-  setObjectiveText(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+  setObjectiveText(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
+  setObjectiveText(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
 
   if(level.splitscreen) {
-    setObjectiveScoreText(game["attackers"], & "OBJECTIVES_SD_ATTACKER");
-    setObjectiveScoreText(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+    setObjectiveScoreText(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
+    setObjectiveScoreText(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
   } else {
-    setObjectiveScoreText(game["attackers"], & "OBJECTIVES_SD_ATTACKER_SCORE");
-    setObjectiveScoreText(game["defenders"], & "OBJECTIVES_SD_DEFENDER_SCORE");
+    setObjectiveScoreText(game["attackers"], &"OBJECTIVES_SD_ATTACKER_SCORE");
+    setObjectiveScoreText(game["defenders"], &"OBJECTIVES_SD_DEFENDER_SCORE");
   }
-  setObjectiveHintText(game["attackers"], & "OBJECTIVES_SD_ATTACKER_HINT");
-  setObjectiveHintText(game["defenders"], & "OBJECTIVES_SD_DEFENDER_HINT");
+  setObjectiveHintText(game["attackers"], &"OBJECTIVES_SD_ATTACKER_HINT");
+  setObjectiveHintText(game["defenders"], &"OBJECTIVES_SD_DEFENDER_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -420,7 +419,6 @@ onUsePlantObject(player) {
     level thread bombPlanted(self, player);
     player logString("bomb planted: " + self.label);
 
-
     for(index = 0; index < level.bombZones.size; index++) {
       if(level.bombZones[index] == self) {
         continue;
@@ -430,9 +428,6 @@ onUsePlantObject(player) {
 
     player playSound("mp_bomb_plant");
     player notify("bomb_planted");
-
-
-
 
     leaderDialog("bomb_planted");
 
@@ -453,10 +448,7 @@ onUseDefuseObject(player) {
   player logString("bomb defused: " + self.label);
   level thread bombDefused();
 
-
   self maps\mp\gametypes\_gameobjects::disableObject();
-
-
 
   leaderDialog("bomb_defused");
 
@@ -534,7 +526,6 @@ bombPlanted(destroyedObj, player) {
   destroyedObj maps\mp\gametypes\_gameobjects::setVisibleTeam("none");
 
   label = destroyedObj maps\mp\gametypes\_gameobjects::getLabel();
-
 
   trigger = destroyedObj.bombDefuseTrig;
   trigger.origin = level.sdBombModel.origin;

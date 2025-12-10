@@ -14,11 +14,11 @@
 function init() {
   var_b20c97f = getminbitcountfornum(7);
   var_1b7d5552 = getminbitcountfornum(3);
-  clientfield::register("scriptmover", "side_ee_gt_spore_glow_fx", 9000, 1, "int", & side_ee_gt_spore_glow_fx, 0, 0);
-  clientfield::register("scriptmover", "side_ee_gt_spore_cloud_fx", 9000, var_b20c97f, "int", & side_ee_gt_spore_cloud_fx, 0, 0);
-  clientfield::register("actor", "side_ee_gt_spore_trail_enemy_fx", 9000, 1, "int", & function_f68bb4e3, 0, 0);
-  clientfield::register("allplayers", "side_ee_gt_spore_trail_player_fx", 9000, var_1b7d5552, "int", & function_f68bb4e3, 0, 0);
-  clientfield::register("actor", "good_thrasher_fx", 9000, 1, "int", & good_thrasher_fx, 0, 0);
+  clientfield::register("scriptmover", "side_ee_gt_spore_glow_fx", 9000, 1, "int", &side_ee_gt_spore_glow_fx, 0, 0);
+  clientfield::register("scriptmover", "side_ee_gt_spore_cloud_fx", 9000, var_b20c97f, "int", &side_ee_gt_spore_cloud_fx, 0, 0);
+  clientfield::register("actor", "side_ee_gt_spore_trail_enemy_fx", 9000, 1, "int", &function_f68bb4e3, 0, 0);
+  clientfield::register("allplayers", "side_ee_gt_spore_trail_player_fx", 9000, var_1b7d5552, "int", &function_f68bb4e3, 0, 0);
+  clientfield::register("actor", "good_thrasher_fx", 9000, 1, "int", &good_thrasher_fx, 0, 0);
 }
 
 function side_ee_gt_spore_glow_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

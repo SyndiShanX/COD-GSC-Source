@@ -83,11 +83,11 @@ function play_alarm_b() {
 }
 
 function alarm_a() {
-  array::thread_all(struct::get_array("amb_warning_siren", "targetname"), & play_alarm_a);
+  array::thread_all(struct::get_array("amb_warning_siren", "targetname"), &play_alarm_a);
 }
 
 function alarm_b() {
-  array::thread_all(struct::get_array("amb_warning_bell", "targetname"), & play_alarm_b);
+  array::thread_all(struct::get_array("amb_warning_bell", "targetname"), &play_alarm_b);
 }
 
 function play_pa_vox() {
@@ -122,7 +122,7 @@ function function_c9207335() {
   wait(3);
   level thread function_d667714e();
   var_13a52dfe = getEntArray(0, "sndMusicTrig", "targetname");
-  array::thread_all(var_13a52dfe, & function_60a32834);
+  array::thread_all(var_13a52dfe, &function_60a32834);
 }
 
 function function_60a32834() {

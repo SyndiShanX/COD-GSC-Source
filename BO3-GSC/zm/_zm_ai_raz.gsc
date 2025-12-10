@@ -28,7 +28,7 @@
 #namespace zm_ai_raz;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_raz", & __init__, & __main__, undefined);
+  system::register("zm_ai_raz", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -44,14 +44,14 @@ function __main__() {
 function register_clientfields() {}
 
 function init() {
-  zm::register_player_damage_callback( & function_94372a17);
+  zm::register_player_damage_callback(&function_94372a17);
   level.var_2e815d61 = 1;
   level.var_629d0743 = 0;
   level.var_d4fa016a = 1;
   level.var_b9ce6312 = 0;
   level.var_6bca5baa = [];
   level.var_f95eaac8 = 5500;
-  zm_score::register_score_event("death_raz", & function_6fdcefe3);
+  zm_score::register_score_event("death_raz", &function_6fdcefe3);
   level flag::init("raz_round");
   level flag::init("raz_round_in_progress");
   level thread aat::register_immunity("zm_aat_blast_furnace", "raz", 1, 1, 1);
@@ -81,7 +81,7 @@ function function_6fdcefe3(str_event, str_mod, str_hit_location, var_48d0b2fe, v
 function function_7dfa7ca6() {
   level.var_629d0743 = 1;
   if(!isDefined(level.var_c810e243)) {
-    level.var_c810e243 = & function_684ce0;
+    level.var_c810e243 = &function_684ce0;
   }
   level thread[[level.var_c810e243]]();
 }
@@ -95,7 +95,7 @@ function function_e099c556() {
   foreach(var_ad58b9ca in level.var_6bca5baa) {
     var_ad58b9ca.is_enabled = 1;
     var_ad58b9ca.script_forcespawn = 1;
-    var_ad58b9ca spawner::add_spawn_function( & function_4749ab89);
+    var_ad58b9ca spawner::add_spawn_function(&function_4749ab89);
   }
 }
 
@@ -126,8 +126,8 @@ function function_684ce0() {
       old_spawn_func = level.round_spawn_func;
       old_wait_func = level.round_wait_func;
       function_77ff30a0();
-      level.round_spawn_func = & function_a33bc00f;
-      level.round_wait_func = & function_692370a0;
+      level.round_spawn_func = &function_a33bc00f;
+      level.round_wait_func = &function_692370a0;
       if(isDefined(level.var_95444cb4)) {
         level.var_51a5abd0 = [
           [level.var_95444cb4]
@@ -175,7 +175,7 @@ function function_a33bc00f() {
   if(level.intermission) {
     return;
   }
-  array::thread_all(level.players, & function_bdf13070);
+  array::thread_all(level.players, &function_bdf13070);
   n_wave_count = function_852019c2();
   function_a67ada8();
   level.zombie_total = int(n_wave_count);
@@ -205,7 +205,7 @@ function function_a33bc00f() {
 function function_665a13cd(spawner, s_spot) {
   var_a09c80cd = zombie_utility::spawn_zombie(level.var_6bca5baa[0], "raz", s_spot);
   if(isDefined(var_a09c80cd)) {
-    var_a09c80cd.check_point_in_enabled_zone = & zm_utility::check_point_in_playable_area;
+    var_a09c80cd.check_point_in_enabled_zone = &zm_utility::check_point_in_playable_area;
     var_a09c80cd thread zombie_utility::round_spawn_failsafe();
     var_a09c80cd thread function_b8671cc0(s_spot);
   }
@@ -445,7 +445,7 @@ function function_4749ab89() {
   self.missinglegs = 0;
   self.team = level.zombie_team;
   self.sword_kill_power = 4;
-  self.instakill_func = & function_a59f11f9;
+  self.instakill_func = &function_a59f11f9;
   self thread zombie_utility::zombie_eye_glow();
   if(isDefined(level.var_c7da0559)) {
     self.func_custom_cleanup_check = level.var_c7da0559;
@@ -602,7 +602,7 @@ function function_a59f11f9(e_player, var_3ca8546d, var_9908b5f4) {
 
 function function_fbcfe4b6() {
   level flag::wait_till("");
-  zm_devgui::add_custom_devgui_callback( & function_3626e3d1);
+  zm_devgui::add_custom_devgui_callback(&function_3626e3d1);
 }
 
 function function_3626e3d1(cmd) {

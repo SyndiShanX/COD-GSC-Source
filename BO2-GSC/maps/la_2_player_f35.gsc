@@ -1621,16 +1621,16 @@ f35_tutorial(b_show_move_prompt, b_show_hover_prompt, b_show_weapon_prompt, b_sh
     stick_layout = getlocalprofileint("gpad_sticksConfig");
 
     if(stick_layout == 2 || stick_layout == 3)
-      self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_MOVE_LEGACY", & "LA_2_FLIGHT_CONTROL_LOOK_LEGACY", ::f35_control_check_movement);
+      self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_MOVE_LEGACY", &"LA_2_FLIGHT_CONTROL_LOOK_LEGACY", ::f35_control_check_movement);
     else
-      self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_MOVE", & "LA_2_FLIGHT_CONTROL_LOOK", ::f35_control_check_movement);
+      self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_MOVE", &"LA_2_FLIGHT_CONTROL_LOOK", ::f35_control_check_movement);
   }
 
   if(b_show_hover_prompt)
-    self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_HOVER_UP", & "LA_2_FLIGHT_CONTROL_HOVER_DOWN", ::f35_control_check_hover);
+    self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_HOVER_UP", &"LA_2_FLIGHT_CONTROL_HOVER_DOWN", ::f35_control_check_hover);
 
   if(b_show_weapon_prompt)
-    self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_GUN", & "LA_2_FLIGHT_CONTROL_MISSILE", ::f35_control_check_weapons);
+    self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_GUN", &"LA_2_FLIGHT_CONTROL_MISSILE", ::f35_control_check_weapons);
 
   if(b_show_ads_prompt) {
   }

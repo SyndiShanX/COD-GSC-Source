@@ -14,29 +14,29 @@
 #namespace archetype_human_locomotion;
 
 function autoexec registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareForMovement", & prepareformovement);
-  behaviorstatemachine::registerbsmscriptapiinternal("prepareForMovement", & prepareformovement);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldTacticalArrive", & shouldtacticalarrivecondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("humanShouldSprint", & humanshouldsprint);
-  behaviorstatemachine::registerbsmscriptapiinternal("planHumanArrivalAtCover", & planhumanarrivalatcover);
-  behaviorstatemachine::registerbsmscriptapiinternal("shouldPlanArrivalIntoCover", & shouldplanarrivalintocover);
-  behaviorstatemachine::registerbsmscriptapiinternal("shouldArriveExposed", & shouldarriveexposed);
-  behaviorstatemachine::registerbsmscriptapiinternal("nonCombatLocomotionUpdate", & noncombatlocomotionupdate);
-  behaviorstatemachine::registerbsmscriptapiinternal("combatLocomotionStart", & combatlocomotionstart);
-  behaviorstatemachine::registerbsmscriptapiinternal("combatLocomotionUpdate", & combatlocomotionupdate);
-  behaviorstatemachine::registerbsmscriptapiinternal("humanNonCombatLocomotionCondition", & humannoncombatlocomotioncondition);
-  behaviorstatemachine::registerbsmscriptapiinternal("humanCombatLocomotionCondition", & humancombatlocomotioncondition);
-  behaviorstatemachine::registerbsmscriptapiinternal("shouldSwitchToTacticalWalkFromRun", & shouldswitchtotacticalwalkfromrun);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareToStopNearEnemy", & preparetostopnearenemy);
-  behaviorstatemachine::registerbsmscriptapiinternal("prepareToStopNearEnemy", & preparetostopnearenemy);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareToMoveAwayFromNearByEnemy", & preparetomoveawayfromnearbyenemy);
-  behaviorstatemachine::registerbsmscriptapiinternal("shouldTacticalWalkPain", & shouldtacticalwalkpain);
-  behaviorstatemachine::registerbsmscriptapiinternal("beginTacticalWalkPain", & begintacticalwalkpain);
-  behaviorstatemachine::registerbsmscriptapiinternal("shouldContinueTacticalWalkPain", & shouldcontinuetacticalwalkpain);
-  behaviorstatemachine::registerbsmscriptapiinternal("shouldTacticalWalkScan", & shouldtacticalwalkscan);
-  behaviorstatemachine::registerbsmscriptapiinternal("continueTacticalWalkScan", & continuetacticalwalkscan);
-  behaviorstatemachine::registerbsmscriptapiinternal("tacticalWalkScanTerminate", & tacticalwalkscanterminate);
-  behaviorstatemachine::registerbsmscriptapiinternal("BSMLocomotionHasValidPainInterrupt", & bsmlocomotionhasvalidpaininterrupt);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareForMovement", &prepareformovement);
+  behaviorstatemachine::registerbsmscriptapiinternal("prepareForMovement", &prepareformovement);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldTacticalArrive", &shouldtacticalarrivecondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("humanShouldSprint", &humanshouldsprint);
+  behaviorstatemachine::registerbsmscriptapiinternal("planHumanArrivalAtCover", &planhumanarrivalatcover);
+  behaviorstatemachine::registerbsmscriptapiinternal("shouldPlanArrivalIntoCover", &shouldplanarrivalintocover);
+  behaviorstatemachine::registerbsmscriptapiinternal("shouldArriveExposed", &shouldarriveexposed);
+  behaviorstatemachine::registerbsmscriptapiinternal("nonCombatLocomotionUpdate", &noncombatlocomotionupdate);
+  behaviorstatemachine::registerbsmscriptapiinternal("combatLocomotionStart", &combatlocomotionstart);
+  behaviorstatemachine::registerbsmscriptapiinternal("combatLocomotionUpdate", &combatlocomotionupdate);
+  behaviorstatemachine::registerbsmscriptapiinternal("humanNonCombatLocomotionCondition", &humannoncombatlocomotioncondition);
+  behaviorstatemachine::registerbsmscriptapiinternal("humanCombatLocomotionCondition", &humancombatlocomotioncondition);
+  behaviorstatemachine::registerbsmscriptapiinternal("shouldSwitchToTacticalWalkFromRun", &shouldswitchtotacticalwalkfromrun);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareToStopNearEnemy", &preparetostopnearenemy);
+  behaviorstatemachine::registerbsmscriptapiinternal("prepareToStopNearEnemy", &preparetostopnearenemy);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareToMoveAwayFromNearByEnemy", &preparetomoveawayfromnearbyenemy);
+  behaviorstatemachine::registerbsmscriptapiinternal("shouldTacticalWalkPain", &shouldtacticalwalkpain);
+  behaviorstatemachine::registerbsmscriptapiinternal("beginTacticalWalkPain", &begintacticalwalkpain);
+  behaviorstatemachine::registerbsmscriptapiinternal("shouldContinueTacticalWalkPain", &shouldcontinuetacticalwalkpain);
+  behaviorstatemachine::registerbsmscriptapiinternal("shouldTacticalWalkScan", &shouldtacticalwalkscan);
+  behaviorstatemachine::registerbsmscriptapiinternal("continueTacticalWalkScan", &continuetacticalwalkscan);
+  behaviorstatemachine::registerbsmscriptapiinternal("tacticalWalkScanTerminate", &tacticalwalkscanterminate);
+  behaviorstatemachine::registerbsmscriptapiinternal("BSMLocomotionHasValidPainInterrupt", &bsmlocomotionhasvalidpaininterrupt);
 }
 
 function private tacticalwalkscanterminate(entity) {

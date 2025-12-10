@@ -10,18 +10,18 @@
 #namespace fr;
 
 function main() {
-  callback::on_localclient_connect( & on_player_connect);
-  clientfield::register("world", "freerun_state", 1, 3, "int", & freerunstatechanged, 0, 0);
-  clientfield::register("world", "freerun_retries", 1, 16, "int", & freerunretriesupdated, 0, 0);
-  clientfield::register("world", "freerun_faults", 1, 16, "int", & freerunfaultsupdated, 0, 0);
-  clientfield::register("world", "freerun_startTime", 1, 31, "int", & freerunstarttimeupdated, 0, 0);
-  clientfield::register("world", "freerun_finishTime", 1, 31, "int", & freerunfinishtimeupdated, 0, 0);
-  clientfield::register("world", "freerun_bestTime", 1, 31, "int", & freerunbesttimeupdated, 0, 0);
-  clientfield::register("world", "freerun_timeAdjustment", 1, 31, "int", & freeruntimeadjustmentupdated, 0, 0);
-  clientfield::register("world", "freerun_timeAdjustmentNegative", 1, 1, "int", & freeruntimeadjustmentsignupdated, 0, 0);
-  clientfield::register("world", "freerun_bulletPenalty", 1, 16, "int", & freerunbulletpenaltyupdated, 0, 0);
-  clientfield::register("world", "freerun_pausedTime", 1, 31, "int", & freerunpausedtimeupdated, 0, 0);
-  clientfield::register("world", "freerun_checkpointIndex", 1, 7, "int", & freeruncheckpointupdated, 0, 0);
+  callback::on_localclient_connect(&on_player_connect);
+  clientfield::register("world", "freerun_state", 1, 3, "int", &freerunstatechanged, 0, 0);
+  clientfield::register("world", "freerun_retries", 1, 16, "int", &freerunretriesupdated, 0, 0);
+  clientfield::register("world", "freerun_faults", 1, 16, "int", &freerunfaultsupdated, 0, 0);
+  clientfield::register("world", "freerun_startTime", 1, 31, "int", &freerunstarttimeupdated, 0, 0);
+  clientfield::register("world", "freerun_finishTime", 1, 31, "int", &freerunfinishtimeupdated, 0, 0);
+  clientfield::register("world", "freerun_bestTime", 1, 31, "int", &freerunbesttimeupdated, 0, 0);
+  clientfield::register("world", "freerun_timeAdjustment", 1, 31, "int", &freeruntimeadjustmentupdated, 0, 0);
+  clientfield::register("world", "freerun_timeAdjustmentNegative", 1, 1, "int", &freeruntimeadjustmentsignupdated, 0, 0);
+  clientfield::register("world", "freerun_bulletPenalty", 1, 16, "int", &freerunbulletpenaltyupdated, 0, 0);
+  clientfield::register("world", "freerun_pausedTime", 1, 31, "int", &freerunpausedtimeupdated, 0, 0);
+  clientfield::register("world", "freerun_checkpointIndex", 1, 7, "int", &freeruncheckpointupdated, 0, 0);
 }
 
 function on_player_connect(localclientnum) {

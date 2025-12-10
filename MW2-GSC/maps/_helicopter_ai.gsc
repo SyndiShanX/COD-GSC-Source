@@ -35,14 +35,14 @@ evasive_createManeuvers(vehicle, maneuverName) {
 
   switch (maneuverName) {
     case "strafe_left_right":
-      // swerve & strafe ( right then left )
+      // swerve &strafe ( right then left )
       vehicle evasive_addPoint(3000, -1500, 500, "average");
       vehicle evasive_addPoint(6000, 3000, -700, "average");
       vehicle evasive_addPoint(3000, -1500, 200, "average");
       break;
 
     case "strafe_right_left":
-      // swerve & strafe ( right then left )
+      // swerve &strafe ( right then left )
       vehicle evasive_addPoint(3000, 1500, 500, "average");
       vehicle evasive_addPoint(6000, -3000, -700, "average");
       vehicle evasive_addPoint(3000, 1500, 200, "average");

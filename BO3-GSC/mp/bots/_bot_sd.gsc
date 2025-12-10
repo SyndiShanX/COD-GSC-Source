@@ -16,7 +16,7 @@
 #namespace bot_sd;
 
 function init() {
-  level.botidle = & bot_idle;
+  level.botidle = &bot_idle;
 }
 
 function bot_idle() {

@@ -31,13 +31,13 @@
 #namespace dev;
 
 function autoexec __init__sytem__() {
-  system::register("", & __init__, undefined, "");
+  system::register("", &__init__, undefined, "");
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
-  callback::on_connect( & on_player_connected);
-  level.devongetormakebot = & getormakebot;
+  callback::on_start_gametype(&init);
+  callback::on_connect(&on_player_connected);
+  level.devongetormakebot = &getormakebot;
 }
 
 function init() {
@@ -851,7 +851,7 @@ function devgui_increase_momentum(score) {
     if(player.sessionstate != "") {
       continue;
     }
-    player globallogic_score::giveplayermomentumnotification(score, & "", "");
+    player globallogic_score::giveplayermomentumnotification(score, &"", "");
   }
 }
 

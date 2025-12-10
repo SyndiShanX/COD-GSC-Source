@@ -19,7 +19,7 @@ function function_c9207335() {
   wait(3);
   level thread function_d667714e();
   var_13a52dfe = getEntArray(0, "sndMusicTrig", "targetname");
-  array::thread_all(var_13a52dfe, & function_60a32834);
+  array::thread_all(var_13a52dfe, &function_60a32834);
 }
 
 function function_60a32834() {

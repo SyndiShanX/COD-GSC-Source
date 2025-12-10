@@ -24,12 +24,12 @@ function init_shared() {
 
 function createscramblerwatcher() {
   watcher = self weaponobjects::createuseweaponobjectwatcher("scrambler", self.team);
-  watcher.onspawn = & onspawnscrambler;
-  watcher.ondetonatecallback = & scramblerdetonate;
-  watcher.onstun = & weaponobjects::weaponstun;
+  watcher.onspawn = &onspawnscrambler;
+  watcher.ondetonatecallback = &scramblerdetonate;
+  watcher.onstun = &weaponobjects::weaponstun;
   watcher.stuntime = 5;
   watcher.hackable = 1;
-  watcher.ondamage = & watchscramblerdamage;
+  watcher.ondamage = &watchscramblerdamage;
 }
 
 function onspawnscrambler(watcher, player) {

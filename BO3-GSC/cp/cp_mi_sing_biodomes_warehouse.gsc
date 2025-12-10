@@ -51,13 +51,13 @@ function warehouse_main() {
   level.ai_hendricks.goalradius = 200;
   level scene::init("cin_bio_05_02_warehouse_aie_activate");
   level thread function_d1e71c2c();
-  spawner::add_spawn_function_group("warehouse_left_waiting", "script_noteworthy", & wait_for_sight_to_engage);
-  spawner::add_spawn_function_group("robot_warehouse_high", "script_string", & robots_crates_spawn);
-  spawner::add_spawn_function_group("warehouse_container_shooter", "targetname", & shoot_container);
-  spawner::add_spawn_function_group("wasps_warehouse", "script_noteworthy", & wasps_warehouse_spawn);
-  spawner::add_spawn_function_group("warehouse_enemy_warlord", "targetname", & function_4940548b);
+  spawner::add_spawn_function_group("warehouse_left_waiting", "script_noteworthy", &wait_for_sight_to_engage);
+  spawner::add_spawn_function_group("robot_warehouse_high", "script_string", &robots_crates_spawn);
+  spawner::add_spawn_function_group("warehouse_container_shooter", "targetname", &shoot_container);
+  spawner::add_spawn_function_group("wasps_warehouse", "script_noteworthy", &wasps_warehouse_spawn);
+  spawner::add_spawn_function_group("warehouse_enemy_warlord", "targetname", &function_4940548b);
   a_spawn_triggers = getEntArray("spawn_trigger", "script_parameters");
-  array::thread_all(a_spawn_triggers, & function_26edc5d7);
+  array::thread_all(a_spawn_triggers, &function_26edc5d7);
   wait(0.5);
   level thread container_crash();
   level thread container_done();
@@ -129,7 +129,7 @@ function dev_warehouse_door_func(str_objective, n_squad) {
   level cp_mi_sing_biodomes::function_cef897cf(str_objective, n_squad);
   level flag::wait_till("first_player_spawned");
   wait(2);
-  spawner::simple_spawn("warehouse_enemy_warlord", & warehouse_warlord_dev);
+  spawner::simple_spawn("warehouse_enemy_warlord", &warehouse_warlord_dev);
   level flag::set("warehouse_warlord");
   level thread clientfield::set("warehouse_window_break", 1);
   getent("warehouse_overwatch_window", "targetname") delete();
@@ -515,7 +515,7 @@ function back_door_close() {
   var_60f8f46f movez(128, 0.05);
   var_bee08349 = getent("back_door_no_pen_clip", "targetname");
   var_bee08349 movez(128, 0.05);
-  spawner::add_spawn_function_group("cloud_mountain_siegebot", "targetname", & function_c001cefd);
+  spawner::add_spawn_function_group("cloud_mountain_siegebot", "targetname", &function_c001cefd);
   spawn_manager::enable("cloud_mountain_siegebot_manager");
   if(isDefined(level.bzmutil_waitforallzombiestodie)) {
     [[level.bzmutil_waitforallzombiestodie]]();
@@ -561,7 +561,7 @@ function function_c001cefd() {
   self thread function_994b4243();
   level flag::wait_till_any(array("back_door_opened", "siegebot_alerted"));
   self setCanDamage(1);
-  self.overridevehicledamage = & siegebot::siegebot_callback_damage;
+  self.overridevehicledamage = &siegebot::siegebot_callback_damage;
   self ai::set_ignoreme(0);
   self ai::set_ignoreall(0);
   wait(0.5);
@@ -578,7 +578,7 @@ function function_994b4243() {
 
 function function_c60cca3f(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, weapon, v_point, v_dir, str_hit_loc, v_damage_origin, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name, v_surface_normal) {
   trigger::use("trig_siegebot_alerted", "targetname");
-  self.overridevehicledamage = & siegebot::siegebot_callback_damage;
+  self.overridevehicledamage = &siegebot::siegebot_callback_damage;
   return n_damage;
 }
 
@@ -587,7 +587,7 @@ function function_4a9bba52() {
   self setCanDamage(0);
   level flag::wait_till("siegebot_damage_enabled");
   self setCanDamage(1);
-  self.overridevehicledamage = & function_c60cca3f;
+  self.overridevehicledamage = &function_c60cca3f;
 }
 
 function back_door_ai_side() {
@@ -634,7 +634,7 @@ function warehouse_warlord_surprise() {
   level thread clientfield::set("warehouse_window_break", 1);
   level flag::set("warehouse_warlord");
   objectives::hide("cp_waypoint_breadcrumb");
-  spawner::simple_spawn("warehouse_enemy_group3", & warehouse_surprise_spawns);
+  spawner::simple_spawn("warehouse_enemy_group3", &warehouse_surprise_spawns);
   getent("warehouse_overwatch_window", "targetname") delete();
   s_landing = struct::get("warehouse_warlord_surprise_landing");
   playrumbleonposition("cp_biodomes_warehouse_warlord_rumble", s_landing.origin);

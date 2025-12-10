@@ -17,12 +17,12 @@
 #namespace _zm_pack_a_punch;
 
 function autoexec __init__sytem__() {
-  system::register("zm_pack_a_punch", & __init__, undefined, undefined);
+  system::register("zm_pack_a_punch", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level._effect["pap_working_fx"] = "dlc1/castle/fx_packapunch_castle";
-  clientfield::register("zbarrier", "pap_working_FX", 5000, 1, "int", & pap_working_fx_handler, 0, 0);
+  clientfield::register("zbarrier", "pap_working_FX", 5000, 1, "int", &pap_working_fx_handler, 0, 0);
 }
 
 function pap_working_fx_handler(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

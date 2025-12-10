@@ -316,7 +316,7 @@ waitRespawnButton() {
 setLowerMessage(text, time, combineMessageAndTimer) {
   if(!isDefined(self.lowerMessage))
     return;
-  if(isDefined(self.lowerMessageOverride) && text != & "") {
+  if(isDefined(self.lowerMessageOverride) && text != &"") {
     text = self.lowerMessageOverride;
     time = undefined;
   }
@@ -327,13 +327,13 @@ setLowerMessage(text, time, combineMessageAndTimer) {
     self.lowerMessage setText("");
   if(isDefined(time) && time > 0) {
     if(!isDefined(combineMessageAndTimer) || !combineMessageAndTimer)
-      self.lowerTimer.label = & "";
+      self.lowerTimer.label = &"";
     else
       self.lowerTimer.label = text;
     self.lowerTimer setTimer(time);
   } else {
     self.lowerTimer setText("");
-    self.lowerTimer.label = & "";
+    self.lowerTimer.label = &"";
   }
   if(self IsSplitscreen())
     self.lowerMessage.fontscale = 1.4;
@@ -407,9 +407,9 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
       player = level.players[i];
       playerteam = player.pers["team"];
       if(isDefined(playerteam)) {
-        if(playerteam == team && isDefined(printFriendly) && printFriendly != & "")
+        if(playerteam == team && isDefined(printFriendly) && printFriendly != &"")
           player iprintln(printFriendly, printarg);
-        else if(playerteam == otherteam && isDefined(printEnemy) && printEnemy != & "")
+        else if(playerteam == otherteam && isDefined(printEnemy) && printEnemy != &"")
           player iprintln(printEnemy, printarg);
       }
     }
@@ -425,11 +425,11 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
         playerteam = player.pers["team"];
         if(isDefined(playerteam)) {
           if(playerteam == team) {
-            if(isDefined(printFriendly) && printFriendly != & "")
+            if(isDefined(printFriendly) && printFriendly != &"")
               player iprintln(printFriendly, printarg);
             player playLocalSound(soundFriendly);
           } else if(playerteam == otherteam) {
-            if(isDefined(printEnemy) && printEnemy != & "")
+            if(isDefined(printEnemy) && printEnemy != &"")
               player iprintln(printEnemy, printarg);
             player playLocalSound(soundEnemy);
           }
@@ -441,10 +441,10 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
         playerteam = player.pers["team"];
         if(isDefined(playerteam)) {
           if(playerteam == team) {
-            if(isDefined(printFriendly) && printFriendly != & "")
+            if(isDefined(printFriendly) && printFriendly != &"")
               player iprintln(printFriendly, printarg);
             player playLocalSound(soundFriendly);
-          } else if(playerteam == otherteam && isDefined(printEnemy) && printEnemy != & "") {
+          } else if(playerteam == otherteam && isDefined(printEnemy) && printEnemy != &"") {
             player iprintln(printEnemy, printarg);
           }
         }

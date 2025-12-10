@@ -22,14 +22,14 @@
 #namespace genesis_achievements;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_achievements", & __init__, undefined, undefined);
+  system::register("zm_genesis_achievements", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level thread function_c190d113();
   level thread function_902aff55();
-  callback::on_connect( & on_player_connect);
-  zm_spawner::register_zombie_death_event_callback( & function_71e89ea4);
+  callback::on_connect(&on_player_connect);
+  zm_spawner::register_zombie_death_event_callback(&function_71e89ea4);
 }
 
 function on_player_connect() {
@@ -43,12 +43,12 @@ function on_player_connect() {
 
 function function_c190d113() {
   level waittill("hash_91a3107");
-  array::run_all(level.players, & giveachievement, "ZM_GENESIS_EE");
+  array::run_all(level.players, &giveachievement, "ZM_GENESIS_EE");
 }
 
 function function_902aff55() {
   level waittill("hash_154abf47");
-  array::run_all(level.players, & giveachievement, "ZM_GENESIS_SUPER_EE");
+  array::run_all(level.players, &giveachievement, "ZM_GENESIS_SUPER_EE");
 }
 
 function function_4d2d1f7a() {

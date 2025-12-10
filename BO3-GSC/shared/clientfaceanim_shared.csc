@@ -11,17 +11,17 @@
 #namespace clientfaceanim;
 
 function autoexec __init__sytem__() {
-  system::register("clientfaceanim_shared", undefined, & main, undefined);
+  system::register("clientfaceanim_shared", undefined, &main, undefined);
 }
 
 function main() {
-  callback::on_spawned( & on_player_spawned);
-  level._clientfaceanimonplayerspawned = & on_player_spawned;
+  callback::on_spawned(&on_player_spawned);
+  level._clientfaceanimonplayerspawned = &on_player_spawned;
 }
 
 function private on_player_spawned(localclientnum) {
   facialanimationsinit(localclientnum);
-  self callback::on_shutdown( & on_player_shutdown);
+  self callback::on_shutdown(&on_player_shutdown);
   self thread on_player_death(localclientnum);
 }
 

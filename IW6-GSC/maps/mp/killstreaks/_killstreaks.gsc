@@ -29,7 +29,7 @@ initKillstreakData() {
     assert(streakRef != "");
 
     streakUseHint = TableLookupIString(level.global_tables["killstreakTable"].path, level.global_tables["killstreakTable"].index_col, i, level.global_tables["killstreakTable"].earned_hint_col);
-    assert(streakUseHint != & "");
+    assert(streakUseHint != &"");
 
     streakEarnDialog = TableLookup(level.global_tables["killstreakTable"].path, level.global_tables["killstreakTable"].index_col, i, level.global_tables["killstreakTable"].earned_dialog_col);
     assert(streakEarnDialog != "");

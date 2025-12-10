@@ -40,13 +40,13 @@
 #namespace escort;
 
 function autoexec __init__sytem__() {
-  system::register("escort", & __init__, undefined, undefined);
+  system::register("escort", &__init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("actor", "robot_state", 1, 2, "int");
   clientfield::register("actor", "escort_robot_burn", 1, 1, "int");
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function main() {
@@ -109,15 +109,15 @@ function main() {
   level.overrideteamscore = 1;
   level.scoreroundwinbased = 1;
   level.doubleovertime = 1;
-  level.onprecachegametype = & onprecachegametype;
-  level.onstartgametype = & onstartgametype;
-  level.onspawnplayer = & onspawnplayer;
-  level.onplayerkilled = & onplayerkilled;
-  level.ontimelimit = & ontimelimit;
-  level.onroundswitch = & onroundswitch;
-  level.onendgame = & onendgame;
-  level.shouldplayovertimeround = & shouldplayovertimeround;
-  level.onroundendgame = & onroundendgame;
+  level.onprecachegametype = &onprecachegametype;
+  level.onstartgametype = &onstartgametype;
+  level.onspawnplayer = &onspawnplayer;
+  level.onplayerkilled = &onplayerkilled;
+  level.ontimelimit = &ontimelimit;
+  level.onroundswitch = &onroundswitch;
+  level.onendgame = &onendgame;
+  level.shouldplayovertimeround = &shouldplayovertimeround;
+  level.onroundendgame = &onroundendgame;
   gameobjects::register_allowed_gameobject(level.gametype);
   killstreak_bundles::register_killstreak_bundle("escort_robot");
 }
@@ -136,12 +136,12 @@ function onstartgametype() {
     game["attackers"] = olddefenders;
     game["defenders"] = oldattackers;
   }
-  util::setobjectivetext(game["attackers"], & "OBJECTIVES_ESCORT_ATTACKER");
-  util::setobjectivetext(game["defenders"], & "OBJECTIVES_ESCORT_DEFENDER");
-  util::setobjectivescoretext(game["attackers"], & "OBJECTIVES_ESCORT_ATTACKER_SCORE");
-  util::setobjectivescoretext(game["defenders"], & "OBJECTIVES_ESCORT_DEFENDER_SCORE");
-  util::setobjectivehinttext(game["attackers"], & "OBJECTIVES_ESCORT_ATTACKER_HINT");
-  util::setobjectivehinttext(game["defenders"], & "OBJECTIVES_ESCORT_DEFENDER_HINT");
+  util::setobjectivetext(game["attackers"], &"OBJECTIVES_ESCORT_ATTACKER");
+  util::setobjectivetext(game["defenders"], &"OBJECTIVES_ESCORT_DEFENDER");
+  util::setobjectivescoretext(game["attackers"], &"OBJECTIVES_ESCORT_ATTACKER_SCORE");
+  util::setobjectivescoretext(game["defenders"], &"OBJECTIVES_ESCORT_DEFENDER_SCORE");
+  util::setobjectivehinttext(game["attackers"], &"OBJECTIVES_ESCORT_ATTACKER_HINT");
+  util::setobjectivehinttext(game["defenders"], &"OBJECTIVES_ESCORT_DEFENDER_HINT");
   if(isDefined(game["overtime_round"])) {
     [[level._setteamscore]]("allies", 0);
     [[level._setteamscore]]("axis", 0);
@@ -151,13 +151,13 @@ function onstartgametype() {
       util::registertimelimit(timem, timem);
     }
     if(game["overtime_round"] == 1) {
-      level.ontimelimit = & ontimelimit_overtime1;
-      util::setobjectivehinttext(game["attackers"], & "MP_ESCORT_OVERTIME_ROUND_1_ATTACKERS");
-      util::setobjectivehinttext(game["defenders"], & "MP_ESCORT_OVERTIME_ROUND_1_DEFENDERS");
+      level.ontimelimit = &ontimelimit_overtime1;
+      util::setobjectivehinttext(game["attackers"], &"MP_ESCORT_OVERTIME_ROUND_1_ATTACKERS");
+      util::setobjectivehinttext(game["defenders"], &"MP_ESCORT_OVERTIME_ROUND_1_DEFENDERS");
     } else {
-      level.ontimelimit = & ontimelimit_overtime2;
-      util::setobjectivehinttext(game["attackers"], & "MP_ESCORT_OVERTIME_ROUND_2_TIE_ATTACKERS");
-      util::setobjectivehinttext(game["defenders"], & "MP_ESCORT_OVERTIME_ROUND_2_TIE_DEFENDERS");
+      level.ontimelimit = &ontimelimit_overtime2;
+      util::setobjectivehinttext(game["attackers"], &"MP_ESCORT_OVERTIME_ROUND_2_TIE_ATTACKERS");
+      util::setobjectivehinttext(game["defenders"], &"MP_ESCORT_OVERTIME_ROUND_2_TIE_DEFENDERS");
     }
   }
   level.spawnmins = (0, 0, 0);
@@ -378,7 +378,7 @@ function debug_draw_robot_path() {
   }
 }
 
-function debug_draw_approximate_robot_path_to_goal( & goalpatharray) {
+function debug_draw_approximate_robot_path_to_goal(&goalpatharray) {
   if((isDefined(getdvarint("")) ? getdvarint("") : 0) == 0) {
     return;
   }
@@ -614,7 +614,7 @@ function spawn_robot(position, angles) {
   if(isDefined(level.shutdowndamage) && level.shutdowndamage) {
     target_set(robot, vectorscale((0, 0, 1), 50));
   }
-  robot.overrideactordamage = & robot_damage;
+  robot.overrideactordamage = &robot_damage;
   robot thread robot_move_chatter();
   robot.missiletargetmissdistance = 64;
   robot thread heatseekingmissile::missiletarget_proximitydetonateincomingmissile();
@@ -1009,7 +1009,7 @@ function set_goal_to_point_on_path(recursioncount = 0) {
   debug_draw_current_robot_goal(closestpathpoint);
 }
 
-function is_path_distance_to_goal_too_long( & patharray, toolongthreshold) {
+function is_path_distance_to_goal_too_long(&patharray, toolongthreshold) {
   debug_draw_approximate_robot_path_to_goal(patharray);
   if(toolongthreshold < 20) {
     toolongthreshold = 20;
@@ -1093,15 +1093,15 @@ function robot_move_chatter() {
 
 function setup_move_object(robot, triggername) {
   trigger = getent(triggername, "targetname");
-  useobj = gameobjects::create_use_object(game["attackers"], trigger, [], (0, 0, 0), & "escort_robot");
+  useobj = gameobjects::create_use_object(game["attackers"], trigger, [], (0, 0, 0), &"escort_robot");
   useobj gameobjects::set_objective_entity(robot);
   useobj gameobjects::allow_use("none");
   useobj gameobjects::set_visible_team("any");
   useobj gameobjects::set_use_time(0);
   trigger enablelinkto();
   trigger linkto(robot);
-  useobj.onuse = & on_use_robot_move;
-  useobj.onupdateuserate = & on_update_use_rate_robot_move;
+  useobj.onuse = &on_use_robot_move;
+  useobj.onupdateuserate = &on_update_use_rate_robot_move;
   useobj.robot = robot;
   if(isDefined(level.levelescortdisable)) {
     if(!isDefined(useobj.exclusions)) {
@@ -1212,7 +1212,7 @@ function setup_reboot_object(robot, triggername) {
 
 function setup_goal_object(robot, triggername) {
   trigger = getent(triggername, "targetname");
-  useobj = gameobjects::create_use_object(game["defenders"], trigger, [], (0, 0, 0), & "escort_goal");
+  useobj = gameobjects::create_use_object(game["defenders"], trigger, [], (0, 0, 0), &"escort_goal");
   useobj gameobjects::set_visible_team("any");
   useobj gameobjects::allow_use("none");
   useobj gameobjects::set_use_time(0);
@@ -1232,7 +1232,7 @@ function watch_robot_enter(robot) {
   while(true) {
     if(robot.moving === 1 && distance2dsquared(self.trigger.origin, robot.origin) < radiussq) {
       level.moveplayers = 0;
-      robot.overrideactordamage = & robot_damage_none;
+      robot.overrideactordamage = &robot_damage_none;
       if(target_istarget(self)) {
         target_remove(self);
       }

@@ -10,16 +10,16 @@
 #namespace bot;
 
 function autoexec __init__sytem__() {
-  system::register("bot_cp", & __init__, undefined, undefined);
+  system::register("bot_cp", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  level.onbotconnect = & on_bot_connect;
-  level.getbotthreats = & bot_combat::get_ai_threats;
-  level.botprecombat = & coop_pre_combat;
-  level.botpostcombat = & coop_post_combat;
-  level.botidle = & follow_coop_players;
-  level.botdevguicmd = & coop_bot_devgui_cmd;
+  level.onbotconnect = &on_bot_connect;
+  level.getbotthreats = &bot_combat::get_ai_threats;
+  level.botprecombat = &coop_pre_combat;
+  level.botpostcombat = &coop_post_combat;
+  level.botidle = &follow_coop_players;
+  level.botdevguicmd = &coop_bot_devgui_cmd;
 }
 
 function on_bot_connect() {

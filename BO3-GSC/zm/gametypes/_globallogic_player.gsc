@@ -562,7 +562,7 @@ function callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansof
   if(globallogic_utils::isheadshot(weapon, shitloc, smeansofdeath, einflictor) && isplayer(eattacker)) {
     smeansofdeath = "MOD_HEAD_SHOT";
   }
-  if(level.onplayerdamage != ( & globallogic::blank)) {
+  if(level.onplayerdamage != (&globallogic::blank)) {
     modifieddamage = [[level.onplayerdamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime);
     if(isDefined(modifieddamage)) {
       if(modifieddamage <= 0) {
@@ -597,13 +597,13 @@ function callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansof
         eattacker.lastattackedshieldtime = gettime();
       }
     }
-    if(idflags & level.idflags_shield_explosive_impact) {
+    if(idflags &level.idflags_shield_explosive_impact) {
       shitloc = "none";
-      if(!idflags & level.idflags_shield_explosive_impact_huge) {
+      if(!idflags &level.idflags_shield_explosive_impact_huge) {
         idamage = idamage * 0;
       }
     } else {
-      if(idflags & level.idflags_shield_explosive_splash) {
+      if(idflags &level.idflags_shield_explosive_splash) {
         if(isDefined(einflictor) && isDefined(einflictor.stucktoplayer) && einflictor.stucktoplayer == self) {
           idamage = 101;
         }
@@ -698,7 +698,7 @@ function isaikillstreakdamage(weapon, einflictor) {
 
 function finishplayerdamagewrapper(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, boneindex, vsurfacenormal) {
   pixbeginevent("finishPlayerDamageWrapper");
-  if(!level.console && idflags & level.idflags_penetration && isplayer(eattacker)) {
+  if(!level.console && idflags &level.idflags_penetration && isplayer(eattacker)) {
     println(((((((((("" + self getentitynumber()) + "") + self.health) + "") + eattacker.clientid) + "") + isplayer(einflictor) + "") + idamage) + "") + shitloc);
     eattacker addplayerstat("penetration_shots", 1);
   }

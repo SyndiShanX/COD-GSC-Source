@@ -26,10 +26,10 @@ getDescription() {
 getnames(num) {
   if(num == 0)
     // Begin Game Autosave
-    savedescription = & "AUTOSAVE_GAME";
+    savedescription = &"AUTOSAVE_GAME";
   else
     // No Name Specified
-    savedescription = & "AUTOSAVE_NOGAME";
+    savedescription = &"AUTOSAVE_NOGAME";
 
   return savedescription;
 }
@@ -53,7 +53,7 @@ beginningOfLevelSave() {
 
   // "levelstart" is recognized by the saveGame command as a special save game
   // Start
-  SaveGame("levelstart", & "AUTOSAVE_LEVELSTART", imagename, true);
+  SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", imagename, true);
   SetDvar("ui_grenade_death", "0");
   PrintLn("Saving level start saved game");
 
@@ -147,7 +147,7 @@ autosave_timeout(timeout) {
 _autosave_game_now_nochecks() {
   imagename = "levelshots / autosave / autosave_" + level.script + "start";
   // Start
-  SaveGame("levelstart", & "AUTOSAVE_LEVELSTART", imagename, true);
+  SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", imagename, true);
 }
 
 _autosave_game_now(suppress_print) {

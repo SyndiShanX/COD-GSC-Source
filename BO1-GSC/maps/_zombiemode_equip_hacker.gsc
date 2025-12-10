@@ -11,7 +11,7 @@ init() {
   if(!maps\_zombiemode_equipment::is_equipment_included("equip_hacker_zm")) {
     return;
   }
-  maps\_zombiemode_equipment::register_equipment("equip_hacker_zm", & "ZOMBIE_EQUIP_HACKER_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_HACKER_HOWTO", "hacker");
+  maps\_zombiemode_equipment::register_equipment("equip_hacker_zm", &"ZOMBIE_EQUIP_HACKER_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_HACKER_HOWTO", "hacker");
   level._hackable_objects = [];
   level._pooled_hackable_objects = [];
   level thread hacker_on_player_connect();

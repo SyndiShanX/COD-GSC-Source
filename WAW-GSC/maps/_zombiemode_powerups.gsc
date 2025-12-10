@@ -30,10 +30,10 @@ init() {
 }
 
 init_powerups() {
-  add_zombie_powerup("nuke", "zombie_bomb", & "ZOMBIE_POWERUP_NUKE", "misc/fx_zombie_mini_nuke");
-  add_zombie_powerup("insta_kill", "zombie_skull", & "ZOMBIE_POWERUP_INSTA_KILL");
-  add_zombie_powerup("double_points", "zombie_x2_icon", & "ZOMBIE_POWERUP_DOUBLE_POINTS");
-  add_zombie_powerup("full_ammo", "zombie_ammocan", & "ZOMBIE_POWERUP_MAX_AMMO");
+  add_zombie_powerup("nuke", "zombie_bomb", &"ZOMBIE_POWERUP_NUKE", "misc/fx_zombie_mini_nuke");
+  add_zombie_powerup("insta_kill", "zombie_skull", &"ZOMBIE_POWERUP_INSTA_KILL");
+  add_zombie_powerup("double_points", "zombie_x2_icon", &"ZOMBIE_POWERUP_DOUBLE_POINTS");
+  add_zombie_powerup("full_ammo", "zombie_ammocan", &"ZOMBIE_POWERUP_MAX_AMMO");
   randomize_powerups();
   level.zombie_powerup_index = 0;
   randomize_powerups();

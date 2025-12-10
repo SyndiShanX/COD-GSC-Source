@@ -394,7 +394,7 @@ moral_event_start(player) {
   level endon("menendez_capture");
   level endon("ending_outside_capture");
   level endon("ending_outside_killed");
-  screen_message_create(&"HAITI_SHOOT_MENENDEZ", & "HAITI_CAPTURE_MENENDEZ", undefined, 150);
+  screen_message_create(&"HAITI_SHOOT_MENENDEZ", &"HAITI_CAPTURE_MENENDEZ", undefined, 150);
   wait 0.05;
   level.player thread watch_shoot_menendez();
   level.player thread watch_capture_menendez();

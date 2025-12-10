@@ -11,17 +11,17 @@
 #namespace healthoverlay;
 
 function autoexec __init__sytem__() {
-  system::register("healthoverlay", & __init__, undefined, undefined);
+  system::register("healthoverlay", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
-  callback::on_joined_team( & end_health_regen);
-  callback::on_joined_spectate( & end_health_regen);
-  callback::on_spawned( & player_health_regen);
-  callback::on_disconnect( & end_health_regen);
-  callback::on_player_killed( & end_health_regen);
-  level.start_player_health_regen = & player_health_regen;
+  callback::on_start_gametype(&init);
+  callback::on_joined_team(&end_health_regen);
+  callback::on_joined_spectate(&end_health_regen);
+  callback::on_spawned(&player_health_regen);
+  callback::on_disconnect(&end_health_regen);
+  callback::on_player_killed(&end_health_regen);
+  level.start_player_health_regen = &player_health_regen;
 }
 
 function init() {

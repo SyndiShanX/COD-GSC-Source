@@ -159,7 +159,7 @@ class robotphalanx {
       robot ai::set_behavior_attribute("move_mode", "normal");
       robot ai::set_behavior_attribute("force_cover", 0);
       robot setavoidancemask("avoid all");
-      aiutility::removeaioverridedamagecallback(robot, & _dampenexplosivedamage);
+      aiutility::removeaioverridedamagecallback(robot, &_dampenexplosivedamage);
     }
   }
 
@@ -193,7 +193,7 @@ class robotphalanx {
     robot ai::set_behavior_attribute("move_mode", "marching");
     robot ai::set_behavior_attribute("force_cover", 1);
     robot setavoidancemask("avoid none");
-    aiutility::addaioverridedamagecallback(robot, & _dampenexplosivedamage, 1);
+    aiutility::addaioverridedamagecallback(robot, &_dampenexplosivedamage, 1);
   }
 
   function private _haltfire(robots) {

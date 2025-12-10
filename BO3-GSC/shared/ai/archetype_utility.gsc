@@ -17,86 +17,86 @@
 #namespace aiutility;
 
 function autoexec registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("forceRagdoll", & forceragdoll);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("hasAmmo", & hasammo);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("hasLowAmmo", & haslowammo);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("hasEnemy", & hasenemy);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isSafeFromGrenades", & issafefromgrenades);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("inGrenadeBlastRadius", & ingrenadeblastradius);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("recentlySawEnemy", & recentlysawenemy);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldBeAggressive", & shouldbeaggressive);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldOnlyFireAccurately", & shouldonlyfireaccurately);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldReactToNewEnemy", & shouldreacttonewenemy);
-  behaviorstatemachine::registerbsmscriptapiinternal("shouldReactToNewEnemy", & shouldreacttonewenemy);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("hasWeaponMalfunctioned", & hasweaponmalfunctioned);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldStopMoving", & shouldstopmoving);
-  behaviorstatemachine::registerbsmscriptapiinternal("shouldStopMoving", & shouldstopmoving);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("chooseBestCoverNodeASAP", & choosebestcovernodeasap);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("chooseBetterCoverService", & choosebettercoverservicecodeversion);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("trackCoverParamsService", & trackcoverparamsservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("refillAmmoIfNeededService", & refillammo);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tryStoppingService", & trystoppingservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isFrustrated", & isfrustrated);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("updatefrustrationLevel", & updatefrustrationlevel);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isLastKnownEnemyPositionApproachable", & islastknownenemypositionapproachable);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tryAdvancingOnLastKnownPositionBehavior", & tryadvancingonlastknownpositionbehavior);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tryGoingToClosestNodeToEnemyBehavior", & trygoingtoclosestnodetoenemybehavior);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tryRunningDirectlyToEnemyBehavior", & tryrunningdirectlytoenemybehavior);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("flagEnemyUnAttackableService", & flagenemyunattackableservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("keepClaimNode", & keepclaimnode);
-  behaviorstatemachine::registerbsmscriptapiinternal("keepClaimNode", & keepclaimnode);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("releaseClaimNode", & releaseclaimnode);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("startRagdoll", & scriptstartragdoll);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("notStandingCondition", & notstandingcondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("notCrouchingCondition", & notcrouchingcondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("explosiveKilled", & explosivekilled);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("electrifiedKilled", & electrifiedkilled);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("burnedKilled", & burnedkilled);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("rapsKilled", & rapskilled);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("meleeAcquireMutex", & meleeacquiremutex);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("meleeReleaseMutex", & meleereleasemutex);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldMutexMelee", & shouldmutexmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareForExposedMelee", & prepareforexposedmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("cleanupMelee", & cleanupmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldNormalMelee", & shouldnormalmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldMelee", & shouldmelee);
-  behaviorstatemachine::registerbsmscriptapiinternal("shouldMelee", & shouldmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("hasCloseEnemyMelee", & hascloseenemytomelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isBalconyDeath", & isbalconydeath);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("balconyDeath", & balconydeath);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("useCurrentPosition", & usecurrentposition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isUnarmed", & isunarmed);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldChargeMelee", & shouldchargemelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldAttackInChargeMelee", & shouldattackinchargemelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("cleanupChargeMelee", & cleanupchargemelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("cleanupChargeMeleeAttack", & cleanupchargemeleeattack);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("setupChargeMeleeAttack", & setupchargemeleeattack);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldChooseSpecialPain", & shouldchoosespecialpain);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldChooseSpecialPronePain", & shouldchoosespecialpronepain);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldChooseSpecialDeath", & shouldchoosespecialdeath);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldChooseSpecialProneDeath", & shouldchoosespecialpronedeath);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("setupExplosionAnimScale", & setupexplosionanimscale);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldStealth", & shouldstealth);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("stealthReactCondition", & stealthreactcondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("locomotionShouldStealth", & locomotionshouldstealth);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldStealthResume", & shouldstealthresume);
-  behaviorstatemachine::registerbsmscriptapiinternal("locomotionShouldStealth", & locomotionshouldstealth);
-  behaviorstatemachine::registerbsmscriptapiinternal("stealthReactCondition", & stealthreactcondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("stealthReactStart", & stealthreactstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("stealthReactTerminate", & stealthreactterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("stealthIdleTerminate", & stealthidleterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isInPhalanx", & isinphalanx);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isInPhalanxStance", & isinphalanxstance);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("togglePhalanxStance", & togglephalanxstance);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tookFlashbangDamage", & tookflashbangdamage);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isAtAttackObject", & isatattackobject);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldAttackObject", & shouldattackobject);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("forceRagdoll", &forceragdoll);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("hasAmmo", &hasammo);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("hasLowAmmo", &haslowammo);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("hasEnemy", &hasenemy);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isSafeFromGrenades", &issafefromgrenades);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("inGrenadeBlastRadius", &ingrenadeblastradius);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("recentlySawEnemy", &recentlysawenemy);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldBeAggressive", &shouldbeaggressive);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldOnlyFireAccurately", &shouldonlyfireaccurately);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldReactToNewEnemy", &shouldreacttonewenemy);
+  behaviorstatemachine::registerbsmscriptapiinternal("shouldReactToNewEnemy", &shouldreacttonewenemy);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("hasWeaponMalfunctioned", &hasweaponmalfunctioned);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldStopMoving", &shouldstopmoving);
+  behaviorstatemachine::registerbsmscriptapiinternal("shouldStopMoving", &shouldstopmoving);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("chooseBestCoverNodeASAP", &choosebestcovernodeasap);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("chooseBetterCoverService", &choosebettercoverservicecodeversion);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("trackCoverParamsService", &trackcoverparamsservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("refillAmmoIfNeededService", &refillammo);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tryStoppingService", &trystoppingservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isFrustrated", &isfrustrated);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("updatefrustrationLevel", &updatefrustrationlevel);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isLastKnownEnemyPositionApproachable", &islastknownenemypositionapproachable);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tryAdvancingOnLastKnownPositionBehavior", &tryadvancingonlastknownpositionbehavior);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tryGoingToClosestNodeToEnemyBehavior", &trygoingtoclosestnodetoenemybehavior);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tryRunningDirectlyToEnemyBehavior", &tryrunningdirectlytoenemybehavior);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("flagEnemyUnAttackableService", &flagenemyunattackableservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("keepClaimNode", &keepclaimnode);
+  behaviorstatemachine::registerbsmscriptapiinternal("keepClaimNode", &keepclaimnode);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("releaseClaimNode", &releaseclaimnode);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("startRagdoll", &scriptstartragdoll);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("notStandingCondition", &notstandingcondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("notCrouchingCondition", &notcrouchingcondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("explosiveKilled", &explosivekilled);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("electrifiedKilled", &electrifiedkilled);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("burnedKilled", &burnedkilled);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("rapsKilled", &rapskilled);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("meleeAcquireMutex", &meleeacquiremutex);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("meleeReleaseMutex", &meleereleasemutex);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldMutexMelee", &shouldmutexmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareForExposedMelee", &prepareforexposedmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("cleanupMelee", &cleanupmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldNormalMelee", &shouldnormalmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldMelee", &shouldmelee);
+  behaviorstatemachine::registerbsmscriptapiinternal("shouldMelee", &shouldmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("hasCloseEnemyMelee", &hascloseenemytomelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isBalconyDeath", &isbalconydeath);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("balconyDeath", &balconydeath);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("useCurrentPosition", &usecurrentposition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isUnarmed", &isunarmed);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldChargeMelee", &shouldchargemelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldAttackInChargeMelee", &shouldattackinchargemelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("cleanupChargeMelee", &cleanupchargemelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("cleanupChargeMeleeAttack", &cleanupchargemeleeattack);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("setupChargeMeleeAttack", &setupchargemeleeattack);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldChooseSpecialPain", &shouldchoosespecialpain);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldChooseSpecialPronePain", &shouldchoosespecialpronepain);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldChooseSpecialDeath", &shouldchoosespecialdeath);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldChooseSpecialProneDeath", &shouldchoosespecialpronedeath);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("setupExplosionAnimScale", &setupexplosionanimscale);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldStealth", &shouldstealth);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("stealthReactCondition", &stealthreactcondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("locomotionShouldStealth", &locomotionshouldstealth);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldStealthResume", &shouldstealthresume);
+  behaviorstatemachine::registerbsmscriptapiinternal("locomotionShouldStealth", &locomotionshouldstealth);
+  behaviorstatemachine::registerbsmscriptapiinternal("stealthReactCondition", &stealthreactcondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("stealthReactStart", &stealthreactstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("stealthReactTerminate", &stealthreactterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("stealthIdleTerminate", &stealthidleterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isInPhalanx", &isinphalanx);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isInPhalanxStance", &isinphalanxstance);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("togglePhalanxStance", &togglephalanxstance);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tookFlashbangDamage", &tookflashbangdamage);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isAtAttackObject", &isatattackobject);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldAttackObject", &shouldattackobject);
   behaviortreenetworkutility::registerbehaviortreeaction("defaultAction", undefined, undefined, undefined);
   archetype_aivsaimelee::registeraivsaimeleebehaviorfunctions();
 }
 
 function registerutilityblackboardattributes() {
-  blackboard::registerblackboardattribute(self, "_arrival_stance", undefined, & bb_getarrivalstance);
+  blackboard::registerblackboardattribute(self, "_arrival_stance", undefined, &bb_getarrivalstance);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -108,7 +108,7 @@ function registerutilityblackboardattributes() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_cover_concealed", undefined, & bb_getcoverconcealed);
+  blackboard::registerblackboardattribute(self, "_cover_concealed", undefined, &bb_getcoverconcealed);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -120,39 +120,39 @@ function registerutilityblackboardattributes() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_cover_type", undefined, & bb_getcurrentcovernodetype);
+  blackboard::registerblackboardattribute(self, "_cover_type", undefined, &bb_getcurrentcovernodetype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_current_location_cover_type", undefined, & bb_getcurrentlocationcovernodetype);
+  blackboard::registerblackboardattribute(self, "_current_location_cover_type", undefined, &bb_getcurrentlocationcovernodetype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_exposed_type", undefined, & bb_getcurrentexposedtype);
+  blackboard::registerblackboardattribute(self, "_exposed_type", undefined, &bb_getcurrentexposedtype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_damage_direction", undefined, & bb_getdamagedirection);
+  blackboard::registerblackboardattribute(self, "_damage_direction", undefined, &bb_getdamagedirection);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_damage_location", undefined, & bb_actorgetdamagelocation);
+  blackboard::registerblackboardattribute(self, "_damage_location", undefined, &bb_actorgetdamagelocation);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_damage_weapon_class", undefined, & bb_getdamageweaponclass);
+  blackboard::registerblackboardattribute(self, "_damage_weapon_class", undefined, &bb_getdamageweaponclass);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_damage_weapon", undefined, & bb_getdamageweapon);
+  blackboard::registerblackboardattribute(self, "_damage_weapon", undefined, &bb_getdamageweapon);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_damage_mod", undefined, & bb_getdamagemod);
+  blackboard::registerblackboardattribute(self, "_damage_mod", undefined, &bb_getdamagemod);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_damage_taken", undefined, & bb_getdamagetaken);
+  blackboard::registerblackboardattribute(self, "_damage_taken", undefined, &bb_getdamagetaken);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -160,23 +160,23 @@ function registerutilityblackboardattributes() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_enemy", undefined, & bb_actorhasenemy);
+  blackboard::registerblackboardattribute(self, "_enemy", undefined, &bb_actorhasenemy);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_enemy_yaw", undefined, & bb_actorgetenemyyaw);
+  blackboard::registerblackboardattribute(self, "_enemy_yaw", undefined, &bb_actorgetenemyyaw);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_react_yaw", undefined, & bb_actorgetreactyaw);
+  blackboard::registerblackboardattribute(self, "_react_yaw", undefined, &bb_actorgetreactyaw);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_fatal_damage_location", undefined, & bb_actorgetfataldamagelocation);
+  blackboard::registerblackboardattribute(self, "_fatal_damage_location", undefined, &bb_actorgetfataldamagelocation);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_fire_mode", undefined, & getfiremode);
+  blackboard::registerblackboardattribute(self, "_fire_mode", undefined, &getfiremode);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -192,47 +192,47 @@ function registerutilityblackboardattributes() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_arrival_distance", undefined, & bb_getlocomotionarrivaldistance);
+  blackboard::registerblackboardattribute(self, "_locomotion_arrival_distance", undefined, &bb_getlocomotionarrivaldistance);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_arrival_yaw", undefined, & bb_getlocomotionarrivalyaw);
+  blackboard::registerblackboardattribute(self, "_locomotion_arrival_yaw", undefined, &bb_getlocomotionarrivalyaw);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_exit_yaw", undefined, & bb_getlocomotionexityaw);
+  blackboard::registerblackboardattribute(self, "_locomotion_exit_yaw", undefined, &bb_getlocomotionexityaw);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_face_enemy_quadrant", "locomotion_face_enemy_none", & bb_getlocomotionfaceenemyquadrant);
+  blackboard::registerblackboardattribute(self, "_locomotion_face_enemy_quadrant", "locomotion_face_enemy_none", &bb_getlocomotionfaceenemyquadrant);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_motion_angle", undefined, & bb_getlocomotionmotionangle);
+  blackboard::registerblackboardattribute(self, "_locomotion_motion_angle", undefined, &bb_getlocomotionmotionangle);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_face_enemy_quadrant_previous", "locomotion_face_enemy_none", & bb_getlocomotionfaceenemyquadrantprevious);
+  blackboard::registerblackboardattribute(self, "_locomotion_face_enemy_quadrant_previous", "locomotion_face_enemy_none", &bb_getlocomotionfaceenemyquadrantprevious);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_pain_type", undefined, & bb_getlocomotionpaintype);
+  blackboard::registerblackboardattribute(self, "_locomotion_pain_type", undefined, &bb_getlocomotionpaintype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_turn_yaw", undefined, & bb_getlocomotionturnyaw);
+  blackboard::registerblackboardattribute(self, "_locomotion_turn_yaw", undefined, &bb_getlocomotionturnyaw);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_lookahead_angle", undefined, & bb_getlookaheadangle);
+  blackboard::registerblackboardattribute(self, "_lookahead_angle", undefined, &bb_getlookaheadangle);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_patrol", undefined, & bb_actorispatroling);
+  blackboard::registerblackboardattribute(self, "_patrol", undefined, &bb_actorispatroling);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_perfect_enemy_yaw", undefined, & bb_actorgetperfectenemyyaw);
+  blackboard::registerblackboardattribute(self, "_perfect_enemy_yaw", undefined, &bb_actorgetperfectenemyyaw);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -244,7 +244,7 @@ function registerutilityblackboardattributes() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_previous_cover_type", undefined, & bb_getpreviouscovernodetype);
+  blackboard::registerblackboardattribute(self, "_previous_cover_type", undefined, &bb_getpreviouscovernodetype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -260,11 +260,11 @@ function registerutilityblackboardattributes() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_tracking_turn_yaw", undefined, & bb_actorgettrackingturnyaw);
+  blackboard::registerblackboardattribute(self, "_tracking_turn_yaw", undefined, &bb_actorgettrackingturnyaw);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_weapon_class", "rifle", & bb_getweaponclass);
+  blackboard::registerblackboardattribute(self, "_weapon_class", "rifle", &bb_getweaponclass);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -272,7 +272,7 @@ function registerutilityblackboardattributes() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_yaw_to_cover", undefined, & bb_getyawtocovernode);
+  blackboard::registerblackboardattribute(self, "_yaw_to_cover", undefined, &bb_getyawtocovernode);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -280,11 +280,11 @@ function registerutilityblackboardattributes() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_awareness", "combat", & bb_getawareness);
+  blackboard::registerblackboardattribute(self, "_awareness", "combat", &bb_getawareness);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_awareness_prev", "combat", & bb_getawarenessprevious);
+  blackboard::registerblackboardattribute(self, "_awareness_prev", "combat", &bb_getawarenessprevious);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -312,7 +312,7 @@ function registerutilityblackboardattributes() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_staircase_skip_num", undefined, & bb_getstairsnumskipsteps);
+  blackboard::registerblackboardattribute(self, "_staircase_skip_num", undefined, &bb_getstairsnumskipsteps);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }

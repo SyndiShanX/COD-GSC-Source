@@ -25,14 +25,14 @@
 #namespace zm_genesis_ai_spawning;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_ai_spawning", & __init__, undefined, undefined);
+  system::register("zm_genesis_ai_spawning", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "chaos_postfx_set", 15000, 1, "int", & chaos_postfx_set, 0, 0);
-  clientfield::register("world", "chaos_fog_bank_switch", 15000, 1, "int", & chaos_fog_bank_switch, 0, 0);
+  clientfield::register("toplayer", "chaos_postfx_set", 15000, 1, "int", &chaos_postfx_set, 0, 0);
+  clientfield::register("world", "chaos_fog_bank_switch", 15000, 1, "int", &chaos_fog_bank_switch, 0, 0);
   visionset_mgr::register_visionset_info("zm_chaos_organge", 15000, 1, undefined, "zm_chaos_organge");
-  ai::add_archetype_spawn_function("keeper", & function_5ea6033e);
+  ai::add_archetype_spawn_function("keeper", &function_5ea6033e);
   level._effect["chaos_1p_light"] = "zombie/fx_bmode_tent_light_zod_zmb";
   level._effect["keeper_glow"] = "zombie/fx_keeper_ambient_torso_zod_zmb";
   level._effect["keeper_mouth"] = "zombie/fx_keeper_glow_mouth_zod_zmb";
@@ -100,7 +100,7 @@ function function_5ea6033e(localclientnum) {
   if(!isDefined(self.sndlooper)) {
     self.sndlooper = self playLoopSound("zmb_keeper_looper");
   }
-  self callback::on_shutdown( & function_4dc56cc7);
+  self callback::on_shutdown(&function_4dc56cc7);
 }
 
 function function_4dc56cc7(localclientnum) {

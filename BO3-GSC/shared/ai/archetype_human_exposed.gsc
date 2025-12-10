@@ -11,14 +11,14 @@
 #namespace archetype_human_exposed;
 
 function autoexec registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("hasCloseEnemy", & hascloseenemy);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("noCloseEnemyService", & nocloseenemyservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("tryReacquireService", & tryreacquireservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareToReactToEnemy", & preparetoreacttoenemy);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("resetReactionToEnemy", & resetreactiontoenemy);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("exposedSetDesiredStanceToStand", & exposedsetdesiredstancetostand);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("setPathMoveDelayedRandom", & setpathmovedelayedrandom);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("vengeanceService", & vengeanceservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("hasCloseEnemy", &hascloseenemy);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("noCloseEnemyService", &nocloseenemyservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("tryReacquireService", &tryreacquireservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("prepareToReactToEnemy", &preparetoreacttoenemy);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("resetReactionToEnemy", &resetreactiontoenemy);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("exposedSetDesiredStanceToStand", &exposedsetdesiredstancetostand);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("setPathMoveDelayedRandom", &setpathmovedelayedrandom);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("vengeanceService", &vengeanceservice);
 }
 
 function private preparetoreacttoenemy(behaviortreeentity) {

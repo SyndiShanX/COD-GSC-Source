@@ -47,23 +47,23 @@ main() {
   level.fogvalue["b"] = 0.0;
   level.fogvalue["near"] = 100;
   level.fogvalue["half"] = 4000;
-  maps\_utility::add_start("bridge", ::misc_dummy, & "STARTS_BRIDGE");
-  maps\_utility::add_start("deck", ::misc_dummy, & "STARTS_DECK");
-  maps\_utility::add_start("hallways", ::misc_dummy, & "STARTS_HALLWAYS");
-  maps\_utility::add_start("cargohold", ::misc_dummy, & "STARTS_CARGOHOLD");
-  maps\_utility::add_start("cargohold2", ::misc_dummy, & "STARTS_CARGOHOLD2");
-  maps\_utility::add_start("laststand", ::misc_dummy, & "STARTS_LASTSTAND");
-  maps\_utility::add_start("package", ::misc_dummy, & "STARTS_PACKAGE");
-  maps\_utility::add_start("escape", ::misc_dummy, & "STARTS_ESCAPE");
-  maps\_utility::add_start("end", ::misc_dummy, & "STARTS_END");
+  maps\_utility::add_start("bridge", ::misc_dummy, &"STARTS_BRIDGE");
+  maps\_utility::add_start("deck", ::misc_dummy, &"STARTS_DECK");
+  maps\_utility::add_start("hallways", ::misc_dummy, &"STARTS_HALLWAYS");
+  maps\_utility::add_start("cargohold", ::misc_dummy, &"STARTS_CARGOHOLD");
+  maps\_utility::add_start("cargohold2", ::misc_dummy, &"STARTS_CARGOHOLD2");
+  maps\_utility::add_start("laststand", ::misc_dummy, &"STARTS_LASTSTAND");
+  maps\_utility::add_start("package", ::misc_dummy, &"STARTS_PACKAGE");
+  maps\_utility::add_start("escape", ::misc_dummy, &"STARTS_ESCAPE");
+  maps\_utility::add_start("end", ::misc_dummy, &"STARTS_END");
   setsaveddvar("compassmaxrange", 1500);
   level.missionfailedquote = [];
-  level.missionfailedquote["slow"] = & "CARGOSHIP_YOU_WERENT_FAST_ENOUGH";
-  level.missionfailedquote["wrongway"] = & "CARGOSHIP_YOU_WENT_THE_WRONG_WAY";
-  level.missionfailedquote["jump1"] = & "CARGOSHIP_NOBODY_MAKES_THEIR_FIRST";
-  level.missionfailedquote["jump2"] = & "CARGOSHIP_NOBODY_MAKES_THEIR_SECOND";
-  level.missionfailedquote["jump3"] = & "CARGOSHIP_NOBODY_MAKES_THEIR_THIRD";
-  level.missionfailedquote["jump"] = & "CARGOSHIP_NOBODY_MAKES_THEIR_JUMP";
+  level.missionfailedquote["slow"] = &"CARGOSHIP_YOU_WERENT_FAST_ENOUGH";
+  level.missionfailedquote["wrongway"] = &"CARGOSHIP_YOU_WENT_THE_WRONG_WAY";
+  level.missionfailedquote["jump1"] = &"CARGOSHIP_NOBODY_MAKES_THEIR_FIRST";
+  level.missionfailedquote["jump2"] = &"CARGOSHIP_NOBODY_MAKES_THEIR_SECOND";
+  level.missionfailedquote["jump3"] = &"CARGOSHIP_NOBODY_MAKES_THEIR_THIRD";
+  level.missionfailedquote["jump"] = &"CARGOSHIP_NOBODY_MAKES_THEIR_JUMP";
   level.missionfailedquote["escape"] = level.missionfailedquote["slow"];
 
   if(getdvar("limited_mode") == "1")
@@ -3992,7 +3992,7 @@ end_screen() {
   else {
     level.intro_offset = 0;
     var_1 = [];
-    var_1[var_1.size] = & "CARGOSHIP_INFINITY_WARD_PRESENTS";
+    var_1[var_1.size] = &"CARGOSHIP_INFINITY_WARD_PRESENTS";
 
     for(var_2 = 0; var_2 < var_1.size; var_2++) {
       var_3 = 1;
@@ -4334,15 +4334,15 @@ misc_drip_sway_fx() {
 }
 
 misc_precacheinit() {
-  level.strings["intro1"] = & "CARGOSHIP_TITLE";
-  level.strings["intro2"] = & "CARGOSHIP_DATE";
-  level.strings["intro3"] = & "CARGOSHIP_PLACE";
-  level.strings["intro4"] = & "CARGOSHIP_INFO";
-  level.strings["hint_laptop"] = & "CARGOSHIP_LAPTOP_HINT";
-  level.strings["obj_package"] = & "CARGOSHIP_OBJ_PACKAGE";
-  level.strings["obj_laptop"] = & "CARGOSHIP_OBJ_LAPTOP";
-  level.strings["obj_exit"] = & "CARGOSHIP_OBJ_EXIT";
-  level.strings["mantle"] = & "CARGOSHIP_MANTLE";
+  level.strings["intro1"] = &"CARGOSHIP_TITLE";
+  level.strings["intro2"] = &"CARGOSHIP_DATE";
+  level.strings["intro3"] = &"CARGOSHIP_PLACE";
+  level.strings["intro4"] = &"CARGOSHIP_INFO";
+  level.strings["hint_laptop"] = &"CARGOSHIP_LAPTOP_HINT";
+  level.strings["obj_package"] = &"CARGOSHIP_OBJ_PACKAGE";
+  level.strings["obj_laptop"] = &"CARGOSHIP_OBJ_LAPTOP";
+  level.strings["obj_exit"] = &"CARGOSHIP_OBJ_EXIT";
+  level.strings["mantle"] = &"CARGOSHIP_MANTLE";
   var_0 = getarraykeys(level.strings);
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {

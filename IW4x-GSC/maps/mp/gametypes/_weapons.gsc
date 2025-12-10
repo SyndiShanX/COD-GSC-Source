@@ -30,7 +30,6 @@ init() {
   level.scavenger_altmode = true;
   level.scavenger_secondary = true;
 
-
   level.maxPerPlayerExplosives = max(getIntProperty("scr_maxPerPlayerExplosives", 2), 1);
   level.riotShieldXPBullets = getIntProperty("scr_riotShieldXPBullets", 15);
 
@@ -51,9 +50,6 @@ init() {
 
   attachmentList = getAttachmentList();
 
-
-
-
   max_weapon_num = 149;
 
   level.weaponList = [];
@@ -72,7 +68,6 @@ init() {
       printLn("weapon,mp/" + weapon_name + "_mp");
     }
 
-
     attachmentNames = [];
     for(innerLoopCount = 0; innerLoopCount < 10; innerLoopCount++) {
       attachmentName = tablelookup("mp/statStable.csv", 0, weaponId, innerLoopCount + 11);
@@ -83,7 +78,6 @@ init() {
 
       attachmentNames[attachmentName] = true;
     }
-
 
     attachments = [];
     foreach(attachmentName in attachmentList) {
@@ -144,10 +138,7 @@ init() {
   level.claymoreDetectionGracePeriod = .75;
   level.claymoreDetonateRadius = 192;
 
-
   level.stingerFXid = loadfx("explosions/aerial_explosion_large");
-
-
 
   level.primary_weapon_array = [];
   level.side_arm_array = [];
@@ -197,8 +188,6 @@ init() {
   level.c4explodethisframe = false;
 
   array_thread(getEntArray("misc_turret", "classname"), ::turret_monitorUse);
-
-
 }
 
 dumpIt() {
@@ -654,7 +643,6 @@ watchPickup() {
 
   assert(isDefined(player.tookWeaponFrom));
 
-
   droppedWeaponName = droppedItem getItemWeaponName();
   if(isDefined(player.tookWeaponFrom[droppedWeaponName])) {
     droppedItem.owner = player.tookWeaponFrom[droppedWeaponName];
@@ -662,7 +650,6 @@ watchPickup() {
     player.tookWeaponFrom[droppedWeaponName] = undefined;
   }
   droppedItem thread watchPickup();
-
 
   if(isDefined(self.ownersattacker) && self.ownersattacker == player) {
     player.tookWeaponFrom[weapname] = self.owner;
@@ -689,7 +676,6 @@ handleScavengerBagPickup(scrPlayer) {
   level endon("game_ended");
 
   assert(isDefined(scrPlayer));
-
 
   self waittill("scavenger", destPlayer);
   assert(isDefined(destPlayer));
@@ -831,7 +817,6 @@ checkHit(weaponName, victim) {
 
   if(!isDefined(self.lastHitTime[weaponName]))
     self.lastHitTime[weaponName] = 0;
-
 
   if(self.lastHitTime[weaponName] == getTime()) {
     return;
@@ -1078,8 +1063,6 @@ watchForThrowbacks() {
 watchC4() {
   self endon("spawned_player");
   self endon("disconnect");
-
-
 
   while(1) {
     self waittill("grenade_fire", c4, weapname);
@@ -1439,7 +1422,7 @@ c4Damage() {
   if(isDefined(type) && (isSubStr(type, "MOD_GRENADE") || isSubStr(type, "MOD_EXPLOSIVE")))
     self.wasChained = true;
 
-  if(isDefined(iDFlags) && (iDFlags & level.iDFLAGS_PENETRATION))
+  if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION))
     self.wasDamagedFromBulletPenetration = true;
 
   self.wasDamaged = true;
@@ -1455,7 +1438,6 @@ c4Damage() {
   }
 
   self detonate(attacker);
-
 }
 
 resetC4ExplodeThisFrame() {
@@ -1613,7 +1595,6 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
 
   radiusSq = radius * radius;
 
-
   players = level.players;
   for(i = 0; i < players.size; i++) {
     if(!isalive(players[i]) || players[i].sessionstate != "playing") {
@@ -1625,7 +1606,6 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
       ents[ents.size] = get_damageable_player(players[i], playerpos);
     }
   }
-
 
   grenades = getEntArray("grenade", "classname");
   for(i = 0; i < grenades.size; i++) {
@@ -1663,7 +1643,6 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
       ents[ents.size] = newent;
     }
   }
-
 
   sentries = getEntArray("misc_turret", "classname");
   foreach(sentry in sentries) {
@@ -1887,7 +1866,6 @@ getStowOffsetModel(weaponName) {
 stowPriorityWeapon() {
   assert(isDefined(level.stow_priority_model_array));
 
-
   foreach(weapon_name, priority_weapon in level.stow_priority_model_array) {
     weaponName = getBaseWeaponName(weapon_name);
     weaponList = self getWeaponsListAll();
@@ -1948,15 +1926,11 @@ detach_all_weapons() {
 detach_back_weapon() {
   detach_success = self detachIfAttached(self.tag_stowed_back, "tag_stowed_back");
 
-
-
   self.tag_stowed_back = undefined;
 }
 
 detach_hip_weapon() {
   detach_success = self detachIfAttached(self.tag_stowed_hip, "tag_stowed_hip");
-
-
 
   self.tag_stowed_hip = undefined;
 }
@@ -2212,7 +2186,6 @@ buildWeaponData(filterPerks) {
 
       attachmentNames[attachmentName] = true;
     }
-
 
     attachments = [];
     foreach(attachmentName in attachmentList) {

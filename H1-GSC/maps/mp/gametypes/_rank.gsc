@@ -206,7 +206,7 @@ getrankinfomaxxp(var_0) {
 
 getrankinfofull(var_0) {
   if(var_0 > level.maxrank)
-    return & "RANK_PARAGON_FULL";
+    return &"RANK_PARAGON_FULL";
   else
     return tablelookupistring("mp\rankTable.csv", 0, var_0, 16);
 }

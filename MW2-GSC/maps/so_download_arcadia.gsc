@@ -48,8 +48,8 @@ main() {
 
   common_scripts\_sentry::main();
 
-  add_hint_string("use_laser1", & "SO_DOWNLOAD_ARCADIA_LASER_HINT1", ::so_stop_laser_hint1);
-  add_hint_string("use_laser2", & "SO_DOWNLOAD_ARCADIA_LASER_HINT2", ::so_stop_laser_hint2);
+  add_hint_string("use_laser1", &"SO_DOWNLOAD_ARCADIA_LASER_HINT1", ::so_stop_laser_hint1);
+  add_hint_string("use_laser2", &"SO_DOWNLOAD_ARCADIA_LASER_HINT2", ::so_stop_laser_hint2);
 
   deadquotes = [];
   deadquotes[deadquotes.size] = "@DEADQUOTE_SO_CLAYMORE_POINT_ENEMY";
@@ -187,7 +187,7 @@ start_so_download_arcadia() {
   thread enable_challenge_timer("start_challenge", "stryker_extraction_done");
   fade_challenge_in(undefined, false);
 
-  so_download_objective_init(0, & "SO_DOWNLOAD_ARCADIA_OBJ_REGULAR");
+  so_download_objective_init(0, &"SO_DOWNLOAD_ARCADIA_OBJ_REGULAR");
   thread stryker_think();
   thread so_download_arcadia_intro_dialogue();
 

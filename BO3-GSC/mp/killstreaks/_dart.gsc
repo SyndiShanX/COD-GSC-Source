@@ -32,8 +32,8 @@
 #namespace dart;
 
 function init() {
-  killstreaks::register("dart", "dart", "killstreak_dart", "dart_used", & activatedart, 1);
-  killstreaks::register_strings("dart", & "KILLSTREAK_DART_EARNED", & "KILLSTREAK_DART_NOT_AVAILABLE", & "KILLSTREAK_DART_INBOUND", undefined, & "KILLSTREAK_DART_HACKED");
+  killstreaks::register("dart", "dart", "killstreak_dart", "dart_used", &activatedart, 1);
+  killstreaks::register_strings("dart", &"KILLSTREAK_DART_EARNED", &"KILLSTREAK_DART_NOT_AVAILABLE", &"KILLSTREAK_DART_INBOUND", undefined, &"KILLSTREAK_DART_HACKED");
   killstreaks::register_dialog("dart", "mpl_killstreak_dart_strt", "dartDialogBundle", "dartPilotDialogBundle", "friendlyDart", "enemyDart", "enemyDartMultiple", "friendlyDartHacked", "enemyDartHacked", "requestDart", "threatDart");
   killstreaks::override_entity_camera_in_demo("dart", 1);
   killstreaks::register_alt_weapon("dart", "killstreak_remote");
@@ -41,8 +41,8 @@ function init() {
   killstreaks::register_alt_weapon("dart", "dart_turret");
   clientfield::register("toplayer", "dart_update_ammo", 1, 2, "int");
   clientfield::register("toplayer", "fog_bank_3", 1, 1, "int");
-  remote_weapons::registerremoteweapon("dart", & "", & startdartremotecontrol, & enddartremotecontrol, 1);
-  visionset_mgr::register_info("visionset", "dart_visionset", 1, 90, 16, 1, & visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
+  remote_weapons::registerremoteweapon("dart", &"", &startdartremotecontrol, &enddartremotecontrol, 1);
+  visionset_mgr::register_info("visionset", "dart_visionset", 1, 90, 16, 1, &visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
 }
 
 function wait_dart_timed_out(time) {
@@ -201,16 +201,16 @@ function spawndart(grenade, killstreak_id, spawn_origin) {
   dart.maxhealth = killstreak_bundles::get_max_health("dart");
   dart.health = dart.maxhealth;
   dart.hackedhealth = killstreak_bundles::get_hacked_health("dart");
-  dart.hackedhealthupdatecallback = & dart_hacked_health_update;
+  dart.hackedhealthupdatecallback = &dart_hacked_health_update;
   dart killstreaks::configure_team("dart", killstreak_id, player, "small_vehicle");
-  dart killstreak_hacking::enable_hacking("dart", & hackedprefunction, & hackedpostfunction);
+  dart killstreak_hacking::enable_hacking("dart", &hackedprefunction, &hackedpostfunction);
   dart clientfield::set("enemyvehicle", 1);
   dart.killstreak_id = killstreak_id;
   dart.hardpointtype = "dart";
-  dart thread killstreaks::waitfortimeout("dart", 30000, & stop_remote_weapon, "remote_weapon_end", "death");
+  dart thread killstreaks::waitfortimeout("dart", 30000, &stop_remote_weapon, "remote_weapon_end", "death");
   dart hacker_tool::registerwithhackertool(50, 2000);
-  dart.overridevehicledamage = & dartdamageoverride;
-  dart.detonateviaemp = & emp_damage_cb;
+  dart.overridevehicledamage = &dartdamageoverride;
+  dart.detonateviaemp = &emp_damage_cb;
   dart.do_scripted_crash = 0;
   dart.delete_on_death = 1;
   dart.one_remote_use = 1;
@@ -218,7 +218,7 @@ function spawndart(grenade, killstreak_id, spawn_origin) {
   dart.predictedcollisiontime = 0.2;
   dart.glasscollision_alt = 1;
   dart.damagetaken = 0;
-  dart.death_enter_cb = & waitremotecontrol;
+  dart.death_enter_cb = &waitremotecontrol;
   target_set(dart);
   dart vehicle::init_target_group();
   dart vehicle::add_to_target_group(dart);
@@ -277,7 +277,7 @@ function startdartremotecontrol(dart) {
       minheightoverride = minz_struct.origin[2];
     }
     dart thread qrdrone::qrdrone_watch_distance(2000, minheightoverride);
-    dart.distance_shutdown_override = & dartdistancefailure;
+    dart.distance_shutdown_override = &dartdistancefailure;
     dart enabledartmissilelocking();
     visionset_mgr::activate("visionset", "dart_visionset", self, 1, 90000, 1);
     player clientfield::set_to_player("fog_bank_3", 1);
@@ -300,7 +300,7 @@ function stop_remote_weapon(attacker, weapon) {
     challenges::destroyedaircraft(attacker, weapon, 1);
     attacker challenges::addflyswatterstat(weapon, self);
     scoreevents::processscoreevent("destroyed_dart", attacker, dart.owner, weapon);
-    luinotifyevent(&"player_callout", 2, & "KILLSTREAK_DESTROYED_DART", attacker.entnum);
+    luinotifyevent(&"player_callout", 2, &"KILLSTREAK_DESTROYED_DART", attacker.entnum);
   }
   if(isDefined(attacker) && attacker != dart.owner) {
     dart killstreaks::play_destroyed_dialog_on_owner("dart", dart.killstreak_id);
@@ -314,7 +314,7 @@ function dartdamageoverride(einflictor, eattacker, idamage, idflags, smeansofdea
     return 0;
   }
   player = dart.owner;
-  idamage = killstreaks::ondamageperweapon("dart", eattacker, idamage, idflags, smeansofdeath, weapon, self.maxhealth, & stop_remote_weapon, self.maxhealth * 0.4, undefined, 0, & emp_damage_cb, 1, 1);
+  idamage = killstreaks::ondamageperweapon("dart", eattacker, idamage, idflags, smeansofdeath, weapon, self.maxhealth, &stop_remote_weapon, self.maxhealth * 0.4, undefined, 0, &emp_damage_cb, 1, 1);
   return idamage;
 }
 
@@ -560,9 +560,9 @@ function enabledartmissilelocking() {
   dart = self;
   player = dart.owner;
   weapon = dart seatgetweapon(0);
-  player.get_stinger_target_override = & getdartmissiletargets;
-  player.is_still_valid_target_for_stinger_override = & isstillvaliddartmissiletarget;
-  player.is_valid_target_for_stinger_override = & isvaliddartmissiletarget;
+  player.get_stinger_target_override = &getdartmissiletargets;
+  player.is_still_valid_target_for_stinger_override = &isstillvaliddartmissiletarget;
+  player.is_valid_target_for_stinger_override = &isvaliddartmissiletarget;
   player.dart_killstreak_weapon = weapon;
   player thread heatseekingmissile::stingerirtloop(weapon);
 }

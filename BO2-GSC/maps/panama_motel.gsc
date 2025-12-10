@@ -216,7 +216,7 @@ motel_fail_condition() {
   flag_wait("trig_mason_to_motel");
   trig_motel_fail trigger_on();
   trig_motel_fail waittill("trigger");
-  setdvar("ui_deadquote", & "PANAMA_HANGAR_FAIL");
+  setdvar("ui_deadquote", &"PANAMA_HANGAR_FAIL");
   level notify("mission failed");
   maps\_utility::missionfailedwrapper();
 }

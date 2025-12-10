@@ -167,6 +167,6 @@ func_7759(param_00, param_01) {
 }
 
 register_interactions() {
-  level.interaction_hintstrings["generator"] = & "COOP_INTERACTIONS_GENERATOR_ON";
+  level.interaction_hintstrings["generator"] = &"COOP_INTERACTIONS_GENERATOR_ON";
   scripts\cp\cp_interaction::register_interaction("generator", "generator", 1, undefined, ::generic_generator, 0);
 }

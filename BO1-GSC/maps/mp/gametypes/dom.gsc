@@ -81,17 +81,17 @@ onPrecacheGameType() {
   precacheShader("waypoint_defend_e");
 }
 onStartGameType() {
-  maps\mp\gametypes\_globallogic_ui::setObjectiveText("allies", & "OBJECTIVES_DOM");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveText("axis", & "OBJECTIVES_DOM");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveText("allies", &"OBJECTIVES_DOM");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveText("axis", &"OBJECTIVES_DOM");
   if(level.splitscreen) {
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", & "OBJECTIVES_DOM");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", & "OBJECTIVES_DOM");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", &"OBJECTIVES_DOM");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", &"OBJECTIVES_DOM");
   } else {
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", & "OBJECTIVES_DOM_SCORE");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", & "OBJECTIVES_DOM_SCORE");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", &"OBJECTIVES_DOM_SCORE");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", &"OBJECTIVES_DOM_SCORE");
   }
-  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("allies", & "OBJECTIVES_DOM_HINT");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("axis", & "OBJECTIVES_DOM_HINT");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("allies", &"OBJECTIVES_DOM_HINT");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("axis", &"OBJECTIVES_DOM_HINT");
   level.flagBaseFXid = [];
   level.flagBaseFXid["allies"] = loadfx("misc/fx_ui_flagbase_gold_t5");
   level.flagBaseFXid["axis"] = loadfx("misc/fx_ui_flagbase_gold_t5");
@@ -375,27 +375,27 @@ onUse(player) {
   self resetFlagBaseEffect();
   level.useStartSpawns = false;
   assert(team != "neutral");
-  string = & "";
+  string = &"";
   switch (label) {
     case "_a":
-      string = & "MP_DOM_FLAG_A_CAPTURED_BY";
+      string = &"MP_DOM_FLAG_A_CAPTURED_BY";
       break;
     case "_b":
-      string = & "MP_DOM_FLAG_B_CAPTURED_BY";
+      string = &"MP_DOM_FLAG_B_CAPTURED_BY";
       break;
     case "_c":
-      string = & "MP_DOM_FLAG_C_CAPTURED_BY";
+      string = &"MP_DOM_FLAG_C_CAPTURED_BY";
       break;
     case "_d":
-      string = & "MP_DOM_FLAG_D_CAPTURED_BY";
+      string = &"MP_DOM_FLAG_D_CAPTURED_BY";
       break;
     case "_e":
-      string = & "MP_DOM_FLAG_E_CAPTURED_BY";
+      string = &"MP_DOM_FLAG_E_CAPTURED_BY";
       break;
     default:
       break;
   }
-  assert(string != & "");
+  assert(string != &"");
   touchList = [];
   touchKeys = GetArrayKeys(self.touchList[team]);
   for(i = 0; i < touchKeys.size; i++)
@@ -403,7 +403,7 @@ onUse(player) {
   thread give_capture_credit(touchList, string);
   if(oldTeam == "neutral") {
     otherTeam = getOtherTeam(team);
-    thread printAndSoundOnEveryone(team, otherTeam, & "", & "", "mp_war_objective_taken", undefined, "");
+    thread printAndSoundOnEveryone(team, otherTeam, &"", &"", "mp_war_objective_taken", undefined, "");
     thread playSoundOnPlayers("mus_dom_captured" + "_" + level.teamPostfix[team]);
     if(getTeamFlagCount(team) == level.flags.size) {
       statusDialog("secure_all", team);
@@ -413,7 +413,7 @@ onUse(player) {
       statusDialog("lost" + self.label, otherTeam);
     }
   } else {
-    thread printAndSoundOnEveryone(team, oldTeam, & "", & "", "mp_war_objective_taken", "mp_war_objective_lost", "");
+    thread printAndSoundOnEveryone(team, oldTeam, &"", &"", "mp_war_objective_taken", "mp_war_objective_lost", "");
     if(getTeamFlagCount(team) == level.flags.size) {
       statusDialog("secure_all", team);
       statusDialog("lost_all", oldTeam);

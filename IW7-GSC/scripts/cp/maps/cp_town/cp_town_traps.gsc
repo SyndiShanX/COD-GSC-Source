@@ -5,10 +5,10 @@
 *****************************************************/
 
 register_traps() {
-  level.interaction_hintstrings["fix_electric_trap"] = & "CP_TOWN_INTERACTIONS_MISSING_COMPONENTS";
-  level.interaction_hintstrings["add_component"] = & "CP_TOWN_INTERACTIONS_ADD_COMPONENT";
+  level.interaction_hintstrings["fix_electric_trap"] = &"CP_TOWN_INTERACTIONS_MISSING_COMPONENTS";
+  level.interaction_hintstrings["add_component"] = &"CP_TOWN_INTERACTIONS_ADD_COMPONENT";
   level.interaction_hintstrings["trap_electric_part"] = "";
-  level.interaction_hintstrings["trap_electric"] = & "CP_TOWN_INTERACTIONS_ELECTRIC_TRAP";
+  level.interaction_hintstrings["trap_electric"] = &"CP_TOWN_INTERACTIONS_ELECTRIC_TRAP";
   scripts\cp\cp_interaction::register_interaction("fix_electric_trap", "trap", undefined, ::electric_trap_fix_hint, ::electric_trap_fix, 0, 0);
   scripts\cp\cp_interaction::register_interaction("trap_electric", "trap", undefined, undefined, ::electric_trap_use, 750, 1, ::electric_trap_init);
   scripts\cp\cp_interaction::register_interaction("trap_electric_part", "trap", undefined, undefined, ::electric_trap_take_part, 0, 0);
@@ -16,37 +16,37 @@ register_traps() {
   scripts\engine\utility::flag_init("electric_trap_part_added");
   level.interactions["trap_electric_part"].disable_guided_interactions = 1;
   level.interactions["fix_electric_trap"].disable_guided_interactions = 1;
-  level.interaction_hintstrings["fix_freeze_trap"] = & "CP_TOWN_INTERACTIONS_FREEZER_CONTROL";
-  level.interaction_hintstrings["replace_freeze_panel"] = & "CP_TOWN_INTERACTIONS_REPLACE_CONTROLBOX";
+  level.interaction_hintstrings["fix_freeze_trap"] = &"CP_TOWN_INTERACTIONS_FREEZER_CONTROL";
+  level.interaction_hintstrings["replace_freeze_panel"] = &"CP_TOWN_INTERACTIONS_REPLACE_CONTROLBOX";
   level.interaction_hintstrings["trap_freeze_part"] = "";
-  level.interaction_hintstrings["trap_freeze"] = & "CP_TOWN_INTERACTIONS_USE_FREEZETRAP";
+  level.interaction_hintstrings["trap_freeze"] = &"CP_TOWN_INTERACTIONS_USE_FREEZETRAP";
   scripts\cp\cp_interaction::register_interaction("fix_freeze_trap", "trap", undefined, ::freeze_trap_fix_hint, ::freeze_trap_fix, 0, 0);
   scripts\cp\cp_interaction::register_interaction("trap_freeze_part", "trap", undefined, undefined, ::freeze_trap_take_part, 0, 0);
   scripts\cp\cp_interaction::register_interaction("trap_freeze", "trap", undefined, undefined, ::freeze_trap_use, 750, 1, ::freeze_trap_init);
   scripts\engine\utility::flag_init("freeze_trap_part_taken");
   scripts\engine\utility::flag_init("freeze_trap_part_added");
   level.interactions["trap_freeze_part"].disable_guided_interactions = 1;
-  level.interaction_hintstrings["fix_pool_trap"] = & "CP_TOWN_INTERACTIONS_FIX_POOL";
-  level.interaction_hintstrings["pool_trap_gas"] = & "CP_TOWN_INTERACTIONS_ADD_GAS";
+  level.interaction_hintstrings["fix_pool_trap"] = &"CP_TOWN_INTERACTIONS_FIX_POOL";
+  level.interaction_hintstrings["pool_trap_gas"] = &"CP_TOWN_INTERACTIONS_ADD_GAS";
   level.interaction_hintstrings["trap_pool_part"] = "";
-  level.interaction_hintstrings["trap_pool"] = & "CP_TOWN_INTERACTIONS_USE_POOL_TRAP";
+  level.interaction_hintstrings["trap_pool"] = &"CP_TOWN_INTERACTIONS_USE_POOL_TRAP";
   scripts\cp\cp_interaction::register_interaction("fix_pool_trap", "trap", undefined, ::pool_trap_fix_hint, ::pool_trap_fix, 0, 0);
   scripts\cp\cp_interaction::register_interaction("trap_pool_part", "trap", undefined, undefined, ::pool_trap_take_part, 0, 0);
   scripts\cp\cp_interaction::register_interaction("trap_pool", "trap", undefined, undefined, ::pool_trap_use, 750, 1, ::pool_trap_init);
   scripts\engine\utility::flag_init("pool_trap_part_taken");
   scripts\engine\utility::flag_init("pool_trap_part_added");
   level.interactions["trap_pool_part"].disable_guided_interactions = 1;
-  level.interaction_hintstrings["fix_propane_trap"] = & "CP_TOWN_INTERACTIONS_FIX_PROPANE";
-  level.interaction_hintstrings["propane_trap_attach_hose"] = & "CP_TOWN_INTERACTIONS_ATTACH_VALVE";
+  level.interaction_hintstrings["fix_propane_trap"] = &"CP_TOWN_INTERACTIONS_FIX_PROPANE";
+  level.interaction_hintstrings["propane_trap_attach_hose"] = &"CP_TOWN_INTERACTIONS_ATTACH_VALVE";
   level.interaction_hintstrings["trap_propane_part"] = "";
-  level.interaction_hintstrings["trap_propane"] = & "CP_TOWN_INTERACTIONS_USE_PROPANE_TRAP";
+  level.interaction_hintstrings["trap_propane"] = &"CP_TOWN_INTERACTIONS_USE_PROPANE_TRAP";
   scripts\cp\cp_interaction::register_interaction("fix_propane_trap", "trap", undefined, ::propane_trap_fix_hint, ::propane_trap_fix, 0, 0);
   scripts\cp\cp_interaction::register_interaction("trap_propane_part", "trap", undefined, undefined, ::propane_trap_take_part, 0, 0);
   scripts\cp\cp_interaction::register_interaction("trap_propane", "trap", undefined, undefined, ::propane_trap_use, 750, 1, ::propane_trap_init);
   scripts\engine\utility::flag_init("propane_trap_part_taken");
   scripts\engine\utility::flag_init("propane_trap_part_added");
   level.interactions["trap_propane_part"].disable_guided_interactions = 1;
-  level.interaction_hintstrings["elvira_trap"] = & "CP_TOWN_INTERACTIONS_USE_ELVIRA_TRAP";
+  level.interaction_hintstrings["elvira_trap"] = &"CP_TOWN_INTERACTIONS_USE_ELVIRA_TRAP";
   scripts\cp\cp_interaction::register_interaction("elvira_trap", "trap", undefined, undefined, ::elvira_trap_use, 750, 1, ::init_elvira_trap);
 }
 

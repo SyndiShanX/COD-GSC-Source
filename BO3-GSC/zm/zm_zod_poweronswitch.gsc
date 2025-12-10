@@ -64,10 +64,10 @@ class cpoweronswitch {
 
   function init_poweronswitch(str_areaname, script_int, linkto_target, func, arg1, n_iter = 0) {
     a_mdl_switch = getEntArray("stair_control", "targetname");
-    a_mdl_switch = array::filter(a_mdl_switch, 0, & filter_areaname, str_areaname);
+    a_mdl_switch = array::filter(a_mdl_switch, 0, &filter_areaname, str_areaname);
     m_mdl_switch = a_mdl_switch[n_iter];
     a_t_switch = getEntArray("stair_control_usetrigger", "targetname");
-    a_t_switch = array::filter(a_t_switch, 0, & filter_areaname, str_areaname);
+    a_t_switch = array::filter(a_t_switch, 0, &filter_areaname, str_areaname);
     m_t_switch = a_t_switch[n_iter];
     m_t_switch sethintstring(&"ZM_ZOD_POWERSWITCH_UNPOWERED");
     m_n_power_index = script_int;

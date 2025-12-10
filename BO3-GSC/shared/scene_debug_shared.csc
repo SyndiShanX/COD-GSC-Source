@@ -14,7 +14,7 @@
 #namespace scene;
 
 function autoexec __init__sytem__() {
-  system::register("", & __init__, undefined, undefined);
+  system::register("", &__init__, undefined, undefined);
 }
 
 function __init__() {

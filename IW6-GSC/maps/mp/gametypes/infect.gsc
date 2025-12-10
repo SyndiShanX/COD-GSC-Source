@@ -90,18 +90,18 @@ initializeMatchRules() {
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  setObjectiveText("allies", & "OBJECTIVES_INFECT");
-  setObjectiveText("axis", & "OBJECTIVES_INFECT");
+  setObjectiveText("allies", &"OBJECTIVES_INFECT");
+  setObjectiveText("axis", &"OBJECTIVES_INFECT");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", & "OBJECTIVES_INFECT");
-    setObjectiveScoreText("axis", & "OBJECTIVES_INFECT");
+    setObjectiveScoreText("allies", &"OBJECTIVES_INFECT");
+    setObjectiveScoreText("axis", &"OBJECTIVES_INFECT");
   } else {
-    setObjectiveScoreText("allies", & "OBJECTIVES_INFECT_SCORE");
-    setObjectiveScoreText("axis", & "OBJECTIVES_INFECT_SCORE");
+    setObjectiveScoreText("allies", &"OBJECTIVES_INFECT_SCORE");
+    setObjectiveScoreText("axis", &"OBJECTIVES_INFECT_SCORE");
   }
-  setObjectiveHintText("allies", & "OBJECTIVES_INFECT_HINT");
-  setObjectiveHintText("axis", & "OBJECTIVES_INFECT_HINT");
+  setObjectiveHintText("allies", &"OBJECTIVES_INFECT_HINT");
+  setObjectiveHintText("axis", &"OBJECTIVES_INFECT_HINT");
 
   initSpawns();
 

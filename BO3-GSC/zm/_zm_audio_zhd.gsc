@@ -28,7 +28,7 @@
 #namespace zm_audio_zhd;
 
 function autoexec __init__sytem__() {
-  system::register("zm_audio_zhd", & __init__, undefined, undefined);
+  system::register("zm_audio_zhd", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -216,7 +216,7 @@ function function_5b2770da() {
 function function_e753d4f() {
   level.var_2a0600f = 0;
   var_8bd44282 = struct::get_array("songstructs", "targetname");
-  array::thread_all(var_8bd44282, & function_929c4dba);
+  array::thread_all(var_8bd44282, &function_929c4dba);
   while(true) {
     level waittill("hash_9b53c751");
     if(level.var_2a0600f == var_8bd44282.size) {

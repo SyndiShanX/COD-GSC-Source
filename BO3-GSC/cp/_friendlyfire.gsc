@@ -12,7 +12,7 @@
 #namespace friendlyfire;
 
 function autoexec __init__sytem__() {
-  system::register("friendlyfire", & __init__, undefined, undefined);
+  system::register("friendlyfire", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -29,7 +29,7 @@ function __init__() {
   if(!isDefined(level.friendlyfiredisabled)) {
     level.friendlyfiredisabled = 0;
   }
-  callback::on_connect( & init_player);
+  callback::on_connect(&init_player);
 }
 
 function init_player() {
@@ -436,9 +436,9 @@ function missionfail() {
   self.participation = 0;
   self.lives = 0;
   if(self.last_hit_team === "neutral") {
-    util::missionfailedwrapper_nodeath(&"SCRIPT_MISSIONFAIL_KILLTEAM_NEUTRAL", & "SCRIPT_MISSIONFAIL_WATCH_FIRE");
+    util::missionfailedwrapper_nodeath(&"SCRIPT_MISSIONFAIL_KILLTEAM_NEUTRAL", &"SCRIPT_MISSIONFAIL_WATCH_FIRE");
   } else {
-    util::missionfailedwrapper_nodeath(&"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN", & "SCRIPT_MISSIONFAIL_WATCH_FIRE");
+    util::missionfailedwrapper_nodeath(&"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN", &"SCRIPT_MISSIONFAIL_WATCH_FIRE");
   }
 }
 

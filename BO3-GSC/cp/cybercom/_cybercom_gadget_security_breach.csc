@@ -19,18 +19,18 @@
 
 function init() {
   init_clientfields();
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
   level.vehicle_transition_on = [];
 }
 
 function init_clientfields() {
-  clientfield::register("toplayer", "hijack_vehicle_transition", 1, 2, "int", & player_vehicletransition, 0, 0);
-  clientfield::register("toplayer", "hijack_static_effect", 1, 7, "float", & player_static_cb, 0, 0);
-  clientfield::register("toplayer", "sndInDrivableVehicle", 1, 1, "int", & sndindrivablevehicle, 0, 0);
-  clientfield::register("vehicle", "vehicle_hijacked", 1, 1, "int", & player_hijacked_this_vehicle, 0, 0);
-  clientfield::register("toplayer", "vehicle_hijacked", 1, 1, "int", & player_hijacked_vehicle, 0, 0);
-  clientfield::register("toplayer", "hijack_spectate", 1, 1, "int", & player_spectate_cb, 0, 0);
-  clientfield::register("toplayer", "hijack_static_ramp_up", 1, 1, "int", & player_static_rampup_cb, 0, 0);
+  clientfield::register("toplayer", "hijack_vehicle_transition", 1, 2, "int", &player_vehicletransition, 0, 0);
+  clientfield::register("toplayer", "hijack_static_effect", 1, 7, "float", &player_static_cb, 0, 0);
+  clientfield::register("toplayer", "sndInDrivableVehicle", 1, 1, "int", &sndindrivablevehicle, 0, 0);
+  clientfield::register("vehicle", "vehicle_hijacked", 1, 1, "int", &player_hijacked_this_vehicle, 0, 0);
+  clientfield::register("toplayer", "vehicle_hijacked", 1, 1, "int", &player_hijacked_vehicle, 0, 0);
+  clientfield::register("toplayer", "hijack_spectate", 1, 1, "int", &player_spectate_cb, 0, 0);
+  clientfield::register("toplayer", "hijack_static_ramp_up", 1, 1, "int", &player_static_rampup_cb, 0, 0);
   visionset_mgr::register_visionset_info("hijack_vehicle", 1, 7, undefined, "vehicle_transition");
   visionset_mgr::register_visionset_info("hijack_vehicle_blur", 1, 7, undefined, "vehicle_hijack_blur");
 }
@@ -100,7 +100,7 @@ function player_static_rampup_cb(localclientnum, oldval, newval, bnewent, biniti
 function player_spectate_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self notify("player_spectate");
   if(newval) {
-    self camerasetupdatecallback( & spectate);
+    self camerasetupdatecallback(&spectate);
   } else {
     self camerasetupdatecallback();
     self.vehicle_camera_pos = undefined;

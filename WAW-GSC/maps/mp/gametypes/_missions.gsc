@@ -175,7 +175,7 @@ tierCheck(tierID) {
 
 challengeNotify(challengeName, challengeDesc) {
   notifyData = spawnStruct();
-  notifyData.titleText = & "MP_CHALLENGE_COMPLETED";
+  notifyData.titleText = &"MP_CHALLENGE_COMPLETED";
   notifyData.notifyText = challengeName;
   notifyData.sound = "mp_challenge_complete";
   self maps\mp\gametypes\_hud_message::notifyMessage(notifyData);
@@ -638,7 +638,7 @@ ch_bulletDamageCommon(data, player, time, weaponClass) {
     }
   }
   if(data.victim.iDFlagsTime == time) {
-    if(data.victim.iDFlags & level.iDFLAGS_PENETRATION)
+    if(data.victim.iDFlags &level.iDFLAGS_PENETRATION)
       player processChallenge("ch_xrayvision_");
   }
   if(data.attackerInLastStand) {

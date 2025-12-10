@@ -88,7 +88,7 @@ give_player_currency(param_00, param_01, param_02, param_03, param_04) {
     }
 
     if(!level.gameended) {
-      scripts\cp\utility::setlowermessage("maxmoney", & "COOP_GAME_PLAY_MONEY_MAX", 4);
+      scripts\cp\utility::setlowermessage("maxmoney", &"COOP_GAME_PLAY_MONEY_MAX", 4);
       self.next_maxmoney_hint_time = var_09 + var_08;
     }
   }

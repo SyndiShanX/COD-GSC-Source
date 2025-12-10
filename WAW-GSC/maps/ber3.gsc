@@ -73,9 +73,9 @@ setup_drones() {
 }
 
 build_starts() {
-  add_start("intro", maps\ber3_event_intro::event_intro_start, & "BER3_WARP_INTRO");
-  add_start("plaza", maps\ber3_event_plaza::event_plaza_start, & "BER3_WARP_PLAZA");
-  add_start("reich", maps\ber3_event_steps::event_reich_start, & "BER3_WARP_REICH");
+  add_start("intro", maps\ber3_event_intro::event_intro_start, &"BER3_WARP_INTRO");
+  add_start("plaza", maps\ber3_event_plaza::event_plaza_start, &"BER3_WARP_PLAZA");
+  add_start("reich", maps\ber3_event_steps::event_reich_start, &"BER3_WARP_REICH");
   add_start("default", level.start_functions["intro"]);
   default_start(level.start_functions["intro"]);
   start = tolower(GetDvar("start"));

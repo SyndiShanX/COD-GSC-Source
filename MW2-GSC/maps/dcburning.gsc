@@ -220,10 +220,10 @@ main() {
   setsaveddvar("sm_sunShadowScale", 0.5); // 1 by default...lower values is better performance
 
   // Press^3 [{+actionslot 3}] ^7to use\nthe M203 Grenade Launcher.
-  add_hint_string("grenade_launcher", & "SCRIPT_LEARN_GRENADE_LAUNCHER", ::should_break_m203_hint);
-  add_hint_string("javelin_pickup", & "DCBURNING_HINT_JAVELIN_PICKUP", ::should_break_javelin_pickup_hint);
-  add_hint_string("javelin_switch", & "DCBURNING_HINT_JAVELIN_SWITCH", ::should_break_javelin_switch_hint);
-  add_hint_string("javelin_shoot", & "DCBURNING_HINT_JAVELIN_FIRE", ::should_break_javelin_fire_hint);
+  add_hint_string("grenade_launcher", &"SCRIPT_LEARN_GRENADE_LAUNCHER", ::should_break_m203_hint);
+  add_hint_string("javelin_pickup", &"DCBURNING_HINT_JAVELIN_PICKUP", ::should_break_javelin_pickup_hint);
+  add_hint_string("javelin_switch", &"DCBURNING_HINT_JAVELIN_SWITCH", ::should_break_javelin_switch_hint);
+  add_hint_string("javelin_shoot", &"DCBURNING_HINT_JAVELIN_FIRE", ::should_break_javelin_fire_hint);
 
   // Press^3 [{+actionslot 3}] ^7to activate heartbeat sensor.
   //add_hint_string( "hint_heartbeat_sensor", &"DCBURNING_SWITCH_HEARTBEAT", ::should_break_activate_heartbeat );
@@ -297,7 +297,7 @@ main() {
 
   //flag_wait( "player_crash_done" );
   //wait( 2 );
-  //iPrintlnbold( &"SCRIPT_DEBUG_LEVEL_END" );
+  //iPrintlnbold(&"SCRIPT_DEBUG_LEVEL_END" );
 }
 
 init_air_vehicle_flags() {
@@ -2635,7 +2635,7 @@ elevator_dude_think(spawner) {
   self gun_remove();
   self setcontents(0);
   self.ignoreme = true;
-  self setlookattext("", & "");
+  self setlookattext("", &"");
   reference = spawner;
   iAnimSwitched = 0;
   elevator_clip = getent("elevator_clip", "targetname");
@@ -3275,7 +3275,7 @@ player_fails_if_abandons_crowsnest() {
   flag_wait("player_abandoning_crowsnest");
 
   //"Mission Failed.\nThe evac site was destroyed."
-  setDvar("ui_deadquote", & "DCBURNING_MISSIONFAIL_CROWSNEST_SNIPE");
+  setDvar("ui_deadquote", &"DCBURNING_MISSIONFAIL_CROWSNEST_SNIPE");
   level notify("mission failed");
   maps\_utility::missionFailedWrapper();
 }
@@ -3763,13 +3763,13 @@ crowsnest_failure_check() {
 }
 
 crowsnest_mission_fail_snipe() {
-  setDvar("ui_deadquote", & "DCBURNING_MISSIONFAIL_CROWSNEST_SNIPE");
+  setDvar("ui_deadquote", &"DCBURNING_MISSIONFAIL_CROWSNEST_SNIPE");
   level notify("mission failed");
   maps\_utility::missionFailedWrapper();
 }
 
 crowsnest_mission_fail_armor() {
-  setDvar("ui_deadquote", & "DCBURNING_MISSIONFAIL_CROWSNEST_SNIPE");
+  setDvar("ui_deadquote", &"DCBURNING_MISSIONFAIL_CROWSNEST_SNIPE");
   level notify("mission failed");
   maps\_utility::missionFailedWrapper();
 }
@@ -6352,7 +6352,7 @@ obj_follow_sgt_macey() {
   flag_wait("obj_follow_sgt_macey_given");
   objective_number = 1;
   obj_position = level.teamleader;
-  objective_add(objective_number, "active", & "DCBURNING_OBJ_FOLLOW_SGT_MACEY");
+  objective_add(objective_number, "active", &"DCBURNING_OBJ_FOLLOW_SGT_MACEY");
   objective_current(objective_number);
   Objective_OnEntity(objective_number, level.teamleader, (0, 0, 70));
   flag_wait("obj_follow_sgt_macey_complete");
@@ -6364,7 +6364,7 @@ obj_commerce() {
   objective_number = 2;
   obj_position = getstruct("obj_commerce_sector_1", "targetname");
 
-  objective_add(objective_number, "active", & "DCBURNING_OBJ_COMMERCE");
+  objective_add(objective_number, "active", &"DCBURNING_OBJ_COMMERCE");
   objective_current(objective_number);
   Objective_OnEntity(objective_number, level.teamleader, (0, 0, 70));
 
@@ -6407,7 +6407,7 @@ obj_commerce_defend_snipe() {
   objective_number = 3;
   obj_position = getstruct("obj_commerce_defend_snipe", "targetname");
 
-  objective_add(objective_number, "active", & "DCBURNING_OBJ_COMMERCE_DEFEND_SNIPE", obj_position.origin);
+  objective_add(objective_number, "active", &"DCBURNING_OBJ_COMMERCE_DEFEND_SNIPE", obj_position.origin);
   objective_current(objective_number);
 
   flag_wait("obj_commerce_defend_snipe_complete");
@@ -6458,12 +6458,12 @@ obj_commerce_defend_crow() {
   objective_number = 4;
   //obj_position = getstruct( "obj_commerce_sector_3", "targetname" );
 
-  objective_add(objective_number, "invisible", & "DCBURNING_OBJ_COMMERCE_DEFEND_CROW");
+  objective_add(objective_number, "invisible", &"DCBURNING_OBJ_COMMERCE_DEFEND_CROW");
   crow_defend_obj1 = getent("crow_defend_obj1", "targetname");
   crow_defend_obj2 = getent("crow_defend_obj2", "targetname");
   objective_additionalposition(objective_number, 0, crow_defend_obj1.origin);
   objective_additionalposition(objective_number, 1, crow_defend_obj2.origin);
-  Objective_SetPointerTextOverride(objective_number, & "DCBURNING_OBJ_TEXT_DEFEND");
+  Objective_SetPointerTextOverride(objective_number, &"DCBURNING_OBJ_TEXT_DEFEND");
   objective_state(objective_number, "current");
 
   flag_wait("obj_commerce_defend_crow_complete");
@@ -6477,7 +6477,7 @@ obj_commerce_defend_javelin() {
   objective_number = 5;
   obj_position = getstruct("obj_jav_defend2", "targetname");
 
-  objective_add(objective_number, "active", & "DCBURNING_OBJ_COMMERCE_DEFEND_JAVELIN");
+  objective_add(objective_number, "active", &"DCBURNING_OBJ_COMMERCE_DEFEND_JAVELIN");
   objective_current(objective_number);
 
   flag_wait("obj_commerce_defend_javelin_complete");
@@ -6539,7 +6539,7 @@ obj_rooftop() {
 
   obj_position = getstruct("obj_commerce_roof", "targetname");
 
-  objective_add(objective_number, "active", & "DCBURNING_OBJ_ROOFTOP", obj_position.origin);
+  objective_add(objective_number, "active", &"DCBURNING_OBJ_ROOFTOP", obj_position.origin);
   objective_current(objective_number);
   //Objective_OnEntity( objective_number, level.teamleader, ( 0, 0, 70 ) );
 
@@ -6584,7 +6584,7 @@ obj_heli_mount() {
   obj_org = spawn("script_origin", (0, 0, 0));
   obj_org.origin = level.blackhawk gettagorigin("tag_player");
   obj_org linkto(level.blackhawk, "tag_player", (0, 0, 25), (0, 0, 0));
-  objective_add(objective_number, "active", & "DCBURNING_OBJ_HELI_MOUNT", obj_org.origin);
+  objective_add(objective_number, "active", &"DCBURNING_OBJ_HELI_MOUNT", obj_org.origin);
   objective_current(objective_number);
 
   while(!flag("blackhawk_landed")) {
@@ -6602,7 +6602,7 @@ obj_heli_ride() {
   flag_wait("obj_heli_ride_given");
   objective_number = 8;
 
-  objective_add(objective_number, "active", & "DCBURNING_OBJ_HELI_RIDE", level.player.origin);
+  objective_add(objective_number, "active", &"DCBURNING_OBJ_HELI_RIDE", level.player.origin);
   objective_current(objective_number);
 
   flag_wait("obj_heli_ride_complete");
@@ -7338,7 +7338,7 @@ initPrecache() {
   precachestring(&"DCBURNING_OBJ_LINCOLN");
   precachestring(&"DCBURNINGINFO_EVAC_SITE_HEALTH");
   precachestring(&"DCBURNING_MISSIONFAIL_LEFT_CHOPPER");
-  //precachestring( &"DCBURNING_SWITCH_HEARTBEAT" );
+  //precachestring(&"DCBURNING_SWITCH_HEARTBEAT" );
   precachestring(&"DCBURNING_RAN_OUT_OF_TIME");
   precachestring(&"DCBURNING_TIME_REMAINING");
 
@@ -9515,7 +9515,7 @@ escape_timer(iSeconds) {
   level.timer = maps\_hud_util::get_countdown_hud();
   level.timer SetPulseFX(30, 900000, 700); // something, decay start, decay duration
   // Retrieve pilot in:
-  level.timer.label = & "DCBURNING_TIME_REMAINING";
+  level.timer.label = &"DCBURNING_TIME_REMAINING";
   level.timer settenthstimer(iSeconds);
 
   /*-----------------------
@@ -9542,7 +9542,7 @@ mission_failed_out_of_time() {
   level notify("mission failed");
   musicstop(1);
   // Mission failed.
-  setDvar("ui_deadquote", & "DCBURNING_RAN_OUT_OF_TIME");
+  setDvar("ui_deadquote", &"DCBURNING_RAN_OUT_OF_TIME");
   maps\_utility::missionFailedWrapper();
   level notify("kill_timer");
 }

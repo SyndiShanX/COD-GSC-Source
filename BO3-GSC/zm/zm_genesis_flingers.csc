@@ -15,13 +15,13 @@ function main() {
 }
 
 function register_clientfields() {
-  clientfield::register("toplayer", "flinger_flying_postfx", 15000, 1, "int", & flinger_flying_postfx, 0, 0);
-  clientfield::register("toplayer", "flinger_land_smash", 15000, 1, "counter", & flinger_land_smash, 0, 0);
-  clientfield::register("toplayer", "flinger_cooldown_start", 15000, 4, "int", & flinger_cooldown_start, 0, 0);
-  clientfield::register("toplayer", "flinger_cooldown_end", 15000, 4, "int", & flinger_cooldown_end, 0, 0);
-  clientfield::register("scriptmover", "player_visibility", 15000, 1, "int", & function_a0a5829, 0, 0);
-  clientfield::register("scriptmover", "flinger_launch_fx", 15000, 1, "counter", & function_3762396c, 0, 0);
-  clientfield::register("scriptmover", "flinger_pad_active_fx", 15000, 4, "int", & flinger_pad_active_fx, 0, 0);
+  clientfield::register("toplayer", "flinger_flying_postfx", 15000, 1, "int", &flinger_flying_postfx, 0, 0);
+  clientfield::register("toplayer", "flinger_land_smash", 15000, 1, "counter", &flinger_land_smash, 0, 0);
+  clientfield::register("toplayer", "flinger_cooldown_start", 15000, 4, "int", &flinger_cooldown_start, 0, 0);
+  clientfield::register("toplayer", "flinger_cooldown_end", 15000, 4, "int", &flinger_cooldown_end, 0, 0);
+  clientfield::register("scriptmover", "player_visibility", 15000, 1, "int", &function_a0a5829, 0, 0);
+  clientfield::register("scriptmover", "flinger_launch_fx", 15000, 1, "counter", &function_3762396c, 0, 0);
+  clientfield::register("scriptmover", "flinger_pad_active_fx", 15000, 4, "int", &flinger_pad_active_fx, 0, 0);
 }
 
 function flinger_flying_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

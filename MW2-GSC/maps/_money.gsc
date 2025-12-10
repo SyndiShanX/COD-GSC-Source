@@ -9,7 +9,7 @@
 
 /* -=-=-=-=-=-=-=-=-=-=
 
-PMC & CO-OP Money system
+PMC &CO-OP Money system
 
 -=-=-=-=-=-=-=-=-=-=-=- */
 

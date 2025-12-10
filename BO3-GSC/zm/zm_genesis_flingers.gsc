@@ -28,9 +28,9 @@
 
 function function_976c9217() {
   register_clientfields();
-  zm::register_player_damage_callback( & function_4b3d145d);
+  zm::register_player_damage_callback(&function_4b3d145d);
   var_fa27add4 = struct::get_array("115_flinger_pad_aimer", "targetname");
-  array::thread_all(var_fa27add4, & function_5ecbd7cb);
+  array::thread_all(var_fa27add4, &function_5ecbd7cb);
   level._effect["flinger_land_kill"] = "zombie/fx_bgb_anywhere_but_here_teleport_aoe_kill_zmb";
   level thread function_4208db02();
 }
@@ -53,7 +53,7 @@ function function_5ecbd7cb() {
   var_cec95fd7 thread function_86ef1da5();
   v_fling = anglesToForward(self.angles) * self.script_int;
   var_845e036a clientfield::set("flinger_pad_active_fx", level.var_6ad55648[var_845e036a.targetname]["ready"]);
-  s_unitrigger_stub = self zm_unitrigger::create_unitrigger("", 50, & function_485001bf, & function_4029cf56, "unitrigger_radius");
+  s_unitrigger_stub = self zm_unitrigger::create_unitrigger("", 50, &function_485001bf, &function_4029cf56, "unitrigger_radius");
   s_unitrigger_stub.angles = (0, 0, 0);
   s_unitrigger_stub.hint_parm1 = 0;
   s_unitrigger_stub.script_string = vol_fling.script_string;
@@ -80,7 +80,7 @@ function function_5ecbd7cb() {
         }
       } else {
         var_7092e170 = function_3dcd0982(level.activeplayers, vol_fling);
-        array::thread_all(var_7092e170, & function_e9d3c391, vol_fling, v_fling, nd_start, var_845e036a);
+        array::thread_all(var_7092e170, &function_e9d3c391, vol_fling, v_fling, nd_start, var_845e036a);
       }
       n_timer = n_timer + 0.1;
       wait(0.1);
@@ -101,8 +101,8 @@ function unitrigger_refresh_message() {
   self zm_unitrigger::run_visibility_function_for_all_triggers();
 }
 
-function function_3dcd0982( & array, var_8d88ae81) {
-  return array::filter(array, 0, & function_a78c631a, var_8d88ae81);
+function function_3dcd0982(&array, var_8d88ae81) {
+  return array::filter(array, 0, &function_a78c631a, var_8d88ae81);
 }
 
 function function_a78c631a(val, var_8d88ae81) {
@@ -153,7 +153,7 @@ function function_e9d3c391(var_a89f74ed, v_fling, nd_start, var_173065cc) {
     self playerlinktodelta(var_413ea50f);
     a_ai_enemies = getaiteamarray("axis");
     a_ai_enemies = arraysort(a_ai_enemies, nd_start.origin, 1, 99, 768);
-    array::thread_all(a_ai_enemies, & ai_delay_cleanup);
+    array::thread_all(a_ai_enemies, &ai_delay_cleanup);
     self thread function_44659337(nd_start, var_a89f74ed, v_fling);
     self playrumbleonentity("zm_castle_flinger_launch");
     self clientfield::set_to_player("flinger_flying_postfx", 1);
@@ -389,7 +389,7 @@ function function_b19e2d45(var_a89f74ed) {
 function function_44659337(nd_target, var_a89f74ed, v_fling) {
   a_ai = getaiteamarray(level.zombie_team);
   a_sorted_ai = arraysortclosest(a_ai, nd_target.origin, a_ai.size, 0, 512);
-  array::thread_all(a_sorted_ai, & function_1a4837ab, nd_target, self, var_a89f74ed, v_fling);
+  array::thread_all(a_sorted_ai, &function_1a4837ab, nd_target, self, var_a89f74ed, v_fling);
 }
 
 function function_1a4837ab(nd_target, e_target, var_a89f74ed, v_fling) {

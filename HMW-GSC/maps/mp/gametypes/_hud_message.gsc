@@ -41,7 +41,7 @@ init() {
   game["end_reason"]["infected_eliminated"] = 22;
   game["end_reason"]["survivors_forfeited"] = 23;
   game["end_reason"]["infected_forfeited"] = 24;
-  game["strings"]["overtime"] = & "MP_OVERTIME";
+  game["strings"]["overtime"] = &"MP_OVERTIME";
   level.lua_splash_type_none = 0;
   level.lua_splash_type_killstreak = 1;
   level.lua_splash_type_medal = 2;
@@ -232,7 +232,7 @@ shownotifymessage(notifyData) {
     if(isDefined(notifyData.titlelabel))
       self.notifytitle.label = notifyData.titlelabel;
     else
-      self.notifytitle.label = & "";
+      self.notifytitle.label = &"";
 
     if(isDefined(notifyData.titlelabel) && !isDefined(notifyData.titleisstring))
       self.notifytitle setvalue(notifyData.titletext);
@@ -256,7 +256,7 @@ shownotifymessage(notifyData) {
     if(isDefined(notifyData.textlabel))
       self.notifytext.label = notifyData.textlabel;
     else
-      self.notifytext.label = & "";
+      self.notifytext.label = &"";
 
     if(isDefined(notifyData.textlabel) && !isDefined(notifyData.textisstring))
       self.notifytext setvalue(notifyData.notifytext);
@@ -278,7 +278,7 @@ shownotifymessage(notifyData) {
     if(isDefined(notifyData.text2label))
       self.notifytext2.label = notifyData.text2label;
     else
-      self.notifytext2.label = & "";
+      self.notifytext2.label = &"";
 
     self.notifytext2 settext(notifyData.notifytext2);
 
@@ -361,8 +361,8 @@ killstreaksplashnotify(var_0, var_1, var_2, var_3, var_4) {
     var_5 = tablelookuprownum("mp/splashTable.csv", 0, var_0);
 
     if(var_5 >= 0) {
-      self luinotifyevent( & "killstreak_splash", 3, var_5, var_1, var_4);
-      self _meth_8579( & "killstreak_splash", 3, var_5, var_1, var_4);
+      self luinotifyevent(&"killstreak_splash", 3, var_5, var_1, var_4);
+      self _meth_8579(&"killstreak_splash", 3, var_5, var_1, var_4);
       insertluasplash(level.lua_splash_type_killstreak, var_5);
     }
 
@@ -453,8 +453,8 @@ challengesplashnotify(challengeRef, originalState, newState) {
       if(ref != "") {
         //print( "challengesplashnotify:", challengeRef );
         intRef = int(ref);
-        self luinotifyevent( & "challenge_splash", 3, intRef, state, target);
-        self _meth_8579( & "challenge_splash", 3, intRef, state, target);
+        self luinotifyevent(&"challenge_splash", 3, intRef, state, target);
+        self _meth_8579(&"challenge_splash", 3, intRef, state, target);
         insertluasplash(level.lua_splash_type_challenge, intRef);
       }
 
@@ -478,8 +478,8 @@ medalsplashnotify(splashRef) {
     index = tablelookuprownum("mp/splashTable.csv", 0, splashRef);
 
     if(index >= 0) {
-      self luinotifyevent( & "medal_splash", 1, index);
-      self _meth_8579( & "medal_splash", 1, index);
+      self luinotifyevent(&"medal_splash", 1, index);
+      self _meth_8579(&"medal_splash", 1, index);
       insertluasplash(level.lua_splash_type_medal, index);
       return;
     }
@@ -497,11 +497,11 @@ splashnotify(splash, optionalNumber, optionalKillstreakSlot) {
 
     if(var_3 >= 0) {
       if(isDefined(optionalNumber)) {
-        self luinotifyevent( & "generic_splash_number", 2, var_3, optionalNumber);
-        self luinotifyeventtospectators( & "generic_splash_number", 2, var_3, optionalNumber);
+        self luinotifyevent(&"generic_splash_number", 2, var_3, optionalNumber);
+        self luinotifyeventtospectators(&"generic_splash_number", 2, var_3, optionalNumber);
       } else {
-        self luinotifyevent( & "generic_splash", 1, var_3);
-        self luinotifyeventtospectators( & "generic_splash", 1, var_3);
+        self luinotifyevent(&"generic_splash", 1, var_3);
+        self luinotifyeventtospectators(&"generic_splash", 1, var_3);
       }
 
       insertluasplash(level.lua_splash_type_generic, var_3);
@@ -543,8 +543,8 @@ rankupsplashnotify(var_0, var_1, var_2) {
     var_3 = tablelookuprownum("mp/splashTable.csv", 0, var_0);
     //print( "rankupsplashnotify:", var_0 );
     if(var_3 >= 0) {
-      self luinotifyevent( & "rankup_splash", 3, var_3, var_1, var_2);
-      self _meth_8579( & "rankup_splash", 3, var_3, var_1, var_2);
+      self luinotifyevent(&"rankup_splash", 3, var_3, var_1, var_2);
+      self _meth_8579(&"rankup_splash", 3, var_3, var_1, var_2);
       insertluasplash(level.lua_splash_type_rankup, var_3);
     }
     return;
@@ -583,9 +583,9 @@ playerCardSplashNotify(splashRef, player, optionalNumber) {
       if(isDefined(optionalNumber))
         self setClientOmnvar("ui_splash_playercard_optional_number", optionalNumber);
       /*
-      self luinotifyevent( &"playercard_splash", 3, index, player, optionalNumber );
-      self luinotifyeventtospectators( &"playercard_splash", 3, index, player, optionalNumber );
-      self _meth_8579( &"playercard_splash", 3, index, player, optionalNumber );
+      self luinotifyevent(&"playercard_splash", 3, index, player, optionalNumber );
+      self luinotifyeventtospectators(&"playercard_splash", 3, index, player, optionalNumber );
+      self _meth_8579(&"playercard_splash", 3, index, player, optionalNumber );
       insertluasplash( level.lua_splash_type_playercard, index );
       */
     }

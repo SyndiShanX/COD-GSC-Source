@@ -15,16 +15,16 @@
 #namespace _gadget_es_strike;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_es_strike", & __init__, undefined, undefined);
+  system::register("gadget_es_strike", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(33, & gadget_es_strike_on, & gadget_es_strike_off);
-  ability_player::register_gadget_possession_callbacks(33, & gadget_es_strike_on_give, & gadget_es_strike_on_take);
-  ability_player::register_gadget_flicker_callbacks(33, & gadget_es_strike_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(33, & gadget_es_strike_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(33, & gadget_es_strike_is_flickering);
-  callback::on_connect( & gadget_es_strike_on_connect);
+  ability_player::register_gadget_activation_callbacks(33, &gadget_es_strike_on, &gadget_es_strike_off);
+  ability_player::register_gadget_possession_callbacks(33, &gadget_es_strike_on_give, &gadget_es_strike_on_take);
+  ability_player::register_gadget_flicker_callbacks(33, &gadget_es_strike_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(33, &gadget_es_strike_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(33, &gadget_es_strike_is_flickering);
+  callback::on_connect(&gadget_es_strike_on_connect);
 }
 
 function gadget_es_strike_is_inuse(slot) {

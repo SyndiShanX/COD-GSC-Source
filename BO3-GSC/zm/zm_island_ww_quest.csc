@@ -13,11 +13,11 @@
 #namespace zm_island_ww_quest;
 
 function function_30d4f164() {
-  clientfield::register("scriptmover", "play_underwater_plant_fx", 9000, 1, "int", & play_underwater_plant_fx, 0, 0);
-  clientfield::register("actor", "play_carrier_fx", 9000, 1, "int", & function_f0e89ab2, 0, 0);
-  clientfield::register("scriptmover", "play_vial_fx", 9000, 1, "int", & function_e9572f40, 0, 0);
-  clientfield::register("world", "add_ww_to_box", 9000, 4, "int", & add_ww_to_box, 0, 0);
-  clientfield::register("scriptmover", "spider_bait", 9000, 1, "int", & function_6eb27bd9, 0, 0);
+  clientfield::register("scriptmover", "play_underwater_plant_fx", 9000, 1, "int", &play_underwater_plant_fx, 0, 0);
+  clientfield::register("actor", "play_carrier_fx", 9000, 1, "int", &function_f0e89ab2, 0, 0);
+  clientfield::register("scriptmover", "play_vial_fx", 9000, 1, "int", &function_e9572f40, 0, 0);
+  clientfield::register("world", "add_ww_to_box", 9000, 4, "int", &add_ww_to_box, 0, 0);
+  clientfield::register("scriptmover", "spider_bait", 9000, 1, "int", &function_6eb27bd9, 0, 0);
 }
 
 function add_ww_to_box(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

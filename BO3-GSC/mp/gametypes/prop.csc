@@ -12,11 +12,11 @@
 #namespace prop;
 
 function main() {
-  clientfield::register("allplayers", "hideTeamPlayer", 27000, 2, "int", & function_8e3b5ce2, 0, 0);
-  clientfield::register("allplayers", "pingHighlight", 27000, 1, "int", & function_c87d7938, 0, 0);
-  callback::on_localplayer_spawned( & function_b413fb86);
-  level.var_f12ccf06 = & function_6baff676;
-  level.var_c301d021 = & function_76519db0;
+  clientfield::register("allplayers", "hideTeamPlayer", 27000, 2, "int", &function_8e3b5ce2, 0, 0);
+  clientfield::register("allplayers", "pingHighlight", 27000, 1, "int", &function_c87d7938, 0, 0);
+  callback::on_localplayer_spawned(&function_b413fb86);
+  level.var_f12ccf06 = &function_6baff676;
+  level.var_c301d021 = &function_76519db0;
   thread function_576e8126();
 }
 

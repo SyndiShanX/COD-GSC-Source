@@ -63,7 +63,7 @@ function setup_pers_upgrade_boards() {
   if(isDefined(level.pers_upgrade_boards) && level.pers_upgrade_boards) {
     level.pers_boarding_round_start = 10;
     level.pers_boarding_number_of_boards_required = 74;
-    zm_pers_upgrades_system::pers_register_upgrade("board", & pers_upgrade_boards_active, "pers_boarding", level.pers_boarding_number_of_boards_required, 0);
+    zm_pers_upgrades_system::pers_register_upgrade("board", &pers_upgrade_boards_active, "pers_boarding", level.pers_boarding_number_of_boards_required, 0);
   }
 }
 
@@ -71,7 +71,7 @@ function setup_pers_upgrade_revive() {
   if(isDefined(level.pers_upgrade_revive) && level.pers_upgrade_revive) {
     level.pers_revivenoperk_number_of_revives_required = 17;
     level.pers_revivenoperk_number_of_chances_to_keep = 1;
-    zm_pers_upgrades_system::pers_register_upgrade("revive", & pers_upgrade_revive_active, "pers_revivenoperk", level.pers_revivenoperk_number_of_revives_required, 1);
+    zm_pers_upgrades_system::pers_register_upgrade("revive", &pers_upgrade_revive_active, "pers_revivenoperk", level.pers_revivenoperk_number_of_revives_required, 1);
   }
 }
 
@@ -79,7 +79,7 @@ function setup_pers_upgrade_multi_kill_headshots() {
   if(isDefined(level.pers_upgrade_multi_kill_headshots) && level.pers_upgrade_multi_kill_headshots) {
     level.pers_multikill_headshots_required = 5;
     level.pers_multikill_headshots_upgrade_reset_counter = 25;
-    zm_pers_upgrades_system::pers_register_upgrade("multikill_headshots", & pers_upgrade_headshot_active, "pers_multikill_headshots", level.pers_multikill_headshots_required, 0);
+    zm_pers_upgrades_system::pers_register_upgrade("multikill_headshots", &pers_upgrade_headshot_active, "pers_multikill_headshots", level.pers_multikill_headshots_required, 0);
   }
 }
 
@@ -89,7 +89,7 @@ function setup_pers_upgrade_cash_back() {
     level.pers_cash_back_perk_buys_prone_required = 15;
     level.pers_cash_back_failed_prones = 1;
     level.pers_cash_back_money_reward = 1000;
-    zm_pers_upgrades_system::pers_register_upgrade("cash_back", & pers_upgrade_cash_back_active, "pers_cash_back_bought", level.pers_cash_back_num_perks_required, 0);
+    zm_pers_upgrades_system::pers_register_upgrade("cash_back", &pers_upgrade_cash_back_active, "pers_cash_back_bought", level.pers_cash_back_num_perks_required, 0);
     zm_pers_upgrades_system::add_pers_upgrade_stat("cash_back", "pers_cash_back_prone", level.pers_cash_back_perk_buys_prone_required);
   }
 }
@@ -98,7 +98,7 @@ function setup_pers_upgrade_insta_kill() {
   if(isDefined(level.pers_upgrade_insta_kill) && level.pers_upgrade_insta_kill) {
     level.pers_insta_kill_num_required = 2;
     level.pers_insta_kill_upgrade_active_time = 18;
-    zm_pers_upgrades_system::pers_register_upgrade("insta_kill", & pers_upgrade_insta_kill_active, "pers_insta_kill", level.pers_insta_kill_num_required, 0);
+    zm_pers_upgrades_system::pers_register_upgrade("insta_kill", &pers_upgrade_insta_kill_active, "pers_insta_kill", level.pers_insta_kill_num_required, 0);
   }
 }
 
@@ -109,14 +109,14 @@ function setup_pers_upgrade_jugg() {
     level.pers_jugg_round_reached_max = 1;
     level.pers_jugg_round_lose_target = 15;
     level.pers_jugg_upgrade_health_bonus = 90;
-    zm_pers_upgrades_system::pers_register_upgrade("jugg", & pers_upgrade_jugg_active, "pers_jugg", level.pers_jugg_hit_and_die_total, 0);
+    zm_pers_upgrades_system::pers_register_upgrade("jugg", &pers_upgrade_jugg_active, "pers_jugg", level.pers_jugg_hit_and_die_total, 0);
   }
 }
 
 function setup_pers_upgrade_carpenter() {
   if(isDefined(level.pers_upgrade_carpenter) && level.pers_upgrade_carpenter) {
     level.pers_carpenter_zombie_kills = 1;
-    zm_pers_upgrades_system::pers_register_upgrade("carpenter", & pers_upgrade_carpenter_active, "pers_carpenter", level.pers_carpenter_zombie_kills, 0);
+    zm_pers_upgrades_system::pers_register_upgrade("carpenter", &pers_upgrade_carpenter_active, "pers_carpenter", level.pers_carpenter_zombie_kills, 0);
   }
 }
 
@@ -124,7 +124,7 @@ function setup_pers_upgrade_perk_lose() {
   if(isDefined(level.pers_upgrade_perk_lose) && level.pers_upgrade_perk_lose) {
     level.pers_perk_round_reached_max = 6;
     level.pers_perk_lose_counter = 3;
-    zm_pers_upgrades_system::pers_register_upgrade("perk_lose", & pers_upgrade_perk_lose_active, "pers_perk_lose_counter", level.pers_perk_lose_counter, 0);
+    zm_pers_upgrades_system::pers_register_upgrade("perk_lose", &pers_upgrade_perk_lose_active, "pers_perk_lose_counter", level.pers_perk_lose_counter, 0);
   }
 }
 
@@ -133,7 +133,7 @@ function setup_pers_upgrade_pistol_points() {
     level.pers_pistol_points_num_kills_in_game = 8;
     level.pers_pistol_points_accuracy = 0.25;
     level.pers_pistol_points_counter = 1;
-    zm_pers_upgrades_system::pers_register_upgrade("pistol_points", & pers_upgrade_pistol_points_active, "pers_pistol_points_counter", level.pers_pistol_points_counter, 0);
+    zm_pers_upgrades_system::pers_register_upgrade("pistol_points", &pers_upgrade_pistol_points_active, "pers_pistol_points_counter", level.pers_pistol_points_counter, 0);
   }
 }
 
@@ -141,7 +141,7 @@ function setup_pers_upgrade_double_points() {
   if(isDefined(level.pers_upgrade_double_points) && level.pers_upgrade_double_points) {
     level.pers_double_points_score = 2500;
     level.pers_double_points_counter = 1;
-    zm_pers_upgrades_system::pers_register_upgrade("double_points", & pers_upgrade_double_points_active, "pers_double_points_counter", level.pers_double_points_counter, 0);
+    zm_pers_upgrades_system::pers_register_upgrade("double_points", &pers_upgrade_double_points_active, "pers_double_points_counter", level.pers_double_points_counter, 0);
   }
 }
 
@@ -151,7 +151,7 @@ function setup_pers_upgrade_sniper() {
     level.pers_sniper_kill_distance = 800;
     level.pers_sniper_counter = 1;
     level.pers_sniper_misses = 3;
-    zm_pers_upgrades_system::pers_register_upgrade("sniper", & pers_upgrade_sniper_active, "pers_sniper_counter", level.pers_sniper_counter, 0);
+    zm_pers_upgrades_system::pers_register_upgrade("sniper", &pers_upgrade_sniper_active, "pers_sniper_counter", level.pers_sniper_counter, 0);
   }
 }
 
@@ -159,7 +159,7 @@ function setup_pers_upgrade_box_weapon() {
   if(isDefined(level.pers_upgrade_box_weapon) && level.pers_upgrade_box_weapon) {
     level.pers_box_weapon_counter = 5;
     level.pers_box_weapon_lose_round = 10;
-    zm_pers_upgrades_system::pers_register_upgrade("box_weapon", & pers_upgrade_box_weapon_active, "pers_box_weapon_counter", level.pers_box_weapon_counter, 0);
+    zm_pers_upgrades_system::pers_register_upgrade("box_weapon", &pers_upgrade_box_weapon_active, "pers_box_weapon_counter", level.pers_box_weapon_counter, 0);
   }
 }
 
@@ -168,7 +168,7 @@ function setup_pers_upgrade_nube() {
     level.pers_nube_counter = 1;
     level.pers_nube_lose_round = 10;
     level.pers_numb_num_kills_unlock = 5;
-    zm_pers_upgrades_system::pers_register_upgrade("nube", & pers_upgrade_nube_active, "pers_nube_counter", level.pers_nube_counter, 0);
+    zm_pers_upgrades_system::pers_register_upgrade("nube", &pers_upgrade_nube_active, "pers_nube_counter", level.pers_nube_counter, 0);
   }
 }
 

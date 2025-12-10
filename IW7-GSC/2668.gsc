@@ -27,7 +27,7 @@ init() {
   level.sentrysettings["crafted_autosentry"].modelplacement = "weapon_sentry_chaingun";
   level.sentrysettings["crafted_autosentry"].modelplacementfailed = "weapon_sentry_chaingun_obj_red";
   level.sentrysettings["crafted_autosentry"].modeldestroyed = "weapon_sentry_chaingun_destroyed";
-  level.sentrysettings["crafted_autosentry"].hintstring = & "COOP_CRAFTABLES_PICKUP";
+  level.sentrysettings["crafted_autosentry"].hintstring = &"COOP_CRAFTABLES_PICKUP";
   level.sentrysettings["crafted_autosentry"].headicon = 1;
   level.sentrysettings["crafted_autosentry"].vodestroyed = "sentry_destroyed";
   level.sentrysettings["crafted_autosentry"].func_9F43 = 0;
@@ -325,12 +325,12 @@ updatesentryplacement(var_00, var_01) {
         var_00 setModel(level.sentrysettings[var_0.sentrytype].modelplacement);
 
         if(!var_01)
-          self forceusehinton( & "COOP_CRAFTABLES_PLACE");
+          self forceusehinton(&"COOP_CRAFTABLES_PLACE");
         else
-          self forceusehinton( & "COOP_CRAFTABLES_PLACE_CANCELABLE");
+          self forceusehinton(&"COOP_CRAFTABLES_PLACE_CANCELABLE");
       } else {
         var_00 setModel(level.sentrysettings[var_0.sentrytype].modelplacementfailed);
-        self forceusehinton( & "COOP_CRAFTABLES_CANNOT_PLACE");
+        self forceusehinton(&"COOP_CRAFTABLES_CANNOT_PLACE");
       }
     }
 

@@ -13,11 +13,11 @@
 #namespace drown;
 
 function autoexec __init__sytem__() {
-  system::register("drown", & __init__, undefined, undefined);
+  system::register("drown", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
   level.drown_damage = getdvarfloat("player_swimDamage");
   level.drown_damage_interval = getdvarfloat("player_swimDamagerInterval") * 1000;
   level.drown_damage_after_time = getdvarfloat("player_swimTime") * 1000;
@@ -25,7 +25,7 @@ function __init__() {
   if(!isDefined(level.vsmgr_prio_overlay_drown_blur)) {
     level.vsmgr_prio_overlay_drown_blur = 10;
   }
-  visionset_mgr::register_info("overlay", "drown_blur", 1, level.vsmgr_prio_overlay_drown_blur, 1, 1, & visionset_mgr::ramp_in_out_thread_per_player, 1);
+  visionset_mgr::register_info("overlay", "drown_blur", 1, level.vsmgr_prio_overlay_drown_blur, 1, 1, &visionset_mgr::ramp_in_out_thread_per_player, 1);
   clientfield::register("toplayer", "drown_stage", 1, 3, "int");
 }
 

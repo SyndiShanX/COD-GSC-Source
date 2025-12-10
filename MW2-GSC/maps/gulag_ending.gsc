@@ -729,7 +729,7 @@ gulag_evac() {
 
   trigger = getEntWithFlag("player_uses_rig");
 
-  // Press and hold^3 &&1 ^7to clip on.
+  // Press and hold^3 && 1 ^7to clip on.
   trigger SetHintString(&"GULAG_HOLD_1_TO_SPIE");
 
   SetSavedDvar("hud_drawhud", 1);

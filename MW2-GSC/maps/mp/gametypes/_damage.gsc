@@ -888,7 +888,7 @@ HitlocDebug(attacker, victim, damage, hitloc, dflags) {
   }
   attacker.damageInfo[0].damage = damage;
   attacker.damageInfo[0].hitloc = hitloc;
-  attacker.damageInfo[0].bp = (dflags & level.iDFLAGS_PENETRATION);
+  attacker.damageInfo[0].bp = (dflags &level.iDFLAGS_PENETRATION);
   attacker.damageInfo[0].jugg = victim hasPerk("specialty_armorvest", true);
   if(isDefined(attacker.damageInfoVictim) && (attacker.damageInfoVictim != victim)) {
     attacker.damageInfoColorIndex++;
@@ -955,7 +955,7 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
 
   stunFraction = 0.0;
 
-  if(iDFlags & level.iDFLAGS_STUN) {
+  if(iDFlags &level.iDFLAGS_STUN) {
     stunFraction = 0.0;
     //victim StunPlayer( 1.0 );
     iDamage = 0.0;
@@ -1002,14 +1002,14 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
       }
     }
 
-    if(iDFlags & level.iDFLAGS_SHIELD_EXPLOSIVE_IMPACT) {
+    if(iDFlags &level.iDFLAGS_SHIELD_EXPLOSIVE_IMPACT) {
       if(!attackerIsHittingTeammate)
         victim thread maps\mp\gametypes\_missions::genericChallenge("shield_explosive_hits", 1);
 
       sHitLoc = "none"; // code ignores any damage to a "shield" bodypart.
-      if(!(iDFlags & level.iDFLAGS_SHIELD_EXPLOSIVE_IMPACT_HUGE))
+      if(!(iDFlags &level.iDFLAGS_SHIELD_EXPLOSIVE_IMPACT_HUGE))
         iDamage *= 0.0;
-    } else if(iDFlags & level.iDFLAGS_SHIELD_EXPLOSIVE_SPLASH) {
+    } else if(iDFlags &level.iDFLAGS_SHIELD_EXPLOSIVE_SPLASH) {
       if(isDefined(eInflictor) && isDefined(eInflictor.stuckEnemyEntity) && eInflictor.stuckEnemyEntity == victim) //does enough damage to shield carrier to ensure death
         iDamage = 101;
 
@@ -1086,7 +1086,7 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
   prof_end("PlayerDamage flags/tweaks");
 
   // check for completely getting out of the damage
-  if(!(iDFlags & level.iDFLAGS_NO_PROTECTION)) {
+  if(!(iDFlags &level.iDFLAGS_NO_PROTECTION)) {
     // items you own don't damage you in FFA
     if(!level.teamBased && attackerIsNPC && isDefined(eAttacker.owner) && eAttacker.owner == victim) {
       prof_end("PlayerDamage player");
@@ -1246,7 +1246,7 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
       damager = eAttacker;
 
     if(isDefined(damager) && damager != victim && iDamage > 0) {
-      if(iDFlags & level.iDFLAGS_STUN)
+      if(iDFlags &level.iDFLAGS_STUN)
         typeHit = "stun";
       else if(victim hasPerk("specialty_armorvest", true) || (isExplosiveDamage(sMeansOfDeath) && victim _hasPerk("_specialty_blastshield")))
         typeHit = "hitBodyArmor";
@@ -1360,7 +1360,7 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
 }
 
 finishPlayerDamageWrapper(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, psOffsetTime, stunFraction) {
-  if((self isUsingRemote()) && (iDamage >= self.health) && !(iDFlags & level.iDFLAGS_STUN)) {
+  if((self isUsingRemote()) && (iDamage >= self.health) && !(iDFlags &level.iDFLAGS_STUN)) {
     if(!isDefined(vDir))
       vDir = (0, 0, 0);
 
@@ -1581,7 +1581,7 @@ lastStandTimer(delay, isFinalStand) {
 
   if(!isFinalStand && !level.dieHardMode && (!isDefined(self.inC4Death) || !self.inC4Death)) {
     self thread lastStandAllowSuicide();
-    self setLowerMessage("last_stand", & "PLATFORM_COWARDS_WAY_OUT");
+    self setLowerMessage("last_stand", &"PLATFORM_COWARDS_WAY_OUT");
     self thread lastStandKeepOverlay();
   }
 

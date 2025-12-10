@@ -36,10 +36,10 @@ watch_dpad() {
 
     var_00 = func_9B93();
     if(var_00 == "has_trap") {
-      scripts\cp\utility::setlowermessage("window", & "ZOMBIE_CRAFTING_SOUVENIRS_WINDOW_HAS_TRAP", 4);
+      scripts\cp\utility::setlowermessage("window", &"ZOMBIE_CRAFTING_SOUVENIRS_WINDOW_HAS_TRAP", 4);
       continue;
     } else if(var_00 == "not_window") {
-      scripts\cp\utility::setlowermessage("not_window", & "ZOMBIE_CRAFTING_SOUVENIRS_NEAR_WINDOW", 4);
+      scripts\cp\utility::setlowermessage("not_window", &"ZOMBIE_CRAFTING_SOUVENIRS_NEAR_WINDOW", 4);
       continue;
     } else {
       break;

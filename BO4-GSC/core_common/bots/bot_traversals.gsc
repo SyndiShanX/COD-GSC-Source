@@ -21,7 +21,7 @@ callback_botentereduseredge(startnode, endnode, mantlenode, startpos, endpos, ma
   var_75e8e8e8 = startnode.type !== "Volume";
 
   if(var_75e8e8e8) {
-    if((startnode.type === "Begin" || startnode.type === "End") && isDefined(startnode.spawnflags) && startnode.spawnflags&134217728) {
+    if((startnode.type === "Begin" || startnode.type === "End") && isDefined(startnode.spawnflags) && startnode.spawnflags& 134217728) {
       var_75e8e8e8 = 0;
     }
   }

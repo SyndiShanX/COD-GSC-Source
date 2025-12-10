@@ -124,12 +124,12 @@ function subway_dialog() {
 function hendricks_swimming() {
   level scene::init("cin_bla_08_02_subway_vign_swim_first_section");
   trigger::wait_till("trig_hendricks_swim");
-  level scene::add_scene_func("cin_bla_08_02_subway_vign_swim_first_section", & function_561cae8a, "play");
+  level scene::add_scene_func("cin_bla_08_02_subway_vign_swim_first_section", &function_561cae8a, "play");
   level scene::play("cin_bla_08_02_subway_vign_swim_first_section");
   level flag::wait_till("subway_second_section");
   level scene::play("cin_bla_08_02_subway_vign_swim_second_section");
   level flag::wait_till("subway_third_section");
-  level scene::add_scene_func("cin_bla_08_02_subway_vign_swim_third_section", & function_5f8ce82c, "done");
+  level scene::add_scene_func("cin_bla_08_02_subway_vign_swim_third_section", &function_5f8ce82c, "done");
   level scene::play("cin_bla_08_02_subway_vign_swim_third_section");
   if(!level flag::get("flag_waypoint_subway01")) {
     trigger::use("trig_hendricks_color_b2", "targetname");
@@ -152,7 +152,7 @@ function function_5f8ce82c(a_ents) {
 function subway_floating_bodies() {
   level endon("out_of_water");
   e_floating_bodies = getEntArray("subway_corpse_floating", "targetname");
-  array::thread_all(e_floating_bodies, & subway_floating_bodies_move);
+  array::thread_all(e_floating_bodies, &subway_floating_bodies_move);
 }
 
 function subway_floating_bodies_move() {

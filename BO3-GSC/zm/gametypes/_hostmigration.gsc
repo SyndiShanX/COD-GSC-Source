@@ -243,7 +243,7 @@ function matchstarttimerconsole(type, duration) {
 }
 
 function matchstartblacscreen(duration) {
-  array::thread_all(getplayers(), & zm::initialblack);
+  array::thread_all(getplayers(), &zm::initialblack);
   fade_time = 4;
   n_black_screen = duration - fade_time;
   level thread zm::fade_out_intro_screen_zm(n_black_screen, fade_time, 1);

@@ -281,14 +281,14 @@ function waterfall_trap_think() {
       waterfall_trap_on();
       wait(0.5);
       who.used_waterfall = 0;
-      array::thread_all(self.trap_damage, & waterfall_trap_damage);
+      array::thread_all(self.trap_damage, &waterfall_trap_damage);
       activetime = 5.5;
-      array::thread_all(self.var_41f396e4, & waterfall_screen_fx, activetime);
+      array::thread_all(self.var_41f396e4, &waterfall_screen_fx, activetime);
       self thread waterfall_screen_shake(activetime);
       wait(activetime);
       self notify("trap_off");
       self.usetrigger sethintstring(&"ZM_TEMPLE_WATER_TRAP_COOL");
-      array::thread_all(self.var_41f396e4, & function_a6e2b85f);
+      array::thread_all(self.var_41f396e4, &function_a6e2b85f);
       waterfall_trap_off();
       array::notify_all(self.trap_damage, "trap_off");
       wait(30);
@@ -483,7 +483,7 @@ function init_maze_trap() {
     level.mazewalls[level.mazewalls.size] = mazewall;
   }
   maze_show_starts();
-  array::thread_all(level.mazecells, & maze_cell_watch);
+  array::thread_all(level.mazecells, &maze_cell_watch);
 }
 
 function init_maze_paths() {
@@ -1003,7 +1003,7 @@ function maze_vibrate_active_floors(time) {
         players = getplayers();
         for(w = 0; w < players.size; w++) {
           if(players[w] istouching(cell.trigger)) {
-            cell.trigger thread trigger::function_d1278be0(players[w], & temple_maze_player_vibrate_on, & temple_maze_player_vibrate_off);
+            cell.trigger thread trigger::function_d1278be0(players[w], &temple_maze_player_vibrate_on, &temple_maze_player_vibrate_off);
           }
         }
       }
@@ -1148,9 +1148,9 @@ function zombie_waterfall_knockdown(entity) {
 
 function override_thundergun_damage_func(player, gib) {
   dmg_point = struct::get("waterfall_dmg_point", "script_noteworthy");
-  self.thundergun_handle_pain_notetracks = & handle_knockdown_pain_notetracks;
+  self.thundergun_handle_pain_notetracks = &handle_knockdown_pain_notetracks;
   self dodamage(1, dmg_point.origin);
-  self animcustom( & zm_weap_thundergun::playthundergunpainanim);
+  self animcustom(&zm_weap_thundergun::playthundergunpainanim);
 }
 
 function handle_knockdown_pain_notetracks(note) {}

@@ -123,7 +123,7 @@ onDamage(eInflictor, eAttacker, iThatDamage, iDFlags, sMeansOfDeath, sWeapon, vP
 DoPain(iDFlags, damageDirection, hitLocation, iDamage, sMeansOfDeath) {
   self endon("killanimscript");
 
-  is_stun = (iDFlags & level.iDFLAGS_STUN);
+  is_stun = (iDFlags &level.iDFLAGS_STUN);
 
   if(sMeansOfDeath == "MOD_MELEE" || is_stun) {
     animState = "pain_pushback";

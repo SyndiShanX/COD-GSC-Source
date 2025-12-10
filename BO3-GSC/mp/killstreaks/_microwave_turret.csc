@@ -11,13 +11,13 @@
 #namespace microwave_turret;
 
 function autoexec __init__sytem__() {
-  system::register("microwave_turret", & __init__, undefined, undefined);
+  system::register("microwave_turret", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("vehicle", "turret_microwave_open", 1, 1, "int", & microwave_open, 0, 0);
-  clientfield::register("scriptmover", "turret_microwave_init", 1, 1, "int", & microwave_init_anim, 0, 0);
-  clientfield::register("scriptmover", "turret_microwave_close", 1, 1, "int", & microwave_close_anim, 0, 0);
+  clientfield::register("vehicle", "turret_microwave_open", 1, 1, "int", &microwave_open, 0, 0);
+  clientfield::register("scriptmover", "turret_microwave_init", 1, 1, "int", &microwave_init_anim, 0, 0);
+  clientfield::register("scriptmover", "turret_microwave_close", 1, 1, "int", &microwave_close_anim, 0, 0);
 }
 
 function turret_microwave_sounds(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

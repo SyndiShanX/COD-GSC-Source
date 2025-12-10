@@ -52,6 +52,6 @@ function createblackboardforentity(entity) {
     entity.__blackboard = [];
   }
   if(!isDefined(level._setblackboardattributefunc)) {
-    level._setblackboardattributefunc = & setblackboardattribute;
+    level._setblackboardattributefunc = &setblackboardattribute;
   }
 }

@@ -17,14 +17,14 @@
 #namespace zm_aat_blast_furnace;
 
 function autoexec __init__sytem__() {
-  system::register("zm_aat_blast_furnace", & __init__, undefined, "aat");
+  system::register("zm_aat_blast_furnace", &__init__, undefined, "aat");
 }
 
 function __init__() {
   if(!(isDefined(level.aat_in_use) && level.aat_in_use)) {
     return;
   }
-  aat::register("zm_aat_blast_furnace", 0.15, 0, 15, 0, 1, & result, "t7_hud_zm_aat_blastfurnace", "wpn_aat_blast_furnace_plr");
+  aat::register("zm_aat_blast_furnace", 0.15, 0, 15, 0, 1, &result, "t7_hud_zm_aat_blastfurnace", "wpn_aat_blast_furnace_plr");
   clientfield::register("actor", "zm_aat_blast_furnace" + "_explosion", 1, 1, "counter");
   clientfield::register("vehicle", "zm_aat_blast_furnace" + "_explosion_vehicle", 1, 1, "counter");
   clientfield::register("actor", "zm_aat_blast_furnace" + "_burn", 1, 1, "counter");
@@ -71,7 +71,7 @@ function blast_furnace_explosion(e_attacker, w_weapon) {
     wait(0.25);
     a_e_blasted_zombies = array::remove_dead(a_e_blasted_zombies);
     a_e_blasted_zombies = array::remove_undefined(a_e_blasted_zombies);
-    array::thread_all(a_e_blasted_zombies, & blast_furnace_zombie_burn, e_attacker, w_weapon);
+    array::thread_all(a_e_blasted_zombies, &blast_furnace_zombie_burn, e_attacker, w_weapon);
   }
 }
 

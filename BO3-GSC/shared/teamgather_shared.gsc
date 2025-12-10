@@ -118,7 +118,7 @@ class cteamgather {
     x_off = 0;
     y_off = y_start + 80;
     go_hud_elem = e_player __create_client_hud_elem("center", "middle", "center", "top", x_off, y_off, n_font_scale, v_font_color, "");
-    a_start_in = array("0", & "TEAM_GATHER_START_IN_1", & "TEAM_GATHER_START_IN_2", & "TEAM_GATHER_START_IN_3", & "TEAM_GATHER_START_IN_4", & "TEAM_GATHER_START_IN_5", & "TEAM_GATHER_START_IN_6", & "TEAM_GATHER_START_IN_7", & "TEAM_GATHER_START_IN_8", & "TEAM_GATHER_START_IN_9", & "TEAM_GATHER_START_IN_10");
+    a_start_in = array("0", &"TEAM_GATHER_START_IN_1", &"TEAM_GATHER_START_IN_2", &"TEAM_GATHER_START_IN_3", &"TEAM_GATHER_START_IN_4", &"TEAM_GATHER_START_IN_5", &"TEAM_GATHER_START_IN_6", &"TEAM_GATHER_START_IN_7", &"TEAM_GATHER_START_IN_8", &"TEAM_GATHER_START_IN_9", &"TEAM_GATHER_START_IN_10");
     while(!is_teamgather_complete()) {
       gathered_hud_elem settext(&"TEAM_GATHER_NUM_PLAYERS", int(m_num_players_ready), int(m_num_players));
       time_remaining = get_time_remaining_in_seconds();
@@ -141,14 +141,14 @@ class cteamgather {
     y_start = 180;
     x_off = 0;
     y_off = y_start;
-    gather_hud_elem = e_player __create_client_hud_elem("center", "middle", "center", "top", x_off, y_off, n_font_scale, v_font_color, & "TEAM_GATHER_TEAM_STEALTH_ENTER");
+    gather_hud_elem = e_player __create_client_hud_elem("center", "middle", "center", "top", x_off, y_off, n_font_scale, v_font_color, &"TEAM_GATHER_TEAM_STEALTH_ENTER");
     x_off = 0;
     y_off = y_start + 100;
     ready_hud_elem = e_player __create_client_hud_elem("center", "middle", "center", "top", x_off, y_off, n_font_scale, v_font_color, "");
     x_off = -45;
     y_off = y_start + 130;
     execute_hud_elem = e_player __create_client_hud_elem("left", "middle", "center", "top", x_off, y_off, n_font_scale, v_font_color, "");
-    a_time_remaining = array("0", & "TEAM_GATHER_TIME_REMAINING_1", & "TEAM_GATHER_TIME_REMAINING_2", & "TEAM_GATHER_TIME_REMAINING_3", & "TEAM_GATHER_TIME_REMAINING_4", & "TEAM_GATHER_TIME_REMAINING_5", & "TEAM_GATHER_TIME_REMAINING_6", & "TEAM_GATHER_TIME_REMAINING_7", & "TEAM_GATHER_TIME_REMAINING_8", & "TEAM_GATHER_TIME_REMAINING_9", & "TEAM_GATHER_TIME_REMAINING_10");
+    a_time_remaining = array("0", &"TEAM_GATHER_TIME_REMAINING_1", &"TEAM_GATHER_TIME_REMAINING_2", &"TEAM_GATHER_TIME_REMAINING_3", &"TEAM_GATHER_TIME_REMAINING_4", &"TEAM_GATHER_TIME_REMAINING_5", &"TEAM_GATHER_TIME_REMAINING_6", &"TEAM_GATHER_TIME_REMAINING_7", &"TEAM_GATHER_TIME_REMAINING_8", &"TEAM_GATHER_TIME_REMAINING_9", &"TEAM_GATHER_TIME_REMAINING_10");
     while(!is_teamgather_complete()) {
       ready_hud_elem settext(&"TEAM_GATHER_PLAYERS_READY", m_num_players_ready, m_num_players);
       time_remaining = get_time_remaining_in_seconds();
@@ -407,7 +407,7 @@ class cteamgather {
     e_object gameobjects::set_use_text("");
     e_object gameobjects::set_use_hint_text(str_use_hint);
     e_object gameobjects::set_visible_team("any");
-    e_object.onuse = & onusegameobject;
+    e_object.onuse = &onusegameobject;
     e_object gameobjects::set_3d_icon("friendly", "T7_hud_prompt_press_64");
     e_object gameobjects::set_3d_icon("enemy", "T7_hud_prompt_press_64");
     e_object gameobjects::set_2d_icon("friendly", "T7_hud_prompt_press_64");
@@ -422,7 +422,7 @@ class cteamgather {
     a_players = get_players_playing();
     for(i = 0; i < a_players.size; i++) {
       e_player = a_players[i];
-      e_player.failure_hud_elem = e_player __create_client_hud_elem("center", "middle", "center", "top", x_off, y_off, n_font_scale, v_font_color, & "TEAM_GATHER_TEAM_EVENT_ABORTED");
+      e_player.failure_hud_elem = e_player __create_client_hud_elem("center", "middle", "center", "top", x_off, y_off, n_font_scale, v_font_color, &"TEAM_GATHER_TEAM_EVENT_ABORTED");
     }
     wait(0);
     for(i = 0; i < a_players.size; i++) {
@@ -438,7 +438,7 @@ class cteamgather {
       a_players = get_players_playing();
       for(i = 0; i < a_players.size; i++) {
         e_player = a_players[i];
-        e_player.success_hud_elem = e_player __create_client_hud_elem("center", "middle", "center", "top", x_off, y_off, n_font_scale, v_font_color, & "TEAM_GATHER_GATHER_SUCCESS");
+        e_player.success_hud_elem = e_player __create_client_hud_elem("center", "middle", "center", "top", x_off, y_off, n_font_scale, v_font_color, &"TEAM_GATHER_GATHER_SUCCESS");
       }
       wait(0);
       for(i = 0; i < a_players.size; i++) {
@@ -453,7 +453,7 @@ class cteamgather {
     m_v_interact_angles = v_interact_angles;
     m_e_interact_entity = e_interact_entity;
     m_v_gather_position = v_gather_pos;
-    e_gameobject = setup_gameobject(v_interact_pos, undefined, & "TEAM_GATHER_HOLD_FOR_TEAM_ENTER", m_e_interact_entity);
+    e_gameobject = setup_gameobject(v_interact_pos, undefined, &"TEAM_GATHER_HOLD_FOR_TEAM_ENTER", m_e_interact_entity);
     e_gameobject.c_teamgather = self;
     e_gameobject waittill("player_interaction");
     e_gameobject gameobjects::disable_object();

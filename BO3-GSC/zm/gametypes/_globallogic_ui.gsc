@@ -15,16 +15,16 @@
 #namespace globallogic_ui;
 
 function autoexec __init__sytem__() {
-  system::register("globallogic_ui", & __init__, undefined, undefined);
+  system::register("globallogic_ui", &__init__, undefined, undefined);
 }
 
 function __init__() {}
 
 function setupcallbacks() {
-  level.autoassign = & menuautoassign;
-  level.spectator = & menuspectator;
-  level.curclass = & menuclass;
-  level.teammenu = & menuteam;
+  level.autoassign = &menuautoassign;
+  level.spectator = &menuspectator;
+  level.curclass = &menuclass;
+  level.teammenu = &menuteam;
 }
 
 function freegameplayhudelems() {

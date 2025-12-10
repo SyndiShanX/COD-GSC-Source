@@ -250,7 +250,7 @@ function private _hasgibdef(entity) {
 function private _hasgibpieces(entity, gibflag) {
   hasgibpieces = 0;
   gibstate = _getgibbedstate(entity);
-  entity.gib_state = gibstate | (gibflag & (512 - 1));
+  entity.gib_state = gibstate | (gibflag &(512 - 1));
   if(isDefined(_getgibbedtorsomodel(entity)) && isDefined(_getgibbedlegmodel(entity))) {
     hasgibpieces = 1;
   }
@@ -263,9 +263,9 @@ function private _setgibbed(entity, gibflag, gibdir) {
     angles = vectortoangles(gibdir);
     yaw = angles[1];
     yaw_bits = getbitsforangle(yaw, 3);
-    entity.gib_state = (_getgibbedstate(entity) | (gibflag & (512 - 1))) + (yaw_bits << 9);
+    entity.gib_state = (_getgibbedstate(entity) | (gibflag &(512 - 1))) + (yaw_bits << 9);
   } else {
-    entity.gib_state = _getgibbedstate(entity) | (gibflag & (512 - 1));
+    entity.gib_state = _getgibbedstate(entity) | (gibflag &(512 - 1));
   }
   entity.gibbed = 1;
   entity clientfield::set("gib_state", entity.gib_state);
@@ -297,7 +297,7 @@ function copygibstate(originalentity, newentity) {
 }
 
 function isgibbed(entity, gibflag) {
-  return _getgibbedstate(entity) & gibflag;
+  return _getgibbedstate(entity) &gibflag;
 }
 
 function gibhat(entity) {
@@ -457,7 +457,7 @@ function togglespawngibs(entity, shouldspawngibs) {
   if(!shouldspawngibs) {
     entity.gib_state = _getgibbedstate(entity) | 1;
   } else {
-    entity.gib_state = _getgibbedstate(entity) & -2;
+    entity.gib_state = _getgibbedstate(entity) &-2;
   }
   entity clientfield::set("gib_state", entity.gib_state);
 }

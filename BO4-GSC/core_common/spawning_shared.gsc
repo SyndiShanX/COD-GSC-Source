@@ -713,7 +713,7 @@ spawn_exploration_wait_for_one_frame() {
 }
 
 private has_player_explored_spawn_point(spawnpoint, player) {
-  return spawnpoint.explored&1 << player getentitynumber();
+  return spawnpoint.explored& 1 << player getentitynumber();
 }
 
 private set_player_explored_spawn_point(spawnpoint, player) {

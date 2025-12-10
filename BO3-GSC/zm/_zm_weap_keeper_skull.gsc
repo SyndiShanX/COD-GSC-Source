@@ -36,7 +36,7 @@
 #namespace keeper_skull;
 
 function autoexec __init__sytem__() {
-  system::register("keeper_skull", & __init__, & __main__, undefined);
+  system::register("keeper_skull", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -56,7 +56,7 @@ function __init__() {
 }
 
 function __main__() {
-  callback::on_connect( & function_3028b9ff);
+  callback::on_connect(&function_3028b9ff);
 }
 
 function function_3028b9ff() {

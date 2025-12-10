@@ -83,7 +83,7 @@ main() {
     setSavedDvar("sv_saveOnStartMap", false);
     imagename = "levelshots / autosave / autosave_" + level.script + "start";
     // string not found for AUTOSAVE_LEVELSTART
-    SaveGame("levelstart", & "AUTOSAVE_LEVELSTART", imagename, true);
+    SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", imagename, true);
     maps\_load::set_player_viewhand_model("viewhands_player_us_army");
   }
 

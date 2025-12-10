@@ -805,7 +805,7 @@ drone_bloodfx(var_0) {
 
 drone_removename() {
   self.name = "";
-  self setlookattext("", & "");
+  self setlookattext("", &"");
 }
 
 isdrone() {
@@ -830,5 +830,5 @@ give_drone_deathanim() {
 
 drone_setname(var_0) {
   self.name = var_0;
-  self setlookattext(var_0, & "");
+  self setlookattext(var_0, &"");
 }

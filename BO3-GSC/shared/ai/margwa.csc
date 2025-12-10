@@ -11,23 +11,23 @@
 #namespace margwa;
 
 function autoexec main() {
-  clientfield::register("actor", "margwa_head_left", 1, 2, "int", & margwaclientutils::margwaheadleftcallback, 0, 0);
-  clientfield::register("actor", "margwa_head_mid", 1, 2, "int", & margwaclientutils::margwaheadmidcallback, 0, 0);
-  clientfield::register("actor", "margwa_head_right", 1, 2, "int", & margwaclientutils::margwaheadrightcallback, 0, 0);
-  clientfield::register("actor", "margwa_fx_in", 1, 1, "counter", & margwaclientutils::margwafxincallback, 0, 0);
-  clientfield::register("actor", "margwa_fx_out", 1, 1, "counter", & margwaclientutils::margwafxoutcallback, 0, 0);
-  clientfield::register("actor", "margwa_fx_spawn", 1, 1, "counter", & margwaclientutils::margwafxspawncallback, 0, 0);
-  clientfield::register("actor", "margwa_smash", 1, 1, "counter", & margwaclientutils::margwasmashcallback, 0, 0);
-  clientfield::register("actor", "margwa_head_left_hit", 1, 1, "counter", & margwaclientutils::margwalefthitcallback, 0, 0);
-  clientfield::register("actor", "margwa_head_mid_hit", 1, 1, "counter", & margwaclientutils::margwamidhitcallback, 0, 0);
-  clientfield::register("actor", "margwa_head_right_hit", 1, 1, "counter", & margwaclientutils::margwarighthitcallback, 0, 0);
-  clientfield::register("actor", "margwa_head_killed", 1, 2, "int", & margwaclientutils::margwaheadkilledcallback, 0, 0);
-  clientfield::register("actor", "margwa_jaw", 1, 6, "int", & margwaclientutils::margwajawcallback, 0, 0);
-  clientfield::register("toplayer", "margwa_head_explosion", 1, 1, "counter", & margwaclientutils::margwaheadexplosion, 0, 0);
-  clientfield::register("scriptmover", "margwa_fx_travel", 1, 1, "int", & margwaclientutils::margwafxtravelcallback, 0, 0);
-  clientfield::register("scriptmover", "margwa_fx_travel_tell", 1, 1, "int", & margwaclientutils::margwafxtraveltellcallback, 0, 0);
+  clientfield::register("actor", "margwa_head_left", 1, 2, "int", &margwaclientutils::margwaheadleftcallback, 0, 0);
+  clientfield::register("actor", "margwa_head_mid", 1, 2, "int", &margwaclientutils::margwaheadmidcallback, 0, 0);
+  clientfield::register("actor", "margwa_head_right", 1, 2, "int", &margwaclientutils::margwaheadrightcallback, 0, 0);
+  clientfield::register("actor", "margwa_fx_in", 1, 1, "counter", &margwaclientutils::margwafxincallback, 0, 0);
+  clientfield::register("actor", "margwa_fx_out", 1, 1, "counter", &margwaclientutils::margwafxoutcallback, 0, 0);
+  clientfield::register("actor", "margwa_fx_spawn", 1, 1, "counter", &margwaclientutils::margwafxspawncallback, 0, 0);
+  clientfield::register("actor", "margwa_smash", 1, 1, "counter", &margwaclientutils::margwasmashcallback, 0, 0);
+  clientfield::register("actor", "margwa_head_left_hit", 1, 1, "counter", &margwaclientutils::margwalefthitcallback, 0, 0);
+  clientfield::register("actor", "margwa_head_mid_hit", 1, 1, "counter", &margwaclientutils::margwamidhitcallback, 0, 0);
+  clientfield::register("actor", "margwa_head_right_hit", 1, 1, "counter", &margwaclientutils::margwarighthitcallback, 0, 0);
+  clientfield::register("actor", "margwa_head_killed", 1, 2, "int", &margwaclientutils::margwaheadkilledcallback, 0, 0);
+  clientfield::register("actor", "margwa_jaw", 1, 6, "int", &margwaclientutils::margwajawcallback, 0, 0);
+  clientfield::register("toplayer", "margwa_head_explosion", 1, 1, "counter", &margwaclientutils::margwaheadexplosion, 0, 0);
+  clientfield::register("scriptmover", "margwa_fx_travel", 1, 1, "int", &margwaclientutils::margwafxtravelcallback, 0, 0);
+  clientfield::register("scriptmover", "margwa_fx_travel_tell", 1, 1, "int", &margwaclientutils::margwafxtraveltellcallback, 0, 0);
   clientfield::register("actor", "supermargwa", 1, 1, "int", undefined, 0, 0);
-  ai::add_archetype_spawn_function("margwa", & margwaclientutils::margwaspawn);
+  ai::add_archetype_spawn_function("margwa", &margwaclientutils::margwaspawn);
   level._jaw = [];
   level._jaw[1] = "idle_1";
   level._jaw[3] = "idle_pain_head_l_explode";
@@ -78,7 +78,7 @@ function private margwaspawn(localclientnum) {
     self setanim(lefttentacle, 1, 0.2, 1);
     self setanim(righttentacle, 1, 0.2, 1);
   }
-  level._footstepcbfuncs[self.archetype] = & margwaprocessfootstep;
+  level._footstepcbfuncs[self.archetype] = &margwaprocessfootstep;
   self.heads = [];
   self.heads[1] = spawnStruct();
   self.heads[1].index = 1;

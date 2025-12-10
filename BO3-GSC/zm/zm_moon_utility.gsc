@@ -41,7 +41,7 @@ function init_zombie_airlocks() {
   for(i = 0; i < airlock_buys.size; i++) {
     airlock_buys[i] thread airlock_buy_init();
   }
-  level thread zm_hackables_doors::hack_doors("zombie_airlock_hackable", & moon_door_opened);
+  level thread zm_hackables_doors::hack_doors("zombie_airlock_hackable", &moon_door_opened);
   airlock_hacks = getEntArray("zombie_airlock_hackable", "targetname");
   for(i = 0; i < airlock_hacks.size; i++) {
     airlock_hacks[i] thread airlock_hack_init();
@@ -491,7 +491,7 @@ function hacker_location_random_init() {
   if(hacker_tool_array.size > 1) {
     hacker_pos = hacker_tool_array[randomint(hacker_tool_array.size)];
     arrayremovevalue(hacker_tool_array, hacker_pos);
-    array::thread_all(hacker_tool_array, & hacker_position_cleanup);
+    array::thread_all(hacker_tool_array, &hacker_position_cleanup);
   }
 }
 
@@ -507,7 +507,7 @@ function hacker_position_cleanup() {
 
 function moon_glass_breach_init() {
   level.glass = getEntArray("moon_breach_glass", "targetname");
-  array::thread_all(level.glass, & glass_breach_think);
+  array::thread_all(level.glass, &glass_breach_think);
   level.var_4fd08591 = [];
   level.var_4fd08591["bridge_zone"] = 1;
   level.var_4fd08591["generator_exit_east_zone"] = 1;
@@ -668,7 +668,7 @@ function function_f1daf14e(str_area) {
 
 function zombie_moon_receiving_hatch_init() {
   hatches = getEntArray("recieving_hatch", "targetname");
-  array::thread_all(hatches, & zombie_moon_hatch);
+  array::thread_all(hatches, &zombie_moon_hatch);
   level thread function_8ceda02();
 }
 

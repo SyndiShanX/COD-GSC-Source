@@ -119,7 +119,7 @@ function main() {
   level._no_equipment_activated_clientfield = 1;
   level._no_navcards = 1;
   level._wallbuy_override_num_bits = 1;
-  level.player_out_of_playable_area_monitor_callback = & player_out_of_playable_area_override;
+  level.player_out_of_playable_area_monitor_callback = &player_out_of_playable_area_override;
   zm_tomb_fx::main();
   level.default_game_mode = "zclassic";
   level.default_start_location = "tomb";
@@ -137,9 +137,9 @@ function main() {
   level.zombiemode = 1;
   level._no_water_risers = 1;
   level.riser_fx_on_client = 1;
-  level._round_start_func = & zm::round_start;
+  level._round_start_func = &zm::round_start;
   level.n_active_ragdolls = 0;
-  level.ragdoll_limit_check = & zm_tomb_utility::ragdoll_attempt;
+  level.ragdoll_limit_check = &zm_tomb_utility::ragdoll_attempt;
   level._limited_equipment = [];
   level._limited_equipment[level._limited_equipment.size] = getweapon("equip_dieseldrone");
   level._limited_equipment[level._limited_equipment.size] = getweapon("staff_air");
@@ -147,34 +147,34 @@ function main() {
   level._limited_equipment[level._limited_equipment.size] = getweapon("staff_lightning");
   level._limited_equipment[level._limited_equipment.size] = getweapon("staff_water");
   level.a_func_vehicle_damage_override = [];
-  level.callbackvehicledamage = & tomb_vehicle_damage_override_wrapper;
-  level.level_specific_stats_init = & init_tomb_stats;
+  level.callbackvehicledamage = &tomb_vehicle_damage_override_wrapper;
+  level.level_specific_stats_init = &init_tomb_stats;
   setdvar("zombiemode_path_minz_bias", 13);
   setdvar("bg_chargeShotExponentialAmmoPerChargeLevel", 1);
   setdvar("dlc2_fix_scripted_looping_linked_animations", 1);
   level thread setup_tomb_spawn_groups();
   spawner_main_chamber_capture_zombies = getent("chamber_capture_zombie_spawner", "targetname");
-  spawner_main_chamber_capture_zombies spawner::add_spawn_function( & chamber_capture_zombie_spawn_init);
+  spawner_main_chamber_capture_zombies spawner::add_spawn_function(&chamber_capture_zombie_spawn_init);
   level.has_richtofen = 0;
-  level.givecustomcharacters = & give_personality_characters;
-  level.setupcustomcharacterexerts = & zm_tomb_vo::setup_personality_character_exerts;
+  level.givecustomcharacters = &give_personality_characters;
+  level.setupcustomcharacterexerts = &zm_tomb_vo::setup_personality_character_exerts;
   initcharacterstartindex();
   level thread zm_tomb_vo::init_flags();
-  level._zmbvoxlevelspecific = & zm_tomb_vo::init_level_specific_audio;
-  level.custom_player_fake_death = & zm_player_fake_death;
-  level.custom_player_fake_death_cleanup = & zm_player_fake_death_cleanup;
-  level.custom_player_track_ammo_count = & tomb_custom_player_track_ammo_count;
-  level.zombie_init_done = & zombie_init_done;
-  level._zombies_round_spawn_failsafe = & tomb_round_spawn_failsafe;
+  level._zmbvoxlevelspecific = &zm_tomb_vo::init_level_specific_audio;
+  level.custom_player_fake_death = &zm_player_fake_death;
+  level.custom_player_fake_death_cleanup = &zm_player_fake_death_cleanup;
+  level.custom_player_track_ammo_count = &tomb_custom_player_track_ammo_count;
+  level.zombie_init_done = &zombie_init_done;
+  level._zombies_round_spawn_failsafe = &tomb_round_spawn_failsafe;
   level.random_pandora_box_start = 1;
-  level.custom_electric_cherry_perk_threads = zm_perks::register_perk_threads("specialty_electriccherry", & tomb_custom_electric_cherry_reload_attack, & zm_perk_electric_cherry::electric_cherry_perk_lost);
-  level.custom_laststand_func = & tomb_custom_electric_cherry_laststand;
-  level.perk_random_vo_func_usemachine = & zm_tomb_vo::wunderfizz_used_vo;
-  level._custom_turn_packapunch_on = & zm_tomb_capture_zones::pack_a_punch_dummy_init;
+  level.custom_electric_cherry_perk_threads = zm_perks::register_perk_threads("specialty_electriccherry", &tomb_custom_electric_cherry_reload_attack, &zm_perk_electric_cherry::electric_cherry_perk_lost);
+  level.custom_laststand_func = &tomb_custom_electric_cherry_laststand;
+  level.perk_random_vo_func_usemachine = &zm_tomb_vo::wunderfizz_used_vo;
+  level._custom_turn_packapunch_on = &zm_tomb_capture_zones::pack_a_punch_dummy_init;
   zm_pap_util::set_interaction_trigger_radius(80);
-  level.register_offhand_weapons_for_level_defaults_override = & offhand_weapon_overrride;
-  level.zombiemode_offhand_weapon_give_override = & offhand_weapon_give_override;
-  level._zombie_custom_add_weapons = & custom_add_weapons;
+  level.register_offhand_weapons_for_level_defaults_override = &offhand_weapon_overrride;
+  level.zombiemode_offhand_weapon_give_override = &offhand_weapon_give_override;
+  level._zombie_custom_add_weapons = &custom_add_weapons;
   level._allow_melee_weapon_switching = 1;
   zm_placeable_mine::add_weapon_to_mine_slot("equip_dieseldrone");
   level.custom_ai_type = [];
@@ -189,15 +189,15 @@ function main() {
   } else {
     level.optimise_for_splitscreen = 0;
   }
-  level.var_7c29c50e = & function_56848b85;
-  level.special_weapon_magicbox_check = & tomb_special_weapon_magicbox_check;
+  level.var_7c29c50e = &function_56848b85;
+  level.special_weapon_magicbox_check = &tomb_special_weapon_magicbox_check;
   level.dont_unset_perk_when_machine_paused = 1;
   tomb_register_client_fields();
   register_burn_overlay();
   zm_tomb_tank::init();
   zm_tomb_giant_robot::init_giant_robot_glows();
   zm_tomb_giant_robot::init_giant_robot();
-  level.can_revive = & zm_tomb_giant_robot::tomb_can_revive_override;
+  level.can_revive = &zm_tomb_giant_robot::tomb_can_revive_override;
   zm_tomb_capture_zones::init_capture_zones();
   zm_tomb_ambient_scripts::init_tomb_ambient_scripts();
   zm_tomb_dig::init_shovel();
@@ -221,20 +221,20 @@ function main() {
   level thread setupmusic();
   zm_tomb_amb::main();
   level thread zm_tomb_ee_main::main();
-  level.callbackactordamage = & tomb_actor_damage_override_wrapper;
-  level._weaponobjects_on_player_connect_override = & tomb_weaponobjects_on_player_connect_override;
-  zm_spawner::register_zombie_death_event_callback( & tomb_zombie_death_event_callback);
-  level.player_intersection_tracker_override = & tomb_player_intersection_tracker_override;
+  level.callbackactordamage = &tomb_actor_damage_override_wrapper;
+  level._weaponobjects_on_player_connect_override = &tomb_weaponobjects_on_player_connect_override;
+  zm_spawner::register_zombie_death_event_callback(&tomb_zombie_death_event_callback);
+  level.player_intersection_tracker_override = &tomb_player_intersection_tracker_override;
   _zm_weap_cymbal_monkey::init();
   level._melee_weapons = [];
   level.a_e_slow_areas = getEntArray("player_slow_area", "targetname");
   level thread zm_tomb_mech::init();
   level.n_crystals_pickedup = 0;
   level thread zm_tomb_main_quest::main_quest_init();
-  level.closest_player_override = & tomb_closest_player_override;
-  level.validate_enemy_path_length = & tomb_validate_enemy_path_length;
+  level.closest_player_override = &tomb_closest_player_override;
+  level.validate_enemy_path_length = &tomb_validate_enemy_path_length;
   level.zones = [];
-  level.zone_manager_init_func = & working_zone_init;
+  level.zone_manager_init_func = &working_zone_init;
   init_zones[0] = "zone_start";
   level thread zm_zonemgr::manage_zones(init_zones);
   if(isDefined(level.optimise_for_splitscreen) && level.optimise_for_splitscreen) {
@@ -255,10 +255,10 @@ function main() {
   level thread zm::last_stand_pistol_rank_init();
   level thread drop_all_barriers();
   level thread zm_tomb_utility::traversal_blocker();
-  callback::on_connect( & on_player_connect);
-  callback::on_ai_spawned( & function_7b72be0d);
-  zm::register_player_damage_callback( & tomb_player_damage_callback);
-  level.custom_get_round_enemy_array_func = & zm_tomb_get_round_enemy_array;
+  callback::on_connect(&on_player_connect);
+  callback::on_ai_spawned(&function_7b72be0d);
+  zm::register_player_damage_callback(&tomb_player_damage_callback);
+  level.custom_get_round_enemy_array_func = &zm_tomb_get_round_enemy_array;
   level flag::wait_till("start_zombie_round_logic");
   util::wait_network_frame();
   level notify("specialty_additionalprimaryweapon_power_on");
@@ -274,10 +274,10 @@ function main() {
   zm_tomb_utility::setup_devgui();
   zm_tomb_utility::init_weather_manager();
   zm_tomb_capture_zones::function_b0debead();
-  level.var_9aaae7ae = & function_869d6f66;
-  level.var_9f5c2c50 = & function_e36dbcf4;
-  level.var_2d4e3645 = & function_d9e1ec4d;
-  level.var_2d0e5eb6 = & function_2d0e5eb6;
+  level.var_9aaae7ae = &function_869d6f66;
+  level.var_9f5c2c50 = &function_e36dbcf4;
+  level.var_2d4e3645 = &function_d9e1ec4d;
+  level.var_2d0e5eb6 = &function_2d0e5eb6;
   level thread zm_tomb_ambient_scripts::function_add29756();
   level thread zm_perks::spare_change();
   zm_tomb_ffotd::main_end();
@@ -320,7 +320,7 @@ function register_burn_overlay() {
   if(!isDefined(level.vsmgr_prio_overlay_zm_transit_burn)) {
     level.vsmgr_prio_overlay_zm_transit_burn = 20;
   }
-  visionset_mgr::register_info("overlay", "zm_transit_burn", 21000, level.vsmgr_prio_overlay_zm_transit_burn, 15, 1, & visionset_mgr::duration_lerp_thread_per_player, 0);
+  visionset_mgr::register_info("overlay", "zm_transit_burn", 21000, level.vsmgr_prio_overlay_zm_transit_burn, 15, 1, &visionset_mgr::duration_lerp_thread_per_player, 0);
 }
 
 function function_2d0e5eb6() {
@@ -568,7 +568,7 @@ function function_a5d4f26d() {
 function setup_tomb_spawn_groups() {
   level.use_multiple_spawns = 1;
   level.spawner_int = 1;
-  level.fn_custom_zombie_spawner_selection = & function_df9f5719;
+  level.fn_custom_zombie_spawner_selection = &function_df9f5719;
   level waittill("start_zombie_round_logic");
 }
 
@@ -841,7 +841,7 @@ function offhand_weapon_overrride() {
   zm_utility::register_melee_weapon_for_level("bowie_knife");
   level.zombie_melee_weapon_player_init = level.weaponbasemelee;
   level.zombie_equipment_player_init = undefined;
-  level.equipment_safe_to_drop = & equipment_safe_to_drop;
+  level.equipment_safe_to_drop = &equipment_safe_to_drop;
 }
 
 function equipment_safe_to_drop(weapon) {
@@ -862,7 +862,7 @@ function offhand_weapon_give_override(str_weapon) {
 
 function tomb_weaponobjects_on_player_connect_override() {
   level.retrievable_knife_init_names = [];
-  callback::on_connect( & zm_weapons::weaponobjects_on_player_connect_override_internal);
+  callback::on_connect(&zm_weapons::weaponobjects_on_player_connect_override_internal);
 }
 
 function tomb_player_intersection_tracker_override(e_player) {
@@ -889,7 +889,7 @@ function custom_add_vox() {
 }
 
 function include_powerups() {
-  level._zombiemode_powerup_grab = & tomb_powerup_grab;
+  level._zombiemode_powerup_grab = &tomb_powerup_grab;
   setup_powerup_devgui();
   setup_oneinchpunch_devgui();
   setup_tablet_devgui();
@@ -905,7 +905,7 @@ function include_perks_in_random_rotation() {
   zm_perk_random::include_perk_in_random_rotation("specialty_additionalprimaryweapon");
   zm_perk_random::include_perk_in_random_rotation("specialty_electriccherry");
   zm_perk_random::include_perk_in_random_rotation("specialty_widowswine");
-  level.custom_random_perk_weights = & tomb_random_perk_weights;
+  level.custom_random_perk_weights = &tomb_random_perk_weights;
 }
 
 function tomb_powerup_grab(s_powerup, e_player) {
@@ -1033,8 +1033,8 @@ function watch_devgui_double_points() {
 }
 
 function setup_rex_starts() {
-  zm_utility::add_gametype("zclassic", & dummy, "zclassic", & dummy);
-  zm_utility::add_gameloc("tomb", & dummy, "tomb", & dummy);
+  zm_utility::add_gametype("zclassic", &dummy, "zclassic", &dummy);
+  zm_utility::add_gameloc("tomb", &dummy, "tomb", &dummy);
 }
 
 function dummy() {}
@@ -1521,22 +1521,22 @@ function tomb_can_track_ammo_custom(weap) {
 }
 
 function function_89182d9b() {
-  level.machine_assets["specialty_additionalprimaryweapon"].power_on_callback = & zm_tomb_capture_zones::custom_vending_power_on;
-  level.machine_assets["specialty_additionalprimaryweapon"].power_off_callback = & zm_tomb_capture_zones::custom_vending_power_off;
-  level.machine_assets["specialty_armorvest"].power_on_callback = & zm_tomb_capture_zones::custom_vending_power_on;
-  level.machine_assets["specialty_armorvest"].power_off_callback = & zm_tomb_capture_zones::custom_vending_power_off;
-  level.machine_assets["specialty_fastreload"].power_on_callback = & zm_tomb_capture_zones::custom_vending_power_on;
-  level.machine_assets["specialty_fastreload"].power_off_callback = & zm_tomb_capture_zones::custom_vending_power_off;
-  level.machine_assets["specialty_quickrevive"].power_on_callback = & zm_tomb_capture_zones::custom_vending_power_on;
-  level.machine_assets["specialty_quickrevive"].power_off_callback = & zm_tomb_capture_zones::custom_vending_power_off;
-  level.machine_assets["specialty_staminup"].power_on_callback = & zm_tomb_capture_zones::custom_vending_power_on;
-  level.machine_assets["specialty_staminup"].power_off_callback = & zm_tomb_capture_zones::custom_vending_power_off;
+  level.machine_assets["specialty_additionalprimaryweapon"].power_on_callback = &zm_tomb_capture_zones::custom_vending_power_on;
+  level.machine_assets["specialty_additionalprimaryweapon"].power_off_callback = &zm_tomb_capture_zones::custom_vending_power_off;
+  level.machine_assets["specialty_armorvest"].power_on_callback = &zm_tomb_capture_zones::custom_vending_power_on;
+  level.machine_assets["specialty_armorvest"].power_off_callback = &zm_tomb_capture_zones::custom_vending_power_off;
+  level.machine_assets["specialty_fastreload"].power_on_callback = &zm_tomb_capture_zones::custom_vending_power_on;
+  level.machine_assets["specialty_fastreload"].power_off_callback = &zm_tomb_capture_zones::custom_vending_power_off;
+  level.machine_assets["specialty_quickrevive"].power_on_callback = &zm_tomb_capture_zones::custom_vending_power_on;
+  level.machine_assets["specialty_quickrevive"].power_off_callback = &zm_tomb_capture_zones::custom_vending_power_off;
+  level.machine_assets["specialty_staminup"].power_on_callback = &zm_tomb_capture_zones::custom_vending_power_on;
+  level.machine_assets["specialty_staminup"].power_off_callback = &zm_tomb_capture_zones::custom_vending_power_off;
   level flag::wait_till("start_zombie_round_logic");
   wait(0.5);
   foreach(var_3b5635b9 in level.powered_items) {
     if(var_3b5635b9.target.script_noteworthy != "pack_a_punch") {
-      var_3b5635b9.power_on_func = & zm_tomb_capture_zones::custom_vending_power_on;
-      var_3b5635b9.power_off_func = & zm_tomb_capture_zones::custom_vending_power_off;
+      var_3b5635b9.power_on_func = &zm_tomb_capture_zones::custom_vending_power_on;
+      var_3b5635b9.power_off_func = &zm_tomb_capture_zones::custom_vending_power_off;
     }
   }
 }

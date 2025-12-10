@@ -232,7 +232,7 @@ on_agent_generic_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
     var_2 = [[level.modifyplayerdamage]](self, var_1, var_2, var_4, var_5, var_6, var_7, var_8);
 
   if(isDefined(var_1) && var_1 != self && var_2 > 0 && (!isDefined(var_8) || var_8 != "shield")) {
-    if(var_3 & level.idflags_stun)
+    if(var_3 &level.idflags_stun)
       var_12 = "stun";
     else if(!maps\mp\gametypes\_damage::shouldweaponfeedback(var_5))
       var_12 = "none";

@@ -340,7 +340,7 @@ class cdoor {
 #namespace doors;
 
 function autoexec __init__sytem__() {
-  system::register("doors", & __init__, undefined, undefined);
+  system::register("doors", &__init__, undefined, undefined);
 }
 
 function __init__() {

@@ -24,7 +24,7 @@
 #namespace zm_ai_quad;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_quad", & __init__, undefined, undefined);
+  system::register("zm_ai_quad", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -32,8 +32,8 @@ function __init__() {
   if(!isDefined(level.ai_quad_register_overlay_override) || level.ai_quad_register_overlay_override) {
     register_overlay();
   }
-  animationstatenetwork::registernotetrackhandlerfunction("quad_melee", & quadnotetrackmeleefire);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("quadDeathAction", & quaddeathaction);
+  animationstatenetwork::registernotetrackhandlerfunction("quad_melee", &quadnotetrackmeleefire);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("quadDeathAction", &quaddeathaction);
   level thread aat::register_immunity("zm_aat_dead_wire", "zombie_quad", 1, 1, 1);
   level thread aat::register_immunity("zm_aat_turned", "zombie_quad", 1, 1, 1);
 }
@@ -56,8 +56,8 @@ function quaddeathaction(entity) {
 
 function function_5af423f4() {
   level.quad_spawners = getEntArray("quad_zombie_spawner", "script_noteworthy");
-  array::thread_all(level.quad_spawners, & spawner::add_spawn_function, & quad_prespawn);
-  zm::register_custom_ai_spawn_check("quads", & quad_spawn_check, & get_quad_spawners);
+  array::thread_all(level.quad_spawners, &spawner::add_spawn_function, &quad_prespawn);
+  zm::register_custom_ai_spawn_check("quads", &quad_spawn_check, &get_quad_spawners);
 }
 
 function register_overlay() {
@@ -81,7 +81,7 @@ function quad_prespawn() {
   self.no_eye_glow = 1;
   self.no_widows_wine = 1;
   self.canbetargetedbyturnedzombies = 1;
-  self.custom_location = & quad_location;
+  self.custom_location = &quad_location;
   self zm_spawner::zombie_spawn_init(1);
   self.zombie_can_sidestep = 0;
   self.maxhealth = int(self.maxhealth * 0.75);
@@ -95,13 +95,13 @@ function quad_prespawn() {
   self.death_gas_radius = 125;
   self.death_gas_time = 7;
   if(isDefined(level.quad_explode) && level.quad_explode) {
-    self.deathfunction = & quad_post_death;
-    self.actor_killed_override = & quad_killed_override;
+    self.deathfunction = &quad_post_death;
+    self.actor_killed_override = &quad_killed_override;
   }
   self set_default_attack_properties();
-  self.thundergun_knockdown_func = & quad_thundergun_knockdown;
-  self.pre_teleport_func = & quad_pre_teleport;
-  self.post_teleport_func = & quad_post_teleport;
+  self.thundergun_knockdown_func = &quad_thundergun_knockdown;
+  self.pre_teleport_func = &quad_pre_teleport;
+  self.post_teleport_func = &quad_post_teleport;
   self.can_explode = 0;
   self.exploded = 0;
   self thread quad_trail();

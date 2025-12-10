@@ -217,7 +217,7 @@ init() {
 
   if(maps\mp\gametypes\_tweakables::gettweakablevalue("killstreak", "allowhelicopter_comlink")) {
     maps\mp\killstreaks\_killstreaks::registerkillstreak("helicopter_comlink_mp", "helicopter_comlink_mp", "killstreak_helicopter_comlink", "helicopter_used", ::usekillstreakhelicopter, 1);
-    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("helicopter_comlink_mp", & "KILLSTREAK_EARNED_HELICOPTER_COMLINK", & "KILLSTREAK_HELICOPTER_COMLINK_NOT_AVAILABLE", & "KILLSTREAK_HELICOPTER_COMLINK_INBOUND");
+    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("helicopter_comlink_mp", &"KILLSTREAK_EARNED_HELICOPTER_COMLINK", &"KILLSTREAK_HELICOPTER_COMLINK_NOT_AVAILABLE", &"KILLSTREAK_HELICOPTER_COMLINK_INBOUND");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("helicopter_comlink_mp", "mpl_killstreak_heli", "kls_cobra_used", "", "kls_cobra_enemy", "", "kls_cobra_ready");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("helicopter_comlink_mp", "scr_givehelicopter_comlink");
     maps\mp\killstreaks\_killstreaks::registerkillstreakaltweapon("helicopter_comlink_mp", "cobra_20mm_comlink_mp");
@@ -1131,10 +1131,10 @@ heli_damage_monitor(hardpointtype) {
         attacker addweaponstat(hardpointtype, "destroyed", 1);
       }
 
-      notifystring = & "KILLSTREAK_DESTROYED_HELICOPTER";
+      notifystring = &"KILLSTREAK_DESTROYED_HELICOPTER";
 
       if(hardpointtype == "helicopter_player_gunner_mp") {
-        notifystring = & "KILLSTREAK_DESTROYED_HELICOPTER_GUNNER";
+        notifystring = &"KILLSTREAK_DESTROYED_HELICOPTER_GUNNER";
         self.owner sendkillstreakdamageevent(600);
       }
 

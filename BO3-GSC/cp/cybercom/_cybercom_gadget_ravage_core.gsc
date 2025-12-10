@@ -31,15 +31,15 @@ function init() {}
 function main() {
   cybercom_gadget::registerability(0, 16);
   level.cybercom.ravage_core = spawnStruct();
-  level.cybercom.ravage_core._is_flickering = & _is_flickering;
-  level.cybercom.ravage_core._on_flicker = & _on_flicker;
-  level.cybercom.ravage_core._on_give = & _on_give;
-  level.cybercom.ravage_core._on_take = & _on_take;
-  level.cybercom.ravage_core._on_connect = & _on_connect;
-  level.cybercom.ravage_core._on = & _on;
-  level.cybercom.ravage_core._off = & _off;
+  level.cybercom.ravage_core._is_flickering = &_is_flickering;
+  level.cybercom.ravage_core._on_flicker = &_on_flicker;
+  level.cybercom.ravage_core._on_give = &_on_give;
+  level.cybercom.ravage_core._on_take = &_on_take;
+  level.cybercom.ravage_core._on_connect = &_on_connect;
+  level.cybercom.ravage_core._on = &_on;
+  level.cybercom.ravage_core._off = &_off;
   level.cybercom.ravage_core.weapon = getweapon("gadget_ravage_core");
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function on_player_spawned() {}

@@ -388,7 +388,7 @@ lockingon(target, lock) {
     self thread watchclearlockingon(target, clientnum);
   } else {
     self notify("locking_on_cleared");
-    target.locking_on = target.locking_on & ~(1 << clientnum);
+    target.locking_on = target.locking_on &~(1 << clientnum);
   }
 }
 
@@ -396,7 +396,7 @@ watchclearlockingon(target, clientnum) {
   target endon("death");
   self endon("locking_on_cleared");
   self waittill_any("death", "disconnect");
-  target.locking_on = target.locking_on & ~(1 << clientnum);
+  target.locking_on = target.locking_on &~(1 << clientnum);
 }
 
 lockedon(target, lock) {
@@ -408,7 +408,7 @@ lockedon(target, lock) {
     self thread watchclearlockedon(target, clientnum);
   } else {
     self notify("locked_on_cleared");
-    target.locked_on = target.locked_on & ~(1 << clientnum);
+    target.locked_on = target.locked_on &~(1 << clientnum);
   }
 }
 
@@ -417,7 +417,7 @@ watchclearlockedon(target, clientnum) {
   self waittill_any("death", "disconnect");
 
   if(isDefined(target))
-    target.locked_on = target.locked_on & ~(1 << clientnum);
+    target.locked_on = target.locked_on &~(1 << clientnum);
 }
 
 missiletarget_lockonmonitor(player, endon1, endon2) {

@@ -10,7 +10,7 @@
 #namespace zm_genesis_traps;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_traps", & __init__, & __main__, undefined);
+  system::register("zm_genesis_traps", &__init__, &__main__, undefined);
 }
 
 function __init__() {

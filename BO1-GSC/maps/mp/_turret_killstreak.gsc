@@ -21,8 +21,8 @@ init() {
   flag_init("end_target_confirm");
   level.auto_turret_settings = [];
   level.auto_turret_settings["sentry"] = spawnStruct();
-  level.auto_turret_settings["sentry"].hintString = & "KILLSTREAK_SENTRY_TURRET_PICKUP";
-  level.auto_turret_settings["sentry"].hackerHintString = & "KILLSTREAK_TURRET_HACKING";
+  level.auto_turret_settings["sentry"].hintString = &"KILLSTREAK_SENTRY_TURRET_PICKUP";
+  level.auto_turret_settings["sentry"].hackerHintString = &"KILLSTREAK_TURRET_HACKING";
   level.auto_turret_settings["sentry"].hintIcon = "hud_ks_auto_turret";
   level.auto_turret_settings["sentry"].modelBase = "t5_weapon_minigun_turret";
   level.auto_turret_settings["sentry"].modelGoodPlacement = "t5_weapon_minigun_turret_yellow";
@@ -32,8 +32,8 @@ init() {
   level.auto_turret_settings["sentry"].stunFXFrequencyMax = 0.75;
   level.auto_turret_settings["sentry"].turretInitDelay = 1.0;
   level.auto_turret_settings["tow"] = spawnStruct();
-  level.auto_turret_settings["tow"].hintString = & "KILLSTREAK_TOW_TURRET_PICKUP";
-  level.auto_turret_settings["tow"].hackerHintString = & "KILLSTREAK_TURRET_HACKING";
+  level.auto_turret_settings["tow"].hintString = &"KILLSTREAK_TOW_TURRET_PICKUP";
+  level.auto_turret_settings["tow"].hackerHintString = &"KILLSTREAK_TURRET_HACKING";
   level.auto_turret_settings["tow"].hintIcon = "hud_ks_sam_turret";
   level.auto_turret_settings["tow"].modelBase = "t5_weapon_sam_turret";
   level.auto_turret_settings["tow"].modelGoodPlacement = "t5_weapon_sam_turret_yellow";
@@ -51,25 +51,25 @@ init() {
   if(maps\mp\gametypes\_tweakables::getTweakableValue("killstreak", "allowauto_turret")) {
     maps\mp\gametypes\_hardpoints::registerKillstreak("autoturret_mp", "autoturret_mp", "killstreak_auto_turret", "auto_turret_used", ::useSentryTurretKillstreak);
     maps\mp\gametypes\_hardpoints::registerKillstreakAltWeapon("autoturret_mp", "auto_gun_turret_mp");
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("autoturret_mp", & "KILLSTREAK_EARNED_AUTO_TURRET", & "KILLSTREAK_AUTO_TURRET_NOT_AVAILABLE");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("autoturret_mp", &"KILLSTREAK_EARNED_AUTO_TURRET", &"KILLSTREAK_AUTO_TURRET_NOT_AVAILABLE");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("autoturret_mp", "mpl_killstreak_auto_turret", "kls_turret_used", "", "kls_turret_enemy", "", "kls_turret_drop");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("autoturret_mp", "scr_giveautoturret");
     maps\mp\gametypes\_hardpoints::registerKillstreak("turret_drop_mp", "turret_drop_mp", "killstreak_auto_turret_drop", "auto_turret_used", ::useKillstreakTurretDrop, undefined, true);
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("turret_drop_mp", & "KILLSTREAK_EARNED_AUTO_TURRET", & "KILLSTREAK_AIRSPACE_FULL");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("turret_drop_mp", &"KILLSTREAK_EARNED_AUTO_TURRET", &"KILLSTREAK_AIRSPACE_FULL");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("turret_drop_mp", "mpl_killstreak_turret", "kls_turret_used", "", "kls_turret_enemy", "", "kls_turret_ready");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("turret_drop_mp", "scr_giveautoturretdrop");
-    maps\mp\gametypes\_supplydrop::registerCrateType("turret_drop_mp", "killstreak", "autoturret_mp", 1, & "KILLSTREAK_AUTO_TURRET_CRATE", undefined, "MEDAL_SHARE_PACKAGE_AUTO_TURRET", maps\mp\gametypes\_supplydrop::giveCrateKillstreak);
+    maps\mp\gametypes\_supplydrop::registerCrateType("turret_drop_mp", "killstreak", "autoturret_mp", 1, &"KILLSTREAK_AUTO_TURRET_CRATE", undefined, "MEDAL_SHARE_PACKAGE_AUTO_TURRET", maps\mp\gametypes\_supplydrop::giveCrateKillstreak);
     level.killStreakIcons["autoturret_mp"] = "hud_ks_auto_turret";
     maps\mp\gametypes\_hardpoints::registerKillstreak("auto_tow_mp", "auto_tow_mp", "killstreak_tow_turret", "tow_turret_used", ::useTowTurretKillstreak);
     maps\mp\gametypes\_hardpoints::registerKillstreakAltWeapon("auto_tow_mp", "tow_turret_mp");
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("auto_tow_mp", & "KILLSTREAK_EARNED_TOW_TURRET", & "KILLSTREAK_TOW_TURRET_NOT_AVAILABLE");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("auto_tow_mp", &"KILLSTREAK_EARNED_TOW_TURRET", &"KILLSTREAK_TOW_TURRET_NOT_AVAILABLE");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("auto_tow_mp", "mpl_killstreak_auto_turret", "kls_tow_used", "", "kls_tow_enemy", "", "kls_tow_drop");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("auto_tow_mp", "scr_giveautotowturret");
     maps\mp\gametypes\_hardpoints::registerKillstreak("tow_turret_drop_mp", "tow_turret_drop_mp", "killstreak_tow_turret_drop", "tow_turret_used", ::useKillstreakTurretDrop, undefined, true);
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("tow_turret_drop_mp", & "KILLSTREAK_EARNED_TOW_TURRET", & "KILLSTREAK_AIRSPACE_FULL");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("tow_turret_drop_mp", &"KILLSTREAK_EARNED_TOW_TURRET", &"KILLSTREAK_AIRSPACE_FULL");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("tow_turret_drop_mp", "mpl_killstreak_auto_turret", "kls_tow_used", "", "kls_tow_enemy", "", "kls_tow_ready");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("tow_turret_drop_mp", "scr_giveautotowturretdrop");
-    maps\mp\gametypes\_supplydrop::registerCrateType("tow_turret_drop_mp", "killstreak", "auto_tow_mp", 1, & "KILLSTREAK_TOW_TURRET_CRATE", undefined, "MEDAL_SHARE_PACKAGE_TOW_TURRET", maps\mp\gametypes\_supplydrop::giveCrateKillstreak);
+    maps\mp\gametypes\_supplydrop::registerCrateType("tow_turret_drop_mp", "killstreak", "auto_tow_mp", 1, &"KILLSTREAK_TOW_TURRET_CRATE", undefined, "MEDAL_SHARE_PACKAGE_TOW_TURRET", maps\mp\gametypes\_supplydrop::giveCrateKillstreak);
     level.killStreakIcons["auto_tow_mp"] = "hud_ks_sam_turret";
   }
   level.turrets_headicon_offset = [];
@@ -287,8 +287,8 @@ updateTurretPlacement(turret) {
     placement = self canPlayerPlaceTurret();
     turret.origin = placement["origin"];
     turret.angles = placement["angles"];
-    good_spot_check = placement["result"] & !(turret turretInHurtTrigger());
-    good_spot_check = placement["result"] & !(turret turretInNoTurretPlacementTrigger());
+    good_spot_check = placement["result"] &!(turret turretInHurtTrigger());
+    good_spot_check = placement["result"] &!(turret turretInNoTurretPlacementTrigger());
     turret.canBePlaced = good_spot_check;
     if(turret.canBePlaced != lastPlacedTurret) {
       if(good_spot_check)

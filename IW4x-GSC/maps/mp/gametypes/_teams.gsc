@@ -216,7 +216,6 @@ updateTeamBalance() {
     if(isDefined(game["BalanceTeamsNextRound"]))
       iPrintLnbold(&"MP_AUTOBALANCE_NEXT_ROUND");
 
-
     level waittill("restarting");
 
     if(isDefined(game["BalanceTeamsNextRound"])) {
@@ -269,7 +268,6 @@ balanceTeams() {
 
   AlliedPlayers = [];
   AxisPlayers = [];
-
 
   players = level.players;
   for(i = 0; i < players.size; i++) {
@@ -523,8 +521,6 @@ setTeamModels(team, charSet) {
       game[team + "_model"]["RIOT"] = mptype\mptype_tf141_arctic_riot::main;
 
       break;
-
-
 
     case "iw3_opfor_desert":
       mptype\mptype_axis_sniper::precache();
@@ -896,8 +892,6 @@ playerConnectedTest() {
     return;
   }
   level endon("exitLevel_called");
-
-
 
   for(;;) {
     foreach(player in level.players) {

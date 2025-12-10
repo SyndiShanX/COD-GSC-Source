@@ -1247,7 +1247,7 @@ vehicle_spawn(vspawner, from) {
     vehicle.script_vehicleattackgroupwait = vspawner.script_vehicleattackgroupwait;
 
   if(isDefined(vspawner.script_friendname))
-    vehicle setvehiclelookattext(vspawner.script_friendname, & "");
+    vehicle setvehiclelookattext(vspawner.script_friendname, &"");
 
   if(isDefined(vspawner.script_unload))
     vehicle.unload_group = vspawner.script_unload;

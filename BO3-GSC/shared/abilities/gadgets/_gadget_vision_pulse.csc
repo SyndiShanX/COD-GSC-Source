@@ -17,16 +17,16 @@
 #namespace gadget_vision_pulse;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_vision_pulse", & __init__, undefined, undefined);
+  system::register("gadget_vision_pulse", &__init__, undefined, undefined);
 }
 
 function __init__() {
   if(!sessionmodeiscampaigngame()) {
-    callback::on_localplayer_spawned( & on_localplayer_spawned);
+    callback::on_localplayer_spawned(&on_localplayer_spawned);
     duplicate_render::set_dr_filter_offscreen("reveal_en", 50, "reveal_enemy", undefined, 2, "mc/hud_outline_model_z_red", 1);
     duplicate_render::set_dr_filter_offscreen("reveal_self", 50, "reveal_self", undefined, 2, "mc/hud_outline_model_z_red_alpha", 1);
   }
-  clientfield::register("toplayer", "vision_pulse_active", 1, 1, "int", & vision_pulse_changed, 0, 1);
+  clientfield::register("toplayer", "vision_pulse_active", 1, 1, "int", &vision_pulse_changed, 0, 1);
   visionset_mgr::register_visionset_info("vision_pulse", 1, 12, undefined, "vision_puls_bw");
 }
 

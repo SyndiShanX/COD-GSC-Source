@@ -19,7 +19,7 @@
 #namespace zm_perk_sleight_of_hand;
 
 function autoexec __init__sytem__() {
-  system::register("zm_perk_sleight_of_hand", & __init__, undefined, undefined);
+  system::register("zm_perk_sleight_of_hand", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -27,10 +27,10 @@ function __init__() {
 }
 
 function enable_sleight_of_hand_perk_for_level() {
-  zm_perks::register_perk_basic_info("specialty_fastreload", "sleight", 3000, & "ZOMBIE_PERK_FASTRELOAD", getweapon("zombie_perk_bottle_sleight"));
-  zm_perks::register_perk_precache_func("specialty_fastreload", & sleight_of_hand_precache);
-  zm_perks::register_perk_clientfields("specialty_fastreload", & sleight_of_hand_register_clientfield, & sleight_of_hand_set_clientfield);
-  zm_perks::register_perk_machine("specialty_fastreload", & sleight_of_hand_perk_machine_setup);
+  zm_perks::register_perk_basic_info("specialty_fastreload", "sleight", 3000, &"ZOMBIE_PERK_FASTRELOAD", getweapon("zombie_perk_bottle_sleight"));
+  zm_perks::register_perk_precache_func("specialty_fastreload", &sleight_of_hand_precache);
+  zm_perks::register_perk_clientfields("specialty_fastreload", &sleight_of_hand_register_clientfield, &sleight_of_hand_set_clientfield);
+  zm_perks::register_perk_machine("specialty_fastreload", &sleight_of_hand_perk_machine_setup);
   zm_perks::register_perk_host_migration_params("specialty_fastreload", "vending_sleight", "sleight_light");
 }
 

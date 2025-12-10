@@ -10,11 +10,11 @@
 #namespace counteruav;
 
 function autoexec __init__sytem__() {
-  system::register("counteruav", & __init__, undefined, undefined);
+  system::register("counteruav", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "counteruav", 1, 1, "int", & spawned, 0, 0);
+  clientfield::register("scriptmover", "counteruav", 1, 1, "int", &spawned, 0, 0);
 }
 
 function spawned(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

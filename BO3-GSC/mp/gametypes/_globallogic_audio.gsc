@@ -17,14 +17,14 @@
 #namespace globallogic_audio;
 
 function autoexec __init__sytem__() {
-  system::register("globallogic_audio", & __init__, undefined, undefined);
+  system::register("globallogic_audio", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
-  level.playleaderdialogonplayer = & leader_dialog_on_player;
-  level.playequipmentdestroyedonplayer = & play_equipment_destroyed_on_player;
-  level.playequipmenthackedonplayer = & play_equipment_hacked_on_player;
+  callback::on_start_gametype(&init);
+  level.playleaderdialogonplayer = &leader_dialog_on_player;
+  level.playequipmentdestroyedonplayer = &play_equipment_destroyed_on_player;
+  level.playequipmenthackedonplayer = &play_equipment_hacked_on_player;
 }
 
 function init() {

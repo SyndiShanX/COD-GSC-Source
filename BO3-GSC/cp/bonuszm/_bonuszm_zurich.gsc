@@ -23,41 +23,41 @@ function autoexec init() {
     return;
   }
   namespace_738cec14::init_voice();
-  level.bzm_zurichdialogue1callback = & function_8924576f;
-  level.bzm_zurichdialogue1_1callback = & function_465e0207;
-  level.bzm_zurichdialogue1_2callback = & function_d45692cc;
-  level.bzm_zurichdialogue1_3callback = & function_fa590d35;
-  level.bzm_zurichdialogue1_4callback = & function_88519dfa;
-  level.bzm_zurichdialogue2callback = & function_171ce834;
-  level.bzm_zurichdialogue3callback = & function_3d1f629d;
-  level.bzm_zurichdialogue4callback = & function_cb17f362;
-  level.bzm_zurichdialogue4_1callback = & function_b80578aa;
-  level.bzm_zurichdialogue5callback = & function_f11a6dcb;
-  level.bzm_zurichdialogue6callback = & function_7f12fe90;
-  level.bzm_zurichdialogue7callback = & function_a51578f9;
-  level.bzm_zurichdialogue9callback = & function_b9382ab7;
-  level.bzm_zurichdialogue10callback = & function_32beb00d;
-  level.bzm_zurichdialogue11callback = & function_cbc35a4;
-  level.bzm_zurichdialogue12callback = & function_7ec3a4df;
-  level.bzm_zurichdialogue13callback = & function_58c12a76;
-  level.bzm_zurichdialogue14callback = & function_9ab4c669;
-  level.bzm_zurichdialogue15callback = & function_74b24c00;
-  level.bzm_zurichdialogue16callback = & function_e6b9bb3b;
-  level.bzm_zurichdialogue17callback = & function_c0b740d2;
-  level.bzm_zurichdialogue18callback = & function_62d28355;
-  level.bzm_zurichdialogue19callback = & function_3cd008ec;
-  level.bzm_zurichdialogue20callback = & function_760a962c;
-  level.bzm_zurichdialogue21callback = & function_9c0d1095;
-  level.bzm_zurichdialogue22callback = & function_c20f8afe;
-  level.bzm_zurichdialogue23callback = & function_e8120567;
+  level.bzm_zurichdialogue1callback = &function_8924576f;
+  level.bzm_zurichdialogue1_1callback = &function_465e0207;
+  level.bzm_zurichdialogue1_2callback = &function_d45692cc;
+  level.bzm_zurichdialogue1_3callback = &function_fa590d35;
+  level.bzm_zurichdialogue1_4callback = &function_88519dfa;
+  level.bzm_zurichdialogue2callback = &function_171ce834;
+  level.bzm_zurichdialogue3callback = &function_3d1f629d;
+  level.bzm_zurichdialogue4callback = &function_cb17f362;
+  level.bzm_zurichdialogue4_1callback = &function_b80578aa;
+  level.bzm_zurichdialogue5callback = &function_f11a6dcb;
+  level.bzm_zurichdialogue6callback = &function_7f12fe90;
+  level.bzm_zurichdialogue7callback = &function_a51578f9;
+  level.bzm_zurichdialogue9callback = &function_b9382ab7;
+  level.bzm_zurichdialogue10callback = &function_32beb00d;
+  level.bzm_zurichdialogue11callback = &function_cbc35a4;
+  level.bzm_zurichdialogue12callback = &function_7ec3a4df;
+  level.bzm_zurichdialogue13callback = &function_58c12a76;
+  level.bzm_zurichdialogue14callback = &function_9ab4c669;
+  level.bzm_zurichdialogue15callback = &function_74b24c00;
+  level.bzm_zurichdialogue16callback = &function_e6b9bb3b;
+  level.bzm_zurichdialogue17callback = &function_c0b740d2;
+  level.bzm_zurichdialogue18callback = &function_62d28355;
+  level.bzm_zurichdialogue19callback = &function_3cd008ec;
+  level.bzm_zurichdialogue20callback = &function_760a962c;
+  level.bzm_zurichdialogue21callback = &function_9c0d1095;
+  level.bzm_zurichdialogue22callback = &function_c20f8afe;
+  level.bzm_zurichdialogue23callback = &function_e8120567;
   level flag::init("BZM_ZURICHDialogue23");
-  level.bzm_zurichdialogue24callback = & function_de00ac88;
-  level.bzm_zurichdialogue25callback = & function_40326f1;
+  level.bzm_zurichdialogue24callback = &function_de00ac88;
+  level.bzm_zurichdialogue25callback = &function_40326f1;
   function_6ff1594f();
 }
 
 function private function_6ff1594f() {
-  callback::on_spawned( & function_cee0476);
+  callback::on_spawned(&function_cee0476);
 }
 
 function function_cee0476() {}

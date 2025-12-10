@@ -23,12 +23,12 @@
 #namespace hunter;
 
 function autoexec __init__sytem__() {
-  system::register("hunter", & __init__, undefined, undefined);
+  system::register("hunter", &__init__, undefined, undefined);
 }
 
 function __init__() {
   registerinterfaceattributes("hunter");
-  vehicle::add_main_callback("hunter", & hunter_initialize);
+  vehicle::add_main_callback("hunter", &hunter_initialize);
 }
 
 function registerinterfaceattributes(archetype) {
@@ -137,7 +137,7 @@ function hunter_initialize() {
   self.goalheight = 999999;
   self setgoal(self.origin, 0, self.goalradius, self.goalheight);
   self hunter_inittagarrays();
-  self.overridevehicledamage = & huntercallback_vehicledamage;
+  self.overridevehicledamage = &huntercallback_vehicledamage;
   self thread vehicle_ai::nudge_collision();
   if(isDefined(level.vehicle_initializer_cb)) {
     [[level.vehicle_initializer_cb]](self);
@@ -147,8 +147,8 @@ function hunter_initialize() {
   self vehicle_ai::initthreatbias();
   self turret::_init_turret(1);
   self turret::_init_turret(2);
-  self turret::set_best_target_func( & side_turret_get_best_target, 1);
-  self turret::set_best_target_func( & side_turret_get_best_target, 2);
+  self turret::set_best_target_func(&side_turret_get_best_target, 1);
+  self turret::set_best_target_func(&side_turret_get_best_target, 2);
   self turret::set_burst_parameters(1, 2, 1, 2, 1);
   self turret::set_burst_parameters(1, 2, 1, 2, 2);
   self turret::set_target_flags(3, 1);
@@ -160,21 +160,21 @@ function hunter_initialize() {
 
 function defaultrole() {
   self vehicle_ai::init_state_machine_for_role();
-  self vehicle_ai::get_state_callbacks("combat").enter_func = & state_combat_enter;
-  self vehicle_ai::get_state_callbacks("combat").update_func = & state_combat_update;
-  self vehicle_ai::get_state_callbacks("combat").exit_func = & state_combat_exit;
-  self vehicle_ai::get_state_callbacks("driving").enter_func = & hunter_scripted;
-  self vehicle_ai::get_state_callbacks("scripted").enter_func = & hunter_scripted;
-  self vehicle_ai::get_state_callbacks("death").enter_func = & state_death_enter;
-  self vehicle_ai::get_state_callbacks("death").update_func = & state_death_update;
-  self vehicle_ai::get_state_callbacks("emped").update_func = & hunter_emped;
-  self vehicle_ai::add_state("unaware", undefined, & state_unaware_update, & state_unaware_exit);
+  self vehicle_ai::get_state_callbacks("combat").enter_func = &state_combat_enter;
+  self vehicle_ai::get_state_callbacks("combat").update_func = &state_combat_update;
+  self vehicle_ai::get_state_callbacks("combat").exit_func = &state_combat_exit;
+  self vehicle_ai::get_state_callbacks("driving").enter_func = &hunter_scripted;
+  self vehicle_ai::get_state_callbacks("scripted").enter_func = &hunter_scripted;
+  self vehicle_ai::get_state_callbacks("death").enter_func = &state_death_enter;
+  self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
+  self vehicle_ai::get_state_callbacks("emped").update_func = &hunter_emped;
+  self vehicle_ai::add_state("unaware", undefined, &state_unaware_update, &state_unaware_exit);
   vehicle_ai::add_interrupt_connection("unaware", "scripted", "enter_scripted");
   vehicle_ai::add_interrupt_connection("unaware", "emped", "emped");
   vehicle_ai::add_interrupt_connection("unaware", "off", "shut_off");
   vehicle_ai::add_interrupt_connection("unaware", "driving", "enter_vehicle");
   vehicle_ai::add_interrupt_connection("unaware", "pain", "pain");
-  self vehicle_ai::add_state("strafe", & state_strafe_enter, & state_strafe_update, & state_strafe_exit);
+  self vehicle_ai::add_state("strafe", &state_strafe_enter, &state_strafe_update, &state_strafe_exit);
   vehicle_ai::add_interrupt_connection("strafe", "scripted", "enter_scripted");
   vehicle_ai::add_interrupt_connection("strafe", "emped", "emped");
   vehicle_ai::add_interrupt_connection("strafe", "off", "shut_off");

@@ -15,13 +15,13 @@
 #namespace weaponobjects;
 
 function init_shared() {
-  callback::on_localplayer_spawned( & on_localplayer_spawned);
-  clientfield::register("toplayer", "proximity_alarm", 1, 2, "int", & proximity_alarm_changed, 0, 1);
-  clientfield::register("missile", "retrievable", 1, 1, "int", & retrievable_changed, 0, 1);
-  clientfield::register("scriptmover", "retrievable", 1, 1, "int", & retrievable_changed, 0, 0);
-  clientfield::register("missile", "enemyequip", 1, 2, "int", & enemyequip_changed, 0, 1);
-  clientfield::register("scriptmover", "enemyequip", 1, 2, "int", & enemyequip_changed, 0, 0);
-  clientfield::register("missile", "teamequip", 1, 1, "int", & teamequip_changed, 0, 1);
+  callback::on_localplayer_spawned(&on_localplayer_spawned);
+  clientfield::register("toplayer", "proximity_alarm", 1, 2, "int", &proximity_alarm_changed, 0, 1);
+  clientfield::register("missile", "retrievable", 1, 1, "int", &retrievable_changed, 0, 1);
+  clientfield::register("scriptmover", "retrievable", 1, 1, "int", &retrievable_changed, 0, 0);
+  clientfield::register("missile", "enemyequip", 1, 2, "int", &enemyequip_changed, 0, 1);
+  clientfield::register("scriptmover", "enemyequip", 1, 2, "int", &enemyequip_changed, 0, 0);
+  clientfield::register("missile", "teamequip", 1, 1, "int", &teamequip_changed, 0, 1);
   level._effect["powerLight"] = "weapon/fx_equip_light_os";
   if(!isDefined(level.retrievable)) {
     level.retrievable = [];
@@ -144,8 +144,8 @@ function watch_perks_changed(local_client_num) {
     wait(0.016);
     util::clean_deleted(level.retrievable);
     util::clean_deleted(level.enemyequip);
-    array::thread_all(level.retrievable, & updateretrievable, local_client_num, 1);
-    array::thread_all(level.enemyequip, & updateenemyequipment, local_client_num, 1);
+    array::thread_all(level.retrievable, &updateretrievable, local_client_num, 1);
+    array::thread_all(level.enemyequip, &updateenemyequipment, local_client_num, 1);
     self waittill("perks_changed");
   }
 }

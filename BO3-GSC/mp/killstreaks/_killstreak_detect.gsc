@@ -13,7 +13,7 @@
 #namespace killstreak_detect;
 
 function autoexec __init__sytem__() {
-  system::register("killstreak_detect", & __init__, undefined, undefined);
+  system::register("killstreak_detect", &__init__, undefined, undefined);
 }
 
 function __init__() {

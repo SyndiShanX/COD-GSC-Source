@@ -15,9 +15,9 @@ func_95F9() {
   precacheshader("fullscreen_bloodsplat_left");
   precacheshader("fullscreen_bloodsplat_right");
   precacheshader("vfx_ui_player_pain_overlay");
-  precachestring( & "GAME_GET_TO_COVER");
-  precachestring( & "GAME_USE_RETRACT_SHIELD");
-  precachestring( & "GAME_LAST_STAND_GET_BACK_UP");
+  precachestring(&"GAME_GET_TO_COVER");
+  precachestring(&"GAME_USE_RETRACT_SHIELD");
+  precachestring(&"GAME_LAST_STAND_GET_BACK_UP");
   func_0B5F::func_965A();
   func_F385();
   thread func_14ED();
@@ -71,10 +71,10 @@ func_F848(var_00) {
     level.func_54D3[1] = "normal";
     level.func_54D3[2] = "hardened";
     level.func_54D3[3] = "veteran";
-    level.func_54D2["easy"] = & "GAMESKILL_EASY";
-    level.func_54D2["normal"] = & "GAMESKILL_NORMAL";
-    level.func_54D2["hardened"] = & "GAMESKILL_HARDENED";
-    level.func_54D2["veteran"] = & "GAMESKILL_VETERAN";
+    level.func_54D2["easy"] = &"GAMESKILL_EASY";
+    level.func_54D2["normal"] = &"GAMESKILL_NORMAL";
+    level.func_54D2["hardened"] = &"GAMESKILL_HARDENED";
+    level.func_54D2["veteran"] = &"GAMESKILL_VETERAN";
     thread func_7685();
   }
 
@@ -1006,9 +1006,9 @@ func_D0CE() {
 
 func_D3A6() {
   level.func_1114E["take_cover"] = spawnStruct();
-  level.func_1114E["take_cover"].text = & "GAME_GET_TO_COVER";
+  level.func_1114E["take_cover"].text = &"GAME_GET_TO_COVER";
   level.func_1114E["get_back_up"] = spawnStruct();
-  level.func_1114E["get_back_up"].text = & "GAME_LAST_STAND_GET_BACK_UP";
+  level.func_1114E["get_back_up"].text = &"GAME_LAST_STAND_GET_BACK_UP";
 }
 
 playerhealthregen() {
@@ -2279,10 +2279,10 @@ func_262C(var_00) {
     func_13C1A() {
       level endon("stop_weapon_help");
       scripts\engine\utility::flag_init("disable_weapon_help");
-      scripts\sp\utility::func_16EB("alt_m8", & "WEAPON_HELP_M8_AR_DPAD", ::func_13062);
-      scripts\sp\utility::func_16EB("alt_fmg", & "WEAPON_HELP_FMG_AKIMBO_DPAD", ::func_1305F);
-      scripts\sp\utility::func_16EB("alt_erad", & "WEAPON_HELP_ERAD_SHOTGUN_DPAD", ::func_1305E);
-      scripts\sp\utility::func_16EB("alt_ripper", & "WEAPON_HELP_RIPPER_SMG_DPAD", ::func_13069);
+      scripts\sp\utility::func_16EB("alt_m8", &"WEAPON_HELP_M8_AR_DPAD", ::func_13062);
+      scripts\sp\utility::func_16EB("alt_fmg", &"WEAPON_HELP_FMG_AKIMBO_DPAD", ::func_1305F);
+      scripts\sp\utility::func_16EB("alt_erad", &"WEAPON_HELP_ERAD_SHOTGUN_DPAD", ::func_1305E);
+      scripts\sp\utility::func_16EB("alt_ripper", &"WEAPON_HELP_RIPPER_SMG_DPAD", ::func_13069);
       wait 30;
       var_00 = scripts\sp\endmission::func_7F6B(level.script);
 

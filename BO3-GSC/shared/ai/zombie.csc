@@ -12,9 +12,9 @@ function autoexec precache() {}
 
 function autoexec main() {
   level._effect["zombie_special_day_effect"] = "zombie/fx_val_chest_burst";
-  ai::add_archetype_spawn_function("zombie", & zombieclientutils::zombie_override_burn_fx);
-  clientfield::register("actor", "zombie", 1, 1, "int", & zombieclientutils::zombiehandler, 0, 0);
-  clientfield::register("actor", "zombie_special_day", 6001, 1, "counter", & zombieclientutils::zombiespecialdayeffectshandler, 0, 0);
+  ai::add_archetype_spawn_function("zombie", &zombieclientutils::zombie_override_burn_fx);
+  clientfield::register("actor", "zombie", 1, 1, "int", &zombieclientutils::zombiehandler, 0, 0);
+  clientfield::register("actor", "zombie_special_day", 6001, 1, "counter", &zombieclientutils::zombiespecialdayeffectshandler, 0, 0);
 }
 
 #namespace zombieclientutils;
@@ -26,11 +26,11 @@ function zombiehandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap
   }
   if(!isDefined(entity.initializedgibcallbacks) || !entity.initializedgibcallbacks) {
     entity.initializedgibcallbacks = 1;
-    gibclientutils::addgibcallback(localclientnum, entity, 8, & _gibcallback);
-    gibclientutils::addgibcallback(localclientnum, entity, 16, & _gibcallback);
-    gibclientutils::addgibcallback(localclientnum, entity, 32, & _gibcallback);
-    gibclientutils::addgibcallback(localclientnum, entity, 128, & _gibcallback);
-    gibclientutils::addgibcallback(localclientnum, entity, 256, & _gibcallback);
+    gibclientutils::addgibcallback(localclientnum, entity, 8, &_gibcallback);
+    gibclientutils::addgibcallback(localclientnum, entity, 16, &_gibcallback);
+    gibclientutils::addgibcallback(localclientnum, entity, 32, &_gibcallback);
+    gibclientutils::addgibcallback(localclientnum, entity, 128, &_gibcallback);
+    gibclientutils::addgibcallback(localclientnum, entity, 256, &_gibcallback);
   }
 }
 

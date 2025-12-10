@@ -13,15 +13,15 @@
 #namespace zm_bgb_mind_blown;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_mind_blown", & __init__, undefined, undefined);
+  system::register("zm_bgb_mind_blown", &__init__, undefined, undefined);
 }
 
 function __init__() {
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  clientfield::register("actor", "zm_bgb_mind_pop_fx", 15000, 1, "int", & function_f10358c6, 0, 0);
-  clientfield::register("actor", "zm_bgb_mind_ray_fx", 15000, 1, "int", & function_57f7c3a1, 0, 0);
+  clientfield::register("actor", "zm_bgb_mind_pop_fx", 15000, 1, "int", &function_f10358c6, 0, 0);
+  clientfield::register("actor", "zm_bgb_mind_ray_fx", 15000, 1, "int", &function_57f7c3a1, 0, 0);
   bgb::register("zm_bgb_mind_blown", "activated");
 }
 

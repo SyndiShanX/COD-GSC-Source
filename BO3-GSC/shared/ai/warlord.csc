@@ -9,7 +9,7 @@
 #namespace warlord;
 
 function autoexec __init__sytem__() {
-  system::register("warlord", & __init__, undefined, undefined);
+  system::register("warlord", &__init__, undefined, undefined);
 }
 
 function autoexec precache() {
@@ -25,10 +25,10 @@ function autoexec precache() {
 
 function __init__() {
   if(ai::shouldregisterclientfieldforarchetype("warlord")) {
-    clientfield::register("actor", "warlord_type", 1, 2, "int", & warlordclientutils::warlordtypehandler, 0, 0);
-    clientfield::register("actor", "warlord_damage_state", 1, 2, "int", & warlordclientutils::warlorddamagestatehandler, 0, 0);
-    clientfield::register("actor", "warlord_thruster_direction", 1, 3, "int", & warlordclientutils::warlordthrusterhandler, 0, 0);
-    clientfield::register("actor", "warlord_lights_state", 1, 1, "int", & warlordclientutils::warlordlightshandler, 0, 0);
+    clientfield::register("actor", "warlord_type", 1, 2, "int", &warlordclientutils::warlordtypehandler, 0, 0);
+    clientfield::register("actor", "warlord_damage_state", 1, 2, "int", &warlordclientutils::warlorddamagestatehandler, 0, 0);
+    clientfield::register("actor", "warlord_thruster_direction", 1, 3, "int", &warlordclientutils::warlordthrusterhandler, 0, 0);
+    clientfield::register("actor", "warlord_lights_state", 1, 1, "int", &warlordclientutils::warlordlightshandler, 0, 0);
   }
 }
 

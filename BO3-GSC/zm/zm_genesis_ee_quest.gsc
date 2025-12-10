@@ -48,7 +48,7 @@
 #namespace zm_genesis_ee_quest;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_ee_quest", & __init__, undefined, undefined);
+  system::register("zm_genesis_ee_quest", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -108,7 +108,7 @@ function function_5b19179b() {
 
 function function_26bc55e3() {
   level waittill("start_zombie_round_logic");
-  level.custom_intermission = & function_5b19179b;
+  level.custom_intermission = &function_5b19179b;
   level thread function_a062344d();
   if(getdvarint("splitscreen_playerCount") > 2) {
     level thread function_c185c51f();
@@ -130,27 +130,27 @@ function function_26bc55e3() {
 
 function function_c185c51f() {
   var_753f10ae = getEntArray("tombstone", "targetname");
-  array::run_all(var_753f10ae, & delete);
+  array::run_all(var_753f10ae, &delete);
   var_4d97ef95 = struct::get_array("audio_reel_place", "targetname");
-  array::run_all(var_4d97ef95, & struct::delete);
+  array::run_all(var_4d97ef95, &struct::delete);
   var_4bf2a542 = getEntArray("apothicon_spawn", "targetname");
-  array::run_all(var_4bf2a542, & delete);
+  array::run_all(var_4bf2a542, &delete);
   var_2efcd138 = getEntArray("b_target", "targetname");
-  array::run_all(var_2efcd138, & delete);
+  array::run_all(var_2efcd138, &delete);
   for(i = 0; i < 7; i++) {
     var_f03dd5b1 = struct::get("ee_grand_tour_toy_0" + i, "targetname");
     var_39018584 = getent(var_f03dd5b1.target, "targetname");
     var_39018584 delete();
   }
   var_22610f78 = getEntArray("115_crystals", "script_noteworthy");
-  array::run_all(var_22610f78, & delete);
+  array::run_all(var_22610f78, &delete);
   var_22610f78 = getEntArray("115_crystal_decoy", "script_noteworthy");
-  array::run_all(var_22610f78, & delete);
+  array::run_all(var_22610f78, &delete);
 }
 
 function function_3c2e817d() {
   level.var_753f10ae = getEntArray("tombstone", "targetname");
-  array::thread_all(level.var_753f10ae, & wait_for_damage);
+  array::thread_all(level.var_753f10ae, &wait_for_damage);
   var_765a3ab1 = 1;
   while(var_765a3ab1 <= 4) {
     level waittill("character", n_shot);
@@ -185,7 +185,7 @@ function wait_for_damage() {
 
 function function_b51d4ede() {
   var_4d97ef95 = struct::get_array("audio_reel_place", "targetname");
-  array::thread_all(var_4d97ef95, & function_7914cbc8);
+  array::thread_all(var_4d97ef95, &function_7914cbc8);
   level thread function_be26578d(1);
   level flag::wait_till("placed_audio1");
   level thread function_37acb884(2);
@@ -244,7 +244,7 @@ function function_7914cbc8() {
     var_be748f8 = array(var_be748f8);
   }
   var_be748f8[var_be748f8.size] = var_26a73a41;
-  array::thread_all(var_be748f8, & function_e464aa51);
+  array::thread_all(var_be748f8, &function_e464aa51);
   wait(0.5);
   function_ccdb680e(var_be748f8, 1);
   switch (self.script_int) {
@@ -364,7 +364,7 @@ function function_37acb884(var_f5e9fb6c) {
   level.var_4bf2a542 = getEntArray("apothicon_spawn", "targetname");
   level.var_db16318c = 0;
   level.var_c15eb311 = 0;
-  level.check_b_valid_poi = & function_5516baeb;
+  level.check_b_valid_poi = &function_5516baeb;
   level flag::wait_till("acm_done");
   s_reel = struct::get("acm_reel", "targetname");
   if(isDefined(level.var_d29b5881)) {
@@ -461,7 +461,7 @@ function function_a062344d() {
   level.var_6aedbc8b = 0;
   var_700a627b = struct::get_array("shard_piece", "targetname");
   level.var_d6c2c8a7 = var_700a627b.size;
-  array::thread_all(var_700a627b, & function_d0b9561c);
+  array::thread_all(var_700a627b, &function_d0b9561c);
   if(getdvarint("") > 0) {
     level flag::set("");
   }
@@ -494,7 +494,7 @@ function function_d0b9561c() {
 
 function function_21bfe3c8(var_f5e9fb6c) {
   var_2efcd138 = getEntArray("b_target", "targetname");
-  array::thread_all(var_2efcd138, & function_24240140);
+  array::thread_all(var_2efcd138, &function_24240140);
   level.var_4d6344fd = 0;
   level.var_96fb1d89 = var_2efcd138.size;
   level flag::wait_till("b_targets_collected");
@@ -802,7 +802,7 @@ function function_7eefe596(str_endon) {
 function function_cde49635() {
   level endon("hash_deeb3634");
   level notify("hash_423907c1");
-  callback::on_spawned( & function_c2ad8318);
+  callback::on_spawned(&function_c2ad8318);
   level thread function_a1369011();
   while(true) {
     e_player = arraygetclosest(level.var_a090a655.origin, level.activeplayers);
@@ -850,7 +850,7 @@ function function_fa9b2a93() {
 
 function function_a1369011() {
   level waittill("hash_deeb3634");
-  callback::remove_on_spawned( & function_c2ad8318);
+  callback::remove_on_spawned(&function_c2ad8318);
 }
 
 function function_b87c7e9a() {
@@ -1354,7 +1354,7 @@ function ee_ending() {
     player.var_4870991a = 1;
   }
   scene::init("genesis_ee_sams_room");
-  scene::add_scene_func("genesis_ee_sams_room", & function_1f70c707, "play");
+  scene::add_scene_func("genesis_ee_sams_room", &function_1f70c707, "play");
   level clientfield::set("ee_quest_state", 12);
   var_221e828b = struct::get_array("sams_room_pos", "script_noteworthy");
   foreach(e_player in level.players) {
@@ -1398,7 +1398,7 @@ function function_ec27cd4b(n_val) {
   level flag::clear("spawn_zombies");
   level thread zm_genesis_arena::function_ab51bfd();
   level lui::play_movie("zm_genesis_outro", "fullscreen", 0, 0, "TDCIWGg1ckRAkdSa3Bip7lMzQhTp+sjnC8dDCTB0cSAAAAAAAAAAAA==");
-  level.custom_intermission = & function_43af724a;
+  level.custom_intermission = &function_43af724a;
   level clientfield::set("GenesisEndGameEEScreen", 1);
   level notify("end_game");
   level thread function_ac21a82d(1, 2);
@@ -1515,24 +1515,24 @@ function function_3fade785(var_6cbdc65) {
 }
 
 function function_ea08fd1f() {
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_14d67389);
-  level thread zm_genesis_util::setup_devgui_func("", "", 2, & function_14d67389);
-  level thread zm_genesis_util::setup_devgui_func("", "", 3, & function_14d67389);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_b3e7fd04);
-  level thread zm_genesis_util::setup_devgui_func("", "", 2, & function_b3e7fd04);
-  level thread zm_genesis_util::setup_devgui_func("", "", 3, & function_b3e7fd04);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_2e1bc559);
-  level thread zm_genesis_util::setup_devgui_func("", "", 4, & function_14d67389);
-  level thread zm_genesis_util::setup_devgui_func("", "", 5, & function_14d67389);
-  level thread zm_genesis_util::setup_devgui_func("", "", 6, & function_14d67389);
-  level thread zm_genesis_util::setup_devgui_func("", "", 7, & function_14d67389);
-  level thread zm_genesis_util::setup_devgui_func("", "", 8, & function_14d67389);
-  level thread zm_genesis_util::setup_devgui_func("", "", 9, & function_14d67389);
-  level thread zm_genesis_util::setup_devgui_func("", "", 10, & function_14d67389);
-  level thread zm_genesis_util::setup_devgui_func("", "", 11, & function_14d67389);
-  level thread zm_genesis_util::setup_devgui_func("", "", 12, & function_14d67389);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_14d67389);
+  level thread zm_genesis_util::setup_devgui_func("", "", 2, &function_14d67389);
+  level thread zm_genesis_util::setup_devgui_func("", "", 3, &function_14d67389);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_b3e7fd04);
+  level thread zm_genesis_util::setup_devgui_func("", "", 2, &function_b3e7fd04);
+  level thread zm_genesis_util::setup_devgui_func("", "", 3, &function_b3e7fd04);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_2e1bc559);
+  level thread zm_genesis_util::setup_devgui_func("", "", 4, &function_14d67389);
+  level thread zm_genesis_util::setup_devgui_func("", "", 5, &function_14d67389);
+  level thread zm_genesis_util::setup_devgui_func("", "", 6, &function_14d67389);
+  level thread zm_genesis_util::setup_devgui_func("", "", 7, &function_14d67389);
+  level thread zm_genesis_util::setup_devgui_func("", "", 8, &function_14d67389);
+  level thread zm_genesis_util::setup_devgui_func("", "", 9, &function_14d67389);
+  level thread zm_genesis_util::setup_devgui_func("", "", 10, &function_14d67389);
+  level thread zm_genesis_util::setup_devgui_func("", "", 11, &function_14d67389);
+  level thread zm_genesis_util::setup_devgui_func("", "", 12, &function_14d67389);
   level flag::init("");
-  level thread zm_genesis_util::setup_devgui_func("", "", 0, & function_ec27cd4b);
+  level thread zm_genesis_util::setup_devgui_func("", "", 0, &function_ec27cd4b);
 }
 
 function function_14d67389(n_val) {

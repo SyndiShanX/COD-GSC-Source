@@ -15,12 +15,12 @@
 #namespace zmhd_cleanup;
 
 function autoexec __init__sytem__() {
-  system::register("zmhd_cleanup", & __init__, & __main__, undefined);
+  system::register("zmhd_cleanup", &__init__, &__main__, undefined);
 }
 
 function __init__() {
   level.n_cleanups_processed_this_frame = 0;
-  level.no_target_override = & no_target_override;
+  level.no_target_override = &no_target_override;
 }
 
 function __main__() {

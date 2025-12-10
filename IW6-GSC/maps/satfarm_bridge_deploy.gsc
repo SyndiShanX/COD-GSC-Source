@@ -148,7 +148,7 @@ tower_to_bridge_deploy() {
   thread maps\satfarm_satellite_view::satellite_view_zoom_in_sound(0.25);
 
   if(getdvar("debug_sat_view_pip", "1") != "2")
-    thread maps\satfarm_satellite_view::satellite_view_type_multiline_text("right", & "SATFARM_ADAM_RORKE", & "SATFARM_GHOST_ONE");
+    thread maps\satfarm_satellite_view::satellite_view_type_multiline_text("right", &"SATFARM_ADAM_RORKE", &"SATFARM_GHOST_ONE");
 
   wait 1;
   thread maps\satfarm_code::radio_dialog_add_and_go("satfarm_hqr_theaagunswill");
@@ -209,7 +209,7 @@ tower_to_bridge_deploy() {
   thread mark_mantis_turrets(var_4);
 
   if(getdvar("debug_sat_view_pip", "1") != "2") {
-    thread maps\satfarm_satellite_view::satellite_view_type_multiline_text_at_point(20, 20, & "SATFARM_OBJECTIVE", & "SATFARM_DESTROY_THE_LOKI", & "SATFARM_DEFENSE_SATELLITE");
+    thread maps\satfarm_satellite_view::satellite_view_type_multiline_text_at_point(20, 20, &"SATFARM_OBJECTIVE", &"SATFARM_DESTROY_THE_LOKI", &"SATFARM_DEFENSE_SATELLITE");
     thread maps\satfarm_satellite_view::satellite_view_type_multiline_text("left", "Missile Incoming", "Time: 5:51", undefined, "satellite_view_missile_wireframe");
   }
 

@@ -661,10 +661,10 @@ func_105C5(var_00, var_01) {
   var_0.func_130F2 = var_02;
   var_03 = scripts\mp\gameobjects::createuseobject(var_01, var_02, []);
   var_03 scripts\mp\gameobjects::setusetime(2);
-  var_03 scripts\mp\gameobjects::setusetext( & "MP_JACKAL_BOARDING");
+  var_03 scripts\mp\gameobjects::setusetext(&"MP_JACKAL_BOARDING");
 
   if(var_2.classname == "trigger_use")
-    var_03 scripts\mp\gameobjects::setusehinttext( & "MP_JACKAL_BOARD");
+    var_03 scripts\mp\gameobjects::setusehinttext(&"MP_JACKAL_BOARD");
 
   var_03 scripts\mp\gameobjects::allowuse("friendly");
   var_03 scripts\mp\gameobjects::setvisibleteam("friendly");
@@ -717,14 +717,14 @@ func_10579(var_00, var_01) {
   if(level.func_A407.allowgrenadedamage) {
     if(isDefined(var_0.func_A83C)) {
       if(!isDefined(var_0.func_A83C.team) || var_0.func_A83C.team == var_1.team) {
-        var_01 iprintlnbold( & "MP_JACKAL_CANT_LAND");
+        var_01 iprintlnbold(&"MP_JACKAL_CANT_LAND");
         return 0;
       }
     }
 
     return 1;
   } else if(!func_10591(var_00)) {
-    var_01 iprintlnbold( & "MP_JACKAL_CANT_LAND");
+    var_01 iprintlnbold(&"MP_JACKAL_CANT_LAND");
     return 0;
   }
 
@@ -737,7 +737,7 @@ func_10581(var_00, var_01, var_02) {
   var_03 = func_10584(var_00, var_01);
 
   if(!isDefined(var_03)) {
-    var_01 iprintlnbold( & "MP_JACKAL_CANT_LAND");
+    var_01 iprintlnbold(&"MP_JACKAL_CANT_LAND");
     return;
   }
 
@@ -800,7 +800,7 @@ func_105B8(var_00) {
       if(func_10579(var_0.func_10574, var_00))
         func_10581(var_0.func_10574, var_00);
       else
-        var_00 iprintlnbold( & "MP_JACKAL_CANT_LAND");
+        var_00 iprintlnbold(&"MP_JACKAL_CANT_LAND");
 
       continue;
     }
@@ -911,7 +911,7 @@ func_10591(var_00) {
 }
 
 func_105AC(var_00, var_01) {
-  var_0.owner forceusehinton( & "MP_JACKAL_EXIT");
+  var_0.owner forceusehinton(&"MP_JACKAL_EXIT");
 }
 
 func_105B2(var_00, var_01, var_02) {
@@ -984,7 +984,7 @@ func_1058F(var_00) {
 
 func_1057A(var_00) {
   if(var_00 ismantling() || var_00 isonladder()) {
-    var_00 iprintlnbold( & "MP_JACKAL_CANT_SUMMON");
+    var_00 iprintlnbold(&"MP_JACKAL_CANT_SUMMON");
     return 0;
   }
 
@@ -994,7 +994,7 @@ func_1057A(var_00) {
   if(level.func_A407.allowhide) {
     foreach(var_02 in level.func_105EC) {
       if(var_00 istouching(var_02)) {
-        var_00 iprintlnbold( & "MP_JACKAL_CANT_SUMMON");
+        var_00 iprintlnbold(&"MP_JACKAL_CANT_SUMMON");
         return 0;
       }
     }
@@ -1007,7 +1007,7 @@ func_1057A(var_00) {
     }
   }
 
-  var_00 iprintlnbold( & "MP_JACKAL_CANT_SUMMON");
+  var_00 iprintlnbold(&"MP_JACKAL_CANT_SUMMON");
   return 0;
 }
 
@@ -1026,7 +1026,7 @@ func_105CF(var_00) {
   var_05 = physics_charactercast(var_01, var_03, var_00, 0, var_0.angles, var_04, var_00, "physicsquery_any");
 
   if(var_05) {
-    var_00 iprintlnbold( & "MP_JACKAL_CANT_SUMMON");
+    var_00 iprintlnbold(&"MP_JACKAL_CANT_SUMMON");
     return;
   }
 
@@ -1040,7 +1040,7 @@ func_105CF(var_00) {
     var_05 = physics_getclosestpointtosphere(var_07, var_08, 0, var_04, undefined, "physicsquery_any");
 
     if(var_05) {
-      var_00 iprintlnbold( & "MP_JACKAL_CANT_SUMMON");
+      var_00 iprintlnbold(&"MP_JACKAL_CANT_SUMMON");
       return;
     }
   }

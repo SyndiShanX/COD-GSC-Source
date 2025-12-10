@@ -262,13 +262,13 @@ function zombie_spawn_init(animname_set = 0) {
       self thread zombie_utility::delayed_zombie_eye_glow();
     }
   }
-  self.deathfunction = & zombie_death_animscript;
+  self.deathfunction = &zombie_death_animscript;
   self.flame_damage_time = 0;
   self.meleedamage = 60;
   self.no_powerups = 1;
   self zombie_history(("zombie_spawn_init -> Spawned = ") + self.origin);
   self.thundergun_knockdown_func = level.basic_zombie_thundergun_knockdown;
-  self.tesla_head_gib_func = & zombie_tesla_head_gib;
+  self.tesla_head_gib_func = &zombie_tesla_head_gib;
   self.team = level.zombie_team;
   self.updatesight = 0;
   self.heroweapon_kill_power = 2;
@@ -1149,7 +1149,7 @@ function zombie_ragdoll_then_explode(launchvector, attacker) {
   wait(2.1);
   if(isDefined(self)) {
     self ghost();
-    self util::delay(0.25, undefined, & zm_utility::self_delete);
+    self util::delay(0.25, undefined, &zm_utility::self_delete);
   }
 }
 
@@ -1987,7 +1987,7 @@ function do_zombie_rise(spot) {
       self animscripted("rise_anim", self.origin, spot.angles, "ai_zombie_traverse_ground_climbout_fast");
     }
   }
-  self zombie_shared::donotetracks("rise_anim", & zombie_utility::handle_rise_notetracks, spot);
+  self zombie_shared::donotetracks("rise_anim", &zombie_utility::handle_rise_notetracks, spot);
   self notify("rise_anim_finished");
   spot notify("stop_zombie_rise_fx");
   self.in_the_ground = 0;

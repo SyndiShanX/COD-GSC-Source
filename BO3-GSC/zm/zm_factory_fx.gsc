@@ -14,7 +14,7 @@
 #namespace zm_factory_fx;
 
 function autoexec __init__sytem__() {
-  system::register("zm_factory_fx", & __init__, undefined, undefined);
+  system::register("zm_factory_fx", &__init__, undefined, undefined);
 }
 
 function __init__() {

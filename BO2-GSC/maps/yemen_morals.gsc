@@ -454,7 +454,7 @@ morals_capture_punch(harper) {
 morals_capture_start_choice(player) {
   level endon("menendez_shot");
   level endon("harper_shot");
-  screen_message_create(&"YEMEN_SHOOT_HARPER", & "YEMEN_SHOOT_MENENDEZ", undefined, -80);
+  screen_message_create(&"YEMEN_SHOOT_HARPER", &"YEMEN_SHOOT_MENENDEZ", undefined, -80);
   wait 0.5;
   level.player thread watch_shoot_harper();
   level.player thread watch_shoot_menendez();

@@ -72,7 +72,7 @@ pre_load() {
 
 get_localized_hint(item, hint) {
   if(is_chaos_mode() && item.isWeapon)
-    return & "ALIEN_CHAOS_WEAPON_PICKUP_HINT";
+    return &"ALIEN_CHAOS_WEAPON_PICKUP_HINT";
 
   return hint;
 }
@@ -157,7 +157,7 @@ init_throwableItems() {
 
   level.throwable_items = [];
 
-  level.throwable_items["alienpropanetank_mp"] = init_throwable(10000, "propane_tank_aliens_iw6", true, & "ALIEN_COLLECTIBLES_PICKUP_PROPANE_TANK", ::propaneTankWatchUse);
+  level.throwable_items["alienpropanetank_mp"] = init_throwable(10000, "propane_tank_aliens_iw6", true, &"ALIEN_COLLECTIBLES_PICKUP_PROPANE_TANK", ::propaneTankWatchUse);
 }
 
 init_throwable(force, model, canBePickedUp, hintString, pickUpFunc) {
@@ -772,14 +772,14 @@ give_weapon(item, is_locker_weapon) {
         cost = level.pistol_ammo_cost;
       }
       self clearLowerMessage("ammo_warn");
-      self setLowerMessage("ammo_taken", & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN", 3);
+      self setLowerMessage("ammo_taken", &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN", 3);
 
       self take_player_currency(cost, false, "weapon", weapon_ref);
 
     } else {
       if(!has_special_ammo) {
         self clearLowerMessage("ammo_warn");
-        self setLowerMessage("ammo_taken", & "ALIEN_COLLECTIBLES_AMMO_MAX", 3);
+        self setLowerMessage("ammo_taken", &"ALIEN_COLLECTIBLES_AMMO_MAX", 3);
       }
     }
   }
@@ -876,7 +876,7 @@ cangive_weapon(item) {
 
   if(is_chaos_mode()) {
     if(maps\mp\alien\_chaos::is_weapon_recently_picked_up(self, weapon_ref) || self has_special_weapon()) {
-      self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+      self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
       return false;
     } else
       return true;
@@ -894,7 +894,7 @@ cangive_weapon(item) {
 
   if(selfmaps\mp\alien\_prestige::prestige_getPistolsOnly() == 1) {
     if(selfmaps\mp\alien\_prestige::prestige_getNoDeployables() != 1) {
-      self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_NERFED", 3);
+      self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_NERFED", 3);
       return false;
     }
   }
@@ -904,7 +904,7 @@ cangive_weapon(item) {
   }
 
   if(currentweapon == "none") {
-    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
     return false;
   }
 
@@ -912,53 +912,53 @@ cangive_weapon(item) {
     if(![
         [level.custom_cangive_weapon_func]
       ](cur_weapons, currentweapon, currentweapon_class, max_primaries)) {
-      self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+      self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
       return false;
     }
   }
 
   if(self has_special_weapon()) {
-    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
     return false;
   }
 
   if(currentweapon_class == "weapon_pistol" && cur_weapons.size >= max_primaries && !self.hasRiotShield && !self HasWeapon("aliensoflam_mp")) {
-    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
     return false;
   }
 
   if(currentweapon_class == "weapon_pistol" && cur_weapons.size >= (max_primaries + 1) && self.hasRiotShield && !self HasWeapon("aliensoflam_mp")) {
-    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
     return false;
   }
 
   if(currentweapon_class == "weapon_pistol" && cur_weapons.size >= (max_primaries + 1) && self hasweapon("aliensoflam_mp") && !self.hasRiotShield) {
-    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
     return false;
   }
 
   if(currentweapon_class == "weapon_pistol" && cur_weapons.size >= (max_primaries + 2) && self.hasRiotShield && self HasWeapon("aliensoflam_mp")) {
-    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
     return false;
   }
 
   if(currentweapon == "aliensoflam_mp" && cur_weapons.size >= (max_primaries + 1) && !self.hasRiotShieldEquipped) {
-    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
     return false;
   }
 
   if(currentweapon == "aliensoflam_mp" && cur_weapons.size >= (max_primaries + 2) && self.hasRiotShieldEquipped) {
-    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
     return false;
   }
 
   if(self.hasRiotShieldEquipped && cur_weapons.size >= (max_primaries + 1) && !self HasWeapon("aliensoflam_mp")) {
-    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
     return false;
   }
 
   if(self.hasRiotShieldEquipped && cur_weapons.size >= (max_primaries + 1) && self HasWeapon("aliensoflam_mp")) {
-    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
+    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
     return false;
   }
 
@@ -970,12 +970,12 @@ cangive_weapon(item) {
 
     if(!has_enough) {
       self clearLowerMessage("ammo_warn");
-      self setLowerMessage("no_money", & "ALIEN_COLLECTIBLES_NO_MONEY", 3);
+      self setLowerMessage("no_money", &"ALIEN_COLLECTIBLES_NO_MONEY", 3);
       return false;
     }
     return true;
   } else {
-    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
     return false;
   }
 
@@ -997,7 +997,7 @@ cangive_throwable_weapon(item) {
   weapon_ref = getsubstr(ref, 5);
 
   if(self isChangingWeapon() || self is_holding_deployable() || self has_special_weapon() || self GetCurrentPrimaryWeapon() == "aliensoflam_mp") {
-    self setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+    self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
     return false;
   }
   if(!self HasWeapon(weapon_ref) && !self is_holding_deployable() && !self has_special_weapon()) {
@@ -1116,12 +1116,12 @@ propaneTankWatchUse(weapname) {
       continue;
     }
     if(player is_holding_deployable() || player has_special_weapon()) {
-      player setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+      player setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
       continue;
     }
 
     if(player isChangingWeapon() || player GetCurrentPrimaryWeapon() == "aliensoflam_mp") {
-      player setLowerMessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+      player setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
       continue;
     }
 
@@ -1141,7 +1141,7 @@ isThrowableItem(weaponName) {
 }
 
 displayThrowMessage() {
-  self setLowerMessage("throw_item", & "ALIEN_COLLECTIBLES_THROW_ITEM", 3);
+  self setLowerMessage("throw_item", &"ALIEN_COLLECTIBLES_THROW_ITEM", 3);
 }
 
 explodeOnDamage(should_explode_on_hive_explode) {
@@ -1448,7 +1448,7 @@ check_for_player_near_weapon() {
     foreach(index, item in level.outline_weapon_watch_list) {
       if(isDefined(item) && distancesquared(item.origin, self.origin) < check_distance) {
         if(!isDefined(item.targetname))
-          self setLowerMessage("ammo_warn", & "ALIENS_PRESTIGE_PISTOLS_ONLY_AMMO_DIST", undefined, 10);
+          self setLowerMessage("ammo_warn", &"ALIENS_PRESTIGE_PISTOLS_ONLY_AMMO_DIST", undefined, 10);
         while(self player_should_see_ammo_message(item, check_distance, false)) {
           wait(.25);
         }

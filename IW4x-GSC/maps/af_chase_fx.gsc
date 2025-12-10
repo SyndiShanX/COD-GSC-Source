@@ -8,63 +8,48 @@
 main() {
   level._effect["explosions/large_vehicle_explosion"] = loadfx("explosions/large_vehicle_explosion");
 
-
   level._effect["water_stop"] = LoadFX("misc/parabolic_water_stand");
   level._effect["water_movement"] = LoadFX("misc/parabolic_water_movement");
 
   level._effect["rocket_hits_heli"] = LoadFX("explosions/grenadeExp_metal");
 
-
   level._effect["zodiac_wake_geotrail"] = LoadFX("treadfx/zodiac_wake_geotrail_af_chase");
 
-
   level._effect["zodiac_leftground"] = LoadFX("misc/watersplash_large");
-
 
   level._effect["player_zodiac_bumpbig"] = LoadFX("misc/watersplash_large");
   level._effect["zodiac_bumpbig"] = LoadFX("misc/watersplash_large");
   level._effect_tag["zodiac_bumpbig"] = "tag_guy2";
 
-
   level._effect["player_zodiac_bump"] = LoadFX("impacts/large_waterhit");
   level._effect["zodiac_bump"] = LoadFX("impacts/large_waterhit");
-
 
   level._effect["zodiac_collision"] = LoadFX("misc/watersplash_large");
   level._effect_tag["zodiac_collision"] = "TAG_DEATH_FX";
 
-
   level._effect["zodiac_bounce_small_left"] = LoadFX("water/zodiac_splash_bounce_small");
   level._effect_tag["zodiac_bounce_small_left"] = "TAG_FX_LF";
-
 
   level._effect["zodiac_bounce_small_right"] = LoadFX("water/zodiac_splash_bounce_small");
   level._effect_tag["zodiac_bounce_small_right"] = "TAG_FX_RF";
 
-
   level._effect["zodiac_bounce_large_left"] = LoadFX("water/zodiac_splash_bounce_large");
   level._effect_tag["zodiac_bounce_large_left"] = "TAG_FX_LF";
-
 
   level._effect["zodiac_bounce_large_right"] = LoadFX("water/zodiac_splash_bounce_large");
   level._effect_tag["zodiac_bounce_large_right"] = "TAG_FX_RF";
 
-
   level._effect["zodiac_sway_left"] = LoadFX("water/zodiac_splash_turn_hard");
   level._effect_tag["zodiac_sway_left"] = "TAG_FX_LF";
-
 
   level._effect["zodiac_sway_right"] = LoadFX("water/zodiac_splash_turn_hard");
   level._effect_tag["zodiac_sway_right"] = "TAG_FX_RF";
 
-
   level._effect["zodiac_sway_left_light"] = LoadFX("water/zodiac_splash_turn_light");
   level._effect_tag["zodiac_sway_left_light"] = "TAG_FX_LF";
 
-
   level._effect["zodiac_sway_right_light"] = LoadFX("water/zodiac_splash_turn_light");
   level._effect_tag["zodiac_sway_right_light"] = "TAG_FX_RF";
-
 
   level.zodiac_fx_sound["zodiac_bump"] = "water_boat_splash_small";
   level.zodiac_fx_sound["zodiac_bumpbig"] = "water_boat_splash";
@@ -72,21 +57,16 @@ main() {
   level.zodiac_fx_sound["player_zodiac_bump"] = "water_boat_splash_small_plr";
   level.zodiac_fx_sound["player_zodiac_bumpbig"] = "water_boat_splash_plr";
 
-
   level.water_sheating_time["bump_big_start"] = 2;
   level.water_sheating_time["bump_small_start"] = 1;
-
 
   level.water_sheating_time["bump_big_after_rapids"] = 4;
   level.water_sheating_time["bump_small_after_rapids"] = 2;
 
-
   level.water_sheating_time["bump_big_player_dies"] = 7;
   level.water_sheating_time["bump_small_player_dies"] = 3;
 
-
   level._effect["splash_over_waterfall"] = LoadFX("misc/watersplash_large");
-
 
   level._effect["player_hits_water_after_waterfall"] = LoadFX("misc/watersplash_large");
 
@@ -107,7 +87,6 @@ main() {
   level._effect["footstep_dust_sandstorm_runner"] = LoadFX("impacts/footstep_dust_sandstorm_runner");
   level._effect["footstep_dust_sandstorm_small_runner"] = LoadFX("impacts/footstep_dust_sandstorm_small_runner");
   level._effect["bodyfall_dust_sandstorm_large_runner"] = LoadFX("impacts/bodyfall_dust_sandstorm_large_runner");
-
 
   level._effect["body_falls_from_ropes_splash"] = LoadFX("impacts/large_waterhit");
 
@@ -150,8 +129,6 @@ main() {
 
   level._effect["heli_blinds_player"] = LoadFX("weather/sand_storm_player_blind");
   level._effect["shepherd_anaconda"] = LoadFX("muzzleflashes/desert_eagle_flash_wv");
-
-
 
   level._effect["pavelow_minigunner_splash_add"] = LoadFX("water/zodiac_splash_bounce_small");
 

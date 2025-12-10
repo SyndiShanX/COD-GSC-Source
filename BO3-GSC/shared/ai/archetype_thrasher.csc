@@ -13,21 +13,21 @@
 #namespace archetype_thrasher;
 
 function autoexec __init__sytem__() {
-  system::register("thrasher", & __init__, undefined, undefined);
+  system::register("thrasher", &__init__, undefined, undefined);
 }
 
 function __init__() {
   visionset_mgr::register_visionset_info("zm_isl_thrasher_stomach_visionset", 9000, 16, undefined, "zm_isl_thrasher_stomach");
   if(ai::shouldregisterclientfieldforarchetype("thrasher")) {
-    clientfield::register("actor", "thrasher_spore_state", 5000, 3, "int", & thrasherclientutils::thrashersporeexplode, 0, 0);
-    clientfield::register("actor", "thrasher_berserk_state", 5000, 1, "int", & thrasherclientutils::thrasherberserkmode, 0, 1);
-    clientfield::register("actor", "thrasher_player_hide", 8000, 4, "int", & thrasherclientutils::thrasherhidefromplayer, 0, 0);
-    clientfield::register("toplayer", "sndPlayerConsumed", 10000, 1, "int", & thrasherclientutils::sndplayerconsumed, 0, 1);
+    clientfield::register("actor", "thrasher_spore_state", 5000, 3, "int", &thrasherclientutils::thrashersporeexplode, 0, 0);
+    clientfield::register("actor", "thrasher_berserk_state", 5000, 1, "int", &thrasherclientutils::thrasherberserkmode, 0, 1);
+    clientfield::register("actor", "thrasher_player_hide", 8000, 4, "int", &thrasherclientutils::thrasherhidefromplayer, 0, 0);
+    clientfield::register("toplayer", "sndPlayerConsumed", 10000, 1, "int", &thrasherclientutils::sndplayerconsumed, 0, 1);
     foreach(spore in array(1, 2, 4)) {
-      clientfield::register("actor", "thrasher_spore_impact" + spore, 8000, 1, "counter", & thrasherclientutils::thrashersporeimpact, 0, 0);
+      clientfield::register("actor", "thrasher_spore_impact" + spore, 8000, 1, "counter", &thrasherclientutils::thrashersporeimpact, 0, 0);
     }
   }
-  ai::add_archetype_spawn_function("thrasher", & thrasherclientutils::thrasherspawn);
+  ai::add_archetype_spawn_function("thrasher", &thrasherclientutils::thrasherspawn);
   level.thrasherpustules = [];
   level thread thrasherclientutils::thrasherfxcleanup();
 }
@@ -54,8 +54,8 @@ function autoexec precache() {
 function private thrasherspawn(localclientnum) {
   entity = self;
   entity.ignoreragdoll = 1;
-  level._footstepcbfuncs[entity.archetype] = & thrasherprocessfootstep;
-  gibclientutils::addgibcallback(localclientnum, entity, 4, & thrasherdisableeyeglow);
+  level._footstepcbfuncs[entity.archetype] = &thrasherprocessfootstep;
+  gibclientutils::addgibcallback(localclientnum, entity, 4, &thrasherdisableeyeglow);
 }
 
 function private thrasherfxcleanup() {
@@ -117,7 +117,7 @@ function private thrasherhidefromplayer(localclientnum, oldvalue, newvalue, bnew
   localplayer = getlocalplayer(localclientnum);
   localplayernum = localplayer getentitynumber();
   localplayerbit = 1 << localplayernum;
-  if(localplayerbit & newvalue) {
+  if(localplayerbit &newvalue) {
     entity hide();
   } else {
     entity show();
@@ -161,13 +161,13 @@ function private thrashersporeexplode(localclientnum, oldvalue, newvalue, bnewen
   entity = self;
   sporeclientfields = array(1, 2, 4);
   sporetags = array("tag_spore_chest", "tag_spore_back", "tag_spore_leg");
-  newsporesexploded = (oldvalue ^ newvalue) & (~oldvalue);
-  oldsporesinflated = (oldvalue ^ newvalue) & (~newvalue);
+  newsporesexploded = (oldvalue ^ newvalue) &(~oldvalue);
+  oldsporesinflated = (oldvalue ^ newvalue) &(~newvalue);
   currentspore = sporeclientfields[0];
   for(index = 0; index < array("tag_spore_chest", "tag_spore_back", "tag_spore_leg").size; index++) {
     sporetag = sporetags[index];
     pustuleinfo = undefined;
-    if(newsporesexploded & currentspore) {
+    if(newsporesexploded &currentspore) {
       playFXOnTag(localclientnum, level._effect["fx_thrash_pustule_burst"], entity, sporetag);
       playFXOnTag(localclientnum, level._effect["fx_thrash_pustule_spore_exp"], entity, sporetag);
       pustuleinfo = spawnStruct();
@@ -175,7 +175,7 @@ function private thrashersporeexplode(localclientnum, oldvalue, newvalue, bnewen
       if(!(isDefined(level.b_thrasher_custom_spore_fx) && level.b_thrasher_custom_spore_fx)) {
         pustuleinfo.fx = playFX(localclientnum, level._effect["fx_spores_cloud_ambient_md"], entity gettagorigin(sporetag));
       }
-    } else if(oldsporesinflated & currentspore) {
+    } else if(oldsporesinflated &currentspore) {
       pustuleinfo = spawnStruct();
       pustuleinfo.length = 2000;
       pustuleinfo.fx = playFXOnTag(localclientnum, level._effect["fx_thrash_pustule_reinflate"], entity, sporetag);

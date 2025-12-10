@@ -15,13 +15,13 @@
 #namespace _gadget_armor;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_armor", & __init__, undefined, undefined);
+  system::register("gadget_armor", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_localplayer_spawned( & on_local_player_spawned);
-  clientfield::register("allplayers", "armor_status", 1, 5, "int", & player_armor_changed, 0, 0);
-  clientfield::register("toplayer", "player_damage_type", 1, 1, "int", & player_damage_type_changed, 0, 0);
+  callback::on_localplayer_spawned(&on_local_player_spawned);
+  clientfield::register("allplayers", "armor_status", 1, 5, "int", &player_armor_changed, 0, 0);
+  clientfield::register("toplayer", "player_damage_type", 1, 1, "int", &player_damage_type_changed, 0, 0);
   duplicate_render::set_dr_filter_framebuffer_duplicate("armor_pl", 40, "armor_on", undefined, 1, "mc/mtl_power_armor", 0);
   level thread armor_overlay_think();
 }

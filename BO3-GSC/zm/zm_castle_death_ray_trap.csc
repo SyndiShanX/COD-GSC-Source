@@ -17,13 +17,13 @@ function main() {
   level._effect["console_red_light"] = "dlc1/castle/fx_glow_panel_red_castle";
   level._effect["tesla_zombie_shock"] = "dlc1/castle/fx_tesla_trap_body_shock";
   level._effect["tesla_zombie_explode"] = "dlc1/castle/fx_tesla_trap_body_exp";
-  clientfield::register("actor", "death_ray_shock_fx", 5000, 1, "int", & death_ray_shock_fx, 0, 0);
-  clientfield::register("actor", "death_ray_shock_eye_fx", 5000, 1, "int", & death_ray_shock_eye_fx, 0, 0);
-  clientfield::register("actor", "death_ray_explode_fx", 5000, 1, "counter", & death_ray_explode_fx, 0, 0);
-  clientfield::register("scriptmover", "death_ray_status_light", 5000, 2, "int", & death_ray_status_light, 0, 0);
-  clientfield::register("actor", "tesla_beam_fx", 5000, 1, "counter", & function_200eea36, 0, 0);
-  clientfield::register("toplayer", "tesla_beam_fx", 5000, 1, "counter", & function_200eea36, 0, 0);
-  clientfield::register("actor", "tesla_beam_mechz", 5000, 1, "int", & tesla_beam_mechz, 0, 0);
+  clientfield::register("actor", "death_ray_shock_fx", 5000, 1, "int", &death_ray_shock_fx, 0, 0);
+  clientfield::register("actor", "death_ray_shock_eye_fx", 5000, 1, "int", &death_ray_shock_eye_fx, 0, 0);
+  clientfield::register("actor", "death_ray_explode_fx", 5000, 1, "counter", &death_ray_explode_fx, 0, 0);
+  clientfield::register("scriptmover", "death_ray_status_light", 5000, 2, "int", &death_ray_status_light, 0, 0);
+  clientfield::register("actor", "tesla_beam_fx", 5000, 1, "counter", &function_200eea36, 0, 0);
+  clientfield::register("toplayer", "tesla_beam_fx", 5000, 1, "counter", &function_200eea36, 0, 0);
+  clientfield::register("actor", "tesla_beam_mechz", 5000, 1, "int", &tesla_beam_mechz, 0, 0);
 }
 
 function death_ray_shock_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

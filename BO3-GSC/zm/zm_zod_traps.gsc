@@ -309,19 +309,19 @@ class ctrap {
   function strings_update_state() {
     switch (m_n_state) {
       case 1: {
-        array::thread_all(m_a_t_use, & hint_string, m_str_trap_available, m_n_cost);
+        array::thread_all(m_a_t_use, &hint_string, m_str_trap_available, m_n_cost);
         break;
       }
       case 2: {
-        array::thread_all(m_a_t_use, & hint_string, m_str_trap_active);
+        array::thread_all(m_a_t_use, &hint_string, m_str_trap_active);
         break;
       }
       case 3: {
-        array::thread_all(m_a_t_use, & hint_string, m_str_trap_cooldown);
+        array::thread_all(m_a_t_use, &hint_string, m_str_trap_cooldown);
         break;
       }
       case 0: {
-        array::thread_all(m_a_t_use, & hint_string, m_str_trap_unavailable);
+        array::thread_all(m_a_t_use, &hint_string, m_str_trap_unavailable);
         break;
       }
     }
@@ -402,20 +402,20 @@ class ctrap {
     m_n_duration_zombie_damage_cooldown = 0.25;
     m_n_player_damage = 25;
     m_n_zombie_damage = 6500;
-    m_str_trap_unavailable = & "ZM_ZOD_TRAP_CHAIN_UNAVAILABLE";
-    m_str_trap_available = & "ZM_ZOD_TRAP_CHAIN_AVAILABLE";
-    m_str_trap_active = & "ZM_ZOD_TRAP_CHAIN_ACTIVE";
-    m_str_trap_cooldown = & "ZM_ZOD_TRAP_CHAIN_COOLDOWN";
+    m_str_trap_unavailable = &"ZM_ZOD_TRAP_CHAIN_UNAVAILABLE";
+    m_str_trap_available = &"ZM_ZOD_TRAP_CHAIN_AVAILABLE";
+    m_str_trap_active = &"ZM_ZOD_TRAP_CHAIN_ACTIVE";
+    m_str_trap_cooldown = &"ZM_ZOD_TRAP_CHAIN_COOLDOWN";
     m_a_t_damage = getEntArray("trap_chain_damage", "targetname");
-    m_a_t_damage = array::filter(m_a_t_damage, 0, & filter_areaname, str_area_name);
+    m_a_t_damage = array::filter(m_a_t_damage, 0, &filter_areaname, str_area_name);
     m_a_t_rumble = getEntArray("trap_chain_rumble", "targetname");
-    m_a_t_rumble = array::filter(m_a_t_damage, 0, & filter_areaname, str_area_name);
+    m_a_t_rumble = array::filter(m_a_t_damage, 0, &filter_areaname, str_area_name);
     m_a_e_heart = getEntArray("trap_chain_heart", "targetname");
-    m_a_e_heart = array::filter(m_a_e_heart, 0, & filter_areaname, str_area_name);
+    m_a_e_heart = array::filter(m_a_e_heart, 0, &filter_areaname, str_area_name);
     m_a_t_use = getEntArray("use_trap_chain", "targetname");
-    m_a_t_use = array::filter(m_a_t_use, 0, & filter_areaname, str_area_name);
+    m_a_t_use = array::filter(m_a_t_use, 0, &filter_areaname, str_area_name);
     strings_update_state();
-    array::thread_all(m_a_t_use, & use_trig_think, self);
+    array::thread_all(m_a_t_use, &use_trig_think, self);
     var_d186b130 = [];
     var_d186b130[0] = "theater";
     var_d186b130[1] = "slums";
@@ -431,7 +431,7 @@ class ctrap {
     m_t_damage = m_a_t_damage[0];
     m_t_rumble = m_a_t_rumble[0];
     a_audio_structs = struct::get_array("trap_chain_audio_loc", "targetname");
-    a_audio_structs = array::filter(a_audio_structs, 0, & filter_areaname, str_area_name);
+    a_audio_structs = array::filter(a_audio_structs, 0, &filter_areaname, str_area_name);
     m_s_audio_location = a_audio_structs[0];
     m_s_audio_location = spawn("script_origin", m_s_audio_location.origin);
     m_b_are_strikers_moving = 0;
@@ -443,7 +443,7 @@ class ctrap {
 #namespace zm_zod_traps;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_traps", & __init__, undefined, undefined);
+  system::register("zm_zod_traps", &__init__, undefined, undefined);
 }
 
 function __init__() {

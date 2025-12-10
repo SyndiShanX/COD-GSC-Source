@@ -124,7 +124,7 @@ onprecachegametype() {
   precachestring(&"axis_base");
   precachestring(&"allies_flag");
   precachestring(&"axis_flag");
-  game["strings"]["score_limit_reached"] = & "MP_CAP_LIMIT_REACHED";
+  game["strings"]["score_limit_reached"] = &"MP_CAP_LIMIT_REACHED";
 }
 
 onstartgametype() {
@@ -135,19 +135,19 @@ onstartgametype() {
 
   setclientnamemode("auto_change");
   maps\mp\gametypes\_globallogic_score::resetteamscores();
-  setobjectivetext("allies", & "OBJECTIVES_CTF");
-  setobjectivetext("axis", & "OBJECTIVES_CTF");
+  setobjectivetext("allies", &"OBJECTIVES_CTF");
+  setobjectivetext("axis", &"OBJECTIVES_CTF");
 
   if(level.splitscreen) {
-    setobjectivescoretext("allies", & "OBJECTIVES_CTF");
-    setobjectivescoretext("axis", & "OBJECTIVES_CTF");
+    setobjectivescoretext("allies", &"OBJECTIVES_CTF");
+    setobjectivescoretext("axis", &"OBJECTIVES_CTF");
   } else {
-    setobjectivescoretext("allies", & "OBJECTIVES_CTF_SCORE");
-    setobjectivescoretext("axis", & "OBJECTIVES_CTF_SCORE");
+    setobjectivescoretext("allies", &"OBJECTIVES_CTF_SCORE");
+    setobjectivescoretext("axis", &"OBJECTIVES_CTF_SCORE");
   }
 
-  setobjectivehinttext("allies", & "OBJECTIVES_CTF_HINT");
-  setobjectivehinttext("axis", & "OBJECTIVES_CTF_HINT");
+  setobjectivehinttext("allies", &"OBJECTIVES_CTF_HINT");
+  setobjectivehinttext("axis", &"OBJECTIVES_CTF_HINT");
 
   if(isDefined(game["overtime_round"])) {
     [[level._setteamscore]]("allies", 0);
@@ -158,14 +158,14 @@ onstartgametype() {
       registertimelimit(game["ctf_overtime_time_to_beat"] / 60000, game["ctf_overtime_time_to_beat"] / 60000);
 
     if(game["overtime_round"] == 1) {
-      setobjectivehinttext("allies", & "MP_CTF_OVERTIME_ROUND_1");
-      setobjectivehinttext("axis", & "MP_CTF_OVERTIME_ROUND_1");
+      setobjectivehinttext("allies", &"MP_CTF_OVERTIME_ROUND_1");
+      setobjectivehinttext("axis", &"MP_CTF_OVERTIME_ROUND_1");
     } else if(isDefined(game["ctf_overtime_first_winner"])) {
-      setobjectivehinttext(game["ctf_overtime_first_winner"], & "MP_CTF_OVERTIME_ROUND_2_WINNER");
-      setobjectivehinttext(getotherteam(game["ctf_overtime_first_winner"]), & "MP_CTF_OVERTIME_ROUND_2_LOSER");
+      setobjectivehinttext(game["ctf_overtime_first_winner"], &"MP_CTF_OVERTIME_ROUND_2_WINNER");
+      setobjectivehinttext(getotherteam(game["ctf_overtime_first_winner"]), &"MP_CTF_OVERTIME_ROUND_2_LOSER");
     } else {
-      setobjectivehinttext("allies", & "MP_CTF_OVERTIME_ROUND_2_TIE");
-      setobjectivehinttext("axis", & "MP_CTF_OVERTIME_ROUND_2_TIE");
+      setobjectivehinttext("allies", &"MP_CTF_OVERTIME_ROUND_2_TIE");
+      setobjectivehinttext("axis", &"MP_CTF_OVERTIME_ROUND_2_TIE");
     }
   }
 
@@ -270,11 +270,11 @@ onroundendgame(winningteam) {
         winningteam = game["ctf_overtime_first_winner"];
 
       if(game["ctf_overtime_first_winner"] == winningteam) {
-        level.endvictoryreasontext = & "MPUI_CTF_OVERTIME_FASTEST_CAP_TIME";
-        level.enddefeatreasontext = & "MPUI_CTF_OVERTIME_DEFEAT_TIMELIMIT";
+        level.endvictoryreasontext = &"MPUI_CTF_OVERTIME_FASTEST_CAP_TIME";
+        level.enddefeatreasontext = &"MPUI_CTF_OVERTIME_DEFEAT_TIMELIMIT";
       } else {
-        level.endvictoryreasontext = & "MPUI_CTF_OVERTIME_FASTEST_CAP_TIME";
-        level.enddefeatreasontext = & "MPUI_CTF_OVERTIME_DEFEAT_DID_NOT_DEFEND";
+        level.endvictoryreasontext = &"MPUI_CTF_OVERTIME_FASTEST_CAP_TIME";
+        level.enddefeatreasontext = &"MPUI_CTF_OVERTIME_DEFEAT_DID_NOT_DEFEND";
       }
     } else if(!isDefined(winningteam) || winningteam == "tie")
       return "tie";
@@ -537,11 +537,11 @@ ondrop(player) {
   }
 
   if(isDefined(player)) {
-    printandsoundoneveryone(team, undefined, & "", undefined, "mp_war_objective_lost");
+    printandsoundoneveryone(team, undefined, &"", undefined, "mp_war_objective_lost");
     level thread maps\mp\_popups::displayteammessagetoteam(&"MP_FRIENDLY_FLAG_DROPPED", player, team);
     level thread maps\mp\_popups::displayteammessagetoteam(&"MP_ENEMY_FLAG_DROPPED", player, otherteam);
   } else
-    printandsoundoneveryone(team, undefined, & "", undefined, "mp_war_objective_lost");
+    printandsoundoneveryone(team, undefined, &"", undefined, "mp_war_objective_lost");
 
   maps\mp\gametypes\_globallogic_audio::leaderdialog("wedrop_flag", otherteam, "ctf_flag");
   maps\mp\gametypes\_globallogic_audio::leaderdialog("theydrop_flag", team, "ctf_flag_enemy");
@@ -611,7 +611,7 @@ onpickup(player) {
 
   if(isDefined(player) && player.pers["team"] == team) {
     self notify("picked_up");
-    printandsoundoneveryone(team, undefined, & "", undefined, "mp_obj_returned");
+    printandsoundoneveryone(team, undefined, &"", undefined, "mp_obj_returned");
 
     if(isDefined(player.pers["returns"])) {
       player.pers["returns"]++;
@@ -645,7 +645,7 @@ onpickup(player) {
     player recordgameevent("pickup");
     maps\mp\_scoreevents::processscoreevent("flag_grab", player);
     maps\mp\_demo::bookmark("event", gettime(), player);
-    printandsoundoneveryone(otherteam, undefined, & "", undefined, "mp_obj_taken", "mp_enemy_obj_taken");
+    printandsoundoneveryone(otherteam, undefined, &"", undefined, "mp_obj_taken", "mp_enemy_obj_taken");
     level thread maps\mp\_popups::displayteammessagetoteam(&"MP_FRIENDLY_FLAG_TAKEN", player, team);
     level thread maps\mp\_popups::displayteammessagetoteam(&"MP_ENEMY_FLAG_TAKEN", player, otherteam);
     maps\mp\gametypes\_globallogic_audio::leaderdialog("wetake_flag", otherteam, "ctf_flag");
@@ -728,7 +728,7 @@ oncapture(player) {
   if(playerteamsflag maps\mp\gametypes\_gameobjects::isobjectawayfromhome()) {
     return;
   }
-  printandsoundoneveryone(team, undefined, & "", undefined, "mp_obj_captured", "mp_enemy_obj_captured");
+  printandsoundoneveryone(team, undefined, &"", undefined, "mp_obj_captured", "mp_enemy_obj_captured");
   bbprint("mpobjective", "gametime %d objtype %s team %s", time, "ctf_flagcapture", enemyteam);
   game["challenge"][team]["capturedFlag"] = 1;
   player maps\mp\_challenges::capturedobjective(time);
@@ -901,22 +901,22 @@ createreturnmessageelems() {
   level.returnmessageelems = [];
   level.returnmessageelems["allies"]["axis"] = createservertimer("objective", 1.4, "allies");
   level.returnmessageelems["allies"]["axis"] setpoint("TOPRIGHT", "TOPRIGHT", 0, 0);
-  level.returnmessageelems["allies"]["axis"].label = & "MP_ENEMY_FLAG_RETURNING_IN";
+  level.returnmessageelems["allies"]["axis"].label = &"MP_ENEMY_FLAG_RETURNING_IN";
   level.returnmessageelems["allies"]["axis"].alpha = 0;
   level.returnmessageelems["allies"]["axis"].archived = 0;
   level.returnmessageelems["allies"]["allies"] = createservertimer("objective", 1.4, "allies");
   level.returnmessageelems["allies"]["allies"] setpoint("TOPRIGHT", "TOPRIGHT", 0, 20);
-  level.returnmessageelems["allies"]["allies"].label = & "MP_YOUR_FLAG_RETURNING_IN";
+  level.returnmessageelems["allies"]["allies"].label = &"MP_YOUR_FLAG_RETURNING_IN";
   level.returnmessageelems["allies"]["allies"].alpha = 0;
   level.returnmessageelems["allies"]["allies"].archived = 0;
   level.returnmessageelems["axis"]["allies"] = createservertimer("objective", 1.4, "axis");
   level.returnmessageelems["axis"]["allies"] setpoint("TOPRIGHT", "TOPRIGHT", 0, 0);
-  level.returnmessageelems["axis"]["allies"].label = & "MP_ENEMY_FLAG_RETURNING_IN";
+  level.returnmessageelems["axis"]["allies"].label = &"MP_ENEMY_FLAG_RETURNING_IN";
   level.returnmessageelems["axis"]["allies"].alpha = 0;
   level.returnmessageelems["axis"]["allies"].archived = 0;
   level.returnmessageelems["axis"]["axis"] = createservertimer("objective", 1.4, "axis");
   level.returnmessageelems["axis"]["axis"] setpoint("TOPRIGHT", "TOPRIGHT", 0, 20);
-  level.returnmessageelems["axis"]["axis"].label = & "MP_YOUR_FLAG_RETURNING_IN";
+  level.returnmessageelems["axis"]["axis"].label = &"MP_YOUR_FLAG_RETURNING_IN";
   level.returnmessageelems["axis"]["axis"].alpha = 0;
   level.returnmessageelems["axis"]["axis"].archived = 0;
 }

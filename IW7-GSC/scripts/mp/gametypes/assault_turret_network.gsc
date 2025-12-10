@@ -418,8 +418,8 @@ func_45CD() {
   scripts\mp\gameobjects::allowuse("friendly");
   scripts\mp\gameobjects::setusetime(1);
   scripts\mp\gameobjects::setwaitweaponchangeonuse(1);
-  scripts\mp\gameobjects::setusetext( & "MP_BREACH_OPERATE_TURRET_ON_ACTION");
-  scripts\mp\gameobjects::setusehinttext( & "MP_BREACH_OPERATE_TURRET_ON");
+  scripts\mp\gameobjects::setusetext(&"MP_BREACH_OPERATE_TURRET_ON_ACTION");
+  scripts\mp\gameobjects::setusehinttext(&"MP_BREACH_OPERATE_TURRET_ON");
   self.onbeginuse = ::func_45C6;
   self.onenduse = ::func_45C7;
   self.onuse = ::func_45C8;
@@ -429,8 +429,8 @@ func_45CE() {
   scripts\mp\gameobjects::allowuse("enemy");
   scripts\mp\gameobjects::setusetime(2);
   scripts\mp\gameobjects::setwaitweaponchangeonuse(1);
-  scripts\mp\gameobjects::setusetext( & "MP_BREACH_OPERATE_TURRET_OFF_ACTION");
-  scripts\mp\gameobjects::setusehinttext( & "MP_BREACH_OPERATE_TURRET_OFF");
+  scripts\mp\gameobjects::setusetext(&"MP_BREACH_OPERATE_TURRET_OFF_ACTION");
+  scripts\mp\gameobjects::setusehinttext(&"MP_BREACH_OPERATE_TURRET_OFF");
   self.onbeginuse = ::func_45C6;
   self.onenduse = ::func_45C7;
   self.onuse = ::func_45C9;

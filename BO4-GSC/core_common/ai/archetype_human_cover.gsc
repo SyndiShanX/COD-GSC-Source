@@ -425,9 +425,9 @@ temp_get_arm_offset(entity, throwposition) {
         rightoffset = (24, 0, 76);
       }
 
-      if(isDefined(entity.node.spawnflags) && (entity.node.spawnflags&1024) == 1024) {
+      if(isDefined(entity.node.spawnflags) && (entity.node.spawnflags& 1024) == 1024) {
         arm_offset = rightoffset;
-      } else if(isDefined(entity.node.spawnflags) && (entity.node.spawnflags&2048) == 2048) {
+      } else if(isDefined(entity.node.spawnflags) && (entity.node.spawnflags& 2048) == 2048) {
         arm_offset = leftoffset;
       } else {
         yawtoenemyposition = angleclamp180(vectortoangles(throwposition - entity.node.origin)[1] - entity.node.angles[1]);

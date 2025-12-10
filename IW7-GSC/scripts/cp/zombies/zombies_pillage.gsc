@@ -292,7 +292,7 @@ player_used_pillage_spot(param_00, param_01) {
         scripts\engine\utility::waitframe();
         param_00 notify("all_players_searched");
       } else {
-        param_01 scripts\cp\utility::setlowermessage("max_ammo", & "COOP_GAME_PLAY_AMMO_MAX", 3);
+        param_01 scripts\cp\utility::setlowermessage("max_ammo", &"COOP_GAME_PLAY_AMMO_MAX", 3);
       }
       break;
 
@@ -307,7 +307,7 @@ player_used_pillage_spot(param_00, param_01) {
         param_01 scripts\cp\cp_persistence::give_player_currency(param_00.var_3C, undefined, undefined, 1, "pillage");
         param_00 notify("all_players_searched");
       } else {
-        param_01 scripts\cp\utility::setlowermessage("max_money", & "COOP_GAME_PLAY_MONEY_MAX", 3);
+        param_01 scripts\cp\utility::setlowermessage("max_money", &"COOP_GAME_PLAY_MONEY_MAX", 3);
       }
       break;
 
@@ -326,9 +326,9 @@ player_used_pillage_spot(param_00, param_01) {
       } else {
         var_02 = param_01 scripts\cp\utility::getvalidtakeweapon();
         if(issubstr(var_02, "iw7_cutie_zm") || issubstr(var_02, "iw7_cutier_zm")) {
-          param_01 scripts\cp\utility::setlowermessage("invalid_ammo", & "CP_TOWN_INVALID_AMMO", 3);
+          param_01 scripts\cp\utility::setlowermessage("invalid_ammo", &"CP_TOWN_INVALID_AMMO", 3);
         } else {
-          param_01 scripts\cp\utility::setlowermessage("max_ammo", & "COOP_GAME_PLAY_AMMO_MAX", 3);
+          param_01 scripts\cp\utility::setlowermessage("max_ammo", &"COOP_GAME_PLAY_AMMO_MAX", 3);
         }
 
         return;
@@ -344,7 +344,7 @@ player_used_pillage_spot(param_00, param_01) {
 
     case "battery":
       if(scripts\engine\utility::istrue(var_02.has_battery)) {
-        var_02 scripts\cp\utility::setlowermessage("have_battery", & "CP_TOWN_HAVE_BATTERY", 4);
+        var_02 scripts\cp\utility::setlowermessage("have_battery", &"CP_TOWN_HAVE_BATTERY", 4);
         return;
       }
 
@@ -469,46 +469,46 @@ func_7A09(param_00) {
   param_00 = "" + param_00;
   switch (param_00) {
     case "power_bolaSpray":
-      return & "ZOMBIE_PILLAGE_FOUND_BOLA_BARRAGE";
+      return &"ZOMBIE_PILLAGE_FOUND_BOLA_BARRAGE";
 
     case "power_semtex":
-      return & "ZOMBIE_PILLAGE_FOUND_SEMTEX";
+      return &"ZOMBIE_PILLAGE_FOUND_SEMTEX";
 
     case "power_splashGrenade":
-      return & "ZOMBIE_PILLAGE_FOUND_PLASMA_GRENADE";
+      return &"ZOMBIE_PILLAGE_FOUND_PLASMA_GRENADE";
 
     case "power_bioSpike":
-      return & "COOP_PILLAGE_FOUND_BIO_SPIKE";
+      return &"COOP_PILLAGE_FOUND_BIO_SPIKE";
 
     case "power_gasGrenade":
-      return & "COOP_PILLAGE_FOUND_GAS_GRENADE";
+      return &"COOP_PILLAGE_FOUND_GAS_GRENADE";
 
     case "power_clusterGrenade":
-      return & "COOP_PILLAGE_FOUND_CLUSTER_GRENADE";
+      return &"COOP_PILLAGE_FOUND_CLUSTER_GRENADE";
 
     case "power_repulsor":
-      return & "COOP_PILLAGE_FOUND_REPULSOR";
+      return &"COOP_PILLAGE_FOUND_REPULSOR";
 
     case "power_frag":
-      return & "ZOMBIE_PILLAGE_FOUND_FRAG_GRENADE";
+      return &"ZOMBIE_PILLAGE_FOUND_FRAG_GRENADE";
 
     case "power_arcGrenade":
-      return & "ZOMBIE_PILLAGE_FOUND_ARC_GRENADE";
+      return &"ZOMBIE_PILLAGE_FOUND_ARC_GRENADE";
 
     case "power_c4":
-      return & "ZOMBIE_PILLAGE_FOUND_C4";
+      return &"ZOMBIE_PILLAGE_FOUND_C4";
 
     case "power_concussionGrenade":
-      return & "ZOMBIE_PILLAGE_FOUND_CONCUSSION_GRENADES";
+      return &"ZOMBIE_PILLAGE_FOUND_CONCUSSION_GRENADES";
 
     case "maxammo":
-      return & "COOP_PILLAGE_FOUND_MAX_AMMO";
+      return &"COOP_PILLAGE_FOUND_MAX_AMMO";
 
     case "clip":
-      return & "COOP_PILLAGE_FOUND_CLIP";
+      return &"COOP_PILLAGE_FOUND_CLIP";
 
     case "tickets":
-      return & "ZOMBIE_PILLAGE_FOUND_TICKETS";
+      return &"ZOMBIE_PILLAGE_FOUND_TICKETS";
 
     default:
       return undefined;
@@ -523,55 +523,55 @@ func_7A06(param_00) {
   param_00 = "" + param_00;
   switch (param_00) {
     case "power_frag":
-      return & "ZOMBIE_PILLAGE_PICKUP_FRAG_GRENADE";
+      return &"ZOMBIE_PILLAGE_PICKUP_FRAG_GRENADE";
 
     case "power_splashGrenade":
-      return & "ZOMBIE_PILLAGE_PICKUP_PLASMA_GRENADE";
+      return &"ZOMBIE_PILLAGE_PICKUP_PLASMA_GRENADE";
 
     case "power_bolaSpray":
-      return & "ZOMBIE_PILLAGE_PICKUP_BOLA_BARRAGE";
+      return &"ZOMBIE_PILLAGE_PICKUP_BOLA_BARRAGE";
 
     case "power_semtex":
-      return & "ZOMBIE_PILLAGE_PICKUP_SEMTEX";
+      return &"ZOMBIE_PILLAGE_PICKUP_SEMTEX";
 
     case "power_gasGrenade":
-      return & "COOP_PILLAGE_PICKUP_GAS_GRENADE";
+      return &"COOP_PILLAGE_PICKUP_GAS_GRENADE";
 
     case "power_clusterGrenade":
-      return & "COOP_PILLAGE_PICKUP_CLUSTER_GRENADE";
+      return &"COOP_PILLAGE_PICKUP_CLUSTER_GRENADE";
 
     case "power_bioSpike":
-      return & "COOP_PILLAGE_PICKUP_BIO_SPIKE";
+      return &"COOP_PILLAGE_PICKUP_BIO_SPIKE";
 
     case "power_repulsor":
-      return & "COOP_PILLAGE_PICKUP_REPULSOR";
+      return &"COOP_PILLAGE_PICKUP_REPULSOR";
 
     case "power_arcGrenade":
-      return & "ZOMBIE_PILLAGE_PICKUP_ARC_GRENADE";
+      return &"ZOMBIE_PILLAGE_PICKUP_ARC_GRENADE";
 
     case "power_c4":
-      return & "ZOMBIE_PILLAGE_PICKUP_C4";
+      return &"ZOMBIE_PILLAGE_PICKUP_C4";
 
     case "power_concussionGrenade":
-      return & "ZOMBIE_PILLAGE_PICKUP_CONCUSSION_GRENADE";
+      return &"ZOMBIE_PILLAGE_PICKUP_CONCUSSION_GRENADE";
 
     case "maxammo":
-      return & "COOP_PILLAGE_PICKUP_MAX_AMMO";
+      return &"COOP_PILLAGE_PICKUP_MAX_AMMO";
 
     case "money":
-      return & "ZOMBIE_PILLAGE_PICKUP_POINTS";
+      return &"ZOMBIE_PILLAGE_PICKUP_POINTS";
 
     case "tickets":
-      return & "ZOMBIE_PILLAGE_PICKUP_TICKETS";
+      return &"ZOMBIE_PILLAGE_PICKUP_TICKETS";
 
     case "clip":
-      return & "COOP_PILLAGE_PICKUP_CLIP";
+      return &"COOP_PILLAGE_PICKUP_CLIP";
 
     case "quest":
-      return & "CP_QUEST_WOR_PART";
+      return &"CP_QUEST_WOR_PART";
 
     case "battery":
-      return & "CP_TOWN_PILLAGE_BATTERY";
+      return &"CP_TOWN_PILLAGE_BATTERY";
 
     default:
       return undefined;
@@ -820,7 +820,7 @@ func_1287B(param_00) {
       return;
     }
 
-    scripts\cp\utility::setlowermessage("max_explosives", & "COOP_INTERACTIONS_EXPLO_MAX", 3);
+    scripts\cp\utility::setlowermessage("max_explosives", &"COOP_INTERACTIONS_EXPLO_MAX", 3);
     return;
   }
 

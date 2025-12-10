@@ -124,7 +124,7 @@ on_spawn_retrieve_trigger(watcher, player) {
   if(isDefined(level.var_b33b8405)) {
     [[level.var_b33b8405]](retrievable_model, var_9dbe9414, prey);
   }
-  retrievable_model thread function_35579833(var_9dbe9414, retrievable_model, & pick_up, watcher.weapon, watcher.pickupsoundplayer, watcher.pickupsound);
+  retrievable_model thread function_35579833(var_9dbe9414, retrievable_model, &pick_up, watcher.weapon, watcher.pickupsoundplayer, watcher.pickupsound);
   player thread watch_shutdown(var_9dbe9414, retrievable_model);
 }
 

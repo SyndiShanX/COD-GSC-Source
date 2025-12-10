@@ -42,19 +42,19 @@ function main() {
   globallogic::registerfriendlyfiredelay(level.gametype, 15, 0, 1440);
   level.teambased = 1;
   level.overrideteamscore = 1;
-  level.onprecachegametype = & onprecachegametype;
-  level.onstartgametype = & onstartgametype;
-  level.onspawnplayer = & onspawnplayer;
-  level.playerspawnedcb = & dem_playerspawnedcb;
-  level.onplayerkilled = & onplayerkilled;
-  level.ondeadevent = & ondeadevent;
-  level.ononeleftevent = & ononeleftevent;
-  level.ontimelimit = & ontimelimit;
-  level.onroundswitch = & onroundswitch;
-  level.getteamkillpenalty = & dem_getteamkillpenalty;
-  level.getteamkillscore = & dem_getteamkillscore;
-  level.gettimelimit = & gettimelimit;
-  level.shouldplayovertimeround = & shouldplayovertimeround;
+  level.onprecachegametype = &onprecachegametype;
+  level.onstartgametype = &onstartgametype;
+  level.onspawnplayer = &onspawnplayer;
+  level.playerspawnedcb = &dem_playerspawnedcb;
+  level.onplayerkilled = &onplayerkilled;
+  level.ondeadevent = &ondeadevent;
+  level.ononeleftevent = &ononeleftevent;
+  level.ontimelimit = &ontimelimit;
+  level.onroundswitch = &onroundswitch;
+  level.getteamkillpenalty = &dem_getteamkillpenalty;
+  level.getteamkillscore = &dem_getteamkillscore;
+  level.gettimelimit = &gettimelimit;
+  level.shouldplayovertimeround = &shouldplayovertimeround;
   level.lastbombexplodetime = undefined;
   level.lastbombexplodebyteam = undefined;
   level.ddbombmodel = [];
@@ -162,33 +162,33 @@ function onstartgametype() {
     game["defenders"] = oldattackers;
   }
   setclientnamemode("manual_change");
-  game["strings"]["target_destroyed"] = & "MP_TARGET_DESTROYED";
-  game["strings"]["bomb_defused"] = & "MP_BOMB_DEFUSED";
+  game["strings"]["target_destroyed"] = &"MP_TARGET_DESTROYED";
+  game["strings"]["bomb_defused"] = &"MP_BOMB_DEFUSED";
   level._effect["bombexplosion"] = "explosions/fx_exp_bomb_demo_mp";
   if(isDefined(game["overtime_round"])) {
-    util::setobjectivetext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER");
-    util::setobjectivetext(game["defenders"], & "OBJECTIVES_DEM_ATTACKER");
+    util::setobjectivetext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER");
+    util::setobjectivetext(game["defenders"], &"OBJECTIVES_DEM_ATTACKER");
     if(level.splitscreen) {
-      util::setobjectivescoretext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER");
-      util::setobjectivescoretext(game["defenders"], & "OBJECTIVES_DEM_ATTACKER");
+      util::setobjectivescoretext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER");
+      util::setobjectivescoretext(game["defenders"], &"OBJECTIVES_DEM_ATTACKER");
     } else {
-      util::setobjectivescoretext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER_SCORE");
-      util::setobjectivescoretext(game["defenders"], & "OBJECTIVES_DEM_ATTACKER_SCORE");
+      util::setobjectivescoretext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER_SCORE");
+      util::setobjectivescoretext(game["defenders"], &"OBJECTIVES_DEM_ATTACKER_SCORE");
     }
-    util::setobjectivehinttext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER_OVERTIME_HINT");
-    util::setobjectivehinttext(game["defenders"], & "OBJECTIVES_DEM_ATTACKER_OVERTIME_HINT");
+    util::setobjectivehinttext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER_OVERTIME_HINT");
+    util::setobjectivehinttext(game["defenders"], &"OBJECTIVES_DEM_ATTACKER_OVERTIME_HINT");
   } else {
-    util::setobjectivetext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER");
-    util::setobjectivetext(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+    util::setobjectivetext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER");
+    util::setobjectivetext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
     if(level.splitscreen) {
-      util::setobjectivescoretext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER");
-      util::setobjectivescoretext(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+      util::setobjectivescoretext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER");
+      util::setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
     } else {
-      util::setobjectivescoretext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER_SCORE");
-      util::setobjectivescoretext(game["defenders"], & "OBJECTIVES_SD_DEFENDER_SCORE");
+      util::setobjectivescoretext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER_SCORE");
+      util::setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_SCORE");
     }
-    util::setobjectivehinttext(game["attackers"], & "OBJECTIVES_DEM_ATTACKER_HINT");
-    util::setobjectivehinttext(game["defenders"], & "OBJECTIVES_SD_DEFENDER_HINT");
+    util::setobjectivehinttext(game["attackers"], &"OBJECTIVES_DEM_ATTACKER_HINT");
+    util::setobjectivehinttext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_HINT");
   }
   bombzones = getEntArray(level.dembombzonename, "targetname");
   if(bombzones.size == 0) {
@@ -256,7 +256,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
     should_spawn_tags = self dogtags::should_spawn_tags(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration);
     should_spawn_tags = should_spawn_tags && !globallogic_spawn::mayspawn();
     if(should_spawn_tags) {
-      level thread dogtags::spawn_dog_tag(self, attacker, & dogtags::onusedogtag, 0);
+      level thread dogtags::spawn_dog_tag(self, attacker, &dogtags::onusedogtag, 0);
     }
   }
   bombzone = undefined;
@@ -538,10 +538,10 @@ function bombs() {
     bombzone gameobjects::set_2d_icon("enemy", "compass_waypoint_target" + scriptlabel);
     bombzone gameobjects::set_3d_icon("enemy", "waypoint_target" + scriptlabel);
     bombzone gameobjects::set_visible_team("any");
-    bombzone.onbeginuse = & onbeginuse;
-    bombzone.onenduse = & onenduse;
-    bombzone.onuse = & onuseobject;
-    bombzone.oncantuse = & oncantuse;
+    bombzone.onbeginuse = &onbeginuse;
+    bombzone.onenduse = &onenduse;
+    bombzone.onuse = &onuseobject;
+    bombzone.oncantuse = &oncantuse;
     bombzone.useweapon = getweapon("briefcase_bomb");
     bombzone.visuals[0].killcament = spawn("script_model", bombzone.visuals[0].origin + vectorscale((0, 0, 1), 128));
     if(isDefined(level.bomb_zone_fixup)) {

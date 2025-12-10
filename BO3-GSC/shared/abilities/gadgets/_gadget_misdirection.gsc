@@ -15,17 +15,17 @@
 #namespace _gadget_misdirection;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_misdirection", & __init__, undefined, undefined);
+  system::register("gadget_misdirection", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(37, & gadget_misdirection_on, & gadget_misdirection_off);
-  ability_player::register_gadget_possession_callbacks(37, & gadget_misdirection_on_give, & gadget_misdirection_on_take);
-  ability_player::register_gadget_flicker_callbacks(37, & gadget_misdirection_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(37, & gadget_misdirection_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(37, & gadget_misdirection_is_flickering);
-  ability_player::register_gadget_primed_callbacks(37, & gadget_misdirection_is_primed);
-  callback::on_connect( & gadget_misdirection_on_connect);
+  ability_player::register_gadget_activation_callbacks(37, &gadget_misdirection_on, &gadget_misdirection_off);
+  ability_player::register_gadget_possession_callbacks(37, &gadget_misdirection_on_give, &gadget_misdirection_on_take);
+  ability_player::register_gadget_flicker_callbacks(37, &gadget_misdirection_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(37, &gadget_misdirection_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(37, &gadget_misdirection_is_flickering);
+  ability_player::register_gadget_primed_callbacks(37, &gadget_misdirection_is_primed);
+  callback::on_connect(&gadget_misdirection_on_connect);
 }
 
 function gadget_misdirection_is_inuse(slot) {

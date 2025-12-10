@@ -404,7 +404,7 @@ helpGameEnd() {
     }
     if(playersLeft == 2) {
       for(i = 0; i < players.size; i++) {
-        players[i] queueWagerPopup(&"MP_HEADS_UP", 0, & "MP_U2_ONLINE", "wm_u2_online");
+        players[i] queueWagerPopup(&"MP_HEADS_UP", 0, &"MP_U2_ONLINE", "wm_u2_online");
         players[i].pers["hasRadar"] = true;
         players[i].hasSpyplane = true;
         level.activeUAVs[players[i] getEntityNumber()]++;
@@ -608,7 +608,7 @@ showPowerupMessage(powerupIndex, doAnimation) {
   self.powerups[powerupIndex].hud_elem_icon.archived = false;
   self.powerups[powerupIndex].hud_elem_icon.alpha = 1.0;
   if(!wasInPrematch && doAnimation)
-    self thread queueWagerPopup(self.powerups[powerupIndex].displayName, 0, & "MP_BONUS_ACQUIRED");
+    self thread queueWagerPopup(self.powerups[powerupIndex].displayName, 0, &"MP_BONUS_ACQUIRED");
   pulseTime = 0.5;
   if(doAnimation) {
     self.powerups[powerupIndex].hud_elem FadeOverTime(pulseTime);
@@ -629,7 +629,7 @@ showPowerupMessage(powerupIndex, doAnimation) {
     wait(pulseTime);
   }
   if(wasInPrematch && doAnimation)
-    self thread queueWagerPopup(self.powerups[powerupIndex].displayName, 0, & "MP_BONUS_ACQUIRED");
+    self thread queueWagerPopup(self.powerups[powerupIndex].displayName, 0, &"MP_BONUS_ACQUIRED");
   wait(5.0);
   for(i = 0; i <= powerupIndex; i++) {
     self.powerups[i].hud_elem FadeOverTime(0.25);

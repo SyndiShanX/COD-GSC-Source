@@ -14,17 +14,17 @@
 #namespace killstreak_detect;
 
 function autoexec __init__sytem__() {
-  system::register("killstreak_detect", & __init__, undefined, undefined);
+  system::register("killstreak_detect", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_localplayer_spawned( & watch_killstreak_detect_perks_changed);
-  clientfield::register("scriptmover", "enemyvehicle", 1, 2, "int", & enemyscriptmovervehicle_changed, 0, 0);
-  clientfield::register("vehicle", "enemyvehicle", 1, 2, "int", & enemyvehicle_changed, 0, 1);
-  clientfield::register("helicopter", "enemyvehicle", 1, 2, "int", & enemyvehicle_changed, 0, 1);
-  clientfield::register("missile", "enemyvehicle", 1, 2, "int", & enemymissilevehicle_changed, 0, 1);
-  clientfield::register("actor", "enemyvehicle", 1, 2, "int", & enemyvehicle_changed, 0, 1);
-  clientfield::register("vehicle", "vehicletransition", 1, 1, "int", & vehicle_transition, 0, 1);
+  callback::on_localplayer_spawned(&watch_killstreak_detect_perks_changed);
+  clientfield::register("scriptmover", "enemyvehicle", 1, 2, "int", &enemyscriptmovervehicle_changed, 0, 0);
+  clientfield::register("vehicle", "enemyvehicle", 1, 2, "int", &enemyvehicle_changed, 0, 1);
+  clientfield::register("helicopter", "enemyvehicle", 1, 2, "int", &enemyvehicle_changed, 0, 1);
+  clientfield::register("missile", "enemyvehicle", 1, 2, "int", &enemymissilevehicle_changed, 0, 1);
+  clientfield::register("actor", "enemyvehicle", 1, 2, "int", &enemyvehicle_changed, 0, 1);
+  clientfield::register("vehicle", "vehicletransition", 1, 1, "int", &vehicle_transition, 0, 1);
   if(!isDefined(level.enemyvehicles)) {
     level.enemyvehicles = [];
   }
@@ -172,8 +172,8 @@ function watch_killstreak_detect_perks_changed(local_client_num) {
     wait(0.016);
     util::clean_deleted(level.enemyvehicles);
     util::clean_deleted(level.enemymissiles);
-    array::thread_all(level.enemyvehicles, & updateenemyvehicles, local_client_num, 1);
-    array::thread_all(level.enemymissiles, & updateenemymissiles, local_client_num, 1);
+    array::thread_all(level.enemyvehicles, &updateenemyvehicles, local_client_num, 1);
+    array::thread_all(level.enemymissiles, &updateenemymissiles, local_client_num, 1);
     self waittill("perks_changed");
   }
 }

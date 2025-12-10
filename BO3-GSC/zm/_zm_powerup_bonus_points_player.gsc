@@ -21,13 +21,13 @@
 #namespace zm_powerup_bonus_points_player;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_bonus_points_player", & __init__, undefined, undefined);
+  system::register("zm_powerup_bonus_points_player", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  zm_powerups::register_powerup("bonus_points_player", & grab_bonus_points_player);
+  zm_powerups::register_powerup("bonus_points_player", &grab_bonus_points_player);
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("bonus_points_player", "zombie_z_money_icon", & "ZOMBIE_POWERUP_BONUS_POINTS", & zm_powerups::func_should_never_drop, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("bonus_points_player", "zombie_z_money_icon", &"ZOMBIE_POWERUP_BONUS_POINTS", &zm_powerups::func_should_never_drop, 1, 0, 0);
   }
 }
 

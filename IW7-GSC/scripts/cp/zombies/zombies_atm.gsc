@@ -176,12 +176,12 @@ atm_withdrawal_hint_logic(param_00, param_01) {
     if(isDefined(level.needspowerstring)) {
       return level.needspowerstring;
     } else {
-      return & "COOP_INTERACTIONS_REQUIRES_POWER";
+      return &"COOP_INTERACTIONS_REQUIRES_POWER";
     }
   }
 
   if(isDefined(level.atm_amount_deposited) && level.atm_amount_deposited < 1000) {
-    return & "CP_ZMB_INTERACTIONS_ATM_INSUFFICIENT_FUNDS";
+    return &"CP_ZMB_INTERACTIONS_ATM_INSUFFICIENT_FUNDS";
   }
 
   return level.interaction_hintstrings[param_00.script_noteworthy];

@@ -28,7 +28,7 @@
 #namespace zm_island_side_ee_song;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_side_ee_song", & __init__, undefined, undefined);
+  system::register("zm_island_side_ee_song", &__init__, undefined, undefined);
 }
 
 function __init__() {}
@@ -46,7 +46,7 @@ function on_player_spawned() {}
 function function_553b8e23() {
   level.var_51d5c50c = 0;
   level.var_c911c0a2 = struct::get_array("side_ee_song_bear", "targetname");
-  array::thread_all(level.var_c911c0a2, & function_4b02c768);
+  array::thread_all(level.var_c911c0a2, &function_4b02c768);
   while(true) {
     level waittill("hash_c3f82290");
     if(level.var_51d5c50c == level.var_c911c0a2.size) {
@@ -83,7 +83,7 @@ function function_f86c981f() {
 }
 
 function function_88ab6cf8() {
-  zm_devgui::add_custom_devgui_callback( & function_aed87222);
+  zm_devgui::add_custom_devgui_callback(&function_aed87222);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -176,7 +176,7 @@ function function_cd6c47c5() {
   self.unitrigger_stub.radius = 16;
   self.unitrigger_stub.require_look_at = 1;
   self.unitrigger_stub.related_parent = self;
-  zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, & zm_unitrigger::unitrigger_logic);
+  zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, &zm_unitrigger::unitrigger_logic);
   while(true) {
     self waittill("trigger_activated", who);
     if(isDefined(level.var_eeab4a07) && level.var_eeab4a07) {
@@ -248,7 +248,7 @@ function function_ae93bb6d() {
   if(!isDefined(var_8e47507d)) {
     return;
   }
-  array::thread_all(var_8e47507d, & function_d75eac4e);
+  array::thread_all(var_8e47507d, &function_d75eac4e);
   level thread function_e01c1b04(var_f45614a);
 }
 

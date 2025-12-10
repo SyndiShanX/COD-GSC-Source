@@ -438,34 +438,34 @@ uav_set_hud_data(var_0, var_1) {
 
 create_hud_upper_left(var_0) {
   var_1 = [];
-  var_1["nar"] = [ & "UAV_NAR", "none"];
-  var_1["white"] = [ & "UAV_WHT", "none"];
-  var_1["rate"] = [ & "UAV_RATE", "none"];
-  var_1["angle"] = [ & "UAV_RATIO", "none"];
-  var_1["numbers"] = [ & "UAV_ABOVE_TEMP_NUMBERS", "none"];
-  var_1["temp"] = [ & "UAV_TEMP", "none"];
+  var_1["nar"] = [ &"UAV_NAR", "none"];
+  var_1["white"] = [ &"UAV_WHT", "none"];
+  var_1["rate"] = [ &"UAV_RATE", "none"];
+  var_1["angle"] = [ &"UAV_RATIO", "none"];
+  var_1["numbers"] = [ &"UAV_ABOVE_TEMP_NUMBERS", "none"];
+  var_1["temp"] = [ &"UAV_TEMP", "none"];
   return create_hud_section(var_1, 10, 80, "left", var_0);
 }
 
 create_hud_upper_right(var_0) {
   var_1 = [];
-  var_1["acft"] = [ & "UAV_ACFT", "none"];
-  var_1["long"] = [ & "UAV_N", "none"];
-  var_1["lat"] = [ & "UAV_W", "none"];
-  var_1["angle"] = [ & "UAV_HAT", "none"];
+  var_1["acft"] = [ &"UAV_ACFT", "none"];
+  var_1["long"] = [ &"UAV_N", "none"];
+  var_1["lat"] = [ &"UAV_W", "none"];
+  var_1["angle"] = [ &"UAV_HAT", "none"];
   return create_hud_section(var_1, 510, 80, "left", var_0);
 }
 
 create_hud_lower_right(var_0) {
   var_1 = [];
-  var_1["long"] = [ & "UAV_N", "none"];
-  var_1["lat"] = [ & "UAV_W", "none"];
+  var_1["long"] = [ &"UAV_N", "none"];
+  var_1["lat"] = [ &"UAV_W", "none"];
   var_2 = create_hud_section(var_1, 500, 335, "left", var_0);
   var_1 = [];
-  var_1["brg"] = [ & "UAV_BRG", ""];
-  var_1["rng_m"] = [ & "UAV_RNG", & "UAV_M"];
-  var_1["rng_nm"] = [ & "UAV_RNG", & "UAV_NM"];
-  var_1["elv"] = [ & "UAV_ELV", & "UAV_F"];
+  var_1["brg"] = [ &"UAV_BRG", ""];
+  var_1["rng_m"] = [ &"UAV_RNG", &"UAV_M"];
+  var_1["rng_nm"] = [ &"UAV_RNG", &"UAV_NM"];
+  var_1["elv"] = [ &"UAV_ELV", &"UAV_F"];
   var_3 = create_hud_section(var_1, 510, 360, "right", var_0);
 
   foreach(var_6, var_5 in var_3)
@@ -528,7 +528,7 @@ create_hud_data_value(var_0, var_1) {
     self.data_value_suffix = var_3;
     var_4 = 1;
 
-    if(var_0 == & "UAV_NM")
+    if(var_0 == &"UAV_NM")
       var_4 = 2;
 
     var_3 hud_fade_in_time(var_1);

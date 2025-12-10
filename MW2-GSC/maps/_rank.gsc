@@ -9,16 +9,16 @@
 
 /* -=-=-=-=-=-=-=-=-=-=
 
-SP & CO-OP XP/Rank system
+SP &CO-OP XP/Rank system
 
 -=-=-=-=-=-=-=-=-=-=-=- */
 
 init() {
   maps\_hud::init();
 
-  // &&1 was promoted to &&2 &&3!
+  // && 1 was promoted to && 2 && 3!
   precacheString(&"RANK_PLAYER_WAS_PROMOTED_N");
-  // &&1 was promoted to &&2!
+  // && 1 was promoted to && 2!
   precacheString(&"RANK_PLAYER_WAS_PROMOTED");
   // You've been promoted!
   precacheString(&"RANK_PROMOTED");
@@ -279,7 +279,7 @@ updatePlayerScore(type, value) {
   self.rankUpdateTotal += value;
 
   // +
-  self.hud_rankscroreupdate.label = & "SCRIPT_PLUS";
+  self.hud_rankscroreupdate.label = &"SCRIPT_PLUS";
 
   self.hud_rankscroreupdate setValue(self.rankUpdateTotal);
   self.hud_rankscroreupdate.alpha = 0.65;
@@ -385,7 +385,7 @@ updateRankAnnounceHUD() {
   notifyData = spawnStruct();
 
   // You've been promoted!
-  notifyData.titleText = & "RANK_PROMOTED";
+  notifyData.titleText = &"RANK_PROMOTED";
   notifyData.iconName = self getRankInfoIcon(self.summary["rank"]);
   notifyData.sound = "sp_level_up";
   notifyData.duration = 4.0;
@@ -396,12 +396,12 @@ updateRankAnnounceHUD() {
   if(subRank == 2) {
     notifyData.textLabel = newRankName;
     // I
-    notifyData.notifyText = & "RANK_ROMANI";
+    notifyData.notifyText = &"RANK_ROMANI";
     notifyData.textIsString = true;
   } else if(subRank == 3) {
     notifyData.textLabel = newRankName;
     // II
-    notifyData.notifyText = & "RANK_ROMANII";
+    notifyData.notifyText = &"RANK_ROMANII";
     notifyData.textIsString = true;
   } else {
     notifyData.notifyText = newRankName;
@@ -454,7 +454,7 @@ showNotifyMessage(notifyData) {
       self.notifyTitle.label = notifyData.titleLabel;
     else
       // string not found for
-      self.notifyTitle.label = & "";
+      self.notifyTitle.label = &"";
 
     if(isDefined(notifyData.titleLabel) && !isDefined(notifyData.titleIsString))
       self.notifyTitle setValue(notifyData.titleText);
@@ -470,7 +470,7 @@ showNotifyMessage(notifyData) {
       self.notifyText.label = notifyData.textLabel;
     else
       // string not found for
-      self.notifyText.label = & "";
+      self.notifyText.label = &"";
 
     if(isDefined(notifyData.textLabel) && !isDefined(notifyData.textIsString))
       self.notifyText setValue(notifyData.notifyText);
@@ -489,7 +489,7 @@ showNotifyMessage(notifyData) {
       self.notifyText2.label = notifyData.text2Label;
     else
       // string not found for
-      self.notifyText2.label = & "";
+      self.notifyText2.label = &"";
 
     self.notifyText2 setText(notifyData.notifyText2);
     self.notifyText2 setPulseFX(100, int(duration * 1000), 1000);

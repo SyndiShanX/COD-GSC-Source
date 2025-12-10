@@ -10,10 +10,10 @@
 #namespace rat;
 
 function autoexec __init__sytem__() {
-  system::register("", & __init__, undefined, undefined);
+  system::register("", &__init__, undefined, undefined);
 }
 
 function __init__() {
   rat_shared::init();
-  level.rat.common.gethostplayer = & util::gethostplayer;
+  level.rat.common.gethostplayer = &util::gethostplayer;
 }

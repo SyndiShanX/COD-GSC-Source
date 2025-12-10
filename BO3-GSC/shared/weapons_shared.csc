@@ -8,7 +8,7 @@
 #namespace weapons_shared;
 
 function autoexec __init__sytem__() {
-  system::register("weapon_shared", & __init__, undefined, undefined);
+  system::register("weapon_shared", &__init__, undefined, undefined);
 }
 
 function __init__() {}

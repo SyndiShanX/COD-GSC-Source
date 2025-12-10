@@ -46,9 +46,9 @@ init() {
   config.modelPlacement = "mp_satcom_obj";
   config.modelPlacementFailed = "mp_satcom_obj_red";
   config.modelBombSquad = "mp_satcom_bombsquad";
-  config.hintString = & "KILLSTREAKS_HINTS_UPLINK_PICKUP";
-  config.placeString = & "KILLSTREAKS_HINTS_UPLINK_PLACE";
-  config.cannotPlaceString = & "KILLSTREAKS_HINTS_UPLINK_CANNOT_PLACE";
+  config.hintString = &"KILLSTREAKS_HINTS_UPLINK_PICKUP";
+  config.placeString = &"KILLSTREAKS_HINTS_UPLINK_PLACE";
+  config.cannotPlaceString = &"KILLSTREAKS_HINTS_UPLINK_CANNOT_PLACE";
   config.headIconHeight = CONST_HEAD_ICON_OFFSET;
   config.splashName = "used_uplink";
   config.lifeSpan = CONST_UPLINK_TIME;

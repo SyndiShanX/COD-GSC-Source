@@ -15,12 +15,12 @@ init() {
   var_00.modelbase = "cp_rave_equipment_lawnmower_01";
   var_00.modelplacement = "tag_origin";
   var_00.modelplacementfailed = "tag_origin";
-  var_00.pow = & "COOP_CRAFTABLES_PICKUP";
+  var_00.pow = &"COOP_CRAFTABLES_PICKUP";
   var_00.var_9F43 = 0;
-  var_00.pow = & "COOP_CRAFTABLES_PICKUP";
-  var_00.placestring = & "CP_RAVE_MOWER_PLACEMENT";
-  var_00.cannotplacestring = & "COOP_CRAFTABLES_CANNOT_PLACE";
-  var_00.placecancelablestring = & "CP_RAVE_PLACE_CANCELABLE";
+  var_00.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_00.placestring = &"CP_RAVE_MOWER_PLACEMENT";
+  var_00.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
+  var_00.placecancelablestring = &"CP_RAVE_PLACE_CANCELABLE";
   var_00.placementheighttolerance = 48;
   var_00.placementradius = 32;
   var_00.carriedtrapoffset = (0, 0, 35);

@@ -386,7 +386,7 @@ player_special_death_hint() {
   }
 
   if(level.script == "panama_2" && isDefined(weaponname) && weaponname == "ac130_vulcan_minigun") {
-    setdvar("ui_deadquote", & "PANAMA_AC130_FAILQUOTE");
+    setdvar("ui_deadquote", &"PANAMA_AC130_FAILQUOTE");
     return;
   }
 

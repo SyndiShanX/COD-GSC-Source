@@ -48,25 +48,25 @@ function main() {
   util::registerroundwinlimit(0, 0);
   util::registernumlives(0, 100);
   globallogic::registerfriendlyfiredelay(level.gametype, 15, 0, 1440);
-  spawner::add_global_spawn_function("axis", & function_54ba8dfa);
+  spawner::add_global_spawn_function("axis", &function_54ba8dfa);
   level.scoreroundwinbased = getgametypesetting("cumulativeRoundScores") == 0;
   level.teamscoreperkill = getgametypesetting("teamScorePerKill");
   level.teamscoreperdeath = getgametypesetting("teamScorePerDeath");
   level.teamscoreperheadshot = getgametypesetting("teamScorePerHeadshot");
   level.teambased = 1;
   level.overrideteamscore = 1;
-  level.onstartgametype = & onstartgametype;
-  level.onspawnplayer = & onspawnplayer;
+  level.onstartgametype = &onstartgametype;
+  level.onspawnplayer = &onspawnplayer;
   level.onspawnplayerunified = undefined;
-  level.onplayerkilled = & onplayerkilled;
-  level.gametypespawnwaiter = & wait_to_spawn;
-  level.var_bdd4d5c2 = & spawnedasspectator;
+  level.onplayerkilled = &onplayerkilled;
+  level.gametypespawnwaiter = &wait_to_spawn;
+  level.var_bdd4d5c2 = &spawnedasspectator;
   level thread function_a67d9d08();
   level.disableprematchmessages = 1;
   level.endgameonscorelimit = 0;
   level.endgameontimelimit = 0;
-  level.ontimelimit = & globallogic::blank;
-  level.onscorelimit = & globallogic::blank;
+  level.ontimelimit = &globallogic::blank;
+  level.onscorelimit = &globallogic::blank;
   gameobjects::register_allowed_gameobject(level.gametype);
   game["dialog"]["gametype"] = "coop_start";
   game["dialog"]["gametype_hardcore"] = "hccoop_start";
@@ -157,9 +157,9 @@ function onstartgametype() {
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
   foreach(team in level.playerteams) {
-    util::setobjectivetext(team, & "OBJECTIVES_COOP");
-    util::setobjectivehinttext(team, & "OBJECTIVES_COOP_HINT");
-    util::setobjectivescoretext(team, & "OBJECTIVES_COOP");
+    util::setobjectivetext(team, &"OBJECTIVES_COOP");
+    util::setobjectivehinttext(team, &"OBJECTIVES_COOP_HINT");
+    util::setobjectivescoretext(team, &"OBJECTIVES_COOP");
   }
   level.mapcenter = math::find_box_center(level.spawnmins, level.spawnmaxs);
   setmapcenter(level.mapcenter);

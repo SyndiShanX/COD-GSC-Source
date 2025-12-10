@@ -127,18 +127,18 @@ onStartGameType() {
   level._effect["vehicle_explosion"] = loadfx("fx/explosions/small_vehicle_explosion_new");
   level._effect["building_explosion"] = loadfx("fx/explosions/building_explosion_gulag");
 
-  setObjectiveText(game["attackers"], & "OBJECTIVES_SD_ATTACKER");
-  setObjectiveText(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+  setObjectiveText(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
+  setObjectiveText(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
 
   if(level.splitscreen) {
-    setObjectiveScoreText(game["attackers"], & "OBJECTIVES_SD_ATTACKER");
-    setObjectiveScoreText(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+    setObjectiveScoreText(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
+    setObjectiveScoreText(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
   } else {
-    setObjectiveScoreText(game["attackers"], & "OBJECTIVES_SD_ATTACKER_SCORE");
-    setObjectiveScoreText(game["defenders"], & "OBJECTIVES_SD_DEFENDER_SCORE");
+    setObjectiveScoreText(game["attackers"], &"OBJECTIVES_SD_ATTACKER_SCORE");
+    setObjectiveScoreText(game["defenders"], &"OBJECTIVES_SD_DEFENDER_SCORE");
   }
-  setObjectiveHintText(game["attackers"], & "OBJECTIVES_SD_ATTACKER_HINT");
-  setObjectiveHintText(game["defenders"], & "OBJECTIVES_SD_DEFENDER_HINT");
+  setObjectiveHintText(game["attackers"], &"OBJECTIVES_SD_ATTACKER_HINT");
+  setObjectiveHintText(game["defenders"], &"OBJECTIVES_SD_DEFENDER_HINT");
 
   initSpawns();
 

@@ -24,7 +24,7 @@
 #namespace laststand;
 
 function autoexec __init__sytem__() {
-  system::register("laststand", & __init__, undefined, undefined);
+  system::register("laststand", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -37,7 +37,7 @@ function __init__() {
     clientfield::register("world", level.laststand_update_clientfields[i], 1, 5, "counter");
   }
   if(!isDefined(level.playerlaststand_func)) {
-    level.playerlaststand_func = & player_laststand;
+    level.playerlaststand_func = &player_laststand;
   }
   level.weaponrevivetool = getweapon("syrette");
   if(!isDefined(level.laststandpistol)) {

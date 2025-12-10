@@ -18,13 +18,13 @@
 #namespace zombiedogbehavior;
 
 function autoexec registerbehaviorscriptfunctions() {
-  spawner::add_archetype_spawn_function("zombie_dog", & archetypezombiedogblackboardinit);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieDogTargetService", & zombiedogtargetservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieDogShouldMelee", & zombiedogshouldmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieDogShouldWalk", & zombiedogshouldwalk);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieDogShouldRun", & zombiedogshouldrun);
-  behaviortreenetworkutility::registerbehaviortreeaction("zombieDogMeleeAction", & zombiedogmeleeaction, undefined, & zombiedogmeleeactionterminate);
-  animationstatenetwork::registernotetrackhandlerfunction("dog_melee", & zombiebehavior::zombienotetrackmeleefire);
+  spawner::add_archetype_spawn_function("zombie_dog", &archetypezombiedogblackboardinit);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieDogTargetService", &zombiedogtargetservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieDogShouldMelee", &zombiedogshouldmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieDogShouldWalk", &zombiedogshouldwalk);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zombieDogShouldRun", &zombiedogshouldrun);
+  behaviortreenetworkutility::registerbehaviortreeaction("zombieDogMeleeAction", &zombiedogmeleeaction, undefined, &zombiedogmeleeactionterminate);
+  animationstatenetwork::registernotetrackhandlerfunction("dog_melee", &zombiebehavior::zombienotetrackmeleefire);
   zombiedoginterface::registerzombiedoginterfaceattributes();
 }
 
@@ -36,15 +36,15 @@ function archetypezombiedogblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_should_run", "walk", & bb_getshouldrunstatus);
+  blackboard::registerblackboardattribute(self, "_should_run", "walk", &bb_getshouldrunstatus);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_should_howl", "dont_howl", & bb_getshouldhowlstatus);
+  blackboard::registerblackboardattribute(self, "_should_howl", "dont_howl", &bb_getshouldhowlstatus);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  self.___archetypeonanimscriptedcallback = & archetypezombiedogonanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = &archetypezombiedogonanimscriptedcallback;
   self finalizetrackedblackboardattributes();
   self.kill_on_wine_coccon = 1;
 }

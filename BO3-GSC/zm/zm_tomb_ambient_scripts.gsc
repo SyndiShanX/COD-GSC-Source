@@ -22,8 +22,8 @@ function init_tomb_ambient_scripts() {
 
 function main() {
   level thread init_zeppelin("sky_cowbell_zeppelin_low", "stop_ambient_zeppelins");
-  util::delay(20, undefined, & init_zeppelin, "sky_cowbell_zeppelin_mid", "stop_ambient_zeppelins");
-  util::delay(40, undefined, & init_zeppelin, "sky_cowbell_zeppelin_high", "stop_ambient_zeppelins");
+  util::delay(20, undefined, &init_zeppelin, "sky_cowbell_zeppelin_mid", "stop_ambient_zeppelins");
+  util::delay(40, undefined, &init_zeppelin, "sky_cowbell_zeppelin_high", "stop_ambient_zeppelins");
 }
 
 function init_zeppelin(str_script_noteworthy, str_ender) {

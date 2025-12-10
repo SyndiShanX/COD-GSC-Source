@@ -87,7 +87,7 @@ function function_622ad391() {
     player clientfield::set_player_uimodel("zmInventory.progress_egg", 1);
   }
   var_e870a8ec = struct::get("gauntlet_incubation_start", "script_noteworthy");
-  var_e870a8ec zm_unitrigger::create_unitrigger(undefined, 40, & function_cf2a342, & function_16907a63);
+  var_e870a8ec zm_unitrigger::create_unitrigger(undefined, 40, &function_cf2a342, &function_16907a63);
 }
 
 function function_fa149742() {
@@ -98,7 +98,7 @@ function function_fa149742() {
   level waittill("hash_698d88e1");
   var_9c840b49 = struct::get_array("dragon_egg_pickup", "targetname");
   foreach(var_21e43ff6 in var_9c840b49) {
-    var_21e43ff6 zm_unitrigger::create_unitrigger(&"ZM_STALINGRAD_EGG_PICKUP", 64, & function_61ab1070, & function_cee6cb2a);
+    var_21e43ff6 zm_unitrigger::create_unitrigger(&"ZM_STALINGRAD_EGG_PICKUP", 64, &function_61ab1070, &function_cee6cb2a);
   }
 }
 
@@ -147,7 +147,7 @@ function function_5d1a6241() {
   level.var_de98e3ce.var_9cd2418f = struct::get_array("egg_cook_loc");
   foreach(s_loc in level.var_de98e3ce.var_9cd2418f) {
     s_loc.var_a1914ebb = 0;
-    s_loc zm_unitrigger::create_unitrigger(&"ZM_STALINGRAD_EGG_PLACE", 32, & function_3e93cfea, & function_48a9eab7);
+    s_loc zm_unitrigger::create_unitrigger(&"ZM_STALINGRAD_EGG_PLACE", 32, &function_3e93cfea, &function_48a9eab7);
   }
 }
 
@@ -211,7 +211,7 @@ function function_2455dd71(s_stub) {
 }
 
 function function_e8c061f7() {
-  zm_spawner::register_zombie_death_event_callback( & function_8d5fd156);
+  zm_spawner::register_zombie_death_event_callback(&function_8d5fd156);
 }
 
 function function_8d5fd156(e_attacker) {
@@ -228,7 +228,7 @@ function function_8d5fd156(e_attacker) {
   if(self.var_9a02a614 === "napalm") {
     level.var_de98e3ce.var_f22951fa++;
     if(level.var_de98e3ce.var_f22951fa >= level.var_de98e3ce.var_44e7a938) {
-      zm_spawner::deregister_zombie_death_event_callback( & function_8d5fd156);
+      zm_spawner::deregister_zombie_death_event_callback(&function_8d5fd156);
       iprintlnbold("");
       level notify("hash_68bf9f79");
       level flag::set("gauntlet_step_2_complete");
@@ -240,8 +240,8 @@ function function_ba9bd748() {
   foreach(player in level.players) {
     player function_5ae27dcc();
   }
-  zm_spawner::register_zombie_death_event_callback( & function_4f6d5274);
-  callback::on_connect( & function_5ae27dcc);
+  zm_spawner::register_zombie_death_event_callback(&function_4f6d5274);
+  callback::on_connect(&function_5ae27dcc);
 }
 
 function function_5ae27dcc() {
@@ -259,7 +259,7 @@ function function_4f6d5274(e_attacker) {
           level.var_de98e3ce.var_56c226f4++;
           if(level.var_de98e3ce.var_56c226f4 >= level.var_de98e3ce.var_661a78ea) {
             iprintlnbold("");
-            zm_spawner::deregister_zombie_death_event_callback( & function_4f6d5274);
+            zm_spawner::deregister_zombie_death_event_callback(&function_4f6d5274);
             level notify("hash_b227a45b");
             level flag::set("gauntlet_step_3_complete");
           }
@@ -271,7 +271,7 @@ function function_4f6d5274(e_attacker) {
 }
 
 function function_cf16e2bc() {
-  zm_spawner::register_zombie_death_event_callback( & function_f2988f0a);
+  zm_spawner::register_zombie_death_event_callback(&function_f2988f0a);
 }
 
 function function_f2988f0a() {
@@ -285,7 +285,7 @@ function function_f2988f0a() {
       if(level.var_de98e3ce.var_b57ab994 >= level.var_de98e3ce.var_e97b0f0a) {
         iprintlnbold("");
         level notify("hash_9b46a273");
-        zm_spawner::deregister_zombie_death_event_callback( & function_f2988f0a);
+        zm_spawner::deregister_zombie_death_event_callback(&function_f2988f0a);
         level flag::set("gauntlet_step_4_complete");
       }
     }
@@ -426,7 +426,7 @@ function function_dcc4fd22() {
 function function_77c54581() {
   var_21e43ff6 = level.var_de98e3ce.var_d54b9ade;
   level.var_de98e3ce.var_987fcd7a = 1;
-  var_21e43ff6 zm_unitrigger::create_unitrigger(&"ZM_STALINGRAD_EGG_RETRIEVE", 40, & function_86e242);
+  var_21e43ff6 zm_unitrigger::create_unitrigger(&"ZM_STALINGRAD_EGG_RETRIEVE", 40, &function_86e242);
   level notify("hash_8c192d5a");
   level.var_de98e3ce.var_d54b9ade.var_62ceb838 clientfield::set("dragon_egg_heat_fx", 1);
   level waittill("start_of_round");

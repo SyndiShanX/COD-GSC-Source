@@ -707,23 +707,23 @@ get_speaker_loc(param_00) {
 }
 
 dj_arcade_purchase_hint_func(param_00, param_01) {
-  return & "CP_QUEST_WOR_PART";
+  return &"CP_QUEST_WOR_PART";
 }
 
 dj_speaker_mid_hint_func(param_00, param_01) {
   if(scripts\engine\utility::istrue(param_00.placed)) {
-    return & "CP_QUEST_WOR_USE_TONE_EQUIP";
+    return &"CP_QUEST_WOR_USE_TONE_EQUIP";
   }
 
-  return & "CP_QUEST_WOR_PLACE_PART";
+  return &"CP_QUEST_WOR_PLACE_PART";
 }
 
 dj_door_hintstring(param_00, param_01) {
   if(param_00.selected) {
-    return & "CP_ZMB_INTERACTIONS_TALK_TO_DJ";
+    return &"CP_ZMB_INTERACTIONS_TALK_TO_DJ";
   }
 
-  return & "CP_ZMB_INTERACTIONS_DJ_NOT_HERE";
+  return &"CP_ZMB_INTERACTIONS_DJ_NOT_HERE";
 }
 
 init_dj_speaker() {
@@ -1365,7 +1365,7 @@ defense_sequence_success(param_00) {
   level.use_dj_door_func = ::use_dj_door_to_pick_up_analyzer;
   clear_defense_sequence_zombie_model();
   level.frequency_device_clip freeentitysentient();
-  var_02 = & "CP_QUEST_WOR_PART";
+  var_02 = &"CP_QUEST_WOR_PART";
   param_00 sethintstring(var_02);
   param_00 makeusable();
   if(isDefined(level.current_speaker)) {

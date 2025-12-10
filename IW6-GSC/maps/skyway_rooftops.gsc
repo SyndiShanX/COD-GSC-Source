@@ -800,7 +800,7 @@ rt_ally_dam_watch() {
   self.v.invincible = 0;
   wait(randomintrange(3, 5));
   self waittill("damage");
-  setdvar("ui_deadquote", & "SKYWAY_HESH_BY_HELOS");
+  setdvar("ui_deadquote", &"SKYWAY_HESH_BY_HELOS");
   maps\_utility::missionfailedwrapper();
 }
 

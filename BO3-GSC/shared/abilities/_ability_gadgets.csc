@@ -12,7 +12,7 @@
 #namespace ability_gadgets;
 
 function autoexec __init__sytem__() {
-  system::register("ability_gadgets", & __init__, undefined, undefined);
+  system::register("ability_gadgets", &__init__, undefined, undefined);
 }
 
 function __init__() {}

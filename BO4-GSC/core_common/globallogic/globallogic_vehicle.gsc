@@ -203,7 +203,7 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, w
     }
   }
 
-  if(self.idflags&8192 && idamage < unmodified) {
+  if(self.idflags& 8192 && idamage < unmodified) {
     idamage = unmodified;
   }
 
@@ -215,7 +215,7 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, w
 
   damageteammates = 0;
 
-  if(!(self.idflags&8192)) {
+  if(!(self.idflags& 8192)) {
     if(self isvehicleimmunetodamage(self.idflags, smeansofdeath, weapon)) {
       return;
     }
@@ -321,7 +321,7 @@ callback_vehicleradiusdamage(einflictor, eattacker, idamage, finnerdamage, foute
     return;
   }
 
-  if(!(self.idflags&8192)) {
+  if(!(self.idflags& 8192)) {
     if(self isvehicleimmunetodamage(self.idflags, smeansofdeath, weapon)) {
       return;
     }

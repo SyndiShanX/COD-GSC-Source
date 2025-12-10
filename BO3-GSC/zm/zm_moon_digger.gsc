@@ -47,7 +47,7 @@ function digger_init_flags() {
     level.digger_speed_multiplier = 1;
   }
   if(isDefined(level.quantum_bomb_register_result_func)) {
-    [[level.quantum_bomb_register_result_func]]("remove_digger", & quantum_bomb_remove_digger_result, 75, & quantum_bomb_remove_digger_validation);
+    [[level.quantum_bomb_register_result_func]]("remove_digger", &quantum_bomb_remove_digger_result, 75, &quantum_bomb_remove_digger_validation);
   }
 }
 
@@ -56,14 +56,14 @@ function digger_init() {
 }
 
 function setup_diggers() {
-  level thread digger_think_panel("digger_hangar_blocker", "hangar_digger_switch", "start_hangar_digger", "hangar_digger_hacked", "hangar_digger_hacked_before_breached", "hangar_breached", & digger_think_blocker, "hangar");
-  level thread digger_think_panel("digger_teleporter_blocker", "teleporter_digger_switch", "start_teleporter_digger", "teleporter_digger_hacked", "teleporter_digger_hacked_before_breached", "teleporter_breached", & digger_think_blocker, "teleporter");
-  level thread digger_think_panel(undefined, "biodome_digger_switch", "start_biodome_digger", "biodome_digger_hacked", "biodome_digger_hacked_before_breached", "biodome_breached", & digger_think_biodome, "biodome");
+  level thread digger_think_panel("digger_hangar_blocker", "hangar_digger_switch", "start_hangar_digger", "hangar_digger_hacked", "hangar_digger_hacked_before_breached", "hangar_breached", &digger_think_blocker, "hangar");
+  level thread digger_think_panel("digger_teleporter_blocker", "teleporter_digger_switch", "start_teleporter_digger", "teleporter_digger_hacked", "teleporter_digger_hacked_before_breached", "teleporter_breached", &digger_think_blocker, "teleporter");
+  level thread digger_think_panel(undefined, "biodome_digger_switch", "start_biodome_digger", "biodome_digger_hacked", "biodome_digger_hacked_before_breached", "biodome_breached", &digger_think_biodome, "biodome");
   level thread diggers_think_no_mans_land();
   level thread digger_round_logic();
   diggers = getEntArray("digger_body", "targetname");
   level function_c497263d();
-  array::thread_all(diggers, & digger_think_move);
+  array::thread_all(diggers, &digger_think_move);
   level thread waitfor_smash();
   wait(0.5);
   level flag::clear("init_diggers");
@@ -508,7 +508,7 @@ function digger_think_panel(blocker_name, trig_name, start_flag, hacked_flag, ha
   struct.custom_debug_color = vectorscale((1, 0, 0), 255);
   struct.radius = 64;
   struct.height = 64;
-  struct.custom_string = & "ZM_MOON_DISABLE_DIGGER";
+  struct.custom_string = &"ZM_MOON_DISABLE_DIGGER";
   struct.no_bullet_trace = 1;
   struct.no_sight_check = 1;
   trig usetriggerrequirelookat();
@@ -526,7 +526,7 @@ function set_hint_on_digger_trig(start_flag, hacked_flag, struct) {
     }
     level flag::wait_till(start_flag);
     if(!level flag::get(hacked_flag)) {
-      zm_equip_hacker::register_pooled_hackable_struct(struct, & digger_hack_func, & digger_hack_qualifer);
+      zm_equip_hacker::register_pooled_hackable_struct(struct, &digger_hack_func, &digger_hack_qualifer);
       self sethintstring(&"ZM_MOON_SYSTEM_ONLINE");
       switch (struct.digger_name) {
         case "hangar": {
@@ -742,9 +742,9 @@ function diggers_think_no_mans_land() {
   diggers = getEntArray("digger_body", "targetname");
   while(true) {
     level flag::wait_till("enter_nml");
-    array::thread_all(diggers, & diggers_visible, 0);
+    array::thread_all(diggers, &diggers_visible, 0);
     flag::wait_till_clear("enter_nml");
-    array::thread_all(diggers, & diggers_visible, 1);
+    array::thread_all(diggers, &diggers_visible, 1);
   }
 }
 

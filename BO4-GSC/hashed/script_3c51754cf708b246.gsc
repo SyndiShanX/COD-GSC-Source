@@ -20,7 +20,7 @@
 #namespace draft;
 
 autoexec __init__system__() {
-  system::register(#"draft", & __init__, undefined, undefined);
+  system::register(#"draft", &__init__, undefined, undefined);
 }
 
 __init__() {
@@ -29,7 +29,7 @@ __init__() {
   clientfield::register("clientuimodel", "PositionDraft.autoSelected", 1, 1, "int");
   clientfield::register("clientuimodel", "PositionDraft.cooldown", 1, 5, "int");
   clientfield::register("worlduimodel", "PositionDraft.timeRemaining", 1, 7, "int");
-  serverfield::register("PositionDraft.uiLoaded", 1, 1, "int", & function_c10691d1);
+  serverfield::register("PositionDraft.uiLoaded", 1, 1, "int", &function_c10691d1);
   level.var_95c2a39c = 0;
   level.draftstage = 0;
 }

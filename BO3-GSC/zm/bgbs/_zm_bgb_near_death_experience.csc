@@ -13,15 +13,15 @@
 #namespace zm_bgb_near_death_experience;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_near_death_experience", & __init__, undefined, undefined);
+  system::register("zm_bgb_near_death_experience", &__init__, undefined, undefined);
 }
 
 function __init__() {
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  clientfield::register("allplayers", "zm_bgb_near_death_experience_3p_fx", 15000, 1, "int", & function_24480126, 0, 0);
-  clientfield::register("toplayer", "zm_bgb_near_death_experience_1p_fx", 15000, 1, "int", & function_11972f24, 0, 1);
+  clientfield::register("allplayers", "zm_bgb_near_death_experience_3p_fx", 15000, 1, "int", &function_24480126, 0, 0);
+  clientfield::register("toplayer", "zm_bgb_near_death_experience_1p_fx", 15000, 1, "int", &function_11972f24, 0, 1);
   bgb::register("zm_bgb_near_death_experience", "rounds");
   level.var_3b53e98b = [];
 }

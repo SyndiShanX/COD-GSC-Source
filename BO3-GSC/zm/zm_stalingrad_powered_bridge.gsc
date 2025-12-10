@@ -31,7 +31,7 @@ function main() {
   e_gate = getent("powered_bridge_gate", "targetname");
   e_gate disconnectpaths();
   var_efdf0fee = getEntArray("bridge_light_on", "targetname");
-  array::run_all(var_efdf0fee, & hide);
+  array::run_all(var_efdf0fee, &hide);
   s_right function_e457f1d();
   s_left function_e457f1d();
   var_cefeeda4 = getnodearray("powered_bridge_door", "targetname");
@@ -46,8 +46,8 @@ function function_e457f1d() {
   self.require_look_at = 0;
   self.radius = 64;
   self.height = 64;
-  self.prompt_and_visibility_func = & function_87d1b410;
-  zm_unitrigger::register_static_unitrigger(self, & function_5156e4d8);
+  self.prompt_and_visibility_func = &function_87d1b410;
+  zm_unitrigger::register_static_unitrigger(self, &function_5156e4d8);
 }
 
 function function_87d1b410(e_player) {
@@ -143,9 +143,9 @@ function function_ef72d561() {
 
 function function_40ac3c12(e_player) {
   var_efdf0fee = getEntArray("bridge_light_on", "targetname");
-  array::run_all(var_efdf0fee, & show);
+  array::run_all(var_efdf0fee, &show);
   var_da999e54 = getEntArray("bridge_light_off", "targetname");
-  array::run_all(var_da999e54, & hide);
+  array::run_all(var_da999e54, &hide);
   level thread exploder::exploder("bridge_lights_exploder");
   var_fa30b172 = getent("bridge_left", "targetname");
   var_c83a1961 = getent("bridge_right", "targetname");
@@ -166,9 +166,9 @@ function function_40ac3c12(e_player) {
   wait(0.5);
   level flag::clear("bridge_jitter_stop");
   var_efdf0fee = getEntArray("bridge_light_on", "targetname");
-  array::run_all(var_efdf0fee, & hide);
+  array::run_all(var_efdf0fee, &hide);
   var_da999e54 = getEntArray("bridge_light_off", "targetname");
-  array::run_all(var_da999e54, & show);
+  array::run_all(var_da999e54, &show);
   exploder::kill_exploder("bridge_lights_exploder");
 }
 

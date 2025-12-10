@@ -323,13 +323,13 @@ class cbreadcrumbobjective: cobjective {
 #namespace objectives;
 
 function autoexec __init__sytem__() {
-  system::register("objectives", & __init__, undefined, undefined);
+  system::register("objectives", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.a_objectives = [];
   level.n_obj_index = 0;
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function set(str_obj_type, a_target_or_list, b_breadcrumb) {

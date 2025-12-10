@@ -16,7 +16,7 @@
 function register_killstreak_bundle(killstreaktype) {
   level.killstreakbundle[killstreaktype] = struct::get_script_bundle("killstreak", "killstreak_" + killstreaktype);
   level.killstreakbundle["inventory_" + killstreaktype] = level.killstreakbundle[killstreaktype];
-  level.killstreakmaxhealthfunction = & get_max_health;
+  level.killstreakmaxhealthfunction = &get_max_health;
   assert(isDefined(level.killstreakbundle[killstreaktype]));
 }
 

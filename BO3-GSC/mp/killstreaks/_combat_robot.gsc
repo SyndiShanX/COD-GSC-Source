@@ -31,9 +31,9 @@
 #namespace combat_robot;
 
 function init() {
-  killstreaks::register("combat_robot", "combat_robot_marker", "killstreak_" + "combat_robot", "combat_robot" + "_used", & activatecombatrobot, undefined, 1);
+  killstreaks::register("combat_robot", "combat_robot_marker", "killstreak_" + "combat_robot", "combat_robot" + "_used", &activatecombatrobot, undefined, 1);
   killstreaks::register_alt_weapon("combat_robot", "lmg_light_robot");
-  killstreaks::register_strings("combat_robot", & "KILLSTREAK_COMBAT_ROBOT_EARNED", & "KILLSTREAK_COMBAT_ROBOT_NOT_AVAILABLE", & "KILLSTREAK_COMBAT_ROBOT_INBOUND", undefined, & "KILLSTREAK_COMBAT_ROBOT_HACKED");
+  killstreaks::register_strings("combat_robot", &"KILLSTREAK_COMBAT_ROBOT_EARNED", &"KILLSTREAK_COMBAT_ROBOT_NOT_AVAILABLE", &"KILLSTREAK_COMBAT_ROBOT_INBOUND", undefined, &"KILLSTREAK_COMBAT_ROBOT_HACKED");
   killstreaks::register_dialog("combat_robot", "mpl_killstreak_combat_robot", "combatRobotDialogBundle", "combatRobotPilotDialogBundle", "friendlyCombatRobot", "enemyCombatRobot", "enemyCombatRobotMultiple", "friendlyCombatRobotHacked", "enemyCombatRobotHacked", "requestCombatRobot", "threatCombatRobot");
   level.killstreaks["inventory_combat_robot"].threatonkill = 1;
   level.killstreaks["combat_robot"].threatonkill = 1;
@@ -80,7 +80,7 @@ function configureteampost(player, ishacked) {
   robot.fovcosinebusy = 0;
   robot.maxsightdistsqrd = 2000 * 2000;
   blackboard::setblackboardattribute(robot, "_robot_mode", "combat");
-  robot.gib_state = 0 | (8 & (512 - 1));
+  robot.gib_state = 0 | (8 &(512 - 1));
   robot clientfield::set("gib_state", robot.gib_state);
   _configurerobotteam(robot, player, ishacked);
   robot ai::set_behavior_attribute("can_become_crawler", 0);
@@ -108,7 +108,7 @@ function private _createguardmarker(robot, position) {
   owner = robot.owner;
   guardmarker = spawn("script_model", (0, 0, 0));
   guardmarker.origin = position;
-  guardmarker entityheadicons::setentityheadicon(owner.pers["team"], owner, undefined, & "airdrop_combatrobot");
+  guardmarker entityheadicons::setentityheadicon(owner.pers["team"], owner, undefined, &"airdrop_combatrobot");
   return guardmarker;
 }
 
@@ -254,16 +254,16 @@ function activatecombatrobot(killstreak) {
     return 0;
   }
   context = spawnStruct();
-  context.prolog = & prolog;
-  context.epilog = & epilog;
+  context.prolog = &prolog;
+  context.epilog = &epilog;
   context.hasflares = 1;
   context.radius = level.killstreakcorebundle.ksairdroprobotradius;
   context.dist_from_boundary = 18;
   context.max_dist_from_location = 4;
   context.perform_physics_trace = 1;
   context.drop_from_goal_distance2d = 96;
-  context.islocationgood = & supplydrop::islocationgood;
-  context.objective = & "airdrop_combatrobot";
+  context.islocationgood = &supplydrop::islocationgood;
+  context.objective = &"airdrop_combatrobot";
   context.killstreakref = killstreak;
   context.validlocationsound = level.killstreakcorebundle.ksvalidcombatrobotlocationsound;
   context.vehiclename = "combat_robot_dropship";
@@ -314,13 +314,13 @@ function prolog(context) {
   spawnangles = (0, 0, 0);
   combatrobot = spawnactor("spawner_bo3_robot_grunt_assault_mp", spawnposition, spawnangles, "", 1);
   combatrobot.missiletrackdamage = 0;
-  combatrobot killstreaks::configure_team("combat_robot", context.killstreak_id, player, "small_vehicle", undefined, & configureteampost);
-  combatrobot killstreak_hacking::enable_hacking("combat_robot", undefined, & hackedcallbackpost);
+  combatrobot killstreaks::configure_team("combat_robot", context.killstreak_id, player, "small_vehicle", undefined, &configureteampost);
+  combatrobot killstreak_hacking::enable_hacking("combat_robot", undefined, &hackedcallbackpost);
   combatrobot thread _escort(combatrobot);
   combatrobot thread watchcombatrobothelicopterhacked(helicopter);
   combatrobot thread watchcombatrobotshutdown();
   combatrobot thread watchcombatrobotdeath();
-  combatrobot thread killstreaks::waitfortimeout("combat_robot", 90000, & oncombatrobottimeout, "combat_robot_shutdown");
+  combatrobot thread killstreaks::waitfortimeout("combat_robot", 90000, &oncombatrobottimeout, "combat_robot_shutdown");
   combatrobot thread sndwatchcombatrobotvoxnotifies();
   helicopter thread watchhelicopterdeath(context);
   helicopter.unloadtimeout = 6;
@@ -338,7 +338,7 @@ function prolog(context) {
   combatrobot thread heatseekingmissile::missiletarget_proximitydetonateincomingmissile("death");
   combatrobot clientfield::set("enemyvehicle", 1);
   combatrobot.soundmod = "drone_land";
-  aiutility::addaioverridedamagecallback(combatrobot, & combatrobotdamageoverride);
+  aiutility::addaioverridedamagecallback(combatrobot, &combatrobotdamageoverride);
   combatrobot.vehicle = helicopter;
   combatrobot.vehicle.ignore_seat_check = 1;
   combatrobot vehicle::get_in(helicopter, "driver", 1);
@@ -350,7 +350,7 @@ function prolog(context) {
   foreach(player in level.players) {
     combatrobot respectnottargetedbyrobotperk(player);
   }
-  callback::on_spawned( & respectnottargetedbyrobotperk, combatrobot);
+  callback::on_spawned(&respectnottargetedbyrobotperk, combatrobot);
   context.robot = combatrobot;
 }
 
@@ -426,14 +426,14 @@ function cleanupthread(context) {
 function watchcombatrobotdeath() {
   combatrobot = self;
   combatrobot endon("combat_robot_shutdown");
-  callback::remove_on_spawned( & respectnottargetedbyrobotperk, combatrobot);
+  callback::remove_on_spawned(&respectnottargetedbyrobotperk, combatrobot);
   combatrobot waittill("death", attacker, damagefromunderneath, weapon);
   attacker = self[[level.figure_out_attacker]](attacker);
   if(isDefined(attacker) && isplayer(attacker) && (!isDefined(combatrobot.owner) || combatrobot.owner util::isenemyplayer(attacker))) {
     attacker challenges::destroyscorestreak(weapon, 0, 1);
     attacker challenges::destroynonairscorestreak_poststatslock(weapon);
     scoreevents::processscoreevent("destroyed_combat_robot", attacker, combatrobot.owner, weapon);
-    luinotifyevent(&"player_callout", 2, & "KILLSTREAK_DESTROYED_COMBAT_ROBOT", attacker.entnum);
+    luinotifyevent(&"player_callout", 2, &"KILLSTREAK_DESTROYED_COMBAT_ROBOT", attacker.entnum);
   }
   combatrobot killstreaks::play_destroyed_dialog_on_owner("combat_robot", combatrobot.killstreak_id);
   combatrobot notify("combat_robot_shutdown");

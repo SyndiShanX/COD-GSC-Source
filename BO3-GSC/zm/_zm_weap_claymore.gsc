@@ -21,14 +21,14 @@
 #namespace _zm_weap_claymore;
 
 function autoexec __init__sytem__() {
-  system::register("claymore", & __init__, undefined, undefined);
+  system::register("claymore", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level._effect["claymore_laser"] = "_t6/weapon/claymore/fx_claymore_laser";
-  zm_placeable_mine::add_mine_type("claymore", & "ZOMBIE_CLAYMORE_PICKUP");
-  zm_placeable_mine::add_planted_callback( & play_claymore_effects, "claymore");
-  zm_placeable_mine::add_planted_callback( & claymore_detonation, "claymore");
+  zm_placeable_mine::add_mine_type("claymore", &"ZOMBIE_CLAYMORE_PICKUP");
+  zm_placeable_mine::add_planted_callback(&play_claymore_effects, "claymore");
+  zm_placeable_mine::add_planted_callback(&claymore_detonation, "claymore");
 }
 
 function play_claymore_effects(e_planter) {

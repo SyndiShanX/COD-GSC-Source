@@ -15,7 +15,7 @@
 #namespace zm_bgb_profit_sharing;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_profit_sharing", & __init__, undefined, "bgb");
+  system::register("zm_bgb_profit_sharing", &__init__, undefined, "bgb");
 }
 
 function __init__() {
@@ -24,15 +24,15 @@ function __init__() {
   }
   clientfield::register("allplayers", "zm_bgb_profit_sharing_3p_fx", 15000, 1, "int");
   clientfield::register("toplayer", "zm_bgb_profit_sharing_1p_fx", 15000, 1, "int");
-  bgb::register("zm_bgb_profit_sharing", "time", 600, & enable, & disable, undefined, undefined);
-  bgb::function_ff4b2998("zm_bgb_profit_sharing", & add_to_player_score_override, 1);
+  bgb::register("zm_bgb_profit_sharing", "time", 600, &enable, &disable, undefined, undefined);
+  bgb::function_ff4b2998("zm_bgb_profit_sharing", &add_to_player_score_override, 1);
 }
 
 function enable() {
   self endon("disconnect");
   self endon("bled_out");
   self endon("bgb_update");
-  self thread bgb::function_4ed517b9(720, & function_ff41ae2d, & function_3c1690be);
+  self thread bgb::function_4ed517b9(720, &function_ff41ae2d, &function_3c1690be);
   self thread function_677e212b();
 }
 

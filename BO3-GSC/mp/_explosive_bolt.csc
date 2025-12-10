@@ -12,12 +12,12 @@
 #namespace explosive_bolt;
 
 function autoexec __init__sytem__() {
-  system::register("explosive_bolt", & __init__, undefined, undefined);
+  system::register("explosive_bolt", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level._effect["crossbow_light"] = "weapon/fx_equip_light_os";
-  callback::add_weapon_type("explosive_bolt", & spawned);
+  callback::add_weapon_type("explosive_bolt", &spawned);
 }
 
 function spawned(localclientnum) {

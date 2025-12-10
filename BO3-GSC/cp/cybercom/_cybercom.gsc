@@ -34,7 +34,7 @@
 #namespace cybercom;
 
 function autoexec __init__sytem__() {
-  system::register("cybercom", & init, & main, undefined);
+  system::register("cybercom", &init, &main, undefined);
 }
 
 function init() {
@@ -99,13 +99,13 @@ function initialize() {
   level.cybercom.abilities = [];
   level.cybercom.swarms_released = 0;
   level.cybercom.var_12f85dec = 0;
-  level.cybercom._ability_turn_on = & ability_on;
-  level.cybercom._ability_turn_off = & ability_off;
-  level.vehicle_initializer_cb = & vehicle_init_cybercom;
-  level.vehicle_destructer_cb = & function_79bafe1d;
-  level.vehicle_defense_cb = & function_fabadf47;
-  level.cybercom.overrideactordamage = & function_25889576;
-  level.cybercom.overridevehicledamage = & function_17136681;
+  level.cybercom._ability_turn_on = &ability_on;
+  level.cybercom._ability_turn_off = &ability_off;
+  level.vehicle_initializer_cb = &vehicle_init_cybercom;
+  level.vehicle_destructer_cb = &function_79bafe1d;
+  level.vehicle_defense_cb = &function_fabadf47;
+  level.cybercom.overrideactordamage = &function_25889576;
+  level.cybercom.overridevehicledamage = &function_17136681;
 }
 
 function function_25889576(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, boneindex, modelindex, surfacetype, surfacenormal) {
@@ -157,8 +157,8 @@ function function_17136681(einflictor, eattacker, idamage, idflags, smeansofdeat
 }
 
 function main() {
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
   if(!isDefined(level.cybercom)) {
     initialize();
   }

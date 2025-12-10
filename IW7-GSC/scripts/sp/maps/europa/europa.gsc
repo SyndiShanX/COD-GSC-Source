@@ -196,9 +196,9 @@ func_D7FB() {
   precachemodel("viewmodel_un_jackal_pilots");
   precachemodel("head_hero_t_hqss");
   precachemodel("head_hero_sipes_cine_hqss");
-  precachestring( & "EUROPA_OBJECTIVE_ACCESS");
-  precachestring( & "EUROPA_OBJECTIVE_FSPAR");
-  precachestring( & "EUROPA_OBJECTIVE_ESCAPE");
+  precachestring(&"EUROPA_OBJECTIVE_ACCESS");
+  precachestring(&"EUROPA_OBJECTIVE_FSPAR");
+  precachestring(&"EUROPA_OBJECTIVE_ESCAPE");
 }
 
 func_6E3A() {

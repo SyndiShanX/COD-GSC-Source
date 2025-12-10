@@ -10,7 +10,7 @@
 #namespace raps;
 
 function autoexec main() {
-  clientfield::register("vehicle", "raps_side_deathfx", 1, 1, "int", & do_side_death_fx, 0, 0);
+  clientfield::register("vehicle", "raps_side_deathfx", 1, 1, "int", &do_side_death_fx, 0, 0);
 }
 
 function adjust_side_death_dir_if_trace_fail(origin, side_dir, fxlength, up_dir) {

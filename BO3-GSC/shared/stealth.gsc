@@ -19,7 +19,7 @@
 #namespace stealth;
 
 function autoexec __init__sytem__() {
-  system::register("stealth", & __init__, undefined, undefined);
+  system::register("stealth", &__init__, undefined, undefined);
 }
 
 function __init__() {

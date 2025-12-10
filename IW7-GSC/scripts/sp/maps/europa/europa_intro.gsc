@@ -29,33 +29,33 @@ func_9AB6() {
   scripts\engine\utility::flag_init("dropship_intro_vo_finished");
   level.player scripts\sp\utility::func_65E0("frost_overlay_active");
   level.player scripts\sp\utility::func_65E0("switched_weapon_during_tutorial");
-  precachestring( & "EUROPA_JUMPIN");
+  precachestring(&"EUROPA_JUMPIN");
 }
 
 func_9ABC() {
   level.player notifyonplayercommand("melee_pressed", "+melee");
   level.player notifyonplayercommand("melee_pressed", "+melee_zoom");
   level.player notifyonplayercommand("melee_pressed", "+melee_breath");
-  precachestring( & "EUROPA_BOOST_DEATH_HINT");
-  precachestring( & "EUROPA_FREEZE_DEATH");
-  precachestring( & "EUROPA_HALOJUMP_FAIL");
+  precachestring(&"EUROPA_BOOST_DEATH_HINT");
+  precachestring(&"EUROPA_FREEZE_DEATH");
+  precachestring(&"EUROPA_HALOJUMP_FAIL");
   precachemodel("weapon_bullet_iw5");
   precachemodel("tactical_knife_iw7_wm");
   precacheshader("vfx_ui_player_freeze_overlay");
   precacheshader("vfx_ui_player_freeze_overlay_02");
   precacheshader("arrow_left_white");
   precacheshader("arrow_right_white");
-  scripts\sp\utility::func_16EB("seeker_tutorial_hint", & "EUROPA_SEEKER_HINT", ::scripts\sp\maps\europa\europa_labs::func_F164);
-  scripts\sp\utility::func_16EB("halojump_hint", & "EUROPA_HALOJUMP_HINT", ::func_8893);
-  scripts\sp\utility::func_16EB("freefall_boost", & "EUROPA_FREEFALL_BOOST", ::func_2CB4);
-  scripts\sp\utility::func_16EB("scope_y", & "EUROPA_HINT_SCOPE_Y", ::func_9CF7);
-  scripts\sp\utility::func_16EB("scope_dpad", & "EUROPA_HINT_SCOPE_DPAD", ::func_9CF7);
-  scripts\sp\utility::func_16EB("scope_both", & "EUROPA_HINT_SCOPE_BOTH", ::func_9CF7);
-  scripts\sp\utility::func_16EB("scope_kb", & "EUROPA_HINT_SCOPE_KB", ::func_9CF7);
-  scripts\sp\utility::func_16EB("scope_test", & "EUROPA_SCOPE_CONFIRM", ::func_9B50);
-  scripts\sp\utility::func_16EB("fly_controller", & "EUROPA_FLY_CONTROLLER", ::func_9EAC);
-  scripts\sp\utility::func_16EB("fly_kb", & "EUROPA_FLY_KB", ::func_9EAC);
-  scripts\sp\utility::func_16EB("melee_hint", & "EUROPA_MELEE", ::func_D42B);
+  scripts\sp\utility::func_16EB("seeker_tutorial_hint", &"EUROPA_SEEKER_HINT", ::scripts\sp\maps\europa\europa_labs::func_F164);
+  scripts\sp\utility::func_16EB("halojump_hint", &"EUROPA_HALOJUMP_HINT", ::func_8893);
+  scripts\sp\utility::func_16EB("freefall_boost", &"EUROPA_FREEFALL_BOOST", ::func_2CB4);
+  scripts\sp\utility::func_16EB("scope_y", &"EUROPA_HINT_SCOPE_Y", ::func_9CF7);
+  scripts\sp\utility::func_16EB("scope_dpad", &"EUROPA_HINT_SCOPE_DPAD", ::func_9CF7);
+  scripts\sp\utility::func_16EB("scope_both", &"EUROPA_HINT_SCOPE_BOTH", ::func_9CF7);
+  scripts\sp\utility::func_16EB("scope_kb", &"EUROPA_HINT_SCOPE_KB", ::func_9CF7);
+  scripts\sp\utility::func_16EB("scope_test", &"EUROPA_SCOPE_CONFIRM", ::func_9B50);
+  scripts\sp\utility::func_16EB("fly_controller", &"EUROPA_FLY_CONTROLLER", ::func_9EAC);
+  scripts\sp\utility::func_16EB("fly_kb", &"EUROPA_FLY_KB", ::func_9EAC);
+  scripts\sp\utility::func_16EB("melee_hint", &"EUROPA_MELEE", ::func_D42B);
   level.player scripts\sp\utility::func_65E0("isFlying");
   level.var_CF99 = 0;
   level.var_D36A = 0;
@@ -1589,7 +1589,7 @@ func_4211() {
   var_00 = scripts\engine\utility::getstruct("jump_obj", "targetname");
   objective_position(1, var_00.origin - (0, 0, 56));
   if(level.var_7683 < 2) {
-    objective_setpointertextoverride(1, & "EUROPA_JUMPIN");
+    objective_setpointertextoverride(1, &"EUROPA_JUMPIN");
   }
 
   scripts\engine\utility::flag_wait("cliffjump_start");
@@ -1815,7 +1815,7 @@ func_134C2() {
   wait(0.5);
   var_00 = ["europa_plr_reaperscarsareo", "europa_rpr_copy11beadvised", "europa_plr_copyunthemove"];
   scripts\sp\maps\europa\europa_util::func_D24C(var_00);
-  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "current", & "EUROPA_OBJECTIVE_ACCESS", "entering_seeker_room");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "current", &"EUROPA_OBJECTIVE_ACCESS", "entering_seeker_room");
   thread func_4211();
   level notify("landing_vo_finished");
   func_4A5D();

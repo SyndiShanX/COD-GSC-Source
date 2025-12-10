@@ -27,7 +27,7 @@
 #namespace zm_tomb_dig;
 
 function init_shovel() {
-  callback::on_connect( & init_shovel_player);
+  callback::on_connect(&init_shovel_player);
   a_shovel_pos = struct::get_array("shovel_location", "targetname");
   a_shovel_zone = [];
   foreach(s_shovel_pos in a_shovel_pos) {
@@ -43,8 +43,8 @@ function init_shovel() {
     m_shovel setModel("p7_zm_ori_tool_shovel");
     generate_shovel_unitrigger(m_shovel);
   }
-  level.get_player_perk_purchase_limit = & get_player_perk_purchase_limit;
-  level.bonus_points_powerup_override = & bonus_points_powerup_override;
+  level.get_player_perk_purchase_limit = &get_player_perk_purchase_limit;
+  level.bonus_points_powerup_override = &bonus_points_powerup_override;
   level thread dig_powerups_tracking();
   level thread dig_spots_init();
   clientfield::register("world", "player0hasItem", 15000, 2, "int");
@@ -75,13 +75,13 @@ function generate_shovel_unitrigger(e_shovel) {
   s_unitrigger_stub.script_width = 64;
   s_unitrigger_stub.script_height = 64;
   s_unitrigger_stub.cursor_hint = "HINT_NOICON";
-  s_unitrigger_stub.hint_string = & "ZM_TOMB_SHPU";
+  s_unitrigger_stub.hint_string = &"ZM_TOMB_SHPU";
   s_unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   s_unitrigger_stub.require_look_at = 1;
-  s_unitrigger_stub.prompt_and_visibility_func = & shovel_trigger_prompt_and_visiblity;
+  s_unitrigger_stub.prompt_and_visibility_func = &shovel_trigger_prompt_and_visiblity;
   s_unitrigger_stub.e_shovel = e_shovel;
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger_stub, 1);
-  zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, & shovel_unitrigger_think);
+  zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, &shovel_unitrigger_think);
 }
 
 function shovel_trigger_prompt_and_visiblity(e_player) {
@@ -95,9 +95,9 @@ function shovel_prompt_update(e_player) {
   if(!self unitrigger_stub_show_hint_prompt_valid(e_player)) {
     return false;
   }
-  self.hint_string = & "ZM_TOMB_SHPU";
+  self.hint_string = &"ZM_TOMB_SHPU";
   if(isDefined(e_player.dig_vars["has_shovel"]) && e_player.dig_vars["has_shovel"]) {
-    self.hint_string = & "ZM_TOMB_SHAG";
+    self.hint_string = &"ZM_TOMB_SHAG";
   }
   return true;
 }
@@ -247,7 +247,7 @@ function dig_spot_spawn() {
   self.m_dig moveto(self.origin, 3, 0, 1);
   self.m_dig waittill("movedone");
   t_dig = zm_tomb_utility::tomb_spawn_trigger_radius(self.origin + vectorscale((0, 0, 1), 20), 100, 1);
-  t_dig.prompt_and_visibility_func = & dig_spot_trigger_visibility;
+  t_dig.prompt_and_visibility_func = &dig_spot_trigger_visibility;
   t_dig.require_look_at = 1;
   t_dig waittill_dug(self);
   zm_unitrigger::unregister_unitrigger(t_dig);
@@ -443,7 +443,7 @@ function dig_up_weapon(digger) {
   m_weapon thread timer_til_despawn(v_spawnpt, 40 * -1);
   m_weapon endon("dig_up_weapon_timed_out");
   playFXOnTag(level._effect["powerup_on_solo"], m_weapon, "tag_origin");
-  m_weapon.trigger = zm_tomb_utility::tomb_spawn_trigger_radius(v_spawnpt, 100, 1, undefined, & weapon_trigger_update_prompt);
+  m_weapon.trigger = zm_tomb_utility::tomb_spawn_trigger_radius(v_spawnpt, 100, 1, undefined, &weapon_trigger_update_prompt);
   m_weapon.trigger.cursor_hint = "HINT_WEAPON";
   m_weapon.trigger.cursor_hint_weapon = var_59d5868d;
   m_weapon.trigger waittill("trigger", player);

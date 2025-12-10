@@ -5,7 +5,7 @@
 
 base_array_init() {
   level.start_point = "base_array";
-  objective_add(maps\_utility::obj("rendesvouz"), "current", & "SATFARM_OBJ_RENDESVOUZ");
+  objective_add(maps\_utility::obj("rendesvouz"), "current", &"SATFARM_OBJ_RENDESVOUZ");
   thread maps\satfarm_code::follow_icon_manager();
   thread base_array_ambient_dogfight_1();
   thread base_array_ambient_dogfight_2();
@@ -27,7 +27,7 @@ base_array_main() {
   level.herotanks[0] thread maps\satfarm_code::tank_relative_speed("air_strip_relative_speed", "base_array_end", 200, 15, 2);
   level.herotanks[1] thread maps\satfarm_code::tank_relative_speed("air_strip_relative_speed", "base_array_end", 250, 13.5, 1.5);
   objective_onentity(maps\_utility::obj("rendesvouz"), level.herotanks[1], (0, 0, 60));
-  objective_setpointertextoverride(maps\_utility::obj("rendesvouz"), & "SATFARM_FOLLOW");
+  objective_setpointertextoverride(maps\_utility::obj("rendesvouz"), &"SATFARM_FOLLOW");
   thread base_array_begin();
   common_scripts\utility::flag_wait("base_array_end");
   maps\_spawner::killspawner(30);
@@ -207,9 +207,9 @@ satfarm_transient_unload() {
 base_array_hints() {
   common_scripts\utility::flag_wait("base_array_ridge_reached");
   maps\_utility::objective_complete(maps\_utility::obj("rendesvouz"));
-  objective_add(maps\_utility::obj("reach_air_strip"), "current", & "SATFARM_OBJ_REACH_AIR_STRIP");
+  objective_add(maps\_utility::obj("reach_air_strip"), "current", &"SATFARM_OBJ_REACH_AIR_STRIP");
   objective_onentity(maps\_utility::obj("reach_air_strip"), level.herotanks[1], (0, 0, 60));
-  objective_setpointertextoverride(maps\_utility::obj("reach_air_strip"), & "SATFARM_FOLLOW");
+  objective_setpointertextoverride(maps\_utility::obj("reach_air_strip"), &"SATFARM_FOLLOW");
 
   if(!common_scripts\utility::flag("PLAYER_ZOOMED_ONCE")) {
     if(level.player usinggamepad())

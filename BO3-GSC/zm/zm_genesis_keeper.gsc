@@ -45,7 +45,7 @@
 #namespace zm_genesis_keeper;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_keeper", & __init__, undefined, undefined);
+  system::register("zm_genesis_keeper", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -58,7 +58,7 @@ function __init__() {
 }
 
 function private function_cf48298e() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisKeeperDeathStart", & function_9d655978);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisKeeperDeathStart", &function_9d655978);
 }
 
 function function_9d655978(entity) {
@@ -78,16 +78,16 @@ function function_f8c7a969(inflictor, attacker, damage, meansofdeath, weapon, di
 }
 
 function function_51dd865c() {
-  spawner::add_archetype_spawn_function("keeper", & function_cb6b3469);
-  spawner::add_archetype_spawn_function("keeper", & function_6ded398b);
-  spawner::add_archetype_spawn_function("keeper", & function_e5e94978);
-  spawner::add_archetype_spawn_function("keeper", & function_1dcdd145);
+  spawner::add_archetype_spawn_function("keeper", &function_cb6b3469);
+  spawner::add_archetype_spawn_function("keeper", &function_6ded398b);
+  spawner::add_archetype_spawn_function("keeper", &function_e5e94978);
+  spawner::add_archetype_spawn_function("keeper", &function_1dcdd145);
   level thread aat::register_immunity("zm_aat_turned", "keeper", 1, 1, 1);
 }
 
 function private function_85d4833b() {
   level flagsys::wait_till("start_zombie_round_logic");
-  zm_devgui::add_custom_devgui_callback( & function_e361808);
+  zm_devgui::add_custom_devgui_callback(&function_e361808);
 }
 
 function keeper_death() {
@@ -132,7 +132,7 @@ function private function_dfdf3fc1() {
 }
 
 function function_6ded398b() {
-  aiutility::addaioverridedamagecallback(self, & function_7085a2e4);
+  aiutility::addaioverridedamagecallback(self, &function_7085a2e4);
   self thread zm::update_zone_name();
   self aat::aat_cooldown_init();
   self thread zm_spawner::enemy_death_detection();
@@ -257,19 +257,19 @@ function function_cb6b3469() {
   blackboard::createblackboardforentity(self);
   self aiutility::registerutilityblackboardattributes();
   ai::createinterfaceforentity(self);
-  blackboard::registerblackboardattribute(self, "_arms_position", "arms_up", & bb_getarmsposition);
+  blackboard::registerblackboardattribute(self, "_arms_position", "arms_up", &bb_getarmsposition);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_speed", "locomotion_speed_walk", & bb_getlocomotionspeedtype);
+  blackboard::registerblackboardattribute(self, "_locomotion_speed", "locomotion_speed_walk", &bb_getlocomotionspeedtype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_has_legs", "has_legs_yes", & bb_gethaslegsstatus);
+  blackboard::registerblackboardattribute(self, "_has_legs", "has_legs_yes", &bb_gethaslegsstatus);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_variant_type", 0, & bb_getvarianttype);
+  blackboard::registerblackboardattribute(self, "_variant_type", 0, &bb_getvarianttype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -285,15 +285,15 @@ function function_cb6b3469() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_should_turn", "should_not_turn", & bb_getshouldturn);
+  blackboard::registerblackboardattribute(self, "_locomotion_should_turn", "should_not_turn", &bb_getshouldturn);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_idgun_damage_direction", "back", & bb_idgungetdamagedirection);
+  blackboard::registerblackboardattribute(self, "_idgun_damage_direction", "back", &bb_idgungetdamagedirection);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_low_gravity_variant", 0, & bb_getlowgravityvariant);
+  blackboard::registerblackboardattribute(self, "_low_gravity_variant", 0, &bb_getlowgravityvariant);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -305,7 +305,7 @@ function function_cb6b3469() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  self.___archetypeonanimscriptedcallback = & archetypezombieonanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = &archetypezombieonanimscriptedcallback;
   self finalizetrackedblackboardattributes();
 }
 

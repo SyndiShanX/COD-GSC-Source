@@ -50,7 +50,7 @@ function randomize_vending_machines() {
       vending_machines[i] thread function_bede3562(machine);
     }
   }
-  level.sndperksacolajingleoverride = & function_25413096;
+  level.sndperksacolajingleoverride = &function_25413096;
   level notify("hash_57a00baa");
 }
 

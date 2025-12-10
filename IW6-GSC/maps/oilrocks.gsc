@@ -15,7 +15,7 @@ main() {
   maps\oilrocks_apache_starts::main();
   maps\oilrocks_infantry_starts::main();
   maps\oilrocks_infantry_upper_starts::main();
-  maps\_utility::intro_screen_create(&"OILROCKS_INTROSCREEN_LEVELNAME", & "OILROCKS_INTROSCREEN_DATE", & "OILROCKS_INTROSCREEN_LOCATION", & "OILROCKS_INTROSCREEN_PLAYERNAME");
+  maps\_utility::intro_screen_create(&"OILROCKS_INTROSCREEN_LEVELNAME", &"OILROCKS_INTROSCREEN_DATE", &"OILROCKS_INTROSCREEN_LOCATION", &"OILROCKS_INTROSCREEN_PLAYERNAME");
   maps\createart\oilrocks_art::main();
   maps\_utility::vision_set_fog_changes("", 0);
   maps\oilrocks_fx::main();

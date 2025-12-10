@@ -71,8 +71,8 @@ onprecachegametype() {
 }
 
 onstartgametype() {
-  setobjectivetext("allies", & "OBJECTIVES_DOM");
-  setobjectivetext("axis", & "OBJECTIVES_DOM");
+  setobjectivetext("allies", &"OBJECTIVES_DOM");
+  setobjectivetext("axis", &"OBJECTIVES_DOM");
 
   if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = 0;
@@ -85,15 +85,15 @@ onstartgametype() {
   }
 
   if(level.splitscreen) {
-    setobjectivescoretext("allies", & "OBJECTIVES_DOM");
-    setobjectivescoretext("axis", & "OBJECTIVES_DOM");
+    setobjectivescoretext("allies", &"OBJECTIVES_DOM");
+    setobjectivescoretext("axis", &"OBJECTIVES_DOM");
   } else {
-    setobjectivescoretext("allies", & "OBJECTIVES_DOM_SCORE");
-    setobjectivescoretext("axis", & "OBJECTIVES_DOM_SCORE");
+    setobjectivescoretext("allies", &"OBJECTIVES_DOM_SCORE");
+    setobjectivescoretext("axis", &"OBJECTIVES_DOM_SCORE");
   }
 
-  setobjectivehinttext("allies", & "OBJECTIVES_DOM_HINT");
-  setobjectivehinttext("axis", & "OBJECTIVES_DOM_HINT");
+  setobjectivehinttext("allies", &"OBJECTIVES_DOM_HINT");
+  setobjectivehinttext("axis", &"OBJECTIVES_DOM_HINT");
   level.flagbasefxid = [];
   level.flagbasefxid["allies"] = loadfx("misc/fx_ui_flagbase_" + game["allies"]);
   level.flagbasefxid["axis"] = loadfx("misc/fx_ui_flagbase_" + game["axis"]);
@@ -449,30 +449,30 @@ onuse(player) {
   level.usestartspawns = 0;
   assert(team != "neutral");
   isbflag = 0;
-  string = & "";
+  string = &"";
 
   switch (label) {
     case "_a":
-      string = & "MP_DOM_FLAG_A_CAPTURED_BY";
+      string = &"MP_DOM_FLAG_A_CAPTURED_BY";
       break;
     case "_b":
-      string = & "MP_DOM_FLAG_B_CAPTURED_BY";
+      string = &"MP_DOM_FLAG_B_CAPTURED_BY";
       isbflag = 1;
       break;
     case "_c":
-      string = & "MP_DOM_FLAG_C_CAPTURED_BY";
+      string = &"MP_DOM_FLAG_C_CAPTURED_BY";
       break;
     case "_d":
-      string = & "MP_DOM_FLAG_D_CAPTURED_BY";
+      string = &"MP_DOM_FLAG_D_CAPTURED_BY";
       break;
     case "_e":
-      string = & "MP_DOM_FLAG_E_CAPTURED_BY";
+      string = &"MP_DOM_FLAG_E_CAPTURED_BY";
       break;
     default:
       break;
   }
 
-  assert(string != & "");
+  assert(string != &"");
   touchlist = [];
   touchkeys = getarraykeys(self.touchlist[team]);
 
@@ -485,7 +485,7 @@ onuse(player) {
   if(oldteam == "neutral") {
     self.singleowner = 1;
     otherteam = getotherteam(team);
-    thread printandsoundoneveryone(team, undefined, & "", undefined, "mp_war_objective_taken");
+    thread printandsoundoneveryone(team, undefined, &"", undefined, "mp_war_objective_taken");
     thread playsoundonplayers("mus_dom_captured" + "_" + level.teampostfix[team]);
 
     if(getteamflagcount(team) == level.flags.size) {
@@ -500,7 +500,7 @@ onuse(player) {
     }
   } else {
     self.singleowner = 0;
-    thread printandsoundoneveryone(team, oldteam, & "", & "", "mp_war_objective_taken", "mp_war_objective_lost", "");
+    thread printandsoundoneveryone(team, oldteam, &"", &"", "mp_war_objective_taken", "mp_war_objective_lost", "");
 
     if(getteamflagcount(team) == level.flags.size) {
       statusdialog("secure_all", team, "gamemode_objective");

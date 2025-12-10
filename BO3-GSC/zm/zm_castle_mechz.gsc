@@ -27,22 +27,22 @@
 function autoexec init() {
   function_dd3133f7();
   level flag::init("can_spawn_mechz", 1);
-  spawner::add_archetype_spawn_function("mechz", & function_d8d01032);
+  spawner::add_archetype_spawn_function("mechz", &function_d8d01032);
   level thread function_76e7495b();
-  level.mechz_should_stun_override = & function_f517cdd6;
-  level.mechz_faceplate_damage_override = & function_bddef31c;
-  level.var_7f2a926d = & mechz_health_increases;
+  level.mechz_should_stun_override = &function_f517cdd6;
+  level.mechz_faceplate_damage_override = &function_bddef31c;
+  level.var_7f2a926d = &mechz_health_increases;
   level thread function_78e44cda();
 }
 
 function private function_dd3133f7() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzTrapService", & function_78c0d00b);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzShouldMoveToTrap", & function_697928b7);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzIsAtTrap", & function_829fa81c);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzShouldAttackTrap", & function_e4f26ac8);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("casteMechzTrapMoveTerminate", & function_cf4879ad);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("casteMechzTrapAttackTerminate", & function_7c295452);
-  animationstatenetwork::registeranimationmocomp("mocomp_trap_attack@mechz", & function_f467e83, undefined, & function_e37c4112);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzTrapService", &function_78c0d00b);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzShouldMoveToTrap", &function_697928b7);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzIsAtTrap", &function_829fa81c);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzShouldAttackTrap", &function_e4f26ac8);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("casteMechzTrapMoveTerminate", &function_cf4879ad);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("casteMechzTrapAttackTerminate", &function_7c295452);
+  animationstatenetwork::registeranimationmocomp("mocomp_trap_attack@mechz", &function_f467e83, undefined, &function_e37c4112);
 }
 
 function private function_76e7495b() {

@@ -12,7 +12,7 @@ main(var_0) {
 
   switch (var_0) {
     case "descent":
-      level.strings["hint_detpack"] = & "DESCENT_HINTSTR_DETPACK";
+      level.strings["hint_detpack"] = &"DESCENT_HINTSTR_DETPACK";
       precachestring(level.strings["hint_detpack"]);
       break;
   }

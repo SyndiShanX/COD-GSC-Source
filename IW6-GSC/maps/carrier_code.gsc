@@ -794,7 +794,7 @@ player_slide_fall() {
     var_1 maps\_anim::anim_single_solo(var_1, "carrier_player_slide");
   } else {
     level.player dodamage(level.player.health * 0.9, level.player.origin + (0, 0, 72));
-    setdvar("ui_deadquote", & "CARRIER_FAIL_DECK_TILT");
+    setdvar("ui_deadquote", &"CARRIER_FAIL_DECK_TILT");
     maps\_utility::missionfailedwrapper();
   }
 }
@@ -1145,7 +1145,7 @@ cinematic_off() {
 }
 
 setup_mantle_hint() {
-  level.strings["mantle"] = & "SCRIPT_MANTLE";
+  level.strings["mantle"] = &"SCRIPT_MANTLE";
   maps\_hud_util::create_mantle();
 }
 

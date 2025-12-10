@@ -12,15 +12,15 @@
 #namespace zm_ai_sentinel_drone;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_sentinel_drone", & __init__, & __main__, undefined);
+  system::register("zm_ai_sentinel_drone", &__init__, &__main__, undefined);
 }
 
 function autoexec __init__() {
-  clientfield::register("world", "sentinel_round_fog", 12000, 1, "int", & sentinel_round_fog, 0, 0);
-  clientfield::register("toplayer", "sentinel_round_fx", 12000, 1, "int", & sentinel_round_fx, 0, 0);
-  clientfield::register("vehicle", "sentinel_spawn_fx", 12000, 1, "int", & sentinel_spawn_fx, 0, 0);
-  clientfield::register("vehicle", "necro_sentinel_fx", 12000, 1, "int", & necro_sentinel_fx, 0, 0);
-  clientfield::register("actor", "sentinel_zombie_spawn_fx", 12000, 1, "int", & function_bc95cac0, 0, 0);
+  clientfield::register("world", "sentinel_round_fog", 12000, 1, "int", &sentinel_round_fog, 0, 0);
+  clientfield::register("toplayer", "sentinel_round_fx", 12000, 1, "int", &sentinel_round_fx, 0, 0);
+  clientfield::register("vehicle", "sentinel_spawn_fx", 12000, 1, "int", &sentinel_spawn_fx, 0, 0);
+  clientfield::register("vehicle", "necro_sentinel_fx", 12000, 1, "int", &necro_sentinel_fx, 0, 0);
+  clientfield::register("actor", "sentinel_zombie_spawn_fx", 12000, 1, "int", &function_bc95cac0, 0, 0);
   level._effect["sentinel_round"] = "zombie/fx_meatball_round_tell_zod_zmb";
   level._effect["sentinel_spawn_in"] = "dlc3/stalingrad/fx_sentinel_drone_spawn_trail";
   level._effect["sentinel_spawn_impact"] = "dlc3/stalingrad/fx_mech_wpn_harpoon_explo";

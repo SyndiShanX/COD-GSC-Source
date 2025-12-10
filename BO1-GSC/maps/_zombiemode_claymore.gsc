@@ -291,9 +291,9 @@ show_claymore_hint(string) {
   self endon("death");
   self endon("disconnect");
   if(string == "claymore_purchased")
-    text = & "ZOMBIE_CLAYMORE_HOWTO";
+    text = &"ZOMBIE_CLAYMORE_HOWTO";
   else
-    text = & "ZOMBIE_CLAYMORE_ALREADY_PURCHASED";
+    text = &"ZOMBIE_CLAYMORE_ALREADY_PURCHASED";
   self setup_client_hintelem();
   self.hintelem setText(text);
   wait(3.5);

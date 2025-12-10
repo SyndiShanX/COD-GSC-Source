@@ -22,13 +22,13 @@
 #namespace zm_powerup_beast_mana;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_beast_mana", & __init__, undefined, undefined);
+  system::register("zm_powerup_beast_mana", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  zm_powerups::register_powerup("beast_mana", & grab_beast_mana);
+  zm_powerups::register_powerup("beast_mana", &grab_beast_mana);
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("beast_mana", "zombie_z_money_icon", & "ZM_ZOD_POWERUP_BEAST_MANA", & zm_powerups::func_should_never_drop, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("beast_mana", "zombie_z_money_icon", &"ZM_ZOD_POWERUP_BEAST_MANA", &zm_powerups::func_should_never_drop, 1, 0, 0);
   }
 }
 

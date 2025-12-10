@@ -12,11 +12,11 @@
 #namespace zm_equip_shield;
 
 function autoexec __init__sytem__() {
-  system::register("zm_equip_shield", & __init__, undefined, undefined);
+  system::register("zm_equip_shield", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_spawned( & player_on_spawned);
+  callback::on_spawned(&player_on_spawned);
   clientfield::register("clientuimodel", "zmInventory.shield_health", 11000, 4, "float", undefined, 0, 0);
 }
 

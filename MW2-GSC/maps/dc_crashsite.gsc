@@ -952,14 +952,14 @@ obj_crash_site() {
   flag_wait("obj_crash_site_given");
   if(level.script == "dcburning") {
     objective_number = 9;
-    objective_add(objective_number, "active", & "DCBURNING_OBJ_CRASH_SITE");
+    objective_add(objective_number, "active", &"DCBURNING_OBJ_CRASH_SITE");
     objective_current(objective_number);
 
     flag_wait("obj_crash_site_complete");
 
     objective_state(objective_number, "done");
   } else {
-    objective_add(level.objnum, "active", & "DCEMP_OBJ_CRASH_SITE");
+    objective_add(level.objnum, "active", &"DCEMP_OBJ_CRASH_SITE");
     objective_current(level.objnum);
 
     flag_wait("iss_fx");
@@ -1095,7 +1095,7 @@ crash_anims() {
   level.scr_sound["crash_leader"]["dcburn_mcy_hangon"] = "dcburn_mcy_hangon";
 
   /*-----------------------
-  MORTAR EFFECTS & SOUNDS
+  MORTAR EFFECTS &SOUNDS
   -------------------------*/
   level._effect["mortar"]["bunker_ceiling"] = loadfx("dust/ceiling_dust_bunker");
   level._effect["mortar"]["bunker_ceiling_green"] = loadfx("dust/ceiling_dust_bunker_green");

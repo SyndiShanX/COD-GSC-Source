@@ -70,11 +70,11 @@ function main() {
   level.allow_teamchange = 0;
   setdvar("scr_disable_team_selection", 1);
   setdvar("scr_disable_weapondrop", 1);
-  level.onstartgametype = & onstartgametype;
-  level.onspawnplayer = & globallogic::blank;
-  level.onspawnplayerunified = & onspawnplayerunified;
-  level.onroundendgame = & onroundendgame;
-  level.playermayspawn = & mayspawn;
+  level.onstartgametype = &onstartgametype;
+  level.onspawnplayer = &globallogic::blank;
+  level.onspawnplayerunified = &onspawnplayerunified;
+  level.onroundendgame = &onroundendgame;
+  level.playermayspawn = &mayspawn;
   zm_utility::set_game_var("ZM_roundLimit", 1);
   zm_utility::set_game_var("ZM_scoreLimit", 1);
   zm_utility::set_game_var("_team1_num", 0);
@@ -105,62 +105,62 @@ function main() {
   zm_utility::set_gamemode_var("match_end_notify", undefined);
   zm_utility::set_gamemode_var("match_end_func", undefined);
   setscoreboardcolumns("score", "kills", "downs", "revives", "headshots");
-  callback::on_connect( & onplayerconnect_check_for_hotjoin);
+  callback::on_connect(&onplayerconnect_check_for_hotjoin);
 }
 
 function globallogic_setupdefault_zombiecallbacks() {
-  level.spawnplayer = & globallogic_spawn::spawnplayer;
-  level.spawnplayerprediction = & globallogic_spawn::spawnplayerprediction;
-  level.spawnclient = & globallogic_spawn::spawnclient;
-  level.spawnspectator = & globallogic_spawn::spawnspectator;
-  level.spawnintermission = & globallogic_spawn::spawnintermission;
-  level.scoreongiveplayerscore = & globallogic_score::giveplayerscore;
-  level.onplayerscore = & globallogic::blank;
-  level.onteamscore = & globallogic::blank;
-  level.wavespawntimer = & globallogic::wavespawntimer;
-  level.onspawnplayer = & globallogic::blank;
-  level.onspawnplayerunified = & globallogic::blank;
-  level.onspawnspectator = & onspawnspectator;
-  level.onspawnintermission = & onspawnintermission;
-  level.onrespawndelay = & globallogic::blank;
-  level.onforfeit = & globallogic::blank;
-  level.ontimelimit = & globallogic::blank;
-  level.onscorelimit = & globallogic::blank;
-  level.ondeadevent = & ondeadevent;
-  level.ononeleftevent = & globallogic::blank;
-  level.giveteamscore = & globallogic::blank;
-  level.gettimepassed = & globallogic_utils::gettimepassed;
-  level.gettimelimit = & globallogic_defaults::default_gettimelimit;
-  level.getteamkillpenalty = & globallogic::blank;
-  level.getteamkillscore = & globallogic::blank;
-  level.iskillboosting = & globallogic::blank;
-  level._setteamscore = & globallogic_score::_setteamscore;
-  level._setplayerscore = & globallogic::blank;
-  level._getteamscore = & globallogic::blank;
-  level._getplayerscore = & globallogic::blank;
-  level.onprecachegametype = & globallogic::blank;
-  level.onstartgametype = & globallogic::blank;
-  level.onplayerconnect = & globallogic::blank;
-  level.onplayerdisconnect = & onplayerdisconnect;
-  level.onplayerdamage = & globallogic::blank;
-  level.onplayerkilled = & globallogic::blank;
+  level.spawnplayer = &globallogic_spawn::spawnplayer;
+  level.spawnplayerprediction = &globallogic_spawn::spawnplayerprediction;
+  level.spawnclient = &globallogic_spawn::spawnclient;
+  level.spawnspectator = &globallogic_spawn::spawnspectator;
+  level.spawnintermission = &globallogic_spawn::spawnintermission;
+  level.scoreongiveplayerscore = &globallogic_score::giveplayerscore;
+  level.onplayerscore = &globallogic::blank;
+  level.onteamscore = &globallogic::blank;
+  level.wavespawntimer = &globallogic::wavespawntimer;
+  level.onspawnplayer = &globallogic::blank;
+  level.onspawnplayerunified = &globallogic::blank;
+  level.onspawnspectator = &onspawnspectator;
+  level.onspawnintermission = &onspawnintermission;
+  level.onrespawndelay = &globallogic::blank;
+  level.onforfeit = &globallogic::blank;
+  level.ontimelimit = &globallogic::blank;
+  level.onscorelimit = &globallogic::blank;
+  level.ondeadevent = &ondeadevent;
+  level.ononeleftevent = &globallogic::blank;
+  level.giveteamscore = &globallogic::blank;
+  level.gettimepassed = &globallogic_utils::gettimepassed;
+  level.gettimelimit = &globallogic_defaults::default_gettimelimit;
+  level.getteamkillpenalty = &globallogic::blank;
+  level.getteamkillscore = &globallogic::blank;
+  level.iskillboosting = &globallogic::blank;
+  level._setteamscore = &globallogic_score::_setteamscore;
+  level._setplayerscore = &globallogic::blank;
+  level._getteamscore = &globallogic::blank;
+  level._getplayerscore = &globallogic::blank;
+  level.onprecachegametype = &globallogic::blank;
+  level.onstartgametype = &globallogic::blank;
+  level.onplayerconnect = &globallogic::blank;
+  level.onplayerdisconnect = &onplayerdisconnect;
+  level.onplayerdamage = &globallogic::blank;
+  level.onplayerkilled = &globallogic::blank;
   level.onplayerkilledextraunthreadedcbs = [];
-  level.onteamoutcomenotify = & hud_message::teamoutcomenotifyzombie;
-  level.onoutcomenotify = & globallogic::blank;
-  level.onteamwageroutcomenotify = & globallogic::blank;
-  level.onwageroutcomenotify = & globallogic::blank;
-  level.onendgame = & onendgame;
-  level.onroundendgame = & globallogic::blank;
-  level.onmedalawarded = & globallogic::blank;
-  level.dogmanagerongetdogs = & globallogic::blank;
-  level.autoassign = & globallogic_ui::menuautoassign;
-  level.spectator = & globallogic_ui::menuspectator;
-  level.curclass = & globallogic_ui::menuclass;
-  level.allies = & menuallieszombies;
-  level.teammenu = & globallogic_ui::menuteam;
-  level.callbackactorkilled = & globallogic::blank;
-  level.callbackvehicledamage = & globallogic::blank;
-  level.callbackvehiclekilled = & globallogic::blank;
+  level.onteamoutcomenotify = &hud_message::teamoutcomenotifyzombie;
+  level.onoutcomenotify = &globallogic::blank;
+  level.onteamwageroutcomenotify = &globallogic::blank;
+  level.onwageroutcomenotify = &globallogic::blank;
+  level.onendgame = &onendgame;
+  level.onroundendgame = &globallogic::blank;
+  level.onmedalawarded = &globallogic::blank;
+  level.dogmanagerongetdogs = &globallogic::blank;
+  level.autoassign = &globallogic_ui::menuautoassign;
+  level.spectator = &globallogic_ui::menuspectator;
+  level.curclass = &globallogic_ui::menuclass;
+  level.allies = &menuallieszombies;
+  level.teammenu = &globallogic_ui::menuteam;
+  level.callbackactorkilled = &globallogic::blank;
+  level.callbackvehicledamage = &globallogic::blank;
+  level.callbackvehiclekilled = &globallogic::blank;
 }
 
 function do_game_mode_shellshock() {
@@ -327,7 +327,7 @@ function onspawnplayer(predictedspawn = 0) {
   if(isDefined(level.game_mode_spawn_player_logic)) {
     spawn_in_spectate = [[level.game_mode_spawn_player_logic]]();
     if(spawn_in_spectate) {
-      self util::delay(0.05, undefined, & zm::spawnspectator);
+      self util::delay(0.05, undefined, &zm::spawnspectator);
     }
   }
   pixendevent();
@@ -555,8 +555,8 @@ function menuallieszombies() {
 }
 
 function custom_spawn_init_func() {
-  array::thread_all(level.zombie_spawners, & spawner::add_spawn_function, & zm_spawner::zombie_spawn_init);
-  array::thread_all(level.zombie_spawners, & spawner::add_spawn_function, level._zombies_round_spawn_failsafe);
+  array::thread_all(level.zombie_spawners, &spawner::add_spawn_function, &zm_spawner::zombie_spawn_init);
+  array::thread_all(level.zombie_spawners, &spawner::add_spawn_function, level._zombies_round_spawn_failsafe);
 }
 
 function init() {

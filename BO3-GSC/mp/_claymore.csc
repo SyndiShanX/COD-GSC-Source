@@ -11,12 +11,12 @@
 #namespace claymore;
 
 function autoexec __init__sytem__() {
-  system::register("claymore", & __init__, undefined, undefined);
+  system::register("claymore", &__init__, undefined, undefined);
 }
 
 function __init__(localclientnum) {
   level._effect["fx_claymore_laser"] = "_t6/weapon/claymore/fx_claymore_laser";
-  callback::add_weapon_type("claymore", & spawned);
+  callback::add_weapon_type("claymore", &spawned);
 }
 
 function spawned(localclientnum) {

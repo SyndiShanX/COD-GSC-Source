@@ -73,7 +73,7 @@ func_DBB7(param_00) {
 
 use_race_game(param_00, param_01) {
   if(param_01 getstance() != "stand") {
-    param_01 scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_MUST_BE_STANDING");
+    param_01 scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_MUST_BE_STANDING");
     return;
   }
 
@@ -389,17 +389,17 @@ race_game_hint_logic(param_00, param_01) {
     if(isDefined(level.needspowerstring)) {
       return level.needspowerstring;
     } else {
-      return & "COOP_INTERACTIONS_REQUIRES_POWER";
+      return &"COOP_INTERACTIONS_REQUIRES_POWER";
     }
   }
 
   if(param_00.script_location == "afterlife") {
     param_00.cost = 0;
-    return & "COOP_INTERACTIONS_PLAY_GAME";
+    return &"COOP_INTERACTIONS_PLAY_GAME";
   }
 
   if(scripts\engine\utility::istrue(param_00.out_of_order)) {
-    return & "CP_ZMB_INTERACTIONS_MACHINE_OUT_OF_ORDER";
+    return &"CP_ZMB_INTERACTIONS_MACHINE_OUT_OF_ORDER";
   }
 
   return level.interaction_hintstrings[param_00.script_noteworthy];

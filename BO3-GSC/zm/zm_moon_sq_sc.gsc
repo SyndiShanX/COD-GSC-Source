@@ -25,13 +25,13 @@
 function init() {
   level._active_tanks = [];
   level flag::init("sam_switch_thrown");
-  zm_sidequests::declare_sidequest_stage("sq", "sc", & init_stage, & stage_logic, & exit_stage);
-  zm_sidequests::declare_stage_asset("sq", "sc", "sq_knife_switch", & sq_sc_switch);
+  zm_sidequests::declare_sidequest_stage("sq", "sc", &init_stage, &stage_logic, &exit_stage);
+  zm_sidequests::declare_stage_asset("sq", "sc", "sq_knife_switch", &sq_sc_switch);
 }
 
 function init_2() {
   level flag::init("cvg_placed");
-  zm_sidequests::declare_sidequest_stage("sq", "sc2", & init_stage_2, & stage_logic_2, & exit_stage_2);
+  zm_sidequests::declare_sidequest_stage("sq", "sc2", &init_stage_2, &stage_logic_2, &exit_stage_2);
 }
 
 function init_stage_2() {
@@ -66,7 +66,7 @@ function stage_logic() {
   level waittill("walls_down");
   wait(1);
   players = getplayers();
-  array::thread_all(players, & room_sweeper);
+  array::thread_all(players, &room_sweeper);
   zm_sidequests::stage_completed("sq", "sc");
 }
 
@@ -169,7 +169,7 @@ function place_cvg() {
   level flag::wait_till("second_tanks_charged");
   level thread richtofen_sam_vo();
   s = struct::get("sq_vg_final", "targetname");
-  s thread zm_sidequests::fake_use("placed_cvg", & place_qualifier);
+  s thread zm_sidequests::fake_use("placed_cvg", &place_qualifier);
   s waittill("placed_cvg", who);
   level flag::set("cvg_placed");
   level clientfield::set("vril_generator", 4);

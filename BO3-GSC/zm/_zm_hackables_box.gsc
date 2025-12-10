@@ -19,14 +19,14 @@ function box_hacks() {
   boxes = struct::get_array("treasure_chest_use", "targetname");
   for(i = 0; i < boxes.size; i++) {
     box = boxes[i];
-    box.box_hacks["respin"] = & init_box_respin;
-    box.box_hacks["respin_respin"] = & init_box_respin_respin;
-    box.box_hacks["summon_box"] = & init_summon_box;
+    box.box_hacks["respin"] = &init_box_respin;
+    box.box_hacks["respin_respin"] = &init_box_respin_respin;
+    box.box_hacks["summon_box"] = &init_summon_box;
     box.last_hacked_round = 0;
   }
-  level._zombiemode_chest_joker_chance_override_func = & check_for_free_locations;
-  level._zombiemode_custom_box_move_logic = & custom_box_move_logic;
-  level._zombiemode_check_firesale_loc_valid_func = & custom_check_firesale_loc_valid_func;
+  level._zombiemode_chest_joker_chance_override_func = &check_for_free_locations;
+  level._zombiemode_custom_box_move_logic = &custom_box_move_logic;
+  level._zombiemode_check_firesale_loc_valid_func = &custom_check_firesale_loc_valid_func;
   level flag::init("override_magicbox_trigger_use");
   init_summon_hacks();
 }
@@ -102,7 +102,7 @@ function box_respin_think(chest, player) {
   respin_hack.player = player;
   respin_hack.no_bullet_trace = 1;
   respin_hack.chest = chest;
-  zm_equip_hacker::register_pooled_hackable_struct(respin_hack, & respin_box, & hack_box_qualifier);
+  zm_equip_hacker::register_pooled_hackable_struct(respin_hack, &respin_box, &hack_box_qualifier);
   self.weapon_model util::waittill_either("death", "kill_respin_think_thread");
   zm_equip_hacker::deregister_hackable_struct(respin_hack);
 }
@@ -152,7 +152,7 @@ function box_respin_respin_think(chest, player) {
   respin_hack.player = player;
   respin_hack.no_bullet_trace = 1;
   respin_hack.chest = chest;
-  zm_equip_hacker::register_pooled_hackable_struct(respin_hack, & respin_respin_box, & hack_box_qualifier);
+  zm_equip_hacker::register_pooled_hackable_struct(respin_hack, &respin_respin_box, &hack_box_qualifier);
   self.weapon_model util::waittill_either("death", "kill_respin_respin_think_thread");
   zm_equip_hacker::deregister_hackable_struct(respin_hack);
 }
@@ -253,7 +253,7 @@ function init_summon_box(create) {
     struct.no_bullet_trace = 1;
     struct.chest = self;
     self._summon_hack_struct = struct;
-    zm_equip_hacker::register_pooled_hackable_struct(struct, & summon_box, & summon_box_qualifier);
+    zm_equip_hacker::register_pooled_hackable_struct(struct, &summon_box, &summon_box_qualifier);
   } else if(isDefined(self._summon_hack_struct)) {
     zm_equip_hacker::deregister_hackable_struct(self._summon_hack_struct);
     self._summon_hack_struct = undefined;

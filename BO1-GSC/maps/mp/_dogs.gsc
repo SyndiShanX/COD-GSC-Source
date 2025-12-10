@@ -31,7 +31,7 @@ init() {
 initKillstreak() {
   if(maps\mp\gametypes\_tweakables::getTweakableValue("killstreak", "allowdogs")) {
     maps\mp\gametypes\_hardpoints::registerKillstreak("dogs_mp", "dogs_mp", "killstreak_dogs", "dogs_used", ::useKillstreakDogs, true);
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("dogs_mp", & "KILLSTREAK_EARNED_DOGS", & "KILLSTREAK_DOGS_NOT_AVAILABLE", & "KILLSTREAK_DOGS_INBOUND");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("dogs_mp", &"KILLSTREAK_EARNED_DOGS", &"KILLSTREAK_DOGS_NOT_AVAILABLE", &"KILLSTREAK_DOGS_INBOUND");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("dogs_mp", "mpl_killstreak_dogs", "kls_dogs_used", "", "kls_dogs_enemy", "", "kls_dogs_ready");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("dogs_mp", "scr_givedogs");
     maps\mp\gametypes\_hardpoints::registerKillstreakAltWeapon("dogs_mp", "dog_bite_mp");

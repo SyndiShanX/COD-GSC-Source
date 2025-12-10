@@ -1473,7 +1473,7 @@ c4Damage() {
   if(isDefined(type) && (isSubStr(type, "MOD_GRENADE") || isSubStr(type, "MOD_EXPLOSIVE")))
     self.wasChained = true;
 
-  if(isDefined(iDFlags) && (iDFlags & level.iDFLAGS_PENETRATION))
+  if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION))
     self.wasDamagedFromBulletPenetration = true;
 
   self.wasDamaged = true;

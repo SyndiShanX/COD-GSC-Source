@@ -11,12 +11,10 @@ TimeUntilWavespawn(minimumWait) {
   if(!self.hasSpawned)
     return 0;
 
-
   earliestSpawnTime = gettime() + minimumWait * 1000;
 
   lastWaveTime = level.lastWave[self.pers["team"]];
   waveDelay = level.waveDelay[self.pers["team"]] * 1000;
-
 
   numWavesPassedEarliestSpawnTime = (earliestSpawnTime - lastWaveTime) / waveDelay;
 
@@ -24,14 +22,12 @@ TimeUntilWavespawn(minimumWait) {
 
   timeOfSpawn = lastWaveTime + numWaves * waveDelay;
 
-
   if(isDefined(self.respawnTimerStartTime)) {
     timeAlreadyPassed = (gettime() - self.respawnTimerStartTime) / 1000.0;
 
     if(self.respawnTimerStartTime < lastWaveTime)
       return 0;
   }
-
 
   if(isDefined(self.waveSpawnIndex))
     timeOfSpawn += 50 * self.waveSpawnIndex;
@@ -70,7 +66,6 @@ TimeUntilspawn(includeTeamkillDelay) {
       if(respawnDelay < 0)
         respawnDelay = 0;
     }
-
 
     if(isDefined(self.setSpawnPoint))
       respawnDelay += level.tiSpawnDelay;
@@ -120,7 +115,7 @@ spawnClient() {
 
     if(self.pers["teamKillPunish"]) {
       self.pers["teamkills"] = max(self.pers["teamkills"] - 1, 0);
-      setLowerMessage("friendly_fire", & "MP_FRIENDLY_FIRE_WILL_NOT");
+      setLowerMessage("friendly_fire", &"MP_FRIENDLY_FIRE_WILL_NOT");
 
       if(!self.hasSpawned && self.pers["teamkills"] <= level.maxAllowedTeamkills)
         self.pers["teamKillPunish"] = false;
@@ -158,7 +153,7 @@ waitAndSpawnClient() {
     teamKillDelay = TeamKillDelay();
 
     if(teamKillDelay > 0) {
-      setLowerMessage("friendly_fire", & "MP_FRIENDLY_FIRE_WILL_NOT", teamKillDelay);
+      setLowerMessage("friendly_fire", &"MP_FRIENDLY_FIRE_WILL_NOT", teamKillDelay);
 
       self thread respawn_asSpectator(self.origin + (0, 0, 60), self.angles);
       spawnedAsSpectator = true;
@@ -172,7 +167,6 @@ waitAndSpawnClient() {
   } else if(TeamKillDelay()) {
     self.pers["teamkills"] = max(self.pers["teamkills"] - 1, 0);
   }
-
 
   if(self isUsingRemote()) {
     self waittill("stopped_using_remote");
@@ -209,8 +203,6 @@ waitAndSpawnClient() {
 
     self waitRespawnButton();
   }
-
-
 
   self.waitingToSpawn = false;
 
@@ -260,7 +252,6 @@ lastStandRespawnPlayer() {
   self.revived = true;
 
   self notify("revive");
-
 
   if(isDefined(self.standardmaxHealth))
     self.maxHealth = self.standardMaxHealth;
@@ -323,8 +314,6 @@ predictAboutToSpawnPlayerOverTime(preduration) {
 
 predictAboutToSpawnPlayer() {
   assert(!isReallyAlive(self));
-
-
 
   if(self TimeUntilspawn(true) > 1.0) {
     spawnpointname = "mp_global_intermission";
@@ -563,7 +552,6 @@ spawnPlayer(fauxSpawn) {
   self setClientDvar("cg_thirdPerson", "0");
   self setDepthOfField(0, 0, 512, 512, 4, 0);
 
-
   if(isDefined(spawnPoint)) {
     self maps\mp\gametypes\_spawnlogic::finalizeSpawnpointChoice(spawnpoint);
     spawnOrigin = getSpawnOrigin(spawnpoint);
@@ -576,14 +564,12 @@ spawnPlayer(fauxSpawn) {
 
   self spawn(spawnOrigin, spawnAngles);
 
-
   if(fauxSpawn && isDefined(self.faux_spawn_stance)) {
     self setStance(self.faux_spawn_stance);
     self.faux_spawn_stance = undefined;
   }
 
   [[level.onSpawnPlayer]]();
-
 
   if(isDefined(spawnPoint))
     self checkPredictedSpawnpointCorrectness(spawnPoint.origin);
@@ -627,11 +613,6 @@ spawnPlayer(fauxSpawn) {
   }
 
   prof_end("spawnPlayer_postUTS");
-
-
-
-
-
 
   waittillframeend;
 
@@ -688,8 +669,6 @@ respawn_asSpectator(origin, angles) {
 
 in_spawnSpectator(origin, angles) {
   self setSpawnVariables();
-
-
 
   if(isDefined(self.pers["team"]) && self.pers["team"] == "spectator" && !level.gameEnded)
     self clearLowerMessage("spawn_info");
@@ -834,7 +813,6 @@ spawnEndOfGame() {
 
   spawnPoint setModel("tag_origin");
 
-
   self playerLinkTo(spawnPoint);
 
   self PlayerHide();
@@ -863,9 +841,6 @@ Callback_PlayerDisconnect() {
 
   if(!level.teamBased)
     game["roundsWon"][self.guid] = undefined;
-
-
-
 
   if(level.splitscreen) {
     players = level.players;
@@ -988,7 +963,6 @@ Callback_PlayerConnect() {
   if(self isHost())
     level.player = self;
 
-
   if(!level.splitscreen && !isDefined(self.pers["score"]))
     iPrintLn(&"MP_CONNECTED", self);
 
@@ -1068,8 +1042,6 @@ Callback_PlayerConnect() {
 
   self thread maps\mp\_flashgrenades::monitorFlash();
 
-
-
   waittillframeend;
   foreach(player in level.players)
   assert(player != self);
@@ -1077,7 +1049,6 @@ Callback_PlayerConnect() {
 
   if(level.teambased)
     self updateScores();
-
 
   if(game["state"] == "postgame") {
     self.connectedPostGame = true;
@@ -1101,7 +1072,6 @@ Callback_PlayerConnect() {
     self.team = undefined;
   }
 
-
   if(firstConnect)
     maps\mp\gametypes\_gamelogic::updateLossStats(self);
 
@@ -1109,7 +1079,6 @@ Callback_PlayerConnect() {
 
   if(isDefined(level.hostMigrationTimer))
     self thread maps\mp\gametypes\_hostmigration::hostMigrationTimerThink();
-
 
   if(!isDefined(self.pers["team"])) {
     if(matchMakingGame()) {
@@ -1394,14 +1363,12 @@ removeFromLivesCount() {
   assert(isPlayer(self));
   level.livesCount[self.team]--;
 
-
   level.livesCount[self.team] = int(max(0, level.livesCount[self.team]));
 }
 
 removeAllFromLivesCount() {
   assert(isPlayer(self));
   level.livesCount[self.team] -= self.pers["lives"];
-
 
   level.livesCount[self.team] = int(max(0, level.livesCount[self.team]));
 }

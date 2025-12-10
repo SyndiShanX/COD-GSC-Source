@@ -45,8 +45,8 @@
 function skipto_quad_init(str_objective, b_starting) {
   if(b_starting) {
     load::function_73adcefc();
-    callback::on_spawned( & vengeance_util::give_hero_weapon);
-    callback::on_spawned( & vengeance_util::function_b9785164);
+    callback::on_spawned(&vengeance_util::give_hero_weapon);
+    callback::on_spawned(&vengeance_util::function_b9785164);
     vengeance_util::init_hero("hendricks", str_objective);
     level.ai_hendricks colors::enable();
     level.ai_hendricks ai::set_ignoreall(1);
@@ -120,7 +120,7 @@ function quad_battle_main() {
   level flag::wait_till("players_at_market");
   objectives::hide("cp_level_vengeance_go_to_safehouse");
   streamermodelhint("veh_t7_drone_quadtank_54i", 10);
-  scene::add_scene_func("cin_ven_06_51_quadbattleintro_wall_vign", & vengeance_util::function_ba7c52d5, "done", "quad_wall_static3");
+  scene::add_scene_func("cin_ven_06_51_quadbattleintro_wall_vign", &vengeance_util::function_ba7c52d5, "done", "quad_wall_static3");
   s_anim_node = struct::get("quad_battle_script_node", "targetname");
   s_anim_node scene::init("cin_ven_06_51_quadbattleintro_wall_vign");
   level flag::wait_till("quad_tank_start_anim");
@@ -134,9 +134,9 @@ function quad_battle_main() {
   wait(0.4);
   level thread vengeance_util::function_1c347e72("quad_wall_static1", "quad_wall_non_static1");
   wait(0.35);
-  level.quadtank = spawner::simple_spawn_single("plaza_quadtank", & quad_battle_quadtank_setup);
+  level.quadtank = spawner::simple_spawn_single("plaza_quadtank", &quad_battle_quadtank_setup);
   level.quadtank thread namespace_855113f3::function_35209d64();
-  callback::on_vehicle_damage( & monitor_quadtank_health, level.quadtank);
+  callback::on_vehicle_damage(&monitor_quadtank_health, level.quadtank);
   var_ecf5f255 = getEntArray("quad_tank_color_triggers", "script_noteworthy");
   foreach(e_trig in var_ecf5f255) {
     e_trig triggerenable(1);
@@ -207,7 +207,7 @@ function quad_battle_quadtank_setup() {
   setthreatbias("garage_hendricks", "quad_tank", 100);
   setthreatbias("quad_tank", "garage_hendricks", 10000);
   setthreatbias("garage_players", "quad_tank", 1000);
-  util::delay(2.5, undefined, & objectives::set, "cp_level_vengeance_destroy_quad", self);
+  util::delay(2.5, undefined, &objectives::set, "cp_level_vengeance_destroy_quad", self);
   self waittill("death");
   level flag::set("quad_tank_dead");
   objectives::hide("cp_level_vengeance_destroy_quad");
@@ -286,11 +286,11 @@ function function_7d7a1bdd() {
   var_a3076518 = getent("sm_qt_hijack", "targetname");
   e_goal_volume = getent("garage_enemy_n_goalvolume", "targetname");
   foreach(var_56b381f2 in getEntArray(var_a3076518.target, "targetname")) {
-    var_56b381f2 spawner::add_spawn_function( & function_a59909a9, e_goal_volume);
+    var_56b381f2 spawner::add_spawn_function(&function_a59909a9, e_goal_volume);
   }
   var_443c7feb = getent("sm_qt_hijack_normal", "targetname");
   foreach(sp_enemy in getEntArray(var_443c7feb.target, "targetname")) {
-    sp_enemy spawner::add_spawn_function( & function_a59909a9, e_goal_volume);
+    sp_enemy spawner::add_spawn_function(&function_a59909a9, e_goal_volume);
   }
   level flag::wait_till("quadtank_hijacked");
   spawn_manager::enable("sm_qt_hijack");
@@ -612,8 +612,8 @@ function function_31629d62() {
 function skipto_plaza_init(str_objective, b_starting) {
   if(b_starting) {
     load::function_73adcefc();
-    callback::on_spawned( & vengeance_util::give_hero_weapon);
-    callback::on_spawned( & vengeance_util::function_b9785164);
+    callback::on_spawned(&vengeance_util::give_hero_weapon);
+    callback::on_spawned(&vengeance_util::function_b9785164);
     level thread function_a5928078();
     e_car = getent("cop_car_2", "targetname");
     e_car kill();
@@ -638,7 +638,7 @@ function skipto_plaza_init(str_objective, b_starting) {
     var_ac036920 = getent("plaza_wall", "targetname");
     var_ac036920 connectpaths();
     var_ac036920 delete();
-    scene::add_scene_func("cin_ven_06_51_quadbattleintro_wall_vign", & vengeance_util::function_ba7c52d5, "done", "quad_wall_static3");
+    scene::add_scene_func("cin_ven_06_51_quadbattleintro_wall_vign", &vengeance_util::function_ba7c52d5, "done", "quad_wall_static3");
     level thread vengeance_util::function_1c347e72("quad_wall_static1", "quad_wall_non_static1");
     s_anim_node = struct::get("quad_battle_script_node", "targetname");
     s_anim_node thread scene::skipto_end("cin_ven_06_51_quadbattleintro_wall_vign");
@@ -871,32 +871,32 @@ function init_plaza_spawn_functions() {
     e_player setthreatbiasgroup("players");
   }
   level.ai_hendricks setthreatbiasgroup("hendricks");
-  spawner::add_spawn_function_group("remote_snipers", "targetname", & vengeance_util::function_bce5a9e);
-  spawner::add_global_spawn_function("axis", & function_eef8125c);
-  spawner::add_spawn_function_group("plaza_enemies_wave_01", "targetname", & function_d824ba94, "54i_grunts");
-  spawner::add_spawn_function_group("plaza_enemies_wave_01", "targetname", & function_db772ecc, 1024);
-  spawner::add_spawn_function_group("plaza_enemies_wave_02", "targetname", & function_d824ba94, "54i_grunts");
-  spawner::add_spawn_function_group("plaza_enemies_wave_02", "targetname", & function_db772ecc, 1024);
+  spawner::add_spawn_function_group("remote_snipers", "targetname", &vengeance_util::function_bce5a9e);
+  spawner::add_global_spawn_function("axis", &function_eef8125c);
+  spawner::add_spawn_function_group("plaza_enemies_wave_01", "targetname", &function_d824ba94, "54i_grunts");
+  spawner::add_spawn_function_group("plaza_enemies_wave_01", "targetname", &function_db772ecc, 1024);
+  spawner::add_spawn_function_group("plaza_enemies_wave_02", "targetname", &function_d824ba94, "54i_grunts");
+  spawner::add_spawn_function_group("plaza_enemies_wave_02", "targetname", &function_db772ecc, 1024);
   var_443c7feb = getent("plaza_enemies_reinforcements", "targetname");
-  spawner::add_spawn_function_group(var_443c7feb.target, "targetname", & function_d824ba94, "54i_reinforcements");
-  spawner::add_spawn_function_group(var_443c7feb.target, "targetname", & function_db772ecc, 1750);
-  spawner::add_spawn_function_group(var_443c7feb.target, "targetname", & function_688b4ed7);
-  spawner::add_spawn_function_group("plaza_warlords", "targetname", & function_d824ba94, "54i_warlords");
-  spawner::add_spawn_function_group("plaza_warlords", "targetname", & function_b25bc7b2);
-  spawner::add_spawn_function_group("plaza_warlords_2", "targetname", & function_d824ba94, "54i_warlords");
-  spawner::add_spawn_function_group("plaza_warlords_2", "targetname", & function_b25bc7b2);
-  spawner::add_spawn_function_group("plaza_warlords_3", "targetname", & function_d824ba94, "54i_warlords");
-  spawner::add_spawn_function_group("plaza_warlords_3", "targetname", & function_b25bc7b2);
-  spawner::add_spawn_function_group("plaza_siegebots", "targetname", & function_d824ba94, "54i_siegebots");
-  spawner::add_spawn_function_group("plaza_siegebots", "targetname", & function_3dc47c4e);
+  spawner::add_spawn_function_group(var_443c7feb.target, "targetname", &function_d824ba94, "54i_reinforcements");
+  spawner::add_spawn_function_group(var_443c7feb.target, "targetname", &function_db772ecc, 1750);
+  spawner::add_spawn_function_group(var_443c7feb.target, "targetname", &function_688b4ed7);
+  spawner::add_spawn_function_group("plaza_warlords", "targetname", &function_d824ba94, "54i_warlords");
+  spawner::add_spawn_function_group("plaza_warlords", "targetname", &function_b25bc7b2);
+  spawner::add_spawn_function_group("plaza_warlords_2", "targetname", &function_d824ba94, "54i_warlords");
+  spawner::add_spawn_function_group("plaza_warlords_2", "targetname", &function_b25bc7b2);
+  spawner::add_spawn_function_group("plaza_warlords_3", "targetname", &function_d824ba94, "54i_warlords");
+  spawner::add_spawn_function_group("plaza_warlords_3", "targetname", &function_b25bc7b2);
+  spawner::add_spawn_function_group("plaza_siegebots", "targetname", &function_d824ba94, "54i_siegebots");
+  spawner::add_spawn_function_group("plaza_siegebots", "targetname", &function_3dc47c4e);
   var_4b4c408f = getent("plaza_allies_spawn_manager", "targetname");
-  spawner::add_spawn_function_group(var_4b4c408f.target, "targetname", & function_d824ba94, "sh_allies");
-  spawner::add_spawn_function_group(var_4b4c408f.target, "targetname", & function_db772ecc, 768);
+  spawner::add_spawn_function_group(var_4b4c408f.target, "targetname", &function_d824ba94, "sh_allies");
+  spawner::add_spawn_function_group(var_4b4c408f.target, "targetname", &function_db772ecc, 768);
   var_3e8c1c00 = getent("sh_wasp", "targetname");
   e_wasp_goal_volume = getent("plaza_volume_center", "targetname");
   foreach(ai_wasp in getEntArray(var_3e8c1c00.target, "targetname")) {
-    vehicle::add_spawn_function(ai_wasp.targetname, & function_d824ba94, "sh_wasps");
-    vehicle::add_spawn_function(ai_wasp.targetname, & wasp_think, e_wasp_goal_volume);
+    vehicle::add_spawn_function(ai_wasp.targetname, &function_d824ba94, "sh_wasps");
+    vehicle::add_spawn_function(ai_wasp.targetname, &wasp_think, e_wasp_goal_volume);
   }
 }
 
@@ -993,7 +993,7 @@ function function_eef8125c() {
   if(!isDefined(self) || !isalive(self)) {
     return;
   }
-  self.overrideactordamage = & function_7273d688;
+  self.overrideactordamage = &function_7273d688;
 }
 
 function function_7273d688(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename) {

@@ -22,7 +22,7 @@ precache() {
 init() {
   level._effect["quadrotor_nudge"] = loadfx("destructibles/fx_quadrotor_nudge01");
   level._effect["qd_revive"] = loadfx("maps/zombie_tomb/fx_tomb_veh_quadrotor_revive_health");
-  maps\mp\zombies\_zm_equipment::register_equipment("equip_dieseldrone_zm", & "ZM_TOMB_DIHS", & "ZM_TOMB_DIHO", "riotshield_zm_icon", "riotshield");
+  maps\mp\zombies\_zm_equipment::register_equipment("equip_dieseldrone_zm", &"ZM_TOMB_DIHS", &"ZM_TOMB_DIHO", "riotshield_zm_icon", "riotshield");
 }
 
 quadrotor_dealt_no_damage_to_player(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime) {

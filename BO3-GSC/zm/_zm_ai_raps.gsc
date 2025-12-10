@@ -43,7 +43,7 @@ function init() {
   }
   clientfield::register("toplayer", "elemental_round_fx", 1, 1, "counter");
   clientfield::register("toplayer", "elemental_round_ring_fx", 1, 1, "counter");
-  visionset_mgr::register_info("visionset", "zm_elemental_round_visionset", 1, level.vsmgr_prio_overlay_zm_raps_round, 31, 0, & visionset_mgr::ramp_in_out_thread, 0);
+  visionset_mgr::register_info("visionset", "zm_elemental_round_visionset", 1, level.vsmgr_prio_overlay_zm_raps_round, 31, 0, &visionset_mgr::ramp_in_out_thread, 0);
   level._effect["raps_meteor_fire"] = "zombie/fx_meatball_trail_sky_zod_zmb";
   level._effect["raps_ground_spawn"] = "zombie/fx_meatball_impact_ground_tell_zod_zmb";
   level._effect["raps_portal"] = "zombie/fx_meatball_portal_sky_zod_zmb";
@@ -61,7 +61,7 @@ function init() {
 function enable_raps_rounds() {
   level.raps_rounds_enabled = 1;
   if(!isDefined(level.raps_round_track_override)) {
-    level.raps_round_track_override = & raps_round_tracker;
+    level.raps_round_track_override = &raps_round_tracker;
   }
   level thread[[level.raps_round_track_override]]();
 }
@@ -83,7 +83,7 @@ function raps_spawner_init() {
   }
   assert(level.raps_spawners.size > 0);
   level.n_raps_health = 100;
-  vehicle::add_main_callback("spawner_enemy_zombie_vehicle_raps_suicide", & raps_init);
+  vehicle::add_main_callback("spawner_enemy_zombie_vehicle_raps_suicide", &raps_init);
 }
 
 function raps_round_tracker() {
@@ -101,8 +101,8 @@ function raps_round_tracker() {
       old_spawn_func = level.round_spawn_func;
       old_wait_func = level.round_wait_func;
       raps_round_start();
-      level.round_spawn_func = & raps_round_spawning;
-      level.round_wait_func = & raps_round_wait_func;
+      level.round_spawn_func = &raps_round_spawning;
+      level.round_wait_func = &raps_round_wait_func;
       if(isDefined(level.zm_custom_get_next_raps_round)) {
         level.n_next_raps_round = [
           [level.zm_custom_get_next_raps_round]
@@ -164,7 +164,7 @@ function raps_round_spawning() {
   if(level.intermission) {
     return;
   }
-  array::thread_all(level.players, & play_raps_round);
+  array::thread_all(level.players, &play_raps_round);
   n_wave_count = get_raps_spawn_total();
   raps_health_increase();
   level.zombie_total = int(n_wave_count);
@@ -571,7 +571,7 @@ function raps_init() {
   self.missinglegs = 0;
   self.isdog = 0;
   self.teslafxtag = "tag_origin";
-  self.custom_player_shellshock = & raps_custom_player_shellshock;
+  self.custom_player_shellshock = &raps_custom_player_shellshock;
   self.grapple_type = 2;
   self setgrapplabletype(self.grapple_type);
   self.team = level.zombie_team;

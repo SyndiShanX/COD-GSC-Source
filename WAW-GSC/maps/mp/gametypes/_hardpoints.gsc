@@ -33,12 +33,12 @@ init() {
     level.hardpointItems["dogs_mp"] = priority;
     priority++;
   }
-  level.hardpointHints["radar_mp"] = & "MP_EARNED_RADAR";
-  level.hardpointHints["artillery_mp"] = & "MP_EARNED_ARTILLERY";
-  level.hardpointHints["dogs_mp"] = & "MP_EARNED_DOGS";
-  level.hardpointHints["radar_mp_not_available"] = & "MP_RADAR_NOT_AVAILABLE";
-  level.hardpointHints["artillery_mp_not_available"] = & "MP_ARTILLERY_NOT_AVAILABLE";
-  level.hardpointHints["dogs_mp_not_available"] = & "MP_DOGS_NOT_AVAILABLE";
+  level.hardpointHints["radar_mp"] = &"MP_EARNED_RADAR";
+  level.hardpointHints["artillery_mp"] = &"MP_EARNED_ARTILLERY";
+  level.hardpointHints["dogs_mp"] = &"MP_EARNED_DOGS";
+  level.hardpointHints["radar_mp_not_available"] = &"MP_RADAR_NOT_AVAILABLE";
+  level.hardpointHints["artillery_mp_not_available"] = &"MP_ARTILLERY_NOT_AVAILABLE";
+  level.hardpointHints["dogs_mp_not_available"] = &"MP_DOGS_NOT_AVAILABLE";
   level.hardpointInforms["radar_mp"] = "mp_killstreak_radar";
   level.hardpointInforms["artillery_mp"] = "mp_killstreak_jet";
   level.hardpointInforms["dogs_mp"] = "mp_killstreak_dogs";
@@ -907,7 +907,7 @@ streakNotify(streakVal) {
   self waittill("playerKilledChallengesProcessed");
   wait .05;
   notifyData = spawnStruct();
-  notifyData.titleLabel = & "MP_KILLSTREAK_N";
+  notifyData.titleLabel = &"MP_KILLSTREAK_N";
   notifyData.titleText = streakVal;
   self maps\mp\gametypes\_hud_message::notifyMessage(notifyData);
   iprintln(&"RANK_KILL_STREAK_N", self, streakVal);
@@ -933,7 +933,7 @@ hardpointNotify(hardpointType, streakVal, challenge_wait) {
   }
   wait .05;
   notifyData = spawnStruct();
-  notifyData.titleLabel = & "MP_KILLSTREAK_N";
+  notifyData.titleLabel = &"MP_KILLSTREAK_N";
   notifyData.titleText = streakVal;
   notifyData.notifyText = level.hardpointHints[hardpointType];
   notifyData.sound = level.hardpointInforms[hardpointType];
@@ -1186,7 +1186,7 @@ useTeamRadar(team, otherteam) {
   setTeamRadarWrapper(team, true);
   wait level.radarViewTime;
   setTeamRadarWrapper(team, false);
-  printAndSoundOnEveryone(team, otherteam, & "MP_WAR_RADAR_EXPIRED", & "MP_WAR_RADAR_EXPIRED_ENEMY", undefined, undefined, "");
+  printAndSoundOnEveryone(team, otherteam, &"MP_WAR_RADAR_EXPIRED", &"MP_WAR_RADAR_EXPIRED_ENEMY", undefined, undefined, "");
 }
 
 usePlayerRadar(team, otherteam) {

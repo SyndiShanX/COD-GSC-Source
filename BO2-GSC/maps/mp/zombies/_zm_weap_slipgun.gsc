@@ -31,9 +31,9 @@ init() {
   precacheitem("slip_bolt_upgraded_zm");
 
   if(is_true(level.slipgun_as_equipment)) {
-    maps\mp\zombies\_zm_equipment::register_equipment("slipgun_zm", & "ZM_HIGHRISE_EQUIP_SLIPGUN_PICKUP_HINT_STRING", & "ZM_HIGHRISE_EQUIP_SLIPGUN_HOWTO", "jetgun_zm_icon", "slipgun", ::slipgun_activation_watcher_thread, ::transferslipgun, ::dropslipgun, ::pickupslipgun);
+    maps\mp\zombies\_zm_equipment::register_equipment("slipgun_zm", &"ZM_HIGHRISE_EQUIP_SLIPGUN_PICKUP_HINT_STRING", &"ZM_HIGHRISE_EQUIP_SLIPGUN_HOWTO", "jetgun_zm_icon", "slipgun", ::slipgun_activation_watcher_thread, ::transferslipgun, ::dropslipgun, ::pickupslipgun);
     maps\mp\zombies\_zm_equipment::enemies_ignore_equipment("slipgun_zm");
-    maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("slipgun", & "ZM_HIGHRISE_EQUIP_SLIPGUN_PICKUP_HINT_STRING");
+    maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("slipgun", &"ZM_HIGHRISE_EQUIP_SLIPGUN_PICKUP_HINT_STRING");
   }
 
   set_zombie_var_once("slipgun_reslip_max_spots", 8);

@@ -26,7 +26,7 @@
 #namespace weaponobjects;
 
 function init_shared() {
-  callback::on_start_gametype( & start_gametype);
+  callback::on_start_gametype(&start_gametype);
   clientfield::register("toplayer", "proximity_alarm", 1, 2, "int");
   clientfield::register("clientuimodel", "hudItems.proximityAlarm", 1, 2, "int");
   clientfield::register("missile", "retrievable", 1, 1, "int");
@@ -51,8 +51,8 @@ function start_gametype() {
   mindist = getdvarint("scr_weaponobject_mindist", 20);
   graceperiod = getdvarfloat("scr_weaponobject_graceperiod", 0.6);
   radius = getdvarint("scr_weaponobject_radius", 192);
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
   level.watcherweapons = [];
   level.watcherweapons = getwatcherweapons();
   level.retrievableweapons = [];
@@ -75,24 +75,24 @@ function start_gametype() {
 }
 
 function setupretrievablehintstrings() {
-  createretrievablehint("hatchet", & "MP_HATCHET_PICKUP");
-  createretrievablehint("claymore", & "MP_CLAYMORE_PICKUP");
-  createretrievablehint("bouncingbetty", & "MP_BOUNCINGBETTY_PICKUP");
-  createretrievablehint("trophy_system", & "MP_TROPHY_SYSTEM_PICKUP");
-  createretrievablehint("acoustic_sensor", & "MP_ACOUSTIC_SENSOR_PICKUP");
-  createretrievablehint("camera_spike", & "MP_CAMERA_SPIKE_PICKUP");
-  createretrievablehint("satchel_charge", & "MP_SATCHEL_CHARGE_PICKUP");
-  createretrievablehint("scrambler", & "MP_SCRAMBLER_PICKUP");
-  createretrievablehint("proximity_grenade", & "MP_SHOCK_CHARGE_PICKUP");
-  createdestroyhint("trophy_system", & "MP_TROPHY_SYSTEM_DESTROY");
-  createdestroyhint("sensor_grenade", & "MP_SENSOR_GRENADE_DESTROY");
-  createhackerhint("claymore", & "MP_CLAYMORE_HACKING");
-  createhackerhint("bouncingbetty", & "MP_BOUNCINGBETTY_HACKING");
-  createhackerhint("trophy_system", & "MP_TROPHY_SYSTEM_HACKING");
-  createhackerhint("acoustic_sensor", & "MP_ACOUSTIC_SENSOR_HACKING");
-  createhackerhint("camera_spike", & "MP_CAMERA_SPIKE_HACKING");
-  createhackerhint("satchel_charge", & "MP_SATCHEL_CHARGE_HACKING");
-  createhackerhint("scrambler", & "MP_SCRAMBLER_HACKING");
+  createretrievablehint("hatchet", &"MP_HATCHET_PICKUP");
+  createretrievablehint("claymore", &"MP_CLAYMORE_PICKUP");
+  createretrievablehint("bouncingbetty", &"MP_BOUNCINGBETTY_PICKUP");
+  createretrievablehint("trophy_system", &"MP_TROPHY_SYSTEM_PICKUP");
+  createretrievablehint("acoustic_sensor", &"MP_ACOUSTIC_SENSOR_PICKUP");
+  createretrievablehint("camera_spike", &"MP_CAMERA_SPIKE_PICKUP");
+  createretrievablehint("satchel_charge", &"MP_SATCHEL_CHARGE_PICKUP");
+  createretrievablehint("scrambler", &"MP_SCRAMBLER_PICKUP");
+  createretrievablehint("proximity_grenade", &"MP_SHOCK_CHARGE_PICKUP");
+  createdestroyhint("trophy_system", &"MP_TROPHY_SYSTEM_DESTROY");
+  createdestroyhint("sensor_grenade", &"MP_SENSOR_GRENADE_DESTROY");
+  createhackerhint("claymore", &"MP_CLAYMORE_HACKING");
+  createhackerhint("bouncingbetty", &"MP_BOUNCINGBETTY_HACKING");
+  createhackerhint("trophy_system", &"MP_TROPHY_SYSTEM_HACKING");
+  createhackerhint("acoustic_sensor", &"MP_ACOUSTIC_SENSOR_HACKING");
+  createhackerhint("camera_spike", &"MP_CAMERA_SPIKE_HACKING");
+  createhackerhint("satchel_charge", &"MP_SATCHEL_CHARGE_HACKING");
+  createhackerhint("scrambler", &"MP_SCRAMBLER_HACKING");
 }
 
 function on_player_connect() {
@@ -151,13 +151,13 @@ function setupretrievablewatcher() {
     watcher = getweaponobjectwatcherbyweapon(level.retrievableweapons[i]);
     if(isDefined(watcher)) {
       if(!isDefined(watcher.onspawnretrievetriggers)) {
-        watcher.onspawnretrievetriggers = & onspawnretrievableweaponobject;
+        watcher.onspawnretrievetriggers = &onspawnretrievableweaponobject;
       }
       if(!isDefined(watcher.ondestroyed)) {
-        watcher.ondestroyed = & ondestroyed;
+        watcher.ondestroyed = &ondestroyed;
       }
       if(!isDefined(watcher.pickup)) {
-        watcher.pickup = & pickup;
+        watcher.pickup = &pickup;
       }
     }
   }
@@ -165,16 +165,16 @@ function setupretrievablewatcher() {
 
 function createspecialcrossbowwatchertypes(weaponname) {
   watcher = self createuseweaponobjectwatcher(weaponname, self.team);
-  watcher.ondetonatecallback = & deleteent;
-  watcher.ondamage = & voidondamage;
+  watcher.ondetonatecallback = &deleteent;
+  watcher.ondamage = &voidondamage;
   if(isDefined(level.b_crossbow_bolt_destroy_on_impact) && level.b_crossbow_bolt_destroy_on_impact) {
-    watcher.onspawn = & onspawncrossbowboltimpact;
-    watcher.onspawnretrievetriggers = & voidonspawnretrievetriggers;
-    watcher.pickup = & voidpickup;
+    watcher.onspawn = &onspawncrossbowboltimpact;
+    watcher.onspawnretrievetriggers = &voidonspawnretrievetriggers;
+    watcher.pickup = &voidpickup;
   } else {
-    watcher.onspawn = & onspawncrossbowbolt;
-    watcher.onspawnretrievetriggers = & onspawnspecialcrossbowtrigger;
-    watcher.pickup = & pickupcrossbowbolt;
+    watcher.onspawn = &onspawncrossbowbolt;
+    watcher.onspawnretrievetriggers = &onspawnspecialcrossbowtrigger;
+    watcher.pickup = &pickupcrossbowbolt;
   }
 }
 
@@ -190,10 +190,10 @@ function createspecialcrossbowwatcher() {
 
 function createhatchetwatcher() {
   watcher = self createuseweaponobjectwatcher("hatchet", self.team);
-  watcher.ondetonatecallback = & deleteent;
-  watcher.onspawn = & onspawnhatchet;
-  watcher.ondamage = & voidondamage;
-  watcher.onspawnretrievetriggers = & onspawnhatchettrigger;
+  watcher.ondetonatecallback = &deleteent;
+  watcher.onspawn = &onspawnhatchet;
+  watcher.ondamage = &voidondamage;
+  watcher.onspawnretrievetriggers = &onspawnhatchettrigger;
 }
 
 function createtactinsertwatcher() {
@@ -274,14 +274,14 @@ function createspikelauncherwatcher(weapon) {
   watcher.hackertoolradius = level.equipmenthackertoolradius;
   watcher.hackertooltimems = level.equipmenthackertooltimems;
   watcher.headicon = 0;
-  watcher.ondetonatecallback = & spikedetonate;
-  watcher.onstun = & weaponstun;
+  watcher.ondetonatecallback = &spikedetonate;
+  watcher.onstun = &weaponstun;
   watcher.stuntime = 1;
   watcher.ownergetsassist = 1;
   watcher.detonatestationary = 0;
   watcher.detonationdelay = 0;
   watcher.detonationsound = "wpn_claymore_alert";
-  watcher.ondetonationhandle = & spikesdetonating;
+  watcher.ondetonationhandle = &spikesdetonating;
   self thread watchspikelauncheritemcountchanged(watcher);
 }
 
@@ -295,7 +295,7 @@ function createplayerhelicopterwatcher() {
 function createclaymorewatcher() {
   watcher = self createproximityweaponobjectwatcher("claymore", self.team);
   watcher.watchforfire = 1;
-  watcher.ondetonatecallback = & claymoredetonate;
+  watcher.ondetonatecallback = &claymoredetonate;
   watcher.activatesound = "wpn_claymore_alert";
   watcher.hackable = 1;
   watcher.hackertoolradius = level.equipmenthackertoolradius;
@@ -306,7 +306,7 @@ function createclaymorewatcher() {
   watcher.detectionmindist = getdvarint("scr_weaponobject_mindist");
   watcher.detectiongraceperiod = getdvarfloat("scr_weaponobject_graceperiod");
   watcher.detonateradius = getdvarint("scr_weaponobject_radius");
-  watcher.onstun = & weaponstun;
+  watcher.onstun = &weaponstun;
   watcher.stuntime = 1;
 }
 
@@ -851,7 +851,7 @@ function createweaponobjectwatcher(weaponname, ownerteam) {
     weaponobjectwatcher.onstun = undefined;
     weaponobjectwatcher.onstunfinished = undefined;
     weaponobjectwatcher.ondestroyed = undefined;
-    weaponobjectwatcher.onfizzleout = & weaponobjectfizzleout;
+    weaponobjectwatcher.onfizzleout = &weaponobjectfizzleout;
     weaponobjectwatcher.shoulddamage = undefined;
     weaponobjectwatcher.onsupplementaldetonatecallback = undefined;
     if(!isDefined(weaponobjectwatcher.objectarray)) {
@@ -865,14 +865,14 @@ function createweaponobjectwatcher(weaponname, ownerteam) {
 function createuseweaponobjectwatcher(weaponname, ownerteam) {
   weaponobjectwatcher = createweaponobjectwatcher(weaponname, ownerteam);
   weaponobjectwatcher.type = "use";
-  weaponobjectwatcher.onspawn = & onspawnuseweaponobject;
+  weaponobjectwatcher.onspawn = &onspawnuseweaponobject;
   return weaponobjectwatcher;
 }
 
 function createproximityweaponobjectwatcher(weaponname, ownerteam) {
   weaponobjectwatcher = createweaponobjectwatcher(weaponname, ownerteam);
   weaponobjectwatcher.type = "proximity";
-  weaponobjectwatcher.onspawn = & onspawnproximityweaponobject;
+  weaponobjectwatcher.onspawn = &onspawnproximityweaponobject;
   detectionconeangle = getdvarint("scr_weaponobject_coneangle");
   weaponobjectwatcher.detectiondot = cos(detectionconeangle);
   weaponobjectwatcher.detectionmindist = getdvarint("scr_weaponobject_mindist");

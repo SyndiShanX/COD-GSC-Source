@@ -35,7 +35,7 @@ function boxingpickupupdate() {
   trigger.targetname = "leftGlove";
   trigger enablelinkto();
   trigger linkto(leftglove);
-  trigger thread function_80bf1f40(self, note, "zmb_pwup_boxing_punch", "boxing_pow", "MOD_IMPACT", & function_fa8666fa);
+  trigger thread function_80bf1f40(self, note, "zmb_pwup_boxing_punch", "boxing_pow", "MOD_IMPACT", &function_fa8666fa);
   org.var_1ab55691 = leftglove;
   org.trigger1 = trigger;
   rightglove = spawn("script_model", self.origin + (0, -60, 32));
@@ -47,7 +47,7 @@ function boxingpickupupdate() {
   trigger.targetname = "rightGlove";
   trigger enablelinkto();
   trigger linkto(rightglove);
-  trigger thread function_80bf1f40(self, note, "zmb_pwup_boxing_punch", "boxing_pow", "MOD_IMPACT", & function_fa8666fa);
+  trigger thread function_80bf1f40(self, note, "zmb_pwup_boxing_punch", "boxing_pow", "MOD_IMPACT", &function_fa8666fa);
   org.var_40b7d0fa = rightglove;
   org.trigger2 = trigger;
   org linkto(self, "", vectorscale((0, 0, 1), 10), (0, 0, 0));

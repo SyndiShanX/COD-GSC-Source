@@ -35,7 +35,7 @@
 #namespace newworld_util;
 
 function autoexec __init__sytem__() {
-  system::register("newworld_util", & __init__, undefined, undefined);
+  system::register("newworld_util", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -473,9 +473,9 @@ function function_948d4091(var_81a32895, var_2380d5c = 0, str_endon, b_looping =
   self flag::init(var_81a32895 + "_WW_closed");
   self flag::init(var_81a32895 + "_WW_tutorial");
   if(var_81a32895 == "cybercom_fireflyswarm") {
-    var_bcb7a46f = & "CP_MI_ZURICH_NEWWORLD_SELECT_FIREFLY_LINE_1";
+    var_bcb7a46f = &"CP_MI_ZURICH_NEWWORLD_SELECT_FIREFLY_LINE_1";
   } else if(var_81a32895 == "cybercom_concussive") {
-    var_bcb7a46f = & "CP_MI_ZURICH_NEWWORLD_SELECT_CONCUSSIVE_WAVE_LINE_1";
+    var_bcb7a46f = &"CP_MI_ZURICH_NEWWORLD_SELECT_CONCUSSIVE_WAVE_LINE_1";
   }
   self thread function_8531ac12(var_81a32895, str_endon);
   self thread function_b95b168e(var_81a32895, str_endon);
@@ -529,7 +529,7 @@ function function_e5122074(var_bcb7a46f, str_endon) {
   self.var_bb5e2d77 = self openluimenu("CyberComTutorial");
   self setluimenudata(self.var_bb5e2d77, "tutorial_line_1", var_bcb7a46f);
   if(level.console || self gamepadusedlast()) {
-    self setluimenudata(self.var_bb5e2d77, "tutorial_line_2", & "CP_MI_ZURICH_NEWWORLD_EQUIP_CYBERCORE");
+    self setluimenudata(self.var_bb5e2d77, "tutorial_line_2", &"CP_MI_ZURICH_NEWWORLD_EQUIP_CYBERCORE");
   }
   wait(4);
   self thread function_d81a8f6f();
@@ -1084,7 +1084,7 @@ function lock_player_controls(var_a5efd39d = 1) {
   }
 }
 
-function function_16dd8c5f(str_triggername, str_type = & "cp_level_newworld_access_door", str_hint = & "CP_MI_ZURICH_NEWWORLD_HACK", var_8baec92b, var_2df3d133, var_d78830f5 = 0) {
+function function_16dd8c5f(str_triggername, str_type = &"cp_level_newworld_access_door", str_hint = &"CP_MI_ZURICH_NEWWORLD_HACK", var_8baec92b, var_2df3d133, var_d78830f5 = 0) {
   t_interact = getent(str_triggername, "targetname");
   t_interact triggerenable(1);
   if(isDefined(var_8baec92b)) {
@@ -1093,7 +1093,7 @@ function function_16dd8c5f(str_triggername, str_type = & "cp_level_newworld_acce
     var_69f96d87 = [];
   }
   if(!var_d78830f5) {
-    s_gameobject = util::init_interactive_gameobject(t_interact, str_type, str_hint, & function_e27a8082, var_69f96d87);
+    s_gameobject = util::init_interactive_gameobject(t_interact, str_type, str_hint, &function_e27a8082, var_69f96d87);
     s_gameobject.var_2df3d133 = var_2df3d133;
     level waittill(var_2df3d133, e_player);
   } else {
@@ -1226,7 +1226,7 @@ function function_d0aa2f4f(n_delay = 0.25) {
   self endon("death");
   self function_4943984c();
   wait(0.4);
-  self util::delay(n_delay, undefined, & function_c949a8ed);
+  self util::delay(n_delay, undefined, &function_c949a8ed);
 }
 
 function function_737d2864(str_location, str_time) {
@@ -1286,7 +1286,7 @@ function function_3e37f48b(b_enabled) {
       }
       level notify("enable_cybercom", e_player);
     }
-    callback::remove_on_spawned( & function_d17cfcf8);
+    callback::remove_on_spawned(&function_d17cfcf8);
   } else {
     foreach(e_player in level.activeplayers) {
       if(e_player function_c633d8fe()) {
@@ -1294,7 +1294,7 @@ function function_3e37f48b(b_enabled) {
       }
       level notify("disable_cybercom", e_player, 1);
     }
-    callback::on_spawned( & function_d17cfcf8);
+    callback::on_spawned(&function_d17cfcf8);
   }
 }
 

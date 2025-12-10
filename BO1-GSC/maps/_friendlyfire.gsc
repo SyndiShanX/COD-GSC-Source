@@ -204,14 +204,14 @@ missionfail() {
   level endon("mine death");
   level notify("mission failed");
   if(isDefined(self.last_hit_team) && self.last_hit_team == "neutral") {
-    SetDvar("ui_deadquote", & "SCRIPT_MISSIONFAIL_KILLTEAM_NEUTRAL");
+    SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_NEUTRAL");
   } else {
     if(level.campaign == "british") {
-      SetDvar("ui_deadquote", & "SCRIPT_MISSIONFAIL_KILLTEAM_BRITISH");
+      SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_BRITISH");
     } else if(level.campaign == "russian") {
-      SetDvar("ui_deadquote", & "SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
+      SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
     } else {
-      SetDvar("ui_deadquote", & "SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
+      SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
     }
   }
   if(isDefined(level.custom_friendly_fire_shader)) {

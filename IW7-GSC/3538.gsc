@@ -735,7 +735,7 @@ omausebar(var_00) {
   self endon("disconnect");
   var_01 = scripts\mp\hud_util::createprimaryprogressbar();
   var_02 = scripts\mp\hud_util::createprimaryprogressbartext();
-  var_02 give_zap_perk( & "MPUI_CHANGING_KIT");
+  var_02 give_zap_perk(&"MPUI_CHANGING_KIT");
   var_01 scripts\mp\hud_util::updatebar(0, 1 / var_00);
 
   for(var_03 = 0; var_03 < var_00 && isalive(self) && !level.gameended; var_03 = var_03 + 0.05)
@@ -949,7 +949,7 @@ _meth_83EE(var_00) {
   level endon("game_ended");
   var_00 endon("disconnect");
   self setcursorhint("HINT_NOICON");
-  self sethintstring( & "MP_PATCH_PICKUP_TI");
+  self sethintstring(&"MP_PATCH_PICKUP_TI");
   thread func_12E8B(var_00);
 
   for(;;) {
@@ -1009,7 +1009,7 @@ _meth_83E9(var_00) {
   level endon("game_ended");
   var_00 endon("disconnect");
   self.enemytrigger setcursorhint("HINT_NOICON");
-  self.enemytrigger sethintstring( & "MP_PATCH_DESTROY_TI");
+  self.enemytrigger sethintstring(&"MP_PATCH_DESTROY_TI");
   self.enemytrigger scripts\mp\utility\game::makeenemyusable(var_00);
 
   for(;;) {
@@ -2237,73 +2237,73 @@ func_4650(var_00, var_01, var_02) {
 
   switch (var_02) {
     case "power_c4":
-      self.trigger sethintstring( & "MP_PICKUP_C4");
+      self.trigger sethintstring(&"MP_PICKUP_C4");
       break;
     case "power_biospike":
-      self.trigger sethintstring( & "MP_PICKUP_BIOSPIKE");
+      self.trigger sethintstring(&"MP_PICKUP_BIOSPIKE");
       break;
     case "power_bouncingBetty":
-      self.trigger sethintstring( & "MP_PICKUP_BOUNCING_BETTY");
+      self.trigger sethintstring(&"MP_PICKUP_BOUNCING_BETTY");
       break;
     case "power_semtex":
-      self.trigger sethintstring( & "MP_PICKUP_SEMTEX");
+      self.trigger sethintstring(&"MP_PICKUP_SEMTEX");
       break;
     case "power_smokeGrenade":
-      self.trigger sethintstring( & "MP_PICKUP_SMOKE_GRENADE");
+      self.trigger sethintstring(&"MP_PICKUP_SMOKE_GRENADE");
       break;
     case "power_domeshield":
-      self.trigger sethintstring( & "MP_PICKUP_DOME_SHIELD");
+      self.trigger sethintstring(&"MP_PICKUP_DOME_SHIELD");
       break;
     case "power_shardBall":
-      self.trigger sethintstring( & "MP_PICKUP_SHARD_BALL");
+      self.trigger sethintstring(&"MP_PICKUP_SHARD_BALL");
       break;
     case "power_splashGrenade":
-      self.trigger sethintstring( & "MP_PICKUP_SPLASH_GRENADE");
+      self.trigger sethintstring(&"MP_PICKUP_SPLASH_GRENADE");
       break;
     case "power_clusterGrenade":
-      self.trigger sethintstring( & "MP_PICKUP_CLUSTER_GRENADE");
+      self.trigger sethintstring(&"MP_PICKUP_CLUSTER_GRENADE");
       break;
     case "power_smokeWall":
-      self.trigger sethintstring( & "MP_PICKUP_SMOKE_WALL");
+      self.trigger sethintstring(&"MP_PICKUP_SMOKE_WALL");
       break;
     case "power_empGrenade":
-      self.trigger sethintstring( & "MP_PICKUP_EMP_GRENADE");
+      self.trigger sethintstring(&"MP_PICKUP_EMP_GRENADE");
       break;
     case "power_blackholeGrenade":
-      self.trigger sethintstring( & "MP_PICKUP_BLACKHOLE_GRENADE");
+      self.trigger sethintstring(&"MP_PICKUP_BLACKHOLE_GRENADE");
       break;
     case "power_blinkKnife":
-      self.trigger sethintstring( & "MP_PICKUP_TELEPORT_KNIFE");
+      self.trigger sethintstring(&"MP_PICKUP_TELEPORT_KNIFE");
       break;
     case "power_throwingReap":
-      self.trigger sethintstring( & "MP_PICKUP_THROWING_REAP");
+      self.trigger sethintstring(&"MP_PICKUP_THROWING_REAP");
       break;
     case "power_thermobaric":
-      self.trigger sethintstring( & "MP_PICKUP_THERMOBARIC");
+      self.trigger sethintstring(&"MP_PICKUP_THERMOBARIC");
       break;
     case "power_playerTrophySystem":
-      self.trigger sethintstring( & "MP_PICKUP_PLAYER_TROPHY");
+      self.trigger sethintstring(&"MP_PICKUP_PLAYER_TROPHY");
       break;
     case "power_discMarker":
-      self.trigger sethintstring( & "MP_PICKUP_DISC_MARKER");
+      self.trigger sethintstring(&"MP_PICKUP_DISC_MARKER");
       break;
     case "power_caseBomb":
-      self.trigger sethintstring( & "MP_PICKUP_CASE_BOMB");
+      self.trigger sethintstring(&"MP_PICKUP_CASE_BOMB");
       break;
     case "power_transponder":
-      self.trigger sethintstring( & "MP_PICKUP_TRANSPONDER");
+      self.trigger sethintstring(&"MP_PICKUP_TRANSPONDER");
       break;
     case "power_gasGrenade":
-      self.trigger sethintstring( & "MP_PICKUP_GAS_GRENADE");
+      self.trigger sethintstring(&"MP_PICKUP_GAS_GRENADE");
       break;
     case "power_blackoutGrenade":
-      self.trigger sethintstring( & "MP_PICKUP_BLACKOUT_GRENADE");
+      self.trigger sethintstring(&"MP_PICKUP_BLACKOUT_GRENADE");
       break;
     case "power_copycatGrenade":
-      self.trigger sethintstring( & "MP_PICKUP_COPYCAT_GRENADE");
+      self.trigger sethintstring(&"MP_PICKUP_COPYCAT_GRENADE");
       break;
     case "power_arcGrenade":
-      self.trigger sethintstring( & "MP_PICKUP_ARC_MINE");
+      self.trigger sethintstring(&"MP_PICKUP_ARC_MINE");
       break;
   }
 

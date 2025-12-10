@@ -69,8 +69,8 @@ function init() {
   clientfield::register("vehicle", "qrdrone_timeout", 1, 1, "int");
   clientfield::register("vehicle", "qrdrone_countdown", 1, 1, "int");
   clientfield::register("vehicle", "qrdrone_out_of_range", 1, 1, "int");
-  level.qrdroneonblowup = & qrdrone_blowup;
-  level.qrdroneondamage = & qrdrone_damagewatcher;
+  level.qrdroneonblowup = &qrdrone_blowup;
+  level.qrdroneondamage = &qrdrone_damagewatcher;
 }
 
 function tryuseqrdrone(lifeid) {
@@ -869,7 +869,7 @@ function qrdrone_leave_on_timeout(killstreakname) {
     watcher thread weaponobjects::waitanddetonate(qrdrone, 0);
     return;
   }
-  qrdrone thread killstreaks::waitfortimeout(killstreakname, waittime, & qrdrone_leave_on_timeout_callback, "death");
+  qrdrone thread killstreaks::waitfortimeout(killstreakname, waittime, &qrdrone_leave_on_timeout_callback, "death");
 }
 
 function qrdrone_leave_on_timeout_callback() {

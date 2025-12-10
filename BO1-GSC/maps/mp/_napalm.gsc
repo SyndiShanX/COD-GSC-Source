@@ -32,7 +32,7 @@ init() {
   PrecacheRumble("artillery_rumble");
   if(maps\mp\gametypes\_tweakables::getTweakableValue("killstreak", "allownapalm")) {
     maps\mp\gametypes\_hardpoints::registerKillstreak("napalm_mp", "napalm_mp", "killstreak_napalm", "napalm_used", ::useKillstreakNapalm, true);
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("napalm_mp", & "MP_EARNED_NAPALM", & "KILLSTREAK_NAPALM_NOT_AVAILABLE", & "MP_WAR_NAPALM_INBOUND", & "MP_WAR_NAPALM_INBOUND_NEAR_YOUR_POSITION");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("napalm_mp", &"MP_EARNED_NAPALM", &"KILLSTREAK_NAPALM_NOT_AVAILABLE", &"MP_WAR_NAPALM_INBOUND", &"MP_WAR_NAPALM_INBOUND_NEAR_YOUR_POSITION");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("napalm_mp", "mpl_killstreak_napalm", "kls_napalm_used", "", "kls_napalm_enemy", "", "kls_napalm_ready");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("napalm_mp", "scr_givenapalm");
   }

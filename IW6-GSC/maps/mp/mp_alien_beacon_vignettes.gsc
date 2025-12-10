@@ -702,7 +702,7 @@ watch_for_use_gas_trigger(var_0) {
   self notify("watch_for_use_gas");
   self endon("watch_for_use_gas");
   self.player_using_gas = 0;
-  var_1 = & "MP_ALIEN_BEACON_GAS_HINT";
+  var_1 = &"MP_ALIEN_BEACON_GAS_HINT";
   var_2 = 24336;
 
   for(;;) {

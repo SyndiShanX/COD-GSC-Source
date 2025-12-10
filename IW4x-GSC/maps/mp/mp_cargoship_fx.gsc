@@ -15,13 +15,10 @@ precache_createfx_fx() {
   level._effect["brick"] = loadfx("explosions/grenadeExp_concrete_1");
   level._effect["coolaidmanbrick"] = loadfx("explosions/grenadeExp_concrete_1");
 
-
   level._effect["rain_heavy_mist"] = loadfx("weather/rain_mp_cargoship");
   level._effect["lightning"] = loadfx("weather/lightning_mp_farm");
   level._effect["cgoshp_drips"] = loadfx("misc/cgoshp_drips");
   level._effect["cgoshp_drips_a"] = loadfx("misc/cgoshp_drips_a");
-
-
 
   level._effect["mp_cargoship_rain_noise01"] = loadfx("ambient_runners/mp_cargoship_rain_noise01");
   level._effect["mp_cargoship_rain_noise02"] = loadfx("ambient_runners/mp_cargoship_rain_noise02");

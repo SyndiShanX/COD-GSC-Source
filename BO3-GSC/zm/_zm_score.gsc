@@ -18,7 +18,7 @@
 #namespace zm_score;
 
 function autoexec __init__sytem__() {
-  system::register("zm_score", & __init__, undefined, undefined);
+  system::register("zm_score", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -33,7 +33,7 @@ function __init__() {
   clientfield::register("clientuimodel", "hudItems.showDpadDown", 1, 1, "int");
   clientfield::register("clientuimodel", "hudItems.showDpadLeft", 1, 1, "int");
   clientfield::register("clientuimodel", "hudItems.showDpadRight", 1, 1, "int");
-  callback::on_spawned( & player_on_spawned);
+  callback::on_spawned(&player_on_spawned);
   level.score_total = 0;
   level.a_func_score_events = [];
 }

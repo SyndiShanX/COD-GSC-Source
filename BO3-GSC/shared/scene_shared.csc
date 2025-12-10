@@ -747,7 +747,7 @@ function get_existing_ent(clientnum, str_name) {
 }
 
 function autoexec __init__sytem__() {
-  system::register("scene", & __init__, & __main__, undefined);
+  system::register("scene", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -763,26 +763,26 @@ function __init__() {
     if(s_scenedef.vmtype == "both") {
       n_clientbits = getminbitcountfornum(3);
       n_clientbits = getminbitcountfornum(6);
-      clientfield::register("world", s_scenedef.name, 1, n_clientbits, "int", & cf_server_sync, 0, 0);
+      clientfield::register("world", s_scenedef.name, 1, n_clientbits, "int", &cf_server_sync, 0, 0);
     }
   }
-  clientfield::register("toplayer", "postfx_igc", 1, 2, "counter", & postfx_igc, 0, 0);
-  clientfield::register("world", "in_igc", 1, 4, "int", & in_igc, 0, 0);
-  clientfield::register("toplayer", "player_scene_skip_completed", 1, 2, "counter", & player_scene_skip_completed, 0, 0);
-  clientfield::register("allplayers", "player_scene_animation_skip", 1, 2, "counter", & player_scene_animation_skip, 0, 0);
-  clientfield::register("actor", "player_scene_animation_skip", 1, 2, "counter", & player_scene_animation_skip, 0, 0);
-  clientfield::register("vehicle", "player_scene_animation_skip", 1, 2, "counter", & player_scene_animation_skip, 0, 0);
-  clientfield::register("scriptmover", "player_scene_animation_skip", 1, 2, "counter", & player_scene_animation_skip, 0, 0);
+  clientfield::register("toplayer", "postfx_igc", 1, 2, "counter", &postfx_igc, 0, 0);
+  clientfield::register("world", "in_igc", 1, 4, "int", &in_igc, 0, 0);
+  clientfield::register("toplayer", "player_scene_skip_completed", 1, 2, "counter", &player_scene_skip_completed, 0, 0);
+  clientfield::register("allplayers", "player_scene_animation_skip", 1, 2, "counter", &player_scene_animation_skip, 0, 0);
+  clientfield::register("actor", "player_scene_animation_skip", 1, 2, "counter", &player_scene_animation_skip, 0, 0);
+  clientfield::register("vehicle", "player_scene_animation_skip", 1, 2, "counter", &player_scene_animation_skip, 0, 0);
+  clientfield::register("scriptmover", "player_scene_animation_skip", 1, 2, "counter", &player_scene_animation_skip, 0, 0);
   level.scene_object_id = 0;
   level.active_scenes = [];
-  callback::on_localclient_shutdown( & on_localplayer_shutdown);
+  callback::on_localclient_shutdown(&on_localplayer_shutdown);
 }
 
 function in_igc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   player = getlocalplayer(localclientnum);
   n_entnum = player getentitynumber();
   b_igc_active = 0;
-  if(newval & (1 << n_entnum)) {
+  if(newval &(1 << n_entnum)) {
     b_igc_active = 1;
   }
   igcactive(localclientnum, b_igc_active);

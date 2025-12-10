@@ -12,9 +12,9 @@
 #namespace zm_island_spider_ee_quest;
 
 function init() {
-  clientfield::register("vehicle", "spider_glow_fx", 9000, 1, "int", & spider_glow_fx, 0, 0);
-  clientfield::register("vehicle", "spider_drinks_fx", 9000, 2, "int", & function_f9f39b8e, 0, 0);
-  clientfield::register("scriptmover", "jungle_cage_charged_fx", 9000, 1, "int", & jungle_cage_charged_fx, 0, 0);
+  clientfield::register("vehicle", "spider_glow_fx", 9000, 1, "int", &spider_glow_fx, 0, 0);
+  clientfield::register("vehicle", "spider_drinks_fx", 9000, 2, "int", &function_f9f39b8e, 0, 0);
+  clientfield::register("scriptmover", "jungle_cage_charged_fx", 9000, 1, "int", &jungle_cage_charged_fx, 0, 0);
 }
 
 function spider_glow_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

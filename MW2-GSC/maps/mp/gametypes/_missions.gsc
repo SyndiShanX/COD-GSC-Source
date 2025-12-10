@@ -1034,7 +1034,7 @@ ch_kills(data, time) {
           player processChallenge("ch_" + baseWeapon + "_" + weaponAttachment);
           continue;
         case "fmj":
-          if(data.victim.iDFlags & level.iDFLAGS_PENETRATION)
+          if(data.victim.iDFlags &level.iDFLAGS_PENETRATION)
             player processChallenge("ch_" + baseWeapon + "_" + weaponAttachment);
           continue;
         default:
@@ -1154,7 +1154,7 @@ ch_bulletDamageCommon(data, player, time, weaponClass) {
   }
 
   if(data.victim.iDFlagsTime == time) {
-    if(data.victim.iDFlags & level.iDFLAGS_PENETRATION)
+    if(data.victim.iDFlags &level.iDFLAGS_PENETRATION)
       player processChallenge("ch_xrayvision");
   }
 

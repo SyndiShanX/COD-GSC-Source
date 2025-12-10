@@ -187,9 +187,9 @@ arcadeMode_checkpoint_restore() {
       player_suicides_total = players[i] pGetIntDvar("player_suicides_total");
       minimumAllowedSuicides = getdvarint("arcademode_minimumAllowedSuicides");
       if((player_suicides_total + 1 == minimumAllowedSuicides) && (players[i] getentitynumber() != 0)) {
-        players[i] thread show_warning_message(7.0, & "SCRIPT_AM_SUICIDE_ONE_LAST_GO", 0);
+        players[i] thread show_warning_message(7.0, &"SCRIPT_AM_SUICIDE_ONE_LAST_GO", 0);
       } else {
-        players[i] thread show_warning_message(7.0, & "SCRIPT_AM_SUICIDE_COMMITED", 0);
+        players[i] thread show_warning_message(7.0, &"SCRIPT_AM_SUICIDE_COMMITED", 0);
       }
       players[i] pSetDvar("player_committed_suicide", 0);
     }
@@ -276,7 +276,7 @@ minimumScoreProcessing(player) {
     } else if(level.arcademode_minimumAllowedWarning >= player.score &&
       level.arcademode_minimumAllowedPoints < player.score &&
       player.arcademode_warningShown == false) {
-      player thread show_warning_message(7.0, & "SCRIPT_AM_LOW_SCORE_WARNING", 30);
+      player thread show_warning_message(7.0, &"SCRIPT_AM_LOW_SCORE_WARNING", 30);
       player.arcademode_warningShown = true;
     } else if(player.score <= level.arcademode_minimumAllowedPoints) {
       ban(player getentitynumber());
@@ -620,7 +620,7 @@ updatePlusScoreHUD(amount) {
       self.hud_scoreplusupdate setValue(self.arcademode_updatePlusTotal);
       self.hud_scoreplusupdate.alpha = 0.85;
       self.hud_scoreplusupdate thread fontPulse(self);
-      self.hud_scoreplusupdate.label = & "SCRIPT_PLUS";
+      self.hud_scoreplusupdate.label = &"SCRIPT_PLUS";
       wait 1;
       self.hud_scoreplusupdate fadeOverTime(0.75);
       self.hud_scoreplusupdate.alpha = 0;
@@ -668,7 +668,7 @@ updateMutliScoreHUD(multi) {
     self.hud_scoremulti setValue(multi);
     self.hud_scoremulti.alpha = 0.85;
     self.hud_scoremulti thread fontPulse(self);
-    self.hud_scoremulti.label = & "SCRIPT_AM_X";
+    self.hud_scoremulti.label = &"SCRIPT_AM_X";
     self.hud_scoremulti.color = level.arcadeMode_streak_color[multi - 1];
     wait 2;
     self.hud_scoremulti fadeOverTime(0.75);

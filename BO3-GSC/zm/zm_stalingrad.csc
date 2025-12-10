@@ -72,10 +72,10 @@ function autoexec opt_in() {
 function init_gamemodes() {}
 
 function main() {
-  scene::add_scene_func("p7_fxanim_gp_tracer_fire_01_bundle", & function_1c53c4e1);
+  scene::add_scene_func("p7_fxanim_gp_tracer_fire_01_bundle", &function_1c53c4e1);
   zm_stalingrad_ffotd::main_start();
   level.debug_keyline_zombies = 0;
-  level.setupcustomcharacterexerts = & setup_personality_character_exerts;
+  level.setupcustomcharacterexerts = &setup_personality_character_exerts;
   level._effect["eye_glow"] = "dlc3/stalingrad/fx_glow_eye_red_stal";
   level._effect["headshot"] = "impacts/fx_flesh_hit";
   level._effect["headshot_nochunks"] = "misc/fx_zombie_bloodsplat";
@@ -123,23 +123,23 @@ function register_clientfields() {
   clientfield::register("clientuimodel", "zmInventory.widget_egg", 12000, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.piece_egg", 12000, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.progress_egg", 12000, 4, "float", undefined, 0, 0);
-  clientfield::register("actor", "drop_pod_score_beam_fx", 12000, 1, "counter", & zm_stalingrad_pap::function_c86c0cdd, 0, 0);
-  clientfield::register("scriptmover", "drop_pod_active", 12000, 1, "int", & zm_stalingrad_pap::function_5858bdaf, 0, 0);
-  clientfield::register("scriptmover", "drop_pod_hp_light", 12000, 2, "int", & zm_stalingrad_pap::function_5e369bd2, 0, 0);
-  clientfield::register("world", "drop_pod_streaming", 12000, 1, "int", & zm_stalingrad_pap::drop_pod_streaming, 0, 0);
-  clientfield::register("toplayer", "tp_water_sheeting", 12000, 1, "int", & water_sheeting_toggle, 0, 0);
-  clientfield::register("toplayer", "sewer_landing_rumble", 12000, 1, "counter", & function_931fa0e1, 0, 0);
-  clientfield::register("scriptmover", "dragon_egg_heat_fx", 12000, 1, "int", & function_3931d3fe, 0, 0);
-  clientfield::register("scriptmover", "dragon_egg_placed", 12000, 1, "counter", & function_4b1f1b87, 0, 0);
-  clientfield::register("actor", "dragon_egg_score_beam_fx", 12000, 1, "counter", & function_bfdc67e3, 0, 0);
-  clientfield::register("world", "force_stream_dragon_egg", 12000, 1, "int", & function_b116183d, 0, 0);
-  clientfield::register("scriptmover", "ethereal_audio_log_fx", 12000, 1, "int", & function_a96968f2, 0, 0);
-  clientfield::register("world", "deactivate_ai_vox", 12000, 1, "int", & deactivate_ai_vox, 0, 0);
-  clientfield::register("world", "sophia_intro_outro", 12000, 1, "int", & function_21deab84, 0, 0);
-  clientfield::register("allplayers", "sophia_follow", 12000, 3, "int", & function_a431bec5, 0, 0);
-  clientfield::register("scriptmover", "sophia_eye_shader", 12000, 1, "int", & function_70b3b237, 0, 0);
-  clientfield::register("world", "sophia_main_waveform", 12000, 1, "int", & function_6cfcd54d, 0, 0);
-  clientfield::register("toplayer", "interact_rumble", 12000, 1, "counter", & function_bbbdcfd5, 0, 0);
+  clientfield::register("actor", "drop_pod_score_beam_fx", 12000, 1, "counter", &zm_stalingrad_pap::function_c86c0cdd, 0, 0);
+  clientfield::register("scriptmover", "drop_pod_active", 12000, 1, "int", &zm_stalingrad_pap::function_5858bdaf, 0, 0);
+  clientfield::register("scriptmover", "drop_pod_hp_light", 12000, 2, "int", &zm_stalingrad_pap::function_5e369bd2, 0, 0);
+  clientfield::register("world", "drop_pod_streaming", 12000, 1, "int", &zm_stalingrad_pap::drop_pod_streaming, 0, 0);
+  clientfield::register("toplayer", "tp_water_sheeting", 12000, 1, "int", &water_sheeting_toggle, 0, 0);
+  clientfield::register("toplayer", "sewer_landing_rumble", 12000, 1, "counter", &function_931fa0e1, 0, 0);
+  clientfield::register("scriptmover", "dragon_egg_heat_fx", 12000, 1, "int", &function_3931d3fe, 0, 0);
+  clientfield::register("scriptmover", "dragon_egg_placed", 12000, 1, "counter", &function_4b1f1b87, 0, 0);
+  clientfield::register("actor", "dragon_egg_score_beam_fx", 12000, 1, "counter", &function_bfdc67e3, 0, 0);
+  clientfield::register("world", "force_stream_dragon_egg", 12000, 1, "int", &function_b116183d, 0, 0);
+  clientfield::register("scriptmover", "ethereal_audio_log_fx", 12000, 1, "int", &function_a96968f2, 0, 0);
+  clientfield::register("world", "deactivate_ai_vox", 12000, 1, "int", &deactivate_ai_vox, 0, 0);
+  clientfield::register("world", "sophia_intro_outro", 12000, 1, "int", &function_21deab84, 0, 0);
+  clientfield::register("allplayers", "sophia_follow", 12000, 3, "int", &function_a431bec5, 0, 0);
+  clientfield::register("scriptmover", "sophia_eye_shader", 12000, 1, "int", &function_70b3b237, 0, 0);
+  clientfield::register("world", "sophia_main_waveform", 12000, 1, "int", &function_6cfcd54d, 0, 0);
+  clientfield::register("toplayer", "interact_rumble", 12000, 1, "counter", &function_bbbdcfd5, 0, 0);
   level.var_6ca4d0f2 = [];
   level.var_48c1095e = [];
 }

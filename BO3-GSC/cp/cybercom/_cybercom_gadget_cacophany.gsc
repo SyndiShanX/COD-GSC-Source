@@ -24,14 +24,14 @@ function init() {}
 function main() {
   cybercom_gadget::registerability(2, 16);
   level.cybercom.cacophany = spawnStruct();
-  level.cybercom.cacophany._is_flickering = & _is_flickering;
-  level.cybercom.cacophany._on_flicker = & _on_flicker;
-  level.cybercom.cacophany._on_give = & _on_give;
-  level.cybercom.cacophany._on_take = & _on_take;
-  level.cybercom.cacophany._on_connect = & _on_connect;
-  level.cybercom.cacophany._on = & _on;
-  level.cybercom.cacophany._off = & _off;
-  level.cybercom.cacophany._is_primed = & _is_primed;
+  level.cybercom.cacophany._is_flickering = &_is_flickering;
+  level.cybercom.cacophany._on_flicker = &_on_flicker;
+  level.cybercom.cacophany._on_give = &_on_give;
+  level.cybercom.cacophany._on_take = &_on_take;
+  level.cybercom.cacophany._on_connect = &_on_connect;
+  level.cybercom.cacophany._on = &_on;
+  level.cybercom.cacophany._off = &_off;
+  level.cybercom.cacophany._is_primed = &_is_primed;
 }
 
 function _is_flickering(slot) {}
@@ -47,8 +47,8 @@ function _on_give(slot, weapon) {
     self.cybercom.var_f72b478f = getdvarfloat("scr_cacophany_upgraded_fov", 0.5);
     self.cybercom.var_23d4a73a = getdvarfloat("scr_cacophany_lock_radius", 330);
   }
-  self.cybercom.targetlockcb = & _get_valid_targets;
-  self.cybercom.targetlockrequirementcb = & _lock_requirement;
+  self.cybercom.targetlockcb = &_get_valid_targets;
+  self.cybercom.targetlockrequirementcb = &_lock_requirement;
   self thread cybercom::function_b5f4e597(weapon);
 }
 

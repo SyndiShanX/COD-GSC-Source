@@ -17,7 +17,7 @@ function init() {
   }
   level._effect["powerup_on_solo"] = "zombie/fx_powerup_on_solo_zmb";
   level._effect["powerup_on_caution"] = "zombie/fx_powerup_on_caution_zmb";
-  clientfield::register("scriptmover", "powerup_fx", 1, 3, "int", & powerup_fx_callback, 0, 0);
+  clientfield::register("scriptmover", "powerup_fx", 1, 3, "int", &powerup_fx_callback, 0, 0);
 }
 
 function add_zombie_powerup(powerup_name, client_field_name, clientfield_version = 1) {
@@ -31,7 +31,7 @@ function add_zombie_powerup(powerup_name, client_field_name, clientfield_version
   struct.powerup_name = powerup_name;
   level.zombie_powerups[powerup_name] = struct;
   if(isDefined(client_field_name)) {
-    clientfield::register("toplayer", client_field_name, clientfield_version, 2, "int", & powerup_state_callback, 0, 1);
+    clientfield::register("toplayer", client_field_name, clientfield_version, 2, "int", &powerup_state_callback, 0, 1);
     struct.client_field_name = client_field_name;
   }
 }

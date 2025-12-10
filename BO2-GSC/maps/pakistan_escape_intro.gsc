@@ -303,7 +303,7 @@ escape_intro_hints() {
   flag_wait("vehicle_switched");
   level notify("end_vehicle_switch");
   wait 1;
-  screen_message_create(&"PAKISTAN_SHARED_SOCT_HINT_GAS", & "PAKISTAN_SHARED_SOCT_HINT_BRAKE");
+  screen_message_create(&"PAKISTAN_SHARED_SOCT_HINT_GAS", &"PAKISTAN_SHARED_SOCT_HINT_BRAKE");
   trigger_wait("sm_st_fork");
   screen_message_delete();
 }

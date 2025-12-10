@@ -17,22 +17,22 @@
 #namespace _gadget_vision_pulse;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_vision_pulse", & __init__, undefined, undefined);
+  system::register("gadget_vision_pulse", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(6, & gadget_vision_pulse_on, & gadget_vision_pulse_off);
-  ability_player::register_gadget_possession_callbacks(6, & gadget_vision_pulse_on_give, & gadget_vision_pulse_on_take);
-  ability_player::register_gadget_flicker_callbacks(6, & gadget_vision_pulse_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(6, & gadget_vision_pulse_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(6, & gadget_vision_pulse_is_flickering);
-  callback::on_connect( & gadget_vision_pulse_on_connect);
-  callback::on_spawned( & gadget_vision_pulse_on_spawn);
+  ability_player::register_gadget_activation_callbacks(6, &gadget_vision_pulse_on, &gadget_vision_pulse_off);
+  ability_player::register_gadget_possession_callbacks(6, &gadget_vision_pulse_on_give, &gadget_vision_pulse_on_take);
+  ability_player::register_gadget_flicker_callbacks(6, &gadget_vision_pulse_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(6, &gadget_vision_pulse_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(6, &gadget_vision_pulse_is_flickering);
+  callback::on_connect(&gadget_vision_pulse_on_connect);
+  callback::on_spawned(&gadget_vision_pulse_on_spawn);
   clientfield::register("toplayer", "vision_pulse_active", 1, 1, "int");
   if(!isDefined(level.vsmgr_prio_visionset_visionpulse)) {
     level.vsmgr_prio_visionset_visionpulse = 61;
   }
-  visionset_mgr::register_info("visionset", "vision_pulse", 1, level.vsmgr_prio_visionset_visionpulse, 12, 1, & visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
+  visionset_mgr::register_info("visionset", "vision_pulse", 1, level.vsmgr_prio_visionset_visionpulse, 12, 1, &visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
 }
 
 function gadget_vision_pulse_is_inuse(slot) {
@@ -101,7 +101,7 @@ function gadget_vision_pulse_on(slot, weapon) {
   }
   self flagsys::set("gadget_vision_pulse_on");
   self thread gadget_vision_pulse_start(slot, weapon);
-  visionset_mgr::activate("visionset", "vision_pulse", self, 0.25, & gadget_vision_pulse_ramp_hold_func, 0.75);
+  visionset_mgr::activate("visionset", "vision_pulse", self, 0.25, &gadget_vision_pulse_ramp_hold_func, 0.75);
   self thread gadget_vision_pulse_watch_death();
   self thread gadget_vision_pulse_watch_emp();
   self clientfield::set_to_player("vision_pulse_active", 1);

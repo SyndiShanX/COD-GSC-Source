@@ -9,24 +9,24 @@
 #namespace spectating;
 
 function autoexec __init__sytem__() {
-  system::register("spectating", & __init__, undefined, undefined);
+  system::register("spectating", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & main);
+  callback::on_start_gametype(&main);
 }
 
 function main() {
   foreach(team in level.teams) {
     level.spectateoverride[team] = spawnStruct();
   }
-  callback::on_connecting( & on_player_connecting);
+  callback::on_connecting(&on_player_connecting);
 }
 
 function on_player_connecting() {
-  callback::on_joined_team( & on_joined_team);
-  callback::on_spawned( & on_player_spawned);
-  callback::on_joined_spectate( & on_joined_spectate);
+  callback::on_joined_team(&on_joined_team);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_joined_spectate(&on_joined_spectate);
 }
 
 function on_player_spawned() {

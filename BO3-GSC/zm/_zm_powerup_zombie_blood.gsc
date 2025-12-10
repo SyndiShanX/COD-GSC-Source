@@ -15,7 +15,7 @@
 #namespace zm_powerup_zombie_blood;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_zombie_blood", & __init__, undefined, undefined);
+  system::register("zm_powerup_zombie_blood", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -25,11 +25,11 @@ function __init__() {
   clientfield::register("allplayers", "player_zombie_blood_fx", 21000, 1, "int");
   level._effect["zombie_blood"] = "dlc5/tomb/fx_pwr_up_blood";
   level._effect["zombie_blood_1st"] = "dlc5/tomb/fx_pwr_up_blood_overlay";
-  zm_powerups::register_powerup("zombie_blood", & function_73234659);
-  zm_powerups::add_zombie_powerup("zombie_blood", "p7_zm_ori_power_up_blood", & "ZOMBIE_POWERUP_MAX_AMMO", & zm_powerups::func_should_always_drop, 1, 0, 0, undefined, "powerup_zombie_blood", "zombie_powerup_zombie_blood_time", "zombie_powerup_zombie_blood_on", 1, 0);
+  zm_powerups::register_powerup("zombie_blood", &function_73234659);
+  zm_powerups::add_zombie_powerup("zombie_blood", "p7_zm_ori_power_up_blood", &"ZOMBIE_POWERUP_MAX_AMMO", &zm_powerups::func_should_always_drop, 1, 0, 0, undefined, "powerup_zombie_blood", "zombie_powerup_zombie_blood_time", "zombie_powerup_zombie_blood_on", 1, 0);
   zm_powerups::powerup_set_can_pick_up_in_last_stand("zombie_blood", 0);
   zm_powerups::powerup_set_statless_powerup("zombie_blood");
-  callback::on_connect( & init_player_zombie_blood_vars);
+  callback::on_connect(&init_player_zombie_blood_vars);
   level.a_zombie_blood_entities = getEntArray("zombie_blood_visible", "targetname");
   if(isDefined(level.a_zombie_blood_entities)) {
     foreach(var_e81648f0 in level.a_zombie_blood_entities) {
@@ -39,7 +39,7 @@ function __init__() {
   if(!isDefined(level.var_198f35d)) {
     level.var_198f35d = 120;
   }
-  visionset_mgr::register_info("visionset", "zm_tomb_in_plain_sight", 21000, level.var_198f35d, 31, 1, & visionset_mgr::ramp_in_out_thread_per_player, 0);
+  visionset_mgr::register_info("visionset", "zm_tomb_in_plain_sight", 21000, level.var_198f35d, 31, 1, &visionset_mgr::ramp_in_out_thread_per_player, 0);
   if(!isDefined(level.var_e8b932c5)) {
     level.var_e8b932c5 = 120;
   }

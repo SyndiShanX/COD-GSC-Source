@@ -177,7 +177,7 @@ final_sequence_fail_condition() {
   level endon("missionfailed");
   level endon("vignette_ending_player_jumped_flag");
   wait 6.0;
-  setdvar("ui_deadquote", & "FLOOD_ENDING_JUMP_FAIL");
+  setdvar("ui_deadquote", &"FLOOD_ENDING_JUMP_FAIL");
   level thread maps\_utility::missionfailedwrapper();
 }
 
@@ -421,7 +421,7 @@ ending_player_qte_failure_logic() {
 
   if(var_1 == level.player && !common_scripts\utility::flag("already_failing")) {
     common_scripts\utility::flag_set("already_failing");
-    setdvar("ui_deadquote", & "SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
+    setdvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
     level thread maps\_utility::missionfailedwrapper();
   }
 }
@@ -530,7 +530,7 @@ ending_let_go_scene_player_experience() {
 
 ending_create_qte_prompt(var_0, var_1) {
   if(!isDefined(var_0))
-    var_0 = & "FLOOD_ENDING_QTE_0_PROMPT";
+    var_0 = &"FLOOD_ENDING_QTE_0_PROMPT";
 
   var_2 = 90;
   var_3 = 35;
@@ -539,13 +539,13 @@ ending_create_qte_prompt(var_0, var_1) {
   var_6 = 90;
   var_7 = [];
 
-  if(var_0 == & "FLOOD_ENDING_QTE_1_PROMPT") {
+  if(var_0 == &"FLOOD_ENDING_QTE_1_PROMPT") {
     var_3 = -3;
     var_2 = 70;
     var_4 = 1.5;
     var_5 = 3;
     var_6 = 95;
-  } else if(var_0 == & "FLOOD_ENDING_QTE_3_PROMPT" || var_0 == & "FLOOD_ENDING_QTE_3_PROMPT_PC" || var_0 == & "FLOOD_ENDING_QTE_3_PROMPT_TOGGLE" || var_0 == & "FLOOD_ENDING_QTE_3_PROMPT_TOGGLEADS_THROW")
+  } else if(var_0 == &"FLOOD_ENDING_QTE_3_PROMPT" || var_0 == &"FLOOD_ENDING_QTE_3_PROMPT_PC" || var_0 == &"FLOOD_ENDING_QTE_3_PROMPT_TOGGLE" || var_0 == &"FLOOD_ENDING_QTE_3_PROMPT_TOGGLEADS_THROW")
     var_2 = getdvarfloat("foo");
 
   var_8 = level.player maps\_hud_util::createclientfontstring("default", var_4);
@@ -581,7 +581,7 @@ ending_create_qte_prompt(var_0, var_1) {
     var_7["icon"] = var_9;
   }
 
-  if(var_0 == & "FLOOD_ENDING_QTE_2_PROMPT") {
+  if(var_0 == &"FLOOD_ENDING_QTE_2_PROMPT") {
     var_8 = level.player maps\_hud_util::createclientfontstring("default", var_4);
     var_8.x = var_3 * -1 + 24;
     var_8.y = var_2 - 2;
@@ -714,12 +714,12 @@ ending_qte_catch(var_0) {
 }
 
 ending_qte_catch_prompt(var_0) {
-  var_1 = & "FLOOD_ENDING_QTE_3_PROMPT";
+  var_1 = &"FLOOD_ENDING_QTE_3_PROMPT";
 
   if(maps\flood_util::game_is_pc()) {
-    maps\flood_util::registeractionbinding("ADS", "+speed_throw", & "FLOOD_ENDING_QTE_3_PROMPT_PC");
-    maps\flood_util::registeractionbinding("ADS", "+toggleads", & "FLOOD_ENDING_QTE_3_PROMPT_TOGGLE");
-    maps\flood_util::registeractionbinding("ADS", "+toggleads_throw", & "FLOOD_ENDING_QTE_3_PROMPT_TOGGLEADS_THROW");
+    maps\flood_util::registeractionbinding("ADS", "+speed_throw", &"FLOOD_ENDING_QTE_3_PROMPT_PC");
+    maps\flood_util::registeractionbinding("ADS", "+toggleads", &"FLOOD_ENDING_QTE_3_PROMPT_TOGGLE");
+    maps\flood_util::registeractionbinding("ADS", "+toggleads_throw", &"FLOOD_ENDING_QTE_3_PROMPT_TOGGLEADS_THROW");
     var_2 = maps\flood_util::getactionbind("ADS");
     var_1 = var_2.hint;
   }

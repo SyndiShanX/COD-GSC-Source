@@ -13,16 +13,16 @@
 #namespace perks;
 
 function autoexec __init__sytem__() {
-  system::register("perks", & __init__, undefined, undefined);
+  system::register("perks", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("allplayers", "flying", 1, 1, "int", & flying_callback, 0, 1);
-  callback::on_localclient_connect( & on_local_client_connect);
-  callback::on_localplayer_spawned( & on_localplayer_spawned);
-  callback::on_spawned( & on_player_spawned);
+  clientfield::register("allplayers", "flying", 1, 1, "int", &flying_callback, 0, 1);
+  callback::on_localclient_connect(&on_local_client_connect);
+  callback::on_localplayer_spawned(&on_localplayer_spawned);
+  callback::on_spawned(&on_player_spawned);
   level.killtrackerfxenable = 1;
-  level._monitor_tracker = & monitor_tracker_perk;
+  level._monitor_tracker = &monitor_tracker_perk;
   level.sitrepscan1_enable = getdvarint("scr_sitrepscan1_enable", 2);
   level.sitrepscan1_setoutline = getdvarint("scr_sitrepscan1_setoutline", 1);
   level.sitrepscan1_setsolid = getdvarint("scr_sitrepscan1_setsolid", 1);
@@ -115,7 +115,7 @@ function on_player_spawned(local_client_num) {
   self thread monitor_tracker_perk(local_client_num);
 }
 
-function array_equal( & a, & b) {
+function array_equal(&a, &b) {
   if(isDefined(a) && isDefined(b) && isarray(a) && isarray(b) && a.size == b.size) {
     for(i = 0; i < a.size; i++) {
       if(!a[i] === b[i]) {
@@ -466,7 +466,7 @@ function monitor_detectnearbyenemies(local_client_num) {
         setuimodelvalue(sixthsensemodel, enemydetectedbitfield);
         enemynearbytime = 0;
         diff = enemydetectedbitfield ^ previousenemydetectedbitfield;
-        if(diff & enemydetectedbitfield) {
+        if(diff &enemydetectedbitfield) {
           self playSound(0, "uin_sixth_sense_ping_on");
         }
         previousenemydetectedbitfield = enemydetectedbitfield;

@@ -28,22 +28,22 @@ function main() {
   level.teamscoreperdeath = getgametypesetting("teamScorePerDeath");
   level.teamscoreperheadshot = getgametypesetting("teamScorePerHeadshot");
   level.killstreaksgivegamescore = getgametypesetting("killstreaksGiveGameScore");
-  level.onstartgametype = & onstartgametype;
-  level.onplayerkilled = & onplayerkilled;
-  level.onspawnplayer = & onspawnplayer;
+  level.onstartgametype = &onstartgametype;
+  level.onplayerkilled = &onplayerkilled;
+  level.onspawnplayer = &onspawnplayer;
   gameobjects::register_allowed_gameobject(level.gametype);
   globallogic_audio::set_leader_gametype_dialog("startFreeForAll", "hcStartFreeForAll", "gameBoost", "gameBoost");
   globallogic::setvisiblescoreboardcolumns("pointstowin", "kills", "deaths", "kdratio", "score");
 }
 
 function setupteam(team) {
-  util::setobjectivetext(team, & "OBJECTIVES_DM");
+  util::setobjectivetext(team, &"OBJECTIVES_DM");
   if(level.splitscreen) {
-    util::setobjectivescoretext(team, & "OBJECTIVES_DM");
+    util::setobjectivescoretext(team, &"OBJECTIVES_DM");
   } else {
-    util::setobjectivescoretext(team, & "OBJECTIVES_DM_SCORE");
+    util::setobjectivescoretext(team, &"OBJECTIVES_DM_SCORE");
   }
-  util::setobjectivehinttext(team, & "OBJECTIVES_DM_HINT");
+  util::setobjectivehinttext(team, &"OBJECTIVES_DM_HINT");
   spawnlogic::add_spawn_points(team, "mp_dm_spawn");
   spawnlogic::place_spawn_points("mp_dm_spawn_start");
   level.spawn_start = spawnlogic::get_spawnpoint_array("mp_dm_spawn_start");

@@ -43,7 +43,7 @@ init() {
   game["end_reason"]["time_to_beat_uplink_win"] = 21;
   game["end_reason"]["time_to_beat_uplink_loss"] = 22;
   game["end_reason"]["nuke_end"] = 23;
-  game["strings"]["overtime"] = & "MP_OVERTIME";
+  game["strings"]["overtime"] = &"MP_OVERTIME";
   level thread onplayerconnect();
   level.showerrormessagefunc = ::showerrormessage;
 }

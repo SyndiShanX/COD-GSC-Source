@@ -69,11 +69,11 @@ function skipto_discover_data_init(str_objective, b_starting) {
   level thread scene::play("cin_sgen_05_01_discoverdata_vign_lookaround_hendricks");
   level waittill("hash_dd334053");
   level thread util::set_streamer_hint(6);
-  level util::delay(2, undefined, & discover_data_vo);
+  level util::delay(2, undefined, &discover_data_vo);
   level flag::wait_till("data_recovered");
   mapping_drone::spawn_drone();
-  level scene::add_scene_func("cin_sgen_06_01_followleader_vign_activate_eac_hendricks", & function_8e9806c5);
-  level scene::add_scene_func("cin_sgen_06_01_followleader_vign_activate_eac_drone", & function_8cf3dc94);
+  level scene::add_scene_func("cin_sgen_06_01_followleader_vign_activate_eac_hendricks", &function_8e9806c5);
+  level scene::add_scene_func("cin_sgen_06_01_followleader_vign_activate_eac_drone", &function_8cf3dc94);
   level thread scene::play("cin_sgen_06_01_followleader_vign_activate_eac_drone");
   level thread scene::play("cin_sgen_06_01_followleader_vign_activate_eac_hendricks");
   skipto::objective_completed(str_objective);
@@ -90,7 +90,7 @@ function function_370bcbcc() {
   t_use setvisibletoall();
   t_use setteamfortrigger("none");
   t_use usetriggerrequirelookat();
-  var_d67faff5 = util::init_interactive_gameobject(t_use, & "cp_prompt_dni_sgen_hack_emf_source", & "CP_MI_SING_SGEN_HACK", & function_41ebcee5, array(var_f3ad9584));
+  var_d67faff5 = util::init_interactive_gameobject(t_use, &"cp_prompt_dni_sgen_hack_emf_source", &"CP_MI_SING_SGEN_HACK", &function_41ebcee5, array(var_f3ad9584));
   level flag::wait_till("data_discovered");
   snd_emf stoploopsound();
   objectives::complete("cp_level_sgen_locate_emf");
@@ -101,7 +101,7 @@ function function_370bcbcc() {
 
 function function_41ebcee5(e_player) {
   level flag::set("data_discovered");
-  level scene::add_scene_func("pb_sgen_data_discovery_hack", & player_data_aquired);
+  level scene::add_scene_func("pb_sgen_data_discovery_hack", &player_data_aquired);
   level scene::play("pb_sgen_data_discovery_hack", e_player);
   level flag::set("data_recovered");
 }
@@ -119,8 +119,8 @@ function player_data_aquired(a_ents) {
     if(isplayer(e_in_scene)) {
       e_in_scene cybercom::cybercom_armpulse(1);
       e_in_scene clientfield::set_to_player("sndCCHacking", 2);
-      e_in_scene util::delay(1, "death", & clientfield::increment_to_player, "hack_dni_fx");
-      e_in_scene util::delay(2, "death", & clientfield::set_to_player, "sndCCHacking", 0);
+      e_in_scene util::delay(1, "death", &clientfield::increment_to_player, "hack_dni_fx");
+      e_in_scene util::delay(2, "death", &clientfield::set_to_player, "sndCCHacking", 0);
     }
   }
 }
@@ -369,7 +369,7 @@ function gen_lab_spawning() {
   }
   level thread force_gen_lab_hot();
   level flag::wait_till("player_mid_gen_lab");
-  spawner::simple_spawn("gen_lab_enemy_wave_2", & setup_wave_2_gen_lab_guy);
+  spawner::simple_spawn("gen_lab_enemy_wave_2", &setup_wave_2_gen_lab_guy);
   level thread wait_till_lab_cleared();
 }
 
@@ -632,7 +632,7 @@ function function_8a4d2dee() {
 function post_gen_lab_hendricks() {
   level scene::play("cin_sgen_08_01_followleader_2_vign_pathfinding_aie_jumpdown_hendricks");
   level flag::wait_till("hendricks_follow2_wallrun_trick");
-  scene::add_scene_func("cin_sgen_09_01_chemlab_vign_windowknock_robots_start", & function_67a6b650);
+  scene::add_scene_func("cin_sgen_09_01_chemlab_vign_windowknock_robots_start", &function_67a6b650);
   level thread scene::play("cin_sgen_09_01_chemlab_vign_windowknock_robots_start");
   level scene::play("cin_sgen_08_01_followleader2_vign_wallrun");
   level flag::wait_till("hendricks_wallrun_done");
@@ -664,7 +664,7 @@ function skipto_chem_lab_init(str_objective, b_starting) {
     objectives::set("cp_level_sgen_descend_into_core");
     level scene::skipto_end("p7_fxanim_cp_sgen_bridge_silo_edge_break_bundle");
     level flag::set("hendricks_wallrun_done");
-    scene::add_scene_func("cin_sgen_09_01_chemlab_vign_windowknock_robots_start", & function_67a6b650);
+    scene::add_scene_func("cin_sgen_09_01_chemlab_vign_windowknock_robots_start", &function_67a6b650);
     level thread scene::play("cin_sgen_09_01_chemlab_vign_windowknock_robots_start");
     level thread namespace_d40478f6::play_robot_knock_music();
     load::function_a2995f22();
@@ -745,7 +745,7 @@ function chem_door_nag_lines() {
 }
 
 function chem_lab_robots() {
-  scene::add_scene_func("cin_sgen_09_02_chem_lab_vign_workerbot_robot01_breakfree", & function_67a6b650);
+  scene::add_scene_func("cin_sgen_09_02_chem_lab_vign_workerbot_robot01_breakfree", &function_67a6b650);
   scene::init("cin_sgen_09_02_chem_lab_vign_workerbot_robot01_breakfree");
   level thread robot_breaks_glass_notetrack();
   level flag::wait_till("start_chem_lab_robot_scare");
@@ -762,7 +762,7 @@ function robot_breaks_glass_notetrack() {
 }
 
 function function_67a6b650(a_ents) {
-  array::thread_all_ents(a_ents, & function_7bff1955);
+  array::thread_all_ents(a_ents, &function_7bff1955);
 }
 
 function function_7bff1955(e_robot) {
@@ -787,7 +787,7 @@ function skipto_post_chem_lab_init(str_objective, b_starting) {
     objectives::set("cp_level_sgen_descend_into_core");
     level scene::skipto_end("p7_fxanim_cp_sgen_bridge_silo_edge_break_bundle");
     level scene::skipto_end("cin_sgen_09_02_chem_lab_vign_exitdoor_hendricks");
-    scene::add_scene_func("cin_sgen_11_02_silofloor_vign_notice_hendricks", & drone_highlights_grate, "init");
+    scene::add_scene_func("cin_sgen_11_02_silofloor_vign_notice_hendricks", &drone_highlights_grate, "init");
     level scene::init("cin_sgen_11_02_silofloor_vign_notice_hendricks");
     level thread setup_silo_robot_risers();
     level thread namespace_d40478f6::function_98762d53();
@@ -860,7 +860,7 @@ function skipto_silo_floor_init(str_objective, b_starting) {
     objectives::complete("cp_level_sgen_locate_emf");
     objectives::set("cp_level_sgen_descend_into_core");
     level scene::skipto_end("p7_fxanim_cp_sgen_bridge_silo_edge_break_bundle");
-    scene::add_scene_func("cin_sgen_11_02_silofloor_vign_notice_hendricks", & drone_highlights_grate, "init");
+    scene::add_scene_func("cin_sgen_11_02_silofloor_vign_notice_hendricks", &drone_highlights_grate, "init");
     level scene::init("cin_sgen_11_02_silofloor_vign_notice_hendricks");
     level flag::set("follow3_1");
     level thread setup_silo_robot_risers();
@@ -912,9 +912,9 @@ function silo_floor_hendricks() {
 }
 
 function silo_floor_battle() {
-  array::thread_all(getspawnerarray("silo_robot_rusher", "script_noteworthy"), & spawner::add_spawn_function, & init_silo_robot_rusher);
-  array::thread_all(getspawnerarray("middle_room_robots", "targetname"), & spawner::add_spawn_function, & init_silo_robots);
-  array::thread_all(getspawnerarray("silo_ambush_robots", "targetname"), & spawner::add_spawn_function, & init_silo_robots);
+  array::thread_all(getspawnerarray("silo_robot_rusher", "script_noteworthy"), &spawner::add_spawn_function, &init_silo_robot_rusher);
+  array::thread_all(getspawnerarray("middle_room_robots", "targetname"), &spawner::add_spawn_function, &init_silo_robots);
+  array::thread_all(getspawnerarray("silo_ambush_robots", "targetname"), &spawner::add_spawn_function, &init_silo_robots);
   savegame::checkpoint_save();
   level flag::wait_till("start_silo_ambush");
   level.vh_mapper mapping_drone::function_74191a2(1);
@@ -926,8 +926,8 @@ function silo_floor_battle() {
   }
   level thread flag::delay_set(n_delay, "spawn_silo_robots");
   level flag::wait_till("spawn_silo_robots");
-  level util::delay(2, undefined, & function_847fb8ed, "break_higher_balcony_right");
-  level util::delay(4.5, undefined, & function_847fb8ed, "break_higher_balcony_left");
+  level util::delay(2, undefined, &function_847fb8ed, "break_higher_balcony_right");
+  level util::delay(4.5, undefined, &function_847fb8ed, "break_higher_balcony_left");
   spawner::simple_spawn("silo_ambush_robots");
   spawner::waittill_ai_group_cleared("silo_floor_robots");
   level thread namespace_d40478f6::function_973b77f9();
@@ -1061,7 +1061,7 @@ function skipto_under_silo_init(str_objective, b_starting) {
     mapping_drone::spawn_drone("nd_silo_grate");
     level.vh_mapper thread drone_lead_player_silo_floor();
     level scene::skipto_end("p7_fxanim_cp_sgen_bridge_silo_edge_break_bundle");
-    scene::add_scene_func("cin_sgen_11_02_silofloor_vign_notice_hendricks", & drone_highlights_grate, "init");
+    scene::add_scene_func("cin_sgen_11_02_silofloor_vign_notice_hendricks", &drone_highlights_grate, "init");
     level scene::init("cin_sgen_11_02_silofloor_vign_notice_hendricks");
     objectives::complete("cp_level_sgen_enter_sgen_no_pointer");
     objectives::complete("cp_level_sgen_investigate_sgen");
@@ -1206,14 +1206,14 @@ function drone_lead_player_gen_lab() {
   self mapping_drone::function_6a8adcf6(25);
   self mapping_drone::follow_path("nd_start_gen_lab");
   self mapping_drone::function_74191a2(1);
-  scene::add_scene_func("cin_sgen_07_01_genlab_vign_patrol", & setup_patrol_scene, "play");
-  spawner::simple_spawn_single("gen_lab_warlord", & setup_gen_lab_warlord);
-  spawner::simple_spawn_single("gen_lab_warlord2", & setup_gen_lab_warlord);
-  spawner::simple_spawn_single("gen_lab_enemy_1", & setup_gen_lab_guy);
-  spawner::simple_spawn_single("gen_lab_enemy_2", & setup_gen_lab_guy);
-  spawner::simple_spawn_single("gen_lab_enemy_3", & setup_gen_lab_guy);
-  spawner::simple_spawn_single("gen_lab_enemy_4", & setup_gen_lab_guy);
-  spawner::simple_spawn_single("gen_lab_enemy_5", & setup_gen_lab_guy);
+  scene::add_scene_func("cin_sgen_07_01_genlab_vign_patrol", &setup_patrol_scene, "play");
+  spawner::simple_spawn_single("gen_lab_warlord", &setup_gen_lab_warlord);
+  spawner::simple_spawn_single("gen_lab_warlord2", &setup_gen_lab_warlord);
+  spawner::simple_spawn_single("gen_lab_enemy_1", &setup_gen_lab_guy);
+  spawner::simple_spawn_single("gen_lab_enemy_2", &setup_gen_lab_guy);
+  spawner::simple_spawn_single("gen_lab_enemy_3", &setup_gen_lab_guy);
+  spawner::simple_spawn_single("gen_lab_enemy_4", &setup_gen_lab_guy);
+  spawner::simple_spawn_single("gen_lab_enemy_5", &setup_gen_lab_guy);
   if(isDefined(level.bzm_sgendialogue2_1callback)) {
     level thread[[level.bzm_sgendialogue2_1callback]]();
   }
@@ -1282,7 +1282,7 @@ function drone_lead_player_silo_floor() {
   level scene::play("cin_sgen_11_02_silofloor_vign_notice_drone");
   self.drivepath = 0;
   self mapping_drone::function_6a8adcf6(25);
-  self mapping_drone::follow_path("nd_silo_floor_platform_1", "hendricks_under_silo_second_jump", & drone_discover_corvus);
+  self mapping_drone::follow_path("nd_silo_floor_platform_1", "hendricks_under_silo_second_jump", &drone_discover_corvus);
 }
 
 function drone_discover_corvus() {

@@ -73,13 +73,13 @@ function main() {
   zm_moon_fx::main();
   level.override_board_repair_sound = "evt_vent_slat_repair";
   level.override_board_teardown_sound = "evt_vent_slat_remove";
-  level.wallbuy_callback_hack_override = & function_36f98292;
+  level.wallbuy_callback_hack_override = &function_36f98292;
   level thread zm_moon_amb::main();
   register_clientfields();
   zm_moon_sq::init_clientfields();
   level._visionset_black_hole_bomb = "zombie_moon_black_hole";
-  level.setupcustomcharacterexerts = & setup_personality_character_exerts;
-  callback::on_localclient_connect( & jump_pad_activate);
+  level.setupcustomcharacterexerts = &setup_personality_character_exerts;
+  callback::on_localclient_connect(&jump_pad_activate);
   load::main();
   util::waitforclient(0);
   level thread zm_moon_digger::main();
@@ -105,7 +105,7 @@ function function_73cc64f1(localclientnum) {
   foreach(player in getplayers(localclientnum)) {
     player thread function_c06d0a4e(localclientnum);
   }
-  callback::on_spawned( & function_c06d0a4e);
+  callback::on_spawned(&function_c06d0a4e);
 }
 
 function function_c06d0a4e(localclientnum) {
@@ -158,50 +158,50 @@ function include_weapons() {
 }
 
 function register_clientfields() {
-  clientfield::register("scriptmover", "digger_moving", 21000, 1, "int", & zm_moon_digger::digger_moving_earthquake_rumble, 0, 0);
-  clientfield::register("scriptmover", "digger_digging", 21000, 1, "int", & zm_moon_digger::digger_digging_earthquake_rumble, 0, 0);
-  clientfield::register("scriptmover", "digger_arm_fx", 21000, 1, "int", & zm_moon_digger::digger_arm_fx, 0, 0);
-  clientfield::register("scriptmover", "dome_malfunction_pad", 21000, 1, "int", & dome_malfunction_pad, 0, 0);
-  clientfield::register("toplayer", "player_sky_transition", 21000, 1, "int", & moon_nml_transition, 0, 0);
-  clientfield::register("toplayer", "soul_swap", 21000, 1, "int", & zm_moon_sq::soul_swap, 0, 0);
-  clientfield::register("toplayer", "gasp_rumble", 21000, 1, "int", & player_gasp_rumble, 0, 0);
-  clientfield::register("toplayer", "biodome_exploder", 21000, 1, "int", & function_947f06dd, 0, 0);
-  clientfield::register("toplayer", "snd_lowgravity", 21000, 1, "int", & zm_moon_gravity::function_20286238, 0, 0);
-  clientfield::register("actor", "low_gravity", 21000, 1, "int", & zm_moon_gravity::zombie_low_gravity, 0, 0);
-  clientfield::register("actor", "ctt", 21000, 1, "int", & zm_moon_sq::zombie_release_soul, 0, 0);
-  clientfield::register("actor", "sd", 21000, 1, "int", & zm_moon_sq::function_38a2773c, 0, 0);
-  clientfield::register("world", "jump_pad_pulse", 21000, 3, "counter", & function_1cd5e7c6, 0, 0);
-  clientfield::register("toplayer", "gas_mask_buy", 21000, 1, "counter", & function_7c00de2d, 0, 0);
-  clientfield::register("toplayer", "gas_mask_on", 21000, 1, "counter", & function_29c0676c, 0, 0);
-  clientfield::register("world", "show_earth", 21000, 1, "counter", & show_earth, 0, 0);
-  clientfield::register("world", "show_destroyed_earth", 21000, 1, "counter", & show_destroyed_earth, 0, 0);
-  clientfield::register("world", "hide_earth", 21000, 1, "counter", & hide_earth, 0, 0);
+  clientfield::register("scriptmover", "digger_moving", 21000, 1, "int", &zm_moon_digger::digger_moving_earthquake_rumble, 0, 0);
+  clientfield::register("scriptmover", "digger_digging", 21000, 1, "int", &zm_moon_digger::digger_digging_earthquake_rumble, 0, 0);
+  clientfield::register("scriptmover", "digger_arm_fx", 21000, 1, "int", &zm_moon_digger::digger_arm_fx, 0, 0);
+  clientfield::register("scriptmover", "dome_malfunction_pad", 21000, 1, "int", &dome_malfunction_pad, 0, 0);
+  clientfield::register("toplayer", "player_sky_transition", 21000, 1, "int", &moon_nml_transition, 0, 0);
+  clientfield::register("toplayer", "soul_swap", 21000, 1, "int", &zm_moon_sq::soul_swap, 0, 0);
+  clientfield::register("toplayer", "gasp_rumble", 21000, 1, "int", &player_gasp_rumble, 0, 0);
+  clientfield::register("toplayer", "biodome_exploder", 21000, 1, "int", &function_947f06dd, 0, 0);
+  clientfield::register("toplayer", "snd_lowgravity", 21000, 1, "int", &zm_moon_gravity::function_20286238, 0, 0);
+  clientfield::register("actor", "low_gravity", 21000, 1, "int", &zm_moon_gravity::zombie_low_gravity, 0, 0);
+  clientfield::register("actor", "ctt", 21000, 1, "int", &zm_moon_sq::zombie_release_soul, 0, 0);
+  clientfield::register("actor", "sd", 21000, 1, "int", &zm_moon_sq::function_38a2773c, 0, 0);
+  clientfield::register("world", "jump_pad_pulse", 21000, 3, "counter", &function_1cd5e7c6, 0, 0);
+  clientfield::register("toplayer", "gas_mask_buy", 21000, 1, "counter", &function_7c00de2d, 0, 0);
+  clientfield::register("toplayer", "gas_mask_on", 21000, 1, "counter", &function_29c0676c, 0, 0);
+  clientfield::register("world", "show_earth", 21000, 1, "counter", &show_earth, 0, 0);
+  clientfield::register("world", "show_destroyed_earth", 21000, 1, "counter", &show_destroyed_earth, 0, 0);
+  clientfield::register("world", "hide_earth", 21000, 1, "counter", &hide_earth, 0, 0);
   var_6225e4bb = tablelookuprowcount("gamedata/tables/zm/zm_astro_names.csv");
   if(isDefined(var_6225e4bb) && var_6225e4bb > 0) {
-    clientfield::register("actor", "astro_name_index", 21000, getminbitcountfornum(var_6225e4bb + 1), "int", & function_ff7d3b7, 0, 0);
+    clientfield::register("actor", "astro_name_index", 21000, getminbitcountfornum(var_6225e4bb + 1), "int", &function_ff7d3b7, 0, 0);
   }
-  clientfield::register("scriptmover", "zombie_has_eyes", 21000, 1, "int", & zm::zombie_eyes_clientfield_cb, 0, 0);
+  clientfield::register("scriptmover", "zombie_has_eyes", 21000, 1, "int", &zm::zombie_eyes_clientfield_cb, 0, 0);
   clientfield::register("clientuimodel", "hudItems.showDpadDown_HackTool", 21000, 1, "int", undefined, 0, 0);
   for(i = 0; i < 4; i++) {
-    registerclientfield("world", ("player" + i) + "wearableItem", 21000, 1, "int", & zm_utility::setsharedinventoryuimodels, 0);
+    registerclientfield("world", ("player" + i) + "wearableItem", 21000, 1, "int", &zm_utility::setsharedinventoryuimodels, 0);
   }
 }
 
 function function_20c21740() {
-  clientfield::register("world", "BIO", 21000, 1, "int", & zm_moon_digger::function_a0cf54a0, 0, 0);
-  clientfield::register("world", "DH", 21000, 1, "int", & zm_moon_digger::function_245b13ce, 0, 0);
-  clientfield::register("world", "TCA", 21000, 1, "int", & zm_moon_digger::function_774edb15, 0, 0);
-  clientfield::register("world", "HCA", 21000, 1, "int", & zm_moon_digger::function_774edb15, 0, 0);
-  clientfield::register("world", "BCA", 21000, 1, "int", & zm_moon_digger::function_774edb15, 0, 0);
-  clientfield::register("world", "Az1", 21000, 1, "counter", & zm_moon_amb::function_6ce4d731, 0, 0);
-  clientfield::register("world", "Az2a", 21000, 1, "counter", & zm_moon_amb::function_6ce4d731, 0, 0);
-  clientfield::register("world", "Az2b", 21000, 1, "counter", & zm_moon_amb::function_6ce4d731, 0, 0);
-  clientfield::register("world", "Az3a", 21000, 1, "counter", & zm_moon_amb::function_6ce4d731, 0, 0);
-  clientfield::register("world", "Az3b", 21000, 1, "counter", & zm_moon_amb::function_6ce4d731, 0, 0);
-  clientfield::register("world", "Az3c", 21000, 1, "counter", & zm_moon_amb::function_6ce4d731, 0, 0);
-  clientfield::register("world", "Az4a", 21000, 1, "counter", & zm_moon_amb::function_6ce4d731, 0, 0);
-  clientfield::register("world", "Az4b", 21000, 1, "counter", & zm_moon_amb::function_6ce4d731, 0, 0);
-  clientfield::register("world", "Az5", 21000, 1, "counter", & zm_moon_amb::function_6ce4d731, 0, 0);
+  clientfield::register("world", "BIO", 21000, 1, "int", &zm_moon_digger::function_a0cf54a0, 0, 0);
+  clientfield::register("world", "DH", 21000, 1, "int", &zm_moon_digger::function_245b13ce, 0, 0);
+  clientfield::register("world", "TCA", 21000, 1, "int", &zm_moon_digger::function_774edb15, 0, 0);
+  clientfield::register("world", "HCA", 21000, 1, "int", &zm_moon_digger::function_774edb15, 0, 0);
+  clientfield::register("world", "BCA", 21000, 1, "int", &zm_moon_digger::function_774edb15, 0, 0);
+  clientfield::register("world", "Az1", 21000, 1, "counter", &zm_moon_amb::function_6ce4d731, 0, 0);
+  clientfield::register("world", "Az2a", 21000, 1, "counter", &zm_moon_amb::function_6ce4d731, 0, 0);
+  clientfield::register("world", "Az2b", 21000, 1, "counter", &zm_moon_amb::function_6ce4d731, 0, 0);
+  clientfield::register("world", "Az3a", 21000, 1, "counter", &zm_moon_amb::function_6ce4d731, 0, 0);
+  clientfield::register("world", "Az3b", 21000, 1, "counter", &zm_moon_amb::function_6ce4d731, 0, 0);
+  clientfield::register("world", "Az3c", 21000, 1, "counter", &zm_moon_amb::function_6ce4d731, 0, 0);
+  clientfield::register("world", "Az4a", 21000, 1, "counter", &zm_moon_amb::function_6ce4d731, 0, 0);
+  clientfield::register("world", "Az4b", 21000, 1, "counter", &zm_moon_amb::function_6ce4d731, 0, 0);
+  clientfield::register("world", "Az5", 21000, 1, "counter", &zm_moon_amb::function_6ce4d731, 0, 0);
 }
 
 function disable_deadshot(i_local_client_num) {

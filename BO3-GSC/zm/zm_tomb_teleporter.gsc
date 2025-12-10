@@ -41,7 +41,7 @@ function teleporter_init() {
     level.a_teleport_models[e_model.script_int] = e_model;
     e_model setignorepauseworld(1);
   }
-  array::thread_all(a_entrance_models, & teleporter_samantha_chamber_line);
+  array::thread_all(a_entrance_models, &teleporter_samantha_chamber_line);
   a_portal_frames = getEntArray("portal_exit_frame", "script_noteworthy");
   level.a_portal_exit_frames = [];
   foreach(e_frame in a_portal_frames) {
@@ -65,7 +65,7 @@ function teleporter_init() {
 
 function main() {
   a_s_teleporters = struct::get_array("trigger_teleport_pad", "targetname");
-  array::thread_all(a_s_teleporters, & run_chamber_entrance_teleporter);
+  array::thread_all(a_s_teleporters, &run_chamber_entrance_teleporter);
 }
 
 function teleporter_samantha_chamber_line() {

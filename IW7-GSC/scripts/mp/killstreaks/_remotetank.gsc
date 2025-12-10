@@ -21,8 +21,8 @@ init() {
   level.tanksettings["remote_tank"].modelplacement = "vehicle_ugv_talon_obj";
   level.tanksettings["remote_tank"].modelplacementfailed = "vehicle_ugv_talon_obj_red";
   level.tanksettings["remote_tank"].modeldestroyed = "vehicle_ugv_talon_mp";
-  level.tanksettings["remote_tank"].var_1114D = & "KILLSTREAKS_REMOTE_TANK_PLACE";
-  level.tanksettings["remote_tank"].var_1114C = & "KILLSTREAKS_REMOTE_TANK_CANNOT_PLACE";
+  level.tanksettings["remote_tank"].var_1114D = &"KILLSTREAKS_REMOTE_TANK_PLACE";
+  level.tanksettings["remote_tank"].var_1114C = &"KILLSTREAKS_REMOTE_TANK_CANNOT_PLACE";
   level.tanksettings["remote_tank"].var_A84D = "killstreak_remote_tank_laptop_mp";
   level.tanksettings["remote_tank"].remotedetonatethink = "killstreak_remote_tank_remote_mp";
   level._effect["remote_tank_dying"] = loadfx("vfx\core\expl\killstreak_explosion_quick");
@@ -36,7 +36,7 @@ init() {
 func_128FE(param_00, param_01) {
   var_02 = 1;
   if(scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\utility::maxvehiclesallowed()) {
-    self iprintlnbold( & "KILLSTREAKS_TOO_MANY_VEHICLES");
+    self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
     return 0;
   }
 
@@ -604,11 +604,11 @@ func_3758(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     return;
   }
 
-  if(isDefined(param_03) && param_03 & level.idflags_penetration) {
+  if(isDefined(param_03) && param_03 &level.idflags_penetration) {
     var_0C.wasdamagedfrombulletpenetration = 1;
   }
 
-  if(isDefined(param_03) && param_03 & level.idflags_ricochet) {
+  if(isDefined(param_03) && param_03 &level.idflags_ricochet) {
     var_0C.wasdamagedfrombulletricochet = 1;
   }
 

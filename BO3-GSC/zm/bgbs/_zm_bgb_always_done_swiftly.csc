@@ -12,7 +12,7 @@
 #namespace zm_bgb_always_done_swiftly;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_always_done_swiftly", & __init__, undefined, undefined);
+  system::register("zm_bgb_always_done_swiftly", &__init__, undefined, undefined);
 }
 
 function __init__() {

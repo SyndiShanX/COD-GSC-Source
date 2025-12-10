@@ -17,21 +17,21 @@
 #namespace speedburst;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_speed_burst", & __init__, undefined, undefined);
+  system::register("gadget_speed_burst", &__init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("toplayer", "speed_burst", 1, 1, "int");
-  ability_player::register_gadget_activation_callbacks(13, & gadget_speed_burst_on, & gadget_speed_burst_off);
-  ability_player::register_gadget_possession_callbacks(13, & gadget_speed_burst_on_give, & gadget_speed_burst_on_take);
-  ability_player::register_gadget_flicker_callbacks(13, & gadget_speed_burst_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(13, & gadget_speed_burst_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(13, & gadget_speed_burst_is_flickering);
+  ability_player::register_gadget_activation_callbacks(13, &gadget_speed_burst_on, &gadget_speed_burst_off);
+  ability_player::register_gadget_possession_callbacks(13, &gadget_speed_burst_on_give, &gadget_speed_burst_on_take);
+  ability_player::register_gadget_flicker_callbacks(13, &gadget_speed_burst_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(13, &gadget_speed_burst_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(13, &gadget_speed_burst_is_flickering);
   if(!isDefined(level.vsmgr_prio_visionset_speedburst)) {
     level.vsmgr_prio_visionset_speedburst = 60;
   }
-  visionset_mgr::register_info("visionset", "speed_burst", 1, level.vsmgr_prio_visionset_speedburst, 9, 1, & visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
-  callback::on_connect( & gadget_speed_burst_on_connect);
+  visionset_mgr::register_info("visionset", "speed_burst", 1, level.vsmgr_prio_visionset_speedburst, 9, 1, &visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
+  callback::on_connect(&gadget_speed_burst_on_connect);
 }
 
 function gadget_speed_burst_is_inuse(slot) {

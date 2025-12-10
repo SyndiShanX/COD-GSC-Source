@@ -11,18 +11,18 @@ init() {
   precacheString(&"MP_SECONDPLACE_NAME");
   precacheString(&"MP_THIRDPLACE_NAME");
   precacheString(&"MP_MATCH_BONUS_IS");
-  game["strings"]["draw"] = & "MP_DRAW";
-  game["strings"]["round_draw"] = & "MP_ROUND_DRAW";
-  game["strings"]["round_win"] = & "MP_ROUND_WIN";
-  game["strings"]["round_loss"] = & "MP_ROUND_LOSS";
-  game["strings"]["victory"] = & "MP_VICTORY";
-  game["strings"]["defeat"] = & "MP_DEFEAT";
-  game["strings"]["halftime"] = & "MP_HALFTIME";
-  game["strings"]["overtime"] = & "MP_OVERTIME";
-  game["strings"]["roundend"] = & "MP_ROUNDEND";
-  game["strings"]["intermission"] = & "MP_INTERMISSION";
-  game["strings"]["side_switch"] = & "MP_SWITCHING_SIDES";
-  game["strings"]["match_bonus"] = & "MP_MATCH_BONUS_IS";
+  game["strings"]["draw"] = &"MP_DRAW";
+  game["strings"]["round_draw"] = &"MP_ROUND_DRAW";
+  game["strings"]["round_win"] = &"MP_ROUND_WIN";
+  game["strings"]["round_loss"] = &"MP_ROUND_LOSS";
+  game["strings"]["victory"] = &"MP_VICTORY";
+  game["strings"]["defeat"] = &"MP_DEFEAT";
+  game["strings"]["halftime"] = &"MP_HALFTIME";
+  game["strings"]["overtime"] = &"MP_OVERTIME";
+  game["strings"]["roundend"] = &"MP_ROUNDEND";
+  game["strings"]["intermission"] = &"MP_INTERMISSION";
+  game["strings"]["side_switch"] = &"MP_SWITCHING_SIDES";
+  game["strings"]["match_bonus"] = &"MP_MATCH_BONUS_IS";
   level thread onPlayerConnect();
 }
 
@@ -137,7 +137,7 @@ showNotifyMessage(notifyData) {
     if(isDefined(notifyData.titleLabel))
       self.notifyTitle.label = notifyData.titleLabel;
     else
-      self.notifyTitle.label = & "";
+      self.notifyTitle.label = &"";
     if(isDefined(notifyData.titleLabel) && !isDefined(notifyData.titleIsString))
       self.notifyTitle setValue(notifyData.titleText);
     else
@@ -150,7 +150,7 @@ showNotifyMessage(notifyData) {
     if(isDefined(notifyData.textLabel))
       self.notifyText.label = notifyData.textLabel;
     else
-      self.notifyText.label = & "";
+      self.notifyText.label = &"";
     if(isDefined(notifyData.textLabel) && !isDefined(notifyData.textIsString))
       self.notifyText setValue(notifyData.notifyText);
     else
@@ -171,7 +171,7 @@ showNotifyMessage(notifyData) {
       if(isDefined(notifyData.text2Label))
         self.notifyText2.label = notifyData.text2Label;
       else
-        self.notifyText2.label = & "";
+        self.notifyText2.label = &"";
       self.notifyText2 setText(notifyData.notifyText2);
       self.notifyText2 setPulseFX(100, int(duration * 1000), 1000);
       self.notifyText2.glowColor = glowColor;
@@ -450,7 +450,7 @@ outcomeNotify(winner, endReasonText) {
   firstTitle.hideWhenInMenu = false;
   firstTitle.archived = false;
   if(isDefined(players[0])) {
-    firstTitle.label = & "MP_FIRSTPLACE_NAME";
+    firstTitle.label = &"MP_FIRSTPLACE_NAME";
     firstTitle setPlayerNameString(players[0]);
     firstTitle setPulseFX(100, duration, 1000);
   }
@@ -461,7 +461,7 @@ outcomeNotify(winner, endReasonText) {
   secondTitle.hideWhenInMenu = false;
   secondTitle.archived = false;
   if(isDefined(players[1])) {
-    secondTitle.label = & "MP_SECONDPLACE_NAME";
+    secondTitle.label = &"MP_SECONDPLACE_NAME";
     secondTitle setPlayerNameString(players[1]);
     secondTitle setPulseFX(100, duration, 1000);
   }
@@ -473,7 +473,7 @@ outcomeNotify(winner, endReasonText) {
   thirdTitle.hideWhenInMenu = false;
   thirdTitle.archived = false;
   if(isDefined(players[2])) {
-    thirdTitle.label = & "MP_THIRDPLACE_NAME";
+    thirdTitle.label = &"MP_THIRDPLACE_NAME";
     thirdTitle setPlayerNameString(players[2]);
     thirdTitle setPulseFX(100, duration, 1000);
   }

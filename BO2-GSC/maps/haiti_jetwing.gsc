@@ -166,7 +166,7 @@ jetwing_collision() {
 }
 
 jetwing_instructions() {
-  screen_message_create(&"HAITI_JETWING_MOVE", & "HAITI_JETWING_LOOK");
+  screen_message_create(&"HAITI_JETWING_MOVE", &"HAITI_JETWING_LOOK");
   wait 4;
   screen_message_delete();
 }

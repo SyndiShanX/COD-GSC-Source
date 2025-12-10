@@ -217,7 +217,7 @@ getChallengeLevels(baseName) {
 
 challengeNotify(challengeName) {
   notifyData = spawnStruct();
-  notifyData.titleText = & "CHALLENGE_COOP_COMPLETED";
+  notifyData.titleText = &"CHALLENGE_COOP_COMPLETED";
   notifyData.notifyText = challengeName;
   notifyData.sound = "mp_challenge_complete";
   self maps\_hud_message::notifyMessage(notifyData);
@@ -449,7 +449,7 @@ updateRankAnnounceHUD() {
   self notify("reset_outcome");
   newRankName = self getRankInfoFull(self.rank);
   notifyData = spawnStruct();
-  notifyData.titleText = & "RANK_PROMOTED";
+  notifyData.titleText = &"RANK_PROMOTED";
   notifyData.iconName = self getRankInfoIcon(self.rank, self.prestige);
   notifyData.sound = "mp_level_up";
   notifyData.duration = 4.0;
@@ -457,15 +457,15 @@ updateRankAnnounceHUD() {
   subRank = int(rank_char[rank_char.size - 1]);
   if(subRank == 2) {
     notifyData.textLabel = newRankName;
-    notifyData.notifyText = & "RANK_ROMANI";
+    notifyData.notifyText = &"RANK_ROMANI";
     notifyData.textIsString = true;
   } else if(subRank == 3) {
     notifyData.textLabel = newRankName;
-    notifyData.notifyText = & "RANK_ROMANII";
+    notifyData.notifyText = &"RANK_ROMANII";
     notifyData.textIsString = true;
   } else if(subRank == 4) {
     notifyData.textLabel = newRankName;
-    notifyData.notifyText = & "RANK_ROMANIII";
+    notifyData.notifyText = &"RANK_ROMANIII";
     notifyData.textIsString = true;
   } else {
     notifyData.notifyText = newRankName;
@@ -638,7 +638,7 @@ unlockCamoSingular(refString) {
   addon = Tok[1];
   weaponStat = int(tableLookup("mp/statstable.csv", 4, baseWeapon, 1));
   addonMask = int(tableLookup("mp/attachmenttable.csv", 4, addon, 10));
-  if(self getStat(weaponStat) & addonMask) {
+  if(self getStat(weaponStat) &addonMask) {
     return;
   }
   setstatto = (self getStat(weaponStat) | addonMask) | (addonMask << 16) | (1 << 16);
@@ -662,7 +662,7 @@ unlockAttachmentSingular(refString) {
   addonIndex = getAttachmentSlot(baseWeapon, addon);
   addonMask = 1 << (addonIndex + 1);
   weaponStat = int(tableLookup("mp/statstable.csv", 4, baseWeapon, 1));
-  if(self getStat(weaponStat) & addonMask) {
+  if(self getStat(weaponStat) &addonMask) {
     return;
   }
   setstatto = (self getStat(weaponStat) | addonMask) | (addonMask << 16) | (1 << 16);
@@ -1086,11 +1086,11 @@ playerLevelEndChallengeProcess() {
   if(0 < totalChallengesUnlock) {
     notifyData = spawnStruct();
     if(1 == totalChallengesUnlock) {
-      notifyData.titleText = & "CHALLENGE_COOP_COMPLETED";
+      notifyData.titleText = &"CHALLENGE_COOP_COMPLETED";
     } else {
-      notifyData.titleText = & "CHALLENGE_MULTIPLE_COOP_COMPLETED";
+      notifyData.titleText = &"CHALLENGE_MULTIPLE_COOP_COMPLETED";
     }
-    notifyData.notifyText = & "CHALLENGE_MULTIPLE_COOP_COMPLETED_DETAILS";
+    notifyData.notifyText = &"CHALLENGE_MULTIPLE_COOP_COMPLETED_DETAILS";
     notifyData.sound = "mp_challenge_complete";
     self thread maps\_hud_message::notifyMessage(notifyData);
     if(oldRank < self.rank) {

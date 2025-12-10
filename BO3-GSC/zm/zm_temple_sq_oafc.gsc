@@ -15,11 +15,11 @@
 #namespace zm_temple_sq_oafc;
 
 function init() {
-  zm_sidequests::declare_sidequest_stage("sq", "OaFC", & init_stage, & stage_logic, & exit_stage);
+  zm_sidequests::declare_sidequest_stage("sq", "OaFC", &init_stage, &stage_logic, &exit_stage);
   zm_sidequests::set_stage_time_limit("sq", "OaFC", 300);
-  zm_sidequests::declare_stage_asset_from_struct("sq", "OaFC", "sq_oafc_switch", & oafc_switch);
-  zm_sidequests::declare_stage_asset_from_struct("sq", "OaFC", "sq_oafc_tileset1", & function_34a397d8, & zm_sidequests::radius_trigger_thread);
-  zm_sidequests::declare_stage_asset_from_struct("sq", "OaFC", "sq_oafc_tileset2", & function_a6ab0713, & zm_sidequests::radius_trigger_thread);
+  zm_sidequests::declare_stage_asset_from_struct("sq", "OaFC", "sq_oafc_switch", &oafc_switch);
+  zm_sidequests::declare_stage_asset_from_struct("sq", "OaFC", "sq_oafc_tileset1", &function_34a397d8, &zm_sidequests::radius_trigger_thread);
+  zm_sidequests::declare_stage_asset_from_struct("sq", "OaFC", "sq_oafc_tileset2", &function_a6ab0713, &zm_sidequests::radius_trigger_thread);
   level flag::init("oafc_switch_pressed");
   level flag::init("oafc_plot_vo_done");
 }
@@ -415,7 +415,7 @@ function exit_stage(success) {
     level.num_matched_text = undefined;
   }
   if(success) {
-    zm_temple_sq_brock::create_radio(2, & zm_temple_sq_brock::radio2_override);
+    zm_temple_sq_brock::create_radio(2, &zm_temple_sq_brock::radio2_override);
   } else {
     zm_temple_sq_brock::create_radio(1);
     level thread zm_temple_sq_skits::fail_skit(1);

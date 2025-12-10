@@ -28,7 +28,7 @@
 
 function init() {
   clientfield::register("vehicle", "flak_drone_camo", 1, 3, "int");
-  vehicle::add_main_callback("veh_flak_drone_mp", & initflakdrone);
+  vehicle::add_main_callback("veh_flak_drone_mp", &initflakdrone);
 }
 
 function initflakdrone() {
@@ -45,13 +45,13 @@ function initflakdrone() {
   self.goalheight = 999999;
   self setgoal(self.origin, 0, self.goalradius, self.goalheight);
   self thread vehicle_ai::nudge_collision();
-  self.overridevehicledamage = & flakdronedamageoverride;
+  self.overridevehicledamage = &flakdronedamageoverride;
   self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("combat").enter_func = & state_combat_enter;
-  self vehicle_ai::get_state_callbacks("combat").update_func = & state_combat_update;
-  self vehicle_ai::get_state_callbacks("off").enter_func = & state_off_enter;
-  self vehicle_ai::get_state_callbacks("off").update_func = & state_off_update;
-  self vehicle_ai::get_state_callbacks("death").update_func = & state_death_update;
+  self vehicle_ai::get_state_callbacks("combat").enter_func = &state_combat_enter;
+  self vehicle_ai::get_state_callbacks("combat").update_func = &state_combat_update;
+  self vehicle_ai::get_state_callbacks("off").enter_func = &state_off_enter;
+  self vehicle_ai::get_state_callbacks("off").update_func = &state_off_update;
+  self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
   self vehicle_ai::startinitialstate("off");
 }
 

@@ -25,7 +25,7 @@
 #namespace dragon_strike;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_dragon_strike", & __init__, & __main__, undefined);
+  system::register("zm_weap_dragon_strike", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -42,10 +42,10 @@ function __init__() {
   clientfield::register("vehicle", "dragon_strike_zombie_fire", 12000, 2, "int");
   clientfield::register("clientuimodel", "dragon_strike_invalid_use", 12000, 1, "counter");
   clientfield::register("clientuimodel", "hudItems.showDpadRight_DragonStrike", 12000, 1, "int");
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
-  level.func_custom_placeable_mine_round_replenish = & function_ff07e778;
-  zm::register_player_damage_callback( & function_43b5419a);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
+  level.func_custom_placeable_mine_round_replenish = &function_ff07e778;
+  zm::register_player_damage_callback(&function_43b5419a);
 }
 
 function __main__() {
@@ -57,7 +57,7 @@ function __main__() {
   if(isDefined(level.retrievehints["launcher_dragon_strike_upgraded"])) {
     arrayremoveindex(level.retrievehints, "launcher_dragon_strike_upgraded", 1);
   }
-  zm_spawner::register_zombie_death_event_callback( & function_22664e38);
+  zm_spawner::register_zombie_death_event_callback(&function_22664e38);
 }
 
 function on_player_connect() {
@@ -208,7 +208,7 @@ function function_8ad253d8(previous_weapon) {
     self flag::set("dragon_strike_active");
     self playsoundtoplayer("fly_dragon_strike_ui_activate", self);
     self zm_audio::create_and_play_dialog("dragon_strike", "call_in");
-    self util::delay(0.5, "death", & function_6c8dfca2, previous_weapon);
+    self util::delay(0.5, "death", &function_6c8dfca2, previous_weapon);
     self thread function_a3b69ec0(self.var_5d020ece);
     self thread function_2864e2c1();
     return;

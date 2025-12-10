@@ -53,13 +53,13 @@ function main() {
   zm_sumpf_fx::main();
   start_zombie_stuff();
   level thread zm_sumpf_amb::main();
-  clientfield::register("world", "SUMPF_VISIONSET_DOGS", 21000, 1, "int", & function_166277c8, 0, 0);
-  clientfield::register("actor", "zombie_flogger_trap", 21000, 1, "int", & function_f79e9b4f, 0, 0);
-  clientfield::register("allplayers", "player_legs_hide", 21000, 1, "int", & player_legs_hide, 0, 0);
+  clientfield::register("world", "SUMPF_VISIONSET_DOGS", 21000, 1, "int", &function_166277c8, 0, 0);
+  clientfield::register("actor", "zombie_flogger_trap", 21000, 1, "int", &function_f79e9b4f, 0, 0);
+  clientfield::register("allplayers", "player_legs_hide", 21000, 1, "int", &player_legs_hide, 0, 0);
   load::main();
   util::waitforclient(0);
   _zm_weap_tesla::init();
-  callback::on_localclient_connect( & function_794950d2);
+  callback::on_localclient_connect(&function_794950d2);
   setdvar("player_shallowWaterWadeScale", 0.5);
   setdvar("player_waistWaterWadeScale", 0.5);
   level thread function_4e327cec();

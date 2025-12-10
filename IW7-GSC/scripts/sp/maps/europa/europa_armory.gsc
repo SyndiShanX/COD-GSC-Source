@@ -9,9 +9,9 @@ func_220C() {
   func_96F2();
   precacheshader("icon_ks_sentry_gun_hud");
   precacheitem("iw7_jackal_support_designator");
-  precachestring( & "EUROPA_FAILED_TO_ESCAPE");
-  precachestring( & "EUROPA_FSPAR_SHOOT");
-  scripts\sp\utility::func_16EB("fspar_switch", & "EUROPA_FSPAR_SWITCH");
+  precachestring(&"EUROPA_FAILED_TO_ESCAPE");
+  precachestring(&"EUROPA_FSPAR_SHOOT");
+  scripts\sp\utility::func_16EB("fspar_switch", &"EUROPA_FSPAR_SWITCH");
   scripts\sp\utility::func_22C9("tram_enemy_spawner", ::func_D70D);
   scripts\sp\utility::func_22C9("tram_enemy_spawner_c6", ::func_D70E);
   scripts\sp\utility::func_22CA("lastroom_fleer_bridge", ::func_D710);
@@ -151,8 +151,8 @@ func_224A() {
   scripts\sp\maps\europa\europa_util::func_107C5();
   scripts\sp\utility::func_F5AF("armory_start_point", [level.var_EBBB, level.var_EBBC, level.player]);
   scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", & "EUROPA_OBJECTIVE_ACCESS");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", & "EUROPA_OBJECTIVE_FSPAR", "tram_move");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", &"EUROPA_OBJECTIVE_ACCESS");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", &"EUROPA_OBJECTIVE_FSPAR", "tram_move");
 }
 
 func_21A4() {
@@ -286,9 +286,9 @@ func_2891() {
   scripts\engine\utility::delaythread(0.1, ::scripts\sp\utility::func_F5AF, "selfdestruct_start_point", [level.var_EBBB, level.var_EBBC, level.player]);
   level.var_11B30.var_10DDB = 2000;
   scripts\engine\utility::array_thread(level.var_EBCA, ::scripts\sp\utility::func_DC45, "raise");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", & "EUROPA_OBJECTIVE_ACCESS");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "done", & "EUROPA_OBJECTIVE_FSPAR");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(3, "current", & "EUROPA_OBJECTIVE_ESCAPE");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", &"EUROPA_OBJECTIVE_ACCESS");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "done", &"EUROPA_OBJECTIVE_FSPAR");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(3, "current", &"EUROPA_OBJECTIVE_ESCAPE");
 }
 
 func_288C() {
@@ -371,7 +371,7 @@ func_288C() {
 
   thread func_537D("armory_entry_explosion", 7);
   level.var_362B = spawnStruct();
-  lib_0A05::func_35A8(getEntArray("steeldragon_pickup", "targetname"), level.var_362B, & "hud_interaction_prompt_center_steel_dragon", undefined, 1);
+  lib_0A05::func_35A8(getEntArray("steeldragon_pickup", "targetname"), level.var_362B, &"hud_interaction_prompt_center_steel_dragon", undefined, 1);
 }
 
 func_10216() {
@@ -647,7 +647,7 @@ func_288D() {
 
   if(func_9CD5("decompression")) {
     level.var_362B = spawnStruct();
-    lib_0A05::func_35A8(getEntArray("steeldragon_pickup", "targetname"), level.var_362B, & "hud_interaction_prompt_center_steel_dragon", undefined, 1);
+    lib_0A05::func_35A8(getEntArray("steeldragon_pickup", "targetname"), level.var_362B, &"hud_interaction_prompt_center_steel_dragon", undefined, 1);
   }
 }
 
@@ -839,9 +839,9 @@ func_3568() {
   scripts\sp\utility::func_22CD("tram_initial_enemies", 1);
   thread scripts\sp\utility::func_1034D("europa_plr_letsgetitout");
   setmusicstate("mx_172_misslefight");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", & "EUROPA_OBJECTIVE_ACCESS");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "done", & "EUROPA_OBJECTIVE_FSPAR");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(3, "current", & "EUROPA_OBJECTIVE_ESCAPE");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", &"EUROPA_OBJECTIVE_ACCESS");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "done", &"EUROPA_OBJECTIVE_FSPAR");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(3, "current", &"EUROPA_OBJECTIVE_ESCAPE");
   thread func_746D();
 }
 
@@ -1778,7 +1778,7 @@ func_11B45(param_00) {
   var_01["c12_start_check"] = ::func_11B34;
   var_01["tram_assemble"] = ::func_11B32;
   scripts\engine\utility::flag_wait("tram_move");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(3, "current", & "EUROPA_OBJECTIVE_ESCAPE");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(3, "current", &"EUROPA_OBJECTIVE_ESCAPE");
   thread func_11B47();
   thread func_11B48();
   var_02 = 0;
@@ -2210,9 +2210,9 @@ func_21DB() {
   scripts\engine\utility::delaythread(30.5, ::func_D287);
   thread func_2872(30.5);
   level.var_11B30.var_10DDB = 2000;
-  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", & "EUROPA_OBJECTIVE_ACCESS");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "done", & "EUROPA_OBJECTIVE_FSPAR");
-  thread scripts\sp\maps\europa\europa_util::func_67B6(3, "current", & "EUROPA_OBJECTIVE_ESCAPE");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(1, "done", &"EUROPA_OBJECTIVE_ACCESS");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(2, "done", &"EUROPA_OBJECTIVE_FSPAR");
+  thread scripts\sp\maps\europa\europa_util::func_67B6(3, "current", &"EUROPA_OBJECTIVE_ESCAPE");
   thread func_746D();
 }
 
@@ -2655,7 +2655,7 @@ func_D294() {
   var_00 scripts\sp\anim::func_1EC3(var_01, "fspar_fire");
   var_02 = spawnStruct();
   var_02.origin = var_01.origin + (0, 0, 50) + anglesToForward(var_01.angles) * 45;
-  var_02 lib_0E46::func_48C4(undefined, undefined, & "EUROPA_FSPAR_SHOOT");
+  var_02 lib_0E46::func_48C4(undefined, undefined, &"EUROPA_FSPAR_SHOOT");
   objective_onentity(3, var_01);
   var_02 waittill("trigger");
   if(scripts\engine\utility::flag("self_destruction_start")) {

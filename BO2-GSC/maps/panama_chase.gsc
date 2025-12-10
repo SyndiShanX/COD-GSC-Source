@@ -530,7 +530,7 @@ heli_path_manager() {
   playFXOnTag(getfx("apache_spotlight"), e_apache_barrel, "tag_origin");
   e_apache thread heli_go_struct_path(s_apache_strafe_start);
   e_apache waittill("path_finished");
-  setdvar("ui_deadquote", & "PANAMA_APACHE_ESCAPE_FAIL");
+  setdvar("ui_deadquote", &"PANAMA_APACHE_ESCAPE_FAIL");
   level.player.overrideplayerdamage = ::apache_player_damage_callback;
   e_apache setlookatent(level.player);
   e_apache set_turret_target(level.player, undefined, 0);

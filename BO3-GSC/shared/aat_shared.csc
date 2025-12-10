@@ -11,7 +11,7 @@
 #namespace aat;
 
 function autoexec __init__sytem__() {
-  system::register("aat", & __init__, undefined, undefined);
+  system::register("aat", &__init__, undefined, undefined);
 }
 
 function private __init__() {
@@ -20,7 +20,7 @@ function private __init__() {
   level.aat_default_info_icon = "blacktransparent";
   level.aat = [];
   register("none", level.aat_default_info_name, level.aat_default_info_icon);
-  callback::on_finalize_initialization( & finalize_clientfields);
+  callback::on_finalize_initialization(&finalize_clientfields);
 }
 
 function register(name, localized_string, icon) {
@@ -52,7 +52,7 @@ function finalize_clientfields() {
       println("" + aat.name);
     }
     n_bits = getminbitcountfornum(level.aat.size - 1);
-    clientfield::register("toplayer", "aat_current", 1, n_bits, "int", & aat_hud_manager, 0, 1);
+    clientfield::register("toplayer", "aat_current", 1, n_bits, "int", &aat_hud_manager, 0, 1);
   }
   level.aat_initializing = 0;
 }

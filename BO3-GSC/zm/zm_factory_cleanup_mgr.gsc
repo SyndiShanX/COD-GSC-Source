@@ -14,7 +14,7 @@
 #namespace factory_cleanup;
 
 function autoexec __init__sytem__() {
-  system::register("factory_cleanup", & __init__, & __main__, undefined);
+  system::register("factory_cleanup", &__init__, &__main__, undefined);
 }
 
 function __init__() {

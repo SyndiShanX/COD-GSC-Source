@@ -199,9 +199,9 @@ func_6B15() {
   func_F8BE();
   if(self.team == "allies" && isDefined(self.name)) {
     scripts\sp\names::func_7B05();
-    self _meth_8307(self.name, & "");
+    self _meth_8307(self.name, &"");
   } else if(self.team == "axis") {
-    self _meth_8307("enemy", & "");
+    self _meth_8307("enemy", &"");
   }
 
   if(isDefined(self.var_EE2C)) {
@@ -1945,7 +1945,7 @@ func_F30A(param_00) {
     return;
   }
 
-  self.magicbullet = self.magicbullet & ~256;
+  self.magicbullet = self.magicbullet &~256;
 }
 
 func_1142F() {
@@ -1976,7 +1976,7 @@ func_F35C(param_00) {
     return;
   }
 
-  self.magicbullet = self.magicbullet & ~8;
+  self.magicbullet = self.magicbullet &~8;
 }
 
 func_FF2C() {
@@ -1989,7 +1989,7 @@ func_F35D(param_00) {
     return;
   }
 
-  self.magicbullet = self.magicbullet & ~16;
+  self.magicbullet = self.magicbullet &~16;
 }
 
 func_FF2F() {
@@ -2008,7 +2008,7 @@ func_F2C6(param_00) {
     return;
   }
 
-  self.magicbullet = self.magicbullet & ~4;
+  self.magicbullet = self.magicbullet &~4;
 }
 
 func_9B69() {
@@ -2021,7 +2021,7 @@ func_F613(param_00) {
     return;
   }
 
-  self.magicbullet = self.magicbullet & ~2;
+  self.magicbullet = self.magicbullet &~2;
 }
 
 func_582B() {
@@ -2034,7 +2034,7 @@ func_F5BF(param_00) {
     return;
   }
 
-  self.magicbullet = self.magicbullet & ~1;
+  self.magicbullet = self.magicbullet &~1;
 }
 
 func_9CE3() {
@@ -2047,7 +2047,7 @@ func_F568(param_00) {
     return;
   }
 
-  self.magicbullet = self.magicbullet & ~32;
+  self.magicbullet = self.magicbullet &~32;
 }
 
 func_FF81() {
@@ -2060,7 +2060,7 @@ func_F410(param_00) {
     return;
   }
 
-  self.magicbullet = self.magicbullet & ~64;
+  self.magicbullet = self.magicbullet &~64;
 }
 
 func_9C0B() {
@@ -2073,7 +2073,7 @@ func_C2C9(param_00) {
     return;
   }
 
-  self.magicbullet = self.magicbullet & ~128;
+  self.magicbullet = self.magicbullet &~128;
 }
 
 func_9C53() {
@@ -2090,7 +2090,7 @@ func_F5F9(param_00) {
     return;
   }
 
-  self.magicbullet = self.magicbullet & ~512;
+  self.magicbullet = self.magicbullet &~512;
 }
 
 func_13903() {
@@ -2103,7 +2103,7 @@ func_F56C(param_00) {
     return;
   }
 
-  self.magicbullet = self.magicbullet & ~2048;
+  self.magicbullet = self.magicbullet &~2048;
 }
 
 func_9BE8() {
@@ -2116,7 +2116,7 @@ func_F3BE(param_00) {
     return;
   }
 
-  self.magicbullet = self.magicbullet & ~1024;
+  self.magicbullet = self.magicbullet &~1024;
 }
 
 func_12735(param_00) {

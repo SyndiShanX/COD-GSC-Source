@@ -286,7 +286,7 @@ player_death() {
   if((isDefined(attacker)) && (attacker.code_classname == "misc_turret")) {
     if(isSubStr(attacker.model, "little_bird")) {
       level notify("new_quote_string");
-      setDvar("ui_deadquote", & "OILRIG_MISSIONFAIL_HELI_DEATH");
+      setDvar("ui_deadquote", &"OILRIG_MISSIONFAIL_HELI_DEATH");
     }
   }
 }
@@ -549,7 +549,7 @@ underwater_sequence() {
   below_water_art_and_ambient_setup();
 
   /*-----------------------
-  SETUP SUBS & SDVS
+  SETUP SUBS &SDVS
   -------------------------*/
   eSub_01 = submarine_spawn("01", eNodeIntro);
   eSub_02 = submarine_spawn("02", eNodeIntro);
@@ -1251,7 +1251,7 @@ player_grate_sequence_think() {
   -------------------------*/
   //	level.hostile_stealthkill_player.useable = true;
   //	level.hostile_stealthkill_player SetCursorHint( "HINT_NOICON" );
-  //	level.hostile_stealthkill_player sethintstring( &"SCRIPT_PLATFORM_OILRIG_HINT_STEALTH_KILL" );
+  //	level.hostile_stealthkill_player sethintstring(&"SCRIPT_PLATFORM_OILRIG_HINT_STEALTH_KILL" );
   //	level.hostile_stealthkill_player waittill( "trigger" );
 
   thread grate_enemy_hint();
@@ -1350,7 +1350,7 @@ player_looking_at_grate_guard_logic() {
 
 grate_enemy_hint() {
   level endon("player_starting_stealth_kill");
-  sHint = & "SCRIPT_PLATFORM_OILRIG_HINT_STEALTH_KILL";
+  sHint = &"SCRIPT_PLATFORM_OILRIG_HINT_STEALTH_KILL";
   thread grate_enemy_hint_cleanup();
   while(!flag("player_starting_stealth_kill")) {
     flag_wait("player_looking_at_grate_guard");
@@ -2601,7 +2601,7 @@ c4_ambush_hints() {
     if((!level.player istouching(eTrig)) && (bAmbushHint == false) && (bC4hint == false)) {
       hint_fade();
       // Take cover in the scaffolding and ambush the enemy
-      //thread hint( &"OILRIG_HINT_AMBUSH_COVER" );
+      //thread hint(&"OILRIG_HINT_AMBUSH_COVER" );
       bAmbushHint = true;
       bC4hint = false;
     }
@@ -2697,7 +2697,7 @@ c4_nag(volume_ambush_room) {
 mission_fail_c4_not_planted() {
   // Mission failed. You didn't plant c4 in time
   flag_set("oilrig_mission_failed");
-  setDvar("ui_deadquote", & "OILRIG_MISSIONFAIL_EXPLOSIVES_NOTPLANTED");
+  setDvar("ui_deadquote", &"OILRIG_MISSIONFAIL_EXPLOSIVES_NOTPLANTED");
   level notify("mission failed");
   maps\_utility::missionFailedWrapper();
 }
@@ -3777,7 +3777,7 @@ c4_barrel_explode() {
   if(is_specialop())
     maps\_specialops::so_force_deadquote("@OILRIG_MISSIONFAIL_EXPLOSIVES");
   else
-    setDvar("ui_deadquote", & "OILRIG_MISSIONFAIL_EXPLOSIVES");
+    setDvar("ui_deadquote", &"OILRIG_MISSIONFAIL_EXPLOSIVES");
   level notify("mission failed");
   maps\_utility::missionFailedWrapper();
 }
@@ -4293,7 +4293,7 @@ obj_stealthkill() {
   obj_position = level.hostile_stealthkill_player;
 
   // Take up ambush positions near the scaffolding
-  objective_add(objective_number, "active", & "OILRIG_OBJ_STEALTHKILL", obj_position.origin);
+  objective_add(objective_number, "active", &"OILRIG_OBJ_STEALTHKILL", obj_position.origin);
   objective_current(objective_number);
 
   flag_wait("obj_stealthkill_complete");
@@ -4307,27 +4307,27 @@ obj_hostages_secure() {
 
   flag_wait("obj_hostages_secure_given");
 
-  // Secure hostages ( &&1 remaining )
-  objective_add(objective_number, "invisible", & "OILRIG_OBJ_HOSTAGES_SECURE");
+  // Secure hostages ( && 1 remaining )
+  objective_add(objective_number, "invisible", &"OILRIG_OBJ_HOSTAGES_SECURE");
   Objective_OnEntity(objective_number, level.teamleader);
   objective_state(objective_number, "current");
-  Objective_String(objective_number, & "OILRIG_OBJ_HOSTAGES_SECURE", level.totalHostages);
+  Objective_String(objective_number, &"OILRIG_OBJ_HOSTAGES_SECURE", level.totalHostages);
 
   flag_wait("player_at_lower_breach");
   flag_wait("railing_patroller_dead");
 
   maps\_slowmo_breach::objective_breach(objective_number, 0, 1);
 
-  // Secure hostages ( &&1 remaining )
-  Objective_String(objective_number, & "OILRIG_OBJ_HOSTAGES_SECURE", level.totalHostages);
+  // Secure hostages ( && 1 remaining )
+  Objective_String(objective_number, &"OILRIG_OBJ_HOSTAGES_SECURE", level.totalHostages);
 
   flag_wait("lower_room_breached");
   objective_clearAdditionalPositions(objective_number);
   Objective_SetPointerTextOverride(objective_number); // kill the breach text
 
   flag_wait("lower_room_cleared");
-  // Secure hostages ( &&1 remaining )
-  Objective_String(objective_number, & "OILRIG_OBJ_HOSTAGES_SECURE", level.totalHostages - 4);
+  // Secure hostages ( && 1 remaining )
+  Objective_String(objective_number, &"OILRIG_OBJ_HOSTAGES_SECURE", level.totalHostages - 4);
   Objective_OnEntity(objective_number, level.friendly02);
 
   flag_wait("player_at_last_breach_building");
@@ -4341,22 +4341,22 @@ obj_hostages_secure() {
   flag_wait("obj_hostages_secure_complete");
 
   objective_state(objective_number, "done");
-  Objective_String(objective_number, & "OILRIG_OBJ_HOSTAGES_SECURE_DONE");
+  Objective_String(objective_number, &"OILRIG_OBJ_HOSTAGES_SECURE_DONE");
 }
 
 obj_c4_ambush_plant() {
   flag_wait("obj_c4_ambush_plant_given");
   objective_number = 3;
-  // Plant C4 on the dead bodies ( &&1 remaining )
-  objective_add(objective_number, "invisible", & "OILRIG_OBJ_C4_AMBUSH_PLANT");
+  // Plant C4 on the dead bodies ( && 1 remaining )
+  objective_add(objective_number, "invisible", &"OILRIG_OBJ_C4_AMBUSH_PLANT");
   //objective_state( objective_number, "active" );
 
   objective_state(objective_number, "current");
   //"empty", "active", "invisible", "done", "current" and "failed"
 
-  // Plant C4 on the dead bodies ( &&1 remaining )
+  // Plant C4 on the dead bodies ( && 1 remaining )
   //Objective_String( objective_number, &"OILRIG_OBJ_C4_AMBUSH_PLANT", level.C4locations.size );
-  Objective_String(objective_number, & "OILRIG_OBJ_C4_AMBUSH_PLANT");
+  Objective_String(objective_number, &"OILRIG_OBJ_C4_AMBUSH_PLANT");
   objective_current(objective_number);
 
   flag_wait("obj_c4_ambush_plant_complete");
@@ -4368,8 +4368,8 @@ obj_c4_ambush_think() {
   level.C4locationsIndex++;
   index = level.C4locationsIndex;
   level.C4locations[level.C4locations.size] = self;
-  // Plant C4 on the dead bodies ( &&1 remaining )
-  Objective_String(3, & "OILRIG_OBJ_C4_AMBUSH_PLANT");
+  // Plant C4 on the dead bodies ( && 1 remaining )
+  Objective_String(3, &"OILRIG_OBJ_C4_AMBUSH_PLANT");
 
   //	if( level.c4first == false )
   //	{
@@ -4381,8 +4381,8 @@ obj_c4_ambush_think() {
 
   objective_additionalposition(3, index, self.origin);
 
-  // Plant C4 on the dead bodies ( &&1 remaining )
-  Objective_String(3, & "OILRIG_OBJ_C4_AMBUSH_PLANT");
+  // Plant C4 on the dead bodies ( && 1 remaining )
+  Objective_String(3, &"OILRIG_OBJ_C4_AMBUSH_PLANT");
 
   self waittill("c4_planted");
   if(!flag("player_has_started_planting_c4"))
@@ -4395,8 +4395,8 @@ obj_c4_ambush_think() {
     flag_set("obj_c4_ambush_plant_complete");
     //objective_state( 3, "invisible" );
   }
-  // Plant C4 on the dead bodies ( &&1 remaining )
-  Objective_String(3, & "OILRIG_OBJ_C4_AMBUSH_PLANT");
+  // Plant C4 on the dead bodies ( && 1 remaining )
+  Objective_String(3, &"OILRIG_OBJ_C4_AMBUSH_PLANT");
 }
 
 obj_ambush() {
@@ -4405,7 +4405,7 @@ obj_ambush() {
 
   //obj_position = getent( "obj_ambush", "targetname" );
   // Take up ambush positions near the scaffolding
-  objective_add(objective_number, "active", & "OILRIG_OBJ_AMBUSH");
+  objective_add(objective_number, "active", &"OILRIG_OBJ_AMBUSH");
   objective_current(objective_number);
   Objective_OnEntity(objective_number, level.teamleader);
   flag_wait("obj_ambush_complete");
@@ -4419,7 +4419,7 @@ obj_explosives_locate() {
 
   //obj_position = getent( "obj_explosives_locate_01", "targetname" );
   // Locate explosives in the upper deck crew quarters
-  objective_add(objective_number, "active", & "OILRIG_OBJ_EXPLOSIVES_LOCATE");
+  objective_add(objective_number, "active", &"OILRIG_OBJ_EXPLOSIVES_LOCATE");
   objective_current(objective_number);
   Objective_OnEntity(objective_number, level.teamleader);
 
@@ -4450,7 +4450,7 @@ obj_escape() {
   flag_wait("obj_escape_given");
   objective_number = 6;
 
-  objective_add(objective_number, "active", & "OILRIG_OBJ_ESCAPE");
+  objective_add(objective_number, "active", &"OILRIG_OBJ_ESCAPE");
   objective_current(objective_number);
   Objective_OnEntity(objective_number, level.teamleader);
 
@@ -4970,11 +4970,11 @@ dialogue_random_thermal_hint() {
   if(level.player player_has_thermal()) {
     iRand = randomint(2);
     radio_dialogue("oilrig_use_thermal_0" + iRand);
-    //thread hint( &"OILRIG_HINT_THERMAL_WEAPON_USE" );
+    //thread hint(&"OILRIG_HINT_THERMAL_WEAPON_USE" );
   } else {
     iRand = randomint(2);
     radio_dialogue("oilrig_find_thermal_0" + iRand);
-    //thread hint( &"OILRIG_HINT_THERMAL_WEAPON_FIND" );
+    //thread hint(&"OILRIG_HINT_THERMAL_WEAPON_FIND" );
   }
 
   waittill_using_thermal_scope_or_timeout_func(7);
@@ -5182,9 +5182,9 @@ initPrecache() {
   precachestring(&"SCRIPT_DEBUG_LEVEL_END");
   // Take out the guard quietly
   precachestring(&"OILRIG_OBJ_STEALTHKILL");
-  // Secure hostages ( &&1 remaining )
+  // Secure hostages ( && 1 remaining )
   precachestring(&"OILRIG_OBJ_HOSTAGES_SECURE");
-  // Plant C4 on the dead bodies ( &&1 remaining )
+  // Plant C4 on the dead bodies ( && 1 remaining )
   precachestring(&"OILRIG_OBJ_C4_AMBUSH_PLANT");
   // Take up ambush positions near the scaffolding
   precachestring(&"OILRIG_OBJ_AMBUSH");
@@ -5432,7 +5432,7 @@ premature_hostage_death_fx() {
 mission_fail_hostage_executed() {
   // Mission failed. A hostage was executed.
   flag_set("oilrig_mission_failed");
-  setDvar("ui_deadquote", & "OILRIG_MISSIONFAIL_ENEMIES_ALERTED_HOSTAGES_KILLED");
+  setDvar("ui_deadquote", &"OILRIG_MISSIONFAIL_ENEMIES_ALERTED_HOSTAGES_KILLED");
   level notify("mission failed");
   maps\_utility::missionFailedWrapper();
 }
@@ -5678,7 +5678,7 @@ killtrigger_ocean_on() {
       other PlayerLinkToBlend(dummy, "tag_origin", .05);
       other kill();
       if(is_specialop()) {
-        setDvar("ui_deadquote", & "OILRIG_MISSIONFAIL_WATER_DEATH");
+        setDvar("ui_deadquote", &"OILRIG_MISSIONFAIL_WATER_DEATH");
         level notify("mission failed");
         maps\_utility::missionFailedWrapper();
       }

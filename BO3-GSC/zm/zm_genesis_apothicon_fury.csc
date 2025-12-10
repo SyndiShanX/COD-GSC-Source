@@ -20,12 +20,12 @@
 #namespace zm_genesis_apothicon_fury;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_apothicon_fury", & __init__, undefined, undefined);
+  system::register("zm_genesis_apothicon_fury", &__init__, undefined, undefined);
 }
 
 function __init__() {
   if(ai::shouldregisterclientfieldforarchetype("apothicon_fury")) {
-    clientfield::register("scriptmover", "apothicon_fury_spawn_meteor", 15000, 2, "int", & function_87fb20f7, 0, 0);
+    clientfield::register("scriptmover", "apothicon_fury_spawn_meteor", 15000, 2, "int", &function_87fb20f7, 0, 0);
   }
   level._effect["apothicon_fury_meteor_fx"] = "dlc4/genesis/fx_apothicon_fury_spawn_in";
   level._effect["apothicon_fury_meteor_exp"] = "dlc4/genesis/fx_apothicon_fury_spawn_in_exp";

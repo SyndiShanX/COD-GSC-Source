@@ -719,12 +719,12 @@ objectives() {
   flag_wait("print_first_objective");
 
   objective_location_makarov = getent("objective_location_makarov", "targetname");
-  objective_add(1, "current", & "ESTATE_OBJ_ASSASSINATE", objective_location_makarov.origin);
+  objective_add(1, "current", &"ESTATE_OBJ_ASSASSINATE", objective_location_makarov.origin);
 
   //flag_wait( "futilejeeps_destroyed" );
   flag_wait("deploy_house_defense_jeeps");
 
-  objective_add(2, "current", & "ESTATE_OBJ_BREACH");
+  objective_add(2, "current", &"ESTATE_OBJ_BREACH");
   objective_current(2);
 
   exteriorBreaches = getEntArray("breach_objective_exterior", "targetname");
@@ -782,7 +782,7 @@ objectives() {
   objective_delete(1);
 
   node = getstruct("ghost_talknode", "targetname");
-  objective_add(1, "current", & "ESTATE_OBJ_REGROUP", node.origin);
+  objective_add(1, "current", &"ESTATE_OBJ_REGROUP", node.origin);
 
   //flag_wait( "dsm_ready_to_use" );
   flag_wait("house_briefing_is_over");
@@ -790,15 +790,15 @@ objectives() {
   objective_state(1, "done");
 
   dsm_real = getent("dsm", "targetname");
-  objective_add(3, "current", & "ESTATE_OBJ_INTEL", dsm_real.origin);
+  objective_add(3, "current", &"ESTATE_OBJ_INTEL", dsm_real.origin);
 
   flag_wait("download_started");
 
   objective_state(3, "done");
 
-  objective_add(4, "current", & "ESTATE_OBJ_DOWNLOAD", dsm_real.origin);
+  objective_add(4, "current", &"ESTATE_OBJ_DOWNLOAD", dsm_real.origin);
 
-  Objective_SetPointerTextOverride(4, & "ESTATE_OBJ_POINTER_PROTECT");
+  Objective_SetPointerTextOverride(4, &"ESTATE_OBJ_POINTER_PROTECT");
 
   //iprintlnbold( "End of Currently Scripted Level" );
 
@@ -806,9 +806,9 @@ objectives() {
 
   objective_state(4, "done");
 
-  objective_add(5, "current", & "ESTATE_OBJ_RETRIEVE", dsm_real.origin);
+  objective_add(5, "current", &"ESTATE_OBJ_RETRIEVE", dsm_real.origin);
 
-  Objective_SetPointerTextOverride(5, & "ESTATE_OBJ_POINTER_RETRIEVE");
+  Objective_SetPointerTextOverride(5, &"ESTATE_OBJ_POINTER_RETRIEVE");
 
   flag_wait("dsm_recovered");
 
@@ -816,7 +816,7 @@ objectives() {
 
   objective_state(5, "done");
 
-  objective_add(6, "current", & "ESTATE_OBJ_LZ", marker.origin);
+  objective_add(6, "current", &"ESTATE_OBJ_LZ", marker.origin);
 
   flag_wait("made_it_to_lz");
 
@@ -1863,7 +1863,7 @@ ending_drag_failure() {
   level.player.ignoreme = true;
   level.player shellshock("estate_bouncingbetty", 9);
 
-  setdvar("ui_deadquote", & "ESTATE_FAKE_DEATH_QUOTE");
+  setdvar("ui_deadquote", &"ESTATE_FAKE_DEATH_QUOTE");
   missionfailedwrapper();
 }
 

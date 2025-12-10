@@ -35,12 +35,12 @@ function main() {
   level.teambased = 0;
   level.overrideteamscore = 1;
   level.overrideplayerscore = 1;
-  level.onstartgametype = & onstartgametype;
-  level.onplayerkilled = & onplayerkilled;
-  level.onroundswitch = & onroundswitch;
-  level.onprecachegametype = & onprecachegametype;
-  level.onendgame = & onendgame;
-  level.onroundendgame = & onroundendgame;
+  level.onstartgametype = &onstartgametype;
+  level.onplayerkilled = &onplayerkilled;
+  level.onroundswitch = &onroundswitch;
+  level.onprecachegametype = &onprecachegametype;
+  level.onendgame = &onendgame;
+  level.onroundendgame = &onroundendgame;
   gameobjects::register_allowed_gameobject("dom");
   game["dialog"]["gametype"] = "dom_start";
   game["dialog"]["gametype_hardcore"] = "hcdom_start";
@@ -53,8 +53,8 @@ function main() {
 function onprecachegametype() {}
 
 function onstartgametype() {
-  util::setobjectivetext("allies", & "OBJECTIVES_DOM");
-  util::setobjectivetext("axis", & "OBJECTIVES_DOM");
+  util::setobjectivetext("allies", &"OBJECTIVES_DOM");
+  util::setobjectivetext("axis", &"OBJECTIVES_DOM");
   if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
   }
@@ -65,14 +65,14 @@ function onstartgametype() {
     game["defenders"] = oldattackers;
   }
   if(level.splitscreen) {
-    util::setobjectivescoretext("allies", & "OBJECTIVES_DOM");
-    util::setobjectivescoretext("axis", & "OBJECTIVES_DOM");
+    util::setobjectivescoretext("allies", &"OBJECTIVES_DOM");
+    util::setobjectivescoretext("axis", &"OBJECTIVES_DOM");
   } else {
-    util::setobjectivescoretext("allies", & "OBJECTIVES_DOM_SCORE");
-    util::setobjectivescoretext("axis", & "OBJECTIVES_DOM_SCORE");
+    util::setobjectivescoretext("allies", &"OBJECTIVES_DOM_SCORE");
+    util::setobjectivescoretext("axis", &"OBJECTIVES_DOM_SCORE");
   }
-  util::setobjectivehinttext("allies", & "OBJECTIVES_DOM_HINT");
-  util::setobjectivehinttext("axis", & "OBJECTIVES_DOM_HINT");
+  util::setobjectivehinttext("allies", &"OBJECTIVES_DOM_HINT");
+  util::setobjectivehinttext("axis", &"OBJECTIVES_DOM_HINT");
   level.flagbasefxid = [];
   level.flagbasefxid["allies"] = "_t6/misc/fx_ui_flagbase_gold_t5";
   level.flagbasefxid["axis"] = "_t6/misc/fx_ui_flagbase_gold_t5";
@@ -151,10 +151,10 @@ function bwars_init() {
     flag gameobjects::set_use_text(&"MP_CAPTURING_FLAG");
     flag gameobjects::set_visible_team("any");
     flag flag_compass_init();
-    flag.onuse = & onuse;
-    flag.onbeginuse = & onbeginuse;
-    flag.onuseupdate = & onuseupdate;
-    flag.onenduse = & onenduse;
+    flag.onuse = &onuse;
+    flag.onbeginuse = &onbeginuse;
+    flag.onuseupdate = &onuseupdate;
+    flag.onenduse = &onenduse;
     level.bwars_flags[level.bwars_flags.size] = flag;
   }
 }

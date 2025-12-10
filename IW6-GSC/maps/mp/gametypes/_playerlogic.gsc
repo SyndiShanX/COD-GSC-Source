@@ -129,7 +129,7 @@ spawnClient() {
     self_pers_teamKillPunish = self.pers["teamKillPunish"];
     if(isDefined(self_pers_teamKillPunish) && self_pers_teamKillPunish) {
       self.pers["teamkills"] = max(self.pers["teamkills"] - 1, 0);
-      setLowerMessage("friendly_fire", & "MP_FRIENDLY_FIRE_WILL_NOT");
+      setLowerMessage("friendly_fire", &"MP_FRIENDLY_FIRE_WILL_NOT");
 
       if(!self.hasSpawned && self.pers["teamkills"] <= level.maxAllowedTeamkills)
         self.pers["teamKillPunish"] = false;
@@ -177,7 +177,7 @@ waitAndSpawnClient() {
     teamKillDelay = TeamKillDelay();
 
     if(teamKillDelay > 0) {
-      setLowerMessage("friendly_fire", & "MP_FRIENDLY_FIRE_WILL_NOT", teamKillDelay, 1, true);
+      setLowerMessage("friendly_fire", &"MP_FRIENDLY_FIRE_WILL_NOT", teamKillDelay, 1, true);
 
       self thread respawn_asSpectator(self.origin + (0, 0, 60), self.angles);
       spawnedAsSpectator = true;

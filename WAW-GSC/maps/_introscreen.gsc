@@ -27,7 +27,7 @@ main() {
       PrecacheString(&"PROLOGUE_INTROSCREEN_PLACE");
       PrecacheString(&"PROLOGUE_INTROSCREEN_DATE");
       PrecacheString(&"PROLOGUE_INTROSCREEN_INFO");
-      introscreen_delay(&"PROLOGUE_INTROSCREEN_TITLE", & "PROLOGUE_INTROSCREEN_DATE", & "PROLOGUE_INTROSCREEN_PLACE", & "PROLOGUE_INTROSCREEN_INFO");
+      introscreen_delay(&"PROLOGUE_INTROSCREEN_TITLE", &"PROLOGUE_INTROSCREEN_DATE", &"PROLOGUE_INTROSCREEN_PLACE", &"PROLOGUE_INTROSCREEN_INFO");
       break;
     case "mak":
       PrecacheString(&"MAK_INTROSCREEN_TITLE");
@@ -35,7 +35,7 @@ main() {
       PrecacheString(&"MAK_INTROSCREEN_DATE");
       PrecacheString(&"MAK_INTROSCREEN_NAME");
       PrecacheString(&"MAK_INTROSCREEN_INFO");
-      introscreen_delay(&"MAK_INTROSCREEN_TITLE", & "MAK_INTROSCREEN_PLACE", & "MAK_INTROSCREEN_DATE", & "MAK_INTROSCREEN_NAME", & "MAK_INTROSCREEN_INFO");
+      introscreen_delay(&"MAK_INTROSCREEN_TITLE", &"MAK_INTROSCREEN_PLACE", &"MAK_INTROSCREEN_DATE", &"MAK_INTROSCREEN_NAME", &"MAK_INTROSCREEN_INFO");
       break;
     case "pel1":
       PrecacheString(&"PEL1_INTROSCREEN_TITLE");
@@ -43,14 +43,14 @@ main() {
       PrecacheString(&"PEL1_INTROSCREEN_DATE");
       PrecacheString(&"PEL1_INTROSCREEN_NAME");
       PrecacheString(&"PEL1_INTROSCREEN_INFO");
-      introscreen_delay(&"PEL1_INTROSCREEN_TITLE", & "PEL1_INTROSCREEN_DATE", & "PEL1_INTROSCREEN_PLACE", & "PEL1_INTROSCREEN_NAME", & "PEL1_INTROSCREEN_INFO");
+      introscreen_delay(&"PEL1_INTROSCREEN_TITLE", &"PEL1_INTROSCREEN_DATE", &"PEL1_INTROSCREEN_PLACE", &"PEL1_INTROSCREEN_NAME", &"PEL1_INTROSCREEN_INFO");
       break;
     case "pel1a":
       PrecacheString(&"PEL1A_INTROSCREEN_TITLE");
       PrecacheString(&"pEL1A_INTROSCREEN_PLACE");
       PrecacheString(&"PEL1A_INTROSCREEN_DATE");
       PrecacheString(&"PEL1A_INTROSCREEN_INFO");
-      introscreen_delay(&"PEL1A_INTROSCREEN_TITLE", & "PEL1A_INTROSCREEN_DATE", & "PEL1A_INTROSCREEN_PLACE", & "PEL1A_INTROSCREEN_NAME", & "PEL1A_INTROSCREEN_INFO");
+      introscreen_delay(&"PEL1A_INTROSCREEN_TITLE", &"PEL1A_INTROSCREEN_DATE", &"PEL1A_INTROSCREEN_PLACE", &"PEL1A_INTROSCREEN_NAME", &"PEL1A_INTROSCREEN_INFO");
       break;
     case "pel1b":
       PrecacheString(&"PEL1B_INTROSCREEN_TITLE");
@@ -58,7 +58,7 @@ main() {
       PrecacheString(&"PEL1B_INTROSCREEN_DATE");
       PrecacheString(&"PEL1B_INTROSCREEN_NAME");
       PrecacheString(&"PEL1B_INTROSCREEN_INFO");
-      introscreen_delay(&"PEL1B_INTROSCREEN_TITLE", & "PEL1B_INTROSCREEN_DATE", & "PEL1B_INTROSCREEN_PLACE", & "PEL1B_INTROSCREEN_NAME", & "PEL1B_INTROSCREEN_INFO");
+      introscreen_delay(&"PEL1B_INTROSCREEN_TITLE", &"PEL1B_INTROSCREEN_DATE", &"PEL1B_INTROSCREEN_PLACE", &"PEL1B_INTROSCREEN_NAME", &"PEL1B_INTROSCREEN_INFO");
       break;
     case "pel2":
       PrecacheString(&"PEL2_INTROSCREEN_TITLE");
@@ -66,7 +66,7 @@ main() {
       PrecacheString(&"PEL2_INTROSCREEN_DATE");
       PrecacheString(&"PEL2_INTROSCREEN_NAME");
       PrecacheString(&"PEL2_INTROSCREEN_INFO");
-      introscreen_delay(&"PEL2_INTROSCREEN_TITLE", & "PEL2_INTROSCREEN_DATE", & "PEL2_INTROSCREEN_PLACE", & "PEL2_INTROSCREEN_NAME", & "PEL2_INTROSCREEN_INFO");
+      introscreen_delay(&"PEL2_INTROSCREEN_TITLE", &"PEL2_INTROSCREEN_DATE", &"PEL2_INTROSCREEN_PLACE", &"PEL2_INTROSCREEN_NAME", &"PEL2_INTROSCREEN_INFO");
       break;
     case "pby_fly":
       PrecacheString(&"PBY_FLY_INTROSCREEN_TITLE");
@@ -74,7 +74,7 @@ main() {
       PrecacheString(&"PBY_FLY_INTROSCREEN_DATE");
       PrecacheString(&"PBY_FLY_INTROSCREEN_NAME");
       PrecacheString(&"PBY_FLY_INTROSCREEN_INFO");
-      introscreen_delay(&"PBY_FLY_INTROSCREEN_TITLE", & "PBY_FLY_INTROSCREEN_DATE", & "PBY_FLY_INTROSCREEN_PLACE", & "PBY_FLY_INTROSCREEN_NAME", & "PBY_FLY_INTROSCREEN_INFO");
+      introscreen_delay(&"PBY_FLY_INTROSCREEN_TITLE", &"PBY_FLY_INTROSCREEN_DATE", &"PBY_FLY_INTROSCREEN_PLACE", &"PBY_FLY_INTROSCREEN_NAME", &"PBY_FLY_INTROSCREEN_INFO");
       break;
     case "see1":
       PrecacheString(&"SEE1_INTROSCREEN_TITLE");
@@ -82,7 +82,7 @@ main() {
       PrecacheString(&"SEE1_INTROSCREEN_DATE");
       PrecacheString(&"SEE1_INTROSCREEN_NAME");
       PrecacheString(&"SEE1_INTROSCREEN_INFO");
-      introscreen_delay(&"SEE1_INTROSCREEN_TITLE", & "SEE1_INTROSCREEN_DATE", & "SEE1_INTROSCREEN_PLACE", & "SEE1_INTROSCREEN_NAME", & "SEE1_INTROSCREEN_INFO");
+      introscreen_delay(&"SEE1_INTROSCREEN_TITLE", &"SEE1_INTROSCREEN_DATE", &"SEE1_INTROSCREEN_PLACE", &"SEE1_INTROSCREEN_NAME", &"SEE1_INTROSCREEN_INFO");
       break;
     case "see2":
       PrecacheString(&"SEE2_INTROSCREEN_TITLE");
@@ -90,21 +90,21 @@ main() {
       PrecacheString(&"SEE2_INTROSCREEN_DATE");
       PrecacheString(&"SEE2_INTROSCREEN_NAME");
       PrecacheString(&"SEE2_INTROSCREEN_INFO");
-      introscreen_delay(&"SEE2_INTROSCREEN_TITLE", & "SEE2_INTROSCREEN_DATE", & "SEE2_INTROSCREEN_PLACE", & "SEE2_INTROSCREEN_NAME", & "SEE2_INTROSCREEN_INFO");
+      introscreen_delay(&"SEE2_INTROSCREEN_TITLE", &"SEE2_INTROSCREEN_DATE", &"SEE2_INTROSCREEN_PLACE", &"SEE2_INTROSCREEN_NAME", &"SEE2_INTROSCREEN_INFO");
       break;
     case "see3":
       PrecacheString(&"SEE3_INTROSCREEN_TITLE");
       PrecacheString(&"sEE3_INTROSCREEN_PLACE");
       PrecacheString(&"SEE3_INTROSCREEN_DATE");
       PrecacheString(&"SEE3_INTROSCREEN_INFO");
-      introscreen_delay(&"SEE3_INTROSCREEN_TITLE", & "SEE3_INTROSCREEN_DATE", & "SEE3_INTROSCREEN_PLACE", & "SEE3_INTROSCREEN_INFO");
+      introscreen_delay(&"SEE3_INTROSCREEN_TITLE", &"SEE3_INTROSCREEN_DATE", &"SEE3_INTROSCREEN_PLACE", &"SEE3_INTROSCREEN_INFO");
       break;
     case "oki1":
       PrecacheString(&"OKI1_INTROSCREEN_TITLE");
       PrecacheString(&"oKI1_INTROSCREEN_PLACE");
       PrecacheString(&"OKI1_INTROSCREEN_DATE");
       PrecacheString(&"OKI1_INTROSCREEN_INFO");
-      introscreen_delay(&"OKI1_INTROSCREEN_TITLE", & "OKI1_INTROSCREEN_DATE", & "OKI1_INTROSCREEN_PLACE", & "OKI1_INTROSCREEN_INFO");
+      introscreen_delay(&"OKI1_INTROSCREEN_TITLE", &"OKI1_INTROSCREEN_DATE", &"OKI1_INTROSCREEN_PLACE", &"OKI1_INTROSCREEN_INFO");
       break;
     case "oki2":
       PrecacheString(&"OKI2_INTROSCREEN_TITLE");
@@ -112,7 +112,7 @@ main() {
       PrecacheString(&"OKI2_INTROSCREEN_PLACE");
       PrecacheString(&"OKI2_INTROSCREEN_WHO");
       PrecacheString(&"OKI2_INTROSCREEN_WHAT");
-      introscreen_delay(&"OKI2_INTROSCREEN_TITLE", & "OKI2_INTROSCREEN_DATE", & "OKI2_INTROSCREEN_PLACE", & "OKI2_INTROSCREEN_WHO", & "OKI2_INTROSCREEN_WHAT");
+      introscreen_delay(&"OKI2_INTROSCREEN_TITLE", &"OKI2_INTROSCREEN_DATE", &"OKI2_INTROSCREEN_PLACE", &"OKI2_INTROSCREEN_WHO", &"OKI2_INTROSCREEN_WHAT");
       break;
     case "oki3":
       PrecacheString(&"OKI3_INTROSCREEN_TITLE");
@@ -120,7 +120,7 @@ main() {
       PrecacheString(&"OKI3_INTROSCREEN_DATE");
       PrecacheString(&"OKI3_INTROSCREEN_INFO");
       PrecacheString(&"OKI3_INTROSCREEN_NAME");
-      introscreen_delay(&"OKI3_INTROSCREEN_TITLE", & "OKI3_INTROSCREEN_DATE", & "OKI3_INTROSCREEN_PLACE", & "OKI3_INTROSCREEN_NAME", & "OKI3_INTROSCREEN_INFO");
+      introscreen_delay(&"OKI3_INTROSCREEN_TITLE", &"OKI3_INTROSCREEN_DATE", &"OKI3_INTROSCREEN_PLACE", &"OKI3_INTROSCREEN_NAME", &"OKI3_INTROSCREEN_INFO");
       break;
     case "ber1":
       PrecacheString(&"BER1_INTROSCREEN_TITLE");
@@ -128,7 +128,7 @@ main() {
       PrecacheString(&"BER1_INTROSCREEN_DATE");
       PrecacheString(&"BER1_INTROSCREEN_INFO");
       PrecacheString(&"BER1_INTROSCREEN_NAME");
-      introscreen_delay(&"BER1_INTROSCREEN_TITLE", & "BER1_INTROSCREEN_DATE", & "BER1_INTROSCREEN_PLACE", & "BER1_INTROSCREEN_NAME", & "BER1_INTROSCREEN_INFO");
+      introscreen_delay(&"BER1_INTROSCREEN_TITLE", &"BER1_INTROSCREEN_DATE", &"BER1_INTROSCREEN_PLACE", &"BER1_INTROSCREEN_NAME", &"BER1_INTROSCREEN_INFO");
       break;
     case "ber2":
       PrecacheString(&"BER2_INTROSCREEN_TITLE");
@@ -136,14 +136,14 @@ main() {
       PrecacheString(&"BER2_INTROSCREEN_NAME");
       PrecacheString(&"BER2_INTROSCREEN_DATE");
       PrecacheString(&"BER2_INTROSCREEN_INFO");
-      introscreen_delay(&"BER2_INTROSCREEN_TITLE", & "BER2_INTROSCREEN_DATE", & "BER2_INTROSCREEN_PLACE", & "BER2_INTROSCREEN_NAME", & "BER2_INTROSCREEN_INFO");
+      introscreen_delay(&"BER2_INTROSCREEN_TITLE", &"BER2_INTROSCREEN_DATE", &"BER2_INTROSCREEN_PLACE", &"BER2_INTROSCREEN_NAME", &"BER2_INTROSCREEN_INFO");
       break;
     case "ber2b":
       PrecacheString(&"BER2B_INTROSCREEN_TITLE");
       PrecacheString(&"BER2B_INTROSCREEN_PLACE");
       PrecacheString(&"BER2B_INTROSCREEN_DATE");
       PrecacheString(&"BER2B_INTROSCREEN_INFO");
-      introscreen_delay(&"BER2B_INTROSCREEN_TITLE", & "BER2B_INTROSCREEN_DATE", & "BER2B_INTROSCREEN_PLACE", & "BER2B_INTROSCREEN_INFO");
+      introscreen_delay(&"BER2B_INTROSCREEN_TITLE", &"BER2B_INTROSCREEN_DATE", &"BER2B_INTROSCREEN_PLACE", &"BER2B_INTROSCREEN_INFO");
       break;
     case "sniper":
       PrecacheString(&"SNIPER_INTROSCREEN_TITLE");
@@ -169,7 +169,7 @@ main() {
       pausetime1 = 3;
       pausetime2 = 4;
       timebeforefade = 3;
-      introscreen_delay(&"BER3B_INTROSCREEN_TITLE", & "BER3B_INTROSCREEN_DATE", & "BER3B_INTROSCREEN_PLACE", & "BER3B_INTROSCREEN_NAME", & "BER3B_INTROSCREEN_INFO", pausetime1, pausetime2, timebeforefade);
+      introscreen_delay(&"BER3B_INTROSCREEN_TITLE", &"BER3B_INTROSCREEN_DATE", &"BER3B_INTROSCREEN_PLACE", &"BER3B_INTROSCREEN_NAME", &"BER3B_INTROSCREEN_INFO", pausetime1, pausetime2, timebeforefade);
       break;
     case "nazi_zombie_prototype":
       introscreen_delay();

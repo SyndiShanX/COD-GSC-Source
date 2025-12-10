@@ -18,7 +18,7 @@
 #namespace vehicle;
 
 function autoexec __init__sytem__() {
-  system::register("vehicle", & __init__, undefined, undefined);
+  system::register("vehicle", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -64,7 +64,7 @@ function __init__() {
   setdvar("scr_veh_disappear_maxpreventvisibilityfeet", "150");
   setdvar("scr_veh_health_tank", "1350");
   level.vehicle_drivers_are_invulnerable = getdvarint("scr_veh_driversareinvulnerable");
-  level.onejectoccupants = & vehicle_eject_all_occupants;
+  level.onejectoccupants = &vehicle_eject_all_occupants;
   level.vehiclehealths["panzer4_mp"] = 2600;
   level.vehiclehealths["t34_mp"] = 2600;
   setdvar("scr_veh_health_jeep", "700");
@@ -254,7 +254,7 @@ function play_vehicle_effects(effects, isdamagedtread) {
 
 function init_vehicle_entities() {
   vehicles = getEntArray("script_vehicle", "classname");
-  array::thread_all(vehicles, & init_original_vehicle);
+  array::thread_all(vehicles, &init_original_vehicle);
   if(isDefined(vehicles)) {
     return vehicles.size;
   }
@@ -506,7 +506,7 @@ function wait_then_cleanup_vehicle(test_name, cleanup_dvar_name) {
   self wait_until_severely_damaged();
   self do_alive_cleanup_wait(test_name);
   self wait_for_vehicle_to_stop_outside_min_radius();
-  self cleanup(test_name, cleanup_dvar_name, & vehicle_recycle);
+  self cleanup(test_name, cleanup_dvar_name, &vehicle_recycle);
 }
 
 function wait_until_severely_damaged() {

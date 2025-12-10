@@ -545,8 +545,8 @@ outpost_objectives() {
   wait 6;
   var_0 = getent("hut_obj_org", "targetname");
   var_1 = getent("field_org", "targetname");
-  objective_add(1, "active", & "BLACKOUT_MEET_THE_RUSSIAN_LOYALISTS", var_1.origin);
-  objective_add(2, "current", & "BLACKOUT_ELIMINATE_THE_OUTER_GUARD", var_0.origin);
+  objective_add(1, "active", &"BLACKOUT_MEET_THE_RUSSIAN_LOYALISTS", var_1.origin);
+  objective_add(2, "current", &"BLACKOUT_ELIMINATE_THE_OUTER_GUARD", var_0.origin);
   objective_indentlevel(2, 1);
   common_scripts\utility::flag_wait("hut_cleared");
   var_2 = getent("chess_obj_org", "targetname");
@@ -2359,7 +2359,7 @@ informant_org() {
 
 vip_death() {
   self waittill("death");
-  setdvar("ui_deadquote", & "BLACKOUT_THE_INFORMANT_WAS_KILLED");
+  setdvar("ui_deadquote", &"BLACKOUT_THE_INFORMANT_WAS_KILLED");
   maps\_utility::missionfailedwrapper();
 }
 

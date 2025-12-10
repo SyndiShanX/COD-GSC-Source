@@ -27,7 +27,7 @@ init() {
   registerkillstreak("remote_missile_mp", "remote_missile_mp", "killstreak_remote_missile", "remote_missle_used", ::tryusepredatormissile, 1);
   registerkillstreakaltweapon("remote_missile_mp", "remote_missile_missile_mp");
   registerkillstreakaltweapon("remote_missile_mp", "remote_missile_bomblet_mp");
-  registerkillstreakstrings("remote_missile_mp", & "KILLSTREAK_EARNED_REMOTE_MISSILE", & "KILLSTREAK_REMOTE_MISSILE_NOT_AVAILABLE", & "KILLSTREAK_REMOTE_MISSILE_INBOUND");
+  registerkillstreakstrings("remote_missile_mp", &"KILLSTREAK_EARNED_REMOTE_MISSILE", &"KILLSTREAK_REMOTE_MISSILE_NOT_AVAILABLE", &"KILLSTREAK_REMOTE_MISSILE_INBOUND");
   registerkillstreakdialog("remote_missile_mp", "mpl_killstreak_cruisemissile", "kls_predator_used", "", "", "", "kls_predator_ready");
   registerkillstreakdevdvar("remote_missile_mp", "scr_givemissileremote");
   setkillstreakteamkillpenaltyscale("remote_missile_mp", level.teamkillreducedpenalty);

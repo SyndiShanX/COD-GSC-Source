@@ -13,21 +13,21 @@
 #namespace dragon_strike;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_dragon_strike", & __init__, undefined, undefined);
+  system::register("zm_weap_dragon_strike", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "dragon_strike_spawn_fx", 12000, 1, "int", & dragon_strike_spawn_fx, 0, 0);
-  clientfield::register("scriptmover", "dragon_strike_marker_on", 12000, 1, "int", & dragon_strike_marker_on, 0, 0);
-  clientfield::register("scriptmover", "dragon_strike_marker_fx", 12000, 1, "counter", & dragon_strike_marker_fx, 0, 0);
-  clientfield::register("scriptmover", "dragon_strike_marker_upgraded_fx", 12000, 1, "counter", & dragon_strike_marker_upgraded_fx, 0, 0);
-  clientfield::register("scriptmover", "dragon_strike_marker_invalid_fx", 12000, 1, "counter", & dragon_strike_marker_invalid_fx, 0, 0);
-  clientfield::register("scriptmover", "dragon_strike_marker_upgraded_invalid_fx", 12000, 1, "counter", & dragon_strike_marker_upgraded_invalid_fx, 0, 0);
-  clientfield::register("scriptmover", "dragon_strike_flare_fx", 12000, 1, "int", & dragon_strike_flare_fx, 0, 0);
-  clientfield::register("scriptmover", "dragon_strike_marker_fx_fadeout", 12000, 1, "counter", & dragon_strike_marker_fx_fadeout, 0, 0);
-  clientfield::register("scriptmover", "dragon_strike_marker_upgraded_fx_fadeout", 12000, 1, "counter", & dragon_strike_marker_upgraded_fx_fadeout, 0, 0);
-  clientfield::register("actor", "dragon_strike_zombie_fire", 12000, 2, "int", & dragon_strike_zombie_fire, 0, 0);
-  clientfield::register("vehicle", "dragon_strike_zombie_fire", 12000, 2, "int", & dragon_strike_zombie_fire, 0, 0);
+  clientfield::register("scriptmover", "dragon_strike_spawn_fx", 12000, 1, "int", &dragon_strike_spawn_fx, 0, 0);
+  clientfield::register("scriptmover", "dragon_strike_marker_on", 12000, 1, "int", &dragon_strike_marker_on, 0, 0);
+  clientfield::register("scriptmover", "dragon_strike_marker_fx", 12000, 1, "counter", &dragon_strike_marker_fx, 0, 0);
+  clientfield::register("scriptmover", "dragon_strike_marker_upgraded_fx", 12000, 1, "counter", &dragon_strike_marker_upgraded_fx, 0, 0);
+  clientfield::register("scriptmover", "dragon_strike_marker_invalid_fx", 12000, 1, "counter", &dragon_strike_marker_invalid_fx, 0, 0);
+  clientfield::register("scriptmover", "dragon_strike_marker_upgraded_invalid_fx", 12000, 1, "counter", &dragon_strike_marker_upgraded_invalid_fx, 0, 0);
+  clientfield::register("scriptmover", "dragon_strike_flare_fx", 12000, 1, "int", &dragon_strike_flare_fx, 0, 0);
+  clientfield::register("scriptmover", "dragon_strike_marker_fx_fadeout", 12000, 1, "counter", &dragon_strike_marker_fx_fadeout, 0, 0);
+  clientfield::register("scriptmover", "dragon_strike_marker_upgraded_fx_fadeout", 12000, 1, "counter", &dragon_strike_marker_upgraded_fx_fadeout, 0, 0);
+  clientfield::register("actor", "dragon_strike_zombie_fire", 12000, 2, "int", &dragon_strike_zombie_fire, 0, 0);
+  clientfield::register("vehicle", "dragon_strike_zombie_fire", 12000, 2, "int", &dragon_strike_zombie_fire, 0, 0);
   clientfield::register("clientuimodel", "dragon_strike_invalid_use", 12000, 1, "counter", undefined, 0, 0);
   clientfield::register("clientuimodel", "hudItems.showDpadRight_DragonStrike", 12000, 1, "int", undefined, 0, 0);
   level._effect["dragon_strike_portal"] = "dlc3/stalingrad/fx_dragonstrike_portal_flash";

@@ -141,9 +141,9 @@ init_sounds() {
 }
 
 custom_add_weapons() {
-  maps\_zombiemode_weapons::add_zombie_weapon("shrink_ray_zm", "shrink_ray_upgraded_zm", & "ZOMBIE_TEMPLE_SHRINK_RAY", 2000, "shrink", "", undefined);
-  maps\_zombiemode_weapons::add_zombie_weapon("blow_gun_zm", "blow_gun_upgraded_zm", & "ZOMBIE_TEMPLE_BLOW_GUN", 2000, "darts", "", undefined);
-  maps\_zombiemode_weapons::add_zombie_weapon("spikemore_zm", undefined, & "ZOMBIE_TEMPLE_SPIKEMORE_PURCHASE", 1000, "spikemore", "", undefined);
+  maps\_zombiemode_weapons::add_zombie_weapon("shrink_ray_zm", "shrink_ray_upgraded_zm", &"ZOMBIE_TEMPLE_SHRINK_RAY", 2000, "shrink", "", undefined);
+  maps\_zombiemode_weapons::add_zombie_weapon("blow_gun_zm", "blow_gun_upgraded_zm", &"ZOMBIE_TEMPLE_BLOW_GUN", 2000, "darts", "", undefined);
+  maps\_zombiemode_weapons::add_zombie_weapon("spikemore_zm", undefined, &"ZOMBIE_TEMPLE_SPIKEMORE_PURCHASE", 1000, "spikemore", "", undefined);
 }
 
 precache_assets() {

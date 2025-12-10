@@ -18,12 +18,10 @@ main() {
   level._effect["cash_trail"] = loadfx("props/cash_trail");
   level._effect["cash_drop"] = loadfx("props/cash_drop");
 
-
   level._effect["glass_dust_trail"] = loadfx("dust/glass_dust_trail_emitter");
   level._effect["car_crush_glass_med"] = loadfx("props/car_glass_med");
   level._effect["car_crush_glass_large"] = loadfx("props/car_glass_large");
   level._effect["car_crush_dust"] = loadfx("dust/car_crush_dust");
-
 
   level._effect["insects_carcass_runner"] = loadfx("misc/insects_carcass_runner");
 

@@ -42,10 +42,10 @@ open_safe() {
 }
 
 register_elvira_interactions() {
-  level.interaction_hintstrings["elvira_talk"] = & "CP_TOWN_INTERACTIONS_SPEAK_WITH_ELVIRA";
+  level.interaction_hintstrings["elvira_talk"] = &"CP_TOWN_INTERACTIONS_SPEAK_WITH_ELVIRA";
   level.interaction_hintstrings["take_spellbook"] = "";
   level.interaction_hintstrings["spell_page"] = "";
-  level.interaction_hintstrings["elvira_beach"] = & "CP_TOWN_INTERACTIONS_SUMMON_ELVIRA";
+  level.interaction_hintstrings["elvira_beach"] = &"CP_TOWN_INTERACTIONS_SUMMON_ELVIRA";
   scripts\cp\cp_interaction::register_interaction("elvira_talk", "arcade_game", undefined, ::elvira_hint, ::interact_with_elvira, 0);
   scripts\cp\cp_interaction::register_interaction("elvira_beach", "arcade_game", undefined, ::elvira_beach_hint, ::elvira_beach, 0, 0, ::init_elvira_beach);
   scripts\cp\cp_interaction::register_interaction("take_spellbook", "arcade_game", undefined, undefined, ::take_elvira_spellbook, 0, 1);
@@ -126,15 +126,15 @@ delay_elvira_ready_vo() {
 
 elvira_beach_hint(param_00, param_01) {
   if(isDefined(level.elvira_ai)) {
-    return & "CP_TOWN_INTERACTIONS_ELVIRA_GONE";
+    return &"CP_TOWN_INTERACTIONS_ELVIRA_GONE";
   }
 
   if(isDefined(level.elvira_available_again) && gettime() < level.elvira_available_again) {
-    return & "CP_TOWN_INTERACTIONS_ELVIRA_GONE";
+    return &"CP_TOWN_INTERACTIONS_ELVIRA_GONE";
   }
 
   if(scripts\engine\utility::flag("vial_filled")) {
-    return & "CP_TOWN_INTERACTIONS_GIVE_VIAL";
+    return &"CP_TOWN_INTERACTIONS_GIVE_VIAL";
   }
 
   return level.interaction_hintstrings["elvira_beach"];
@@ -189,23 +189,23 @@ play_elvira_sound_in_space_vo(param_00) {
 
 elvira_hint(param_00, param_01) {
   if(isDefined(level.elvira_ai)) {
-    return & "CP_TOWN_INTERACTIONS_ELVIRA_GONE";
+    return &"CP_TOWN_INTERACTIONS_ELVIRA_GONE";
   }
 
   if(isDefined(level.elvira_available_again) && gettime() < level.elvira_available_again) {
-    return & "CP_TOWN_INTERACTIONS_ELVIRA_GONE";
+    return &"CP_TOWN_INTERACTIONS_ELVIRA_GONE";
   }
 
   if(scripts\engine\utility::flag("spellbook_found") && !scripts\engine\utility::flag("spellbook_placed")) {
-    return & "CP_TOWN_INTERACTIONS_GIVE_BOOK";
+    return &"CP_TOWN_INTERACTIONS_GIVE_BOOK";
   }
 
   if(scripts\engine\utility::flag("spellbook_placed") && scripts\engine\utility::flag("spellbook_page1_found") && !scripts\engine\utility::flag("spellbook_page1_placed")) {
-    return & "CP_TOWN_INTERACTIONS_GIVE_PAGES";
+    return &"CP_TOWN_INTERACTIONS_GIVE_PAGES";
   }
 
   if(scripts\engine\utility::flag("vial_filled")) {
-    return & "CP_TOWN_INTERACTIONS_GIVE_VIAL";
+    return &"CP_TOWN_INTERACTIONS_GIVE_VIAL";
   }
 
   return level.interaction_hintstrings["elvira_talk"];

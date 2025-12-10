@@ -34,7 +34,7 @@ main() {
 }
 
 apache_factory_objective() {
-  objective_add(maps\_utility::obj("apache_factory"), "active", & "OILROCKS_OBJ_APACHE_ATTACK");
+  objective_add(maps\_utility::obj("apache_factory"), "active", &"OILROCKS_OBJ_APACHE_ATTACK");
   objective_current(maps\_utility::obj("apache_factory"));
   var_0 = maps\oilrocks_code::get_obj_ent_hvt();
 }

@@ -9,12 +9,12 @@
 #namespace planemortar;
 
 function autoexec __init__sytem__() {
-  system::register("planemortar", & __init__, undefined, undefined);
+  system::register("planemortar", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.planemortarexhaustfx = "killstreaks/fx_ls_exhaust_afterburner";
-  clientfield::register("scriptmover", "planemortar_contrail", 1, 1, "int", & planemortar_contrail, 0, 0);
+  clientfield::register("scriptmover", "planemortar_contrail", 1, 1, "int", &planemortar_contrail, 0, 0);
 }
 
 function planemortar_contrail(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

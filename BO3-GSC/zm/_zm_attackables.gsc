@@ -22,11 +22,11 @@
 #namespace zm_attackables;
 
 function autoexec __init__sytem__() {
-  system::register("zm_attackables", & __init__, & __main__, undefined);
+  system::register("zm_attackables", &__init__, &__main__, undefined);
 }
 
 function __init__() {
-  level.attackablecallback = & attackable_callback;
+  level.attackablecallback = &attackable_callback;
   level.attackables = struct::get_array("scriptbundle_attackables", "classname");
   foreach(attackable in level.attackables) {
     attackable.bundle = struct::get_script_bundle("attackables", attackable.scriptbundlename);

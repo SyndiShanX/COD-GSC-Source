@@ -167,7 +167,7 @@ main() {
       // string not found for KILLHOUSE_INTROSCREEN_LINE_3
       // string not found for KILLHOUSE_INTROSCREEN_LINE_4
       // string not found for KILLHOUSE_INTROSCREEN_LINE_5
-      introscreen_delay(&"KILLHOUSE_INTROSCREEN_LINE_1", & "KILLHOUSE_INTROSCREEN_LINE_3", & "KILLHOUSE_INTROSCREEN_LINE_4", & "KILLHOUSE_INTROSCREEN_LINE_5");
+      introscreen_delay(&"KILLHOUSE_INTROSCREEN_LINE_1", &"KILLHOUSE_INTROSCREEN_LINE_3", &"KILLHOUSE_INTROSCREEN_LINE_4", &"KILLHOUSE_INTROSCREEN_LINE_5");
       break;
     case "favela":
       // "Takedown"
@@ -295,15 +295,15 @@ contingency_black_screen_intro() {
 
   lines = [];
   // Contingency""
-  lines[lines.size] = & "CONTINGENCY_LINE1";
+  lines[lines.size] = &"CONTINGENCY_LINE1";
   // Day 4 - 16:35:[{FAKE_INTRO_SECONDS:32}]
-  lines["date"] = & "CONTINGENCY_LINE2";
+  lines["date"] = &"CONTINGENCY_LINE2";
   // Sgt. Gary 'Roach' Sanderson
-  lines[lines.size] = & "CONTINGENCY_LINE3";
+  lines[lines.size] = &"CONTINGENCY_LINE3";
   // Task Force 141
-  lines[lines.size] = & "CONTINGENCY_LINE4";
+  lines[lines.size] = &"CONTINGENCY_LINE4";
   // Eastern Russia
-  lines[lines.size] = & "CONTINGENCY_LINE5";
+  lines[lines.size] = &"CONTINGENCY_LINE5";
 
   maps\_introscreen::introscreen_feed_lines(lines);
 
@@ -318,15 +318,15 @@ contingency_intro_text() {
 
   lines = [];
   // Contingency""
-  lines[lines.size] = & "CONTINGENCY_LINE1";
+  lines[lines.size] = &"CONTINGENCY_LINE1";
   // Day 4 - 16:35:[{FAKE_INTRO_SECONDS:32}]
-  lines["date"] = & "CONTINGENCY_LINE2";
+  lines["date"] = &"CONTINGENCY_LINE2";
   // Sgt. Gary 'Roach' Sanderson
-  lines[lines.size] = & "CONTINGENCY_LINE3";
+  lines[lines.size] = &"CONTINGENCY_LINE3";
   // Task Force 141
-  lines[lines.size] = & "CONTINGENCY_LINE4";
+  lines[lines.size] = &"CONTINGENCY_LINE4";
   // Eastern Russia
-  lines[lines.size] = & "CONTINGENCY_LINE5";
+  lines[lines.size] = &"CONTINGENCY_LINE5";
 
   maps\_introscreen::introscreen_feed_lines(lines);
 }
@@ -336,15 +336,15 @@ cliffhanger_intro_text() {
 
   lines = [];
   // Cliffhanger""
-  lines[lines.size] = & "CLIFFHANGER_LINE1";
+  lines[lines.size] = &"CLIFFHANGER_LINE1";
   // Day 2 - 7:35:[{FAKE_INTRO_SECONDS:32}]
-  lines["date"] = & "CLIFFHANGER_LINE2";
+  lines["date"] = &"CLIFFHANGER_LINE2";
   // Sgt. Gary Roach" Sanderson"
-  lines[lines.size] = & "CLIFFHANGER_LINE3";
+  lines[lines.size] = &"CLIFFHANGER_LINE3";
   // Task Force 141
-  lines[lines.size] = & "CLIFFHANGER_LINE4";
+  lines[lines.size] = &"CLIFFHANGER_LINE4";
   // Tian Shan Range, Kazakhstan
-  lines[lines.size] = & "CLIFFHANGER_LINE5";
+  lines[lines.size] = &"CLIFFHANGER_LINE5";
 
   maps\_introscreen::introscreen_feed_lines(lines);
 }
@@ -647,21 +647,21 @@ favela_intro() {
   level.player FreezeControls(true);
 
   // string not found for AUTOSAVE_LEVELSTART
-  SaveGame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", true);
+  SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", true);
 
   thread introscreen_generic_black_fade_in(5.0);
 
   lines = [];
   // 'Takedown'
-  lines[lines.size] = & "FAVELA_INTROSCREEN_LINE_1"; // 'Takedown'
+  lines[lines.size] = &"FAVELA_INTROSCREEN_LINE_1"; // 'Takedown'
   // Day 4 - 14:30:[{FAKE_INTRO_SECONDS:16}]
-  lines["date"] = & "FAVELA_INTROSCREEN_LINE_2"; // Day 4 - 14:30:[ {FAKE_INTRO_SECONDS:16} ]
+  lines["date"] = &"FAVELA_INTROSCREEN_LINE_2"; // Day 4 - 14:30:[ {FAKE_INTRO_SECONDS:16} ]
   // Sgt. Gary 'Roach' Sanderson
-  lines[lines.size] = & "FAVELA_INTROSCREEN_LINE_3"; // Sgt. Gary 'Roach' Sanderson
+  lines[lines.size] = &"FAVELA_INTROSCREEN_LINE_3"; // Sgt. Gary 'Roach' Sanderson
   // Task Force 141
-  lines[lines.size] = & "FAVELA_INTROSCREEN_LINE_4"; // Task Force 141
+  lines[lines.size] = &"FAVELA_INTROSCREEN_LINE_4"; // Task Force 141
   // Rio de Janeiro, Brazil
-  lines[lines.size] = & "FAVELA_INTROSCREEN_LINE_5"; // Rio de Janeiro, Brazil
+  lines[lines.size] = &"FAVELA_INTROSCREEN_LINE_5"; // Rio de Janeiro, Brazil
 
   introscreen_feed_lines(lines);
 
@@ -675,7 +675,7 @@ favela_escape_intro() {
   level.player FreezeControls(true);
 
   // string not found for AUTOSAVE_LEVELSTART
-  SaveGame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", true);
+  SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", true);
 
   blacktime = 6;
   thread introscreen_generic_black_fade_in(blacktime);
@@ -683,15 +683,15 @@ favela_escape_intro() {
 
   lines = [];
   // 'The Hornet's Nest'
-  lines[lines.size] = & "FAVELA_ESCAPE_INTROSCREEN_LINE_1"; // 'The Hornet's Nest'
+  lines[lines.size] = &"FAVELA_ESCAPE_INTROSCREEN_LINE_1"; // 'The Hornet's Nest'
   // Day 4 - 04:19:[{FAKE_INTRO_SECONDS:40}]
-  lines["date"] = & "FAVELA_ESCAPE_INTROSCREEN_LINE_2"; // Day 4 - 04:19:[ {FAKE_INTRO_SECONDS:40} ]
+  lines["date"] = &"FAVELA_ESCAPE_INTROSCREEN_LINE_2"; // Day 4 - 04:19:[ {FAKE_INTRO_SECONDS:40} ]
   // Sgt. Gary 'Roach' Sanderson
-  lines[lines.size] = & "FAVELA_ESCAPE_INTROSCREEN_LINE_3"; // Sgt. Gary 'Roach' Sanderson
+  lines[lines.size] = &"FAVELA_ESCAPE_INTROSCREEN_LINE_3"; // Sgt. Gary 'Roach' Sanderson
   // Task Force 141
-  lines[lines.size] = & "FAVELA_ESCAPE_INTROSCREEN_LINE_4"; // Task Force 141
+  lines[lines.size] = &"FAVELA_ESCAPE_INTROSCREEN_LINE_4"; // Task Force 141
   // Rio de Janeiro, 1700 F.S.L.
-  lines[lines.size] = & "FAVELA_ESCAPE_INTROSCREEN_LINE_5"; // Rio de Janeiro, 7000 F.S.L.
+  lines[lines.size] = &"FAVELA_ESCAPE_INTROSCREEN_LINE_5"; // Rio de Janeiro, 7000 F.S.L.
 
   introscreen_feed_lines(lines);
 
@@ -705,21 +705,21 @@ arcadia_intro() {
   level.player FreezeControls(true);
 
   // string not found for AUTOSAVE_LEVELSTART
-  SaveGame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", true);
+  SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", true);
 
   thread introscreen_generic_black_fade_in(5.0);
 
   lines = [];
   // 'Exodus'
-  lines[lines.size] = & "ARCADIA_INTROSCREEN_LINE_1"; // 'Contraflow'
+  lines[lines.size] = &"ARCADIA_INTROSCREEN_LINE_1"; // 'Contraflow'
   // Day 04 - 17:36:[{FAKE_INTRO_SECONDS:28}]
-  lines["date"] = & "ARCADIA_INTROSCREEN_LINE_2"; // DC Invasion D + 1 - 15:22:[ {FAKE_INTRO_SECONDS:02} ]
+  lines["date"] = &"ARCADIA_INTROSCREEN_LINE_2"; // DC Invasion D + 1 - 15:22:[ {FAKE_INTRO_SECONDS:02} ]
   // Pvt. James Ramirez
-  lines[lines.size] = & "ARCADIA_INTROSCREEN_LINE_3"; // PFC James Patterson
+  lines[lines.size] = &"ARCADIA_INTROSCREEN_LINE_3"; // PFC James Patterson
   // 1st Bn., 75th Ranger Regiment
-  lines[lines.size] = & "ARCADIA_INTROSCREEN_LINE_4"; // U.S. Army 3rd Infantry Regiment
+  lines[lines.size] = &"ARCADIA_INTROSCREEN_LINE_4"; // U.S. Army 3rd Infantry Regiment
   // Northeastern Virginia, U.S.A.
-  lines[lines.size] = & "ARCADIA_INTROSCREEN_LINE_5"; // Washington DC Suburbs
+  lines[lines.size] = &"ARCADIA_INTROSCREEN_LINE_5"; // Washington DC Suburbs
 
   introscreen_feed_lines(lines);
 
@@ -732,15 +732,15 @@ arcadia_intro() {
 boneyard_intro() {
   lines = [];
   // 'The Enemy of My Enemy'
-  lines[lines.size] = & "BONEYARD_INTROSCREEN_LINE_1"; // "The Enemy Of My Enemy"
+  lines[lines.size] = &"BONEYARD_INTROSCREEN_LINE_1"; // "The Enemy Of My Enemy"
   // Day 6 - 17:30:[{FAKE_INTRO_SECONDS:21}]
-  lines["date"] = & "BONEYARD_INTROSCREEN_LINE_2"; // Day 6 - 17:30:[ {FAKE_INTRO_SECONDS:41} ]
+  lines["date"] = &"BONEYARD_INTROSCREEN_LINE_2"; // Day 6 - 17:30:[ {FAKE_INTRO_SECONDS:41} ]
   // Cpt. 'Soap' MacTavish
-  lines[lines.size] = & "BONEYARD_INTROSCREEN_LINE_3"; // Cpt. 'Soap' MacTavish
+  lines[lines.size] = &"BONEYARD_INTROSCREEN_LINE_3"; // Cpt. 'Soap' MacTavish
   // 160 miles SW of Kandahar, Afghanistan
-  lines[lines.size] = & "BONEYARD_INTROSCREEN_LINE_4"; // 160 miles SW of Kandahar, Afghanistan
+  lines[lines.size] = &"BONEYARD_INTROSCREEN_LINE_4"; // 160 miles SW of Kandahar, Afghanistan
   // U.S. Vehicle Disposal Yard 437
-  lines[lines.size] = & "BONEYARD_INTROSCREEN_LINE_5"; // U.S. Vehicle Disposal Yard 437
+  lines[lines.size] = &"BONEYARD_INTROSCREEN_LINE_5"; // U.S. Vehicle Disposal Yard 437
 
   introscreen_feed_lines(lines);
 
@@ -750,15 +750,15 @@ boneyard_intro() {
 estate_intro() {
   lines = [];
   // 'Loose Ends'
-  lines[lines.size] = & "ESTATE_INTROSCREEN_LINE_1"; // 'Loose Ends'
+  lines[lines.size] = &"ESTATE_INTROSCREEN_LINE_1"; // 'Loose Ends'
   // Day 6 - 14:45:[{FAKE_INTRO_SECONDS:07}]
-  lines["date"] = & "ESTATE_INTROSCREEN_LINE_2"; // Day 6 - 14:30:[ {FAKE_INTRO_SECONDS:07} ]
+  lines["date"] = &"ESTATE_INTROSCREEN_LINE_2"; // Day 6 - 14:30:[ {FAKE_INTRO_SECONDS:07} ]
   // Sgt. Gary Roach" Sanderson"
-  lines[lines.size] = & "ESTATE_INTROSCREEN_LINE_3"; // Sgt. Gary 'Roach' Sanderson
+  lines[lines.size] = &"ESTATE_INTROSCREEN_LINE_3"; // Sgt. Gary 'Roach' Sanderson
   // Task Force 141
-  lines[lines.size] = & "ESTATE_INTROSCREEN_LINE_4"; // Task Force 141
+  lines[lines.size] = &"ESTATE_INTROSCREEN_LINE_4"; // Task Force 141
   // Georgian-Russian Border
-  lines[lines.size] = & "ESTATE_INTROSCREEN_LINE_5"; // Georgian - Russian Border
+  lines[lines.size] = &"ESTATE_INTROSCREEN_LINE_5"; // Georgian - Russian Border
 
   introscreen_feed_lines(lines);
 
@@ -769,7 +769,7 @@ airport_intro() {
   level.player FreezeControls(true);
 
   // string not found for AUTOSAVE_LEVELSTART
-  SaveGame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", true);
+  SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", true);
 
   time = 21 + 5.5;
   //	thread introscreen_generic_black_fade_in( time );
@@ -777,15 +777,15 @@ airport_intro() {
   lines = [];
 
   // No Russian""
-  lines[lines.size] = & "AIRPORT_LINE1";
+  lines[lines.size] = &"AIRPORT_LINE1";
   // Day 3, 08:40:[{FAKE_INTRO_SECONDS:32}]
-  lines["date"] = & "AIRPORT_LINE2";
+  lines["date"] = &"AIRPORT_LINE2";
   // PFC Joseph Allen a.k.a. Alexei Borodin
-  lines[lines.size] = & "AIRPORT_LINE3";
+  lines[lines.size] = &"AIRPORT_LINE3";
   // Terminal 3, Domodedovo Int'l Airport
-  lines[lines.size] = & "AIRPORT_LINE4";
+  lines[lines.size] = &"AIRPORT_LINE4";
   // Moscow, Russia
-  lines[lines.size] = & "AIRPORT_LINE5";
+  lines[lines.size] = &"AIRPORT_LINE5";
 
   delayThread(10.25 + 5.5, ::introscreen_feed_lines, lines);
 
@@ -826,15 +826,15 @@ oilrig_intro2() {
   lines = [];
 
   // The Only Easy Day...Was Yesterday
-  lines[lines.size] = & "OILRIG_INTROSCREEN_LINE_1";
+  lines[lines.size] = &"OILRIG_INTROSCREEN_LINE_1";
   // LANG_ENGLISH Day 3 - [{FAKE_INTRO_TIME:06:58:21}] hrs"
-  lines[lines.size] = & "OILRIG_INTROSCREEN_LINE_2";
+  lines[lines.size] = &"OILRIG_INTROSCREEN_LINE_2";
   // Sgt. Gary 'Roach' Sanderson
-  lines[lines.size] = & "OILRIG_INTROSCREEN_LINE_3";
+  lines[lines.size] = &"OILRIG_INTROSCREEN_LINE_3";
   // Task Force 141
-  lines[lines.size] = & "OILRIG_INTROSCREEN_LINE_4";
+  lines[lines.size] = &"OILRIG_INTROSCREEN_LINE_4";
   // Vikhorevka 36 Oil Platform
-  lines[lines.size] = & "OILRIG_INTROSCREEN_LINE_5";
+  lines[lines.size] = &"OILRIG_INTROSCREEN_LINE_5";
 
   introscreen_feed_lines(lines);
 }
@@ -842,11 +842,11 @@ oilrig_intro2() {
 char_museum_intro() {
   lines = [];
 
-  lines[lines.size] = & "CHAR_MUSEUM_LINE1";
+  lines[lines.size] = &"CHAR_MUSEUM_LINE1";
 
-  lines[lines.size] = & "CHAR_MUSEUM_LINE3";
+  lines[lines.size] = &"CHAR_MUSEUM_LINE3";
 
-  lines[lines.size] = & "CHAR_MUSEUM_LINE4";
+  lines[lines.size] = &"CHAR_MUSEUM_LINE4";
 
   introscreen_feed_lines(lines);
 }
@@ -855,15 +855,15 @@ estate_intro2() {
   lines = [];
 
   // 'Loose Ends'
-  lines[lines.size] = & "ESTATE_INTROSCREEN_LINE_1"; // "'Loose Ends'"
+  lines[lines.size] = &"ESTATE_INTROSCREEN_LINE_1"; // "'Loose Ends'"
   // Day 6 - 14:45:[{FAKE_INTRO_SECONDS:07}]
-  lines["date"] = & "ESTATE_INTROSCREEN_LINE_2"; // "Day 06 – 14:05:[{FAKE_INTRO_SECONDS:07}]"
+  lines["date"] = &"ESTATE_INTROSCREEN_LINE_2"; // "Day 06 – 14:05:[{FAKE_INTRO_SECONDS:07}]"
   // Sgt. Gary Roach" Sanderson"
-  lines[lines.size] = & "ESTATE_INTROSCREEN_LINE_3"; // "Sgt. Gary 'Roach' Sanderson"
+  lines[lines.size] = &"ESTATE_INTROSCREEN_LINE_3"; // "Sgt. Gary 'Roach' Sanderson"
   // Task Force 141
-  lines[lines.size] = & "ESTATE_INTROSCREEN_LINE_4"; // "Task Force 141"
+  lines[lines.size] = &"ESTATE_INTROSCREEN_LINE_4"; // "Task Force 141"
   // Georgian-Russian Border
-  lines[lines.size] = & "ESTATE_INTROSCREEN_LINE_5"; // "Georgian-Russian Border"
+  lines[lines.size] = &"ESTATE_INTROSCREEN_LINE_5"; // "Georgian-Russian Border"
 
   introscreen_feed_lines(lines);
 }
@@ -896,7 +896,7 @@ dcburning_intro() {
   //	introtime.sort = 1;
   //	introtime.foreground = true;
   //
-  //	introtime SetText( &"DCBURNING_MAIN_TITLE" );
+  //	introtime SetText(&"DCBURNING_MAIN_TITLE" );
   //	introtime.fontScale = 1.6;
   //	introtime.color = ( 0.8, 1.0, 0.8 );
   //	introtime.font = "objective";
@@ -929,15 +929,15 @@ dcburning_intro() {
 
   lines = [];
   // 'Of Their Own Accord'
-  lines[lines.size] = & "DCBURNING_INTROSCREEN_1";
+  lines[lines.size] = &"DCBURNING_INTROSCREEN_1";
   // LANG_ENGLISH Day 5 - [{FAKE_INTRO_TIME:18:12:09}] hrs"
-  lines[lines.size] = & "DCBURNING_INTROSCREEN_2";
+  lines[lines.size] = &"DCBURNING_INTROSCREEN_2";
   // Pvt. James Ramirez
-  lines[lines.size] = & "DCBURNING_INTROSCREEN_3";
+  lines[lines.size] = &"DCBURNING_INTROSCREEN_3";
   // 75th Ranger Regiment
-  lines[lines.size] = & "DCBURNING_INTROSCREEN_4";
+  lines[lines.size] = &"DCBURNING_INTROSCREEN_4";
   // Washington, D.C.
-  lines[lines.size] = & "DCBURNING_INTROSCREEN_5";
+  lines[lines.size] = &"DCBURNING_INTROSCREEN_5";
 
   introscreen_feed_lines(lines);
 }
@@ -947,15 +947,15 @@ dcemp_intro() {
 
   lines = [];
   // 'Second Sun'
-  lines[lines.size] = & "DCEMP_INTROSCREEN_1";
+  lines[lines.size] = &"DCEMP_INTROSCREEN_1";
   // Day 5, 19:02:[{FAKE_INTRO_SECONDS:38}] hrs
-  lines[lines.size] = & "DCEMP_INTROSCREEN_2";
+  lines[lines.size] = &"DCEMP_INTROSCREEN_2";
   // Pvt. James Ramirez
-  lines[lines.size] = & "DCEMP_INTROSCREEN_3";
+  lines[lines.size] = &"DCEMP_INTROSCREEN_3";
   // 75th Ranger Regiment
-  lines[lines.size] = & "DCEMP_INTROSCREEN_4";
+  lines[lines.size] = &"DCEMP_INTROSCREEN_4";
   // Washington, D.C.
-  lines[lines.size] = & "DCEMP_INTROSCREEN_5";
+  lines[lines.size] = &"DCEMP_INTROSCREEN_5";
 
   wait 1;
   maps\_introscreen::introscreen_feed_lines(lines);
@@ -968,21 +968,21 @@ dc_whitehouse_intro() {
   level.player FreezeControls(true);
 
   // string not found for AUTOSAVE_LEVELSTART
-  SaveGame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", true);
+  SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", true);
 
   thread introscreen_generic_black_fade_in(5.0);
 
   lines = [];
   // 'Whiskey Hotel'
-  lines[lines.size] = & "DC_WHITEHOUSE_INTROSCREEN_1";
+  lines[lines.size] = &"DC_WHITEHOUSE_INTROSCREEN_1";
   // Day 5, 19:31:[{FAKE_INTRO_SECONDS:22}] hrs
-  lines["date"] = & "DC_WHITEHOUSE_INTROSCREEN_2";
+  lines["date"] = &"DC_WHITEHOUSE_INTROSCREEN_2";
   // Pvt. James Ramirez
-  lines[lines.size] = & "DC_WHITEHOUSE_INTROSCREEN_3";
+  lines[lines.size] = &"DC_WHITEHOUSE_INTROSCREEN_3";
   // 75th Ranger Regiment
-  lines[lines.size] = & "DC_WHITEHOUSE_INTROSCREEN_4";
+  lines[lines.size] = &"DC_WHITEHOUSE_INTROSCREEN_4";
   // Washington, D.C.
-  lines[lines.size] = & "DC_WHITEHOUSE_INTROSCREEN_5";
+  lines[lines.size] = &"DC_WHITEHOUSE_INTROSCREEN_5";
 
   introscreen_feed_lines(lines);
 
@@ -1020,15 +1020,15 @@ trainer_intro() {
   introblack SetShader("black", 640, 480);
   lines = [];
   // "S.S.D.D."
-  lines[lines.size] = & "TRAINER_INTROSCREEN_LINE_1";
+  lines[lines.size] = &"TRAINER_INTROSCREEN_LINE_1";
   // Day 1 - 15:30:[{FAKE_INTRO_SECONDS:25}]
-  lines[lines.size] = & "TRAINER_INTROSCREEN_LINE_2";
+  lines[lines.size] = &"TRAINER_INTROSCREEN_LINE_2";
   // PFC Joseph Allen
-  lines[lines.size] = & "TRAINER_INTROSCREEN_LINE_3";
+  lines[lines.size] = &"TRAINER_INTROSCREEN_LINE_3";
   // 1st Bn., 75th Ranger Regiment
-  lines[lines.size] = & "TRAINER_INTROSCREEN_LINE_4";
+  lines[lines.size] = &"TRAINER_INTROSCREEN_LINE_4";
   // Fire Base Phoenix, Afghanistan
-  lines[lines.size] = & "TRAINER_INTROSCREEN_LINE_5";
+  lines[lines.size] = &"TRAINER_INTROSCREEN_LINE_5";
 
   introscreen_feed_lines(lines);
 
@@ -1083,13 +1083,13 @@ af_caves_intro() {
 
   lines = [];
   // Just Like Old Times""
-  lines[lines.size] = & "AF_CAVES_LINE1"; // "Just Like Old Times"
+  lines[lines.size] = &"AF_CAVES_LINE1"; // "Just Like Old Times"
   // Day 7 - 16:40:[{FAKE_INTRO_SECONDS:22}]
-  lines["date"] = & "AF_CAVES_LINE2"; // Day 7 – 16:40:
+  lines["date"] = &"AF_CAVES_LINE2"; // Day 7 – 16:40:
   // 'Soap' MacTavish
-  lines[lines.size] = & "AF_CAVES_LINE3"; // 'Soap' MacTavish
+  lines[lines.size] = &"AF_CAVES_LINE3"; // 'Soap' MacTavish
   // Site Hotel Bravo, Afghanistan
-  lines[lines.size] = & "AF_CAVES_LINE4"; // Site Hotel Bravo, Afghanistan
+  lines[lines.size] = &"AF_CAVES_LINE4"; // Site Hotel Bravo, Afghanistan
 
   level thread maps\_introscreen::introscreen_feed_lines(lines);
 }
@@ -1098,13 +1098,13 @@ af_chase_intro() {
   lines = [];
 
   // "You Can't Win A War With A Bullet"
-  lines[lines.size] = & "AF_CHASE_INTROSCREEN_LINE1";
+  lines[lines.size] = &"AF_CHASE_INTROSCREEN_LINE1";
   // Day 7 - 18:10:[{FAKE_INTRO_SECONDS:22}]
-  lines["date"] = & "AF_CHASE_INTROSCREEN_LINE2";
+  lines["date"] = &"AF_CHASE_INTROSCREEN_LINE2";
   // 'Soap' MacTavish
-  lines[lines.size] = & "AF_CHASE_INTROSCREEN_LINE3";
+  lines[lines.size] = &"AF_CHASE_INTROSCREEN_LINE3";
   // Site Hotel Bravo, Afghanistan
-  lines[lines.size] = & "AF_CHASE_INTROSCREEN_LINE4";
+  lines[lines.size] = &"AF_CHASE_INTROSCREEN_LINE4";
 
   introscreen_feed_lines(lines);
 
@@ -1168,15 +1168,15 @@ flying_intro() {
         CinematicInGameSync("killhouse_fade");
         lines = [];
         // string not found for KILLHOUSE_INTROSCREEN_LINE_1
-        lines[lines.size] = & "KILLHOUSE_INTROSCREEN_LINE_1";
+        lines[lines.size] = &"KILLHOUSE_INTROSCREEN_LINE_1";
         // string not found for KILLHOUSE_INTROSCREEN_LINE_2
         //	lines[ "date" ] 	= &"KILLHOUSE_INTROSCREEN_LINE_2";
         // string not found for KILLHOUSE_INTROSCREEN_LINE_3
-        lines[lines.size] = & "KILLHOUSE_INTROSCREEN_LINE_3";
+        lines[lines.size] = &"KILLHOUSE_INTROSCREEN_LINE_3";
         // string not found for KILLHOUSE_INTROSCREEN_LINE_4
-        lines[lines.size] = & "KILLHOUSE_INTROSCREEN_LINE_4";
+        lines[lines.size] = &"KILLHOUSE_INTROSCREEN_LINE_4";
         // string not found for KILLHOUSE_INTROSCREEN_LINE_5
-        lines[lines.size] = & "KILLHOUSE_INTROSCREEN_LINE_5";
+        lines[lines.size] = &"KILLHOUSE_INTROSCREEN_LINE_5";
         break;
 
       case "estate":
@@ -1211,15 +1211,15 @@ flying_intro() {
         thread introscreen_generic_black_fade_in(0.05);
         lines = [];
         // Team Player
-        lines[lines.size] = & "ROADKILL_LINE_1";
+        lines[lines.size] = &"ROADKILL_LINE_1";
         // Day 1 - 16:08:[{FAKE_INTRO_SECONDS:07}]
-        lines[lines.size] = & "ROADKILL_LINE_2";
+        lines[lines.size] = &"ROADKILL_LINE_2";
         // PFC Joseph Allen
-        lines[lines.size] = & "ROADKILL_LINE_3";
+        lines[lines.size] = &"ROADKILL_LINE_3";
         // 3rd Bn, 75th Ranger Regiment
-        lines[lines.size] = & "ROADKILL_LINE_4";
+        lines[lines.size] = &"ROADKILL_LINE_4";
         // The Red Zone, Afghanistan
-        lines[lines.size] = & "ROADKILL_LINE_5";
+        lines[lines.size] = &"ROADKILL_LINE_5";
         feedline_delay = 21;
 
         feedline_delay_func = level.roadkill_feedline_delay;
@@ -1266,7 +1266,7 @@ flying_intro() {
 
   if(!special_save)
     // string not found for AUTOSAVE_LEVELSTART
-    SaveGame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", true);
+    SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", true);
   wait(0.5);
   flag_set("pullup_weapon");
 

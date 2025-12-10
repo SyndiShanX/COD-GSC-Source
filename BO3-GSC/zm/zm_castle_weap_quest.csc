@@ -18,16 +18,16 @@
 #namespace zm_castle_weap_quest;
 
 function autoexec __init__sytem__() {
-  system::register("zm_castle_weap_quest", & __init__, undefined, undefined);
+  system::register("zm_castle_weap_quest", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.var_f302359b = struct::get_array("dragon_position", "targetname");
-  clientfield::register("actor", "make_client_clone", 5000, 4, "int", & function_90c151e6, 0, 0);
+  clientfield::register("actor", "make_client_clone", 5000, 4, "int", &function_90c151e6, 0, 0);
   for(i = 0; i < level.var_f302359b.size; i++) {
-    clientfield::register("world", level.var_f302359b[i].script_parameters, 5000, 3, "int", & function_cda3a15d, 0, 0);
+    clientfield::register("world", level.var_f302359b[i].script_parameters, 5000, 3, "int", &function_cda3a15d, 0, 0);
   }
-  clientfield::register("toplayer", "bow_pickup_fx", 5000, 1, "int", & function_4e75b7c1, 0, 0);
+  clientfield::register("toplayer", "bow_pickup_fx", 5000, 1, "int", &function_4e75b7c1, 0, 0);
 }
 
 function main() {
@@ -60,9 +60,9 @@ function main() {
   level.var_93ad1521[1] = "cin_t7_ai_zm_dlc1_dragonhead_idle_b";
   level.var_16db17aa = [];
   level.var_16db17aa[0] = "cin_t7_ai_zm_dlc1_dragonhead_idle_twitch_roar";
-  scene::add_scene_func(level.var_93ad1521[0], & function_8cce2397);
-  scene::add_scene_func(level.var_93ad1521[1], & function_8cce2397);
-  scene::add_scene_func(level.var_16db17aa[0], & function_def5820e);
+  scene::add_scene_func(level.var_93ad1521[0], &function_8cce2397);
+  scene::add_scene_func(level.var_93ad1521[1], &function_8cce2397);
+  scene::add_scene_func(level.var_16db17aa[0], &function_def5820e);
   level.var_f41bc81e = % zm_castle::ai_zm_dlc1_dragonhead_zombie_impact;
   function_46c9cb0();
   util::waitforallclients();
@@ -86,7 +86,7 @@ function main() {
       level.var_3cc6503b[j][level.var_f302359b[i].script_parameters] useanimtree($zm_castle);
       level.var_abd9e961[j][level.var_f302359b[i].script_parameters] = getent(j, level.var_f302359b[i].script_label + "_mini", "targetname");
     }
-    array::run_all(level.var_abd9e961[j], & function_c9ca8c4b, j);
+    array::run_all(level.var_abd9e961[j], &function_c9ca8c4b, j);
   }
   level.var_ab74f2fa = 1;
 }

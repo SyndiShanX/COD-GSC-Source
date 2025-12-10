@@ -18,16 +18,16 @@ init_craftables() {
   precachestring(&"ZM_PRISON_KEY_DOOR");
   level.craftable_piece_count = 10;
   register_clientfields();
-  add_zombie_craftable("alcatraz_shield_zm", & "ZM_PRISON_CRAFT_RIOT", undefined, & "ZOMBIE_BOUGHT_RIOT", undefined, 1);
+  add_zombie_craftable("alcatraz_shield_zm", &"ZM_PRISON_CRAFT_RIOT", undefined, &"ZOMBIE_BOUGHT_RIOT", undefined, 1);
   add_zombie_craftable_vox_category("alcatraz_shield_zm", "build_zs");
   make_zombie_craftable_open("alcatraz_shield_zm", "t6_wpn_zmb_shield_dlc2_dmg0_world", vectorscale((0, -1, 0), 90.0), (0, 0, level.riotshield_placement_zoffset));
-  add_zombie_craftable("packasplat", & "ZM_PRISON_CRAFT_PACKASPLAT", undefined, undefined, ::onfullycrafted_packasplat, 1);
+  add_zombie_craftable("packasplat", &"ZM_PRISON_CRAFT_PACKASPLAT", undefined, undefined, ::onfullycrafted_packasplat, 1);
   add_zombie_craftable_vox_category("packasplat", "build_bsm");
   make_zombie_craftable_open("packasplat", "p6_anim_zm_al_packasplat", vectorscale((0, -1, 0), 90.0));
   level.craftable_piece_swap_allowed = 0;
   add_zombie_craftable("quest_key1");
-  add_zombie_craftable("plane", & "ZM_PRISON_CRAFT_PLANE", & "ZM_PRISON_CRAFTING_PLANE", undefined, ::onfullycrafted_plane);
-  add_zombie_craftable("refuelable_plane", & "ZM_PRISON_REFUEL_PLANE", & "ZM_PRISON_REFUELING_PLANE", undefined, ::onfullycrafted_refueled);
+  add_zombie_craftable("plane", &"ZM_PRISON_CRAFT_PLANE", &"ZM_PRISON_CRAFTING_PLANE", undefined, ::onfullycrafted_plane);
+  add_zombie_craftable("refuelable_plane", &"ZM_PRISON_REFUEL_PLANE", &"ZM_PRISON_REFUELING_PLANE", undefined, ::onfullycrafted_refueled);
   in_game_checklist_setup();
 }
 
@@ -158,7 +158,7 @@ register_clientfields() {
 }
 
 riotshieldcraftable() {
-  maps\mp\zombies\_zm_craftables::craftable_trigger_think("riotshield_zm_craftable_trigger", "alcatraz_shield_zm", "alcatraz_shield_zm", & "ZOMBIE_GRAB_RIOTSHIELD", 1, 1);
+  maps\mp\zombies\_zm_craftables::craftable_trigger_think("riotshield_zm_craftable_trigger", "alcatraz_shield_zm", "alcatraz_shield_zm", &"ZOMBIE_GRAB_RIOTSHIELD", 1, 1);
 }
 
 packasplatcraftable() {

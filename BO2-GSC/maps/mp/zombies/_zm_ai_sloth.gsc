@@ -3150,7 +3150,7 @@ create_candy_booze_trigger() {
   gift_trigger.prompt_and_visibility_func = ::sloth_gift_prompt;
   gift_trigger.originfunc = ::sloth_get_unitrigger_origin;
   gift_trigger.buildablestruct.building = "";
-  gift_trigger.building_prompt = & "ZM_BURIED_GIVING";
+  gift_trigger.building_prompt = &"ZM_BURIED_GIVING";
   gift_trigger.build_weapon = "no_hands_zm";
   gift_trigger.ignore_open_sesame = 1;
   gift_trigger.usetime = int(750);
@@ -3228,9 +3228,9 @@ sloth_gift_prompt(player) {
 
     if(isDefined(piece)) {
       if(piece.buildablename == "candy")
-        level.zombie_buildables["sloth"].hint = & "ZM_BURIED_CANDY_GV";
+        level.zombie_buildables["sloth"].hint = &"ZM_BURIED_CANDY_GV";
       else
-        level.zombie_buildables["sloth"].hint = & "ZM_BURIED_BOOZE_GV";
+        level.zombie_buildables["sloth"].hint = &"ZM_BURIED_BOOZE_GV";
     }
 
     can_use = self buildabletrigger_update_prompt(player);

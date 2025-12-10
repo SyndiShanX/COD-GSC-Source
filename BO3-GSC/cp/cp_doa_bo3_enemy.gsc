@@ -34,9 +34,9 @@
 #namespace namespace_51bd792;
 
 function init() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("doaWarlordShouldSDoSpecial", & function_43f48136);
-  behaviortreenetworkutility::registerbehaviortreeaction("doaWarlordSpecialAction", & function_c9e4e727, & function_c238a312, undefined);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("doaWarlordUpdateToGoal", & function_2fd0d5c7);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("doaWarlordShouldSDoSpecial", &function_43f48136);
+  behaviortreenetworkutility::registerbehaviortreeaction("doaWarlordSpecialAction", &function_c9e4e727, &function_c238a312, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("doaWarlordUpdateToGoal", &function_2fd0d5c7);
 }
 
 function function_65762352(classname, var_3a9f2119) {
@@ -500,7 +500,7 @@ function function_4d2a4a76(spawner, loc, def) {
     ai.var_2d8174e3 = 1;
     ai.ignorevortices = 1;
     ai.var_d538832c = 1;
-    ai.custom_damage_func = & function_d45df351;
+    ai.custom_damage_func = &function_d45df351;
     ai ai::set_behavior_attribute("rogue_control", "forced_level_3");
     ai ai::set_behavior_attribute("rogue_control_speed", "sprint");
     ai.team = "axis";
@@ -538,8 +538,8 @@ function function_fb051310(spawner, loc, def, droptoground = 1, hp, force = 0) {
     ai.var_2d8174e3 = 1;
     ai.def = def;
     ai.untouchable = 1;
-    ai.custom_damage_func = & function_d4213fbb;
-    ai callback::add_callback("hash_acb66515", & function_7ebf419e);
+    ai.custom_damage_func = &function_d4213fbb;
+    ai callback::add_callback("hash_acb66515", &function_7ebf419e);
     ai thread doa_utility::function_dbcf48a0(1);
     ai thread function_5f1a1e65(-50000);
     if(isDefined(droptoground) && droptoground) {
@@ -792,7 +792,7 @@ function function_ecbf1358(origin, angles, carried = 0) {
   egg.targetname = "zombietron_spider_egg";
   egg setModel("zombietron_spider_egg");
   egg setscale(0.5);
-  egg.death_func = & function_e4004164;
+  egg.death_func = &function_e4004164;
   egg.health = 2000;
   egg.takedamage = 1;
   egg.team = "axis";
@@ -889,7 +889,7 @@ function function_b9980eda(spawner, loc, def, teleport = 1) {
     ai.var_2d8174e3 = 1;
     ai.zombie_move_speed = "sprint";
     ai.no_ragdoll = 1;
-    aiutility::addaioverridedamagecallback(ai, & function_c1b5c042);
+    aiutility::addaioverridedamagecallback(ai, &function_c1b5c042);
     if(isDefined(teleport) && teleport) {
       ai thread shadowteleportmenow(1);
       ai playLoopSound("zmb_smokeman_looper");
@@ -898,7 +898,7 @@ function function_b9980eda(spawner, loc, def, teleport = 1) {
   return ai;
 }
 
-function function_ef4fa49d( & spots, mindist = 300) {
+function function_ef4fa49d(&spots, mindist = 300) {
   mindistsq = mindist * mindist;
   newspots = [];
   foreach(spot in spots) {
@@ -1440,7 +1440,7 @@ function private function_c0147a11() {
   self.var_e6ea564a = int(self.health * 0.2);
   self.goalradius = 16;
   self.goalheight = 256;
-  self.overrideactordamage = & margwadamage;
+  self.overrideactordamage = &margwadamage;
   self.zombie_move_speed = "walk";
   self thread function_1c99c7cd();
   self thread function_e8a17069();

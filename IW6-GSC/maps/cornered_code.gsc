@@ -158,7 +158,7 @@ cornered_falling_death() {
   wait 0.5;
   var_0 show();
   wait 3.0;
-  setdvar("ui_deadquote", & "CORNERED_FALL_FAIL");
+  setdvar("ui_deadquote", &"CORNERED_FALL_FAIL");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -327,7 +327,7 @@ balcony_death_func() {
   }
   self.dontdonotetracks = 1;
   self.ignoreme = 1;
-  self setlookattext("", & "");
+  self setlookattext("", &"");
   maps\_utility::gun_remove();
   self setCanDamage(0);
   self.team = "neutral";

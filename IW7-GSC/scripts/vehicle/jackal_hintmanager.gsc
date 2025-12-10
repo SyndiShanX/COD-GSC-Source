@@ -14,12 +14,12 @@ hintmanager_init() {
 }
 
 hint_manager_common_hints() {
-  lib_0BDC::jackal_hintmanager_hint_add("roll", & "ZEROG_ROTATE_TUTORIAL_HINT", ::hint_roll_conditions, ::hint_roll_terminator, ["+actionslot 3", "+actionslot 4"]);
-  lib_0BDC::jackal_hintmanager_hint_add("missiles", & "JACKAL_MISSILE", ::hint_missile_conditions, ::hint_missile_terminator, ["+frag"]);
-  lib_0BDC::jackal_hintmanager_hint_add("weaponDrone", & "JACKAL_MARK_DROPZONE", ::hint_weapdrone_conditions, ::hint_weapdrone_terminator);
-  lib_0BDC::jackal_hintmanager_hint_add("dodfight", & "JACKAL_ADS", ::hint_dogfight_conditions, ::hint_dogfight_terminator, ["+speed_throw", "+toggleads_throw", "+ads_akimbo_accessible"]);
-  lib_0BDC::jackal_hintmanager_hint_add("ascend", & "ZEROG_ASCEND_TUTORIAL_HINT", ::hint_ascend_conditions, ::hint_ascend_terminator, ["+gostand"]);
-  lib_0BDC::jackal_hintmanager_hint_add("descend", & "ZEROG_DESCEND_TUTORIAL_HINT", ::hint_descend_conditions, ::hint_descend_terminator, ["+stance"]);
+  lib_0BDC::jackal_hintmanager_hint_add("roll", &"ZEROG_ROTATE_TUTORIAL_HINT", ::hint_roll_conditions, ::hint_roll_terminator, ["+actionslot 3", "+actionslot 4"]);
+  lib_0BDC::jackal_hintmanager_hint_add("missiles", &"JACKAL_MISSILE", ::hint_missile_conditions, ::hint_missile_terminator, ["+frag"]);
+  lib_0BDC::jackal_hintmanager_hint_add("weaponDrone", &"JACKAL_MARK_DROPZONE", ::hint_weapdrone_conditions, ::hint_weapdrone_terminator);
+  lib_0BDC::jackal_hintmanager_hint_add("dodfight", &"JACKAL_ADS", ::hint_dogfight_conditions, ::hint_dogfight_terminator, ["+speed_throw", "+toggleads_throw", "+ads_akimbo_accessible"]);
+  lib_0BDC::jackal_hintmanager_hint_add("ascend", &"ZEROG_ASCEND_TUTORIAL_HINT", ::hint_ascend_conditions, ::hint_ascend_terminator, ["+gostand"]);
+  lib_0BDC::jackal_hintmanager_hint_add("descend", &"ZEROG_DESCEND_TUTORIAL_HINT", ::hint_descend_conditions, ::hint_descend_terminator, ["+stance"]);
 }
 
 hint_manager() {

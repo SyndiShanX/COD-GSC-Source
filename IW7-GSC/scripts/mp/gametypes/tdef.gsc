@@ -53,7 +53,7 @@ main() {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
   }
 
-  game["strings"]["overtime_hint"] = & "MP_FIRST_BLOOD";
+  game["strings"]["overtime_hint"] = &"MP_FIRST_BLOOD";
   game["dialog"]["drone_reset"] = "defender_obj_respawned";
   game["dialog"]["ally_own_drone"] = "tdef_ally_own_drone";
   game["dialog"]["enemy_own_drone"] = "tdef_enemy_own_drone";
@@ -106,18 +106,18 @@ onstartgametype() {
     game["defenders"] = var_00;
   }
 
-  scripts\mp\utility::setobjectivetext("allies", & "OBJECTIVES_TDEF");
-  scripts\mp\utility::setobjectivetext("axis", & "OBJECTIVES_TDEF");
+  scripts\mp\utility::setobjectivetext("allies", &"OBJECTIVES_TDEF");
+  scripts\mp\utility::setobjectivetext("axis", &"OBJECTIVES_TDEF");
   if(level.splitscreen) {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_TDEF");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_TDEF");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_TDEF");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_TDEF");
   } else {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_TDEF_SCORE");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_TDEF_SCORE");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_TDEF_SCORE");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_TDEF_SCORE");
   }
 
-  scripts\mp\utility::setobjectivehinttext("allies", & "OBJECTIVES_TDEF_ATTACKER_HINT");
-  scripts\mp\utility::setobjectivehinttext("axis", & "OBJECTIVES_TDEF_ATTACKER_HINT");
+  scripts\mp\utility::setobjectivehinttext("allies", &"OBJECTIVES_TDEF_ATTACKER_HINT");
+  scripts\mp\utility::setobjectivehinttext("axis", &"OBJECTIVES_TDEF_ATTACKER_HINT");
   createfx();
   scripts\mp\gametypes\obj_ball::ball_default_origins();
   scripts\mp\gametypes\obj_ball::ball_init_map_min_max();

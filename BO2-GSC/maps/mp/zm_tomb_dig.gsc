@@ -76,7 +76,7 @@ generate_shovel_unitrigger(e_shovel) {
   s_unitrigger_stub.script_width = 64;
   s_unitrigger_stub.script_height = 64;
   s_unitrigger_stub.cursor_hint = "HINT_NOICON";
-  s_unitrigger_stub.hint_string = & "ZM_TOMB_SHPU";
+  s_unitrigger_stub.hint_string = &"ZM_TOMB_SHPU";
   s_unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   s_unitrigger_stub.require_look_at = 1;
   s_unitrigger_stub.prompt_and_visibility_func = ::shovel_trigger_prompt_and_visiblity;
@@ -96,10 +96,10 @@ shovel_prompt_update(e_player) {
   if(!self unitrigger_stub_show_hint_prompt_valid(e_player))
     return false;
 
-  self.hint_string = & "ZM_TOMB_SHPU";
+  self.hint_string = &"ZM_TOMB_SHPU";
 
   if(isDefined(e_player.dig_vars["has_shovel"]) && e_player.dig_vars["has_shovel"])
-    self.hint_string = & "ZM_TOMB_SHAG";
+    self.hint_string = &"ZM_TOMB_SHAG";
 
   return true;
 }
@@ -479,7 +479,7 @@ dig_up_weapon(digger) {
   m_weapon endon("dig_up_weapon_timed_out");
   playFXOnTag(level._effect["special_glow"], m_weapon, "tag_origin");
   m_weapon.trigger = tomb_spawn_trigger_radius(v_spawnpt, 100, 1);
-  m_weapon.trigger.hint_string = & "ZM_TOMB_X2PU";
+  m_weapon.trigger.hint_string = &"ZM_TOMB_X2PU";
   m_weapon.trigger.hint_parm1 = getweapondisplayname(str_weapon);
   m_weapon.trigger waittill("trigger", player);
   m_weapon.trigger notify("weapon_grabbed");

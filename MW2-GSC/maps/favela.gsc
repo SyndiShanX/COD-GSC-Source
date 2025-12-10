@@ -730,7 +730,7 @@ chase() {
   level.soap thread magic_bullet_shield();
 
   chase_objective_location = getent("chase_objective_location", "targetname");
-  objective_add(1, "current", & "FAVELA_OBJ_CATCH_RUNNER", chase_objective_location.origin);
+  objective_add(1, "current", &"FAVELA_OBJ_CATCH_RUNNER", chase_objective_location.origin);
 
   waveNode = getnode("soap_start_node", "targetname");
   waveNode anim_teleport_solo(level.soap, "run_and_wave");
@@ -1230,7 +1230,7 @@ opening_death() {
 
 add_top_of_hill_objective() {
   originEnt = getent("mission_objective_location", "targetname");
-  objective_add(2, "current", & "FAVELA_OBJ_REACH_TOP", originEnt.origin);
+  objective_add(2, "current", &"FAVELA_OBJ_REACH_TOP", originEnt.origin);
 }
 
 favela_friendlies() {
@@ -1414,7 +1414,7 @@ objective_on_faust() {
 
   // put the objective marker on Faust
   objective_onentity(2, self, (0, 0, 70));
-  objective_setpointertextoverride(2, & "FAVELA_OBJ_CAPTURE");
+  objective_setpointertextoverride(2, &"FAVELA_OBJ_CAPTURE");
   setsaveddvar("objectiveFadeTooFar", 0.1);
 
   // wait until we delete Faust

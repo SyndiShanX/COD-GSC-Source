@@ -55,20 +55,20 @@ init_powerups() {
   if(!isDefined(level.zombie_special_drop_array)) {
     level.zombie_special_drop_array = [];
   }
-  add_zombie_powerup("nuke", "zombie_bomb", & "ZOMBIE_POWERUP_NUKE", "misc/fx_zombie_mini_nuke");
-  add_zombie_powerup("insta_kill", "zombie_skull", & "ZOMBIE_POWERUP_INSTA_KILL");
-  add_zombie_powerup("double_points", "zombie_x2_icon", & "ZOMBIE_POWERUP_DOUBLE_POINTS");
-  add_zombie_powerup("full_ammo", "zombie_ammocan", & "ZOMBIE_POWERUP_MAX_AMMO");
+  add_zombie_powerup("nuke", "zombie_bomb", &"ZOMBIE_POWERUP_NUKE", "misc/fx_zombie_mini_nuke");
+  add_zombie_powerup("insta_kill", "zombie_skull", &"ZOMBIE_POWERUP_INSTA_KILL");
+  add_zombie_powerup("double_points", "zombie_x2_icon", &"ZOMBIE_POWERUP_DOUBLE_POINTS");
+  add_zombie_powerup("full_ammo", "zombie_ammocan", &"ZOMBIE_POWERUP_MAX_AMMO");
   if(!level.mutators["mutator_noBoards"]) {
-    add_zombie_powerup("carpenter", "zombie_carpenter", & "ZOMBIE_POWERUP_MAX_AMMO");
+    add_zombie_powerup("carpenter", "zombie_carpenter", &"ZOMBIE_POWERUP_MAX_AMMO");
   }
   if(!level.mutators["mutator_noMagicBox"]) {
-    add_zombie_powerup("fire_sale", "zombie_firesale", & "ZOMBIE_POWERUP_MAX_AMMO");
+    add_zombie_powerup("fire_sale", "zombie_firesale", &"ZOMBIE_POWERUP_MAX_AMMO");
   }
-  add_zombie_powerup("bonfire_sale", "zombie_pickup_bonfire", & "ZOMBIE_POWERUP_MAX_AMMO");
-  add_zombie_powerup("all_revive", "zombie_revive", & "ZOMBIE_POWERUP_MAX_AMMO");
+  add_zombie_powerup("bonfire_sale", "zombie_pickup_bonfire", &"ZOMBIE_POWERUP_MAX_AMMO");
+  add_zombie_powerup("all_revive", "zombie_revive", &"ZOMBIE_POWERUP_MAX_AMMO");
   add_zombie_special_drop("dog");
-  add_zombie_powerup("minigun", "zombie_pickup_minigun", & "ZOMBIE_POWERUP_MINIGUN", level._effect["minigun_pickup"]);
+  add_zombie_powerup("minigun", "zombie_pickup_minigun", &"ZOMBIE_POWERUP_MINIGUN", level._effect["minigun_pickup"]);
   randomize_powerups();
   level.zombie_powerup_index = 0;
   randomize_powerups();

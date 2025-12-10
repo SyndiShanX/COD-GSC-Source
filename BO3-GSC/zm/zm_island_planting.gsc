@@ -56,7 +56,7 @@
 
 function main() {
   register_clientfields();
-  level.bonus_points_powerup_override = & function_bb96e04a;
+  level.bonus_points_powerup_override = &function_bb96e04a;
   level thread init_planting_spots();
   function_54af12e9();
   function_72298dfd();
@@ -107,8 +107,8 @@ function function_fedc998b(var_e7abf7d0 = 0) {
   s_plant_unitrigger.script_width = 100;
   s_plant_unitrigger.script_length = 100;
   s_plant_unitrigger.script_height = 150;
-  s_plant_unitrigger.prompt_and_visibility_func = & planting_spot_trigger_visibility;
-  zm_unitrigger::register_static_unitrigger(s_plant_unitrigger, & planting_spot_unitrigger_think);
+  s_plant_unitrigger.prompt_and_visibility_func = &planting_spot_trigger_visibility;
+  zm_unitrigger::register_static_unitrigger(s_plant_unitrigger, &planting_spot_unitrigger_think);
   self.s_plant_unitrigger = s_plant_unitrigger;
   self.var_75c7a97e = 0;
   self.var_594609f9 = 0;
@@ -678,7 +678,7 @@ function function_41663231(b_upgraded = 0) {
       util::wait_network_frame();
       s_temp struct::delete();
       self.s_plant.model clientfield::set("zombie_or_grenade_spawned_from_minor_cache_plant", 1);
-      self.s_plant.model util::delay(3, undefined, & clientfield::set, "zombie_or_grenade_spawned_from_minor_cache_plant", 0);
+      self.s_plant.model util::delay(3, undefined, &clientfield::set, "zombie_or_grenade_spawned_from_minor_cache_plant", 0);
       e_who notify("player_revealed_cache_plant_bad");
       break;
     }
@@ -690,7 +690,7 @@ function function_41663231(b_upgraded = 0) {
       grenade = getweapon("frag_grenade");
       e_who magicgrenadetype(grenade, v_spawnpt, vectorscale((0, 0, 1), 300), 3);
       self.s_plant.model clientfield::set("zombie_or_grenade_spawned_from_minor_cache_plant", 2);
-      self.s_plant.model util::delay(3, undefined, & clientfield::set, "zombie_or_grenade_spawned_from_minor_cache_plant", 0);
+      self.s_plant.model util::delay(3, undefined, &clientfield::set, "zombie_or_grenade_spawned_from_minor_cache_plant", 0);
       e_who notify("player_revealed_cache_plant_bad");
       break;
     }
@@ -713,8 +713,8 @@ function function_a6ebbe13() {
   s_plant_unitrigger.script_width = 100;
   s_plant_unitrigger.script_length = 100;
   s_plant_unitrigger.script_height = 150;
-  s_plant_unitrigger.prompt_and_visibility_func = & function_be57d4be;
-  zm_unitrigger::register_static_unitrigger(s_plant_unitrigger, & function_241f6a3e);
+  s_plant_unitrigger.prompt_and_visibility_func = &function_be57d4be;
+  zm_unitrigger::register_static_unitrigger(s_plant_unitrigger, &function_241f6a3e);
   self.var_23c5e7a6 = s_plant_unitrigger;
   self.s_plant flag::clear("plant_interact_trigger_used");
 }
@@ -909,8 +909,8 @@ function function_192bd777() {
   s_plant_unitrigger.script_width = 100;
   s_plant_unitrigger.script_length = 100;
   s_plant_unitrigger.script_height = 150;
-  s_plant_unitrigger.prompt_and_visibility_func = & function_4fdc4f62;
-  zm_unitrigger::register_static_unitrigger(s_plant_unitrigger, & function_a5e6439a);
+  s_plant_unitrigger.prompt_and_visibility_func = &function_4fdc4f62;
+  zm_unitrigger::register_static_unitrigger(s_plant_unitrigger, &function_a5e6439a);
   self.var_23c5e7a6 = s_plant_unitrigger;
   self.s_plant flag::clear("plant_interact_trigger_used");
 }
@@ -953,10 +953,10 @@ function function_a5e6439a() {
 }
 
 function function_cd4b5ba1() {
-  scene::add_scene_func("zm_dlc2_plant_babysitter_gib_zombie", & function_389c8477, "play");
-  scene::add_scene_func("zm_dlc2_plant_babysitter_grab_zombie_crawler", & function_a4a048a1, "play");
-  scene::add_scene_func("zm_dlc2_plant_babysitter_grab_spider", & function_6d8761e4, "play");
-  scene::add_scene_func("zm_dlc2_plant_babysitter_outro", & function_7a4276be, "done");
+  scene::add_scene_func("zm_dlc2_plant_babysitter_gib_zombie", &function_389c8477, "play");
+  scene::add_scene_func("zm_dlc2_plant_babysitter_grab_zombie_crawler", &function_a4a048a1, "play");
+  scene::add_scene_func("zm_dlc2_plant_babysitter_grab_spider", &function_6d8761e4, "play");
+  scene::add_scene_func("zm_dlc2_plant_babysitter_outro", &function_7a4276be, "done");
 }
 
 function function_12c8548e(b_upgraded = 0) {
@@ -1027,7 +1027,7 @@ function function_12c8548e(b_upgraded = 0) {
   }
   if(!(isDefined(e_who.missinglegs) && e_who.missinglegs) && (!(isDefined(e_who.b_is_spider) && e_who.b_is_spider))) {
     e_who.var_2ff6aa22 = 1;
-    e_who thread util::delay(1, "death", & function_9a107da1);
+    e_who thread util::delay(1, "death", &function_9a107da1);
     self scene::play("zm_dlc2_plant_babysitter_gib_zombie", var_73dc61d6);
   }
   if(isDefined(e_who.b_is_spider) && e_who.b_is_spider) {
@@ -1144,23 +1144,23 @@ function function_7a4276be(a_ents) {
 }
 
 function function_349e17a5() {
-  scene::add_scene_func("zm_dlc2_plant_trap_outro", & function_2df6714, "done");
-  scene::add_scene_func("zm_dlc2_plant_trap_attack_front", & function_9e124689, "play");
-  scene::add_scene_func("zm_dlc2_plant_trap_attack_back", & function_9e124689, "play");
-  scene::add_scene_func("zm_dlc2_plant_trap_attack_left", & function_9e124689, "play");
-  scene::add_scene_func("zm_dlc2_plant_trap_attack_right", & function_9e124689, "play");
-  scene::add_scene_func("zm_dlc2_plant_trap_attack_no_target_front", & function_9e124689, "play");
-  scene::add_scene_func("zm_dlc2_plant_trap_attack_no_target_back", & function_9e124689, "play");
-  scene::add_scene_func("zm_dlc2_plant_trap_attack_no_target_left", & function_9e124689, "play");
-  scene::add_scene_func("zm_dlc2_plant_trap_attack_no_target_right", & function_9e124689, "play");
-  scene::add_scene_func("zm_dlc2_plant_trap_attack_crawler_front", & function_9e124689, "play");
-  scene::add_scene_func("zm_dlc2_plant_trap_attack_crawler_back", & function_9e124689, "play");
-  scene::add_scene_func("zm_dlc2_plant_trap_attack_crawler_left", & function_9e124689, "play");
-  scene::add_scene_func("zm_dlc2_plant_trap_attack_crawler_right", & function_9e124689, "play");
-  scene::add_scene_func("zm_dlc2_plant_trap_attack_spider_front", & function_b1a9e247, "play");
-  scene::add_scene_func("zm_dlc2_plant_trap_attack_spider_back", & function_b1a9e247, "play");
-  scene::add_scene_func("zm_dlc2_plant_trap_attack_spider_left", & function_b1a9e247, "play");
-  scene::add_scene_func("zm_dlc2_plant_trap_attack_spider_right", & function_b1a9e247, "play");
+  scene::add_scene_func("zm_dlc2_plant_trap_outro", &function_2df6714, "done");
+  scene::add_scene_func("zm_dlc2_plant_trap_attack_front", &function_9e124689, "play");
+  scene::add_scene_func("zm_dlc2_plant_trap_attack_back", &function_9e124689, "play");
+  scene::add_scene_func("zm_dlc2_plant_trap_attack_left", &function_9e124689, "play");
+  scene::add_scene_func("zm_dlc2_plant_trap_attack_right", &function_9e124689, "play");
+  scene::add_scene_func("zm_dlc2_plant_trap_attack_no_target_front", &function_9e124689, "play");
+  scene::add_scene_func("zm_dlc2_plant_trap_attack_no_target_back", &function_9e124689, "play");
+  scene::add_scene_func("zm_dlc2_plant_trap_attack_no_target_left", &function_9e124689, "play");
+  scene::add_scene_func("zm_dlc2_plant_trap_attack_no_target_right", &function_9e124689, "play");
+  scene::add_scene_func("zm_dlc2_plant_trap_attack_crawler_front", &function_9e124689, "play");
+  scene::add_scene_func("zm_dlc2_plant_trap_attack_crawler_back", &function_9e124689, "play");
+  scene::add_scene_func("zm_dlc2_plant_trap_attack_crawler_left", &function_9e124689, "play");
+  scene::add_scene_func("zm_dlc2_plant_trap_attack_crawler_right", &function_9e124689, "play");
+  scene::add_scene_func("zm_dlc2_plant_trap_attack_spider_front", &function_b1a9e247, "play");
+  scene::add_scene_func("zm_dlc2_plant_trap_attack_spider_back", &function_b1a9e247, "play");
+  scene::add_scene_func("zm_dlc2_plant_trap_attack_spider_left", &function_b1a9e247, "play");
+  scene::add_scene_func("zm_dlc2_plant_trap_attack_spider_right", &function_b1a9e247, "play");
 }
 
 function function_5d62716(b_upgraded = 0, var_f40460f5) {
@@ -1564,8 +1564,8 @@ function function_2df6714(a_ents) {
 }
 
 function function_869faee7() {
-  level.func_clone_plant_respawn = & func_clone_plant_respawn;
-  level.check_end_solo_game_override = & check_end_solo_game_override;
+  level.func_clone_plant_respawn = &func_clone_plant_respawn;
+  level.check_end_solo_game_override = &check_end_solo_game_override;
   level.var_50d5cc84 = 0;
 }
 
@@ -1657,8 +1657,8 @@ function function_b78c42da() {
   s_plant_unitrigger.script_width = 100;
   s_plant_unitrigger.script_length = 100;
   s_plant_unitrigger.script_height = 150;
-  s_plant_unitrigger.prompt_and_visibility_func = & function_d4d40251;
-  zm_unitrigger::register_static_unitrigger(s_plant_unitrigger, & function_7756fe45);
+  s_plant_unitrigger.prompt_and_visibility_func = &function_d4d40251;
+  zm_unitrigger::register_static_unitrigger(s_plant_unitrigger, &function_7756fe45);
   self.var_23c5e7a6 = s_plant_unitrigger;
   self.s_plant flag::clear("plant_interact_trigger_used");
 }
@@ -1967,8 +1967,8 @@ function function_bf89dc95() {
   s_plant_unitrigger.script_width = 100;
   s_plant_unitrigger.script_length = 100;
   s_plant_unitrigger.script_height = 150;
-  s_plant_unitrigger.prompt_and_visibility_func = & function_7187558;
-  zm_unitrigger::register_static_unitrigger(s_plant_unitrigger, & function_c31605a8);
+  s_plant_unitrigger.prompt_and_visibility_func = &function_7187558;
+  zm_unitrigger::register_static_unitrigger(s_plant_unitrigger, &function_c31605a8);
   self.var_23c5e7a6 = s_plant_unitrigger;
   self.s_plant flag::clear("plant_interact_trigger_used");
 }
@@ -2135,7 +2135,7 @@ function dig_up_weapon(e_digger, wpn_to_spawn, var_c6fcdf22 = undefined) {
   m_weapon endon("dig_up_weapon_timed_out");
   m_weapon.trigger = zm_island_util::spawn_trigger_radius(v_spawnpt, 100, 1);
   m_weapon.trigger.wpn = wpn_to_spawn;
-  m_weapon.trigger.prompt_and_visibility_func = & weapon_trigger_update_prompt;
+  m_weapon.trigger.prompt_and_visibility_func = &weapon_trigger_update_prompt;
   m_weapon.trigger flag::init("weapon_grabbed_or_timed_out");
   m_weapon.trigger waittill("trigger", player);
   m_weapon notify("weapon_grabbed");
@@ -2285,7 +2285,7 @@ function function_40428876(s_plant, str_anim) {
 }
 
 function function_e851ad39() {
-  zm_devgui::add_custom_devgui_callback( & function_2dbcc8ad);
+  zm_devgui::add_custom_devgui_callback(&function_2dbcc8ad);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");

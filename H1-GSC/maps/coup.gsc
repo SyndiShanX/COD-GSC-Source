@@ -51,14 +51,14 @@ main() {
   level.weaponclipmodels[1] = "weapon_ak74u_clip";
   level.mig29_near_distance_override = 11880;
   maps\_utility::default_start(::startintro);
-  maps\_utility::add_start("drive", ::startdrive, & "STARTS_DRIVE");
-  maps\_utility::add_start("doorkick", ::startdoorkick, & "STARTS_DOORKICK");
-  maps\_utility::add_start("trashstumble", ::starttrashstumble, & "STARTS_TRASHSTUMBLE");
-  maps\_utility::add_start("runners2", ::startrunners2, & "STARTS_RUNNERS2");
-  maps\_utility::add_start("alley", ::startalley, & "STARTS_ALLEY2");
-  maps\_utility::add_start("shore", ::startshore, & "STARTS_SHORE");
-  maps\_utility::add_start("carexit", ::startcarexit, & "STARTS_CAREXIT");
-  maps\_utility::add_start("ending", ::startending, & "STARTS_END");
+  maps\_utility::add_start("drive", ::startdrive, &"STARTS_DRIVE");
+  maps\_utility::add_start("doorkick", ::startdoorkick, &"STARTS_DOORKICK");
+  maps\_utility::add_start("trashstumble", ::starttrashstumble, &"STARTS_TRASHSTUMBLE");
+  maps\_utility::add_start("runners2", ::startrunners2, &"STARTS_RUNNERS2");
+  maps\_utility::add_start("alley", ::startalley, &"STARTS_ALLEY2");
+  maps\_utility::add_start("shore", ::startshore, &"STARTS_SHORE");
+  maps\_utility::add_start("carexit", ::startcarexit, &"STARTS_CAREXIT");
+  maps\_utility::add_start("ending", ::startending, &"STARTS_END");
   maps\coup_precache::main();
   animscripts\dog\dog_init::initdoganimations();
   maps\coup_fx::main();
@@ -2058,8 +2058,8 @@ ending_speech() {
   var_1 = 27.6;
   level.player maps\_utility::delaythread(var_0, maps\coup_code::playalasadspeech, "coup_kaa_laywaste", "Just as they lay waste to our country, we shall lay waste to theirs.");
   level.player maps\_utility::delaythread(var_1, maps\coup_code::playalasadspeech, "coup_kaa_beginsa", "This is how it begins.");
-  maps\_utility::delaythread(var_0, ::subtitle, & "COUP_SUBTITLE_10", undefined, 3.8);
-  maps\_utility::delaythread(var_1, ::subtitle, & "COUP_SUBTITLE_11", undefined, 1.6);
+  maps\_utility::delaythread(var_0, ::subtitle, &"COUP_SUBTITLE_10", undefined, 3.8);
+  maps\_utility::delaythread(var_1, ::subtitle, &"COUP_SUBTITLE_11", undefined, 1.6);
 }
 
 ending_slowmo() {
@@ -2708,15 +2708,15 @@ initsubtitles() {
 }
 
 subtitlesequence() {
-  maps\_utility::delaythread(level.coup_kaa_onenation_timing, ::subtitle, & "COUP_SUBTITLE_01A", & "COUP_SUBTITLE_01B", 8.5);
-  maps\_utility::delaythread(level.coup_kaa_newera_timing, ::subtitle, & "COUP_SUBTITLE_02A", & "COUP_SUBTITLE_02B", 8.8, 1);
-  maps\_utility::delaythread(level.coup_kaa_selfinterest_timing, ::subtitle, & "COUP_SUBTITLE_03A", & "COUP_SUBTITLE_03B", 13, 1);
-  maps\_utility::delaythread(level.coup_kaa_notenslaved_timing, ::subtitle, & "COUP_SUBTITLE_04", undefined, 5, 1);
-  maps\_utility::delaythread(level.coup_kaa_donotfear_timing, ::subtitle, & "COUP_SUBTITLE_05A", & "COUP_SUBTITLE_05B", 9.8);
-  maps\_utility::delaythread(level.coup_kaa_freefromyoke_timing, ::subtitle, & "COUP_SUBTITLE_06A", & "COUP_SUBTITLE_06B", 6.5, 1);
-  maps\_utility::delaythread(level.coup_kaa_armiesstrong_timing, ::subtitle, & "COUP_SUBTITLE_07", undefined, 3.5);
-  maps\_utility::delaythread(level.coup_kaa_greatnation_timing, ::subtitle, & "COUP_SUBTITLE_08A", & "COUP_SUBTITLE_08B", 12.2, 1);
-  maps\_utility::delaythread(level.coup_kaa_begun_timing, ::subtitle, & "COUP_SUBTITLE_09", undefined, 3.2);
+  maps\_utility::delaythread(level.coup_kaa_onenation_timing, ::subtitle, &"COUP_SUBTITLE_01A", &"COUP_SUBTITLE_01B", 8.5);
+  maps\_utility::delaythread(level.coup_kaa_newera_timing, ::subtitle, &"COUP_SUBTITLE_02A", &"COUP_SUBTITLE_02B", 8.8, 1);
+  maps\_utility::delaythread(level.coup_kaa_selfinterest_timing, ::subtitle, &"COUP_SUBTITLE_03A", &"COUP_SUBTITLE_03B", 13, 1);
+  maps\_utility::delaythread(level.coup_kaa_notenslaved_timing, ::subtitle, &"COUP_SUBTITLE_04", undefined, 5, 1);
+  maps\_utility::delaythread(level.coup_kaa_donotfear_timing, ::subtitle, &"COUP_SUBTITLE_05A", &"COUP_SUBTITLE_05B", 9.8);
+  maps\_utility::delaythread(level.coup_kaa_freefromyoke_timing, ::subtitle, &"COUP_SUBTITLE_06A", &"COUP_SUBTITLE_06B", 6.5, 1);
+  maps\_utility::delaythread(level.coup_kaa_armiesstrong_timing, ::subtitle, &"COUP_SUBTITLE_07", undefined, 3.5);
+  maps\_utility::delaythread(level.coup_kaa_greatnation_timing, ::subtitle, &"COUP_SUBTITLE_08A", &"COUP_SUBTITLE_08B", 12.2, 1);
+  maps\_utility::delaythread(level.coup_kaa_begun_timing, ::subtitle, &"COUP_SUBTITLE_09", undefined, 3.2);
 }
 
 subtitle(var_0, var_1, var_2, var_3) {

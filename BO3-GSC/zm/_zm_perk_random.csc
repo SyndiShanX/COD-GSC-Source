@@ -15,19 +15,19 @@
 #namespace zm_perk_random;
 
 function autoexec __init__sytem__() {
-  system::register("zm_perk_random", & __init__, undefined, undefined);
+  system::register("zm_perk_random", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "perk_bottle_cycle_state", 5000, 2, "int", & start_bottle_cycling, 0, 0);
-  clientfield::register("zbarrier", "set_client_light_state", 5000, 2, "int", & set_light_state, 0, 0);
-  clientfield::register("zbarrier", "init_perk_random_machine", 5000, 1, "int", & perk_random_machine_init, 0, 0);
-  clientfield::register("zbarrier", "client_stone_emmissive_blink", 5000, 1, "int", & perk_random_machine_rock_emissive, 0, 0);
-  clientfield::register("scriptmover", "turn_active_perk_light_green", 5000, 1, "int", & turn_on_active_light_green, 0, 0);
-  clientfield::register("scriptmover", "turn_on_location_indicator", 5000, 1, "int", & turn_on_location_indicator, 0, 0);
-  clientfield::register("zbarrier", "lightning_bolt_FX_toggle", 10000, 1, "int", & lightning_bolt_fx_toggle, 0, 0);
-  clientfield::register("scriptmover", "turn_active_perk_ball_light", 5000, 1, "int", & turn_on_active_ball_light, 0, 0);
-  clientfield::register("scriptmover", "zone_captured", 5000, 1, "int", & zone_captured_cb, 0, 0);
+  clientfield::register("scriptmover", "perk_bottle_cycle_state", 5000, 2, "int", &start_bottle_cycling, 0, 0);
+  clientfield::register("zbarrier", "set_client_light_state", 5000, 2, "int", &set_light_state, 0, 0);
+  clientfield::register("zbarrier", "init_perk_random_machine", 5000, 1, "int", &perk_random_machine_init, 0, 0);
+  clientfield::register("zbarrier", "client_stone_emmissive_blink", 5000, 1, "int", &perk_random_machine_rock_emissive, 0, 0);
+  clientfield::register("scriptmover", "turn_active_perk_light_green", 5000, 1, "int", &turn_on_active_light_green, 0, 0);
+  clientfield::register("scriptmover", "turn_on_location_indicator", 5000, 1, "int", &turn_on_location_indicator, 0, 0);
+  clientfield::register("zbarrier", "lightning_bolt_FX_toggle", 10000, 1, "int", &lightning_bolt_fx_toggle, 0, 0);
+  clientfield::register("scriptmover", "turn_active_perk_ball_light", 5000, 1, "int", &turn_on_active_ball_light, 0, 0);
+  clientfield::register("scriptmover", "zone_captured", 5000, 1, "int", &zone_captured_cb, 0, 0);
   level._effect["perk_machine_light_yellow"] = "dlc1/castle/fx_wonder_fizz_light_yellow";
   level._effect["perk_machine_light_red"] = "dlc1/castle/fx_wonder_fizz_light_red";
   level._effect["perk_machine_light_green"] = "dlc1/castle/fx_wonder_fizz_light_green";

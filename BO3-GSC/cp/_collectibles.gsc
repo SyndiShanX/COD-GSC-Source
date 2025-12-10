@@ -15,7 +15,7 @@
 #namespace collectibles;
 
 function autoexec __init__sytem__() {
-  system::register("collectibles", & __init__, & __main__, undefined);
+  system::register("collectibles", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -35,8 +35,8 @@ function __main__() {
       collectible = function_8765a33c(mdl_collectible);
       array::add(level.collectibles, collectible, 0);
     }
-    callback::on_spawned( & on_player_spawned);
-    callback::on_connect( & on_player_connect);
+    callback::on_spawned(&on_player_spawned);
+    callback::on_connect(&on_player_connect);
   } else {
     foreach(mdl_collectible in mdl_collectibles) {
       mdl_collectible hide();
@@ -160,8 +160,8 @@ function function_8765a33c(mdl_collectible) {
   var_837a6185 gameobjects::set_owner_team("allies");
   var_837a6185 gameobjects::set_visible_team("any");
   var_837a6185.mdl_collectible = mdl_collectible;
-  var_837a6185.onuse = & onuse;
-  var_837a6185.onbeginuse = & onbeginuse;
+  var_837a6185.onuse = &onuse;
+  var_837a6185.onbeginuse = &onbeginuse;
   var_837a6185.single_use = 1;
   var_837a6185.origin = mdl_collectible.origin;
   var_837a6185.angles = var_837a6185.angles;

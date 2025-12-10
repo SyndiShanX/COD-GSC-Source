@@ -61,9 +61,9 @@ class cpickupitem: cbaseinteractable {
     m_n_drop_offset = 0;
     m_iscarryable = 1;
     a_carry_threads = [];
-    a_carry_threads[0] = & carry_pickupitem;
+    a_carry_threads[0] = &carry_pickupitem;
     a_drop_funcs = [];
-    a_drop_funcs[0] = & drop_pickupitem;
+    a_drop_funcs[0] = &drop_pickupitem;
   }
 
   destructor() {}
@@ -219,7 +219,7 @@ class cbaseinteractable {
     m_n_body_trigger_height = 128;
     m_n_repair_radius = 72;
     m_n_repair_height = 128;
-    m_repair_complete_func = & repair_completed;
+    m_repair_complete_func = &repair_completed;
     m_str_itemname = "Item";
   }
 

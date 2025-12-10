@@ -71,7 +71,7 @@ main() {
   else if(getDvarInt("scr_diehard"))
     game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
 
-  game["strings"]["overtime_hint"] = & "MP_FIRST_BLOOD";
+  game["strings"]["overtime_hint"] = &"MP_FIRST_BLOOD";
 }
 
 onPrecacheGameType() {
@@ -97,18 +97,18 @@ onStartGameType() {
     game["defenders"] = oldAttackers;
   }
 
-  setObjectiveText("allies", & "OBJECTIVES_ARENA");
-  setObjectiveText("axis", & "OBJECTIVES_ARENA");
+  setObjectiveText("allies", &"OBJECTIVES_ARENA");
+  setObjectiveText("axis", &"OBJECTIVES_ARENA");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", & "OBJECTIVES_ARENA");
-    setObjectiveScoreText("axis", & "OBJECTIVES_ARENA");
+    setObjectiveScoreText("allies", &"OBJECTIVES_ARENA");
+    setObjectiveScoreText("axis", &"OBJECTIVES_ARENA");
   } else {
-    setObjectiveScoreText("allies", & "OBJECTIVES_ARENA_SCORE");
-    setObjectiveScoreText("axis", & "OBJECTIVES_ARENA_SCORE");
+    setObjectiveScoreText("allies", &"OBJECTIVES_ARENA_SCORE");
+    setObjectiveScoreText("axis", &"OBJECTIVES_ARENA_SCORE");
   }
-  setObjectiveHintText("allies", & "OBJECTIVES_ARENA_HINT");
-  setObjectiveHintText("axis", & "OBJECTIVES_ARENA_HINT");
+  setObjectiveHintText("allies", &"OBJECTIVES_ARENA_HINT");
+  setObjectiveHintText("axis", &"OBJECTIVES_ARENA_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -389,17 +389,17 @@ onUse(player) {
 
   if(oldTeam == "neutral") {
     otherTeam = getOtherTeam(team);
-    thread printAndSoundOnEveryone(team, otherTeam, & "MP_NEUTRAL_FLAG_CAPTURED_BY", & "MP_NEUTRAL_FLAG_CAPTURED_BY", "mp_war_objective_taken", undefined, player);
+    thread printAndSoundOnEveryone(team, otherTeam, &"MP_NEUTRAL_FLAG_CAPTURED_BY", &"MP_NEUTRAL_FLAG_CAPTURED_BY", "mp_war_objective_taken", undefined, player);
 
     statusDialog("captured_a", team);
     statusDialog("enemy_has_a", otherTeam);
   } else
-    thread printAndSoundOnEveryone(team, oldTeam, & "MP_ENEMY_FLAG_CAPTURED_BY", & "MP_FRIENDLY_FLAG_CAPTURED_BY", "mp_war_objective_taken", "mp_war_objective_lost", player);
+    thread printAndSoundOnEveryone(team, oldTeam, &"MP_ENEMY_FLAG_CAPTURED_BY", &"MP_FRIENDLY_FLAG_CAPTURED_BY", "mp_war_objective_taken", "mp_war_objective_lost", player);
 
   thread giveFlagCaptureXP(self.touchList[team]);
   player notify("objective", "captured");
 
-  thread flagCaptured(team, & "MP_DOM_NEUTRAL_FLAG_CAPTURED");
+  thread flagCaptured(team, &"MP_DOM_NEUTRAL_FLAG_CAPTURED");
 }
 
 onBeginUse(player) {

@@ -38,7 +38,7 @@
 #namespace zm_genesis_skull_turret;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_skull_turret", & __init__, & __main__, undefined);
+  system::register("zm_genesis_skull_turret", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -48,7 +48,7 @@ function __init__() {
   clientfield::register("actor", "skull_turret_shock_fx", 15000, 1, "int");
   clientfield::register("actor", "skull_turret_shock_eye_fx", 15000, 1, "int");
   clientfield::register("actor", "skull_turret_explode_fx", 15000, 1, "counter");
-  zm::register_player_damage_callback( & function_bfe01277);
+  zm::register_player_damage_callback(&function_bfe01277);
 }
 
 function function_3f4e5049(eattacker) {
@@ -72,7 +72,7 @@ function function_bfe01277(einflictor, eattacker, idamage, idflags, smeansofdeat
 }
 
 function __main__() {
-  a_vh_turrets = spawner::simple_spawn("skull_turret", & function_aeaa2ee6);
+  a_vh_turrets = spawner::simple_spawn("skull_turret", &function_aeaa2ee6);
   level thread function_7fd518ea();
   level thread function_881d11a1(a_vh_turrets);
 }
@@ -82,7 +82,7 @@ function function_aeaa2ee6() {
   self flag::init("turret_cooldown");
   self makeusable();
   s_trigger = struct::get(self.target, "targetname");
-  s_unitrigger = s_trigger zm_unitrigger::create_unitrigger(&"", 32, & function_ff090b49);
+  s_unitrigger = s_trigger zm_unitrigger::create_unitrigger(&"", 32, &function_ff090b49);
   s_unitrigger.require_look_at = 1;
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger, 1);
   s_unitrigger.vh_turret = self;
@@ -545,7 +545,7 @@ function function_67cc41d(vh_turret) {
 function function_218cc1b() {
   self notify("death");
   self ghost();
-  self util::delay(0.25, undefined, & zm_utility::self_delete);
+  self util::delay(0.25, undefined, &zm_utility::self_delete);
 }
 
 function function_41ecbdf9() {
@@ -566,8 +566,8 @@ function function_881d11a1(a_vh_turrets) {
   if(!isDefined(level.var_dc188362)) {
     level.var_dc188362 = 0;
   }
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & devgui_skull_turret_skip_timeout);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_1f8c58a1);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &devgui_skull_turret_skip_timeout);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_1f8c58a1);
 }
 
 function devgui_skull_turret_skip_timeout(n_val) {

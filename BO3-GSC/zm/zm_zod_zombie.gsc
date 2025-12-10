@@ -23,18 +23,18 @@
 
 function autoexec init() {
   initzmzodbehaviorsandasm();
-  level.zombie_init_done = & zod_zombie_init_done;
+  level.zombie_init_done = &zod_zombie_init_done;
   setdvar("scr_zm_use_code_enemy_selection", 0);
   setdvar("tu5_zmPathDistanceCheckTolarance", 20);
-  level.closest_player_override = & zod_closest_player;
+  level.closest_player_override = &zod_closest_player;
   level thread update_closest_player();
   level.move_valid_poi_to_navmesh = 1;
   level.pathdist_type = 2;
 }
 
 function private initzmzodbehaviorsandasm() {
-  animationstatenetwork::registeranimationmocomp("mocomp_teleport_traversal@zombie", & teleporttraversalmocompstart, undefined, undefined);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodShouldMove", & zodshouldmove);
+  animationstatenetwork::registeranimationmocomp("mocomp_teleport_traversal@zombie", &teleporttraversalmocompstart, undefined, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodShouldMove", &zodshouldmove);
 }
 
 function teleporttraversalmocompstart(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {

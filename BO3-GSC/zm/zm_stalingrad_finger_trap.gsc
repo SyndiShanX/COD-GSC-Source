@@ -29,9 +29,9 @@ function main() {
 function function_7715178d() {
   level thread scene::init("p7_fxanim_zm_stal_finger_trap_bundle");
   level.var_79dbe0dd = [];
-  scene::add_scene_func("p7_fxanim_zm_stal_finger_trap_bundle", & function_2d729696, "init");
+  scene::add_scene_func("p7_fxanim_zm_stal_finger_trap_bundle", &function_2d729696, "init");
   var_bbadd4a4 = struct::get_array("finger_trap_activate", "targetname");
-  array::thread_all(var_bbadd4a4, & function_eeb24547);
+  array::thread_all(var_bbadd4a4, &function_eeb24547);
 }
 
 function function_2d729696(a_ents) {
@@ -47,7 +47,7 @@ function function_2d729696(a_ents) {
 }
 
 function function_eeb24547() {
-  self zm_unitrigger::create_unitrigger("", 64, & function_512d92f4);
+  self zm_unitrigger::create_unitrigger("", 64, &function_512d92f4);
   self.s_unitrigger.hint_parm1 = 1500;
   self.s_unitrigger.require_look_at = 0;
   self thread function_891da2d8();
@@ -99,10 +99,10 @@ function function_891da2d8() {
 
 function finger_trap_activate(var_3778532a) {
   var_3778532a thread zm_stalingrad_vo::function_c0914f1b();
-  array::run_all(level.var_79dbe0dd, & triggerenable, 1);
-  array::thread_all(level.var_79dbe0dd, & function_f5af37c6, var_3778532a);
+  array::run_all(level.var_79dbe0dd, &triggerenable, 1);
+  array::thread_all(level.var_79dbe0dd, &function_f5af37c6, var_3778532a);
   level function_88a65f39();
-  array::run_all(level.var_79dbe0dd, & triggerenable, 0);
+  array::run_all(level.var_79dbe0dd, &triggerenable, 0);
   level flag::clear("finger_trap_on");
   level flag::set("finger_trap_cooldown");
   level endon("hash_f8b849b9");

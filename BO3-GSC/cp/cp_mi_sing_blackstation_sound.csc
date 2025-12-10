@@ -11,7 +11,7 @@
 function main() {
   level thread function_87c8026c();
   level thread function_ca589ae4();
-  clientfield::register("toplayer", "slowmo_duck_active", 1, 2, "int", & function_41d671f5, 0, 0);
+  clientfield::register("toplayer", "slowmo_duck_active", 1, 2, "int", &function_41d671f5, 0, 0);
 }
 
 function sndwindsystem(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

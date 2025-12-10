@@ -14,17 +14,17 @@
 #namespace teams;
 
 function autoexec __init__sytem__() {
-  system::register("teams", & __init__, undefined, undefined);
+  system::register("teams", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
-  level.getenemyteam = & getenemyteam;
+  callback::on_start_gametype(&init);
+  level.getenemyteam = &getenemyteam;
   level.use_team_based_logic_for_locking_on = 1;
 }
 
 function init() {
-  game["strings"]["autobalance"] = & "MP_AUTOBALANCE_NOW";
+  game["strings"]["autobalance"] = &"MP_AUTOBALANCE_NOW";
   if(getdvarstring("scr_teambalance") == "") {
     setdvar("scr_teambalance", "0");
   }
@@ -38,16 +38,16 @@ function init() {
   if(level.teambased) {
     level.alliesplayers = [];
     level.axisplayers = [];
-    callback::on_connect( & on_player_connect);
-    callback::on_joined_team( & on_joined_team);
-    callback::on_joined_spectate( & on_joined_spectators);
+    callback::on_connect(&on_player_connect);
+    callback::on_joined_team(&on_joined_team);
+    callback::on_joined_spectate(&on_joined_spectators);
     level thread update_balance_dvar();
     wait(0.15);
     if(level.onlinegame) {
       level thread update_player_times();
     }
   } else {
-    callback::on_connect( & on_free_player_connect);
+    callback::on_connect(&on_free_player_connect);
     wait(0.15);
     if(level.onlinegame) {
       level thread update_player_times();

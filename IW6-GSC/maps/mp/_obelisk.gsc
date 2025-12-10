@@ -5,7 +5,7 @@
 
 obelisk_init() {
   level.scanned_obelisks = [];
-  level.drill_tutorial_text = & "MP_ALIEN_DESCENT_DRILL_TUTORIAL_HINT";
+  level.drill_tutorial_text = &"MP_ALIEN_DESCENT_DRILL_TUTORIAL_HINT";
 }
 
 obelisk() {

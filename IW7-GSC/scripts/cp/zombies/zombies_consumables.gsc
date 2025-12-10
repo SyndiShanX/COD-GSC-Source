@@ -2671,7 +2671,7 @@ give_ammo_to_players_standing_nearby(param_00, param_01) {
           continue;
         }
 
-        param_00 scripts\cp\utility::setlowermessage("max_ammo", & "COOP_GAME_PLAY_AMMO_MAX", 3);
+        param_00 scripts\cp\utility::setlowermessage("max_ammo", &"COOP_GAME_PLAY_AMMO_MAX", 3);
       }
     }
 

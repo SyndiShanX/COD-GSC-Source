@@ -19,7 +19,7 @@
 #namespace zm_perk_doubletap2;
 
 function autoexec __init__sytem__() {
-  system::register("zm_perk_doubletap2", & __init__, undefined, undefined);
+  system::register("zm_perk_doubletap2", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -27,10 +27,10 @@ function __init__() {
 }
 
 function enable_doubletap2_perk_for_level() {
-  zm_perks::register_perk_basic_info("specialty_doubletap2", "doubletap", 2000, & "ZOMBIE_PERK_DOUBLETAP", getweapon("zombie_perk_bottle_doubletap"));
-  zm_perks::register_perk_precache_func("specialty_doubletap2", & doubletap2_precache);
-  zm_perks::register_perk_clientfields("specialty_doubletap2", & doubletap2_register_clientfield, & doubletap2_set_clientfield);
-  zm_perks::register_perk_machine("specialty_doubletap2", & doubletap2_perk_machine_setup);
+  zm_perks::register_perk_basic_info("specialty_doubletap2", "doubletap", 2000, &"ZOMBIE_PERK_DOUBLETAP", getweapon("zombie_perk_bottle_doubletap"));
+  zm_perks::register_perk_precache_func("specialty_doubletap2", &doubletap2_precache);
+  zm_perks::register_perk_clientfields("specialty_doubletap2", &doubletap2_register_clientfield, &doubletap2_set_clientfield);
+  zm_perks::register_perk_machine("specialty_doubletap2", &doubletap2_perk_machine_setup);
   zm_perks::register_perk_host_migration_params("specialty_doubletap2", "vending_doubletap", "doubletap2_light");
 }
 

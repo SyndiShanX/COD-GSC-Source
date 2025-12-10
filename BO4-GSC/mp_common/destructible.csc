@@ -28,7 +28,7 @@ doexplosion(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bw
 
   physics_explosion = 0;
 
-  if(newval&1 << 9) {
+  if(newval& 1 << 9) {
     physics_explosion = 1;
     newval -= 1 << 9;
   }

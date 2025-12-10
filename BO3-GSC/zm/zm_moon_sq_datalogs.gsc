@@ -47,7 +47,7 @@ function init() {
     who._has_log = 1;
     log delete();
     who zm_sidequests::add_sidequest_icon("sq", "datalog");
-    player thread zm_sidequests::fake_use("placed", & log_qualifier);
+    player thread zm_sidequests::fake_use("placed", &log_qualifier);
     player waittill("placed", who);
     who._has_log = undefined;
     who zm_sidequests::remove_sidequest_icon("sq", "datalog");

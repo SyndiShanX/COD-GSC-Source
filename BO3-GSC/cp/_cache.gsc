@@ -13,14 +13,14 @@
 #namespace cache;
 
 function autoexec __init__sytem__() {
-  system::register("cache", & __init__, undefined, undefined);
+  system::register("cache", &__init__, undefined, undefined);
 }
 
 function __init__() {
   a_ammo_crates = getEntArray("sys_ammo_cache", "targetname");
-  array::thread_all(a_ammo_crates, & _setup_ammo_cache);
+  array::thread_all(a_ammo_crates, &_setup_ammo_cache);
   a_weapon_crates = getEntArray("sys_weapon_cache", "targetname");
-  array::thread_all(a_weapon_crates, & _setup_weapon_cache);
+  array::thread_all(a_weapon_crates, &_setup_weapon_cache);
 }
 
 function _setup_ammo_cache() {

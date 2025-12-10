@@ -37,7 +37,7 @@ init(weapon_name, flourish_weapon_name, ballistic_weapon_name, ballistic_upgrade
         melee_weapon_triggers[i] setcursorhint("HINT_NOICON");
     } else {
       weapon_display = get_weapon_display_name(weapon_name);
-      hint_string = & "ZOMBIE_WEAPONCOSTONLY";
+      hint_string = &"ZOMBIE_WEAPONCOSTONLY";
       melee_weapon_triggers[i] sethintstring(hint_string, weapon_display, cost);
 
       if(getdvarint(#"tu12_zombies_allow_hint_weapon_from_script") && !(isDefined(level.disable_melee_wallbuy_icons) && level.disable_melee_wallbuy_icons)) {
@@ -90,7 +90,7 @@ prepare_stub(stub, weapon_name, flourish_weapon_name, ballistic_weapon_name, bal
     } else {
       stub.hint_parm1 = get_weapon_display_name(weapon_name);
       stub.hint_parm2 = cost;
-      stub.hint_string = & "ZOMBIE_WEAPONCOSTONLY";
+      stub.hint_string = &"ZOMBIE_WEAPONCOSTONLY";
 
       if(getdvarint(#"tu12_zombies_allow_hint_weapon_from_script") && !(isDefined(level.disable_melee_wallbuy_icons) && level.disable_melee_wallbuy_icons)) {
         stub.cursor_hint = "HINT_WEAPON";

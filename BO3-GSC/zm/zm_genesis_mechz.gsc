@@ -32,13 +32,13 @@
 function autoexec init() {
   function_24ed806f();
   level flag::init("can_spawn_mechz", 1);
-  spawner::add_archetype_spawn_function("mechz", & function_d8d01032);
-  spawner::add_archetype_spawn_function("mechz", & function_b7e11612);
+  spawner::add_archetype_spawn_function("mechz", &function_d8d01032);
+  spawner::add_archetype_spawn_function("mechz", &function_b7e11612);
   level thread function_76e7495b();
-  level.mechz_should_stun_override = & function_f517cdd6;
-  level.var_7f2a926d = & mechz_health_increases;
-  level.mechz_damage_override = & mechz_damage_override;
-  level.var_7d2a391d = & spawn_effect;
+  level.mechz_should_stun_override = &function_f517cdd6;
+  level.var_7f2a926d = &mechz_health_increases;
+  level.mechz_damage_override = &mechz_damage_override;
+  level.var_7d2a391d = &spawn_effect;
   if(ai::shouldregisterclientfieldforarchetype("mechz")) {
     clientfield::register("actor", "death_ray_shock_fx", 15000, 1, "int");
   }
@@ -47,18 +47,18 @@ function autoexec init() {
 }
 
 function private function_24ed806f() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzTrapService", & function_b25360f);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisVortexService", & function_8746ceea);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMechzOctobombService", & function_2ffb7337);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzShouldMoveToTrap", & function_beb13c4b);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzIsAtTrap", & function_fc277828);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzShouldAttackTrap", & function_d1cb5cbc);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMechzShouldOctobombAttack", & function_4e06a982);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("casteMechzTrapMoveTerminate", & function_4210ca29);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("casteMechzTrapAttackTerminate", & function_910e57ee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMechzDestoryOctobomb", & function_78198ba2);
-  animationstatenetwork::registeranimationmocomp("mocomp_trap_attack@mechz", & function_45f397ee, undefined, & function_9da58a6f);
-  animationstatenetwork::registeranimationmocomp("mocomp_teleport_traversal@mechz", & teleporttraversalmocompstart, undefined, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzTrapService", &function_b25360f);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisVortexService", &function_8746ceea);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMechzOctobombService", &function_2ffb7337);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzShouldMoveToTrap", &function_beb13c4b);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzIsAtTrap", &function_fc277828);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("castleMechzShouldAttackTrap", &function_d1cb5cbc);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMechzShouldOctobombAttack", &function_4e06a982);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("casteMechzTrapMoveTerminate", &function_4210ca29);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("casteMechzTrapAttackTerminate", &function_910e57ee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("genesisMechzDestoryOctobomb", &function_78198ba2);
+  animationstatenetwork::registeranimationmocomp("mocomp_trap_attack@mechz", &function_45f397ee, undefined, &function_9da58a6f);
+  animationstatenetwork::registeranimationmocomp("mocomp_teleport_traversal@mechz", &teleporttraversalmocompstart, undefined, undefined);
 }
 
 function private function_76e7495b() {
@@ -299,9 +299,9 @@ function function_26beb37e(n_value, n_limit, n_player_modifier) {
 }
 
 function function_d8d01032() {
-  self.idgun_damage_cb = & function_5f2149bb;
-  self.var_c732138b = & function_1df1ec14;
-  self.traversalspeedboost = & function_40ef38f8;
+  self.idgun_damage_cb = &function_5f2149bb;
+  self.var_c732138b = &function_1df1ec14;
+  self.traversalspeedboost = &function_40ef38f8;
   self thread function_a2a11991();
   self thread function_b2a1b297();
   self thread function_2a26e636();
@@ -393,7 +393,7 @@ function function_a2a11991() {
   while(!isDefined(self.zombie_lift_override)) {
     wait(0.05);
   }
-  self.zombie_lift_override = & function_2d571578;
+  self.zombie_lift_override = &function_2d571578;
 }
 
 function function_2a2bfc25() {

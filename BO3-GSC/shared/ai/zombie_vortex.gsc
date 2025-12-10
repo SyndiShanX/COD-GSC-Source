@@ -15,7 +15,7 @@
 #namespace zombie_vortex;
 
 function autoexec __init__sytem__() {
-  system::register("vortex_shared", & __init__, & __main__, undefined);
+  system::register("vortex_shared", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -25,8 +25,8 @@ function __init__() {
   if(!isDefined(level.vsmgr_prio_overlay_zombie_vortex)) {
     level.vsmgr_prio_overlay_zombie_vortex = 23;
   }
-  visionset_mgr::register_info("visionset", "zm_idgun_vortex" + "_visionset", 1, level.vsmgr_prio_visionset_zombie_vortex, 30, 1, & visionset_mgr::ramp_in_out_thread_per_player, 0);
-  visionset_mgr::register_info("overlay", "zm_idgun_vortex" + "_blur", 1, level.vsmgr_prio_overlay_zombie_vortex, 1, 1, & visionset_mgr::ramp_in_out_thread_per_player, 1);
+  visionset_mgr::register_info("visionset", "zm_idgun_vortex" + "_visionset", 1, level.vsmgr_prio_visionset_zombie_vortex, 30, 1, &visionset_mgr::ramp_in_out_thread_per_player, 0);
+  visionset_mgr::register_info("overlay", "zm_idgun_vortex" + "_blur", 1, level.vsmgr_prio_overlay_zombie_vortex, 1, 1, &visionset_mgr::ramp_in_out_thread_per_player, 1);
   clientfield::register("scriptmover", "vortex_start", 1, 2, "counter");
   clientfield::register("allplayers", "vision_blur", 1, 1, "int");
   level.vortex_manager = spawnStruct();
@@ -38,7 +38,7 @@ function __init__() {
 }
 
 function __main__() {
-  level vehicle_ai::register_custom_add_state_callback( & idgun_add_vehicle_death_state);
+  level vehicle_ai::register_custom_add_state_callback(&idgun_add_vehicle_death_state);
 }
 
 function init_vortices() {
@@ -256,9 +256,9 @@ function player_vortex_visionset(name) {
 
 function idgun_add_vehicle_death_state() {
   if(isairborne(self)) {
-    self vehicle_ai::add_state("idgun_death", & state_idgun_flying_crush_enter, & state_idgun_flying_crush_update, undefined);
+    self vehicle_ai::add_state("idgun_death", &state_idgun_flying_crush_enter, &state_idgun_flying_crush_update, undefined);
   } else {
-    self vehicle_ai::add_state("idgun_death", & state_idgun_crush_enter, & state_idgun_crush_update, undefined);
+    self vehicle_ai::add_state("idgun_death", &state_idgun_crush_enter, &state_idgun_crush_update, undefined);
   }
 }
 
@@ -325,7 +325,7 @@ function state_idgun_flying_crush_update(params) {
   self thread switch_to_crush_asm(black_hole_center);
   self setvehgoalpos(black_hole_center, 0, 0);
   self waittill("near_goal");
-  self vehicle_ai::get_state_callbacks("death").update_func = & state_idgun_flying_death_update;
+  self vehicle_ai::get_state_callbacks("death").update_func = &state_idgun_flying_death_update;
   self.veh_idgun_allow_damage = 1;
   self dodamage(self.health + 666, self.origin, attacker, undefined, "none", "MOD_UNKNOWN", 0, weapon);
 }

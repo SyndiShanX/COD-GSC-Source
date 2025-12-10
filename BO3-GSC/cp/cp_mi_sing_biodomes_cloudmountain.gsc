@@ -50,14 +50,14 @@
 function precache() {}
 
 function main() {
-  spawner::add_spawn_function_group("rambo", "script_noteworthy", & rambo_robots);
-  spawner::add_spawn_function_group("rusher", "script_noteworthy", & rusher_robots);
-  spawner::add_spawn_function_group("hunter_flybys", "script_noteworthy", & hunter_flyby_cloud_mountain);
-  spawner::add_spawn_function_group("cloud_mountain_reinforcements", "script_noteworthy", & cloud_mountain_reinforcements_spawn);
-  spawner::add_spawn_function_group("cloud_mountain_retreaters", "script_noteworthy", & cloud_mountain_retreaters_spawn);
-  spawner::add_spawn_function_group("level_3_surprised_enemies", "script_noteworthy", & cloud_mountain_level_3_surprised);
-  spawner::add_spawn_function_group("pod_spawners", "script_noteworthy", & robot_pod_spawn);
-  spawner::add_spawn_function_group("sp_cloudmountain_level_2_warlord", "targetname", & function_a288e474);
+  spawner::add_spawn_function_group("rambo", "script_noteworthy", &rambo_robots);
+  spawner::add_spawn_function_group("rusher", "script_noteworthy", &rusher_robots);
+  spawner::add_spawn_function_group("hunter_flybys", "script_noteworthy", &hunter_flyby_cloud_mountain);
+  spawner::add_spawn_function_group("cloud_mountain_reinforcements", "script_noteworthy", &cloud_mountain_reinforcements_spawn);
+  spawner::add_spawn_function_group("cloud_mountain_retreaters", "script_noteworthy", &cloud_mountain_retreaters_spawn);
+  spawner::add_spawn_function_group("level_3_surprised_enemies", "script_noteworthy", &cloud_mountain_level_3_surprised);
+  spawner::add_spawn_function_group("pod_spawners", "script_noteworthy", &robot_pod_spawn);
+  spawner::add_spawn_function_group("sp_cloudmountain_level_2_warlord", "targetname", &function_a288e474);
   level thread catwalk_goal_control();
 }
 
@@ -108,7 +108,7 @@ function cloudmountain_main() {
   level thread cloudmountain_elevators();
   level thread catwalk_supertree_spawns();
   level thread function_d532cc21();
-  spawner::add_spawn_function_ai_group("cloud_mountain_entrance_bridge", & function_4df7264d);
+  spawner::add_spawn_function_ai_group("cloud_mountain_entrance_bridge", &function_4df7264d);
   spawn_manager::enable("manager_phalanx_humans_bridge");
   level thread function_a234f527();
   level thread function_efae47c8();
@@ -534,13 +534,13 @@ function cleanup_pod_robots() {
 function cloudmountain_elevators() {
   function_6f311542();
   trigger::wait_till("trig_cloudmountain_elevators");
-  spawner::simple_spawn("cloudmountain_elevator_enemy", & elevator_spawning, "cloudmountain");
+  spawner::simple_spawn("cloudmountain_elevator_enemy", &elevator_spawning, "cloudmountain");
 }
 
 function catwalk_goal_control() {
   a_catwalk_spawners = getspawnerarray("catwalk", "script_noteworthy");
   for(i = 0; i < a_catwalk_spawners.size; i++) {
-    a_catwalk_spawners[i] spawner::add_spawn_function( & catwalk_goal_radius);
+    a_catwalk_spawners[i] spawner::add_spawn_function(&catwalk_goal_radius);
   }
 }
 
@@ -558,7 +558,7 @@ function disable_cloudmountain_triggers() {
 
 function cloud_mountain_reinforcements() {
   trigger::wait_till("trig_cloud_mountain_reinforcements");
-  spawner::add_spawn_function_group("sp_cloud_mountain_reinforcements_wasps", "targetname", & function_947a1ae8);
+  spawner::add_spawn_function_group("sp_cloud_mountain_reinforcements_wasps", "targetname", &function_947a1ae8);
   spawn_manager::enable("sm_cloud_mountain_reinforcements");
   spawn_manager::enable("sm_cloud_mountain_reinforcements_wasps");
   spawn_manager::enable("sm_cloud_mountain_retreaters");
@@ -742,7 +742,7 @@ function objective_xiulan_vignette_init(str_objective, b_starting) {
     level thread cp_mi_sing_biodomes_util::function_753a859(str_objective);
     var_777355da = getEntArray("hallway_turret", "script_noteworthy");
     a_turrets = spawner::simple_spawn(var_777355da);
-    array::run_all(a_turrets, & kill);
+    array::run_all(a_turrets, &kill);
     level thread cp_mi_sing_biodomes_util::function_cc20e187("cloudmountain");
     load::function_a2995f22();
   }
@@ -787,20 +787,20 @@ function setup_server_room_door_use_object() {
   v_offset = (0, 0, 0);
   t_door_use_object = getent("trig_server_room_door_use_object", "targetname");
   t_door_use_object show();
-  e_door_use_object = util::init_interactive_gameobject(t_door_use_object, & "cp_level_biodomes_server_door", & "CP_MI_SING_BIODOMES_CLOUDMOUNTAIN_ACCESS_TERMINAL", & function_9a82e132);
+  e_door_use_object = util::init_interactive_gameobject(t_door_use_object, &"cp_level_biodomes_server_door", &"CP_MI_SING_BIODOMES_CLOUDMOUNTAIN_ACCESS_TERMINAL", &function_9a82e132);
   level waittill("hash_69d6458d");
   a_enemies = getaiteamarray("axis");
-  array::run_all(a_enemies, & delete);
+  array::run_all(a_enemies, &delete);
   level clientfield::set("set_exposure_bank", 1);
   level thread function_d28364c1();
   level thread dialog::player_say("plyr_we_have_to_take_her_0", 1);
   level thread namespace_f1b4cbbc::function_3919d226();
-  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh010", & function_2db7566e, "play");
-  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh020", & function_3de47a8b, "play");
-  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh090", & function_cbdd0b50, "play");
-  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh170", & function_7dedb1f0, "play");
-  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh190", & function_f1df85b9, "play");
-  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh260", & function_d065fdd0, "done");
+  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh010", &function_2db7566e, "play");
+  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh020", &function_3de47a8b, "play");
+  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh090", &function_cbdd0b50, "play");
+  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh170", &function_7dedb1f0, "play");
+  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh190", &function_f1df85b9, "play");
+  level scene::add_scene_func("cin_bio_09_accessdrives_3rd_sh260", &function_d065fdd0, "done");
   level.ai_hendricks.ignoreall = 1;
   if(isDefined(level.bzm_biodialogue3callback)) {
     level thread[[level.bzm_biodialogue3callback]]();
@@ -938,7 +938,7 @@ function objective_server_room_defend_init(str_objective, b_starting) {
     cp_mi_sing_biodomes_util::enable_traversals(0, "server_room_window_mantle", "script_noteworthy");
     var_777355da = getEntArray("hallway_turret", "script_noteworthy");
     a_turrets = spawner::simple_spawn(var_777355da);
-    array::run_all(a_turrets, & kill);
+    array::run_all(a_turrets, &kill);
     e_clip = getent("turret_hallway_door_ai_clip", "targetname");
     e_clip delete();
     level thread cp_mi_sing_biodomes_util::function_753a859(str_objective);
@@ -985,10 +985,10 @@ function server_room_spawning() {
   foreach(node in a_nodes) {
     setenablenode(node, 0);
   }
-  spawner::add_spawn_function_group("server_room_enemy_window", "targetname", & function_229a8bc9);
-  spawner::add_spawn_function_group("server_room_enemy_elevator1", "targetname", & elevator_spawning, "server_room");
-  spawner::add_spawn_function_group("server_room_enemy_elevator2", "targetname", & elevator_backup, "server_room");
-  spawner::add_spawn_function_group("server_room_enemy_swat1", "targetname", & swat_team_ai);
+  spawner::add_spawn_function_group("server_room_enemy_window", "targetname", &function_229a8bc9);
+  spawner::add_spawn_function_group("server_room_enemy_elevator1", "targetname", &elevator_spawning, "server_room");
+  spawner::add_spawn_function_group("server_room_enemy_elevator2", "targetname", &elevator_backup, "server_room");
+  spawner::add_spawn_function_group("server_room_enemy_swat1", "targetname", &swat_team_ai);
   level waittill("hash_d065fdd0");
   level thread dialog::remote("kane_he_s_fine_0");
   savegame::checkpoint_save();
@@ -998,7 +998,7 @@ function server_room_spawning() {
   level notify("hash_f3c45157");
   wait(2);
   spawner::simple_spawn("server_room_enemy_window");
-  spawner::add_spawn_function_ai_group("top_floor", & top_floor_door);
+  spawner::add_spawn_function_ai_group("top_floor", &top_floor_door);
   spawn_manager::enable("server_room_wave_2_1");
   level util::waittill_notify_or_timeout("top_floor_breached", 10);
   spawn_manager::enable("server_room_wave_2_2");
@@ -1013,7 +1013,7 @@ function server_room_spawning() {
   savegame::checkpoint_save();
   level thread dialog::remote("kane_download_at_twenty_p_0");
   playsoundatposition("evt_server_def_walla_3rd", (900, 12750, 1140));
-  spawner::add_spawn_function_group("sp_server_room_background", "targetname", & cp_mi_sing_biodomes_fighttothedome::function_76c56ee1);
+  spawner::add_spawn_function_group("sp_server_room_background", "targetname", &cp_mi_sing_biodomes_fighttothedome::function_76c56ee1);
   spawn_manager::enable("sm_server_room_background");
   level thread function_963807b1();
   level waittill("zipline_spawning_done");
@@ -1042,14 +1042,14 @@ function server_room_spawning() {
   if(level.players.size > 2) {
     spawner::simple_spawn("server_room_enemy_elevator2");
     wait(2);
-    spawn_manager::enable("server_room_topfloor_fodder_manager", & set_goal_server_room);
+    spawn_manager::enable("server_room_topfloor_fodder_manager", &set_goal_server_room);
   }
   level dialog::player_say("plyr_more_hostiles_from_t_0");
   level thread dialog::remote("kane_download_at_sixty_pe_0", 1);
   playsoundatposition("evt_server_def_walla_bots_b", (1117, 13871, 1116));
   wave_wait(2, 5, "hallway");
   if(level.players.size > 1) {
-    spawn_manager::enable("server_room_fodder_manager_stairs", & set_goal_server_room);
+    spawn_manager::enable("server_room_fodder_manager_stairs", &set_goal_server_room);
   }
   spawn_manager::kill("server_room_topfloor_fodder_manager");
   wave_wait(0, 25, "top_floor", "hallway", "window");
@@ -1060,9 +1060,9 @@ function server_room_spawning() {
   wait(3);
   function_560d15cf();
   wait(3);
-  spawn_manager::enable("server_room_final_wave_manager", & set_goal_server_room);
+  spawn_manager::enable("server_room_final_wave_manager", &set_goal_server_room);
   wave_wait(2, 2, "final_wave");
-  spawn_manager::enable("server_room_fodder_manager_stairs", & set_goal_server_room);
+  spawn_manager::enable("server_room_fodder_manager_stairs", &set_goal_server_room);
   if(level.players.size > 2) {
     wait(0.25);
     spawner::simple_spawn("server_room_enemy_hallway_final");
@@ -1396,28 +1396,28 @@ function function_963807b1() {
 function zipline_spawning() {
   level endon("server_room_fail");
   level.var_1a0f3432 = 0;
-  spawner::simple_spawn("server_room_enemy_rope2_guy1", & rope_guy_init);
+  spawner::simple_spawn("server_room_enemy_rope2_guy1", &rope_guy_init);
   wait(randomfloat(0.5));
-  spawner::simple_spawn("server_room_enemy_rope1_guy1", & rope_guy_init);
+  spawner::simple_spawn("server_room_enemy_rope1_guy1", &rope_guy_init);
   wait(randomfloatrange(1, 4));
-  spawner::simple_spawn("server_room_enemy_rope2_guy2", & rope_guy_init);
+  spawner::simple_spawn("server_room_enemy_rope2_guy2", &rope_guy_init);
   wait(randomfloat(0.5));
-  spawner::simple_spawn("server_room_enemy_rope1_guy2", & rope_guy_init);
+  spawner::simple_spawn("server_room_enemy_rope1_guy2", &rope_guy_init);
   wait(randomfloatrange(1, 4));
-  spawner::simple_spawn("server_room_enemy_rope2_guy3", & rope_guy_init);
+  spawner::simple_spawn("server_room_enemy_rope2_guy3", &rope_guy_init);
   wait(randomfloat(0.5));
-  spawner::simple_spawn("server_room_enemy_rope1_guy3", & rope_guy_init);
+  spawner::simple_spawn("server_room_enemy_rope1_guy3", &rope_guy_init);
   if(level.players.size > 2) {
     wait(randomfloatrange(1, 3));
-    spawner::simple_spawn("server_room_enemy_rope2_guy1", & rope_guy_init);
+    spawner::simple_spawn("server_room_enemy_rope2_guy1", &rope_guy_init);
     wait(randomfloat(0.5));
-    spawner::simple_spawn("server_room_enemy_rope1_guy1", & rope_guy_init);
+    spawner::simple_spawn("server_room_enemy_rope1_guy1", &rope_guy_init);
     wait(randomfloatrange(1, 3));
-    spawner::simple_spawn("server_room_enemy_rope2_guy2", & rope_guy_init);
+    spawner::simple_spawn("server_room_enemy_rope2_guy2", &rope_guy_init);
     wait(randomfloat(0.5));
-    spawner::simple_spawn("server_room_enemy_rope1_guy2", & rope_guy_init);
+    spawner::simple_spawn("server_room_enemy_rope1_guy2", &rope_guy_init);
   }
-  spawner::add_spawn_function_ai_group("top_floor", & set_goal_server_room);
+  spawner::add_spawn_function_ai_group("top_floor", &set_goal_server_room);
   spawn_manager::enable("server_room_topfloor_fodder_manager");
   level notify("zipline_spawning_done");
   wait(10);

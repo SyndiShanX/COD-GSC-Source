@@ -27,7 +27,7 @@ function init() {
   clientfield::register("scriptmover", "play_artillery_barrage", 21000, 2, "int");
   level._effect["grenade_samantha_steal"] = "dlc5/zmhd/fx_zombie_couch_effect";
   level.beacons = [];
-  level.zombie_weapons_callbacks[level.w_beacon] = & player_give_beacon;
+  level.zombie_weapons_callbacks[level.w_beacon] = &player_give_beacon;
   level thread function_45216da2();
 }
 
@@ -742,7 +742,7 @@ function set_beacon_damage() {
 }
 
 function function_45216da2() {
-  level thread setup_devgui_func("ZM/Weapons/Offhand/Give Beacon", "give_beacon", 4, & function_eeb65596);
+  level thread setup_devgui_func("ZM/Weapons/Offhand/Give Beacon", "give_beacon", 4, &function_eeb65596);
 }
 
 function private setup_devgui_func(str_devgui_path, str_dvar, n_value, func, n_base_value = -1) {

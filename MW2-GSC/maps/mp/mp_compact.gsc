@@ -64,8 +64,8 @@ crusherControl() {
   playerDetector thread triggerLinkThread(crusher);
   playerDetector thread playerDetectorThread();
 
-  //precacheString( &"MP_PRESS_TO_RAPPEL" );
-  //button setHintString( &"MP_PRESS_TO_RAPPEL" );
+  //precacheString(&"MP_PRESS_TO_RAPPEL" );
+  //button setHintString(&"MP_PRESS_TO_RAPPEL" );
 
   for(;;) {
     /*

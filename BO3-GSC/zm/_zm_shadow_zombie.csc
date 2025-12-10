@@ -14,7 +14,7 @@
 #namespace zm_shadow_zombie;
 
 function autoexec __init__sytem__() {
-  system::register("zm_shadow_zombie", & __init__, undefined, undefined);
+  system::register("zm_shadow_zombie", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -32,10 +32,10 @@ function init_fx() {
 }
 
 function register_clientfields() {
-  clientfield::register("actor", "shadow_zombie_clientfield_aura_fx", 15000, 1, "int", & function_384150e9, 0, 0);
-  clientfield::register("actor", "shadow_zombie_clientfield_death_fx", 15000, 1, "int", & function_ac1abcb6, 0, 0);
-  clientfield::register("actor", "shadow_zombie_clientfield_damaged_fx", 15000, 1, "counter", & function_b3071651, 0, 0);
-  clientfield::register("scriptmover", "shadow_zombie_cursetrap_fx", 15000, 1, "int", & shadow_zombie_cursetrap_fx, 0, 0);
+  clientfield::register("actor", "shadow_zombie_clientfield_aura_fx", 15000, 1, "int", &function_384150e9, 0, 0);
+  clientfield::register("actor", "shadow_zombie_clientfield_death_fx", 15000, 1, "int", &function_ac1abcb6, 0, 0);
+  clientfield::register("actor", "shadow_zombie_clientfield_damaged_fx", 15000, 1, "counter", &function_b3071651, 0, 0);
+  clientfield::register("scriptmover", "shadow_zombie_cursetrap_fx", 15000, 1, "int", &shadow_zombie_cursetrap_fx, 0, 0);
 }
 
 function function_ac1abcb6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

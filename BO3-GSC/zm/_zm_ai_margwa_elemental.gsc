@@ -37,7 +37,7 @@
 
 function autoexec init() {
   function_afef488b();
-  spawner::add_archetype_spawn_function("margwa", & function_e1859566);
+  spawner::add_archetype_spawn_function("margwa", &function_e1859566);
   clientfield::register("actor", "margwa_elemental_type", 15000, 3, "int");
   clientfield::register("actor", "margwa_defense_actor_appear_disappear_fx", 15000, 1, "int");
   clientfield::register("scriptmover", "play_margwa_fire_attack_fx", 15000, 1, "counter");
@@ -48,61 +48,61 @@ function autoexec init() {
   if(isDefined(var_91a17b7d) && var_91a17b7d.size > 0) {
     level.var_39c0c115 = var_91a17b7d[0];
   }
-  zm::register_actor_damage_callback( & function_5ff4198);
+  zm::register_actor_damage_callback(&function_5ff4198);
   level thread function_15492d9b();
 }
 
 function private function_afef488b() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaFireAttackService", & brrebirth_triggerrespawnoverlay);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaFireDefendService", & function_c8dea044);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaElectricGroundAttackService", & function_744188c1);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaElectricShootAttackService", & function_7652cccb);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaElectricDefendService", & function_39eece3f);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaLightAttackService", & function_655b9672);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaLightDefendService", & function_64e5bb2);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShadowAttackService", & function_43079630);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShadowDefendService", & function_50654c28);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldFireAttack", & function_78f83c26);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldFireDefendOut", & function_782e86fb);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldFireDefendIn", & function_836eeae4);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldElectricGroundAttack", & function_eb0118e7);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldElectricShootAttack", & function_2672a46d);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldElectricDefendOut", & function_efc320f8);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldElectricDefendIn", & function_bcd55721);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldLightAttack", & function_fd4fb480);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldLightDefendOut", & function_5bfc92ed);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldLightDefendIn", & function_412d8b9a);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldShadowAttack", & function_dfedf376);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldShadowAttackLoop", & function_a5dc38a7);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldShadowAttackOut", & function_f2802e4b);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldShadowDefendOut", & function_87dfc76b);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldShadowDefendIn", & function_6af3c534);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaFireAttack", & function_face7ad8);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaFireAttackTerminate", & function_68e3291c);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaFireDefendOut", & function_99ba2c25);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaFireDefendOutTerminate", & function_6a7ddf05);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaFireDefendIn", & function_75f40972);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaFireDefendInTerminate", & function_cd27e3fa);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaElectricGroundAttack", & function_b473ad25);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaElectricShootAttack", & function_6619b5ab);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaElectricDefendOut", & function_8382b576);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaElectricDefendOutTerminate", & function_3c8bea36);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaElectricDefendIn", & function_11d72a03);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaLightAttack", & function_226a6f4a);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaLightDefendOut", & function_9c7737ef);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaLightDefendOutTerminate", & function_5d88ac4b);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaLightDefendIn", & function_c2614d30);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShadowAttack", & function_9a9f35ac);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShadowAttackLoop", & function_ae1bcedd);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShadowAttackLoopTerminate", & function_58c0f99d);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShadowAttackOutTerminate", & function_d89cf919);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShadowDefendOut", & function_d765e859);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShadowDefendOutTerminate", & function_4600a191);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShadowDefendIn", & function_d258371e);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaIsElectric", & function_3cfb8731);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaIsFire", & function_6bbd2a18);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaIsLight", & function_7db0458);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaIsShadow", & function_b9fad980);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaFireAttackService", &brrebirth_triggerrespawnoverlay);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaFireDefendService", &function_c8dea044);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaElectricGroundAttackService", &function_744188c1);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaElectricShootAttackService", &function_7652cccb);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaElectricDefendService", &function_39eece3f);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaLightAttackService", &function_655b9672);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaLightDefendService", &function_64e5bb2);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShadowAttackService", &function_43079630);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShadowDefendService", &function_50654c28);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldFireAttack", &function_78f83c26);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldFireDefendOut", &function_782e86fb);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldFireDefendIn", &function_836eeae4);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldElectricGroundAttack", &function_eb0118e7);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldElectricShootAttack", &function_2672a46d);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldElectricDefendOut", &function_efc320f8);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldElectricDefendIn", &function_bcd55721);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldLightAttack", &function_fd4fb480);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldLightDefendOut", &function_5bfc92ed);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldLightDefendIn", &function_412d8b9a);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldShadowAttack", &function_dfedf376);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldShadowAttackLoop", &function_a5dc38a7);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldShadowAttackOut", &function_f2802e4b);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldShadowDefendOut", &function_87dfc76b);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShouldShadowDefendIn", &function_6af3c534);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaFireAttack", &function_face7ad8);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaFireAttackTerminate", &function_68e3291c);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaFireDefendOut", &function_99ba2c25);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaFireDefendOutTerminate", &function_6a7ddf05);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaFireDefendIn", &function_75f40972);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaFireDefendInTerminate", &function_cd27e3fa);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaElectricGroundAttack", &function_b473ad25);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaElectricShootAttack", &function_6619b5ab);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaElectricDefendOut", &function_8382b576);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaElectricDefendOutTerminate", &function_3c8bea36);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaElectricDefendIn", &function_11d72a03);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaLightAttack", &function_226a6f4a);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaLightDefendOut", &function_9c7737ef);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaLightDefendOutTerminate", &function_5d88ac4b);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaLightDefendIn", &function_c2614d30);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShadowAttack", &function_9a9f35ac);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShadowAttackLoop", &function_ae1bcedd);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShadowAttackLoopTerminate", &function_58c0f99d);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShadowAttackOutTerminate", &function_d89cf919);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShadowDefendOut", &function_d765e859);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShadowDefendOutTerminate", &function_4600a191);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaShadowDefendIn", &function_d258371e);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaIsElectric", &function_3cfb8731);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaIsFire", &function_6bbd2a18);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaIsLight", &function_7db0458);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zmMargwaIsShadow", &function_b9fad980);
 }
 
 function function_eb5051f4(spawner, targetname, var_f9ebd43e, s_location) {
@@ -150,7 +150,7 @@ function function_eb5051f4(spawner, targetname, var_f9ebd43e, s_location) {
       level.margwa_gore_right_model_override = level.var_fd47363["gore_ri"];
     }
     ai disableaimassist();
-    ai.actor_damage_func = & margwaserverutils::margwadamage;
+    ai.actor_damage_func = &margwaserverutils::margwadamage;
     ai.candamage = 0;
     ai.targetname = targetname;
     ai.holdfire = 1;
@@ -176,10 +176,10 @@ function function_eb5051f4(spawner, targetname, var_f9ebd43e, s_location) {
     ai.n_start_health = self.health;
     ai.team = level.zombie_team;
     ai.canstun = 1;
-    ai.thundergun_fling_func = & zm_ai_margwa::function_7292417a;
-    ai.thundergun_knockdown_func = & zm_ai_margwa::function_94fd1710;
-    ai.var_23340a5d = & zm_ai_margwa::function_7292417a;
-    ai.var_e1dbd63 = & zm_ai_margwa::function_94fd1710;
+    ai.thundergun_fling_func = &zm_ai_margwa::function_7292417a;
+    ai.thundergun_knockdown_func = &zm_ai_margwa::function_94fd1710;
+    ai.var_23340a5d = &zm_ai_margwa::function_7292417a;
+    ai.var_e1dbd63 = &zm_ai_margwa::function_94fd1710;
     e_player = zm_utility::get_closest_player(s_location.origin);
     v_dir = e_player.origin - s_location.origin;
     v_dir = vectornormalize(v_dir);
@@ -354,7 +354,7 @@ function function_b9fad980(entity) {
 }
 
 function private function_e1859566() {
-  self.zombie_lift_override = & function_2ab5f647;
+  self.zombie_lift_override = &function_2ab5f647;
   self function_68ff73f4();
   self function_1d2f460c();
   self function_3c6c3309();
@@ -1238,7 +1238,7 @@ function function_258d1434(var_c37d9885, var_6cd7eac7, var_19d406c9) {
   }
   queryresult = positionquery_source_navigation(var_58b84a32, var_6cd7eac7, var_19d406c9, 256, 96, self);
   pointlist = array::randomize(queryresult.data);
-  pointlist = array::filter(pointlist, 0, & function_794b06f);
+  pointlist = array::filter(pointlist, 0, &function_794b06f);
   if(pointlist.size > 0) {
     self.var_58b84a32 = pointlist[0].origin;
     self.var_937645c5 = spawn("script_model", self.var_58b84a32 + var_c37d9885);

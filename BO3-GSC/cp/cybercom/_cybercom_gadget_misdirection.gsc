@@ -33,14 +33,14 @@ function init() {
 function main() {
   cybercom_gadget::registerability(2, 32, 1);
   level.cybercom.misdirection = spawnStruct();
-  level.cybercom.misdirection._is_flickering = & _is_flickering;
-  level.cybercom.misdirection._on_flicker = & _on_flicker;
-  level.cybercom.misdirection._on_give = & _on_give;
-  level.cybercom.misdirection._on_take = & _on_take;
-  level.cybercom.misdirection._on_connect = & _on_connect;
-  level.cybercom.misdirection._on = & _on;
-  level.cybercom.misdirection._off = & _off;
-  level.cybercom.misdirection._is_primed = & _is_primed;
+  level.cybercom.misdirection._is_flickering = &_is_flickering;
+  level.cybercom.misdirection._on_flicker = &_on_flicker;
+  level.cybercom.misdirection._on_give = &_on_give;
+  level.cybercom.misdirection._on_take = &_on_take;
+  level.cybercom.misdirection._on_connect = &_on_connect;
+  level.cybercom.misdirection._on = &_on;
+  level.cybercom.misdirection._off = &_off;
+  level.cybercom.misdirection._is_primed = &_is_primed;
 }
 
 function _is_flickering(slot) {}
@@ -150,7 +150,7 @@ function function_7074260(point) {
   return true;
 }
 
-function function_10cd71b(decoy, & potentialtargets) {
+function function_10cd71b(decoy, &potentialtargets) {
   mins = vectorscale((1, 1, 1), 1000000);
   maxs = vectorscale((-1, -1, -1), 1000000);
   playerforward = anglesToForward(self getplayerangles());
@@ -214,7 +214,7 @@ function initthreatbias() {
   }
 }
 
-function function_4adc7dc8( & potentialtargets) {
+function function_4adc7dc8(&potentialtargets) {
   decoy = spawn("script_model", self.origin);
   if(!isDefined(decoy)) {
     return undefined;

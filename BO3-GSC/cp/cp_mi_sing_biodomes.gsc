@@ -75,9 +75,9 @@ function main() {
   cp_mi_sing_biodomes_cloudmountain::main();
   cp_mi_sing_biodomes_fighttothedome::main();
   setup_skiptos();
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
-  spawner::add_global_spawn_function("axis", & on_actor_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
+  spawner::add_global_spawn_function("axis", &on_actor_spawned);
   if(sessionmodeiscampaignzombiesgame()) {
     level scene::init("server_room_access_start", "targetname");
   }
@@ -87,20 +87,20 @@ function main() {
 }
 
 function setup_skiptos() {
-  skipto::add("objective_igc", & objective_igc, undefined, & objective_igc_done);
-  skipto::function_d68e678e("objective_markets_start", & cp_mi_sing_biodomes_markets::objective_markets_start_init, undefined, & cp_mi_sing_biodomes_markets::objective_markets_start_done);
-  skipto::function_d68e678e("objective_markets_rpg", & cp_mi_sing_biodomes_markets::objective_markets_rpg_init, undefined, & cp_mi_sing_biodomes_markets::objective_markets_rpg_done);
-  skipto::function_d68e678e("objective_markets2_start", & cp_mi_sing_biodomes_markets::objective_markets2_start_init, undefined, & cp_mi_sing_biodomes_markets::objective_markets2_start_done);
-  skipto::function_d68e678e("objective_warehouse", & cp_mi_sing_biodomes_warehouse::objective_warehouse_init, undefined, & cp_mi_sing_biodomes_warehouse::objective_warehouse_done);
-  skipto::function_d68e678e("objective_cloudmountain", & cp_mi_sing_biodomes_cloudmountain::objective_cloudmountain_init, undefined, & cp_mi_sing_biodomes_cloudmountain::objective_cloudmountain_done);
-  skipto::function_d68e678e("objective_cloudmountain_level_2", & cp_mi_sing_biodomes_cloudmountain::function_8ce887a2, undefined, & cp_mi_sing_biodomes_cloudmountain::function_2013f39c);
-  skipto::function_d68e678e("objective_turret_hallway", & cp_mi_sing_biodomes_cloudmountain::objective_turret_hallway_init, undefined, & cp_mi_sing_biodomes_cloudmountain::objective_turret_hallway_done);
-  skipto::function_d68e678e("objective_xiulan_vignette", & cp_mi_sing_biodomes_cloudmountain::objective_xiulan_vignette_init, undefined, & cp_mi_sing_biodomes_cloudmountain::objective_xiulan_vignette_done);
-  skipto::add("objective_server_room_defend", & cp_mi_sing_biodomes_cloudmountain::objective_server_room_defend_init, undefined, & cp_mi_sing_biodomes_cloudmountain::objective_server_room_defend_done);
-  skipto::function_d68e678e("objective_fighttothedome", & cp_mi_sing_biodomes_fighttothedome::objective_fighttothedome_init, undefined, & cp_mi_sing_biodomes_fighttothedome::objective_fighttothedome_done);
-  skipto::add_dev("", & dev_bullet_scene_init);
-  skipto::add_dev("", & cp_mi_sing_biodomes_warehouse::dev_warehouse_door_init);
-  skipto::add_dev("", & cp_mi_sing_biodomes_warehouse::dev_warehouse_door_without_robots_init);
+  skipto::add("objective_igc", &objective_igc, undefined, &objective_igc_done);
+  skipto::function_d68e678e("objective_markets_start", &cp_mi_sing_biodomes_markets::objective_markets_start_init, undefined, &cp_mi_sing_biodomes_markets::objective_markets_start_done);
+  skipto::function_d68e678e("objective_markets_rpg", &cp_mi_sing_biodomes_markets::objective_markets_rpg_init, undefined, &cp_mi_sing_biodomes_markets::objective_markets_rpg_done);
+  skipto::function_d68e678e("objective_markets2_start", &cp_mi_sing_biodomes_markets::objective_markets2_start_init, undefined, &cp_mi_sing_biodomes_markets::objective_markets2_start_done);
+  skipto::function_d68e678e("objective_warehouse", &cp_mi_sing_biodomes_warehouse::objective_warehouse_init, undefined, &cp_mi_sing_biodomes_warehouse::objective_warehouse_done);
+  skipto::function_d68e678e("objective_cloudmountain", &cp_mi_sing_biodomes_cloudmountain::objective_cloudmountain_init, undefined, &cp_mi_sing_biodomes_cloudmountain::objective_cloudmountain_done);
+  skipto::function_d68e678e("objective_cloudmountain_level_2", &cp_mi_sing_biodomes_cloudmountain::function_8ce887a2, undefined, &cp_mi_sing_biodomes_cloudmountain::function_2013f39c);
+  skipto::function_d68e678e("objective_turret_hallway", &cp_mi_sing_biodomes_cloudmountain::objective_turret_hallway_init, undefined, &cp_mi_sing_biodomes_cloudmountain::objective_turret_hallway_done);
+  skipto::function_d68e678e("objective_xiulan_vignette", &cp_mi_sing_biodomes_cloudmountain::objective_xiulan_vignette_init, undefined, &cp_mi_sing_biodomes_cloudmountain::objective_xiulan_vignette_done);
+  skipto::add("objective_server_room_defend", &cp_mi_sing_biodomes_cloudmountain::objective_server_room_defend_init, undefined, &cp_mi_sing_biodomes_cloudmountain::objective_server_room_defend_done);
+  skipto::function_d68e678e("objective_fighttothedome", &cp_mi_sing_biodomes_fighttothedome::objective_fighttothedome_init, undefined, &cp_mi_sing_biodomes_fighttothedome::objective_fighttothedome_done);
+  skipto::add_dev("", &dev_bullet_scene_init);
+  skipto::add_dev("", &cp_mi_sing_biodomes_warehouse::dev_warehouse_door_init);
+  skipto::add_dev("", &cp_mi_sing_biodomes_warehouse::dev_warehouse_door_without_robots_init);
 }
 
 function precache() {
@@ -196,7 +196,7 @@ function level_init() {
   }
   hidemiscmodels("partyroom_destroyed");
   a_trig_waterfalls = getEntArray("waterfall_triggers", "script_noteworthy");
-  array::thread_all(a_trig_waterfalls, & trig_waterfall_func);
+  array::thread_all(a_trig_waterfalls, &trig_waterfall_func);
   level thread add_turret1_action();
 }
 
@@ -269,9 +269,9 @@ function play_waterfall(t_waterfall) {
 
 function igc_party(var_f45807af = 0) {
   load::function_73adcefc();
-  level thread scene::add_scene_func("cin_bio_02_04_gunplay_vign_stab_both", & party_over, "done");
-  level thread scene::add_scene_func("cin_bio_01_01_party_1st_drinks", & function_df65aec6, "play");
-  level thread scene::add_scene_func("cin_bio_01_01_party_1st_drinks", & function_b361ad8b, "skip_started");
+  level thread scene::add_scene_func("cin_bio_02_04_gunplay_vign_stab_both", &party_over, "done");
+  level thread scene::add_scene_func("cin_bio_01_01_party_1st_drinks", &function_df65aec6, "play");
+  level thread scene::add_scene_func("cin_bio_01_01_party_1st_drinks", &function_b361ad8b, "skip_started");
   level thread scene::init("cin_bio_03_01_market_vign_engage");
   level thread scene::init("cin_bio_03_01_market_aie_weapons");
   level thread scene::init("cin_gen_aie_table_react");
@@ -291,7 +291,7 @@ function igc_party(var_f45807af = 0) {
     level scene::init("cin_bio_01_01_party_1st_drinks_part2");
     util::set_lighting_state(1);
     load::function_c32ba481();
-    util::do_chyron_text(&"CP_MI_SING_BIODOMES_INTRO_LINE_1_FULL", & "CP_MI_SING_BIODOMES_INTRO_LINE_1_SHORT", & "CP_MI_SING_BIODOMES_INTRO_LINE_2_FULL", & "CP_MI_SING_BIODOMES_INTRO_LINE_2_SHORT", & "CP_MI_SING_BIODOMES_INTRO_LINE_3_FULL", & "CP_MI_SING_BIODOMES_INTRO_LINE_3_SHORT", & "CP_MI_SING_BIODOMES_INTRO_LINE_4_FULL", & "CP_MI_SING_BIODOMES_INTRO_LINE_4_SHORT", "", "", 9);
+    util::do_chyron_text(&"CP_MI_SING_BIODOMES_INTRO_LINE_1_FULL", &"CP_MI_SING_BIODOMES_INTRO_LINE_1_SHORT", &"CP_MI_SING_BIODOMES_INTRO_LINE_2_FULL", &"CP_MI_SING_BIODOMES_INTRO_LINE_2_SHORT", &"CP_MI_SING_BIODOMES_INTRO_LINE_3_FULL", &"CP_MI_SING_BIODOMES_INTRO_LINE_3_SHORT", &"CP_MI_SING_BIODOMES_INTRO_LINE_4_FULL", &"CP_MI_SING_BIODOMES_INTRO_LINE_4_SHORT", "", "", 9);
   }
   level thread namespace_f1b4cbbc::function_f936f64e();
   function_484bc3aa(1);
@@ -349,7 +349,7 @@ function function_8013ff12() {
 
 function function_b361ad8b(a_ents) {
   level flag::set("party_scene_skipped");
-  level thread scene::add_scene_func("cin_gen_aie_table_react", & cp_mi_sing_biodomes_markets::function_c7cb9a93, "done");
+  level thread scene::add_scene_func("cin_gen_aie_table_react", &cp_mi_sing_biodomes_markets::function_c7cb9a93, "done");
   level thread scene::play("cin_gen_aie_table_react");
   level thread scene::play("cin_bio_03_01_market_vign_engage");
   level thread scene::play("cin_bio_03_01_market_aie_weapons");

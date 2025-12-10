@@ -23,15 +23,15 @@
 #namespace parasite;
 
 function autoexec __init__sytem__() {
-  system::register("parasite", & __init__, undefined, undefined);
+  system::register("parasite", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("parasite", & parasite_initialize);
+  vehicle::add_main_callback("parasite", &parasite_initialize);
   clientfield::register("vehicle", "parasite_tell_fx", 1, 1, "int");
   clientfield::register("vehicle", "parasite_secondary_deathfx", 1, 1, "int");
   clientfield::register("toplayer", "parasite_damage", 1, 1, "counter");
-  callback::on_spawned( & parasite_damage);
+  callback::on_spawned(&parasite_damage);
   ai::registermatchedinterface("parasite", "firing_rate", "slow", array("slow", "medium", "fast"));
 }
 
@@ -146,7 +146,7 @@ function parasite_initialize() {
   blackboard::createblackboardforentity(self);
   self blackboard::registervehicleblackboardattributes();
   ai::createinterfaceforentity(self);
-  blackboard::registerblackboardattribute(self, "_parasite_firing_rate", "slow", & getparasitefiringrate);
+  blackboard::registerblackboardattribute(self, "_parasite_firing_rate", "slow", &getparasitefiringrate);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -173,9 +173,9 @@ function parasite_initialize() {
 
 function defaultrole() {
   self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("combat").enter_func = & state_combat_enter;
-  self vehicle_ai::get_state_callbacks("combat").update_func = & state_combat_update;
-  self vehicle_ai::get_state_callbacks("death").update_func = & state_death_update;
+  self vehicle_ai::get_state_callbacks("combat").enter_func = &state_combat_enter;
+  self vehicle_ai::get_state_callbacks("combat").update_func = &state_combat_update;
+  self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
   self vehicle_ai::call_custom_add_state_callbacks();
   vehicle_ai::startinitialstate("combat");
 }

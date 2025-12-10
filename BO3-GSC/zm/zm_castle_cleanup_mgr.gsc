@@ -15,7 +15,7 @@
 #namespace castle_cleanup;
 
 function autoexec __init__sytem__() {
-  system::register("castle_cleanup", & __init__, & __main__, undefined);
+  system::register("castle_cleanup", &__init__, &__main__, undefined);
 }
 
 function __init__() {

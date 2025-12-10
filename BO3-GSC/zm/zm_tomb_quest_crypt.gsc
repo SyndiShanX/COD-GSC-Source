@@ -19,7 +19,7 @@
 #namespace zm_tomb_quest_crypt;
 
 function main() {
-  callback::on_connect( & on_player_connect_crypt);
+  callback::on_connect(&on_player_connect_crypt);
   level flag::init("disc_rotation_active");
   level thread zm_tomb_vo::watch_one_shot_line("puzzle", "try_puzzle", "vo_try_puzzle_crypt");
   init_crypt_gems();
@@ -29,19 +29,19 @@ function main() {
 function on_player_connect_crypt() {
   discs = getEntArray("crypt_puzzle_disc", "script_noteworthy");
   foreach(disc in discs) {
-    disc util::delay(0.5, undefined, & bryce_cake_light_update, 0);
+    disc util::delay(0.5, undefined, &bryce_cake_light_update, 0);
   }
 }
 
 function chamber_disc_puzzle_init() {
-  scene::add_scene_func("p7_fxanim_zm_ori_chamber_mid_ring_bundle", & function_746282b3, "init");
+  scene::add_scene_func("p7_fxanim_zm_ori_chamber_mid_ring_bundle", &function_746282b3, "init");
   level.gem_start_pos = [];
   level.gem_start_pos["crypt_gem_fire"] = 2;
   level.gem_start_pos["crypt_gem_air"] = 3;
   level.gem_start_pos["crypt_gem_ice"] = 0;
   level.gem_start_pos["crypt_gem_elec"] = 1;
   chamber_discs = getEntArray("crypt_puzzle_disc", "script_noteworthy");
-  array::thread_all(chamber_discs, & chamber_disc_run);
+  array::thread_all(chamber_discs, &chamber_disc_run);
   level util::waittill_any("gramophone_vinyl_player_picked_up", "open_sesame", "open_all_gramophone_doors");
   chamber_discs_randomize();
 }
@@ -312,7 +312,7 @@ function chamber_disc_trigger_run(e_disc, e_lever, b_clockwise) {
       e_lever playSound("zmb_crypt_lever");
       wait(n_anim_time * 0.5);
       e_lever thread chamber_disc_switch_spark();
-      array::thread_all(discs_to_rotate, & chamber_disc_rotate, b_clockwise);
+      array::thread_all(discs_to_rotate, &chamber_disc_rotate, b_clockwise);
       wait(1);
       level flag::clear("disc_rotation_active");
       level notify("vo_try_puzzle_crypt", e_triggerer);

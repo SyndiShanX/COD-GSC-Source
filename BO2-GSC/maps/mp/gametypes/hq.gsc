@@ -107,7 +107,7 @@ getrespawndelay() {
       return undefined;
 
     if(level.playerobjectiveheldrespawndelay >= level.hqautodestroytime)
-      self.lowermessageoverride = & "MP_WAITING_FOR_HQ";
+      self.lowermessageoverride = &"MP_WAITING_FOR_HQ";
 
     if(level.delayplayer)
       return min(level.spawndelay, timeremaining);
@@ -130,20 +130,20 @@ onstartgametype() {
   maps\mp\gametypes\_globallogic_score::resetteamscores();
 
   foreach(team in level.teams) {
-    setobjectivetext(team, & "OBJECTIVES_KOTH");
+    setobjectivetext(team, &"OBJECTIVES_KOTH");
 
     if(level.splitscreen) {
-      setobjectivescoretext(team, & "OBJECTIVES_HQ");
+      setobjectivescoretext(team, &"OBJECTIVES_HQ");
       continue;
     }
 
-    setobjectivescoretext(team, & "OBJECTIVES_HQ_SCORE");
+    setobjectivescoretext(team, &"OBJECTIVES_HQ_SCORE");
   }
 
-  level.objectivehintpreparehq = & "MP_CONTROL_HQ";
-  level.objectivehintcapturehq = & "MP_CAPTURE_HQ";
-  level.objectivehintdestroyhq = & "MP_DESTROY_HQ";
-  level.objectivehintdefendhq = & "MP_DEFEND_HQ";
+  level.objectivehintpreparehq = &"MP_CONTROL_HQ";
+  level.objectivehintcapturehq = &"MP_CAPTURE_HQ";
+  level.objectivehintdestroyhq = &"MP_DESTROY_HQ";
+  level.objectivehintdefendhq = &"MP_DEFEND_HQ";
   precachestring(level.objectivehintpreparehq);
   precachestring(level.objectivehintcapturehq);
   precachestring(level.objectivehintdestroyhq);
@@ -215,14 +215,14 @@ spawn_next_radio() {
 hqmainloop() {
   level endon("game_ended");
   level.hqrevealtime = -100000;
-  hqspawninginstr = & "MP_HQ_AVAILABLE_IN";
+  hqspawninginstr = &"MP_HQ_AVAILABLE_IN";
 
   if(level.kothmode) {
-    hqdestroyedinfriendlystr = & "MP_HQ_DESPAWN_IN";
-    hqdestroyedinenemystr = & "MP_HQ_DESPAWN_IN";
+    hqdestroyedinfriendlystr = &"MP_HQ_DESPAWN_IN";
+    hqdestroyedinenemystr = &"MP_HQ_DESPAWN_IN";
   } else {
-    hqdestroyedinfriendlystr = & "MP_HQ_REINFORCEMENTS_IN";
-    hqdestroyedinenemystr = & "MP_HQ_DESPAWN_IN";
+    hqdestroyedinfriendlystr = &"MP_HQ_REINFORCEMENTS_IN";
+    hqdestroyedinenemystr = &"MP_HQ_DESPAWN_IN";
   }
 
   precachestring(hqspawninginstr);
@@ -396,7 +396,7 @@ onenduse(team, player, success) {
 onradiocapture(player) {
   capture_team = player.pers["team"];
   player logstring("radio captured");
-  string = & "MP_HQ_CAPTURED_BY";
+  string = &"MP_HQ_CAPTURED_BY";
   level.usestartspawns = 0;
   thread give_capture_credit(self.touchlist[capture_team], string);
   oldteam = maps\mp\gametypes\_gameobjects::getownerteam();
@@ -478,12 +478,12 @@ onradiodestroy(firstplayer) {
     }
   }
 
-  destroyteammessage = & "MP_HQ_DESTROYED_BY";
-  otherteammessage = & "MP_HQ_DESTROYED_BY_ENEMY";
+  destroyteammessage = &"MP_HQ_DESTROYED_BY";
+  otherteammessage = &"MP_HQ_DESTROYED_BY_ENEMY";
 
   if(level.kothmode) {
-    destroyteammessage = & "MP_HQ_CAPTURED_BY";
-    otherteammessage = & "MP_HQ_CAPTURED_BY_ENEMY";
+    destroyteammessage = &"MP_HQ_CAPTURED_BY";
+    otherteammessage = &"MP_HQ_CAPTURED_BY_ENEMY";
   }
 
   level thread maps\mp\_popups::displayteammessagetoall(destroyteammessage, player);

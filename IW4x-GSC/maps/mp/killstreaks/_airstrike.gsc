@@ -46,11 +46,6 @@ init() {
   level.fx_airstrike_afterburner = loadfx("fire/jet_afterburner");
   level.fx_airstrike_contrail = loadfx("smoke/jet_contrail");
 
-
-
-
-
-
   level.dangerMaxRadius["stealth"] = 900;
   level.dangerMinRadius["stealth"] = 750;
   level.dangerForwardPush["stealth"] = 1;
@@ -312,8 +307,6 @@ getSingleAirstrikeDanger(point, origin, forward, airstrikeType) {
 
 pointIsInAirstrikeArea(point, targetpos, yaw, airstrikeType) {
   return distance2d(point, targetpos) <= level.dangerMaxRadius[airstrikeType] * 1.25;
-
-
 }
 
 losRadiusDamage(pos, radius, max, min, owner, eInflictor, sWeapon) {
@@ -446,7 +439,6 @@ doBomberStrike(lifeId, owner, requiredDeathCount, bombsite, startPoint, endPoint
   pathStart = startPoint + ((randomfloat(2) - 1) * startPathRandomness, (randomfloat(2) - 1) * startPathRandomness, 0);
   pathEnd = endPoint + ((randomfloat(2) - 1) * endPathRandomness, (randomfloat(2) - 1) * endPathRandomness, 0);
 
-
   plane = spawnplane(owner, "script_model", pathStart, "compass_objpoint_b2_airstrike_friendly", "compass_objpoint_b2_airstrike_enemy");
 
   plane playLoopSound("veh_b2_dist_loop");
@@ -462,7 +454,6 @@ doBomberStrike(lifeId, owner, requiredDeathCount, bombsite, startPoint, endPoint
 
   thread bomberDropBombs(plane, bombsite, owner);
 
-
   wait(flyTime);
   plane notify("delete");
   plane delete();
@@ -471,9 +462,6 @@ doBomberStrike(lifeId, owner, requiredDeathCount, bombsite, startPoint, endPoint
 bomberDropBombs(plane, bombSite, owner) {
   while(!targetIsClose(plane, bombsite, 5000))
     wait(0.05);
-
-
-
 
   showFx = true;
   sonicBoom = false;
@@ -495,9 +483,6 @@ bomberDropBombs(plane, bombSite, owner) {
   }
 
   plane notify("stop_bombing");
-
-
-
 }
 
 playBombFx() {
@@ -573,7 +558,6 @@ doPlaneStrike(lifeId, owner, requiredDeathCount, bombsite, startPoint, endPoint,
   pathStart = startPoint + ((randomfloat(2) - 1) * startPathRandomness, (randomfloat(2) - 1) * startPathRandomness, 0);
   pathEnd = endPoint + ((randomfloat(2) - 1) * endPathRandomness, (randomfloat(2) - 1) * endPathRandomness, 0);
 
-
   if(typeOfStrike == "harrier")
     plane = spawnplane(owner, "script_model", pathStart, "hud_minimap_harrier_green", "hud_minimap_harrier_red");
   else
@@ -600,9 +584,7 @@ doPlaneStrike(lifeId, owner, requiredDeathCount, bombsite, startPoint, endPoint,
   if(getdvar("scr_airstrikedebug") == "1")
     thread airstrikeLine(pathStart, pathEnd, (1, 1, 1), 20);
 
-
   thread callStrike_bombEffect(plane, pathEnd, flyTime, bombTime - 1.0, owner, requiredDeathCount, typeOfStrike);
-
 
   wait flyTime;
   plane notify("delete");
@@ -790,10 +772,8 @@ callStrike(lifeId, owner, coord, yaw) {
 
   endPoint += (0, 0, planeFlyHeight);
 
-
   d = length(startPoint - endPoint);
   flyTime = (d / planeFlySpeed);
-
 
   d = abs(d / 2 + planeBombExplodeDistance);
   bombTime = (d / planeFlySpeed);
@@ -821,7 +801,6 @@ callStrike(lifeId, owner, coord, yaw) {
     owner thread defendLocation(harrier);
 
     return harrier;
-
 
   } else if(self.airStrikeType == "stealth") {
     level thread doBomberStrike(lifeId, owner, requiredDeathCount, coord, startPoint + (0, 0, randomInt(1000)), endPoint + (0, 0, randomInt(1000)), bombTime, flyTime, direction, self.airStrikeType);
@@ -932,7 +911,6 @@ selectAirstrikeLocation(lifeId, airStrikeType) {
 
   self endon("stop_location_selection");
 
-
   self waittill("confirm_location", location, directionYaw);
   if(!chooseDirection)
     directionYaw = randomint(360);
@@ -956,7 +934,6 @@ selectAirstrikeLocation(lifeId, airStrikeType) {
 
 finishAirstrikeUsage(lifeId, location, directionYaw) {
   self notify("used");
-
 
   trace = bulletTrace(level.mapCenter + (0, 0, 1000000), level.mapCenter, false, undefined);
   location = (location[0], location[1], trace["position"][2] - 514);

@@ -10,13 +10,13 @@
 #namespace zm_stalingrad_ambient;
 
 function autoexec __init__sytem__() {
-  system::register("zm_stalingrad_ambient", & __init__, undefined, undefined);
+  system::register("zm_stalingrad_ambient", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "ambient_mortar_strike", 12000, 2, "int", & ambient_mortar_strike, 0, 0);
-  clientfield::register("scriptmover", "ambient_artillery_strike", 12000, 2, "int", & ambient_artillery_strike, 0, 0);
-  clientfield::register("world", "power_on_level", 12000, 1, "int", & power_on_level, 0, 0);
+  clientfield::register("scriptmover", "ambient_mortar_strike", 12000, 2, "int", &ambient_mortar_strike, 0, 0);
+  clientfield::register("scriptmover", "ambient_artillery_strike", 12000, 2, "int", &ambient_artillery_strike, 0, 0);
+  clientfield::register("world", "power_on_level", 12000, 1, "int", &power_on_level, 0, 0);
   level thread function_866a2751();
   level thread function_a8bcf075();
   level thread function_1eb91e4b();

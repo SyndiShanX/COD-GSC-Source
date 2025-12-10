@@ -47,7 +47,7 @@ main() {
     game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
   }
 
-  game["strings"]["overtime_hint"] = & "MP_FIRST_BLOOD";
+  game["strings"]["overtime_hint"] = &"MP_FIRST_BLOOD";
   level thread watchplayerconnect();
 }
 
@@ -77,18 +77,18 @@ onstartgametype() {
     game["defenders"] = var_00;
   }
 
-  scripts\mp\utility::setobjectivetext("allies", & "OBJECTIVES_LAVA");
-  scripts\mp\utility::setobjectivetext("axis", & "OBJECTIVES_LAVA");
+  scripts\mp\utility::setobjectivetext("allies", &"OBJECTIVES_LAVA");
+  scripts\mp\utility::setobjectivetext("axis", &"OBJECTIVES_LAVA");
   if(level.splitscreen) {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_LAVA");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_LAVA");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_LAVA");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_LAVA");
   } else {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_LAVA_SCORE");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_LAVA_SCORE");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_LAVA_SCORE");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_LAVA_SCORE");
   }
 
-  scripts\mp\utility::setobjectivehinttext("allies", & "OBJECTIVES_LAVA_HINT");
-  scripts\mp\utility::setobjectivehinttext("axis", & "OBJECTIVES_LAVA_HINT");
+  scripts\mp\utility::setobjectivehinttext("allies", &"OBJECTIVES_LAVA_HINT");
+  scripts\mp\utility::setobjectivehinttext("axis", &"OBJECTIVES_LAVA_HINT");
   initspawns();
   var_02[0] = level.gametype;
   scripts\mp\gameobjects::main(var_02);
@@ -157,7 +157,7 @@ watchplayeronground() {
   self endon("disconnect");
   for(;;) {
     if(scripts\mp\utility::isreallyalive(self)) {
-      if(self isonground() & !self iswallrunning()) {
+      if(self isonground() &!self iswallrunning()) {
         self dodamage(8, self.origin, self, undefined, "MOD_SUICIDE");
         wait(1);
       }

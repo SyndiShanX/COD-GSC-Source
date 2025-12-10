@@ -11,7 +11,7 @@
 #namespace zm_weap_thundergun;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_thundergun", & __init__, & __main__, undefined);
+  system::register("zm_weap_thundergun", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -20,7 +20,7 @@ function __init__() {
 }
 
 function __main__() {
-  callback::on_localplayer_spawned( & localplayer_spawned);
+  callback::on_localplayer_spawned(&localplayer_spawned);
 }
 
 function localplayer_spawned(localclientnum) {

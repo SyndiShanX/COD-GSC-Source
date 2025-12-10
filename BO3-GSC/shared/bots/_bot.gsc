@@ -16,64 +16,64 @@
 #namespace bot;
 
 function autoexec __init__sytem__() {
-  system::register("bot", & __init__, undefined, undefined);
+  system::register("bot", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
-  callback::on_player_killed( & on_player_killed);
+  callback::on_start_gametype(&init);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_player_killed(&on_player_killed);
   if(!isDefined(level.getbotsettings)) {
-    level.getbotsettings = & get_bot_default_settings;
+    level.getbotsettings = &get_bot_default_settings;
   }
   if(!isDefined(level.onbotremove)) {
-    level.onbotremove = & bot_void;
+    level.onbotremove = &bot_void;
   }
   if(!isDefined(level.onbotconnect)) {
-    level.onbotconnect = & bot_void;
+    level.onbotconnect = &bot_void;
   }
   if(!isDefined(level.onbotspawned)) {
-    level.onbotspawned = & bot_void;
+    level.onbotspawned = &bot_void;
   }
   if(!isDefined(level.onbotkilled)) {
-    level.onbotkilled = & bot_void;
+    level.onbotkilled = &bot_void;
   }
   if(!isDefined(level.onbotdamage)) {
-    level.onbotdamage = & bot_void;
+    level.onbotdamage = &bot_void;
   }
   if(!isDefined(level.botupdate)) {
-    level.botupdate = & bot_update;
+    level.botupdate = &bot_update;
   }
   if(!isDefined(level.botprecombat)) {
-    level.botprecombat = & bot_void;
+    level.botprecombat = &bot_void;
   }
   if(!isDefined(level.botcombat)) {
-    level.botcombat = & bot_combat::combat_think;
+    level.botcombat = &bot_combat::combat_think;
   }
   if(!isDefined(level.botpostcombat)) {
-    level.botpostcombat = & bot_void;
+    level.botpostcombat = &bot_void;
   }
   if(!isDefined(level.botidle)) {
-    level.botidle = & bot_void;
+    level.botidle = &bot_void;
   }
   if(!isDefined(level.botthreatdead)) {
-    level.botthreatdead = & bot_combat::clear_threat;
+    level.botthreatdead = &bot_combat::clear_threat;
   }
   if(!isDefined(level.botthreatengage)) {
-    level.botthreatengage = & bot_combat::engage_threat;
+    level.botthreatengage = &bot_combat::engage_threat;
   }
   if(!isDefined(level.botupdatethreatgoal)) {
-    level.botupdatethreatgoal = & bot_combat::update_threat_goal;
+    level.botupdatethreatgoal = &bot_combat::update_threat_goal;
   }
   if(!isDefined(level.botthreatlost)) {
-    level.botthreatlost = & bot_combat::clear_threat;
+    level.botthreatlost = &bot_combat::clear_threat;
   }
   if(!isDefined(level.botgetthreats)) {
-    level.botgetthreats = & bot_combat::get_bot_threats;
+    level.botgetthreats = &bot_combat::get_bot_threats;
   }
   if(!isDefined(level.botignorethreat)) {
-    level.botignorethreat = & bot_combat::ignore_non_sentient;
+    level.botignorethreat = &bot_combat::ignore_non_sentient;
   }
   setdvar("bot_maxMantleHeight", 200);
   level thread bot_devgui_think();

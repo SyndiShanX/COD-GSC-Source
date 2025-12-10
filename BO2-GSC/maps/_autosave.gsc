@@ -34,14 +34,14 @@ allow_save() {
 }
 
 autosave_description() {
-  return & "AUTOSAVE_AUTOSAVE";
+  return &"AUTOSAVE_AUTOSAVE";
 }
 
 autosave_names(num) {
   if(num == 0)
-    savedescription = & "AUTOSAVE_GAME";
+    savedescription = &"AUTOSAVE_GAME";
   else
-    savedescription = & "AUTOSAVE_NOGAME";
+    savedescription = &"AUTOSAVE_NOGAME";
 
   return savedescription;
 }
@@ -70,7 +70,7 @@ start_level_save() {
 
   auto_save_print("start_level_save: Start of level save");
 
-  savegame("levelstart", 0, & "AUTOSAVE_LEVELSTART", imagename, 1);
+  savegame("levelstart", 0, &"AUTOSAVE_LEVELSTART", imagename, 1);
   setdvar("ui_grenade_death", "0");
 
   println("Saving level start saved game");

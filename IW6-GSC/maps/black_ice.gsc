@@ -27,7 +27,7 @@ main() {
   maps\_utility::add_start("command_inside", ::start_command, "Command Center Inside", ::main_command, "black_ice_outro_tr");
   maps\_utility::add_start("exfil", ::start_exfil, "Exfil", ::main_exfil, "black_ice_outro_tr");
   mission_precache();
-  maps\_utility::intro_screen_create(&"BLACK_ICE_INTROSCREEN_LINE_1", & "BLACK_ICE_INTROSCREEN_LINE_2", & "BLACK_ICE_INTROSCREEN_LINE_3", & "BLACK_ICE_INTROSCREEN_LINE_4");
+  maps\_utility::intro_screen_create(&"BLACK_ICE_INTROSCREEN_LINE_1", &"BLACK_ICE_INTROSCREEN_LINE_2", &"BLACK_ICE_INTROSCREEN_LINE_3", &"BLACK_ICE_INTROSCREEN_LINE_4");
   maps\_utility::intro_screen_custom_func(::introscreen);
   maps\_utility::transient_init("black_ice_intro_tr");
   maps\_utility::transient_init("black_ice_outro_tr");
@@ -371,30 +371,30 @@ objectives() {
   switch (level.start_point) {
     case "swim":
       level waittill("notify_swim_dialog5_1");
-      objective_add(maps\_utility::obj("obj_swim_detonate_charges"), "current", & "BLACK_ICE_OBJ_SWIM_DETONATE");
+      objective_add(maps\_utility::obj("obj_swim_detonate_charges"), "current", &"BLACK_ICE_OBJ_SWIM_DETONATE");
       common_scripts\utility::flag_wait("flag_swim_breach_detonate");
       maps\_utility::objective_complete(maps\_utility::obj("obj_swim_detonate_charges"));
     case "camp":
       level waittill("bc_player_ready");
-      objective_add(maps\_utility::obj("obj_camp_clear_camp"), "current", & "BLACK_ICE_OBJ_CAMP_CLEAR_CAMP");
+      objective_add(maps\_utility::obj("obj_camp_clear_camp"), "current", &"BLACK_ICE_OBJ_CAMP_CLEAR_CAMP");
       common_scripts\utility::flag_wait("flag_camp_cleared");
       wait 2.5;
       maps\_utility::objective_complete(maps\_utility::obj("obj_camp_clear_camp"));
     case "ascend":
       wait 1;
-      objective_add(maps\_utility::obj("obj_ascend_ascend"), "current", & "BLACK_ICE_OBJ_ASCEND_ASCEND");
+      objective_add(maps\_utility::obj("obj_ascend_ascend"), "current", &"BLACK_ICE_OBJ_ASCEND_ASCEND");
       level waittill("notify_ascend_objective_complete");
       maps\_utility::objective_complete(maps\_utility::obj("obj_ascend_ascend"));
     case "common_room":
     case "barracks":
     case "catwalks":
       wait 1;
-      objective_add(maps\_utility::obj("obj_flarestack_fight_to"), "current", & "BLACK_ICE_OBJ_FLARESTACK_FIGHT_TO");
+      objective_add(maps\_utility::obj("obj_flarestack_fight_to"), "current", &"BLACK_ICE_OBJ_FLARESTACK_FIGHT_TO");
       common_scripts\utility::flag_wait("flag_flarestack_scene_start");
       maps\_utility::objective_complete(maps\_utility::obj("obj_flarestack_fight_to"));
     case "flarestack":
       level waittill("notify_activate_flarestack_console");
-      objective_add(maps\_utility::obj("obj_flarestack_shut_off"), "current", & "BLACK_ICE_OBJ_FLARESTACK_SHUT_OFF");
+      objective_add(maps\_utility::obj("obj_flarestack_shut_off"), "current", &"BLACK_ICE_OBJ_FLARESTACK_SHUT_OFF");
       level waittill("notify_flare_stack_off");
       maps\_utility::objective_complete(maps\_utility::obj("obj_flarestack_shut_off"));
       common_scripts\utility::flag_wait("flag_flarestack_end");
@@ -402,21 +402,21 @@ objectives() {
     case "engine_room":
     case "tanks":
     case "refinery":
-      objective_add(maps\_utility::obj("obj_command_fight_to_command_center"), "current", & "BLACK_ICE_OBJ_COMMAND_FIGHT_TO");
+      objective_add(maps\_utility::obj("obj_command_fight_to_command_center"), "current", &"BLACK_ICE_OBJ_COMMAND_FIGHT_TO");
       level waittill("notify_pipedeck_final_battle_start");
       maps\_utility::objective_complete(maps\_utility::obj("obj_command_fight_to_command_center"));
       level waittill("dialogue_mgs_done");
-      objective_add(maps\_utility::obj("obj_command_take_out_mgs"), "current", & "BLACK_ICE_OBJ_PIPEDECK_TURRETS");
+      objective_add(maps\_utility::obj("obj_command_take_out_mgs"), "current", &"BLACK_ICE_OBJ_PIPEDECK_TURRETS");
       common_scripts\utility::flag_wait("flag_pipe_deck_mgs_down");
       maps\_utility::objective_complete(maps\_utility::obj("obj_command_take_out_mgs"));
     case "command_inside":
     case "command_outside":
       common_scripts\utility::flag_wait("flag_objective_fire_supression");
-      objective_add(maps\_utility::obj("obj_command_disable_suppression"), "current", & "BLACK_ICE_OBJ_COMMAND_DISABLE_SUPPRESSION");
+      objective_add(maps\_utility::obj("obj_command_disable_suppression"), "current", &"BLACK_ICE_OBJ_COMMAND_DISABLE_SUPPRESSION");
       common_scripts\utility::flag_wait("flag_command_done");
       maps\_utility::objective_complete(maps\_utility::obj("obj_command_disable_suppression"));
     case "exfil":
-      objective_add(maps\_utility::obj("obj_exfil_get_to_heli"), "current", & "BLACK_ICE_OBJ_EXFIL_GET_TO_HELI");
+      objective_add(maps\_utility::obj("obj_exfil_get_to_heli"), "current", &"BLACK_ICE_OBJ_EXFIL_GET_TO_HELI");
       level waittill("player_ladder_success");
       maps\_utility::objective_complete(maps\_utility::obj("obj_exfil_get_to_heli"));
   }

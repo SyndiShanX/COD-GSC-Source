@@ -118,7 +118,7 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, wea
   params.vdamageorigin = vdamageorigin;
   params.psoffsettime = psoffsettime;
 
-  if(!(idflags&8192)) {
+  if(!(idflags& 8192)) {
     if(isplayer(eattacker) && isDefined(eattacker.pers)) {
       if(!isDefined(eattacker.pers[#"participation"])) {
         eattacker.pers[#"participation"] = 0;

@@ -15,7 +15,7 @@
 #namespace _gadget_forced_malfunction;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_forced_malfunction", & __init__, undefined, undefined);
+  system::register("gadget_forced_malfunction", &__init__, undefined, undefined);
 }
 
 function __init__() {}

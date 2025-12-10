@@ -334,13 +334,13 @@ missionfail() {
   level notify("mission failed");
 
   if(isDefined(self.last_hit_team) && self.last_hit_team == "neutral")
-    setdvar("ui_deadquote", & "SCRIPT_MISSIONFAIL_KILLTEAM_NEUTRAL");
+    setdvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_NEUTRAL");
   else if(level.campaign == "british")
-    setdvar("ui_deadquote", & "SCRIPT_MISSIONFAIL_KILLTEAM_BRITISH");
+    setdvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_BRITISH");
   else if(level.campaign == "russian")
-    setdvar("ui_deadquote", & "SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
+    setdvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
   else
-    setdvar("ui_deadquote", & "SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
+    setdvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
 
   if(isDefined(level.custom_friendly_fire_shader))
     thread maps\_load_common::special_death_indicator_hudelement(level.custom_friendly_fire_shader, 64, 64, 0);

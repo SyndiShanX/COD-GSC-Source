@@ -12,14 +12,14 @@
 #namespace zm_bgb_cache_back;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_cache_back", & __init__, undefined, "bgb");
+  system::register("zm_bgb_cache_back", &__init__, undefined, "bgb");
 }
 
 function __init__() {
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_cache_back", "activated", 1, undefined, undefined, undefined, & activation);
+  bgb::register("zm_bgb_cache_back", "activated", 1, undefined, undefined, undefined, &activation);
 }
 
 function activation() {

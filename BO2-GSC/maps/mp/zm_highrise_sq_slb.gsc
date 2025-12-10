@@ -90,7 +90,7 @@ lion_ball_enable_pickup() {
 
   while(true) {
     self.can_pickup = 1;
-    self.t_pickup = sq_slb_create_use_trigger(self.origin, 32, 70, & "ZM_HIGHRISE_SQ_PICKUP_BALL");
+    self.t_pickup = sq_slb_create_use_trigger(self.origin, 32, 70, &"ZM_HIGHRISE_SQ_PICKUP_BALL");
 
     while(self.can_pickup) {
       self.t_pickup waittill("trigger", player);
@@ -110,7 +110,7 @@ lion_ball_enable_pickup() {
     self hide();
     self setCanDamage(0);
     wait 1;
-    self.t_putdown = sq_slb_create_use_trigger(self.origin, 16, 70, & "ZM_HIGHRISE_SQ_PUTDOWN_BALL");
+    self.t_putdown = sq_slb_create_use_trigger(self.origin, 16, 70, &"ZM_HIGHRISE_SQ_PUTDOWN_BALL");
     self.player clientclaimtrigger(self.t_putdown);
     self.player.t_putdown_ball = self.t_putdown;
     self ball_pickup_waittill_change();

@@ -22,38 +22,38 @@
 #namespace zm_weap_quantum_bomb;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_quantum_bomb", & __init__, undefined, undefined);
+  system::register("zm_weap_quantum_bomb", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  level.quantum_bomb_register_result_func = & quantum_bomb_register_result;
-  level.quantum_bomb_deregister_result_func = & quantum_bomb_deregister_result;
-  level.quantum_bomb_in_playable_area_validation_func = & quantum_bomb_in_playable_area_validation;
+  level.quantum_bomb_register_result_func = &quantum_bomb_register_result;
+  level.quantum_bomb_deregister_result_func = &quantum_bomb_deregister_result;
+  level.quantum_bomb_in_playable_area_validation_func = &quantum_bomb_in_playable_area_validation;
   level.w_quantum_bomb = getweapon("quantum_bomb");
   init();
 }
 
 function init() {
-  level.zombiemode_devgui_quantum_bomb_give = & player_give_quantum_bomb;
-  quantum_bomb_register_result("random_lethal_grenade", & quantum_bomb_lethal_grenade_result, 50);
-  quantum_bomb_register_result("random_weapon_starburst", & quantum_bomb_random_weapon_starburst_result, 75);
-  quantum_bomb_register_result("pack_or_unpack_current_weapon", & quantum_bomb_pack_or_unpack_current_weapon_result, 10, & quantum_bomb_pack_or_unpack_current_weapon_validation);
-  quantum_bomb_register_result("auto_revive", & quantum_bomb_auto_revive_result, 60, & quantum_bomb_auto_revive_validation);
-  quantum_bomb_register_result("player_teleport", & quantum_bomb_player_teleport_result, 20);
-  quantum_bomb_register_result("zombie_speed_buff", & quantum_bomb_zombie_speed_buff_result, 2);
-  quantum_bomb_register_result("zombie_add_to_total", & quantum_bomb_zombie_add_to_total_result, 70, & quantum_bomb_zombie_add_to_total_validation);
+  level.zombiemode_devgui_quantum_bomb_give = &player_give_quantum_bomb;
+  quantum_bomb_register_result("random_lethal_grenade", &quantum_bomb_lethal_grenade_result, 50);
+  quantum_bomb_register_result("random_weapon_starburst", &quantum_bomb_random_weapon_starburst_result, 75);
+  quantum_bomb_register_result("pack_or_unpack_current_weapon", &quantum_bomb_pack_or_unpack_current_weapon_result, 10, &quantum_bomb_pack_or_unpack_current_weapon_validation);
+  quantum_bomb_register_result("auto_revive", &quantum_bomb_auto_revive_result, 60, &quantum_bomb_auto_revive_validation);
+  quantum_bomb_register_result("player_teleport", &quantum_bomb_player_teleport_result, 20);
+  quantum_bomb_register_result("zombie_speed_buff", &quantum_bomb_zombie_speed_buff_result, 2);
+  quantum_bomb_register_result("zombie_add_to_total", &quantum_bomb_zombie_add_to_total_result, 70, &quantum_bomb_zombie_add_to_total_validation);
   level._effect["zombie_fling_result"] = "dlc5/moon/fx_moon_qbomb_explo_distort";
-  quantum_bomb_register_result("zombie_fling", & quantum_bomb_zombie_fling_result);
+  quantum_bomb_register_result("zombie_fling", &quantum_bomb_zombie_fling_result);
   level._effect["quantum_bomb_viewmodel_twist"] = "dlc5/zmb_weapon/fx_twist";
   level._effect["quantum_bomb_viewmodel_press"] = "dlc5/zmb_weapon/fx_press";
   level._effect["quantum_bomb_area_effect"] = "dlc5/zmb_weapon/fx_area_effect";
   level._effect["quantum_bomb_player_effect"] = "dlc5/zmb_weapon/fx_player_effect";
   level._effect["quantum_bomb_player_position_effect"] = "dlc5/zmb_weapon/fx_player_position_effect";
   level._effect["quantum_bomb_mystery_effect"] = "dlc5/zmb_weapon/fx_mystery_effect";
-  level.quantum_bomb_play_area_effect_func = & quantum_bomb_play_area_effect;
-  level.quantum_bomb_play_player_effect_func = & quantum_bomb_play_player_effect;
-  level.quantum_bomb_play_player_effect_at_position_func = & quantum_bomb_play_player_effect_at_position;
-  level.quantum_bomb_play_mystery_effect_func = & quantum_bomb_play_mystery_effect;
+  level.quantum_bomb_play_area_effect_func = &quantum_bomb_play_area_effect;
+  level.quantum_bomb_play_player_effect_func = &quantum_bomb_play_player_effect;
+  level.quantum_bomb_play_player_effect_at_position_func = &quantum_bomb_play_player_effect_at_position;
+  level.quantum_bomb_play_mystery_effect_func = &quantum_bomb_play_mystery_effect;
 }
 
 function quantum_bomb_debug_print_ln(msg) {
@@ -97,7 +97,7 @@ function quantum_bomb_register_result(name, result_func, chance, validation_func
     result.chance = math::clamp(chance, 1, 100);
   }
   if(!isDefined(validation_func)) {
-    result.validation_func = & quantum_bomb_default_validation;
+    result.validation_func = &quantum_bomb_default_validation;
   } else {
     result.validation_func = validation_func;
   }

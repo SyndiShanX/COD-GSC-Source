@@ -90,7 +90,7 @@ function main() {
   array::add(level.zod_character_names, "femme");
   array::add(level.zod_character_names, "magician");
   register_clientfields();
-  level.setupcustomcharacterexerts = & setup_personality_character_exerts;
+  level.setupcustomcharacterexerts = &setup_personality_character_exerts;
   level.debug_keyline_zombies = 0;
   zm_zod_fx::main();
   level._effect["eye_glow"] = "zombie/fx_glow_eye_orange_zod";
@@ -112,20 +112,20 @@ function main() {
   zm_zod_perks::init();
   load::main();
   thread zm_zod_amb::main();
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
   duplicate_render::set_dr_filter_framebuffer("zod_ghost", 90, "zod_ghost", undefined, 0, "mc/hud_zod_ghost", 0);
   zm_zod_ffotd::main_end();
   util::waitforclient(0);
 }
 
 function register_clientfields() {
-  clientfield::register("toplayer", "fullscreen_rain_fx", 1, 1, "int", & toggle_rain_overlay, 0, 1);
+  clientfield::register("toplayer", "fullscreen_rain_fx", 1, 1, "int", &toggle_rain_overlay, 0, 1);
   clientfield::register("world", "rain_state", 1, 1, "int", undefined, 0, 0);
-  clientfield::register("world", "junction_crane_state", 1, 1, "int", & junction_crane_state, 0, 1);
-  clientfield::register("toplayer", "devgui_lightning_test", 1, 1, "counter", & devgui_lightning_test, 0, 0);
+  clientfield::register("world", "junction_crane_state", 1, 1, "int", &junction_crane_state, 0, 1);
+  clientfield::register("toplayer", "devgui_lightning_test", 1, 1, "counter", &devgui_lightning_test, 0, 0);
   n_bits = getminbitcountfornum(8);
-  clientfield::register("toplayer", "player_rumble_and_shake", 1, n_bits, "int", & zm_zod_util::player_rumble_and_shake, 0, 0);
-  clientfield::register("actor", "ghost_actor", 1, 1, "int", & ghost_actor, 0, 0);
+  clientfield::register("toplayer", "player_rumble_and_shake", 1, n_bits, "int", &zm_zod_util::player_rumble_and_shake, 0, 0);
+  clientfield::register("actor", "ghost_actor", 1, 1, "int", &ghost_actor, 0, 0);
   n_bits = getminbitcountfornum(4);
   clientfield::register("clientuimodel", "zmInventory.player_character_identity", 1, n_bits, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.player_using_sprayer", 1, 1, "int", undefined, 0, 0);
@@ -141,9 +141,9 @@ function register_clientfields() {
   clientfield::register("clientuimodel", "zmInventory.widget_fuses", 1, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.widget_egg", 1, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.widget_sprayer", 1, 1, "int", undefined, 0, 0);
-  clientfield::register("world", "hide_perf_static_models", 1, 1, "int", & hide_perf_static_models, 0, 1);
-  clientfield::register("world", "breakable_show", 1, 3, "int", & function_66fdd0a3, 0, 1);
-  clientfield::register("world", "breakable_hide", 1, 3, "int", & function_5a6fb328, 0, 1);
+  clientfield::register("world", "hide_perf_static_models", 1, 1, "int", &hide_perf_static_models, 0, 1);
+  clientfield::register("world", "breakable_show", 1, 3, "int", &function_66fdd0a3, 0, 1);
+  clientfield::register("world", "breakable_hide", 1, 3, "int", &function_5a6fb328, 0, 1);
   visionset_mgr::register_visionset_info("zombie_noire", 1, 1, undefined, "zombie_noire");
 }
 

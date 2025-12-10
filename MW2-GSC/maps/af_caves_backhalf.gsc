@@ -1207,7 +1207,7 @@ pre_self_destruct_explosions() {
 keyboard_think() {
   self glow();
   self MakeUsable();
-  // Hold ^3&&1^7 to override the door lock.
+  // Hold ^3&& 1^7 to override the door lock.
   self SetHintString(&"AF_CAVES_USE_KEYBOARD");
 
   self waittill("trigger");
@@ -2063,7 +2063,7 @@ obj_ledge_traverse() {
   objective_number = 6;
 
   // Traverse the rock bridge
-  Objective_Add(objective_number, "active", & "AF_CAVES_OBJ_LEDGE_TRAVERSE");
+  Objective_Add(objective_number, "active", &"AF_CAVES_OBJ_LEDGE_TRAVERSE");
   Objective_Current(objective_number);
   Objective_OnEntity(objective_number, level.price, (0, 0, 70));
   // Capt. MacTavish
@@ -2092,13 +2092,13 @@ obj_overlook_to_skylight() {
   objective_number = 6;
 
   // Locate Shepherd.\n
-  Objective_Add(objective_number, "active", & "AF_CAVES_LOCATE_SHEPHERD");
+  Objective_Add(objective_number, "active", &"AF_CAVES_LOCATE_SHEPHERD");
   Objective_Current(objective_number);
   Objective_OnEntity(objective_number, level.price, (0, 0, 70));
 
   flag_wait_any("price_has_given_flank_hint", "obj_overlook_to_skylight_complete");
 
-  Objective_String_NoMessage(objective_number, & "AF_CAVES_OBJ_FLANK_AND_KILL");
+  Objective_String_NoMessage(objective_number, &"AF_CAVES_OBJ_FLANK_AND_KILL");
 
   Objective_Position(objective_number, (0, 0, 0));
   obj_position = GetEnt("obj_flank_skylight_01", "targetname");
@@ -2124,7 +2124,7 @@ obj_breach() {
   objective_number = 6;
 
   // Reach Shepherd's Command Center
-  Objective_Add(objective_number, "active", & "AF_CAVES_OBJ_BREACH", (0, 0, 0));
+  Objective_Add(objective_number, "active", &"AF_CAVES_OBJ_BREACH", (0, 0, 0));
 
   breach_positions = getEntArray("obj_breach", "targetname");
 
@@ -2159,7 +2159,7 @@ obj_door_controls() {
 
   obj_position = GetEnt("keyboard", "targetname");
   // Override the door controls
-  Objective_Add(objective_number, "active", & "AF_CAVES_OBJ_DOOR_CONTROLS", obj_position.origin);
+  Objective_Add(objective_number, "active", &"AF_CAVES_OBJ_DOOR_CONTROLS", obj_position.origin);
   Objective_Current(objective_number);
 
   flag_wait("control_room_door_opened");
@@ -2176,7 +2176,7 @@ obj_escape() {
   objective_number = 8;
 
   // Escape from the cave
-  Objective_Add(objective_number, "active", & "AF_CAVES_OBJ_ESCAPE");
+  Objective_Add(objective_number, "active", &"AF_CAVES_OBJ_ESCAPE");
   Objective_Current(objective_number);
   Objective_OnEntity(objective_number, level.price, (0, 0, 70));
 
@@ -2194,7 +2194,7 @@ obj_level_end() {
   objective_number = 6;
 
   // Follow Price.
-  Objective_Add(objective_number, "active", & "AF_CAVES_LOCATE_SHEPHERD");
+  Objective_Add(objective_number, "active", &"AF_CAVES_LOCATE_SHEPHERD");
   Objective_Current(objective_number);
   Objective_OnEntity(objective_number, level.price, (0, 0, 70));
 
@@ -2766,7 +2766,7 @@ mission_failed_out_of_time() {
   playFX(getfx("player_death_explosion"), level.player.origin);
   Earthquake(1, 1, level.player.origin, 100);
   // You did not reach the cave exit in time.
-  SetDvar("ui_deadquote", & "AF_CAVES_RAN_OUT_OF_TIME");
+  SetDvar("ui_deadquote", &"AF_CAVES_RAN_OUT_OF_TIME");
   level notify("mission failed");
   maps\_utility::missionFailedWrapper();
   level.player kill();
@@ -3014,7 +3014,7 @@ c4_barrel_explode() {
   playFX(getfx("player_death_explosion"), level.player.origin);
   Earthquake(1, 1, level.player.origin, 100);
   // Mission Failed.\nYou shot and detonated the rigged explosives.
-  SetDvar("ui_deadquote", & "AF_CAVES_MISSIONFAIL_EXPLOSIVES");
+  SetDvar("ui_deadquote", &"AF_CAVES_MISSIONFAIL_EXPLOSIVES");
   level notify("mission failed");
   maps\_utility::missionFailedWrapper();
   level.player kill();

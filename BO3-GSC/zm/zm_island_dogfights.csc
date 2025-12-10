@@ -15,14 +15,14 @@
 #namespace zm_island_dogfights;
 
 function init() {
-  clientfield::register("world", "play_dogfight_scenes", 9000, 3, "int", & play_dogfight_scenes, 0, 0);
-  scene::add_scene_func("p7_fxanim_zm_island_plane_teleport_chase1_bundle", & function_618223cc, "play");
-  scene::add_scene_func("p7_fxanim_zm_island_plane_teleport_chase2_bundle", & function_618223cc, "play");
-  scene::add_scene_func("p7_fxanim_zm_island_plane_teleport_chase3_bundle", & function_618223cc, "play");
-  scene::add_scene_func("p7_fxanim_zm_island_plane_teleport_chase4_bundle", & function_618223cc, "play");
-  scene::add_scene_func("p7_fxanim_zm_island_plane_teleport_corsair1_bundle", & function_618223cc, "play");
-  scene::add_scene_func("p7_fxanim_zm_island_plane_teleport_zero1_bundle", & function_618223cc, "play");
-  scene::add_scene_func("p7_fxanim_zm_island_plane_teleport_mob_bundle", & function_618223cc, "play");
+  clientfield::register("world", "play_dogfight_scenes", 9000, 3, "int", &play_dogfight_scenes, 0, 0);
+  scene::add_scene_func("p7_fxanim_zm_island_plane_teleport_chase1_bundle", &function_618223cc, "play");
+  scene::add_scene_func("p7_fxanim_zm_island_plane_teleport_chase2_bundle", &function_618223cc, "play");
+  scene::add_scene_func("p7_fxanim_zm_island_plane_teleport_chase3_bundle", &function_618223cc, "play");
+  scene::add_scene_func("p7_fxanim_zm_island_plane_teleport_chase4_bundle", &function_618223cc, "play");
+  scene::add_scene_func("p7_fxanim_zm_island_plane_teleport_corsair1_bundle", &function_618223cc, "play");
+  scene::add_scene_func("p7_fxanim_zm_island_plane_teleport_zero1_bundle", &function_618223cc, "play");
+  scene::add_scene_func("p7_fxanim_zm_island_plane_teleport_mob_bundle", &function_618223cc, "play");
 }
 
 function function_618223cc(a_ents) {

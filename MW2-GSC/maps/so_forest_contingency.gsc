@@ -11,9 +11,9 @@
 #include maps\_stealth_utility;
 #include maps\_stealth_shared_utilities;
 
-CONST_regular_obj = & "SO_FOREST_CONTINGENCY_OBJ_REGULAR";
-CONST_hardened_obj = & "SO_FOREST_CONTINGENCY_OBJ_HARDENED";
-CONST_veteran_obj = & "SO_FOREST_CONTINGENCY_OBJ_VETERAN";
+CONST_regular_obj = &"SO_FOREST_CONTINGENCY_OBJ_REGULAR";
+CONST_hardened_obj = &"SO_FOREST_CONTINGENCY_OBJ_HARDENED";
+CONST_veteran_obj = &"SO_FOREST_CONTINGENCY_OBJ_VETERAN";
 
 //	penalty seconds per kill
 CONST_kill_penalty = 10;

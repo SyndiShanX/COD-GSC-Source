@@ -35,20 +35,20 @@ main() {
   level.drone_spawnFunction["axis"] = ::drone_character_axis;
   maps\_drones::init();
   default_start(::event1_start);
-  add_start("event1_intro", ::event1_after_intro_start, & "STARTS_MAK_EVENT1_AFTER_INTRO");
-  add_start("event1_v_under_hut", ::event1_vignette_start, & "STARTS_MAK_EVENT1_V_UNDER_HUT");
-  add_start("event1_v_guy2shed", ::event1_vignette_start, & "STARTS_MAK_EVENT1_V_GUY2SHED");
-  add_start("event1_v_pond_fight", ::event1_vignette_start, & "STARTS_MAK_EVENT1_V_POND_FIGHT");
-  add_start("event1_v_fire_beatdown", ::event1_vignette_start, & "STARTS_MAK_EVENT1_V_FIRE_BEATDOWN");
-  add_start("event1_v_tower_collapse", ::event1_vignette_start, & "STARTS_MAK_EVENT1_V_TOWER_COLLAPSE");
-  add_start("event1_v_showdown", ::event1_vignette_start, & "STARTS_MAK_EVENT1_V_SHOWDOWN");
-  add_start("event1_lmg", ::event1_vignette_start, & "STARTS_MAK_EVENT1_LMG");
-  add_start("event2", ::event2_start, & "STARTS_MAK_EVENT2");
-  add_start("event2_beach", ::event2_beach_start, & "STARTS_MAK_EVENT2_BEACH");
-  add_start("event3_feign", ::event3_feign_start, & "STARTS_MAK_EVENT3_FEIGN");
-  add_start("event4", ::event4_start, & "STARTS_MAK_EVENT4");
-  add_start("event5", ::event5_start, & "STARTS_MAK_EVENT5");
-  add_start("outtro", ::event6_outtro_start, & "STARTS_MAK_OUTTRO");
+  add_start("event1_intro", ::event1_after_intro_start, &"STARTS_MAK_EVENT1_AFTER_INTRO");
+  add_start("event1_v_under_hut", ::event1_vignette_start, &"STARTS_MAK_EVENT1_V_UNDER_HUT");
+  add_start("event1_v_guy2shed", ::event1_vignette_start, &"STARTS_MAK_EVENT1_V_GUY2SHED");
+  add_start("event1_v_pond_fight", ::event1_vignette_start, &"STARTS_MAK_EVENT1_V_POND_FIGHT");
+  add_start("event1_v_fire_beatdown", ::event1_vignette_start, &"STARTS_MAK_EVENT1_V_FIRE_BEATDOWN");
+  add_start("event1_v_tower_collapse", ::event1_vignette_start, &"STARTS_MAK_EVENT1_V_TOWER_COLLAPSE");
+  add_start("event1_v_showdown", ::event1_vignette_start, &"STARTS_MAK_EVENT1_V_SHOWDOWN");
+  add_start("event1_lmg", ::event1_vignette_start, &"STARTS_MAK_EVENT1_LMG");
+  add_start("event2", ::event2_start, &"STARTS_MAK_EVENT2");
+  add_start("event2_beach", ::event2_beach_start, &"STARTS_MAK_EVENT2_BEACH");
+  add_start("event3_feign", ::event3_feign_start, &"STARTS_MAK_EVENT3_FEIGN");
+  add_start("event4", ::event4_start, &"STARTS_MAK_EVENT4");
+  add_start("event5", ::event5_start, &"STARTS_MAK_EVENT5");
+  add_start("outtro", ::event6_outtro_start, &"STARTS_MAK_OUTTRO");
   level.custom_introscreen = ::custom_introscreen;
   maps\_load::main();
   set_player_attrib("fov", 65);
@@ -56,7 +56,7 @@ main() {
   maps\mak_amb::main();
   maps\mak_anim::main();
   maps\_mgturret::init_mg_animent();
-  add_hint_string("truck_hint", & "MAK_TRUCK_HINT", ::event4_hint_check);
+  add_hint_string("truck_hint", &"MAK_TRUCK_HINT", ::event4_hint_check);
   init_flags();
   init_threatbias_groups();
   dof_enable(false);
@@ -5111,25 +5111,25 @@ hide_players() {
 
 set_objective(num, ent) {
   if(num == 0) {
-    Objective_Add(0, "active", & "MAK_OBJ_SECURE_VILLAGE", (-9705, -15483, 132));
+    Objective_Add(0, "active", &"MAK_OBJ_SECURE_VILLAGE", (-9705, -15483, 132));
     Objective_Current(0);
   } else if(num == 1) {
     Objective_State(0, "done");
-    Objective_Add(1, "active", & "MAK_OBJ_REGROUP_2ND_SQUAD", (-3096, -16800, 39.2));
+    Objective_Add(1, "active", &"MAK_OBJ_REGROUP_2ND_SQUAD", (-3096, -16800, 39.2));
     Objective_Current(1);
   } else if(num == 1.5) {
-    Objective_String(1, & "MAK_OBJ_RESCUE_2ND_SQUAD");
+    Objective_String(1, &"MAK_OBJ_RESCUE_2ND_SQUAD");
   } else if(num == 2) {
     Objective_State(1, "done");
-    Objective_Add(2, "active", & "MAK_OBJ_EXTRACTION_POINT", (3048, -14174, 376));
+    Objective_Add(2, "active", &"MAK_OBJ_EXTRACTION_POINT", (3048, -14174, 376));
     Objective_Current(2);
   } else if(num == 3) {
     origin = (2684, -12778, 144);
     players = get_players();
     if(players.size > 1) {
-      Objective_Add(3, "active", & "MAK_OBJ_PLANTCHARGE_COOP", origin);
+      Objective_Add(3, "active", &"MAK_OBJ_PLANTCHARGE_COOP", origin);
     } else {
-      Objective_Add(3, "active", & "MAK_OBJ_PLANTCHARGE", origin);
+      Objective_Add(3, "active", &"MAK_OBJ_PLANTCHARGE", origin);
     }
     Objective_Current(3);
   } else if(num == 4) {

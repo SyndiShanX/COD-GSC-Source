@@ -48,16 +48,16 @@ move_struct(param_00, param_01, param_02) {
 }
 
 registerdoorinteractions() {
-  level.interaction_hintstrings["debris_350"] = & "CP_TOWN_INTERACTIONS_PURCHASE_AREA";
-  level.interaction_hintstrings["debris_1000"] = & "CP_TOWN_INTERACTIONS_PURCHASE_AREA";
-  level.interaction_hintstrings["debris_1500"] = & "CP_TOWN_INTERACTIONS_PURCHASE_AREA";
-  level.interaction_hintstrings["debris_2000"] = & "CP_TOWN_INTERACTIONS_PURCHASE_AREA";
-  level.interaction_hintstrings["debris_2500"] = & "CP_TOWN_INTERACTIONS_PURCHASE_AREA";
-  level.interaction_hintstrings["debris_1250"] = & "CP_TOWN_INTERACTIONS_PURCHASE_AREA";
-  level.interaction_hintstrings["debris_750"] = & "CP_TOWN_INTERACTIONS_PURCHASE_AREA";
-  level.interaction_hintstrings["team_door_switch"] = & "CP_TOWN_INTERACTIONS_TEAM_DOOR_SWITCH";
-  level.interaction_hintstrings["power_door_sliding"] = & "CP_FINAL_INTERACTIONS_SYSTEM_OFFLINE";
-  level.interaction_hintstrings["power_door_sliding"] = & "CP_TOWN_INTERACTIONS_PURCHASE_AREA";
+  level.interaction_hintstrings["debris_350"] = &"CP_TOWN_INTERACTIONS_PURCHASE_AREA";
+  level.interaction_hintstrings["debris_1000"] = &"CP_TOWN_INTERACTIONS_PURCHASE_AREA";
+  level.interaction_hintstrings["debris_1500"] = &"CP_TOWN_INTERACTIONS_PURCHASE_AREA";
+  level.interaction_hintstrings["debris_2000"] = &"CP_TOWN_INTERACTIONS_PURCHASE_AREA";
+  level.interaction_hintstrings["debris_2500"] = &"CP_TOWN_INTERACTIONS_PURCHASE_AREA";
+  level.interaction_hintstrings["debris_1250"] = &"CP_TOWN_INTERACTIONS_PURCHASE_AREA";
+  level.interaction_hintstrings["debris_750"] = &"CP_TOWN_INTERACTIONS_PURCHASE_AREA";
+  level.interaction_hintstrings["team_door_switch"] = &"CP_TOWN_INTERACTIONS_TEAM_DOOR_SWITCH";
+  level.interaction_hintstrings["power_door_sliding"] = &"CP_FINAL_INTERACTIONS_SYSTEM_OFFLINE";
+  level.interaction_hintstrings["power_door_sliding"] = &"CP_TOWN_INTERACTIONS_PURCHASE_AREA";
   levelinteractionregistration(0, "debris_350", "door_buy", undefined, undefined, ::scripts\cp\zombies\interaction_openareas::clear_debris, 350, 0, undefined);
   levelinteractionregistration(0, "debris_1000", "door_buy", undefined, undefined, ::scripts\cp\zombies\interaction_openareas::clear_debris, 1000, 0, undefined);
   levelinteractionregistration(0, "debris_1500", "door_buy", undefined, undefined, ::scripts\cp\zombies\interaction_openareas::clear_debris, 1500, 0, undefined);
@@ -77,11 +77,11 @@ registerdoorinteractions() {
 register_ritual_circle_interactions() {}
 
 register_afterlife_games() {
-  level.interaction_hintstrings["basketball_game_afterlife"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["laughingclown_afterlife"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["bowling_for_planets_afterlife"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["clown_tooth_game_afterlife"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["game_race"] = & "COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["basketball_game_afterlife"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["laughingclown_afterlife"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["bowling_for_planets_afterlife"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["clown_tooth_game_afterlife"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["game_race"] = &"COOP_INTERACTIONS_PLAY_GAME";
   scripts\cp\cp_interaction::register_interaction("basketball_game_afterlife", "afterlife_game", undefined, undefined, ::scripts\cp\zombies\interaction_basketball::use_basketball_game, 0, 0, ::scripts\cp\zombies\interaction_basketball::init_afterlife_basketball_game);
   scripts\cp\cp_interaction::register_interaction("clown_tooth_game_afterlife", "afterlife_game", undefined, undefined, ::scripts\cp\zombies\interaction_clowntooth::use_clowntooth_game, 0, 0, ::scripts\cp\zombies\interaction_clowntooth::init_afterlife_clowntooth_game);
   scripts\cp\cp_interaction::register_interaction("laughingclown_afterlife", "afterlife_game", undefined, undefined, ::scripts\cp\zombies\interaction_laughingclown::laughing_clown, 0, 0, ::scripts\cp\zombies\interaction_laughingclown::init_all_afterlife_laughing_clowns);
@@ -90,14 +90,14 @@ register_afterlife_games() {
 }
 
 register_arcade_roms() {
-  level.interaction_hintstrings["arcade_hero"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_icehock"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_seaques"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_boxing"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_oink"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_keyston"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_plaque"] = & "COOP_INTERACTIONS_PLAY_GAME";
-  level.interaction_hintstrings["arcade_crackpo"] = & "COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_hero"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_icehock"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_seaques"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_boxing"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_oink"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_keyston"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_plaque"] = &"COOP_INTERACTIONS_PLAY_GAME";
+  level.interaction_hintstrings["arcade_crackpo"] = &"COOP_INTERACTIONS_PLAY_GAME";
   scripts\cp\cp_interaction::register_interaction("arcade_hero", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
   scripts\cp\cp_interaction::register_interaction("arcade_icehock", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
   scripts\cp\cp_interaction::register_interaction("arcade_seaques", "arcade_game", undefined, undefined, ::scripts\cp\zombies\zombie_arcade_games::use_arcade_game, 0, 1);
@@ -165,7 +165,7 @@ level_specific_wait_for_interaction_triggered(param_00) {
       var_04 = scripts\cp\cp_weapon::get_weapon_level(var_03);
       if(scripts\engine\utility::istrue(var_01.has_zis_soul_key) || scripts\engine\utility::istrue(level.placed_alien_fuses)) {
         if(var_04 == 3) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_UPGRADE_MAXED");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_UPGRADE_MAXED");
           continue;
         } else if(scripts\cp\maps\cp_final\cp_final_weapon_upgrade::can_upgrade(var_03, 1)) {
           if(var_04 == 1) {
@@ -174,13 +174,13 @@ level_specific_wait_for_interaction_triggered(param_00) {
             var_02 = 10000;
           }
         } else {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_FAIL");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_FAIL");
           continue;
         }
       } else if(scripts\engine\utility::istrue(level.has_picked_up_fuses) && !isDefined(level.placed_alien_fuses)) {
         var_02 = 0;
       } else if(var_04 == level.pap_max) {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_UPGRADE_MAXED");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_UPGRADE_MAXED");
         continue;
       } else if(scripts\cp\maps\cp_final\cp_final_weapon_upgrade::can_upgrade(var_03)) {
         if(var_04 == 1) {
@@ -189,7 +189,7 @@ level_specific_wait_for_interaction_triggered(param_00) {
           var_02 = 10000;
         }
       } else {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_FAIL");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_FAIL");
         continue;
       }
     } else if(scripts\cp\cp_interaction::interaction_is_weapon_buy(param_00)) {
@@ -201,7 +201,7 @@ level_specific_wait_for_interaction_triggered(param_00) {
       var_06 = scripts\cp\utility::getbaseweaponname(var_05);
       if(scripts\cp\cp_weapon::has_weapon_variation(param_00.script_noteworthy)) {
         if(!scripts\cp\cp_interaction::can_purchase_ammo(param_00.script_noteworthy)) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_GAME_PLAY_AMMO_MAX");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_GAME_PLAY_AMMO_MAX");
           continue;
         } else {
           var_07 = scripts\cp\utility::getrawbaseweaponname(param_00.script_noteworthy);
@@ -224,7 +224,7 @@ level_specific_wait_for_interaction_triggered(param_00) {
     } else if(scripts\cp\cp_interaction::interaction_is_fortune_teller(param_00)) {
       if(!scripts\engine\utility::istrue(level.unlimited_fnf)) {
         if(var_01.card_refills == 2) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_NO_MORE_CARDS_OWNED");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_NO_MORE_CARDS_OWNED");
           continue;
         }
       }
@@ -247,13 +247,13 @@ level_specific_wait_for_interaction_triggered(param_00) {
     if(!scripts\cp\cp_interaction::can_purchase_interaction(param_00, var_02, level.interactions[param_00.script_noteworthy].spend_type)) {
       level notify("interaction", "purchase_denied", level.interactions[param_00.script_noteworthy], self);
       if(param_00.script_parameters == "tickets") {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "CP_ZMB_INTERACTIONS_NEED_TICKETS");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"CP_ZMB_INTERACTIONS_NEED_TICKETS");
         thread scripts\cp\cp_vo::try_to_play_vo("no_tickets", "zmb_comment_vo", "high", 10, 0, 0, 1, 50);
       } else if((scripts\cp\utility::isplayingsolo() || level.only_one_player) && scripts\cp\cp_interaction::interaction_is_perk(param_00) && param_00.perk_type == "perk_machine_revive" && var_01.self_revives_purchased >= var_01.max_self_revive_machine_use) {
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_CANNOT_BUY_SELF_REVIVE");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_CANNOT_BUY_SELF_REVIVE");
       } else {
         thread scripts\cp\cp_vo::try_to_play_vo("no_cash", "zmb_comment_vo", "high", 10, 0, 0, 1, 50);
-        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_NEED_MONEY");
+        scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_NEED_MONEY");
       }
 
       continue;
@@ -262,7 +262,7 @@ level_specific_wait_for_interaction_triggered(param_00) {
     if(param_00.script_noteworthy == "atm_withdrawal") {
       if(isDefined(level.atm_transaction_amount)) {
         if(level.atm_amount_deposited < level.atm_transaction_amount) {
-          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_NEED_MONEY");
+          scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_NEED_MONEY");
           continue;
         }
       }
@@ -420,15 +420,15 @@ weaponinteractions() {
 
     var_03 = int(tablelookupbyrow("cp\zombies\cp_final_weapontable.csv", var_00, 4));
     var_04 = tablelookupbyrow("cp\zombies\cp_final_weapontable.csv", var_00, 1);
-    level.interaction_hintstrings[var_04] = & "CP_TOWN_INTERACTIONS_BUY_WEAPON";
+    level.interaction_hintstrings[var_04] = &"CP_TOWN_INTERACTIONS_BUY_WEAPON";
     levelinteractionregistration(0, var_04, "wall_buy", undefined, ::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func, ::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon, var_03);
     var_00++;
   }
 }
 
 registeratminteractions() {
-  level.interaction_hintstrings["atm_deposit"] = & "CP_TOWN_INTERACTIONS_ATM_DEPOSIT";
-  level.interaction_hintstrings["atm_withdrawal"] = & "CP_TOWN_INTERACTIONS_ATM_WITHDRAWAL";
+  level.interaction_hintstrings["atm_deposit"] = &"CP_TOWN_INTERACTIONS_ATM_DEPOSIT";
+  level.interaction_hintstrings["atm_withdrawal"] = &"CP_TOWN_INTERACTIONS_ATM_WITHDRAWAL";
   levelinteractionregistration(0, "atm_deposit", "atm", undefined, ::scripts\cp\cp_interaction::atm_deposit_hint, ::atm_deposit, 1000, 0, undefined);
   levelinteractionregistration(0, "atm_withdrawal", "atm", undefined, ::atm_withdrawal_hint, ::atm_withdrawal, 0, 0, ::setup_atm_system);
 }
@@ -505,11 +505,11 @@ atm_withdrawal(param_00, param_01) {
 
 atm_withdrawal_hint(param_00, param_01) {
   if(param_00.requires_power && !param_00.powered_on) {
-    return & "CP_FINAL_INTERACTIONS_SYSTEM_OFFLINE";
+    return &"CP_FINAL_INTERACTIONS_SYSTEM_OFFLINE";
   }
 
   if(isDefined(level.atm_amount_deposited) && level.atm_amount_deposited < 1000) {
-    return & "CP_TOWN_INTERACTIONS_ATM_INSUFFICIENT_FUNDS";
+    return &"CP_TOWN_INTERACTIONS_ATM_INSUFFICIENT_FUNDS";
   }
 
   return level.interaction_hintstrings[param_00.script_noteworthy];
@@ -588,10 +588,10 @@ pap_portal_hint(param_00, param_01) {
   }
 
   if(isDefined(param_00.cooling_down)) {
-    return & "COOP_INTERACTIONS_COOLDOWN";
+    return &"COOP_INTERACTIONS_COOLDOWN";
   }
 
-  return & "CP_FINAL_ENTER_PAP_PORTAL";
+  return &"CP_FINAL_ENTER_PAP_PORTAL";
 }
 
 init_brute_func() {
@@ -794,17 +794,17 @@ initslidingdoor() {
 
 slidingdoorhint(param_00, param_01) {
   if(scripts\engine\utility::istrue(param_00.requires_power)) {
-    return & "CP_FINAL_INTERACTIONS_SYSTEM_OFFLINE";
+    return &"CP_FINAL_INTERACTIONS_SYSTEM_OFFLINE";
   }
 
   if(scripts\engine\utility::istrue(param_00.player_opened)) {
     param_01.interaction_trigger sethintstringparams(level.enter_area_hint);
-    return & "CP_FINAL_INTERACTIONS_OPEN_AREA";
+    return &"CP_FINAL_INTERACTIONS_OPEN_AREA";
   }
 
   var_02 = int(level.interactions[param_00.script_noteworthy].cost);
   param_01.interaction_trigger sethintstringparams(level.enter_area_hint, var_02);
-  return & "CP_TOWN_INTERACTIONS_PURCHASE_AREA";
+  return &"CP_TOWN_INTERACTIONS_PURCHASE_AREA";
 }
 
 openslidingdoor(param_00, param_01) {
@@ -968,7 +968,7 @@ closeslidingdoor(param_00, param_01) {
 
 helmet_useable() {
   self makeusable();
-  self sethintstring( & "CP_FINAL_INTERACTIONS_PICKUP_BRUTE_HELMET");
+  self sethintstring(&"CP_FINAL_INTERACTIONS_PICKUP_BRUTE_HELMET");
 }
 
 helmet_not_useable() {

@@ -33,7 +33,7 @@
 #namespace zm_perk_widows_wine;
 
 function autoexec __init__sytem__() {
-  system::register("zm_perk_widows_wine", & __init__, undefined, undefined);
+  system::register("zm_perk_widows_wine", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -41,12 +41,12 @@ function __init__() {
 }
 
 function enable_widows_wine_perk_for_level() {
-  zm_perks::register_perk_basic_info("specialty_widowswine", "widows_wine", 4000, & "ZOMBIE_PERK_WIDOWSWINE", getweapon("zombie_perk_bottle_widows_wine"));
-  zm_perks::register_perk_precache_func("specialty_widowswine", & widows_wine_precache);
-  zm_perks::register_perk_clientfields("specialty_widowswine", & widows_wine_register_clientfield, & widows_wine_set_clientfield);
-  zm_perks::register_perk_machine("specialty_widowswine", & widows_wine_perk_machine_setup);
+  zm_perks::register_perk_basic_info("specialty_widowswine", "widows_wine", 4000, &"ZOMBIE_PERK_WIDOWSWINE", getweapon("zombie_perk_bottle_widows_wine"));
+  zm_perks::register_perk_precache_func("specialty_widowswine", &widows_wine_precache);
+  zm_perks::register_perk_clientfields("specialty_widowswine", &widows_wine_register_clientfield, &widows_wine_set_clientfield);
+  zm_perks::register_perk_machine("specialty_widowswine", &widows_wine_perk_machine_setup);
   zm_perks::register_perk_host_migration_params("specialty_widowswine", "vending_widowswine", "widow_light");
-  zm_perks::register_perk_threads("specialty_widowswine", & widows_wine_perk_activate, & widows_wine_perk_lost);
+  zm_perks::register_perk_threads("specialty_widowswine", &widows_wine_perk_activate, &widows_wine_perk_lost);
   if(isDefined(level.custom_widows_wine_perk_threads) && level.custom_widows_wine_perk_threads) {
     level thread[[level.custom_widows_wine_perk_threads]]();
   }
@@ -91,10 +91,10 @@ function widows_wine_perk_machine_setup(use_trigger, perk_machine, bump_trigger,
 
 function init_widows_wine() {
   zm_utility::register_lethal_grenade_for_level("sticky_grenade_widows_wine");
-  zm_spawner::register_zombie_damage_callback( & widows_wine_zombie_damage_response);
-  zm_spawner::register_zombie_death_event_callback( & widows_wine_zombie_death_watch);
-  zm::register_vehicle_damage_callback( & widows_wine_vehicle_damage_response);
-  zm_perks::register_perk_damage_override_func( & widows_wine_damage_callback);
+  zm_spawner::register_zombie_damage_callback(&widows_wine_zombie_damage_response);
+  zm_spawner::register_zombie_death_event_callback(&widows_wine_zombie_death_watch);
+  zm::register_vehicle_damage_callback(&widows_wine_vehicle_damage_response);
+  zm_perks::register_perk_damage_override_func(&widows_wine_damage_callback);
   level.w_widows_wine_grenade = getweapon("sticky_grenade_widows_wine");
   zm_utility::register_melee_weapon_for_level("knife_widows_wine");
   level.w_widows_wine_knife = getweapon("knife_widows_wine");
@@ -130,10 +130,10 @@ function widows_wine_perk_activate() {
       }
     }
   }
-  assert(!isDefined(self.check_override_wallbuy_purchase) || self.check_override_wallbuy_purchase == ( & widows_wine_override_wallbuy_purchase));
-  assert(!isDefined(self.check_override_melee_wallbuy_purchase) || self.check_override_melee_wallbuy_purchase == ( & widows_wine_override_melee_wallbuy_purchase));
-  self.check_override_wallbuy_purchase = & widows_wine_override_wallbuy_purchase;
-  self.check_override_melee_wallbuy_purchase = & widows_wine_override_melee_wallbuy_purchase;
+  assert(!isDefined(self.check_override_wallbuy_purchase) || self.check_override_wallbuy_purchase == (&widows_wine_override_wallbuy_purchase));
+  assert(!isDefined(self.check_override_melee_wallbuy_purchase) || self.check_override_melee_wallbuy_purchase == (&widows_wine_override_melee_wallbuy_purchase));
+  self.check_override_wallbuy_purchase = &widows_wine_override_wallbuy_purchase;
+  self.check_override_melee_wallbuy_purchase = &widows_wine_override_melee_wallbuy_purchase;
   self thread grenade_bounce_monitor();
 }
 
@@ -201,7 +201,7 @@ function widows_wine_zombie_death_watch(attacker) {
       }
       if(randomfloat(1) <= chance) {
         self.no_powerups = 1;
-        level._powerup_timeout_override = & powerup_widows_wine_timeout;
+        level._powerup_timeout_override = &powerup_widows_wine_timeout;
         level thread zm_powerups::specific_powerup_drop("ww_grenade", self.origin, undefined, undefined, undefined, self.attacker);
         level._powerup_timeout_override = undefined;
       }

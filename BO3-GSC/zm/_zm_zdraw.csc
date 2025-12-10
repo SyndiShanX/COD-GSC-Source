@@ -16,7 +16,7 @@
 #namespace zm_zdraw;
 
 function autoexec __init__sytem__() {
-  system::register("", & __init__, & __main__, undefined);
+  system::register("", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -60,17 +60,17 @@ function function_3e630288() {
 
 function function_aa8545fe() {
   level.zdraw.commands = [];
-  level.zdraw.commands[""] = & function_5ef6cf9b;
-  level.zdraw.commands[""] = & function_eae4114a;
-  level.zdraw.commands[""] = & function_f2f3c18e;
-  level.zdraw.commands[""] = & function_8f04ad79;
-  level.zdraw.commands[""] = & function_a13efe1c;
-  level.zdraw.commands[""] = & function_b3b92edc;
-  level.zdraw.commands[""] = & function_8c2ca616;
-  level.zdraw.commands[""] = & function_3145e33f;
-  level.zdraw.commands[""] = & function_f36ec3d2;
-  level.zdraw.commands[""] = & function_7bdd3089;
-  level.zdraw.commands[""] = & function_be7cf134;
+  level.zdraw.commands[""] = &function_5ef6cf9b;
+  level.zdraw.commands[""] = &function_eae4114a;
+  level.zdraw.commands[""] = &function_f2f3c18e;
+  level.zdraw.commands[""] = &function_8f04ad79;
+  level.zdraw.commands[""] = &function_a13efe1c;
+  level.zdraw.commands[""] = &function_b3b92edc;
+  level.zdraw.commands[""] = &function_8c2ca616;
+  level.zdraw.commands[""] = &function_3145e33f;
+  level.zdraw.commands[""] = &function_f36ec3d2;
+  level.zdraw.commands[""] = &function_7bdd3089;
+  level.zdraw.commands[""] = &function_be7cf134;
 }
 
 function function_404ac348() {

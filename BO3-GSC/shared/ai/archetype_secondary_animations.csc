@@ -14,16 +14,16 @@ function autoexec main() {
   if(sessionmodeiszombiesgame() && getdvarint("splitscreen_playerCount") > 2) {
     return;
   }
-  ai::add_archetype_spawn_function("human", & secondaryanimationsinit);
-  ai::add_archetype_spawn_function("zombie", & secondaryanimationsinit);
-  ai::add_ai_spawn_function( & on_entity_spawn);
+  ai::add_archetype_spawn_function("human", &secondaryanimationsinit);
+  ai::add_archetype_spawn_function("zombie", &secondaryanimationsinit);
+  ai::add_ai_spawn_function(&on_entity_spawn);
 }
 
 function private secondaryanimationsinit(localclientnum) {
   if(!isDefined(level.__facialanimationslist)) {
     buildandvalidatefacialanimationlist(localclientnum);
   }
-  self callback::on_shutdown( & on_entity_shutdown);
+  self callback::on_shutdown(&on_entity_shutdown);
   self thread secondaryfacialanimationthink(localclientnum);
 }
 

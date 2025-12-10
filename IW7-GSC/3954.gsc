@@ -690,7 +690,7 @@ func_7FD7(var_00, var_01, var_02, var_03) {
   if(!isDefined(var_03))
     var_03 = 1;
 
-  var_05 = var_00 & var_00 - 1;
+  var_05 = var_00 &var_00 - 1;
 
   if(var_05 > 0) {
     if(var_02 < 1) {
@@ -705,7 +705,7 @@ func_7FD7(var_00, var_01, var_02, var_03) {
         var_07 = var_10 + (var_11 >> 2) * var_09;
         var_12 = 1 << (var_11 & 3);
 
-        if((var_00 & var_12) != 0 && isDefined(func_2C18(var_01 | var_04 | var_12))) {
+        if((var_00 &var_12) != 0 && isDefined(func_2C18(var_01 | var_04 | var_12))) {
           if(randomfloat(1.0) > func_3C3B(var_12) * var_03)
             var_04 = var_04 | var_12;
         }
@@ -784,7 +784,7 @@ func_BDFB(var_00, var_01, var_02, var_03, var_04) {
     var_06 = scripts\engine\utility::is_true(level.func_8EE6[var_01]);
 
   if(var_00 != self.func_B8BA) {
-    var_07 = ~self.func_B8BA & var_00;
+    var_07 = ~self.func_B8BA &var_00;
 
     if(scripts\cp\utility::is_codxp()) {
       if(!scripts\engine\utility::is_true(self.entered_playspace))

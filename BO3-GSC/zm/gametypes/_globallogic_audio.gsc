@@ -13,11 +13,11 @@
 #namespace globallogic_audio;
 
 function autoexec __init__sytem__() {
-  system::register("globallogic_audio", & __init__, undefined, undefined);
+  system::register("globallogic_audio", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
+  callback::on_start_gametype(&init);
 }
 
 function init() {

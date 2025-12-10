@@ -16,7 +16,7 @@
 
 function main() {
   mp_apartments_fx::main();
-  level.add_raps_drop_locations = & add_raps_drop_locations;
+  level.add_raps_drop_locations = &add_raps_drop_locations;
   level.remotemissile_kill_z = 650 + 50;
   load::main();
   compass::setupminimap("compass_map_mp_apartments");
@@ -55,7 +55,7 @@ function main() {
   level.cleandepositpoints = array((-2348.08, -639.428, 1215.81), (-186.08, -415.428, 1344.81), (70.9199, -1853.93, 1344.81), (-1352.58, -913.428, 1226.81), (-434.08, 660.072, 1346.81));
 }
 
-function add_raps_drop_locations( & drop_candidate_array) {
+function add_raps_drop_locations(&drop_candidate_array) {
   if(!isDefined(drop_candidate_array)) {
     drop_candidate_array = [];
   } else if(!isarray(drop_candidate_array)) {

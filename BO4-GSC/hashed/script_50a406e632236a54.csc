@@ -12,13 +12,13 @@
 #namespace ball;
 
 event_handler[gametype_init] main(eventstruct) {
-  clientfield::register("allplayers", "ballcarrier", 1, 1, "int", & function_5354f213, 0, 1);
-  clientfield::register("allplayers", "passoption", 1, 1, "int", & function_8dc589c8, 0, 0);
-  clientfield::register("world", "ball_away", 1, 1, "int", & function_c27acbbf, 0, 1);
-  clientfield::register("world", "ball_score_allies", 1, 1, "int", & function_fe891abf, 0, 1);
-  clientfield::register("world", "ball_score_axis", 1, 1, "int", & function_7d1a6e7e, 0, 1);
-  callback::on_localclient_connect( & on_localclient_connect);
-  callback::on_spawned( & on_player_spawned);
+  clientfield::register("allplayers", "ballcarrier", 1, 1, "int", &function_5354f213, 0, 1);
+  clientfield::register("allplayers", "passoption", 1, 1, "int", &function_8dc589c8, 0, 0);
+  clientfield::register("world", "ball_away", 1, 1, "int", &function_c27acbbf, 0, 1);
+  clientfield::register("world", "ball_score_allies", 1, 1, "int", &function_fe891abf, 0, 1);
+  clientfield::register("world", "ball_score_axis", 1, 1, "int", &function_7d1a6e7e, 0, 1);
+  callback::on_localclient_connect(&on_localclient_connect);
+  callback::on_spawned(&on_player_spawned);
   if(!getdvarint(#"tu11_programaticallycoloredgamefx", 0)) {
     level.effect_scriptbundles = [];
     level.effect_scriptbundles[# "goal"] = struct::get_script_bundle("teamcolorfx", "teamcolorfx_uplink_goal");

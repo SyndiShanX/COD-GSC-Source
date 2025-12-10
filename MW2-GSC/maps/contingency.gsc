@@ -308,9 +308,9 @@ main() {
 
   thread setup_dont_leave_failure();
   thread setup_dont_leave_hint();
-  add_hint_string("hint_dont_leave_price", & "CONTINGENCY_DONT_LEAVE", ::should_break_dont_leave);
-  add_hint_string("hint_predator_drone", & "HELLFIRE_USE_DRONE", ::should_break_use_drone);
-  add_hint_string("hint_steer_drone", & "SCRIPT_PLATFORM_STEER_DRONE", ::should_break_steer_drone);
+  add_hint_string("hint_dont_leave_price", &"CONTINGENCY_DONT_LEAVE", ::should_break_dont_leave);
+  add_hint_string("hint_predator_drone", &"HELLFIRE_USE_DRONE", ::should_break_use_drone);
+  add_hint_string("hint_steer_drone", &"SCRIPT_PLATFORM_STEER_DRONE", ::should_break_steer_drone);
 
   thread objective_main();
 }
@@ -1983,7 +1983,7 @@ activate_players_key() {
   players_key glow();
 
   players_key setCursorHint("HINT_NOICON");
-  // Press and hold ^3&&1^7 to pick up the turret.
+  // Press and hold ^3&& 1^7 to pick up the turret.
   players_key setHintString(&"CONTINGENCY_TURN_KEY");
   players_key makeUsable();
 
@@ -2718,7 +2718,7 @@ setup_dont_leave_failure() {
   flag_wait("player_left_map");
 
   level notify("mission failed");
-  setDvar("ui_deadquote", & "CONTINGENCY_DONT_LEAVE_FAILURE");
+  setDvar("ui_deadquote", &"CONTINGENCY_DONT_LEAVE_FAILURE");
   maps\_utility::missionFailedWrapper();
 }
 
@@ -6223,7 +6223,7 @@ delay_first_obj() {
 objective_price() {
   while(!isDefined(level.price))
     wait .1;
-  registerObjective("obj_price", & "CONTINGENCY_OBJ_PRICE", level.price.origin);
+  registerObjective("obj_price", &"CONTINGENCY_OBJ_PRICE", level.price.origin);
   setObjectiveState("obj_price", "current");
   thread setObjectiveLocationMoving("obj_price", level.price, (0, 0, 70));
 
@@ -6258,7 +6258,7 @@ objective_get_to_sub() {
   obj_reach_split_off = getstruct("obj_reach_split_off", "targetname");
   if(isDefined(obj_reach_split_off))
     origin = obj_reach_split_off.origin;
-  registerObjective("obj_reach", & "CONTINGENCY_OBJ_ENTER_SUB", origin);
+  registerObjective("obj_reach", &"CONTINGENCY_OBJ_ENTER_SUB", origin);
   setObjectiveState("obj_reach", "current");
 
   flag_wait("price_splits_off");
@@ -6274,9 +6274,9 @@ objective_defend_sub() {
   flag_wait("price_splits_off");
 
   origin = getstruct("obj_guard_house", "targetname").origin;
-  registerObjective("obj_sub", & "CONTINGENCY_OBJ_DEFEND_SUB", origin + (0, 0, 48));
+  registerObjective("obj_sub", &"CONTINGENCY_OBJ_DEFEND_SUB", origin + (0, 0, 48));
   setObjectiveState("obj_sub", "current");
-  setObjectiveWaypoint("obj_sub", & "CONTINGENCY_OBJ_DEFEND");
+  setObjectiveWaypoint("obj_sub", &"CONTINGENCY_OBJ_DEFEND");
   //setObjectiveString( "obj_sub", &"CONTINGENCY_OBJ_DEFEND_SUB" );
   //setObjectiveLocation( "obj_sub", origin + (0,0,48) );
 
@@ -6390,7 +6390,7 @@ timer_start() {
 
   thread dialog_time_nags(level.timer_allowed_time);
 
-  level thread timer_logic(level.timer_allowed_time, & "CONTINGENCY_TIME_TO_ENTER_SUB");
+  level thread timer_logic(level.timer_allowed_time, &"CONTINGENCY_TIME_TO_ENTER_SUB");
   level.timer_start_time = gettime();
 }
 

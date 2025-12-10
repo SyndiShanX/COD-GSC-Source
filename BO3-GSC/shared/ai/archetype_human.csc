@@ -15,7 +15,7 @@
 function autoexec precache() {}
 
 function autoexec main() {
-  clientfield::register("actor", "facial_dial", 1, 1, "int", & humanclientutils::facialdialoguehandler, 0, 1);
+  clientfield::register("actor", "facial_dial", 1, 1, "int", &humanclientutils::facialdialoguehandler, 0, 1);
 }
 
 #namespace humanclientutils;

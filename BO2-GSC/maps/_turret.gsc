@@ -476,7 +476,7 @@ set_turret_target_flags(n_flags, n_index) {
 
 _has_target_flags(n_flags, n_index) {
   n_current_flags = _get_turret_data(n_index).n_target_flags;
-  return (n_current_flags & n_flags) == n_flags;
+  return (n_current_flags &n_flags) == n_flags;
 }
 
 set_turret_max_target_distance(n_distance, n_index) {

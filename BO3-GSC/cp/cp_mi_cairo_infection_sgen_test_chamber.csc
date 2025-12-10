@@ -14,18 +14,18 @@ function main() {
 }
 
 function init_clientfields() {
-  clientfield::register("world", "sgen_test_chamber_pod_graphics", 1, 1, "int", & function_8d81452c, 0, 0);
-  clientfield::register("world", "sgen_test_chamber_time_lapse", 1, 1, "int", & callback_time_lapse, 0, 0);
-  clientfield::register("scriptmover", "sgen_test_guys_decay", 1, 1, "int", & callback_guys_decay, 0, 0);
-  clientfield::register("world", "fxanim_hive_cluster_break", 1, 1, "int", & fxanim_hive_cluster_break, 0, 0);
-  clientfield::register("world", "fxanim_time_lapse_objects", 1, 1, "int", & fxanim_time_lapse_objects, 0, 0);
+  clientfield::register("world", "sgen_test_chamber_pod_graphics", 1, 1, "int", &function_8d81452c, 0, 0);
+  clientfield::register("world", "sgen_test_chamber_time_lapse", 1, 1, "int", &callback_time_lapse, 0, 0);
+  clientfield::register("scriptmover", "sgen_test_guys_decay", 1, 1, "int", &callback_guys_decay, 0, 0);
+  clientfield::register("world", "fxanim_hive_cluster_break", 1, 1, "int", &fxanim_hive_cluster_break, 0, 0);
+  clientfield::register("world", "fxanim_time_lapse_objects", 1, 1, "int", &fxanim_time_lapse_objects, 0, 0);
 }
 
 function fxanim_hive_cluster_break(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     level thread scene::init("p7_fxanim_cp_infection_sgen_hive_drop_bundle");
   } else {
-    scene::add_scene_func("p7_fxanim_cp_infection_sgen_hive_drop_bundle", & callback_hive_remove, "play");
+    scene::add_scene_func("p7_fxanim_cp_infection_sgen_hive_drop_bundle", &callback_hive_remove, "play");
     level thread scene::play("p7_fxanim_cp_infection_sgen_hive_drop_bundle");
   }
 }

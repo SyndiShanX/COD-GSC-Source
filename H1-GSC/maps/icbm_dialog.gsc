@@ -132,7 +132,7 @@ dialog_rescue() {
     wait 1;
     level.price maps\_anim::anim_single_queue(level.price, "cutloose");
     wait 1;
-    objective_string(2, & "ICBM_UNTIE_GRIGGS");
+    objective_string(2, &"ICBM_UNTIE_GRIGGS");
     wait 3;
     dialog_price_finds_griggs();
     wait 1;
@@ -141,7 +141,7 @@ dialog_rescue() {
   } else {
     maps\icbm_code::price_rescue_anims();
     wait 0.5;
-    objective_string(2, & "ICBM_UNTIE_GRIGGS");
+    objective_string(2, &"ICBM_UNTIE_GRIGGS");
   }
 }
 

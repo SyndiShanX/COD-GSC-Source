@@ -17,14 +17,14 @@
 #namespace namespace_ade8e118;
 
 autoexec __init__system__() {
-  system::register(#"hash_3e28122e3a96907e", & __init__, & __main__, undefined);
+  system::register(#"hash_3e28122e3a96907e", &__init__, &__main__, undefined);
 }
 
 private __init__() {
   if(!function_4922937f()) {
     return;
   }
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 private __main__() {

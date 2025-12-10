@@ -45,7 +45,7 @@ callback_playerdamage_internal(param_00, param_01, param_02, param_03, param_04,
   }
 
   var_10 = 0;
-  if(param_04 & level.idflags_stun) {
+  if(param_04 &level.idflags_stun) {
     var_10 = 0;
     param_03 = 0;
   }
@@ -196,7 +196,7 @@ callback_playerdamage_internal(param_00, param_01, param_02, param_03, param_04,
   }
 
   var_1F = param_08;
-  if(isDefined(param_04) && param_04 & level.idflags_ricochet && param_03 < self.health) {
+  if(isDefined(param_04) && param_04 &level.idflags_ricochet && param_03 < self.health) {
     var_1F = param_02.origin - param_01.origin;
   }
 
@@ -361,7 +361,7 @@ func_3696(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       }
     }
 
-    if(isDefined(param_0A) && param_0A & level.idflags_ricochet) {
+    if(isDefined(param_0A) && param_0A &level.idflags_ricochet) {
       var_10 = scripts\mp\utility::getweaponbasedsmokegrenadecount(param_04);
       if(var_10 != "none" && !scripts\mp\utility::issuperweapon(var_10)) {
         param_02 = param_02 * 0.4;
@@ -784,7 +784,7 @@ handlefriendlyfiredamage(param_00, param_01, param_02, param_03, param_04, param
       return 0;
     }
 
-    if(isDefined(param_04) && param_04 & level.idflags_ricochet && scripts\engine\utility::isbulletdamage(param_05)) {
+    if(isDefined(param_04) && param_04 &level.idflags_ricochet && scripts\engine\utility::isbulletdamage(param_05)) {
       param_03 = int(param_03 * 0.2);
     }
   }
@@ -997,13 +997,13 @@ handleriotshieldhits(param_00, param_01, param_02, param_03, param_04, param_05,
   }
 
   var_14 = isDefined(param_00) && isDefined(param_00.stuckenemyentity) && param_00.stuckenemyentity == param_01;
-  if(param_09 & level.idflags_shield_explosive_impact && !param_01 scripts\mp\utility::_hasperk("specialty_rearguard")) {
+  if(param_09 &level.idflags_shield_explosive_impact && !param_01 scripts\mp\utility::_hasperk("specialty_rearguard")) {
     param_01 thread scripts\mp\missions::processchallenge("shield_explosive_hits", 1);
     param_08 = "none";
-    if(!param_09 & level.idflags_shield_explosive_impact_huge) {
+    if(!param_09 &level.idflags_shield_explosive_impact_huge) {
       param_03 = 0;
     }
-  } else if(param_09 & level.idflags_shield_explosive_splash) {
+  } else if(param_09 &level.idflags_shield_explosive_splash) {
     if(scripts\mp\utility::func_9F7F(param_01, param_00, param_05, param_04)) {
       param_01.forcehitlocation = "none";
       param_03 = param_01.maxhealth;
@@ -1233,7 +1233,7 @@ handledamagefeedback(param_00, param_01, param_02, param_03, param_04, param_05,
     var_0D = !scripts\mp\utility::isreallyalive(param_02) || isagent(param_02) && param_03 >= param_02.health;
     if(param_02 scripts\mp\heavyarmor::hasheavyarmor() || param_02 scripts\mp\heavyarmor::hasheavyarmorinvulnerability()) {
       var_0C = "hitjuggernaut";
-    } else if(param_07 & level.idflags_stun) {
+    } else if(param_07 &level.idflags_stun) {
       var_0C = "stun";
     } else if(isexplosivedamagemod(param_04) && isDefined(param_02.var_1177D) && param_02.var_1177D) {
       var_0C = "thermobaric_debuff";
@@ -2536,7 +2536,7 @@ hitlocdebug(param_00, param_01, param_02, param_03, param_04) {
 
   param_00.damageinfo[0].var_DA = param_02;
   param_00.damageinfo[0].hitloc = param_03;
-  param_00.damageinfo[0].bp = param_04 & level.idflags_penetration;
+  param_00.damageinfo[0].bp = param_04 &level.idflags_penetration;
   param_00.damageinfo[0].jugg = param_01 scripts\mp\utility::isjuggernaut();
   if(isDefined(param_00.damageinfovictim) && param_00.damageinfovictim != param_01) {
     param_00.damageinfocolorindex++;
@@ -2723,7 +2723,7 @@ finishplayerdamagewrapper(param_00, param_01, param_02, param_03, param_04, para
     param_0A = 0;
   }
 
-  if(scripts\mp\utility::isusingremote() && param_02 >= self.health && !param_03 & level.idflags_stun && allowfauxdeath()) {
+  if(scripts\mp\utility::isusingremote() && param_02 >= self.health && !param_03 &level.idflags_stun && allowfauxdeath()) {
     if(!isDefined(param_07)) {
       param_07 = (0, 0, 0);
     }
@@ -2965,7 +2965,7 @@ func_AA11(param_00, param_01) {
   self.setlasermaterial = 1;
   if(!param_01 && !isDefined(self.inc4death) || !self.inc4death) {
     thread func_AA05();
-    scripts\mp\utility::setlowermessage("last_stand", & "PLATFORM_COWARDS_WAY_OUT", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+    scripts\mp\utility::setlowermessage("last_stand", &"PLATFORM_COWARDS_WAY_OUT", undefined, undefined, undefined, undefined, undefined, undefined, 1);
     thread func_AA09();
   }
 
@@ -2973,7 +2973,7 @@ func_AA11(param_00, param_01) {
     var_02 = spawn("script_model", self.origin);
     var_02 setModel("tag_origin");
     var_02 setcursorhint("HINT_NOICON");
-    var_02 sethintstring( & "PLATFORM_REVIVE");
+    var_02 sethintstring(&"PLATFORM_REVIVE");
     var_02 revivesetup(self);
     var_02 endon("death");
     var_03 = newteamhudelem(self.team);
@@ -2996,7 +2996,7 @@ func_AA11(param_00, param_01) {
     var_02 = spawn("script_model", self.origin);
     var_03 setModel("tag_origin");
     var_03 setcursorhint("HINT_NOICON");
-    var_03 sethintstring( & "PLATFORM_REVIVE");
+    var_03 sethintstring(&"PLATFORM_REVIVE");
     var_03 revivesetup(self);
     var_03 endon("death");
     var_03 = newteamhudelem(self.team);
@@ -3655,11 +3655,11 @@ monitordamageoneshot(param_00, param_01, param_02, param_03, param_04, param_05,
 
   self.wasdamaged = 1;
   self.var_E1 = self.var_E1 + var_0E;
-  if(isDefined(param_08) && param_08 & level.idflags_penetration) {
+  if(isDefined(param_08) && param_08 &level.idflags_penetration) {
     self.wasdamagedfrombulletpenetration = 1;
   }
 
-  if(isDefined(param_08) && param_08 & level.idflags_ricochet) {
+  if(isDefined(param_08) && param_08 &level.idflags_ricochet) {
     self.wasdamagedfrombulletricochet = 1;
   }
 

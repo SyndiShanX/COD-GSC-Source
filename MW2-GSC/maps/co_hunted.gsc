@@ -88,10 +88,10 @@ main() {
   maps\_compass::setupMiniMap("compass_map_hunted");
 
   // Press ^3[{weapnext}]^7 to cycle through weapons.
-  add_hint_string("ac130_changed_weapons", & "AC130_HINT_CYCLE_WEAPONS", ::ShouldBreakAC130HintPrint);
+  add_hint_string("ac130_changed_weapons", &"AC130_HINT_CYCLE_WEAPONS", ::ShouldBreakAC130HintPrint);
 
   // Press ^3[{+actionslot 4}]^7 to use toggle laser targeting device.
-  add_hint_string("laser_hint", & "CO_HUNTED_HINT_LASER", ::ShouldBreakLaserHintPrint);
+  add_hint_string("laser_hint", &"CO_HUNTED_HINT_LASER", ::ShouldBreakLaserHintPrint);
 }
 
 gameplay_logic(gametype) {
@@ -178,7 +178,7 @@ gameplay_logic(gametype) {
   battlechatter_on("axis");
 
   // Start
-  saveGame("levelstart", & "AUTOSAVE_LEVELSTART", "whatever", true);
+  saveGame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", true);
 
   level.timed = true;
   /*level.timed = false;
@@ -308,7 +308,7 @@ ac130_change_weapon_hint() {
   if(!flag("player_changed_weapons"))
     level.ac130gunner thread display_hint("ac130_changed_weapons");
   // Press ^3[{weapnext}]^7 to cycle through weapons.
-  //hintPrint_coop( &"AC130_HINT_CYCLE_WEAPONS" );
+  //hintPrint_coop(&"AC130_HINT_CYCLE_WEAPONS" );
 }
 
 hintPrint_coop(string) {
@@ -328,19 +328,19 @@ checkpoint_system(gametype) {
   if(gametype == "default") {
     // Checkpoint A:
     // Checkpoint A time expired.
-    checkpoint_logic(60, "checkpoint_a", "waypoint_checkpoint_neutral_a", & "CO_HUNTED_TIME_TILL_CHECKPOINT_A", & "CO_HUNTED_MISSED_CHECKPOINT_A");
+    checkpoint_logic(60, "checkpoint_a", "waypoint_checkpoint_neutral_a", &"CO_HUNTED_TIME_TILL_CHECKPOINT_A", &"CO_HUNTED_MISSED_CHECKPOINT_A");
 
     // Checkpoint B:
     // Checkpoint B time expired.
-    checkpoint_logic(80, "checkpoint_b", "waypoint_checkpoint_neutral_b", & "CO_HUNTED_TIME_TILL_CHECKPOINT_B", & "CO_HUNTED_MISSED_CHECKPOINT_B");
+    checkpoint_logic(80, "checkpoint_b", "waypoint_checkpoint_neutral_b", &"CO_HUNTED_TIME_TILL_CHECKPOINT_B", &"CO_HUNTED_MISSED_CHECKPOINT_B");
 
     // Checkpoint C:
     // Checkpoint C time expired.
-    checkpoint_logic(110, "checkpoint_c", "waypoint_checkpoint_neutral_c", & "CO_HUNTED_TIME_TILL_CHECKPOINT_C", & "CO_HUNTED_MISSED_CHECKPOINT_C");
+    checkpoint_logic(110, "checkpoint_c", "waypoint_checkpoint_neutral_c", &"CO_HUNTED_TIME_TILL_CHECKPOINT_C", &"CO_HUNTED_MISSED_CHECKPOINT_C");
 
     // Checkpoint D:
     // Checkpoint D time expired.
-    checkpoint_logic(60, "checkpoint_d", "waypoint_checkpoint_neutral_d", & "CO_HUNTED_TIME_TILL_CHECKPOINT_D", & "CO_HUNTED_MISSED_CHECKPOINT_D");
+    checkpoint_logic(60, "checkpoint_d", "waypoint_checkpoint_neutral_d", &"CO_HUNTED_TIME_TILL_CHECKPOINT_D", &"CO_HUNTED_MISSED_CHECKPOINT_D");
 
     escape = getent("escape_obj", "targetname");
     escape thread threeD_objective_hint("waypoint_targetneutral");
@@ -698,7 +698,7 @@ timer_start(gametype) {
   assert(isDefined(iSeconds));
 
   // Reach target in:
-  level thread bridge_timer_logic(iSeconds, & "CO_HUNTED_SPECOP_TIMER");
+  level thread bridge_timer_logic(iSeconds, &"CO_HUNTED_SPECOP_TIMER");
 }
 
 bridge_timer_logic(iSeconds, sLabel, bUseTick) {
@@ -736,7 +736,7 @@ mission_failed_out_of_time(deadquote) {
   level endon("kill_timer");
 
   // Mission failed. Enemy destroyed the bridge.
-  //thread hint( &"CO_HUNTED_TIMER_EXPIRED", 4 );
+  //thread hint(&"CO_HUNTED_TIMER_EXPIRED", 4 );
 
   level notify("mission failed");
   level.player freezeControls(true);
@@ -762,7 +762,7 @@ objective(gametype) {
   if(gametype == "default") {
     escape = getent("escape_obj", "targetname");
     // Cross the bridge to safety before it is destroyed.
-    objective_add(1, "active", & "CO_HUNTED_OBJ_CROSS_BRIDGE", escape.origin);
+    objective_add(1, "active", &"CO_HUNTED_OBJ_CROSS_BRIDGE", escape.origin);
     objective_current(1);
     flag_wait("escaped");
     objective_state(1, "done");
@@ -779,7 +779,7 @@ objective(gametype) {
   if(gametype == "specop") {
     specop_barn = getent("checkpoint_b", "targetname");
     // Reach the checkpoint at the barn.
-    objective_add(1, "active", & "CO_HUNTED_OBJ_REACH_BARN", specop_barn.origin);
+    objective_add(1, "active", &"CO_HUNTED_OBJ_REACH_BARN", specop_barn.origin);
     objective_current(1);
     flag_wait("checkpoint_b");
     objective_state(1, "done");

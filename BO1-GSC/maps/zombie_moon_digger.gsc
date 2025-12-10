@@ -390,7 +390,7 @@ digger_think_panel(blocker_name, trig_name, start_flag, hacked_flag, blocker_fun
   struct.custom_debug_color = (255, 0, 0);
   struct.radius = 64;
   struct.height = 64;
-  struct.custom_string = & "ZOMBIE_MOON_DISABLE_DIGGER";
+  struct.custom_string = &"ZOMBIE_MOON_DISABLE_DIGGER";
   struct.no_bullet_trace = true;
   struct.no_sight_check = true;
   trig UseTriggerRequireLookAt();

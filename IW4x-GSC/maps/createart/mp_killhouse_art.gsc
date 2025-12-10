@@ -6,8 +6,6 @@
 main() {
   level.tweakfile = true;
 
-
-
   setdvar("scr_fog_disable", "1");
 
   VisionSetNaked("mp_killhouse", 0);

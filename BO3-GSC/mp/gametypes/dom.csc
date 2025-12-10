@@ -10,7 +10,7 @@
 #namespace dom;
 
 function main() {
-  callback::on_localclient_connect( & on_localclient_connect);
+  callback::on_localclient_connect(&on_localclient_connect);
   if(getgametypesetting("silentPlant") != 0) {
     setsoundcontext("bomb_plant", "silent");
   }

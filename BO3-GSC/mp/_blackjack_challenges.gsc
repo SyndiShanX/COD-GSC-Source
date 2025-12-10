@@ -17,11 +17,11 @@
 #namespace blackjack_challenges;
 
 function autoexec __init__sytem__() {
-  system::register("blackjack_challenges", & __init__, undefined, undefined);
+  system::register("blackjack_challenges", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & start_gametype);
+  callback::on_start_gametype(&start_gametype);
 }
 
 function start_gametype() {
@@ -30,12 +30,12 @@ function start_gametype() {
   }
   waittillframeend();
   if(challenges::canprocesschallenges()) {
-    challenges::registerchallengescallback("playerKilled", & challenge_kills);
-    challenges::registerchallengescallback("roundEnd", & challenge_round_ended);
-    challenges::registerchallengescallback("gameEnd", & challenge_game_ended);
-    scoreevents::register_hero_ability_kill_event( & on_hero_ability_kill);
+    challenges::registerchallengescallback("playerKilled", &challenge_kills);
+    challenges::registerchallengescallback("roundEnd", &challenge_round_ended);
+    challenges::registerchallengescallback("gameEnd", &challenge_game_ended);
+    scoreevents::register_hero_ability_kill_event(&on_hero_ability_kill);
   }
-  callback::on_connect( & on_player_connect);
+  callback::on_connect(&on_player_connect);
 }
 
 function on_player_connect() {

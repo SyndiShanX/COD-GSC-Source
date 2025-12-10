@@ -17,7 +17,7 @@
 #namespace helicopter;
 
 function autoexec __init__sytem__() {
-  system::register("helicopter", & __init__, undefined, undefined);
+  system::register("helicopter", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -31,29 +31,29 @@ function __init__() {
   level._effect["heli_gunner_light"]["enemy"] = "killstreaks/fx_vtol_lights_red";
   level._effect["heli_gunner"]["vtol_fx"] = "killstreaks/fx_vtol_thruster";
   level._effect["heli_gunner"]["vtol_fx_ft"] = "killstreaks/fx_vtol_thruster";
-  clientfield::register("helicopter", "heli_warn_targeted", 1, 1, "int", & warnmissilelocking, 0, 0);
-  clientfield::register("helicopter", "heli_warn_locked", 1, 1, "int", & warnmissilelocked, 0, 0);
-  clientfield::register("helicopter", "heli_warn_fired", 1, 1, "int", & warnmissilefired, 0, 0);
-  clientfield::register("helicopter", "supplydrop_care_package_state", 1, 1, "int", & supplydrop_care_package_state, 0, 0);
-  clientfield::register("helicopter", "supplydrop_ai_tank_state", 1, 1, "int", & supplydrop_ai_tank_state, 0, 0);
-  clientfield::register("helicopter", "heli_comlink_bootup_anim", 1, 1, "int", & heli_comlink_bootup_anim, 0, 0);
-  clientfield::register("vehicle", "heli_warn_targeted", 1, 1, "int", & warnmissilelocking, 0, 0);
-  clientfield::register("vehicle", "heli_warn_locked", 1, 1, "int", & warnmissilelocked, 0, 0);
-  clientfield::register("vehicle", "heli_warn_fired", 1, 1, "int", & warnmissilefired, 0, 0);
-  clientfield::register("vehicle", "supplydrop_care_package_state", 1, 1, "int", & supplydrop_care_package_state, 0, 0);
-  clientfield::register("vehicle", "supplydrop_ai_tank_state", 1, 1, "int", & supplydrop_ai_tank_state, 0, 0);
-  clientfield::register("vehicle", "heli_comlink_bootup_anim", 1, 1, "int", & heli_comlink_bootup_anim, 0, 0);
+  clientfield::register("helicopter", "heli_warn_targeted", 1, 1, "int", &warnmissilelocking, 0, 0);
+  clientfield::register("helicopter", "heli_warn_locked", 1, 1, "int", &warnmissilelocked, 0, 0);
+  clientfield::register("helicopter", "heli_warn_fired", 1, 1, "int", &warnmissilefired, 0, 0);
+  clientfield::register("helicopter", "supplydrop_care_package_state", 1, 1, "int", &supplydrop_care_package_state, 0, 0);
+  clientfield::register("helicopter", "supplydrop_ai_tank_state", 1, 1, "int", &supplydrop_ai_tank_state, 0, 0);
+  clientfield::register("helicopter", "heli_comlink_bootup_anim", 1, 1, "int", &heli_comlink_bootup_anim, 0, 0);
+  clientfield::register("vehicle", "heli_warn_targeted", 1, 1, "int", &warnmissilelocking, 0, 0);
+  clientfield::register("vehicle", "heli_warn_locked", 1, 1, "int", &warnmissilelocked, 0, 0);
+  clientfield::register("vehicle", "heli_warn_fired", 1, 1, "int", &warnmissilefired, 0, 0);
+  clientfield::register("vehicle", "supplydrop_care_package_state", 1, 1, "int", &supplydrop_care_package_state, 0, 0);
+  clientfield::register("vehicle", "supplydrop_ai_tank_state", 1, 1, "int", &supplydrop_ai_tank_state, 0, 0);
+  clientfield::register("vehicle", "heli_comlink_bootup_anim", 1, 1, "int", &heli_comlink_bootup_anim, 0, 0);
   duplicate_render::set_dr_filter_framebuffer("active_camo_scorestreak", 90, "active_camo_on", "", 0, "mc/hud_outline_predator_camo_active_enemy_scorestreak", 0);
   duplicate_render::set_dr_filter_framebuffer("active_camo_flicker_scorestreak", 80, "active_camo_flicker", "", 0, "mc/hud_outline_predator_camo_disruption_enemy_scorestreak", 0);
   duplicate_render::set_dr_filter_framebuffer_duplicate("active_camo_reveal_scorestreak_dr", 90, "active_camo_reveal", "hide_model", 1, "mc/hud_outline_predator_camo_active_enemy_scorestreak", 0);
   duplicate_render::set_dr_filter_framebuffer("active_camo_reveal_scorestreak", 80, "active_camo_reveal,hide_model", "", 0, "mc/hud_outline_predator_scorestreak", 0);
-  clientfield::register("helicopter", "active_camo", 1, 3, "int", & active_camo_changed, 0, 0);
-  clientfield::register("vehicle", "active_camo", 1, 3, "int", & active_camo_changed, 0, 0);
-  clientfield::register("toplayer", "marker_state", 1, 2, "int", & marker_state_changed, 0, 0);
-  clientfield::register("scriptmover", "supplydrop_thrusters_state", 1, 1, "int", & setsupplydropthrustersstate, 0, 0);
-  clientfield::register("scriptmover", "aitank_thrusters_state", 1, 1, "int", & setaitankhrustersstate, 0, 0);
-  clientfield::register("vehicle", "mothership", 1, 1, "int", & mothership_cb, 0, 0);
-  callback::on_spawned( & on_player_spawned);
+  clientfield::register("helicopter", "active_camo", 1, 3, "int", &active_camo_changed, 0, 0);
+  clientfield::register("vehicle", "active_camo", 1, 3, "int", &active_camo_changed, 0, 0);
+  clientfield::register("toplayer", "marker_state", 1, 2, "int", &marker_state_changed, 0, 0);
+  clientfield::register("scriptmover", "supplydrop_thrusters_state", 1, 1, "int", &setsupplydropthrustersstate, 0, 0);
+  clientfield::register("scriptmover", "aitank_thrusters_state", 1, 1, "int", &setaitankhrustersstate, 0, 0);
+  clientfield::register("vehicle", "mothership", 1, 1, "int", &mothership_cb, 0, 0);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function on_player_spawned(localclientnum) {

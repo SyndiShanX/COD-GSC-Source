@@ -10,7 +10,7 @@
 #namespace namespace_13b01f59;
 
 autoexec __init__system__() {
-  system::register(#"hash_4b6aad59587b2b51", & __init__, undefined, undefined);
+  system::register(#"hash_4b6aad59587b2b51", &__init__, undefined, undefined);
 }
 
 __init__() {
@@ -20,9 +20,9 @@ __init__() {
   if(!level.var_53022701) {
     return;
   }
-  clientfield::register("toplayer", "deathzonepostfx", 1, 1, "int", & function_90fd06c4, 0, 1);
-  clientfield::register("toplayer", "deathzonewarningsound", 1, 2, "int", & function_5cdb5442, 0, 1);
-  callback::on_localplayer_spawned( & on_localplayer_spawned);
+  clientfield::register("toplayer", "deathzonepostfx", 1, 1, "int", &function_90fd06c4, 0, 1);
+  clientfield::register("toplayer", "deathzonewarningsound", 1, 2, "int", &function_5cdb5442, 0, 1);
+  callback::on_localplayer_spawned(&on_localplayer_spawned);
 }
 
 function_302b7c90(localclientnum) {

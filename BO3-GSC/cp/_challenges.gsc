@@ -15,12 +15,12 @@
 #namespace challenges;
 
 function autoexec __init__sytem__() {
-  system::register("challenges", & __init__, undefined, undefined);
+  system::register("challenges", &__init__, undefined, undefined);
 }
 
 function __init__() {
   init_shared();
-  callback::on_start_gametype( & start_gametype);
+  callback::on_start_gametype(&start_gametype);
 }
 
 function start_gametype() {
@@ -29,13 +29,13 @@ function start_gametype() {
   }
   waittillframeend();
   if(canprocesschallenges()) {
-    registerchallengescallback("actorKilled", & challengeactorkills);
-    registerchallengescallback("actorDamaged", & function_e0360654);
-    registerchallengescallback("VehicleKilled", & function_2acd9b03);
-    registerchallengescallback("VehicleDamage", & challengeactorkills);
+    registerchallengescallback("actorKilled", &challengeactorkills);
+    registerchallengescallback("actorDamaged", &function_e0360654);
+    registerchallengescallback("VehicleKilled", &function_2acd9b03);
+    registerchallengescallback("VehicleDamage", &challengeactorkills);
   }
-  callback::on_connect( & on_player_connect);
-  callback::on_connect( & function_dadf37f9);
+  callback::on_connect(&on_player_connect);
+  callback::on_connect(&function_dadf37f9);
 }
 
 function function_2acd9b03(data, time) {
@@ -274,7 +274,7 @@ function function_96ed590f(statname, n_amount = 1) {
 }
 
 function function_dadf37f9() {
-  self.challenge_callback_cp = & function_97666686;
+  self.challenge_callback_cp = &function_97666686;
   self thread function_4f96d6bd();
 }
 

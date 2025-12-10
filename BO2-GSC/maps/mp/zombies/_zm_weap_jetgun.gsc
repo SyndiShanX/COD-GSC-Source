@@ -19,8 +19,8 @@ init() {
   if(!maps\mp\zombies\_zm_weapons::is_weapon_included("jetgun_zm")) {
     return;
   }
-  maps\mp\zombies\_zm_equipment::register_equipment("jetgun_zm", & "ZOMBIE_EQUIP_JETGUN_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_JETGUN_HOWTO", "jetgun_zm_icon", "jetgun", ::jetgun_activation_watcher_thread, undefined, ::dropjetgun, ::pickupjetgun);
-  maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("jetgun", & "ZOMBIE_EQUIP_JETGUN_PICKUP_HINT_STRING");
+  maps\mp\zombies\_zm_equipment::register_equipment("jetgun_zm", &"ZOMBIE_EQUIP_JETGUN_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_JETGUN_HOWTO", "jetgun_zm_icon", "jetgun", ::jetgun_activation_watcher_thread, undefined, ::dropjetgun, ::pickupjetgun);
+  maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("jetgun", &"ZOMBIE_EQUIP_JETGUN_PICKUP_HINT_STRING");
   level._effect["jetgun_smoke_cloud"] = loadfx("weapon/thunder_gun/fx_thundergun_smoke_cloud");
   level._effect["jetgun_overheat"] = loadfx("weapon/jet_gun/fx_jetgun_overheat");
   level._effect["jetgun_vortex"] = loadfx("weapon/jet_gun/fx_jetgun_on");

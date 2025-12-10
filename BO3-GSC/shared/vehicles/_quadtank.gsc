@@ -27,11 +27,11 @@
 #namespace quadtank;
 
 function autoexec __init__sytem__() {
-  system::register("quadtank", & __init__, undefined, undefined);
+  system::register("quadtank", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("quadtank", & quadtank_initialize);
+  vehicle::add_main_callback("quadtank", &quadtank_initialize);
   clientfield::register("toplayer", "player_shock_fx", 1, 1, "int");
   clientfield::register("vehicle", "quadtank_trophy_state", 1, 1, "int");
 }
@@ -68,11 +68,11 @@ function quadtank_initialize() {
   self show_weak_spots(0);
   turret::_init_turret(1);
   turret::_init_turret(2);
-  turret::set_best_target_func( & _get_best_target_quadtank_side_turret, 1);
-  turret::set_best_target_func( & _get_best_target_quadtank_side_turret, 2);
+  turret::set_best_target_func(&_get_best_target_quadtank_side_turret, 1);
+  turret::set_best_target_func(&_get_best_target_quadtank_side_turret, 2);
   self quadtank_update_difficulty();
   self quadtank_side_turrets_forward();
-  self.overridevehicledamage = & quadtankcallback_vehicledamage;
+  self.overridevehicledamage = &quadtankcallback_vehicledamage;
   if(isDefined(level.vehicle_initializer_cb)) {
     [[level.vehicle_initializer_cb]](self);
   }
@@ -102,15 +102,15 @@ function quadtank_update_difficulty() {
 
 function defaultrole() {
   self.state_machine = self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("pain").update_func = & pain_update;
-  self vehicle_ai::get_state_callbacks("emped").update_func = & quadtank_emped;
-  self vehicle_ai::get_state_callbacks("off").enter_func = & state_off_enter;
-  self vehicle_ai::get_state_callbacks("off").exit_func = & state_off_exit;
-  self vehicle_ai::get_state_callbacks("scripted").update_func = & state_scripted_update;
-  self vehicle_ai::get_state_callbacks("driving").update_func = & state_driving_update;
-  self vehicle_ai::get_state_callbacks("combat").update_func = & state_combat_update;
-  self vehicle_ai::get_state_callbacks("combat").exit_func = & state_combat_exit;
-  self vehicle_ai::get_state_callbacks("death").update_func = & quadtank_death;
+  self vehicle_ai::get_state_callbacks("pain").update_func = &pain_update;
+  self vehicle_ai::get_state_callbacks("emped").update_func = &quadtank_emped;
+  self vehicle_ai::get_state_callbacks("off").enter_func = &state_off_enter;
+  self vehicle_ai::get_state_callbacks("off").exit_func = &state_off_exit;
+  self vehicle_ai::get_state_callbacks("scripted").update_func = &state_scripted_update;
+  self vehicle_ai::get_state_callbacks("driving").update_func = &state_driving_update;
+  self vehicle_ai::get_state_callbacks("combat").update_func = &state_combat_update;
+  self vehicle_ai::get_state_callbacks("combat").exit_func = &state_combat_exit;
+  self vehicle_ai::get_state_callbacks("death").update_func = &quadtank_death;
   self vehicle_ai::call_custom_add_state_callbacks();
   self vehicle_ai::startinitialstate();
 }

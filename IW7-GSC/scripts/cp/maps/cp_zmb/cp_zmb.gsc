@@ -37,8 +37,8 @@ main() {
   level.eligable_for_reward_func = ::cp_zmb_eligable_for_reward_func;
   level.should_do_damage_check_func = ::cp_zmb_should_do_damage_check_func;
   level.wait_to_be_revived_func = ::cp_zmb_wait_to_be_revived_func;
-  level.magic_wheel_spin_hint = & "CP_ZMB_INTERACTIONS_SPIN_WHEEL";
-  level.reboard_barriers_hint = & "CP_ZMB_INTERACTIONS_SECURE_WINDOW";
+  level.magic_wheel_spin_hint = &"CP_ZMB_INTERACTIONS_SPIN_WHEEL";
+  level.reboard_barriers_hint = &"CP_ZMB_INTERACTIONS_SECURE_WINDOW";
   level.custom_onspawnplayer_func = ::cp_zmb_onplayerspawned;
   scripts\cp\cp_weapon_autosentry::init();
   scripts\cp\zombies\craftables\_zm_soul_collector::init();
@@ -1367,7 +1367,7 @@ launch_battery_from_geyser(param_00) {
   var_02 moveto(var_01 + (0, 0, 60), 0.25);
   var_02 waittill("movedone");
   var_02 makeusable();
-  var_02 sethintstring( & "CP_QUEST_WOR_PART");
+  var_02 sethintstring(&"CP_QUEST_WOR_PART");
   var_02 thread pick_up_battery();
   for(var_03 = 0; var_03 < 8; var_03++) {
     var_02 rotateto(var_02.angles + (90, 0, 0), 0.2);
@@ -1993,7 +1993,7 @@ put_tooth_in_gator_mouth() {
   var_00 = getent("gator_mouth", "targetname");
   scripts\engine\utility::flag_wait("gator_gold_tooth_pickup");
   level.gator_tooth_use_trig makeusable();
-  level.gator_tooth_use_trig sethintstring( & "CP_QUEST_WOR_PLACE_PART");
+  level.gator_tooth_use_trig sethintstring(&"CP_QUEST_WOR_PLACE_PART");
   level.gator_tooth_use_trig waittill("trigger");
   scripts\engine\utility::flag_set("gator_gold_tooth_placed");
   foreach(var_02 in level.gator_teeth_array) {
@@ -2091,7 +2091,7 @@ zmb_power_gate_handler() {
   scripts\engine\utility::flag_wait("doors_initialized");
   var_00 = getEntArray("bollard_trigger", "targetname");
   foreach(var_02 in var_00) {
-    var_02 sethintstring( & "COOP_INTERACTIONS_REQUIRES_POWER");
+    var_02 sethintstring(&"COOP_INTERACTIONS_REQUIRES_POWER");
   }
 
   var_04 = getEntArray("first_gate_bollard", "targetname");
@@ -2240,16 +2240,16 @@ dirt_concrete_fx(param_00) {
 
 cp_zmb_introscreen_text() {
   wait(2);
-  var_00 = scripts\cp\cp_hud_util::introscreen_corner_line( & "CP_ZMB_INTRO_LINE_1", 1);
+  var_00 = scripts\cp\cp_hud_util::introscreen_corner_line(&"CP_ZMB_INTRO_LINE_1", 1);
   wait(1);
-  var_01 = scripts\cp\cp_hud_util::introscreen_corner_line( & "CP_ZMB_INTRO_LINE_2", 2);
+  var_01 = scripts\cp\cp_hud_util::introscreen_corner_line(&"CP_ZMB_INTRO_LINE_2", 2);
   wait(1);
-  var_02 = scripts\cp\cp_hud_util::introscreen_corner_line( & "CP_ZMB_INTRO_LINE_3", 3);
+  var_02 = scripts\cp\cp_hud_util::introscreen_corner_line(&"CP_ZMB_INTRO_LINE_3", 3);
   wait(1);
   if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
-    var_03 = scripts\cp\cp_hud_util::introscreen_corner_line( & "DIRECT_BOSS_FIGHT_LINE4_ZMB", 4);
+    var_03 = scripts\cp\cp_hud_util::introscreen_corner_line(&"DIRECT_BOSS_FIGHT_LINE4_ZMB", 4);
   } else {
-    var_03 = scripts\cp\cp_hud_util::introscreen_corner_line( & "CP_ZMB_INTRO_LINE_4", 4);
+    var_03 = scripts\cp\cp_hud_util::introscreen_corner_line(&"CP_ZMB_INTRO_LINE_4", 4);
   }
 
   level waittill("introscreen_over");

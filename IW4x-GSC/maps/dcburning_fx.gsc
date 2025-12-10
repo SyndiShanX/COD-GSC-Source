@@ -8,17 +8,14 @@
 main() {
   level._effect["_attack_heli_spotlight_ending"] = LoadFX("misc/hunted_spotlight_model_dim");
 
-
   level._effect["vehicle_explosion_slamraam"] = LoadFX("explosions/vehicle_explosion_slamraam");
 
   level._effect["_attack_heli_spotlight"] = LoadFX("misc/spotlight_large_dcburning");
-
 
   level._effect["large_column"] = loadfx("props/dcburning_pillars");
 
   level._effect["turret_overheat_haze"] = loadfx("distortion/abrams_exhaust");
   level._effect["turret_overheat_smoke"] = loadfx("distortion/armored_car_overheat");
-
 
   level._effect["javelin_muzzle"] = loadfx("muzzleflashes/javelin_flash_wv");
 
@@ -68,8 +65,6 @@ main() {
 
   level.airstrikefx = loadfx("explosions/clusterbomb");
 
-
-
   level._effect["powerline_runner"] = loadfx("explosions/powerline_runner");
 
   level._effect["antiair_runner"] = loadfx("misc/antiair_runner_night");
@@ -91,7 +86,6 @@ main() {
   level._effect["water_pipe_spray"] = loadfx("water/water_pipe_spray");
   level._effect["cgo_ship_puddle_small"] = loadfx("distortion/cgo_ship_puddle_small");
   level._effect["rock_falling_small_runner"] = loadfx("misc/rock_falling_small_runner");
-
 
   level._effect["ceiling_dust_default"] = loadfx("dust/ceiling_dust_default");
   level._effect["commerce_window_shatter"] = loadfx("props/car_glass_large");

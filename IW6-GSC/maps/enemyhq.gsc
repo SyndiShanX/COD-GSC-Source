@@ -115,12 +115,12 @@ enemyhq_pre_load() {
   maps\_vehicle::build_deathfx_override("script_vehicle_iveco_lynx", undefined, "vehicle_iveco_lynx_iw6", "vfx/moments/enemyhq/vfx_ehq_truckexp", undefined, undefined);
   maps\_vehicle::build_light_override("script_vehicle_man_7t_k9", "headlight_truck_left", "tag_headlight_left", "vfx/ambient/lights/vfx_headlight_truck_ehq", "headlightsL");
   maps\_vehicle::build_light_override("script_vehicle_man_7t_k9", "headlight_truck_right", "tag_headlight_right", "vfx/ambient/lights/vfx_headlight_truck_ehq", "headlightsR");
-  maps\_utility::add_hint_string("tear_hint", & "ENEMY_HQ_FRAG_TO_THROW_TEARGAS", maps\enemyhq_basement::teargas_hint_wait);
-  maps\_utility::add_hint_string("zoom_hint", & "ENEMY_HQ_ZOOMHINT", maps\enemyhq_rooftop_intro::zoom_hint_wait);
-  maps\_utility::add_hint_string("zoom_noglyph_hint", & "ENEMY_HQ_ZOOMHINT_NO_GLYPH", maps\enemyhq_rooftop_intro::zoom_hint_wait);
-  maps\_utility::add_hint_string("sniperuse_hint", & "ENEMY_HQ_ACTIONSLOT_1_TO_USE_REMOTE", maps\enemyhq_code::sniperuse_hint_wait);
-  maps\_utility::add_hint_string("riley_hint", & "ENEMY_HQ_PRESS_LB_TO_COMMAND", maps\enemyhq_code::dog_hint_check);
-  maps\_utility::add_hint_string("blow_charges", & "ENEMY_HQ_BLOWCHARGES", maps\enemyhq_code::hint_blow_charges_wait);
+  maps\_utility::add_hint_string("tear_hint", &"ENEMY_HQ_FRAG_TO_THROW_TEARGAS", maps\enemyhq_basement::teargas_hint_wait);
+  maps\_utility::add_hint_string("zoom_hint", &"ENEMY_HQ_ZOOMHINT", maps\enemyhq_rooftop_intro::zoom_hint_wait);
+  maps\_utility::add_hint_string("zoom_noglyph_hint", &"ENEMY_HQ_ZOOMHINT_NO_GLYPH", maps\enemyhq_rooftop_intro::zoom_hint_wait);
+  maps\_utility::add_hint_string("sniperuse_hint", &"ENEMY_HQ_ACTIONSLOT_1_TO_USE_REMOTE", maps\enemyhq_code::sniperuse_hint_wait);
+  maps\_utility::add_hint_string("riley_hint", &"ENEMY_HQ_PRESS_LB_TO_COMMAND", maps\enemyhq_code::dog_hint_check);
+  maps\_utility::add_hint_string("blow_charges", &"ENEMY_HQ_BLOWCHARGES", maps\enemyhq_code::hint_blow_charges_wait);
   maps\_utility_dogs::init_dog_pc("a");
 }
 

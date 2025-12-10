@@ -63,11 +63,11 @@ init(player) {
   precacheString(&"AC130_HUD_WEAPON_40MM");
   // 25 mm
   precacheString(&"AC130_HUD_WEAPON_25MM");
-  // &&1 AGL
+  // && 1 AGL
   precacheString(&"AC130_HUD_AGL");
   // Press ^3[{weapnext}]^7 to cycle through weapons.
   precachestring(&"AC130_HINT_CYCLE_WEAPONS");
-  // Friendlies: &&1
+  // Friendlies: && 1
   precachestring(&"AC130_DEBUG_FRIENDLY_COUNT");
   // Too many friendlies have been KIA. Mission failed.
   precachestring(&"AC130_FRIENDLIES_DEAD");
@@ -544,7 +544,7 @@ overlay_coords() {
   level.HUDItem["coordinate_agl"].horzAlign = "right";
   level.HUDItem["coordinate_agl"].vertAlign = "top";
   level.HUDItem["coordinate_agl"].fontScale = level.ac130_fontscale;
-  // &&1 AGL
+  // && 1 AGL
   level.HUDItem["coordinate_agl"].label = (&"AC130_HUD_AGL");
   level.HUDItem["coordinate_agl"].alpha = 1.0;
 
@@ -1235,7 +1235,7 @@ breakable()
 	for(;;)
 	{
 		self waittill ( "damage", damage, attacker );
-		if( ( isplayer( attacker ) ) & ( damage >= 1000 ) )
+		if( ( isplayer( attacker ) ) &( damage >= 1000 ) )
 			break;
 	}
 	self delete();
@@ -1741,8 +1741,8 @@ debug_friendly_count() {
     level.friendlyCountHudElem.alignY = "bottom";
     level.friendlyCountHudElem.horzAlign = "left";
     level.friendlyCountHudElem.vertAlign = "bottom";
-    // Friendlies: &&1
-    level.friendlyCountHudElem.label = & "AC130_DEBUG_FRIENDLY_COUNT";
+    // Friendlies: && 1
+    level.friendlyCountHudElem.label = &"AC130_DEBUG_FRIENDLY_COUNT";
     level.friendlyCountHudElem.alpha = 1;
   }
   level.friendlyCountHudElem setValue(level.friendlyCount);

@@ -1114,7 +1114,7 @@ riverbed_fail_warning() {
 
 riverbed_fail_kill() {
   self waittill("trigger");
-  setdvar("ui_deadquote", & "ANGOLA_CONVOY_FAIL");
+  setdvar("ui_deadquote", &"ANGOLA_CONVOY_FAIL");
   level.player maps\_mortar::explosion_boom("mortar_savannah");
   wait 0.45;
   level.player dodamage(level.player.health + 1000, (0, 0, 0));

@@ -18,7 +18,7 @@ func_211C() {
 use_arcade_game(param_00, param_01) {
   param_01 endon("disconnect");
   if(param_01 getstance() != "stand") {
-    param_01 scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "COOP_INTERACTIONS_MUST_BE_STANDING");
+    param_01 scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"COOP_INTERACTIONS_MUST_BE_STANDING");
     param_01 scripts\cp\cp_interaction::refresh_interaction();
     return;
   }

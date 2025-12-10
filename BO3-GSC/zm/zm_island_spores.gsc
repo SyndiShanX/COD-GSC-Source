@@ -30,13 +30,13 @@
 
 function init() {
   if(getdvarint("splitscreen_playerCount") > 2) {
-    array::run_all(getEntArray("mdl_mushroom_spore", "targetname"), & delete);
-    array::run_all(getEntArray("t_spore_explode", "script_noteworthy"), & delete);
-    array::run_all(getEntArray("t_spore_damage", "script_noteworthy"), & delete);
-    array::thread_all(struct::get_array("spore_fx_org", "script_noteworthy"), & struct::delete);
-    array::thread_all(struct::get_array("spore_cloud_org_stage_01", "script_noteworthy"), & struct::delete);
-    array::thread_all(struct::get_array("spore_cloud_org_stage_02", "script_noteworthy"), & struct::delete);
-    array::thread_all(struct::get_array("spore_cloud_org_stage_03", "script_noteworthy"), & struct::delete);
+    array::run_all(getEntArray("mdl_mushroom_spore", "targetname"), &delete);
+    array::run_all(getEntArray("t_spore_explode", "script_noteworthy"), &delete);
+    array::run_all(getEntArray("t_spore_damage", "script_noteworthy"), &delete);
+    array::thread_all(struct::get_array("spore_fx_org", "script_noteworthy"), &struct::delete);
+    array::thread_all(struct::get_array("spore_cloud_org_stage_01", "script_noteworthy"), &struct::delete);
+    array::thread_all(struct::get_array("spore_cloud_org_stage_02", "script_noteworthy"), &struct::delete);
+    array::thread_all(struct::get_array("spore_cloud_org_stage_03", "script_noteworthy"), &struct::delete);
     struct::delete_script_bundle("scene", "p7_fxanim_zm_island_spores_rock_stage_01_bundle");
     struct::delete_script_bundle("scene", "p7_fxanim_zm_island_spores_rock_stage_02_bundle");
     struct::delete_script_bundle("scene", "p7_fxanim_zm_island_spores_rock_stage_02_rapid_bundle");
@@ -47,8 +47,8 @@ function init() {
     struct::delete_script_bundle("scene", "p7_fxanim_zm_island_spores_wall_stage_03_bundle");
   } else {
     level.var_1abc7758 = getEntArray("mdl_mushroom_spore", "targetname");
-    array::thread_all(level.var_1abc7758, & function_53848c29);
-    level.var_d6539691 = & function_62f658cb;
+    array::thread_all(level.var_1abc7758, &function_53848c29);
+    level.var_d6539691 = &function_62f658cb;
   }
 }
 
@@ -223,8 +223,8 @@ function function_4c6beece(var_f9f788a6, b_hero_weapon, e_attacker) {
     var_d7bb540a = var_d7bb540a - 0.25;
     a_e_enemies = var_6d602035 array::get_touching(getaiteamarray("axis"));
     a_e_players = var_6d602035 array::get_touching(level.players);
-    array::thread_all(a_e_enemies, & function_ba7a3b74, 1, b_hero_weapon, e_attacker);
-    array::thread_all(a_e_players, & function_ba7a3b74, 0, b_hero_weapon, undefined);
+    array::thread_all(a_e_enemies, &function_ba7a3b74, 1, b_hero_weapon, e_attacker);
+    array::thread_all(a_e_players, &function_ba7a3b74, 0, b_hero_weapon, undefined);
     wait(0.25);
   }
   self clientfield::set("spore_cloud_fx", 0);
@@ -285,7 +285,7 @@ function function_ba7a3b74(is_enemy, b_hero_weapon, e_attacker) {
           }
           if(b_hero_weapon) {
             a_enemies = array::get_all_closest(self.origin, getaiteamarray("axis"), undefined, undefined, 128);
-            array::run_all(a_enemies, & dodamage, 1000, self.origin);
+            array::run_all(a_enemies, &dodamage, 1000, self.origin);
           } else {
             self kill();
           }

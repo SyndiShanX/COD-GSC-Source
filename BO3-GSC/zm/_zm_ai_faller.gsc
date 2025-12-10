@@ -20,17 +20,17 @@
 
 function autoexec init() {
   initfallerbehaviorsandasm();
-  animationstatenetwork::registernotetrackhandlerfunction("faller_melee", & handle_fall_notetracks);
-  animationstatenetwork::registernotetrackhandlerfunction("deathout", & handle_fall_death_notetracks);
+  animationstatenetwork::registernotetrackhandlerfunction("faller_melee", &handle_fall_notetracks);
+  animationstatenetwork::registernotetrackhandlerfunction("deathout", &handle_fall_death_notetracks);
 }
 
 function private initfallerbehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreeaction("fallerDropAction", & fallerdropaction, & fallerdropactionupdate, & fallerdropactionterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldFallerDrop", & shouldfallerdrop);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isFallerInCeiling", & isfallerinceiling);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("fallerCeilingDeath", & fallerceilingdeath);
-  animationstatenetwork::registeranimationmocomp("mocomp_drop@faller", & mocompfallerdrop, undefined, undefined);
-  animationstatenetwork::registeranimationmocomp("mocomp_ceiling_death@faller", & mocompceilingdeath, undefined, undefined);
+  behaviortreenetworkutility::registerbehaviortreeaction("fallerDropAction", &fallerdropaction, &fallerdropactionupdate, &fallerdropactionterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldFallerDrop", &shouldfallerdrop);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isFallerInCeiling", &isfallerinceiling);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("fallerCeilingDeath", &fallerceilingdeath);
+  animationstatenetwork::registeranimationmocomp("mocomp_drop@faller", &mocompfallerdrop, undefined, undefined);
+  animationstatenetwork::registeranimationmocomp("mocomp_ceiling_death@faller", &mocompceilingdeath, undefined, undefined);
 }
 
 function fallerdropaction(entity, asmstatename) {
@@ -118,7 +118,7 @@ function setup_deathfunc(func_name) {
     if(isDefined(level.custom_faller_death)) {
       self.deathfunction = level.custom_faller_death;
     } else {
-      self.deathfunction = & zombie_fall_death_func;
+      self.deathfunction = &zombie_fall_death_func;
     }
   }
 }
@@ -226,7 +226,7 @@ function zombie_faller_do_fall() {
   self zombie_faller_enable_location();
   self animscripted("fall_anim", self.origin, spot.angles, "ai_zm_dlc5_zombie_ceiling_dropdown_01");
   wait(level.faller_fall_time);
-  self.deathfunction = & zm_spawner::zombie_death_animscript;
+  self.deathfunction = &zm_spawner::zombie_death_animscript;
   self.normal_death = 1;
   self notify("fall_anim_finished");
   spot notify("stop_zombie_fall_fx");
@@ -533,7 +533,7 @@ function potentially_visible(how_close = 1000000) {
 
 function do_zombie_emerge(spot) {
   self endon("death");
-  self thread setup_deathfunc( & faller_death_ragdoll);
+  self thread setup_deathfunc(&faller_death_ragdoll);
   self.no_powerups = 1;
   self.in_the_ceiling = 1;
   anim_org = spot.origin;
@@ -558,7 +558,7 @@ function zombie_faller_emerge(spot) {
     self animscripted("fall_anim", self.zombie_faller_location.origin, self.zombie_faller_location.angles, "zombie_riser_elevator_from_ceiling");
   }
   self zombie_shared::donotetracks("rise_anim");
-  self.deathfunction = & zm_spawner::zombie_death_animscript;
+  self.deathfunction = &zm_spawner::zombie_death_animscript;
   self.in_the_ceiling = 0;
   self.no_powerups = 0;
 }

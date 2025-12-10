@@ -13,7 +13,7 @@
 #namespace zm_perks;
 
 function init() {
-  callback::on_start_gametype( & init_perk_machines_fx);
+  callback::on_start_gametype(&init_perk_machines_fx);
   init_custom_perks();
   perks_register_clientfield();
   init_perk_custom_threads();
@@ -21,7 +21,7 @@ function init() {
 
 function perks_register_clientfield() {
   if(isDefined(level.zombiemode_using_perk_intro_fx) && level.zombiemode_using_perk_intro_fx) {
-    clientfield::register("scriptmover", "clientfield_perk_intro_fx", 1, 1, "int", & perk_meteor_fx, 0, 0);
+    clientfield::register("scriptmover", "clientfield_perk_intro_fx", 1, 1, "int", &perk_meteor_fx, 0, 0);
   }
   if(level._custom_perks.size > 0) {
     a_keys = getarraykeys(level._custom_perks);
@@ -110,7 +110,7 @@ function init_perk_machines_fx(localclientnum) {
   }
   wait(0.1);
   machines = struct::get_array("zm_perk_machine", "targetname");
-  array::thread_all(machines, & perk_start_up);
+  array::thread_all(machines, &perk_start_up);
 }
 
 function perk_start_up() {

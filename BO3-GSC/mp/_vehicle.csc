@@ -14,7 +14,7 @@
 #namespace vehicle;
 
 function autoexec __init__sytem__() {
-  system::register("vehicle", & __init__, undefined, undefined);
+  system::register("vehicle", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -22,7 +22,7 @@ function __init__() {
     level._effect = [];
   }
   level.vehicles_inited = 1;
-  clientfield::register("vehicle", "timeout_beep", 1, 2, "int", & timeout_beep, 0, 0);
+  clientfield::register("vehicle", "timeout_beep", 1, 2, "int", &timeout_beep, 0, 0);
 }
 
 function vehicle_rumble(localclientnum) {

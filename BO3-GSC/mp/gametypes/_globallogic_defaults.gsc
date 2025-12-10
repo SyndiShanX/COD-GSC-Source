@@ -33,7 +33,7 @@ function default_onforfeit(team) {
   wait(10);
   announcement(game["strings"]["opponent_forfeiting_in"], 10, 0);
   wait(10);
-  endreason = & "";
+  endreason = &"";
   if(level.multiteam) {
     setdvar("ui_text_endreason", game["strings"]["other_teams_forfeited"]);
     endreason = game["strings"]["other_teams_forfeited"];
@@ -131,7 +131,7 @@ function default_ononeleftevent(team) {
     } else {
       print("");
     }
-    thread globallogic::endgame(winner, & "MP_ENEMIES_ELIMINATED");
+    thread globallogic::endgame(winner, &"MP_ENEMIES_ELIMINATED");
   } else {
     for(index = 0; index < level.players.size; index++) {
       player = level.players[index];

@@ -26,7 +26,7 @@
 #namespace zm_genesis_traps;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_traps", & __init__, & __main__, undefined);
+  system::register("zm_genesis_traps", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -37,7 +37,7 @@ function __main__() {
   level flag::wait_till("start_zombie_round_logic");
   precache_scripted_fx();
   var_8fcfe322 = getEntArray("t_flogger_trap", "targetname");
-  array::thread_all(var_8fcfe322, & function_835fd6d8);
+  array::thread_all(var_8fcfe322, &function_835fd6d8);
 }
 
 function precache_scripted_fx() {
@@ -96,11 +96,11 @@ function function_835fd6d8() {
   }
   self thread trap_move_switches();
   self triggerenable(0);
-  array::thread_all(self.a_s_triggers, & function_38d940ac, self);
+  array::thread_all(self.a_s_triggers, &function_38d940ac, self);
 }
 
 function function_38d940ac(var_60532813) {
-  s_unitrigger = self zm_unitrigger::create_unitrigger(&"ZOMBIE_NEED_POWER", 64, & function_dc9dafb8);
+  s_unitrigger = self zm_unitrigger::create_unitrigger(&"ZOMBIE_NEED_POWER", 64, &function_dc9dafb8);
   s_unitrigger.require_look_at = 1;
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger, 1);
   s_unitrigger.var_60532813 = var_60532813;
@@ -352,6 +352,6 @@ function private do_zombie_explode() {
     self zombie_utility::zombie_eye_glow_stop();
     self clientfield::increment("skull_turret_explode_fx");
     self ghost();
-    self util::delay(0.25, undefined, & zm_utility::self_delete);
+    self util::delay(0.25, undefined, &zm_utility::self_delete);
   }
 }

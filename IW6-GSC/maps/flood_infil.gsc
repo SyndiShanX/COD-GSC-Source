@@ -641,7 +641,7 @@ tank_damage_player(var_0, var_1) {
     }
 
     if(!isalive(level.player)) {
-      setdvar("ui_deadquote", & "FLOOD_FAIL_VEHICLE_CRUSH");
+      setdvar("ui_deadquote", &"FLOOD_FAIL_VEHICLE_CRUSH");
       self stopanimscripted();
 
       foreach(var_5 in level.lynx_smash_array)
@@ -1725,7 +1725,7 @@ kill_player_with_tanks(var_0) {
   }
 
   wait 0.1;
-  setdvar("ui_deadquote", & "FLOOD_TANKS_FAIL");
+  setdvar("ui_deadquote", &"FLOOD_TANKS_FAIL");
   level thread maps\_utility::missionfailedwrapper();
 }
 

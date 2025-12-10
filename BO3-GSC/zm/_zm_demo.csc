@@ -12,7 +12,7 @@
 #namespace _zm_demo;
 
 function autoexec __init__sytem__() {
-  system::register("zm_demo", & __init__, undefined, undefined);
+  system::register("zm_demo", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -20,7 +20,7 @@ function __init__() {
     if(!isDefined(level.demolocalclients)) {
       level.demolocalclients = [];
     }
-    callback::on_localclient_connect( & player_on_connect);
+    callback::on_localclient_connect(&player_on_connect);
   }
 }
 

@@ -20,7 +20,7 @@ function enable_hacking(killstreakname, prehackfunction, posthackfunction) {
   killstreak = self;
   level.challenge_scorestreaksenabled = 1;
   killstreak.challenge_isscorestreak = 1;
-  killstreak.killstreak_hackedcallback = & _hacked_callback;
+  killstreak.killstreak_hackedcallback = &_hacked_callback;
   killstreak.killstreakprehackfunction = prehackfunction;
   killstreak.killstreakposthackfunction = posthackfunction;
   killstreak.hackertoolinnertimems = killstreak killstreak_bundles::get_hack_tool_inner_time();

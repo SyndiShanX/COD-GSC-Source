@@ -197,9 +197,9 @@ boxstub_update_prompt(player) {
     if(isDefined(level.magic_box_check_equipment) && [
         [level.magic_box_check_equipment]
       ](self.stub.trigger_target.grab_weapon_name))
-      self.hint_string = & "ZOMBIE_TRADE_EQUIP";
+      self.hint_string = &"ZOMBIE_TRADE_EQUIP";
     else
-      self.hint_string = & "ZOMBIE_TRADE_WEAPON";
+      self.hint_string = &"ZOMBIE_TRADE_WEAPON";
   } else if(isDefined(level.using_locked_magicbox) && level.using_locked_magicbox && (isDefined(self.stub.trigger_target.is_locked) && self.stub.trigger_target.is_locked))
     self.hint_string = get_hint_string(self, "locked_magic_box_cost");
   else {

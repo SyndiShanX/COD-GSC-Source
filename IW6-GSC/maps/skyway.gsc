@@ -54,7 +54,7 @@ main() {
   maps\_utility::add_start("end_beach", ::start_end_beach, "end_beach", ::main_end_beach, "skyway_outro_tr");
   maps\_utility::add_start("end_beach_final", ::start_end_beach, "end_beach_final", ::main_end_beach, "skyway_outro_tr");
   mission_precache();
-  maps\_utility::intro_screen_create(&"SKYWAY_INTROSCREEN_TITLE", & "SKYWAY_INTROSCREEN_TIME", & "SKYWAY_INTROSCREEN_LOC", & "SKYWAY_INTROSCREEN_NAME");
+  maps\_utility::intro_screen_create(&"SKYWAY_INTROSCREEN_TITLE", &"SKYWAY_INTROSCREEN_TIME", &"SKYWAY_INTROSCREEN_LOC", &"SKYWAY_INTROSCREEN_NAME");
   maps\_utility::intro_screen_custom_func(::introscreen);
   maps\_utility::transient_init("skyway_intro_tr");
   maps\_utility::transient_init("skyway_outro_tr");
@@ -132,7 +132,7 @@ mission_precache() {
   maps\skyway_end_swim::section_precache();
   maps\skyway_endbeach::section_precache();
   maps\skyway_precache::main();
-  maps\_utility::add_hint_string("15_mins_before", & "SKYWAY_INTROSCREEN_TIMEBEFORE", ::introscreen_hint);
+  maps\_utility::add_hint_string("15_mins_before", &"SKYWAY_INTROSCREEN_TIMEBEFORE", ::introscreen_hint);
   precachemodel("viewhands_gs_stealth");
   precachemodel("viewhands_player_gs_stealth");
   precacheitem("fads");
@@ -337,18 +337,18 @@ objectives() {
     case "hangar_nomove":
     case "hangar":
       level waittill("stop_chyron");
-      objective_add(maps\_utility::obj("obj_find_boss"), "current", & "SKYWAY_OBJ_FINDBOSS");
+      objective_add(maps\_utility::obj("obj_find_boss"), "current", &"SKYWAY_OBJ_FINDBOSS");
     case "sat1":
     case "sat1_nomove":
       common_scripts\utility::flag_wait("flag_sat2_end");
-      objective_add(maps\_utility::obj("obj_get_to_roof"), "current", & "SKYWAY_OBJ_GETTOROOF");
+      objective_add(maps\_utility::obj("obj_get_to_roof"), "current", &"SKYWAY_OBJ_GETTOROOF");
       common_scripts\utility::flag_wait("flag_rooftops_start");
       maps\_utility::objective_complete(maps\_utility::obj("obj_get_to_roof"));
     case "rooftops":
     case "rooftops_nomove":
       common_scripts\utility::flag_wait("flag_helo_start");
       wait 3;
-      objective_add(maps\_utility::obj("obj_take_out_helos"), "current", & "SKYWAY_OBJ_TAKEOUTHELOS");
+      objective_add(maps\_utility::obj("obj_take_out_helos"), "current", &"SKYWAY_OBJ_TAKEOUTHELOS");
       common_scripts\utility::flag_wait("flag_helo_end");
 
       if(!common_scripts\utility::flag("flag_helo_fail"))

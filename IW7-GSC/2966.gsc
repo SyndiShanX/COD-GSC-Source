@@ -278,7 +278,7 @@ func_131F6(var_00) {
   var_00 thread scripts\sp\vehicle_aianim::func_88AE();
 
   if(isDefined(var_0.func_EDB8))
-    var_00 setvehiclelookattext(var_0.func_EDB8, & "");
+    var_00 setvehiclelookattext(var_0.func_EDB8, &"");
 
   var_00 thread func_131EC();
 

@@ -1002,7 +1002,7 @@ player_decent_death() {
 
   level notify("new_quote_string");
   // You did not brake in time.
-  SetDvar("ui_deadquote", & "AF_CAVES_FELL_TO_DEATH");
+  SetDvar("ui_deadquote", &"AF_CAVES_FELL_TO_DEATH");
   blackout = create_client_overlay("black", 0, level.player);
   blackout FadeOverTime(1.5);
   blackout.alpha = 1;

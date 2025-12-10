@@ -16,15 +16,15 @@
 #namespace namespace_96796d10;
 
 autoexec __init__system__() {
-  system::register(#"hash_39bb8d673164edda", & __init__, undefined, undefined);
+  system::register(#"hash_39bb8d673164edda", &__init__, undefined, undefined);
 }
 
 __init__() {
-  zm_talisman::register_talisman("talisman_box_guarantee_wonder_weapon", & activate_talisman);
+  zm_talisman::register_talisman("talisman_box_guarantee_wonder_weapon", &activate_talisman);
 }
 
 activate_talisman() {
-  self.var_f15dc7c3 = & function_93c6fd5;
+  self.var_f15dc7c3 = &function_93c6fd5;
 }
 
 function_93c6fd5(a_keys) {

@@ -1285,7 +1285,7 @@ drop_soul_key() {
 soul_key_pick_up_monitor(param_00, param_01) {
   param_00 endon("death");
   param_00 makeusable();
-  param_00 sethintstring( & "CP_RAVE_PICK_UP_SOUL_KEY");
+  param_00 sethintstring(&"CP_RAVE_PICK_UP_SOUL_KEY");
   for(;;) {
     param_00 waittill("trigger", var_02);
     if(isplayer(var_02)) {

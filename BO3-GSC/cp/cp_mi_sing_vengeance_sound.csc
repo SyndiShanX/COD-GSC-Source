@@ -9,7 +9,7 @@
 #namespace cp_mi_sing_vengeance_sound;
 
 function main() {
-  clientfield::register("toplayer", "slowmo_duck_active", 1, 2, "int", & function_41d671f5, 0, 0);
+  clientfield::register("toplayer", "slowmo_duck_active", 1, 2, "int", &function_41d671f5, 0, 0);
   level thread function_dcd7454a();
   level thread function_38ba2136();
   level thread function_4035bef1();

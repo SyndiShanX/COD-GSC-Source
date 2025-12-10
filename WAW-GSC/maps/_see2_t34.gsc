@@ -22,7 +22,7 @@ main(model, type) {
   build_compassicon();
   build_vehiclewalk(6);
   build_aianims(::setanims, ::set_vehicle_anims);
-  level.vehicletypefancy["see2_t34"] = & "VEHICLENAME_T34_TANK";
+  level.vehicletypefancy["see2_t34"] = &"VEHICLENAME_T34_TANK";
 }
 
 init_local() {

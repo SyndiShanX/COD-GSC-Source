@@ -15,14 +15,14 @@
 #namespace zm_bgb_round_robbin;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_round_robbin", & __init__, undefined, "bgb");
+  system::register("zm_bgb_round_robbin", &__init__, undefined, "bgb");
 }
 
 function __init__() {
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_round_robbin", "activated", 1, undefined, undefined, & validation, & activation);
+  bgb::register("zm_bgb_round_robbin", "activated", 1, undefined, undefined, &validation, &activation);
 }
 
 function validation() {

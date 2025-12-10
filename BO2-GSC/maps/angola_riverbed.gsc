@@ -586,7 +586,7 @@ mortar_helper_message(delay) {
     wait(delay);
 
   if(flag("strafe_hint_active")) {
-    screen_message_create(&"ANGOLA_STRAFE_HINT", & "ANGOLA_MORTAR_TUTORIAL");
+    screen_message_create(&"ANGOLA_STRAFE_HINT", &"ANGOLA_MORTAR_TUTORIAL");
     wait 5;
     screen_message_create(&"ANGOLA_STRAFE_HINT");
   } else {

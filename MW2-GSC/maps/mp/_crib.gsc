@@ -45,7 +45,7 @@ radial_button_definitions() {
 }
 
 radial_init() {
-  // calculate start & end angles of all buttons for range selection
+  // calculate start &end angles of all buttons for range selection
   foreach(button_group in level.radial_button_group) {
     // sort buttons by angle so we can calculate mid angles in sequence
     sort_buttons_by_angle(button_group);

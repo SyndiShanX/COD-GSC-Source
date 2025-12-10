@@ -20,7 +20,7 @@ onforfeit(var_0) {
   level.forfeit_aborted = 0;
   var_1 = 20.0;
   matchforfeittimer(var_1);
-  var_2 = & "";
+  var_2 = &"";
 
   if(!isDefined(var_0)) {
     level.finalkillcam_winner = "none";
@@ -1528,31 +1528,31 @@ callback_startgametype() {
       game["state"] = "playing";
 
     if(level.teambased) {
-      game["strings"]["waiting_for_teams"] = & "MP_WAITING_FOR_TEAMS";
-      game["strings"]["opponent_forfeiting_in"] = & "MP_OPPONENT_FORFEITING_IN";
+      game["strings"]["waiting_for_teams"] = &"MP_WAITING_FOR_TEAMS";
+      game["strings"]["opponent_forfeiting_in"] = &"MP_OPPONENT_FORFEITING_IN";
     } else {
-      game["strings"]["waiting_for_teams"] = & "MP_WAITING_FOR_MORE_PLAYERS";
-      game["strings"]["opponent_forfeiting_in"] = & "MP_OPPONENT_FORFEITING_IN";
+      game["strings"]["waiting_for_teams"] = &"MP_WAITING_FOR_MORE_PLAYERS";
+      game["strings"]["opponent_forfeiting_in"] = &"MP_OPPONENT_FORFEITING_IN";
     }
 
-    game["strings"]["press_to_spawn"] = & "PLATFORM_PRESS_TO_SPAWN";
-    game["strings"]["match_starting_in"] = & "MP_MATCH_STARTING_IN";
-    game["strings"]["match_resuming_in"] = & "MP_MATCH_RESUMING_IN";
-    game["strings"]["waiting_for_players"] = & "MP_WAITING_FOR_PLAYERS";
-    game["strings"]["spawn_tag_wait"] = & "MP_SPAWN_TAG_WAIT";
-    game["strings"]["spawn_next_round"] = & "MP_SPAWN_NEXT_ROUND";
-    game["strings"]["waiting_to_spawn"] = & "MP_WAITING_TO_SPAWN";
-    game["strings"]["match_starting"] = & "MP_MATCH_STARTING";
-    game["strings"]["change_team"] = & "MP_CHANGE_TEAM_NEXT_SPAWN";
-    game["strings"]["change_team_cancel"] = & "MP_CHANGE_TEAM_CANCEL";
-    game["strings"]["change_team_wait"] = & "MP_CHANGE_TEAM_WAIT";
-    game["strings"]["change_class"] = & "MP_CHANGE_CLASS_NEXT_SPAWN";
-    game["strings"]["change_class_cancel"] = & "MP_CHANGE_CLASS_CANCEL";
-    game["strings"]["change_class_wait"] = & "MP_CHANGE_CLASS_WAIT";
-    game["strings"]["last_stand"] = & "MPUI_LAST_STAND";
-    game["strings"]["final_stand"] = & "MPUI_FINAL_STAND";
-    game["strings"]["cowards_way"] = & "PLATFORM_COWARDS_WAY_OUT";
-    game["strings"]["tie"] = & "MP_MATCH_TIE";
+    game["strings"]["press_to_spawn"] = &"PLATFORM_PRESS_TO_SPAWN";
+    game["strings"]["match_starting_in"] = &"MP_MATCH_STARTING_IN";
+    game["strings"]["match_resuming_in"] = &"MP_MATCH_RESUMING_IN";
+    game["strings"]["waiting_for_players"] = &"MP_WAITING_FOR_PLAYERS";
+    game["strings"]["spawn_tag_wait"] = &"MP_SPAWN_TAG_WAIT";
+    game["strings"]["spawn_next_round"] = &"MP_SPAWN_NEXT_ROUND";
+    game["strings"]["waiting_to_spawn"] = &"MP_WAITING_TO_SPAWN";
+    game["strings"]["match_starting"] = &"MP_MATCH_STARTING";
+    game["strings"]["change_team"] = &"MP_CHANGE_TEAM_NEXT_SPAWN";
+    game["strings"]["change_team_cancel"] = &"MP_CHANGE_TEAM_CANCEL";
+    game["strings"]["change_team_wait"] = &"MP_CHANGE_TEAM_WAIT";
+    game["strings"]["change_class"] = &"MP_CHANGE_CLASS_NEXT_SPAWN";
+    game["strings"]["change_class_cancel"] = &"MP_CHANGE_CLASS_CANCEL";
+    game["strings"]["change_class_wait"] = &"MP_CHANGE_CLASS_WAIT";
+    game["strings"]["last_stand"] = &"MPUI_LAST_STAND";
+    game["strings"]["final_stand"] = &"MPUI_FINAL_STAND";
+    game["strings"]["cowards_way"] = &"PLATFORM_COWARDS_WAY_OUT";
+    game["strings"]["tie"] = &"MP_MATCH_TIE";
     game["colors"]["blue"] = (0.25, 0.25, 0.75);
     game["colors"]["red"] = (0.75, 0.25, 0.25);
     game["colors"]["white"] = (1, 1, 1);

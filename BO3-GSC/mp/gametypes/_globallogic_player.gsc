@@ -1224,7 +1224,7 @@ function modify_player_damage(einflictor, eattacker, idamage, idflags, smeansofd
     }
   }
   idamage = custom_gamemodes_modified_damage(self, eattacker, idamage, smeansofdeath, weapon, einflictor, shitloc);
-  if(level.onplayerdamage != ( & globallogic::blank)) {
+  if(level.onplayerdamage != (&globallogic::blank)) {
     modifieddamage = [[level.onplayerdamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime);
     if(isDefined(modifieddamage)) {
       if(modifieddamage <= 0) {

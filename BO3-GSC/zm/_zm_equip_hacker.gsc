@@ -17,15 +17,15 @@
 #namespace zm_equip_hacker;
 
 function autoexec __init__sytem__() {
-  system::register("zm_equip_hacker", & __init__, & __main__, undefined);
+  system::register("zm_equip_hacker", &__init__, &__main__, undefined);
 }
 
 function __init__() {
-  zm_equipment::register("equip_hacker", & "ZOMBIE_EQUIP_HACKER_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_HACKER_HOWTO", undefined, "hacker");
+  zm_equipment::register("equip_hacker", &"ZOMBIE_EQUIP_HACKER_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_HACKER_HOWTO", undefined, "hacker");
   level._hackable_objects = [];
   level._pooled_hackable_objects = [];
-  callback::on_connect( & hacker_on_player_connect);
-  callback::on_spawned( & function_fa12cef4);
+  callback::on_connect(&hacker_on_player_connect);
+  callback::on_spawned(&function_fa12cef4);
   level thread hack_trigger_think();
   level thread hacker_trigger_pool_think();
   level thread hacker_round_reward();
@@ -595,7 +595,7 @@ function hacker_on_player_connect() {
   struct.script_int = 500;
   struct.entity = self;
   struct.trigger_offset = vectorscale((0, 0, 1), 48);
-  register_pooled_hackable_struct(struct, & player_hack, & player_qualifier);
+  register_pooled_hackable_struct(struct, &player_hack, &player_qualifier);
   struct thread player_hack_disconnect_watcher(self);
 }
 

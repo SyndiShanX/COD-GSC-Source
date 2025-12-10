@@ -20,7 +20,7 @@
 function init() {
   level thread achievement_moon_sidequest();
   level thread achievement_ground_control();
-  callback::on_connect( & onplayerconnect);
+  callback::on_connect(&onplayerconnect);
 }
 
 function onplayerconnect() {

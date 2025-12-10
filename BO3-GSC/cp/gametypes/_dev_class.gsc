@@ -12,11 +12,11 @@
 #namespace dev_class;
 
 function autoexec __init__sytem__() {
-  system::register("", & __init__, undefined, undefined);
+  system::register("", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
+  callback::on_start_gametype(&init);
 }
 
 function init() {
@@ -39,15 +39,15 @@ function init() {
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_body, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_body, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_head, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_head, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_character, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_character, "");
         break;
       }
       case "": {
@@ -67,27 +67,27 @@ function init() {
         break;
       }
       case "": {
-        dev_cac_set_model_range( & sort_greatest, "");
+        dev_cac_set_model_range(&sort_greatest, "");
         break;
       }
       case "": {
-        dev_cac_set_model_range( & sort_least, "");
+        dev_cac_set_model_range(&sort_least, "");
         break;
       }
       case "": {
-        dev_cac_set_model_range( & sort_greatest, "");
+        dev_cac_set_model_range(&sort_greatest, "");
         break;
       }
       case "": {
-        dev_cac_set_model_range( & sort_least, "");
+        dev_cac_set_model_range(&sort_least, "");
         break;
       }
       case "": {
-        dev_cac_set_model_range( & sort_greatest, "");
+        dev_cac_set_model_range(&sort_greatest, "");
         break;
       }
       case "": {
-        dev_cac_set_model_range( & sort_least, "");
+        dev_cac_set_model_range(&sort_least, "");
         break;
       }
       case "": {
@@ -96,39 +96,39 @@ function init() {
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
         break;
       }
       case "": {

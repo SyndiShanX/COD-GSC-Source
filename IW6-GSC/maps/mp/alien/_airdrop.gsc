@@ -1645,7 +1645,7 @@ show_drill_hint() {
   while(is_blocker_alive()) {
     if(isDefined(level.current_blocker_hive) && isDefined(level.drill_carrier) && level.drill_carrier == self) {
       if(DistanceSquared(self.origin, level.current_blocker_hive.origin) < distance_check && isDefined(level.drill_carrier) && level.drill_carrier == self)
-        self setLowerMessage("hive_drill_hint", & "ALIENS_BLOCKER_HIVE_DRILL_HINT");
+        self setLowerMessage("hive_drill_hint", &"ALIENS_BLOCKER_HIVE_DRILL_HINT");
 
       while(is_blocker_alive() &&
         (DistanceSquared(self.origin, level.current_blocker_hive.origin) < distance_check && isDefined(level.drill_carrier) && level.drill_carrier == self)) {

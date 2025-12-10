@@ -19,11 +19,11 @@
 #namespace auto_turret;
 
 function autoexec __init__sytem__() {
-  system::register("auto_turret", & __init__, undefined, undefined);
+  system::register("auto_turret", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("auto_turret", & turret_initialze);
+  vehicle::add_main_callback("auto_turret", &turret_initialze);
 }
 
 function turret_initialze() {
@@ -54,8 +54,8 @@ function turret_initialze() {
     self.nocybercom = 1;
   }
   self thread turret::track_lens_flare();
-  self.overridevehicledamage = & turretcallback_vehicledamage;
-  self.allowfriendlyfiredamageoverride = & turretallowfriendlyfiredamage;
+  self.overridevehicledamage = &turretcallback_vehicledamage;
+  self.allowfriendlyfiredamageoverride = &turretallowfriendlyfiredamage;
   if(isDefined(level.vehicle_initializer_cb)) {
     [[level.vehicle_initializer_cb]](self);
   }
@@ -67,22 +67,22 @@ function turret_initialze() {
 
 function defaultrole() {
   self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("death").update_func = & state_death_update;
-  self vehicle_ai::get_state_callbacks("combat").update_func = & state_combat_update;
-  self vehicle_ai::get_state_callbacks("combat").exit_func = & state_combat_exit;
-  self vehicle_ai::get_state_callbacks("off").enter_func = & state_off_enter;
-  self vehicle_ai::get_state_callbacks("off").exit_func = & state_off_exit;
-  self vehicle_ai::get_state_callbacks("emped").enter_func = & state_emped_enter;
-  self vehicle_ai::get_state_callbacks("emped").update_func = & state_emped_update;
-  self vehicle_ai::get_state_callbacks("emped").exit_func = & state_emped_exit;
-  self vehicle_ai::add_state("unaware", undefined, & state_unaware_update, undefined);
+  self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
+  self vehicle_ai::get_state_callbacks("combat").update_func = &state_combat_update;
+  self vehicle_ai::get_state_callbacks("combat").exit_func = &state_combat_exit;
+  self vehicle_ai::get_state_callbacks("off").enter_func = &state_off_enter;
+  self vehicle_ai::get_state_callbacks("off").exit_func = &state_off_exit;
+  self vehicle_ai::get_state_callbacks("emped").enter_func = &state_emped_enter;
+  self vehicle_ai::get_state_callbacks("emped").update_func = &state_emped_update;
+  self vehicle_ai::get_state_callbacks("emped").exit_func = &state_emped_exit;
+  self vehicle_ai::add_state("unaware", undefined, &state_unaware_update, undefined);
   vehicle_ai::add_interrupt_connection("unaware", "scripted", "enter_scripted");
   vehicle_ai::add_interrupt_connection("unaware", "emped", "emped");
   vehicle_ai::add_interrupt_connection("unaware", "off", "shut_off");
   vehicle_ai::add_interrupt_connection("unaware", "driving", "enter_vehicle");
   vehicle_ai::add_interrupt_connection("unaware", "pain", "pain");
-  vehicle_ai::add_utility_connection("unaware", "combat", & should_switch_to_combat);
-  vehicle_ai::add_utility_connection("combat", "unaware", & should_switch_to_unaware);
+  vehicle_ai::add_utility_connection("unaware", "combat", &should_switch_to_combat);
+  vehicle_ai::add_utility_connection("combat", "unaware", &should_switch_to_unaware);
   vehicle_ai::startinitialstate("unaware");
 }
 

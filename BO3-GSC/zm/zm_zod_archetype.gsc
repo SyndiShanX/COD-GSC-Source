@@ -9,10 +9,10 @@
 #namespace zm_zod_archetype;
 
 function autoexec init() {
-  zombie_utility::register_ignore_player_handler("margwa", & function_478e89a7);
-  zombie_utility::register_ignore_player_handler("zombie", & function_478e89a7);
-  level.raps_can_reach_inaccessible_location = & raps_can_reach_inaccessible_location;
-  level.is_player_accessible_to_raps = & is_player_accessible_to_raps;
+  zombie_utility::register_ignore_player_handler("margwa", &function_478e89a7);
+  zombie_utility::register_ignore_player_handler("zombie", &function_478e89a7);
+  level.raps_can_reach_inaccessible_location = &raps_can_reach_inaccessible_location;
+  level.is_player_accessible_to_raps = &is_player_accessible_to_raps;
 }
 
 function private function_478e89a7() {

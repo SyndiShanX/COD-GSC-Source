@@ -1489,7 +1489,7 @@ cp_disco_gns_3_setup() {
   level.assign_moving_target_flags_func = ::cp_disco_assign_moving_target_flags;
   level.reset_moving_target_wave_data = ::cp_disco_reset_moving_target_wave_data;
   level.process_moving_target_hit_func = ::cp_disco_process_moving_target_hit_with_right_color;
-  level.grab_same_ghost_string = & "CP_DISCO_GNS_TRACK_SAME_CUBE";
+  level.grab_same_ghost_string = &"CP_DISCO_GNS_TRACK_SAME_CUBE";
   level.gns_moving_target_model = "cp_disco_pixel_question_mark";
   level.enter_ghosts_n_skulls_func = ::cp_disco_enter_ghosts_n_skulls_func;
   level.all_perk_list = ["perk_machine_boom", "perk_machine_flash", "perk_machine_fwoosh", "perk_machine_more", "perk_machine_rat_a_tat", "perk_machine_revive", "perk_machine_run", "perk_machine_deadeye", "perk_machine_tough", "perk_machine_zap"];

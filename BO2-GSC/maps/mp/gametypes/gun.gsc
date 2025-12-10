@@ -199,7 +199,7 @@ promoteplayer(weaponused) {
         if(isalive(self))
           self thread givecustomloadout(0, 1);
 
-        self thread maps\mp\gametypes\_wager::queuewagerpopup(&"MPUI_PLAYER_KILLED", 0, & "MP_GUN_NEXT_LEVEL");
+        self thread maps\mp\gametypes\_wager::queuewagerpopup(&"MPUI_PLAYER_KILLED", 0, &"MP_GUN_NEXT_LEVEL");
       }
 
       pointstowin = self.pers["pointstowin"];
@@ -234,7 +234,7 @@ demoteplayer() {
 
   self.pers["humiliated"]++;
   self.humiliated = self.pers["humiliated"];
-  self thread maps\mp\gametypes\_wager::queuewagerpopup(&"MP_HUMILIATED", 0, & "MP_GUN_PREV_LEVEL", "wm_humiliated");
+  self thread maps\mp\gametypes\_wager::queuewagerpopup(&"MP_HUMILIATED", 0, &"MP_GUN_PREV_LEVEL", "wm_humiliated");
   self playlocalsound(game["dialog"]["wm_humiliation"]);
   self maps\mp\gametypes\_globallogic_audio::leaderdialogonplayer("wm_humiliated");
 }
@@ -274,19 +274,19 @@ onstartgametype() {
   setdvar("ui_weapon_tiers", level.gunprogression.size);
   makedvarserverinfo("ui_weapon_tiers", level.gunprogression.size);
   setclientnamemode("auto_change");
-  setobjectivetext("allies", & "OBJECTIVES_GUN");
-  setobjectivetext("axis", & "OBJECTIVES_GUN");
+  setobjectivetext("allies", &"OBJECTIVES_GUN");
+  setobjectivetext("axis", &"OBJECTIVES_GUN");
 
   if(level.splitscreen) {
-    setobjectivescoretext("allies", & "OBJECTIVES_GUN");
-    setobjectivescoretext("axis", & "OBJECTIVES_GUN");
+    setobjectivescoretext("allies", &"OBJECTIVES_GUN");
+    setobjectivescoretext("axis", &"OBJECTIVES_GUN");
   } else {
-    setobjectivescoretext("allies", & "OBJECTIVES_GUN_SCORE");
-    setobjectivescoretext("axis", & "OBJECTIVES_GUN_SCORE");
+    setobjectivescoretext("allies", &"OBJECTIVES_GUN_SCORE");
+    setobjectivescoretext("axis", &"OBJECTIVES_GUN_SCORE");
   }
 
-  setobjectivehinttext("allies", & "OBJECTIVES_GUN_HINT");
-  setobjectivehinttext("axis", & "OBJECTIVES_GUN_HINT");
+  setobjectivehinttext("allies", &"OBJECTIVES_GUN_HINT");
+  setobjectivehinttext("axis", &"OBJECTIVES_GUN_HINT");
   allowed[0] = "gun";
   maps\mp\gametypes\_gameobjects::main(allowed);
   maps\mp\gametypes\_spawning::create_map_placed_influencers();

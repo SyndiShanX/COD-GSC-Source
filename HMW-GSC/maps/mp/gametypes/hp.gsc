@@ -98,9 +98,9 @@ initializematchrules() {
 }
 
 onprecachegametype() {
-  level.objectivehintpreparezone = & "MP_CONTROL_KOTH";
-  level.objectivehintcapturezone = & "MP_CAPTURE_KOTH";
-  level.objectivehintdefendhq = & "MP_DEFEND_KOTH";
+  level.objectivehintpreparezone = &"MP_CONTROL_KOTH";
+  level.objectivehintcapturezone = &"MP_CAPTURE_KOTH";
+  level.objectivehintdefendhq = &"MP_DEFEND_KOTH";
   level.iconneutral3d = "waypoint_captureneutral";
   level.iconneutral2d = "waypoint_captureneutral";
   level.iconcapture3d = "waypoint_capture";
@@ -113,8 +113,8 @@ onprecachegametype() {
   level.iconbluespectator = "waypoint_esports_hardpoint_blue";
   level.iconredspectator = "waypoint_esports_hardpoint_red";
   level.iconcontestedspectator = "waypoint_contested";
-  level.zonespawninginstr = & "MP_KOTH_AVAILABLE_IN";
-  level.zonedestroyedinenemystr = & "MP_KOTH_MOVING_IN";
+  level.zonespawninginstr = &"MP_KOTH_AVAILABLE_IN";
+  level.zonedestroyedinenemystr = &"MP_KOTH_MOVING_IN";
 }
 
 updateobjectivehintmessages(var_0, var_1) {
@@ -137,15 +137,15 @@ onstartgametype() {
     game["defenders"] = var_0;
   }
 
-  maps\mp\_utility::setobjectivetext("allies", & "OBJECTIVES_KOTH");
-  maps\mp\_utility::setobjectivetext("axis", & "OBJECTIVES_KOTH");
+  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_KOTH");
+  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_KOTH");
 
   if(level.splitscreen) {
-    maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_KOTH");
-    maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_KOTH");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_KOTH");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_KOTH");
   } else {
-    maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_KOTH_SCORE");
-    maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_KOTH_SCORE");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_KOTH_SCORE");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_KOTH_SCORE");
   }
 
   if(level.initialzonedelay)
@@ -254,7 +254,7 @@ hpcaptureloop() {
   for(;;) {
     level.zone.gameobject maps\mp\gametypes\_gameobjects::allowuse("any");
     level.zone.gameobject maps\mp\gametypes\_gameobjects::setusetime(0);
-    level.zone.gameobject maps\mp\gametypes\_gameobjects::setusetext( & "MP_CAPTURING_OBJECTIVE");
+    level.zone.gameobject maps\mp\gametypes\_gameobjects::setusetext(&"MP_CAPTURING_OBJECTIVE");
     level.zone.gameobject maps\mp\gametypes\_gameobjects::setvisibleteam("any");
     if(scripts\mp_patches\common::is_iw4_map()) {
       level.zone.gameobject maps\mp\gametypes\_gameobjects::setmodelvisibility(0);

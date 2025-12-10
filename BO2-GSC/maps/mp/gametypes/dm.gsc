@@ -40,19 +40,19 @@ main() {
 
 onstartgametype() {
   setclientnamemode("auto_change");
-  setobjectivetext("allies", & "OBJECTIVES_DM");
-  setobjectivetext("axis", & "OBJECTIVES_DM");
+  setobjectivetext("allies", &"OBJECTIVES_DM");
+  setobjectivetext("axis", &"OBJECTIVES_DM");
 
   if(level.splitscreen) {
-    setobjectivescoretext("allies", & "OBJECTIVES_DM");
-    setobjectivescoretext("axis", & "OBJECTIVES_DM");
+    setobjectivescoretext("allies", &"OBJECTIVES_DM");
+    setobjectivescoretext("axis", &"OBJECTIVES_DM");
   } else {
-    setobjectivescoretext("allies", & "OBJECTIVES_DM_SCORE");
-    setobjectivescoretext("axis", & "OBJECTIVES_DM_SCORE");
+    setobjectivescoretext("allies", &"OBJECTIVES_DM_SCORE");
+    setobjectivescoretext("axis", &"OBJECTIVES_DM_SCORE");
   }
 
-  setobjectivehinttext("allies", & "OBJECTIVES_DM_HINT");
-  setobjectivehinttext("axis", & "OBJECTIVES_DM_HINT");
+  setobjectivehinttext("allies", &"OBJECTIVES_DM_HINT");
+  setobjectivehinttext("axis", &"OBJECTIVES_DM_HINT");
   allowed[0] = "dm";
   maps\mp\gametypes\_gameobjects::main(allowed);
   maps\mp\gametypes\_spawning::create_map_placed_influencers();

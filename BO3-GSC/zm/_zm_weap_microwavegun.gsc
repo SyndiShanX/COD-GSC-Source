@@ -21,7 +21,7 @@
 #namespace zm_weap_microwavegun;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_microwavegun", & __init__, undefined, undefined);
+  system::register("zm_weap_microwavegun", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -29,8 +29,8 @@ function __init__() {
   clientfield::register("actor", "toggle_microwavegun_expand_response", 21000, 1, "int");
   clientfield::register("clientuimodel", "hudItems.showDpadLeft_WaveGun", 21000, 1, "int");
   clientfield::register("clientuimodel", "hudItems.dpadLeftAmmo", 21000, 5, "int");
-  zm_spawner::register_zombie_damage_callback( & microwavegun_zombie_damage_response);
-  zm_spawner::register_zombie_death_animscript_callback( & microwavegun_zombie_death_response);
+  zm_spawner::register_zombie_damage_callback(&microwavegun_zombie_damage_response);
+  zm_spawner::register_zombie_death_animscript_callback(&microwavegun_zombie_death_response);
   zombie_utility::set_zombie_var("microwavegun_cylinder_radius", 180);
   zombie_utility::set_zombie_var("microwavegun_sizzle_range", 480);
   level._effect["microwavegun_zap_shock_dw"] = "dlc5/zmb_weapon/fx_zap_shock_dw";
@@ -39,15 +39,15 @@ function __init__() {
   level._effect["microwavegun_zap_shock_eyes_lh"] = "dlc5/zmb_weapon/fx_zap_shock_eyes_lh";
   level._effect["microwavegun_zap_shock_ug"] = "dlc5/zmb_weapon/fx_zap_shock_ug";
   level._effect["microwavegun_zap_shock_eyes_ug"] = "dlc5/zmb_weapon/fx_zap_shock_eyes_ug";
-  animationstatenetwork::registernotetrackhandlerfunction("expand", & function_5c6b11a6);
-  animationstatenetwork::registernotetrackhandlerfunction("explode", & function_f8d8850f);
+  animationstatenetwork::registernotetrackhandlerfunction("expand", &function_5c6b11a6);
+  animationstatenetwork::registernotetrackhandlerfunction("explode", &function_f8d8850f);
   level thread microwavegun_on_player_connect();
   level._microwaveable_objects = [];
   level.w_microwavegun = getweapon("microwavegun");
   level.w_microwavegun_upgraded = getweapon("microwavegun_upgraded");
   level.w_microwavegundw = getweapon("microwavegundw");
   level.w_microwavegundw_upgraded = getweapon("microwavegundw_upgraded");
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function on_player_spawned() {
@@ -266,7 +266,7 @@ function microwavegun_sizzle_zombie(player, sizzle_vec, index) {
       }
       self clientfield::set("toggle_microwavegun_hit_response", 1);
       self.nodeathragdoll = 1;
-      self.handle_death_notetracks = & microwavegun_handle_death_notetracks;
+      self.handle_death_notetracks = &microwavegun_handle_death_notetracks;
     }
   }
 }

@@ -9,7 +9,7 @@
 #namespace destructible_character;
 
 function autoexec main() {
-  clientfield::register("actor", "destructible_character_state", 1, 21, "int", & destructclientutils::_destructhandler, 0, 0);
+  clientfield::register("actor", "destructible_character_state", 1, 21, "int", &destructclientutils::_destructhandler, 0, 0);
   destructibles = struct::get_script_bundles("destructiblecharacterdef");
   processedbundles = [];
   foreach(destructiblename, destructible in destructibles) {
@@ -50,7 +50,7 @@ function private _destructhandler(localclientnum, oldvalue, newvalue, bnewent, b
   currentdestructflag = 2;
   piecenumber = 1;
   while(destructflags >= currentdestructflag) {
-    if(destructflags & currentdestructflag) {
+    if(destructflags &currentdestructflag) {
       _destructpiece(localclientnum, entity, piecenumber, shouldspawngibs);
     }
     currentdestructflag = currentdestructflag << 1;
@@ -108,5 +108,5 @@ function adddestructpiececallback(localclientnum, entity, piecenumber, callbackf
 }
 
 function ispiecedestructed(localclientnum, entity, piecenumber) {
-  return _getdestructstate(localclientnum, entity) & (1 << piecenumber);
+  return _getdestructstate(localclientnum, entity) &(1 << piecenumber);
 }

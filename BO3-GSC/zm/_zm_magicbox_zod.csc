@@ -12,9 +12,9 @@
 function init() {
   level._effect["box_open"] = "zombie/fx_weapon_box_open_zod_zmb";
   level._effect["box_closed"] = "zombie/fx_weapon_box_closed_zod_zmb";
-  registerclientfield("zbarrier", "magicbox_initial_fx", 1, 1, "int", & magicbox_initial_closed_fx);
-  registerclientfield("zbarrier", "magicbox_amb_sound", 1, 1, "int", & magicbox_ambient_sound);
-  registerclientfield("zbarrier", "magicbox_open_fx", 1, 2, "int", & magicbox_open_fx);
+  registerclientfield("zbarrier", "magicbox_initial_fx", 1, 1, "int", &magicbox_initial_closed_fx);
+  registerclientfield("zbarrier", "magicbox_amb_sound", 1, 1, "int", &magicbox_ambient_sound);
+  registerclientfield("zbarrier", "magicbox_open_fx", 1, 2, "int", &magicbox_open_fx);
 }
 
 function magicbox_open_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

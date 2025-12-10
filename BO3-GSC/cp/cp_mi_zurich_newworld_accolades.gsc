@@ -30,7 +30,7 @@ function function_4d39a2af() {
   accolades::register("MISSION_NEWWORLD_CHALLENGE13", "ch13_turret_kill");
   accolades::register("MISSION_NEWWORLD_CHALLENGE14", "ch14_shotgun_kills");
   accolades::register("MISSION_NEWWORLD_CHALLENGE15", "ch15_wall_run_train");
-  callback::on_spawned( & function_3a6b5b3e);
+  callback::on_spawned(&function_3a6b5b3e);
   function_89a4c66f();
   function_314eff4a();
   function_2b972244();
@@ -68,7 +68,7 @@ function function_9f8d841b() {
 }
 
 function function_89a4c66f() {
-  callback::on_actor_killed( & function_595dc718);
+  callback::on_actor_killed(&function_595dc718);
 }
 
 function function_595dc718(params) {
@@ -106,7 +106,7 @@ function function_840d3bcc() {
 }
 
 function function_314eff4a() {
-  callback::on_ai_killed( & function_9257e223);
+  callback::on_ai_killed(&function_9257e223);
 }
 
 function function_9257e223(params) {
@@ -119,7 +119,7 @@ function function_9257e223(params) {
 }
 
 function function_2b972244() {
-  callback::on_ai_killed( & function_9d5a87b1);
+  callback::on_ai_killed(&function_9d5a87b1);
 }
 
 function function_9d5a87b1(params) {
@@ -141,7 +141,7 @@ function function_b4b1da62() {
 }
 
 function function_5a3da660() {
-  spawner::add_archetype_spawn_function("robot", & function_f9a5c6a1);
+  spawner::add_archetype_spawn_function("robot", &function_f9a5c6a1);
 }
 
 function function_f9a5c6a1() {
@@ -168,7 +168,7 @@ function function_9c7144b6() {
 }
 
 function function_e346bcd4() {
-  callback::on_ai_killed( & function_1b6f43c5);
+  callback::on_ai_killed(&function_1b6f43c5);
 }
 
 function function_1b6f43c5(params) {
@@ -214,7 +214,7 @@ function function_23ad043b() {
 }
 
 function function_a87e96e() {
-  callback::on_ai_killed( & function_ee3272c2);
+  callback::on_ai_killed(&function_ee3272c2);
 }
 
 function function_ee3272c2(params) {
@@ -231,7 +231,7 @@ function function_ee3272c2(params) {
 }
 
 function function_353e449e() {
-  callback::on_ai_killed( & function_3867e45c);
+  callback::on_ai_killed(&function_3867e45c);
 }
 
 function function_3867e45c(params) {
@@ -241,8 +241,8 @@ function function_3867e45c(params) {
 }
 
 function function_6972c343() {
-  spawner::add_archetype_spawn_function("robot", & function_deb99e6);
-  callback::on_ai_killed( & function_c008ffe2);
+  spawner::add_archetype_spawn_function("robot", &function_deb99e6);
+  callback::on_ai_killed(&function_c008ffe2);
 }
 
 function function_deb99e6() {
@@ -291,14 +291,14 @@ function function_2d344335() {
 
 function function_323baa37() {
   level flag::wait_till("all_players_spawned");
-  callback::on_actor_killed( & function_bc7f04af);
-  callback::on_ai_spawned( & function_829b12c4);
+  callback::on_actor_killed(&function_bc7f04af);
+  callback::on_ai_spawned(&function_829b12c4);
   level flag::wait_till("chase_done");
   foreach(player in level.players) {
     player thread function_8af9d448();
   }
-  callback::remove_on_actor_killed( & function_bc7f04af);
-  callback::remove_on_ai_spawned( & function_829b12c4);
+  callback::remove_on_actor_killed(&function_bc7f04af);
+  callback::remove_on_ai_spawned(&function_829b12c4);
 }
 
 function function_bc7f04af(params) {
@@ -325,9 +325,9 @@ function function_8af9d448() {
 }
 
 function function_f7dd9b2c() {
-  callback::on_ai_killed( & function_e50c8d4a);
+  callback::on_ai_killed(&function_e50c8d4a);
   level waittill("hash_c37d20e3");
-  callback::remove_on_ai_killed( & function_e50c8d4a);
+  callback::remove_on_ai_killed(&function_e50c8d4a);
 }
 
 function function_e50c8d4a(params) {
@@ -342,8 +342,8 @@ function function_8bb97e0() {
   foreach(player in level.players) {
     player thread function_ee166ee8();
   }
-  callback::on_spawned( & function_ee166ee8);
-  callback::on_ai_killed( & function_85ed003e);
+  callback::on_spawned(&function_ee166ee8);
+  callback::on_ai_killed(&function_85ed003e);
 }
 
 function function_85ed003e(params) {

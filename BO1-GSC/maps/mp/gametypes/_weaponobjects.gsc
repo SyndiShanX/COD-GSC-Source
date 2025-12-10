@@ -46,17 +46,17 @@ weapons_get_dvar(dvar, def) {
   }
 }
 setUpRetrievableHintStrings() {
-  createRetrievableHint("hatchet", & "MP_HATCHET_PICKUP");
-  createRetrievableHint("claymore", & "MP_CLAYMORE_PICKUP");
-  createRetrievableHint("acoustic_sensor", & "MP_ACOUSTIC_SENSOR_PICKUP");
-  createRetrievableHint("camera_spike", & "MP_CAMERA_SPIKE_PICKUP");
-  createRetrievableHint("satchel_charge", & "MP_SATCHEL_CHARGE_PICKUP");
-  createRetrievableHint("scrambler", & "MP_SCRAMBLER_PICKUP");
-  createHackerHint("claymore_mp", & "MP_CLAYMORE_HACKING");
-  createHackerHint("acoustic_sensor_mp", & "MP_ACOUSTIC_SENSOR_HACKING");
-  createHackerHint("camera_spike_mp", & "MP_CAMERA_SPIKE_HACKING");
-  createHackerHint("satchel_charge_mp", & "MP_SATCHEL_CHARGE_HACKING");
-  createHackerHint("scrambler_mp", & "MP_SCRAMBLER_HACKING");
+  createRetrievableHint("hatchet", &"MP_HATCHET_PICKUP");
+  createRetrievableHint("claymore", &"MP_CLAYMORE_PICKUP");
+  createRetrievableHint("acoustic_sensor", &"MP_ACOUSTIC_SENSOR_PICKUP");
+  createRetrievableHint("camera_spike", &"MP_CAMERA_SPIKE_PICKUP");
+  createRetrievableHint("satchel_charge", &"MP_SATCHEL_CHARGE_PICKUP");
+  createRetrievableHint("scrambler", &"MP_SCRAMBLER_PICKUP");
+  createHackerHint("claymore_mp", &"MP_CLAYMORE_HACKING");
+  createHackerHint("acoustic_sensor_mp", &"MP_ACOUSTIC_SENSOR_HACKING");
+  createHackerHint("camera_spike_mp", &"MP_CAMERA_SPIKE_HACKING");
+  createHackerHint("satchel_charge_mp", &"MP_SATCHEL_CHARGE_HACKING");
+  createHackerHint("scrambler_mp", &"MP_SCRAMBLER_HACKING");
 }
 onPlayerConnect() {
   for(;;) {
@@ -369,7 +369,7 @@ weaponObjectDamage(watcher) {
   self maps\mp\_entityheadicons::setEntityHeadIcon("none");
   if(isDefined(type) && (isSubStr(type, "MOD_GRENADE_SPLASH") || isSubStr(type, "MOD_GRENADE") || isSubStr(type, "MOD_EXPLOSIVE")))
     self.wasChained = true;
-  if(isDefined(iDFlags) && (iDFlags & level.iDFLAGS_PENETRATION)) {
+  if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION)) {
     self.wasDamagedFromBulletPenetration = true;
     attacker maps\mp\_properks::shotEquipment(self.owner, iDFlags);
   }

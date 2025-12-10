@@ -2784,7 +2784,7 @@ friendly_mg42_wait_for_use(mg42) {
   mg42 endon("friendly_finished_using_mg42");
   self.useable = true;
   self setcursorhint("HINT_NOICON");
-  // Hold &&1 to commandeer the MG42
+  // Hold && 1 to commandeer the MG42
   self setHintString(&"PLATFORM_USEAIONMG42");
   self waittill("trigger");
   println("^a was used by player, stop using turret");

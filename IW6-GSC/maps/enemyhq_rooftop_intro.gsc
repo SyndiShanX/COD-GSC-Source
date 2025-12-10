@@ -82,7 +82,7 @@ listen_mk32_mode() {
 setup_rooftop_intro() {
   level.remote_target_override_function = ::handle_intro_sniper_outline;
   level.ehq_blackout_time = 5;
-  maps\_utility::intro_screen_create(&"ENEMY_HQ_INTROSCREEN_LINE_1", & "ENEMY_HQ_INTROSCREEN_LINE_2", & "ENEMY_HQ_INTROSCREEN_LINE_3");
+  maps\_utility::intro_screen_create(&"ENEMY_HQ_INTROSCREEN_LINE_1", &"ENEMY_HQ_INTROSCREEN_LINE_2", &"ENEMY_HQ_INTROSCREEN_LINE_3");
   maps\_utility::intro_screen_custom_timing(2, 1);
   maps\_utility::intro_screen_custom_func(::introscreen);
   level.sniper_wait_extra_black = 1;
@@ -187,7 +187,7 @@ player_failcase_road_mk32() {
 
     while(common_scripts\utility::flag("FLAG_player_failcase_road_mk32")) {
       if(var_1 > var_0.size - 1) {
-        setdvar("ui_deadquote", & "ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
+        setdvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
         maps\_utility::missionfailedwrapper();
         break;
       }
@@ -202,7 +202,7 @@ player_failcase_road_mk32() {
 player_failcase_road_overrun_mk32() {
   level endon("kill_player_fail");
   common_scripts\utility::flag_wait("FLAG_player_failcase_road_overrun_mk32");
-  setdvar("ui_deadquote", & "ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
+  setdvar("ui_deadquote", &"ENEMY_HQ_YOU_LEFT_YOUR_TEAM_BEHIND");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -989,7 +989,7 @@ watch_last_truck() {
       wait 3;
 
       if(level.player_hit_convoy == 0) {
-        setdvar("ui_deadquote", & "ENEMY_HQ_YOU_FAILED_TO_HIT_ENOUGH");
+        setdvar("ui_deadquote", &"ENEMY_HQ_YOU_FAILED_TO_HIT_ENOUGH");
         maps\_utility::missionfailedwrapper();
         wait 20;
       }
@@ -1276,9 +1276,9 @@ track_dud() {
 
     if(isDefined(var_9) && (var_9 == level.player_truck || isai(var_9) && var_9.team == "allies")) {
       if(var_9 == level.player_truck)
-        setdvar("ui_deadquote", & "ENEMY_HQ_YOUR_ACTIONS_COMPROMISED");
+        setdvar("ui_deadquote", &"ENEMY_HQ_YOUR_ACTIONS_COMPROMISED");
       else
-        setdvar("ui_deadquote", & "ENEMY_HQ_FRIENDLY_FIRE_WILL_NOT");
+        setdvar("ui_deadquote", &"ENEMY_HQ_FRIENDLY_FIRE_WILL_NOT");
 
       maps\_utility::missionfailedwrapper();
       wait 10;
@@ -2116,13 +2116,13 @@ setup_sniper_view(var_0, var_1) {
 
 intro_objectives() {
   var_0 = maps\_utility::obj("find_ajax");
-  objective_add(var_0, "active", & "ENEMY_HQ_LOCATE_AJAX_USING_THE");
+  objective_add(var_0, "active", &"ENEMY_HQ_LOCATE_AJAX_USING_THE");
   objective_current(var_0);
   common_scripts\utility::flag_wait("bishop_glimpse_over");
   maps\_utility::objective_complete(var_0);
   common_scripts\utility::flag_wait("picked_up_mk32");
   var_1 = maps\_utility::obj("tag_trucks");
-  objective_add(var_1, "active", & "ENEMY_HQ_MARK_THE_CONVOY_WITH");
+  objective_add(var_1, "active", &"ENEMY_HQ_MARK_THE_CONVOY_WITH");
   objective_current(var_1);
   level.player waittill("player_tagged_truck");
   maps\_utility::objective_complete(var_1);

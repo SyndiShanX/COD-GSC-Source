@@ -76,7 +76,7 @@ drone_give_soul() {
     // asign name
     self maps\_names::get_name();
     // string not found for
-    self setlookattext(self.name, & "");
+    self setlookattext(self.name, &"");
   }
 
   if(isDefined(level.droneCallbackThread))

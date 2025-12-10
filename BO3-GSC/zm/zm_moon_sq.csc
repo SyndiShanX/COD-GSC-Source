@@ -23,19 +23,19 @@ function init_clientfields() {
   zm_sidequests::register_sidequest_icon("cgenerator", 21000);
   zm_sidequests::register_sidequest_icon("wire", 21000);
   zm_sidequests::register_sidequest_icon("datalog", 21000);
-  clientfield::register("world", "raise_rockets", 21000, 1, "counter", & raise_rockets, 0, 0);
-  clientfield::register("world", "rocket_launch", 21000, 1, "counter", & rocket_launch, 0, 0);
-  clientfield::register("world", "rocket_explode", 21000, 1, "counter", & rocket_explode, 0, 0);
-  clientfield::register("world", "charge_tank_1", 21000, 1, "counter", & charge_tank_1, 0, 0);
-  clientfield::register("world", "charge_tank_2", 21000, 1, "counter", & charge_tank_2, 0, 0);
-  clientfield::register("world", "charge_tank_cleanup", 21000, 1, "counter", & charge_tank_cleanup, 0, 0);
-  clientfield::register("world", "sam_vo_rumble", 21000, 1, "int", & sam_vo_rumble, 0, 0);
-  clientfield::register("world", "charge_vril_init", 21000, 1, "int", & charge_vril_init, 0, 0);
-  clientfield::register("world", "sq_wire_init", 21000, 1, "int", & sq_wire_init, 0, 0);
-  clientfield::register("world", "sam_init", 21000, 1, "int", & sam_init, 0, 0);
+  clientfield::register("world", "raise_rockets", 21000, 1, "counter", &raise_rockets, 0, 0);
+  clientfield::register("world", "rocket_launch", 21000, 1, "counter", &rocket_launch, 0, 0);
+  clientfield::register("world", "rocket_explode", 21000, 1, "counter", &rocket_explode, 0, 0);
+  clientfield::register("world", "charge_tank_1", 21000, 1, "counter", &charge_tank_1, 0, 0);
+  clientfield::register("world", "charge_tank_2", 21000, 1, "counter", &charge_tank_2, 0, 0);
+  clientfield::register("world", "charge_tank_cleanup", 21000, 1, "counter", &charge_tank_cleanup, 0, 0);
+  clientfield::register("world", "sam_vo_rumble", 21000, 1, "int", &sam_vo_rumble, 0, 0);
+  clientfield::register("world", "charge_vril_init", 21000, 1, "int", &charge_vril_init, 0, 0);
+  clientfield::register("world", "sq_wire_init", 21000, 1, "int", &sq_wire_init, 0, 0);
+  clientfield::register("world", "sam_init", 21000, 1, "int", &sam_init, 0, 0);
   n_bits = getminbitcountfornum(4);
-  clientfield::register("world", "vril_generator", 21000, n_bits, "int", & vril_generator, 0, 0);
-  clientfield::register("world", "sam_end_rumble", 21000, 1, "int", & sam_end_rumble, 0, 0);
+  clientfield::register("world", "vril_generator", 21000, n_bits, "int", &vril_generator, 0, 0);
+  clientfield::register("world", "sam_end_rumble", 21000, 1, "int", &sam_end_rumble, 0, 0);
 }
 
 function rocket_test() {}
@@ -298,7 +298,7 @@ function do_sr_rumble(localclientnum) {
 
 function sam_vo_rumble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    array::thread_all(getlocalplayers(), & function_9b1295b1, localclientnum);
+    array::thread_all(getlocalplayers(), &function_9b1295b1, localclientnum);
   } else {
     level notify("hash_306cf2d4");
   }

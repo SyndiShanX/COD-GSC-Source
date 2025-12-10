@@ -19,7 +19,7 @@
 #namespace vehicle_ai;
 
 function autoexec __init__sytem__() {
-  system::register("vehicle_ai", & __init__, undefined, undefined);
+  system::register("vehicle_ai", &__init__, undefined, undefined);
 }
 
 function __init__() {}
@@ -678,14 +678,14 @@ function init_state_machine_for_role(rolename = "default") {
     set_role(rolename);
   }
   statemachine statemachine::add_state("suspend", undefined, undefined, undefined);
-  statemachine statemachine::add_state("death", & defaultstate_death_enter, & defaultstate_death_update, undefined);
-  statemachine statemachine::add_state("scripted", & defaultstate_scripted_enter, undefined, & defaultstate_scripted_exit);
-  statemachine statemachine::add_state("combat", & defaultstate_combat_enter, undefined, & defaultstate_combat_exit);
-  statemachine statemachine::add_state("emped", & defaultstate_emped_enter, & defaultstate_emped_update, & defaultstate_emped_exit, & defaultstate_emped_reenter);
-  statemachine statemachine::add_state("surge", & defaultstate_surge_enter, & defaultstate_surge_update, & defaultstate_surge_exit);
-  statemachine statemachine::add_state("off", & defaultstate_off_enter, undefined, & defaultstate_off_exit);
-  statemachine statemachine::add_state("driving", & defaultstate_driving_enter, undefined, & defaultstate_driving_exit);
-  statemachine statemachine::add_state("pain", & defaultstate_pain_enter, undefined, & defaultstate_pain_exit);
+  statemachine statemachine::add_state("death", &defaultstate_death_enter, &defaultstate_death_update, undefined);
+  statemachine statemachine::add_state("scripted", &defaultstate_scripted_enter, undefined, &defaultstate_scripted_exit);
+  statemachine statemachine::add_state("combat", &defaultstate_combat_enter, undefined, &defaultstate_combat_exit);
+  statemachine statemachine::add_state("emped", &defaultstate_emped_enter, &defaultstate_emped_update, &defaultstate_emped_exit, &defaultstate_emped_reenter);
+  statemachine statemachine::add_state("surge", &defaultstate_surge_enter, &defaultstate_surge_update, &defaultstate_surge_exit);
+  statemachine statemachine::add_state("off", &defaultstate_off_enter, undefined, &defaultstate_off_exit);
+  statemachine statemachine::add_state("driving", &defaultstate_driving_enter, undefined, &defaultstate_driving_exit);
+  statemachine statemachine::add_state("pain", &defaultstate_pain_enter, undefined, &defaultstate_pain_exit);
   statemachine statemachine::add_interrupt_connection("off", "combat", "start_up");
   statemachine statemachine::add_interrupt_connection("driving", "combat", "exit_vehicle");
   statemachine statemachine::add_utility_connection("emped", "combat");
@@ -708,8 +708,8 @@ function init_state_machine_for_role(rolename = "default") {
   statemachine statemachine::add_interrupt_connection("emped", "pain", "pain");
   statemachine statemachine::add_interrupt_connection("off", "pain", "pain");
   statemachine statemachine::add_interrupt_connection("driving", "pain", "pain");
-  self.overridevehiclekilled = & callback_vehiclekilled;
-  self.overridevehicledeathpostgame = & callback_vehiclekilled;
+  self.overridevehiclekilled = &callback_vehiclekilled;
+  self.overridevehicledeathpostgame = &callback_vehiclekilled;
   statemachine thread statemachine::set_state("suspend");
   self thread on_death_cleanup();
   return statemachine;
@@ -1398,7 +1398,7 @@ function positionquery_filter_random(queryresult, min, max) {
 }
 
 function positionquery_postprocess_sortscore(queryresult, descending = 1) {
-  sorted = array::merge_sort(queryresult.data, & _sort_by_score, descending);
+  sorted = array::merge_sort(queryresult.data, &_sort_by_score, descending);
   queryresult.data = sorted;
 }
 
@@ -1536,12 +1536,12 @@ function function_c8b0c8c2(client_flags, var_9f84050f, var_1e08b2fd, var_9c5ca2c
     attacker = level.players[i];
     if(isDefined(attacker)) {
       client_flag = 1 << attacker getentitynumber();
-      if(client_flag & remaining_flags_to_process) {
+      if(client_flag &remaining_flags_to_process) {
         self setpersonalthreatbias(attacker, int(var_9f84050f), var_1e08b2fd);
         if(var_9c5ca2c) {
           self getperfectinfo(attacker, var_cee3c9e9);
         }
-        remaining_flags_to_process = remaining_flags_to_process & (~client_flag);
+        remaining_flags_to_process = remaining_flags_to_process &(~client_flag);
       }
     }
   }

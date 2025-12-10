@@ -14,7 +14,7 @@
 #namespace zm_factory_vo;
 
 function autoexec __init__sytem__() {
-  system::register("zm_factory_vo", & __init__, & __main__, undefined);
+  system::register("zm_factory_vo", &__init__, &__main__, undefined);
 }
 
 function __init__() {}

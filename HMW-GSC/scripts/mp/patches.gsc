@@ -520,8 +520,8 @@ xppointspopup_stub(event, amount) {
 
   if(getdvarint("scr_lua_score") == 1) {
     if(event_id >= 0) {
-      self luinotifyevent( & "score_event", 2, event_id, amount);
-      self _meth_8579( & "score_event", 2, event_id, amount);
+      self luinotifyevent(&"score_event", 2, event_id, amount);
+      self _meth_8579(&"score_event", 2, event_id, amount);
     }
 
     return;

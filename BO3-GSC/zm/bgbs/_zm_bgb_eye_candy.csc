@@ -16,7 +16,7 @@
 #namespace zm_bgb_eye_candy;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_eye_candy", & __init__, undefined, undefined);
+  system::register("zm_bgb_eye_candy", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -37,9 +37,9 @@ function __init__() {
   visionset_mgr::register_overlay_info_style_postfx_bundle("zm_bgb_eye_candy_vs_4", 21000, 1, "pstfx_zm_bgb_eye_candy_blue");
   duplicate_render::set_dr_filter_framebuffer("e_c_4", 35, "eye_candy_4", undefined, 0, "mc/zombie_candy_mode_blue", 0);
   n_bits = getminbitcountfornum(5);
-  clientfield::register("toplayer", "eye_candy_render", 21000, n_bits, "int", & function_7021da92, 0, 0);
-  clientfield::register("actor", "eye_candy_active", 21000, 1, "int", & function_697cc62, 0, 0);
-  clientfield::register("vehicle", "eye_candy_active", 21000, 1, "int", & function_697cc62, 0, 0);
+  clientfield::register("toplayer", "eye_candy_render", 21000, n_bits, "int", &function_7021da92, 0, 0);
+  clientfield::register("actor", "eye_candy_active", 21000, 1, "int", &function_697cc62, 0, 0);
+  clientfield::register("vehicle", "eye_candy_active", 21000, 1, "int", &function_697cc62, 0, 0);
 }
 
 function function_7021da92(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

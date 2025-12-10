@@ -18,17 +18,17 @@
 #namespace zm_bot;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bot", & __init__, undefined, undefined);
+  system::register("zm_bot", &__init__, undefined, undefined);
 }
 
 function __init__() {
   println("");
-  level.onbotspawned = & on_bot_spawned;
-  level.getbotthreats = & bot_combat::get_ai_threats;
-  level.botprecombat = & bot::coop_pre_combat;
-  level.botpostcombat = & bot::coop_post_combat;
-  level.botidle = & bot::follow_coop_players;
-  level.botdevguicmd = & bot::coop_bot_devgui_cmd;
+  level.onbotspawned = &on_bot_spawned;
+  level.getbotthreats = &bot_combat::get_ai_threats;
+  level.botprecombat = &bot::coop_pre_combat;
+  level.botpostcombat = &bot::coop_post_combat;
+  level.botidle = &bot::follow_coop_players;
+  level.botdevguicmd = &bot::coop_bot_devgui_cmd;
   thread debug_coop_bot_test();
 }
 

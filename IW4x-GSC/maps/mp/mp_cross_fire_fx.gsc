@@ -8,7 +8,6 @@ main() {
   level._effect["dust"] = loadfx("explosions/grenadeExp_dirt_1");
   level._effect["brick"] = loadfx("explosions/grenadeExp_concrete_1");
 
-
   level._effect["paper_falling"] = loadfx("misc/paper_falling");
   level._effect["battlefield_smokebank_S"] = loadfx("smoke/battlefield_smokebank_S");
   level._effect["thin_black_smoke_M"] = loadfx("smoke/thin_black_smoke_M");

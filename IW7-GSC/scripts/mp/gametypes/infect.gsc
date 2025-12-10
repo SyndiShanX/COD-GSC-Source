@@ -77,18 +77,18 @@ initializematchrules() {
 
 onstartgametype() {
   setclientnamemode("auto_change");
-  scripts\mp\utility::setobjectivetext("allies", & "OBJECTIVES_INFECT");
-  scripts\mp\utility::setobjectivetext("axis", & "OBJECTIVES_INFECT");
+  scripts\mp\utility::setobjectivetext("allies", &"OBJECTIVES_INFECT");
+  scripts\mp\utility::setobjectivetext("axis", &"OBJECTIVES_INFECT");
   if(level.splitscreen) {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_INFECT");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_INFECT");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_INFECT");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_INFECT");
   } else {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_INFECT_SCORE");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_INFECT_SCORE");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_INFECT_SCORE");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_INFECT_SCORE");
   }
 
-  scripts\mp\utility::setobjectivehinttext("allies", & "OBJECTIVES_INFECT_HINT");
-  scripts\mp\utility::setobjectivehinttext("axis", & "OBJECTIVES_INFECT_HINT");
+  scripts\mp\utility::setobjectivehinttext("allies", &"OBJECTIVES_INFECT_HINT");
+  scripts\mp\utility::setobjectivehinttext("axis", &"OBJECTIVES_INFECT_HINT");
   initspawns();
   var_00[0] = level.gametype;
   scripts\mp\gameobjects::main(var_00);
@@ -594,7 +594,7 @@ setfirstinfected(param_00) {
     level.infect_skipsounds = 1;
   }
 
-  self iprintlnbold( & "SPLASHES_INFECT_ALL");
+  self iprintlnbold(&"SPLASHES_INFECT_ALL");
   initsurvivaltime(1);
 }
 

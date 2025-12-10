@@ -18,9 +18,9 @@ function init() {
   flag::init("sq_ptt_dial_dialed");
   flag::init("sq_ptt_level_pulled");
   flag::init("ptt_plot_vo_done");
-  zm_sidequests::declare_sidequest_stage("sq", "PtT", & init_stage, & stage_logic, & exit_stage);
+  zm_sidequests::declare_sidequest_stage("sq", "PtT", &init_stage, &stage_logic, &exit_stage);
   zm_sidequests::set_stage_time_limit("sq", "PtT", 300);
-  zm_sidequests::declare_stage_asset_from_struct("sq", "PtT", "sq_ptt_trig", & gas_volume, & function_74e74bde);
+  zm_sidequests::declare_stage_asset_from_struct("sq", "PtT", "sq_ptt_trig", &gas_volume, &function_74e74bde);
 }
 
 function debug_jet() {
@@ -277,7 +277,7 @@ function exit_stage(success) {
   if(success) {
     zm_temple_sq_brock::create_radio(5);
   } else {
-    zm_temple_sq_brock::create_radio(4, & zm_temple_sq_brock::radio4_override);
+    zm_temple_sq_brock::create_radio(4, &zm_temple_sq_brock::radio4_override);
     level thread zm_temple_sq_skits::fail_skit();
   }
   level.skit_vox_override = 0;

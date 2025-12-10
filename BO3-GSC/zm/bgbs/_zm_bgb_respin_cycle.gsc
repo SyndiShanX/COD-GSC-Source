@@ -15,14 +15,14 @@
 #namespace zm_bgb_respin_cycle;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_respin_cycle", & __init__, undefined, "bgb");
+  system::register("zm_bgb_respin_cycle", &__init__, undefined, "bgb");
 }
 
 function __init__() {
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_respin_cycle", "activated", 2, undefined, undefined, & validation, & activation);
+  bgb::register("zm_bgb_respin_cycle", "activated", 2, undefined, undefined, &validation, &activation);
   clientfield::register("zbarrier", "zm_bgb_respin_cycle", 1, 1, "counter");
 }
 
@@ -63,7 +63,7 @@ function function_7a5dc39b(player) {
   if(!level flag::get("moving_chest_now")) {
     self.grab_weapon_hint = 1;
     self.grab_weapon = self.zbarrier.weapon;
-    self thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, & zm_magicbox::magicbox_unitrigger_think);
+    self thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, &zm_magicbox::magicbox_unitrigger_think);
     self thread zm_magicbox::treasure_chest_timeout();
   }
 }

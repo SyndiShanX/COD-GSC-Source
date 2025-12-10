@@ -11,7 +11,7 @@
 #namespace zm_laststand;
 
 function autoexec __init__sytem__() {
-  system::register("zm_laststand", & __init__, undefined, undefined);
+  system::register("zm_laststand", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -21,7 +21,7 @@ function __init__() {
     level.laststands[i].bleedouttime = 0;
     level.laststands[i].laststand_update_clientfields = "laststand_update" + i;
     level.laststands[i].lastbleedouttime = 0;
-    clientfield::register("world", level.laststands[i].laststand_update_clientfields, 1, 5, "counter", & update_bleedout_timer, 0, 0);
+    clientfield::register("world", level.laststands[i].laststand_update_clientfields, 1, 5, "counter", &update_bleedout_timer, 0, 0);
   }
   level thread wait_and_set_revive_shader_constant();
   visionset_mgr::register_visionset_info("zombie_last_stand", 1, 31, undefined, "zombie_last_stand", 6);

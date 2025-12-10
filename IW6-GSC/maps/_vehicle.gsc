@@ -26,8 +26,8 @@ init_vehicles() {
 
   level.vehicle_processtriggers = undefined;
   level.levelhasvehicles = getEntArray("script_vehicle", "code_classname").size > 0;
-  maps\_utility::add_hint_string("invulerable_frags", & "SCRIPT_INVULERABLE_FRAGS", undefined);
-  maps\_utility::add_hint_string("invulerable_bullets", & "SCRIPT_INVULERABLE_BULLETS", undefined);
+  maps\_utility::add_hint_string("invulerable_frags", &"SCRIPT_INVULERABLE_FRAGS", undefined);
+  maps\_utility::add_hint_string("invulerable_bullets", &"SCRIPT_INVULERABLE_BULLETS", undefined);
   common_scripts\utility::create_lock("aircraft_wash_math");
 }
 

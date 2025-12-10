@@ -12,9 +12,9 @@
 #namespace zm_island_pap_quest;
 
 function init() {
-  clientfield::register("scriptmover", "show_part", 9000, 1, "int", & function_97bd83a7, 0, 0);
-  clientfield::register("actor", "zombie_splash", 9000, 1, "int", & function_b2ce2a08, 0, 0);
-  clientfield::register("world", "lower_pap_water", 9000, 2, "int", & lower_pap_water, 0, 0);
+  clientfield::register("scriptmover", "show_part", 9000, 1, "int", &function_97bd83a7, 0, 0);
+  clientfield::register("actor", "zombie_splash", 9000, 1, "int", &function_b2ce2a08, 0, 0);
+  clientfield::register("world", "lower_pap_water", 9000, 2, "int", &lower_pap_water, 0, 0);
 }
 
 function function_97bd83a7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

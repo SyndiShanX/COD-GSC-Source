@@ -41,7 +41,7 @@ init() {
   game["end_reason"]["ended_game"] = 16;
   game["end_reason"]["host_ended_game"] = 17;
 
-  game["strings"]["overtime"] = & "MP_OVERTIME";
+  game["strings"]["overtime"] = &"MP_OVERTIME";
 
   level thread onPlayerConnect();
 }
@@ -268,7 +268,7 @@ showNotifyMessage(notifyData) {
     if(isDefined(notifyData.titleLabel))
       self.notifyTitle.label = notifyData.titleLabel;
     else
-      self.notifyTitle.label = & "";
+      self.notifyTitle.label = &"";
 
     if(isDefined(notifyData.titleLabel) && !isDefined(notifyData.titleIsString))
       self.notifyTitle setValue(notifyData.titleText);
@@ -286,7 +286,7 @@ showNotifyMessage(notifyData) {
     if(isDefined(notifyData.textLabel))
       self.notifyText.label = notifyData.textLabel;
     else
-      self.notifyText.label = & "";
+      self.notifyText.label = &"";
 
     if(isDefined(notifyData.textLabel) && !isDefined(notifyData.textIsString))
       self.notifyText setValue(notifyData.notifyText);
@@ -304,7 +304,7 @@ showNotifyMessage(notifyData) {
     if(isDefined(notifyData.text2Label))
       self.notifyText2.label = notifyData.text2Label;
     else
-      self.notifyText2.label = & "";
+      self.notifyText2.label = &"";
 
     self.notifyText2 setText(notifyData.notifyText2);
     self.notifyText2 setPulseFX(100, int(duration * 1000), 1000);

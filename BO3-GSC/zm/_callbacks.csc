@@ -18,7 +18,7 @@
 #namespace callback;
 
 function autoexec __init__sytem__() {
-  system::register("callback", & __init__, undefined, undefined);
+  system::register("callback", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -26,13 +26,13 @@ function __init__() {
 }
 
 function set_default_callbacks() {
-  level.callbackplayerspawned = & playerspawned;
-  level.callbacklocalclientconnect = & localclientconnect;
-  level.callbackentityspawned = & entityspawned;
-  level.callbackhostmigration = & host_migration;
-  level.callbackplayaifootstep = & footsteps::playaifootstep;
-  level.callbackplaylightloopexploder = & exploder::playlightloopexploder;
-  level._custom_weapon_cb_func = & spawned_weapon_type;
+  level.callbackplayerspawned = &playerspawned;
+  level.callbacklocalclientconnect = &localclientconnect;
+  level.callbackentityspawned = &entityspawned;
+  level.callbackhostmigration = &host_migration;
+  level.callbackplayaifootstep = &footsteps::playaifootstep;
+  level.callbackplaylightloopexploder = &exploder::playlightloopexploder;
+  level._custom_weapon_cb_func = &spawned_weapon_type;
 }
 
 function localclientconnect(localclientnum) {

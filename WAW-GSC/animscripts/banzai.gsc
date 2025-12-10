@@ -1304,11 +1304,11 @@ kill_player(player, delay) {
   waittillframeend;
   setDvar("ui_deadquote", "");
   wait(1.6);
-  level.banzaiDeathHint = & "SCRIPT_PLATFORM_BANZAI_DEATH_DO_NOTHING";
+  level.banzaiDeathHint = &"SCRIPT_PLATFORM_BANZAI_DEATH_DO_NOTHING";
   if(isDefined(player.banzaiAttackedTooEarly) && player.banzaiAttackedTooEarly) {
-    level.banzaiDeathHint = & "SCRIPT_PLATFORM_BANZAI_DEATH_TOO_SOON";
+    level.banzaiDeathHint = &"SCRIPT_PLATFORM_BANZAI_DEATH_TOO_SOON";
   } else if(isDefined(player.banzaiAttackedTooLate) && player.banzaiAttackedTooLate) {
-    level.banzaiDeathHint = & "SCRIPT_PLATFORM_BANZAI_DEATH_TOO_LATE";
+    level.banzaiDeathHint = &"SCRIPT_PLATFORM_BANZAI_DEATH_TOO_LATE";
   }
   thread banzai_deathquote(player);
 }

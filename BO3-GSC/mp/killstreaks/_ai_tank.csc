@@ -16,7 +16,7 @@
 #namespace ai_tank;
 
 function autoexec __init__sytem__() {
-  system::register("ai_tank", & __init__, undefined, undefined);
+  system::register("ai_tank", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -26,13 +26,13 @@ function __init__() {
   level._ai_tank_fx["light_green"] = "killstreaks/fx_agr_vlight_eye_grn";
   level._ai_tank_fx["light_red"] = "killstreaks/fx_agr_vlight_eye_red";
   level._ai_tank_fx["stun"] = "killstreaks/fx_agr_emp_stun";
-  clientfield::register("vehicle", "ai_tank_death", 1, 1, "int", & death, 0, 0);
-  clientfield::register("vehicle", "ai_tank_missile_fire", 1, 2, "int", & missile_fire, 0, 0);
-  clientfield::register("vehicle", "ai_tank_stun", 1, 1, "int", & tank_stun, 0, 0);
-  clientfield::register("toplayer", "ai_tank_update_hud", 1, 1, "counter", & update_hud, 0, 0);
-  vehicle::add_vehicletype_callback("ai_tank_drone_mp", & spawned);
-  vehicle::add_vehicletype_callback("spawner_bo3_ai_tank_mp", & spawned);
-  vehicle::add_vehicletype_callback("spawner_bo3_ai_tank_mp_player", & spawned);
+  clientfield::register("vehicle", "ai_tank_death", 1, 1, "int", &death, 0, 0);
+  clientfield::register("vehicle", "ai_tank_missile_fire", 1, 2, "int", &missile_fire, 0, 0);
+  clientfield::register("vehicle", "ai_tank_stun", 1, 1, "int", &tank_stun, 0, 0);
+  clientfield::register("toplayer", "ai_tank_update_hud", 1, 1, "counter", &update_hud, 0, 0);
+  vehicle::add_vehicletype_callback("ai_tank_drone_mp", &spawned);
+  vehicle::add_vehicletype_callback("spawner_bo3_ai_tank_mp", &spawned);
+  vehicle::add_vehicletype_callback("spawner_bo3_ai_tank_mp_player", &spawned);
   visionset_mgr::register_visionset_info("agr_visionset", 1, 16, undefined, "mp_vehicles_agr");
 }
 

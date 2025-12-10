@@ -469,7 +469,7 @@ part_2_fight_timeout(var_0) {
   level notify("failure");
   level._ally playSound("scn_sw_hesh_stabbed");
   wait 1;
-  setdvar("ui_deadquote", & "SKYWAY_FAIL_ALLY_STABBED");
+  setdvar("ui_deadquote", &"SKYWAY_FAIL_ALLY_STABBED");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -535,7 +535,7 @@ part_2_shoot_chance(var_0, var_1) {
     level.player thread maps\_anim::anim_single_solo(level.playerviewmodel, "pt2_fire_win");
     wait 3.2;
     level.playerviewmodel delete();
-    setdvar("ui_deadquote", & "SKYWAY_FAIL_NO_SHOOT");
+    setdvar("ui_deadquote", &"SKYWAY_FAIL_NO_SHOOT");
     maps\_utility::missionfailedwrapper();
   }
 }
@@ -791,7 +791,7 @@ event_qte_bullet_catch() {
   level notify("notify_end_slomo");
   thread fade_qte_prompt(0.05, 0.0);
   wait 2.25;
-  setdvar("ui_deadquote", & "SKYWAY_FAIL_NO_GRAB");
+  setdvar("ui_deadquote", &"SKYWAY_FAIL_NO_GRAB");
   maps\_utility::missionfailedwrapper();
   wait 5.0;
 }

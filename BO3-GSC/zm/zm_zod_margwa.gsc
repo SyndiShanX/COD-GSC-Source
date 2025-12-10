@@ -16,7 +16,7 @@
 #namespace zm_zod_margwa;
 
 function autoexec init() {
-  level.var_785a0d1e = & function_785a0d1e;
+  level.var_785a0d1e = &function_785a0d1e;
   level.var_3b3eeb2e = [];
   level.var_3b3eeb2e[level.var_3b3eeb2e.size] = "zone_subway_pap";
   level.var_3b3eeb2e[level.var_3b3eeb2e.size] = "zone_subway_pap_ritual";
@@ -154,7 +154,7 @@ function function_8bcb72e9(var_8f401985, s_loc) {
     s_loc = array::random(level.zm_loc_types["margwa_location"]);
   }
   var_225347e1 = zm_ai_margwa::function_8a0708c2(s_loc);
-  var_225347e1.var_26f9f957 = & function_26f9f957;
+  var_225347e1.var_26f9f957 = &function_26f9f957;
   level.var_95981590 = var_225347e1;
   level notify("hash_c484afcb");
   if(isDefined(var_225347e1)) {

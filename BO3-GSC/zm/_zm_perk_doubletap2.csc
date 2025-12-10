@@ -11,7 +11,7 @@
 #namespace zm_perk_doubletap2;
 
 function autoexec __init__sytem__() {
-  system::register("zm_perk_doubletap2", & __init__, undefined, undefined);
+  system::register("zm_perk_doubletap2", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -19,9 +19,9 @@ function __init__() {
 }
 
 function enable_doubletap2_perk_for_level() {
-  zm_perks::register_perk_clientfields("specialty_doubletap2", & doubletap2_client_field_func, & doubletap2_code_callback_func);
+  zm_perks::register_perk_clientfields("specialty_doubletap2", &doubletap2_client_field_func, &doubletap2_code_callback_func);
   zm_perks::register_perk_effects("specialty_doubletap2", "doubletap2_light");
-  zm_perks::register_perk_init_thread("specialty_doubletap2", & init_doubletap2);
+  zm_perks::register_perk_init_thread("specialty_doubletap2", &init_doubletap2);
 }
 
 function init_doubletap2() {

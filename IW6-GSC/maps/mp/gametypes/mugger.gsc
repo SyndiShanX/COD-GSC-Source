@@ -110,18 +110,18 @@ onPrecacheGameType() {
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  setObjectiveText("allies", & "OBJECTIVES_MUGGER");
-  setObjectiveText("axis", & "OBJECTIVES_MUGGER");
+  setObjectiveText("allies", &"OBJECTIVES_MUGGER");
+  setObjectiveText("axis", &"OBJECTIVES_MUGGER");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", & "OBJECTIVES_MUGGER");
-    setObjectiveScoreText("axis", & "OBJECTIVES_MUGGER");
+    setObjectiveScoreText("allies", &"OBJECTIVES_MUGGER");
+    setObjectiveScoreText("axis", &"OBJECTIVES_MUGGER");
   } else {
-    setObjectiveScoreText("allies", & "OBJECTIVES_MUGGER_SCORE");
-    setObjectiveScoreText("axis", & "OBJECTIVES_MUGGER_SCORE");
+    setObjectiveScoreText("allies", &"OBJECTIVES_MUGGER_SCORE");
+    setObjectiveScoreText("axis", &"OBJECTIVES_MUGGER_SCORE");
   }
-  setObjectiveHintText("allies", & "OBJECTIVES_MUGGER_HINT");
-  setObjectiveHintText("axis", & "OBJECTIVES_MUGGER_HINT");
+  setObjectiveHintText("allies", &"OBJECTIVES_MUGGER_HINT");
+  setObjectiveHintText("axis", &"OBJECTIVES_MUGGER_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);

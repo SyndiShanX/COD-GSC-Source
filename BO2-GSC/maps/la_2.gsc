@@ -518,15 +518,15 @@ setup_skiptos() {
   add_skipto("street", ::skipto_la_1b);
   add_skipto("plaza", ::skipto_la_1b);
   add_skipto("intersection", ::skipto_la_1b);
-  add_skipto("f35_wakeup", maps\la_2::skipto_f35_wakeup, & "SKIPTO_STRING_HERE", maps\la_2_ground::f35_wakeup);
-  add_skipto("f35_boarding", maps\la_2::skipto_f35_boarding, & "SKIPTO_STRING_HERE", maps\la_2_ground::f35_boarding);
-  add_skipto("f35_flying", maps\la_2::skipto_f35_flying, & "SKIPTO_STRING_HERE", maps\la_2_ground::f35_flight_start);
-  add_skipto("f35_pacing", maps\la_2::skipto_f35_pacing, & "SKIPTO_STRING_HERE", maps\la_2_ground::f35_pacing);
-  add_skipto("f35_rooftops", maps\la_2::skipto_f35_rooftops, & "SKIPTO_STRING_HERE", maps\la_2_ground::f35_rooftops);
-  add_skipto("f35_dogfights", maps\la_2::skipto_f35_dogfights, & "SKIPTO_STRING_HERE", maps\la_2_fly::f35_dogfights);
-  add_skipto("f35_eject", maps\la_2::skipto_f35_eject, & "SKIPTO_STRING_HERE", maps\la_2_ground::f35_eject);
-  add_skipto("f35_outro", maps\la_2::skipto_f35_outro, & "SKIPTO_STRING_HERE", maps\la_2_ground::f35_outro);
-  add_skipto("dev_build_test", maps\la_2::skipto_dev_build_test, & "SKIPTO_STRING_HERE");
+  add_skipto("f35_wakeup", maps\la_2::skipto_f35_wakeup, &"SKIPTO_STRING_HERE", maps\la_2_ground::f35_wakeup);
+  add_skipto("f35_boarding", maps\la_2::skipto_f35_boarding, &"SKIPTO_STRING_HERE", maps\la_2_ground::f35_boarding);
+  add_skipto("f35_flying", maps\la_2::skipto_f35_flying, &"SKIPTO_STRING_HERE", maps\la_2_ground::f35_flight_start);
+  add_skipto("f35_pacing", maps\la_2::skipto_f35_pacing, &"SKIPTO_STRING_HERE", maps\la_2_ground::f35_pacing);
+  add_skipto("f35_rooftops", maps\la_2::skipto_f35_rooftops, &"SKIPTO_STRING_HERE", maps\la_2_ground::f35_rooftops);
+  add_skipto("f35_dogfights", maps\la_2::skipto_f35_dogfights, &"SKIPTO_STRING_HERE", maps\la_2_fly::f35_dogfights);
+  add_skipto("f35_eject", maps\la_2::skipto_f35_eject, &"SKIPTO_STRING_HERE", maps\la_2_ground::f35_eject);
+  add_skipto("f35_outro", maps\la_2::skipto_f35_outro, &"SKIPTO_STRING_HERE", maps\la_2_ground::f35_outro);
+  add_skipto("dev_build_test", maps\la_2::skipto_dev_build_test, &"SKIPTO_STRING_HERE");
   set_skipto_cleanup_func(::skipto_cleanup);
 }
 

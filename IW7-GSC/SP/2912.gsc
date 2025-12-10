@@ -18,13 +18,13 @@ func_96DC() {
   precacheshader("vfx_ui_player_blood_splat_large");
   precacheshader("vfx_ui_player_death_overlay");
   precachemodel("vm_hero_protagonist_helmet_glass_crack_03");
-  precachestring( & "SCRIPT_GRENADE_DEATH");
-  precachestring( & "SCRIPT_GRENADE_SUICIDE");
-  precachestring( & "SCRIPT_EXPLODING_VEHICLE_DEATH");
-  precachestring( & "SCRIPT_EXPLODING_DESTRUCTIBLE_DEATH");
-  precachestring( & "SCRIPT_EXPLODING_BARREL_DEATH");
-  precachestring( & "SCRIPT_SEEKER_DEATH");
-  precachestring( & "SCRIPT_SEEKER_DEATH_EASY");
+  precachestring(&"SCRIPT_GRENADE_DEATH");
+  precachestring(&"SCRIPT_GRENADE_SUICIDE");
+  precachestring(&"SCRIPT_EXPLODING_VEHICLE_DEATH");
+  precachestring(&"SCRIPT_EXPLODING_DESTRUCTIBLE_DEATH");
+  precachestring(&"SCRIPT_EXPLODING_BARREL_DEATH");
+  precachestring(&"SCRIPT_SEEKER_DEATH");
+  precachestring(&"SCRIPT_SEEKER_DEATH_EASY");
   func_96D9();
   thread main();
 }

@@ -14,7 +14,7 @@
 #namespace colors;
 
 function autoexec __init__sytem__() {
-  system::register("colors", & __init__, & __main__, undefined);
+  system::register("colors", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -803,7 +803,7 @@ function color_node_finds_user_from_colorcodes(colorcodestring, team) {
     return;
   }
   colorcodes = strtok(colorcodestring, " ");
-  array::thread_all_ents(colorcodes, & color_node_finds_user_for_colorcode, team);
+  array::thread_all_ents(colorcodes, &color_node_finds_user_for_colorcode, team);
 }
 
 function color_node_finds_user_for_colorcode(colorcode, team) {
@@ -1146,17 +1146,17 @@ function removespawnerfromcolornumberarray() {
 }
 
 function add_cover_node(type) {
-  level.color_node_type_function[type][1]["allies"] = & process_cover_node_with_last_in_mind_allies;
-  level.color_node_type_function[type][1]["axis"] = & process_cover_node_with_last_in_mind_axis;
-  level.color_node_type_function[type][0]["allies"] = & process_cover_node;
-  level.color_node_type_function[type][0]["axis"] = & process_cover_node;
+  level.color_node_type_function[type][1]["allies"] = &process_cover_node_with_last_in_mind_allies;
+  level.color_node_type_function[type][1]["axis"] = &process_cover_node_with_last_in_mind_axis;
+  level.color_node_type_function[type][0]["allies"] = &process_cover_node;
+  level.color_node_type_function[type][0]["axis"] = &process_cover_node;
 }
 
 function add_path_node(type) {
-  level.color_node_type_function[type][1]["allies"] = & process_path_node;
-  level.color_node_type_function[type][0]["allies"] = & process_path_node;
-  level.color_node_type_function[type][1]["axis"] = & process_path_node;
-  level.color_node_type_function[type][0]["axis"] = & process_path_node;
+  level.color_node_type_function[type][1]["allies"] = &process_path_node;
+  level.color_node_type_function[type][0]["allies"] = &process_path_node;
+  level.color_node_type_function[type][1]["axis"] = &process_path_node;
+  level.color_node_type_function[type][0]["axis"] = &process_path_node;
 }
 
 function colornode_spawn_reinforcement(classname, fromcolor) {
@@ -1390,7 +1390,7 @@ function kill_color_replacements() {
   level notify("kill_color_replacements");
   level.friendly_spawners_types = undefined;
   ai = getaiarray();
-  array::thread_all(ai, & remove_replace_on_death);
+  array::thread_all(ai, &remove_replace_on_death);
 }
 
 function remove_replace_on_death() {

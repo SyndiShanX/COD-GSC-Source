@@ -345,16 +345,16 @@ update_gun_objectives() {
   }
   switch (guns) {
     case 1:
-      objective_string(1, & "OKI2_OBJ_2_1");
+      objective_string(1, &"OKI2_OBJ_2_1");
       break;
     case 2:
-      objective_string(1, & "OKI2_OBJ_2_2");
+      objective_string(1, &"OKI2_OBJ_2_2");
       break;
     case 3:
-      objective_string(1, & "OKI2_OBJ_2_3");
+      objective_string(1, &"OKI2_OBJ_2_3");
       break;
     case 4:
-      objective_string(1, & "OKI2_OBJ_2_4");
+      objective_string(1, &"OKI2_OBJ_2_4");
       break;
   }
   autosave_by_name(guns + " guns remaining");

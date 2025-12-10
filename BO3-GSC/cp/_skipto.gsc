@@ -33,7 +33,7 @@
 #namespace skipto;
 
 function autoexec __init__sytem__() {
-  system::register("skipto", & __init__, & __main__, undefined);
+  system::register("skipto", &__init__, &__main__, undefined);
 }
 
 function function_97bb1111(mapname) {
@@ -67,15 +67,15 @@ function __init__() {
   clientfield::register("toplayer", "catch_up_transition", 1, 1, "counter");
   clientfield::register("world", "set_last_map_dvar", 1, 1, "counter");
   add_internal("_default");
-  add_internal("_exit", & level_completed);
-  add_internal("no_game", & nogame);
+  add_internal("_exit", &level_completed);
+  add_internal("no_game", &nogame);
   load_mission_table("gamedata/tables/cp/cp_mapmissions.csv", level.script);
-  level.filter_spawnpoints = & filter_spawnpoints;
-  callback::on_finalize_initialization( & on_finalize_initialization);
-  callback::on_spawned( & on_player_spawn);
-  callback::on_connect( & on_player_connect);
+  level.filter_spawnpoints = &filter_spawnpoints;
+  callback::on_finalize_initialization(&on_finalize_initialization);
+  callback::on_spawned(&on_player_spawn);
+  callback::on_connect(&on_player_connect);
   level thread update_billboard();
-  callback::on_spawned( & update_player_billboard);
+  callback::on_spawned(&update_player_billboard);
 }
 
 function __main__() {
@@ -888,7 +888,7 @@ function do_no_game() {
     level[[level.custom_no_game_setupfunc]]();
   }
   level thread load::all_players_spawned();
-  array::thread_all(getEntArray("water", "targetname"), & load::water_think);
+  array::thread_all(getEntArray("water", "targetname"), &load::water_think);
   level waittill("eternity");
 }
 
@@ -969,7 +969,7 @@ function teleport_players(skipto_name, coop_sort) {
     var_ac126ac5 = level.players[i] player::get_snapped_spot_origin(var_ac126ac5);
     level.players[i] setorigin(var_ac126ac5);
     if(isDefined(skipto_spots[i].angles)) {
-      level.players[i] util::delay_network_frames(2, "disconnect", & setplayerangles, skipto_spots[i].angles);
+      level.players[i] util::delay_network_frames(2, "disconnect", &setplayerangles, skipto_spots[i].angles);
     }
   }
 }
@@ -1020,7 +1020,7 @@ function load_mission_table(table, levelname, sublevel = "") {
       end_before = row[4];
       end_before = convert_token(end_before, "+", ",");
       locstr = row[5];
-      add_branch(skipto, & load_mission_init, locstr, undefined, launch_after, end_before);
+      add_branch(skipto, &load_mission_init, locstr, undefined, launch_after, end_before);
     }
     index++;
     row = tablelookuprow(table, index);
@@ -1340,7 +1340,7 @@ function private function_61843b91(var_717810f, n_player_dist) {
       wait(0.5);
       self setorigin(loc.origin);
       if(isDefined(loc.angles)) {
-        util::delay_network_frames(2, "disconnect", & setplayerangles, loc.angles);
+        util::delay_network_frames(2, "disconnect", &setplayerangles, loc.angles);
       }
       self playsoundtoplayer("evt_coop_regroup_in", self);
       break;
@@ -1921,7 +1921,7 @@ function level_completed(skipto, starting) {
       for(i = 0; i < level.players.size; i++) {
         level.players[i] thread function_f380969b();
       }
-      callback::on_spawned( & function_3fbee503);
+      callback::on_spawned(&function_3fbee503);
       if(!is_final_level()) {
         util::clientnotify("aar");
         music::setmusicstate("aar");

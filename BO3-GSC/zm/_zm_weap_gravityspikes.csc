@@ -12,7 +12,7 @@
 #namespace _zm_weap_gravityspikes;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_gravityspikes", & __init__, undefined, undefined);
+  system::register("zm_weap_gravityspikes", &__init__, undefined, undefined);
 }
 
 function __init__(localclientnum) {
@@ -32,19 +32,19 @@ function __init__(localclientnum) {
 }
 
 function register_clientfields() {
-  clientfield::register("actor", "gravity_slam_down", 1, 1, "int", & gravity_slam_down, 0, 0);
-  clientfield::register("scriptmover", "gravity_trap_fx", 1, 1, "int", & gravity_trap_fx, 0, 0);
-  clientfield::register("scriptmover", "gravity_trap_spike_spark", 1, 1, "int", & gravity_trap_spike_spark, 0, 0);
-  clientfield::register("scriptmover", "gravity_trap_destroy", 1, 1, "counter", & gravity_trap_destroy, 0, 0);
-  clientfield::register("scriptmover", "gravity_trap_location", 1, 1, "int", & gravity_trap_location, 0, 0);
-  clientfield::register("scriptmover", "gravity_slam_fx", 1, 1, "int", & gravity_slam_fx, 0, 0);
-  clientfield::register("toplayer", "gravity_slam_player_fx", 1, 1, "counter", & gravity_slam_player_fx, 0, 0);
-  clientfield::register("actor", "sparky_beam_fx", 1, 1, "int", & play_sparky_beam_fx, 0, 0);
-  clientfield::register("actor", "sparky_zombie_fx", 1, 1, "int", & sparky_zombie_fx_cb, 0, 0);
-  clientfield::register("actor", "sparky_zombie_trail_fx", 1, 1, "int", & sparky_zombie_trail_fx_cb, 0, 0);
-  clientfield::register("toplayer", "gravity_trap_rumble", 1, 1, "int", & gravity_trap_rumble_callback, 0, 0);
-  clientfield::register("actor", "ragdoll_impact_watch", 1, 1, "int", & ragdoll_impact_watch_start, 0, 0);
-  clientfield::register("actor", "gravity_spike_zombie_explode_fx", 12000, 1, "counter", & gravity_spike_zombie_explode, 1, 0);
+  clientfield::register("actor", "gravity_slam_down", 1, 1, "int", &gravity_slam_down, 0, 0);
+  clientfield::register("scriptmover", "gravity_trap_fx", 1, 1, "int", &gravity_trap_fx, 0, 0);
+  clientfield::register("scriptmover", "gravity_trap_spike_spark", 1, 1, "int", &gravity_trap_spike_spark, 0, 0);
+  clientfield::register("scriptmover", "gravity_trap_destroy", 1, 1, "counter", &gravity_trap_destroy, 0, 0);
+  clientfield::register("scriptmover", "gravity_trap_location", 1, 1, "int", &gravity_trap_location, 0, 0);
+  clientfield::register("scriptmover", "gravity_slam_fx", 1, 1, "int", &gravity_slam_fx, 0, 0);
+  clientfield::register("toplayer", "gravity_slam_player_fx", 1, 1, "counter", &gravity_slam_player_fx, 0, 0);
+  clientfield::register("actor", "sparky_beam_fx", 1, 1, "int", &play_sparky_beam_fx, 0, 0);
+  clientfield::register("actor", "sparky_zombie_fx", 1, 1, "int", &sparky_zombie_fx_cb, 0, 0);
+  clientfield::register("actor", "sparky_zombie_trail_fx", 1, 1, "int", &sparky_zombie_trail_fx_cb, 0, 0);
+  clientfield::register("toplayer", "gravity_trap_rumble", 1, 1, "int", &gravity_trap_rumble_callback, 0, 0);
+  clientfield::register("actor", "ragdoll_impact_watch", 1, 1, "int", &ragdoll_impact_watch_start, 0, 0);
+  clientfield::register("actor", "gravity_spike_zombie_explode_fx", 12000, 1, "counter", &gravity_spike_zombie_explode, 1, 0);
 }
 
 function gravity_slam_down(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

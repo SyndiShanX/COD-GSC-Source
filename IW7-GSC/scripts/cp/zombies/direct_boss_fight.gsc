@@ -383,20 +383,20 @@ perk_purchase_hint_func(param_00, param_01) {
 
   var_02 = param_01.candy_box_looking_at.perk;
   if(param_01 scripts\cp\utility::has_zombie_perk(var_02)) {
-    return & "COOP_PERK_MACHINES_REMOVE_PERK";
+    return &"COOP_PERK_MACHINES_REMOVE_PERK";
   }
 
   if(isDefined(param_01.zombies_perks) && param_01.zombies_perks.size > 20 && !scripts\engine\utility::istrue(param_01.have_gns_perk)) {
-    return & "COOP_PERK_MACHINES_PERK_SLOTS_FULL";
+    return &"COOP_PERK_MACHINES_PERK_SLOTS_FULL";
   }
 
   var_03 = get_perk_cost(var_02);
   if(param_01 scripts\cp\cp_persistence::get_player_currency() < var_03) {
-    return & "COOP_INTERACTIONS_NEED_MONEY";
+    return &"COOP_INTERACTIONS_NEED_MONEY";
   }
 
   if(var_02 == "perk_machine_revive" && scripts\cp\utility::isplayingsolo() || level.only_one_player) {
-    return & "COOP_PERK_MACHINES_SELF_REVIVE";
+    return &"COOP_PERK_MACHINES_SELF_REVIVE";
   }
 
   return level.interaction_hintstrings[var_02];
@@ -1066,16 +1066,16 @@ is_kung_fu(param_00) {
 get_kung_fu_string(param_00) {
   switch (param_00) {
     case "snake":
-      return & "CP_DISCO_CHALLENGES_SNAKE";
+      return &"CP_DISCO_CHALLENGES_SNAKE";
 
     case "tiger":
-      return & "CP_DISCO_CHALLENGES_TIGER";
+      return &"CP_DISCO_CHALLENGES_TIGER";
 
     case "crane":
-      return & "CP_DISCO_CHALLENGES_CRANE";
+      return &"CP_DISCO_CHALLENGES_CRANE";
 
     case "dragon":
-      return & "CP_DISCO_CHALLENGES_DRAGON";
+      return &"CP_DISCO_CHALLENGES_DRAGON";
   }
 }
 
@@ -1191,35 +1191,35 @@ weapon_purchase_hint_func(param_00, param_01) {
       return "";
     }
 
-    return & "CP_DISCO_CHALLENGES_DRINK_GOURD";
+    return &"CP_DISCO_CHALLENGES_DRINK_GOURD";
   }
 
   if(!have_weapon(param_01, param_01.weapon_purchase_looking_at.weapontogive)) {
     if(param_01 scripts\cp\cp_persistence::get_player_currency() < get_weapon_cost(param_01.weapon_purchase_looking_at.weapontogive)) {
-      return & "COOP_INTERACTIONS_NEED_MONEY";
+      return &"COOP_INTERACTIONS_NEED_MONEY";
     }
 
     switch (level.script) {
       case "cp_zmb":
-        return & "CP_ZMB_INTERACTIONS_BUY_WEAPON";
+        return &"CP_ZMB_INTERACTIONS_BUY_WEAPON";
 
       case "cp_rave":
-        return & "CP_RAVE_BUY_WEAPON";
+        return &"CP_RAVE_BUY_WEAPON";
 
       case "cp_disco":
-        return & "CP_DISCO_INTERACTIONS_BUY_WEAPON";
+        return &"CP_DISCO_INTERACTIONS_BUY_WEAPON";
 
       case "cp_town":
-        return & "CP_TOWN_INTERACTIONS_BUY_WEAPON";
+        return &"CP_TOWN_INTERACTIONS_BUY_WEAPON";
 
       case "cp_final":
-        return & "CP_TOWN_INTERACTIONS_BUY_WEAPON";
+        return &"CP_TOWN_INTERACTIONS_BUY_WEAPON";
     }
 
     return;
   }
 
-  return & "DIRECT_BOSS_FIGHT_WEAPON_REFUND";
+  return &"DIRECT_BOSS_FIGHT_WEAPON_REFUND";
 }
 
 have_weapon(param_00, param_01, param_02) {
@@ -1479,10 +1479,10 @@ set_up_boss_fight_activation_interaction_at(param_00) {
 
 activate_boss_fight_hint_func(param_00, param_01) {
   if(scripts\engine\utility::flag_exist("boss_fight_ready_soon") && scripts\engine\utility::flag("boss_fight_ready_soon")) {
-    return & "CP_TOWN_BOSS_FIGHT_READY_SOON";
+    return &"CP_TOWN_BOSS_FIGHT_READY_SOON";
   }
 
-  return & "DIRECT_BOSS_FIGHT_ACTIVATION";
+  return &"DIRECT_BOSS_FIGHT_ACTIVATION";
 }
 
 try_activate_boss_fight(param_00, param_01) {}

@@ -15,7 +15,7 @@ main() {
   level.script_mover_defaults["delay_time"] = 0;
   level.script_mover_defaults["usable"] = 0;
   level.script_mover_defaults["hintstring"] = "activate";
-  script_mover_add_hintstring("activate", & "MP_ACTIVATE_MOVER");
+  script_mover_add_hintstring("activate", &"MP_ACTIVATE_MOVER");
   script_mover_add_parameters("none", "");
   level.script_mover_named_goals = [];
   scripts\engine\utility::waitframe();

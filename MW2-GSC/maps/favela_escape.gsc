@@ -317,23 +317,23 @@ favela_escape_objectives() {
 
   obj1_set = false; // hack to make Soap-less start points work with objectives
   if(isDefined(level.sarge)) {
-    Objective_Add(1, "current", & "FAVELA_ESCAPE_OBJ_FOLLOW_SOAP");
+    Objective_Add(1, "current", &"FAVELA_ESCAPE_OBJ_FOLLOW_SOAP");
     Objective_OnEntity(1, level.sarge);
-    Objective_SetPointerTextOverride(1, & "FAVELA_ESCAPE_OBJ_FOLLOW_MARKER");
+    Objective_SetPointerTextOverride(1, &"FAVELA_ESCAPE_OBJ_FOLLOW_MARKER");
 
     obj1_set = true;
   }
 
   flag_wait("market_introdialogue_done");
   if(obj1_set) {
-    Objective_String(1, & "FAVELA_ESCAPE_OBJ_FLEE_RADIOTOWER");
+    Objective_String(1, &"FAVELA_ESCAPE_OBJ_FLEE_RADIOTOWER");
     Objective_Position(1, (-3154, -1875, 1096));
     Objective_SetPointerTextOverride(1, ""); // reset to default
   }
 
   flag_wait("market_evac_chopper_incoming");
   Objective_Complete(1);
-  Objective_Add(2, "current", & "FAVELA_ESCAPE_OBJ_MARKET_ESCAPE", (-3937, -1051, 1241));
+  Objective_Add(2, "current", &"FAVELA_ESCAPE_OBJ_MARKET_ESCAPE", (-3937, -1051, 1241));
   // start point hack
   if(isDefined(level.chopper)) {
     Objective_OnEntity(2, level.chopper);
@@ -344,14 +344,14 @@ favela_escape_objectives() {
   flag_wait("solorun_objective_display");
   //flag_wait( "solorun_start" );
   Objective_Complete(2);
-  Objective_Add(3, "current", & "FAVELA_ESCAPE_OBJ_GET_BACK_TO_ROOF", (-5924, -870, 816));
+  Objective_Add(3, "current", &"FAVELA_ESCAPE_OBJ_GET_BACK_TO_ROOF", (-5924, -870, 816));
 
   thread solorun_houses_obj_update_pos(3);
   thread solorun_houses_obj_turnoff_compass();
 
   flag_wait("solorun_player_at_balcony");
   Objective_Complete(3);
-  Objective_Add(4, "current", & "FAVELA_ESCAPE_OBJ_GET_TO_CHOPPER", (-8192, 2128, 704));
+  Objective_Add(4, "current", &"FAVELA_ESCAPE_OBJ_GET_TO_CHOPPER", (-8192, 2128, 704));
 
   thread solorun_roof_obj_update_pos(4);
 

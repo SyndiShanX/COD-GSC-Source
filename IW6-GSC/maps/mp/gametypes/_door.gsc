@@ -81,7 +81,7 @@ door_setup() {
         } else {
           AssertMsg("Invalid light ent with script_noteworthy of: " + ent.script_noteworthy);
         }
-      } else if(ent.spawnflags & SPAWNFLAG_AI_SIGHT_LINE) {
+      } else if(ent.spawnflags &SPAWNFLAG_AI_SIGHT_LINE) {
         if(!isDefined(button.ai_sight_brushes)) {
           button.ai_sight_brushes = [];
         }
@@ -192,7 +192,7 @@ door_state_update(noSound) {
           }
         }
 
-        if(door.spawnflags & SPAWNFLAG_DYNAMIC_PATH) {
+        if(door.spawnflags &SPAWNFLAG_DYNAMIC_PATH) {
           door DisconnectPaths();
         }
       } else {
@@ -203,7 +203,7 @@ door_state_update(noSound) {
           }
         }
 
-        if(door.spawnflags & SPAWNFLAG_DYNAMIC_PATH) {
+        if(door.spawnflags &SPAWNFLAG_DYNAMIC_PATH) {
           if(isDefined(door.script_noteworthy) && (door.script_noteworthy == "always_disconnect")) {
             door DisconnectPaths();
           } else {
@@ -223,7 +223,7 @@ door_state_update(noSound) {
       }
     }
 
-    hintString = ter_op(button.stateCurr == STATE_DOOR_CLOSED, & "MP_DOOR_USE_OPEN", & "MP_DOOR_USE_CLOSE");
+    hintString = ter_op(button.stateCurr == STATE_DOOR_CLOSED, &"MP_DOOR_USE_OPEN", &"MP_DOOR_USE_CLOSE");
     button SetHintString(hintString);
     button MakeUsable();
     button waittill("trigger");

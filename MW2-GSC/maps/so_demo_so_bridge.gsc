@@ -143,15 +143,15 @@ so_demoman_init() {
 }
 
 so_demoman_setup_regular() {
-  objective_add(1, "current", & "SO_DEMO_SO_BRIDGE_OBJ_REGULAR");
+  objective_add(1, "current", &"SO_DEMO_SO_BRIDGE_OBJ_REGULAR");
 }
 
 so_demoman_setup_hardened() {
-  objective_add(1, "current", & "SO_DEMO_SO_BRIDGE_OBJ_HARDENED");
+  objective_add(1, "current", &"SO_DEMO_SO_BRIDGE_OBJ_HARDENED");
 }
 
 so_demoman_setup_veteran() {
-  objective_add(1, "current", & "SO_DEMO_SO_BRIDGE_OBJ_VETERAN");
+  objective_add(1, "current", &"SO_DEMO_SO_BRIDGE_OBJ_VETERAN");
 }
 
 // ---------------------------------------------------------------------------------

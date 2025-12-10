@@ -41,18 +41,18 @@
 #namespace zurich_util;
 
 function autoexec __init__sytem__() {
-  system::register("zurich_util", & __init__, undefined, undefined);
+  system::register("zurich_util", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.lighting_state = 0;
-  callback::on_spawned( & on_player_spawned);
-  callback::on_disconnect( & on_player_disconnect);
-  callback::on_actor_killed( & ai_death_explosions);
-  spawner::add_global_spawn_function("axis", & function_dc8f9fa6);
-  spawner::add_global_spawn_function("axis", & ai_surreal_spawn_fx);
-  spawner::add_global_spawn_function("team3", & function_dc8f9fa6);
-  spawner::add_global_spawn_function("axis", & function_b2c5d91c);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_disconnect(&on_player_disconnect);
+  callback::on_actor_killed(&ai_death_explosions);
+  spawner::add_global_spawn_function("axis", &function_dc8f9fa6);
+  spawner::add_global_spawn_function("axis", &ai_surreal_spawn_fx);
+  spawner::add_global_spawn_function("team3", &function_dc8f9fa6);
+  spawner::add_global_spawn_function("axis", &function_b2c5d91c);
   util::init_breath_fx();
   init_client_field_callback_funcs();
   level._effect["root_heart_fire"] = "fire/fx_fire_heart_burn_zurich";
@@ -202,14 +202,14 @@ function on_player_spawned() {
 function on_player_disconnect() {}
 
 function setup_scene_callbacks() {
-  scene::add_scene_func("p7_fxanim_cp_sgen_charging_station_open_01_bundle", & function_38b7a56, "init");
-  scene::add_scene_func("p7_fxanim_cp_sgen_charging_station_break_01_bundle", & function_38b7a56, "init");
-  scene::add_scene_func("p7_fxanim_cp_sgen_charging_station_break_02_bundle", & function_38b7a56, "init");
-  scene::add_scene_func("p7_fxanim_cp_sgen_charging_station_break_03_bundle", & function_38b7a56, "init");
+  scene::add_scene_func("p7_fxanim_cp_sgen_charging_station_open_01_bundle", &function_38b7a56, "init");
+  scene::add_scene_func("p7_fxanim_cp_sgen_charging_station_break_01_bundle", &function_38b7a56, "init");
+  scene::add_scene_func("p7_fxanim_cp_sgen_charging_station_break_02_bundle", &function_38b7a56, "init");
+  scene::add_scene_func("p7_fxanim_cp_sgen_charging_station_break_03_bundle", &function_38b7a56, "init");
 }
 
 function function_38b7a56(a_ents) {
-  array::run_all(a_ents, & notsolid);
+  array::run_all(a_ents, &notsolid);
 }
 
 function function_a7b5b565() {
@@ -278,7 +278,7 @@ function function_d6b3e7b5() {
 
 function function_be06d646() {
   var_4e3140b1 = getEntArray("trig_falling_death", "targetname");
-  array::thread_all(var_4e3140b1, & falling_death_think);
+  array::thread_all(var_4e3140b1, &falling_death_think);
 }
 
 function falling_death_think() {
@@ -1047,7 +1047,7 @@ function function_d8c91e6b(n_dist) {
 
 function delete_all_ai() {
   a_ai = getaiteamarray("axis", "allies", "team3");
-  array::spread_all(a_ai, & function_914c331d);
+  array::spread_all(a_ai, &function_914c331d);
 }
 
 function function_914c331d() {
@@ -1148,9 +1148,9 @@ function function_1eb6ea27(trigger, str_location) {
 
 function function_8d10b109() {
   level.var_71aac273 = 0;
-  scene::add_scene_func("cin_zur_vign_conversation", & function_6a0676d9, "play");
-  scene::add_scene_func("cin_zur_vign_seizure_soldier", & function_6a0676d9, "play");
-  scene::add_scene_func("cin_zur_m_floor_stomach_wounded_zsf", & function_6a0676d9, "play");
+  scene::add_scene_func("cin_zur_vign_conversation", &function_6a0676d9, "play");
+  scene::add_scene_func("cin_zur_vign_seizure_soldier", &function_6a0676d9, "play");
+  scene::add_scene_func("cin_zur_m_floor_stomach_wounded_zsf", &function_6a0676d9, "play");
 }
 
 function function_6a0676d9(a_ents) {
@@ -1178,7 +1178,7 @@ function function_16f4964d() {
 }
 
 function function_c27f6351() {
-  scene::add_scene_func("p7_fxanim_cp_zurich_train_seats_bundle", & function_9f90bc0f, "play", "rails_ambient_cleanup");
+  scene::add_scene_func("p7_fxanim_cp_zurich_train_seats_bundle", &function_9f90bc0f, "play", "rails_ambient_cleanup");
   level scene::init("p7_fxanim_cp_zurich_train_seats_bundle");
   trigger::wait_till("t_enter_train");
   level thread scene::play("p7_fxanim_cp_zurich_train_seats_bundle");
@@ -1186,7 +1186,7 @@ function function_c27f6351() {
 
 function t_skipto_init() {
   t_skiptos = getEntArray("zurich_skipto", "targetname");
-  array::thread_all(t_skiptos, & t_skipto);
+  array::thread_all(t_skiptos, &t_skipto);
 }
 
 function t_skipto() {
@@ -1313,11 +1313,11 @@ function function_30a6b901(var_929e1778, var_de2c41d4) {
     }
   }
   if(var_929e1778) {
-    str_obj = & "cp_level_zurich_burn_heart";
+    str_obj = &"cp_level_zurich_burn_heart";
   } else {
-    str_obj = & "cp_level_zurich_burn_vines";
+    str_obj = &"cp_level_zurich_burn_vines";
   }
-  self.var_90971f20 = util::init_interactive_gameobject(self, str_obj, & "CP_MI_ZURICH_COALESCENCE_BURN", & function_64158e74);
+  self.var_90971f20 = util::init_interactive_gameobject(self, str_obj, &"CP_MI_ZURICH_COALESCENCE_BURN", &function_64158e74);
   self triggerenable(1);
   level waittill("hash_914d02c2");
   self notify("hash_3600bf2b");
@@ -1356,7 +1356,7 @@ function function_cdd5119b(e_attacker, v_impact_point) {
 
 function function_91d852fa() {
   var_2cfeb5a9 = getEntArray("zurich_vinewalls", "targetname");
-  array::thread_all(var_2cfeb5a9, & function_ff5e6201);
+  array::thread_all(var_2cfeb5a9, &function_ff5e6201);
 }
 
 function function_ff5e6201(var_8d6d1339) {
@@ -1611,7 +1611,7 @@ function function_2153e0ef(s_start = self, s_next, n_multiplier, var_bd62ea22 = 
 function function_f9afa212(str_key, str_val = "targetname", var_d646fb81) {
   var_33b370d9 = getspawnerarray(str_key, str_val);
   foreach(n_index, var_907b6d46 in var_33b370d9) {
-    var_d697d6e2[n_index] = spawner::simple_spawn_single(var_907b6d46, & function_12141c31);
+    var_d697d6e2[n_index] = spawner::simple_spawn_single(var_907b6d46, &function_12141c31);
   }
   return var_d697d6e2;
 }
@@ -1808,13 +1808,13 @@ function function_3ee4a3b3(var_5f69ad96, str_objective) {
   foreach(i, s_trig in a_s_triggers) {
     a_trigs[i] = function_3789d4db(s_trig.targetname, undefined, undefined, undefined, 768, str_objective);
   }
-  array::thread_all(a_trigs, & function_1fb1b1c4);
+  array::thread_all(a_trigs, &function_1fb1b1c4);
 }
 
 function function_1fb1b1c4() {
   self endon("death");
   self waittill("trigger");
-  function_33ec653f(self.target, undefined, undefined, & function_d065a580);
+  function_33ec653f(self.target, undefined, undefined, &function_d065a580);
 }
 
 function function_d065a580() {
@@ -1954,7 +1954,7 @@ function function_7be427b1(n_damage = 5) {
   self endon("death");
   var_dd075cd2 = 1;
   self hazard::function_459e5eff("biohazard", 0);
-  level.overrideplayerdamage = & player_callback_damage;
+  level.overrideplayerdamage = &player_callback_damage;
   while(true) {
     wait(1);
     var_dd075cd2 = self hazard::do_damage("biohazard", n_damage);
@@ -1994,10 +1994,10 @@ function function_11b424e5(is_on) {
   if(isDefined(is_on) && !isplayer(self)) {
     if(is_on) {
       level.var_60bad7a5 = 1;
-      array::run_all(level.players, & util::set_low_ready, 1);
+      array::run_all(level.players, &util::set_low_ready, 1);
     } else {
       level.var_60bad7a5 = 0;
-      array::run_all(level.players, & util::set_low_ready, 0);
+      array::run_all(level.players, &util::set_low_ready, 0);
     }
   } else if(isDefined(level.var_60bad7a5)) {
     if(level.var_60bad7a5) {
@@ -2018,8 +2018,8 @@ function function_c049667c(is_true) {
 }
 
 function function_d1996775() {
-  str_obj = & "cp_level_zurich_hack_lobby_door";
-  str_hint = & "CP_MI_ZURICH_COALESCENCE_HACK";
+  str_obj = &"cp_level_zurich_hack_lobby_door";
+  str_hint = &"CP_MI_ZURICH_COALESCENCE_HACK";
   self hacking::init_hack_trigger(3, str_obj, str_hint);
   e_who = self hacking::trigger_wait();
   self triggerenable(0);
@@ -2031,9 +2031,9 @@ function function_9bb12e2f(params) {
 }
 
 function function_74c09be7() {
-  str_obj = & "cp_level_zurich_hack_lobby_door";
-  str_hint = & "CP_MI_ZURICH_COALESCENCE_HACK";
-  util::init_interactive_gameobject(self, str_obj, str_hint, & function_89a1383e);
+  str_obj = &"cp_level_zurich_hack_lobby_door";
+  str_hint = &"CP_MI_ZURICH_COALESCENCE_HACK";
+  util::init_interactive_gameobject(self, str_obj, str_hint, &function_89a1383e);
   self triggerenable(1);
   level waittill("hash_a271fdb7");
 }
@@ -2046,9 +2046,9 @@ function function_89a1383e(e_player) {
 }
 
 function function_f3bcbbb1() {
-  str_obj = & "cp_level_zurich_burn_vines";
-  str_hint = & "CP_MI_ZURICH_COALESCENCE_BURN";
-  util::init_interactive_gameobject(self, str_obj, str_hint, & function_b6a9fc24);
+  str_obj = &"cp_level_zurich_burn_vines";
+  str_hint = &"CP_MI_ZURICH_COALESCENCE_BURN";
+  util::init_interactive_gameobject(self, str_obj, str_hint, &function_b6a9fc24);
   self triggerenable(1);
   level waittill("hash_e9197af7");
 }
@@ -2218,7 +2218,7 @@ function function_6d571441() {
       self setvehgoalpos(s_crash_point.origin);
       self waittill("goal");
       self vehicle::god_off();
-      array::run_all(self.riders, & kill);
+      array::run_all(self.riders, &kill);
       self dodamage(self.health + 100, self.origin, e_attacker);
     }
   }
@@ -2258,9 +2258,9 @@ function function_86b1cd8a(a_ents) {
 function function_2504fb31(b_on) {
   a_clip = getEntArray("hq_atrium_player_clip", "targetname");
   if(b_on) {
-    array::run_all(a_clip, & solid);
+    array::run_all(a_clip, &solid);
   } else {
-    array::run_all(a_clip, & notsolid);
+    array::run_all(a_clip, &notsolid);
   }
 }
 

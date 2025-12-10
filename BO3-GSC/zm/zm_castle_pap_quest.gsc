@@ -23,7 +23,7 @@
 #namespace zm_castle_pap_quest;
 
 function autoexec __init__sytem__() {
-  system::register("zm_castle_pap_quest", & __init__, & __main__, undefined);
+  system::register("zm_castle_pap_quest", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -31,7 +31,7 @@ function __init__() {
   level.var_e1ee8457 = 0;
   level flag::init("pap_reform_available");
   level flag::init("pap_reformed");
-  level.pack_a_punch.custom_power_think = & function_c4641d12;
+  level.pack_a_punch.custom_power_think = &function_c4641d12;
   level.zombiemode_reusing_pack_a_punch = 1;
   zm_pap_util::set_interaction_trigger_radius(128);
 }
@@ -44,7 +44,7 @@ function function_c4641d12(is_powered) {
   level.var_1c602ba8 = struct::get_array("s_pap_tp");
   level.pap_machine = self;
   self.zbarrier _zm_pack_a_punch::set_state_hidden();
-  array::thread_all(level.var_1c602ba8, & function_53bc4f86, self);
+  array::thread_all(level.var_1c602ba8, &function_53bc4f86, self);
   level.var_164e92cf = 2;
   level.var_1e4d46e3 = 0;
   level.var_22ce1993 = [];
@@ -175,10 +175,10 @@ function function_53bc4f86(pap_machine) {
   s_unitrigger_stub.radius = 70;
   s_unitrigger_stub.cursor_hint = "HINT_NOICON";
   s_unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
-  s_unitrigger_stub.prompt_and_visibility_func = & function_99664e8;
+  s_unitrigger_stub.prompt_and_visibility_func = &function_99664e8;
   s_unitrigger_stub.parent_struct = self;
   s_unitrigger_stub.parent_struct.activated = 0;
-  zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, & zm_castle_flingers::function_4029cf56);
+  zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, &zm_castle_flingers::function_4029cf56);
   s_unitrigger_stub waittill("trigger", e_who);
   while(level.var_e1ee8457 > 0) {
     wait(0.05);
@@ -291,7 +291,7 @@ function function_eb56512() {
   }
   var_fc5d165 = arraygetclosest(s_pap_location.origin, level.var_94c82bf8);
   level.var_c9f5f61 = getEntArray(s_pap_location.target, "targetname");
-  scene::add_scene_func("p7_fxanim_zm_castle_pap_complete_reform_bundle", & function_335f66d5, "play");
+  scene::add_scene_func("p7_fxanim_zm_castle_pap_complete_reform_bundle", &function_335f66d5, "play");
   var_fc5d165.origin = var_fc5d165.origin + (vectorscale((0, 0, -1), 16));
   var_fc5d165 scene::play("p7_fxanim_zm_castle_pap_complete_reform_bundle");
   var_fc5d165.origin = var_fc5d165.origin + vectorscale((0, 0, 1), 16);
@@ -372,7 +372,7 @@ function function_a8c41b9() {
 }
 
 function function_99664e8() {
-  str_msg = & "";
+  str_msg = &"";
   str_msg = self.stub.hint_string;
   if(level.var_e1ee8457 > 0) {
     self sethintstring(&"ZM_CASTLE_PAP_TP_UNAVAILABLE");
@@ -411,7 +411,7 @@ function detect_reentry() {
 function function_42a3de0d() {
   level flagsys::wait_till("");
   wait(1);
-  zm_devgui::add_custom_devgui_callback( & function_f04119b5);
+  zm_devgui::add_custom_devgui_callback(&function_f04119b5);
   adddebugcommand("");
 }
 
@@ -425,7 +425,7 @@ function function_f04119b5(cmd) {
       wait(1);
       pap_machine = getent("", "");
       level.var_54cd8d06 = level.var_1c602ba8[0];
-      array::thread_all(level.players, & function_b9cca08f, pap_machine);
+      array::thread_all(level.players, &function_b9cca08f, pap_machine);
       return true;
     }
   }

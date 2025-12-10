@@ -29,10 +29,10 @@ function main() {
   gameobjects::register_allowed_gameobject("tdm");
   level.leaderdialog = undefined;
   level.var_cbfbddb2 = getweapon("sniper_powerbolt", "extclip", "swayreduc");
-  level.onstartgametype = & onstartgametype;
-  level.onplayerkilled = & onplayerkilled;
-  level.givecustomloadout = & givecustomloadout;
-  callback::on_connect( & on_player_connect);
+  level.onstartgametype = &onstartgametype;
+  level.onplayerkilled = &onplayerkilled;
+  level.givecustomloadout = &givecustomloadout;
+  callback::on_connect(&on_player_connect);
 }
 
 function onstartgametype() {
@@ -191,7 +191,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
     should_spawn_tags = self dogtags::should_spawn_tags(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration);
     should_spawn_tags = should_spawn_tags && !globallogic_spawn::mayspawn();
     if(should_spawn_tags) {
-      level thread dogtags::spawn_dog_tag(self, attacker, & dogtags::onusedogtag, 0);
+      level thread dogtags::spawn_dog_tag(self, attacker, &dogtags::onusedogtag, 0);
     }
   }
   if(!isDefined(attacker)) {
@@ -270,7 +270,7 @@ function function_b5214454() {
 function function_ef6a5017() {
   self endon("disconnect");
   self.var_ea382ca4 = hud::createfontstring("objective", 1);
-  self.var_ea382ca4.label = & "MP_RANGE_KILL_INDICATOR";
+  self.var_ea382ca4.label = &"MP_RANGE_KILL_INDICATOR";
   self.var_ea382ca4 setvalue(0);
   self.var_ea382ca4.x = 0;
   self.var_ea382ca4.y = 20;
@@ -290,7 +290,7 @@ function function_ef6a5017() {
   self.var_f9eb945c.aligny = "top";
   self.var_f9eb945c.horzalign = "user_right";
   self.var_f9eb945c.vertalign = "user_top";
-  self.var_f9eb945c.label = & "MP_MAX_KILL_INDICATOR";
+  self.var_f9eb945c.label = &"MP_MAX_KILL_INDICATOR";
   self.var_f9eb945c setvalue(0);
   self.var_f9eb945c.alpha = 0;
   self.var_f9eb945c.archived = 0;
@@ -306,7 +306,7 @@ function function_c12878ec() {
   level.var_a670a293.aligny = "top";
   level.var_a670a293.horzalign = "user_right";
   level.var_a670a293.vertalign = "user_top";
-  level.var_a670a293.label = & "MP_MAX_MATCH_INDICATOR";
+  level.var_a670a293.label = &"MP_MAX_MATCH_INDICATOR";
   level.var_a670a293 setvalue(0);
   level.var_a670a293.alpha = 0;
   level.var_a670a293.archived = 0;

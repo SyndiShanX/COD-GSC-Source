@@ -78,7 +78,7 @@ __init__() {
 
 function_1e4302d0(value, index) {
   assert(index < 2);
-  newvalue = value << 1 | index&1;
+  newvalue = value << 1 | index& 1;
   return newvalue;
 }
 

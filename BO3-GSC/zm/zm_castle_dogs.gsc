@@ -17,7 +17,7 @@
 #namespace zm_castle_dogs;
 
 function autoexec init() {
-  spawner::add_archetype_spawn_function("zombie_dog", & function_9f8cfcf5);
+  spawner::add_archetype_spawn_function("zombie_dog", &function_9f8cfcf5);
 }
 
 function function_9f8cfcf5() {
@@ -39,8 +39,8 @@ function dog_round_tracker() {
       old_spawn_func = level.round_spawn_func;
       old_wait_func = level.round_wait_func;
       zm_ai_dogs::dog_round_start();
-      level.round_spawn_func = & zm_ai_dogs::dog_round_spawning;
-      level.round_wait_func = & zm_ai_dogs::dog_round_wait_func;
+      level.round_spawn_func = &zm_ai_dogs::dog_round_spawning;
+      level.round_wait_func = &zm_ai_dogs::dog_round_wait_func;
       level clientfield::set("castle_fog_bank_switch", 1);
       level.next_dog_round = level.round_number + randomintrange(7, 14);
       getplayers()[0] iprintln("" + level.next_dog_round);

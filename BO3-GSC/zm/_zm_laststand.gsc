@@ -26,7 +26,7 @@
 #namespace zm_laststand;
 
 function autoexec __init__sytem__() {
-  system::register("zm_laststand", & __init__, undefined, undefined);
+  system::register("zm_laststand", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -49,11 +49,11 @@ function __init__() {
   if(!isDefined(level.vsmgr_prio_visionset_zm_laststand)) {
     level.vsmgr_prio_visionset_zm_laststand = 1000;
   }
-  visionset_mgr::register_info("visionset", "zombie_last_stand", 1, level.vsmgr_prio_visionset_zm_laststand, 31, 1, & visionset_mgr::ramp_in_thread_per_player, 0);
+  visionset_mgr::register_info("visionset", "zombie_last_stand", 1, level.vsmgr_prio_visionset_zm_laststand, 31, 1, &visionset_mgr::ramp_in_thread_per_player, 0);
   if(!isDefined(level.vsmgr_prio_visionset_zm_death)) {
     level.vsmgr_prio_visionset_zm_death = 1100;
   }
-  visionset_mgr::register_info("visionset", "zombie_death", 1, level.vsmgr_prio_visionset_zm_death, 31, 1, & visionset_mgr::ramp_in_thread_per_player, 0);
+  visionset_mgr::register_info("visionset", "zombie_death", 1, level.vsmgr_prio_visionset_zm_death, 31, 1, &visionset_mgr::ramp_in_thread_per_player, 0);
 }
 
 function laststand_global_init() {
@@ -62,10 +62,10 @@ function laststand_global_init() {
   level.const_laststand_getup_bar_regen = 0.0025;
   level.const_laststand_getup_bar_damage = 0.1;
   level.player_name_directive = [];
-  level.player_name_directive[0] = & "ZOMBIE_PLAYER_NAME_0";
-  level.player_name_directive[1] = & "ZOMBIE_PLAYER_NAME_1";
-  level.player_name_directive[2] = & "ZOMBIE_PLAYER_NAME_2";
-  level.player_name_directive[3] = & "ZOMBIE_PLAYER_NAME_3";
+  level.player_name_directive[0] = &"ZOMBIE_PLAYER_NAME_0";
+  level.player_name_directive[1] = &"ZOMBIE_PLAYER_NAME_1";
+  level.player_name_directive[2] = &"ZOMBIE_PLAYER_NAME_2";
+  level.player_name_directive[3] = &"ZOMBIE_PLAYER_NAME_3";
 }
 
 function player_last_stand_stats(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
@@ -886,7 +886,7 @@ function auto_revive(reviver, dont_enable_weapons) {
   visionset_mgr::deactivate("visionset", "zombie_death", self);
   self notify("clear_red_flashing_overlay");
   self allowjump(1);
-  self util::delay(2, "death", & set_ignoreme, 0);
+  self util::delay(2, "death", &set_ignoreme, 0);
   self.laststand = undefined;
   if(!(isDefined(level.isresetting_grief) && level.isresetting_grief)) {
     if(isplayer(reviver)) {
@@ -945,7 +945,7 @@ function revive_success(reviver, b_track_stats = 1) {
   self.revivetrigger delete();
   self.revivetrigger = undefined;
   self laststand::cleanup_suicide_hud();
-  self util::delay(2, "death", & set_ignoreme, 0);
+  self util::delay(2, "death", &set_ignoreme, 0);
   visionset_mgr::deactivate("visionset", "zombie_last_stand", self);
   visionset_mgr::deactivate("visionset", "zombie_death", self);
   wait(0.05);

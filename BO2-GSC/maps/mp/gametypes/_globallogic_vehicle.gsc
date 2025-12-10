@@ -11,7 +11,7 @@
 #include maps\mp\gametypes\_damagefeedback;
 
 callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
-  if(!(level.idflags_radius & idflags))
+  if(!(level.idflags_radius &idflags))
     idamage = maps\mp\gametypes\_class::cac_modified_vehicle_damage(self, eattacker, idamage, smeansofdeath, sweapon, einflictor);
 
   self.idflags = idflags;
@@ -41,7 +41,7 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, s
       sweapon = "destructible_car_mp";
   }
 
-  if(!(idflags & level.idflags_no_protection)) {
+  if(!(idflags &level.idflags_no_protection)) {
     if(self isvehicleimmunetodamage(idflags, smeansofdeath, sweapon)) {
       return;
     }
@@ -186,7 +186,7 @@ callback_vehicleradiusdamage(einflictor, eattacker, idamage, finnerdamage, foute
   }
   friendly = 0;
 
-  if(!(idflags & level.idflags_no_protection)) {
+  if(!(idflags &level.idflags_no_protection)) {
     if(self isvehicleimmunetodamage(idflags, smeansofdeath, sweapon)) {
       return;
     }

@@ -34,10 +34,10 @@
 #namespace turret;
 
 function init() {
-  killstreaks::register("autoturret", "autoturret", "killstreak_auto_turret", "auto_turret_used", & activateturret);
+  killstreaks::register("autoturret", "autoturret", "killstreak_auto_turret", "auto_turret_used", &activateturret);
   killstreaks::register_alt_weapon("autoturret", "auto_gun_turret");
   killstreaks::register_remote_override_weapon("autoturret", "killstreak_remote_turret");
-  killstreaks::register_strings("autoturret", & "KILLSTREAK_EARNED_AUTO_TURRET", & "KILLSTREAK_AUTO_TURRET_NOT_AVAILABLE", & "KILLSTREAK_AUTO_TURRET_INBOUND", undefined, & "KILLSTREAK_AUTO_TURRET_HACKED", 0);
+  killstreaks::register_strings("autoturret", &"KILLSTREAK_EARNED_AUTO_TURRET", &"KILLSTREAK_AUTO_TURRET_NOT_AVAILABLE", &"KILLSTREAK_AUTO_TURRET_INBOUND", undefined, &"KILLSTREAK_AUTO_TURRET_HACKED", 0);
   killstreaks::register_dialog("autoturret", "mpl_killstreak_auto_turret", "turretDialogBundle", undefined, "friendlyTurret", "enemyTurret", "enemyTurretMultiple", "friendlyTurretHacked", "enemyTurretHacked", "requestTurret", "threatTurret");
   level.killstreaks["autoturret"].threatonkill = 1;
   clientfield::register("vehicle", "auto_turret_open", 1, 1, "int");
@@ -45,9 +45,9 @@ function init() {
   clientfield::register("scriptmover", "auto_turret_close", 1, 1, "int");
   level.autoturretopenanim = % mp_autoturret::o_turret_sentry_deploy;
   level.autoturretcloseanim = % mp_autoturret::o_turret_sentry_close;
-  remote_weapons::registerremoteweapon("autoturret", & "MP_REMOTE_USE_TURRET", & startturretremotecontrol, & endturretremotecontrol, 1);
-  vehicle::add_main_callback("sentry_turret", & initturret);
-  visionset_mgr::register_info("visionset", "turret_visionset", 1, 81, 16, 1, & visionset_mgr::ramp_in_out_thread_per_player, 0);
+  remote_weapons::registerremoteweapon("autoturret", &"MP_REMOTE_USE_TURRET", &startturretremotecontrol, &endturretremotecontrol, 1);
+  vehicle::add_main_callback("sentry_turret", &initturret);
+  visionset_mgr::register_info("visionset", "turret_visionset", 1, 81, 16, 1, &visionset_mgr::ramp_in_out_thread_per_player, 0);
 }
 
 function initturret() {
@@ -69,8 +69,8 @@ function initturret() {
   turretvehicle set_on_target_angle(15, 0);
   turretvehicle clientfield::set("enemyvehicle", 1);
   turretvehicle.soundmod = "drone_land";
-  turretvehicle.overridevehicledamage = & onturretdamage;
-  turretvehicle.overridevehicledeath = & onturretdeath;
+  turretvehicle.overridevehicledamage = &onturretdamage;
+  turretvehicle.overridevehicledeath = &onturretdeath;
 }
 
 function activateturret() {
@@ -81,7 +81,7 @@ function activateturret() {
     return false;
   }
   bundle = level.killstreakbundle["autoturret"];
-  turret = player placeables::spawnplaceable("autoturret", killstreakid, & onplaceturret, & oncancelplacement, & onpickupturret, & onshutdown, undefined, undefined, "veh_t7_turret_sentry_gun_world_mp", "veh_t7_turret_sentry_gun_world_yellow", "veh_t7_turret_sentry_gun_world_red", 1, & "KILLSTREAK_SENTRY_TURRET_PICKUP", 90000, undefined, 0, bundle.ksplaceablehint, bundle.ksplaceableinvalidlocationhint);
+  turret = player placeables::spawnplaceable("autoturret", killstreakid, &onplaceturret, &oncancelplacement, &onpickupturret, &onshutdown, undefined, undefined, "veh_t7_turret_sentry_gun_world_mp", "veh_t7_turret_sentry_gun_world_yellow", "veh_t7_turret_sentry_gun_world_red", 1, &"KILLSTREAK_SENTRY_TURRET_PICKUP", 90000, undefined, 0, bundle.ksplaceablehint, bundle.ksplaceableinvalidlocationhint);
   turret thread watchturretshutdown(killstreakid, player.team);
   turret thread util::ghost_wait_show_to_player(player);
   turret.othermodel thread util::ghost_wait_show_to_others(player);
@@ -122,7 +122,7 @@ function onplaceturret(turret) {
     turret.vehicle.waittill_turret_on_target_delay = 0.25;
     turret.vehicle.ignore_vehicle_underneath_splash_scalar = 1;
     turret.vehicle killstreaks::configure_team("autoturret", turret.killstreakid, player, "small_vehicle");
-    turret.vehicle killstreak_hacking::enable_hacking("autoturret", & hackedcallbackpre, & hackedcallbackpost);
+    turret.vehicle killstreak_hacking::enable_hacking("autoturret", &hackedcallbackpre, &hackedcallbackpost);
     turret.vehicle thread turret_watch_owner_events();
     turret.vehicle thread turret_laser_watch();
     turret.vehicle thread setup_death_watch_for_new_targets();
@@ -255,7 +255,7 @@ function ondeath(einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, sh
     eattacker challenges::destroynonairscorestreak_poststatslock(weapon);
     eattacker addplayerstat("destroy_turret", 1);
     eattacker addweaponstat(weapon, "destroy_turret", 1);
-    luinotifyevent(&"player_callout", 2, & "KILLSTREAK_DESTROYED_AUTO_TURRET", eattacker.entnum);
+    luinotifyevent(&"player_callout", 2, &"KILLSTREAK_DESTROYED_AUTO_TURRET", eattacker.entnum);
   }
   turretvehicle vehicle_death::death_fx();
   turretvehicle playSound("mpl_m_turret_exp");

@@ -554,7 +554,7 @@ last_aa_defense() {
   flag_wait("trig_last_aa_defense");
   level waittill("obj_aaguns_complete");
   autosave_by_name("Pel2 aaguns cleared");
-  objective_string(5, & "PEL2_SECURE_AABUNKER");
+  objective_string(5, &"PEL2_SECURE_AABUNKER");
   objective_position(5, (2319.8, 8145.9, 126));
   objective_ring(5);
   waittill_aigroupcleared("last_bunker_ai");
@@ -1200,13 +1200,13 @@ aa_gun_destroyed(aa_gun) {
 aa_guns_obj_update() {
   switch (level.aa_guns_cleared) {
     case 1:
-      objective_string(5, & "PEL2_DESTROY_AA_GUNS_3");
+      objective_string(5, &"PEL2_DESTROY_AA_GUNS_3");
       play_vo(level.polonsky, "vo", "taken_out");
       wait(2);
       play_vo(level.roebuck, "vo", "three_more");
       break;
     case 2:
-      objective_string(5, & "PEL2_DESTROY_AA_GUNS_2");
+      objective_string(5, &"PEL2_DESTROY_AA_GUNS_2");
       play_vo(level.polonsky, "vo", "second_crew_down");
       wait(2);
       play_vo(level.roebuck, "vo", "stay_strong");
@@ -1214,11 +1214,11 @@ aa_guns_obj_update() {
       play_vo(level.roebuck, "vo", "two_more");
       break;
     case 3:
-      objective_string(5, & "PEL2_DESTROY_AA_GUNS_1");
+      objective_string(5, &"PEL2_DESTROY_AA_GUNS_1");
       play_vo(level.roebuck, "vo", "get_the_last_one");
       break;
     case 4:
-      objective_string(5, & "PEL2_DESTROY_AA_GUNS");
+      objective_string(5, &"PEL2_DESTROY_AA_GUNS");
       play_vo(level.polonsky, "vo", "outta_commission");
       level notify("obj_aaguns_complete");
       break;
@@ -1306,7 +1306,7 @@ chi_3_wave_dead() {
     switch (tanks.size) {
       case 2:
         if(!one_tank_dead_vo) {
-          objective_string(4, & "PEL2_BAZOOKA_2");
+          objective_string(4, &"PEL2_BAZOOKA_2");
           play_vo(level.roebuck, "vo", "one_tank_down");
           wait(1.5);
           play_vo(level.polonsky, "vo", "yeah!!!");
@@ -1315,7 +1315,7 @@ chi_3_wave_dead() {
         break;
       case 1:
         if(!two_tanks_dead_vo) {
-          objective_string(4, & "PEL2_BAZOOKA_1");
+          objective_string(4, &"PEL2_BAZOOKA_1");
           play_vo(level.roebuck, "vo", "keep_doing");
           two_tanks_dead_vo = 1;
         }
@@ -1330,7 +1330,7 @@ chi_3_wave_dead() {
   flag_set("chi_3_wave_dead");
   level notify("obj_airfield_tanks_complete");
   objective_state(4, "done");
-  objective_string(4, & "PEL2_BAZOOKA");
+  objective_string(4, &"PEL2_BAZOOKA");
   if(!flag("trig_last_aa_defense")) {
     play_vo(level.roebuck, "vo", "damn_good_work");
     autosave_by_name("Pel2 tanks destroyed");
@@ -1507,7 +1507,7 @@ player_has_bazooka() {
     for(i = 0; i < players.size; i++) {
       if(players[i] HasWeapon("bazooka")) {
         flag_set("player_got_bazooka");
-        objective_string(4, & "PEL2_BAZOOKA_3");
+        objective_string(4, &"PEL2_BAZOOKA_3");
         Objective_additionalPosition(4, 3, (0, 0, 0));
         level thread objective_stars_on_tanks();
         break;

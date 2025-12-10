@@ -1757,9 +1757,9 @@ create_meat_team_hud(meat_team, destroy_only) {
   elem.alpha = 1.0;
 
   if(isDefined(self._meat_team) && self._meat_team == meat_team)
-    elem.label = & "ZOMBIE_TEAM_HAS_MEAT";
+    elem.label = &"ZOMBIE_TEAM_HAS_MEAT";
   else
-    elem.label = & "ZOMBIE_OTHER_TEAM_HAS_MEAT";
+    elem.label = &"ZOMBIE_OTHER_TEAM_HAS_MEAT";
 
   self._has_meat_hud = elem;
 }
@@ -1781,7 +1781,7 @@ create_meat_player_hud() {
   elem.fontscale = 1.4;
   elem.color = vectorscale((1, 1, 0), 0.9);
   elem.alpha = 1.0;
-  elem.label = & "ZOMBIE_PLAYER_HAS_MEAT";
+  elem.label = &"ZOMBIE_PLAYER_HAS_MEAT";
   self._has_meat_hud = elem;
 }
 

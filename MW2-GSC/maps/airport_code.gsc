@@ -5564,7 +5564,7 @@ tarmac_handle_player_too_far() {
     flag_set("tarmac_too_far");
     oldstring = level.fail_string;
     // The police barricade has too much fire power to confront.
-    level.fail_string = & "AIRPORT_FAIL_POLICE_BARRICADE";
+    level.fail_string = &"AIRPORT_FAIL_POLICE_BARRICADE";
     thread tarmac_handle_player_too_far_death();
 
     while(level.player IsTouching(trigger))
@@ -7174,7 +7174,7 @@ friendly_fire() {
 
   // You blew your cover... don't fire on Makarov's squad.
   if(!isDefined(level.fail_string))
-    level.fail_string = & "AIRPORT_FAIL_BLEW_COVER_FIRE";
+    level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_FIRE";
 
   thread friendly_fire_player_death();
   level thread notify_delay("friendly_fire_watch_player", .1);
@@ -7245,7 +7245,7 @@ friendly_fire_wander_away() {
   }
 
   // You blew your cover... Convince Makarov you're loyal to the cause.
-  level.fail_string = & "AIRPORT_FAIL_BLEW_COVER_WANDER";
+  level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_WANDER";
   flag_set("friendly_fire_warning");
 }
 
@@ -7298,7 +7298,7 @@ friendly_fire_notpartofteam() {
   }
 
   // You blew your cover... Convince Makarov you're loyal to the cause.
-  level.fail_string = & "AIRPORT_FAIL_BLEW_COVER_WANDER";
+  level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_WANDER";
   flag_set("friendly_fire_warning");
 }
 
@@ -7376,7 +7376,7 @@ friendly_fire_watch_player_nade() {
 
     flag_set("friendly_fire_warning");
     // You blew your cover... don't fire on Makarov's squad.
-    level.fail_string = & "AIRPORT_FAIL_BLEW_COVER_FIRE";
+    level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_FIRE";
     break;
   }
 }
@@ -7400,7 +7400,7 @@ friendly_fire_watch_player_flash() {
     friendly_fire_handle_aggrissive_num();
     if(flag("friendly_fire_warning"))
       // You blew your cover... don't fire on Makarov's squad.
-      level.fail_string = & "AIRPORT_FAIL_BLEW_COVER_FIRE";
+      level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_FIRE";
     break;
   }
 }
@@ -7419,7 +7419,7 @@ friendly_fire_watch_player_fire() {
 
     if(flag("friendly_fire_warning"))
       // You blew your cover... don't fire on Makarov's squad.
-      level.fail_string = & "AIRPORT_FAIL_BLEW_COVER_FIRE";
+      level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_FIRE";
   }
 }
 

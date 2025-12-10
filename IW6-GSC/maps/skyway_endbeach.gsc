@@ -10,12 +10,12 @@ section_flag_inits() {
 }
 
 section_precache() {
-  maps\_utility::add_hint_string("hint_drag_left", & "SKYWAY_HINT_DRAG_LEFT", ::hint_drag);
-  maps\_utility::add_hint_string("hint_drag_left_pc", & "SKYWAY_HINT_DRAG_LEFT_PC", ::hint_drag);
-  maps\_utility::add_hint_string("hint_drag_right", & "SKYWAY_HINT_DRAG_RIGHT", ::hint_drag);
-  maps\_utility::add_hint_string("hint_drag_right_pc", & "SKYWAY_HINT_DRAG_RIGHT_PC", ::hint_drag);
-  maps\_utility::add_hint_string("hint_drag_leftright", & "SKYWAY_HINT_DRAG_LEFTRIGHT", ::hint_drag);
-  maps\_utility::add_hint_string("hint_drag_leftright_pc", & "SKYWAY_HINT_DRAG_LEFTRIGHT_PC", ::hint_drag);
+  maps\_utility::add_hint_string("hint_drag_left", &"SKYWAY_HINT_DRAG_LEFT", ::hint_drag);
+  maps\_utility::add_hint_string("hint_drag_left_pc", &"SKYWAY_HINT_DRAG_LEFT_PC", ::hint_drag);
+  maps\_utility::add_hint_string("hint_drag_right", &"SKYWAY_HINT_DRAG_RIGHT", ::hint_drag);
+  maps\_utility::add_hint_string("hint_drag_right_pc", &"SKYWAY_HINT_DRAG_RIGHT_PC", ::hint_drag);
+  maps\_utility::add_hint_string("hint_drag_leftright", &"SKYWAY_HINT_DRAG_LEFTRIGHT", ::hint_drag);
+  maps\_utility::add_hint_string("hint_drag_leftright_pc", &"SKYWAY_HINT_DRAG_LEFTRIGHT_PC", ::hint_drag);
   precacheshellshock("skyway_beach_pain");
   precacheshader("logo_ghosts");
 }

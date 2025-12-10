@@ -37,20 +37,20 @@ function init() {
   clientfield::register("toplayer", "vehicle_hijacked", 1, 1, "int");
   visionset_mgr::register_info("visionset", "hijack_vehicle", 1, 5, 1, 1);
   visionset_mgr::register_info("visionset", "hijack_vehicle_blur", 1, 6, 1, 1);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function main() {
   cybercom_gadget::registerability(0, 32);
   level.cybercom.security_breach = spawnStruct();
-  level.cybercom.security_breach._is_flickering = & _is_flickering;
-  level.cybercom.security_breach._on_flicker = & _on_flicker;
-  level.cybercom.security_breach._on_give = & _on_give;
-  level.cybercom.security_breach._on_take = & _on_take;
-  level.cybercom.security_breach._on_connect = & _on_connect;
-  level.cybercom.security_breach._on = & _on;
-  level.cybercom.security_breach._off = & _off;
-  level.cybercom.security_breach._is_primed = & _is_primed;
+  level.cybercom.security_breach._is_flickering = &_is_flickering;
+  level.cybercom.security_breach._on_flicker = &_on_flicker;
+  level.cybercom.security_breach._on_give = &_on_give;
+  level.cybercom.security_breach._on_take = &_on_take;
+  level.cybercom.security_breach._on_connect = &_on_connect;
+  level.cybercom.security_breach._on = &_on;
+  level.cybercom.security_breach._off = &_off;
+  level.cybercom.security_breach._is_primed = &_is_primed;
 }
 
 function on_player_spawned() {
@@ -71,9 +71,9 @@ function _on_give(slot, weapon) {
   if(self hascybercomability("cybercom_securitybreach") == 2) {
     self.cybercom.security_breach_lifetime = getdvarint("scr_security_breach_upgraded_lifetime", 60);
   }
-  self.cybercom.targetlockcb = & _get_valid_targets;
-  self.cybercom.targetlockrequirementcb = & _lock_requirement;
-  self.cybercom.var_73d069a7 = & function_17342509;
+  self.cybercom.targetlockcb = &_get_valid_targets;
+  self.cybercom.targetlockrequirementcb = &_lock_requirement;
+  self.cybercom.var_73d069a7 = &function_17342509;
   self.cybercom.var_46483c8f = 63;
   self thread cybercom::function_b5f4e597(weapon);
 }
@@ -258,7 +258,7 @@ function private _security_breach(player, weapon) {
   clone.var_66ff806d = var_66ff806d;
   clone setteam(player.team);
   clone.health = clone.healthdefault;
-  clone.var_fb7ce72a = & function_637db461;
+  clone.var_fb7ce72a = &function_637db461;
   if(isDefined(self.var_72f54197)) {
     clone.var_72f54197 = self.var_72f54197;
   }

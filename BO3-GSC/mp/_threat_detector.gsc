@@ -16,22 +16,22 @@
 #namespace threat_detector;
 
 function autoexec __init__sytem__() {
-  system::register("threat_detector", & __init__, undefined, undefined);
+  system::register("threat_detector", &__init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("missile", "threat_detector", 1, 1, "int");
-  callback::add_weapon_watcher( & createthreatdetectorwatcher);
+  callback::add_weapon_watcher(&createthreatdetectorwatcher);
 }
 
 function createthreatdetectorwatcher() {
   watcher = self weaponobjects::createuseweaponobjectwatcher("threat_detector", self.team);
   watcher.headicon = 0;
-  watcher.onspawn = & onspawnthreatdetector;
-  watcher.ondetonatecallback = & threatdetectordestroyed;
-  watcher.stun = & weaponobjects::weaponstun;
+  watcher.onspawn = &onspawnthreatdetector;
+  watcher.ondetonatecallback = &threatdetectordestroyed;
+  watcher.stun = &weaponobjects::weaponstun;
   watcher.stuntime = 0;
-  watcher.ondamage = & watchthreatdetectordamage;
+  watcher.ondamage = &watchthreatdetectordamage;
   watcher.enemydestroy = 1;
 }
 

@@ -117,22 +117,22 @@ onstartgametype() {
   level._effect["bomb_explosion"] = loadfx("vfx\iw7\_requests\mp\vfx_bombardment_strike_explosion");
   level._effect["vehicle_explosion"] = loadfx("vfx\core\expl\small_vehicle_explosion_new.vfx");
   level._effect["building_explosion"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
-  scripts\mp\utility::setobjectivetext(game["attackers"], & "OBJECTIVES_DD_ATTACKER");
-  scripts\mp\utility::setobjectivetext(game["defenders"], & "OBJECTIVES_DD_DEFENDER");
+  scripts\mp\utility::setobjectivetext(game["attackers"], &"OBJECTIVES_DD_ATTACKER");
+  scripts\mp\utility::setobjectivetext(game["defenders"], &"OBJECTIVES_DD_DEFENDER");
   if(level.splitscreen) {
-    scripts\mp\utility::setobjectivescoretext(game["attackers"], & "OBJECTIVES_DD_ATTACKER");
-    scripts\mp\utility::setobjectivescoretext(game["defenders"], & "OBJECTIVES_DD_DEFENDER");
+    scripts\mp\utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_DD_ATTACKER");
+    scripts\mp\utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_DD_DEFENDER");
   } else {
-    scripts\mp\utility::setobjectivescoretext(game["attackers"], & "OBJECTIVES_DD_ATTACKER_SCORE");
-    scripts\mp\utility::setobjectivescoretext(game["defenders"], & "OBJECTIVES_DD_DEFENDER_SCORE");
+    scripts\mp\utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_DD_ATTACKER_SCORE");
+    scripts\mp\utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_DD_DEFENDER_SCORE");
   }
 
   if(scripts\mp\utility::inovertime()) {
-    scripts\mp\utility::setobjectivehinttext(game["attackers"], & "OBJECTIVES_DD_OVERTIME_HINT");
-    scripts\mp\utility::setobjectivehinttext(game["defenders"], & "OBJECTIVES_DD_OVERTIME_HINT");
+    scripts\mp\utility::setobjectivehinttext(game["attackers"], &"OBJECTIVES_DD_OVERTIME_HINT");
+    scripts\mp\utility::setobjectivehinttext(game["defenders"], &"OBJECTIVES_DD_OVERTIME_HINT");
   } else {
-    scripts\mp\utility::setobjectivehinttext(game["attackers"], & "OBJECTIVES_DD_ATTACKER_HINT");
-    scripts\mp\utility::setobjectivehinttext(game["defenders"], & "OBJECTIVES_DD_DEFENDER_HINT");
+    scripts\mp\utility::setobjectivehinttext(game["attackers"], &"OBJECTIVES_DD_ATTACKER_HINT");
+    scripts\mp\utility::setobjectivehinttext(game["defenders"], &"OBJECTIVES_DD_DEFENDER_HINT");
   }
 
   thread func_13849();
@@ -468,8 +468,8 @@ func_E249() {
 
   self.id = "bomb_zone";
   scripts\mp\gameobjects::setusetime(level.planttime);
-  scripts\mp\gameobjects::setusetext( & "MP_PLANTING_EXPLOSIVE");
-  scripts\mp\gameobjects::setusehinttext( & "PLATFORM_HOLD_TO_PLANT_EXPLOSIVES");
+  scripts\mp\gameobjects::setusetext(&"MP_PLANTING_EXPLOSIVE");
+  scripts\mp\gameobjects::setusehinttext(&"PLATFORM_HOLD_TO_PLANT_EXPLOSIVES");
   scripts\mp\gameobjects::set2dicon("friendly", var_00);
   scripts\mp\gameobjects::set3dicon("friendly", var_00);
   scripts\mp\gameobjects::set2dicon("enemy", var_01);
@@ -490,8 +490,8 @@ func_FAAE() {
 
   scripts\mp\gameobjects::allowuse("friendly");
   scripts\mp\gameobjects::setusetime(level.defusetime);
-  scripts\mp\gameobjects::setusetext( & "MP_DEFUSING_EXPLOSIVE");
-  scripts\mp\gameobjects::setusehinttext( & "PLATFORM_HOLD_TO_DEFUSE_EXPLOSIVES");
+  scripts\mp\gameobjects::setusetext(&"MP_DEFUSING_EXPLOSIVE");
+  scripts\mp\gameobjects::setusehinttext(&"PLATFORM_HOLD_TO_DEFUSE_EXPLOSIVES");
   scripts\mp\gameobjects::setkeyobject(undefined);
   scripts\mp\gameobjects::set2dicon("friendly", var_00);
   scripts\mp\gameobjects::set3dicon("friendly", var_00);
@@ -501,7 +501,7 @@ func_FAAE() {
 }
 
 oncantuse(param_00) {
-  param_00 iprintlnbold( & "MP_BOMBSITE_IN_USE");
+  param_00 iprintlnbold(&"MP_BOMBSITE_IN_USE");
 }
 
 onreset() {}

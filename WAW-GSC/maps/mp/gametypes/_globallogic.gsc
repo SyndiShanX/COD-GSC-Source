@@ -48,7 +48,7 @@ init() {
   else
     precacheString(&"MP_HOST_ENDED_GAME");
   level.halftimeType = "halftime";
-  level.halftimeSubCaption = & "MP_SWITCHING_SIDES";
+  level.halftimeSubCaption = &"MP_SWITCHING_SIDES";
   level.lastStatusTime = 0;
   level.wasWinning = "none";
   level.lastSlowProcessFrame = 0;
@@ -170,7 +170,7 @@ default_onForfeit(team) {
   wait(10.0);
   announcement(game["strings"]["opponent_forfeiting_in"], 10.0);
   wait(10.0);
-  endReason = & "";
+  endReason = &"";
   if(!isDefined(team)) {
     setDvar("ui_text_endreason", game["strings"]["players_forfeited"]);
     endReason = game["strings"]["players_forfeited"];
@@ -231,7 +231,7 @@ default_onOneLeftEvent(team) {
       logString("last one alive, win: " + winner.name);
     else
       logString("last one alive, win: unknown");
-    thread endGame(winner, & "MP_ENEMIES_ELIMINATED");
+    thread endGame(winner, &"MP_ENEMIES_ELIMINATED");
   } else {
     for(index = 0; index < level.players.size; index++) {
       player = level.players[index];
@@ -293,12 +293,12 @@ forceEnd(hostsucks) {
   level.forcedEnd = true;
   level.hostForcedEnd = true;
   if(hostsucks) {
-    endString = & "MP_HOST_SUCKS";
+    endString = &"MP_HOST_SUCKS";
   } else {
     if(level.splitscreen)
-      endString = & "MP_ENDED_GAME";
+      endString = &"MP_ENDED_GAME";
     else
-      endString = & "MP_HOST_ENDED_GAME";
+      endString = &"MP_HOST_ENDED_GAME";
   }
   makeDvarServerInfo("ui_text_endreason", endString);
   setDvar("ui_text_endreason", endString);
@@ -652,7 +652,7 @@ testMenu() {
   for(;;) {
     wait(10.0);
     notifyData = spawnStruct();
-    notifyData.titleText = & "MP_CHALLENGE_COMPLETED";
+    notifyData.titleText = &"MP_CHALLENGE_COMPLETED";
     notifyData.notifyText = "wheee";
     notifyData.sound = "mp_challenge_complete";
     self thread maps\mp\gametypes\_hud_message::notifyMessage(notifyData);
@@ -2763,36 +2763,36 @@ Callback_StartGameType() {
     makeDvarServerInfo("scr_axis", "japanese");
     makeDvarServerInfo("cg_thirdPersonAngle", 354);
     setDvar("cg_thirdPersonAngle", 354);
-    game["strings"]["press_to_spawn"] = & "PLATFORM_PRESS_TO_SPAWN";
+    game["strings"]["press_to_spawn"] = &"PLATFORM_PRESS_TO_SPAWN";
     if(level.teamBased) {
-      game["strings"]["waiting_for_teams"] = & "MP_WAITING_FOR_TEAMS";
-      game["strings"]["opponent_forfeiting_in"] = & "MP_OPPONENT_FORFEITING_IN";
+      game["strings"]["waiting_for_teams"] = &"MP_WAITING_FOR_TEAMS";
+      game["strings"]["opponent_forfeiting_in"] = &"MP_OPPONENT_FORFEITING_IN";
     } else {
-      game["strings"]["waiting_for_teams"] = & "MP_WAITING_FOR_PLAYERS";
-      game["strings"]["opponent_forfeiting_in"] = & "MP_OPPONENT_FORFEITING_IN";
+      game["strings"]["waiting_for_teams"] = &"MP_WAITING_FOR_PLAYERS";
+      game["strings"]["opponent_forfeiting_in"] = &"MP_OPPONENT_FORFEITING_IN";
     }
-    game["strings"]["match_starting_in"] = & "MP_MATCH_STARTING_IN";
-    game["strings"]["spawn_next_round"] = & "MP_SPAWN_NEXT_ROUND";
-    game["strings"]["waiting_to_spawn"] = & "MP_WAITING_TO_SPAWN";
-    game["strings"]["match_starting"] = & "MP_MATCH_STARTING";
-    game["strings"]["change_class"] = & "MP_CHANGE_CLASS_NEXT_SPAWN";
-    game["strings"]["last_stand"] = & "MPUI_LAST_STAND";
-    game["strings"]["cowards_way"] = & "PLATFORM_COWARDS_WAY_OUT";
-    game["strings"]["tie"] = & "MP_MATCH_TIE";
-    game["strings"]["round_draw"] = & "MP_ROUND_DRAW";
-    game["strings"]["enemies_eliminated"] = & "MP_ENEMIES_ELIMINATED";
-    game["strings"]["score_limit_reached"] = & "MP_SCORE_LIMIT_REACHED";
-    game["strings"]["round_limit_reached"] = & "MP_ROUND_LIMIT_REACHED";
-    game["strings"]["time_limit_reached"] = & "MP_TIME_LIMIT_REACHED";
-    game["strings"]["players_forfeited"] = & "MP_PLAYERS_FORFEITED";
+    game["strings"]["match_starting_in"] = &"MP_MATCH_STARTING_IN";
+    game["strings"]["spawn_next_round"] = &"MP_SPAWN_NEXT_ROUND";
+    game["strings"]["waiting_to_spawn"] = &"MP_WAITING_TO_SPAWN";
+    game["strings"]["match_starting"] = &"MP_MATCH_STARTING";
+    game["strings"]["change_class"] = &"MP_CHANGE_CLASS_NEXT_SPAWN";
+    game["strings"]["last_stand"] = &"MPUI_LAST_STAND";
+    game["strings"]["cowards_way"] = &"PLATFORM_COWARDS_WAY_OUT";
+    game["strings"]["tie"] = &"MP_MATCH_TIE";
+    game["strings"]["round_draw"] = &"MP_ROUND_DRAW";
+    game["strings"]["enemies_eliminated"] = &"MP_ENEMIES_ELIMINATED";
+    game["strings"]["score_limit_reached"] = &"MP_SCORE_LIMIT_REACHED";
+    game["strings"]["round_limit_reached"] = &"MP_ROUND_LIMIT_REACHED";
+    game["strings"]["time_limit_reached"] = &"MP_TIME_LIMIT_REACHED";
+    game["strings"]["players_forfeited"] = &"MP_PLAYERS_FORFEITED";
     switch (game["allies"]) {
       case "russian":
-        game["strings"]["allies_win"] = & "MP_RUSSIAN_WIN_MATCH";
-        game["strings"]["allies_win_round"] = & "MP_RUSSIAN_WIN_ROUND";
-        game["strings"]["allies_mission_accomplished"] = & "MP_RUSSIAN_MISSION_ACCOMPLISHED";
-        game["strings"]["allies_eliminated"] = & "MP_RUSSIAN_ELIMINATED";
-        game["strings"]["allies_forfeited"] = & "MP_RUSSIAN_FORFEITED";
-        game["strings"]["allies_name"] = & "MP_RUSSIAN_NAME";
+        game["strings"]["allies_win"] = &"MP_RUSSIAN_WIN_MATCH";
+        game["strings"]["allies_win_round"] = &"MP_RUSSIAN_WIN_ROUND";
+        game["strings"]["allies_mission_accomplished"] = &"MP_RUSSIAN_MISSION_ACCOMPLISHED";
+        game["strings"]["allies_eliminated"] = &"MP_RUSSIAN_ELIMINATED";
+        game["strings"]["allies_forfeited"] = &"MP_RUSSIAN_FORFEITED";
+        game["strings"]["allies_name"] = &"MP_RUSSIAN_NAME";
         game["music"]["spawn_allies"] = "mp_spawn_soviet";
         game["music"]["victory_allies"] = "mp_victory_soviet";
         game["icons"]["allies"] = "faction_128_soviet";
@@ -2802,12 +2802,12 @@ Callback_StartGameType() {
         break;
       default:
       case "marines":
-        game["strings"]["allies_win"] = & "MP_MARINE_WIN_MATCH";
-        game["strings"]["allies_win_round"] = & "MP_MARINE_WIN_ROUND";
-        game["strings"]["allies_mission_accomplished"] = & "MP_MARINE_MISSION_ACCOMPLISHED";
-        game["strings"]["allies_eliminated"] = & "MP_MARINE_ELIMINATED";
-        game["strings"]["allies_forfeited"] = & "MP_MARINE_FORFEITED";
-        game["strings"]["allies_name"] = & "MP_MARINE_NAME";
+        game["strings"]["allies_win"] = &"MP_MARINE_WIN_MATCH";
+        game["strings"]["allies_win_round"] = &"MP_MARINE_WIN_ROUND";
+        game["strings"]["allies_mission_accomplished"] = &"MP_MARINE_MISSION_ACCOMPLISHED";
+        game["strings"]["allies_eliminated"] = &"MP_MARINE_ELIMINATED";
+        game["strings"]["allies_forfeited"] = &"MP_MARINE_FORFEITED";
+        game["strings"]["allies_name"] = &"MP_MARINE_NAME";
         game["music"]["spawn_allies"] = "mp_spawn_usa";
         game["music"]["victory_allies"] = "mp_victory_usa";
         game["icons"]["allies"] = "faction_128_american";
@@ -2818,12 +2818,12 @@ Callback_StartGameType() {
     }
     switch (game["axis"]) {
       case "german":
-        game["strings"]["axis_win"] = & "MP_GERMAN_WIN_MATCH";
-        game["strings"]["axis_win_round"] = & "MP_GERMAN_WIN_ROUND";
-        game["strings"]["axis_mission_accomplished"] = & "MP_GERMAN_MISSION_ACCOMPLISHED";
-        game["strings"]["axis_eliminated"] = & "MP_GERMAN_ELIMINATED";
-        game["strings"]["axis_forfeited"] = & "MP_GERMAN_FORFEITED";
-        game["strings"]["axis_name"] = & "MP_GERMAN_NAME";
+        game["strings"]["axis_win"] = &"MP_GERMAN_WIN_MATCH";
+        game["strings"]["axis_win_round"] = &"MP_GERMAN_WIN_ROUND";
+        game["strings"]["axis_mission_accomplished"] = &"MP_GERMAN_MISSION_ACCOMPLISHED";
+        game["strings"]["axis_eliminated"] = &"MP_GERMAN_ELIMINATED";
+        game["strings"]["axis_forfeited"] = &"MP_GERMAN_FORFEITED";
+        game["strings"]["axis_name"] = &"MP_GERMAN_NAME";
         game["music"]["spawn_axis"] = "mp_spawn_german";
         game["music"]["victory_axis"] = "mp_victory_german";
         game["icons"]["axis"] = "faction_128_german";
@@ -2833,12 +2833,12 @@ Callback_StartGameType() {
         break;
       default:
       case "japanese":
-        game["strings"]["axis_win"] = & "MP_JAPANESE_WIN_MATCH";
-        game["strings"]["axis_win_round"] = & "MP_JAPANESE_WIN_ROUND";
-        game["strings"]["axis_mission_accomplished"] = & "MP_JAPANESE_MISSION_ACCOMPLISHED";
-        game["strings"]["axis_eliminated"] = & "MP_JAPANESE_ELIMINATED";
-        game["strings"]["axis_forfeited"] = & "MP_JAPANESE_FORFEITED";
-        game["strings"]["axis_name"] = & "MP_JAPANESE_NAME";
+        game["strings"]["axis_win"] = &"MP_JAPANESE_WIN_MATCH";
+        game["strings"]["axis_win_round"] = &"MP_JAPANESE_WIN_ROUND";
+        game["strings"]["axis_mission_accomplished"] = &"MP_JAPANESE_MISSION_ACCOMPLISHED";
+        game["strings"]["axis_eliminated"] = &"MP_JAPANESE_ELIMINATED";
+        game["strings"]["axis_forfeited"] = &"MP_JAPANESE_FORFEITED";
+        game["strings"]["axis_name"] = &"MP_JAPANESE_NAME";
         game["music"]["spawn_axis"] = "mp_spawn_japanese";
         game["music"]["victory_axis"] = "mp_victory_japanese";
         game["icons"]["axis"] = "faction_128_japan";
@@ -3510,7 +3510,7 @@ isHeadShot(sWeapon, sHitLoc, sMeansOfDeath) {
 }
 
 Callback_VehicleDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, psOffsetTime, damageFromUnderneath, modelIndex, partName) {
-  if(!(level.iDFLAGS_RADIUS & iDFlags)) {
+  if(!(level.iDFLAGS_RADIUS &iDFlags)) {
     iDamage = maps\mp\gametypes\_class::cac_modified_vehicle_damage(self, eAttacker, iDamage, sMeansOfDeath, sWeapon, eInflictor);
   }
   self.iDFlags = iDFlags;
@@ -3535,7 +3535,7 @@ Callback_VehicleDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
     else if(isDefined(eInflictor.destructible_type) && isSubStr(eInflictor.destructible_type, "vehicle_"))
       sWeapon = "destructible_car";
   }
-  if(!(iDFlags & level.iDFLAGS_NO_PROTECTION)) {
+  if(!(iDFlags &level.iDFLAGS_NO_PROTECTION)) {
     if(self IsVehicleImmuneToDamage(iDFlags, sMeansOfDeath, sWeapon)) {
       return;
     }
@@ -3655,7 +3655,7 @@ Callback_VehicleRadiusDamage(eInflictor, eAttacker, iDamage, fInnerDamage, fOute
     return;
   }
   friendly = false;
-  if(!(iDFlags & level.iDFLAGS_NO_PROTECTION)) {
+  if(!(iDFlags &level.iDFLAGS_NO_PROTECTION)) {
     if(self IsVehicleImmuneToDamage(iDFlags, sMeansOfDeath, sWeapon)) {
       return;
     }
@@ -3779,7 +3779,7 @@ Callback_ActorDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWe
   if(maps\mp\_dogs::dog_get_dvar_int("debug_dog_attack", "0") == 2) {
     iDamage = 1;
   }
-  if(!(iDFlags & level.iDFLAGS_NO_PROTECTION)) {
+  if(!(iDFlags &level.iDFLAGS_NO_PROTECTION)) {
     if(isPlayer(eAttacker))
       eAttacker.pers["participation"]++;
     prevHealthRatio = self.health / self.maxhealth;
@@ -3923,9 +3923,9 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
     }
   }
   prof_end("PlayerDamage flags/tweaks");
-  if(iDFlags & level.iDFLAGS_PENETRATION && eAttacker hasPerk("specialty_bulletpenetration"))
+  if(iDFlags &level.iDFLAGS_PENETRATION && eAttacker hasPerk("specialty_bulletpenetration"))
     self thread maps\mp\gametypes\_battlechatter_mp::perkSpecificBattleChatter("deepimpact", true);
-  if(!(iDFlags & level.iDFLAGS_NO_PROTECTION)) {
+  if(!(iDFlags &level.iDFLAGS_NO_PROTECTION)) {
     if(level.teamBased && isDefined(level.chopper) && isDefined(eAttacker) && eAttacker == level.chopper && eAttacker.team == self.pers["team"]) {
       return;
     }
@@ -4104,7 +4104,7 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
       }
       eAttacker.damageInfo[0].damage = iDamage;
       eAttacker.damageInfo[0].hitloc = sHitLoc;
-      eAttacker.damageInfo[0].bp = (iDFlags & level.iDFLAGS_PENETRATION);
+      eAttacker.damageInfo[0].bp = (iDFlags &level.iDFLAGS_PENETRATION);
       eAttacker.damageInfo[0].jugg = self hasPerk("specialty_armorvest");
       if(isDefined(eAttacker.damageInfoVictim) && eAttacker.damageInfoVictim != self) {
         eAttacker.damageInfoColorIndex++;

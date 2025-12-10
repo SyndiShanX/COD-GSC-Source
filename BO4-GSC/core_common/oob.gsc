@@ -107,7 +107,7 @@ istouchinganyoobtrigger() {
 
     n_flags = function_27f2ef17(trigger);
 
-    if(trigger.classname == "trigger_out_of_bounds_new" && self.team == #"axis" && !(n_flags&1) || self.team == #"allies" && !(n_flags&2)) {
+    if(trigger.classname == "trigger_out_of_bounds_new" && self.team == #"axis" && !(n_flags& 1) || self.team == #"allies" && !(n_flags& 2)) {
       continue;
     }
 

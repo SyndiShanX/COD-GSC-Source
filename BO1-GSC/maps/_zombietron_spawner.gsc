@@ -600,8 +600,8 @@ the_big_boss_defeated(type) {
   boss_msg3 = undefined;
   switch (type) {
     case "ape_zombie":
-      text2 = & "ZOMBIETRON_COSMIC_SB_DEFEATED";
-      text3 = & "ZOMBIETRON_COSMIC_SB_DEFEATED2";
+      text2 = &"ZOMBIETRON_COSMIC_SB_DEFEATED";
+      text3 = &"ZOMBIETRON_COSMIC_SB_DEFEATED2";
       break;
   }
   boss_msg = NewHudElem(self);
@@ -672,7 +672,7 @@ the_big_boss_introduction(type) {
   boss_msg2 = undefined;
   switch (type) {
     case "ape_zombie":
-      text2 = & "ZOMBIETRON_COSMIC_SB";
+      text2 = &"ZOMBIETRON_COSMIC_SB";
       break;
   }
   boss_msg = NewHudElem(self);

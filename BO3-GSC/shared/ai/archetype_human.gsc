@@ -30,8 +30,8 @@
 #namespace archetype_human;
 
 function autoexec init() {
-  spawner::add_archetype_spawn_function("human", & archetypehumanblackboardinit);
-  spawner::add_archetype_spawn_function("human", & archetypehumaninit);
+  spawner::add_archetype_spawn_function("human", &archetypehumanblackboardinit);
+  spawner::add_archetype_spawn_function("human", &archetypehumaninit);
   humaninterface::registerhumaninterfaceattributes();
   clientfield::register("actor", "facial_dial", 1, 1, "int");
   level.__ai_forcegibs = getdvarint("");
@@ -39,8 +39,8 @@ function autoexec init() {
 
 function private archetypehumaninit() {
   entity = self;
-  aiutility::addaioverridedamagecallback(entity, & damageoverride);
-  aiutility::addaioverridekilledcallback(entity, & humangibkilledoverride);
+  aiutility::addaioverridedamagecallback(entity, &damageoverride);
+  aiutility::addaioverridekilledcallback(entity, &humangibkilledoverride);
   locomotiontypes = array("alt1", "alt2", "alt3", "alt4");
   altindex = entity getentitynumber() % locomotiontypes.size;
   blackboard::setblackboardattribute(entity, "_human_locomotion_variation", locomotiontypes[altindex]);
@@ -54,8 +54,8 @@ function private archetypehumanblackboardinit() {
   ai::createinterfaceforentity(self);
   self aiutility::registerutilityblackboardattributes();
   self blackboard::registeractorblackboardattributes();
-  self.___archetypeonanimscriptedcallback = & archetypehumanonanimscriptedcallback;
-  self.___archetypeonbehavecallback = & archetypehumanonbehavecallback;
+  self.___archetypeonanimscriptedcallback = &archetypehumanonanimscriptedcallback;
+  self.___archetypeonbehavecallback = &archetypehumanonbehavecallback;
   self finalizetrackedblackboardattributes();
   self thread gameskill::accuracy_buildup_before_fire(self);
   if(self.accuratefire) {

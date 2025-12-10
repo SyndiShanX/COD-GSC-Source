@@ -13,17 +13,17 @@
 #namespace dragon_scale_shield;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_dragonshield", & __init__, undefined, undefined);
+  system::register("zm_weap_dragonshield", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("allplayers", "ds_ammo", 12000, 1, "int", & function_3b8ce539, 0, 0);
-  clientfield::register("allplayers", "burninate", 12000, 1, "counter", & function_adc7474a, 0, 0);
-  clientfield::register("allplayers", "burninate_upgraded", 12000, 1, "counter", & function_627dd7e5, 0, 0);
-  clientfield::register("actor", "dragonshield_snd_projectile_impact", 12000, 1, "counter", & dragonshield_snd_projectile_impact, 0, 0);
-  clientfield::register("vehicle", "dragonshield_snd_projectile_impact", 12000, 1, "counter", & dragonshield_snd_projectile_impact, 0, 0);
-  clientfield::register("actor", "dragonshield_snd_zombie_knockdown", 12000, 1, "counter", & dragonshield_snd_zombie_knockdown, 0, 0);
-  clientfield::register("vehicle", "dragonshield_snd_zombie_knockdown", 12000, 1, "counter", & dragonshield_snd_zombie_knockdown, 0, 0);
+  clientfield::register("allplayers", "ds_ammo", 12000, 1, "int", &function_3b8ce539, 0, 0);
+  clientfield::register("allplayers", "burninate", 12000, 1, "counter", &function_adc7474a, 0, 0);
+  clientfield::register("allplayers", "burninate_upgraded", 12000, 1, "counter", &function_627dd7e5, 0, 0);
+  clientfield::register("actor", "dragonshield_snd_projectile_impact", 12000, 1, "counter", &dragonshield_snd_projectile_impact, 0, 0);
+  clientfield::register("vehicle", "dragonshield_snd_projectile_impact", 12000, 1, "counter", &dragonshield_snd_projectile_impact, 0, 0);
+  clientfield::register("actor", "dragonshield_snd_zombie_knockdown", 12000, 1, "counter", &dragonshield_snd_zombie_knockdown, 0, 0);
+  clientfield::register("vehicle", "dragonshield_snd_zombie_knockdown", 12000, 1, "counter", &dragonshield_snd_zombie_knockdown, 0, 0);
 }
 
 function function_3b8ce539(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

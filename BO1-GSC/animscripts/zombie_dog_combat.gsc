@@ -198,7 +198,7 @@ use_low_attack(player) {
 }
 
 prepareAttackPlayer(player) {
-  level.dog_death_quote = & "SCRIPT_PLATFORM_DOG_DEATH_DO_NOTHING";
+  level.dog_death_quote = &"SCRIPT_PLATFORM_DOG_DEATH_DO_NOTHING";
   distanceToTarget = distance(self.origin, self.enemy.origin);
   targetHeight = Abs(self.enemy.origin[2] - self.origin[2]);
   self.enemy_attack_start_distance = distanceToTarget;

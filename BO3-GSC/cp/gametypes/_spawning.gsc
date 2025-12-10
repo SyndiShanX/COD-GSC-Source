@@ -20,7 +20,7 @@
 #namespace spawning;
 
 function autoexec __init__sytem__() {
-  system::register("spawning", & __init__, undefined, undefined);
+  system::register("spawning", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -29,7 +29,7 @@ function __init__() {
   foreach(team in level.teams) {
     level.recently_deceased[team] = util::spawn_array_struct();
   }
-  callback::on_connecting( & onplayerconnect);
+  callback::on_connecting(&onplayerconnect);
   level.spawnprotectiontime = getgametypesetting("spawnprotectiontime");
   level.spawnprotectiontimems = int((isDefined(level.spawnprotectiontime) ? level.spawnprotectiontime : 0) * 1000);
   setdvar("", "");

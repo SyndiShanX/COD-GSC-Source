@@ -16,53 +16,53 @@
 #namespace zm_castle_ee_bossfight;
 
 function autoexec __init__sytem__() {
-  system::register("zm_castle_ee_bossfight", & __init__, undefined, undefined);
+  system::register("zm_castle_ee_bossfight", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "player_snow_fx_off", 5000, 1, "counter", & player_snow_fx_off, 0, 0);
-  clientfield::register("actor", "boss_skeleton_eye_glow_fx_change", 5000, 1, "counter", & boss_skeleton_eye_glow_fx_change, 0, 0);
+  clientfield::register("toplayer", "player_snow_fx_off", 5000, 1, "counter", &player_snow_fx_off, 0, 0);
+  clientfield::register("actor", "boss_skeleton_eye_glow_fx_change", 5000, 1, "counter", &boss_skeleton_eye_glow_fx_change, 0, 0);
   level._effect["boss_skeleton_eye_glow"] = "dlc1/castle/fx_glow_eye_orange_skeleton";
-  clientfield::register("scriptmover", "boss_mpd_fx", 5000, 1, "int", & boss_mpd_fx, 0, 0);
+  clientfield::register("scriptmover", "boss_mpd_fx", 5000, 1, "int", &boss_mpd_fx, 0, 0);
   level._effect["boss_mpd_mist"] = "dlc1/castle/fx_ee_keeper_small_mist_trail";
   level._effect["boss_mpd_mouth"] = "dlc1/castle/fx_ee_keeper_small_mouth_glow";
-  clientfield::register("scriptmover", "boss_fx", 5000, 1, "int", & boss_fx, 0, 0);
-  clientfield::register("scriptmover", "boss_weak_point_shader", 5000, 1, "int", & boss_weak_point_shader, 0, 0);
-  clientfield::register("actor", "boss_zombie_rise_fx", 1, 1, "int", & boss_zombie_rise_fx, 1, 1);
+  clientfield::register("scriptmover", "boss_fx", 5000, 1, "int", &boss_fx, 0, 0);
+  clientfield::register("scriptmover", "boss_weak_point_shader", 5000, 1, "int", &boss_weak_point_shader, 0, 0);
+  clientfield::register("actor", "boss_zombie_rise_fx", 1, 1, "int", &boss_zombie_rise_fx, 1, 1);
   level._effect["boss_mist"] = "dlc1/castle/fx_ee_keeper_mist_trail";
   level._effect["boss_mouth"] = "dlc1/castle/fx_ee_keeper_mouth_glow";
   level._effect["boss_rise_burst"] = "dlc1/castle/fx_ee_keeper_hand_burst_zmb";
   level._effect["boss_rise_billow"] = "dlc1/castle/fx_ee_keeper_body_billowing_zmb";
-  clientfield::register("scriptmover", "boss_teleport_fx", 5000, 1, "counter", & boss_teleport_fx, 0, 0);
+  clientfield::register("scriptmover", "boss_teleport_fx", 5000, 1, "counter", &boss_teleport_fx, 0, 0);
   level._effect["boss_teleport"] = "dlc1/castle/fx_ee_keeper_teleport";
-  clientfield::register("scriptmover", "boss_elemental_storm_cast_fx", 5000, 1, "int", & boss_elemental_storm_cast_fx, 0, 0);
-  clientfield::register("scriptmover", "boss_elemental_storm_explode_fx", 5000, 1, "int", & boss_elemental_storm_explode_fx, 0, 0);
-  clientfield::register("scriptmover", "boss_elemental_storm_stunned_keeper_fx", 5000, 1, "int", & boss_elemental_storm_stunned_keeper_fx, 0, 0);
-  clientfield::register("scriptmover", "boss_elemental_storm_stunned_spikes_fx", 5000, 1, "int", & boss_elemental_storm_stunned_spikes_fx, 0, 0);
+  clientfield::register("scriptmover", "boss_elemental_storm_cast_fx", 5000, 1, "int", &boss_elemental_storm_cast_fx, 0, 0);
+  clientfield::register("scriptmover", "boss_elemental_storm_explode_fx", 5000, 1, "int", &boss_elemental_storm_explode_fx, 0, 0);
+  clientfield::register("scriptmover", "boss_elemental_storm_stunned_keeper_fx", 5000, 1, "int", &boss_elemental_storm_stunned_keeper_fx, 0, 0);
+  clientfield::register("scriptmover", "boss_elemental_storm_stunned_spikes_fx", 5000, 1, "int", &boss_elemental_storm_stunned_spikes_fx, 0, 0);
   level._effect["boss_elemental_storm_cast"] = "dlc1/castle/fx_ee_keeper_storm_tell";
   level._effect["boss_elemental_storm_explode_loop"] = "dlc1/zmb_weapon/fx_bow_storm_funnel_loop_zmb";
   level._effect["boss_elemental_storm_explode_end"] = "dlc1/zmb_weapon/fx_bow_storm_funnel_end_zmb";
   level._effect["boss_elemental_storm_stunned_spikes"] = "dlc1/castle/fx_ee_keeper_beam_stunned_src";
   level._effect["boss_elemental_storm_stunned_keeper"] = "dlc1/castle/fx_ee_keeper_beam_stunned_tgt";
-  clientfield::register("scriptmover", "boss_demongate_cast_fx", 5000, 1, "int", & boss_demongate_cast_fx, 0, 0);
-  clientfield::register("scriptmover", "boss_demongate_chomper_fx", 5000, 1, "int", & boss_demongate_chomper_fx, 0, 0);
-  clientfield::register("scriptmover", "boss_demongate_chomper_bite_fx", 5000, 1, "counter", & boss_demongate_chomper_bite_fx, 0, 0);
+  clientfield::register("scriptmover", "boss_demongate_cast_fx", 5000, 1, "int", &boss_demongate_cast_fx, 0, 0);
+  clientfield::register("scriptmover", "boss_demongate_chomper_fx", 5000, 1, "int", &boss_demongate_chomper_fx, 0, 0);
+  clientfield::register("scriptmover", "boss_demongate_chomper_bite_fx", 5000, 1, "counter", &boss_demongate_chomper_bite_fx, 0, 0);
   level._effect["boss_demongate_portal_open"] = "dlc1/castle/fx_ee_keeper_demongate_portal_open";
   level._effect["boss_demongate_portal_loop"] = "dlc1/castle/fx_ee_keeper_demongate_portal_loop";
   level._effect["boss_demongate_portal_close"] = "dlc1/castle/fx_ee_keeper_demongate_portal_close";
   level._effect["boss_demongate_chomper_trail"] = "dlc1/castle/fx_ee_keeper_demonhead_trail";
   level._effect["boss_demongate_chomper_bite"] = "dlc1/castle/fx_ee_keeper_demonhead_despawn";
   level._effect["boss_demongate_chomper_despawn"] = "dlc1/castle/fx_ee_keeper_demonhead_despawn";
-  clientfield::register("scriptmover", "boss_rune_prison_erupt_fx", 5000, 1, "int", & boss_rune_prison_erupt_fx, 0, 0);
-  clientfield::register("scriptmover", "boss_rune_prison_rock_fx", 5000, 1, "int", & boss_rune_prison_rock_fx, 0, 0);
-  clientfield::register("scriptmover", "boss_rune_prison_explode_fx", 5000, 1, "int", & boss_rune_prison_explode_fx, 0, 0);
-  clientfield::register("allplayers", "boss_rune_prison_dot_fx", 5000, 1, "int", & boss_rune_prison_dot_fx, 0, 0);
-  clientfield::register("world", "sndBossBattle", 5000, 1, "int", & sndbossbattle, 0, 0);
+  clientfield::register("scriptmover", "boss_rune_prison_erupt_fx", 5000, 1, "int", &boss_rune_prison_erupt_fx, 0, 0);
+  clientfield::register("scriptmover", "boss_rune_prison_rock_fx", 5000, 1, "int", &boss_rune_prison_rock_fx, 0, 0);
+  clientfield::register("scriptmover", "boss_rune_prison_explode_fx", 5000, 1, "int", &boss_rune_prison_explode_fx, 0, 0);
+  clientfield::register("allplayers", "boss_rune_prison_dot_fx", 5000, 1, "int", &boss_rune_prison_dot_fx, 0, 0);
+  clientfield::register("world", "sndBossBattle", 5000, 1, "int", &sndbossbattle, 0, 0);
   level._effect["boss_rune_prison_erupt"] = "dlc1/castle/fx_ee_keeper_runeprison_glow";
   level._effect["boss_rune_prison_explode"] = "dlc1/castle/fx_ee_keeper_runeprison_fire";
   level._effect["boss_rune_prison_dot"] = "dlc1/zmb_weapon/fx_bow_rune_fire_torso_zmb";
-  clientfield::register("world", "boss_wolf_howl_fx_change", 5000, 1, "int", & boss_wolf_howl_fx_change, 0, 0);
-  clientfield::register("world", "boss_gravity_spike_fx_change", 5000, 1, "int", & boss_gravity_spike_fx_change, 0, 0);
+  clientfield::register("world", "boss_wolf_howl_fx_change", 5000, 1, "int", &boss_wolf_howl_fx_change, 0, 0);
+  clientfield::register("world", "boss_gravity_spike_fx_change", 5000, 1, "int", &boss_gravity_spike_fx_change, 0, 0);
 }
 
 function player_snow_fx_off(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

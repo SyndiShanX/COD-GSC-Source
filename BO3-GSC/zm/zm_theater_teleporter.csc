@@ -12,17 +12,17 @@
 #namespace zm_theater_teleporter;
 
 function autoexec __init__sytem__() {
-  system::register("zm_theater_teleporter", & __init__, undefined, undefined);
+  system::register("zm_theater_teleporter", &__init__, undefined, undefined);
 }
 
 function __init__() {
   visionset_mgr::register_overlay_info_style_postfx_bundle("zm_theater_teleport", 21000, 1, "pstfx_zm_kino_teleport");
-  clientfield::register("scriptmover", "extra_screen", 21000, 1, "int", & function_667aa0b4, 0, 0);
-  clientfield::register("scriptmover", "teleporter_fx", 21000, 1, "counter", & function_a8255fab, 0, 0);
-  clientfield::register("allplayers", "player_teleport_fx", 21000, 1, "counter", & function_2b23adc9, 0, 0);
-  clientfield::register("scriptmover", "play_fly_me_to_the_moon_fx", 21000, 1, "int", & play_fly_me_to_the_moon_fx, 0, 0);
-  clientfield::register("world", "teleporter_initiate_fx", 21000, 1, "counter", & function_6776dea9, 0, 0);
-  clientfield::register("scriptmover", "teleporter_link_cable_mtl", 21000, 1, "int", & teleporter_link_cable_mtl, 0, 0);
+  clientfield::register("scriptmover", "extra_screen", 21000, 1, "int", &function_667aa0b4, 0, 0);
+  clientfield::register("scriptmover", "teleporter_fx", 21000, 1, "counter", &function_a8255fab, 0, 0);
+  clientfield::register("allplayers", "player_teleport_fx", 21000, 1, "counter", &function_2b23adc9, 0, 0);
+  clientfield::register("scriptmover", "play_fly_me_to_the_moon_fx", 21000, 1, "int", &play_fly_me_to_the_moon_fx, 0, 0);
+  clientfield::register("world", "teleporter_initiate_fx", 21000, 1, "counter", &function_6776dea9, 0, 0);
+  clientfield::register("scriptmover", "teleporter_link_cable_mtl", 21000, 1, "int", &teleporter_link_cable_mtl, 0, 0);
 }
 
 function main() {

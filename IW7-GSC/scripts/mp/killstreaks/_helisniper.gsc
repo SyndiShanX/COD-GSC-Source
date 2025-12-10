@@ -27,18 +27,18 @@ func_128E8(param_00, param_01) {
   if(isDefined(self.isjuggernautlevelcustom) && self.isjuggernautlevelcustom == 1) {
     return 0;
   } else if(!isDefined(level.var_1A66) || !isDefined(var_02) || !isDefined(var_03)) {
-    self iprintlnbold( & "KILLSTREAKS_UNAVAILABLE_IN_LEVEL");
+    self iprintlnbold(&"KILLSTREAKS_UNAVAILABLE_IN_LEVEL");
     return 0;
   }
 
   var_05 = 1;
   if(func_68C2()) {
-    self iprintlnbold( & "KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+    self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
   }
 
   if(scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + var_05 >= scripts\mp\utility::maxvehiclesallowed()) {
-    self iprintlnbold( & "KILLSTREAKS_TOO_MANY_VEHICLES");
+    self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
     return 0;
   }
 

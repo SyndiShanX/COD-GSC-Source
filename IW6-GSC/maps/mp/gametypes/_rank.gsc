@@ -1151,7 +1151,7 @@ syncXPStat() {
         playerteam = player.pers["team"];
         if(isDefined(playerteam) && player != self) {
           if(playerteam == team)
-            player IPrintLn(&"RANK_PLAYER_WAS_PROMOTED", self, & "MPUI_PRESTIGE");
+            player IPrintLn(&"RANK_PLAYER_WAS_PROMOTED", self, &"MPUI_PRESTIGE");
         }
       }
     }

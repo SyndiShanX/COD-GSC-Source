@@ -69,9 +69,9 @@ function main() {
 }
 
 function init_clientfields() {
-  clientfield::register("world", "asylum_trap_fx_north", 21000, 1, "int", & zm_asylum_fx::function_93f91575, 0, 0);
-  clientfield::register("world", "asylum_trap_fx_south", 21000, 1, "int", & zm_asylum_fx::function_4c17ba1b, 0, 0);
-  clientfield::register("world", "asylum_generator_state", 21000, 1, "int", & function_d56a2c4b, 0, 0);
+  clientfield::register("world", "asylum_trap_fx_north", 21000, 1, "int", &zm_asylum_fx::function_93f91575, 0, 0);
+  clientfield::register("world", "asylum_trap_fx_south", 21000, 1, "int", &zm_asylum_fx::function_4c17ba1b, 0, 0);
+  clientfield::register("world", "asylum_generator_state", 21000, 1, "int", &function_d56a2c4b, 0, 0);
 }
 
 function start_zombie_stuff() {
@@ -119,7 +119,7 @@ function function_c9207335() {
   wait(3);
   level thread function_d667714e();
   var_13a52dfe = getEntArray(0, "sndMusicTrig", "targetname");
-  array::thread_all(var_13a52dfe, & function_60a32834);
+  array::thread_all(var_13a52dfe, &function_60a32834);
 }
 
 function function_60a32834() {

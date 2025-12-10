@@ -58,7 +58,7 @@ function init() {
   init_call_boxes();
   level thread lander_poi_init();
   level flag::wait_till("start_zombie_round_logic");
-  callback::on_connect( & function_7a1aff0c);
+  callback::on_connect(&function_7a1aff0c);
   setup_initial_lander_states();
   level notify("lander_launched");
   wait(0.1);
@@ -424,7 +424,7 @@ function new_lander_intro() {
   level thread lander_engine_fx();
   lander.anchor moveto(spot1, 8, 0.1, 7.9);
   level notify("lander_launched");
-  util::delay(6, undefined, & flag::set, "lander_intro_done");
+  util::delay(6, undefined, &flag::set, "lander_intro_done");
   lander.anchor waittill("movedone");
   level.intro_lander = 0;
   level flag::set("lander_grounded");
@@ -870,7 +870,7 @@ function zombie_knockdown() {
   if(isDefined(self.thundergun_knockdown_func)) {
     self[[self.thundergun_knockdown_func]](self, 0);
   }
-  self.thundergun_handle_pain_notetracks = & zm_weap_thundergun::handle_thundergun_pain_notetracks;
+  self.thundergun_handle_pain_notetracks = &zm_weap_thundergun::handle_thundergun_pain_notetracks;
   self dodamage(1, self.origin);
 }
 
@@ -990,10 +990,10 @@ function lander_cooldown_think() {
     level flag::clear("lander_inuse");
     level flag::set("lander_cooldown");
     cooldown = 3;
-    str = & "ZM_COSMODROME_LANDER_COOLDOWN";
+    str = &"ZM_COSMODROME_LANDER_COOLDOWN";
     if(riders != 0) {
       cooldown = 30;
-      str = & "ZM_COSMODROME_LANDER_REFUEL";
+      str = &"ZM_COSMODROME_LANDER_REFUEL";
       for(i = 0; i < lander_callboxes.size; i++) {
         lander_callboxes[i] playSound("vox_ann_lander_cooldown");
       }

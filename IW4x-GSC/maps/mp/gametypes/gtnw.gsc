@@ -83,18 +83,18 @@ onStartGameType() {
   setClientNameMode("auto_change");
 
   if(level.splitscreen) {
-    setObjectiveScoreText(game["attackers"], & "OBJECTIVES_GTNW");
-    setObjectiveScoreText(game["defenders"], & "OBJECTIVES_GTNW");
+    setObjectiveScoreText(game["attackers"], &"OBJECTIVES_GTNW");
+    setObjectiveScoreText(game["defenders"], &"OBJECTIVES_GTNW");
   } else {
-    setObjectiveScoreText(game["attackers"], & "OBJECTIVES_GTNW_SCORE");
-    setObjectiveScoreText(game["defenders"], & "OBJECTIVES_GTNW_SCORE");
+    setObjectiveScoreText(game["attackers"], &"OBJECTIVES_GTNW_SCORE");
+    setObjectiveScoreText(game["defenders"], &"OBJECTIVES_GTNW_SCORE");
   }
 
-  setObjectiveText(game["attackers"], & "OBJECTIVES_GTNW");
-  setObjectiveText(game["defenders"], & "OBJECTIVES_GTNW");
+  setObjectiveText(game["attackers"], &"OBJECTIVES_GTNW");
+  setObjectiveText(game["defenders"], &"OBJECTIVES_GTNW");
 
-  setObjectiveHintText(game["attackers"], & "OBJECTIVES_GTNW_HINT");
-  setObjectiveHintText(game["defenders"], & "OBJECTIVES_GTNW_HINT");
+  setObjectiveHintText(game["attackers"], &"OBJECTIVES_GTNW_HINT");
+  setObjectiveHintText(game["defenders"], &"OBJECTIVES_GTNW_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -386,7 +386,6 @@ setUseBarScore(team) {
     if(!isDefined(self.touchlist[team][player.guid])) {
       continue;
     }
-
 
     player.useBar updateBar(teamScore / 100, 0);
   }

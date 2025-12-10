@@ -247,7 +247,7 @@ on_agent_generic_damaged(param_00, param_01, param_02, param_03, param_04, param
   }
 
   if(isDefined(param_01) && param_01 != self && param_02 > 0 && !isDefined(param_08) || param_08 != "shield") {
-    if(param_03 & level.idflags_stun) {
+    if(param_03 &level.idflags_stun) {
       var_0E = "stun";
     } else if(!scripts\mp\damage::func_100C1(param_06)) {
       var_0E = "none";

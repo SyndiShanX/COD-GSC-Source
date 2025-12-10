@@ -12,9 +12,9 @@ init() {
   var_0.modelplacement = "boom_box_c4_wm";
   var_0.modelplacementfailed = "boom_box_c4_wm_bad";
   var_0.placedmodel = "boom_box_c4_wm";
-  var_0.placestring = & "COOP_CRAFTABLES_PLACE";
-  var_0.cannotplacestring = & "COOP_CRAFTABLES_CANNOT_PLACE";
-  var_0.placecancelablestring = & "COOP_CRAFTABLES_PLACE_CANCELABLE";
+  var_0.placestring = &"COOP_CRAFTABLES_PLACE";
+  var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
+  var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
   var_0.placementheighttolerance = 30.0;
   var_0.placementradius = 16.0;
   var_0.carriedtrapoffset = (0, 0, 35);

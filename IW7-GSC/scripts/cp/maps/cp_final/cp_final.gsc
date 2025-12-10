@@ -52,10 +52,10 @@ main() {
   level.venom_x_weapon_logic_thread = ::scripts\cp\maps\cp_final\cp_final_venomx_quest::venomx_weapon_logic_start;
   level thread scripts\cp\maps\cp_final\cp_final_rhino_boss::rhino_boss_init();
   level thread scripts\cp\maps\cp_final\cp_final_fast_travel::init_teleport_portals();
-  level.magic_wheel_spin_hint = & "CP_TOWN_INTERACTIONS_SPIN_WHEEL";
-  level.reboard_barriers_hint = & "CP_TOWN_INTERACTIONS_SECURE_WINDOW";
-  level.enter_area_hint = & "CP_TOWN_INTERACTIONS_ENTER_THIS_AREA";
-  level.needspowerstring = & "CP_FINAL_INTERACTIONS_SYSTEM_OFFLINE";
+  level.magic_wheel_spin_hint = &"CP_TOWN_INTERACTIONS_SPIN_WHEEL";
+  level.reboard_barriers_hint = &"CP_TOWN_INTERACTIONS_SECURE_WINDOW";
+  level.enter_area_hint = &"CP_TOWN_INTERACTIONS_ENTER_THIS_AREA";
+  level.needspowerstring = &"CP_FINAL_INTERACTIONS_SYSTEM_OFFLINE";
   level.zombie_ghost_model = "zombie_ghost_green";
   scripts\cp\zombies\coop_wall_buys::init();
   level.map_interaction_func = ::scripts\cp\maps\cp_final\cp_final_interactions::register_interactions;
@@ -407,11 +407,11 @@ wait_for_pre_game_period() {
     wait(1);
   }
 
-  level.interaction_hintstrings["jaroslav_machine_meph"] = & "CP_FINAL_FNF_MEPH";
+  level.interaction_hintstrings["jaroslav_machine_meph"] = &"CP_FINAL_FNF_MEPH";
   scripts\cp\cp_interaction::register_interaction("jaroslav_machine_meph", "wondercard_machine", 0, ::scripts\cp\zombies\zombies_consumable_replenishment::jaroslav_hint_logic, ::scripts\cp\zombies\zombies_consumable_replenishment::interaction_jaroslav, 0, 0);
-  level.interaction_hintstrings["meph_perks"] = & "CP_FINAL_MEPH_PERKS";
+  level.interaction_hintstrings["meph_perks"] = &"CP_FINAL_MEPH_PERKS";
   scripts\cp\cp_interaction::register_interaction("meph_perks", "perk", 0, undefined, ::take_final_fight_perks, 0, 0);
-  level.interaction_hintstrings["start_meph_battle"] = & "CP_FINAL_EXIT_AFTERLIFE";
+  level.interaction_hintstrings["start_meph_battle"] = &"CP_FINAL_EXIT_AFTERLIFE";
   scripts\cp\cp_interaction::register_interaction("start_meph_battle", "perk", 0, undefined, ::scripts\cp\maps\cp_final\cp_final_final_boss::try_to_leave_bossfight, 0, 0);
   level.centhub_portal_fx = level._effect["afterlife_portal_fx"];
   thread scripts\cp\maps\cp_final\cp_final_final_boss::pre_bossfight_init();
@@ -432,7 +432,7 @@ take_final_fight_perks(param_00, param_01) {
       return;
     }
 
-    param_01 scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, & "CP_FINAL_TAKE_PERK_FAIL");
+    param_01 scripts\cp\cp_interaction::interaction_show_fail_reason(param_00, &"CP_FINAL_TAKE_PERK_FAIL");
     param_01 scripts\cp\cp_interaction::refresh_interaction();
     param_01 playlocalsound("purchase_deny");
     return;
@@ -2119,20 +2119,20 @@ disablepa(param_00) {
 }
 
 cp_final_introscreen_text() {
-  var_00 = scripts\cp\cp_hud_util::introscreen_corner_line( & "CP_FINAL_INTRO_LINE_1", 1);
+  var_00 = scripts\cp\cp_hud_util::introscreen_corner_line(&"CP_FINAL_INTRO_LINE_1", 1);
   wait(1);
-  var_01 = scripts\cp\cp_hud_util::introscreen_corner_line( & "CP_FINAL_INTRO_LINE_2", 2);
+  var_01 = scripts\cp\cp_hud_util::introscreen_corner_line(&"CP_FINAL_INTRO_LINE_2", 2);
   wait(1);
   if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight() && !scripts\cp\zombies\direct_boss_fight::is_meph_fight()) {
-    var_02 = scripts\cp\cp_hud_util::introscreen_corner_line( & "DIRECT_BOSS_FIGHT_LINE4_FINAL", 3);
+    var_02 = scripts\cp\cp_hud_util::introscreen_corner_line(&"DIRECT_BOSS_FIGHT_LINE4_FINAL", 3);
   } else if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight() && scripts\cp\zombies\direct_boss_fight::is_meph_fight()) {
-    var_02 = scripts\cp\cp_hud_util::introscreen_corner_line( & "DIRECT_BOSS_FIGHT_LINE4_DC", 3);
+    var_02 = scripts\cp\cp_hud_util::introscreen_corner_line(&"DIRECT_BOSS_FIGHT_LINE4_DC", 3);
   } else {
-    var_02 = scripts\cp\cp_hud_util::introscreen_corner_line( & "CP_FINAL_INTRO_LINE_3", 3);
+    var_02 = scripts\cp\cp_hud_util::introscreen_corner_line(&"CP_FINAL_INTRO_LINE_3", 3);
   }
 
   wait(1);
-  var_03 = scripts\cp\cp_hud_util::introscreen_corner_line( & "CP_FINAL_INTRO_LINE_4", 4);
+  var_03 = scripts\cp\cp_hud_util::introscreen_corner_line(&"CP_FINAL_INTRO_LINE_4", 4);
   wait(3);
   var_00 fadeovertime(3);
   var_01 fadeovertime(3);

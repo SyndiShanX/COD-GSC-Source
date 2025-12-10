@@ -66,7 +66,7 @@ function _server_safe_ground_trace(pos) {
 
 function server_safe_ground_trace(id, max, origin) {
   server_safe_init(id, max);
-  return server_choke_action(id, & _server_safe_ground_trace, origin);
+  return server_choke_action(id, &_server_safe_ground_trace, origin);
 }
 
 function _server_safe_ground_trace_ignore_water(pos) {
@@ -75,5 +75,5 @@ function _server_safe_ground_trace_ignore_water(pos) {
 
 function server_safe_ground_trace_ignore_water(id, max, origin) {
   server_safe_init(id, max);
-  return server_choke_action(id, & _server_safe_ground_trace_ignore_water, origin);
+  return server_choke_action(id, &_server_safe_ground_trace_ignore_water, origin);
 }

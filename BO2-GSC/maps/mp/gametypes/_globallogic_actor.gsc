@@ -62,7 +62,7 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
       sweapon = "destructible_car_mp";
   }
 
-  if(!(idflags & level.idflags_no_protection)) {
+  if(!(idflags &level.idflags_no_protection)) {
     if(isplayer(eattacker))
       eattacker.pers["participation"]++;
 

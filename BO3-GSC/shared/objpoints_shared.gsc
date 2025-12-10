@@ -9,7 +9,7 @@
 #namespace objpoints;
 
 function autoexec __init__sytem__() {
-  system::register("objpoints", & __init__, undefined, undefined);
+  system::register("objpoints", &__init__, undefined, undefined);
 }
 
 function __init__() {

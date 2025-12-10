@@ -29,18 +29,18 @@
 #namespace castle_rocketshield;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_castle_rocketshield", & __init__, & __main__, undefined);
+  system::register("zm_weap_castle_rocketshield", &__init__, &__main__, undefined);
 }
 
 function __init__() {
   zm_craft_shield::init("craft_shield_zm", "castle_riotshield", "wpn_t7_zmb_zod_rocket_shield_world");
   clientfield::register("allplayers", "rs_ammo", 1, 1, "int");
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
   level.weaponriotshield = getweapon("castle_riotshield");
-  zm_equipment::register("castle_riotshield", & "ZOMBIE_EQUIP_RIOTSHIELD_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_RIOTSHIELD_HOWTO", undefined, "riotshield");
+  zm_equipment::register("castle_riotshield", &"ZOMBIE_EQUIP_RIOTSHIELD_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_RIOTSHIELD_HOWTO", undefined, "riotshield");
   level.weaponriotshieldupgraded = getweapon("castle_riotshield_upgraded");
-  zm_equipment::register("castle_riotshield_upgraded", & "ZOMBIE_EQUIP_RIOTSHIELD_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_RIOTSHIELD_HOWTO", undefined, "riotshield");
+  zm_equipment::register("castle_riotshield_upgraded", &"ZOMBIE_EQUIP_RIOTSHIELD_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_RIOTSHIELD_HOWTO", undefined, "riotshield");
 }
 
 function __main__() {
@@ -300,8 +300,8 @@ function create_bottle_unitrigger(v_origin, v_angles) {
   unitrigger_stub.mdl_shield_recharge.angles = v_angles;
   s_struct.spawned = 1;
   unitrigger_stub.shield_recharge_spawnpoint = s_struct;
-  unitrigger_stub.prompt_and_visibility_func = & bottle_trigger_visibility;
-  zm_unitrigger::register_static_unitrigger(unitrigger_stub, & shield_recharge_trigger_think);
+  unitrigger_stub.prompt_and_visibility_func = &bottle_trigger_visibility;
+  zm_unitrigger::register_static_unitrigger(unitrigger_stub, &shield_recharge_trigger_think);
   return unitrigger_stub;
 }
 
@@ -366,7 +366,7 @@ function bottle_trigger_activate(trig_stub, player) {
 function function_3f94d6cf() {
   level flagsys::wait_till("");
   wait(1);
-  zm_devgui::add_custom_devgui_callback( & function_e2f5a93);
+  zm_devgui::add_custom_devgui_callback(&function_e2f5a93);
   adddebugcommand("");
   adddebugcommand("");
   players = getplayers();
@@ -380,12 +380,12 @@ function function_e2f5a93(cmd) {
   retval = 0;
   switch (cmd) {
     case "": {
-      array::thread_all(players, & zm_devgui::zombie_devgui_equipment_give, "");
+      array::thread_all(players, &zm_devgui::zombie_devgui_equipment_give, "");
       retval = 1;
       break;
     }
     case "": {
-      array::thread_all(players, & function_3796f8bc);
+      array::thread_all(players, &function_3796f8bc);
       retval = 1;
       break;
     }

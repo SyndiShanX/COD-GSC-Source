@@ -57,9 +57,9 @@ function main_end() {
   zm::spawn_kill_brush((1200, 928, 64), 92, 43);
   level thread function_965d5385();
   level thread function_78328cd0();
-  level.no_target_override = & function_c428951;
-  level.player_score_override = & function_d6da0785;
-  level.player_intersection_tracker_override = & function_401305fb;
+  level.no_target_override = &function_c428951;
+  level.player_score_override = &function_d6da0785;
+  level.player_intersection_tracker_override = &function_401305fb;
 }
 
 function function_965d5385() {

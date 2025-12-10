@@ -462,11 +462,11 @@ exchange_barrett_trigger() {
       wait 1.5;
       thread sniper_text(&"SNIPERESCAPE_DISTANCE", 120, 1);
       wait 0.85;
-      thread sniper_text_countup(896.7, & "SNIPERESCAPE_M", 0, 1);
+      thread sniper_text_countup(896.7, &"SNIPERESCAPE_M", 0, 1);
       wait 1.5;
       thread sniper_text(&"SNIPERESCAPE_BULLET_TRAVEL", 120, 2);
       wait 0.8;
-      thread sniper_text_countup(1.05, & "SNIPERESCAPE_S", 0, 2);
+      thread sniper_text_countup(1.05, &"SNIPERESCAPE_S", 0, 2);
     } else {
       thread sniper_text(&"SNIPERESCAPE_TARGET", 0, 0);
       wait 0.5;
@@ -474,11 +474,11 @@ exchange_barrett_trigger() {
       wait 1.5;
       thread sniper_text(&"SNIPERESCAPE_DISTANCE", 0, 1);
       wait 0.85;
-      thread sniper_text_countup(896.7, & "SNIPERESCAPE_M", 158, 1);
+      thread sniper_text_countup(896.7, &"SNIPERESCAPE_M", 158, 1);
       wait 1.5;
       thread sniper_text(&"SNIPERESCAPE_BULLET_TRAVEL", 0, 2);
       wait 0.8;
-      thread sniper_text_countup(1.05, & "SNIPERESCAPE_S", 155, 2);
+      thread sniper_text_countup(1.05, &"SNIPERESCAPE_S", 155, 2);
     }
   } else {
     if(getdvarint("loc_language", 0) == 12) {
@@ -488,11 +488,11 @@ exchange_barrett_trigger() {
       wait 1.5;
       thread sniper_text(&"SNIPERESCAPE_DISTANCE", 120, 1, 2.7);
       wait 0.6;
-      thread sniper_text_countup(896.7, & "SNIPERESCAPE_M", 0, 1, 2.1);
+      thread sniper_text_countup(896.7, &"SNIPERESCAPE_M", 0, 1, 2.1);
       wait 1.5;
       thread sniper_text(&"SNIPERESCAPE_BULLET_TRAVEL", 120, 2, 0.6);
       wait 0.6;
-      thread sniper_text_countup(1.05, & "SNIPERESCAPE_S", 0, 2, 0);
+      thread sniper_text_countup(1.05, &"SNIPERESCAPE_S", 0, 2, 0);
     } else {
       thread sniper_text(&"SNIPERESCAPE_TARGET", 0, 0, 4.45);
       wait 0.25;
@@ -500,11 +500,11 @@ exchange_barrett_trigger() {
       wait 1.5;
       thread sniper_text(&"SNIPERESCAPE_DISTANCE", 0, 1, 2.7);
       wait 0.6;
-      thread sniper_text_countup(896.7, & "SNIPERESCAPE_M", 158, 1, 2.1);
+      thread sniper_text_countup(896.7, &"SNIPERESCAPE_M", 158, 1, 2.1);
       wait 1.5;
       thread sniper_text(&"SNIPERESCAPE_BULLET_TRAVEL", 0, 2, 0.6);
       wait 0.6;
-      thread sniper_text_countup(1.05, & "SNIPERESCAPE_S", 155, 2, 0);
+      thread sniper_text_countup(1.05, &"SNIPERESCAPE_S", 155, 2, 0);
     }
 
     wait 11.5;
@@ -2019,17 +2019,17 @@ exchange_mission_failure() {
   if(common_scripts\utility::flag("makarov_killed"))
     exchange_mission_failure_paradox_deadquote();
   else
-    setdvar("ui_deadquote", & "SNIPERESCAPE_ZAKHAEV_ESCAPED");
+    setdvar("ui_deadquote", &"SNIPERESCAPE_ZAKHAEV_ESCAPED");
 
   maps\_utility::missionfailedwrapper();
 }
 
 exchange_mission_failure_paradox_deadquote() {
   level.paradox_quotes = [];
-  level.paradox_quotes = common_scripts\utility::array_add(level.paradox_quotes, & "SNIPERESCAPE_PARADOXFAIL_01");
-  level.paradox_quotes = common_scripts\utility::array_add(level.paradox_quotes, & "SNIPERESCAPE_PARADOXFAIL_02");
-  level.paradox_quotes = common_scripts\utility::array_add(level.paradox_quotes, & "SNIPERESCAPE_PARADOXFAIL_03");
-  level.paradox_quotes = common_scripts\utility::array_add(level.paradox_quotes, & "SNIPERESCAPE_PARADOXFAIL_04");
+  level.paradox_quotes = common_scripts\utility::array_add(level.paradox_quotes, &"SNIPERESCAPE_PARADOXFAIL_01");
+  level.paradox_quotes = common_scripts\utility::array_add(level.paradox_quotes, &"SNIPERESCAPE_PARADOXFAIL_02");
+  level.paradox_quotes = common_scripts\utility::array_add(level.paradox_quotes, &"SNIPERESCAPE_PARADOXFAIL_03");
+  level.paradox_quotes = common_scripts\utility::array_add(level.paradox_quotes, &"SNIPERESCAPE_PARADOXFAIL_04");
   setdvarifuninitialized("paradox_fail_quote", 0);
   var_0 = getdvarint("paradox_fail_quote");
   setdvar("ui_deadquote", level.paradox_quotes[var_0]);
@@ -2371,14 +2371,14 @@ flashback_guys_failure() {
     if(var_0 == "Makarov") {
       level.flashback_guys_uaz maps\_utility::ent_flag_set("driver_dead");
       common_scripts\utility::flag_set("makarov_killed");
-      objective_add(maps\sniperescape_wounding::getobj("future"), "active", & "SNIPERESCAPE_CHANGE_THE_FUTURE");
+      objective_add(maps\sniperescape_wounding::getobj("future"), "active", &"SNIPERESCAPE_CHANGE_THE_FUTURE");
       objective_indentlevel(maps\sniperescape_wounding::getobj("future"), 1);
       maps\_utility::objective_complete(maps\sniperescape_wounding::getobj("future"));
       continue;
     }
 
     if(var_0 == "Yuri") {
-      setdvar("ui_deadquote", & "SNIPERESCAPE_FRIENDLY_FIRE");
+      setdvar("ui_deadquote", &"SNIPERESCAPE_FRIENDLY_FIRE");
       maps\_utility::missionfailedwrapper();
       return;
     }

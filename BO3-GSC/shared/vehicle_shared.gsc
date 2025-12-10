@@ -22,7 +22,7 @@
 #namespace vehicle;
 
 function autoexec __init__sytem__() {
-  system::register("vehicle_shared", & __init__, & __main__, undefined);
+  system::register("vehicle_shared", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -83,7 +83,7 @@ function __init__() {
   setup_level_vars();
   setup_triggers();
   setup_nodes();
-  level array::thread_all_ents(level.vehicle_processtriggers, & trigger_process);
+  level array::thread_all_ents(level.vehicle_processtriggers, &trigger_process);
   level.vehicle_processtriggers = undefined;
   level.vehicle_enemy_tanks = [];
   level.vehicle_enemy_tanks["vehicle_ger_tracked_king_tiger"] = 1;
@@ -161,7 +161,7 @@ function trigger_process(trigger) {
       level waittill("vehiclegroup spawned" + trigger.script_vehiclespawngroup);
     }
     if(gates.size > 0 && btriggeronce) {
-      level array::thread_all_ents(gates, & path_gate_open);
+      level array::thread_all_ents(gates, &path_gate_open);
     }
     if(isDefined(trigger) && isDefined(trigger.script_vehiclestartmove)) {
       if(!isDefined(level.vehicle_startmovegroup[trigger.script_vehiclestartmove])) {
@@ -1048,10 +1048,10 @@ function node_trigger_process() {
   if(isDefined(self.script_vehicledetour) && isDefined(self.targetname)) {
     get_func = undefined;
     if(isDefined(get_from_entity(self.targetname))) {
-      get_func = & get_from_entity_target;
+      get_func = &get_from_entity_target;
     }
     if(isDefined(get_from_spawnStruct(self.targetname))) {
-      get_func = & get_from_spawnstruct_target;
+      get_func = &get_from_spawnstruct_target;
     }
     if(isDefined(get_func)) {
       setup_dynamic_detour(self, get_func);
@@ -1097,7 +1097,7 @@ function setup_triggers() {
   triggers = arraycombine(getallvehiclenodes(), getEntArray("script_origin", "classname"), 1, 0);
   triggers = arraycombine(triggers, level.struct, 1, 0);
   triggers = arraycombine(triggers, trigger::get_all(), 1, 0);
-  array::thread_all(triggers, & node_trigger_process);
+  array::thread_all(triggers, &node_trigger_process);
 }
 
 function setup_nodes() {
@@ -2174,14 +2174,14 @@ function get_closest_attacker_with_missile_locked_on_to_me(monitored_entity) {
     attacker = level.players[i];
     if(isDefined(attacker)) {
       client_flag = 1 << attacker getentitynumber();
-      if(client_flag & remaining_locked_on_flags) {
+      if(client_flag &remaining_locked_on_flags) {
         to_attacker = vectornormalize(attacker.origin - view_origin);
         attacker_dot = vectordot(view_forward, to_attacker);
         if(attacker_dot > closest_attacker_dot) {
           closest_attacker = attacker;
           closest_attacker_dot = attacker_dot;
         }
-        remaining_locked_on_flags = remaining_locked_on_flags & (~client_flag);
+        remaining_locked_on_flags = remaining_locked_on_flags &(~client_flag);
       }
     }
   }

@@ -11,11 +11,11 @@
 #namespace arena;
 
 function autoexec __init__sytem__() {
-  system::register("arena", & __init__, undefined, undefined);
+  system::register("arena", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_connect( & on_connect);
+  callback::on_connect(&on_connect);
 }
 
 function on_connect() {

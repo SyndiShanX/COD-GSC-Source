@@ -51,7 +51,7 @@ main(notifyname, character, node, scr_thread, bitflags) {
     self.goalradius = (25);
     teleport = false;
     if(isDefined(bitflags)) {
-      if(bitflags & level.teleport) {
+      if(bitflags &level.teleport) {
         self teleport(org);
         teleport = true;
       }
@@ -110,7 +110,7 @@ idle_anim(node, notifyname, character, bitflags) {
     org = node.origin;
   else
     org = getStartOrigin(node.origin, node.angles, level.scr_anim[notifyname][character]["idle"][0]);
-  if((isDefined(bitflags)) && (bitflags & level.teleport))
+  if((isDefined(bitflags)) && (bitflags &level.teleport))
     self teleport(org);
   else {
     oldradius = self.goalradius;

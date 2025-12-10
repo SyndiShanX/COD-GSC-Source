@@ -17,7 +17,7 @@
 
 init() {
   registerkillstreak("helicopter_player_gunner_mp", "helicopter_player_gunner_mp", "killstreak_helicopter_player_gunner", "helicopter_used", ::heli_gunner_killstreak, 1);
-  registerkillstreakstrings("helicopter_player_gunner_mp", & "KILLSTREAK_EARNED_HELICOPTER_GUNNER", & "KILLSTREAK_HELICOPTER_GUNNER_NOT_AVAILABLE", & "KILLSTREAK_HELICOPTER_GUNNER_INBOUND");
+  registerkillstreakstrings("helicopter_player_gunner_mp", &"KILLSTREAK_EARNED_HELICOPTER_GUNNER", &"KILLSTREAK_HELICOPTER_GUNNER_NOT_AVAILABLE", &"KILLSTREAK_HELICOPTER_GUNNER_INBOUND");
   registerkillstreakdialog("helicopter_player_gunner_mp", "mpl_killstreak_osprey_strt", "kls_playerheli_used", "", "kls_playerheli_enemy", "", "kls_playerheli_ready");
   registerkillstreakdevdvar("helicopter_player_gunner_mp", "scr_givehelicopter_player_gunner");
   registerkillstreakaltweapon("helicopter_player_gunner_mp", "cobra_minigun_mp");

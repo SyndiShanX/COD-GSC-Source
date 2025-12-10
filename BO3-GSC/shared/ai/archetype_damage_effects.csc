@@ -16,8 +16,8 @@ function autoexec main() {
 }
 
 function registerclientfields() {
-  clientfield::register("actor", "arch_actor_fire_fx", 1, 2, "int", & actor_fire_fx_state, 0, 0);
-  clientfield::register("actor", "arch_actor_char", 1, 2, "int", & actor_char, 0, 0);
+  clientfield::register("actor", "arch_actor_fire_fx", 1, 2, "int", &actor_fire_fx_state, 0, 0);
+  clientfield::register("actor", "arch_actor_char", 1, 2, "int", &actor_char, 0, 0);
 }
 
 function loadeffects() {

@@ -11,12 +11,12 @@
 #namespace zm_craftables;
 
 function autoexec __init__sytem__() {
-  system::register("zm_craftables", & __init__, undefined, undefined);
+  system::register("zm_craftables", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.craftable_piece_count = 0;
-  callback::on_finalize_initialization( & set_craftable_clientfield);
+  callback::on_finalize_initialization(&set_craftable_clientfield);
 }
 
 function set_craftable_clientfield(localclientnum) {

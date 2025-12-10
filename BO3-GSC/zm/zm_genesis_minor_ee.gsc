@@ -43,12 +43,12 @@
 #namespace zm_genesis_minor_ee;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_minor_ee", & __init__, & __main__, undefined);
+  system::register("zm_genesis_minor_ee", &__init__, &__main__, undefined);
 }
 
 function __init__() {
   level flag::init("old_school_activated");
-  level.func_override_wallbuy_prompt = & function_bc56f047;
+  level.func_override_wallbuy_prompt = &function_bc56f047;
 }
 
 function __main__() {
@@ -338,10 +338,10 @@ function lil_arnie_upgrade() {
   if(getdvarint("") > 0) {
     level.var_f11300cd = 99;
   }
-  zm_spawner::register_zombie_death_event_callback( & function_4a0f0038);
+  zm_spawner::register_zombie_death_event_callback(&function_4a0f0038);
   level flag::wait_till("lil_arnie_prereq_done");
-  zm_spawner::deregister_zombie_death_event_callback( & function_4a0f0038);
-  level.check_b_valid_poi = & zm_genesis_ee_quest::function_5516baeb;
+  zm_spawner::deregister_zombie_death_event_callback(&function_4a0f0038);
+  level.check_b_valid_poi = &zm_genesis_ee_quest::function_5516baeb;
   level flag::wait_till("lil_arnie_done");
   foreach(player in level.activeplayers) {
     if(player hasweapon(level.w_octobomb)) {
@@ -395,7 +395,7 @@ function function_be8c2f38() {
   level.var_557b53fd[4] = 2;
   level.var_8091d507 = 0;
   var_9bafc533 = struct::get_array("old_school_switch");
-  array::thread_all(var_9bafc533, & function_6e14903b);
+  array::thread_all(var_9bafc533, &function_6e14903b);
   while(level.var_8091d507 < var_9bafc533.size) {
     wait(0.05);
   }
@@ -405,7 +405,7 @@ function function_be8c2f38() {
 function function_6e14903b() {
   level endon("old_school_activated");
   level.var_c592ecc1 = 0;
-  s_unitrigger = self zm_unitrigger::create_unitrigger(&"", 64, & function_b2869a31);
+  s_unitrigger = self zm_unitrigger::create_unitrigger(&"", 64, &function_b2869a31);
   s_unitrigger.require_look_at = 1;
   s_unitrigger.b_enabled = 1;
   array::add(level.var_aa421b74, s_unitrigger);
@@ -458,7 +458,7 @@ function function_77da8ee0() {
 }
 
 function function_a1f4f500() {
-  level._bouncingbettywatchfortrigger = & function_82df6cd4;
+  level._bouncingbettywatchfortrigger = &function_82df6cd4;
   level thread function_f227a0ab();
 }
 
@@ -525,10 +525,10 @@ function function_82df6cd4(watcher) {
 }
 
 function function_1d13619e() {
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_6cd2074);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_7c5650a5);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_c3100cb0);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_e1963311);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_6cd2074);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_7c5650a5);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_c3100cb0);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_e1963311);
 }
 
 function function_7c5650a5(n_val) {

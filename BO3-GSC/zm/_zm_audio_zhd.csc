@@ -14,12 +14,12 @@
 #namespace zm_audio_zhd;
 
 function autoexec __init__sytem__() {
-  system::register("zm_audio_zhd", & __init__, undefined, undefined);
+  system::register("zm_audio_zhd", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "snd_zhdegg", 21000, 2, "int", & function_97d247be, 0, 0);
-  clientfield::register("scriptmover", "snd_zhdegg_arm", 21000, 1, "counter", & function_e312f684, 0, 0);
+  clientfield::register("scriptmover", "snd_zhdegg", 21000, 2, "int", &function_97d247be, 0, 0);
+  clientfield::register("scriptmover", "snd_zhdegg_arm", 21000, 1, "counter", &function_e312f684, 0, 0);
   level._effect["zhdegg_ballerina_appear"] = "dlc3/stalingrad/fx_main_impact_success";
   level._effect["zhdegg_ballerina_disappear"] = "dlc3/stalingrad/fx_main_impact_success";
   level._effect["zhdegg_arm_appear"] = "dlc3/stalingrad/fx_dirt_hand_burst_challenges";

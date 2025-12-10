@@ -87,16 +87,16 @@ function main() {
   zm::init_fx();
   level.zombiemode = 1;
   level.sndzhdaudio = 1;
-  level.register_offhand_weapons_for_level_defaults_override = & offhand_weapon_overrride;
+  level.register_offhand_weapons_for_level_defaults_override = &offhand_weapon_overrride;
   visionset_mgr::register_info("visionset", "flare", 21000, 15, 1, 1);
   visionset_mgr::register_info("visionset", "cheat_bw_contrast", 21000, 16, 1, 1);
   visionset_mgr::register_info("visionset", "cheat_bw_invert_contrast", 21000, 17, 1, 1);
   visionset_mgr::register_info("visionset", "zombie_turned", 21000, 18, 1, 1);
-  level.precachecustomcharacters = & precachecustomcharacters;
-  level.givecustomcharacters = & givecustomcharacters;
+  level.precachecustomcharacters = &precachecustomcharacters;
+  level.givecustomcharacters = &givecustomcharacters;
   initcharacterstartindex();
-  level._round_start_func = & zm::round_start;
-  level._zombie_custom_add_weapons = & custom_add_weapons;
+  level._round_start_func = &zm::round_start;
+  level._zombie_custom_add_weapons = &custom_add_weapons;
   include_perks_in_random_rotation();
   load::main();
   zm_theater_amb::main();
@@ -105,28 +105,28 @@ function main() {
   level.laststandpistol = level.default_laststandpistol;
   level.start_weapon = level.default_laststandpistol;
   level thread zm::last_stand_pistol_rank_init();
-  level.var_9aaae7ae = & function_869d6f66;
-  level.var_9cef605e = & function_823705c7;
+  level.var_9aaae7ae = &function_869d6f66;
+  level.var_9cef605e = &function_823705c7;
   if(getdvarint("artist") > 0) {
     return;
   }
   level.dogs_enabled = 1;
   level.random_pandora_box_start = 1;
   level.quad_move_speed = 35;
-  level.quad_traverse_death_fx = & zm_theater_quad::quad_traverse_death_fx;
+  level.quad_traverse_death_fx = &zm_theater_quad::quad_traverse_death_fx;
   level.quad_explode = 1;
   level.custom_ai_type = [];
-  level.door_dialog_function = & zm::play_door_dialog;
+  level.door_dialog_function = &zm::play_door_dialog;
   level._allow_melee_weapon_switching = 1;
   _zm_weap_cymbal_monkey::init();
   zm_ai_dogs::enable_dog_rounds();
-  level.zombie_init_done = & function_ec7faaac;
+  level.zombie_init_done = &function_ec7faaac;
   init_zombie_theater();
   compass::setupminimap("menu_map_zombie_theater");
-  level.ignore_spawner_func = & theater_ignore_spawner;
-  level.player_out_of_playable_area_monitor_callback = & function_d1ca1764;
+  level.ignore_spawner_func = &theater_ignore_spawner;
+  level.player_out_of_playable_area_monitor_callback = &function_d1ca1764;
   level.zones = [];
-  level.zone_manager_init_func = & theater_zone_init;
+  level.zone_manager_init_func = &theater_zone_init;
   init_zones[0] = "foyer_zone";
   init_zones[1] = "foyer2_zone";
   level thread zm_zonemgr::manage_zones(init_zones);
@@ -140,10 +140,10 @@ function main() {
   level thread function_6452fa9d();
   function_27cb39f1();
   chandelier = getEntArray("theater_chandelier", "targetname");
-  array::thread_all(chandelier, & theater_chandelier_model_scale);
+  array::thread_all(chandelier, &theater_chandelier_model_scale);
   level thread zm_theater_teleporter::teleport_pad_hide_use();
   level thread zm_perks::spare_change();
-  scene::add_scene_func("cin_zmhd_sizzle_theater_cam", & cin_zmhd_sizzle_theater_cam, "play");
+  scene::add_scene_func("cin_zmhd_sizzle_theater_cam", &cin_zmhd_sizzle_theater_cam, "play");
   zm_theater_ffotd::main_end();
 }
 
@@ -312,7 +312,7 @@ function offhand_weapon_overrride() {
 }
 
 function function_ce6ee03b() {
-  scene::add_scene_func("p7_fxanim_zm_kino_curtains_stage_main_bundle", & function_9a38ad2c, "play");
+  scene::add_scene_func("p7_fxanim_zm_kino_curtains_stage_main_bundle", &function_9a38ad2c, "play");
   var_5be55f14 = getent("theater_curtains", "targetname");
   var_5be55f14 thread scene::play("p7_fxanim_zm_kino_curtains_stage_main_bundle", var_5be55f14);
   playsoundatposition("evt_curtain_open", var_5be55f14.origin);
@@ -399,7 +399,7 @@ function init_sounds() {
   zm_utility::add_sound("zmb_fence_door", "zmb_door_fence_open");
   zm_utility::add_sound("zmb_heavy_door_open", "zmb_heavy_door_open");
   level thread custom_add_vox();
-  level.audio_get_mod_type = & custom_get_mod_type;
+  level.audio_get_mod_type = &custom_get_mod_type;
   level.vox_response_override = 1;
 }
 
@@ -626,7 +626,7 @@ function include_perks_in_random_rotation() {
   zm_perk_random::include_perk_in_random_rotation("specialty_staminup");
   zm_perk_random::include_perk_in_random_rotation("specialty_deadshot");
   zm_perk_random::include_perk_in_random_rotation("specialty_widowswine");
-  level.custom_random_perk_weights = & function_c027d01d;
+  level.custom_random_perk_weights = &function_c027d01d;
 }
 
 function function_c027d01d() {

@@ -38,12 +38,12 @@ init() {
       level.validPerks[level.validPerks.size] = perk;
   }
   level.perkPickupHints = [];
-  level.perkPickupHints["specialty_bulletdamage"] = & "PLATFORM_PICK_UP_STOPPING_POWER";
-  level.perkPickupHints["specialty_armorvest"] = & "PLATFORM_PICK_UP_JUGGERNAUT";
-  level.perkPickupHints["specialty_rof"] = & "PLATFORM_PICK_UP_DOUBLE_TAP";
-  level.perkPickupHints["specialty_pistoldeath"] = & "PLATFORM_PICK_UP_LAST_STAND";
-  level.perkPickupHints["specialty_grenadepulldeath"] = & "PLATFORM_PICK_UP_MARTYRDOM";
-  level.perkPickupHints["specialty_fastreload"] = & "PLATFORM_PICK_UP_SLEIGHT_OF_HAND";
+  level.perkPickupHints["specialty_bulletdamage"] = &"PLATFORM_PICK_UP_STOPPING_POWER";
+  level.perkPickupHints["specialty_armorvest"] = &"PLATFORM_PICK_UP_JUGGERNAUT";
+  level.perkPickupHints["specialty_rof"] = &"PLATFORM_PICK_UP_DOUBLE_TAP";
+  level.perkPickupHints["specialty_pistoldeath"] = &"PLATFORM_PICK_UP_LAST_STAND";
+  level.perkPickupHints["specialty_grenadepulldeath"] = &"PLATFORM_PICK_UP_MARTYRDOM";
+  level.perkPickupHints["specialty_fastreload"] = &"PLATFORM_PICK_UP_SLEIGHT_OF_HAND";
   perkPickupKeys = getArrayKeys(level.perkPickupHints);
   for(i = 0; i < perkPickupKeys.size; i++)
     precacheString(level.perkPickupHints[perkPickupKeys[i]]);

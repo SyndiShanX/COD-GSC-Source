@@ -179,7 +179,7 @@ function laststand_getup_hud() {
   hudelem.hidewheninmenu = 1;
   hudelem.hidewhendead = 1;
   hudelem.sort = 2;
-  hudelem.label = & "SO_WAR_LASTSTAND_GETUP_BAR";
+  hudelem.label = &"SO_WAR_LASTSTAND_GETUP_BAR";
   self thread laststand_getup_hud_destroy(hudelem);
   while(true) {
     hudelem setvalue(self.laststand_info.getup_bar_value);

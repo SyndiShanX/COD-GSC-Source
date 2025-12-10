@@ -26,7 +26,7 @@
 #namespace zm_zod_portals;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_portals", & __init__, undefined, undefined);
+  system::register("zm_zod_portals", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -43,7 +43,7 @@ function __init__() {
   clientfield::register("world", "pulse_slums_portal_bottom", 1, 1, "counter");
   clientfield::register("world", "pulse_theater_portal_top", 1, 1, "counter");
   clientfield::register("world", "pulse_theater_portal_bottom", 1, 1, "counter");
-  visionset_mgr::register_info("overlay", "zm_zod_transported", 1, 20, 15, 1, & visionset_mgr::duration_lerp_thread_per_player, 0);
+  visionset_mgr::register_info("overlay", "zm_zod_transported", 1, 20, 15, 1, &visionset_mgr::duration_lerp_thread_per_player, 0);
 }
 
 function function_54ec766b(str_id) {
@@ -66,8 +66,8 @@ function function_54ec766b(str_id) {
   s_loc.unitrigger_stub.script_length = length;
   s_loc.unitrigger_stub.require_look_at = 0;
   s_loc.unitrigger_stub.str_areaname = str_areaname;
-  s_loc.unitrigger_stub.prompt_and_visibility_func = & function_16fca6d;
-  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, & function_a90ab0d7);
+  s_loc.unitrigger_stub.prompt_and_visibility_func = &function_16fca6d;
+  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, &function_a90ab0d7);
 }
 
 function function_16fca6d(player) {
@@ -188,7 +188,7 @@ function portal_teleport_player(player, show_fx = 1) {
   stand_offset = (0, 0, 0);
   a_ai_enemies = getaiteamarray("axis");
   a_ai_enemies = arraysort(a_ai_enemies, self.origin, 1, 99, 768);
-  array::thread_all(a_ai_enemies, & ai_delay_cleanup);
+  array::thread_all(a_ai_enemies, &ai_delay_cleanup);
   level.n_cleanup_manager_restart_time = 2 + 15;
   level.n_cleanup_manager_restart_time = level.n_cleanup_manager_restart_time + (gettime() / 1000);
   image_room = struct::get("teleport_room_" + n_pos, "targetname");

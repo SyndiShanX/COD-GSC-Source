@@ -26,13 +26,13 @@
 #namespace skeletonbehavior;
 
 function autoexec __init__sytem__() {
-  system::register("skeleton", & __init__, undefined, undefined);
+  system::register("skeleton", &__init__, undefined, undefined);
 }
 
 function __init__() {
   initskeletonbehaviorsandasm();
-  spawner::add_archetype_spawn_function("skeleton", & archetypeskeletonblackboardinit);
-  spawner::add_archetype_spawn_function("skeleton", & skeletonspawnsetup);
+  spawner::add_archetype_spawn_function("skeleton", &archetypeskeletonblackboardinit);
+  spawner::add_archetype_spawn_function("skeleton", &skeletonspawnsetup);
   if(ai::shouldregisterclientfieldforarchetype("skeleton")) {
     clientfield::register("actor", "skeleton", 1, 1, "int");
   }
@@ -52,26 +52,26 @@ function skeletonspawnsetup() {
 }
 
 function private initskeletonbehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("skeletonTargetService", & skeletontargetservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("skeletonShouldMelee", & skeletonshouldmeleecondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("skeletonGibLegsCondition", & skeletongiblegscondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("isSkeletonWalking", & isskeletonwalking);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("skeletonDeathAction", & skeletondeathaction);
-  animationstatenetwork::registernotetrackhandlerfunction("contact", & skeletonnotetrackmeleefire);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("skeletonTargetService", &skeletontargetservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("skeletonShouldMelee", &skeletonshouldmeleecondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("skeletonGibLegsCondition", &skeletongiblegscondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("isSkeletonWalking", &isskeletonwalking);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("skeletonDeathAction", &skeletondeathaction);
+  animationstatenetwork::registernotetrackhandlerfunction("contact", &skeletonnotetrackmeleefire);
 }
 
 function private archetypeskeletonblackboardinit() {
   blackboard::createblackboardforentity(self);
   self aiutility::registerutilityblackboardattributes();
-  blackboard::registerblackboardattribute(self, "_arms_position", "arms_up", & bb_getarmsposition);
+  blackboard::registerblackboardattribute(self, "_arms_position", "arms_up", &bb_getarmsposition);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_speed", "locomotion_speed_walk", & bb_getlocomotionspeedtype);
+  blackboard::registerblackboardattribute(self, "_locomotion_speed", "locomotion_speed_walk", &bb_getlocomotionspeedtype);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_has_legs", "has_legs_yes", & bb_gethaslegsstatus);
+  blackboard::registerblackboardattribute(self, "_has_legs", "has_legs_yes", &bb_gethaslegsstatus);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -83,7 +83,7 @@ function private archetypeskeletonblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  self.___archetypeonanimscriptedcallback = & archetypeskeletononanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = &archetypeskeletononanimscriptedcallback;
   self finalizetrackedblackboardattributes();
 }
 

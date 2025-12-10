@@ -22,9 +22,9 @@ init() {
   config.modelPlacementFailed = "ims_scorpion_body_iw6_placement_failed";
   config.modelDestroyed = "ims_scorpion_body_iw6";
   config.modelBombSquad = "ims_scorpion_body_iw6_bombsquad";
-  config.hintString = & "KILLSTREAKS_HINTS_IMS_PICKUP_TO_MOVE";
-  config.placeString = & "KILLSTREAKS_HINTS_IMS_PLACE";
-  config.cannotPlaceString = & "KILLSTREAKS_HINTS_IMS_CANNOT_PLACE";
+  config.hintString = &"KILLSTREAKS_HINTS_IMS_PICKUP_TO_MOVE";
+  config.placeString = &"KILLSTREAKS_HINTS_IMS_PLACE";
+  config.cannotPlaceString = &"KILLSTREAKS_HINTS_IMS_CANNOT_PLACE";
   config.streakName = "ims";
   config.splashName = "used_ims";
   config.maxHealth = 1000;

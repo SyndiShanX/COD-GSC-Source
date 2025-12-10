@@ -90,8 +90,8 @@ init_vehicles() {
 
   init_level_has_vehicles();
 
-  add_hint_string("invulerable_frags", & "SCRIPT_INVULERABLE_FRAGS", undefined);
-  add_hint_string("invulerable_bullets", & "SCRIPT_INVULERABLE_BULLETS", undefined);
+  add_hint_string("invulerable_frags", &"SCRIPT_INVULERABLE_FRAGS", undefined);
+  add_hint_string("invulerable_bullets", &"SCRIPT_INVULERABLE_BULLETS", undefined);
 }
 
 init_helicopter_list() {
@@ -1716,7 +1716,7 @@ vehicle_init(vehicle) {
   vehicle thread maps\_vehicle_aianim::handle_attached_guys();
 
   if(isDefined(vehicle.script_friendname))
-    vehicle setVehicleLookAtText(vehicle.script_friendname, & "");
+    vehicle setVehicleLookAtText(vehicle.script_friendname, &"");
 
   // special stuff for unloading
   if(!vehicle isCheap())

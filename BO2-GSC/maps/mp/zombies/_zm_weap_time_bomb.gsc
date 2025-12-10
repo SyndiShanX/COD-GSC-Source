@@ -127,7 +127,7 @@ time_bomb_post_init() {
 }
 
 add_time_bomb_to_mystery_box() {
-  maps\mp\zombies\_zm_weapons::add_zombie_weapon("time_bomb_zm", undefined, & "ZOMBIE_WEAPON_TIME_BOMB", 50, "pickup_bomb", "", undefined, 1);
+  maps\mp\zombies\_zm_weapons::add_zombie_weapon("time_bomb_zm", undefined, &"ZOMBIE_WEAPON_TIME_BOMB", 50, "pickup_bomb", "", undefined, 1);
 }
 
 player_give_time_bomb() {

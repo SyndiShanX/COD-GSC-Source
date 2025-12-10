@@ -32,12 +32,12 @@
 #namespace archetype_robot;
 
 function autoexec __init__sytem__() {
-  system::register("robot", & __init__, undefined, undefined);
+  system::register("robot", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  spawner::add_archetype_spawn_function("robot", & robotsoldierbehavior::archetyperobotblackboardinit);
-  spawner::add_archetype_spawn_function("robot", & robotsoldierserverutils::robotsoldierspawnsetup);
+  spawner::add_archetype_spawn_function("robot", &robotsoldierbehavior::archetyperobotblackboardinit);
+  spawner::add_archetype_spawn_function("robot", &robotsoldierserverutils::robotsoldierspawnsetup);
   if(ai::shouldregisterclientfieldforarchetype("robot")) {
     clientfield::register("actor", "robot_mind_control", 1, 2, "int");
     clientfield::register("actor", "robot_mind_control_explosion", 1, 1, "int");
@@ -51,105 +51,105 @@ function __init__() {
 #namespace robotsoldierbehavior;
 
 function registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreeaction("robotStepIntoAction", & stepintoinitialize, undefined, & stepintoterminate);
-  behaviortreenetworkutility::registerbehaviortreeaction("robotStepOutAction", & stepoutinitialize, undefined, & stepoutterminate);
-  behaviortreenetworkutility::registerbehaviortreeaction("robotTakeOverAction", & takeoverinitialize, undefined, & takeoverterminate);
-  behaviortreenetworkutility::registerbehaviortreeaction("robotEmpIdleAction", & robotempidleinitialize, & robotempidleupdate, & robotempidleterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotBecomeCrawler", & robotbecomecrawler);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotDropStartingWeapon", & robotdropstartingweapon);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotDontTakeCover", & robotdonttakecover);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCoverOverInitialize", & robotcoveroverinitialize);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCoverOverTerminate", & robotcoveroverterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotExplode", & robotexplode);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotExplodeTerminate", & robotexplodeterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotDeployMiniRaps", & robotdeployminiraps);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotMoveToPlayer", & movetoplayerupdate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotStartSprint", & robotstartsprint);
-  behaviorstatemachine::registerbsmscriptapiinternal("robotStartSprint", & robotstartsprint);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotStartSuperSprint", & robotstartsupersprint);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTacticalWalkActionStart", & robottacticalwalkactionstart);
-  behaviorstatemachine::registerbsmscriptapiinternal("robotTacticalWalkActionStart", & robottacticalwalkactionstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotDie", & robotdie);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCleanupChargeMeleeAttack", & robotcleanupchargemeleeattack);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotIsMoving", & robotismoving);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotAbleToShoot", & robotabletoshootcondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCrawlerCanShootEnemy", & robotcrawlercanshootenemy);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("canMoveToEnemy", & canmovetoenemycondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("canMoveCloseToEnemy", & canmoveclosetoenemycondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("hasMiniRaps", & hasminiraps);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotIsAtCover", & robotisatcovercondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldTacticalWalk", & robotshouldtacticalwalk);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotHasCloseEnemyToMelee", & robothascloseenemytomelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotHasEnemyToMelee", & robothasenemytomelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotRogueHasCloseEnemyToMelee", & robotroguehascloseenemytomelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotRogueHasEnemyToMelee", & robotroguehasenemytomelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotIsCrawler", & robotiscrawler);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotIsMarching", & robotismarching);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotPrepareForAdjustToCover", & robotprepareforadjusttocover);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldAdjustToCover", & robotshouldadjusttocover);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldBecomeCrawler", & robotshouldbecomecrawler);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldReactAtCover", & robotshouldreactatcover);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldExplode", & robotshouldexplode);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldShutdown", & robotshouldshutdown);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotSupportsOverCover", & robotsupportsovercover);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldStepIn", & shouldstepincondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldTakeOver", & shouldtakeovercondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("supportsStepOut", & supportsstepoutcondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("setDesiredStanceToStand", & setdesiredstancetostand);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("setDesiredStanceToCrouch", & setdesiredstancetocrouch);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("toggleDesiredStance", & toggledesiredstance);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotMovement", & robotmovement);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotDelayMovement", & robotdelaymovement);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotInvalidateCover", & robotinvalidatecover);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldChargeMelee", & robotshouldchargemelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldMelee", & robotshouldmelee);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotScriptRequiresToSprint", & scriptrequirestosprintcondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotScanExposedPainTerminate", & robotscanexposedpainterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTookEmpDamage", & robottookempdamage);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotNoCloseEnemyService", & robotnocloseenemyservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotWithinSprintRange", & robotwithinsprintrange);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotWithinSuperSprintRange", & robotwithinsupersprintrange);
-  behaviorstatemachine::registerbsmscriptapiinternal("robotWithinSuperSprintRange", & robotwithinsupersprintrange);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotOutsideTacticalWalkRange", & robotoutsidetacticalwalkrange);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotOutsideSprintRange", & robotoutsidesprintrange);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotOutsideSuperSprintRange", & robotoutsidesupersprintrange);
-  behaviorstatemachine::registerbsmscriptapiinternal("robotOutsideSuperSprintRange", & robotoutsidesupersprintrange);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotLightsOff", & robotlightsoff);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotLightsFlicker", & robotlightsflicker);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotLightsOn", & robotlightson);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldGibDeath", & robotshouldgibdeath);
-  behaviortreenetworkutility::registerbehaviortreeaction("robotProceduralTraversal", & robottraversestart, & robotproceduraltraversalupdate, & robottraverseragdollondeath);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCalcProceduralTraversal", & robotcalcproceduraltraversal);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotProceduralLanding", & robotprocedurallandingupdate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTraverseEnd", & robottraverseend);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTraverseRagdollOnDeath", & robottraverseragdollondeath);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldProceduralTraverse", & robotshouldproceduraltraverse);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotWallrunTraverse", & robotwallruntraverse);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldWallrun", & robotshouldwallrun);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotSetupWallRunJump", & robotsetupwallrunjump);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotSetupWallRunLand", & robotsetupwallrunland);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotWallrunStart", & robotwallrunstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotWallrunEnd", & robotwallrunend);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCanJuke", & robotcanjuke);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCanTacticalJuke", & robotcantacticaljuke);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCanPreemptiveJuke", & robotcanpreemptivejuke);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotJukeInitialize", & robotjukeinitialize);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotPreemptiveJukeTerminate", & robotpreemptivejuketerminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCoverScanInitialize", & robotcoverscaninitialize);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCoverScanTerminate", & robotcoverscanterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotIsAtCoverModeScan", & robotisatcovermodescan);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotExposedCoverService", & robotexposedcoverservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotPositionService", & robotpositionservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTargetService", & robottargetservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTryReacquireService", & robottryreacquireservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotRushEnemyService", & robotrushenemyservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotRushNeighborService", & robotrushneighborservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCrawlerService", & robotcrawlerservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("robotMoveToPlayerService", & movetoplayerupdate);
-  animationstatenetwork::registeranimationmocomp("mocomp_ignore_pain_face_enemy", & mocompignorepainfaceenemyinit, & mocompignorepainfaceenemyupdate, & mocompignorepainfaceenemyterminate);
-  animationstatenetwork::registeranimationmocomp("robot_procedural_traversal", & mocomprobotproceduraltraversalinit, & mocomprobotproceduraltraversalupdate, & mocomprobotproceduraltraversalterminate);
-  animationstatenetwork::registeranimationmocomp("robot_start_traversal", & mocomprobotstarttraversalinit, undefined, & mocomprobotstarttraversalterminate);
-  animationstatenetwork::registeranimationmocomp("robot_start_wallrun", & mocomprobotstartwallruninit, & mocomprobotstartwallrunupdate, & mocomprobotstartwallrunterminate);
+  behaviortreenetworkutility::registerbehaviortreeaction("robotStepIntoAction", &stepintoinitialize, undefined, &stepintoterminate);
+  behaviortreenetworkutility::registerbehaviortreeaction("robotStepOutAction", &stepoutinitialize, undefined, &stepoutterminate);
+  behaviortreenetworkutility::registerbehaviortreeaction("robotTakeOverAction", &takeoverinitialize, undefined, &takeoverterminate);
+  behaviortreenetworkutility::registerbehaviortreeaction("robotEmpIdleAction", &robotempidleinitialize, &robotempidleupdate, &robotempidleterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotBecomeCrawler", &robotbecomecrawler);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotDropStartingWeapon", &robotdropstartingweapon);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotDontTakeCover", &robotdonttakecover);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCoverOverInitialize", &robotcoveroverinitialize);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCoverOverTerminate", &robotcoveroverterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotExplode", &robotexplode);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotExplodeTerminate", &robotexplodeterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotDeployMiniRaps", &robotdeployminiraps);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotMoveToPlayer", &movetoplayerupdate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotStartSprint", &robotstartsprint);
+  behaviorstatemachine::registerbsmscriptapiinternal("robotStartSprint", &robotstartsprint);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotStartSuperSprint", &robotstartsupersprint);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTacticalWalkActionStart", &robottacticalwalkactionstart);
+  behaviorstatemachine::registerbsmscriptapiinternal("robotTacticalWalkActionStart", &robottacticalwalkactionstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotDie", &robotdie);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCleanupChargeMeleeAttack", &robotcleanupchargemeleeattack);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotIsMoving", &robotismoving);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotAbleToShoot", &robotabletoshootcondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCrawlerCanShootEnemy", &robotcrawlercanshootenemy);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("canMoveToEnemy", &canmovetoenemycondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("canMoveCloseToEnemy", &canmoveclosetoenemycondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("hasMiniRaps", &hasminiraps);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotIsAtCover", &robotisatcovercondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldTacticalWalk", &robotshouldtacticalwalk);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotHasCloseEnemyToMelee", &robothascloseenemytomelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotHasEnemyToMelee", &robothasenemytomelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotRogueHasCloseEnemyToMelee", &robotroguehascloseenemytomelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotRogueHasEnemyToMelee", &robotroguehasenemytomelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotIsCrawler", &robotiscrawler);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotIsMarching", &robotismarching);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotPrepareForAdjustToCover", &robotprepareforadjusttocover);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldAdjustToCover", &robotshouldadjusttocover);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldBecomeCrawler", &robotshouldbecomecrawler);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldReactAtCover", &robotshouldreactatcover);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldExplode", &robotshouldexplode);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldShutdown", &robotshouldshutdown);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotSupportsOverCover", &robotsupportsovercover);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldStepIn", &shouldstepincondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldTakeOver", &shouldtakeovercondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("supportsStepOut", &supportsstepoutcondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("setDesiredStanceToStand", &setdesiredstancetostand);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("setDesiredStanceToCrouch", &setdesiredstancetocrouch);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("toggleDesiredStance", &toggledesiredstance);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotMovement", &robotmovement);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotDelayMovement", &robotdelaymovement);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotInvalidateCover", &robotinvalidatecover);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldChargeMelee", &robotshouldchargemelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldMelee", &robotshouldmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotScriptRequiresToSprint", &scriptrequirestosprintcondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotScanExposedPainTerminate", &robotscanexposedpainterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTookEmpDamage", &robottookempdamage);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotNoCloseEnemyService", &robotnocloseenemyservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotWithinSprintRange", &robotwithinsprintrange);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotWithinSuperSprintRange", &robotwithinsupersprintrange);
+  behaviorstatemachine::registerbsmscriptapiinternal("robotWithinSuperSprintRange", &robotwithinsupersprintrange);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotOutsideTacticalWalkRange", &robotoutsidetacticalwalkrange);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotOutsideSprintRange", &robotoutsidesprintrange);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotOutsideSuperSprintRange", &robotoutsidesupersprintrange);
+  behaviorstatemachine::registerbsmscriptapiinternal("robotOutsideSuperSprintRange", &robotoutsidesupersprintrange);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotLightsOff", &robotlightsoff);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotLightsFlicker", &robotlightsflicker);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotLightsOn", &robotlightson);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldGibDeath", &robotshouldgibdeath);
+  behaviortreenetworkutility::registerbehaviortreeaction("robotProceduralTraversal", &robottraversestart, &robotproceduraltraversalupdate, &robottraverseragdollondeath);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCalcProceduralTraversal", &robotcalcproceduraltraversal);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotProceduralLanding", &robotprocedurallandingupdate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTraverseEnd", &robottraverseend);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTraverseRagdollOnDeath", &robottraverseragdollondeath);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldProceduralTraverse", &robotshouldproceduraltraverse);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotWallrunTraverse", &robotwallruntraverse);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotShouldWallrun", &robotshouldwallrun);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotSetupWallRunJump", &robotsetupwallrunjump);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotSetupWallRunLand", &robotsetupwallrunland);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotWallrunStart", &robotwallrunstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotWallrunEnd", &robotwallrunend);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCanJuke", &robotcanjuke);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCanTacticalJuke", &robotcantacticaljuke);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCanPreemptiveJuke", &robotcanpreemptivejuke);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotJukeInitialize", &robotjukeinitialize);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotPreemptiveJukeTerminate", &robotpreemptivejuketerminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCoverScanInitialize", &robotcoverscaninitialize);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCoverScanTerminate", &robotcoverscanterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotIsAtCoverModeScan", &robotisatcovermodescan);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotExposedCoverService", &robotexposedcoverservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotPositionService", &robotpositionservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTargetService", &robottargetservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotTryReacquireService", &robottryreacquireservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotRushEnemyService", &robotrushenemyservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotRushNeighborService", &robotrushneighborservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotCrawlerService", &robotcrawlerservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("robotMoveToPlayerService", &movetoplayerupdate);
+  animationstatenetwork::registeranimationmocomp("mocomp_ignore_pain_face_enemy", &mocompignorepainfaceenemyinit, &mocompignorepainfaceenemyupdate, &mocompignorepainfaceenemyterminate);
+  animationstatenetwork::registeranimationmocomp("robot_procedural_traversal", &mocomprobotproceduraltraversalinit, &mocomprobotproceduraltraversalupdate, &mocomprobotproceduraltraversalterminate);
+  animationstatenetwork::registeranimationmocomp("robot_start_traversal", &mocomprobotstarttraversalinit, undefined, &mocomprobotstarttraversalterminate);
+  animationstatenetwork::registeranimationmocomp("robot_start_wallrun", &mocomprobotstartwallruninit, &mocomprobotstartwallrunupdate, &mocomprobotstartwallrunterminate);
 }
 
 function robotcleanupchargemeleeattack(behaviortreeentity) {
@@ -650,7 +650,7 @@ function private archetyperobotblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_mind_control", "normal", & robotismindcontrolled);
+  blackboard::registerblackboardattribute(self, "_mind_control", "normal", &robotismindcontrolled);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -658,7 +658,7 @@ function private archetyperobotblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_gibbed_limbs", undefined, & robotgetgibbedlimbs);
+  blackboard::registerblackboardattribute(self, "_gibbed_limbs", undefined, &robotgetgibbedlimbs);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -682,7 +682,7 @@ function private archetyperobotblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  entity.___archetypeonanimscriptedcallback = & archetyperobotonanimscriptedcallback;
+  entity.___archetypeonanimscriptedcallback = &archetyperobotonanimscriptedcallback;
   entity finalizetrackedblackboardattributes();
   if(sessionmodeiscampaigngame() || sessionmodeiszombiesgame()) {
     self thread gameskill::accuracy_buildup_before_fire(self);
@@ -2130,13 +2130,13 @@ function private robotsoldierspawnsetup() {
     entity ai::set_behavior_attribute("", "");
   }
   entity thread cleanupequipment(entity);
-  aiutility::addaioverridedamagecallback(entity, & destructserverutils::handledamage);
-  aiutility::addaioverridedamagecallback(entity, & robotdamageoverride);
-  aiutility::addaioverridedamagecallback(entity, & robotdestructrandompieces);
-  aiutility::addaioverridedamagecallback(entity, & robotgibdamageoverride);
-  aiutility::addaioverridekilledcallback(entity, & robotdeathoverride);
-  aiutility::addaioverridekilledcallback(entity, & robotgibdeathoverride);
-  aiutility::addaioverridekilledcallback(entity, & robotdestructdeathoverride);
+  aiutility::addaioverridedamagecallback(entity, &destructserverutils::handledamage);
+  aiutility::addaioverridedamagecallback(entity, &robotdamageoverride);
+  aiutility::addaioverridedamagecallback(entity, &robotdestructrandompieces);
+  aiutility::addaioverridedamagecallback(entity, &robotgibdamageoverride);
+  aiutility::addaioverridekilledcallback(entity, &robotdeathoverride);
+  aiutility::addaioverridekilledcallback(entity, &robotgibdeathoverride);
+  aiutility::addaioverridekilledcallback(entity, &robotdestructdeathoverride);
   if(getdvarint("") == 1) {
     entity ai::set_behavior_attribute("", "");
   } else {

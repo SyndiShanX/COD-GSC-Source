@@ -126,8 +126,8 @@ function main() {
   level flag::init("idgun_up_for_grabs");
   level flag::init("pod_miasma");
   register_clientfields();
-  callback::on_spawned( & on_player_spawned);
-  callback::on_spawned( & function_f7d81bd5);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_spawned(&function_f7d81bd5);
   level._uses_sticky_grenades = 1;
   level._uses_taser_knuckles = 1;
   level._no_vending_machine_auto_collision = 1;
@@ -146,37 +146,37 @@ function main() {
   level._effect["switch_sparks"] = "electric/fx_elec_sparks_directional_orange";
   level.default_start_location = "start_room";
   level.default_game_mode = "zclassic";
-  level.precachecustomcharacters = & precachecustomcharacters;
-  level.givecustomcharacters = & givecustomcharacters;
+  level.precachecustomcharacters = &precachecustomcharacters;
+  level.givecustomcharacters = &givecustomcharacters;
   level thread setup_personality_character_exerts();
   initcharacterstartindex();
-  level.register_offhand_weapons_for_level_defaults_override = & offhand_weapon_overrride;
-  level.zombiemode_offhand_weapon_give_override = & offhand_weapon_give_override;
-  level._zombie_custom_add_weapons = & custom_add_weapons;
+  level.register_offhand_weapons_for_level_defaults_override = &offhand_weapon_overrride;
+  level.zombiemode_offhand_weapon_give_override = &offhand_weapon_give_override;
+  level._zombie_custom_add_weapons = &custom_add_weapons;
   level thread custom_add_vox();
   level._allow_melee_weapon_switching = 1;
   level.zombiemode_reusing_pack_a_punch = 1;
   level.do_randomized_zigzag_path = 1;
-  level.enemy_location_override_func = & enemy_location_override;
-  level.no_target_override = & no_target_override;
-  level.player_out_of_playable_area_override = & player_out_of_playable_area_override;
-  level.zm_custom_spawn_location_selection = & function_2c092767;
-  level.zm_custom_get_next_wasp_round = & function_612012aa;
-  level.zm_custom_get_next_raps_round = & function_612012aa;
-  level.zm_wasp_spawn_callback = & function_f88e4c70;
-  level.var_9cef605e = & function_89b7689f;
-  level.var_2300a8ad = & function_42cc727b;
-  level.var_2d0e5eb6 = & function_2d0e5eb6;
-  level.var_2c12d9a6 = & function_533186ee;
-  level.check_end_solo_game_override = & check_end_solo_game_override;
-  level._game_module_game_end_check = & function_63f29efd;
-  level.powerup_grab_get_players_override = & powerup_grab_get_players_override;
-  level.zm_override_ai_aftermath_powerup_drop = & zm_override_ai_aftermath_powerup_drop;
-  level.can_revive_game_module = & function_80ba9218;
+  level.enemy_location_override_func = &enemy_location_override;
+  level.no_target_override = &no_target_override;
+  level.player_out_of_playable_area_override = &player_out_of_playable_area_override;
+  level.zm_custom_spawn_location_selection = &function_2c092767;
+  level.zm_custom_get_next_wasp_round = &function_612012aa;
+  level.zm_custom_get_next_raps_round = &function_612012aa;
+  level.zm_wasp_spawn_callback = &function_f88e4c70;
+  level.var_9cef605e = &function_89b7689f;
+  level.var_2300a8ad = &function_42cc727b;
+  level.var_2d0e5eb6 = &function_2d0e5eb6;
+  level.var_2c12d9a6 = &function_533186ee;
+  level.check_end_solo_game_override = &check_end_solo_game_override;
+  level._game_module_game_end_check = &function_63f29efd;
+  level.powerup_grab_get_players_override = &powerup_grab_get_players_override;
+  level.zm_override_ai_aftermath_powerup_drop = &zm_override_ai_aftermath_powerup_drop;
+  level.can_revive_game_module = &function_80ba9218;
   include_weapons();
   magic_box_init();
   level.using_solo_revive = zod_use_solo_revive();
-  level._custom_perks["specialty_quickrevive"].cost = & revive_cost_override;
+  level._custom_perks["specialty_quickrevive"].cost = &revive_cost_override;
   zm_zod_perks::init();
   zm_craftables::init();
   zm_zod_craftables::randomize_craftable_spawns();
@@ -189,27 +189,27 @@ function main() {
   level thread function_4df9f4ad();
   setdvar("ai_threatUpdateInterval", 50);
   _zm_weap_tesla::init();
-  level.customrandomweaponweights = & zod_custom_weapon_weights;
-  level.special_weapon_magicbox_check = & zod_special_weapon_magicbox_check;
-  level._round_start_func = & zm::round_start;
-  level.fn_custom_round_ai_spawn = & function_33aa4940;
+  level.customrandomweaponweights = &zod_custom_weapon_weights;
+  level.special_weapon_magicbox_check = &zod_special_weapon_magicbox_check;
+  level._round_start_func = &zm::round_start;
+  level.fn_custom_round_ai_spawn = &function_33aa4940;
   level thread function_631e737d();
-  level.fn_custom_zombie_spawner_selection = & function_b05d27ad;
+  level.fn_custom_zombie_spawner_selection = &function_b05d27ad;
   level thread function_48fda59a();
   level.fn_custom_wasp_favourate_enemy = undefined;
-  level.func_get_zombie_spawn_delay = & function_59804866;
-  level.func_get_delay_between_rounds = & function_5ee4c46c;
-  level._zombiemode_post_respawn_callback = & function_afdf4111;
+  level.func_get_zombie_spawn_delay = &function_59804866;
+  level.func_get_delay_between_rounds = &function_5ee4c46c;
+  level._zombiemode_post_respawn_callback = &function_afdf4111;
   init_sounds();
   zm_ai_raps::enable_raps_rounds();
   zm_ai_wasp::enable_wasp_rounds();
   zm_zod_margwa::function_5e93cd08();
-  level._wasp_death_cb = & zm_zod_idgun_quest::function_14e2eca6;
-  level._margwa_damage_cb = & zm_zod_ee::function_37dc5568;
-  level.var_7cef68dc = & zm_zod_idgun_quest::function_c3ffc175;
-  level.player_intersection_tracker_override = & function_d034d8ff;
+  level._wasp_death_cb = &zm_zod_idgun_quest::function_14e2eca6;
+  level._margwa_damage_cb = &zm_zod_ee::function_37dc5568;
+  level.var_7cef68dc = &zm_zod_idgun_quest::function_c3ffc175;
+  level.player_intersection_tracker_override = &function_d034d8ff;
   level.zones = [];
-  level.zone_manager_init_func = & zm_zod_zone_init;
+  level.zone_manager_init_func = &zm_zod_zone_init;
   init_zones[0] = "zone_start";
   level thread zm_zonemgr::manage_zones(init_zones);
   level.zombie_ai_limit = 24;
@@ -224,7 +224,7 @@ function main() {
   level thread zm_zod_quest::start_zod_quest();
   level thread zm_zod_maps::init();
   level thread setupmusic();
-  level._powerup_grab_check = & powerup_can_player_grab;
+  level._powerup_grab_check = &powerup_can_player_grab;
   zm_powerups::powerup_remove_from_regular_drops("bonus_points_team");
   level thread beast_mode();
   zombie_utility::set_zombie_var("zombie_powerup_drop_max_per_round", 2);
@@ -361,7 +361,7 @@ function wait_for_revive_machine_to_be_turned_on() {
   if(!level flag::exists("solo_revive")) {
     level flag::init("solo_revive");
   }
-  level.override_use_solo_revive = & zod_use_solo_revive;
+  level.override_use_solo_revive = &zod_use_solo_revive;
 }
 
 function zod_use_solo_revive() {
@@ -464,7 +464,7 @@ function powerup_can_player_grab(player) {
 
 function beast_mode() {
   beast_mode_highlights();
-  level.player_out_of_playable_area_monitor_callback = & player_out_of_playable_area_monitor_callback;
+  level.player_out_of_playable_area_monitor_callback = &player_out_of_playable_area_monitor_callback;
 }
 
 function player_out_of_playable_area_monitor_callback() {
@@ -497,7 +497,7 @@ function placed_powerups() {
 }
 
 function spawn_infinite_powerup_drop(v_origin, str_type) {
-  level._powerup_timeout_override = & powerup_infinite_time;
+  level._powerup_timeout_override = &powerup_infinite_time;
   if(isDefined(str_type)) {
     intro_powerup = zm_powerups::specific_powerup_drop(str_type, v_origin);
   } else {
@@ -542,7 +542,7 @@ function offhand_weapon_give_override(str_weapon) {
 
 function zm_zod_beastpath(triggername, platformname) {
   beast_connect_triggers = getEntArray(triggername, "targetname");
-  array::thread_all(beast_connect_triggers, & activate_beast_platforms, platformname);
+  array::thread_all(beast_connect_triggers, &activate_beast_platforms, platformname);
 }
 
 function activate_beast_platforms(platformname) {
@@ -1293,7 +1293,7 @@ function function_e33614b9() {
 }
 
 function function_c9e2531c() {
-  level thread zm_zod_util::setup_devgui_func("ZM/Zod/Lighting/Slums Lightning Test", "zod_lightning_test", 1, & function_5abd3b41);
+  level thread zm_zod_util::setup_devgui_func("ZM/Zod/Lighting/Slums Lightning Test", "zod_lightning_test", 1, &function_5abd3b41);
 }
 
 function function_5abd3b41(n_index) {
@@ -1307,7 +1307,7 @@ function function_5abd3b41(n_index) {
 }
 
 function function_c876231d() {
-  level thread zm_zod_util::setup_devgui_func("ZM/Zod/Ghost test", "zod_ghost_test", 1, & zod_ghost_test);
+  level thread zm_zod_util::setup_devgui_func("ZM/Zod/Ghost test", "zod_ghost_test", 1, &zod_ghost_test);
 }
 
 function zod_ghost_test(n_index) {
@@ -1330,7 +1330,7 @@ function setup_devgui() {
   setdvar("", 0);
   setdvar("", 0);
   execdevgui("");
-  level.custom_devgui = & function_4173fe95;
+  level.custom_devgui = &function_4173fe95;
 }
 
 function function_4173fe95(cmd) {
@@ -1596,8 +1596,8 @@ function function_eda7de97() {
 
 function function_631e737d() {
   level waittill("raps_round_ending");
-  level.zm_mixed_wasp_raps_spawning = & function_243d0df6;
-  level.zm_ai_round_over = & function_68990a1c;
+  level.zm_mixed_wasp_raps_spawning = &function_243d0df6;
+  level.zm_ai_round_over = &function_68990a1c;
 }
 
 function function_243d0df6() {
@@ -1786,7 +1786,7 @@ function function_aab1d0bd() {
 
 function function_a988e9bb() {
   level flag::wait_till("all_players_connected");
-  array::thread_all(getplayers(), & player_noire_ee);
+  array::thread_all(getplayers(), &player_noire_ee);
 }
 
 function player_noire_ee() {

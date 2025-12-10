@@ -89,7 +89,7 @@ Elevator(elevatorID) {
 
 SetupRappel() {
   // Press and hold ^3[{+activate}]^7 to rappel
-  //precacheString( &"MP_PRESS_TO_RAPPEL" );
+  //precacheString(&"MP_PRESS_TO_RAPPEL" );
   trigs = getEntArray("rappeltrigger", "targetname");
   foreach(trig in trigs) {
     org = getent(trig.target, "targetname");
@@ -107,7 +107,7 @@ SetupRappel() {
 
 RappelThink() {
   // Press and hold ^3[{+activate}]^7 to rappel
-  //self setHintString( &"MP_PRESS_TO_RAPPEL" );
+  //self setHintString(&"MP_PRESS_TO_RAPPEL" );
 
   while(1) {
     self waittill("trigger", player);

@@ -11,16 +11,16 @@
 #namespace zm_genesis_challenges;
 
 function autoexec __init__sytem__() {
-  system::register("zm_stalingrad_challenges", & __init__, undefined, undefined);
+  system::register("zm_stalingrad_challenges", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "challenge1state", 15000, 2, "int", & function_4ff59189, 0, 0);
-  clientfield::register("toplayer", "challenge2state", 15000, 2, "int", & function_4ff59189, 0, 0);
-  clientfield::register("toplayer", "challenge3state", 15000, 2, "int", & function_4ff59189, 0, 0);
-  clientfield::register("toplayer", "challenge_board_eyes", 15000, 1, "int", & function_1664174d, 0, 0);
-  clientfield::register("scriptmover", "challenge_board_base", 15000, 1, "int", & function_aae53847, 0, 0);
-  clientfield::register("scriptmover", "challenge_board_reward", 15000, 1, "int", & function_2494cf3d, 0, 0);
+  clientfield::register("toplayer", "challenge1state", 15000, 2, "int", &function_4ff59189, 0, 0);
+  clientfield::register("toplayer", "challenge2state", 15000, 2, "int", &function_4ff59189, 0, 0);
+  clientfield::register("toplayer", "challenge3state", 15000, 2, "int", &function_4ff59189, 0, 0);
+  clientfield::register("toplayer", "challenge_board_eyes", 15000, 1, "int", &function_1664174d, 0, 0);
+  clientfield::register("scriptmover", "challenge_board_base", 15000, 1, "int", &function_aae53847, 0, 0);
+  clientfield::register("scriptmover", "challenge_board_reward", 15000, 1, "int", &function_2494cf3d, 0, 0);
   level.var_3c3a1522 = [];
   for(x = 0; x < 4; x++) {
     str_name = "challenge_board_" + x;

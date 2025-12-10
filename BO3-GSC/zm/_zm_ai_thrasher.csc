@@ -11,7 +11,7 @@
 #namespace _zm_ai_thrasher;
 
 function autoexec main() {
-  clientfield::register("actor", "thrasher_mouth_cf", 9000, 8, "int", & thrasherclientutils::function_dc24e0f3, 0, 0);
+  clientfield::register("actor", "thrasher_mouth_cf", 9000, 8, "int", &thrasherclientutils::function_dc24e0f3, 0, 0);
 }
 
 #namespace thrasherclientutils;
@@ -19,7 +19,7 @@ function autoexec main() {
 function function_43bf0af5(entity, player, state) {
   entitynumber = player getentitynumber();
   var_a2619f0 = 3 << (entitynumber * 2);
-  return (state & var_a2619f0) >> (entitynumber * 2);
+  return (state &var_a2619f0) >> (entitynumber * 2);
 }
 
 function private function_dc24e0f3(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {

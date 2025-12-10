@@ -13,7 +13,7 @@
 #namespace archetype_robot;
 
 function autoexec __init__sytem__() {
-  system::register("robot", & __init__, undefined, undefined);
+  system::register("robot", &__init__, undefined, undefined);
 }
 
 function autoexec precache() {
@@ -23,12 +23,12 @@ function autoexec precache() {
 
 function __init__() {
   if(ai::shouldregisterclientfieldforarchetype("robot")) {
-    clientfield::register("actor", "robot_mind_control", 1, 2, "int", & robotclientutils::robotmindcontrolhandler, 0, 1);
-    clientfield::register("actor", "robot_mind_control_explosion", 1, 1, "int", & robotclientutils::robotmindcontrolexplosionhandler, 0, 0);
-    clientfield::register("actor", "robot_lights", 1, 3, "int", & robotclientutils::robotlightshandler, 0, 0);
-    clientfield::register("actor", "robot_EMP", 1, 1, "int", & robotclientutils::robotemphandler, 0, 0);
+    clientfield::register("actor", "robot_mind_control", 1, 2, "int", &robotclientutils::robotmindcontrolhandler, 0, 1);
+    clientfield::register("actor", "robot_mind_control_explosion", 1, 1, "int", &robotclientutils::robotmindcontrolexplosionhandler, 0, 0);
+    clientfield::register("actor", "robot_lights", 1, 3, "int", &robotclientutils::robotlightshandler, 0, 0);
+    clientfield::register("actor", "robot_EMP", 1, 1, "int", &robotclientutils::robotemphandler, 0, 0);
   }
-  ai::add_archetype_spawn_function("robot", & robotclientutils::robotsoldierspawnsetup);
+  ai::add_archetype_spawn_function("robot", &robotclientutils::robotsoldierspawnsetup);
 }
 
 #namespace robotclientutils;

@@ -17,19 +17,19 @@
 #namespace namespace_c550ee23;
 
 function autoexec __init__sytem__() {
-  system::register("training_sim", & __init__, undefined, undefined);
+  system::register("training_sim", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("actor", "rez_in", 1, 1, "int", & function_86af5f80, 0, 0);
-  clientfield::register("actor", "rez_out", 1, 1, "int", & function_11225c9f, 0, 0);
-  clientfield::register("vehicle", "rez_in", 1, 1, "int", & function_86af5f80, 0, 0);
-  clientfield::register("vehicle", "rez_out", 1, 1, "int", & function_11225c9f, 0, 0);
-  clientfield::register("actor", "enable_ethereal_overlay", 1, 1, "int", & function_d3b7cf16, 0, 0);
-  clientfield::register("vehicle", "enable_ethereal_overlay", 1, 1, "int", & function_d3b7cf16, 0, 0);
-  clientfield::register("scriptmover", "enable_ethereal_overlay", 1, 1, "int", & function_d3b7cf16, 0, 0);
-  clientfield::register("toplayer", "postfx_build_world", 1, 1, "counter", & function_14646786, 0, 0);
-  clientfield::register("toplayer", "cleanup_sim", 1000, 1, "counter", & function_b699155b, 0, 0);
+  clientfield::register("actor", "rez_in", 1, 1, "int", &function_86af5f80, 0, 0);
+  clientfield::register("actor", "rez_out", 1, 1, "int", &function_11225c9f, 0, 0);
+  clientfield::register("vehicle", "rez_in", 1, 1, "int", &function_86af5f80, 0, 0);
+  clientfield::register("vehicle", "rez_out", 1, 1, "int", &function_11225c9f, 0, 0);
+  clientfield::register("actor", "enable_ethereal_overlay", 1, 1, "int", &function_d3b7cf16, 0, 0);
+  clientfield::register("vehicle", "enable_ethereal_overlay", 1, 1, "int", &function_d3b7cf16, 0, 0);
+  clientfield::register("scriptmover", "enable_ethereal_overlay", 1, 1, "int", &function_d3b7cf16, 0, 0);
+  clientfield::register("toplayer", "postfx_build_world", 1, 1, "counter", &function_14646786, 0, 0);
+  clientfield::register("toplayer", "cleanup_sim", 1000, 1, "counter", &function_b699155b, 0, 0);
   duplicate_render::set_dr_filter_framebuffer_duplicate("armor_pl", 0, "armor_on", undefined, 1, "mc/mtl_power_armor", 0);
 }
 

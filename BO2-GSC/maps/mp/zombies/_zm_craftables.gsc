@@ -37,7 +37,7 @@ init() {
   open_table.triggerthink = ::opentablecraftable;
   open_table.custom_craftablestub_update_prompt = ::open_craftablestub_update_prompt;
   include_zombie_craftable(open_table);
-  add_zombie_craftable("open_table", & "");
+  add_zombie_craftable("open_table", &"");
 
   if(isDefined(level.use_swipe_protection))
     onplayerconnect_callback(::craftables_watch_swipes);
@@ -352,7 +352,7 @@ generate_piece_unitrigger(classname, origin, angles, flags, radius, script_heigh
 
   unitrigger_stub.radius = radius;
   unitrigger_stub.cursor_hint = "HINT_NOICON";
-  unitrigger_stub.hint_string = & "ZOMBIE_BUILD_PIECE_GRAB";
+  unitrigger_stub.hint_string = &"ZOMBIE_BUILD_PIECE_GRAB";
   unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   unitrigger_stub.require_look_at = 0;
 
@@ -397,7 +397,7 @@ piecestub_update_prompt(player) {
 
   if(isDefined(player.current_craftable_piece) && !(isDefined(self.piece.is_shared) && self.piece.is_shared)) {
     if(!level.craftable_piece_swap_allowed)
-      self.hint_string = & "ZM_CRAFTABLES_PIECE_NO_SWITCH";
+      self.hint_string = &"ZM_CRAFTABLES_PIECE_NO_SWITCH";
     else {
       spiece = self.piece;
       cpiece = player.current_craftable_piece;
@@ -407,10 +407,10 @@ piecestub_update_prompt(player) {
         return false;
       }
 
-      self.hint_string = & "ZOMBIE_BUILD_PIECE_SWITCH";
+      self.hint_string = &"ZOMBIE_BUILD_PIECE_SWITCH";
     }
   } else
-    self.hint_string = & "ZOMBIE_BUILD_PIECE_GRAB";
+    self.hint_string = &"ZOMBIE_BUILD_PIECE_GRAB";
 
   return true;
 }
@@ -1446,10 +1446,10 @@ craftablestub_update_prompt(player, unitrigger) {
   if(!(isDefined(self.crafted) && self.crafted)) {
     if(!self.craftablespawn craftable_can_use_shared_piece()) {
       if(!isDefined(player.current_craftable_piece)) {
-        self.hint_string = & "ZOMBIE_BUILD_PIECE_MORE";
+        self.hint_string = &"ZOMBIE_BUILD_PIECE_MORE";
         return false;
       } else if(!self.craftablespawn craftable_has_piece(player.current_craftable_piece)) {
-        self.hint_string = & "ZOMBIE_BUILD_PIECE_WRONG";
+        self.hint_string = &"ZOMBIE_BUILD_PIECE_WRONG";
         return false;
       }
     }
@@ -1458,22 +1458,22 @@ craftablestub_update_prompt(player, unitrigger) {
     self.hint_string = level.zombie_craftablestubs[self.equipname].str_to_craft;
   } else if(self.persistent == 1) {
     if(maps\mp\zombies\_zm_equipment::is_limited_equipment(self.weaponname) && maps\mp\zombies\_zm_equipment::limited_equipment_in_use(self.weaponname)) {
-      self.hint_string = & "ZOMBIE_BUILD_PIECE_ONLY_ONE";
+      self.hint_string = &"ZOMBIE_BUILD_PIECE_ONLY_ONE";
       return false;
     }
 
     if(player has_player_equipment(self.weaponname)) {
-      self.hint_string = & "ZOMBIE_BUILD_PIECE_HAVE_ONE";
+      self.hint_string = &"ZOMBIE_BUILD_PIECE_HAVE_ONE";
       return false;
     }
 
     self.hint_string = self.trigger_hintstring;
   } else if(self.persistent == 2) {
     if(!maps\mp\zombies\_zm_weapons::limited_weapon_below_quota(self.weaponname, undefined)) {
-      self.hint_string = & "ZOMBIE_GO_TO_THE_BOX_LIMITED";
+      self.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
       return false;
     } else if(isDefined(self.str_taken) && self.str_taken) {
-      self.hint_string = & "ZOMBIE_GO_TO_THE_BOX";
+      self.hint_string = &"ZOMBIE_GO_TO_THE_BOX";
       return false;
     }
 
@@ -1570,7 +1570,7 @@ open_craftablestub_update_prompt(player) {
     switch (self.a_uts_open_craftables_available.size) {
       case 0:
         if(!isDefined(player.current_craftable_piece)) {
-          self.hint_string = & "ZOMBIE_BUILD_PIECE_MORE";
+          self.hint_string = &"ZOMBIE_BUILD_PIECE_MORE";
           self.n_open_craftable_choice = -1;
           return false;
         }
@@ -1820,13 +1820,13 @@ craftable_place_think() {
       self craftabletrigger_update_prompt(player_crafted);
 
     if(!maps\mp\zombies\_zm_weapons::limited_weapon_below_quota(self.stub.weaponname, undefined)) {
-      self.stub.hint_string = & "ZOMBIE_GO_TO_THE_BOX_LIMITED";
+      self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
       self sethintstring(self.stub.hint_string);
       return;
     }
 
     if(isDefined(self.stub.str_taken) && self.stub.str_taken) {
-      self.stub.hint_string = & "ZOMBIE_GO_TO_THE_BOX";
+      self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX";
       self sethintstring(self.stub.hint_string);
       return;
     }
@@ -1874,9 +1874,9 @@ craftable_place_think() {
         self[[level.zombie_include_craftables[self.stub.equipname].onbuyweapon]](player);
 
       if(!maps\mp\zombies\_zm_weapons::limited_weapon_below_quota(self.stub.weaponname, undefined))
-        self.stub.hint_string = & "ZOMBIE_GO_TO_THE_BOX_LIMITED";
+        self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
       else
-        self.stub.hint_string = & "ZOMBIE_GO_TO_THE_BOX";
+        self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX";
 
       self sethintstring(self.stub.hint_string);
       player track_craftables_pickedup(self.stub.craftablespawn);

@@ -36,7 +36,7 @@ function callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeanso
   eattackernotself = isDefined(eattacker) && eattacker != self;
   eattackerisnotowner = isDefined(eattacker) && isDefined(self.owner) && eattacker != self.owner;
   trytododamagefeedback = !isDefined(self.nodamagefeedback) || !self.nodamagefeedback;
-  if(!1 & idflags) {
+  if(!1 &idflags) {
     idamage = loadout::cac_modified_vehicle_damage(self, eattacker, idamage, smeansofdeath, weapon, einflictor);
   }
   self.idflags = idflags;

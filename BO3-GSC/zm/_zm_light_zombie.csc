@@ -14,7 +14,7 @@
 #namespace zm_light_zombie;
 
 function autoexec __init__sytem__() {
-  system::register("zm_light_zombie", & __init__, undefined, undefined);
+  system::register("zm_light_zombie", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -29,9 +29,9 @@ function init_fx() {
 }
 
 function register_clientfields() {
-  clientfield::register("actor", "light_zombie_clientfield_aura_fx", 15000, 1, "int", & function_98e8bc87, 0, 0);
-  clientfield::register("actor", "light_zombie_clientfield_death_fx", 15000, 1, "int", & function_9127e2f8, 0, 0);
-  clientfield::register("actor", "light_zombie_clientfield_damaged_fx", 15000, 1, "counter", & function_ad4789b4, 0, 0);
+  clientfield::register("actor", "light_zombie_clientfield_aura_fx", 15000, 1, "int", &function_98e8bc87, 0, 0);
+  clientfield::register("actor", "light_zombie_clientfield_death_fx", 15000, 1, "int", &function_9127e2f8, 0, 0);
+  clientfield::register("actor", "light_zombie_clientfield_damaged_fx", 15000, 1, "counter", &function_ad4789b4, 0, 0);
 }
 
 function function_9127e2f8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

@@ -570,7 +570,7 @@ vm2_get_vehicle_instance_count(var_0) {
   if(isstring(var_0)) {
     var_3 = var_2.presets[var_0];
 
-    if(isDefined(var_3) & isarray(var_3.instances))
+    if(isDefined(var_3) &isarray(var_3.instances))
       var_1 = var_3.instances.size;
   } else {
     foreach(var_3 in var_2.presets) {

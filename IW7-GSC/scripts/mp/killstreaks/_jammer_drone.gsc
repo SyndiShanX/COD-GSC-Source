@@ -181,11 +181,11 @@ func_3758(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     return;
   }
 
-  if(isDefined(param_03) && param_03 & level.idflags_penetration) {
+  if(isDefined(param_03) && param_03 &level.idflags_penetration) {
     var_0C.wasdamagedfrombulletpenetration = 1;
   }
 
-  if(isDefined(param_03) && param_03 & level.idflags_ricochet) {
+  if(isDefined(param_03) && param_03 &level.idflags_ricochet) {
     self.wasdamagedfrombulletricochet = 1;
   }
 

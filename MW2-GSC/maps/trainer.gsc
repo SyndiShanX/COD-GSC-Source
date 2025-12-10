@@ -385,7 +385,7 @@ start_ending() {
   org = getent("course_leave", "targetname");
   level.player SetOrigin(org.origin);
   level.player SetPlayerAngles(org.angles);
-  registerObjective("obj_course", & "TRAINER_OBJ_EXIT_THE_PIT", getent("course_start", "targetname"));
+  registerObjective("obj_course", &"TRAINER_OBJ_EXIT_THE_PIT", getent("course_start", "targetname"));
   setObjectiveState("obj_course", "current");
   thread AA_ending_init();
   maps\_utility::vision_set_fog_changes("trainer_pit", 0);
@@ -548,7 +548,7 @@ firing_range_hip_and_ads() {
   PICK UP THE WEAPON
   -------------------------*/
   if(!player_has_primary_weapon()) {
-    registerObjective("obj_rifle", & "TRAINER_PICK_UP_A_RIFLE_FROM", getEnt("range_rifle", "script_noteworthy"));
+    registerObjective("obj_rifle", &"TRAINER_PICK_UP_A_RIFLE_FROM", getEnt("range_rifle", "script_noteworthy"));
     setObjectiveState("obj_rifle", "current");
 
     pickup_rifle = getent("pickup_rifle", "targetname");
@@ -590,10 +590,10 @@ firing_range_hip_and_ads() {
   -------------------------*/
   //Shoot each target while firing from the hip.
   if(player_needs_to_pickup_primary_weapon == false) {
-    registerObjective("obj_rifle", & "TRAINER_SHOOT_EACH_TARGET_WHILE1", getEnt("firing_range", "targetname"));
+    registerObjective("obj_rifle", &"TRAINER_SHOOT_EACH_TARGET_WHILE1", getEnt("firing_range", "targetname"));
     setObjectiveState("obj_rifle", "current");
   } else {
-    setObjectiveString("obj_rifle", & "TRAINER_SHOOT_EACH_TARGET_WHILE1");
+    setObjectiveString("obj_rifle", &"TRAINER_SHOOT_EACH_TARGET_WHILE1");
     setObjectiveLocation("obj_rifle", getEnt("firing_range", "targetname"));
   }
 
@@ -741,7 +741,7 @@ firing_range_hip_and_ads() {
   -------------------------*/
   // Notice that your crosshair expands as you fire.\nThe bigger the crosshairs, the less accurate you are.
   //double_line = true;
-  //thread killhouse_hint( &"TRAINER_HINT_CROSSHAIR_CHANGES", 6, double_line );
+  //thread killhouse_hint(&"TRAINER_HINT_CROSSHAIR_CHANGES", 6, double_line );
 
   /*-----------------------
   ADS TRAINING
@@ -766,7 +766,7 @@ firing_range_hip_and_ads() {
   level.foley dialogue_execute("train_fly_crouchfirst");
 
   // Shoot three targets while aiming down your sights.
-  thread setObjectiveString("obj_rifle", & "TRAINER_SHOOT_EACH_TARGET_WHILE");
+  thread setObjectiveString("obj_rifle", &"TRAINER_SHOOT_EACH_TARGET_WHILE");
   setObjectiveState("obj_rifle", "current");
 
   numberOfTagretsToHit = 3;
@@ -935,7 +935,7 @@ cycle_targets_till_hit(targets, numberOfTagretsToHit, mustADS, mustCrouch, mustS
           clear_hints();
         } else {
           clear_hints();
-          //thread killhouse_hint( &"TRAINER_SHOOT_THE_TARGET_THROUGH", 6 );
+          //thread killhouse_hint(&"TRAINER_SHOOT_THE_TARGET_THROUGH", 6 );
           level notify("player_needs_to_shoot_through_plywood");
           continue;
         }
@@ -1011,7 +1011,7 @@ firing_range_timed_ads() {
   level.foley dialogue_execute("train_fly_showemprivate");
 
   // Shoot each target as quickly as possible.
-  registerObjective("obj_timed_rifle", & "TRAINER_SHOOT_EACH_TARGET_AS", getEnt("firing_range", "targetname"));
+  registerObjective("obj_timed_rifle", &"TRAINER_SHOOT_EACH_TARGET_AS", getEnt("firing_range", "targetname"));
   setObjectiveState("obj_timed_rifle", "current");
 
   //(HINT: RELEASE AND PULL LT TO AUTOMATICALLY SNAP TO A NEARBY TARGET)
@@ -1238,7 +1238,7 @@ firing_range_penetration() {
   level.translator delaythread(level.translatordelay, ::dialogue_execute, "train_fly_theprivatehere");
   level.foley dialogue_execute("train_fly_theprivatehere");
 
-  registerObjective("obj_penetration", & "TRAINER_SHOOT_A_TARGET_THROUGH", getEnt("firing_range", "targetname"));
+  registerObjective("obj_penetration", &"TRAINER_SHOOT_A_TARGET_THROUGH", getEnt("firing_range", "targetname"));
   setObjectiveState("obj_penetration", "current");
 
   while(!within_fov(level.player.origin, level.player getplayerangles(), level.firing_range_area.origin, level.cosine["45"]))
@@ -1347,7 +1347,7 @@ firing_range_frags() {
     thread frags_glow();
     //Sgt. Foley	Private Allen, pick up some frag grenades from the table.	
     level.foley thread dialogue_execute("train_fly_pickupfrag");
-    registerObjective("obj_frags", & "TRAINER_PICK_UP_THE_FRAG_GRENADES", getEnt("frag_trigger", "script_noteworthy"));
+    registerObjective("obj_frags", &"TRAINER_PICK_UP_THE_FRAG_GRENADES", getEnt("frag_trigger", "script_noteworthy"));
     setObjectiveState("obj_frags", "current");
   } else {
     alreadyHadFrags = true;
@@ -1360,11 +1360,11 @@ firing_range_frags() {
   THROW A FRAG INTO THE SPOT...
   -------------------------*/
   if(alreadyHadFrags) {
-    registerObjective("obj_frags", & "TRAINER_THROW_A_GRENADE_INTO", getEnt("firing_range", "targetname"));
+    registerObjective("obj_frags", &"TRAINER_THROW_A_GRENADE_INTO", getEnt("firing_range", "targetname"));
     setObjectiveState("obj_frags", "current");
     setObjectiveLocation("obj_frags", getent("firing_range", "targetname"));
   } else {
-    thread setObjectiveString("obj_frags", & "TRAINER_THROW_A_GRENADE_INTO");
+    thread setObjectiveString("obj_frags", &"TRAINER_THROW_A_GRENADE_INTO");
     setObjectiveState("obj_frags", "current");
     setObjectiveLocation("obj_frags", getent("firing_range", "targetname"));
   }
@@ -1713,7 +1713,7 @@ AA_find_the_pit_sequence() {
   thread dialogue_ambient();
 
   setSavedDvar("objectiveAlpha", 1);
-  registerObjective("obj_course_locate", & "TRAINER_OBJ_GO_TO_THE_PIT", getEnt("origin_sidearm_table_babystep_1", "targetname"));
+  registerObjective("obj_course_locate", &"TRAINER_OBJ_GO_TO_THE_PIT", getEnt("origin_sidearm_table_babystep_1", "targetname"));
   setObjectiveState("obj_course_locate", "current");
   flag_set("obj_go_to_the_pit_given");
 
@@ -1766,7 +1766,7 @@ sideArm_Training() {
   alreadyHadPistol = true;
   if(!level.player HasWeapon(level.gunSidearm)) {
     alreadyHadPistol = false;
-    registerObjective("obj_sidearm", & "TRAINER_GET_A_PISTOL_FROM_THE", getEnt("origin_sidearm_table", "targetname"));
+    registerObjective("obj_sidearm", &"TRAINER_GET_A_PISTOL_FROM_THE", getEnt("origin_sidearm_table", "targetname"));
     setObjectiveState("obj_sidearm", "current");
     //Cpl. DunnGo ahead and grab a pistol.
     level.pitguy dialogue_execute("train_cpd_grabapistol");
@@ -1781,7 +1781,7 @@ sideArm_Training() {
   }
 
   if(alreadyHadPistol == true) {
-    registerObjective("obj_sidearm", & "TRAINER_GET_A_PISTOL_FROM_THE", getEnt("origin_course_01", "targetname"));
+    registerObjective("obj_sidearm", &"TRAINER_GET_A_PISTOL_FROM_THE", getEnt("origin_course_01", "targetname"));
     setObjectiveState("obj_sidearm", "current");
     //Cpl. Dunn	OK. So you already have your side arm.
     //level.pitguy dialogue_execute( "train_cpd_alreadyhave" );
@@ -1790,7 +1790,7 @@ sideArm_Training() {
   }
 
   setObjectiveLocation("obj_sidearm", getent("origin_course_01", "targetname"));
-  setObjectiveString("obj_sidearm", & "TRAINER_SWITCH_TO_YOUR_RIFLE");
+  setObjectiveString("obj_sidearm", &"TRAINER_SWITCH_TO_YOUR_RIFLE");
 
   currentWeapon = level.player getCurrentWeapon();
   if(currentWeapon == level.gunSidearm) {
@@ -1999,7 +1999,7 @@ course_loop_think() {
     -------------------------*/
     if(level.first_time) {
       level.objectiveRegroup = 0;
-      registerObjective("obj_course", & "TRAINER_OBJ_COURSE", getEnt("origin_course_01", "targetname"));
+      registerObjective("obj_course", &"TRAINER_OBJ_COURSE", getEnt("origin_course_01", "targetname"));
       setObjectiveState("obj_course", "current");
     }
 
@@ -2017,7 +2017,7 @@ course_loop_think() {
 
     setObjectiveLocation("obj_course", getent("origin_course_01", "targetname"));
     if(level.objectiveRegroup != 0)
-      setObjectiveString("obj_course", & "TRAINER_OBJ_COURSE");
+      setObjectiveString("obj_course", &"TRAINER_OBJ_COURSE");
 
     flag_clear("melee_target_hit");
     level.targets_hit_with_melee = 0;
@@ -2244,7 +2244,7 @@ course_loop_think() {
         //Cpl. DunnYou can run the course again or regroup with the others by the main gate.	
         level.pitguy thread dialogue_execute("train_cpd_runagain", "dunn_finished_with_difficulty_selection_dialogue");
         setObjectiveLocation("obj_course", getent("course_start", "targetname"));
-        setObjectiveString("obj_course", & "TRAINER_OBJ_EXIT_THE_PIT");
+        setObjectiveString("obj_course", &"TRAINER_OBJ_EXIT_THE_PIT");
         level.objectiveRegroup = 1;
       }
     } else {
@@ -2333,7 +2333,7 @@ try_again() {
     //Cpl. Dunn	Alright. Head back in and give it another go.	
     level.pitguy thread dialogue_execute("train_cpd_anothergo");
     setObjectiveLocation("obj_course", getent("origin_course_01", "targetname"));
-    setObjectiveString("obj_course", & "TRAINER_OBJ_COURSE");
+    setObjectiveString("obj_course", &"TRAINER_OBJ_COURSE");
     level.objectiveRegroup = 0;
   } else {
     flag_set("player_done_with_course");
@@ -4013,11 +4013,11 @@ objective_hints(completion_flag) {
     //	level.marine1 nagPlayer( "squadwaiting", 15.0 );
 
     if(!flag(completion_flag) && timePassed > 20.0) {
-      //killhouse_hint( &"TRAINER_HINT_OBJECTIVE_REMINDER", 6.0 );
+      //killhouse_hint(&"TRAINER_HINT_OBJECTIVE_REMINDER", 6.0 );
       thread compass_reminder();
       RefreshHudCompass();
       //wait( 0.5 );
-      //thread killhouse_hint( &"TRAINER_HINT_OBJECTIVE_REMINDER2", 10.0 );
+      //thread killhouse_hint(&"TRAINER_HINT_OBJECTIVE_REMINDER2", 10.0 );
       timePassed = 0;
     }
 
@@ -4049,7 +4049,7 @@ add_hint_background(double_line) {
 //	level.hintElem setPoint( "TOP", undefined, 0, 110 );
 //	level.hintElem.sort = 0.5;
 //
-//	level.hintElem setText( &"TRAINER_HINT_OBJECTIVE_MARKER" );
+//	level.hintElem setText(&"TRAINER_HINT_OBJECTIVE_MARKER" );
 //
 //	level.iconElem = createIcon( "objective", 32, 32 );
 //	level.iconElem.hidewheninmenu = true;
@@ -4085,7 +4085,7 @@ add_hint_background(double_line) {
 //	level.hintElem setPoint( "TOP", undefined, 0, 110 );
 //	level.hintElem.sort = 0.5;
 //
-//	level.hintElem setText( &"TRAINER_HINT_OBJECTIVE_REMINDER" );
+//	level.hintElem setText(&"TRAINER_HINT_OBJECTIVE_REMINDER" );
 //
 //
 //	level.iconElem = createIcon( "objective", 32, 32 );
@@ -4238,104 +4238,104 @@ delete_if_obj_complete(obj_flag) {
 
 registerActions() {
   level.actionBinds = [];
-  registerActionBinding("objectives", "pause", & "TRAINER_HINT_CHECK_OBJECTIVES_PAUSED");
+  registerActionBinding("objectives", "pause", &"TRAINER_HINT_CHECK_OBJECTIVES_PAUSED");
 
-  registerActionBinding("objectives_pc", "+scores", & "TRAINER_HINT_CHECK_OBJECTIVES_SCORES");
+  registerActionBinding("objectives_pc", "+scores", &"TRAINER_HINT_CHECK_OBJECTIVES_SCORES");
 
-  registerActionBinding("pc_attack", "+attack", & "TRAINER_HINT_ATTACK_PC");
-  registerActionBinding("pc_hip_attack", "+attack", & "TRAINER_HINT_HIP_ATTACK_PC");
+  registerActionBinding("pc_attack", "+attack", &"TRAINER_HINT_ATTACK_PC");
+  registerActionBinding("pc_hip_attack", "+attack", &"TRAINER_HINT_HIP_ATTACK_PC");
 
-  registerActionBinding("hip_attack", "+attack", & "TRAINER_HINT_HIP_ATTACK");
-  registerActionBinding("attack", "+attack", & "TRAINER_HINT_ATTACK");
+  registerActionBinding("hip_attack", "+attack", &"TRAINER_HINT_HIP_ATTACK");
+  registerActionBinding("attack", "+attack", &"TRAINER_HINT_ATTACK");
 
-  registerActionBinding("stop_ads", "+speed_throw", & "TRAINER_HINT_STOP_ADS_THROW");
-  registerActionBinding("stop_ads", "+speed", & "TRAINER_HINT_STOP_ADS");
-  registerActionBinding("stop_ads", "+toggleads_throw", & "TRAINER_HINT_STOP_ADS_TOGGLE_THROW");
-  registerActionBinding("stop_ads", "toggleads", & "TRAINER_HINT_STOP_ADS_TOGGLE");
+  registerActionBinding("stop_ads", "+speed_throw", &"TRAINER_HINT_STOP_ADS_THROW");
+  registerActionBinding("stop_ads", "+speed", &"TRAINER_HINT_STOP_ADS");
+  registerActionBinding("stop_ads", "+toggleads_throw", &"TRAINER_HINT_STOP_ADS_TOGGLE_THROW");
+  registerActionBinding("stop_ads", "toggleads", &"TRAINER_HINT_STOP_ADS_TOGGLE");
 
-  registerActionBinding("ads_360", "+speed_throw", & "TRAINER_HINT_ADS_THROW_360");
-  registerActionBinding("ads_360", "+speed", & "TRAINER_HINT_ADS_360");
+  registerActionBinding("ads_360", "+speed_throw", &"TRAINER_HINT_ADS_THROW_360");
+  registerActionBinding("ads_360", "+speed", &"TRAINER_HINT_ADS_360");
 
-  registerActionBinding("ads", "+speed_throw", & "TRAINER_HINT_ADS_THROW");
-  registerActionBinding("ads", "+speed", & "TRAINER_HINT_ADS");
-  registerActionBinding("ads", "+toggleads_throw", & "TRAINER_HINT_ADS_TOGGLE_THROW");
-  registerActionBinding("ads", "toggleads", & "TRAINER_HINT_ADS_TOGGLE");
+  registerActionBinding("ads", "+speed_throw", &"TRAINER_HINT_ADS_THROW");
+  registerActionBinding("ads", "+speed", &"TRAINER_HINT_ADS");
+  registerActionBinding("ads", "+toggleads_throw", &"TRAINER_HINT_ADS_TOGGLE_THROW");
+  registerActionBinding("ads", "toggleads", &"TRAINER_HINT_ADS_TOGGLE");
 
-  registerActionBinding("ads_switch", "+speed_throw", & "TRAINER_HINT_ADS_SWITCH_THROW");
-  registerActionBinding("ads_switch", "+speed", & "TRAINER_HINT_ADS_SWITCH");
+  registerActionBinding("ads_switch", "+speed_throw", &"TRAINER_HINT_ADS_SWITCH_THROW");
+  registerActionBinding("ads_switch", "+speed", &"TRAINER_HINT_ADS_SWITCH");
 
-  registerActionBinding("ads_switch_shoulder", "+speed_throw", & "TRAINER_HINT_ADS_SWITCH_THROW_SHOULDER");
-  registerActionBinding("ads_switch_shoulder", "+speed", & "TRAINER_HINT_ADS_SWITCH_SHOULDER");
+  registerActionBinding("ads_switch_shoulder", "+speed_throw", &"TRAINER_HINT_ADS_SWITCH_THROW_SHOULDER");
+  registerActionBinding("ads_switch_shoulder", "+speed", &"TRAINER_HINT_ADS_SWITCH_SHOULDER");
 
-  registerActionBinding("breath", "+melee_breath", & "TRAINER_HINT_BREATH_MELEE");
-  registerActionBinding("breath", "+breath_sprint", & "TRAINER_HINT_BREATH_SPRINT");
-  registerActionBinding("breath", "+holdbreath", & "TRAINER_HINT_BREATH");
+  registerActionBinding("breath", "+melee_breath", &"TRAINER_HINT_BREATH_MELEE");
+  registerActionBinding("breath", "+breath_sprint", &"TRAINER_HINT_BREATH_SPRINT");
+  registerActionBinding("breath", "+holdbreath", &"TRAINER_HINT_BREATH");
 
-  registerActionBinding("melee", "+melee", & "TRAINER_HINT_MELEE");
-  registerActionBinding("melee", "+melee_breath", & "TRAINER_HINT_MELEE_BREATH");
+  registerActionBinding("melee", "+melee", &"TRAINER_HINT_MELEE");
+  registerActionBinding("melee", "+melee_breath", &"TRAINER_HINT_MELEE_BREATH");
 
-  registerActionBinding("prone", "goprone", & "TRAINER_HINT_PRONE");
-  registerActionBinding("prone", "+stance", & "TRAINER_HINT_PRONE_STANCE");
-  registerActionBinding("prone", "toggleprone", & "TRAINER_HINT_PRONE_TOGGLE");
-  registerActionBinding("prone", "+prone", & "TRAINER_HINT_PRONE_HOLD");
-  registerActionBinding("prone", "lowerstance", & "TRAINER_HINT_PRONE_DOUBLE");
+  registerActionBinding("prone", "goprone", &"TRAINER_HINT_PRONE");
+  registerActionBinding("prone", "+stance", &"TRAINER_HINT_PRONE_STANCE");
+  registerActionBinding("prone", "toggleprone", &"TRAINER_HINT_PRONE_TOGGLE");
+  registerActionBinding("prone", "+prone", &"TRAINER_HINT_PRONE_HOLD");
+  registerActionBinding("prone", "lowerstance", &"TRAINER_HINT_PRONE_DOUBLE");
   //	registerActionBinding( "prone",				"+movedown",			&"" );
 
-  registerActionBinding("crouch", "gocrouch", & "TRAINER_HINT_CROUCH");
-  registerActionBinding("crouch", "+stance", & "TRAINER_HINT_CROUCH_STANCE");
-  registerActionBinding("crouch", "togglecrouch", & "TRAINER_HINT_CROUCH_TOGGLE");
+  registerActionBinding("crouch", "gocrouch", &"TRAINER_HINT_CROUCH");
+  registerActionBinding("crouch", "+stance", &"TRAINER_HINT_CROUCH_STANCE");
+  registerActionBinding("crouch", "togglecrouch", &"TRAINER_HINT_CROUCH_TOGGLE");
   //	registerActionBinding( "crouch",			"lowerstance",			&"TRAINER_HINT_CROUCH_DOU" );
-  registerActionBinding("crouch", "+movedown", & "TRAINER_HINT_CROUCH_HOLD");
+  registerActionBinding("crouch", "+movedown", &"TRAINER_HINT_CROUCH_HOLD");
 
-  registerActionBinding("stand", "+gostand", & "TRAINER_HINT_STAND");
-  registerActionBinding("stand", "+stance", & "TRAINER_HINT_STAND_STANCE");
-  registerActionBinding("stand", "+moveup", & "TRAINER_HINT_STAND_UP");
+  registerActionBinding("stand", "+gostand", &"TRAINER_HINT_STAND");
+  registerActionBinding("stand", "+stance", &"TRAINER_HINT_STAND_STANCE");
+  registerActionBinding("stand", "+moveup", &"TRAINER_HINT_STAND_UP");
 
-  registerActionBinding("jump", "+gostand", & "TRAINER_HINT_JUMP_STAND");
-  registerActionBinding("jump", "+moveup", & "TRAINER_HINT_JUMP");
+  registerActionBinding("jump", "+gostand", &"TRAINER_HINT_JUMP_STAND");
+  registerActionBinding("jump", "+moveup", &"TRAINER_HINT_JUMP");
 
-  registerActionBinding("sprint", "+breath_sprint", & "TRAINER_HINT_SPRINT_BREATH");
-  registerActionBinding("sprint", "+sprint", & "TRAINER_HINT_SPRINT");
+  registerActionBinding("sprint", "+breath_sprint", &"TRAINER_HINT_SPRINT_BREATH");
+  registerActionBinding("sprint", "+sprint", &"TRAINER_HINT_SPRINT");
 
-  registerActionBinding("sprint_pc", "+breath_sprint", & "TRAINER_HINT_SPRINT_BREATH_PC");
-  registerActionBinding("sprint_pc", "+sprint", & "TRAINER_HINT_SPRINT_PC");
+  registerActionBinding("sprint_pc", "+breath_sprint", &"TRAINER_HINT_SPRINT_BREATH_PC");
+  registerActionBinding("sprint_pc", "+sprint", &"TRAINER_HINT_SPRINT_PC");
 
-  registerActionBinding("sprint2", "+breath_sprint", & "TRAINER_HINT_HOLDING_SPRINT_BREATH");
-  registerActionBinding("sprint2", "+sprint", & "TRAINER_HINT_HOLDING_SPRINT");
+  registerActionBinding("sprint2", "+breath_sprint", &"TRAINER_HINT_HOLDING_SPRINT_BREATH");
+  registerActionBinding("sprint2", "+sprint", &"TRAINER_HINT_HOLDING_SPRINT");
 
-  registerActionBinding("reload", "+reload", & "TRAINER_HINT_RELOAD");
-  registerActionBinding("reload", "+usereload", & "TRAINER_HINT_RELOAD_USE");
+  registerActionBinding("reload", "+reload", &"TRAINER_HINT_RELOAD");
+  registerActionBinding("reload", "+usereload", &"TRAINER_HINT_RELOAD_USE");
 
-  registerActionBinding("mantle", "+gostand", & "TRAINER_HINT_MANTLE");
+  registerActionBinding("mantle", "+gostand", &"TRAINER_HINT_MANTLE");
 
-  registerActionBinding("sidearm", "weapnext", & "TRAINER_HINT_SIDEARM_SWAP");
+  registerActionBinding("sidearm", "weapnext", &"TRAINER_HINT_SIDEARM_SWAP");
 
-  registerActionBinding("primary", "weapnext", & "TRAINER_HINT_PRIMARY_SWAP");
+  registerActionBinding("primary", "weapnext", &"TRAINER_HINT_PRIMARY_SWAP");
 
-  registerActionBinding("frag", "+frag", & "TRAINER_HINT_FRAG");
+  registerActionBinding("frag", "+frag", &"TRAINER_HINT_FRAG");
 
-  registerActionBinding("flash", "+smoke", & "TRAINER_HINT_FLASH");
+  registerActionBinding("flash", "+smoke", &"TRAINER_HINT_FLASH");
 
-  registerActionBinding("swap_launcher", "+activate", & "TRAINER_HINT_SWAP");
-  registerActionBinding("swap_launcher", "+usereload", & "TRAINER_HINT_SWAP_RELOAD");
+  registerActionBinding("swap_launcher", "+activate", &"TRAINER_HINT_SWAP");
+  registerActionBinding("swap_launcher", "+usereload", &"TRAINER_HINT_SWAP_RELOAD");
 
-  registerActionBinding("firemode", "+actionslot 2", & "TRAINER_HINT_FIREMODE");
+  registerActionBinding("firemode", "+actionslot 2", &"TRAINER_HINT_FIREMODE");
 
-  registerActionBinding("attack_launcher", "+attack", & "TRAINER_HINT_LAUNCHER_ATTACK");
+  registerActionBinding("attack_launcher", "+attack", &"TRAINER_HINT_LAUNCHER_ATTACK");
 
-  registerActionBinding("swap_explosives", "+activate", & "TRAINER_HINT_EXPLOSIVES");
-  registerActionBinding("swap_explosives", "+usereload", & "TRAINER_HINT_EXPLOSIVES_RELOAD");
+  registerActionBinding("swap_explosives", "+activate", &"TRAINER_HINT_EXPLOSIVES");
+  registerActionBinding("swap_explosives", "+usereload", &"TRAINER_HINT_EXPLOSIVES_RELOAD");
 
-  registerActionBinding("plant_explosives", "+activate", & "TRAINER_HINT_EXPLOSIVES_PLANT");
-  registerActionBinding("plant_explosives", "+usereload", & "TRAINER_HINT_EXPLOSIVES_PLANT_RELOAD");
+  registerActionBinding("plant_explosives", "+activate", &"TRAINER_HINT_EXPLOSIVES_PLANT");
+  registerActionBinding("plant_explosives", "+usereload", &"TRAINER_HINT_EXPLOSIVES_PLANT_RELOAD");
 
-  registerActionBinding("equip_C4", "+actionslot 4", & "TRAINER_HINT_EQUIP_C4");
+  registerActionBinding("equip_C4", "+actionslot 4", &"TRAINER_HINT_EQUIP_C4");
 
-  registerActionBinding("throw_C4", "+toggleads_throw", & "TRAINER_HINT_THROW_C4_TOGGLE");
-  registerActionBinding("throw_C4", "+speed_throw", & "TRAINER_HINT_THROW_C4_SPEED");
-  registerActionBinding("throw_C4", "+throw", & "TRAINER_HINT_THROW_C4");
+  registerActionBinding("throw_C4", "+toggleads_throw", &"TRAINER_HINT_THROW_C4_TOGGLE");
+  registerActionBinding("throw_C4", "+speed_throw", &"TRAINER_HINT_THROW_C4_SPEED");
+  registerActionBinding("throw_C4", "+throw", &"TRAINER_HINT_THROW_C4");
 
-  registerActionBinding("detonate_C4", "+attack", & "TRAINER_DETONATE_C4");
+  registerActionBinding("detonate_C4", "+attack", &"TRAINER_DETONATE_C4");
 
   initKeys();
   updateKeysForBindings();
@@ -5151,7 +5151,7 @@ killTimer(best_time, deck) {
   time = ((gettime() - level.start_time) / 1000);
   time = roundDecimalPlaces(time, 2);
   level.HUDtimer = get_pit_hud();
-  level.HUDtimer.label = & "TRAINER_YOUR_TIME_IN_SECONDS";
+  level.HUDtimer.label = &"TRAINER_YOUR_TIME_IN_SECONDS";
   level.HUDtimer.y = 55;
   level.HUDtimer setValue(time);
 
@@ -5159,7 +5159,7 @@ killTimer(best_time, deck) {
   PRINT ENEMIES KILLED
   -------------------------*/
   level.HUDenemiesKilled = get_pit_hud();
-  level.HUDenemiesKilled.label = & "TRAINER_ENEMIES_KILLED";
+  level.HUDenemiesKilled.label = &"TRAINER_ENEMIES_KILLED";
   level.HUDenemiesKilled setValue(enemies_hit);
   level.HUDenemiesKilled.y = 70;
 
@@ -5167,7 +5167,7 @@ killTimer(best_time, deck) {
   PRINT CIVVIES KILLED
   -------------------------*/
   level.HUDcivviesKilled = get_pit_hud();
-  level.HUDcivviesKilled.label = & "TRAINER_CIVVIES_KILLED";
+  level.HUDcivviesKilled.label = &"TRAINER_CIVVIES_KILLED";
   level.HUDcivviesKilled setValue(friendlies_hit);
   level.HUDcivviesKilled.y = 85;
 
@@ -5178,7 +5178,7 @@ killTimer(best_time, deck) {
   -------------------------*/
   level.HUDaccuracy = get_pit_hud();
   level.HUDaccuracy.y = 115;
-  level.HUDaccuracy.label = & "TRAINER_ACCURACY_LABEL";
+  level.HUDaccuracy.label = &"TRAINER_ACCURACY_LABEL";
   level.HUDaccuracy setValue(level.pitaccuracy);
 
   level.HUDaccuracybonus = get_pit_hud();
@@ -5186,9 +5186,9 @@ killTimer(best_time, deck) {
 
   if(level.bonus_time <= 0) {
     //"Accuracy bonus: 0.0"
-    level.HUDaccuracybonus.label = & "TRAINER_ACCURACY_BONUS_ZERO";
+    level.HUDaccuracybonus.label = &"TRAINER_ACCURACY_BONUS_ZERO";
   } else {
-    level.HUDaccuracybonus.label = & "TRAINER_ACCURACY_BONUS";
+    level.HUDaccuracybonus.label = &"TRAINER_ACCURACY_BONUS";
     level.HUDaccuracybonus setValue(level.bonus_time);
   }
 
@@ -5198,12 +5198,12 @@ killTimer(best_time, deck) {
   level.HUDmissedenemypenalty = get_pit_hud();
   level.HUDmissedenemypenalty.y = 145;
   if(enemies_hit == level.totalPitEnemies) {
-    level.HUDmissedenemypenalty.label = & "TRAINER_MISSED_ENEMY_PENALTY_NONE";
+    level.HUDmissedenemypenalty.label = &"TRAINER_MISSED_ENEMY_PENALTY_NONE";
     missed_enemies_penalty = 0;
   } else {
     missed_enemies = (level.totalPitEnemies - enemies_hit);
     level.HUDmissedenemypenalty.color = level.color["red"];
-    level.HUDmissedenemypenalty.label = & "TRAINER_MISSED_ENEMY_PENALTY";
+    level.HUDmissedenemypenalty.label = &"TRAINER_MISSED_ENEMY_PENALTY";
     missed_enemies_penalty = (missed_enemies * level.timepenaltyForMissedEnemies);
     //timepenaltyForKilledCivvies
     level.HUDmissedenemypenalty setValue(missed_enemies_penalty);
@@ -5214,11 +5214,11 @@ killTimer(best_time, deck) {
   level.HUDkilledcivviespenalty = get_pit_hud();
   level.HUDkilledcivviespenalty.y = 160;
   if(friendlies_hit == 0) {
-    level.HUDkilledcivviespenalty.label = & "TRAINER_KILLED_CIVVIES_NONE";
+    level.HUDkilledcivviespenalty.label = &"TRAINER_KILLED_CIVVIES_NONE";
     killed_civvies_penalty = 0;
   } else {
     level.HUDkilledcivviespenalty.color = level.color["red"];
-    level.HUDkilledcivviespenalty.label = & "TRAINER_KILLED_CIVVIES_PENALTY";
+    level.HUDkilledcivviespenalty.label = &"TRAINER_KILLED_CIVVIES_PENALTY";
     killed_civvies_penalty = (friendlies_hit * level.timepenaltyForKilledCivvies);
     level.HUDkilledcivviespenalty setValue(killed_civvies_penalty);
   }
@@ -5238,7 +5238,7 @@ killTimer(best_time, deck) {
   //add any civvies killed penalty time
   final_time = final_time + killed_civvies_penalty;
 
-  level.HUDfinaltime.label = & "TRAINER_YOUR_FINAL_TIME";
+  level.HUDfinaltime.label = &"TRAINER_YOUR_FINAL_TIME";
   level.HUDfinaltime setValue(final_time);
 
   /*-----------------------
@@ -5254,12 +5254,12 @@ killTimer(best_time, deck) {
   -------------------------*/
   level.recommended_label = get_pit_hud();
   level.recommended_label SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-  level.recommended_label.label = & "TRAINER_RECOMMENDED_LABEL";
+  level.recommended_label.label = &"TRAINER_RECOMMENDED_LABEL";
   level.recommended_label.y = 220;
 
   level.recommended_label2 = get_pit_hud();
   level.recommended_label2 SetPulseFX(30, 900000, 700); // something, decay start, decay duration
-  level.recommended_label2.label = & "TRAINER_RECOMMENDED_LABEL2";
+  level.recommended_label2.label = &"TRAINER_RECOMMENDED_LABEL2";
   level.recommended_label2.y = 235;
 
   level.recommended = get_pit_hud();
@@ -5276,23 +5276,23 @@ killTimer(best_time, deck) {
     level.toomanycivilianskilled = true;
   }
   if((final_time > level.timeFail) || (level.targets_hit_with_melee > 10) || (level.toomanytargetsmissed == true) || (level.toomanycivilianskilled == true)) {
-    level.recommended.label = & "TRAINER_RECOMMENDED_TRY_AGAIN";
+    level.recommended.label = &"TRAINER_RECOMMENDED_TRY_AGAIN";
     level.recommendedDifficulty = 1000;
   } else if(final_time > level.timeEasy) {
     setdvar("recommended_gameskill", "0");
-    level.recommended.label = & "TRAINER_RECOMMENDED_EASY";
+    level.recommended.label = &"TRAINER_RECOMMENDED_EASY";
     level.recommendedDifficulty = 0;
   } else if(final_time > level.timeRegular) {
     setdvar("recommended_gameskill", "1");
-    level.recommended.label = & "TRAINER_RECOMMENDED_NORMAL";
+    level.recommended.label = &"TRAINER_RECOMMENDED_NORMAL";
     level.recommendedDifficulty = 1;
   } else if(final_time > level.timeHard) {
     setdvar("recommended_gameskill", "2");
-    level.recommended.label = & "TRAINER_RECOMMENDED_HARD";
+    level.recommended.label = &"TRAINER_RECOMMENDED_HARD";
     level.recommendedDifficulty = 2;
   } else {
     setdvar("recommended_gameskill", "3");
-    level.recommended.label = & "TRAINER_RECOMMENDED_VETERAN";
+    level.recommended.label = &"TRAINER_RECOMMENDED_VETERAN";
     level.recommendedDifficulty = 3;
   }
 
@@ -5470,7 +5470,7 @@ startTimer(timelimit) {
   -------------------------*/
   // Timer size and positioning
   level.HUDtimer = maps\_hud_util::get_countdown_hud();
-  level.HUDtimer.label = & "TRAINER_YOUR_TIME";
+  level.HUDtimer.label = &"TRAINER_YOUR_TIME";
   level.HUDtimer settenthstimerUp(.05);
   level.HUDtimer.y = 55;
 
@@ -5478,7 +5478,7 @@ startTimer(timelimit) {
   PRINT ENEMIES KILLED
   -------------------------*/
   level.HUDenemiesKilled = maps\_hud_util::get_countdown_hud();
-  level.HUDenemiesKilled.label = & "TRAINER_ENEMIES_KILLED";
+  level.HUDenemiesKilled.label = &"TRAINER_ENEMIES_KILLED";
   level.HUDenemiesKilled setValue(level.targets_hit);
   level.HUDenemiesKilled.y = 70;
 
@@ -5486,7 +5486,7 @@ startTimer(timelimit) {
   PRINT CIVVIES KILLED
   -------------------------*/
   level.HUDcivviesKilled = maps\_hud_util::get_countdown_hud();
-  level.HUDcivviesKilled.label = & "TRAINER_CIVVIES_KILLED";
+  level.HUDcivviesKilled.label = &"TRAINER_CIVVIES_KILLED";
   level.HUDcivviesKilled setValue(level.friendlies_hit);
   level.HUDcivviesKilled.y = 85;
 
@@ -5521,9 +5521,9 @@ mission_failed_out_of_time() {
 
   level notify("mission failed");
   if(!flag("player_course_end"))
-    setDvar("ui_deadquote", & "TRAINER_SHIP_TOO_SLOW");
+    setDvar("ui_deadquote", &"TRAINER_SHIP_TOO_SLOW");
   else
-    setDvar("ui_deadquote", & "TRAINER_SHIP_DIDNT_SPRINT");
+    setDvar("ui_deadquote", &"TRAINER_SHIP_DIDNT_SPRINT");
 
   maps\_utility::missionFailedWrapper();
 }
@@ -5772,7 +5772,7 @@ weaponfire_failure() {
       if(flag("player_in_camp")) {
         //mission fail
         wait(.5);
-        SetDvar("ui_deadquote", & "TRAINER_MISSION_FAIL_FIRE_IN_CAMP");
+        SetDvar("ui_deadquote", &"TRAINER_MISSION_FAIL_FIRE_IN_CAMP");
         maps\_utility::missionFailedWrapper();
         level notify("mission failed");
       } else {

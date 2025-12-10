@@ -29,7 +29,7 @@
 #namespace zm_island_traps;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_traps", & __init__, undefined, undefined);
+  system::register("zm_island_traps", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -38,7 +38,7 @@ function __init__() {
   clientfield::register("world", "walltrap_draft_rumble", 9000, 1, "int");
   clientfield::register("toplayer", "walltrap_draft_blur", 9000, 1, "int");
   level flag::init("witnessed_trapkill_dialog");
-  callback::on_player_killed( & function_2ee3731e);
+  callback::on_player_killed(&function_2ee3731e);
 }
 
 function function_2ee3731e() {
@@ -57,7 +57,7 @@ function function_7309e48() {
 
 function function_7dea397f() {
   level thread scene::init("p7_fxanim_zm_island_engine_trap_on_bundle");
-  level thread scene::add_scene_func("p7_fxanim_zm_island_engine_trap_on_bundle", & function_3c8c2e02, "init");
+  level thread scene::add_scene_func("p7_fxanim_zm_island_engine_trap_on_bundle", &function_3c8c2e02, "init");
   function_9a88139e();
   function_74859935();
 }
@@ -80,7 +80,7 @@ function function_9a88139e() {
   level.var_e938db57.v_off_pos = level.var_e938db57.origin + vectorscale((0, 0, 1), 30);
   level.var_e938db57.var_380861c6 = level.var_e938db57.angles;
   level.var_e938db57.var_401e166a = level.var_e938db57.angles;
-  level.var_e938db57.var_16e1fdfb = & function_b0658775;
+  level.var_e938db57.var_16e1fdfb = &function_b0658775;
   level.var_e938db57._trap_type = "propeller";
   level.var_e938db57 function_3a8453ed();
 }
@@ -98,7 +98,7 @@ function function_74859935() {
   level.var_77316c1c.v_off_pos = level.var_77316c1c.origin + vectorscale((0, 0, 1), 100);
   level.var_77316c1c.var_380861c6 = (75, 270, -89.992);
   level.var_77316c1c.var_401e166a = (75, 270, -90);
-  level.var_77316c1c.var_16e1fdfb = & function_bc1706ea;
+  level.var_77316c1c.var_16e1fdfb = &function_bc1706ea;
   level.var_77316c1c._trap_type = "propeller";
   level.var_77316c1c function_3a8453ed();
 }
@@ -283,11 +283,11 @@ function function_17303d81() {
       var_2e0c3d2c.script_height = 100;
     }
     level.var_84662f56 = [];
-    level.var_84662f56["proptraps_onswitch"] = & "ZM_ISLAND_TRAP_PROPTRAP_USE";
-    level.var_84662f56["walltrap_onswitch"] = & "ZM_ISLAND_TRAP_WALLTRAP_USE";
+    level.var_84662f56["proptraps_onswitch"] = &"ZM_ISLAND_TRAP_PROPTRAP_USE";
+    level.var_84662f56["walltrap_onswitch"] = &"ZM_ISLAND_TRAP_WALLTRAP_USE";
     level.var_2e0a18df = [];
-    level.var_2e0a18df["proptraps_onswitch"] = & "ZM_ISLAND_TRAP_PROPTRAP_REST";
-    level.var_2e0a18df["walltrap_onswitch"] = & "ZM_ISLAND_TRAP_WALLTRAP_REST";
+    level.var_2e0a18df["proptraps_onswitch"] = &"ZM_ISLAND_TRAP_PROPTRAP_REST";
+    level.var_2e0a18df["walltrap_onswitch"] = &"ZM_ISLAND_TRAP_WALLTRAP_REST";
     level.var_af480c69 = [];
     level.var_af480c69["proptraps_onswitch"] = 1000;
     level.var_af480c69["walltrap_onswitch"] = 1000;
@@ -304,8 +304,8 @@ function function_17303d81() {
         var_2e0c3d2c.var_614a7182 = 30;
         var_2e0c3d2c.n_cost = 1000;
         level.var_569af21a[var_2e0c3d2c.script_noteworthy] = var_2e0c3d2c;
-        var_2e0c3d2c.prompt_and_visibility_func = & function_2f33d1b;
-        zm_unitrigger::register_static_unitrigger(var_2e0c3d2c, & function_d6b07530);
+        var_2e0c3d2c.prompt_and_visibility_func = &function_2f33d1b;
+        zm_unitrigger::register_static_unitrigger(var_2e0c3d2c, &function_d6b07530);
         continue;
       }
       if(var_2e0c3d2c.targetname == "proptraps_onswitch") {
@@ -315,8 +315,8 @@ function function_17303d81() {
         var_2e0c3d2c.var_614a7182 = 30;
         var_2e0c3d2c.n_cost = 1000;
         level.var_8e8608e3[var_2e0c3d2c.script_noteworthy] = var_2e0c3d2c;
-        var_2e0c3d2c.prompt_and_visibility_func = & function_25bf44e4;
-        zm_unitrigger::register_static_unitrigger(var_2e0c3d2c, & function_5245e8c3);
+        var_2e0c3d2c.prompt_and_visibility_func = &function_25bf44e4;
+        zm_unitrigger::register_static_unitrigger(var_2e0c3d2c, &function_5245e8c3);
       }
     }
   }
@@ -442,7 +442,7 @@ function function_b2e2a102() {
       level.var_dd5501c7[var_84d67e66.targetname].var_d6d6c058 = anglesToForward(var_2b73bb92[var_84d67e66.targetname].angles) * -1;
       level.var_dd5501c7[var_84d67e66.targetname].var_6b281b64 = anglestoright(var_2b73bb92[var_84d67e66.targetname].angles) + level.var_dd5501c7[var_84d67e66.targetname].var_d6d6c058;
       level.var_dd5501c7[var_84d67e66.targetname].var_d93f9cb8 = var_947d0bae[var_84d67e66.targetname];
-      level.var_dd5501c7[var_84d67e66.targetname].var_8bf7f16f = & function_4ed6e5ec;
+      level.var_dd5501c7[var_84d67e66.targetname].var_8bf7f16f = &function_4ed6e5ec;
       level.var_dd5501c7[var_84d67e66.targetname] walltrap_off();
     }
   }

@@ -218,7 +218,7 @@ function launch_rumble_and_quake() {
 function rocket_monitor_for_damage() {
   level endon("stop_rumble");
   rocket_pieces = getEntArray(level.rocket.target, "targetname");
-  array::thread_all(rocket_pieces, & rocket_piece_monitor_for_damage);
+  array::thread_all(rocket_pieces, &rocket_piece_monitor_for_damage);
   level.rocket thread rocket_piece_monitor_for_damage();
   level waittill("rocket_dmg");
   playsoundatposition("zmb_rocket_destroyed", (0, 0, 0));

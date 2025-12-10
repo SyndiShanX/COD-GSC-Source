@@ -80,18 +80,18 @@ onstartgametype() {
     game["switchedsides"] = 0;
   }
 
-  scripts\mp\utility::setobjectivetext("allies", & "OBJECTIVES_GRND");
-  scripts\mp\utility::setobjectivetext("axis", & "OBJECTIVES_GRND");
+  scripts\mp\utility::setobjectivetext("allies", &"OBJECTIVES_GRND");
+  scripts\mp\utility::setobjectivetext("axis", &"OBJECTIVES_GRND");
   if(level.splitscreen) {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_GRND");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_GRND");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_GRND");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_GRND");
   } else {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_GRND_SCORE");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_GRND_SCORE");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_GRND_SCORE");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_GRND_SCORE");
   }
 
-  scripts\mp\utility::setobjectivehinttext("allies", & "OBJECTIVES_DOM_HINT");
-  scripts\mp\utility::setobjectivehinttext("axis", & "OBJECTIVES_DOM_HINT");
+  scripts\mp\utility::setobjectivehinttext("allies", &"OBJECTIVES_DOM_HINT");
+  scripts\mp\utility::setobjectivehinttext("axis", &"OBJECTIVES_DOM_HINT");
   var_00[0] = level.gametype;
   var_00[1] = "tdm";
   var_00[2] = "hardpoint";

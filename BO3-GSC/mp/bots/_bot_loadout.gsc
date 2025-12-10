@@ -97,7 +97,7 @@ function build_classes() {
   }
 }
 
-function pick_item( & pickeditems, items) {
+function pick_item(&pickeditems, items) {
   if(!isDefined(items) || items.size <= 0) {
     return;
   }

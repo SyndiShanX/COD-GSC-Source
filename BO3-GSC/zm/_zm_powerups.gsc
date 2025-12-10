@@ -50,7 +50,7 @@ function init() {
   zombie_utility::set_zombie_var("zombie_powerup_double_points_time", 30, undefined, undefined, 1);
   zombie_utility::set_zombie_var("zombie_powerup_drop_increment", 2000);
   zombie_utility::set_zombie_var("zombie_powerup_drop_max_per_round", 4);
-  callback::on_connect( & init_player_zombie_vars);
+  callback::on_connect(&init_player_zombie_vars);
   level._effect["powerup_on"] = "zombie/fx_powerup_on_green_zmb";
   level._effect["powerup_off"] = "zombie/fx_powerup_off_green_zmb";
   level._effect["powerup_grabbed"] = "zombie/fx_powerup_grab_green_zmb";
@@ -77,7 +77,7 @@ function init_powerups() {
   if(!isDefined(level.active_powerups)) {
     level.active_powerups = [];
   }
-  add_zombie_powerup("insta_kill_ug", "zombie_skull", & "ZOMBIE_POWERUP_INSTA_KILL", & func_should_never_drop, 1, 0, 0, undefined, "powerup_instant_kill_ug", "zombie_powerup_insta_kill_ug_time", "zombie_powerup_insta_kill_ug_on", 1);
+  add_zombie_powerup("insta_kill_ug", "zombie_skull", &"ZOMBIE_POWERUP_INSTA_KILL", &func_should_never_drop, 1, 0, 0, undefined, "powerup_instant_kill_ug", "zombie_powerup_insta_kill_ug_time", "zombie_powerup_insta_kill_ug_on", 1);
   if(isDefined(level.level_specific_init_powerups)) {
     [[level.level_specific_init_powerups]]();
   }
@@ -385,7 +385,7 @@ function include_zombie_powerup(powerup_name) {
 function powerup_remove_from_regular_drops(powerup_name) {
   assert(isDefined(level.zombie_powerups));
   assert(isDefined(level.zombie_powerups[powerup_name]));
-  level.zombie_powerups[powerup_name].func_should_drop_with_regular_powerups = & func_should_never_drop;
+  level.zombie_powerups[powerup_name].func_should_drop_with_regular_powerups = &func_should_never_drop;
 }
 
 function powerup_round_start() {
@@ -463,7 +463,7 @@ function specific_powerup_drop(powerup_name, drop_spot, powerup_team, powerup_lo
     }
     powerup thread powerup_wobble();
     if(isDefined(pickup_delay) && pickup_delay > 0) {
-      powerup util::delay(pickup_delay, "powerup_timedout", & powerup_grab, powerup_team);
+      powerup util::delay(pickup_delay, "powerup_timedout", &powerup_grab, powerup_team);
     } else {
       powerup thread powerup_grab(powerup_team);
     }

@@ -20,7 +20,7 @@ function main() {
   level thread function_af7b8418("air");
   level thread function_af7b8418("lightning");
   setsoundcontext("train", "tunnel");
-  level.var_da1a3c87 = & function_da1a3c87;
+  level.var_da1a3c87 = &function_da1a3c87;
   function_6cc11add();
   level thread function_714746a6();
   thread snd_play_loopers();
@@ -49,7 +49,7 @@ function function_c9207335() {
   wait(3);
   level thread function_d667714e();
   var_13a52dfe = getEntArray(0, "sndMusicTrig", "targetname");
-  array::thread_all(var_13a52dfe, & function_60a32834);
+  array::thread_all(var_13a52dfe, &function_60a32834);
 }
 
 function function_60a32834() {
@@ -196,8 +196,8 @@ function function_74c85975() {
 
 function function_6cc11add() {
   level.var_8f027e99 = array();
-  clientfield::register("toplayer", "sndEggElements", 21000, 1, "int", & function_3599b48b, 0, 0);
-  level.sndchargeshot_func = & function_6442a8c2;
+  clientfield::register("toplayer", "sndEggElements", 21000, 1, "int", &function_3599b48b, 0, 0);
+  level.sndchargeshot_func = &function_6442a8c2;
 }
 
 function function_ec990408(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -300,7 +300,7 @@ function function_555b3a00() {
 }
 
 function init() {
-  level._entityshutdowncbfunc = & heli_linkto_sound_ents_delete;
+  level._entityshutdowncbfunc = &heli_linkto_sound_ents_delete;
   level.helisoundvalues = [];
   init_heli_sound_values("qrdrone", "turbine_idle", 30, 0.8, 0, 16, 0.9, 1.1);
   init_heli_sound_values("qrdrone", "turbine_moving", 30, 0, 0.9, 20, 0.9, 1.1);

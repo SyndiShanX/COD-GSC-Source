@@ -17,13 +17,13 @@
 #namespace zm_powerup_double_points;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_double_points", & __init__, undefined, undefined);
+  system::register("zm_powerup_double_points", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  zm_powerups::register_powerup("double_points", & grab_double_points);
+  zm_powerups::register_powerup("double_points", &grab_double_points);
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("double_points", "p7_zm_power_up_double_points", & "ZOMBIE_POWERUP_DOUBLE_POINTS", & zm_powerups::func_should_always_drop, 0, 0, 0, undefined, "powerup_double_points", "zombie_powerup_double_points_time", "zombie_powerup_double_points_on");
+    zm_powerups::add_zombie_powerup("double_points", "p7_zm_power_up_double_points", &"ZOMBIE_POWERUP_DOUBLE_POINTS", &zm_powerups::func_should_always_drop, 0, 0, 0, undefined, "powerup_double_points", "zombie_powerup_double_points_time", "zombie_powerup_double_points_on");
   }
 }
 

@@ -26,14 +26,14 @@ function init() {}
 function main() {
   cybercom_gadget::registerability(1, 1);
   level.cybercom.smokescreen = spawnStruct();
-  level.cybercom.smokescreen._is_flickering = & _is_flickering;
-  level.cybercom.smokescreen._on_flicker = & _on_flicker;
-  level.cybercom.smokescreen._on_give = & _on_give;
-  level.cybercom.smokescreen._on_take = & _on_take;
-  level.cybercom.smokescreen._on_connect = & _on_connect;
-  level.cybercom.smokescreen._on = & _on;
-  level.cybercom.smokescreen._off = & _off;
-  level.cybercom.smokescreen._is_primed = & _is_primed;
+  level.cybercom.smokescreen._is_flickering = &_is_flickering;
+  level.cybercom.smokescreen._on_flicker = &_on_flicker;
+  level.cybercom.smokescreen._on_give = &_on_give;
+  level.cybercom.smokescreen._on_take = &_on_take;
+  level.cybercom.smokescreen._on_connect = &_on_connect;
+  level.cybercom.smokescreen._on = &_on;
+  level.cybercom.smokescreen._off = &_off;
+  level.cybercom.smokescreen._is_primed = &_is_primed;
 }
 
 function _is_flickering(slot) {}

@@ -11,7 +11,7 @@
 function init() {
   level thread achievement_the_eagle_has_landers();
   level thread achievement_chimp_on_the_barbie();
-  level thread callback::on_connect( & onplayerconnect);
+  level thread callback::on_connect(&onplayerconnect);
 }
 
 function onplayerconnect() {

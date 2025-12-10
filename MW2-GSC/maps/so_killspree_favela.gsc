@@ -27,9 +27,9 @@ main() {
   maps\favela_anim::main();
   thread maps\favela_amb::main();
 
-  add_hint_string("leaving_warning", & "SO_KILLSPREE_FAVELA_MISSION_FAILED_LEAVING_WARNING");
-  add_hint_string("harmed_civilian", & "SO_KILLSPREE_FAVELA_DONT_HARM_CIVILIAN");
-  add_hint_string("harmed_civilian_final", & "SO_KILLSPREE_FAVELA_DONT_HARM_CIVILIAN_FINAL");
+  add_hint_string("leaving_warning", &"SO_KILLSPREE_FAVELA_MISSION_FAILED_LEAVING_WARNING");
+  add_hint_string("harmed_civilian", &"SO_KILLSPREE_FAVELA_DONT_HARM_CIVILIAN");
+  add_hint_string("harmed_civilian_final", &"SO_KILLSPREE_FAVELA_DONT_HARM_CIVILIAN_FINAL");
 
   flag_init("challenge_success");
   flag_init("favela_enemies_spawned");
@@ -64,7 +64,7 @@ delete_on_veteran() {
 }
 
 so_favela_setup_regular() {
-  level.challenge_objective = & "SO_KILLSPREE_FAVELA_OBJ_REGULAR";
+  level.challenge_objective = &"SO_KILLSPREE_FAVELA_OBJ_REGULAR";
   level.points_counter = 30;
 
   level.min_enemy_population = 14; // min enemies in level, refills a wave if drops below this number
@@ -78,7 +78,7 @@ so_favela_setup_regular() {
 }
 
 so_favela_setup_hardened() {
-  level.challenge_objective = & "SO_KILLSPREE_FAVELA_OBJ_HARDENED";
+  level.challenge_objective = &"SO_KILLSPREE_FAVELA_OBJ_HARDENED";
   level.points_counter = 40;
 
   level.min_enemy_population = 14; // min enemies in level, refills a wave if drops below this number
@@ -94,7 +94,7 @@ so_favela_setup_hardened() {
 so_favela_setup_veteran() {
   delete_on_veteran();
 
-  level.challenge_objective = & "SO_KILLSPREE_FAVELA_OBJ_VETERAN";
+  level.challenge_objective = &"SO_KILLSPREE_FAVELA_OBJ_VETERAN";
   level.points_counter = 50;
 
   level.min_enemy_population = 12; // min enemies in level, refills a wave if drops below this number

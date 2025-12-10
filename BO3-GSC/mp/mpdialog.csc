@@ -12,7 +12,7 @@
 #namespace mpdialog;
 
 function autoexec __init__sytem__() {
-  system::register("mpdialog", & __init__, undefined, undefined);
+  system::register("mpdialog", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -27,9 +27,9 @@ function __init__() {
   level.mpboostresponse["seraph"] = "Enforcer";
   level.mpboostresponse["trapper"] = "Trapper";
   level.mpboostresponse["blackjack"] = "Blackjack";
-  level.clientvoicesetup = & client_voice_setup;
-  clientfield::register("world", "boost_number", 1, 2, "int", & set_boost_number, 1, 1);
-  clientfield::register("allplayers", "play_boost", 1, 2, "int", & play_boost_vox, 1, 0);
+  level.clientvoicesetup = &client_voice_setup;
+  clientfield::register("world", "boost_number", 1, 2, "int", &set_boost_number, 1, 1);
+  clientfield::register("allplayers", "play_boost", 1, 2, "int", &play_boost_vox, 1, 0);
 }
 
 function client_voice_setup(localclientnum) {

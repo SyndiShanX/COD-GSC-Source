@@ -31,14 +31,14 @@
 #namespace namespace_6b38abe3;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_wearables", & __init__, undefined, undefined);
+  system::register("zm_genesis_wearables", &__init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("scriptmover", "battery_fx", 15000, 2, "int");
   clientfield::register("clientuimodel", "zmInventory.wearable_perk_icons", 15000, 2, "int");
-  zm_spawner::register_zombie_death_event_callback( & function_9d85b9ce);
-  zm_spawner::register_zombie_damage_callback( & function_cb27f92e);
+  zm_spawner::register_zombie_death_event_callback(&function_9d85b9ce);
+  zm_spawner::register_zombie_damage_callback(&function_cb27f92e);
   for(i = 0; i < 4; i++) {
     registerclientfield("world", ("player" + i) + "wearableItem", 15000, 4, "int");
   }
@@ -50,7 +50,7 @@ function __init__() {
   level thread function_8454afd5();
   level thread function_3167c564();
   level thread function_37ba4813();
-  zm_devgui::add_custom_devgui_callback( & function_82e9c58d);
+  zm_devgui::add_custom_devgui_callback(&function_82e9c58d);
   level thread function_e8a31296();
 }
 
@@ -76,7 +76,7 @@ function function_f6b20985(var_8fca9f8c, var_f48b681c, str_tag, var_f3776824) {
   level.var_6d65545f = spawn("script_model", s_loc.origin);
   level.var_6d65545f.angles = s_loc.angles;
   level.var_6d65545f setModel(var_f48b681c);
-  var_750a9baa = s_loc zm_unitrigger::create_unitrigger(&"ZM_GENESIS_WEARABLE_PICKUP", undefined, & function_24061b58, & function_7f0ec71c);
+  var_750a9baa = s_loc zm_unitrigger::create_unitrigger(&"ZM_GENESIS_WEARABLE_PICKUP", undefined, &function_24061b58, &function_7f0ec71c);
   var_750a9baa.var_f4b4f2f2 = var_f48b681c;
   var_750a9baa.str_tag = str_tag;
   var_750a9baa.var_475b0a4e = var_8fca9f8c;
@@ -560,7 +560,7 @@ function function_4fddc919() {
   level thread function_9b35bbf0("margwa_head_fire_flag", "margwa_head_shadow_flag");
   level thread function_bf2067a4("margwa_head_shadow_flag", "margwa_head_fire_flag");
   level.var_16f4dfa5 = 1;
-  level.margwa_head_kill_weapon_check = & function_a5131f0d;
+  level.margwa_head_kill_weapon_check = &function_a5131f0d;
   level flag::wait_till_all(array("margwa_head_wasps_flag", "margwa_head_fire_flag", "margwa_head_shadow_flag"));
   level.var_16f4dfa5 = 0;
   level.margwa_head_kill_weapon_check = undefined;

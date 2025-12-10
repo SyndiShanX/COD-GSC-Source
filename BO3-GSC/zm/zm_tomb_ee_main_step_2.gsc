@@ -23,7 +23,7 @@
 #namespace zm_tomb_ee_main_step_2;
 
 function init() {
-  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_2", & init_stage, & stage_logic, & exit_stage);
+  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_2", &init_stage, &stage_logic, &exit_stage);
 }
 
 function init_stage() {
@@ -123,7 +123,7 @@ function create_robot_head_trigger(unitrigger_stub) {
   m_sign zm_powerup_zombie_blood::make_zombie_blood_entity();
   unitrigger_stub.m_sign = m_sign;
   unitrigger_stub.origin = unitrigger_stub.origin + vectorscale((0, 0, 1), 30);
-  zm_unitrigger::register_static_unitrigger(unitrigger_stub, & robot_head_trigger_think);
+  zm_unitrigger::register_static_unitrigger(unitrigger_stub, &robot_head_trigger_think);
 }
 
 function robot_head_trigger_think() {

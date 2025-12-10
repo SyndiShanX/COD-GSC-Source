@@ -13,27 +13,27 @@
 
 function init() {
   clientfield::register("clientuimodel", "zmInventory.widget_bucket_parts", 9000, 1, "int", undefined, 0, 0);
-  clientfield::register("toplayer", "bucket_held", 9000, getminbitcountfornum(2), "int", & zm_utility::setinventoryuimodels, 0, 0);
-  clientfield::register("toplayer", "bucket_bucket_type", 9000, getminbitcountfornum(2), "int", & zm_utility::setinventoryuimodels, 0, 0);
-  clientfield::register("toplayer", "bucket_bucket_water_type", 9000, getminbitcountfornum(3), "int", & zm_utility::setinventoryuimodels, 0, 1);
-  clientfield::register("toplayer", "bucket_bucket_water_level", 9000, getminbitcountfornum(3), "int", & zm_utility::setinventoryuimodels, 0, 1);
+  clientfield::register("toplayer", "bucket_held", 9000, getminbitcountfornum(2), "int", &zm_utility::setinventoryuimodels, 0, 0);
+  clientfield::register("toplayer", "bucket_bucket_type", 9000, getminbitcountfornum(2), "int", &zm_utility::setinventoryuimodels, 0, 0);
+  clientfield::register("toplayer", "bucket_bucket_water_type", 9000, getminbitcountfornum(3), "int", &zm_utility::setinventoryuimodels, 0, 1);
+  clientfield::register("toplayer", "bucket_bucket_water_level", 9000, getminbitcountfornum(3), "int", &zm_utility::setinventoryuimodels, 0, 1);
   clientfield::register("clientuimodel", "zmInventory.widget_skull_parts", 9000, 1, "int", undefined, 0, 0);
-  clientfield::register("toplayer", "skull_skull_state", 9000, getminbitcountfornum(3), "int", & zm_utility::setinventoryuimodels, 0, 1);
-  clientfield::register("toplayer", "skull_skull_type", 9000, getminbitcountfornum(3), "int", & zm_utility::setinventoryuimodels, 0, 0);
+  clientfield::register("toplayer", "skull_skull_state", 9000, getminbitcountfornum(3), "int", &zm_utility::setinventoryuimodels, 0, 1);
+  clientfield::register("toplayer", "skull_skull_type", 9000, getminbitcountfornum(3), "int", &zm_utility::setinventoryuimodels, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.widget_gasmask_parts", 9000, 1, "int", undefined, 0, 0);
-  clientfield::register("toplayer", "gaskmask_part_visor", 9000, 1, "int", & zm_utility::setsharedinventoryuimodels, 0, 0);
-  clientfield::register("toplayer", "gaskmask_part_strap", 9000, 1, "int", & zm_utility::setsharedinventoryuimodels, 0, 0);
-  clientfield::register("toplayer", "gaskmask_part_filter", 9000, 1, "int", & zm_utility::setsharedinventoryuimodels, 0, 0);
+  clientfield::register("toplayer", "gaskmask_part_visor", 9000, 1, "int", &zm_utility::setsharedinventoryuimodels, 0, 0);
+  clientfield::register("toplayer", "gaskmask_part_strap", 9000, 1, "int", &zm_utility::setsharedinventoryuimodels, 0, 0);
+  clientfield::register("toplayer", "gaskmask_part_filter", 9000, 1, "int", &zm_utility::setsharedinventoryuimodels, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.gaskmask_gasmask_active", 9000, 1, "int", undefined, 0, 0);
-  clientfield::register("toplayer", "gaskmask_gasmask_progress", 9000, getminbitcountfornum(10), "int", & function_67b53ed4, 0, 0);
+  clientfield::register("toplayer", "gaskmask_gasmask_progress", 9000, getminbitcountfornum(10), "int", &function_67b53ed4, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.widget_machinetools_parts", 9000, 1, "int", undefined, 0, 0);
-  clientfield::register("toplayer", "valveone_part_lever", 9000, 1, "int", & zm_utility::setsharedinventoryuimodels, 0, 0);
-  clientfield::register("toplayer", "valvetwo_part_lever", 9000, 1, "int", & zm_utility::setsharedinventoryuimodels, 0, 0);
-  clientfield::register("toplayer", "valvethree_part_lever", 9000, 1, "int", & zm_utility::setsharedinventoryuimodels, 0, 0);
+  clientfield::register("toplayer", "valveone_part_lever", 9000, 1, "int", &zm_utility::setsharedinventoryuimodels, 0, 0);
+  clientfield::register("toplayer", "valvetwo_part_lever", 9000, 1, "int", &zm_utility::setsharedinventoryuimodels, 0, 0);
+  clientfield::register("toplayer", "valvethree_part_lever", 9000, 1, "int", &zm_utility::setsharedinventoryuimodels, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.widget_wonderweapon_parts", 9000, 1, "int", undefined, 0, 0);
-  clientfield::register("toplayer", "wonderweapon_part_wwi", 9000, 1, "int", & zm_utility::setsharedinventoryuimodels, 0, 0);
-  clientfield::register("toplayer", "wonderweapon_part_wwii", 9000, 1, "int", & zm_utility::setsharedinventoryuimodels, 0, 0);
-  clientfield::register("toplayer", "wonderweapon_part_wwiii", 9000, 1, "int", & zm_utility::setsharedinventoryuimodels, 0, 0);
+  clientfield::register("toplayer", "wonderweapon_part_wwi", 9000, 1, "int", &zm_utility::setsharedinventoryuimodels, 0, 0);
+  clientfield::register("toplayer", "wonderweapon_part_wwii", 9000, 1, "int", &zm_utility::setsharedinventoryuimodels, 0, 0);
+  clientfield::register("toplayer", "wonderweapon_part_wwiii", 9000, 1, "int", &zm_utility::setsharedinventoryuimodels, 0, 0);
 }
 
 function main() {}

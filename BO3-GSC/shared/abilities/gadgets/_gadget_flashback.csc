@@ -16,13 +16,13 @@
 #namespace _gadget_flashback;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_flashback", & __init__, undefined, undefined);
+  system::register("gadget_flashback", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "flashback_trail_fx", 1, 1, "int", & set_flashback_trail_fx, 0, 0);
-  clientfield::register("playercorpse", "flashback_clone", 1, 1, "int", & clone_flashback_changed, 0, 0);
-  clientfield::register("allplayers", "flashback_activated", 1, 1, "int", & flashback_activated, 0, 0);
+  clientfield::register("scriptmover", "flashback_trail_fx", 1, 1, "int", &set_flashback_trail_fx, 0, 0);
+  clientfield::register("playercorpse", "flashback_clone", 1, 1, "int", &clone_flashback_changed, 0, 0);
+  clientfield::register("allplayers", "flashback_activated", 1, 1, "int", &flashback_activated, 0, 0);
   visionset_mgr::register_overlay_info_style_postfx_bundle("flashback_warp", 1, 1, "pstfx_flashback_warp", 0.8);
   duplicate_render::set_dr_filter_framebuffer("flashback", 90, "flashback_on", "", 0, "mc/mtl_glitch", 0);
 }

@@ -43,7 +43,6 @@ init() {
 
   level.classMap["copycat"] = -1;
 
-
   level.botClasses = [];
   level.botClasses[0] = "class0";
   level.botClasses[1] = "class0";
@@ -54,7 +53,6 @@ init() {
   level.defaultClass = "CLASS_ASSAULT";
 
   level.classTableName = "mp/classTable.csv";
-
 
   precacheShader("specialty_pistoldeath");
   precacheShader("specialty_finalstand");
@@ -255,7 +253,6 @@ giveLoadout(team, class, allowCopycat) {
 
   primaryIndex = 0;
 
-
   self.specialty = [];
 
   if(!isDefined(allowCopycat))
@@ -264,7 +261,6 @@ giveLoadout(team, class, allowCopycat) {
   primaryWeapon = undefined;
 
   clearAmmo = false;
-
 
   loadoutKillstreak1 = undefined;
   loadoutKillstreak2 = undefined;
@@ -321,7 +317,6 @@ giveLoadout(team, class, allowCopycat) {
     loadoutSecondaryAttachment = gamemodeLoadout["loadoutSecondaryAttachment"];
     loadoutSecondaryAttachment2 = gamemodeLoadout["loadoutSecondaryAttachment2"];
     loadoutSecondaryCamo = gamemodeLoadout["loadoutSecondaryCamo"];
-
 
     if(loadoutPrimary == "throwingknife" && loadoutSecondary != "none") {
       loadoutPrimary = loadoutSecondary;
@@ -438,8 +433,6 @@ giveLoadout(team, class, allowCopycat) {
   if(loadoutPerk1 != "specialty_onemanarmy" && loadoutSecondary == "onemanarmy")
     loadoutSecondary = table_getWeapon(level.classTableName, 10, 1);
 
-
-
   self.loadoutPrimaryCamo = int(tableLookup("mp/camoTable.csv", 1, loadoutPrimaryCamo, 0));
   self.loadoutPrimary = loadoutPrimary;
   self.loadoutSecondary = loadoutSecondary;
@@ -454,12 +447,9 @@ giveLoadout(team, class, allowCopycat) {
 
   self SetOffhandPrimaryClass("other");
 
-
-
   self _SetActionSlot(1, "nightvision");
   self _SetActionSlot(3, "altMode");
   self _SetActionSlot(4, "");
-
 
   self _clearPerks();
   self _detachAll();
@@ -480,8 +470,6 @@ giveLoadout(team, class, allowCopycat) {
     loadoutKillstreak3 = "none";
   }
 
-
-
   if(level.dieHardMode)
     self maps\mp\perks\_perks::givePerk("specialty_pistoldeath");
 
@@ -491,7 +479,6 @@ giveLoadout(team, class, allowCopycat) {
 
   if(self hasPerk("specialty_extraammo", true) && getWeaponClass(secondaryName) != "weapon_projectile")
     self giveMaxAmmo(secondaryName);
-
 
   if(self.pers["cur_death_streak"] > 0) {
     if(loadoutDeathStreak != "specialty_null") {
@@ -509,10 +496,8 @@ giveLoadout(team, class, allowCopycat) {
     }
   }
 
-
   primaryName = buildWeaponName(loadoutPrimary, loadoutPrimaryAttachment, loadoutPrimaryAttachment2);
   self _giveWeapon(primaryName, self.loadoutPrimaryCamo);
-
 
   if(primaryName == "riotshield_mp" && level.inGracePeriod)
     self notify("weapon_change", "riotshield_mp");
@@ -524,9 +509,6 @@ giveLoadout(team, class, allowCopycat) {
 
   primaryTokens = strtok(primaryName, "_");
   self.pers["primaryWeapon"] = primaryTokens[0];
-
-
-
 
   offhandSecondaryWeapon = loadoutOffhand + "_mp";
 
@@ -558,7 +540,6 @@ giveLoadout(team, class, allowCopycat) {
   self.primaryWeapon = primaryWeapon;
   self.secondaryWeapon = secondaryName;
 
-
   if(clearAmmo) {
     self SetWeaponAmmoClip(self.primaryWeapon, 0);
     self SetWeaponAmmoStock(self.primaryWeapon, 0);
@@ -569,7 +550,6 @@ giveLoadout(team, class, allowCopycat) {
   self.isSniper = (weaponClass(self.primaryWeapon) == "sniper");
 
   self maps\mp\gametypes\_weapons::updateMoveSpeedScale("primary");
-
 
   self maps\mp\perks\_perks::cac_selector();
 
@@ -647,8 +627,6 @@ trackRiotShield() {
 
   self.hasRiotShield = self hasWeapon("riotshield_mp");
   self.hasRiotShieldEquipped = (self.currentWeaponAtSpawn == "riotshield_mp");
-
-
 
   if(self.hasRiotShield) {
     if(self.hasRiotShieldEquipped) {
@@ -733,7 +711,6 @@ tryDetach(placement)
 buildWeaponName(baseName, attachment1, attachment2) {
   if(!isDefined(level.letterToNumber))
     level.letterToNumber = makeLettersToNumbers();
-
 
   if(getDvarInt("scr_game_perks") == 0) {
     attachment2 = "none";
@@ -824,14 +801,11 @@ setKillstreaks(streak1, streak2, streak3) {
   if(streak1 != "none") {
     streakVal = int(tableLookup("mp/killstreakTable.csv", 1, streak1, 4));
 
-
     killStreaks[streakVal + modifier] = streak1;
   }
 
   if(streak2 != "none") {
     streakVal = int(tableLookup("mp/killstreakTable.csv", 1, streak2, 4));
-
-
 
     if((getDvarInt("scr_classic") == 1) && (streak2 == "precision_airstrike")) {
       streakVal = (streakVal - 1);
@@ -843,11 +817,8 @@ setKillstreaks(streak1, streak2, streak3) {
   if(streak3 != "none") {
     streakVal = int(tableLookup("mp/killstreakTable.csv", 1, streak3, 4));
 
-
     killStreaks[streakVal + modifier] = streak3;
   }
-
-
 
   maxVal = 0;
   foreach(streakVal, streakName in killStreaks) {
@@ -863,8 +834,6 @@ setKillstreaks(streak1, streak2, streak3) {
 
     self.killStreaks[streakIndex] = killStreaks[streakIndex];
   }
-
-
 
   maxRollOvers = 10;
   newKillstreaks = self.killstreaks;

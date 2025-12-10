@@ -24,7 +24,7 @@ init() {
   precachemodel("veh_iw_littlebird_minigun_right");
   registerkillstreak("helicopter_guard_mp", "helicopter_guard_mp", "killstreak_helicopter_guard", "helicopter_used", ::tryuseheliguardsupport, 1);
   registerkillstreakaltweapon("helicopter_guard_mp", "littlebird_guard_minigun_mp");
-  registerkillstreakstrings("helicopter_guard_mp", & "KILLSTREAK_EARNED_HELICOPTER_GUARD", & "KILLSTREAK_HELICOPTER_GUARD_NOT_AVAILABLE", & "KILLSTREAK_HELICOPTER_GUARD_INBOUND");
+  registerkillstreakstrings("helicopter_guard_mp", &"KILLSTREAK_EARNED_HELICOPTER_GUARD", &"KILLSTREAK_HELICOPTER_GUARD_NOT_AVAILABLE", &"KILLSTREAK_HELICOPTER_GUARD_INBOUND");
   registerkillstreakdialog("helicopter_guard_mp", "mpl_killstreak_lbguard_strt", "kls_littlebird_used", "", "kls_littlebird_enemy", "", "kls_littlebird_ready");
   registerkillstreakdevdvar("helicopter_guard_mp", "scr_givehelicopterguard");
   setkillstreakteamkillpenaltyscale("helicopter_guard_mp", 0.0);

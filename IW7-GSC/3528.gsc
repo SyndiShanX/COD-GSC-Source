@@ -29,9 +29,9 @@ init() {
   var_0.modelplacement = "mp_satcom_obj";
   var_0.modelplacementfailed = "mp_satcom_obj_red";
   var_0.modelbombsquad = "mp_satcom_bombsquad";
-  var_0.hintstring = & "KILLSTREAKS_HINTS_UPLINK_PICKUP";
-  var_0.placestring = & "KILLSTREAKS_HINTS_UPLINK_PLACE";
-  var_0.cannotplacestring = & "KILLSTREAKS_HINTS_UPLINK_CANNOT_PLACE";
+  var_0.hintstring = &"KILLSTREAKS_HINTS_UPLINK_PICKUP";
+  var_0.placestring = &"KILLSTREAKS_HINTS_UPLINK_PLACE";
+  var_0.cannotplacestring = &"KILLSTREAKS_HINTS_UPLINK_CANNOT_PLACE";
   var_0.func_8C79 = 42;
   var_0.func_10A38 = "used_uplink";
   var_0.lifespan = 30;

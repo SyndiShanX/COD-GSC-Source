@@ -2185,7 +2185,7 @@ give_backpack(localclientnum, networkid) {
 
   data.inventory.var_7658cbec = item_inventory_util::function_d8cebda3(item.itementry);
 
-  if(data.inventory.var_7658cbec&1 && data.inventory.var_c212de25 != 10) {
+  if(data.inventory.var_7658cbec& 1 && data.inventory.var_c212de25 != 10) {
     for(index = data.inventory.var_c212de25; index < 10; index++) {
       inventoryitem = data.inventory.items[index];
       setuimodelvalue(createuimodel(inventoryitem.itemuimodel, "disabled"), 0);

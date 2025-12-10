@@ -254,7 +254,7 @@ mechz_kill_jump_watcher() {
 }
 
 mechz_jump_cleanup() {
-  self.fx_field = self.fx_field & ~128;
+  self.fx_field = self.fx_field &~128;
   self setclientfield("mechz_fx", self.fx_field);
   self stopanimscripted();
   self notify("jump_complete");

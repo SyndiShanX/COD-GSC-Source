@@ -30,7 +30,7 @@ function init_shared() {
   level.lightninggun_arc_fx_min_range = 1;
   level.lightninggun_arc_fx_min_range_sq = level.lightninggun_arc_fx_min_range * level.lightninggun_arc_fx_min_range;
   level._effect["lightninggun_arc"] = "weapon/fx_lightninggun_arc";
-  callback::add_weapon_damage(level.weaponlightninggun, & on_damage_lightninggun);
+  callback::add_weapon_damage(level.weaponlightninggun, &on_damage_lightninggun);
   level thread update_dvars();
 }
 

@@ -16,7 +16,7 @@
 #namespace zm_theater_amb;
 
 function autoexec __init__sytem__() {
-  system::register("zm_theater_amb", & __init__, undefined, undefined);
+  system::register("zm_theater_amb", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -30,8 +30,8 @@ function main() {
   level thread setup_meteor_audio();
   level thread setup_radio_egg_audio();
   level thread sndzhd_knocker();
-  array::thread_all(getEntArray("portrait_egg", "targetname"), & portrait_egg_vox);
-  array::thread_all(getEntArray("location_egg", "targetname"), & location_egg_vox);
+  array::thread_all(getEntArray("portrait_egg", "targetname"), &portrait_egg_vox);
+  array::thread_all(getEntArray("location_egg", "targetname"), &location_egg_vox);
   level thread function_8d1c7be1();
   level thread amb_0_zombie();
   var_3a067a8d = struct::get_array("trap_electric", "targetname");
@@ -40,7 +40,7 @@ function main() {
     e_trap thread function_57a1070b();
   }
   level thread function_71554606();
-  level.sndtrapfunc = & function_448d83df;
+  level.sndtrapfunc = &function_448d83df;
   level.b_trap_start_custom_vo = 1;
 }
 
@@ -177,7 +177,7 @@ function play_radio_egg(delay) {
 function setup_radio_egg_audio() {
   wait(1);
   level.radio_egg_counter = 0;
-  array::thread_all(getEntArray("audio_egg_radio", "targetname"), & radio_egg_trigger);
+  array::thread_all(getEntArray("audio_egg_radio", "targetname"), &radio_egg_trigger);
 }
 
 function radio_egg_trigger() {

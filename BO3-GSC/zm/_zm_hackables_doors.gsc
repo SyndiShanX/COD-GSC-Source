@@ -28,7 +28,7 @@ function door_struct_debug() {
   }
 }
 
-function hack_doors(targetname = "zombie_door", door_activate_func = & zm_blockers::door_opened) {
+function hack_doors(targetname = "zombie_door", door_activate_func = &zm_blockers::door_opened) {
   doors = getEntArray(targetname, "targetname");
   for(i = 0; i < doors.size; i++) {
     door = doors[i];
@@ -43,7 +43,7 @@ function hack_doors(targetname = "zombie_door", door_activate_func = & zm_blocke
     struct.door_activate_func = door_activate_func;
     trace_passed = 0;
     door thread hide_door_buy_when_hacker_active(struct);
-    zm_equip_hacker::register_pooled_hackable_struct(struct, & door_hack);
+    zm_equip_hacker::register_pooled_hackable_struct(struct, &door_hack);
     door thread watch_door_for_open(struct);
   }
 }

@@ -141,7 +141,7 @@ function _setup_simultaneous_pap_triggers() {
     triggers[i] = getent("pap_blocker_trigger" + (i + 1), "targetname");
   }
   _randomize_pressure_plates(triggers);
-  array::thread_all(triggers, & _pap_pressure_plate_move);
+  array::thread_all(triggers, &_pap_pressure_plate_move);
   wait(1);
   last_num_plates_active = -1;
   last_plate_state = -1;
@@ -174,7 +174,7 @@ function _setup_simultaneous_pap_triggers() {
       }
       _pap_think();
       _randomize_pressure_plates(triggers);
-      array::thread_all(triggers, & _pap_pressure_plate_move);
+      array::thread_all(triggers, &_pap_pressure_plate_move);
       _set_num_plates_active(4, 15);
       wait(1);
     }
@@ -332,14 +332,14 @@ function _move_up(onmovefunc, onstopfunc) {
 }
 
 function _plate_move_up() {
-  onmovefunc = & _plate_onmove;
-  onstopfunc = & _plate_onstop;
+  onmovefunc = &_plate_onmove;
+  onstopfunc = &_plate_onstop;
   self thread _move_up(onmovefunc, onstopfunc);
 }
 
 function _plate_move_down() {
-  onmovefunc = & _plate_onmove;
-  onstopfunc = & _plate_onstop;
+  onmovefunc = &_plate_onmove;
+  onstopfunc = &_plate_onstop;
   self thread _move_down(onmovefunc, onstopfunc);
 }
 
@@ -365,14 +365,14 @@ function _move_all_stairs_up() {
 }
 
 function _stairs_move_up() {
-  onmovefunc = & _stairs_onmove;
-  onstopfunc = & _stairs_onstop;
+  onmovefunc = &_stairs_onmove;
+  onstopfunc = &_stairs_onstop;
   self _move_up(onmovefunc, onstopfunc);
 }
 
 function _stairs_move_down() {
-  onmovefunc = & _stairs_onmove;
-  onstopfunc = & _stairs_onstop;
+  onmovefunc = &_stairs_onmove;
+  onstopfunc = &_stairs_onstop;
   self _move_down(onmovefunc, onstopfunc);
 }
 
@@ -519,8 +519,8 @@ function playerclip_restore() {
 
 function _wait_for_pap_reset() {
   level endon("fake_death");
-  array::thread_all(level.pap_timers, & _move_visual_timer);
-  array::thread_all(level.pap_timers, & _pack_a_punch_timer_sounds);
+  array::thread_all(level.pap_timers, &_move_visual_timer);
+  array::thread_all(level.pap_timers, &_pack_a_punch_timer_sounds);
   level thread _pack_a_punch_warning_fx(level.pap_active_time);
   fx_time_offset = 0.5;
   wait(level.pap_active_time - fx_time_offset);

@@ -1102,7 +1102,7 @@ run_ally_edge_death() {
 
 ally_edge_death() {
   self.ignoreme = 1;
-  self setlookattext("", & "");
+  self setlookattext("", &"");
   self setCanDamage(0);
   self.a.nodeath = 1;
   self notify("stop_loop");
@@ -1937,7 +1937,7 @@ gunship_death() {
         wait 1;
 
         if(isalive(self) && self istouching(var_3)) {
-          setdvar("ui_deadquote", & "CARRIER_DEATH_GUNSHIP");
+          setdvar("ui_deadquote", &"CARRIER_DEATH_GUNSHIP");
           maps\_utility::missionfailedwrapper();
           self kill();
         }
@@ -1947,7 +1947,7 @@ gunship_death() {
     if(var_1 >= 30.0) {
       maps\carrier_code::gunship_line_attack_death();
       wait 1;
-      setdvar("ui_deadquote", & "CARRIER_DEATH_GUNSHIP");
+      setdvar("ui_deadquote", &"CARRIER_DEATH_GUNSHIP");
       maps\_utility::missionfailedwrapper();
       self kill();
     }
@@ -2044,7 +2044,7 @@ kill_trigger(var_0, var_1, var_2, var_3) {
 
         if(level.player is_touching_any(var_0)) {
           wait 1;
-          setdvar("ui_deadquote", & "CARRIER_FAIL_FAR_AWAY");
+          setdvar("ui_deadquote", &"CARRIER_FAIL_FAR_AWAY");
           maps\_utility::missionfailedwrapper();
         }
       }

@@ -80,7 +80,7 @@ function precache_everything() {}
 
 function setup_capture_zones() {
   spawner_capture_zombie = getent("capture_zombie_spawner", "targetname");
-  spawner_capture_zombie spawner::add_spawn_function( & zm_tomb_utility::capture_zombie_spawn_init);
+  spawner_capture_zombie spawner::add_spawn_function(&zm_tomb_utility::capture_zombie_spawn_init);
   a_s_generator = struct::get_array("s_generator", "targetname");
   var_2dc6026c = struct::get_array("generator_attackable", "targetname");
   clientfield::register("world", "packapunch_anim", 21000, 3, "int");
@@ -107,8 +107,8 @@ function setup_capture_zones() {
   objective_add(1, "invisible", (0, 0, 0), istring("zm_dlc5_capture_generator1"));
   objective_add(2, "invisible", (0, 0, 0), istring("zm_dlc5_capture_generator1"));
   objective_add(3, "invisible", (0, 0, 0), istring("zm_dlc5_capture_generator1"));
-  level.magic_box_zbarrier_state_func = & set_magic_box_zbarrier_state;
-  level.custom_perk_validation = & check_perk_machine_valid;
+  level.magic_box_zbarrier_state_func = &set_magic_box_zbarrier_state;
+  level.custom_perk_validation = &check_perk_machine_valid;
   level thread track_max_player_zombie_points();
   foreach(s_generator in a_s_generator) {
     if(!isDefined(s_generator.var_b454101b)) {
@@ -127,13 +127,13 @@ function setup_capture_zones() {
   level thread recapture_round_tracker();
   level.zone_capture.recapture_zombies = [];
   level.zone_capture.last_zone_captured = undefined;
-  level.zone_capture.spawn_func_capture_zombie = & init_capture_zombie;
-  level.zone_capture.spawn_func_recapture_zombie = & init_recapture_zombie;
+  level.zone_capture.spawn_func_capture_zombie = &init_capture_zombie;
+  level.zone_capture.spawn_func_recapture_zombie = &init_recapture_zombie;
   level thread watch_for_open_sesame();
   level thread debug_watch_for_zone_capture();
   level thread debug_watch_for_zone_recapture();
-  zm_spawner::register_zombie_death_event_callback( & recapture_zombie_death_func);
-  level.custom_derive_damage_refs = & zone_capture_gib_think;
+  zm_spawner::register_zombie_death_event_callback(&recapture_zombie_death_func);
+  level.custom_derive_damage_refs = &zone_capture_gib_think;
   setup_inaccessible_zombie_attack_points();
   level thread quick_revive_game_type_watcher();
   level thread quick_revive_solo_leave_watcher();
@@ -325,7 +325,7 @@ function pack_a_punch_disable() {
 
 function register_elements_powered_by_zone_capture_generators() {
   register_random_perk_machine_for_zone("generator_start_bunker", "starting_bunker");
-  register_perk_machine_for_zone("generator_start_bunker", "revive", "specialty_quickrevive", & revive_perk_fx_think);
+  register_perk_machine_for_zone("generator_start_bunker", "revive", "specialty_quickrevive", &revive_perk_fx_think);
   register_mystery_box_for_zone("generator_start_bunker", "bunker_start_chest");
   register_random_perk_machine_for_zone("generator_tank_trench", "trenches_right");
   register_mystery_box_for_zone("generator_tank_trench", "bunker_tank_chest");
@@ -379,7 +379,7 @@ function register_mystery_box_for_zone(str_zone_name, str_identifier) {
     level.zone_capture.zones[str_zone_name].mystery_boxes = [];
   }
   s_mystery_box = get_mystery_box_from_script_noteworthy(str_identifier);
-  s_mystery_box.unitrigger_stub.prompt_and_visibility_func = & magic_box_trigger_update_prompt;
+  s_mystery_box.unitrigger_stub.prompt_and_visibility_func = &magic_box_trigger_update_prompt;
   s_mystery_box.unitrigger_stub.zone = str_zone_name;
   s_mystery_box.zone_capture_area = str_zone_name;
   s_mystery_box.zbarrier.zone_capture_area = str_zone_name;
@@ -527,14 +527,14 @@ function setup_generator_unitrigger() {
   s_unitrigger_stub.script_width = 128;
   s_unitrigger_stub.script_height = 128;
   s_unitrigger_stub.cursor_hint = "HINT_NOICON";
-  s_unitrigger_stub.hint_string = & "ZM_TOMB_CAP";
-  s_unitrigger_stub.hint_parm1 = [[ & get_generator_capture_start_cost]]();
+  s_unitrigger_stub.hint_string = &"ZM_TOMB_CAP";
+  s_unitrigger_stub.hint_parm1 = [[ &get_generator_capture_start_cost]]();
   s_unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   s_unitrigger_stub.require_look_at = 1;
-  s_unitrigger_stub.prompt_and_visibility_func = & generator_trigger_prompt_and_visibility;
+  s_unitrigger_stub.prompt_and_visibility_func = &generator_trigger_prompt_and_visibility;
   s_unitrigger_stub.generator_struct = self;
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger_stub, 1);
-  zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, & generator_unitrigger_think);
+  zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, &generator_unitrigger_think);
 }
 
 function generator_trigger_prompt_and_visibility(e_player) {
@@ -611,7 +611,7 @@ function wait_for_capture_trigger() {
     if(!level flag::get("zone_capture_in_progress")) {
       level flag::set("zone_capture_in_progress");
       self.var_ea997a3c = e_player;
-      e_player util::delay(2.5, undefined, & zm_audio::create_and_play_dialog, "zone_capture", "capture_started");
+      e_player util::delay(2.5, undefined, &zm_audio::create_and_play_dialog, "zone_capture", "capture_started");
       self zm_tomb_capture_zones_ffotd::capture_event_start();
       self thread monitor_capture_zombies();
       self thread activate_capture_zone();
@@ -1796,7 +1796,7 @@ function set_magic_box_zbarrier_state(state) {
     case "initial": {
       self showzbarrierpiece(1);
       self thread zm_magicbox::magic_box_initial();
-      thread zm_unitrigger::register_static_unitrigger(self.owner.unitrigger_stub, & zm_magicbox::magicbox_unitrigger_think);
+      thread zm_unitrigger::register_static_unitrigger(self.owner.unitrigger_stub, &zm_magicbox::magicbox_unitrigger_think);
       self.state = "close";
       break;
     }
@@ -1883,14 +1883,14 @@ function magic_box_stub_update_prompt(player) {
     if(isDefined(level.magic_box_check_equipment) && [
         [level.magic_box_check_equipment]
       ](cursor_hint_weapon)) {
-      self.hint_string = & "ZOMBIE_TRADE_EQUIP_FILL";
+      self.hint_string = &"ZOMBIE_TRADE_EQUIP_FILL";
     } else {
-      self.hint_string = & "ZOMBIE_TRADE_WEAPON_FILL";
+      self.hint_string = &"ZOMBIE_TRADE_WEAPON_FILL";
     }
   } else {
     self setcursorhint("HINT_NOICON");
     if(!level.zone_capture.zones[self.stub.zone] flag::get("player_controlled")) {
-      self.hint_string = & "ZM_TOMB_ZC";
+      self.hint_string = &"ZM_TOMB_ZC";
       return false;
     }
     self.hint_parm1 = self.stub.trigger_target.zombie_cost;
@@ -1981,7 +1981,7 @@ function recapture_round_start() {
     var_28e07566 zm_attackables::activate();
     if(b_is_first_generator_attack) {
       s_recapture_target_zone thread monitor_recapture_zombies();
-      util::delay(10, undefined, & broadcast_vo_category_to_team, "recapture_generator_attacked");
+      util::delay(10, undefined, &broadcast_vo_category_to_team, "recapture_generator_attacked");
     }
     s_recapture_target_zone thread generator_under_attack_warnings();
     s_recapture_target_zone flag::set("current_recapture_target_zone");
@@ -1991,7 +1991,7 @@ function recapture_round_start() {
     s_recapture_target_zone flag::clear("current_recapture_target_zone");
     var_28e07566 zm_attackables::deactivate();
     if(!s_recapture_target_zone flag::get("player_controlled")) {
-      util::delay(3, undefined, & broadcast_vo_category_to_team, "recapture_started");
+      util::delay(3, undefined, &broadcast_vo_category_to_team, "recapture_started");
     }
     b_is_first_generator_attack = 0;
     s_recapture_target_zone zm_tomb_capture_zones_ffotd::recapture_event_end();
@@ -2027,7 +2027,7 @@ function broadcast_vo_category_to_team(str_category, n_delay = 1) {
   }
   while(a_players.size > 0);
   for(i = 0; i < a_speakers.size; i++) {
-    a_speakers[i] util::delay(n_delay, undefined, & zm_audio::create_and_play_dialog, "zone_capture", str_category);
+    a_speakers[i] util::delay(n_delay, undefined, &zm_audio::create_and_play_dialog, "zone_capture", str_category);
   }
 }
 
@@ -2102,7 +2102,7 @@ function recapture_zombie_death_func() {
   if(isDefined(self.is_recapture_zombie) && self.is_recapture_zombie) {
     level.recapture_zombies_killed++;
     if(isDefined(self.attacker) && isplayer(self.attacker) && level.recapture_zombies_killed == get_recapture_zombies_needed()) {
-      self.attacker thread util::delay(2, undefined, & zm_audio::create_and_play_dialog, "zone_capture", "recapture_prevented");
+      self.attacker thread util::delay(2, undefined, &zm_audio::create_and_play_dialog, "zone_capture", "recapture_prevented");
       foreach(player in getplayers()) {}
     }
     if(level.recapture_zombies_killed == get_recapture_zombies_needed() && level flag::get("generator_under_attack")) {

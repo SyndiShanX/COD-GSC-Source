@@ -17,25 +17,25 @@ init() {
   precacheString(&"MP_WAGER_WINNINGS_ARE");
   precacheString(&"MP_WAGER_SIDEBET_WINNINGS_ARE");
   precacheString(&"MP_WAGER_IN_THE_MONEY");
-  game["strings"]["draw"] = & "MP_DRAW_CAPS";
-  game["strings"]["round_draw"] = & "MP_ROUND_DRAW_CAPS";
-  game["strings"]["round_win"] = & "MP_ROUND_WIN_CAPS";
-  game["strings"]["round_loss"] = & "MP_ROUND_LOSS_CAPS";
-  game["strings"]["victory"] = & "MP_VICTORY_CAPS";
-  game["strings"]["defeat"] = & "MP_DEFEAT_CAPS";
-  game["strings"]["game_over"] = & "MP_GAME_OVER_CAPS";
-  game["strings"]["halftime"] = & "MP_HALFTIME_CAPS";
-  game["strings"]["overtime"] = & "MP_OVERTIME_CAPS";
-  game["strings"]["roundend"] = & "MP_ROUNDEND_CAPS";
-  game["strings"]["intermission"] = & "MP_INTERMISSION_CAPS";
-  game["strings"]["side_switch"] = & "MP_SWITCHING_SIDES_CAPS";
-  game["strings"]["match_bonus"] = & "MP_MATCH_BONUS_IS";
-  game["strings"]["codpoints_match_bonus"] = & "MP_CODPOINTS_MATCH_BONUS_IS";
-  game["strings"]["wager_winnings"] = & "MP_WAGER_WINNINGS_ARE";
-  game["strings"]["wager_sidebet_winnings"] = & "MP_WAGER_SIDEBET_WINNINGS_ARE";
-  game["strings"]["wager_inthemoney"] = & "MP_WAGER_IN_THE_MONEY_CAPS";
-  game["strings"]["wager_loss"] = & "MP_WAGER_LOSS_CAPS";
-  game["strings"]["wager_topwinners"] = & "MP_WAGER_TOPWINNERS";
+  game["strings"]["draw"] = &"MP_DRAW_CAPS";
+  game["strings"]["round_draw"] = &"MP_ROUND_DRAW_CAPS";
+  game["strings"]["round_win"] = &"MP_ROUND_WIN_CAPS";
+  game["strings"]["round_loss"] = &"MP_ROUND_LOSS_CAPS";
+  game["strings"]["victory"] = &"MP_VICTORY_CAPS";
+  game["strings"]["defeat"] = &"MP_DEFEAT_CAPS";
+  game["strings"]["game_over"] = &"MP_GAME_OVER_CAPS";
+  game["strings"]["halftime"] = &"MP_HALFTIME_CAPS";
+  game["strings"]["overtime"] = &"MP_OVERTIME_CAPS";
+  game["strings"]["roundend"] = &"MP_ROUNDEND_CAPS";
+  game["strings"]["intermission"] = &"MP_INTERMISSION_CAPS";
+  game["strings"]["side_switch"] = &"MP_SWITCHING_SIDES_CAPS";
+  game["strings"]["match_bonus"] = &"MP_MATCH_BONUS_IS";
+  game["strings"]["codpoints_match_bonus"] = &"MP_CODPOINTS_MATCH_BONUS_IS";
+  game["strings"]["wager_winnings"] = &"MP_WAGER_WINNINGS_ARE";
+  game["strings"]["wager_sidebet_winnings"] = &"MP_WAGER_SIDEBET_WINNINGS_ARE";
+  game["strings"]["wager_inthemoney"] = &"MP_WAGER_IN_THE_MONEY_CAPS";
+  game["strings"]["wager_loss"] = &"MP_WAGER_LOSS_CAPS";
+  game["strings"]["wager_topwinners"] = &"MP_WAGER_TOPWINNERS";
   game["menu_endgameupdate"] = "endgameupdate";
   precacheMenu(game["menu_endgameupdate"]);
   level thread onPlayerConnect();
@@ -171,7 +171,7 @@ showNotifyMessage(notifyData, duration) {
     if(isDefined(notifyData.titleLabel))
       self.notifyTitle.label = notifyData.titleLabel;
     else
-      self.notifyTitle.label = & "";
+      self.notifyTitle.label = &"";
     if(isDefined(notifyData.titleLabel) && !isDefined(notifyData.titleIsString))
       self.notifyTitle setValue(notifyData.titleText);
     else
@@ -184,7 +184,7 @@ showNotifyMessage(notifyData, duration) {
     if(isDefined(notifyData.textLabel))
       self.notifyText.label = notifyData.textLabel;
     else
-      self.notifyText.label = & "";
+      self.notifyText.label = &"";
     if(isDefined(notifyData.textLabel) && !isDefined(notifyData.textIsString))
       self.notifyText setValue(notifyData.notifyText);
     else
@@ -205,7 +205,7 @@ showNotifyMessage(notifyData, duration) {
       if(isDefined(notifyData.text2Label))
         self.notifyText2.label = notifyData.text2Label;
       else
-        self.notifyText2.label = & "";
+        self.notifyText2.label = &"";
       self.notifyText2 setText(notifyData.notifyText2);
       self.notifyText2 setPulseFX(100, int(duration * 1000), 1000);
       self.notifyText2.glowColor = glowColor;
@@ -470,7 +470,7 @@ outcomeNotify(winner, isRoundEnd, endReasonText) {
   firstTitle.hideWhenInMenu = false;
   firstTitle.archived = false;
   if(isDefined(players[0])) {
-    firstTitle.label = & "MP_FIRSTPLACE_NAME";
+    firstTitle.label = &"MP_FIRSTPLACE_NAME";
     firstTitle setPlayerNameString(players[0]);
     firstTitle setCOD7DecodeFX(175, duration, 600);
   }
@@ -481,7 +481,7 @@ outcomeNotify(winner, isRoundEnd, endReasonText) {
   secondTitle.hideWhenInMenu = false;
   secondTitle.archived = false;
   if(isDefined(players[1])) {
-    secondTitle.label = & "MP_SECONDPLACE_NAME";
+    secondTitle.label = &"MP_SECONDPLACE_NAME";
     secondTitle setPlayerNameString(players[1]);
     secondTitle setCOD7DecodeFX(175, duration, 600);
   }
@@ -493,7 +493,7 @@ outcomeNotify(winner, isRoundEnd, endReasonText) {
   thirdTitle.hideWhenInMenu = false;
   thirdTitle.archived = false;
   if(isDefined(players[2])) {
-    thirdTitle.label = & "MP_THIRDPLACE_NAME";
+    thirdTitle.label = &"MP_THIRDPLACE_NAME";
     thirdTitle setPlayerNameString(players[2]);
     thirdTitle setCOD7DecodeFX(175, duration, 600);
   }
@@ -582,7 +582,7 @@ wagerOutcomeNotify(winner, endReasonText) {
       secondTitle.glowAlpha = 1;
       secondTitle.hideWhenInMenu = false;
       secondTitle.archived = false;
-      secondTitle.label = & "MP_WAGER_PLACE_NAME";
+      secondTitle.label = &"MP_WAGER_PLACE_NAME";
       secondTitle.playerNum = i;
       secondTitle setPlayerNameString(players[i]);
       playerNameHudElems[playerNameHudElems.size] = secondTitle;
@@ -592,7 +592,7 @@ wagerOutcomeNotify(winner, endReasonText) {
       secondCP.glowAlpha = 1;
       secondCP.hideWhenInMenu = false;
       secondCP.archived = false;
-      secondCP.label = & "MENU_POINTS";
+      secondCP.label = &"MENU_POINTS";
       secondCP.currentValue = 0;
       if(isDefined(players[i].wagerWinnings))
         secondCP.targetValue = players[i].wagerWinnings;

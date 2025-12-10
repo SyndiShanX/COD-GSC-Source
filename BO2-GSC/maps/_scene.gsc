@@ -698,7 +698,7 @@ _setup_model_for_scene(s_asset_info, s_scene_info, b_first_frame) {
   if(isDefined(self.is_drone) && self.is_drone) {
     if(isDefined(s_asset_info.b_play_dead) && s_asset_info.b_play_dead) {
       self.takedamage = 0;
-      self setlookattext("", & "");
+      self setlookattext("", &"");
       self notify("no_friendly_fire");
     } else if(!isDefined(s_asset_info.do_not_allow_death) || s_asset_info.do_not_allow_death)
       self.takedamage = 0;

@@ -32,7 +32,7 @@ function init() {
   foreach(team in level.teams) {
     game["teamops"].teamprogress[team] = 0;
   }
-  level.teamopsonprocessplayerevent = & processplayerevent;
+  level.teamopsonprocessplayerevent = &processplayerevent;
   tableid = getteamopstableid();
   assert(isDefined(tableid));
   if(!isDefined(tableid)) {
@@ -198,7 +198,7 @@ function main() {
   thread watchteamopstime();
   level.teamopstargetkills = getdvarint("teamOpsKillsCountTrigger_" + level.gametype, 37);
   if(level.teamopstargetkills > 0) {
-    level.teamopsonplayerkilled = & onplayerkilled;
+    level.teamopsonplayerkilled = &onplayerkilled;
   }
 }
 

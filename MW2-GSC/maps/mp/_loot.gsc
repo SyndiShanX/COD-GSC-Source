@@ -98,7 +98,7 @@ initLootDisplay() {
   self.totalMoney = createFontString("bigfixed", 0.8);
   self.totalMoney setPoint("TOPRIGHT");
   self.totalMoney setValue(self.pers["money"]);
-  self.totalMoney.label = & "MP_DOLLAR";
+  self.totalMoney.label = &"MP_DOLLAR";
   self.totalMoney.glowColor = (0.3, 0.8, 0.3);
   self.totalMoney.glowAlpha = 1;
   self.totalMoney.alpha = 0;
@@ -107,7 +107,7 @@ initLootDisplay() {
   self.earnedMoney setParent(self.totalMoney);
   self.earnedMoney setPoint("TOPRIGHT", "BOTTOMRIGHT", 0, 10);
   self.earnedMoney setValue(0);
-  self.earnedMoney.label = & "MP_PLUS";
+  self.earnedMoney.label = &"MP_PLUS";
   self.earnedMoney.glowColor = (0.3, 0.8, 0.3);
   self.earnedMoney.glowAlpha = 0.1;
   self.earnedMoney.alpha = 0;

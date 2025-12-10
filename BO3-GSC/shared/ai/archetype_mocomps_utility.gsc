@@ -11,9 +11,9 @@
 #namespace archetype_mocomps_utility;
 
 function autoexec registerdefaultanimationmocomps() {
-  animationstatenetwork::registeranimationmocomp("adjust_to_cover", & mocompadjusttocoverinit, & mocompadjusttocoverupdate, & mocompadjusttocoverterminate);
-  animationstatenetwork::registeranimationmocomp("locomotion_explosion_death", & mocomplocoexplosioninit, undefined, undefined);
-  animationstatenetwork::registeranimationmocomp("mocomp_flank_stand", & mocompflankstandinit, undefined, undefined);
+  animationstatenetwork::registeranimationmocomp("adjust_to_cover", &mocompadjusttocoverinit, &mocompadjusttocoverupdate, &mocompadjusttocoverterminate);
+  animationstatenetwork::registeranimationmocomp("locomotion_explosion_death", &mocomplocoexplosioninit, undefined, undefined);
+  animationstatenetwork::registeranimationmocomp("mocomp_flank_stand", &mocompflankstandinit, undefined, undefined);
 }
 
 function autoexec initadjusttocoverparams() {

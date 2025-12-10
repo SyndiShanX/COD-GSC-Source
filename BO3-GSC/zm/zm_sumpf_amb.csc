@@ -23,11 +23,11 @@ function play_meteor_loop() {
 function start_lights() {
   level waittill("start_lights");
   wait(2);
-  array::thread_all(struct::get_array("electrical_circuit", "targetname"), & circuit_sound);
+  array::thread_all(struct::get_array("electrical_circuit", "targetname"), &circuit_sound);
   playSound(0, "zmb_turn_on", (0, 0, 0));
   wait(3);
-  array::thread_all(struct::get_array("electrical_surge", "targetname"), & light_sound);
-  array::thread_all(struct::get_array("low_buzz", "targetname"), & buzz_sound);
+  array::thread_all(struct::get_array("electrical_surge", "targetname"), &light_sound);
+  array::thread_all(struct::get_array("low_buzz", "targetname"), &buzz_sound);
   playertrack = audio::playloopat("player_ambience", (0, 0, 0));
 }
 
@@ -64,7 +64,7 @@ function function_c9207335() {
   wait(3);
   level thread function_d667714e();
   var_13a52dfe = getEntArray(0, "sndMusicTrig", "targetname");
-  array::thread_all(var_13a52dfe, & function_60a32834);
+  array::thread_all(var_13a52dfe, &function_60a32834);
 }
 
 function function_60a32834() {

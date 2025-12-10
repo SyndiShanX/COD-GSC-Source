@@ -35,7 +35,7 @@ function init_shared() {
   level.fireflies_min_speed = getdvarint("scr_firefly_min_speed", 400);
   level.fireflies_attack_speed_scale = getdvarfloat("scr_firefly_attack_attack_speed_scale", 1.75);
   level.fireflies_collision_check_interval = getdvarfloat("scr_firefly_collision_check_interval", 0.2);
-  callback::add_weapon_damage(level.firefly_pod_weapon, & on_damage_firefly_pod);
+  callback::add_weapon_damage(level.firefly_pod_weapon, &on_damage_firefly_pod);
   level thread register();
   level thread update_dvars();
 }
@@ -57,7 +57,7 @@ function register() {
 
 function createfireflypodwatcher() {
   watcher = self weaponobjects::createproximityweaponobjectwatcher("hero_chemicalgelgun", self.team);
-  watcher.onspawn = & on_spawn_firefly_pod;
+  watcher.onspawn = &on_spawn_firefly_pod;
   watcher.watchforfire = 1;
   watcher.hackable = 0;
   watcher.headicon = 0;
@@ -67,17 +67,17 @@ function createfireflypodwatcher() {
   watcher.immediatedetonation = 1;
   watcher.detectiongraceperiod = level.firefly_pod_grace_period;
   watcher.detonateradius = level.firefly_pod_detection_radius;
-  watcher.onstun = & weaponobjects::weaponstun;
+  watcher.onstun = &weaponobjects::weaponstun;
   watcher.stuntime = 0;
-  watcher.ondetonatecallback = & firefly_pod_detonate;
+  watcher.ondetonatecallback = &firefly_pod_detonate;
   watcher.activationdelay = level.firefly_pod_activation_time;
   watcher.activatesound = "wpn_gelgun_blob_burst";
-  watcher.shoulddamage = & firefly_pod_should_damage;
+  watcher.shoulddamage = &firefly_pod_should_damage;
   watcher.deleteonplayerspawn = 1;
   watcher.timeout = getdvarfloat("scr_firefly_pod_timeout", 0);
   watcher.ignorevehicles = 0;
   watcher.ignoreai = 0;
-  watcher.onsupplementaldetonatecallback = & firefly_death;
+  watcher.onsupplementaldetonatecallback = &firefly_death;
 }
 
 function on_spawn_firefly_pod(watcher, owner) {

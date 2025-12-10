@@ -57,7 +57,6 @@ class animationadjustmentinfoxy {
 }
 
 class jukeinfo {
-
   constructor() {}
 
   destructor() {}
@@ -69,9 +68,9 @@ class jukeinfo {
 function autoexec init() {
   initapothiconfurybehaviorsandasm();
   apothiconfuryinterface::registerapothiconfuryinterfaceattributes();
-  spawner::add_archetype_spawn_function("apothicon_fury", & apothiconfuryblackboardinit);
-  spawner::add_archetype_spawn_function("apothicon_fury", & zombie_utility::zombiespawnsetup);
-  spawner::add_archetype_spawn_function("apothicon_fury", & apothiconfuryspawnsetup);
+  spawner::add_archetype_spawn_function("apothicon_fury", &apothiconfuryblackboardinit);
+  spawner::add_archetype_spawn_function("apothicon_fury", &zombie_utility::zombiespawnsetup);
+  spawner::add_archetype_spawn_function("apothicon_fury", &apothiconfuryspawnsetup);
   if(ai::shouldregisterclientfieldforarchetype("apothicon_fury")) {
     clientfield::register("actor", "fury_fire_damage", 15000, getminbitcountfornum(7), "counter");
     clientfield::register("actor", "furious_level", 15000, 1, "int");
@@ -82,32 +81,32 @@ function autoexec init() {
 }
 
 function private initapothiconfurybehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconCanJuke", & apothiconcanjuke);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconJukeInit", & apothiconjukeinit);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconPreemptiveJukeService", & apothiconpreemptivejukeservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconPreemptiveJukePending", & apothiconpreemptivejukepending);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconPreemptiveJukeDone", & apothiconpreemptivejukedone);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconMoveStart", & apothiconmovestart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconMoveUpdate", & apothiconmoveupdate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconCanMeleeAttack", & apothiconcanmeleeattack);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconShouldMeleeCondition", & apothiconshouldmeleecondition);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconCanBamf", & apothiconcanbamf);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconCanBamfAfterJuke", & apothiconcanbamfafterjuke);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconBamfInit", & apothiconbamfinit);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconShouldTauntAtPlayer", & apothiconshouldtauntatplayer);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconTauntAtPlayerEvent", & apothicontauntatplayerevent);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconFuriousModeInit", & apothiconfuriousmodeinit);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconKnockdownService", & apothiconknockdownservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconDeathStart", & apothicondeathstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconDeathTerminate", & apothicondeathterminate);
-  animationstatenetwork::registeranimationmocomp("mocomp_teleport@apothicon_fury", & mocompapothiconfuryteleportinit, undefined, & mocompapothiconfuryteleportterminate);
-  animationstatenetwork::registeranimationmocomp("mocomp_juke@apothicon_fury", & mocompapothiconfuryjukeinit, & mocompapothiconfuryjukeupdate, & mocompapothiconfuryjuketerminate);
-  animationstatenetwork::registeranimationmocomp("mocomp_bamf@apothicon_fury", & mocompapothiconfurybamfinit, & mocompapothiconfurybamfupdate, & mocompapothiconfurybamfterminate);
-  animationstatenetwork::registernotetrackhandlerfunction("start_effect", & apothiconbamfout);
-  animationstatenetwork::registernotetrackhandlerfunction("end_effect", & apothiconbamfin);
-  animationstatenetwork::registernotetrackhandlerfunction("bamf_land", & apothiconbamfland);
-  animationstatenetwork::registernotetrackhandlerfunction("start_dissolve", & apothicondeathdissolve);
-  animationstatenetwork::registernotetrackhandlerfunction("dissolved", & apothicondeathdissolved);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconCanJuke", &apothiconcanjuke);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconJukeInit", &apothiconjukeinit);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconPreemptiveJukeService", &apothiconpreemptivejukeservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconPreemptiveJukePending", &apothiconpreemptivejukepending);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconPreemptiveJukeDone", &apothiconpreemptivejukedone);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconMoveStart", &apothiconmovestart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconMoveUpdate", &apothiconmoveupdate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconCanMeleeAttack", &apothiconcanmeleeattack);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconShouldMeleeCondition", &apothiconshouldmeleecondition);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconCanBamf", &apothiconcanbamf);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconCanBamfAfterJuke", &apothiconcanbamfafterjuke);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconBamfInit", &apothiconbamfinit);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconShouldTauntAtPlayer", &apothiconshouldtauntatplayer);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconTauntAtPlayerEvent", &apothicontauntatplayerevent);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconFuriousModeInit", &apothiconfuriousmodeinit);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconKnockdownService", &apothiconknockdownservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconDeathStart", &apothicondeathstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("apothiconDeathTerminate", &apothicondeathterminate);
+  animationstatenetwork::registeranimationmocomp("mocomp_teleport@apothicon_fury", &mocompapothiconfuryteleportinit, undefined, &mocompapothiconfuryteleportterminate);
+  animationstatenetwork::registeranimationmocomp("mocomp_juke@apothicon_fury", &mocompapothiconfuryjukeinit, &mocompapothiconfuryjukeupdate, &mocompapothiconfuryjuketerminate);
+  animationstatenetwork::registeranimationmocomp("mocomp_bamf@apothicon_fury", &mocompapothiconfurybamfinit, &mocompapothiconfurybamfupdate, &mocompapothiconfurybamfterminate);
+  animationstatenetwork::registernotetrackhandlerfunction("start_effect", &apothiconbamfout);
+  animationstatenetwork::registernotetrackhandlerfunction("end_effect", &apothiconbamfin);
+  animationstatenetwork::registernotetrackhandlerfunction("bamf_land", &apothiconbamfland);
+  animationstatenetwork::registernotetrackhandlerfunction("start_dissolve", &apothicondeathdissolve);
+  animationstatenetwork::registernotetrackhandlerfunction("dissolved", &apothicondeathdissolved);
 }
 
 function private apothiconfuryblackboardinit() {
@@ -116,11 +115,11 @@ function private apothiconfuryblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_apothicon_bamf_distance", undefined, & getbamfmeleedistance);
+  blackboard::registerblackboardattribute(self, "_apothicon_bamf_distance", undefined, &getbamfmeleedistance);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_idgun_damage_direction", "back", & bb_idgungetdamagedirection);
+  blackboard::registerblackboardattribute(self, "_idgun_damage_direction", "back", &bb_idgungetdamagedirection);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -130,7 +129,7 @@ function private apothiconfuryblackboardinit() {
   }
   self aiutility::registerutilityblackboardattributes();
   ai::createinterfaceforentity(self);
-  self.___archetypeonanimscriptedcallback = & apothiconfuryonanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = &apothiconfuryonanimscriptedcallback;
   self finalizetrackedblackboardattributes();
 }
 
@@ -142,8 +141,8 @@ function private apothiconfuryspawnsetup() {
   self setpitchorient();
   self pushactors(1);
   self.skipautoragdoll = 1;
-  aiutility::addaioverridedamagecallback(self, & apothicondamagecallback);
-  aiutility::addaioverridekilledcallback(self, & apothiconondeath);
+  aiutility::addaioverridedamagecallback(self, &apothicondamagecallback);
+  aiutility::addaioverridekilledcallback(self, &apothiconondeath);
   self.zigzag_distance_min = 300;
   self.zigzag_distance_max = 700;
   self.isfurious = 0;
@@ -164,7 +163,7 @@ function apothicondeathdissolve(entity) {
     return;
   }
   a_zombies = getaiarchetypearray("zombie");
-  a_filtered_zombies = array::filter(a_zombies, 0, & apothiconzombieeligibleforknockdown, entity, entity.origin);
+  a_filtered_zombies = array::filter(a_zombies, 0, &apothiconzombieeligibleforknockdown, entity, entity.origin);
   if(a_filtered_zombies.size > 0) {
     foreach(zombie in a_filtered_zombies) {
       apothiconknockdownzombie(entity, zombie);
@@ -720,7 +719,7 @@ function apothiconknockdownservice(entity) {
   speed = move_dist_sq / predict_time;
   if(speed >= 10) {
     a_zombies = getaiarchetypearray("zombie");
-    a_filtered_zombies = array::filter(a_zombies, 0, & apothiconzombieeligibleforknockdown, entity, predicted_pos);
+    a_filtered_zombies = array::filter(a_zombies, 0, &apothiconzombieeligibleforknockdown, entity, predicted_pos);
     if(a_filtered_zombies.size > 0) {
       foreach(zombie in a_filtered_zombies) {
         apothiconknockdownzombie(entity, zombie);
@@ -1040,7 +1039,7 @@ function apothiconbamfout(entity) {
   entity notsolid();
   self clientfield::set("juke_active", 0);
   a_zombies = getaiarchetypearray("zombie");
-  a_filtered_zombies = array::filter(a_zombies, 0, & apothiconzombieeligibleforknockdown, entity, entity.origin);
+  a_filtered_zombies = array::filter(a_zombies, 0, &apothiconzombieeligibleforknockdown, entity, entity.origin);
   if(a_filtered_zombies.size > 0) {
     foreach(zombie in a_filtered_zombies) {
       apothiconknockdownzombie(entity, zombie);
@@ -1069,7 +1068,7 @@ function apothiconbamfin(entity) {
   entity solid();
   self clientfield::set("juke_active", 1);
   a_zombies = getaiarchetypearray("zombie");
-  a_filtered_zombies = array::filter(a_zombies, 0, & apothiconzombieeligibleforknockdown, entity, entity.origin);
+  a_filtered_zombies = array::filter(a_zombies, 0, &apothiconzombieeligibleforknockdown, entity, entity.origin);
   if(a_filtered_zombies.size > 0) {
     foreach(zombie in a_filtered_zombies) {
       apothiconknockdownzombie(entity, zombie);

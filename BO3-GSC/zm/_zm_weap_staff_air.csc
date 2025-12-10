@@ -10,14 +10,14 @@
 #namespace zm_weap_staff_air;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_staff_air", & __init__, undefined, undefined);
+  system::register("zm_weap_staff_air", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level._effect["whirlwind"] = "dlc5/zmb_weapon/fx_staff_air_impact_ug_miss";
-  clientfield::register("scriptmover", "whirlwind_play_fx", 21000, 1, "int", & function_c6b66912, 0, 0);
-  clientfield::register("actor", "air_staff_launch", 21000, 1, "int", & air_staff_launch, 0, 0);
-  clientfield::register("allplayers", "air_staff_source", 21000, 1, "int", & function_869adfb, 0, 0);
+  clientfield::register("scriptmover", "whirlwind_play_fx", 21000, 1, "int", &function_c6b66912, 0, 0);
+  clientfield::register("actor", "air_staff_launch", 21000, 1, "int", &air_staff_launch, 0, 0);
+  clientfield::register("allplayers", "air_staff_source", 21000, 1, "int", &function_869adfb, 0, 0);
   level.var_1e7d95e0 = (0, 0, 0);
   level.var_654c7116 = [];
   zm_weap_staff::function_4be5e665(getweapon("staff_air_upgraded"), "dlc5/zmb_weapon/fx_staff_charge_air_lv1");

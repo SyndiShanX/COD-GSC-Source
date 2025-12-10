@@ -14,7 +14,7 @@
 #namespace turret;
 
 function autoexec __init__sytem__() {
-  system::register("turret", & __init__, undefined, undefined);
+  system::register("turret", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -322,7 +322,7 @@ function set_target_flags(n_flags, n_index) {
 
 function _has_target_flags(n_flags, n_index) {
   n_current_flags = _get_turret_data(n_index).n_target_flags;
-  return (n_current_flags & n_flags) == n_flags;
+  return (n_current_flags &n_flags) == n_flags;
 }
 
 function set_max_target_distance(n_distance, n_index) {
@@ -854,19 +854,19 @@ function _update_turret_arcs(n_index) {
 function set_best_target_func_from_weapon_type(n_index) {
   switch (_get_turret_data(n_index).str_weapon_type) {
     case "bullet": {
-      set_best_target_func( & _get_best_target_bullet, n_index);
+      set_best_target_func(&_get_best_target_bullet, n_index);
       break;
     }
     case "gas": {
-      set_best_target_func( & _get_best_target_gas, n_index);
+      set_best_target_func(&_get_best_target_gas, n_index);
       break;
     }
     case "grenade": {
-      set_best_target_func( & _get_best_target_grenade, n_index);
+      set_best_target_func(&_get_best_target_grenade, n_index);
       break;
     }
     case "projectile": {
-      set_best_target_func( & _get_best_target_projectile, n_index);
+      set_best_target_func(&_get_best_target_projectile, n_index);
       break;
     }
     default: {

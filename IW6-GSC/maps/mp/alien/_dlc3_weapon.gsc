@@ -378,7 +378,7 @@ spitter_ammo_think() {
       var_4 = var_1 getweaponammostock(var_2);
 
       if(var_3 + var_4 >= weaponmaxammo(var_2) + weaponclipsize(var_2)) {
-        var_1 maps\mp\_utility::setlowermessage("ammo_taken", & "ALIEN_COLLECTIBLES_AMMO_MAX", 3);
+        var_1 maps\mp\_utility::setlowermessage("ammo_taken", &"ALIEN_COLLECTIBLES_AMMO_MAX", 3);
         continue;
       }
 

@@ -515,7 +515,7 @@ water_fall_edge() {
   wait 1;
   if(!flag("killed_pickup_heli")) {
     // Shepherd escaped on the Helicopter.
-    SetDvar("ui_deadquote", & "AF_CHASE_FAILED_TO_SHOOT_DOWN");
+    SetDvar("ui_deadquote", &"AF_CHASE_FAILED_TO_SHOOT_DOWN");
     missionFailedWrapper();
     return;
   }

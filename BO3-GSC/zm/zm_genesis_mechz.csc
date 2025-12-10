@@ -18,15 +18,15 @@
 #namespace zm_genesis_mechz;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_mechz", & __init__, undefined, undefined);
+  system::register("zm_genesis_mechz", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level._effect["tesla_zombie_shock"] = "dlc4/genesis/fx_elec_trap_body_shock";
   if(ai::shouldregisterclientfieldforarchetype("mechz")) {
-    clientfield::register("actor", "death_ray_shock_fx", 15000, 1, "int", & death_ray_shock_fx, 0, 0);
+    clientfield::register("actor", "death_ray_shock_fx", 15000, 1, "int", &death_ray_shock_fx, 0, 0);
   }
-  clientfield::register("actor", "mechz_fx_spawn", 15000, 1, "counter", & function_4b9cfd4c, 0, 0);
+  clientfield::register("actor", "mechz_fx_spawn", 15000, 1, "counter", &function_4b9cfd4c, 0, 0);
 }
 
 function death_ray_shock_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

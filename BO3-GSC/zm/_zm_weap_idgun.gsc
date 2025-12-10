@@ -27,12 +27,12 @@
 #namespace idgun;
 
 function autoexec __init__sytem__() {
-  system::register("idgun", & init, & main, undefined);
+  system::register("idgun", &init, &main, undefined);
 }
 
 function init() {
-  callback::on_connect( & function_2bd571b9);
-  zm::register_player_damage_callback( & function_b618ee82);
+  callback::on_connect(&function_2bd571b9);
+  zm::register_player_damage_callback(&function_b618ee82);
 }
 
 function main() {
@@ -44,7 +44,7 @@ function main() {
     }
     level.idgun_weapons[level.idgun_weapons.size] = getweapon("idgun");
   }
-  level zm::register_vehicle_damage_callback( & idgun_apply_vehicle_damage);
+  level zm::register_vehicle_damage_callback(&idgun_apply_vehicle_damage);
 }
 
 function is_idgun_damage(weapon) {

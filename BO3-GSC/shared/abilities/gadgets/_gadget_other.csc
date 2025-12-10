@@ -17,7 +17,7 @@
 #namespace _gadget_other;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_other", & __init__, undefined, undefined);
+  system::register("gadget_other", &__init__, undefined, undefined);
 }
 
 function __init__() {}

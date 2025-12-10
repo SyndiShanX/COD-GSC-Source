@@ -1561,7 +1561,7 @@ func_D670() {
     return;
   }
 
-  if(self.spawnimpulsefield & var_00) {
+  if(self.spawnimpulsefield &var_00) {
     return;
   }
 

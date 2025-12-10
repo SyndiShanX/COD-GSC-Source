@@ -21,7 +21,6 @@ main() {
 
   setdvar("compassmaxrange", "1400");
 
-
   if(getDvar("g_gametype") != "koth")
     level thread deleteChaModels();
   else
@@ -35,10 +34,7 @@ deleteChaModels() {
   domSpawns = getEntArray("mp_dom_spawn", "targetname");
   tdmSpawns = getEntArray("mp_tdm_spawn", "targetname");
 
-
-
   universalExploderAB = getEntArray("exploder", "targetname");
-
 
   flagRemoveAllies = getEntArray("ctf_flag_allies", "targetname");
   flagTrigRemoveAllies = getEntArray("ctf_trig_allies", "targetname");
@@ -46,7 +42,6 @@ deleteChaModels() {
   flagRemoveAxis = getEntArray("ctf_flag_axis", "targetname");
   flagTrigRemoveAxis = getEntArray("ctf_trig_axis", "targetname");
   flagZoneRemoveAxis = getEntArray("ctf_zone_axis", "targetname");
-
 
   ddbombzonesTouchAB = getEntArray("dd_bombzone", "targetname");
   ddbombzonesModelA = getEntArray("pf408_auto1", "targetname");
@@ -56,10 +51,8 @@ deleteChaModels() {
   ddbombzonesCollA = getEntArray("dd_bombzone_clip_a", "targetname");
   ddbombzonesCollB = getEntArray("dd_bombzone_clip_b", "targetname");
 
-
   flagPrimary = getEntArray("flag_primary", "targetname");
   flagDescriptor = getEntArray("flag_descriptor", "targetname");
-
 
   sabbombzonesColl = getEntArray("sab_bomb_col", "targetname");
   sabbombzonesTouchAllies = getEntArray("sab_bomb_allies", "targetname");
@@ -68,7 +61,6 @@ deleteChaModels() {
   sabbombzonesTouchAxis = getEntArray("sab_bomb_axis", "targetname");
   sabbombzonesDefuseAxis = getEntArray("sab_bomb_defuse_axis", "targetname");
   sabbombzonesSiteModelAxis = getEntArray("pf398_auto1", "targetname");
-
 
   bombzonesTouchAB = getEntArray("bombzone", "targetname");
   bombzonesCollAB = getEntArray("bomb_col", "targetname");

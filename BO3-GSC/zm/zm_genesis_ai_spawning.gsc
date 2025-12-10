@@ -46,7 +46,7 @@
 #namespace zm_genesis_ai_spawning;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_ai_spawning", & __init__, undefined, undefined);
+  system::register("zm_genesis_ai_spawning", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -93,8 +93,8 @@ function function_c87827a3() {
   level flag::clear("zombie_drop_powerups");
   var_ddda26e = level.round_spawn_func;
   var_da2533b8 = level.round_wait_func;
-  level.round_spawn_func = & function_8e64e16a;
-  level.round_wait_func = & function_aa92a46b;
+  level.round_spawn_func = &function_8e64e16a;
+  level.round_wait_func = &function_aa92a46b;
   level.var_8cd70c57++;
   level util::waittill_any("chaos_round_complete", "kill_round");
   level.round_spawn_func = var_ddda26e;
@@ -113,7 +113,7 @@ function function_8e64e16a() {
   level.var_1f12d3b8 = gettime();
   function_1fe60e52();
   level notify("hash_3e06faeb");
-  zm_spawner::register_zombie_death_event_callback( & function_8d6f4be5);
+  zm_spawner::register_zombie_death_event_callback(&function_8d6f4be5);
   level thread function_a61de87c();
   level endon("last_ai_down");
   while(true) {
@@ -210,7 +210,7 @@ function function_a61de87c() {
     util::wait_network_frame();
   }
   level.n_override_cleanup_dist_sq = undefined;
-  zm_spawner::deregister_zombie_death_event_callback( & function_8d6f4be5);
+  zm_spawner::deregister_zombie_death_event_callback(&function_8d6f4be5);
   level.zombie_ai_limit = level.zombie_vars["zombie_max_ai"];
   zm_genesis_wasp::parasite_round_fx();
   level clientfield::set("chaos_fog_bank_switch", 0);
@@ -579,7 +579,7 @@ function function_47b2f1f4() {
 }
 
 function function_28e53883() {
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_b6f47996);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_b6f47996);
 }
 
 function function_b6f47996(n_val) {

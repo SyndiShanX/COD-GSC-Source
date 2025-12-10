@@ -46,7 +46,7 @@ init() {
     SetDvar("scr_rcbomb_notimeout", "0");
   if(maps\mp\gametypes\_tweakables::getTweakableValue("killstreak", "allowrcbomb")) {
     maps\mp\gametypes\_hardpoints::registerKillstreak("rcbomb_mp", "rcbomb_mp", "killstreak_rcbomb", "rcbomb_used", ::useKillstreakRCBomb);
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("rcbomb_mp", & "KILLSTREAK_EARNED_RCBOMB", & "KILLSTREAK_RCBOMB_NOT_AVAILABLE", & "KILLSTREAK_RCBOMB_INBOUND");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("rcbomb_mp", &"KILLSTREAK_EARNED_RCBOMB", &"KILLSTREAK_RCBOMB_NOT_AVAILABLE", &"KILLSTREAK_RCBOMB_INBOUND");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("rcbomb_mp", "mpl_killstreak_rcbomb", "kls_rcbomb_used", "", "kls_rcbomb_enemy", "", "kls_rcbomb_ready");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("rcbomb_mp", "scr_givercbomb");
     maps\mp\gametypes\_hardpoints::allowKillstreakAssists("rcbomb_mp", true);

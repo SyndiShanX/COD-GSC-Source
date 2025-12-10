@@ -78,7 +78,7 @@ func_108DE(param_00, param_01, param_02, param_03, param_04) {
   var_0E = 250;
   var_0F = 175;
   var_10 = 3000;
-  var_11 = & "KILLSTREAKS_HINTS_JACKAL_GUARD";
+  var_11 = &"KILLSTREAKS_HINTS_JACKAL_GUARD";
   var_12 = "follow_player";
   var_13 = scripts\mp\killstreak_loot::getrarityforlootitem(param_04.variantid);
   if(var_13 != "") {
@@ -1276,14 +1276,14 @@ func_13AD6(param_00, param_01) {
         self notify(self.var_BC);
         if(self.var_BC == "guard_location") {
           param_00 = "follow_player";
-          param_01 = & "KILLSTREAKS_HINTS_JACKAL_FOLLOW";
+          param_01 = &"KILLSTREAKS_HINTS_JACKAL_FOLLOW";
           self.triggerportableradarping scripts\mp\utility::func_C638("jackal_guard");
           self.triggerportableradarping playlocalsound("mp_killstreak_warden_switch_mode");
           thread dropship_change_thrust_sfx();
           thread guardposition(self.triggerportableradarping.origin);
         } else {
           param_00 = "guard_location";
-          param_01 = & "KILLSTREAKS_HINTS_JACKAL_GUARD";
+          param_01 = &"KILLSTREAKS_HINTS_JACKAL_GUARD";
           self.triggerportableradarping playlocalsound("mp_killstreak_warden_switch_mode");
           thread patrolfield();
           thread dropship_change_thrust_sfx();

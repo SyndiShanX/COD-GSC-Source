@@ -67,13 +67,13 @@ onstartgametype() {
   level.spawnmaxs = (0, 0, 0);
 
   foreach(team in level.teams) {
-    setobjectivetext(team, & "OBJECTIVES_TDM");
-    setobjectivehinttext(team, & "OBJECTIVES_TDM_HINT");
+    setobjectivetext(team, &"OBJECTIVES_TDM");
+    setobjectivehinttext(team, &"OBJECTIVES_TDM_HINT");
 
     if(level.splitscreen)
-      setobjectivescoretext(team, & "OBJECTIVES_TDM");
+      setobjectivescoretext(team, &"OBJECTIVES_TDM");
     else
-      setobjectivescoretext(team, & "OBJECTIVES_TDM_SCORE");
+      setobjectivescoretext(team, &"OBJECTIVES_TDM_SCORE");
 
     maps\mp\gametypes\_spawnlogic::addspawnpoints(team, "mp_tdm_spawn");
     maps\mp\gametypes\_spawnlogic::placespawnpoints(maps\mp\gametypes\_spawning::gettdmstartspawnname(team));

@@ -578,7 +578,7 @@ func_D996(param_00) {
     self notify("tripleStopCancel");
   }
 
-  if(isDefined(param_00.modifiers["headshot"]) && param_00.var_92BE & level.idflags_ricochet) {
+  if(isDefined(param_00.modifiers["headshot"]) && param_00.var_92BE &level.idflags_ricochet) {
     if(isDefined(self.var_2F04)) {
       self notify("bounceKillVerify");
     } else {
@@ -2200,7 +2200,7 @@ func_D98E(param_00, param_01, param_02, param_03, param_04) {
         break;
 
       case "fmj":
-        if(param_00.var_92BE & level.idflags_penetration) {
+        if(param_00.var_92BE &level.idflags_penetration) {
           param_01 func_D991("ch_fmj_penetrate");
         }
 
@@ -4494,13 +4494,13 @@ func_3DF8(param_00) {
 }
 
 func_3E32(param_00, param_01) {
-  if(param_00.var_92BE & level.idflags_penetration) {
+  if(param_00.var_92BE &level.idflags_penetration) {
     processchallenge("ch_" + param_01 + "_penetrate");
   }
 }
 
 func_3E31(param_00, param_01) {
-  if(param_00.var_92BE & level.idflags_penetration) {
+  if(param_00.var_92BE &level.idflags_penetration) {
     func_D991("ch_" + param_01 + "_penetrate");
   }
 }

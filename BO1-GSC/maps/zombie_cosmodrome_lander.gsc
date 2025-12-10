@@ -880,10 +880,10 @@ lander_cooldown_think() {
     flag_clear("lander_inuse");
     flag_set("lander_cooldown");
     cooldown = 3;
-    str = & "ZOMBIE_COSMODROME_LANDER_COOLDOWN";
+    str = &"ZOMBIE_COSMODROME_LANDER_COOLDOWN";
     if(riders != 0) {
       cooldown = 30;
-      str = & "ZOMBIE_COSMODROME_LANDER_REFUEL";
+      str = &"ZOMBIE_COSMODROME_LANDER_REFUEL";
       for(i = 0; i < lander_callboxes.size; i++) {
         lander_callboxes[i] playSound("vox_ann_lander_cooldown");
       }

@@ -24,7 +24,7 @@
 #namespace hacking;
 
 function autoexec __init__sytem__() {
-  system::register("hacking", & __init__, undefined, undefined);
+  system::register("hacking", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -38,7 +38,7 @@ function hack(n_hacking_time, e_hacking_player) {
   onenduse(undefined, e_hacking_player, 1);
 }
 
-function init_hack_trigger(n_hacking_time = 0.5, str_objective = & "cp_hacking", str_hint_text, var_84221fce, a_keyline_objects, var_27d1693f) {
+function init_hack_trigger(n_hacking_time = 0.5, str_objective = &"cp_hacking", str_hint_text, var_84221fce, a_keyline_objects, var_27d1693f) {
   if(isDefined(str_hint_text)) {
     self sethintstring(str_hint_text);
   }
@@ -61,9 +61,9 @@ function init_hack_trigger(n_hacking_time = 0.5, str_objective = & "cp_hacking",
   game_object gameobjects::set_use_time(0.35);
   game_object gameobjects::set_owner_team("allies");
   game_object gameobjects::set_visible_team("any");
-  game_object.onuse = & onuse;
-  game_object.onbeginuse = & onbeginuse;
-  game_object.onenduse = & onenduse;
+  game_object.onuse = &onuse;
+  game_object.onbeginuse = &onbeginuse;
+  game_object.onenduse = &onenduse;
   game_object.var_84221fce = var_84221fce;
   game_object.keepweapon = 1;
   game_object.var_27d1693f = var_27d1693f;
@@ -85,7 +85,7 @@ function onuse(player) {
     level.hacking flag::set("in_progress");
     player cybercom::cybercom_armpulse(1);
     player clientfield::set_to_player("sndCCHacking", 2);
-    player util::delay(1, undefined, & clientfield::increment_to_player, "hack_dni_fx");
+    player util::delay(1, undefined, &clientfield::increment_to_player, "hack_dni_fx");
     if(isDefined(self.var_27d1693f)) {
       var_c4ed51d5 = util::spawn_model("tag_origin", player.origin, player.angles);
       var_c4ed51d5 linkto(self.var_27d1693f);

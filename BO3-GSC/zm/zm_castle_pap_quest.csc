@@ -15,7 +15,7 @@ function autoexec main() {
 }
 
 function register_clientfields() {
-  clientfield::register("scriptmover", "pap_tp_fx", 5000, 1, "counter", & pap_tp_fx, 0, 0);
+  clientfield::register("scriptmover", "pap_tp_fx", 5000, 1, "counter", &pap_tp_fx, 0, 0);
 }
 
 function pap_tp_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

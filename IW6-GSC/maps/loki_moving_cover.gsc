@@ -4,7 +4,7 @@
 **************************************/
 
 section_main() {
-  maps\_utility::add_hint_string("pickup_gun", & "LOKI_IN_YOUR_FACE", ::stop_in_your_face_hint);
+  maps\_utility::add_hint_string("pickup_gun", &"LOKI_IN_YOUR_FACE", ::stop_in_your_face_hint);
 }
 
 section_precache() {
@@ -349,7 +349,7 @@ in_your_face() {
     var_0 = anglesToForward(level.player.angles);
     var_1 = level.player.origin + 15 * var_0 + (randomfloatrange(-10, 10), randomfloatrange(-10, 10), 55);
     magicbullet("microtar_space", var_1, level.player.origin);
-    setdvar("ui_deadquote", & "LOKI_IN_YOUR_FACE_FAIL");
+    setdvar("ui_deadquote", &"LOKI_IN_YOUR_FACE_FAIL");
     wait(randomfloatrange(1, 2));
   }
 }

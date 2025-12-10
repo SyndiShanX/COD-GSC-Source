@@ -23,7 +23,7 @@ init() {
   level.missiledronesoundstart = "mpl_hk_scan";
   registerkillstreak("missile_swarm_mp", "missile_swarm_mp", "killstreak_missile_swarm", "missile_swarm_used", ::swarm_killstreak, 1);
   registerkillstreakaltweapon("missile_swarm_mp", "missile_swarm_projectile_mp");
-  registerkillstreakstrings("missile_swarm_mp", & "KILLSTREAK_EARNED_MISSILE_SWARM", & "KILLSTREAK_MISSILE_SWARM_NOT_AVAILABLE", & "KILLSTREAK_MISSILE_SWARM_INBOUND");
+  registerkillstreakstrings("missile_swarm_mp", &"KILLSTREAK_EARNED_MISSILE_SWARM", &"KILLSTREAK_MISSILE_SWARM_NOT_AVAILABLE", &"KILLSTREAK_MISSILE_SWARM_INBOUND");
   registerkillstreakdialog("missile_swarm_mp", "mpl_killstreak_missile_swarm", "kls_swarm_used", "", "kls_swarm_enemy", "", "kls_swarm_ready");
   registerkillstreakdevdvar("missile_swarm_mp", "scr_givemissileswarm");
   setkillstreakteamkillpenaltyscale("missile_swarm_mp", 0.0);

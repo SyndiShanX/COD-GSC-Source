@@ -60,21 +60,21 @@ function function_eed58360() {
   level.var_f090ed38.var_c18c0bbb = 0;
   level.var_f090ed38.var_a7e89eae = 0;
   level thread function_8cde51de();
-  callback::on_connect( & function_1fc9779e);
+  callback::on_connect(&function_1fc9779e);
   var_b9b5d81a = struct::get("wearable_dragon_wings", "targetname");
-  var_b9b5d81a zm_unitrigger::create_unitrigger(&"ZM_STALINGRAD_WEARABLE_WINGS_EQUIP", undefined, & function_2c1e6f00, & function_18dda0a0);
+  var_b9b5d81a zm_unitrigger::create_unitrigger(&"ZM_STALINGRAD_WEARABLE_WINGS_EQUIP", undefined, &function_2c1e6f00, &function_18dda0a0);
   zm_unitrigger::unitrigger_force_per_player_triggers(var_b9b5d81a.s_unitrigger, 1);
   level thread function_1a6de86e();
   level thread function_ac75c48f();
   level thread function_42a9380e();
   var_94cd901e = struct::get("wearable_raz_hat", "targetname");
-  var_94cd901e zm_unitrigger::create_unitrigger(&"ZM_STALINGRAD_WEARABLE_RAZ_MASK_EQUIP", undefined, & function_449ba539, & function_ad641a9f);
+  var_94cd901e zm_unitrigger::create_unitrigger(&"ZM_STALINGRAD_WEARABLE_RAZ_MASK_EQUIP", undefined, &function_449ba539, &function_ad641a9f);
   zm_unitrigger::unitrigger_force_per_player_triggers(var_94cd901e.s_unitrigger, 1);
   level thread function_69f1fce3();
   level thread function_fe559f6c();
   level thread function_ba204ad8();
   var_494ee1d1 = struct::get("wearable_sentinel_hat", "targetname");
-  var_494ee1d1 zm_unitrigger::create_unitrigger(&"ZM_STALINGRAD_WEARABLE_VALKYRIE_HAT_EQUIP", undefined, & function_a6595bd6, & function_f3b06f8e);
+  var_494ee1d1 zm_unitrigger::create_unitrigger(&"ZM_STALINGRAD_WEARABLE_VALKYRIE_HAT_EQUIP", undefined, &function_a6595bd6, &function_f3b06f8e);
   zm_unitrigger::unitrigger_force_per_player_triggers(var_494ee1d1.s_unitrigger, 1);
   level thread function_14b98ab6();
 }
@@ -132,7 +132,7 @@ function function_1fc9779e() {
     }
     if(level.var_f090ed38.var_a7e89eae && level.var_f090ed38.var_c18c0bbb && level.var_f090ed38.var_f957bac3) {
       level flag::set("dragon_platforms_all_used");
-      callback::remove_on_connect( & function_1fc9779e);
+      callback::remove_on_connect(&function_1fc9779e);
       if(!level flag::get("dragon_wings_items_aquired")) {
         playsoundatposition("zmb_wearable_wing_success_step", (0, 0, 0));
       }
@@ -183,10 +183,10 @@ function function_18dda0a0() {
     player function_20f2df00();
     player.var_e7d196cc = "dragon_wings";
     player playSound("zmb_wearable_wing_wear");
-    zm::register_player_damage_callback( & function_9c197fbf);
+    zm::register_player_damage_callback(&function_9c197fbf);
     player function_793f10ed(3);
     player thread function_2436f867();
-    array::run_all(level.var_37e960a1, & showtoplayer, player);
+    array::run_all(level.var_37e960a1, &showtoplayer, player);
   }
 }
 
@@ -209,7 +209,7 @@ function function_484ecd5() {
 }
 
 function function_7e873fe6() {
-  self zm_unitrigger::create_unitrigger("", 100, & function_9a167439);
+  self zm_unitrigger::create_unitrigger("", 100, &function_9a167439);
   zm_unitrigger::unitrigger_force_per_player_triggers(self.s_unitrigger, 1);
   while(true) {
     self waittill("trigger_activated", e_player);
@@ -246,7 +246,7 @@ function function_cc32e7df() {
 
 function function_588ad36a() {
   if(self.var_e7d196cc === "dragon_wings") {
-    array::run_all(level.var_37e960a1, & setinvisibletoplayer, self);
+    array::run_all(level.var_37e960a1, &setinvisibletoplayer, self);
   }
 }
 
@@ -320,7 +320,7 @@ function function_ad641a9f() {
     player function_20f2df00();
     player.var_e7d196cc = "raz_hat";
     player playSound("zmb_wearable_raz_wear");
-    zm::register_player_damage_callback( & function_9c197fbf);
+    zm::register_player_damage_callback(&function_9c197fbf);
     player function_793f10ed(1);
     player thread function_2436f867();
   }
@@ -396,7 +396,7 @@ function function_f3b06f8e() {
     player function_20f2df00();
     player playSound("zmb_wearable_sent_wear");
     player.var_e7d196cc = "sentinel_hat";
-    zm::register_player_damage_callback( & function_9c197fbf);
+    zm::register_player_damage_callback(&function_9c197fbf);
     player function_793f10ed(2);
     player thread function_2436f867();
   }
@@ -467,23 +467,23 @@ function function_19458e73() {
   level.var_8f92a57b.var_31e59fa8 = 50;
   level.var_8f92a57b.var_3ec0a9c2 = struct::get_array("mee_drshup_rune", "targetname");
   level.var_8f92a57b.var_7cd42d94 = 0;
-  level.craftable_crafted_custom_func = & function_8ad194d1;
+  level.craftable_crafted_custom_func = &function_8ad194d1;
   level thread function_5e8bb6cc();
   level thread function_4052556b();
   level flag::wait_till_all(array("drshup_factory_rune_hit", "drshup_judicial_rune_hit", "drshup_library_rune_hit"));
   playsoundatposition("zmb_dragshield_success_medium", (0, 0, 0));
   level flag::set("drshup_rune_step_done");
-  callback::remove_on_connect( & function_70aa26aa);
+  callback::remove_on_connect(&function_70aa26aa);
   level flag::wait_till("drshup_bathed_in_flame");
   playsoundatposition("zmb_dragshield_success_medium", (0, 0, 0));
   level.var_8f92a57b.var_3297395c = struct::get("drshup_quench_loc", "targetname");
-  level.var_8f92a57b.var_3297395c zm_unitrigger::create_unitrigger("", 32, & function_cf47076, & function_ac90554d);
+  level.var_8f92a57b.var_3297395c zm_unitrigger::create_unitrigger("", 32, &function_cf47076, &function_ac90554d);
   level flag::wait_till("drshup_quest_done");
   level.var_8f92a57b.var_18d10053 zm_equipment::buy("dragonshield_upgraded");
   foreach(player in level.activeplayers) {
     player thread function_fa020cda();
   }
-  callback::on_connect( & function_fa020cda);
+  callback::on_connect(&function_fa020cda);
 }
 
 function function_9f500475() {}
@@ -493,7 +493,7 @@ function function_4052556b() {
   if(isDefined(level.var_f9c3fe97) && level.var_f9c3fe97) {
     level.var_8f92a57b.var_31e59fa8 = 2;
   }
-  zm_spawner::register_zombie_death_event_callback( & function_a3232de);
+  zm_spawner::register_zombie_death_event_callback(&function_a3232de);
 }
 
 function function_a3232de(e_attacker) {
@@ -503,7 +503,7 @@ function function_a3232de(e_attacker) {
   if(self.damageweapon.name == "dragonshield") {
     level.var_8f92a57b.n_shield_kills++;
     if(level.var_8f92a57b.n_shield_kills >= level.var_8f92a57b.var_31e59fa8) {
-      zm_spawner::deregister_zombie_death_event_callback( & function_a3232de);
+      zm_spawner::deregister_zombie_death_event_callback(&function_a3232de);
       level flag::set("drshup_step_1_done");
       playsoundatposition("zmb_dragshield_success_medium", (0, 0, 0));
     }
@@ -520,7 +520,7 @@ function function_5e8bb6cc() {
   foreach(player in level.activeplayers) {
     player thread function_70aa26aa();
   }
-  callback::on_connect( & function_70aa26aa);
+  callback::on_connect(&function_70aa26aa);
 }
 
 function function_70aa26aa() {
@@ -613,8 +613,8 @@ function function_8ad194d1(var_94c6b1d7) {
   if(var_94c6b1d7.craftable_name == "craft_shield_zm") {
     level flag::wait_till("drshup_quest_done");
     var_94c6b1d7.stub.model setModel("wpn_t7_zmb_dlc3_dragon_shield_dmg0_upg_world");
-    var_94c6b1d7.stub.trigger_hintstring = & "ZM_STALINGRAD_SHIELD_UPGRADE_PICKUP";
-    var_94c6b1d7.stub.craftablestub.str_taken = & "ZM_STALINGRAD_SHIELD_UPGRADE_TAKEN";
+    var_94c6b1d7.stub.trigger_hintstring = &"ZM_STALINGRAD_SHIELD_UPGRADE_PICKUP";
+    var_94c6b1d7.stub.craftablestub.str_taken = &"ZM_STALINGRAD_SHIELD_UPGRADE_TAKEN";
     var_94c6b1d7.stub.weaponname = getweapon("dragonshield_upgraded");
   }
 }

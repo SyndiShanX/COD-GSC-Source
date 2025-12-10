@@ -19,8 +19,8 @@ function main() {
   level.hardpoints = [];
   level.visuals = [];
   level.hardpointfx = [];
-  clientfield::register("world", "hardpoint", 1, 5, "int", & hardpoint, 0, 0);
-  clientfield::register("world", "hardpointteam", 1, 5, "int", & hardpoint_state, 0, 0);
+  clientfield::register("world", "hardpoint", 1, 5, "int", &hardpoint, 0, 0);
+  clientfield::register("world", "hardpointteam", 1, 5, "int", &hardpoint_state, 0, 0);
   level.effect_scriptbundles = [];
   level.effect_scriptbundles["zoneEdgeMarker"] = struct::get_script_bundle("teamcolorfx", "teamcolorfx_koth_edge_marker");
   level.effect_scriptbundles["zoneEdgeMarkerWndw"] = struct::get_script_bundle("teamcolorfx", "teamcolorfx_koth_edge_marker_window");

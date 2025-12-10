@@ -14,16 +14,16 @@
 #namespace zm_bgb_sword_flay;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_sword_flay", & __init__, undefined, "bgb");
+  system::register("zm_bgb_sword_flay", &__init__, undefined, "bgb");
 }
 
 function __init__() {
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_sword_flay", "time", 150, & enable, & disable, undefined);
-  bgb::register_actor_damage_override("zm_bgb_sword_flay", & actor_damage_override);
-  bgb::register_vehicle_damage_override("zm_bgb_sword_flay", & vehicle_damage_override);
+  bgb::register("zm_bgb_sword_flay", "time", 150, &enable, &disable, undefined);
+  bgb::register_actor_damage_override("zm_bgb_sword_flay", &actor_damage_override);
+  bgb::register_vehicle_damage_override("zm_bgb_sword_flay", &vehicle_damage_override);
 }
 
 function enable() {}

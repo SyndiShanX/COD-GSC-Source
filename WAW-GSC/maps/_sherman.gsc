@@ -27,7 +27,7 @@ main(model, type) {
   build_compassicon();
   build_aianims(::setanims, ::set_vehicle_anims);
   build_frontarmor(.33);
-  level.vehicletypefancy["sherman"] = & "VEHICLENAME_SHERMAN_TANK";
+  level.vehicletypefancy["sherman"] = &"VEHICLENAME_SHERMAN_TANK";
 }
 
 init_local() {}

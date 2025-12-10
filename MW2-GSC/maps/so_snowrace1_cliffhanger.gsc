@@ -20,7 +20,7 @@ main() {
   precacheString(&"SO_SNOWRACE1_CLIFFHANGER_YOUWIN");
   precacheString(&"SO_SNOWRACE1_CLIFFHANGER_YOULOSE");
 
-  level.objective_desc = & "SO_SNOWRACE1_CLIFFHANGER_OBJ_FINISHLINE";
+  level.objective_desc = &"SO_SNOWRACE1_CLIFFHANGER_OBJ_FINISHLINE";
   precacheString(level.objective_desc);
 
   precacheShader("difficulty_star");

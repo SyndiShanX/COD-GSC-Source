@@ -105,9 +105,9 @@ getrespawndelay() {
 
     if(level.spawndelay >= level.hqautodestroytime) {
       if(level.hqclassicmode)
-        maps\mp\_utility::setlowermessage("hq_respawn", & "MP_WAITING_FOR_HQ", undefined, 10);
+        maps\mp\_utility::setlowermessage("hq_respawn", &"MP_WAITING_FOR_HQ", undefined, 10);
       else
-        maps\mp\_utility::setlowermessage("hq_respawn", & "MP_WAITING_FOR_HQ_CAPTURE", undefined, 10);
+        maps\mp\_utility::setlowermessage("hq_respawn", &"MP_WAITING_FOR_HQ_CAPTURE", undefined, 10);
 
       self setclientomnvar("ui_hide_spawn_timer", 1);
     }
@@ -132,15 +132,15 @@ hintstruct(var_0, var_1) {
 }
 
 onstartgametype() {
-  maps\mp\_utility::setobjectivetext("allies", & "OBJECTIVES_KOTH");
-  maps\mp\_utility::setobjectivetext("axis", & "OBJECTIVES_KOTH");
+  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_KOTH");
+  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_KOTH");
 
   if(level.splitscreen) {
-    maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_KOTH");
-    maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_KOTH");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_KOTH");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_KOTH");
   } else {
-    maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_KOTH_SCORE");
-    maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_KOTH_SCORE");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_KOTH_SCORE");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_KOTH_SCORE");
   }
 
   level.objectivehint["prepare"] = hintstruct(&"MP_CONTROL_HQ", 0);

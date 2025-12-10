@@ -244,7 +244,7 @@ global_inits() {
   level.default_goalheight = 128;
 
   // Press^3 [{+actionslot 3}] ^7to use\nthe M203 Grenade Launcher.
-  add_hint_string("grenade_launcher", & "SCRIPT_LEARN_GRENADE_LAUNCHER", ::should_break_m203_hint);
+  add_hint_string("grenade_launcher", &"SCRIPT_LEARN_GRENADE_LAUNCHER", ::should_break_m203_hint);
 }
 
 /************************************************************************************************************/
@@ -2125,20 +2125,20 @@ start_common_airport() {
 
 objective() {
   // Don't blow your cover.
-  level.strings["OBJ_COVER"] = & "AIRPORT_OBJ_COVER";
+  level.strings["OBJ_COVER"] = &"AIRPORT_OBJ_COVER";
   // Don't blow your cover... at any cost.
-  level.strings["OBJ_COVER_COST"] = & "AIRPORT_OBJ_COVER_COST";
+  level.strings["OBJ_COVER_COST"] = &"AIRPORT_OBJ_COVER_COST";
   // Don't blow your cover and earn Makarov's trust.
-  level.strings["OBJ_COVER_TRUST"] = & "AIRPORT_OBJ_COVER_TRUST";
+  level.strings["OBJ_COVER_TRUST"] = &"AIRPORT_OBJ_COVER_TRUST";
   // Earn Makarov's trust.
-  level.strings["OBJ_TRUST"] = & "AIRPORT_OBJ_TRUST";
+  level.strings["OBJ_TRUST"] = &"AIRPORT_OBJ_TRUST";
   // Follow Makarov's lead.
-  level.strings["OBJ_TRUST_COST"] = & "AIRPORT_OBJ_TRUST_COST";
+  level.strings["OBJ_TRUST_COST"] = &"AIRPORT_OBJ_TRUST_COST";
   // Get in the van.
-  level.strings["OBJ_GET_IN_VAN"] = & "AIRPORT_OBJ_GET_IN_VAN";
+  level.strings["OBJ_GET_IN_VAN"] = &"AIRPORT_OBJ_GET_IN_VAN";
 
   // Press ^3[{+gostand}]^7 to
-  level.strings["mantle"] = & "SCRIPT_MANTLE";
+  level.strings["mantle"] = &"SCRIPT_MANTLE";
 
   foreach(string in level.strings)
   PreCacheString(string);

@@ -40,7 +40,7 @@ init() {
   action = setupAction(::loadMap, "cqb_1");
   description = spawnStruct();
   // 1st pass
-  description.display = & "MENU_1ST_PASS";
+  description.display = &"MENU_1ST_PASS";
   description.xPos = 240;
   description.yPos = 100;
   // CQB Test
@@ -49,7 +49,7 @@ init() {
   action = setupAction(::loadMap, "descent");
   description = spawnStruct();
   // 1st pass
-  description.display = & "MENU_1ST_PASS";
+  description.display = &"MENU_1ST_PASS";
   description.xPos = 240;
   description.yPos = 100;
   // Bunker
@@ -58,7 +58,7 @@ init() {
   action = setupAction(::loadMap, "aftermath");
   description = spawnStruct();
   // 100% initial geo
-  description.display = & "MENU_100_INITIAL_GEO";
+  description.display = &"MENU_100_INITIAL_GEO";
   description.xPos = 240;
   description.yPos = 100;
   // Aftermath
@@ -67,7 +67,7 @@ init() {
   action = setupAction(::loadMap, "chechnya_escape");
   description = spawnStruct();
   // 40% initial geo
-  description.display = & "MENU_40_INITIAL_GEO";
+  description.display = &"MENU_40_INITIAL_GEO";
   description.xPos = 240;
   description.yPos = 100;
   // Chechnya Escape
@@ -76,7 +76,7 @@ init() {
   action = setupAction(::loadMap, "marksman");
   description = spawnStruct();
   // 25% scripted
-  description.display = & "MENU_25_SCRIPTED";
+  description.display = &"MENU_25_SCRIPTED";
   description.xPos = 240;
   description.yPos = 100;
   // Marksman
@@ -85,7 +85,7 @@ init() {
   action = setupAction(::loadMap, "seaknight_defend");
   description = spawnStruct();
   // Prototype Level, 30% scripted
-  description.display = & "MENU_PROTOTYPE_LEVEL_30_SCRIPTED";
+  description.display = &"MENU_PROTOTYPE_LEVEL_30_SCRIPTED";
   description.xPos = 240;
   description.yPos = 100;
   // Seaknight Defend
@@ -94,7 +94,7 @@ init() {
   action = setupAction(::loadMap, "wetwork");
   description = spawnStruct();
   // 100% initial geo
-  description.display = & "MENU_100_INITIAL_GEO";
+  description.display = &"MENU_100_INITIAL_GEO";
   description.xPos = 240;
   description.yPos = 100;
   // Wetwork
@@ -103,7 +103,7 @@ init() {
   action = setupAction(::loadMap, "cargoship");
   description = spawnStruct();
   // 10% scripted
-  description.display = & "MENU_10_SCRIPTED";
+  description.display = &"MENU_10_SCRIPTED";
   description.xPos = 240;
   description.yPos = 100;
   // Cargoship
@@ -112,7 +112,7 @@ init() {
   action = setupAction(::loadMap, "bog");
   description = spawnStruct();
   // 35% initial geo
-  description.display = & "MENU_35_INITIAL_GEO";
+  description.display = &"MENU_35_INITIAL_GEO";
   description.xPos = 240;
   description.yPos = 100;
   // Bog
@@ -121,7 +121,7 @@ init() {
   action = setupAction(::loadMap, "training");
   description = spawnStruct();
   // 5% scripted
-  description.display = & "MENU_5_SCRIPTED";
+  description.display = &"MENU_5_SCRIPTED";
   description.xPos = 240;
   description.yPos = 100;
   // Training
@@ -130,7 +130,7 @@ init() {
   action = setupAction(::loadMap, "ac130");
   description = spawnStruct();
   // 30%
-  description.display = & "MENU_30";
+  description.display = &"MENU_30";
   description.xPos = 240;
   description.yPos = 100;
   // AC130
@@ -139,7 +139,7 @@ init() {
   action = setupAction(::loadMap, "seaknight_assault");
   description = spawnStruct();
   // Initial geo in progress
-  description.display = & "MENU_INITIAL_GEO_IN_PROGRESS";
+  description.display = &"MENU_INITIAL_GEO_IN_PROGRESS";
   description.xPos = 240;
   description.yPos = 100;
   // Seaknight Assault
@@ -148,7 +148,7 @@ init() {
   action = setupAction(::loadMap, "pilotcobra");
   description = spawnStruct();
   // Initial geo in progress
-  description.display = & "MENU_INITIAL_GEO_IN_PROGRESS";
+  description.display = &"MENU_INITIAL_GEO_IN_PROGRESS";
   description.xPos = 240;
   description.yPos = 100;
   // Pilot Cobra
@@ -230,14 +230,14 @@ init() {
   // Controls
   // Subtitles
   // Save Device
-  //optionsMenu addItem( &"MENU_SAVE_DEVICE", ::void );
+  //optionsMenu addItem(&"MENU_SAVE_DEVICE", ::void );
 
   mainMenu = createMenu("main");
   action = setupAction(::pushMenu, levelMenu);
   // Select Level
   mainMenu addItem(&"MENU_SELECT_LEVEL", action, "openmenu_levels");
   // Options
-  subMenu = mainMenu addSubMenu("options", & "MENU_OPTIONS");
+  subMenu = mainMenu addSubMenu("options", &"MENU_OPTIONS");
   action = setupAction(::pushMenu, controlsMenu);
   // Controls
   subMenu addItem(&"MENU_CONTROLS", action);

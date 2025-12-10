@@ -12,14 +12,14 @@
 #namespace sticky_grenade;
 
 function autoexec __init__sytem__() {
-  system::register("spike_charge", & __init__, undefined, undefined);
+  system::register("spike_charge", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level._effect["spike_light"] = "weapon/fx_light_spike_launcher";
-  callback::add_weapon_type("spike_launcher", & spawned);
-  callback::add_weapon_type("spike_launcher_cpzm", & spawned);
-  callback::add_weapon_type("spike_charge", & spawned_spike_charge);
+  callback::add_weapon_type("spike_launcher", &spawned);
+  callback::add_weapon_type("spike_launcher_cpzm", &spawned);
+  callback::add_weapon_type("spike_charge", &spawned_spike_charge);
 }
 
 function spawned(localclientnum) {

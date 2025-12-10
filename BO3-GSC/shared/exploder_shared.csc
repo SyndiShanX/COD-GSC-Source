@@ -11,12 +11,12 @@
 #namespace exploder;
 
 function autoexec __init__sytem__() {
-  system::register("exploder", & __init__, undefined, undefined);
+  system::register("exploder", &__init__, undefined, undefined);
 }
 
 function __init__() {
   if(sessionmodeiscampaigngame()) {
-    callback::on_localclient_connect( & player_init);
+    callback::on_localclient_connect(&player_init);
   }
 }
 

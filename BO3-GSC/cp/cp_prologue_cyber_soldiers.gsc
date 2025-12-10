@@ -46,8 +46,8 @@ function intro_cyber_soldiers_main() {
   level.ai_hendricks sethighdetail(1);
   function_9f230ee1();
   cp_prologue_util::function_47a62798(0);
-  array::run_all(level.players, & util::set_low_ready, 0);
-  callback::remove_on_spawned( & cp_mi_eth_prologue::function_4d4f1d4f);
+  array::run_all(level.players, &util::set_low_ready, 0);
+  callback::remove_on_spawned(&cp_mi_eth_prologue::function_4d4f1d4f);
   level notify("hash_e1626ff0");
   level.ai_prometheus sethighdetail(0);
   level.ai_hendricks sethighdetail(0);
@@ -100,14 +100,14 @@ function function_9f230ee1() {
 
 function function_679e7da9(a_ents) {
   level thread function_ac290386();
-  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_taylor_attack", & namespace_21b2c1f2::function_43ead72c, "play");
-  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_taylor_attack", & function_39b556d, "play");
-  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_taylor_attack", & function_e98e1240, "play");
-  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_sarah_attack", & function_4e5acf5e, "play");
-  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_taylor_attack", & function_a21df404, "play");
-  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_confrontation_hkm", & function_89f840a1, "play");
-  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_confrontation_hkm", & function_d71a5c1b, "play");
-  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_confrontation", & function_73293683, "play");
+  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_taylor_attack", &namespace_21b2c1f2::function_43ead72c, "play");
+  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_taylor_attack", &function_39b556d, "play");
+  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_taylor_attack", &function_e98e1240, "play");
+  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_sarah_attack", &function_4e5acf5e, "play");
+  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_taylor_attack", &function_a21df404, "play");
+  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_confrontation_hkm", &function_89f840a1, "play");
+  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_confrontation_hkm", &function_d71a5c1b, "play");
+  scene::add_scene_func("cin_pro_09_01_intro_1st_cybersoldiers_confrontation", &function_73293683, "play");
   if(isDefined(level.bzm_prologuedialogue5callback)) {
     level thread[[level.bzm_prologuedialogue5callback]]();
   }
@@ -138,9 +138,9 @@ function function_73293683(a_ents) {
 function function_ac290386() {
   level waittill("hash_b7587dcc");
   level waittill("hash_63ae24ea");
-  array::run_all(level.players, & util::set_low_ready, 1);
-  callback::on_spawned( & cp_mi_eth_prologue::function_4d4f1d4f);
-  array::thread_all(level.players, & cp_mi_eth_prologue::function_7072c5d8);
+  array::run_all(level.players, &util::set_low_ready, 1);
+  callback::on_spawned(&cp_mi_eth_prologue::function_4d4f1d4f);
+  array::thread_all(level.players, &cp_mi_eth_prologue::function_7072c5d8);
   level waittill("hash_af43d596");
   playsoundatposition("evt_soldierintro_walla_panic_1", (6859, 886, 191));
   playsoundatposition("evt_soldierintro_walla_panic_2", (6870, 598, 197));

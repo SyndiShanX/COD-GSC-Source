@@ -1145,7 +1145,7 @@ function playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, shit
     }
     washacked = einflictor util::ishacked();
   }
-  waslockingon = waslockingon & (1 << data.victim.entnum);
+  waslockingon = waslockingon &(1 << data.victim.entnum);
   if(waslockingon != 0) {
     data.waslockingon = 1;
   } else {

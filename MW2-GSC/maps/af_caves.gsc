@@ -95,11 +95,11 @@ main() {
   thread maps\_mortar::bunker_style_mortar();
   level thread maps\af_caves_amb::main();
 
-  add_hint_string("begin_descent", & "AF_CAVES_DESCEND", ::should_stop_descend_hint);
+  add_hint_string("begin_descent", &"AF_CAVES_DESCEND", ::should_stop_descend_hint);
 
   // Press^3 [{+actionslot 1}] ^7to use Night Vision Goggles.
-  add_hint_string("nvg", & "SCRIPT_NIGHTVISION_USE", maps\_nightvision::ShouldBreakNVGHintPrint);
-  add_hint_string("rappel_melee", & "SCRIPT_PLATFORM_OILRIG_HINT_STEALTH_KILL", ::should_not_do_melee_rappel_hint);
+  add_hint_string("nvg", &"SCRIPT_NIGHTVISION_USE", maps\_nightvision::ShouldBreakNVGHintPrint);
+  add_hint_string("rappel_melee", &"SCRIPT_PLATFORM_OILRIG_HINT_STEALTH_KILL", ::should_not_do_melee_rappel_hint);
 
   maps\_compass::setupMiniMap("compass_map_afghan_caves");
 
@@ -485,7 +485,7 @@ objective_follow_price() {
   objective_number = 0;
   obj_position = level.price.origin;
 
-  objective_add(objective_number, "active", & "AF_CAVES_FOLLOW_PRICE", obj_position);
+  objective_add(objective_number, "active", &"AF_CAVES_FOLLOW_PRICE", obj_position);
   objective_current(objective_number);
   Objective_OnEntity(objective_number, level.price, (0, 0, 70));
 
@@ -501,7 +501,7 @@ objective_follow_price() {
 objective_rappel() {
   objective_number = 1;
 
-  objective_add(objective_number, "active", & "AF_CAVES_RAPPEL", (3006, 11756, -1834));
+  objective_add(objective_number, "active", &"AF_CAVES_RAPPEL", (3006, 11756, -1834));
   objective_current(objective_number);
 
   flag_wait("player_hooking_up");
@@ -520,12 +520,12 @@ objective_follow_price_again() {
 
   flag_wait("steamroom_ambush_started");
 
-  Objective_String(0, & "AF_CAVES_SUPPORT_PRICE");
-  Objective_SetPointerTextOverride(0, & "AF_CAVES_OBJ_MARKER_SUPPORT");
+  Objective_String(0, &"AF_CAVES_SUPPORT_PRICE");
+  Objective_SetPointerTextOverride(0, &"AF_CAVES_OBJ_MARKER_SUPPORT");
 
   flag_wait("steamroom_ambush_done");
 
-  Objective_String(0, & "AF_CAVES_FOLLOW_PRICE");
+  Objective_String(0, &"AF_CAVES_FOLLOW_PRICE");
   Objective_SetPointerTextOverride(0, "");
 
   flag_wait("obj_ledge_traverse_given");
@@ -549,7 +549,7 @@ objective_regroup_on_price() {
   objective_number = 4;
   obj_position = level.price.origin;
 
-  objective_add(objective_number, "active", & "AF_CAVES_REGROUP_WITH_PRICE", obj_position);
+  objective_add(objective_number, "active", &"AF_CAVES_REGROUP_WITH_PRICE", obj_position);
   objective_current(objective_number);
   Objective_OnEntity(objective_number, level.price, (0, 0, 70));
 
@@ -1899,7 +1899,7 @@ rappel_player_rappel_setup() {
   wait(0.5);
 
   rappel_trigger = getent("player_rappel_trigger", "targetname");
-  rappel_trigger sethintstring(&"AF_CAVES_RAPPEL_HINT"); // Press and hold^3 &&1 ^7to rappel
+  rappel_trigger sethintstring(&"AF_CAVES_RAPPEL_HINT"); // Press and hold^3 && 1 ^7to rappel
 
   for(;;) {
     rappel_trigger waittill("trigger");

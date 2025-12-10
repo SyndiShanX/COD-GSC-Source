@@ -51,10 +51,10 @@ main() {
   level.drone_spawnFunction["allies"] = character\char_usa_marine_r_rifle::main;
   maps\_drones::init();
   default_start(::event1_dogAttack);
-  add_start("ArtilleryKill", ::event1_dogAttack, & "STARTS_PEL1B_EVENT1");
-  add_start("ArtilleryKilla", ::event1a_skipto_setup, & "STARTS_PEL1B_EVENT1A");
-  add_start("FlameDeath", ::event1b_skipto_setup, & "STARTS_PEL1B_EVENT1b");
-  add_start("outro", ::outro_skipto_setup, & "STARTS_PEL1B_OUTRO");
+  add_start("ArtilleryKill", ::event1_dogAttack, &"STARTS_PEL1B_EVENT1");
+  add_start("ArtilleryKilla", ::event1a_skipto_setup, &"STARTS_PEL1B_EVENT1A");
+  add_start("FlameDeath", ::event1b_skipto_setup, &"STARTS_PEL1B_EVENT1b");
+  add_start("outro", ::outro_skipto_setup, &"STARTS_PEL1B_OUTRO");
   level.startskip = "event1";
   maps\_load::main();
   maps\_banzai::init();
@@ -1084,7 +1084,7 @@ stop_magic_bullet(the_squad) {
 set_objectives(objectiveId) {
   if(objectiveId == 0) {
     objective_add(0, "current");
-    objective_string(0, & "PEL1B_OBJECTIVE_MOVE_UP");
+    objective_string(0, &"PEL1B_OBJECTIVE_MOVE_UP");
   }
   if(objectiveId == 1) {
     level.obj_arty = 2;
@@ -1092,14 +1092,14 @@ set_objectives(objectiveId) {
     objective_add(1, "current");
     objective_additionalposition(1, 1, (48004.2, 2406, 174.6));
     objective_additionalposition(1, 2, (47438.2, 5726.9, 60.5));
-    objective_string(1, & "PEL1B_OBJECTIVE_ARTILLERY", level.obj_arty);
+    objective_string(1, &"PEL1B_OBJECTIVE_ARTILLERY", level.obj_arty);
   }
   if(objectiveId == 2) {
     flag_set("event1_objectives_done");
     objective_state(1, "done");
     objective_add(2, "current");
     objective_additionalposition(2, 1, (46093, 6259, 0));
-    objective_string(2, & "PEL1B_OBJECTIVE_FOLLOW_SQUAD");
+    objective_string(2, &"PEL1B_OBJECTIVE_FOLLOW_SQUAD");
     objective_state(2, "done");
     thread battlechatter_off("allies");
     thread battlechatter_off("axis");
@@ -1304,7 +1304,7 @@ event1_objective_thread_left_art() {
     wait(1);
   }
   level.obj_arty--;
-  Objective_String(1, & "PEL1B_OBJECTIVE_ARTILLERY", level.obj_arty);
+  Objective_String(1, &"PEL1B_OBJECTIVE_ARTILLERY", level.obj_arty);
   Objective_AdditionalPosition(1, 1, (0, 0, 0));
   level notify("event1_objective_left_art_done");
   autosave_by_name("after_left_artillery");
@@ -1329,7 +1329,7 @@ event1_objective_thread_right_art() {
     wait(1);
   }
   level.obj_arty--;
-  Objective_String(1, & "PEL1B_OBJECTIVE_ARTILLERY", level.obj_arty);
+  Objective_String(1, &"PEL1B_OBJECTIVE_ARTILLERY", level.obj_arty);
   Objective_AdditionalPosition(1, 2, (0, 0, 0));
   level notify("event1_objective_right_art_done");
   autosave_by_name("after_right_artillery");

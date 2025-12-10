@@ -49,18 +49,18 @@ weapon_upgrade_hint_logic(param_00, param_01) {
   var_02 = param_01 getcurrentweapon();
   var_03 = scripts\cp\cp_weapon::get_weapon_level(var_02);
   if(var_03 == level.pap_max) {
-    return & "COOP_INTERACTIONS_UPGRADE_MAXED";
+    return &"COOP_INTERACTIONS_UPGRADE_MAXED";
   } else if(param_01 scripts\cp\utility::is_melee_weapon(var_02, 1)) {
     return "";
   } else if(!scripts\cp\cp_weapon::can_upgrade(var_02)) {
-    return & "CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_FAIL";
+    return &"CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_FAIL";
   } else if(var_03 == 1) {
-    return & "CP_ZMB_INTERACTIONS_UPGRADE_WEAPON";
+    return &"CP_ZMB_INTERACTIONS_UPGRADE_WEAPON";
   } else {
-    return & "CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_GENERIC";
+    return &"CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_GENERIC";
   }
 
-  return & "CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_FAIL";
+  return &"CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_FAIL";
 }
 
 weapon_upgrade(param_00, param_01) {

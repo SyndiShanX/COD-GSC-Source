@@ -37,10 +37,10 @@ init() {
   level.uav_struct.view_cone = 4;
   common_scripts\utility::flag_init("predator_missile_launch_allowed");
   common_scripts\utility::flag_set("predator_missile_launch_allowed");
-  maps\_utility::add_hint_string("hint_predator_drone_destroyed", & "HELLFIRE_DESTROYED", ::should_break_destroyed);
-  maps\_utility::add_hint_string("hint_predator_drone_4", & "HELLFIRE_USE_DRONE", ::should_break_use_drone);
-  maps\_utility::add_hint_string("hint_predator_drone_2", & "HELLFIRE_USE_DRONE_2", ::should_break_use_drone);
-  maps\_utility::add_hint_string("hint_predator_drone_not_available", & "HELLFIRE_DRONE_NOT_AVAILABLE", ::should_break_available);
+  maps\_utility::add_hint_string("hint_predator_drone_destroyed", &"HELLFIRE_DESTROYED", ::should_break_destroyed);
+  maps\_utility::add_hint_string("hint_predator_drone_4", &"HELLFIRE_USE_DRONE", ::should_break_use_drone);
+  maps\_utility::add_hint_string("hint_predator_drone_2", &"HELLFIRE_USE_DRONE_2", ::should_break_use_drone);
+  maps\_utility::add_hint_string("hint_predator_drone_not_available", &"HELLFIRE_DRONE_NOT_AVAILABLE", ::should_break_available);
 
   if(isDefined(level.remotemissile_usethermal) && level.remotemissile_usethermal)
     visionsetmissilecam("missilecam");

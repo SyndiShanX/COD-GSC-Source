@@ -37,7 +37,7 @@ function init() {
   self stealth_event::init();
   self stealth_tagging::init();
   self stealth_vo::init();
-  self.overrideactordamage = & function_ebcb7adc;
+  self.overrideactordamage = &function_ebcb7adc;
   self stealth_debug::init_debug();
   if(isDefined(self.var_64f4c3f) && self.var_64f4c3f || (isDefined(self.script_stealth_dontseek) && self.script_stealth_dontseek)) {
     self thread function_39fb9593();
@@ -67,10 +67,10 @@ function enabled() {
 
 function function_a860a2eb() {
   entnum = self getentitynumber();
-  if(isDefined(self.stealth) && !isDefined(self.stealth.var_fd87ae1c) && (!isDefined(self.___archetypeonanimscriptedcallback) || self.___archetypeonanimscriptedcallback != ( & function_a880fdea))) {
+  if(isDefined(self.stealth) && !isDefined(self.stealth.var_fd87ae1c) && (!isDefined(self.___archetypeonanimscriptedcallback) || self.___archetypeonanimscriptedcallback != (&function_a880fdea))) {
     self.stealth.var_fd87ae1c = self.___archetypeonanimscriptedcallback;
   }
-  self.___archetypeonanimscriptedcallback = & function_a880fdea;
+  self.___archetypeonanimscriptedcallback = &function_a880fdea;
   switch (entnum % 4) {
     case 1: {
       blackboard::setblackboardattribute(self, "_context2", "v2");

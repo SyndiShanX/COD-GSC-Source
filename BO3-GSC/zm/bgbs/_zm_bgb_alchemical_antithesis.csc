@@ -12,7 +12,7 @@
 #namespace zm_bgb_alchemical_antithesis;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_alchemical_antithesis", & __init__, undefined, undefined);
+  system::register("zm_bgb_alchemical_antithesis", &__init__, undefined, undefined);
 }
 
 function __init__() {

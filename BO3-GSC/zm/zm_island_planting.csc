@@ -14,17 +14,17 @@
 #namespace zm_island_planting;
 
 function init() {
-  clientfield::register("scriptmover", "plant_growth_siege_anims", 9000, 2, "int", & plant_growth_siege_anims, 0, 0);
-  clientfield::register("scriptmover", "cache_plant_interact_fx", 9000, 1, "int", & function_d6804e46, 0, 0);
-  clientfield::register("scriptmover", "plant_hit_with_ww_fx", 9000, 1, "int", & plant_hit_with_ww, 0, 0);
-  clientfield::register("scriptmover", "plant_watered_fx", 9000, 1, "int", & plant_watered, 0, 0);
-  clientfield::register("scriptmover", "planter_model_watered", 9000, 1, "int", & planter_model_watered, 0, 0);
-  clientfield::register("scriptmover", "babysitter_plant_fx", 9000, 1, "int", & babysitter_plant_fx, 0, 0);
-  clientfield::register("scriptmover", "trap_plant_fx", 9000, 1, "int", & trap_plant_fx, 0, 0);
-  clientfield::register("toplayer", "player_spawned_from_clone_plant", 9000, 1, "int", & player_spawned_from_clone_plant, 0, 0);
-  clientfield::register("toplayer", "player_cloned_fx", 9000, 1, "int", & player_cloned_fx, 0, 0);
-  clientfield::register("scriptmover", "zombie_or_grenade_spawned_from_minor_cache_plant", 9000, 2, "int", & zombie_or_grenade_spawned_from_minor_cache_plant, 0, 0);
-  clientfield::register("allplayers", "player_vomit_fx", 9000, 1, "int", & player_vomit_fx, 0, 0);
+  clientfield::register("scriptmover", "plant_growth_siege_anims", 9000, 2, "int", &plant_growth_siege_anims, 0, 0);
+  clientfield::register("scriptmover", "cache_plant_interact_fx", 9000, 1, "int", &function_d6804e46, 0, 0);
+  clientfield::register("scriptmover", "plant_hit_with_ww_fx", 9000, 1, "int", &plant_hit_with_ww, 0, 0);
+  clientfield::register("scriptmover", "plant_watered_fx", 9000, 1, "int", &plant_watered, 0, 0);
+  clientfield::register("scriptmover", "planter_model_watered", 9000, 1, "int", &planter_model_watered, 0, 0);
+  clientfield::register("scriptmover", "babysitter_plant_fx", 9000, 1, "int", &babysitter_plant_fx, 0, 0);
+  clientfield::register("scriptmover", "trap_plant_fx", 9000, 1, "int", &trap_plant_fx, 0, 0);
+  clientfield::register("toplayer", "player_spawned_from_clone_plant", 9000, 1, "int", &player_spawned_from_clone_plant, 0, 0);
+  clientfield::register("toplayer", "player_cloned_fx", 9000, 1, "int", &player_cloned_fx, 0, 0);
+  clientfield::register("scriptmover", "zombie_or_grenade_spawned_from_minor_cache_plant", 9000, 2, "int", &zombie_or_grenade_spawned_from_minor_cache_plant, 0, 0);
+  clientfield::register("allplayers", "player_vomit_fx", 9000, 1, "int", &player_vomit_fx, 0, 0);
 }
 
 function plant_growth_siege_anims(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

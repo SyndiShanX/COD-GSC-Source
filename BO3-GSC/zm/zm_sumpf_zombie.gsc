@@ -34,9 +34,9 @@ function autoexec init() {
 }
 
 function private function_ee90a52a() {
-  animationstatenetwork::registeranimationmocomp("mocomp_teleport_traversal@zombie", & teleporttraversalmocompstart, undefined, undefined);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodShouldMove", & zodshouldmove);
-  spawner::add_archetype_spawn_function("zombie", & function_5bf6989a);
+  animationstatenetwork::registeranimationmocomp("mocomp_teleport_traversal@zombie", &teleporttraversalmocompstart, undefined, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodShouldMove", &zodshouldmove);
+  spawner::add_archetype_spawn_function("zombie", &function_5bf6989a);
 }
 
 function teleporttraversalmocompstart(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
@@ -84,7 +84,7 @@ function zodshouldmove(entity) {
 }
 
 function private function_5bf6989a() {
-  self.cant_move_cb = & function_9f18c3b1;
+  self.cant_move_cb = &function_9f18c3b1;
 }
 
 function private function_9f18c3b1() {

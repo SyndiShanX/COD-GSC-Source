@@ -548,7 +548,7 @@ function function_d8d20160() {
     self.trashcan = 1;
     self.var_1a563349 = 1;
     self.var_262e30aa = vectorscale((0, 0, 1), 42);
-    self.death_func = & function_193a95a6;
+    self.death_func = &function_193a95a6;
     level.doa.hazards[level.doa.hazards.size] = self;
     while(isDefined(self)) {
       self waittill("damage", damage, attacker, direction_vec, point, meansofdeath, tagname, modelname, partname, weapon);

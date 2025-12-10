@@ -24,14 +24,14 @@
 #namespace zm_moon_gravity;
 
 function init() {
-  level.zombie_init_done = & zombie_moon_init_done;
+  level.zombie_init_done = &zombie_moon_init_done;
   level thread init_low_gravity_fx();
-  zm_spawner::register_zombie_death_animscript_callback( & gravity_zombie_death_response);
-  callback::on_spawned( & low_gravity_watch);
+  zm_spawner::register_zombie_death_animscript_callback(&gravity_zombie_death_response);
+  callback::on_spawned(&low_gravity_watch);
   level thread update_zombie_locomotion();
   level thread update_low_gravity_fx();
   level thread update_zombie_gravity_transition();
-  callback::on_spawned( & player_throw_grenade);
+  callback::on_spawned(&player_throw_grenade);
 }
 
 function init_low_gravity_fx() {
@@ -50,9 +50,9 @@ function gravity_trigger() {
   while(true) {
     self waittill("trigger", who);
     if(!isplayer(who)) {
-      self thread trigger::function_d1278be0(who, & gravity_zombie_in, & gravity_zombie_out);
+      self thread trigger::function_d1278be0(who, &gravity_zombie_in, &gravity_zombie_out);
     } else {
-      self thread trigger::function_d1278be0(who, & gravity_player_in, & gravity_player_out);
+      self thread trigger::function_d1278be0(who, &gravity_player_in, &gravity_player_out);
     }
   }
 }
@@ -99,7 +99,7 @@ function gravity_zombie_update(low_gravity, force_update) {
   if(low_gravity) {
     self clientfield::set("low_gravity", 1);
     self.script_noteworthy = "moon_gravity";
-    self.zombie_damage_fx_func = & function_7a7cde90;
+    self.zombie_damage_fx_func = &function_7a7cde90;
   } else {
     self.zombie_damage_fx_func = undefined;
     self.nogravity = undefined;
@@ -184,7 +184,7 @@ function zombie_moon_check_zone() {
 }
 
 function zombie_moon_init_done() {
-  self.crawl_anim_override = & zombie_moon_crawl_anim_override;
+  self.crawl_anim_override = &zombie_moon_crawl_anim_override;
   self thread zombie_moon_check_zone();
   self thread zombie_watch_nogravity();
   self thread zombie_watch_run_notetracks();

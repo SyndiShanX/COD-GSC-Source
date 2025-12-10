@@ -190,26 +190,26 @@ get_lost_and_found_hintstring(param_00, param_01) {
       if(isDefined(param_01.lost_and_found_spot) && param_01.lost_and_found_spot == param_00) {
         if(isDefined(param_01.lost_and_found_primary_count) && param_01.lost_and_found_primary_count.size > 2) {
           if(var_02) {
-            return & "ZOMBIE_LOST_AND_FOUND_COLLECT_2_SOLO";
+            return &"ZOMBIE_LOST_AND_FOUND_COLLECT_2_SOLO";
           }
 
-          return & "ZOMBIE_LOST_AND_FOUND_COLLECT_2";
+          return &"ZOMBIE_LOST_AND_FOUND_COLLECT_2";
         }
 
         if(var_02) {
-          return & "ZOMBIE_LOST_AND_FOUND_COLLECT_1_SOLO";
+          return &"ZOMBIE_LOST_AND_FOUND_COLLECT_1_SOLO";
         }
 
-        return & "ZOMBIE_LOST_AND_FOUND_COLLECT_1";
+        return &"ZOMBIE_LOST_AND_FOUND_COLLECT_1";
       }
 
-      return & "ZOMBIE_LOST_AND_FOUND_ITEM_AT_NEXT_WINDOW";
+      return &"ZOMBIE_LOST_AND_FOUND_ITEM_AT_NEXT_WINDOW";
     }
 
-    return & "ZOMBIE_LOST_AND_FOUND_CANNOT_COLLECT";
+    return &"ZOMBIE_LOST_AND_FOUND_CANNOT_COLLECT";
   }
 
-  return & "ZOMBIE_LOST_AND_FOUND_NO_ITEM";
+  return &"ZOMBIE_LOST_AND_FOUND_NO_ITEM";
 }
 
 register_interactions() {

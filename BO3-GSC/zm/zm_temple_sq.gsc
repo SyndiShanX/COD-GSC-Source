@@ -50,14 +50,14 @@ function init() {
   }
   zm_temple_sq_brock::init();
   zm_temple_sq_skits::init_skits();
-  zm_sidequests::declare_sidequest("sq", & init_sidequest, undefined, & complete_sidequest, & generic_stage_start, & generic_stage_complete);
-  zm_sidequests::declare_sidequest_asset("sq", "sq_sundial", & sundial_monitor);
-  zm_sidequests::declare_sidequest_asset("sq", "sq_sundial_button", & sundial_button);
-  zm_sidequests::declare_sidequest_asset("sq", "sq_ptt_dial", & ptt_dial_handler);
-  zm_sidequests::declare_sidequest_asset("sq", "sq_bttp2_dial", & bttp2_dial_handler);
+  zm_sidequests::declare_sidequest("sq", &init_sidequest, undefined, &complete_sidequest, &generic_stage_start, &generic_stage_complete);
+  zm_sidequests::declare_sidequest_asset("sq", "sq_sundial", &sundial_monitor);
+  zm_sidequests::declare_sidequest_asset("sq", "sq_sundial_button", &sundial_button);
+  zm_sidequests::declare_sidequest_asset("sq", "sq_ptt_dial", &ptt_dial_handler);
+  zm_sidequests::declare_sidequest_asset("sq", "sq_bttp2_dial", &bttp2_dial_handler);
   zm_sidequests::declare_sidequest_asset("sq", "sq_spiketrap");
-  zm_sidequests::declare_sidequest_asset_from_struct("sq", "sq_crystals", & crystal_handler);
-  zm_sidequests::declare_sidequest_asset("sq", "sq_gong", & gong_handler, & gong_trigger_handler);
+  zm_sidequests::declare_sidequest_asset_from_struct("sq", "sq_crystals", &crystal_handler);
+  zm_sidequests::declare_sidequest_asset("sq", "sq_gong", &gong_handler, &gong_trigger_handler);
   zm_temple_sq_oafc::init();
   zm_temple_sq_dgcwf::init();
   zm_temple_sq_lgs::init();
@@ -278,7 +278,7 @@ function sundial_monitor() {
   level notify("kill_buttons");
   wait(0.05);
   buttons = getEntArray("sq_sundial_button", "targetname");
-  array::thread_all(buttons, & sundial_button);
+  array::thread_all(buttons, &sundial_button);
   while(true) {
     while(level._sundial_buttons_pressed < 4) {
       wait(0.1);
@@ -1038,7 +1038,7 @@ function force_stoploopsound_end() {
 
 function function_e63287bf() {
   level waittill("start_zombie_round_logic");
-  zm_devgui::add_custom_devgui_callback( & function_b1064ab3);
+  zm_devgui::add_custom_devgui_callback(&function_b1064ab3);
   adddebugcommand("");
   adddebugcommand("");
 }

@@ -238,7 +238,7 @@ func_76C8(param_00, param_01) {
   self.carriedgascan delete();
   self delete();
   wait(1);
-  param_01 scripts\cp\utility::setlowermessage("candy_hint", & "ZOMBIE_CRAFTING_SOUVENIRS_SHOOT_TO_IGNITE", 4);
+  param_01 scripts\cp\utility::setlowermessage("candy_hint", &"ZOMBIE_CRAFTING_SOUVENIRS_SHOOT_TO_IGNITE", 4);
   wait(15);
   var_03 delete();
 }
@@ -419,19 +419,19 @@ func_12EA0(param_00, param_01) {
       if(param_00.canbeplaced) {
         param_00.carriedgascan setModel(level.var_47AF["crafted_gascan"].modelplacement);
         if(!isDefined(param_00.var_8C16)) {
-          self forceusehinton( & "ZOMBIE_CRAFTING_SOUVENIRS_POUR_CANCELABLE");
+          self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_CANCELABLE");
         } else if(param_00.var_8C16 == 1) {
-          self forceusehinton( & "ZOMBIE_CRAFTING_SOUVENIRS_POUR_80");
+          self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_80");
         } else if(param_00.var_8C16 == 2) {
-          self forceusehinton( & "ZOMBIE_CRAFTING_SOUVENIRS_POUR_60");
+          self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_60");
         } else if(param_00.var_8C16 == 3) {
-          self forceusehinton( & "ZOMBIE_CRAFTING_SOUVENIRS_POUR_40");
+          self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_40");
         } else if(param_00.var_8C16 == 4) {
-          self forceusehinton( & "ZOMBIE_CRAFTING_SOUVENIRS_POUR_20");
+          self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_20");
         }
       } else {
         param_00.carriedgascan setModel(level.var_47AF["crafted_gascan"].modelplacementfailed);
-        self forceusehinton( & "COOP_CRAFTABLES_CANNOT_PLACE");
+        self forceusehinton(&"COOP_CRAFTABLES_CANNOT_PLACE");
       }
     }
 

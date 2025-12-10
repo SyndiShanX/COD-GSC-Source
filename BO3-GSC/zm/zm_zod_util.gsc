@@ -23,7 +23,7 @@
 #namespace zm_zod_util;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_util", & __init__, & __main__, undefined);
+  system::register("zm_zod_util", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -38,8 +38,8 @@ function __main__() {
     }
   }
   level.zombie_spawn_callbacks = undefined;
-  add_zod_zombie_spawn_func( & watch_zombie_death);
-  callback::on_connect( & on_player_connect);
+  add_zod_zombie_spawn_func(&watch_zombie_death);
+  callback::on_connect(&on_player_connect);
   level.teleport_positions = struct::get_array("teleport_position");
 }
 
@@ -96,7 +96,7 @@ function zod_unitrigger_assess_visibility(player) {
   } else if(isDefined(self.stub.func_unitrigger_visible)) {
     b_visible = self[[self.stub.func_unitrigger_visible]](player);
   }
-  str_msg = & "";
+  str_msg = &"";
   param1 = undefined;
   if(b_visible) {
     if(isDefined(self.stub.func_unitrigger_message)) {
@@ -180,7 +180,7 @@ function set_unitrigger_hint_string(str_message, param1) {
   self.hint_string = str_message;
   self.hint_parm1 = param1;
   zm_unitrigger::unregister_unitrigger(self);
-  zm_unitrigger::register_unitrigger(self, & unitrigger_think);
+  zm_unitrigger::register_unitrigger(self, &unitrigger_think);
 }
 
 function private spawn_unitrigger(origin, angles, radius_or_dims, use_trigger = 0, func_per_player_msg) {
@@ -209,8 +209,8 @@ function private spawn_unitrigger(origin, angles, radius_or_dims, use_trigger = 
     trigger_stub.func_unitrigger_message = func_per_player_msg;
     zm_unitrigger::unitrigger_force_per_player_triggers(trigger_stub, 1);
   }
-  trigger_stub.prompt_and_visibility_func = & zod_unitrigger_assess_visibility;
-  zm_unitrigger::register_unitrigger(trigger_stub, & unitrigger_think);
+  trigger_stub.prompt_and_visibility_func = &zod_unitrigger_assess_visibility;
+  zm_unitrigger::register_unitrigger(trigger_stub, &unitrigger_think);
   return trigger_stub;
 }
 
@@ -234,9 +234,9 @@ function add_zod_zombie_spawn_func(fn_zombie_spawned) {
     }
     level.zombie_spawn_callbacks[level.zombie_spawn_callbacks.size] = fn_zombie_spawned;
   } else {
-    array::thread_all(level.zombie_spawners, & spawner::add_spawn_function, fn_zombie_spawned);
+    array::thread_all(level.zombie_spawners, &spawner::add_spawn_function, fn_zombie_spawned);
     a_ritual_spawners = getEntArray("ritual_zombie_spawner", "targetname");
-    array::thread_all(a_ritual_spawners, & spawner::add_spawn_function, fn_zombie_spawned);
+    array::thread_all(a_ritual_spawners, &spawner::add_spawn_function, fn_zombie_spawned);
   }
 }
 

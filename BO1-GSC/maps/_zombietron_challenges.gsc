@@ -51,14 +51,14 @@ main() {
         struct.max_ai = 20;
         struct.spawnInitCB = maps\_zombietron_spawner::sergei_spawn_init;
         struct.postspawnCB = maps\_zombietron_spawner::spawn_sergei_postCB;
-        struct.text = & "ZOMBIETRON_CHALLENGE_SERGEI";
+        struct.text = &"ZOMBIETRON_CHALLENGE_SERGEI";
         break;
       case "quad":
         struct.round = 13;
         struct.hp_mod = 0.7;
         struct.max_ai = 20;
         struct.spawnInitCB = maps\_zombietron_ai_quad::quad_prespawn;
-        struct.text = & "ZOMBIETRON_CHALLENGE_QUAD";
+        struct.text = &"ZOMBIETRON_CHALLENGE_QUAD";
         break;
       case "german":
         struct.round = 17;
@@ -66,7 +66,7 @@ main() {
         struct.max_ai = 20;
         struct.spawnInitCB = maps\_zombietron_spawner::clark_spawn_init;
         struct.spawnEventInit = maps\_zombietron_ai_buffalo::challenge_init;
-        struct.text = & "ZOMBIETRON_CHALLENGE_COW";
+        struct.text = &"ZOMBIETRON_CHALLENGE_COW";
         break;
       case "engineer":
         struct.round = 22;
@@ -74,7 +74,7 @@ main() {
         struct.max_ai = 20;
         struct.spawnInitCB = maps\_zombietron_ai_engineer::engineer_prespawn;
         struct.postspawnCB = maps\_zombietron_spawner::spawn_engineer_postCB;
-        struct.text = & "ZOMBIETRON_CHALLENGE_ENGINEER";
+        struct.text = &"ZOMBIETRON_CHALLENGE_ENGINEER";
         break;
       case "moss_big":
         struct.spawnInitCB = maps\_zombietron_spawner::moss_spawn_init_big;
@@ -84,14 +84,14 @@ main() {
         struct.hp_mod = 0.5;
         struct.max_ai = 28;
         struct.spawnInitCB = maps\_zombietron_spawner::moss_spawn_init;
-        struct.text = & "ZOMBIETRON_CHALLENGE_SNOW";
+        struct.text = &"ZOMBIETRON_CHALLENGE_SNOW";
         break;
       case "dog":
         struct.round = 34;
         struct.hp_mod = 0.25;
         struct.max_ai = 10;
         struct.spawnInitCB = maps\_zombietron_ai_dog::dog_prespawn;
-        struct.text = & "ZOMBIETRON_CHALLENGE_DOG";
+        struct.text = &"ZOMBIETRON_CHALLENGE_DOG";
         break;
       default:
         assertex(0, "Unhandled miniboss");
@@ -103,7 +103,7 @@ main() {
   struct.round = 25;
   struct.spawner = undefined;
   struct.type = "barrel";
-  struct.text = & "ZOMBIETRON_CHALLENGE_PIG";
+  struct.text = &"ZOMBIETRON_CHALLENGE_PIG";
   level.ChallengeEvents[level.ChallengeEvents.size] = struct;
   moss = get_challenge_by_type("moss");
   if(isDefined(moss)) {

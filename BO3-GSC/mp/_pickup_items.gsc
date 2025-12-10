@@ -16,11 +16,11 @@
 #namespace pickup_items;
 
 function autoexec __init__sytem__() {
-  system::register("pickup_items", & __init__, undefined, undefined);
+  system::register("pickup_items", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & start_gametype);
+  callback::on_start_gametype(&start_gametype);
   level.nullprimaryoffhand = getweapon("null_offhand_primary");
   level.nullsecondaryoffhand = getweapon("null_offhand_secondary");
   level.pickup_items = [];
@@ -33,7 +33,7 @@ function on_player_spawned() {
 }
 
 function start_gametype() {
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
   pickup_triggers = getEntArray("pickup_item", "targetname");
   pickup_models = getEntArray("pickup_model", "targetname");
   visuals = [];
@@ -44,7 +44,7 @@ function start_gametype() {
     pickup_item_object = gameobjects::create_use_object("neutral", trigger, visuals, vectorscale((0, 0, 1), 32), istring("pickup_item"));
     pickup_item_object gameobjects::allow_use("any");
     pickup_item_object gameobjects::set_use_time(0);
-    pickup_item_object.onuse = & on_touch;
+    pickup_item_object.onuse = &on_touch;
     level.pickup_items[level.pickup_items.size] = pickup_item_object;
   }
 }

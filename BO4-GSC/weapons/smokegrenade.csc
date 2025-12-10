@@ -158,7 +158,7 @@ function_62ec0142(local_client_num, bundle) {
     return false;
   }
 
-  if(!(isDefined(self.insmoke) && self.insmoke&2)) {
+  if(!(isDefined(self.insmoke) && self.insmoke& 2)) {
     return false;
   }
 
@@ -206,7 +206,7 @@ function_28db726(local_client_num, bundle) {
     return false;
   }
 
-  if(!(isDefined(self.insmoke) && self.insmoke&1)) {
+  if(!(isDefined(self.insmoke) && self.insmoke& 1)) {
     return false;
   }
 

@@ -128,7 +128,7 @@ find_thing(param_00, param_01) {
   }
 
   var_02 makeusable();
-  var_02 sethintstring( & "CP_RAVE_PICKUP_ITEM");
+  var_02 sethintstring(&"CP_RAVE_PICKUP_ITEM");
   var_02 waittill("trigger", var_04);
   var_02 makeunusable();
   level.player_picked_up_thing = var_04;
@@ -396,7 +396,7 @@ slash_a_perk(param_00) {
 wait_for_start_trigger(param_00, param_01) {
   var_02 = 1000000;
   level.photo makeusable();
-  level.photo sethintstring( & "CP_RAVE_PLACE_ITEM");
+  level.photo sethintstring(&"CP_RAVE_PLACE_ITEM");
   for(;;) {
     level.photo waittill("trigger", var_03);
     var_04 = 0;
@@ -796,7 +796,7 @@ pick_up_charged_photo(param_00, param_01) {
   var_02 = level.photo;
   var_02 setModel(param_01);
   var_02 makeusable();
-  var_02 sethintstring( & "CP_RAVE_INSPECT_ITEM");
+  var_02 sethintstring(&"CP_RAVE_INSPECT_ITEM");
   var_02 waittill("trigger", var_03);
   var_02 makeunusable();
   if(isDefined(level.photo_soul)) {
@@ -865,7 +865,7 @@ drop_photo_from_slasher(param_00, param_01, param_02) {
   var_03 = spawn("script_model", level.photo.origin);
   var_03 setModel("tag_origin_soultrail");
   level.photo makeusable();
-  level.photo sethintstring( & "CP_RAVE_INSPECT_ITEM");
+  level.photo sethintstring(&"CP_RAVE_INSPECT_ITEM");
   level.photo waittill("trigger", var_04);
   level.photo hide();
   var_03 delete();

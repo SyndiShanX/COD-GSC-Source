@@ -490,7 +490,7 @@ prepareattackplayer(player) {
   if(!isDefined(player.player_view))
     player.player_view = playerview_spawn(player);
 
-  level.dog_death_quote = & "SCRIPT_PLATFORM_DOG_DEATH_DO_NOTHING";
+  level.dog_death_quote = &"SCRIPT_PLATFORM_DOG_DEATH_DO_NOTHING";
   distancetotarget = distance(self.origin, self.enemy.origin);
 
   if(distancetotarget > self.meleeattackdist) {
@@ -606,13 +606,13 @@ dog_melee_death(player) {
             player.player_view setanimlimited(get_player_knockdown_late_knob(), 1, 0.2, 1);
             self setanimlimited( % attack_player, 0.01, 0.2, 1);
             self setanimlimited( % attack_player_late, 1, 0.2, 1);
-            level.dog_death_quote = & "SCRIPT_PLATFORM_DOG_DEATH_TOO_LATE";
+            level.dog_death_quote = &"SCRIPT_PLATFORM_DOG_DEATH_TOO_LATE";
           }
 
           return;
         }
 
-        level.dog_death_quote = & "SCRIPT_PLATFORM_DOG_DEATH_TOO_SOON";
+        level.dog_death_quote = &"SCRIPT_PLATFORM_DOG_DEATH_TOO_SOON";
         self setflaggedanimknobrestart("meleeanim", % german_shepherd_player_neck_miss, 1, 0.2, 1);
         player.player_view setflaggedanimknobrestart("viewanim", get_player_dog_neck_miss_anim(), 1, 0.2, 1);
         return;

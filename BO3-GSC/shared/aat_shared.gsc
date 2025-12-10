@@ -14,7 +14,7 @@
 #namespace aat;
 
 function autoexec __init__sytem__() {
-  system::register("aat", & __init__, & __main__, undefined);
+  system::register("aat", &__init__, &__main__, undefined);
 }
 
 function private __init__() {
@@ -26,14 +26,14 @@ function private __init__() {
   level.aat["none"] = spawnStruct();
   level.aat["none"].name = "none";
   level.aat_reroll = [];
-  callback::on_connect( & on_player_connect);
+  callback::on_connect(&on_player_connect);
   spawners = getspawnerarray();
   foreach(spawner in spawners) {
-    spawner spawner::add_spawn_function( & aat_cooldown_init);
+    spawner spawner::add_spawn_function(&aat_cooldown_init);
   }
   level.aat_exemptions = [];
-  zm::register_vehicle_damage_callback( & aat_vehicle_damage_monitor);
-  callback::on_finalize_initialization( & finalize_clientfields);
+  zm::register_vehicle_damage_callback(&aat_vehicle_damage_monitor);
+  callback::on_finalize_initialization(&finalize_clientfields);
   level thread setup_devgui();
 }
 
@@ -41,7 +41,7 @@ function __main__() {
   if(!(isDefined(level.aat_in_use) && level.aat_in_use)) {
     return;
   }
-  zm::register_zombie_damage_override_callback( & aat_response);
+  zm::register_zombie_damage_override_callback(&aat_response);
 }
 
 function private on_player_connect() {

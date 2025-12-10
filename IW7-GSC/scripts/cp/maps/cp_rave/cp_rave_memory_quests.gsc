@@ -86,7 +86,7 @@ ent_near_item(param_00, param_01) {
 
 memories_end_hint_func(param_00, param_01) {
   if(scripts\engine\utility::istrue(param_00.quest_complete)) {
-    return & "CP_RAVE_INSPECT_ITEM";
+    return &"CP_RAVE_INSPECT_ITEM";
   }
 
   return "";

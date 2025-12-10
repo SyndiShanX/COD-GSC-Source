@@ -24,11 +24,11 @@
 #namespace island_achievements;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_achievements", & __init__, undefined, undefined);
+  system::register("zm_island_achievements", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_connect( & on_player_connect);
+  callback::on_connect(&on_player_connect);
 }
 
 function on_player_connect() {

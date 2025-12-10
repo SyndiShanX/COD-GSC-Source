@@ -17,25 +17,25 @@
 #namespace zm_tomb_capture_zones;
 
 function init_structs() {
-  level.zombie_custom_riser_fx_handler = & function_5f50cf29;
+  level.zombie_custom_riser_fx_handler = &function_5f50cf29;
   level.var_d7512031 = 0;
-  clientfield::register("world", "packapunch_anim", 21000, 3, "int", & play_pap_anim, 0, 0);
-  clientfield::register("actor", "zone_capture_zombie", 21000, 1, "int", & function_a412a80d, 0, 0);
-  clientfield::register("scriptmover", "zone_capture_emergence_hole", 21000, 1, "int", & function_be0738b1, 0, 0);
-  clientfield::register("world", "zc_change_progress_bar_color", 21000, 1, "int", & zm_utility::setsharedinventoryuimodels, 0, 0);
-  clientfield::register("world", "zone_capture_hud_all_generators_captured", 21000, 1, "int", & function_ac197e52, 0, 1);
+  clientfield::register("world", "packapunch_anim", 21000, 3, "int", &play_pap_anim, 0, 0);
+  clientfield::register("actor", "zone_capture_zombie", 21000, 1, "int", &function_a412a80d, 0, 0);
+  clientfield::register("scriptmover", "zone_capture_emergence_hole", 21000, 1, "int", &function_be0738b1, 0, 0);
+  clientfield::register("world", "zc_change_progress_bar_color", 21000, 1, "int", &zm_utility::setsharedinventoryuimodels, 0, 0);
+  clientfield::register("world", "zone_capture_hud_all_generators_captured", 21000, 1, "int", &function_ac197e52, 0, 1);
   setupclientfieldcodecallbacks("world", 1, "zone_capture_hud_all_generators_captured");
-  clientfield::register("world", "pap_monolith_ring_shake", 21000, 1, "counter", & pap_monolith_ring_shake, 0, 0);
-  clientfield::register("world", "zone_capture_perk_machine_smoke_fx_always_on", 21000, 1, "int", & function_daf4318, 0, 0);
+  clientfield::register("world", "pap_monolith_ring_shake", 21000, 1, "counter", &pap_monolith_ring_shake, 0, 0);
+  clientfield::register("world", "zone_capture_perk_machine_smoke_fx_always_on", 21000, 1, "int", &function_daf4318, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.capture_generator_wheel_widget", 21000, 1, "int", undefined, 0, 0);
-  clientfield::register("zbarrier", "pap_emissive_fx", 21000, 1, "int", & pap_emissive_fx, 0, 0);
+  clientfield::register("zbarrier", "pap_emissive_fx", 21000, 1, "int", &pap_emissive_fx, 0, 0);
   a_s_generator = struct::get_array("s_generator", "targetname");
   foreach(struct in a_s_generator) {
-    clientfield::register("world", struct.script_noteworthy, 21000, 7, "float", & function_a6f34d1c, 0, 0);
-    clientfield::register("world", "state_" + struct.script_noteworthy, 21000, 3, "int", & function_d56a2c4b, 0, 0);
-    clientfield::register("world", "zone_capture_hud_generator_" + struct.script_int, 21000, 2, "int", & zm_utility::setsharedinventoryuimodels, 0, 0);
-    clientfield::register("world", "zone_capture_monolith_crystal_" + struct.script_int, 21000, 1, "int", & function_54aa6e5c, 0, 0);
-    clientfield::register("world", "zone_capture_perk_machine_smoke_fx_" + struct.script_int, 21000, 1, "int", & function_6543186c, 0, 0);
+    clientfield::register("world", struct.script_noteworthy, 21000, 7, "float", &function_a6f34d1c, 0, 0);
+    clientfield::register("world", "state_" + struct.script_noteworthy, 21000, 3, "int", &function_d56a2c4b, 0, 0);
+    clientfield::register("world", "zone_capture_hud_generator_" + struct.script_int, 21000, 2, "int", &zm_utility::setsharedinventoryuimodels, 0, 0);
+    clientfield::register("world", "zone_capture_monolith_crystal_" + struct.script_int, 21000, 1, "int", &function_54aa6e5c, 0, 0);
+    clientfield::register("world", "zone_capture_perk_machine_smoke_fx_" + struct.script_int, 21000, 1, "int", &function_6543186c, 0, 0);
     setupclientfieldcodecallbacks("world", 1, "zone_capture_hud_generator_" + struct.script_int);
   }
   level._effect["zone_capture_damage_spark"] = "dlc5/tomb/fx_tomb_mech_dmg_armor";

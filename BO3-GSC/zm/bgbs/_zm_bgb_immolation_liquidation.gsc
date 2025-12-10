@@ -12,14 +12,14 @@
 #namespace zm_bgb_immolation_liquidation;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_immolation_liquidation", & __init__, undefined, "bgb");
+  system::register("zm_bgb_immolation_liquidation", &__init__, undefined, "bgb");
 }
 
 function __init__() {
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
   }
-  bgb::register("zm_bgb_immolation_liquidation", "activated", 3, undefined, undefined, & function_3d1f600e, & activation);
+  bgb::register("zm_bgb_immolation_liquidation", "activated", 3, undefined, undefined, &function_3d1f600e, &activation);
 }
 
 function activation() {

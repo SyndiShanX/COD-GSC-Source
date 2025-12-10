@@ -42,7 +42,7 @@
 #namespace zm_ai_spiders;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_spiders", & __init__, & __main__, undefined);
+  system::register("zm_ai_spiders", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -56,10 +56,10 @@ function __init__() {
   level thread function_3fd0c070();
   function_5c48d276();
   init();
-  callback::on_spawned( & function_83a70ec3);
-  spawner::add_archetype_spawn_function("spider", & function_82b6256d);
-  spawner::add_archetype_spawn_function("spider", & function_df94945b);
-  zm::register_vehicle_damage_callback( & function_5b625d74);
+  callback::on_spawned(&function_83a70ec3);
+  spawner::add_archetype_spawn_function("spider", &function_82b6256d);
+  spawner::add_archetype_spawn_function("spider", &function_df94945b);
+  zm::register_vehicle_damage_callback(&function_5b625d74);
 }
 
 function __main__() {
@@ -100,7 +100,7 @@ function init() {
   level.melee_height_sav = getdvarstring("ai_meleeHeight");
   function_7a544164();
   level thread function_fd32a77c();
-  visionset_mgr::register_info("visionset", "zm_isl_parasite_spider_visionset", 9000, 33, 16, 0, & visionset_mgr::ramp_in_out_thread, 0);
+  visionset_mgr::register_info("visionset", "zm_isl_parasite_spider_visionset", 9000, 33, 16, 0, &visionset_mgr::ramp_in_out_thread, 0);
 }
 
 function function_1c624caf(a_ents) {
@@ -147,7 +147,7 @@ function function_fd32a77c() {
 function function_d2716ad8() {
   level.var_347e707c = 1;
   if(!isDefined(level.var_33655cba)) {
-    level.var_33655cba = & function_2a424152;
+    level.var_33655cba = &function_2a424152;
   }
   level thread[[level.var_33655cba]]();
 }
@@ -168,7 +168,7 @@ function function_7a544164() {
     level.var_c38a4fee[i].script_forcespawn = 1;
   }
   assert(level.var_c38a4fee.size > 0);
-  array::thread_all(level.var_c38a4fee, & spawner::add_spawn_function, & function_7c1ef59b);
+  array::thread_all(level.var_c38a4fee, &spawner::add_spawn_function, &function_7c1ef59b);
 }
 
 function function_7c1ef59b() {
@@ -179,10 +179,10 @@ function function_7c1ef59b() {
   self.no_gib = 1;
   self.b_is_spider = 1;
   self.no_eye_glow = 1;
-  self.custom_player_shellshock = & function_c685a92b;
+  self.custom_player_shellshock = &function_c685a92b;
   self.team = level.zombie_team;
   self.missinglegs = 0;
-  self.thundergun_knockdown_func = & function_96d38ff4;
+  self.thundergun_knockdown_func = &function_96d38ff4;
   self.lightning_chain_immune = 1;
   self thread function_747a2fea();
   self thread function_7609fd9();
@@ -275,8 +275,8 @@ function function_2a424152() {
       old_spawn_func = level.round_spawn_func;
       old_wait_func = level.round_wait_func;
       function_9f7a20d2();
-      level.round_spawn_func = & function_a2a299a1;
-      level.round_wait_func = & function_872e306e;
+      level.round_spawn_func = &function_a2a299a1;
+      level.round_wait_func = &function_872e306e;
       level.var_3013498 = level.round_number + randomintrange(4, 6);
       getplayers()[0] iprintln("" + level.var_3013498);
     } else if(level flag::get("spider_round")) {
@@ -293,7 +293,7 @@ function spider_round_fx() {
     player clientfield::increment_to_player("spider_round_fx");
     player clientfield::increment_to_player("spider_round_ring_fx");
   }
-  visionset_mgr::activate("visionset", "zm_isl_parasite_spider_visionset", undefined, 1.5, & function_fad41aec, 2);
+  visionset_mgr::activate("visionset", "zm_isl_parasite_spider_visionset", undefined, 1.5, &function_fad41aec, 2);
 }
 
 function function_fad41aec() {
@@ -316,7 +316,7 @@ function function_a2a299a1() {
   }
   level flag::set("spider_round_in_progress");
   level thread function_f602171e();
-  array::thread_all(level.players, & function_cb42e438);
+  array::thread_all(level.players, &function_cb42e438);
   wait(1);
   spider_round_fx();
   wait(4);
@@ -690,7 +690,7 @@ function function_49e57a3b(var_c79d3f71, ent = self, var_a79b986e = 0) {
   var_c79d3f71 endon("death");
   if(!isDefined(ent.target) || var_a79b986e) {
     var_c79d3f71 ghost();
-    var_c79d3f71 util::delay(0.2, "death", & show);
+    var_c79d3f71 util::delay(0.2, "death", &show);
     var_c79d3f71 util::delay_notify(0.2, "visible", "death");
     var_c79d3f71.origin = ent.origin;
     var_c79d3f71.angles = ent.angles;
@@ -805,7 +805,7 @@ function function_7be01d65(str_zone) {
 
 function function_3fd0c070() {
   level flagsys::wait_till("");
-  zm_devgui::add_custom_devgui_callback( & function_8457e10f);
+  zm_devgui::add_custom_devgui_callback(&function_8457e10f);
 }
 
 function function_8457e10f(cmd) {

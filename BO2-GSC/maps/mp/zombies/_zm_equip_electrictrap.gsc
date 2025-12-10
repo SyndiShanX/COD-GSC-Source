@@ -19,10 +19,10 @@ init() {
     return;
   }
   level.electrictrap_name = "equip_electrictrap_zm";
-  maps\mp\zombies\_zm_equipment::register_equipment("equip_electrictrap_zm", & "ZOMBIE_EQUIP_ELECTRICTRAP_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_ELECTRICTRAP_HOWTO", "etrap_zm_icon", "electrictrap", undefined, ::transfertrap, ::droptrap, ::pickuptrap, ::placetrap);
+  maps\mp\zombies\_zm_equipment::register_equipment("equip_electrictrap_zm", &"ZOMBIE_EQUIP_ELECTRICTRAP_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_ELECTRICTRAP_HOWTO", "etrap_zm_icon", "electrictrap", undefined, ::transfertrap, ::droptrap, ::pickuptrap, ::placetrap);
   maps\mp\zombies\_zm_equipment::add_placeable_equipment("equip_electrictrap_zm", "p6_anim_zm_buildable_etrap");
   level thread onplayerconnect();
-  maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("equip_electrictrap", & "ZOMBIE_EQUIP_ELECTRICTRAP_PICKUP_HINT_STRING");
+  maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("equip_electrictrap", &"ZOMBIE_EQUIP_ELECTRICTRAP_PICKUP_HINT_STRING");
   level._effect["etrap_on"] = loadfx("maps/zombie/fx_zmb_tranzit_electric_trap_on");
   thread wait_init_damage();
 }

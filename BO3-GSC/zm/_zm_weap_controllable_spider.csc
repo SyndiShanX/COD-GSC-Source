@@ -13,12 +13,12 @@
 #namespace controllable_spider;
 
 function autoexec __init__sytem__() {
-  system::register("controllable_spider", & __init__, undefined, undefined);
+  system::register("controllable_spider", &__init__, undefined, undefined);
 }
 
 function __init__(localclientnum) {
-  clientfield::register("scriptmover", "player_cocooned_fx", 9000, 1, "int", & player_cocooned_fx, 0, 0);
-  clientfield::register("allplayers", "player_cocooned_fx", 9000, 1, "int", & player_cocooned_fx, 0, 0);
+  clientfield::register("scriptmover", "player_cocooned_fx", 9000, 1, "int", &player_cocooned_fx, 0, 0);
+  clientfield::register("allplayers", "player_cocooned_fx", 9000, 1, "int", &player_cocooned_fx, 0, 0);
 }
 
 function player_cocooned_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

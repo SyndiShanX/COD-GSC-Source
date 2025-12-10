@@ -115,33 +115,33 @@ onstartgametype() {
   setclientnamemode("auto_change");
 
   if(!intiebreaker()) {
-    maps\mp\_utility::setobjectivetext("allies", & "OBJECTIVES_SAB");
-    maps\mp\_utility::setobjectivetext("axis", & "OBJECTIVES_SAB");
+    maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_SAB");
+    maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_SAB");
 
     if(level.splitscreen) {
-      maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_SAB");
-      maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_SAB");
+      maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_SAB");
+      maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_SAB");
     } else {
-      maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_SAB_SCORE");
-      maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_SAB_SCORE");
+      maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_SAB_SCORE");
+      maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_SAB_SCORE");
     }
 
-    maps\mp\_utility::setobjectivehinttext("allies", & "OBJECTIVES_SAB_HINT");
-    maps\mp\_utility::setobjectivehinttext("axis", & "OBJECTIVES_SAB_HINT");
+    maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_SAB_HINT");
+    maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_SAB_HINT");
   } else {
-    maps\mp\_utility::setobjectivetext("allies", & "OBJECTIVES_WAR");
-    maps\mp\_utility::setobjectivetext("axis", & "OBJECTIVES_WAR");
+    maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_WAR");
+    maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_WAR");
 
     if(level.splitscreen) {
-      maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_WAR");
-      maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_WAR");
+      maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_WAR");
+      maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_WAR");
     } else {
-      maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_WAR_SCORE");
-      maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_WAR_SCORE");
+      maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_WAR_SCORE");
+      maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_WAR_SCORE");
     }
 
-    maps\mp\_utility::setobjectivehinttext("allies", & "OBJECTIVES_WAR_HINT");
-    maps\mp\_utility::setobjectivehinttext("axis", & "OBJECTIVES_WAR_HINT");
+    maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_WAR_HINT");
+    maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_WAR_HINT");
   }
 
   initspawns();

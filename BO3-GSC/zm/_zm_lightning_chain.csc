@@ -11,7 +11,7 @@
 #namespace lightning_chain;
 
 function autoexec __init__sytem__() {
-  system::register("lightning_chain", & init, undefined, undefined);
+  system::register("lightning_chain", &init, undefined, undefined);
 }
 
 function init() {
@@ -20,10 +20,10 @@ function init() {
   level._effect["tesla_shock_secondary"] = "zombie/fx_tesla_bolt_secondary_zmb";
   level._effect["tesla_shock_nonfatal"] = "zombie/fx_bmode_shock_os_zod_zmb";
   level._effect["tesla_shock_eyes"] = "zombie/fx_tesla_shock_eyes_zmb";
-  clientfield::register("actor", "lc_fx", 1, 2, "int", & lc_shock_fx, 0, 1);
-  clientfield::register("vehicle", "lc_fx", 1, 2, "int", & lc_shock_fx, 0, 0);
-  clientfield::register("actor", "lc_death_fx", 1, 2, "int", & lc_play_death_fx, 0, 0);
-  clientfield::register("vehicle", "lc_death_fx", 8000, 2, "int", & lc_play_death_fx, 0, 0);
+  clientfield::register("actor", "lc_fx", 1, 2, "int", &lc_shock_fx, 0, 1);
+  clientfield::register("vehicle", "lc_fx", 1, 2, "int", &lc_shock_fx, 0, 0);
+  clientfield::register("actor", "lc_death_fx", 1, 2, "int", &lc_play_death_fx, 0, 0);
+  clientfield::register("vehicle", "lc_death_fx", 8000, 2, "int", &lc_play_death_fx, 0, 0);
 }
 
 function lc_shock_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

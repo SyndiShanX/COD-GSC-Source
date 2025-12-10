@@ -149,13 +149,13 @@ init_rave_door_buys() {
 
 show_fail_hint() {
   self endon("disconnect");
-  self forceusehinton( & "COOP_INTERACTIONS_NEED_MONEY");
+  self forceusehinton(&"COOP_INTERACTIONS_NEED_MONEY");
   wait(1);
   self getrigindexfromarchetyperef();
 }
 
 rave_door_buy() {
-  self sethintstring( & "CP_RAVE_PURCHASE_AREA");
+  self sethintstring(&"CP_RAVE_PURCHASE_AREA");
   self sethintstringparams(level.enter_area_hint, 350);
   for(;;) {
     self waittill("trigger", var_00);

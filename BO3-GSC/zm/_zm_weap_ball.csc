@@ -13,18 +13,18 @@
 #namespace ball;
 
 function autoexec __init__sytem__() {
-  system::register("ball", & __init__, undefined, undefined);
+  system::register("ball", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("allplayers", "ballcarrier", 15000, 1, "int", & player_ballcarrier_changed, 0, 1);
-  clientfield::register("allplayers", "passoption", 15000, 1, "int", & player_passoption_changed, 0, 0);
-  clientfield::register("world", "ball_away", 15000, 1, "int", & world_ball_away_changed, 0, 1);
-  clientfield::register("world", "ball_score_allies", 15000, 1, "int", & world_ball_score_allies, 0, 1);
-  clientfield::register("world", "ball_score_axis", 15000, 1, "int", & world_ball_score_axis, 0, 1);
-  clientfield::register("scriptmover", "ball_on_ground_fx", 15000, 1, "int", & ball_on_ground_fx, 0, 0);
-  callback::on_localclient_connect( & on_localclient_connect);
-  callback::on_spawned( & on_player_spawned);
+  clientfield::register("allplayers", "ballcarrier", 15000, 1, "int", &player_ballcarrier_changed, 0, 1);
+  clientfield::register("allplayers", "passoption", 15000, 1, "int", &player_passoption_changed, 0, 0);
+  clientfield::register("world", "ball_away", 15000, 1, "int", &world_ball_away_changed, 0, 1);
+  clientfield::register("world", "ball_score_allies", 15000, 1, "int", &world_ball_score_allies, 0, 1);
+  clientfield::register("world", "ball_score_axis", 15000, 1, "int", &world_ball_score_axis, 0, 1);
+  clientfield::register("scriptmover", "ball_on_ground_fx", 15000, 1, "int", &ball_on_ground_fx, 0, 0);
+  callback::on_localclient_connect(&on_localclient_connect);
+  callback::on_spawned(&on_player_spawned);
   level.effect_scriptbundles = [];
   level.effect_scriptbundles["goal"] = struct::get_script_bundle("teamcolorfx", "teamcolorfx_uplink_goal");
   level.effect_scriptbundles["goal_score"] = struct::get_script_bundle("teamcolorfx", "teamcolorfx_uplink_goal_score");
@@ -149,7 +149,7 @@ function clear_hud(localclientnum) {
   level.ball_carrier = undefined;
   setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballHeldByEnemy"), 0);
   setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballHeldByFriendly"), 0);
-  setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballStatusText"), & "MPUI_BALL_AWAY");
+  setuimodelvalue(createuimodel(getuimodelforcontroller(localclientnum), "ballGametype.ballStatusText"), &"MPUI_BALL_AWAY");
 }
 
 function watch_for_death(localclientnum) {

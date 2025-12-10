@@ -23,11 +23,11 @@
 #namespace glaive;
 
 function autoexec __init__sytem__() {
-  system::register("glaive", & __init__, undefined, undefined);
+  system::register("glaive", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("glaive", & glaive_initialize);
+  vehicle::add_main_callback("glaive", &glaive_initialize);
   clientfield::register("vehicle", "glaive_blood_fx", 1, 1, "int");
 }
 
@@ -49,8 +49,8 @@ function glaive_initialize() {
   self.goalradius = 9999999;
   self.goalheight = 512;
   self setgoal(self.origin, 0, self.goalradius, self.goalheight);
-  self.overridevehicledamage = & glaive_callback_damage;
-  self.allowfriendlyfiredamageoverride = & glaive_allowfriendlyfiredamage;
+  self.overridevehicledamage = &glaive_callback_damage;
+  self.allowfriendlyfiredamageoverride = &glaive_allowfriendlyfiredamage;
   self.ignoreme = 1;
   self._glaive_settings_lifetime = self.settings.lifetime;
   if(isDefined(level.vehicle_initializer_cb)) {
@@ -61,9 +61,9 @@ function glaive_initialize() {
 
 function defaultrole() {
   self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("combat").update_func = & state_combat_update;
-  self vehicle_ai::get_state_callbacks("combat").enter_func = & state_combat_enter;
-  self vehicle_ai::add_state("slash", undefined, & state_slash_update, undefined);
+  self vehicle_ai::get_state_callbacks("combat").update_func = &state_combat_update;
+  self vehicle_ai::get_state_callbacks("combat").enter_func = &state_combat_enter;
+  self vehicle_ai::add_state("slash", undefined, &state_slash_update, undefined);
   setdvar("", 1);
   self thread glaive_target_selection();
   vehicle_ai::startinitialstate("combat");

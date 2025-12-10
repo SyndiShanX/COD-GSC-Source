@@ -23,20 +23,20 @@
 #namespace zm_powerup_weapon_minigun;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_weapon_minigun", & __init__, undefined, undefined);
+  system::register("zm_powerup_weapon_minigun", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  zm_powerups::register_powerup("minigun", & grab_minigun);
-  zm_powerups::register_powerup_weapon("minigun", & minigun_countdown);
+  zm_powerups::register_powerup("minigun", &grab_minigun);
+  zm_powerups::register_powerup_weapon("minigun", &minigun_countdown);
   zm_powerups::powerup_set_prevent_pick_up_if_drinking("minigun", 1);
   zm_powerups::set_weapon_ignore_max_ammo("minigun");
   if(tolower(getdvarstring("g_gametype")) != "zcleansed") {
-    zm_powerups::add_zombie_powerup("minigun", "zombie_pickup_minigun", & "ZOMBIE_POWERUP_MINIGUN", & func_should_drop_minigun, 1, 0, 0, undefined, "powerup_mini_gun", "zombie_powerup_minigun_time", "zombie_powerup_minigun_on");
+    zm_powerups::add_zombie_powerup("minigun", "zombie_pickup_minigun", &"ZOMBIE_POWERUP_MINIGUN", &func_should_drop_minigun, 1, 0, 0, undefined, "powerup_mini_gun", "zombie_powerup_minigun_time", "zombie_powerup_minigun_on");
     level.zombie_powerup_weapon["minigun"] = getweapon("minigun");
   }
-  callback::on_connect( & init_player_zombie_vars);
-  zm::register_actor_damage_callback( & minigun_damage_adjust);
+  callback::on_connect(&init_player_zombie_vars);
+  zm::register_actor_damage_callback(&minigun_damage_adjust);
 }
 
 function grab_minigun(player) {
@@ -75,7 +75,7 @@ function minigun_weapon_powerup(ent_player, time) {
     }
     return;
   }
-  level._zombie_minigun_powerup_last_stand_func = & minigun_powerup_last_stand;
+  level._zombie_minigun_powerup_last_stand_func = &minigun_powerup_last_stand;
   stance_disabled = 0;
   if(ent_player getstance() === "prone") {
     ent_player allowcrouch(0);

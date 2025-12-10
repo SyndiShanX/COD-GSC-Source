@@ -23,23 +23,23 @@
 #namespace thief;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_thief", & __init__, undefined, undefined);
+  system::register("gadget_thief", &__init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("toplayer", "thief_state", 11000, 2, "int");
   clientfield::register("toplayer", "thief_weapon_option", 11000, 4, "int");
-  ability_player::register_gadget_activation_callbacks(44, & gadget_thief_on_activate, & gadget_thief_on_deactivate);
-  ability_player::register_gadget_possession_callbacks(44, & gadget_thief_on_give, & gadget_thief_on_take);
-  ability_player::register_gadget_flicker_callbacks(44, & gadget_thief_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(44, & gadget_thief_is_inuse);
-  ability_player::register_gadget_ready_callbacks(44, & gadget_thief_is_ready);
-  ability_player::register_gadget_is_flickering_callbacks(44, & gadget_thief_is_flickering);
+  ability_player::register_gadget_activation_callbacks(44, &gadget_thief_on_activate, &gadget_thief_on_deactivate);
+  ability_player::register_gadget_possession_callbacks(44, &gadget_thief_on_give, &gadget_thief_on_take);
+  ability_player::register_gadget_flicker_callbacks(44, &gadget_thief_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(44, &gadget_thief_is_inuse);
+  ability_player::register_gadget_ready_callbacks(44, &gadget_thief_is_ready);
+  ability_player::register_gadget_is_flickering_callbacks(44, &gadget_thief_is_flickering);
   clientfield::register("scriptmover", "gadget_thief_fx", 11000, 1, "int");
   clientfield::register("clientuimodel", "playerAbilities.playerGadget3.flashStart", 11000, 3, "int");
   clientfield::register("clientuimodel", "playerAbilities.playerGadget3.flashEnd", 11000, 3, "int");
-  callback::on_connect( & gadget_thief_on_connect);
-  callback::on_spawned( & gadget_thief_on_player_spawn);
+  callback::on_connect(&gadget_thief_on_connect);
+  callback::on_spawned(&gadget_thief_on_player_spawn);
   setup_gadget_thief_array();
   level.gadgetthieftimecharge = 0;
   level.gadgetthiefshutdownfullcharge = getdvarint("gadgetThiefShutdownFullCharge", 1);
@@ -78,7 +78,7 @@ function gadget_thief_on_flicker(slot, weapon) {
 }
 
 function gadget_thief_on_give(slot, weapon) {
-  self.gadget_thief_kill_callback = & gadget_thief_kill_callback;
+  self.gadget_thief_kill_callback = &gadget_thief_kill_callback;
   self.gadget_thief_slot = slot;
   self thread gadget_thief_active(slot, weapon);
   if(sessionmodeismultiplayergame()) {

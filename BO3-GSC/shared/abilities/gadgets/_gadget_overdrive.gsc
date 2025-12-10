@@ -16,20 +16,20 @@
 #namespace _gadget_overdrive;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_overdrive", & __init__, undefined, undefined);
+  system::register("gadget_overdrive", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(28, & gadget_overdrive_on, & gadget_overdrive_off);
-  ability_player::register_gadget_possession_callbacks(28, & gadget_overdrive_on_give, & gadget_overdrive_on_take);
-  ability_player::register_gadget_flicker_callbacks(28, & gadget_overdrive_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(28, & gadget_overdrive_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(28, & gadget_overdrive_is_flickering);
+  ability_player::register_gadget_activation_callbacks(28, &gadget_overdrive_on, &gadget_overdrive_off);
+  ability_player::register_gadget_possession_callbacks(28, &gadget_overdrive_on_give, &gadget_overdrive_on_take);
+  ability_player::register_gadget_flicker_callbacks(28, &gadget_overdrive_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(28, &gadget_overdrive_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(28, &gadget_overdrive_is_flickering);
   if(!isDefined(level.vsmgr_prio_visionset_overdrive)) {
     level.vsmgr_prio_visionset_overdrive = 65;
   }
-  visionset_mgr::register_info("visionset", "overdrive", 1, level.vsmgr_prio_visionset_overdrive, 15, 1, & visionset_mgr::ramp_in_out_thread_per_player, 0);
-  callback::on_connect( & gadget_overdrive_on_connect);
+  visionset_mgr::register_info("visionset", "overdrive", 1, level.vsmgr_prio_visionset_overdrive, 15, 1, &visionset_mgr::ramp_in_out_thread_per_player, 0);
+  callback::on_connect(&gadget_overdrive_on_connect);
   clientfield::register("toplayer", "overdrive_state", 1, 1, "int");
 }
 

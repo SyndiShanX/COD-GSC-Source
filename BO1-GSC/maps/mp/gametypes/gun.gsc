@@ -111,7 +111,7 @@ promotePlayer(weaponUsed) {
         self.gunProgress++;
         if(IsAlive(self))
           self thread giveCustomLoadout(false, true);
-        self thread maps\mp\gametypes\_wager::queueWagerPopup(&"MPUI_PLAYER_KILLED", 0, & "MP_GUN_NEXT_LEVEL");
+        self thread maps\mp\gametypes\_wager::queueWagerPopup(&"MPUI_PLAYER_KILLED", 0, &"MP_GUN_NEXT_LEVEL");
       }
       score = maps\mp\gametypes\_globallogic_score::_getPlayerScore(self);
       if(score < level.gunProgression.size)
@@ -132,7 +132,7 @@ demotePlayer() {
   }
   self.pers["humiliated"]++;
   self.humiliated = self.pers["humiliated"];
-  self thread maps\mp\gametypes\_wager::queueWagerPopup(&"MP_HUMILIATED", 0, & "MP_GUN_PREV_LEVEL", "wm_humiliated");
+  self thread maps\mp\gametypes\_wager::queueWagerPopup(&"MP_HUMILIATED", 0, &"MP_GUN_PREV_LEVEL", "wm_humiliated");
 }
 onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration) {
   if(sMeansOfDeath == "MOD_SUICIDE") {
@@ -146,7 +146,7 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
     }
     if(sMeansOfDeath == "MOD_MELEE") {
       self thread demotePlayer();
-      attacker thread maps\mp\gametypes\_wager::queueWagerPopup(&"MP_HUMILIATION", 0, & "MP_GUN_PREV_LEVEL_OTHER", "wm_humiliation");
+      attacker thread maps\mp\gametypes\_wager::queueWagerPopup(&"MP_HUMILIATION", 0, &"MP_GUN_PREV_LEVEL_OTHER", "wm_humiliation");
       return;
     }
     attacker thread promotePlayer(sWeapon);
@@ -165,17 +165,17 @@ onStartGameType() {
   setDvar("ui_weapon_tiers", level.gunProgression.size);
   makedvarserverinfo("ui_weapon_tiers", level.gunProgression.size);
   setClientNameMode("auto_change");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveText("allies", & "OBJECTIVES_GUN");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveText("axis", & "OBJECTIVES_GUN");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveText("allies", &"OBJECTIVES_GUN");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveText("axis", &"OBJECTIVES_GUN");
   if(level.splitscreen) {
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", & "OBJECTIVES_GUN");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", & "OBJECTIVES_GUN");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", &"OBJECTIVES_GUN");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", &"OBJECTIVES_GUN");
   } else {
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", & "OBJECTIVES_GUN_SCORE");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", & "OBJECTIVES_GUN_SCORE");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("allies", &"OBJECTIVES_GUN_SCORE");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText("axis", &"OBJECTIVES_GUN_SCORE");
   }
-  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("allies", & "OBJECTIVES_GUN_HINT");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("axis", & "OBJECTIVES_GUN_HINT");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("allies", &"OBJECTIVES_GUN_HINT");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText("axis", &"OBJECTIVES_GUN_HINT");
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
   newSpawns = getEntArray("mp_wager_spawn", "classname");

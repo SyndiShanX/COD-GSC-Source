@@ -2266,7 +2266,7 @@ minedamagemonitor() {
     self.waschained = 1;
   }
 
-  if(isDefined(var_08) && var_08 & level.idflags_penetration) {
+  if(isDefined(var_08) && var_08 &level.idflags_penetration) {
     self.wasdamagedfrombulletpenetration = 1;
   }
 
@@ -3566,7 +3566,7 @@ return_weapon_name_with_like_attachments(param_00, param_01, param_02, param_03,
   var_1C = get_possible_attachments_by_weaponclass(var_1B, var_06, param_01);
   if(!var_1C && isDefined(param_01)) {
     if(!scripts\engine\utility::istrue(param_03)) {
-      scripts\cp\utility::setlowermessage("cant_attach", & "COOP_PILLAGE_CANT_USE", 3);
+      scripts\cp\utility::setlowermessage("cant_attach", &"COOP_PILLAGE_CANT_USE", 3);
     }
 
     return undefined;
@@ -4135,57 +4135,57 @@ equipmentwatchuse(param_00, param_01) {
   self.trigger setcursorhint("HINT_NOICON");
   switch (self.weapon_name) {
     case "c4_zm":
-      self.trigger sethintstring( & "MP_PICKUP_C4");
+      self.trigger sethintstring(&"MP_PICKUP_C4");
       break;
 
     case "claymore_mp":
-      self.trigger sethintstring( & "MP_PICKUP_CLAYMORE");
+      self.trigger sethintstring(&"MP_PICKUP_CLAYMORE");
       break;
 
     case "bouncingbetty_mp":
-      self.trigger sethintstring( & "MP_PICKUP_BOUNCING_BETTY");
+      self.trigger sethintstring(&"MP_PICKUP_BOUNCING_BETTY");
       break;
 
     case "proximity_explosive_mp":
-      self.trigger sethintstring( & "MP_PICKUP_PROXIMITY_EXPLOSIVE");
+      self.trigger sethintstring(&"MP_PICKUP_PROXIMITY_EXPLOSIVE");
       break;
 
     case "mobile_radar_mp":
-      self.trigger sethintstring( & "MP_PICKUP_MOBILE_RADAR");
+      self.trigger sethintstring(&"MP_PICKUP_MOBILE_RADAR");
       break;
 
     case "ztransponder_mp":
     case "transponder_mp":
-      self.trigger sethintstring( & "MP_PICKUP_TRANSPONDER");
+      self.trigger sethintstring(&"MP_PICKUP_TRANSPONDER");
       break;
 
     case "sonic_sensor_mp":
-      self.trigger sethintstring( & "MP_PICKUP_SONIC_SENSOR");
+      self.trigger sethintstring(&"MP_PICKUP_SONIC_SENSOR");
       break;
 
     case "sticky_mine_mp":
-      self.trigger sethintstring( & "MP_PICKUP_STICKY_MINE");
+      self.trigger sethintstring(&"MP_PICKUP_STICKY_MINE");
       break;
 
     case "blackhole_grenade_zm":
     case "blackhole_grenade_mp":
-      self.trigger sethintstring( & "MP_PICKUP_BLACKHOLE_GRENADE");
+      self.trigger sethintstring(&"MP_PICKUP_BLACKHOLE_GRENADE");
       break;
 
     case "shard_ball_mp":
-      self.trigger sethintstring( & "MP_PICKUP_SHARD_BALL");
+      self.trigger sethintstring(&"MP_PICKUP_SHARD_BALL");
       break;
 
     case "cryo_grenade_mp":
-      self.trigger sethintstring( & "MP_PICKUP_CRYO_MINE");
+      self.trigger sethintstring(&"MP_PICKUP_CRYO_MINE");
       break;
 
     case "trip_mine_mp":
-      self.trigger sethintstring( & "MP_PICKUP_TRIP_MINE");
+      self.trigger sethintstring(&"MP_PICKUP_TRIP_MINE");
       break;
 
     case "arc_grenade_mine_mp":
-      self.trigger sethintstring( & "MP_PICKUP_ARC_MINE");
+      self.trigger sethintstring(&"MP_PICKUP_ARC_MINE");
       break;
   }
 

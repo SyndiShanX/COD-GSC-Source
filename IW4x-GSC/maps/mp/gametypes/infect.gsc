@@ -23,7 +23,6 @@ main() {
 
   level.teamBased = true;
 
-
   level.prematchWaitForTeams = false;
   level.onPrecacheGameType = ::onPrecacheGameType;
   level.onStartGameType = ::onStartGameType;
@@ -62,14 +61,14 @@ onPrecacheGameType() {
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  setObjectiveText("allies", & "OBJECTIVES_INFECT");
-  setObjectiveText("axis", & "OBJECTIVES_INFECT");
+  setObjectiveText("allies", &"OBJECTIVES_INFECT");
+  setObjectiveText("axis", &"OBJECTIVES_INFECT");
 
-  setObjectiveScoreText("allies", & "OBJECTIVES_INFECT_SCORE");
-  setObjectiveScoreText("axis", & "OBJECTIVES_INFECT_SCORE");
+  setObjectiveScoreText("allies", &"OBJECTIVES_INFECT_SCORE");
+  setObjectiveScoreText("axis", &"OBJECTIVES_INFECT_SCORE");
 
-  setObjectiveHintText("allies", & "OBJECTIVES_INFECT_HINT");
-  setObjectiveHintText("axis", & "OBJECTIVES_INFECT_HINT");
+  setObjectiveHintText("allies", &"OBJECTIVES_INFECT_HINT");
+  setObjectiveHintText("axis", &"OBJECTIVES_INFECT_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -97,7 +96,7 @@ onStartGameType() {
 
   level.infect_timerDisplay = createServerTimer("objective", 1.4);
   level.infect_timerDisplay setPoint("TOPLEFT", "TOPLEFT", 115, 5);
-  level.infect_timerDisplay.label = & "MP_DRAFT_STARTS_IN";
+  level.infect_timerDisplay.label = &"MP_DRAFT_STARTS_IN";
   level.infect_timerDisplay.alpha = 0;
   level.infect_timerDisplay.archived = false;
   level.infect_timerDisplay.hideWhenInMenu = true;
@@ -133,7 +132,6 @@ getSpawnPoint() {
   if(self.infect_firstSpawn) {
     self.infect_firstSpawn = false;
 
-
     self.pers["class"] = "gamemode";
     self.pers["lastClass"] = "";
     self.class = self.pers["class"];
@@ -164,7 +162,6 @@ onSpawnPlayer() {
   self.infect_spawnpos = self.origin;
   updateTeamScores();
 
-
   if(!level.infect_choosingFirstInfected) {
     level.infect_choosingFirstInfected = true;
     level thread chooseFirstInfected();
@@ -192,8 +189,6 @@ onSpawnPlayer() {
     if(level.infect_teamscores["axis"] == 1)
       self.isInitialInfected = 1;
   }
-
-
 
   if(isDefined(self.isInitialInfected))
     self.pers["gamemodeLoadout"] = level.infect_loadouts["axis_initial"];
@@ -281,7 +276,7 @@ chooseFirstInfected() {
 
   gameFlagWait("prematch_done");
 
-  level.infect_timerDisplay.label = & "MP_DRAFT_STARTS_IN";
+  level.infect_timerDisplay.label = &"MP_DRAFT_STARTS_IN";
   level.infect_timerDisplay settimer(8);
   level.infect_timerDisplay.alpha = 1;
 
@@ -298,20 +293,16 @@ setFirstInfected(wasChosen) {
   if(wasChosen)
     self.infect_isBeingChosen = true;
 
-
   while(!isReallyAlive(self) || isUsingRemote())
     wait 0.05;
-
 
   if(isDefined(self.isCarrying) && self.isCarrying == 1) {
     self notify("force_cancel_placement");
     wait 0.05;
   }
 
-
   while(self IsMantling())
     wait(0.05);
-
 
   while(!self isOnGround() && !self IsOnLadder())
     wait(0.05);
@@ -319,29 +310,22 @@ setFirstInfected(wasChosen) {
   while(!isAlive(self))
     waitframe();
 
-
   if(wasChosen) {
     self maps\mp\gametypes\_menus::addToTeam("axis");
     level.infect_choseFirstInfected = true;
     self.infect_isBeingChosen = undefined;
 
-
     updateTeamScores();
-
 
     level.infect_allowSuicide = true;
   }
 
-
   self.isInitialInfected = true;
-
 
   self.pers["gamemodeLoadout"] = level.infect_loadouts["axis_initial"];
 
-
   if(isDefined(self.setSpawnpoint))
     maps\mp\perks\_perkfunctions::deleteTI(self.setSpawnpoint);
-
 
   spawnPoint = spawn("script_model", self.origin);
   spawnPoint.angles = self.angles;
@@ -349,11 +333,9 @@ setFirstInfected(wasChosen) {
   spawnPoint.notTI = true;
   self.setSpawnPoint = spawnPoint;
 
-
   self notify("faux_spawn");
   self.faux_spawn_stance = self getStance();
   self thread maps\mp\gametypes\_playerlogic::spawnPlayer(true);
-
 
   if(wasChosen)
     level.infect_players[self.name] = true;
@@ -370,42 +352,33 @@ setInitialToNormalInfected(gotKill) {
   if(isDefined(gotKill))
     self.changingToRegularInfectedByKill = true;
 
-
   while(!isReallyAlive(self))
     wait(0.05);
-
 
   if(isDefined(self.isCarrying) && self.isCarrying == true) {
     self notify("force_cancel_placement");
     wait(0.05);
   }
 
-
   while(self IsMantling())
     wait(0.05);
-
 
   while(!self isOnGround())
     wait(0.05);
 
-
   while(!isReallyAlive(self))
     wait(0.05);
 
-
   self.pers["gamemodeLoadout"] = level.infect_loadouts["axis"];
-
 
   if(isDefined(self.setSpawnpoint))
     self maps\mp\perks\_perkfunctions::deleteTI(self.setSpawnpoint);
-
 
   spawnPoint = spawn("script_model", self.origin);
   spawnPoint.angles = self.angles;
   spawnPoint.playerSpawnPos = self.origin;
   spawnPoint.notTI = true;
   self.setSpawnPoint = spawnPoint;
-
 
   self notify("faux_spawn");
   self.faux_spawn_stance = self getStance();
@@ -428,12 +401,9 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
   if(processKill) {
     self.teamChangedThisFrame = true;
 
-
     self maps\mp\gametypes\_menus::addToTeam("axis");
 
-
     updateTeamScores();
-
 
     level.infect_players[self.name] = true;
 
@@ -452,7 +422,6 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
       maps\mp\gametypes\_gamescore::givePlayerScore("draft_rogue", attacker, self, true);
       attacker thread maps\mp\gametypes\_rank::giveRankXP("draft_rogue");
     }
-
 
     if(level.infect_teamScores["allies"] > 1) {
       playSoundOnPlayers("mp_enemy_obj_captured", "allies");
@@ -561,9 +530,7 @@ onPlayerDisconnect() {
   self endon("eliminated");
   self waittill("disconnect");
 
-
   updateTeamScores();
-
 
   if(isDefined(self.infect_isBeingChosen) || level.infect_choseFirstInfected) {
     if(level.infect_teamScores["axis"] && level.infect_teamScores["allies"]) {
@@ -639,7 +606,6 @@ updateTeamScores() {
   level.infect_teamScores["allies"] = getNumSurvivors();
   game["teamScores"]["allies"] = level.infect_teamScores["allies"];
   setTeamScore("allies", level.infect_teamScores["allies"]);
-
 
   level.infect_teamScores["axis"] = getNumInfected();
   game["teamScores"]["axis"] = level.infect_teamScores["axis"];

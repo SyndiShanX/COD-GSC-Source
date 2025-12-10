@@ -143,7 +143,7 @@ killedplayer(var_0, var_1, var_2, var_3, var_4) {
     if(isDefined(self.lastkilledby) && self.lastkilledby == var_1)
       revengeevent(var_0);
 
-    if(var_1.idflags & level.idflags_penetration)
+    if(var_1.idflags &level.idflags_penetration)
       bulletpenetrationevent(var_0, var_2);
 
     if(ispointblank(var_1, var_3))

@@ -19,7 +19,7 @@
 #namespace accolades;
 
 function autoexec __init__sytem__() {
-  system::register("accolades", & __init__, & __main__, undefined);
+  system::register("accolades", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -48,9 +48,9 @@ function __init__() {
         break;
       }
     }
-    callback::on_connect( & on_player_connect);
-    callback::on_spawned( & on_player_spawned);
-    callback::on_disconnect( & on_player_disconnect);
+    callback::on_connect(&on_player_connect);
+    callback::on_spawned(&on_player_spawned);
+    callback::on_disconnect(&on_player_disconnect);
     level.var_f8718de3 = ("MISSION_" + toupper(level.mission_name)) + "_";
     level.var_d8f32e57 = int(tablelookup("gamedata/stats/cp/statsmilestones1.csv", 4, level.var_f8718de3 + "UNTOUCHED", 0));
     register(level.var_f8718de3 + "UNTOUCHED", undefined, 1);

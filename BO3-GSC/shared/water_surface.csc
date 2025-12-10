@@ -11,7 +11,7 @@
 #namespace water_surface;
 
 function autoexec __init__sytem__() {
-  system::register("water_surface", & __init__, undefined, undefined);
+  system::register("water_surface", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -20,7 +20,7 @@ function __init__() {
   if(isDefined(level.disablewatersurfacefx) && level.disablewatersurfacefx == 1) {
     return;
   }
-  callback::on_localplayer_spawned( & localplayer_spawned);
+  callback::on_localplayer_spawned(&localplayer_spawned);
 }
 
 function localplayer_spawned(localclientnum) {

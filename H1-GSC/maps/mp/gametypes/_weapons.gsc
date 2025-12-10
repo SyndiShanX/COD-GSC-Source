@@ -1963,7 +1963,7 @@ c4damage(var_0) {
   if(isDefined(var_5) && (issubstr(var_5, "MOD_GRENADE") || issubstr(var_5, "MOD_EXPLOSIVE")))
     self.waschained = 1;
 
-  if(isDefined(var_9) && var_9 & level.idflags_penetration)
+  if(isDefined(var_9) && var_9 &level.idflags_penetration)
     self.wasdamagedfrombulletpenetration = 1;
 
   self.wasdamaged = 1;
@@ -2767,7 +2767,7 @@ minedamagemonitor() {
   if(isDefined(var_4) && (issubstr(var_4, "MOD_GRENADE") || issubstr(var_4, "MOD_EXPLOSIVE")))
     self.waschained = 1;
 
-  if(isDefined(var_8) && var_8 & level.idflags_penetration)
+  if(isDefined(var_8) && var_8 &level.idflags_penetration)
     self.wasdamagedfrombulletpenetration = 1;
 
   self.wasdamaged = 1;

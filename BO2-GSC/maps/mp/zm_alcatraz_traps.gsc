@@ -78,7 +78,7 @@ fan_trap_think() {
           level.trapped_track["fan"] = 1;
           level notify("trap_activated");
           who maps\mp\zombies\_zm_stats::increment_client_stat("prison_fan_trap_used", 0);
-          array_thread(triggers, ::hint_string, & "ZOMBIE_TRAP_ACTIVE");
+          array_thread(triggers, ::hint_string, &"ZOMBIE_TRAP_ACTIVE");
           self.zombie_dmg_trig setvisibletoall();
           self thread activate_fan_trap();
           self.zombie_dmg_trig waittill("trap_finished_" + self.script_string);
@@ -86,12 +86,12 @@ fan_trap_think() {
           self.zombie_dmg_trig notify("fan_trap_finished");
           self.zombie_dmg_trig.active = 0;
           self.zombie_dmg_trig setinvisibletoall();
-          array_thread(triggers, ::hint_string, & "ZOMBIE_TRAP_COOLDOWN");
+          array_thread(triggers, ::hint_string, &"ZOMBIE_TRAP_COOLDOWN");
           wait 25;
           self playSound("zmb_trap_available");
           self notify("available");
           self.zombie_dmg_trig.in_use = 0;
-          array_thread(triggers, ::hint_string, & "ZM_PRISON_FAN_TRAP", self.cost);
+          array_thread(triggers, ::hint_string, &"ZM_PRISON_FAN_TRAP", self.cost);
         }
       }
     }
@@ -286,7 +286,7 @@ acid_trap_think() {
           level.trapped_track["acid"] = 1;
           level notify("trap_activated");
           who maps\mp\zombies\_zm_stats::increment_client_stat("prison_acid_trap_used", 0);
-          array_thread(triggers, ::hint_string, & "ZOMBIE_TRAP_ACTIVE");
+          array_thread(triggers, ::hint_string, &"ZOMBIE_TRAP_ACTIVE");
           self thread activate_acid_trap();
           self.zombie_dmg_trig waittill("acid_trap_fx_done");
           clientnotify(self.script_string + "off");
@@ -302,12 +302,12 @@ acid_trap_think() {
 
           self.zombie_dmg_trig notify("acid_trap_finished");
           self.zombie_dmg_trig.active = 0;
-          array_thread(triggers, ::hint_string, & "ZOMBIE_TRAP_COOLDOWN");
+          array_thread(triggers, ::hint_string, &"ZOMBIE_TRAP_COOLDOWN");
           wait 25;
           self playSound("zmb_trap_available");
           self notify("available");
           self.zombie_dmg_trig.in_use = 0;
-          array_thread(triggers, ::hint_string, & "ZM_PRISON_ACID_TRAP", self.cost);
+          array_thread(triggers, ::hint_string, &"ZM_PRISON_ACID_TRAP", self.cost);
         }
       }
     }

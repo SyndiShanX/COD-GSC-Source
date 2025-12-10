@@ -439,48 +439,48 @@ get_chaos_event_notify_string(omnvar_name, omnvar_value) {
   if(omnvar_name == "ui_chaos_perk") {
     switch (omnvar_value) {
       case 1:
-        return & "ALIEN_CHAOS_PERK_QUICKDRAW";
+        return &"ALIEN_CHAOS_PERK_QUICKDRAW";
       case 2:
-        return & "ALIEN_CHAOS_PERK_STRONGER_MELEE";
+        return &"ALIEN_CHAOS_PERK_STRONGER_MELEE";
       case 3:
-        return & "ALIEN_CHAOS_PERK_TRAP_MASTER";
+        return &"ALIEN_CHAOS_PERK_TRAP_MASTER";
       case 4:
-        return & "ALIEN_CHAOS_PERK_GAS_MASK";
+        return &"ALIEN_CHAOS_PERK_GAS_MASK";
       case 5:
-        return & "ALIEN_CHAOS_PERK_FASTRELOAD";
+        return &"ALIEN_CHAOS_PERK_FASTRELOAD";
       case 6:
-        return & "ALIEN_CHAOS_PERK_BULLET_DAMAGE_1";
+        return &"ALIEN_CHAOS_PERK_BULLET_DAMAGE_1";
       case 7:
-        return & "ALIEN_CHAOS_PERK_STEADY_AIM";
+        return &"ALIEN_CHAOS_PERK_STEADY_AIM";
       case 8:
-        return & "ALIEN_CHAOS_PERK_STALKER";
+        return &"ALIEN_CHAOS_PERK_STALKER";
       case 9:
-        return & "ALIEN_CHAOS_PERK_QUICK_REVIVE";
+        return &"ALIEN_CHAOS_PERK_QUICK_REVIVE";
       case 10:
-        return & "ALIEN_CHAOS_PERK_FAST_REGEN";
+        return &"ALIEN_CHAOS_PERK_FAST_REGEN";
       case 11:
-        return & "ALIEN_CHAOS_PERK_MARATHON";
+        return &"ALIEN_CHAOS_PERK_MARATHON";
       case 12:
-        return & "ALIEN_CHAOS_PERK_MORE_CASH";
+        return &"ALIEN_CHAOS_PERK_MORE_CASH";
       case 13:
-        return & "ALIEN_CHAOS_PERK_BULLET_DAMAGE_2";
+        return &"ALIEN_CHAOS_PERK_BULLET_DAMAGE_2";
       case 14:
-        return & "ALIEN_CHAOS_PERK_AGILITY";
+        return &"ALIEN_CHAOS_PERK_AGILITY";
       case 15:
-        return & "ALIEN_CHAOS_PERK_MORE_HEALTH";
+        return &"ALIEN_CHAOS_PERK_MORE_HEALTH";
       case 16:
-        return & "ALIEN_CHAOS_PERK_FERAL_VISION";
+        return &"ALIEN_CHAOS_PERK_FERAL_VISION";
     }
   } else {
     switch (omnvar_value) {
       case 2:
-        return & "ALIEN_CHAOS_MEGA_KILL";
+        return &"ALIEN_CHAOS_MEGA_KILL";
       case 3:
-        return & "ALIEN_CHAOS_QUAD_KILL";
+        return &"ALIEN_CHAOS_QUAD_KILL";
       case 5:
-        return & "ALIEN_CHAOS_TRIPLE_KILL";
+        return &"ALIEN_CHAOS_TRIPLE_KILL";
       case 10:
-        return & "ALIEN_CHAOS_DOUBLE_KILL";
+        return &"ALIEN_CHAOS_DOUBLE_KILL";
     }
   }
 }
@@ -1228,7 +1228,7 @@ remove_other_chaos_offhand_item(player) {
 }
 
 give_soflam(boxEnt) {
-  self maps\mp\_utility::setLowerMessage("chaos_soflam_hint", & "ALIEN_CHAOS_SOFLAM_HINT", 3);
+  self maps\mp\_utility::setLowerMessage("chaos_soflam_hint", &"ALIEN_CHAOS_SOFLAM_HINT", 3);
   self giveweapon("aliensoflam_mp");
 }
 

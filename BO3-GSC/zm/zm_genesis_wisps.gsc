@@ -31,13 +31,13 @@
 #namespace zm_genesis_wisps;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_wisps", & __init__, & __main__, undefined);
+  system::register("zm_genesis_wisps", &__init__, &__main__, undefined);
 }
 
 function __init__() {
   clientfield::register("toplayer", "set_funfact_fx", 15000, 3, "int");
   clientfield::register("scriptmover", "wisp_fx", 15000, 2, "int");
-  callback::on_disconnect( & on_player_disconnect);
+  callback::on_disconnect(&on_player_disconnect);
 }
 
 function __main__() {
@@ -60,7 +60,7 @@ function function_d1c51308() {
   level.a_wisps["s_trig"] = struct::get_array("s_trig_wisp", "targetname");
   level.a_wisps["s_fx"] = struct::get_array("s_fx_wisp", "targetname");
   foreach(s_trig in level.a_wisps["s_trig"]) {
-    s_unitrigger = s_trig zm_unitrigger::create_unitrigger(&"", 64, & function_836f0458);
+    s_unitrigger = s_trig zm_unitrigger::create_unitrigger(&"", 64, &function_836f0458);
     s_unitrigger.require_look_at = 1;
   }
   level thread function_f61f49b0();
@@ -167,7 +167,7 @@ function function_bce246fa() {
   level.var_e2304a21["s_fx"][2] = struct::get("s_fx_funfact_rich", "targetname");
   level.var_e2304a21["s_fx"][3] = struct::get("s_fx_funfact_take", "targetname");
   foreach(s_trig in level.var_e2304a21["s_trig"]) {
-    s_unitrigger = s_trig zm_unitrigger::create_unitrigger(&"", 64, & function_caef395a);
+    s_unitrigger = s_trig zm_unitrigger::create_unitrigger(&"", 64, &function_caef395a);
     s_unitrigger.require_look_at = 1;
     s_unitrigger.script_int = s_trig.script_int;
   }
@@ -259,29 +259,29 @@ function function_caef395a(e_player) {
 }
 
 function function_a9d6e3ef() {
-  level thread zm_genesis_util::setup_devgui_func("", "", 0, & function_d4b54e53);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_d4b54e53);
-  level thread zm_genesis_util::setup_devgui_func("", "", 2, & function_d4b54e53);
-  level thread zm_genesis_util::setup_devgui_func("", "", 3, & function_d4b54e53);
-  level thread zm_genesis_util::setup_devgui_func("", "", 0, & function_910a409b);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_910a409b);
-  level thread zm_genesis_util::setup_devgui_func("", "", 2, & function_910a409b);
-  level thread zm_genesis_util::setup_devgui_func("", "", 3, & function_910a409b);
-  level thread zm_genesis_util::setup_devgui_func("", "", 0, & function_920920c8);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_920920c8);
-  level thread zm_genesis_util::setup_devgui_func("", "", 2, & function_920920c8);
-  level thread zm_genesis_util::setup_devgui_func("", "", 3, & function_920920c8);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_4701ab9e);
-  level thread zm_genesis_util::setup_devgui_func("", "", 2, & function_4701ab9e);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_76a93e50);
-  level thread zm_genesis_util::setup_devgui_func("", "", 2, & function_76a93e50);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_eaebf31c);
-  level thread zm_genesis_util::setup_devgui_func("", "", 2, & function_eaebf31c);
-  level thread zm_genesis_util::setup_devgui_func("", "", 0, & function_eaebf31c);
-  level thread zm_genesis_util::setup_devgui_func("", "", 0, & function_371c89ce);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_371c89ce);
-  level thread zm_genesis_util::setup_devgui_func("", "", 2, & function_371c89ce);
-  level thread zm_genesis_util::setup_devgui_func("", "", 3, & function_371c89ce);
+  level thread zm_genesis_util::setup_devgui_func("", "", 0, &function_d4b54e53);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_d4b54e53);
+  level thread zm_genesis_util::setup_devgui_func("", "", 2, &function_d4b54e53);
+  level thread zm_genesis_util::setup_devgui_func("", "", 3, &function_d4b54e53);
+  level thread zm_genesis_util::setup_devgui_func("", "", 0, &function_910a409b);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_910a409b);
+  level thread zm_genesis_util::setup_devgui_func("", "", 2, &function_910a409b);
+  level thread zm_genesis_util::setup_devgui_func("", "", 3, &function_910a409b);
+  level thread zm_genesis_util::setup_devgui_func("", "", 0, &function_920920c8);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_920920c8);
+  level thread zm_genesis_util::setup_devgui_func("", "", 2, &function_920920c8);
+  level thread zm_genesis_util::setup_devgui_func("", "", 3, &function_920920c8);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_4701ab9e);
+  level thread zm_genesis_util::setup_devgui_func("", "", 2, &function_4701ab9e);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_76a93e50);
+  level thread zm_genesis_util::setup_devgui_func("", "", 2, &function_76a93e50);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_eaebf31c);
+  level thread zm_genesis_util::setup_devgui_func("", "", 2, &function_eaebf31c);
+  level thread zm_genesis_util::setup_devgui_func("", "", 0, &function_eaebf31c);
+  level thread zm_genesis_util::setup_devgui_func("", "", 0, &function_371c89ce);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_371c89ce);
+  level thread zm_genesis_util::setup_devgui_func("", "", 2, &function_371c89ce);
+  level thread zm_genesis_util::setup_devgui_func("", "", 3, &function_371c89ce);
 }
 
 function function_68f439f5(n_val) {

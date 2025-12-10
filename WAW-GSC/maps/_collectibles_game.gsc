@@ -15,7 +15,7 @@ collectibles_checkpoint_restore() {
   if(host_options == 0 || host_options_enabled == 0) {
     return;
   }
-  if((host_options & (1 << maps\_collectibles::collectible_get_unlock_value("collectible_berserker"))) != 0) {
+  if((host_options &(1 << maps\_collectibles::collectible_get_unlock_value("collectible_berserker"))) != 0) {
     players = get_players();
     for(i = 0; i < players.size; i++) {
       players[i] notify("berserker_end");

@@ -22,14 +22,14 @@ main() {
   maps\_coop_weaponswap::init();
   maps\_destructible_type94truck::init();
   precache_assets();
-  add_start("bunkers", ::start_bunkers, & "STARTS_PEL2_BUNKERS");
-  add_start("flame", ::start_flame, & "STARTS_PEL2_FLAME");
-  add_start("forest", ::start_forest, & "STARTS_PEL2_FOREST");
-  add_start("admin", ::start_admin, & "STARTS_PEL2_ADMIN");
-  add_start("stairs", ::start_debug_stairs, & "STARTS_PEL2_ADMIN");
-  add_start("airfield", ::start_airfield, & "STARTS_PEL2_AIRFIELD");
-  add_start("aaguns", ::start_aaguns, & "STARTS_PEL2_AAGUNS");
-  add_start("napalm", ::start_napalm, & "STARTS_PEL2_NAPALM");
+  add_start("bunkers", ::start_bunkers, &"STARTS_PEL2_BUNKERS");
+  add_start("flame", ::start_flame, &"STARTS_PEL2_FLAME");
+  add_start("forest", ::start_forest, &"STARTS_PEL2_FOREST");
+  add_start("admin", ::start_admin, &"STARTS_PEL2_ADMIN");
+  add_start("stairs", ::start_debug_stairs, &"STARTS_PEL2_ADMIN");
+  add_start("airfield", ::start_airfield, &"STARTS_PEL2_AIRFIELD");
+  add_start("aaguns", ::start_aaguns, &"STARTS_PEL2_AAGUNS");
+  add_start("napalm", ::start_napalm, &"STARTS_PEL2_NAPALM");
   default_start(::mangrove);
   createthreatbiasgroup("players");
   init_callbacks();
@@ -1618,7 +1618,7 @@ player_pickup_flamethrower(guy) {
   flamethrower_pickup = spawn("weapon_m2_flamethrower", flamethrower_origin, 1);
   flamethrower_pickup.angles = (0, 249, -90);
   flamethrower_pickup hide();
-  objective_string(3, & "PEL2_RETRIEVE_FLAME");
+  objective_string(3, &"PEL2_RETRIEVE_FLAME");
   objective_position(3, flamethrower_origin);
   objective_ring(3);
   autosave_by_name("Pel2 pickup flamethrower");
@@ -1977,7 +1977,7 @@ flame_bunker_vo() {
     for(i = 0; i < players.size; i++) {
       if(players[i] HasWeapon("m2_flamethrower")) {
         flag_set("player_got_flamethrower");
-        objective_string(3, & "PEL2_FLAME_BUNKER");
+        objective_string(3, &"PEL2_FLAME_BUNKER");
         objective_position(3, (-281, -7098, -26));
         objective_ring(3);
         break;
@@ -2829,41 +2829,41 @@ init_callbacks() {
 }
 
 setup_objectives() {
-  objective_add(1, "active", & "PEL2_SECURE_MANGROVE_AREA", (4032, -14250, -47));
+  objective_add(1, "active", &"PEL2_SECURE_MANGROVE_AREA", (4032, -14250, -47));
   objective_current(1);
   level waittill("obj_mangrove_complete");
   objective_state(1, "done");
-  objective_add(2, "active", & "PEL2_CLEAR_BUNKERS", (970, -10388, -42));
+  objective_add(2, "active", &"PEL2_CLEAR_BUNKERS", (970, -10388, -42));
   objective_current(2);
   level waittill("obj_bunkers_complete");
   objective_state(2, "done");
-  objective_add(3, "active", & "PEL2_FLAME_MG", (-244.7, -6972.4, -31));
+  objective_add(3, "active", &"PEL2_FLAME_MG", (-244.7, -6972.4, -31));
   objective_current(3);
   level waittill("obj_flame_complete");
-  objective_string(3, & "PEL2_ADVANCE_TOWARDS_AIRFIELD");
+  objective_string(3, &"PEL2_ADVANCE_TOWARDS_AIRFIELD");
   objective_position(3, (-301, -6976, -260));
   level waittill("obj_forest_complete");
   objective_state(3, "done");
-  objective_add(4, "active", & "PEL2_CLEAR_THE_BUILDING", (2605, -602, 37));
+  objective_add(4, "active", &"PEL2_CLEAR_THE_BUILDING", (2605, -602, 37));
   objective_current(4);
   level waittill("obj_building_complete");
-  objective_string(4, & "PEL2_ASSAULT_AIRFIELD");
+  objective_string(4, &"PEL2_ASSAULT_AIRFIELD");
   objective_position(4, (2755, 8112.7, 127));
   level waittill("obj_assault_airfield_complete");
-  objective_string(4, & "PEL2_GET_BAZOOKA");
+  objective_string(4, &"PEL2_GET_BAZOOKA");
   objective_position(4, (2704.9, 4525.2, -23.1));
   objective_ring(4);
   level waittill("obj_airfield_tanks_complete");
-  objective_add(5, "active", & "PEL2_AA_BUNKER", (4091, 7782, 58));
+  objective_add(5, "active", &"PEL2_AA_BUNKER", (4091, 7782, 58));
   objective_current(5);
   flag_wait("trig_last_aa_guys");
-  objective_string(5, & "PEL2_DESTROY_AA_GUNS_4");
+  objective_string(5, &"PEL2_DESTROY_AA_GUNS_4");
   wait_network_frame();
   level thread maps\pel2_airfield::last_aa_guns_objective();
   level waittill("obj_airfield_complete");
   objective_state(5, "done");
   flag_wait("last_counterattack_start");
-  objective_add(6, "active", & "PEL2_COUNTERATTACK", (2251.1, 8557.9, 124));
+  objective_add(6, "active", &"PEL2_COUNTERATTACK", (2251.1, 8557.9, 124));
   objective_current(6);
   level waittill("obj_counterattack_complete");
   objective_state(6, "done");

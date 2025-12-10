@@ -12,7 +12,7 @@
 #namespace ballistic_knife;
 
 function init_shared() {
-  callback::add_weapon_watcher( & createballisticknifewatcher);
+  callback::add_weapon_watcher(&createballisticknifewatcher);
 }
 
 function onspawn(watcher, player) {
@@ -96,7 +96,7 @@ function onspawnretrievetrigger(watcher, player) {
   } else {
     pickup_trigger linkto(retrievable_model);
   }
-  retrievable_model thread watch_use_trigger(pickup_trigger, retrievable_model, & pick_up, watcher.pickupsoundplayer, watcher.pickupsound);
+  retrievable_model thread watch_use_trigger(pickup_trigger, retrievable_model, &pick_up, watcher.pickupsoundplayer, watcher.pickupsound);
   retrievable_model thread watch_shutdown();
 }
 
@@ -204,8 +204,8 @@ function updateretrievetrigger() {
 
 function createballisticknifewatcher() {
   watcher = self weaponobjects::createuseweaponobjectwatcher("knife_ballistic", self.team);
-  watcher.onspawn = & onspawn;
-  watcher.ondetonatecallback = & weaponobjects::deleteent;
-  watcher.onspawnretrievetriggers = & onspawnretrievetrigger;
+  watcher.onspawn = &onspawn;
+  watcher.ondetonatecallback = &weaponobjects::deleteent;
+  watcher.onspawnretrievetriggers = &onspawnretrievetrigger;
   watcher.storedifferentobject = 1;
 }

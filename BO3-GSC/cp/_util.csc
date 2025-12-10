@@ -10,7 +10,7 @@
 
 function set_streamer_hint_function(func, number_of_zones) {
   level.func_streamer_hint = func;
-  clientfield::register("world", "force_streamer", 1, getminbitcountfornum(number_of_zones), "int", & _force_streamer, 0, 0);
+  clientfield::register("world", "force_streamer", 1, getminbitcountfornum(number_of_zones), "int", &_force_streamer, 0, 0);
 }
 
 function _force_streamer(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojumpid) {
@@ -27,8 +27,8 @@ function init_breath_fx() {
   level.cold_breath = [];
   level._effect["player_cold_breath"] = "player/fx_plyr_breath_steam_1p";
   level._effect["ai_cold_breath"] = "player/fx_plyr_breath_steam_3p";
-  clientfield::register("toplayer", "player_cold_breath", 1, 1, "int", & function_9d577661, 0, 0);
-  clientfield::register("actor", "ai_cold_breath", 1, 1, "counter", & function_ddc76be5, 0, 0);
+  clientfield::register("toplayer", "player_cold_breath", 1, 1, "int", &function_9d577661, 0, 0);
+  clientfield::register("actor", "ai_cold_breath", 1, 1, "counter", &function_ddc76be5, 0, 0);
 }
 
 function function_9d577661(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

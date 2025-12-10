@@ -18,7 +18,7 @@ func_591D(param_00) {
   var_03 scripts\mp\gameobjects::allowuse("enemy");
   var_03 scripts\mp\gameobjects::cancontestclaim(1);
   var_03 scripts\mp\gameobjects::setusetime(level.flagcapturetime);
-  var_03 scripts\mp\gameobjects::setusetext( & "MP_SECURING_POSITION");
+  var_03 scripts\mp\gameobjects::setusetext(&"MP_SECURING_POSITION");
   var_04 = var_03 scripts\mp\gameobjects::getlabel();
   var_03.label = var_04;
   var_03 scripts\mp\gameobjects::setzonestatusicons(level.icondefend + var_04, level.iconneutral + var_04);

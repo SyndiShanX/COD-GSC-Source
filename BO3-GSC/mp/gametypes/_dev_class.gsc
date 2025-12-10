@@ -29,15 +29,15 @@ function dev_cac_init() {
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_body, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_body, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_head, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_head, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_character, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_character, "");
         break;
       }
       case "": {
@@ -57,27 +57,27 @@ function dev_cac_init() {
         break;
       }
       case "": {
-        dev_cac_set_model_range( & sort_greatest, "");
+        dev_cac_set_model_range(&sort_greatest, "");
         break;
       }
       case "": {
-        dev_cac_set_model_range( & sort_least, "");
+        dev_cac_set_model_range(&sort_least, "");
         break;
       }
       case "": {
-        dev_cac_set_model_range( & sort_greatest, "");
+        dev_cac_set_model_range(&sort_greatest, "");
         break;
       }
       case "": {
-        dev_cac_set_model_range( & sort_least, "");
+        dev_cac_set_model_range(&sort_least, "");
         break;
       }
       case "": {
-        dev_cac_set_model_range( & sort_greatest, "");
+        dev_cac_set_model_range(&sort_greatest, "");
         break;
       }
       case "": {
-        dev_cac_set_model_range( & sort_least, "");
+        dev_cac_set_model_range(&sort_least, "");
         break;
       }
       case "": {
@@ -86,39 +86,39 @@ function dev_cac_init() {
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
         break;
       }
       case "": {
-        host thread dev_cac_dpad_think("", & dev_cac_cycle_render_options, "");
+        host thread dev_cac_dpad_think("", &dev_cac_cycle_render_options, "");
         break;
       }
       case "": {

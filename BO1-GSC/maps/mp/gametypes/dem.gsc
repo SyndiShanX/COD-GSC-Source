@@ -164,22 +164,22 @@ onStartGameType() {
     game["defenders"] = oldAttackers;
   }
   setClientNameMode("manual_change");
-  game["strings"]["target_destroyed"] = & "MP_TARGET_DESTROYED";
-  game["strings"]["bomb_defused"] = & "MP_BOMB_DEFUSED";
+  game["strings"]["target_destroyed"] = &"MP_TARGET_DESTROYED";
+  game["strings"]["bomb_defused"] = &"MP_BOMB_DEFUSED";
   precacheString(game["strings"]["target_destroyed"]);
   precacheString(game["strings"]["bomb_defused"]);
   level._effect["bombexplosion"] = loadfx("maps/mp_maps/fx_mp_exp_bomb");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveText(game["attackers"], & "OBJECTIVES_DEM_ATTACKER");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveText(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveText(game["attackers"], &"OBJECTIVES_DEM_ATTACKER");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveText(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
   if(level.splitscreen) {
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText(game["attackers"], & "OBJECTIVES_DEM_ATTACKER");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText(game["defenders"], & "OBJECTIVES_SD_DEFENDER");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText(game["attackers"], &"OBJECTIVES_DEM_ATTACKER");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
   } else {
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText(game["attackers"], & "OBJECTIVES_DEM_ATTACKER_SCORE");
-    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText(game["defenders"], & "OBJECTIVES_SD_DEFENDER_SCORE");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText(game["attackers"], &"OBJECTIVES_DEM_ATTACKER_SCORE");
+    maps\mp\gametypes\_globallogic_ui::setObjectiveScoreText(game["defenders"], &"OBJECTIVES_SD_DEFENDER_SCORE");
   }
-  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText(game["attackers"], & "OBJECTIVES_DEM_ATTACKER_HINT");
-  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText(game["defenders"], & "OBJECTIVES_SD_DEFENDER_HINT");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText(game["attackers"], &"OBJECTIVES_DEM_ATTACKER_HINT");
+  maps\mp\gametypes\_globallogic_ui::setObjectiveHintText(game["defenders"], &"OBJECTIVES_SD_DEFENDER_HINT");
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
   maps\mp\gametypes\_spawnlogic::dropSpawnPoints("mp_dem_spawn_attacker_a");

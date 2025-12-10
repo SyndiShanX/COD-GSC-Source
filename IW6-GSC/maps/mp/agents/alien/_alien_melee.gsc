@@ -843,7 +843,7 @@ DoPain(iDFlags, iDamage, sMeansOfDeath, vDir, sHitLoc) {
     self ScrAgentSetAnimMode("anim deltas");
   }
 
-  is_stun = iDFlags & level.iDFLAGS_STUN;
+  is_stun = iDFlags &level.iDFLAGS_STUN;
 
   animStateInfo = get_melee_painState_info(iDamage, sMeansOfDeath, is_stun);
   animIndex = getMeleePainAnimIndex(animStateInfo["anim_state"], vDir, sHitLoc);

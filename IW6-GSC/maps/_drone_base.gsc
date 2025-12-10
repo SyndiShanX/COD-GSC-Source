@@ -14,7 +14,7 @@ drone_give_soul() {
 
   if(self.team == "allies") {
     maps\_names::get_name();
-    self setlookattext(self.name, & "");
+    self setlookattext(self.name, &"");
   }
 
   if(isDefined(level.dronecallbackthread))

@@ -80,9 +80,9 @@ section_flag_inits() {
 }
 
 section_precache() {
-  maps\_utility::add_hint_string("hint_ascend_init", & "BLACK_ICE_ASCEND_INIT", ::hint_ascend_init_func);
-  maps\_utility::add_hint_string("hint_ascend_launch", & "BLACK_ICE_ASCEND_LAUNCH", ::hint_ascend_func);
-  maps\_utility::add_hint_string("hint_ascend", & "BLACK_ICE_ASCEND_ASCEND", ::hint_ascend_func);
+  maps\_utility::add_hint_string("hint_ascend_init", &"BLACK_ICE_ASCEND_INIT", ::hint_ascend_init_func);
+  maps\_utility::add_hint_string("hint_ascend_launch", &"BLACK_ICE_ASCEND_LAUNCH", ::hint_ascend_func);
+  maps\_utility::add_hint_string("hint_ascend", &"BLACK_ICE_ASCEND_ASCEND", ::hint_ascend_func);
   precachemodel("black_ice_rope_prop");
   precachemodel("black_ice_rope_prop_obj");
 }

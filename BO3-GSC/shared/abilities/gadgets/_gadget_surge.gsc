@@ -15,17 +15,17 @@
 #namespace _gadget_surge;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_surge", & __init__, undefined, undefined);
+  system::register("gadget_surge", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(21, & gadget_surge_on, & gadget_surge_off);
-  ability_player::register_gadget_possession_callbacks(21, & gadget_surge_on_give, & gadget_surge_on_take);
-  ability_player::register_gadget_flicker_callbacks(21, & gadget_surge_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(21, & gadget_surge_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(21, & gadget_surge_is_flickering);
-  ability_player::register_gadget_primed_callbacks(21, & gadget_surge_is_primed);
-  callback::on_connect( & gadget_surge_on_connect);
+  ability_player::register_gadget_activation_callbacks(21, &gadget_surge_on, &gadget_surge_off);
+  ability_player::register_gadget_possession_callbacks(21, &gadget_surge_on_give, &gadget_surge_on_take);
+  ability_player::register_gadget_flicker_callbacks(21, &gadget_surge_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(21, &gadget_surge_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(21, &gadget_surge_is_flickering);
+  ability_player::register_gadget_primed_callbacks(21, &gadget_surge_is_primed);
+  callback::on_connect(&gadget_surge_on_connect);
 }
 
 function gadget_surge_is_inuse(slot) {

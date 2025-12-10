@@ -577,7 +577,7 @@ afchase_objectives() {
     case "boatdrive_end":
     case "boatdrive_end_test":
       // Don't let Shepherd get away.
-      Objective_Add(obj("pursue"), "current", & "AF_CHASE_PURSUE");
+      Objective_Add(obj("pursue"), "current", &"AF_CHASE_PURSUE");
       objective_onentity(obj("pursue"), level.enemy_boat, (0, 0, 160));
 
       flag_wait("player_in_sight_of_boarding");

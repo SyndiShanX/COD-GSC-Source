@@ -885,7 +885,7 @@ item_keep_rotating(param_00) {
 fuse_pick_up_monitor(param_00, param_01) {
   param_00 endon("death");
   param_00 makeusable();
-  param_00 sethintstring( & "CP_ZMB_UFO_PICK_UP_FUSE");
+  param_00 sethintstring(&"CP_ZMB_UFO_PICK_UP_FUSE");
   foreach(var_03 in level.players) {
     var_03 thread scripts\cp\cp_vo::add_to_nag_vo("nag_ufo_fusefail", "zmb_comment_vo", 60, 15, 6, 1);
   }
@@ -924,7 +924,7 @@ soul_key_pick_up_monitor(param_00, param_01) {
   param_00 endon("death");
   var_02 = 137;
   param_00 makeusable();
-  param_00 sethintstring( & "CP_ZMB_UFO_PICK_UP_SOUL_KEY");
+  param_00 sethintstring(&"CP_ZMB_UFO_PICK_UP_SOUL_KEY");
   for(;;) {
     param_00 waittill("trigger", var_03);
     if(isplayer(var_03)) {
@@ -1024,7 +1024,7 @@ soulkey_quest_vo(param_00) {
 
 pap_upgrade_hintstring(param_00, param_01) {
   if(isDefined(level.num_fuse_in_possession) && level.num_fuse_in_possession > 0) {
-    return & "CP_ZMB_INTERACTIONS_PAP_UPGRADE";
+    return &"CP_ZMB_INTERACTIONS_PAP_UPGRADE";
   }
 
   return "";

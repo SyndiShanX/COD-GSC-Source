@@ -176,7 +176,7 @@ intro() {
   level thread vtol_hatch_open();
   level thread vtol_explode2();
   level thread intro_fxanims();
-  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, & "plane_jetwing_haiti");
+  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, &"plane_jetwing_haiti");
   luinotifyevent(&"hud_jetwing_alpha", 1, 50);
   level thread maps\_audio::switch_music_wait("HAITI_FLIGHT", 56);
   level waittill("first_objective");
@@ -418,7 +418,7 @@ delay_intro_fog(time) {
 add_fake_jetwing_hud() {
   level.player waittill("exit_vehicle");
   wait 0.05;
-  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, & "plane_jetwing_haiti");
+  luinotifyevent(&"hud_update_vehicle_custom", 2, 1, &"plane_jetwing_haiti");
 }
 
 #using_animtree("vehicles");

@@ -13,16 +13,16 @@
 #namespace zm_castle_ee_side;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_ee_side", & __init__, undefined, undefined);
+  system::register("zm_zod_ee_side", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level._effect["clocktower_flash"] = "dlc1/castle/fx_lightning_strike_weathervane";
   level._effect["exploding_death"] = "dlc1/zmb_weapon/fx_ee_plunger_teleport_impact";
-  clientfield::register("world", "clocktower_flash", 5000, 1, "counter", & clocktower_flash, 0, 0);
-  clientfield::register("world", "sndUEB", 5000, 1, "int", & sndueb, 0, 0);
-  clientfield::register("actor", "plunger_exploding_ai", 5000, 1, "int", & callback_exploding_death_fx, 0, 0);
-  clientfield::register("toplayer", "plunger_charged_strike", 5000, 1, "counter", & plunger_charged_strike, 0, 0);
+  clientfield::register("world", "clocktower_flash", 5000, 1, "counter", &clocktower_flash, 0, 0);
+  clientfield::register("world", "sndUEB", 5000, 1, "int", &sndueb, 0, 0);
+  clientfield::register("actor", "plunger_exploding_ai", 5000, 1, "int", &callback_exploding_death_fx, 0, 0);
+  clientfield::register("toplayer", "plunger_charged_strike", 5000, 1, "counter", &plunger_charged_strike, 0, 0);
 }
 
 function clocktower_flash(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

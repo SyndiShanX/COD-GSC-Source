@@ -16,16 +16,16 @@
 
 function init() {
   level.weaponzmcymbalmonkey = getweapon("cymbal_monkey");
-  zm_weapons::register_zombie_weapon_callback(level.weaponzmcymbalmonkey, & player_give_cymbal_monkey);
+  zm_weapons::register_zombie_weapon_callback(level.weaponzmcymbalmonkey, &player_give_cymbal_monkey);
   if(!cymbal_monkey_exists(level.weaponzmcymbalmonkey)) {
     return;
   }
   level.w_cymbal_monkey_upgraded = getweapon("cymbal_monkey_upgraded");
   if(cymbal_monkey_exists(level.w_cymbal_monkey_upgraded)) {
-    zm_weapons::register_zombie_weapon_callback(level.w_cymbal_monkey_upgraded, & player_give_cymbal_monkey_upgraded);
+    zm_weapons::register_zombie_weapon_callback(level.w_cymbal_monkey_upgraded, &player_give_cymbal_monkey_upgraded);
     level._effect["monkey_bass"] = "dlc3/stalingrad/fx_cymbal_monkey_radial_pulse";
   }
-  level.zombiemode_devgui_cymbal_monkey_give = & player_give_cymbal_monkey;
+  level.zombiemode_devgui_cymbal_monkey_give = &player_give_cymbal_monkey;
   if(isDefined(level.legacy_cymbal_monkey) && level.legacy_cymbal_monkey) {
     level.cymbal_monkey_model = "weapon_zombie_monkey_bomb";
   } else {

@@ -14,7 +14,7 @@
 #namespace zm_genesis_sound;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_sound", & __init__, undefined, undefined);
+  system::register("zm_genesis_sound", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -29,7 +29,7 @@ function function_bab3ea62() {
   level thread function_53b9afad();
   level thread function_c959aa5f();
   var_29085ef = getEntArray(0, "sndMusicTrig", "targetname");
-  array::thread_all(var_29085ef, & sndmusictrig);
+  array::thread_all(var_29085ef, &sndmusictrig);
 }
 
 function sndmusictrig() {
@@ -86,7 +86,7 @@ function function_849aa028() {
   level.var_f860f73b = 1;
   level thread function_899d68c0();
   var_29085ef = getEntArray(0, "sndMusicTrig", "targetname");
-  array::thread_all(var_29085ef, & function_ad9a8fa6);
+  array::thread_all(var_29085ef, &function_ad9a8fa6);
 }
 
 function function_ad9a8fa6() {

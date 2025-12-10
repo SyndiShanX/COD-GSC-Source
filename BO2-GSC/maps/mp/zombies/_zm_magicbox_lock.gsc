@@ -14,7 +14,7 @@ init() {
   precachemodel("p6_anim_zm_al_magic_box_lock_red");
   level.locked_magic_box_cost = 2000;
   level.custom_magicbox_state_handler = maps\mp\zombies\_zm_magicbox_lock::set_locked_magicbox_state;
-  add_zombie_hint("locked_magic_box_cost", & "ZOMBIE_LOCKED_COST_2000");
+  add_zombie_hint("locked_magic_box_cost", &"ZOMBIE_LOCKED_COST_2000");
 }
 
 watch_for_lock() {

@@ -231,9 +231,9 @@ init_combat_resource_overrides() {
   config.modelPlacementFailed = "ims_scorpion_body_iw6_placement_failed";
   config.modelDestroyed = "ims_scorpion_body_iw6";
   config.modelBombSquad = "ims_scorpion_body_iw6_bombsquad";
-  config.hintString = & "ALIEN_COLLECTIBLES_IMS_PICKUP";
-  config.placeString = & "ALIEN_COLLECTIBLES_IMS_PLACE";
-  config.cannotPlaceString = & "ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
+  config.hintString = &"ALIEN_COLLECTIBLES_IMS_PICKUP";
+  config.placeString = &"ALIEN_COLLECTIBLES_IMS_PLACE";
+  config.cannotPlaceString = &"ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
   config.streakName = "alien_ims";
   config.splashName = "used_ims";
   config.lifeSpan = 600.0;
@@ -266,9 +266,9 @@ init_combat_resource_overrides() {
   config.modelPlacementFailed = "ims_scorpion_body_iw6_placement_failed";
   config.modelDestroyed = "ims_scorpion_body_iw6";
   config.modelBombSquad = "ims_scorpion_body_iw6_bombsquad";
-  config.hintString = & "ALIEN_COLLECTIBLES_IMS_PICKUP";
-  config.placeString = & "ALIEN_COLLECTIBLES_IMS_PLACE";
-  config.cannotPlaceString = & "ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
+  config.hintString = &"ALIEN_COLLECTIBLES_IMS_PICKUP";
+  config.placeString = &"ALIEN_COLLECTIBLES_IMS_PLACE";
+  config.cannotPlaceString = &"ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
   config.streakName = "alien_ims_1";
   config.splashName = "used_ims";
   config.lifeSpan = 600.0;
@@ -301,9 +301,9 @@ init_combat_resource_overrides() {
   config.modelPlacementFailed = "ims_scorpion_body_iw6_placement_failed";
   config.modelDestroyed = "ims_scorpion_body_iw6";
   config.modelBombSquad = "ims_scorpion_body_iw6_bombsquad";
-  config.hintString = & "ALIEN_COLLECTIBLES_IMS_PICKUP";
-  config.placeString = & "ALIEN_COLLECTIBLES_IMS_PLACE";
-  config.cannotPlaceString = & "ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
+  config.hintString = &"ALIEN_COLLECTIBLES_IMS_PICKUP";
+  config.placeString = &"ALIEN_COLLECTIBLES_IMS_PLACE";
+  config.cannotPlaceString = &"ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
   config.streakName = "alien_ims_2";
   config.splashName = "used_ims";
   config.lifeSpan = 600.0;
@@ -336,9 +336,9 @@ init_combat_resource_overrides() {
   config.modelPlacementFailed = "ims_scorpion_body_iw6_placement_failed";
   config.modelDestroyed = "ims_scorpion_body_iw6";
   config.modelBombSquad = "ims_scorpion_body_iw6_bombsquad";
-  config.hintString = & "ALIEN_COLLECTIBLES_IMS_PICKUP";
-  config.placeString = & "ALIEN_COLLECTIBLES_IMS_PLACE";
-  config.cannotPlaceString = & "ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
+  config.hintString = &"ALIEN_COLLECTIBLES_IMS_PICKUP";
+  config.placeString = &"ALIEN_COLLECTIBLES_IMS_PLACE";
+  config.cannotPlaceString = &"ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
   config.streakName = "alien_ims_3";
   config.splashName = "used_ims";
   config.lifeSpan = 600.0;
@@ -371,9 +371,9 @@ init_combat_resource_overrides() {
   config.modelPlacementFailed = "ims_scorpion_body_iw6_placement_failed";
   config.modelDestroyed = "ims_scorpion_body_iw6";
   config.modelBombSquad = "ims_scorpion_body_iw6_bombsquad";
-  config.hintString = & "ALIEN_COLLECTIBLES_IMS_PICKUP";
-  config.placeString = & "ALIEN_COLLECTIBLES_IMS_PLACE";
-  config.cannotPlaceString = & "ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
+  config.hintString = &"ALIEN_COLLECTIBLES_IMS_PICKUP";
+  config.placeString = &"ALIEN_COLLECTIBLES_IMS_PLACE";
+  config.cannotPlaceString = &"ALIEN_COLLECTIBLES_IMS_CANNOT_PLACE";
   config.streakName = "alien_ims_4";
   config.splashName = "used_ims";
   config.lifeSpan = 600.0;
@@ -562,17 +562,17 @@ init_combat_resource_overrides() {
   level.ballDroneSettings["alien_ball_drone_4"].fxId_light1["enemy"] = LoadFX("vfx/gameplay/mp/killstreaks/vfx_light_detonator_blink");
   level.ballDroneSettings["alien_ball_drone_4"].fxId_light1["friendly"] = LoadFX("fx/misc/light_mine_blink_friendly");
 
-  level.boxSettings["deployable_vest"].hintString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_VEST_PICKUP";
-  level.boxSettings["deployable_vest"].capturingString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_VEST_GETTING";
-  level.boxSettings["deployable_vest"].eventString = & "ALIEN_COLLECTIBLES_DEPLOYED_VEST";
+  level.boxSettings["deployable_vest"].hintString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_VEST_PICKUP";
+  level.boxSettings["deployable_vest"].capturingString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_VEST_GETTING";
+  level.boxSettings["deployable_vest"].eventString = &"ALIEN_COLLECTIBLES_DEPLOYED_VEST";
 
-  level.boxSettings["deployable_ammo"].hintString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_PICKUP";
-  level.boxSettings["deployable_ammo"].capturingString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKING";
-  level.boxSettings["deployable_ammo"].eventString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN";
+  level.boxSettings["deployable_ammo"].hintString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_PICKUP";
+  level.boxSettings["deployable_ammo"].capturingString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKING";
+  level.boxSettings["deployable_ammo"].eventString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_AMMO_TAKEN";
 
-  level.boxSettings["deployable_juicebox"].hintString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_PICKUP";
-  level.boxSettings["deployable_juicebox"].capturingString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_TAKING";
-  level.boxSettings["deployable_juicebox"].eventString = & "ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_TAKEN";
+  level.boxSettings["deployable_juicebox"].hintString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_PICKUP";
+  level.boxSettings["deployable_juicebox"].capturingString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_TAKING";
+  level.boxSettings["deployable_juicebox"].eventString = &"ALIEN_COLLECTIBLES_DEPLOYABLE_BOOST_TAKEN";
 
   level.boxSettings["deployable_ammo"].deathDamageMax = undefined;
 
@@ -954,7 +954,7 @@ Use_dpad_team_currency(def, rank) {
 
 CanPurchase_dpad_riotshield(def, rank) {
   if(self.hasRiotShield) {
-    self setLowerMessage("riot_shield_equipped", & "ALIEN_COLLECTIBLES_RIOT_SHIELD_EQUIPPED", 3);
+    self setLowerMessage("riot_shield_equipped", &"ALIEN_COLLECTIBLES_RIOT_SHIELD_EQUIPPED", 3);
     return false;
   }
 

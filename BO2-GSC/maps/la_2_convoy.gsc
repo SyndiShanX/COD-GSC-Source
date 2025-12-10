@@ -484,7 +484,7 @@ potus_death() {
   wait 1;
 
   if(level.skipto_point != "f35_eject") {
-    setdvar("ui_deadquote", & "LA_2_OBJ_PROTECT_FAIL");
+    setdvar("ui_deadquote", &"LA_2_OBJ_PROTECT_FAIL");
     missionfailed();
   }
 }

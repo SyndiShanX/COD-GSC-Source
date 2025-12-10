@@ -29,7 +29,7 @@
 #namespace zm_stalingrad_audio;
 
 function autoexec __init__sytem__() {
-  system::register("zm_stalingrad_audio", & __init__, undefined, undefined);
+  system::register("zm_stalingrad_audio", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -38,7 +38,7 @@ function __init__() {
   level flag::init("ballerina_ready");
   level.var_bf88fef7 = 0;
   level.var_a31a784f = [];
-  level.monkey_song_override = & function_24ff7a78;
+  level.monkey_song_override = &function_24ff7a78;
 }
 
 function main() {
@@ -55,7 +55,7 @@ function on_player_spawned() {}
 function function_af4c67d() {
   level.var_c128c3f5 = 0;
   level.var_9d74f1a7 = struct::get_array("side_ee_song_vodka", "targetname");
-  array::thread_all(level.var_9d74f1a7, & function_5583a127);
+  array::thread_all(level.var_9d74f1a7, &function_5583a127);
   while(true) {
     level waittill("hash_9727ab41");
     if(level.var_c128c3f5 == level.var_9d74f1a7.size) {
@@ -94,7 +94,7 @@ function function_81b46338() {
 function function_41f49ee8() {
   level.var_62e63d78 = 0;
   level.var_68982832 = struct::get_array("side_ee_song_card", "targetname");
-  array::thread_all(level.var_68982832, & function_f021c688);
+  array::thread_all(level.var_68982832, &function_f021c688);
   while(true) {
     level waittill("hash_ce64d360");
     if(level.var_62e63d78 == level.var_68982832.size) {
@@ -151,7 +151,7 @@ function function_ae93bb6d() {
   if(!isDefined(var_8e47507d)) {
     return;
   }
-  array::thread_all(var_8e47507d, & function_d75eac4e);
+  array::thread_all(var_8e47507d, &function_d75eac4e);
 }
 
 function function_d75eac4e() {

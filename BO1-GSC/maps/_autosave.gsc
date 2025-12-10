@@ -19,9 +19,9 @@ autosave_description() {
 
 autosave_names(num) {
   if(num == 0) {
-    savedescription = & "AUTOSAVE_GAME";
+    savedescription = &"AUTOSAVE_GAME";
   } else {
-    savedescription = & "AUTOSAVE_NOGAME";
+    savedescription = &"AUTOSAVE_NOGAME";
   }
   return savedescription;
 }
@@ -46,7 +46,7 @@ start_level_save() {
   for(i = 0; i < players.size; i++) {
     players[i].savedVisionSet = players[i] getvisionSetNaked();
   }
-  SaveGame("levelstart", & "AUTOSAVE_LEVELSTART", imagename, true);
+  SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", imagename, true);
   setDvar("ui_grenade_death", "0");
   println("Saving level start saved game");
   flag_clear("game_saving");

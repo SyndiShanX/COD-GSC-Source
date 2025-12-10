@@ -18,7 +18,7 @@
 #namespace zm_zod_sword;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_sword", & __init__, undefined, undefined);
+  system::register("zm_zod_sword", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -27,28 +27,28 @@ function __init__() {
   level._effect["sword_quest_ground_glow_white"] = "zombie/fx_sword_quest_egg_ground_whitepedestal_zod_zmb";
   level._effect["sword_quest_ground_fire_white"] = "zombie/fx_sword_quest_egg_ground_whitefire_zod_zmb";
   level._effect["sword_quest_sword_glow"] = "zombie/fx_sword_quest_glow_zod_zmb";
-  clientfield::register("scriptmover", "zod_egg_glow", 1, 1, "int", & sword_egg_glow, 0, 0);
-  clientfield::register("scriptmover", "zod_egg_soul", 1, 1, "int", & blood_soul_fx, 0, 0);
-  clientfield::register("scriptmover", "sword_statue_glow", 1, 1, "int", & sword_statue_glow, 0, 0);
+  clientfield::register("scriptmover", "zod_egg_glow", 1, 1, "int", &sword_egg_glow, 0, 0);
+  clientfield::register("scriptmover", "zod_egg_soul", 1, 1, "int", &blood_soul_fx, 0, 0);
+  clientfield::register("scriptmover", "sword_statue_glow", 1, 1, "int", &sword_statue_glow, 0, 0);
   n_bits = getminbitcountfornum(5);
-  clientfield::register("toplayer", "magic_circle_state_0", 1, n_bits, "int", & function_528aad40, 0, 1);
-  clientfield::register("toplayer", "magic_circle_state_1", 1, n_bits, "int", & function_1d308217, 0, 1);
-  clientfield::register("toplayer", "magic_circle_state_2", 1, n_bits, "int", & function_b17464d4, 0, 1);
-  clientfield::register("toplayer", "magic_circle_state_3", 1, n_bits, "int", & function_b6499939, 0, 1);
+  clientfield::register("toplayer", "magic_circle_state_0", 1, n_bits, "int", &function_528aad40, 0, 1);
+  clientfield::register("toplayer", "magic_circle_state_1", 1, n_bits, "int", &function_1d308217, 0, 1);
+  clientfield::register("toplayer", "magic_circle_state_2", 1, n_bits, "int", &function_b17464d4, 0, 1);
+  clientfield::register("toplayer", "magic_circle_state_3", 1, n_bits, "int", &function_b6499939, 0, 1);
   n_bits = getminbitcountfornum(9);
-  clientfield::register("world", "keeper_quest_state_0", 1, n_bits, "int", & function_9ba2b995, 0, 1);
-  clientfield::register("world", "keeper_quest_state_1", 1, n_bits, "int", & function_fd8ec03a, 0, 1);
-  clientfield::register("world", "keeper_quest_state_2", 1, n_bits, "int", & function_32002235, 0, 1);
-  clientfield::register("world", "keeper_quest_state_3", 1, n_bits, "int", & function_4fd5e276, 0, 1);
+  clientfield::register("world", "keeper_quest_state_0", 1, n_bits, "int", &function_9ba2b995, 0, 1);
+  clientfield::register("world", "keeper_quest_state_1", 1, n_bits, "int", &function_fd8ec03a, 0, 1);
+  clientfield::register("world", "keeper_quest_state_2", 1, n_bits, "int", &function_32002235, 0, 1);
+  clientfield::register("world", "keeper_quest_state_3", 1, n_bits, "int", &function_4fd5e276, 0, 1);
   n_bits = getminbitcountfornum(4);
   clientfield::register("world", "keeper_egg_location_0", 1, n_bits, "int", undefined, 0, 1);
   clientfield::register("world", "keeper_egg_location_1", 1, n_bits, "int", undefined, 0, 1);
   clientfield::register("world", "keeper_egg_location_2", 1, n_bits, "int", undefined, 0, 1);
   clientfield::register("world", "keeper_egg_location_3", 1, n_bits, "int", undefined, 0, 1);
-  clientfield::register("toplayer", "ZM_ZOD_UI_LVL1_SWORD_PICKUP", 1, 1, "int", & zm_utility::zm_ui_infotext, 0, 1);
-  clientfield::register("toplayer", "ZM_ZOD_UI_LVL1_EGG_PICKUP", 1, 1, "int", & zm_utility::zm_ui_infotext, 0, 1);
-  clientfield::register("toplayer", "ZM_ZOD_UI_LVL2_SWORD_PICKUP", 1, 1, "int", & zm_utility::zm_ui_infotext, 0, 1);
-  clientfield::register("toplayer", "ZM_ZOD_UI_LVL2_EGG_PICKUP", 1, 1, "int", & zm_utility::zm_ui_infotext, 0, 1);
+  clientfield::register("toplayer", "ZM_ZOD_UI_LVL1_SWORD_PICKUP", 1, 1, "int", &zm_utility::zm_ui_infotext, 0, 1);
+  clientfield::register("toplayer", "ZM_ZOD_UI_LVL1_EGG_PICKUP", 1, 1, "int", &zm_utility::zm_ui_infotext, 0, 1);
+  clientfield::register("toplayer", "ZM_ZOD_UI_LVL2_SWORD_PICKUP", 1, 1, "int", &zm_utility::zm_ui_infotext, 0, 1);
+  clientfield::register("toplayer", "ZM_ZOD_UI_LVL2_EGG_PICKUP", 1, 1, "int", &zm_utility::zm_ui_infotext, 0, 1);
   level.var_e91b9e85 = [];
   level.var_e91b9e85[0] = "wpn_t7_zmb_zod_sword2_box_world";
   level.var_e91b9e85[1] = "wpn_t7_zmb_zod_sword2_det_world";

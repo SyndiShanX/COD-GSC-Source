@@ -11,7 +11,7 @@
 #namespace zm_perk_staminup;
 
 function autoexec __init__sytem__() {
-  system::register("zm_perk_staminup", & __init__, undefined, undefined);
+  system::register("zm_perk_staminup", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -19,9 +19,9 @@ function __init__() {
 }
 
 function enable_staminup_perk_for_level() {
-  zm_perks::register_perk_clientfields("specialty_staminup", & staminup_client_field_func, & staminup_callback_func);
+  zm_perks::register_perk_clientfields("specialty_staminup", &staminup_client_field_func, &staminup_callback_func);
   zm_perks::register_perk_effects("specialty_staminup", "marathon_light");
-  zm_perks::register_perk_init_thread("specialty_staminup", & init_staminup);
+  zm_perks::register_perk_init_thread("specialty_staminup", &init_staminup);
 }
 
 function init_staminup() {

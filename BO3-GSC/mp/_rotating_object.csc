@@ -11,16 +11,16 @@
 #namespace rotating_object;
 
 function autoexec __init__sytem__() {
-  system::register("rotating_object", & __init__, undefined, undefined);
+  system::register("rotating_object", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_localclient_connect( & init);
+  callback::on_localclient_connect(&init);
 }
 
 function init(localclientnum) {
   rotating_objects = getEntArray(localclientnum, "rotating_object", "targetname");
-  array::thread_all(rotating_objects, & rotating_object_think);
+  array::thread_all(rotating_objects, &rotating_object_think);
 }
 
 function rotating_object_think() {

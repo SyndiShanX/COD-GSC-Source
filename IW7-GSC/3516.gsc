@@ -20,8 +20,8 @@ init() {
   level.tanksettings["remote_tank"].modelplacement = "vehicle_ugv_talon_obj";
   level.tanksettings["remote_tank"].modelplacementfailed = "vehicle_ugv_talon_obj_red";
   level.tanksettings["remote_tank"].modeldestroyed = "vehicle_ugv_talon_mp";
-  level.tanksettings["remote_tank"].func_1114D = & "KILLSTREAKS_REMOTE_TANK_PLACE";
-  level.tanksettings["remote_tank"].func_1114C = & "KILLSTREAKS_REMOTE_TANK_CANNOT_PLACE";
+  level.tanksettings["remote_tank"].func_1114D = &"KILLSTREAKS_REMOTE_TANK_PLACE";
+  level.tanksettings["remote_tank"].func_1114C = &"KILLSTREAKS_REMOTE_TANK_CANNOT_PLACE";
   level.tanksettings["remote_tank"].func_A84D = "killstreak_remote_tank_laptop_mp";
   level.tanksettings["remote_tank"].remotedetonatethink = "killstreak_remote_tank_remote_mp";
   level._effect["remote_tank_dying"] = loadfx("vfx\core\expl\killstreak_explosion_quick");
@@ -36,7 +36,7 @@ func_128FE(var_00, var_01) {
   var_02 = 1;
 
   if(scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\utility\game::maxvehiclesallowed()) {
-    self iprintlnbold( & "KILLSTREAKS_TOO_MANY_VEHICLES");
+    self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
     return 0;
   }
 
@@ -606,10 +606,10 @@ func_3758(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   if(!scripts\mp\weapons::friendlyfirecheck(var_12.owner, var_01)) {
     return;
   }
-  if(isDefined(var_03) && var_03 & level.idflags_penetration)
+  if(isDefined(var_03) && var_03 &level.idflags_penetration)
     var_12.wasdamagedfrombulletpenetration = 1;
 
-  if(isDefined(var_03) && var_03 & level.idflags_no_team_protection)
+  if(isDefined(var_03) && var_03 &level.idflags_no_team_protection)
     var_12.wasdamagedfrombulletricochet = 1;
 
   var_12.wasdamaged = 1;

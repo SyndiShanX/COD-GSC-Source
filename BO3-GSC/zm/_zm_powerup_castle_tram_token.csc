@@ -11,7 +11,7 @@
 #namespace zm_powerup_castle_tram_token;
 
 function autoexec __init__sytem__() {
-  system::register("zm_powerup_castle_tram_token", & __init__, undefined, undefined);
+  system::register("zm_powerup_castle_tram_token", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -23,10 +23,10 @@ function __init__() {
 
 function register_clientfields() {
   clientfield::register("toplayer", "has_castle_tram_token", 1, 1, "int", undefined, 0, 0);
-  clientfield::register("toplayer", "ZM_CASTLE_TRAM_TOKEN_ACQUIRED", 1, 1, "int", & zm_utility::zm_ui_infotext, 0, 1);
-  clientfield::register("scriptmover", "powerup_fuse_fx", 1, 1, "int", & function_4f546258, 0, 0);
+  clientfield::register("toplayer", "ZM_CASTLE_TRAM_TOKEN_ACQUIRED", 1, 1, "int", &zm_utility::zm_ui_infotext, 0, 1);
+  clientfield::register("scriptmover", "powerup_fuse_fx", 1, 1, "int", &function_4f546258, 0, 0);
   for(i = 0; i < 4; i++) {
-    registerclientfield("world", ("player" + i) + "hasItem", 1, 1, "int", & zm_utility::setsharedinventoryuimodels, 0);
+    registerclientfield("world", ("player" + i) + "hasItem", 1, 1, "int", &zm_utility::setsharedinventoryuimodels, 0);
   }
   clientfield::register("clientuimodel", "zmInventory.player_using_sprayer", 1, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.widget_sprayer", 1, 1, "int", undefined, 0, 0);

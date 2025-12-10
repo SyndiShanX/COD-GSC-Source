@@ -157,19 +157,19 @@ onstartgametype() {
   setclientnamemode("manual_change");
 
   if(level.madpropsmode) {
-    maps\mp\_utility::setobjectivetext(game["attackers"], & "OBJECTIVES_PK_ATTACKER");
-    maps\mp\_utility::setobjectivetext(game["defenders"], & "OBJECTIVES_PK_DEFENDER");
-    maps\mp\_utility::setobjectivescoretext(game["attackers"], & "OBJECTIVES_PK_ATTACKER_SCORE");
-    maps\mp\_utility::setobjectivescoretext(game["defenders"], & "OBJECTIVES_PK_DEFENDER_SCORE");
-    maps\mp\_utility::setobjectivehinttext(game["attackers"], & "OBJECTIVES_PK_ATTACKER_HINT");
-    maps\mp\_utility::setobjectivehinttext(game["defenders"], & "OBJECTIVES_PK_DEFENDER_HINT");
+    maps\mp\_utility::setobjectivetext(game["attackers"], &"OBJECTIVES_PK_ATTACKER");
+    maps\mp\_utility::setobjectivetext(game["defenders"], &"OBJECTIVES_PK_DEFENDER");
+    maps\mp\_utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_PK_ATTACKER_SCORE");
+    maps\mp\_utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_PK_DEFENDER_SCORE");
+    maps\mp\_utility::setobjectivehinttext(game["attackers"], &"OBJECTIVES_PK_ATTACKER_HINT");
+    maps\mp\_utility::setobjectivehinttext(game["defenders"], &"OBJECTIVES_PK_DEFENDER_HINT");
   } else {
-    maps\mp\_utility::setobjectivetext(game["attackers"], & "OBJECTIVES_PH_ATTACKER");
-    maps\mp\_utility::setobjectivetext(game["defenders"], & "OBJECTIVES_PH_DEFENDER");
-    maps\mp\_utility::setobjectivescoretext(game["attackers"], & "OBJECTIVES_PH_ATTACKER_SCORE");
-    maps\mp\_utility::setobjectivescoretext(game["defenders"], & "OBJECTIVES_PH_DEFENDER_SCORE");
-    maps\mp\_utility::setobjectivehinttext(game["attackers"], & "OBJECTIVES_PH_ATTACKER_HINT");
-    maps\mp\_utility::setobjectivehinttext(game["defenders"], & "OBJECTIVES_PH_DEFENDER_HINT");
+    maps\mp\_utility::setobjectivetext(game["attackers"], &"OBJECTIVES_PH_ATTACKER");
+    maps\mp\_utility::setobjectivetext(game["defenders"], &"OBJECTIVES_PH_DEFENDER");
+    maps\mp\_utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_PH_ATTACKER_SCORE");
+    maps\mp\_utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_PH_DEFENDER_SCORE");
+    maps\mp\_utility::setobjectivehinttext(game["attackers"], &"OBJECTIVES_PH_ATTACKER_HINT");
+    maps\mp\_utility::setobjectivehinttext(game["defenders"], &"OBJECTIVES_PH_DEFENDER_HINT");
   }
 
   if(level.madpropsmode) {
@@ -314,7 +314,7 @@ propcontrolshud() {
   self endon("disconnect");
   var_0 = 26;
   self.propchangecounter = maps\mp\gametypes\_hud_util::createfontstring("objective", 0.9);
-  self.propchangecounter.label = & "MP_PH_CHANGESLEFT";
+  self.propchangecounter.label = &"MP_PH_CHANGESLEFT";
   self.propchangecounter setvalue(0);
   self.propchangecounter.x = -5;
   self.propchangecounter.y = var_0;
@@ -329,7 +329,7 @@ propcontrolshud() {
   self.propchangecounter.hidewheninmenu = 0;
   var_0 = var_0 + 12;
   self.changepropkey = maps\mp\gametypes\_hud_util::createfontstring("objective", 0.9);
-  self.changepropkey.label = & "MP_PH_CHANGE";
+  self.changepropkey.label = &"MP_PH_CHANGE";
   self.changepropkey.x = -5;
   self.changepropkey.y = var_0;
   self.changepropkey.alignx = "right";
@@ -343,7 +343,7 @@ propcontrolshud() {
   self.changepropkey.hidewheninmenu = 0;
   var_0 = var_0 + 12;
   self.lockpropkey = maps\mp\gametypes\_hud_util::createfontstring("objective", 0.9);
-  self.lockpropkey.label = & "MP_PH_LOCK";
+  self.lockpropkey.label = &"MP_PH_LOCK";
   self.lockpropkey.x = -5;
   self.lockpropkey.y = var_0;
   self.lockpropkey.alignx = "right";
@@ -359,9 +359,9 @@ propcontrolshud() {
   self.matchslopekey = maps\mp\gametypes\_hud_util::createfontstring("objective", 0.9);
 
   if(common_scripts\utility::is_player_gamepad_enabled())
-    self.matchslopekey.label = & "MP_PH_SLOPE";
+    self.matchslopekey.label = &"MP_PH_SLOPE";
   else
-    self.matchslopekey.label = & "MP_PH_SLOPE_PC";
+    self.matchslopekey.label = &"MP_PH_SLOPE_PC";
 
   self.matchslopekey.x = -5;
   self.matchslopekey.y = var_0;
@@ -396,7 +396,7 @@ pkcontrolshud() {
   self endon("disconnect");
   var_0 = 38;
   self.pkexplodekey = maps\mp\gametypes\_hud_util::createfontstring("objective", 0.9);
-  self.pkexplodekey.label = & "MP_PK_EXPLODELKEY";
+  self.pkexplodekey.label = &"MP_PK_EXPLODELKEY";
   self.pkexplodekey.x = -5;
   self.pkexplodekey.y = var_0;
   self.pkexplodekey.alignx = "right";
@@ -410,7 +410,7 @@ pkcontrolshud() {
   self.pkexplodekey.hidewheninmenu = 0;
   var_0 = var_0 + 12;
   self.pklivesleft = maps\mp\gametypes\_hud_util::createfontstring("objective", 0.9);
-  self.pklivesleft.label = & "MP_PK_LIVESLEFT";
+  self.pklivesleft.label = &"MP_PK_LIVESLEFT";
   self.pklivesleft setvalue(3);
   self.pklivesleft.x = -5;
   self.pklivesleft.y = var_0;
@@ -442,13 +442,13 @@ updatetextongamepadchange() {
 
       if(var_1) {
         if(!maps\mp\_utility::is_true(self.slopelocked))
-          self.matchslopekey.label = & "MP_PH_SLOPE";
+          self.matchslopekey.label = &"MP_PH_SLOPE";
         else
-          self.matchslopekey.label = & "MP_PH_SLOPED";
+          self.matchslopekey.label = &"MP_PH_SLOPED";
       } else if(!maps\mp\_utility::is_true(self.slopelocked))
-        self.matchslopekey.label = & "MP_PH_SLOPE_PC";
+        self.matchslopekey.label = &"MP_PH_SLOPE_PC";
       else
-        self.matchslopekey.label = & "MP_PH_SLOPED_PC";
+        self.matchslopekey.label = &"MP_PH_SLOPED_PC";
     }
 
     waitframe();
@@ -458,7 +458,7 @@ updatetextongamepadchange() {
 setuproundstarthud() {
   level.phcountdowntimer = maps\mp\gametypes\_hud_util::createservertimer("objective", 1.4);
   level.phcountdowntimer maps\mp\gametypes\_hud_util::setpoint("CENTER", undefined, 0, 50);
-  level.phcountdowntimer.label = & "MP_PH_STARTS_IN";
+  level.phcountdowntimer.label = &"MP_PH_STARTS_IN";
   level.phcountdowntimer.alpha = 0;
   level.phcountdowntimer.archived = 0;
   level.phcountdowntimer.hidewheninmenu = 1;
@@ -470,13 +470,13 @@ setuproundstarthud() {
   level.phwhistletimer.aligny = "top";
   level.phwhistletimer.horzalign = "right_adjustable";
   level.phwhistletimer.vertalign = "top_adjustable";
-  level.phwhistletimer.label = & "MP_PH_WHISTILE_IN";
+  level.phwhistletimer.label = &"MP_PH_WHISTILE_IN";
   level.phwhistletimer.alpha = 0;
   level.phwhistletimer.archived = 0;
   level.phwhistletimer.hidewheninmenu = 1;
   level.phwhistletimer settimer(120);
   level.whistling = maps\mp\gametypes\_hud_util::createserverfontstring("objective", 1);
-  level.whistling.label = & "MP_PH_WHISTLING";
+  level.whistling.label = &"MP_PH_WHISTLING";
   level.whistling.x = -5;
   level.whistling.y = 2;
   level.whistling.alignx = "right";
@@ -492,7 +492,7 @@ setuproundstarthud() {
     level.elim_hud = [];
 
   level.elim_hud = maps\mp\gametypes\_hud_util::createserverfontstring("objective", 0.9);
-  level.elim_hud.label = & "MP_PH_ALIVE";
+  level.elim_hud.label = &"MP_PH_ALIVE";
   level.elim_hud setvalue(0);
   level.elim_hud.x = -5;
   level.elim_hud.y = 14;
@@ -513,7 +513,7 @@ setupmadpropsstarthud() {
     level.elim_hud = [];
 
   level.elim_hud = maps\mp\gametypes\_hud_util::createserverfontstring("objective", 0.9);
-  level.elim_hud.label = & "MP_PK_ALIVE";
+  level.elim_hud.label = &"MP_PK_ALIVE";
   level.elim_hud setvalue(0);
   level.elim_hud.x = -5;
   level.elim_hud.y = 14;
@@ -531,7 +531,7 @@ setupmadpropsstarthud() {
     level.elim_hud_humans = [];
 
   level.elim_hud_humans = maps\mp\gametypes\_hud_util::createserverfontstring("objective", 0.9);
-  level.elim_hud_humans.label = & "MP_PK_HUMANSALIVE";
+  level.elim_hud_humans.label = &"MP_PK_HUMANSALIVE";
   level.elim_hud_humans setvalue(0);
   level.elim_hud_humans.x = -5;
   level.elim_hud_humans.y = 26;
@@ -547,14 +547,14 @@ setupmadpropsstarthud() {
   level thread eliminatedhudmonitor();
   level.phcountdowntimer = maps\mp\gametypes\_hud_util::createservertimer("objective", 1.4);
   level.phcountdowntimer maps\mp\gametypes\_hud_util::setpoint("CENTER", undefined, 0, 50);
-  level.phcountdowntimer.label = & "MP_PK_STARTS_IN";
+  level.phcountdowntimer.label = &"MP_PK_STARTS_IN";
   level.phcountdowntimer.alpha = 0;
   level.phcountdowntimer.archived = 0;
   level.phcountdowntimer.hidewheninmenu = 1;
   level.phcountdowntimer.sort = 1;
   level.pkinvuln = maps\mp\gametypes\_hud_util::createservertimer("objective", 1.4);
   level.pkinvuln maps\mp\gametypes\_hud_util::setpoint("CENTER", undefined, 0, 50);
-  level.pkinvuln.label = & "MP_PK_PROPSINVULN";
+  level.pkinvuln.label = &"MP_PK_PROPSINVULN";
   level.pkinvuln.alpha = 0;
   level.pkinvuln.archived = 0;
   level.pkinvuln.hidewheninmenu = 1;
@@ -980,7 +980,7 @@ propwhistle() {
         return;
       } else {
         if(var_2 * 2 + getteamplayersalive(game["defenders"]) * 2500 >= maps\mp\gametypes\_gamelogic::gettimeremaining() - var_3) {
-          level.phwhistletimer.label = & "MP_PH_FINAL_WHISTLE";
+          level.phwhistletimer.label = &"MP_PH_FINAL_WHISTLE";
           var_2 = var_2 + getteamplayersalive(game["defenders"]) * 2500;
         }
 
@@ -1119,9 +1119,9 @@ proplockwatch() {
         }
 
         if(common_scripts\utility::is_player_gamepad_enabled())
-          self.matchslopekey.label = & "MP_PH_SLOPED";
+          self.matchslopekey.label = &"MP_PH_SLOPED";
         else
-          self.matchslopekey.label = & "MP_PH_SLOPED_PC";
+          self.matchslopekey.label = &"MP_PH_SLOPED_PC";
       } else {
         self.slopelocked = 0;
 
@@ -1133,9 +1133,9 @@ proplockwatch() {
         }
 
         if(common_scripts\utility::is_player_gamepad_enabled())
-          self.matchslopekey.label = & "MP_PH_SLOPE";
+          self.matchslopekey.label = &"MP_PH_SLOPE";
         else
-          self.matchslopekey.label = & "MP_PH_SLOPE_PC";
+          self.matchslopekey.label = &"MP_PH_SLOPE_PC";
       }
 
       continue;
@@ -1250,7 +1250,7 @@ unlockprop() {
 
   self.propanchor linktosynchronizedparent(self);
   self.lock = 0;
-  self.lockpropkey.label = & "MP_PH_LOCK";
+  self.lockpropkey.label = &"MP_PH_LOCK";
 }
 
 lockprop() {
@@ -1265,7 +1265,7 @@ lockprop() {
   }
 
   self.lock = 1;
-  self.lockpropkey.label = & "MP_PH_LOCKED";
+  self.lockpropkey.label = &"MP_PH_LOCKED";
   self notify("locked");
 }
 
@@ -1391,7 +1391,7 @@ propspectateendwatch() {
 
 createpropspecatehud() {
   self.spectatecommands = maps\mp\gametypes\_hud_util::createfontstring("objective", 1);
-  self.spectatecommands.label = & "MP_PH_SPECCOMMANDS";
+  self.spectatecommands.label = &"MP_PH_SPECCOMMANDS";
   self.spectatecommands.x = 20;
   self.spectatecommands.y = -80;
   self.spectatecommands.alignx = "center";
@@ -1486,7 +1486,7 @@ propcamerazoom() {
 setnewabilityhud() {
   switch (self.currentability) {
     case "FLASH":
-      self.abilitykey.label = & "MP_PH_FLASH";
+      self.abilitykey.label = &"MP_PH_FLASH";
       break;
     default:
       break;

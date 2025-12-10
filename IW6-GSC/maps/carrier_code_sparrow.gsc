@@ -545,21 +545,21 @@ sam_update_compass() {
         var_15 = "";
 
         if(var_13 == 0)
-          var_15 = & "ENEMY_HQ_NORTH";
+          var_15 = &"ENEMY_HQ_NORTH";
         else if(var_13 == 45)
-          var_15 = & "ENEMY_HQ_NORTHEAST";
+          var_15 = &"ENEMY_HQ_NORTHEAST";
         else if(var_13 == 90)
-          var_15 = & "ENEMY_HQ_EAST";
+          var_15 = &"ENEMY_HQ_EAST";
         else if(var_13 == 135)
-          var_15 = & "ENEMY_HQ_SOUTHEAST";
+          var_15 = &"ENEMY_HQ_SOUTHEAST";
         else if(var_13 == 180)
-          var_15 = & "ENEMY_HQ_SOUTH";
+          var_15 = &"ENEMY_HQ_SOUTH";
         else if(var_13 == 225)
-          var_15 = & "ENEMY_HQ_SOUTHWEST";
+          var_15 = &"ENEMY_HQ_SOUTHWEST";
         else if(var_13 == 270)
-          var_15 = & "ENEMY_HQ_WEST";
+          var_15 = &"ENEMY_HQ_WEST";
         else if(var_13 == 315)
-          var_15 = & "ENEMY_HQ_NORTHWEST";
+          var_15 = &"ENEMY_HQ_NORTHWEST";
 
         self.sam_hud_elements["compass_label_mark_" + var_14].x = var_12 + var_10 * var_9;
         self.sam_hud_elements["compass_label_mark_" + var_14] settext(var_15);

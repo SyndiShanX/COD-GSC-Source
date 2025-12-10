@@ -28,7 +28,7 @@
 #namespace zm_light_zombie;
 
 function autoexec __init__sytem__() {
-  system::register("zm_light_zombie", & __init__, undefined, undefined);
+  system::register("zm_light_zombie", &__init__, undefined, undefined);
 }
 
 function __init__() {

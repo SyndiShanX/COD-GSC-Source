@@ -1380,12 +1380,12 @@ hud_display_wavecount(wave_num) {
   foreach(player in level.players) {
     // For now, it looks like there are waves on all difficulties.
     if(wave_num < 5) {
-      player.hud_wave_title = so_create_hud_item(0, so_hud_ypos(), & "SPECIAL_OPS_WAVENUM", player);
+      player.hud_wave_title = so_create_hud_item(0, so_hud_ypos(), &"SPECIAL_OPS_WAVENUM", player);
       player.hud_wave_count = so_create_hud_item(0, so_hud_ypos(), undefined, player);
       player.hud_wave_count.alignx = "left";
       player.hud_wave_count SetValue(wave_num);
     } else {
-      player.hud_wave_title = so_create_hud_item(0, so_hud_ypos(), & "SPECIAL_OPS_WAVEFINAL", player);
+      player.hud_wave_title = so_create_hud_item(0, so_hud_ypos(), &"SPECIAL_OPS_WAVEFINAL", player);
       player.hud_wave_title.alignx = "center";
     }
   }
@@ -1402,7 +1402,7 @@ hud_display_wavecount_remove() {
 }
 
 hud_display_uav_spotted(player, uav_id) {
-  hudelem = so_create_hud_item(-1, -4, & "SO_DEFENSE_INVASION_UAV_SPOTTED", player);
+  hudelem = so_create_hud_item(-1, -4, &"SO_DEFENSE_INVASION_UAV_SPOTTED", player);
   hudelem set_hud_yellow();
   thread hud_display_uav_spotted_fade(hudelem, uav_id);
   return hudelem;
@@ -1413,7 +1413,7 @@ hud_display_uav_targetting(hudelem) {
     return;
 
   hudelem set_hud_red();
-  hudelem.label = & "SO_DEFENSE_INVASION_UAV_TARGETTING";
+  hudelem.label = &"SO_DEFENSE_INVASION_UAV_TARGETTING";
 }
 
 hud_display_uav_spotted_fade(hudelem, uav_id) {
@@ -1430,7 +1430,7 @@ hud_display_wave(title_text, timer) {
   hudelems = [];
   list = hud_get_wave_list(title_text);
   for(i = 0; i < list.size; i++) {
-    if(list[i] != & "SO_DEFENSE_INVASION_ALERT_BLANK") {
+    if(list[i] != &"SO_DEFENSE_INVASION_ALERT_BLANK") {
       hudelems[i] = hud_create_wave_splash_default(i, list[i]);
       hudelems[i] SetPulseFX(60, ((timer - 1) * 1000) - (i * 1000), 1000);
     }
@@ -1486,7 +1486,7 @@ hud_display_enemies_active_player(enemy_title, enemy_total, enemy_death) {
   }
 
   hudelem_count so_remove_hud_item(true);
-  hudelem_count = so_create_hud_item(hud_line, so_hud_ypos(), & "SPECIAL_OPS_DASHDASH", self);
+  hudelem_count = so_create_hud_item(hud_line, so_hud_ypos(), &"SPECIAL_OPS_DASHDASH", self);
   hudelem_count.alignx = "left";
 
   hudelem_title thread so_hud_pulse_success();
@@ -1588,36 +1588,36 @@ hud_get_wave_list(title_text) {
 
   switch (title_text) {
     case "SO_DEFENSE_INVASION_WAVE_1":
-      list[0] = & "SO_DEFENSE_INVASION_WAVE_1";
-      list[1] = & "SO_DEFENSE_INVASION_ALERT_20";
+      list[0] = &"SO_DEFENSE_INVASION_WAVE_1";
+      list[1] = &"SO_DEFENSE_INVASION_ALERT_20";
       break;
 
     case "SO_DEFENSE_INVASION_WAVE_2":
-      list[0] = & "SO_DEFENSE_INVASION_WAVE_2";
-      list[1] = & "SO_DEFENSE_INVASION_ALERT_30";
-      list[2] = & "SO_DEFENSE_INVASION_ALERT_HELLFIRE";
+      list[0] = &"SO_DEFENSE_INVASION_WAVE_2";
+      list[1] = &"SO_DEFENSE_INVASION_ALERT_30";
+      list[2] = &"SO_DEFENSE_INVASION_ALERT_HELLFIRE";
       break;
 
     case "SO_DEFENSE_INVASION_WAVE_3":
-      list[0] = & "SO_DEFENSE_INVASION_WAVE_3";
-      list[1] = & "SO_DEFENSE_INVASION_ALERT_40";
-      list[2] = & "SO_DEFENSE_INVASION_ALERT_HELI";
-      list[3] = & "SO_DEFENSE_INVASION_ALERT_HELLFIRE";
+      list[0] = &"SO_DEFENSE_INVASION_WAVE_3";
+      list[1] = &"SO_DEFENSE_INVASION_ALERT_40";
+      list[2] = &"SO_DEFENSE_INVASION_ALERT_HELI";
+      list[3] = &"SO_DEFENSE_INVASION_ALERT_HELLFIRE";
       break;
 
     case "SO_DEFENSE_INVASION_WAVE_4":
-      list[0] = & "SO_DEFENSE_INVASION_WAVE_4";
-      list[1] = & "SO_DEFENSE_INVASION_ALERT_30_SKILLED";
-      list[2] = & "SO_DEFENSE_INVASION_ALERT_BTR80";
-      list[3] = & "SO_DEFENSE_INVASION_ALERT_HELLFIRE";
+      list[0] = &"SO_DEFENSE_INVASION_WAVE_4";
+      list[1] = &"SO_DEFENSE_INVASION_ALERT_30_SKILLED";
+      list[2] = &"SO_DEFENSE_INVASION_ALERT_BTR80";
+      list[3] = &"SO_DEFENSE_INVASION_ALERT_HELLFIRE";
       break;
 
     case "SO_DEFENSE_INVASION_WAVE_5":
-      list[0] = & "SO_DEFENSE_INVASION_WAVE_5";
-      list[1] = & "SO_DEFENSE_INVASION_ALERT_40_SKILLED";
-      list[2] = & "SO_DEFENSE_INVASION_ALERT_BTR80";
-      list[3] = & "SO_DEFENSE_INVASION_ALERT_HELIS";
-      list[4] = & "SO_DEFENSE_INVASION_ALERT_HELLFIRE";
+      list[0] = &"SO_DEFENSE_INVASION_WAVE_5";
+      list[1] = &"SO_DEFENSE_INVASION_ALERT_40_SKILLED";
+      list[2] = &"SO_DEFENSE_INVASION_ALERT_BTR80";
+      list[3] = &"SO_DEFENSE_INVASION_ALERT_HELIS";
+      list[4] = &"SO_DEFENSE_INVASION_ALERT_HELLFIRE";
       break;
 
     default:

@@ -20,17 +20,17 @@
 #namespace heat_wave;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_heat_wave", & __init__, undefined, undefined);
+  system::register("gadget_heat_wave", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(41, & gadget_heat_wave_on_activate, & gadget_heat_wave_on_deactivate);
-  ability_player::register_gadget_possession_callbacks(41, & gadget_heat_wave_on_give, & gadget_heat_wave_on_take);
-  ability_player::register_gadget_flicker_callbacks(41, & gadget_heat_wave_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(41, & gadget_heat_wave_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(41, & gadget_heat_wave_is_flickering);
-  callback::on_connect( & gadget_heat_wave_on_connect);
-  callback::on_spawned( & gadget_heat_wave_on_player_spawn);
+  ability_player::register_gadget_activation_callbacks(41, &gadget_heat_wave_on_activate, &gadget_heat_wave_on_deactivate);
+  ability_player::register_gadget_possession_callbacks(41, &gadget_heat_wave_on_give, &gadget_heat_wave_on_take);
+  ability_player::register_gadget_flicker_callbacks(41, &gadget_heat_wave_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(41, &gadget_heat_wave_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(41, &gadget_heat_wave_is_flickering);
+  callback::on_connect(&gadget_heat_wave_on_connect);
+  callback::on_spawned(&gadget_heat_wave_on_player_spawn);
   clientfield::register("scriptmover", "heatwave_fx", 1, 1, "int");
   clientfield::register("allplayers", "heatwave_victim", 1, 1, "int");
   clientfield::register("toplayer", "heatwave_activate", 1, 1, "int");
@@ -40,8 +40,8 @@ function __init__() {
   if(!isDefined(level.vsmgr_prio_visionset_heatwave_charred)) {
     level.vsmgr_prio_visionset_heatwave_charred = 53;
   }
-  visionset_mgr::register_info("visionset", "heatwave", 1, level.vsmgr_prio_visionset_heatwave_activate, 16, 1, & visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
-  visionset_mgr::register_info("visionset", "charred", 1, level.vsmgr_prio_visionset_heatwave_charred, 16, 1, & visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
+  visionset_mgr::register_info("visionset", "heatwave", 1, level.vsmgr_prio_visionset_heatwave_activate, 16, 1, &visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
+  visionset_mgr::register_info("visionset", "charred", 1, level.vsmgr_prio_visionset_heatwave_charred, 16, 1, &visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
 }
 
 function updatedvars() {

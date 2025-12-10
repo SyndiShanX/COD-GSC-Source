@@ -22,11 +22,11 @@ init() {
   level.var_12A8D["mg_turret"].modelplacementfailed = "mp_remote_turret_placement_failed";
   level.var_12A8D["mg_turret"].modeldestroyed = "mp_remote_turret";
   level.var_12A8D["mg_turret"].teamsplash = "used_remote_mg_turret";
-  level.var_12A8D["mg_turret"].var_901A = & "KILLSTREAKS_ENTER_REMOTE_TURRET";
-  level.var_12A8D["mg_turret"].var_901B = & "KILLSTREAKS_EARLY_EXIT";
-  level.var_12A8D["mg_turret"].var_901F = & "KILLSTREAKS_DOUBLE_TAP_TO_CARRY";
-  level.var_12A8D["mg_turret"].placestring = & "KILLSTREAKS_TURRET_PLACE";
-  level.var_12A8D["mg_turret"].cannotplacestring = & "KILLSTREAKS_TURRET_CANNOT_PLACE";
+  level.var_12A8D["mg_turret"].var_901A = &"KILLSTREAKS_ENTER_REMOTE_TURRET";
+  level.var_12A8D["mg_turret"].var_901B = &"KILLSTREAKS_EARLY_EXIT";
+  level.var_12A8D["mg_turret"].var_901F = &"KILLSTREAKS_DOUBLE_TAP_TO_CARRY";
+  level.var_12A8D["mg_turret"].placestring = &"KILLSTREAKS_TURRET_PLACE";
+  level.var_12A8D["mg_turret"].cannotplacestring = &"KILLSTREAKS_TURRET_CANNOT_PLACE";
   level.var_12A8D["mg_turret"].vodestroyed = "remote_sentry_destroyed";
   level.var_12A8D["mg_turret"].var_A84D = "killstreak_remote_turret_laptop_mp";
   level.var_12A8D["mg_turret"].remotedetonatethink = "killstreak_remote_turret_remote_mp";
@@ -822,11 +822,11 @@ func_129FA() {
       self.var_E1 = self.var_E1 + self.maxhealth;
     }
 
-    if(isDefined(var_08) && var_08 & level.idflags_penetration) {
+    if(isDefined(var_08) && var_08 &level.idflags_penetration) {
       self.wasdamagedfrombulletpenetration = 1;
     }
 
-    if(isDefined(var_08) && var_08 & level.idflags_ricochet) {
+    if(isDefined(var_08) && var_08 &level.idflags_ricochet) {
       self.wasdamagedfrombulletricochet = 1;
     }
 

@@ -49,7 +49,7 @@ stage_logic() {
   s_pos = getstruct("player_portal_final", "targetname");
   t_portal = tomb_spawn_trigger_radius(s_pos.origin, 100, 1);
   t_portal.require_look_at = 1;
-  t_portal.hint_string = & "ZM_TOMB_TELE";
+  t_portal.hint_string = &"ZM_TOMB_TELE";
   t_portal thread waittill_player_activates();
   level.ee_ending_beam_fx = spawn("script_model", s_pos.origin + vectorscale((0, 0, -1), 300.0));
   level.ee_ending_beam_fx.angles = vectorscale((0, 1, 0), 90.0);

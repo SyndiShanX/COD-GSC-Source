@@ -1975,7 +1975,7 @@ drone_punishment() {
   level endon("jump_down_player_started");
   flag_wait("alert_drones");
   flag_set("player_detected");
-  setdvar("ui_deadquote", & "PAKISTAN_SHARED_KILLED_BY_DRONE");
+  setdvar("ui_deadquote", &"PAKISTAN_SHARED_KILLED_BY_DRONE");
   level thread drone_death_hud(level.player);
   level thread kill_player_after_time();
   level.player setlowready(0);

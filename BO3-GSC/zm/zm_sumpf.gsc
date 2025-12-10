@@ -78,15 +78,15 @@ function main() {
   level.default_start_location = "default";
   level.use_water_risers = 1;
   level.sndzhdaudio = 1;
-  level._zombie_custom_add_weapons = & custom_add_weapons;
+  level._zombie_custom_add_weapons = &custom_add_weapons;
   zm_sumpf_fx::main();
   zm::init_fx();
-  level._zmbvoxlevelspecific = & init_level_specific_audio;
+  level._zmbvoxlevelspecific = &init_level_specific_audio;
   level.randomize_perks = 0;
   level.pulls_since_last_ray_gun = 0;
   level.pulls_since_last_tesla_gun = 0;
   level.player_drops_tesla_gun = 0;
-  level.door_dialog_function = & zm::play_door_dialog;
+  level.door_dialog_function = &zm::play_door_dialog;
   level.dogs_enabled = 1;
   level.zombie_rise_spawners = [];
   level.burning_zombies = [];
@@ -98,12 +98,12 @@ function main() {
   } else if(!isarray(level.custom_ai_type)) {
     level.custom_ai_type = array(level.custom_ai_type);
   }
-  level.custom_ai_type[level.custom_ai_type.size] = & zm_ai_dogs::init;
-  level.register_offhand_weapons_for_level_defaults_override = & offhand_weapon_overrride;
+  level.custom_ai_type[level.custom_ai_type.size] = &zm_ai_dogs::init;
+  level.register_offhand_weapons_for_level_defaults_override = &offhand_weapon_overrride;
   level.use_zombie_heroes = 1;
-  level.givecustomcharacters = & givecustomcharacters;
+  level.givecustomcharacters = &givecustomcharacters;
   initcharacterstartindex();
-  level._round_start_func = & zm::round_start;
+  level._round_start_func = &zm::round_start;
   level._effect["zombie_grain"] = "misc/fx_zombie_grain_cloud";
   init_zombie_sumpf();
   clientfield::register("world", "SUMPF_VISIONSET_DOGS", 21000, 1, "int");
@@ -123,13 +123,13 @@ function main() {
   _zm_weap_tesla::init();
   zm_ai_dogs::enable_dog_rounds();
   level.zones = [];
-  level.zone_manager_init_func = & sumpf_zone_init;
+  level.zone_manager_init_func = &sumpf_zone_init;
   init_zones[0] = "center_building_upstairs";
   level thread zm_zonemgr::manage_zones(init_zones);
   level.zombie_ai_limit = 24;
   level.validate_poi_attractors = 1;
   level thread water_burst_overwrite();
-  level.custom_devgui = & function_920754d;
+  level.custom_devgui = &function_920754d;
   init_sounds();
   level thread setupmusic();
   level notify("setup_rope");
@@ -145,10 +145,10 @@ function main() {
   level thread function_5b94e922();
   setdvar("player_shallowWaterWadeScale", 0.55);
   setdvar("player_waistWaterWadeScale", 0.55);
-  scene::add_scene_func("p7_fxanim_zm_sumpf_zipline_down_bundle", & function_b87f949f, "init");
+  scene::add_scene_func("p7_fxanim_zm_sumpf_zipline_down_bundle", &function_b87f949f, "init");
   level scene::init("p7_fxanim_zm_sumpf_zipline_down_bundle");
-  level.var_9aaae7ae = & function_869d6f66;
-  level.var_9cef605e = & function_3e7eb37b;
+  level.var_9aaae7ae = &function_869d6f66;
+  level.var_9cef605e = &function_3e7eb37b;
   level thread zm_sumpf_ffotd::main_end();
 }
 
@@ -658,7 +658,7 @@ function init_level_specific_audio() {}
 function function_d166ac07() {
   level.var_8ec97b54 = 0;
   var_5e490b83 = getEntArray("sndzhd_plates", "targetname");
-  array::thread_all(var_5e490b83, & function_4bb6626e);
+  array::thread_all(var_5e490b83, &function_4bb6626e);
 }
 
 function function_4bb6626e() {
@@ -686,7 +686,7 @@ function include_perks_in_random_rotation() {
   zm_perk_random::include_perk_in_random_rotation("specialty_staminup");
   zm_perk_random::include_perk_in_random_rotation("specialty_deadshot");
   zm_perk_random::include_perk_in_random_rotation("specialty_widowswine");
-  level.custom_random_perk_weights = & function_c027d01d;
+  level.custom_random_perk_weights = &function_c027d01d;
 }
 
 function function_c027d01d() {

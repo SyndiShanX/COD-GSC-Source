@@ -6,15 +6,15 @@
 
 register_traps() {
   level.trapcooldownarray = [];
-  level.interaction_hintstrings["laser_trap"] = & "CP_FINAL_INTERACTIONS_LASER_TRAP";
+  level.interaction_hintstrings["laser_trap"] = &"CP_FINAL_INTERACTIONS_LASER_TRAP";
   scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(0, "laser_trap", "trap", undefined, undefined, ::use_lasers_trap, 750, 1, ::lasers_trap_init);
-  level.interaction_hintstrings["blackhole_trap"] = & "CP_FINAL_INTERACTIONS_MOVIE_WORMHOLE";
+  level.interaction_hintstrings["blackhole_trap"] = &"CP_FINAL_INTERACTIONS_MOVIE_WORMHOLE";
   scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(0, "blackhole_trap", "trap", undefined, undefined, ::use_blackhole_trap, 1250, 1, ::init_blackhole_trap);
-  level.interaction_hintstrings["fridge_trap"] = & "CP_FINAL_INTERACTIONS_FRIDGE_TRAP";
+  level.interaction_hintstrings["fridge_trap"] = &"CP_FINAL_INTERACTIONS_FRIDGE_TRAP";
   scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(0, "fridge_trap", "trap", undefined, undefined, ::use_fridge_trap, 750, 1, ::fridge_trap_init);
-  level.interaction_hintstrings["electric_trap"] = & "CP_FINAL_INTERACTIONS_ELECTROCUTION_TRAP";
+  level.interaction_hintstrings["electric_trap"] = &"CP_FINAL_INTERACTIONS_ELECTROCUTION_TRAP";
   scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(0, "electric_trap", "trap", undefined, undefined, ::electric_trap_use, 750, 1, ::electric_trap_init);
-  level.interaction_hintstrings["acid_rain_trap"] = & "CP_FINAL_INTERACTIONS_RAINING_ACID";
+  level.interaction_hintstrings["acid_rain_trap"] = &"CP_FINAL_INTERACTIONS_RAINING_ACID";
   scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(0, "acid_rain_trap", "trap", undefined, undefined, ::use_rain_trap, 750, 1, ::init_rain_trap);
   level thread watch_for_trap_kills_obtained();
 }

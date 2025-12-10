@@ -201,8 +201,8 @@ function init() {
   level._effect["heli_comlink_light"]["friendly"] = "_debug/fx_debug_deleted_fx";
   level._effect["heli_comlink_light"]["enemy"] = "_debug/fx_debug_deleted_fx";
   level.helicomlinkbootupanim = % mp_vehicles::veh_anim_future_heli_gearup_bay_open;
-  killstreaks::register("helicopter_comlink", "helicopter_comlink", "killstreak_helicopter_comlink", "helicopter_used", & usekillstreakhelicopter, 1);
-  killstreaks::register_strings("helicopter_comlink", & "KILLSTREAK_EARNED_HELICOPTER_COMLINK", & "KILLSTREAK_HELICOPTER_COMLINK_NOT_AVAILABLE", & "KILLSTREAK_HELICOPTER_COMLINK_INBOUND", undefined, & "KILLSTREAK_HELICOPTER_COMLINK_HACKED");
+  killstreaks::register("helicopter_comlink", "helicopter_comlink", "killstreak_helicopter_comlink", "helicopter_used", &usekillstreakhelicopter, 1);
+  killstreaks::register_strings("helicopter_comlink", &"KILLSTREAK_EARNED_HELICOPTER_COMLINK", &"KILLSTREAK_HELICOPTER_COMLINK_NOT_AVAILABLE", &"KILLSTREAK_HELICOPTER_COMLINK_INBOUND", undefined, &"KILLSTREAK_HELICOPTER_COMLINK_HACKED");
   killstreaks::register_dialog("helicopter_comlink", "mpl_killstreak_heli", "helicopterDialogBundle", "helicopterPilotDialogBundle", "friendlyHelicopter", "enemyHelicopter", "enemyHelicopterMultiple", "friendlyHelicopterHacked", "enemyHelicopterHacked", "requestHelicopter", "threatHelicopter");
   killstreaks::register_alt_weapon("helicopter_comlink", "cobra_20mm_comlink");
   killstreaks::set_team_kill_penalty_scale("helicopter_comlink", 0);
@@ -279,7 +279,7 @@ function spawn_helicopter(owner, origin, angles, model, targetname, target_offse
   chopper.attackerdata = [];
   chopper.attackerdamage = [];
   chopper.flareattackerdamage = [];
-  chopper.destroyfunc = & destroyhelicopter;
+  chopper.destroyfunc = &destroyhelicopter;
   chopper.hardpointtype = hardpointtype;
   chopper.killstreak_id = killstreak_id;
   chopper.pilotistalking = 0;
@@ -293,7 +293,7 @@ function spawn_helicopter(owner, origin, angles, model, targetname, target_offse
   target_set(chopper, target_offset);
   if(hardpointtype == "helicopter_comlink" || hardpointtype == "inventory_helicopter_comlink") {
     chopper.allowhackingaftercloak = 1;
-    chopper.flak_drone = flak_drone::spawn(chopper, & onflakdronedestroyed);
+    chopper.flak_drone = flak_drone::spawn(chopper, &onflakdronedestroyed);
     chopper.treat_owner_damage_as_friendly_fire = 1;
     chopper.ignore_team_kills = 1;
     chopper init_active_camo();
@@ -417,9 +417,9 @@ function heli_think(owner, startnode, heli_team, missilesenabled, protectlocatio
   }
   chopper = spawn_helicopter(owner, heliorigin, heliangles, "heli_ai_mp", choppermodelfriendly, vectorscale((0, 0, 1), 100), hardpointtype, killstreak_id);
   chopper.harpointtype = hardpointtype;
-  chopper killstreaks::configure_team(hardpointtype, killstreak_id, owner, "helicopter", undefined, & configureteampost);
+  chopper killstreaks::configure_team(hardpointtype, killstreak_id, owner, "helicopter", undefined, &configureteampost);
   if(hardpointtype == "helicopter_comlink" || hardpointtype == "inventory_helicopter_comlink") {
-    chopper killstreak_hacking::enable_hacking("helicopter_comlink", undefined, & hackedcallbackpost);
+    chopper killstreak_hacking::enable_hacking("helicopter_comlink", undefined, &hackedcallbackpost);
   }
   chopper setenemymodel(choppermodelenemy);
   chopper thread watchforemp();
@@ -989,7 +989,7 @@ function heli_damage_monitor(hardpointtype) {
   if(isDefined(tablehealth)) {
     self.maxhealth = tablehealth;
   }
-  helicopter.hackedhealthupdatecallback = & heli_hacked_health_update;
+  helicopter.hackedhealthupdatecallback = &heli_hacked_health_update;
   helicopter.hackedhealth = killstreak_bundles::get_hacked_health(hardpointtype);
   if(!isDefined(self.attackerdata)) {
     self.attackers = [];
@@ -1145,12 +1145,12 @@ function heli_damage_monitor(hardpointtype) {
         case "helicopter_comlink":
         case "helicopter_x2":
         case "inventory_helicopter_comlink": {
-          notifystring = & "KILLSTREAK_DESTROYED_HELICOPTER";
+          notifystring = &"KILLSTREAK_DESTROYED_HELICOPTER";
           killstreakreference = "killstreak_helicopter_comlink";
           break;
         }
         case "supply_drop": {
-          notifystring = & "KILLSTREAK_DESTROYED_SUPPLY_DROP_DEPLOY_SHIP";
+          notifystring = &"KILLSTREAK_DESTROYED_SUPPLY_DROP_DEPLOY_SHIP";
           killstreakreference = "killstreak_supply_drop";
           break;
         }

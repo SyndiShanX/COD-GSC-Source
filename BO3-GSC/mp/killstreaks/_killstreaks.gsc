@@ -62,7 +62,7 @@
 #namespace killstreaks;
 
 function autoexec __init__sytem__() {
-  system::register("killstreaks", & __init__, undefined, undefined);
+  system::register("killstreaks", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -71,7 +71,7 @@ function __init__() {
   level.droplocations = [];
   level.zoffsetcounter = 0;
   clientfield::register("vehicle", "timeout_beep", 1, 2, "int");
-  callback::on_start_gametype( & init);
+  callback::on_start_gametype(&init);
 }
 
 function init() {
@@ -83,14 +83,14 @@ function init() {
   level.menureferenceforkillstreak = [];
   level.numkillstreakreservedobjectives = 0;
   level.killstreakcounter = 0;
-  level.play_killstreak_firewall_being_hacked_dialog = & play_killstreak_firewall_being_hacked_dialog;
-  level.play_killstreak_firewall_hacked_dialog = & play_killstreak_firewall_hacked_dialog;
-  level.play_killstreak_being_hacked_dialog = & play_killstreak_being_hacked_dialog;
-  level.play_killstreak_hacked_dialog = & play_killstreak_hacked_dialog;
+  level.play_killstreak_firewall_being_hacked_dialog = &play_killstreak_firewall_being_hacked_dialog;
+  level.play_killstreak_firewall_hacked_dialog = &play_killstreak_firewall_hacked_dialog;
+  level.play_killstreak_being_hacked_dialog = &play_killstreak_being_hacked_dialog;
+  level.play_killstreak_hacked_dialog = &play_killstreak_hacked_dialog;
   if(!isDefined(level.roundstartkillstreakdelay)) {
     level.roundstartkillstreakdelay = 0;
   }
-  level.iskillstreakweapon = & is_killstreak_weapon;
+  level.iskillstreakweapon = &is_killstreak_weapon;
   level.killstreakcorebundle = struct::get_script_bundle("killstreak", "killstreak_core");
   remote_weapons::init();
   ai_tank::init();
@@ -118,8 +118,8 @@ function init() {
   level.killstreak_init_end_time = getmillisecondsraw();
   elapsed_time = level.killstreak_init_end_time - level.killstreak_init_start_time;
   println(("" + elapsed_time) + "");
-  callback::on_spawned( & on_player_spawned);
-  callback::on_joined_team( & on_joined_team);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_joined_team(&on_joined_team);
   level thread killstreak_debug_think();
   if(getdvarint("teamOpsEnabled") == 1) {
     level teamops::main();
@@ -1251,7 +1251,7 @@ function display_unavailable_time() {
   if(timeleft <= 0) {
     timeleft = 1;
   }
-  self iprintlnbold(&"MP_UNAVAILABLE_FOR_N", (" " + timeleft) + " ", & "EXE_SECONDS");
+  self iprintlnbold(&"MP_UNAVAILABLE_FOR_N", (" " + timeleft) + " ", &"EXE_SECONDS");
 }
 
 function trigger_killstreak(killstreaktype, isfrominventory) {
@@ -1811,7 +1811,7 @@ function unhide_compass() {
 function setup_health(killstreak_ref, max_health, low_health) {
   self.maxhealth = max_health;
   self.lowhealth = low_health;
-  self.hackedhealthupdatecallback = & defaulthackedhealthupdatecallback;
+  self.hackedhealthupdatecallback = &defaulthackedhealthupdatecallback;
   tablemaxhealth = killstreak_bundles::get_max_health(killstreak_ref);
   if(isDefined(tablemaxhealth)) {
     self.maxhealth = tablemaxhealth;

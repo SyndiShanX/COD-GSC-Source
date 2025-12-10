@@ -42,10 +42,10 @@ onplayerspawned() {
 }
 
 setup_retrievable_hint_strings() {
-  create_retrievable_hint("hatchet", & "WEAPON_HATCHET_PICKUP");
-  create_retrievable_hint("satchel_charge", & "WEAPON_SATCHEL_CHARGE_PICKUP");
-  create_retrievable_hint("claymore", & "WEAPON_CLAYMORE_PICKUP");
-  create_retrievable_hint("proximity_grenade", & "WEAPON_TASER_SPIKE_PICKUP");
+  create_retrievable_hint("hatchet", &"WEAPON_HATCHET_PICKUP");
+  create_retrievable_hint("satchel_charge", &"WEAPON_SATCHEL_CHARGE_PICKUP");
+  create_retrievable_hint("claymore", &"WEAPON_CLAYMORE_PICKUP");
+  create_retrievable_hint("proximity_grenade", &"WEAPON_TASER_SPIKE_PICKUP");
 }
 
 create_retrievable_hint(name, hint) {
@@ -557,7 +557,7 @@ weapon_object_damage(watcher) {
   if(isDefined(type) && (issubstr(type, "MOD_GRENADE_SPLASH") || issubstr(type, "MOD_GRENADE") || issubstr(type, "MOD_EXPLOSIVE")))
     self.waschained = 1;
 
-  if(isDefined(idflags) && idflags & level.idflags_penetration)
+  if(isDefined(idflags) && idflags &level.idflags_penetration)
     self.wasdamagedfrombulletpenetration = 1;
 
   self.wasdamaged = 1;

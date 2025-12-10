@@ -36,7 +36,7 @@
 #namespace zm_weap_glaive;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_glaive", & __init__, undefined, undefined);
+  system::register("zm_weap_glaive", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -55,14 +55,14 @@ function __init__() {
   level.glaive_chop_cone_range_sq = level.glaive_chop_cone_range * level.glaive_chop_cone_range;
   level.var_3e0110d = 160;
   level.var_42894cb8 = level.var_3e0110d * level.var_3e0110d;
-  callback::on_connect( & watch_sword_equipped);
+  callback::on_connect(&watch_sword_equipped);
   for(i = 0; i < 4; i++) {
-    zombie_utility::add_zombie_gib_weapon_callback(("glaive_apothicon" + "_") + i, & gib_check, & gib_head_check);
-    zombie_utility::add_zombie_gib_weapon_callback(("glaive_keeper" + "_") + i, & gib_check, & gib_head_check);
+    zombie_utility::add_zombie_gib_weapon_callback(("glaive_apothicon" + "_") + i, &gib_check, &gib_head_check);
+    zombie_utility::add_zombie_gib_weapon_callback(("glaive_keeper" + "_") + i, &gib_check, &gib_head_check);
     zm_hero_weapon::register_hero_weapon(("glaive_apothicon" + "_") + i);
     zm_hero_weapon::register_hero_weapon(("glaive_keeper" + "_") + i);
-    zm_hero_weapon::register_hero_recharge_event(getweapon(("glaive_apothicon" + "_") + i), & function_4a948f8a);
-    zm_hero_weapon::register_hero_recharge_event(getweapon(("glaive_keeper" + "_") + i), & function_4a948f8a);
+    zm_hero_weapon::register_hero_recharge_event(getweapon(("glaive_apothicon" + "_") + i), &function_4a948f8a);
+    zm_hero_weapon::register_hero_recharge_event(getweapon(("glaive_keeper" + "_") + i), &function_4a948f8a);
   }
   level.glaive_damage_locations = array("left_arm_upper", "left_arm_lower", "left_hand", "right_arm_upper", "right_arm_lower", "right_hand");
   level thread function_e97f78f0();

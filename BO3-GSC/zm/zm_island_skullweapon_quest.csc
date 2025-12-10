@@ -23,17 +23,17 @@
 #namespace zm_island_skullquest;
 
 function init() {
-  clientfield::register("world", "keeper_spawn_portals", 1, 1, "int", & keeper_spawn_portals, 0, 0);
-  clientfield::register("actor", "keeper_fx", 1, 1, "int", & keeper_fx, 0, 0);
-  clientfield::register("actor", "ritual_attacker_fx", 1, 1, "int", & ritual_attacker_fx, 0, 0);
-  clientfield::register("world", "skullquest_ritual_1_fx", 1, 3, "int", & skullquest_ritual_1_fx, 0, 0);
-  clientfield::register("world", "skullquest_ritual_2_fx", 1, 3, "int", & skullquest_ritual_2_fx, 0, 0);
-  clientfield::register("world", "skullquest_ritual_3_fx", 1, 3, "int", & skullquest_ritual_3_fx, 0, 0);
-  clientfield::register("world", "skullquest_ritual_4_fx", 1, 3, "int", & skullquest_ritual_4_fx, 0, 0);
-  clientfield::register("scriptmover", "skullquest_finish_start_fx", 1, 1, "int", & skullquest_finish_start_fx, 0, 0);
-  clientfield::register("scriptmover", "skullquest_finish_trail_fx", 1, 1, "int", & skullquest_finish_trail_fx, 0, 0);
-  clientfield::register("scriptmover", "skullquest_finish_end_fx", 1, 1, "int", & skullquest_finish_end_fx, 0, 0);
-  clientfield::register("scriptmover", "skullquest_finish_done_glow_fx", 1, 1, "int", & skullquest_finish_done_glow_fx, 0, 0);
+  clientfield::register("world", "keeper_spawn_portals", 1, 1, "int", &keeper_spawn_portals, 0, 0);
+  clientfield::register("actor", "keeper_fx", 1, 1, "int", &keeper_fx, 0, 0);
+  clientfield::register("actor", "ritual_attacker_fx", 1, 1, "int", &ritual_attacker_fx, 0, 0);
+  clientfield::register("world", "skullquest_ritual_1_fx", 1, 3, "int", &skullquest_ritual_1_fx, 0, 0);
+  clientfield::register("world", "skullquest_ritual_2_fx", 1, 3, "int", &skullquest_ritual_2_fx, 0, 0);
+  clientfield::register("world", "skullquest_ritual_3_fx", 1, 3, "int", &skullquest_ritual_3_fx, 0, 0);
+  clientfield::register("world", "skullquest_ritual_4_fx", 1, 3, "int", &skullquest_ritual_4_fx, 0, 0);
+  clientfield::register("scriptmover", "skullquest_finish_start_fx", 1, 1, "int", &skullquest_finish_start_fx, 0, 0);
+  clientfield::register("scriptmover", "skullquest_finish_trail_fx", 1, 1, "int", &skullquest_finish_trail_fx, 0, 0);
+  clientfield::register("scriptmover", "skullquest_finish_end_fx", 1, 1, "int", &skullquest_finish_end_fx, 0, 0);
+  clientfield::register("scriptmover", "skullquest_finish_done_glow_fx", 1, 1, "int", &skullquest_finish_done_glow_fx, 0, 0);
 }
 
 function keeper_spawn_portals(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

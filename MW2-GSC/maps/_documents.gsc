@@ -76,7 +76,7 @@ get_closest_document(array) {
 document_think(activate_notify, array_targetname) {
   //	println ("waittill trigger");
 
-  // Press &&1 to pick up the documents.
+  // Press && 1 to pick up the documents.
   self setHintString(&"SCRIPT_PLATFORM_HINTSTR_DOCUMENTS");
 
   if(isDefined(activate_notify)) {

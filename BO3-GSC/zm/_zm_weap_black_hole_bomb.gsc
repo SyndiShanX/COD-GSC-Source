@@ -27,11 +27,11 @@
 #namespace zm_weap_black_hole_bomb;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_black_hole_bomb", & __init__, undefined, undefined);
+  system::register("zm_weap_black_hole_bomb", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  visionset_mgr::register_info("visionset", "zombie_cosmodrome_blackhole", 21000, level.vsmgr_prio_visionset_zombie_vortex + 1, 30, 1, & function_bf9781f8, 1);
+  visionset_mgr::register_info("visionset", "zombie_cosmodrome_blackhole", 21000, level.vsmgr_prio_visionset_zombie_vortex + 1, 30, 1, &function_bf9781f8, 1);
   clientfield::register("toplayer", "bhb_viewlights", 21000, 2, "int");
   clientfield::register("scriptmover", "toggle_black_hole_deployed", 21000, 1, "int");
   clientfield::register("actor", "toggle_black_hole_being_pulled", 21000, 1, "int");
@@ -44,15 +44,15 @@ function __init__() {
   level._effect["black_hole_samantha_steal"] = "dlc5/cosmo/fx_zmb_blackhole_trap_end";
   level._effect["black_hole_bomb_zombie_pull"] = "dlc5/cosmo/fx_blackhole_zombie_breakup";
   level._effect["black_hole_bomb_marker_flare"] = "dlc5/cosmo/fx_zmb_blackhole_flare_marker";
-  level.zombiemode_devgui_black_hole_bomb_give = & player_give_black_hole_bomb;
+  level.zombiemode_devgui_black_hole_bomb_give = &player_give_black_hole_bomb;
   level.var_4af7fb42 = [];
   level._black_hole_bomb_zombies_anim_change = [];
   level flag::init("bhb_anim_change_allowed");
   level thread black_hole_bomb_throttle_anim_changes();
   level flag::set("bhb_anim_change_allowed");
   level.w_black_hole_bomb = getweapon("black_hole_bomb");
-  level.black_hole_bomb_death_start_func = & black_hole_bomb_event_horizon_death;
-  level.vortexresetcondition = & zm_behavior::zombiekilledbyblackholebombcondition;
+  level.black_hole_bomb_death_start_func = &black_hole_bomb_event_horizon_death;
+  level.vortexresetcondition = &zm_behavior::zombiekilledbyblackholebombcondition;
 }
 
 function player_give_black_hole_bomb() {
@@ -400,7 +400,7 @@ function black_hole_bomb_trigger_monitor(ent_trigger) {
   while(true) {
     ent_trigger waittill("trigger", ent_player);
     if(isplayer(ent_player) && !ent_player isonground() && (!(isDefined(ent_player.lander) && ent_player.lander))) {
-      ent_trigger thread black_hole_teleport_trigger_thread(ent_player, & black_hole_time_before_teleport, & black_hole_teleport_cancel);
+      ent_trigger thread black_hole_teleport_trigger_thread(ent_player, &black_hole_time_before_teleport, &black_hole_teleport_cancel);
     }
     wait(0.1);
   }

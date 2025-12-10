@@ -12,11 +12,11 @@
 #namespace turret;
 
 function autoexec __init__sytem__() {
-  system::register("turret", & __init__, undefined, undefined);
+  system::register("turret", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("vehicle", "toggle_lensflare", 1, 1, "int", & field_toggle_lensflare, 0, 0);
+  clientfield::register("vehicle", "toggle_lensflare", 1, 1, "int", &field_toggle_lensflare, 0, 0);
 }
 
 function field_toggle_lensflare(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

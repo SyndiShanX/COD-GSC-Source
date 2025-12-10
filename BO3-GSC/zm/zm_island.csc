@@ -76,8 +76,8 @@ function autoexec opt_in() {
 function main() {
   zm_island_ffotd::main_start();
   zm_island_fx::main();
-  callback::on_localplayer_spawned( & on_localplayer_spawned);
-  level.setupcustomcharacterexerts = & setup_personality_character_exerts;
+  callback::on_localplayer_spawned(&on_localplayer_spawned);
+  level.setupcustomcharacterexerts = &setup_personality_character_exerts;
   level._uses_sticky_grenades = 1;
   level._uses_taser_knuckles = 1;
   register_clientfields();
@@ -118,16 +118,16 @@ function register_clientfields() {
   var_ddba80d7 = getminbitcountfornum(3);
   clientfield::register("clientuimodel", "zmInventory.widget_shield_parts", 9000, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.player_crafted_shield", 9000, 1, "int", undefined, 0, 0);
-  clientfield::register("toplayer", "postfx_futz_mild", 9000, 1, "counter", & postfx_futz_mild, 0, 0);
-  clientfield::register("toplayer", "water_motes", 9000, 1, "int", & water_motes, 0, 0);
-  clientfield::register("toplayer", "play_bubbles", 9000, 1, "int", & function_58e931d1, 0, 0);
-  clientfield::register("toplayer", "set_world_fog", 9000, var_ddba80d7, "int", & function_346468e3, 0, 0);
-  clientfield::register("toplayer", "speed_burst", 9000, 1, "int", & player_speed_changed, 0, 1);
-  clientfield::register("toplayer", "tp_water_sheeting", 9000, 1, "int", & water_sheeting_toggle, 0, 0);
-  clientfield::register("toplayer", "wind_blur", 9000, 1, "int", & function_4a01cc4e, 0, 0);
-  clientfield::register("scriptmover", "set_heavy_web_fade_material", 9000, 1, "int", & set_heavy_web_fade_material, 0, 0);
-  clientfield::register("world", "force_stream_spiders", 9001, 1, "int", & force_stream_spiders, 0, 0);
-  clientfield::register("world", "force_stream_takeo_arms", 11001, 1, "int", & force_stream_takeo_arms, 0, 0);
+  clientfield::register("toplayer", "postfx_futz_mild", 9000, 1, "counter", &postfx_futz_mild, 0, 0);
+  clientfield::register("toplayer", "water_motes", 9000, 1, "int", &water_motes, 0, 0);
+  clientfield::register("toplayer", "play_bubbles", 9000, 1, "int", &function_58e931d1, 0, 0);
+  clientfield::register("toplayer", "set_world_fog", 9000, var_ddba80d7, "int", &function_346468e3, 0, 0);
+  clientfield::register("toplayer", "speed_burst", 9000, 1, "int", &player_speed_changed, 0, 1);
+  clientfield::register("toplayer", "tp_water_sheeting", 9000, 1, "int", &water_sheeting_toggle, 0, 0);
+  clientfield::register("toplayer", "wind_blur", 9000, 1, "int", &function_4a01cc4e, 0, 0);
+  clientfield::register("scriptmover", "set_heavy_web_fade_material", 9000, 1, "int", &set_heavy_web_fade_material, 0, 0);
+  clientfield::register("world", "force_stream_spiders", 9001, 1, "int", &force_stream_spiders, 0, 0);
+  clientfield::register("world", "force_stream_takeo_arms", 11001, 1, "int", &force_stream_takeo_arms, 0, 0);
 }
 
 function include_weapons() {

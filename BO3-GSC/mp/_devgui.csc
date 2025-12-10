@@ -9,7 +9,7 @@
 #namespace mp_devgui;
 
 function autoexec __init__sytem__() {
-  system::register("mp_devgui", & __init__, undefined, undefined);
+  system::register("mp_devgui", &__init__, undefined, undefined);
 }
 
 function __init__() {}

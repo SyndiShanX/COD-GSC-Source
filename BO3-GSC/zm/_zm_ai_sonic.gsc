@@ -27,7 +27,7 @@
 #namespace zm_ai_sonic;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_sonic", & __init__, & __main__, undefined);
+  system::register("zm_ai_sonic", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -56,18 +56,18 @@ function __main__() {
   level.thundergun_gib_refs[level.thundergun_gib_refs.size] = "guts";
   level.thundergun_gib_refs[level.thundergun_gib_refs.size] = "right_arm";
   level.thundergun_gib_refs[level.thundergun_gib_refs.size] = "left_arm";
-  array::thread_all(level.sonic_zombie_spawners, & spawner::add_spawn_function, & sonic_zombie_spawn);
-  array::thread_all(level.sonic_zombie_spawners, & spawner::add_spawn_function, & zombie_utility::round_spawn_failsafe);
-  zm_spawner::register_zombie_damage_callback( & _sonic_damage_callback);
+  array::thread_all(level.sonic_zombie_spawners, &spawner::add_spawn_function, &sonic_zombie_spawn);
+  array::thread_all(level.sonic_zombie_spawners, &spawner::add_spawn_function, &zombie_utility::round_spawn_failsafe);
+  zm_spawner::register_zombie_damage_callback(&_sonic_damage_callback);
   level thread function_1249f13c();
   println("" + level.nextsonicspawnround);
 }
 
 function registerbehaviorscriptfunctions() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("sonicAttackInitialize", & sonicattackinitialize);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("sonicAttackTerminate", & sonicattackterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("sonicCanAttack", & soniccanattack);
-  animationstatenetwork::registernotetrackhandlerfunction("sonic_fire", & function_cd107cf);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("sonicAttackInitialize", &sonicattackinitialize);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("sonicAttackTerminate", &sonicattackterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("sonicCanAttack", &soniccanattack);
+  animationstatenetwork::registernotetrackhandlerfunction("sonic_fire", &function_cd107cf);
 }
 
 function init_clientfields() {
@@ -174,7 +174,7 @@ function function_89ce0aca() {
 }
 
 function sonic_zombie_spawn(animname_set) {
-  self.custom_location = & function_56fe13df;
+  self.custom_location = &function_56fe13df;
   zm_spawner::zombie_spawn_init(animname_set);
   level.var_57ecc1a3 = level.round_number;
   println("");
@@ -191,10 +191,10 @@ function sonic_zombie_spawn(animname_set) {
   self.death_fling_range = 240;
   self.death_scream_range = 480;
   self _updatenextscreamtime();
-  self.deathfunction = & sonic_zombie_death;
-  self._zombie_shrink_callback = & _sonic_shrink;
-  self._zombie_unshrink_callback = & _sonic_unshrink;
-  self.monkey_bolt_taunts = & sonic_monkey_bolt_taunts;
+  self.deathfunction = &sonic_zombie_death;
+  self._zombie_shrink_callback = &_sonic_shrink;
+  self._zombie_unshrink_callback = &_sonic_unshrink;
+  self.monkey_bolt_taunts = &sonic_monkey_bolt_taunts;
   self thread _zombie_runeffects();
   self thread _zombie_initsidestep();
   self thread _zombie_death_watch();
@@ -269,7 +269,7 @@ function _zombie_screamattack() {
   self playSound("zmb_vocals_sonic_scream");
   self thread _zombie_playscreamfx();
   players = getplayers();
-  array::thread_all(players, & _player_screamattackwatch, self);
+  array::thread_all(players, &_player_screamattackwatch, self);
 }
 
 function _zombie_scream_attack_done() {
@@ -576,7 +576,7 @@ function _soniczombie_knockdown_zombie(player, gib) {
       self.a.gib_ref = array::random(level.thundergun_gib_refs);
       self thread zombie_death::do_gib();
     }
-    self.thundergun_handle_pain_notetracks = & zm_weap_thundergun::handle_thundergun_pain_notetracks;
+    self.thundergun_handle_pain_notetracks = &zm_weap_thundergun::handle_thundergun_pain_notetracks;
     self dodamage(20, player.origin, player);
   }
 }

@@ -108,8 +108,8 @@ function gamemode_callback_setup() {
 }
 
 function setup_rex_starts() {
-  zm_utility::add_gametype("zclassic", & dummy, "zclassic", & dummy);
-  zm_utility::add_gameloc("default", & dummy, "default", & dummy);
+  zm_utility::add_gametype("zclassic", &dummy, "zclassic", &dummy);
+  zm_utility::add_gameloc("default", &dummy, "default", &dummy);
 }
 
 function dummy() {}
@@ -118,20 +118,20 @@ function main() {
   zm_island_ffotd::main_start();
   function_ac03a39a();
   init_flags();
-  level.zm_aat_turned_validation_override = & function_490a2312;
+  level.zm_aat_turned_validation_override = &function_490a2312;
   level._uses_sticky_grenades = 1;
   level._uses_taser_knuckles = 1;
-  scene::add_scene_func("p7_fxanim_zm_island_power_plant_on_bundle", & zm_island_power::function_f0a1682d, "init");
-  scene::add_scene_func("p7_fxanim_zm_island_power_plant_on_bundle", & zm_island_power::function_c1edfb09, "play");
-  level.temporary_power_switch_logic = & zm_island_power::function_156f973e;
+  scene::add_scene_func("p7_fxanim_zm_island_power_plant_on_bundle", &zm_island_power::function_f0a1682d, "init");
+  scene::add_scene_func("p7_fxanim_zm_island_power_plant_on_bundle", &zm_island_power::function_c1edfb09, "play");
+  level.temporary_power_switch_logic = &zm_island_power::function_156f973e;
   level.var_7b5a9e65 = 120;
   level.var_7ccadaab = getdvarint("loc_language");
   zm::init_fx();
-  callback::on_spawned( & on_player_spawned);
-  callback::on_connect( & zm_island_challenges::on_player_connect);
-  callback::on_disconnect( & zm_island_skullquest::function_c7cd5585);
-  callback::on_disconnect( & zm_island_challenges::on_player_disconnect);
-  callback::on_ai_spawned( & function_e50fed59);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_connect(&zm_island_challenges::on_player_connect);
+  callback::on_disconnect(&zm_island_skullquest::function_c7cd5585);
+  callback::on_disconnect(&zm_island_challenges::on_player_disconnect);
+  callback::on_ai_spawned(&function_e50fed59);
   var_ddba80d7 = getminbitcountfornum(3);
   var_d1cfa380 = getminbitcountfornum(7);
   var_a15256dd = getminbitcountfornum(3);
@@ -191,16 +191,16 @@ function main() {
   clientfield::register("scriptmover", "do_emissive_material_direct", 9000, 3, "float");
   level.default_start_location = "start_room";
   level.default_game_mode = "zclassic";
-  level.precachecustomcharacters = & precachecustomcharacters;
-  level.givecustomcharacters = & givecustomcharacters;
+  level.precachecustomcharacters = &precachecustomcharacters;
+  level.givecustomcharacters = &givecustomcharacters;
   initcharacterstartindex();
-  level.register_offhand_weapons_for_level_defaults_override = & offhand_weapon_overrride;
-  level.zombiemode_offhand_weapon_give_override = & offhand_weapon_give_override;
-  level._zombie_custom_add_weapons = & custom_add_weapons;
+  level.register_offhand_weapons_for_level_defaults_override = &offhand_weapon_overrride;
+  level.zombiemode_offhand_weapon_give_override = &offhand_weapon_give_override;
+  level._zombie_custom_add_weapons = &custom_add_weapons;
   level._allow_melee_weapon_switching = 1;
   level.zombiemode_reusing_pack_a_punch = 1;
   level.dont_unset_perk_when_machine_paused = 1;
-  level.bgb_machine_movement_frequency_override_func = & function_f51a1980;
+  level.bgb_machine_movement_frequency_override_func = &function_f51a1980;
   level thread zm_island_bgb::init();
   level thread custom_add_vox();
   level thread setup_personality_character_exerts();
@@ -218,17 +218,17 @@ function main() {
   zm_island_planting::main();
   zm_island_perks::init();
   zm_island_spiders::function_8e89793a();
-  spawner::add_global_spawn_function("axis", & function_b487bafd);
+  spawner::add_global_spawn_function("axis", &function_b487bafd);
   load::main();
   _zm_weap_bowie::init();
   _zm_weap_cymbal_monkey::init();
-  level._round_start_func = & zm::round_start;
+  level._round_start_func = &zm::round_start;
   init_sounds();
-  level.no_target_override = & no_target_override;
-  level.player_intersection_tracker_override = & function_4fc0dcb3;
-  level.fn_custom_round_ai_spawn = & zm_island_spiders::function_33aa4940;
+  level.no_target_override = &no_target_override;
+  level.player_intersection_tracker_override = &function_4fc0dcb3;
+  level.fn_custom_round_ai_spawn = &zm_island_spiders::function_33aa4940;
   level thread zm_ai_spiders::function_d2716ad8();
-  level.var_5f1b87ca = & zm_island_vo::function_5f161c52;
+  level.var_5f1b87ca = &zm_island_vo::function_5f161c52;
   level function_1b14c4b0();
   level thread zm_ai_thrasher::function_5e5433d8();
   level thread zm_island_zones::main();
@@ -238,8 +238,8 @@ function main() {
   zm_powerups::powerup_remove_from_regular_drops("bonus_points_team");
   zm_powerups::powerup_remove_from_regular_drops("empty_perk");
   zm_powerups::powerup_remove_from_regular_drops("island_seed");
-  level._custom_powerups["ww_grenade"].setup_powerup = & function_8608b597;
-  level._powerup_grab_check = & function_66e965d8;
+  level._custom_powerups["ww_grenade"].setup_powerup = &function_8608b597;
+  level._powerup_grab_check = &function_66e965d8;
   level flag::wait_till("start_zombie_round_logic");
   level thread zm_island_perks::function_c97259e9();
   level thread zm_perks::spare_change();
@@ -868,7 +868,7 @@ function function_8608b597() {
 }
 
 function placed_powerups() {
-  array::thread_all(getEntArray("power_up_web", "targetname"), & function_726351cf);
+  array::thread_all(getEntArray("power_up_web", "targetname"), &function_726351cf);
   zm_powerups::powerup_round_start();
   a_bonus_types = [];
   array::add(a_bonus_types, "double_points");
@@ -882,7 +882,7 @@ function placed_powerups() {
 }
 
 function spawn_infinite_powerup_drop(v_origin, str_type) {
-  level._powerup_timeout_override = & powerup_infinite_time;
+  level._powerup_timeout_override = &powerup_infinite_time;
   if(isDefined(str_type)) {
     var_9f6494 = zm_powerups::specific_powerup_drop(str_type, v_origin);
   } else {

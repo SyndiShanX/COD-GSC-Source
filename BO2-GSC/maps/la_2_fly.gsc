@@ -237,7 +237,7 @@ _dogfights_failure_distance_check() {
     if(isplayer(e_triggered) && !isgodmode(e_triggered)) {
       level notify("player_failed");
       screen_message_delete();
-      setdvar("ui_deadquote", & "LA_SHARED_LEFT_COMBAT");
+      setdvar("ui_deadquote", &"LA_SHARED_LEFT_COMBAT");
       missionfailed();
     }
   }
@@ -1348,7 +1348,7 @@ _set_objective_on_plane() {
   if(!isDefined(level.dogfights_objective_marker_active)) {
     level.dogfights_objective_marker_active = 1;
     objective_add(level.obj_dogfights, "current");
-    objective_string(level.obj_dogfights, & "LA_2_OBJ_DOGFIGHTS", n_targets_total);
+    objective_string(level.obj_dogfights, &"LA_2_OBJ_DOGFIGHTS", n_targets_total);
     dogfights_objective_setup();
     objective_set3d(level.obj_dogfights, 1, "default");
   }
@@ -1377,11 +1377,11 @@ dogfights_objective_update_counter() {
   if(n_remaining <= 0) {
     if(!flag("dogfight_done")) {
       flag_set("dogfight_done");
-      objective_string(level.obj_dogfights, & "LA_2_OBJ_DOGFIGHTS", 0);
+      objective_string(level.obj_dogfights, &"LA_2_OBJ_DOGFIGHTS", 0);
       objective_state(level.obj_dogfights, "done");
     }
   } else
-    objective_string(level.obj_dogfights, & "LA_2_OBJ_DOGFIGHTS", n_remaining);
+    objective_string(level.obj_dogfights, &"LA_2_OBJ_DOGFIGHTS", n_remaining);
 }
 
 dogfights_objective_setup() {

@@ -341,7 +341,7 @@ player_special_death_hint() {
       return;
     level notify("new_quote_string");
     SetDvar("ui_deadquote", "");
-    self thread grenade_death_text_hudelement(&"SCRIPT_GRENADE_SUICIDE_LINE1", & "SCRIPT_GRENADE_SUICIDE_LINE2");
+    self thread grenade_death_text_hudelement(&"SCRIPT_GRENADE_SUICIDE_LINE1", &"SCRIPT_GRENADE_SUICIDE_LINE2");
     return;
   }
   if(cause == "MOD_EXPLOSIVE") {

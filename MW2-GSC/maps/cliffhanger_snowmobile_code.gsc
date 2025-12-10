@@ -1192,7 +1192,7 @@ ending_heli_trigger_multiple() {
 }
 
 ending_heli_trigger_use() {
-  // "Press and hold ^3&&1^7 to board."
+  // "Press and hold ^3&& 1^7 to board."
   self setHintString(&"CLIFFHANGER_BOARD");
   add_wait(::waittill_msg, "trigger");
   level add_wait(::waittill_msg, "player_boards");

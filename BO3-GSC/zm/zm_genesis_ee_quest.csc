@@ -24,19 +24,19 @@
 #namespace zm_genesis_ee_quest;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_ee_quest", & __init__, undefined, undefined);
+  system::register("zm_genesis_ee_quest", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("world", "ee_quest_state", 15000, getminbitcountfornum(13), "int", & ee_quest_state, 0, 0);
-  clientfield::register("scriptmover", "ghost_entity", 15000, 1, "int", & function_2b5ef9a6, 0, 0);
-  clientfield::register("scriptmover", "electric_charge", 15000, 1, "int", & function_ede1c539, 0, 0);
-  clientfield::register("scriptmover", "grand_tour_found_toy_fx", 15000, 1, "int", & function_52d5d371, 0, 0);
-  clientfield::register("scriptmover", "sophia_transition_fx", 15000, 1, "int", & sophia_transition_fx, 0, 0);
-  clientfield::register("allplayers", "sophia_follow", 15000, 3, "int", & sophia_follow, 0, 0);
-  clientfield::register("scriptmover", "sophia_eye_on", 15000, 1, "int", & sophia_eye_on, 0, 0);
-  clientfield::register("allplayers", "sophia_delete_local", 15000, 1, "int", & sophia_delete_local, 0, 0);
-  clientfield::register("world", "GenesisEndGameEEScreen", 15000, 1, "int", & genesisendgameee, 0, 0);
+  clientfield::register("world", "ee_quest_state", 15000, getminbitcountfornum(13), "int", &ee_quest_state, 0, 0);
+  clientfield::register("scriptmover", "ghost_entity", 15000, 1, "int", &function_2b5ef9a6, 0, 0);
+  clientfield::register("scriptmover", "electric_charge", 15000, 1, "int", &function_ede1c539, 0, 0);
+  clientfield::register("scriptmover", "grand_tour_found_toy_fx", 15000, 1, "int", &function_52d5d371, 0, 0);
+  clientfield::register("scriptmover", "sophia_transition_fx", 15000, 1, "int", &sophia_transition_fx, 0, 0);
+  clientfield::register("allplayers", "sophia_follow", 15000, 3, "int", &sophia_follow, 0, 0);
+  clientfield::register("scriptmover", "sophia_eye_on", 15000, 1, "int", &sophia_eye_on, 0, 0);
+  clientfield::register("allplayers", "sophia_delete_local", 15000, 1, "int", &sophia_delete_local, 0, 0);
+  clientfield::register("world", "GenesisEndGameEEScreen", 15000, 1, "int", &genesisendgameee, 0, 0);
   duplicate_render::set_dr_filter_framebuffer("zod_ghost", 90, "zod_ghost", undefined, 0, "mc/hud_zod_ghost", 0);
   level._effect["electric_charge"] = "electric/fx_elec_arc_med_loop_hacktower";
 }

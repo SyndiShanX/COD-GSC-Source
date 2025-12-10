@@ -21,12 +21,12 @@
 #namespace zm_tomb_ee_main_step_5;
 
 function init() {
-  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_5", & init_stage, & stage_logic, & exit_stage);
+  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_5", &init_stage, &stage_logic, &exit_stage);
 }
 
 function init_stage() {
   level._cur_stage_name = "step_5";
-  level.callbackvehicledamage = & ee_plane_vehicledamage;
+  level.callbackvehicledamage = &ee_plane_vehicledamage;
   level.zombie_ai_limit--;
 }
 
@@ -129,10 +129,10 @@ function spawn_quadrotor_pickup(v_origin, v_angles) {
   unitrigger_stub.radius = 36;
   unitrigger_stub.height = 256;
   unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
-  unitrigger_stub.hint_string = & "ZM_TOMB_DIHS";
+  unitrigger_stub.hint_string = &"ZM_TOMB_DIHS";
   unitrigger_stub.cursor_hint = "HINT_NOICON";
   unitrigger_stub.require_look_at = 1;
-  zm_unitrigger::register_static_unitrigger(unitrigger_stub, & quadrotor_pickup_think);
+  zm_unitrigger::register_static_unitrigger(unitrigger_stub, &quadrotor_pickup_think);
   level flag::wait_till("ee_maxis_drone_retrieved");
   zm_unitrigger::unregister_unitrigger(unitrigger_stub);
 }

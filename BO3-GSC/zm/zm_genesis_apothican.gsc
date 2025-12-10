@@ -38,7 +38,7 @@
 #namespace zm_genesis_apothican;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_apothican", & __init__, & __main__, undefined);
+  system::register("zm_genesis_apothican", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -64,13 +64,13 @@ function __init__() {
   level thread function_d1338047();
   level thread function_6e5d600d();
   level thread function_21a5cf5e();
-  zm_spawner::register_zombie_death_event_callback( & function_bfaac59);
-  zm_spawner::register_zombie_death_event_callback( & function_6119f23);
+  zm_spawner::register_zombie_death_event_callback(&function_bfaac59);
+  zm_spawner::register_zombie_death_event_callback(&function_6119f23);
   level thread function_a2a299a1();
   level thread function_72e88a5f();
   level thread function_411feb6a();
   level thread function_dd6ccbfc();
-  callback::on_spawned( & function_ceb45430);
+  callback::on_spawned(&function_ceb45430);
 }
 
 function __main__() {
@@ -121,8 +121,8 @@ function function_890c450c(str_name) {
   if(isDefined(s_trigger_pos.script_string)) {
     var_79ade33c.script_string = s_trigger_pos.script_string;
   }
-  var_79ade33c.prompt_and_visibility_func = & zm_genesis_util::function_5ea427bf;
-  zm_unitrigger::register_unitrigger(var_79ade33c, & function_ea9e816a);
+  var_79ade33c.prompt_and_visibility_func = &zm_genesis_util::function_5ea427bf;
+  zm_unitrigger::register_unitrigger(var_79ade33c, &function_ea9e816a);
 }
 
 function function_ea9e816a() {
@@ -783,7 +783,7 @@ function function_c73dbcf0(var_21e43ff6) {
   var_1436760b clientfield::set("egg_spawn_fx", 0);
   var_1436760b delete();
   var_21e43ff6.origin = var_21e43ff6.origin + vectorscale((0, 0, 1), 16);
-  s_unitrigger = var_21e43ff6 zm_unitrigger::create_unitrigger("", 64, & function_e3dd263c);
+  s_unitrigger = var_21e43ff6 zm_unitrigger::create_unitrigger("", 64, &function_e3dd263c);
   var_21e43ff6 waittill("trigger_activated", e_player);
   if(!e_player flag::get("holding_egg")) {
     e_player thread zm_genesis_vo::function_2a22bd54();
@@ -805,13 +805,13 @@ function function_e3dd263c(e_player) {
 
 function function_9071b894() {
   level flag::wait_till("book_placed");
-  zm_spawner::register_zombie_death_event_callback( & function_31a6b711);
+  zm_spawner::register_zombie_death_event_callback(&function_31a6b711);
   level.var_2a7689da = struct::get_array("gateworm_pod", "targetname");
   foreach(var_661a8e9b in level.var_2a7689da) {
     var_661a8e9b thread function_ff65120e();
   }
   level flag::wait_till("rift_entrance_open");
-  zm_spawner::deregister_zombie_death_event_callback( & function_31a6b711);
+  zm_spawner::deregister_zombie_death_event_callback(&function_31a6b711);
 }
 
 function function_ff65120e() {
@@ -821,7 +821,7 @@ function function_ff65120e() {
   var_5e99fdc8 = "lgt_apoth_int_" + self.script_string;
   var_87302b25 = strtok(self.script_string, "_");
   var_b2f4a489 = "lgt_apoth_int_eggworm_" + var_87302b25[1];
-  s_unitrigger = self zm_unitrigger::create_unitrigger(&"ZM_GENESIS_PICKUP_EGG", 64, & function_5bd5869a);
+  s_unitrigger = self zm_unitrigger::create_unitrigger(&"ZM_GENESIS_PICKUP_EGG", 64, &function_5bd5869a);
   self waittill("trigger_activated", e_player);
   level thread function_88893a6c(var_b2f4a489);
   v_pos = self.var_3e51eb2c gettagorigin("tag_origin");
@@ -845,7 +845,7 @@ function function_ff65120e() {
   mdl_gateworm clientfield::set("gateworm_mtl", 1);
   mdl_gateworm thread scene::play("zm_dlc4_gateworm_idle_basin", mdl_gateworm);
   mdl_gateworm linkto(var_3e51eb2c, "ovary_gateworm_tag");
-  self thread util::delay(6, undefined, & function_7fd5874f, mdl_gateworm);
+  self thread util::delay(6, undefined, &function_7fd5874f, mdl_gateworm);
   var_3e51eb2c scene::play("p7_fxanim_zm_gen_gateworm_ovary_worm_birth_bundle", var_3e51eb2c);
   var_3e51eb2c thread scene::play("p7_fxanim_zm_gen_gateworm_ovary_worm_birth_idle_bundle", var_3e51eb2c);
 }
@@ -862,7 +862,7 @@ function function_5c65688b(mdl_gateworm) {
 }
 
 function function_7fd5874f(mdl_gateworm) {
-  s_unitrigger = self zm_unitrigger::create_unitrigger("", 64, & function_4661867f);
+  s_unitrigger = self zm_unitrigger::create_unitrigger("", 64, &function_4661867f);
   self waittill("trigger_activated", e_player);
   self.var_56390601 = mdl_gateworm.origin;
   self.var_5a5b5ecf = mdl_gateworm.angles;
@@ -971,7 +971,7 @@ function function_31a6b711(e_attacker) {
 }
 
 function function_87d7a33f() {
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_540f913f);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_540f913f);
 }
 
 function function_540f913f(n_val) {

@@ -36,7 +36,7 @@ function spawn_dog_tag(victim, attacker, on_use_function, objectives_for_attacke
     trigger = spawn("trigger_radius", (0, 0, 0), 0, 32, 32);
     level.dogtags[victim.entnum] = gameobjects::create_use_object("any", trigger, visuals, vectorscale((0, 0, 1), 16));
     level.dogtags[victim.entnum] gameobjects::set_use_time(0);
-    level.dogtags[victim.entnum].onuse = & onuse;
+    level.dogtags[victim.entnum].onuse = &onuse;
     level.dogtags[victim.entnum].custom_onuse = on_use_function;
     level.dogtags[victim.entnum].victim = victim;
     level.dogtags[victim.entnum].victimteam = victim.team;
@@ -47,10 +47,10 @@ function spawn_dog_tag(victim, attacker, on_use_function, objectives_for_attacke
       objective_icon(level.dogtags[victim.entnum].objid[team], "waypoint_dogtags");
       objective_team(level.dogtags[victim.entnum].objid[team], team);
       if(team == attacker.team) {
-        objective_setcolor(level.dogtags[victim.entnum].objid[team], & "EnemyOrange");
+        objective_setcolor(level.dogtags[victim.entnum].objid[team], &"EnemyOrange");
         continue;
       }
-      objective_setcolor(level.dogtags[victim.entnum].objid[team], & "FriendlyBlue");
+      objective_setcolor(level.dogtags[victim.entnum].objid[team], &"FriendlyBlue");
     }
   }
   pos = victim.origin + vectorscale((0, 0, 1), 14);

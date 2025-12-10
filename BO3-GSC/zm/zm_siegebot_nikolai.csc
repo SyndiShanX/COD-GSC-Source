@@ -12,21 +12,21 @@
 #namespace zm_siegebot_nikolai;
 
 function autoexec __init__sytem__() {
-  system::register("zm_siegebot_nikolai", & __init__, undefined, undefined);
+  system::register("zm_siegebot_nikolai", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_vehicletype_callback("siegebot_nikolai", & on_spawned);
-  clientfield::register("vehicle", "nikolai_destroyed_r_arm", 12000, 1, "int", & nikolai_destroyed_r_arm, 0, 0);
-  clientfield::register("vehicle", "nikolai_destroyed_l_arm", 12000, 1, "int", & nikolai_destroyed_l_arm, 0, 0);
-  clientfield::register("vehicle", "nikolai_destroyed_r_chest", 12000, 1, "int", & nikolai_destroyed_r_chest, 0, 0);
-  clientfield::register("vehicle", "nikolai_destroyed_l_chest", 12000, 1, "int", & nikolai_destroyed_l_chest, 0, 0);
-  clientfield::register("vehicle", "nikolai_weakpoint_l_fx", 12000, 1, "int", & nikolai_weakpoint_l_fx, 0, 0);
-  clientfield::register("vehicle", "nikolai_weakpoint_r_fx", 12000, 1, "int", & nikolai_weakpoint_r_fx, 0, 0);
-  clientfield::register("vehicle", "nikolai_gatling_tell", 12000, 1, "int", & nikolai_gatling_tell, 0, 0);
-  clientfield::register("missile", "harpoon_impact", 12000, 1, "int", & harpoon_impact, 0, 0);
-  clientfield::register("vehicle", "play_raps_trail_fx", 12000, 1, "int", & function_66f3947f, 0, 0);
-  clientfield::register("vehicle", "raps_landing", 12000, 1, "int", & raps_landing, 0, 0);
+  vehicle::add_vehicletype_callback("siegebot_nikolai", &on_spawned);
+  clientfield::register("vehicle", "nikolai_destroyed_r_arm", 12000, 1, "int", &nikolai_destroyed_r_arm, 0, 0);
+  clientfield::register("vehicle", "nikolai_destroyed_l_arm", 12000, 1, "int", &nikolai_destroyed_l_arm, 0, 0);
+  clientfield::register("vehicle", "nikolai_destroyed_r_chest", 12000, 1, "int", &nikolai_destroyed_r_chest, 0, 0);
+  clientfield::register("vehicle", "nikolai_destroyed_l_chest", 12000, 1, "int", &nikolai_destroyed_l_chest, 0, 0);
+  clientfield::register("vehicle", "nikolai_weakpoint_l_fx", 12000, 1, "int", &nikolai_weakpoint_l_fx, 0, 0);
+  clientfield::register("vehicle", "nikolai_weakpoint_r_fx", 12000, 1, "int", &nikolai_weakpoint_r_fx, 0, 0);
+  clientfield::register("vehicle", "nikolai_gatling_tell", 12000, 1, "int", &nikolai_gatling_tell, 0, 0);
+  clientfield::register("missile", "harpoon_impact", 12000, 1, "int", &harpoon_impact, 0, 0);
+  clientfield::register("vehicle", "play_raps_trail_fx", 12000, 1, "int", &function_66f3947f, 0, 0);
+  clientfield::register("vehicle", "raps_landing", 12000, 1, "int", &raps_landing, 0, 0);
 }
 
 function on_spawned(localclientnum) {

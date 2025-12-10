@@ -15,7 +15,7 @@
 #namespace zm_train;
 
 function autoexec __init__sytem__() {
-  system::register("zm_train", & __init__, undefined, undefined);
+  system::register("zm_train", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -36,11 +36,11 @@ function __init__() {
   level._effect["callbox_cooldown"] = "light/fx_light_button_yellow_traincar_zod_zmb";
   level._effect["callbox_offline"] = "light/fx_light_button_red_train_zod_zmb";
   level._effect["map_light"] = "light/fx_light_button_yellow_traincar_zod_zmb";
-  clientfield::register("vehicle", "train_switch_light", 1, 2, "int", & train_switch_light, 0, 0);
-  clientfield::register("scriptmover", "train_callbox_light", 1, 2, "int", & train_callbox_light, 0, 0);
-  clientfield::register("scriptmover", "train_map_light", 1, 2, "int", & train_map_light, 0, 0);
-  clientfield::register("vehicle", "train_rain_fx_occluder", 1, 1, "int", & train_rain_fx_occluder, 0, 0);
-  clientfield::register("world", "sndTrainVox", 1, 4, "int", & sndtrainvox, 0, 0);
+  clientfield::register("vehicle", "train_switch_light", 1, 2, "int", &train_switch_light, 0, 0);
+  clientfield::register("scriptmover", "train_callbox_light", 1, 2, "int", &train_callbox_light, 0, 0);
+  clientfield::register("scriptmover", "train_map_light", 1, 2, "int", &train_map_light, 0, 0);
+  clientfield::register("vehicle", "train_rain_fx_occluder", 1, 1, "int", &train_rain_fx_occluder, 0, 0);
+  clientfield::register("world", "sndTrainVox", 1, 4, "int", &sndtrainvox, 0, 0);
   level thread function_1093db4e();
 }
 

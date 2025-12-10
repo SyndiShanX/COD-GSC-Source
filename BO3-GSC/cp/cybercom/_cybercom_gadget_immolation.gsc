@@ -32,14 +32,14 @@ function init() {}
 function main() {
   cybercom_gadget::registerability(2, 4);
   level.cybercom.immolation = spawnStruct();
-  level.cybercom.immolation._is_flickering = & _is_flickering;
-  level.cybercom.immolation._on_flicker = & _on_flicker;
-  level.cybercom.immolation._on_give = & _on_give;
-  level.cybercom.immolation._on_take = & _on_take;
-  level.cybercom.immolation._on_connect = & _on_connect;
-  level.cybercom.immolation._on = & _on;
-  level.cybercom.immolation._off = & _off;
-  level.cybercom.immolation._is_primed = & _is_primed;
+  level.cybercom.immolation._is_flickering = &_is_flickering;
+  level.cybercom.immolation._on_flicker = &_on_flicker;
+  level.cybercom.immolation._on_give = &_on_give;
+  level.cybercom.immolation._on_take = &_on_take;
+  level.cybercom.immolation._on_connect = &_on_connect;
+  level.cybercom.immolation._on = &_on;
+  level.cybercom.immolation._off = &_off;
+  level.cybercom.immolation._is_primed = &_is_primed;
   level.cybercom.immolation.grenadelocs = array("j_shoulder_le_rot", "j_elbow_le_rot", "j_shoulder_ri_rot", "j_elbow_ri_rot", "j_hip_le", "j_knee_le", "j_hip_ri", "j_knee_ri", "j_head", "j_mainroot");
   level.cybercom.immolation.grenadetypes = array("frag_grenade_notrail", "emp_grenade");
 }
@@ -53,8 +53,8 @@ function _on_give(slot, weapon) {
   if(self hascybercomability("cybercom_immolation") == 2) {
     self.cybercom.var_110c156a = getdvarint("scr_immolation_upgraded_count", 1);
   }
-  self.cybercom.targetlockcb = & _get_valid_targets;
-  self.cybercom.targetlockrequirementcb = & _lock_requirement;
+  self.cybercom.targetlockcb = &_get_valid_targets;
+  self.cybercom.targetlockrequirementcb = &_lock_requirement;
   self thread cybercom::function_b5f4e597(weapon);
 }
 

@@ -23,7 +23,7 @@
 #namespace devgui;
 
 function autoexec __init__sytem__() {
-  system::register("", & __init__, undefined, undefined);
+  system::register("", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -41,9 +41,9 @@ function __init__() {
   thread devgui_test_chart_think();
   thread init_debug_center_screen();
   level thread dev::body_customization_devgui(2);
-  callback::on_start_gametype( & devgui_player_commands);
-  callback::on_connect( & devgui_player_connect);
-  callback::on_disconnect( & devgui_player_disconnect);
+  callback::on_start_gametype(&devgui_player_commands);
+  callback::on_connect(&devgui_player_connect);
+  callback::on_disconnect(&devgui_player_disconnect);
 }
 
 function devgui_player_commands() {
@@ -154,134 +154,134 @@ function devgui_think() {
     }
     switch (cmd) {
       case "": {
-        devgui_handle_player_command(cmd, & devgui_give_health);
+        devgui_handle_player_command(cmd, &devgui_give_health);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & devgui_toggle_ammo);
+        devgui_handle_player_command(cmd, &devgui_toggle_ammo);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & devgui_toggle_ignore);
+        devgui_handle_player_command(cmd, &devgui_toggle_ignore);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & devgui_invulnerable, 1);
+        devgui_handle_player_command(cmd, &devgui_invulnerable, 1);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & devgui_invulnerable, 0);
+        devgui_handle_player_command(cmd, &devgui_invulnerable, 0);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & devgui_kill);
+        devgui_handle_player_command(cmd, &devgui_kill);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & devgui_revive);
+        devgui_handle_player_command(cmd, &devgui_revive);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & devgui_toggle_infinitesolo);
+        devgui_handle_player_command(cmd, &devgui_toggle_infinitesolo);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_cac73614, 100);
+        devgui_handle_player_command(cmd, &function_cac73614, 100);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_cac73614, 1000);
+        devgui_handle_player_command(cmd, &function_cac73614, 1000);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_9f78d70e, 100);
+        devgui_handle_player_command(cmd, &function_9f78d70e, 100);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_9f78d70e, 1000);
+        devgui_handle_player_command(cmd, &function_9f78d70e, 1000);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_d7b26538);
+        devgui_handle_player_command(cmd, &function_d7b26538);
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_fcd3cf3f);
+        devgui_handle_player_command(cmd, &function_fcd3cf3f);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_192ef5eb);
+        devgui_handle_player_command(cmd, &function_192ef5eb);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_b79fb0fe, 0);
+        devgui_handle_player_command(cmd, &function_b79fb0fe, 0);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_b79fb0fe, 1);
+        devgui_handle_player_command(cmd, &function_b79fb0fe, 1);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_b79fb0fe, 2);
+        devgui_handle_player_command(cmd, &function_b79fb0fe, 2);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_b79fb0fe, 3);
+        devgui_handle_player_command(cmd, &function_b79fb0fe, 3);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_b79fb0fe, 4);
+        devgui_handle_player_command(cmd, &function_b79fb0fe, 4);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_b79fb0fe, 5);
+        devgui_handle_player_command(cmd, &function_b79fb0fe, 5);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_b79fb0fe, 6);
+        devgui_handle_player_command(cmd, &function_b79fb0fe, 6);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_b79fb0fe, 7);
+        devgui_handle_player_command(cmd, &function_b79fb0fe, 7);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_b79fb0fe, 8);
+        devgui_handle_player_command(cmd, &function_b79fb0fe, 8);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_b79fb0fe, 9);
+        devgui_handle_player_command(cmd, &function_b79fb0fe, 9);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_b79fb0fe, 10);
+        devgui_handle_player_command(cmd, &function_b79fb0fe, 10);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_f61fdbaf);
+        devgui_handle_player_command(cmd, &function_f61fdbaf);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_408729cd);
+        devgui_handle_player_command(cmd, &function_408729cd);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_4edb34ed);
+        devgui_handle_player_command(cmd, &function_4edb34ed);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_4533d882);
+        devgui_handle_player_command(cmd, &function_4533d882);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_cac73614, 1000000);
+        devgui_handle_player_command(cmd, &function_cac73614, 1000000);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_e2643869);
+        devgui_handle_player_command(cmd, &function_e2643869);
         break;
       }
       case "": {
-        devgui_handle_player_command(cmd, & function_9c35ef50, "");
+        devgui_handle_player_command(cmd, &function_9c35ef50, "");
       }
       case "": {
         break;
@@ -607,12 +607,12 @@ function devgui_weapon_think() {
   for(;;) {
     weapon_name = getdvarstring("");
     if(weapon_name != "") {
-      devgui_handle_player_command(weapon_name, & devgui_give_weapon, weapon_name);
+      devgui_handle_player_command(weapon_name, &devgui_give_weapon, weapon_name);
       setdvar("", "");
     }
     attachmentname = getdvarstring("");
     if(attachmentname != "") {
-      devgui_handle_player_command(attachmentname, & devgui_give_attachment, attachmentname);
+      devgui_handle_player_command(attachmentname, &devgui_give_attachment, attachmentname);
       setdvar("", "");
     }
     wait(0.5);

@@ -19,7 +19,7 @@ function init_shared() {
   level._effect["prox_grenade_enemy_default"] = "weapon/fx_prox_grenade_scan_orng";
   level._effect["prox_grenade_enemy_warning"] = "weapon/fx_prox_grenade_wrn_red";
   level._effect["prox_grenade_player_shock"] = "weapon/fx_prox_grenade_impact_player_spwner";
-  callback::add_weapon_type("proximity_grenade", & proximity_spawned);
+  callback::add_weapon_type("proximity_grenade", &proximity_spawned);
   level thread watchforproximityexplosion();
 }
 

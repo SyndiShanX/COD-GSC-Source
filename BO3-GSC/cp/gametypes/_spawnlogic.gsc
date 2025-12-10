@@ -16,7 +16,7 @@
 #namespace spawnlogic;
 
 function autoexec __init__sytem__() {
-  system::register("spawnlogic", & __init__, undefined, undefined);
+  system::register("spawnlogic", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -34,7 +34,7 @@ function __init__() {
     }
   }
   level thread update_spawn_points();
-  callback::on_start_gametype( & init);
+  callback::on_start_gametype(&init);
   level thread debug_spawn_points();
 }
 

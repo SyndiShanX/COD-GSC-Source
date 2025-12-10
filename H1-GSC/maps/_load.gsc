@@ -1723,10 +1723,10 @@ ammo_cache_think_global(var_0) {
   self.use_trigger setModel("tag_origin");
   self.use_trigger makeusable();
   self.use_trigger setcursorhint("HINT_NOICON");
-  var_1 = & "WEAPON_CACHE_USE_HINT";
+  var_1 = &"WEAPON_CACHE_USE_HINT";
 
   if(getdvar("consoleGame") == "true")
-    var_1 = & "WEAPON_CACHE_USE_CONTROLLER_HINT";
+    var_1 = &"WEAPON_CACHE_USE_CONTROLLER_HINT";
 
   self.use_trigger sethintstring(var_1);
 

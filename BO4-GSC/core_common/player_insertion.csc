@@ -65,11 +65,11 @@ on_localclient_connect(localclientnum) {
 }
 
 private function_a4c14f8c(value) {
-  return value&1;
+  return value& 1;
 }
 
 private function_ff16ec5f(value) {
-  return ~value&1;
+  return ~value& 1;
 }
 
 private function_76a4b21e(value) {
@@ -416,8 +416,8 @@ infil_compass(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
 
 function_4da7bee9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   for(var_1e7db62f = 0; var_1e7db62f < 2; var_1e7db62f++) {
-    oldvalue = oldval&1;
-    value = newval&1;
+    oldvalue = oldval& 1;
+    value = newval& 1;
     newval >>= 1;
     oldval >>= 1;
 

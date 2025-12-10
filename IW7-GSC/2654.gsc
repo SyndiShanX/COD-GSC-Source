@@ -4,7 +4,7 @@
 ***************************************/
 
 init() {
-  precachestring( & "CP_MERIT_COMPLETED");
+  precachestring(&"CP_MERIT_COMPLETED");
 
   if(!mayprocessmerits()) {
     return;

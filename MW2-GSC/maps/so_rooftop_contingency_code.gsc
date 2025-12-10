@@ -55,7 +55,7 @@ uav_pickup_setup() {
 
     uav_pickup MakeUsable();
     uav_pickup SetCursorHint("HINT_NOICON");
-    // Hold &&1 to pick up
+    // Hold && 1 to pick up
     uav_pickup SetHintString(&"SO_ROOFTOP_CONTINGENCY_DRONE_PICKUP");
     uav_pickup waittill("trigger", player);
 
@@ -344,13 +344,13 @@ hud_wave_num() {
 
     hud_count = undefined;
     if(level.current_wave < get_wave_count()) {
-      hud = so_create_hud_item(0, so_hud_ypos(), & "SPECIAL_OPS_WAVENUM", self);
+      hud = so_create_hud_item(0, so_hud_ypos(), &"SPECIAL_OPS_WAVENUM", self);
       hud_count = so_create_hud_item(0, so_hud_ypos(), undefined, self);
       hud_count.alignx = "left";
 
       hud_count SetValue(level.current_wave);
     } else {
-      hud = so_create_hud_item(0, so_hud_ypos(), & "SPECIAL_OPS_WAVEFINAL", self);
+      hud = so_create_hud_item(0, so_hud_ypos(), &"SPECIAL_OPS_WAVEFINAL", self);
       hud.alignx = "center";
     }
 
@@ -370,8 +370,8 @@ hud_wave_num() {
 
 hud_hostile_count() {
   // Hostiles:
-  hudelem_title = so_create_hud_item(2, so_hud_ypos(), & "SO_ROOFTOP_CONTINGENCY_HOSTILES", self);
-  hudelem_count = so_create_hud_item(2, so_hud_ypos(), & "SPECIAL_OPS_DASHDASH", self);
+  hudelem_title = so_create_hud_item(2, so_hud_ypos(), &"SO_ROOFTOP_CONTINGENCY_HOSTILES", self);
+  hudelem_count = so_create_hud_item(2, so_hud_ypos(), &"SPECIAL_OPS_DASHDASH", self);
   hudelem_count.alignx = "left";
 
   flag_wait("waves_start");
@@ -393,7 +393,7 @@ hud_hostile_count() {
 
     if(curr_count <= 0) {
       hudelem_count so_remove_hud_item(true);
-      hudelem_count = so_create_hud_item(2, so_hud_ypos(), & "SPECIAL_OPS_DASHDASH", self);
+      hudelem_count = so_create_hud_item(2, so_hud_ypos(), &"SPECIAL_OPS_DASHDASH", self);
       hudelem_count.alignx = "left";
 
       hudelem_title thread so_hud_pulse_success();
@@ -416,7 +416,7 @@ hud_hostile_count() {
   }
 
   hudelem_count so_remove_hud_item(true);
-  hudelem_count = so_create_hud_item(2, so_hud_ypos(), & "SPECIAL_OPS_DASHDASH", self);
+  hudelem_count = so_create_hud_item(2, so_hud_ypos(), &"SPECIAL_OPS_DASHDASH", self);
   hudelem_count.alignx = "left";
 
   hudelem_title thread so_remove_hud_item();
@@ -433,25 +433,25 @@ hud_new_wave() {
   }
 
   // Next Wave in:
-  wave_msg = & "SO_ROOFTOP_CONTINGENCY_WAVE_STARTS";
+  wave_msg = &"SO_ROOFTOP_CONTINGENCY_WAVE_STARTS";
   wave_delay = 0.75;
   if(current_wave == get_wave_count()) {
     // Final Wave in:
-    wave_msg = & "SO_ROOFTOP_CONTINGENCY_WAVE_FINAL_STARTS";
+    wave_msg = &"SO_ROOFTOP_CONTINGENCY_WAVE_FINAL_STARTS";
   } else {
     if(current_wave == 2) {
       // Second Wave in:
-      wave_msg = & "SO_ROOFTOP_CONTINGENCY_WAVE_SECOND_STARTS";
+      wave_msg = &"SO_ROOFTOP_CONTINGENCY_WAVE_SECOND_STARTS";
     }
 
     if(current_wave == 3) {
       // Third Wave in:
-      wave_msg = & "SO_ROOFTOP_CONTINGENCY_WAVE_THIRD_STARTS";
+      wave_msg = &"SO_ROOFTOP_CONTINGENCY_WAVE_THIRD_STARTS";
     }
 
     if(current_wave == 4) {
       // Fourth Wave in:
-      wave_msg = & "SO_ROOFTOP_CONTINGENCY_WAVE_FOURTH_STARTS";
+      wave_msg = &"SO_ROOFTOP_CONTINGENCY_WAVE_FOURTH_STARTS";
     }
   }
 
@@ -478,10 +478,10 @@ hud_get_wave_list(wave_num) {
   list[0] = spawnStruct();
 
   if(wave_num < get_wave_count()) {
-    list[0].text = & "SPECIAL_OPS_INTERMISSION_WAVENUM";
+    list[0].text = &"SPECIAL_OPS_INTERMISSION_WAVENUM";
     list[0].count = wave_num;
   } else {
-    list[0].text = & "SPECIAL_OPS_INTERMISSION_WAVEFINAL";
+    list[0].text = &"SPECIAL_OPS_INTERMISSION_WAVEFINAL";
   }
 
   //	switch( wave_num )
@@ -517,8 +517,8 @@ hud_get_wave_list(wave_num) {
   //	}
 
   list[1] = spawnStruct();
-  // &&1 Hostiles
-  list[1].text = & "SO_ROOFTOP_CONTINGENCY_HOSTILES_COUNT";
+  // && 1 Hostiles
+  list[1].text = &"SO_ROOFTOP_CONTINGENCY_HOSTILES_COUNT";
   list[1].count = get_wave_ai_count(wave_num);
 
   index = 2;
@@ -531,11 +531,11 @@ hud_get_wave_list(wave_num) {
 
   if(uaz_count > 0) {
     if(uaz_count == 1) {
-      // &&1 UAZ Vehicle
-      str = & "SO_ROOFTOP_CONTINGENCY_UAZ_COUNT_SINGLE";
+      // && 1 UAZ Vehicle
+      str = &"SO_ROOFTOP_CONTINGENCY_UAZ_COUNT_SINGLE";
     } else {
-      // &&1 UAZ Vehicles
-      str = & "SO_ROOFTOP_CONTINGENCY_UAZ_COUNT";
+      // && 1 UAZ Vehicles
+      str = &"SO_ROOFTOP_CONTINGENCY_UAZ_COUNT";
     }
 
     list[index] = spawnStruct();
@@ -551,11 +551,11 @@ hud_get_wave_list(wave_num) {
 
   if(bm21_count > 0) {
     if(bm21_count == 1) {
-      // &&1 BM21 Troop Carrier
-      str = & "SO_ROOFTOP_CONTINGENCY_BM21_COUNT_SINGLE";
+      // && 1 BM21 Troop Carrier
+      str = &"SO_ROOFTOP_CONTINGENCY_BM21_COUNT_SINGLE";
     } else {
-      // &&1 BM21 Troop Carriers
-      str = & "SO_ROOFTOP_CONTINGENCY_BM21_COUNT";
+      // && 1 BM21 Troop Carriers
+      str = &"SO_ROOFTOP_CONTINGENCY_BM21_COUNT";
     }
 
     list[index] = spawnStruct();

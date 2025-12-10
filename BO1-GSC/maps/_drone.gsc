@@ -85,7 +85,7 @@ drone_init() {
   if(self.team == "allies") {
     self.voice = "american";
     self maps\_names::get_name();
-    self setlookattext(self.name, & "");
+    self setlookattext(self.name, &"");
   }
   if(isDefined(level.droneCallbackThread)) {
     self thread[[level.droneCallbackThread]]();

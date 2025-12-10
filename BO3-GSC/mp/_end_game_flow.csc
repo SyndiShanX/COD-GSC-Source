@@ -14,15 +14,15 @@
 #namespace end_game_flow;
 
 function autoexec __init__sytem__() {
-  system::register("end_game_flow", & __init__, undefined, undefined);
+  system::register("end_game_flow", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("world", "displayTop3Players", 1, 1, "int", & handletopthreeplayers, 0, 0);
-  clientfield::register("world", "triggerScoreboardCamera", 1, 1, "int", & showscoreboard, 0, 0);
-  clientfield::register("world", "playTop0Gesture", 1000, 3, "int", & handleplaytop0gesture, 0, 0);
-  clientfield::register("world", "playTop1Gesture", 1000, 3, "int", & handleplaytop1gesture, 0, 0);
-  clientfield::register("world", "playTop2Gesture", 1000, 3, "int", & handleplaytop2gesture, 0, 0);
+  clientfield::register("world", "displayTop3Players", 1, 1, "int", &handletopthreeplayers, 0, 0);
+  clientfield::register("world", "triggerScoreboardCamera", 1, 1, "int", &showscoreboard, 0, 0);
+  clientfield::register("world", "playTop0Gesture", 1000, 3, "int", &handleplaytop0gesture, 0, 0);
+  clientfield::register("world", "playTop1Gesture", 1000, 3, "int", &handleplaytop1gesture, 0, 0);
+  clientfield::register("world", "playTop2Gesture", 1000, 3, "int", &handleplaytop2gesture, 0, 0);
   level thread streamerwatcher();
 }
 

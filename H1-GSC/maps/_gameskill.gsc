@@ -49,10 +49,10 @@ setskill(var_0) {
     level.difficultytype[1] = "normal";
     level.difficultytype[2] = "hardened";
     level.difficultytype[3] = "veteran";
-    level.difficultystring["easy"] = & "GAMESKILL_EASY";
-    level.difficultystring["normal"] = & "GAMESKILL_NORMAL";
-    level.difficultystring["hardened"] = & "GAMESKILL_HARDENED";
-    level.difficultystring["veteran"] = & "GAMESKILL_VETERAN";
+    level.difficultystring["easy"] = &"GAMESKILL_EASY";
+    level.difficultystring["normal"] = &"GAMESKILL_NORMAL";
+    level.difficultystring["hardened"] = &"GAMESKILL_HARDENED";
+    level.difficultystring["veteran"] = &"GAMESKILL_VETERAN";
     thread gameskill_change_monitor();
   }
 

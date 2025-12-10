@@ -214,7 +214,7 @@ class csmashable {
         level scene::init(m_e_trigger.target, "targetname");
       }
       var_5b3a6271 = function_3408f1a2();
-      add_callback( & zm_zod_smashables::cb_fxanim, var_5b3a6271, var_afea543d, var_6e27ff4);
+      add_callback(&zm_zod_smashables::cb_fxanim, var_5b3a6271, var_afea543d, var_6e27ff4);
     }
   }
 
@@ -244,7 +244,7 @@ class csmashable {
     foreach(str_param in a_params) {
       m_a_b_parameters[str_param] = 1;
       if(str_param == "connect_paths") {
-        add_callback( & zm_zod_smashables::cb_connect_paths);
+        add_callback(&zm_zod_smashables::cb_connect_paths);
         continue;
       }
       if(str_param == "any_damage") {
@@ -286,13 +286,13 @@ class csmashable {
 #namespace zm_zod_smashables;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_smashables", & __init__, undefined, undefined);
+  system::register("zm_zod_smashables", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level thread init_smashables();
   foreach(str_bundle in level.zod_smashable_scriptbundles) {
-    scene::add_scene_func(str_bundle, & add_scriptbundle_models, "init");
+    scene::add_scene_func(str_bundle, &add_scriptbundle_models, "init");
   }
 }
 
@@ -342,22 +342,22 @@ function private init_smashables() {
     if(issubstr(str_id, "portal")) {
       [
         [o_smashable]
-      ] - > set_trigger_func( & zm_zod_portals::function_54ec766b, str_id);
+      ] - > set_trigger_func(&zm_zod_portals::function_54ec766b, str_id);
     }
     if(issubstr(str_id, "memento")) {
       [
         [o_smashable]
-      ] - > set_trigger_func( & zm_zod_quest::reveal_personal_item, str_id);
+      ] - > set_trigger_func(&zm_zod_quest::reveal_personal_item, str_id);
     }
     if(issubstr(str_id, "beast_kiosk")) {
       [
         [o_smashable]
-      ] - > set_trigger_func( & unlock_beast_kiosk, str_id);
+      ] - > set_trigger_func(&unlock_beast_kiosk, str_id);
     }
     if(str_id === "unlock_quest_key") {
       [
         [o_smashable]
-      ] - > set_trigger_func( & unlock_quest_key, str_id);
+      ] - > set_trigger_func(&unlock_quest_key, str_id);
     }
     [[o_smashable]] - > init(trigger);
   }

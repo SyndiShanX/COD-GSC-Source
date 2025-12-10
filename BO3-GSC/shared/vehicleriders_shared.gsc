@@ -22,7 +22,7 @@
 #namespace vehicle;
 
 function autoexec __init__sytem__() {
-  system::register("vehicleriders", & __init__, undefined, undefined);
+  system::register("vehicleriders", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -67,9 +67,9 @@ function __init__() {
       s.highexitlandheight = 32;
     }
   }
-  callback::on_vehicle_spawned( & on_vehicle_spawned);
-  callback::on_ai_spawned( & on_ai_spawned);
-  callback::on_vehicle_killed( & on_vehicle_killed);
+  callback::on_vehicle_spawned(&on_vehicle_spawned);
+  callback::on_ai_spawned(&on_ai_spawned);
+  callback::on_vehicle_killed(&on_vehicle_killed);
 }
 
 function seat_position_to_index(str_position) {

@@ -160,27 +160,27 @@ onPrecacheGameType() {
   if(!isDefined(game["strings_menu"]))
     game["strings_menu"] = [];
   if(!isDefined(game["strings"]["war_callsign_a"]) || !isDefined(game["strings_menu"]["war_callsign_a"])) {
-    game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_A";
+    game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_A";
     game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_A";
   }
   precacheString(game["strings"]["war_callsign_a"]);
   if(!isDefined(game["strings"]["war_callsign_b"]) || !isDefined(game["strings_menu"]["war_callsign_b"])) {
-    game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_B";
+    game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_B";
     game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_B";
   }
   precacheString(game["strings"]["war_callsign_b"]);
   if(!isDefined(game["strings"]["war_callsign_c"]) || !isDefined(game["strings_menu"]["war_callsign_c"])) {
-    game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_C";
+    game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_C";
     game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_C";
   }
   precacheString(game["strings"]["war_callsign_c"]);
   if(!isDefined(game["strings"]["war_callsign_d"]) || !isDefined(game["strings_menu"]["war_callsign_d"])) {
-    game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_D";
+    game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_D";
     game["strings_menu"]["war_callsign_d"] = "@MPUI_CALLSIGN_D";
   }
   precacheString(game["strings"]["war_callsign_d"]);
   if(!isDefined(game["strings"]["war_callsign_e"]) || !isDefined(game["strings_menu"]["war_callsign_e"])) {
-    game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_E";
+    game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_E";
     game["strings_menu"]["war_callsign_e"] = "@MPUI_CALLSIGN_E";
   }
   precacheString(game["strings"]["war_callsign_e"]);
@@ -199,7 +199,7 @@ onPrecacheGameType() {
 
 onRoundSwitch() {
   level.halftimeType = "finalfight";
-  level.halftimeSubCaption = & "MP_ONEFLAGWINS";
+  level.halftimeSubCaption = &"MP_ONEFLAGWINS";
 }
 
 getTimeLimitDvarValue() {
@@ -233,17 +233,17 @@ onStartGameType() {
   } else {
     level.inFinalFight = true;
   }
-  maps\mp\gametypes\_globallogic::setObjectiveText("allies", & "OBJECTIVES_TWAR");
-  maps\mp\gametypes\_globallogic::setObjectiveText("axis", & "OBJECTIVES_TWAR");
+  maps\mp\gametypes\_globallogic::setObjectiveText("allies", &"OBJECTIVES_TWAR");
+  maps\mp\gametypes\_globallogic::setObjectiveText("axis", &"OBJECTIVES_TWAR");
   if(level.splitscreen) {
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", & "OBJECTIVES_TWAR");
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", & "OBJECTIVES_TWAR");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", &"OBJECTIVES_TWAR");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", &"OBJECTIVES_TWAR");
   } else {
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", & "OBJECTIVES_TWAR_SCORE");
-    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", & "OBJECTIVES_TWAR_SCORE");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("allies", &"OBJECTIVES_TWAR_SCORE");
+    maps\mp\gametypes\_globallogic::setObjectiveScoreText("axis", &"OBJECTIVES_TWAR_SCORE");
   }
-  maps\mp\gametypes\_globallogic::setObjectiveHintText("allies", & "OBJECTIVES_TWAR_HINT");
-  maps\mp\gametypes\_globallogic::setObjectiveHintText("axis", & "OBJECTIVES_TWAR_HINT");
+  maps\mp\gametypes\_globallogic::setObjectiveHintText("allies", &"OBJECTIVES_TWAR_HINT");
+  maps\mp\gametypes\_globallogic::setObjectiveHintText("axis", &"OBJECTIVES_TWAR_HINT");
   setClientNameMode("auto_change");
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -317,7 +317,7 @@ onTimeLimit() {
       player thread maps\mp\gametypes\_hud::showClientGenericMessageBar(undefined, undefined);
   }
   if(!level.inFinalFight && 0 <= getDvarInt("twar_finalFightTimeLimit")) {
-    thread maps\mp\gametypes\_globallogic::endGame("endregulation", & "MP_END_OF_REGULATION");
+    thread maps\mp\gametypes\_globallogic::endGame("endregulation", &"MP_END_OF_REGULATION");
     alliesFlagCount = getTeamFlagCount("allies");
     switch (alliesFlagCount) {
       case 0:
@@ -890,23 +890,23 @@ updateMomentum(team, amount) {
       if(previousMultiplier < game["war_momentum"][team + "_multiplier"]) {
         enemyTeam = getOtherTeam(team);
         if(game["war_momentum"][team + "_multiplier"] == momentumMaxMultiplier) {
-          notifyData.titleText = & "MP_BLITZKRIEG";
-          notifyData.notifyText = & "MP_BLITZKRIEG_DESC";
+          notifyData.titleText = &"MP_BLITZKRIEG";
+          notifyData.notifyText = &"MP_BLITZKRIEG_DESC";
           notifyData.iconName = "hud_momentum_notification_blitzkrieg";
           notifyData.iconWidth = 40;
           notifyData.iconHeight = 40;
           maps\mp\gametypes\_globallogic::leaderDialog("blitz_friendly", team);
         } else {
-          notifyData.titleText = & "MP_MOMENTUM";
-          notifyData.notifyText = & "MP_MOMENTUM_DESC";
+          notifyData.titleText = &"MP_MOMENTUM";
+          notifyData.notifyText = &"MP_MOMENTUM_DESC";
           notifyData.iconName = "hud_momentum_notification_bonus";
           notifyData.iconWidth = 32;
           notifyData.iconHeight = 32;
           maps\mp\gametypes\_globallogic::leaderDialog("momentum_friendly", team);
         }
       } else if(game["war_momentum"][team + "_multiplier"] == 1) {
-        notifyData.titleText = & "MP_MOMENTUM_LOST";
-        notifyData.notifyText = & "MP_MOMENTUM_LOST_DESC";
+        notifyData.titleText = &"MP_MOMENTUM_LOST";
+        notifyData.notifyText = &"MP_MOMENTUM_LOST_DESC";
       }
       for(i = 0; i < level.players.size; i++) {
         player = level.players[i];
@@ -1431,7 +1431,7 @@ onUse(player) {
   nextFlag = undefined;
   if(oldTeam == "neutral") {
     otherTeam = getOtherTeam(team);
-    thread printAndSoundOnEveryone(team, otherTeam, & "MP_NEUTRAL_FLAG_CAPTURED_BY", & "MP_NEUTRAL_FLAG_CAPTURED_BY", "mp_war_objective_taken", undefined, player);
+    thread printAndSoundOnEveryone(team, otherTeam, &"MP_NEUTRAL_FLAG_CAPTURED_BY", &"MP_NEUTRAL_FLAG_CAPTURED_BY", "mp_war_objective_taken", undefined, player);
     if(!level.inFinalFight) {
       if(!checkIfLastFlagCaptured(otherTeam)) {
         thread playSoundOnPlayers("mx_WAR_captured" + "_" + level.teamPrefix[team]);
@@ -1445,7 +1445,7 @@ onUse(player) {
       }
     }
   } else {
-    thread printAndSoundOnEveryone(team, oldTeam, & "MP_ENEMY_FLAG_CAPTURED_BY", & "MP_FRIENDLY_FLAG_CAPTURED_BY", "mp_war_objective_taken", "mp_war_objective_lost", player);
+    thread printAndSoundOnEveryone(team, oldTeam, &"MP_ENEMY_FLAG_CAPTURED_BY", &"MP_FRIENDLY_FLAG_CAPTURED_BY", "mp_war_objective_taken", "mp_war_objective_lost", player);
     if(!level.inFinalFight) {
       thread playSoundOnPlayers("mx_WAR_captured" + "_" + level.teamPrefix[team]);
       if(team != "neutral") {

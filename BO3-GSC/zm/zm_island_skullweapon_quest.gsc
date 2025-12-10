@@ -41,7 +41,7 @@
 #namespace zm_island_skullquest;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_skullquest", & __init__, undefined, undefined);
+  system::register("zm_island_skullquest", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -56,21 +56,21 @@ function __init__() {
   clientfield::register("scriptmover", "skullquest_finish_trail_fx", 1, 1, "int");
   clientfield::register("scriptmover", "skullquest_finish_end_fx", 1, 1, "int");
   clientfield::register("scriptmover", "skullquest_finish_done_glow_fx", 1, 1, "int");
-  callback::on_spawned( & on_player_spawned);
-  scene::add_scene_func("scene_zm_dlc2_zombie_quick_rise_v2", & function_1c624caf, "done");
+  callback::on_spawned(&on_player_spawned);
+  scene::add_scene_func("scene_zm_dlc2_zombie_quick_rise_v2", &function_1c624caf, "done");
   level flag::init("a_player_got_skullgun");
-  callback::on_spawned( & function_940267cd);
-  callback::on_spawned( & function_ba04e236);
-  callback::on_spawned( & function_e0075c9f);
+  callback::on_spawned(&function_940267cd);
+  callback::on_spawned(&function_ba04e236);
+  callback::on_spawned(&function_e0075c9f);
 }
 
 function main() {
   level thread function_18d60013();
   level.var_b34be0cd = array(0, 1, 2, 0, 3);
   level.var_53df8575 = array(0, "p7_zm_isl_pedestal_battle", "p7_zm_isl_pedestal_blood", "p7_zm_isl_pedestal_chaos", "p7_zm_isl_pedestal_doom");
-  level.var_8b0a8fa9 = & "ZM_ISLAND_SKULL_GET";
-  level.var_983da0e6 = & "ZM_ISLAND_SKULL_PUT";
-  level.var_8b418269 = & "ZM_ISLAND_SKULL_START";
+  level.var_8b0a8fa9 = &"ZM_ISLAND_SKULL_GET";
+  level.var_983da0e6 = &"ZM_ISLAND_SKULL_PUT";
+  level.var_8b418269 = &"ZM_ISLAND_SKULL_START";
   level.var_452c59e0 = 0;
   level.var_3846d9a8 = 0;
   level.var_55c48492 = getent("mdl_skullgun", "targetname");
@@ -228,8 +228,8 @@ function function_80794095() {
   self.var_cec6c329 = 0;
   self.var_f9d4e953 = 0;
   self.var_2f6a00a = 0;
-  zm_spawner::register_zombie_death_event_callback( & function_3aa06eec);
-  callback::on_vehicle_killed( & function_5681b8d3);
+  zm_spawner::register_zombie_death_event_callback(&function_3aa06eec);
+  callback::on_vehicle_killed(&function_5681b8d3);
   self thread function_d15f7b3d();
   self thread function_9098a17a();
   self thread function_ff1550bd();
@@ -251,7 +251,7 @@ function function_279e8476(str_state) {
       break;
     }
   }
-  scene::add_scene_func(str_anim, & function_b00b433f, "play", self.script_special);
+  scene::add_scene_func(str_anim, &function_b00b433f, "play", self.script_special);
   self.mdl_skulltar thread scene::play(str_anim);
   if(str_state == "rise") {
     wait(1);
@@ -262,7 +262,7 @@ function function_279e8476(str_state) {
       self.var_226d2560 delete();
     }
   }
-  scene::remove_scene_func(str_anim, & function_b00b433f);
+  scene::remove_scene_func(str_anim, &function_b00b433f);
 }
 
 function function_b00b433f(a_ents, var_f2e38849) {
@@ -440,8 +440,8 @@ function function_c3360ba8(n_step_time = 0.1) {
 }
 
 function function_186d9bd6() {
-  zm_spawner::deregister_zombie_death_event_callback( & function_3aa06eec);
-  callback::remove_on_vehicle_killed( & function_5681b8d3);
+  zm_spawner::deregister_zombie_death_event_callback(&function_3aa06eec);
+  callback::remove_on_vehicle_killed(&function_5681b8d3);
   self notify("hash_52ad0df5");
   level flag::clear("skullquest_ritual_inprogress" + self.script_special);
   level notify("skullquest_ritual_ended" + self.script_special);
@@ -995,7 +995,7 @@ function function_97106262() {
     level.var_55c48492 show();
   }
   if(isDefined(level.var_b2152df5)) {
-    level.var_b2152df5 setup_unitrigger("unitrigger_radius_use", & function_d3554921, & function_c8ef1118);
+    level.var_b2152df5 setup_unitrigger("unitrigger_radius_use", &function_d3554921, &function_c8ef1118);
   }
 }
 
@@ -1091,7 +1091,7 @@ function function_ef5b1df5() {
         ai.targetname = "skullroom_keeper_zombie";
         ai thread function_2d0c5aa1(s_spawn_point);
         level thread function_efbd4abf(ai, s_spawn_point);
-        ai.custom_location = & function_b820cada;
+        ai.custom_location = &function_b820cada;
         array::add(var_2241a147, ai);
       }
       wait(1);
@@ -1259,7 +1259,7 @@ function function_940267cd() {
   if(isDefined(var_d9516038) && !isDefined(var_d9516038.b_shown)) {
     self thread function_f293f820(var_d9516038, "mural1_revealed");
   } else {
-    callback::remove_on_spawned( & function_940267cd);
+    callback::remove_on_spawned(&function_940267cd);
   }
 }
 
@@ -1270,7 +1270,7 @@ function function_ba04e236() {
   if(isDefined(var_d9516038) && !isDefined(var_d9516038.b_shown)) {
     self thread function_f293f820(var_d9516038, "mural2_revealed");
   } else {
-    callback::remove_on_spawned( & function_ba04e236);
+    callback::remove_on_spawned(&function_ba04e236);
   }
 }
 
@@ -1281,7 +1281,7 @@ function function_e0075c9f() {
   if(isDefined(var_d9516038) && !isDefined(var_d9516038.b_shown)) {
     self thread function_f293f820(var_d9516038, "mural3_revealed");
   } else {
-    callback::remove_on_spawned( & function_e0075c9f);
+    callback::remove_on_spawned(&function_e0075c9f);
   }
 }
 
@@ -1407,7 +1407,7 @@ function function_c7cd5585() {
 }
 
 function function_18d60013() {
-  zm_devgui::add_custom_devgui_callback( & function_3bd86987);
+  zm_devgui::add_custom_devgui_callback(&function_3bd86987);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -1554,8 +1554,8 @@ function function_38f8b6e3(var_f2e38849) {
     level flag::init("skullquest_completed" + var_f2e38849);
   }
   function_fae0aa01(var_f2e38849, "start");
-  level.var_a576e0b9[var_f2e38849].s_utrig_pillar setup_unitrigger("unitrigger_radius_use", & function_8c6a13d0, & function_dc9fe8fe, 24);
-  level.var_a576e0b9[var_f2e38849].s_utrig_skulltar setup_unitrigger("unitrigger_radius_use", & function_3cd83908, & function_d757eab6);
+  level.var_a576e0b9[var_f2e38849].s_utrig_pillar setup_unitrigger("unitrigger_radius_use", &function_8c6a13d0, &function_dc9fe8fe, 24);
+  level.var_a576e0b9[var_f2e38849].s_utrig_skulltar setup_unitrigger("unitrigger_radius_use", &function_3cd83908, &function_d757eab6);
 }
 
 function setup_unitrigger(str_type = "unitrigger_radius_use", var_fe58e458, func_think, n_radius = 64, n_height = 256, b_lookat = 1) {

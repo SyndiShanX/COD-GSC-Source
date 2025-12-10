@@ -34,7 +34,7 @@
 #namespace zm_ai_thrasher;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_thrasher", & __init__, & __main__, undefined);
+  system::register("zm_ai_thrasher", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -54,8 +54,8 @@ function register_clientfields() {
 
 function init() {
   precache();
-  level.can_revive = & thrasherserverutils::thrashercanberevived;
-  level.var_11b06c2f = & function_6f6d7a0b;
+  level.can_revive = &thrasherserverutils::thrashercanberevived;
+  level.var_11b06c2f = &function_6f6d7a0b;
   level.var_82212ebb = 1;
   level.var_f51fb588 = 0;
   level.var_175273f2 = 1;
@@ -74,13 +74,13 @@ function init() {
   if(level.var_feebf312.size == 0) {
     return;
   }
-  array::thread_all(level.var_feebf312, & spawner::add_spawn_function, & function_a716de1f);
-  scene::add_scene_func("scene_zm_dlc2_thrasher_transform_thrasher", & function_1c624caf, "done");
-  scene::add_scene_func("scene_zm_dlc2_thrasher_transform_zombie", & function_1c624caf, "done");
-  scene::add_scene_func("scene_zm_dlc2_thrasher_transform_zombie_friendly", & function_1c624caf, "done");
-  scene::add_scene_func("scene_zm_dlc2_thrasher_teleport_out", & function_1c624caf, "done");
-  scene::add_scene_func("scene_zm_dlc2_thrasher_teleport_in_v1", & function_1c624caf, "done");
-  scene::add_scene_func("scene_zm_dlc2_thrasher_attack_swing_swipe", & function_1c624caf, "done");
+  array::thread_all(level.var_feebf312, &spawner::add_spawn_function, &function_a716de1f);
+  scene::add_scene_func("scene_zm_dlc2_thrasher_transform_thrasher", &function_1c624caf, "done");
+  scene::add_scene_func("scene_zm_dlc2_thrasher_transform_zombie", &function_1c624caf, "done");
+  scene::add_scene_func("scene_zm_dlc2_thrasher_transform_zombie_friendly", &function_1c624caf, "done");
+  scene::add_scene_func("scene_zm_dlc2_thrasher_teleport_out", &function_1c624caf, "done");
+  scene::add_scene_func("scene_zm_dlc2_thrasher_teleport_in_v1", &function_1c624caf, "done");
+  scene::add_scene_func("scene_zm_dlc2_thrasher_attack_swing_swipe", &function_1c624caf, "done");
   level thread function_10d1beae();
 }
 
@@ -105,7 +105,7 @@ function precache() {}
 function function_5e5433d8() {
   level.var_f51fb588 = 1;
   if(!isDefined(level.var_fc6fe2e6)) {
-    level.var_fc6fe2e6 = & function_8aac3fe;
+    level.var_fc6fe2e6 = &function_8aac3fe;
   }
   level thread[[level.var_fc6fe2e6]]();
 }
@@ -447,25 +447,25 @@ function function_a716de1f() {
   }
   self.health = self.maxhealth;
   self.thrasherragelevel = level.round_number;
-  self.thrasherclosestvalidplayer = & zm_utility::get_closest_valid_player;
-  self.thrasherconsumezombiecallback = & function_5185e56a;
-  self.thrashercanconsumecallback = & function_7febcbb3;
-  self.thrasherpustulepopcallback = & function_bf8a850e;
-  self.thrashermovemodefriendlycallback = & function_70622dc9;
-  self.nuke_damage_func = & function_7cec0046;
-  self.thrashermeleehitcallback = & function_4912c054;
-  self.thrasherteleportcallback = & function_565fed9e;
-  self.thrashershouldteleportcallback = & function_eeeff8b3;
-  self.thrashercanconsumeplayercallback = & function_7a8dca06;
-  self.thrasherconsumedcallback = & function_fb5d97db;
-  self.thrasherreleaseconsumedcallback = & function_bda057d1;
-  self.thrasherstarttraversecallback = & function_a2c48487;
-  self.thrasherterminatetraversecallback = & function_d95f74d1;
-  self.thrasherattackableobjectcallback = & zm_behavior::zombieattackableobjectservice;
-  self.riotshield_knockdown_func = & function_a7b4c742;
-  self.riotshield_fling_func = & function_a7b4c742;
-  self.tesla_damage_func = & function_bd6d26aa;
-  self.thrasher_teleport_dest_func = & function_82522cfc;
+  self.thrasherclosestvalidplayer = &zm_utility::get_closest_valid_player;
+  self.thrasherconsumezombiecallback = &function_5185e56a;
+  self.thrashercanconsumecallback = &function_7febcbb3;
+  self.thrasherpustulepopcallback = &function_bf8a850e;
+  self.thrashermovemodefriendlycallback = &function_70622dc9;
+  self.nuke_damage_func = &function_7cec0046;
+  self.thrashermeleehitcallback = &function_4912c054;
+  self.thrasherteleportcallback = &function_565fed9e;
+  self.thrashershouldteleportcallback = &function_eeeff8b3;
+  self.thrashercanconsumeplayercallback = &function_7a8dca06;
+  self.thrasherconsumedcallback = &function_fb5d97db;
+  self.thrasherreleaseconsumedcallback = &function_bda057d1;
+  self.thrasherstarttraversecallback = &function_a2c48487;
+  self.thrasherterminatetraversecallback = &function_d95f74d1;
+  self.thrasherattackableobjectcallback = &zm_behavior::zombieattackableobjectservice;
+  self.riotshield_knockdown_func = &function_a7b4c742;
+  self.riotshield_fling_func = &function_a7b4c742;
+  self.tesla_damage_func = &function_bd6d26aa;
+  self.thrasher_teleport_dest_func = &function_82522cfc;
   self zombie_utility::zombie_eye_glow_stop();
   self thread zm::update_zone_name();
   foreach(var_278bf215 in self.thrasherspores) {
@@ -591,7 +591,7 @@ function function_d2ac7b69(entity, player, state) {
   if(isDefined(entity) && isDefined(player)) {
     entitynumber = player getentitynumber();
     var_4b5ca201 = entity clientfield::get("thrasher_mouth_cf");
-    var_4b5ca201 = var_4b5ca201 & (~(3 << (entitynumber * 2)));
+    var_4b5ca201 = var_4b5ca201 &(~(3 << (entitynumber * 2)));
     var_4b5ca201 = var_4b5ca201 | (state << (entitynumber * 2));
     entity clientfield::set("thrasher_mouth_cf", var_4b5ca201);
   }
@@ -719,7 +719,7 @@ function function_eeeff8b3(origin) {
 
 function function_ae069b1c() {
   level flagsys::wait_till("");
-  zm_devgui::add_custom_devgui_callback( & function_da954e93);
+  zm_devgui::add_custom_devgui_callback(&function_da954e93);
 }
 
 function function_11d343a5(thrasher) {

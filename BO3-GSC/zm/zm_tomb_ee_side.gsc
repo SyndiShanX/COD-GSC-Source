@@ -36,7 +36,7 @@ function init() {
   clientfield::register("world", "wagon_3_fire", 21000, 1, "int");
   clientfield::register("actor", "ee_zombie_tablet_fx", 21000, 1, "int");
   clientfield::register("toplayer", "ee_beacon_reward", 21000, 1, "int");
-  callback::on_connect( & on_player_connect);
+  callback::on_connect(&on_player_connect);
   sq_one_inch_punch();
   level thread wagon_fire_challenge();
   level thread wall_hole_poster();
@@ -244,8 +244,8 @@ function sq_one_inch_punch_death_watch() {
 }
 
 function sq_one_inch_punch() {
-  zm_spawner::add_custom_zombie_spawn_logic( & bunker_volume_death_check);
-  zm_spawner::add_custom_zombie_spawn_logic( & church_volume_death_check);
+  zm_spawner::add_custom_zombie_spawn_logic(&bunker_volume_death_check);
+  zm_spawner::add_custom_zombie_spawn_logic(&church_volume_death_check);
   level.n_tablets_remaining = 4;
   a_tablets = [];
   for(n_player_id = 0; n_player_id < level.n_tablets_remaining; n_player_id++) {
@@ -458,7 +458,7 @@ function radio_ee_song() {
     m_radio.angles = unitrigger_stub.angles;
     m_radio setModel("p7_zm_ori_radio_01");
     m_radio attach("p7_zm_ori_radio_01_panel_02", "tag_j_cover");
-    zm_unitrigger::register_static_unitrigger(unitrigger_stub, & radio_ee_think);
+    zm_unitrigger::register_static_unitrigger(unitrigger_stub, &radio_ee_think);
     unitrigger_stub thread radio_ee_debug();
     util::wait_network_frame();
   }

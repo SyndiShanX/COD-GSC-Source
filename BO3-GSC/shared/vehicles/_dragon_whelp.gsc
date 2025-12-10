@@ -22,11 +22,11 @@
 #namespace dragon;
 
 function autoexec __init__sytem__() {
-  system::register("dragon", & __init__, undefined, undefined);
+  system::register("dragon", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("dragon", & dragon_initialize);
+  vehicle::add_main_callback("dragon", &dragon_initialize);
 }
 
 function dragon_initialize() {
@@ -49,8 +49,8 @@ function dragon_initialize() {
   self.goalheight = 512;
   self setgoal(self.origin, 0, self.goalradius, self.goalheight);
   self.delete_on_death = 1;
-  self.overridevehicledamage = & dragon_callback_damage;
-  self.allowfriendlyfiredamageoverride = & dragon_allowfriendlyfiredamage;
+  self.overridevehicledamage = &dragon_callback_damage;
+  self.allowfriendlyfiredamageoverride = &dragon_allowfriendlyfiredamage;
   self.ignoreme = 1;
   if(isDefined(level.vehicle_initializer_cb)) {
     [[level.vehicle_initializer_cb]](self);
@@ -60,11 +60,11 @@ function dragon_initialize() {
 
 function defaultrole() {
   self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("combat").update_func = & state_combat_update;
-  self vehicle_ai::get_state_callbacks("death").update_func = & state_death_update;
+  self vehicle_ai::get_state_callbacks("combat").update_func = &state_combat_update;
+  self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
   if(sessionmodeiszombiesgame()) {
-    self vehicle_ai::add_state("power_up", undefined, & state_power_up_update, undefined);
-    self vehicle_ai::add_utility_connection("combat", "power_up", & should_go_for_power_up);
+    self vehicle_ai::add_state("power_up", undefined, &state_power_up_update, undefined);
+    self vehicle_ai::add_utility_connection("combat", "power_up", &should_go_for_power_up);
     self vehicle_ai::add_utility_connection("power_up", "combat");
   }
   setdvar("", 0);

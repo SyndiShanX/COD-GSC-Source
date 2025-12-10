@@ -12,17 +12,17 @@
 #namespace _zm_weap_octobomb;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_octobomb", & __init__, & __main__, undefined);
+  system::register("zm_weap_octobomb", &__init__, &__main__, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "octobomb_fx", 1, 2, "int", & octobomb_fx, 1, 0);
-  clientfield::register("actor", "octobomb_spores_fx", 1, 2, "int", & octobomb_spores_fx, 1, 0);
-  clientfield::register("actor", "octobomb_tentacle_hit_fx", 1, 1, "int", & octobomb_tentacle_hit_fx, 1, 0);
-  clientfield::register("actor", "zombie_explode_fx", 1, 1, "counter", & octobomb_zombie_explode_fx, 1, 0);
-  clientfield::register("actor", "zombie_explode_fx", -8000, 1, "counter", & octobomb_zombie_explode_fx, 1, 0);
-  clientfield::register("actor", "octobomb_zombie_explode_fx", 8000, 1, "counter", & octobomb_zombie_explode_fx, 1, 0);
-  clientfield::register("missile", "octobomb_spit_fx", 1, 2, "int", & octobomb_spit_fx, 1, 0);
+  clientfield::register("scriptmover", "octobomb_fx", 1, 2, "int", &octobomb_fx, 1, 0);
+  clientfield::register("actor", "octobomb_spores_fx", 1, 2, "int", &octobomb_spores_fx, 1, 0);
+  clientfield::register("actor", "octobomb_tentacle_hit_fx", 1, 1, "int", &octobomb_tentacle_hit_fx, 1, 0);
+  clientfield::register("actor", "zombie_explode_fx", 1, 1, "counter", &octobomb_zombie_explode_fx, 1, 0);
+  clientfield::register("actor", "zombie_explode_fx", -8000, 1, "counter", &octobomb_zombie_explode_fx, 1, 0);
+  clientfield::register("actor", "octobomb_zombie_explode_fx", 8000, 1, "counter", &octobomb_zombie_explode_fx, 1, 0);
+  clientfield::register("missile", "octobomb_spit_fx", 1, 2, "int", &octobomb_spit_fx, 1, 0);
   clientfield::register("toplayer", "octobomb_state", 1, 3, "int", undefined, 0, 1);
   setupclientfieldcodecallbacks("toplayer", 1, "octobomb_state");
 }

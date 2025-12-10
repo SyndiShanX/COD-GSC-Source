@@ -35,7 +35,7 @@ function init() {
   level flag::init("stealth_combat", 0);
   level flag::init("stealth_discovered", 0);
   init_parms();
-  spawner::add_global_spawn_function("axis", & stealth::agent_init);
+  spawner::add_global_spawn_function("axis", &stealth::agent_init);
   self stealth_vo::init();
   self thread function_7bf2f7ba();
   self thread update_thread();
@@ -59,7 +59,7 @@ function init() {
 }
 
 function stop() {
-  spawner::remove_global_spawn_function("axis", & stealth::agent_init);
+  spawner::remove_global_spawn_function("axis", &stealth::agent_init);
   level.using_awareness = 0;
   setdvar("ai_stumbleSightRange", 0);
   setdvar("ai_awarenessenabled", 0);
@@ -120,8 +120,8 @@ function get_parms(strawareness) {
 }
 
 function function_7bf2f7ba() {
-  array::thread_all(getEntArray("_stealth_shadow", "targetname"), & stealth_shadow_volumes);
-  array::thread_all(getEntArray("stealth_shadow", "targetname"), & stealth_shadow_volumes);
+  array::thread_all(getEntArray("_stealth_shadow", "targetname"), &stealth_shadow_volumes);
+  array::thread_all(getEntArray("stealth_shadow", "targetname"), &stealth_shadow_volumes);
 }
 
 function stealth_shadow_volumes() {

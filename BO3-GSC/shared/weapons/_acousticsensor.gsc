@@ -16,17 +16,17 @@
 function init_shared() {
   level._effect["acousticsensor_enemy_light"] = "_t6/misc/fx_equip_light_red";
   level._effect["acousticsensor_friendly_light"] = "_t6/misc/fx_equip_light_green";
-  callback::add_weapon_watcher( & createacousticsensorwatcher);
+  callback::add_weapon_watcher(&createacousticsensorwatcher);
 }
 
 function createacousticsensorwatcher() {
   watcher = self weaponobjects::createuseweaponobjectwatcher("acoustic_sensor", self.team);
-  watcher.onspawn = & onspawnacousticsensor;
-  watcher.ondetonatecallback = & acousticsensordetonate;
-  watcher.stun = & weaponobjects::weaponstun;
+  watcher.onspawn = &onspawnacousticsensor;
+  watcher.ondetonatecallback = &acousticsensordetonate;
+  watcher.stun = &weaponobjects::weaponstun;
   watcher.stuntime = 5;
   watcher.hackable = 1;
-  watcher.ondamage = & watchacousticsensordamage;
+  watcher.ondamage = &watchacousticsensordamage;
 }
 
 function onspawnacousticsensor(watcher, player) {

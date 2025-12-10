@@ -36,14 +36,14 @@ function main() {
   globallogic::registerfriendlyfiredelay(level.gametype, 15, 0, 1440);
   level.teambased = 1;
   level.overrideteamscore = 1;
-  level.onstartgametype = & onstartgametype;
-  level.onroundswitch = & onroundswitch;
-  level.onplayerkilled = & onplayerkilled;
-  level.onprecachegametype = & onprecachegametype;
-  level.onendgame = & onendgame;
-  level.onroundendgame = & onroundendgame;
-  level.ontimelimit = & ontimelimit;
-  level.gettimelimit = & gettimelimit;
+  level.onstartgametype = &onstartgametype;
+  level.onroundswitch = &onroundswitch;
+  level.onplayerkilled = &onplayerkilled;
+  level.onprecachegametype = &onprecachegametype;
+  level.onendgame = &onendgame;
+  level.onroundendgame = &onroundendgame;
+  level.ontimelimit = &ontimelimit;
+  level.gettimelimit = &gettimelimit;
   gameobjects::register_allowed_gameobject(level.gametype);
   game["dialog"]["gametype"] = "res_start";
   game["dialog"]["gametype_hardcore"] = "hcres_start";
@@ -116,21 +116,21 @@ function onstartgametype() {
     game["defenders"] = oldattackers;
   }
   level.usingextratime = 0;
-  game["strings"]["flags_capped"] = & "MP_TARGET_DESTROYED";
-  util::setobjectivetext(game["attackers"], & "OBJECTIVES_RES_ATTACKER");
-  util::setobjectivetext(game["defenders"], & "OBJECTIVES_RES_DEFENDER");
+  game["strings"]["flags_capped"] = &"MP_TARGET_DESTROYED";
+  util::setobjectivetext(game["attackers"], &"OBJECTIVES_RES_ATTACKER");
+  util::setobjectivetext(game["defenders"], &"OBJECTIVES_RES_DEFENDER");
   if(level.splitscreen) {
-    util::setobjectivescoretext(game["attackers"], & "OBJECTIVES_RES_ATTACKER");
-    util::setobjectivescoretext(game["defenders"], & "OBJECTIVES_RES_DEFENDER");
+    util::setobjectivescoretext(game["attackers"], &"OBJECTIVES_RES_ATTACKER");
+    util::setobjectivescoretext(game["defenders"], &"OBJECTIVES_RES_DEFENDER");
   } else {
-    util::setobjectivescoretext(game["attackers"], & "OBJECTIVES_RES_ATTACKER_SCORE");
-    util::setobjectivescoretext(game["defenders"], & "OBJECTIVES_RES_DEFENDER_SCORE");
+    util::setobjectivescoretext(game["attackers"], &"OBJECTIVES_RES_ATTACKER_SCORE");
+    util::setobjectivescoretext(game["defenders"], &"OBJECTIVES_RES_DEFENDER_SCORE");
   }
-  util::setobjectivehinttext(game["attackers"], & "OBJECTIVES_RES_ATTACKER_HINT");
-  util::setobjectivehinttext(game["defenders"], & "OBJECTIVES_RES_DEFENDER_HINT");
-  level.objectivehintpreparehq = & "MP_CONTROL_HQ";
-  level.objectivehintcapturehq = & "MP_CAPTURE_HQ";
-  level.objectivehintdefendhq = & "MP_DEFEND_HQ";
+  util::setobjectivehinttext(game["attackers"], &"OBJECTIVES_RES_ATTACKER_HINT");
+  util::setobjectivehinttext(game["defenders"], &"OBJECTIVES_RES_DEFENDER_HINT");
+  level.objectivehintpreparehq = &"MP_CONTROL_HQ";
+  level.objectivehintcapturehq = &"MP_CAPTURE_HQ";
+  level.objectivehintdefendhq = &"MP_DEFEND_HQ";
   level.flagbasefxid = [];
   level.flagbasefxid["allies"] = ("_t6/misc/fx_ui_flagbase_") + game["allies"];
   level.flagbasefxid["axis"] = ("_t6/misc/fx_ui_flagbase_") + game["axis"];
@@ -269,11 +269,11 @@ function resflagsinit() {
     label = resflag gameobjects::get_label();
     resflag.label = label;
     resflag gameobjects::set_model_visibility(0);
-    resflag.onuse = & onuse;
-    resflag.onbeginuse = & onbeginuse;
-    resflag.onuseupdate = & onuseupdate;
-    resflag.onuseclear = & onuseclear;
-    resflag.onenduse = & onenduse;
+    resflag.onuse = &onuse;
+    resflag.onbeginuse = &onbeginuse;
+    resflag.onuseupdate = &onuseupdate;
+    resflag.onuseclear = &onuseclear;
+    resflag.onenduse = &onenduse;
     resflag.claimgraceperiod = level.flagcapturegraceperiod;
     resflag.decayprogress = level.flaginactivedecay;
     tracestart = visuals[0].origin + vectorscale((0, 0, 1), 32);
@@ -332,7 +332,7 @@ function setupnextflag(flagindex) {
 }
 
 function createtimerdisplay() {
-  flagspawninginstr = & "MP_HQ_AVAILABLE_IN";
+  flagspawninginstr = &"MP_HQ_AVAILABLE_IN";
   level.locationobjid = gameobjects::get_next_obj_id();
   level.timerdisplay = [];
   level.timerdisplay["allies"] = hud::createservertimer("objective", 1.4, "allies");
@@ -374,7 +374,7 @@ function showflag(flagindex) {
     objective_icon(level.locationobjid, "waypoint_targetneutral");
     objective_state(level.locationobjid, "active");
     updateobjectivehintmessages(level.objectivehintpreparehq, level.objectivehintdefendhq);
-    flagspawninginstr = & "MP_HQ_AVAILABLE_IN";
+    flagspawninginstr = &"MP_HQ_AVAILABLE_IN";
     level.timerdisplay["allies"].label = flagspawninginstr;
     level.timerdisplay["allies"] settimer(level.flagactivatedelay);
     level.timerdisplay["allies"].alpha = 1;
@@ -546,26 +546,26 @@ function onuse(player, team) {
       }
     }
     spawning::updateallspawnpoints();
-    string = & "";
+    string = &"";
     switch (label) {
       case "_a": {
-        string = & "MP_DOM_FLAG_A_CAPTURED_BY";
+        string = &"MP_DOM_FLAG_A_CAPTURED_BY";
         break;
       }
       case "_b": {
-        string = & "MP_DOM_FLAG_B_CAPTURED_BY";
+        string = &"MP_DOM_FLAG_B_CAPTURED_BY";
         break;
       }
       case "_c": {
-        string = & "MP_DOM_FLAG_C_CAPTURED_BY";
+        string = &"MP_DOM_FLAG_C_CAPTURED_BY";
         break;
       }
       case "_d": {
-        string = & "MP_DOM_FLAG_D_CAPTURED_BY";
+        string = &"MP_DOM_FLAG_D_CAPTURED_BY";
         break;
       }
       case "_e": {
-        string = & "MP_DOM_FLAG_E_CAPTURED_BY";
+        string = &"MP_DOM_FLAG_E_CAPTURED_BY";
         break;
       }
       default: {
@@ -579,7 +579,7 @@ function onuse(player, team) {
       touchlist[touchkeys[i]] = self.touchlist[team][touchkeys[i]];
     }
     thread give_capture_credit(touchlist, string);
-    thread util::printandsoundoneveryone(team, oldteam, & "", & "", "mp_war_objective_taken", "mp_war_objective_lost", "");
+    thread util::printandsoundoneveryone(team, oldteam, &"", &"", "mp_war_objective_taken", "mp_war_objective_lost", "");
     if(getteamflagcount(team) == level.flags.size) {
       statusdialog("secure_all", team);
       statusdialog("lost_all", oldteam);

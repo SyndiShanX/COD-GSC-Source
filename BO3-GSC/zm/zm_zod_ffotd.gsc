@@ -121,7 +121,7 @@ function function_e7337b94() {
   function_2cba29a8("canal", (818, -1512, 450), 128, 160);
   wait(1);
   level.var_4e5a7cb5 = level.player_out_of_playable_area_monitor_callback;
-  level.player_out_of_playable_area_monitor_callback = & player_out_of_playable_area_monitor_callback;
+  level.player_out_of_playable_area_monitor_callback = &player_out_of_playable_area_monitor_callback;
 }
 
 function player_out_of_playable_area_monitor_callback() {

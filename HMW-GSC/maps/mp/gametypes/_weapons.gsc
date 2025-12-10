@@ -1830,11 +1830,11 @@ equipmentenableuse(var_0) {
   self.trigger setcursorhint("HINT_NOICON");
 
   if(self.weaponname == "h1_c4_mp")
-    self.trigger sethintstring( & "LUA_C4_PICKUP");
+    self.trigger sethintstring(&"LUA_C4_PICKUP");
   else if(self.weaponname == "h1_claymore_mp")
-    self.trigger sethintstring( & "LUA_CLAYMORE_PICKUP");
+    self.trigger sethintstring(&"LUA_CLAYMORE_PICKUP");
   else if(self.weaponname == "bouncingbetty_mp")
-    self.trigger sethintstring( & "MP_PICKUP_BOUNCING_BETTY");
+    self.trigger sethintstring(&"MP_PICKUP_BOUNCING_BETTY");
 
   self.trigger maps\mp\_utility::setselfusable(var_0);
   self.trigger thread maps\mp\_utility::notUsableForJoiningPlayers(var_0);
@@ -2200,7 +2200,7 @@ c4damage(var_0) {
   if(isDefined(var_5) && (issubstr(var_5, "MOD_GRENADE") || issubstr(var_5, "MOD_EXPLOSIVE")))
     self.waschained = 1;
 
-  if(isDefined(var_9) && var_9 & level.idflags_penetration)
+  if(isDefined(var_9) && var_9 &level.idflags_penetration)
     self.wasdamagedfrombulletpenetration = 1;
 
   self.wasdamaged = 1;
@@ -3071,7 +3071,7 @@ minedamagemonitor() {
   if(isDefined(var_4) && (issubstr(var_4, "MOD_GRENADE") || issubstr(var_4, "MOD_EXPLOSIVE")))
     self.waschained = 1;
 
-  if(isDefined(var_8) && var_8 & level.idflags_penetration)
+  if(isDefined(var_8) && var_8 &level.idflags_penetration)
     self.wasdamagedfrombulletpenetration = 1;
 
   self.wasdamaged = 1;
@@ -3761,7 +3761,7 @@ watchgrenadegraceperiod() {
           var_4 = 1;
 
         if(isplayer(self))
-          self iprintlnbold( & "MP_EXPLOSIVES_UNAVAILABLE_FOR_N", var_4);
+          self iprintlnbold(&"MP_EXPLOSIVES_UNAVAILABLE_FOR_N", var_4);
       }
 
       continue;

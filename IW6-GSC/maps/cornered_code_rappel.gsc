@@ -417,7 +417,7 @@ cnd_rpl_calc_move(var_0, var_1) {
     var_25 = abs(var_22) > var_24;
 
     if(var_1.rappel_type == "inverted")
-      var_25 = var_25 & abs(var_0.right_move_strength) < 0.4;
+      var_25 = var_25 &abs(var_0.right_move_strength) < 0.4;
 
     if(var_25)
       var_0.right_move_strength = 0;

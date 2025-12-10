@@ -13,7 +13,7 @@
 function init_shared() {
   level._effect["tacticalInsertionFriendly"] = "_t6/misc/fx_equip_tac_insert_light_grn";
   level._effect["tacticalInsertionEnemy"] = "_t6/misc/fx_equip_tac_insert_light_red";
-  clientfield::register("scriptmover", "tacticalinsertion", 1, 1, "int", & spawned, 0, 0);
+  clientfield::register("scriptmover", "tacticalinsertion", 1, 1, "int", &spawned, 0, 0);
   latlongstruct = struct::get("lat_long", "targetname");
   if(isDefined(latlongstruct)) {
     mapx = latlongstruct.origin[0];

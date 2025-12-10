@@ -1469,7 +1469,7 @@ in_igc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastim
   n_entnum = player getentitynumber();
   b_igc_active = 0;
 
-  if(newval&1 << n_entnum) {
+  if(newval& 1 << n_entnum) {
     b_igc_active = 1;
   }
 
@@ -1927,12 +1927,12 @@ __main__() {
     assert(isDefined(s_scenedef), "<dev string:x114>" + s_instance.origin + "<dev string:x126>" + s_instance.scriptbundlename + "<dev string:x13d>");
 
     if(s_scenedef.vmtype === "client") {
-      if(isDefined(s_instance.spawnflags) && (s_instance.spawnflags&2) == 2) {
+      if(isDefined(s_instance.spawnflags) && (s_instance.spawnflags& 2) == 2) {
         s_instance thread play();
         continue;
       }
 
-      if(isDefined(s_instance.spawnflags) && (s_instance.spawnflags&1) == 1) {
+      if(isDefined(s_instance.spawnflags) && (s_instance.spawnflags& 1) == 1) {
         s_instance thread init();
       }
     }

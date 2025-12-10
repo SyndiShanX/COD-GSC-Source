@@ -60,9 +60,9 @@ function function_16f0344e() {
     s_valve thread function_dd9ccb8(s_valve.script_int);
   }
   level thread function_aa37ce2d();
-  level scene::add_scene_func("p7_fxanim_zm_island_pap_elements_gauge_bundle", & function_b6d4787d, "init");
-  level scene::add_scene_func("p7_fxanim_zm_island_pap_elements_whistle_bundle", & function_e0bc0bdc, "init");
-  level scene::add_scene_func("p7_fxanim_zm_island_pap_elements_wheel_bundle", & function_f7c8e279, "init");
+  level scene::add_scene_func("p7_fxanim_zm_island_pap_elements_gauge_bundle", &function_b6d4787d, "init");
+  level scene::add_scene_func("p7_fxanim_zm_island_pap_elements_whistle_bundle", &function_e0bc0bdc, "init");
+  level scene::add_scene_func("p7_fxanim_zm_island_pap_elements_wheel_bundle", &function_f7c8e279, "init");
   level scene::init("p7_fxanim_zm_island_pap_elements_gauge_bundle");
   level scene::init("p7_fxanim_zm_island_pap_elements_whistle_bundle");
   level scene::init("p7_fxanim_zm_island_pap_elements_wheel_bundle");
@@ -166,12 +166,12 @@ function function_4c046b1b() {
 
 function function_dd9ccb8(n_id) {
   if(n_id == 1) {
-    self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, & function_72a105ff);
+    self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, &function_72a105ff);
   } else {
     if(n_id == 2) {
-      self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, & function_e35907c);
+      self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, &function_e35907c);
     } else {
-      self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, & function_578e801d);
+      self.trigger = zm_island_util::spawn_trigger_radius(self.origin, 50, 1, &function_578e801d);
     }
   }
   while(true) {
@@ -198,23 +198,23 @@ function function_dd9ccb8(n_id) {
 
 function private function_72a105ff(e_player) {
   if(level flag::get("valve1_found")) {
-    return & "ZM_ISLAND_DRAIN_WATER";
+    return &"ZM_ISLAND_DRAIN_WATER";
   }
-  return & "ZOMBIE_BUILD_PIECE_MORE";
+  return &"ZOMBIE_BUILD_PIECE_MORE";
 }
 
 function private function_e35907c(e_player) {
   if(level flag::get("valve2_found")) {
-    return & "ZM_ISLAND_DRAIN_WATER";
+    return &"ZM_ISLAND_DRAIN_WATER";
   }
-  return & "ZOMBIE_BUILD_PIECE_MORE";
+  return &"ZOMBIE_BUILD_PIECE_MORE";
 }
 
 function private function_578e801d(e_player) {
   if(level flag::get("valve3_found")) {
-    return & "ZM_ISLAND_DRAIN_WATER";
+    return &"ZM_ISLAND_DRAIN_WATER";
   }
-  return & "ZOMBIE_BUILD_PIECE_MORE";
+  return &"ZOMBIE_BUILD_PIECE_MORE";
 }
 
 function function_1a519eae(str_flag) {
@@ -346,12 +346,12 @@ function function_14c57bc9() {
   mdl_part = util::spawn_model("p7_zm_isl_pap_elements_gauge", self.origin + (vectorscale((0, 0, -1), 154)));
   mdl_part clientfield::set("show_part", 1);
   mdl_part setscale(1.5);
-  mdl_part.trigger = zm_island_util::spawn_trigger_radius(mdl_part.origin, 50, 1, & function_9bd3096f);
+  mdl_part.trigger = zm_island_util::spawn_trigger_radius(mdl_part.origin, 50, 1, &function_9bd3096f);
   mdl_part thread function_1a519eae("valve1_found");
 }
 
 function private function_9bd3096f(player) {
-  return & "ZOMBIE_BUILD_PIECE_GRAB";
+  return &"ZOMBIE_BUILD_PIECE_GRAB";
 }
 
 function function_f4a071bb() {
@@ -455,7 +455,7 @@ function function_9fcd89f7() {
   level.var_ced49fc moveto(level.var_ced49fc.v_org, 3);
   level.var_ced49fc rotateto(level.var_ced49fc.v_ang, 3);
   level.var_ced49fc waittill("movedone");
-  level.var_ced49fc.trigger = zm_island_util::spawn_trigger_radius(level.var_ced49fc.origin, 50, 1, & function_9bd3096f);
+  level.var_ced49fc.trigger = zm_island_util::spawn_trigger_radius(level.var_ced49fc.origin, 50, 1, &function_9bd3096f);
   level.var_ced49fc thread function_1a519eae("valve3_found");
   level flag::set("defend_success");
   level.mdl_gate moveto(level.mdl_gate.v_org, 3);
@@ -551,7 +551,7 @@ function function_4fdc8e70() {
   mdl_part = util::spawn_model("p7_zm_isl_pap_elements_wheel", array::random(var_f89319f8).origin);
   mdl_part clientfield::set("show_part", 1);
   mdl_part setscale(1.5);
-  mdl_part.trigger = zm_island_util::spawn_trigger_radius(mdl_part.origin, 50, 1, & function_9bd3096f);
+  mdl_part.trigger = zm_island_util::spawn_trigger_radius(mdl_part.origin, 50, 1, &function_9bd3096f);
   mdl_part thread function_1a519eae("valve2_found");
 }
 
@@ -569,13 +569,13 @@ function function_145f4b1a() {
 }
 
 function function_336744d2() {
-  callback::remove_on_spawned( & on_player_spawned);
+  callback::remove_on_spawned(&on_player_spawned);
   level notify("hash_62f73de6");
   self clientfield::set("do_emissive_material", 1);
 }
 
 function function_7cd896fc() {
-  zm_devgui::add_custom_devgui_callback( & function_9e3140d6);
+  zm_devgui::add_custom_devgui_callback(&function_9e3140d6);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");

@@ -14,8 +14,8 @@
 #namespace zm_tomb_teleporter;
 
 function init() {
-  clientfield::register("allplayers", "teleport_arrival_departure_fx", 21000, 1, "counter", & function_dadd24b7, 0, 0);
-  clientfield::register("vehicle", "teleport_arrival_departure_fx", 21000, 1, "counter", & function_dadd24b7, 0, 0);
+  clientfield::register("allplayers", "teleport_arrival_departure_fx", 21000, 1, "counter", &function_dadd24b7, 0, 0);
+  clientfield::register("vehicle", "teleport_arrival_departure_fx", 21000, 1, "counter", &function_dadd24b7, 0, 0);
 }
 
 function main() {

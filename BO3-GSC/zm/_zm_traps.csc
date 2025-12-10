@@ -9,7 +9,7 @@
 #namespace zm_traps;
 
 function autoexec __init__sytem__() {
-  system::register("zm_traps", & __init__, undefined, undefined);
+  system::register("zm_traps", &__init__, undefined, undefined);
 }
 
 function __init__() {

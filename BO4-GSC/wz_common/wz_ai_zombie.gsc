@@ -1136,7 +1136,7 @@ function_e261b81d() {
     }
 
     if(self.aistate == 3) {
-      if((self getentitynumber()&1) == (getlevelframenumber()&1)) {
+      if((self getentitynumber()& 1) == (getlevelframenumber()& 1)) {
         self.clamptonavmesh = !self.isonnavmesh && isDefined(self.ai_zone) && self istouching(self.ai_zone.def);
       }
     } else {
@@ -1696,7 +1696,7 @@ private update_goal() {
 }
 
 private function_bf21ead1() {
-  if((getdvarint(#"survival_prototype", 0) == 1 || getdvarint(#"cluster_awareness", 0)) && (self getentitynumber()&1) == (getlevelframenumber()&1)) {
+  if((getdvarint(#"survival_prototype", 0) == 1 || getdvarint(#"cluster_awareness", 0)) && (self getentitynumber()& 1) == (getlevelframenumber()& 1)) {
     return;
   }
 

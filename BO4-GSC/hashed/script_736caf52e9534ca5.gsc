@@ -11,7 +11,7 @@
 #namespace namespace_13b01f59;
 
 autoexec __init__system__() {
-  system::register(#"hash_4b6aad59587b2b51", & __init__, undefined, undefined);
+  system::register(#"hash_4b6aad59587b2b51", &__init__, undefined, undefined);
 }
 
 __init__() {
@@ -25,7 +25,7 @@ __init__() {
   clientfield::register("toplayer", "deathzonewarningsound", 1, 2, "int");
   level.var_c102797c = 5;
   level.var_c6dde68f = 1;
-  callback::on_game_playing( & function_de7ae64);
+  callback::on_game_playing(&function_de7ae64);
 
   level thread devgui_loop();
   level thread debug_loop();
@@ -202,13 +202,13 @@ function_e7a695ba() {
   }
 }
 
-private function_4b8ab8e6(zones, & var_2c55459a) {
+private function_4b8ab8e6(zones, &var_2c55459a) {
   foreach(zone in zones) {
     function_64ca7bde(zone.links, var_2c55459a);
   }
 }
 
-private function_64ca7bde(zones, & var_2c55459a) {
+private function_64ca7bde(zones, &var_2c55459a) {
   foreach(zone in zones) {
     if(isDefined(zone.open) && zone.open) {
       continue;
@@ -317,7 +317,7 @@ function_90de4a3a(width = 10, height = 10) {
       targetname = "zone." + x + "." + y;
       vol = spawn("info_volume", (x * 200, y * 200, 0), 0, 200, 200, 100);
       vol.targetname = targetname;
-      init(targetname, & function_83af8a0b, & on_shutdown);
+      init(targetname, &function_83af8a0b, &on_shutdown);
       if(x > 0) {
         var_4db3e032 = "zone." + x - 1 + "." + y;
         link(targetname, var_4db3e032);

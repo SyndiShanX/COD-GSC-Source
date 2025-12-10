@@ -182,7 +182,7 @@ setup_hud_elem() {
   self.horzalign = "center";
   self.vertalign = "middle";
   self.foreground = 1;
-  self.label = & "SCRIPT_INTELLIGENCE_OF_THIRTY";
+  self.label = &"SCRIPT_INTELLIGENCE_OF_THIRTY";
 }
 
 intel_found_total() {

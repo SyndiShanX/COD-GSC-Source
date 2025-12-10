@@ -12,16 +12,16 @@
 #namespace zm_castle_tram;
 
 function autoexec __init__sytem__() {
-  system::register("zm_castle_tram", & __init__, undefined, undefined);
+  system::register("zm_castle_tram", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level._effect["tram_fuse_destroy"] = "dlc1/castle/fx_glow_115_fuse_burst_castle";
   level._effect["tram_fuse_fx"] = "dlc1/castle/fx_glow_115_fuse_castle";
-  clientfield::register("scriptmover", "tram_fuse_destroy", 1, 1, "counter", & tram_fuse_destroy, 0, 0);
-  clientfield::register("scriptmover", "tram_fuse_fx", 1, 1, "counter", & function_1383302a, 0, 0);
-  clientfield::register("scriptmover", "cleanup_dynents", 1, 1, "counter", & function_8a2bbd06, 0, 0);
-  clientfield::register("world", "snd_tram", 5000, 2, "int", & snd_tram, 0, 0);
+  clientfield::register("scriptmover", "tram_fuse_destroy", 1, 1, "counter", &tram_fuse_destroy, 0, 0);
+  clientfield::register("scriptmover", "tram_fuse_fx", 1, 1, "counter", &function_1383302a, 0, 0);
+  clientfield::register("scriptmover", "cleanup_dynents", 1, 1, "counter", &function_8a2bbd06, 0, 0);
+  clientfield::register("world", "snd_tram", 5000, 2, "int", &snd_tram, 0, 0);
   thread function_58a73de9();
   thread function_60283937();
 }

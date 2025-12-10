@@ -329,7 +329,7 @@ camo_battle_stealth_assist() {
   self endon("assisted_kill");
   self waittill("death", attacker);
 
-  if(isplayer(attacker) & !flag("ruins_stealth_over")) {
+  if(isplayer(attacker) &!flag("ruins_stealth_over")) {
     ai_close = get_closest_ai(self.origin, "axis");
 
     if(isDefined(ai_close) && distancesquared(self.origin, ai_close.origin) < 62500) {

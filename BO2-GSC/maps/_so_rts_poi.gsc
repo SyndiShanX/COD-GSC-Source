@@ -37,7 +37,7 @@ init() {
   level.rts.networkintruders["axis"] = [];
   level.rts.networkintruders["allies"] = [];
   level.rts.nointruderzones = getEntArray("no_intruder", "targetname");
-  level.rts.intruderplantstring = & "SO_RTS_PLANT_INTRUDER";
+  level.rts.intruderplantstring = &"SO_RTS_PLANT_INTRUDER";
   initpois();
 }
 

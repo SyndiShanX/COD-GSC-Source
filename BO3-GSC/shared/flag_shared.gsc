@@ -88,7 +88,7 @@ function get(str_flag) {
   return self.flag[str_flag];
 }
 
-function get_any( & array) {
+function get_any(&array) {
   foreach(str_flag in array) {
     if(get(str_flag)) {
       return true;

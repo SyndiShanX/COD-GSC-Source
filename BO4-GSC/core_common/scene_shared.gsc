@@ -770,12 +770,12 @@ run_instances() {
       continue;
     }
 
-    if(isDefined(s_instance.spawnflags) && (s_instance.spawnflags&2) == 2) {
+    if(isDefined(s_instance.spawnflags) && (s_instance.spawnflags& 2) == 2) {
       s_instance thread play();
       continue;
     }
 
-    if(isDefined(s_instance.spawnflags) && (s_instance.spawnflags&1) == 1) {
+    if(isDefined(s_instance.spawnflags) && (s_instance.spawnflags& 1) == 1) {
       s_instance thread init();
     }
   }
@@ -2175,7 +2175,7 @@ set_igc_active(b_in_igc, str_scene_name) {
 is_igc_active() {
   n_players_in_igc = level clientfield::get("in_igc");
   n_entnum = self getentitynumber();
-  return n_players_in_igc&1 << n_entnum;
+  return n_players_in_igc& 1 << n_entnum;
 }
 
 function_871087b6() {

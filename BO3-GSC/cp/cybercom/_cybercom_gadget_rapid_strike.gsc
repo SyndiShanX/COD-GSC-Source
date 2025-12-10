@@ -27,15 +27,15 @@ function init() {}
 
 function main() {
   cybercom_gadget::registerability(1, 64);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
   level.cybercom.rapid_strike = spawnStruct();
-  level.cybercom.rapid_strike._is_flickering = & _is_flickering;
-  level.cybercom.rapid_strike._on_flicker = & _on_flicker;
-  level.cybercom.rapid_strike._on_give = & _on_give;
-  level.cybercom.rapid_strike._on_take = & _on_take;
-  level.cybercom.rapid_strike._on_connect = & _on_connect;
-  level.cybercom.rapid_strike._on = & _on;
-  level.cybercom.rapid_strike._off = & _off;
+  level.cybercom.rapid_strike._is_flickering = &_is_flickering;
+  level.cybercom.rapid_strike._on_flicker = &_on_flicker;
+  level.cybercom.rapid_strike._on_give = &_on_give;
+  level.cybercom.rapid_strike._on_take = &_on_take;
+  level.cybercom.rapid_strike._on_connect = &_on_connect;
+  level.cybercom.rapid_strike._on = &_on;
+  level.cybercom.rapid_strike._off = &_off;
 }
 
 function on_player_spawned() {}

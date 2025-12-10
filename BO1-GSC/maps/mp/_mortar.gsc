@@ -24,7 +24,7 @@ init() {
   precacheLocationSelector("map_mortar_selector");
   if(maps\mp\gametypes\_tweakables::getTweakableValue("killstreak", "allowmortar")) {
     maps\mp\gametypes\_hardpoints::registerKillstreak("mortar_mp", "mortar_mp", "killstreak_mortar", "mortar_used", ::useKillstreakMortar, true);
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("mortar_mp", & "KILLSTREAK_EARNED_MORTAR", & "KILLSTREAK_MORTAR_NOT_AVAILABLE", & "KILLSTREAK_MORTAR_INBOUND");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("mortar_mp", &"KILLSTREAK_EARNED_MORTAR", &"KILLSTREAK_MORTAR_NOT_AVAILABLE", &"KILLSTREAK_MORTAR_INBOUND");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("mortar_mp", "mpl_killstreak_mortar", "kls_mortars_used", "", "kls_mortars_enemy", "", "kls_mortars_ready");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("mortar_mp", "scr_givemortar");
   }

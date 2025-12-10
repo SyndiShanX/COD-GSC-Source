@@ -24,8 +24,8 @@ section_flag_inits() {
 }
 
 section_precache() {
-  maps\_utility::add_hint_string("hint_crouch_stance", & "BLACK_ICE_ENGINE_ROOM_SMOKE_DUCK", ::hint_crouch);
-  maps\_utility::add_hint_string("hint_crouch_crouch", & "BLACK_ICE_ENGINE_ROOM_SMOKE_DUCK_CROUCH", ::hint_crouch);
+  maps\_utility::add_hint_string("hint_crouch_stance", &"BLACK_ICE_ENGINE_ROOM_SMOKE_DUCK", ::hint_crouch);
+  maps\_utility::add_hint_string("hint_crouch_crouch", &"BLACK_ICE_ENGINE_ROOM_SMOKE_DUCK_CROUCH", ::hint_crouch);
   precachestring(&"BLACK_ICE_ENGINE_ROOM_SMOKE_DEATH");
 }
 
@@ -300,7 +300,7 @@ player_cough_damage() {
         self dodamage(40, level.player.origin, level._engine_room.damage_smoke_ent);
     } else if(!common_scripts\utility::flag("flag_engine_room_nodamage")) {
       level.player kill();
-      setdvar("ui_deadquote", & "BLACK_ICE_ENGINE_ROOM_SMOKE_DEATH");
+      setdvar("ui_deadquote", &"BLACK_ICE_ENGINE_ROOM_SMOKE_DEATH");
       maps\_utility::missionfailedwrapper();
     }
 

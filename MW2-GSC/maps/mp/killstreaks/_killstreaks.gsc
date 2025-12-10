@@ -10,7 +10,7 @@
 KILLSTREAK_STRING_TABLE = "mp/killstreakTable.csv";
 
 init() {
-  // &&1 Kill Streak!
+  // && 1 Kill Streak!
   precacheString(&"MP_KILLSTREAK_N");
   precacheString(&"MP_NUKE_ALREADY_INBOUND");
   precacheString(&"MP_UNAVILABLE_IN_LASTSTAND");
@@ -53,7 +53,7 @@ initKillstreakData() {
     assert(streakRef != "");
 
     streakUseHint = tableLookupIString(KILLSTREAK_STRING_TABLE, 0, i, 6);
-    assert(streakUseHint != & "");
+    assert(streakUseHint != &"");
     precacheString(streakUseHint);
 
     streakEarnDialog = tableLookup(KILLSTREAK_STRING_TABLE, 0, i, 8);

@@ -24,10 +24,8 @@ main() {
 
   setDvar("r_diffusecolorscale", "1.5");
 
-
   alleyTrigger = getent("alleyTrigger", "targetname");
   windowTrigger = getent("triggerwindowTarget", "targetname");
-
 
   target1 = getent("fieldTarget_BackLeft", "targetname");
   target2 = getent("fieldTarget_FrontLeft", "targetname");
@@ -50,30 +48,20 @@ main() {
   target19 = getent("target_alleyWindow2", "targetname");
   target20 = getent("target_alleyWindow3", "targetname");
 
-
-
-
   targetLight1_off = getent("steelBuildingTargetLight1_off", "targetname");
   targetLight1_on = getent("steelBuildingTargetLight1_on", "targetname");
 
   targetLight2_off = getent("steelBuildingTargetLight2_off", "targetname");
   targetLight2_on = getent("steelBuildingTargetLight2_on", "targetname");
 
-
-
   level.const_fx_exploder_red_light_1 = 1001;
   level.const_fx_exploder_red_light_2 = 1002;
-
 
   speaker1 = getent("loudspeaker1", "targetname");
   speaker2 = getent("loudspeaker2", "targetname");
 
-
-
-
   targetLight1_on Hide();
   targetLight2_on Hide();
-
 
   target1 setCanDamage(true);
   target2 setCanDamage(true);
@@ -104,13 +92,9 @@ main() {
   target14 thread damageTarget(3);
   target15 thread damageTarget(3);
 
-
   target18 thread damageTarget(4);
   target19 thread damageTarget(4);
   target20 thread damageTarget(5);
-
-
-
 
   target1 thread moveTarget(4, 220, 10.1);
   target2 thread moveTarget(4, 220, 5.2);
@@ -131,11 +115,8 @@ main() {
   target19 thread moveTarget(6, 70, 6.65);
   target20 thread moveTarget(1, 130, 5.75);
 
-
-
   target11 thread rotateTarget(2, 90, 0.5, 2);
   target12 thread rotateTarget(1, 90, 0.7, 3);
-
 
   target9.triggeroff = true;
   alleyTrigger thread triggerCheck(target9);
@@ -147,7 +128,6 @@ triggerCheck(target) {
   self endon("game_ended");
   while(1) {
     self waittill("trigger", player);
-
 
     distance = Distance(target.origin, self.origin);
     if(distance <= 90) {
@@ -220,7 +200,6 @@ moveTarget(dir, dis, speed) {
   self endon("game_ended");
   keepMoving = true;
 
-
   startPOS = self.origin;
 
   FarPOS = self.origin;
@@ -252,7 +231,6 @@ moveTarget(dir, dis, speed) {
       farPOS = self.origin - dis;
       break;
   }
-
 
   while(1) {
     if(isDefined(self.triggeroff))

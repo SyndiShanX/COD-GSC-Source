@@ -14,7 +14,7 @@
 #namespace zm_moon_amb;
 
 function main() {
-  level._sndambientstatecallback = & function_93c8dd7;
+  level._sndambientstatecallback = &function_93c8dd7;
   level.audio_zones_breached = [];
   level.audio_zones_breached["1"] = 0;
   level.audio_zones_breached["2a"] = 0;
@@ -33,15 +33,15 @@ function main() {
   level thread snd_start_autofx_audio();
   level thread function_c9207335();
   level thread function_d19cb2f8();
-  clientfield::register("allplayers", "beam_fx_audio", 21000, 1, "counter", & beam_fx_audio, 0, 0);
-  clientfield::register("world", "teleporter_audio_sfx", 21000, 1, "counter", & teleporter_audio_sfx, 0, 0);
+  clientfield::register("allplayers", "beam_fx_audio", 21000, 1, "counter", &beam_fx_audio, 0, 0);
+  clientfield::register("world", "teleporter_audio_sfx", 21000, 1, "counter", &teleporter_audio_sfx, 0, 0);
 }
 
 function function_c9207335() {
   wait(3);
   level thread function_d667714e();
   var_13a52dfe = getEntArray(0, "sndMusicTrig", "targetname");
-  array::thread_all(var_13a52dfe, & function_60a32834);
+  array::thread_all(var_13a52dfe, &function_60a32834);
 }
 
 function function_60a32834() {
@@ -87,7 +87,7 @@ function snd_start_autofx_audio() {
 
 function ambience_randoms() {
   level waittill("power_on");
-  array::thread_all(struct::get_array("amb_random_beeps", "targetname"), & play_random_beeps);
+  array::thread_all(struct::get_array("amb_random_beeps", "targetname"), &play_random_beeps);
 }
 
 function play_random_beeps() {
@@ -104,8 +104,8 @@ function zone_alarms_setup() {
   if(!isDefined(array1) || !isDefined(array2)) {
     return;
   }
-  array::thread_all(array1, & play_zone_alarms);
-  array::thread_all(array2, & play_zone_shakes);
+  array::thread_all(array1, &play_zone_alarms);
+  array::thread_all(array2, &play_zone_shakes);
 }
 
 function play_zone_alarms() {
@@ -153,8 +153,8 @@ function teleporter_audio_sfx(localclientnum, oldval, newval, bnewent, binitials
   if(!isDefined(level.warmup_array)) {
     level.warmup_array = struct::get_array("teleporter_warmup_sfx", "targetname");
   }
-  array::thread_all(level.click_array, & play_teleporter_sounds);
-  array::thread_all(level.warmup_array, & play_warmup_cooldown);
+  array::thread_all(level.click_array, &play_teleporter_sounds);
+  array::thread_all(level.warmup_array, &play_warmup_cooldown);
   exploder::exploder(121);
   exploder::exploder(131);
 }

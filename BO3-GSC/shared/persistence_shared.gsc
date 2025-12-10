@@ -12,12 +12,12 @@
 #namespace persistence;
 
 function autoexec __init__sytem__() {
-  system::register("persistence", & __init__, undefined, undefined);
+  system::register("persistence", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
-  callback::on_connect( & on_player_connect);
+  callback::on_start_gametype(&init);
+  callback::on_connect(&on_player_connect);
 }
 
 function init() {

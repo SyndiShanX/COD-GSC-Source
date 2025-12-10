@@ -9,8 +9,8 @@
 #namespace clean;
 
 function main() {
-  clientfield::register("scriptmover", "taco_flag", 12000, 2, "int", & function_3fdcaa92, 0, 0);
-  clientfield::register("allplayers", "taco_carry", 12000, 1, "int", & function_87660047, 0, 0);
+  clientfield::register("scriptmover", "taco_flag", 12000, 2, "int", &function_3fdcaa92, 0, 0);
+  clientfield::register("allplayers", "taco_carry", 12000, 1, "int", &function_87660047, 0, 0);
 }
 
 function function_3fdcaa92(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

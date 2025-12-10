@@ -12,12 +12,12 @@
 #namespace emp;
 
 function autoexec __init__sytem__() {
-  system::register("emp", & __init__, undefined, undefined);
+  system::register("emp", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "emp_turret_init", 1, 1, "int", & emp_turret_init, 0, 0);
-  clientfield::register("vehicle", "emp_turret_deploy", 1, 1, "int", & emp_turret_deploy_start, 0, 0);
+  clientfield::register("scriptmover", "emp_turret_init", 1, 1, "int", &emp_turret_init, 0, 0);
+  clientfield::register("vehicle", "emp_turret_deploy", 1, 1, "int", &emp_turret_deploy_start, 0, 0);
   thread monitor_emp_killstreaks();
 }
 

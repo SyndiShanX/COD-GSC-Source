@@ -712,7 +712,7 @@ tall_grass_nag() {
 }
 
 stealth_search_for_player(delay, str_spawnername, view_dot, vis_dist, a_nodes, fail_delay_time) {
-  if(isDefined(delay) & delay > 0)
+  if(isDefined(delay) &delay > 0)
     wait(delay);
 
   e_spawner = getent(str_spawnername, "targetname");

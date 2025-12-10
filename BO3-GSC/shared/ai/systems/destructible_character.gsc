@@ -170,7 +170,7 @@ function isdestructed(entity, piecenumber) {
   /
   #
   assert(1 <= piecenumber && piecenumber <= 20);
-  return _getdestructstate(entity) & (1 << piecenumber);
+  return _getdestructstate(entity) &(1 << piecenumber);
 }
 
 function reapplydestructedpieces(entity) {
@@ -206,7 +206,7 @@ function togglespawngibs(entity, shouldspawngibs) {
   if(shouldspawngibs) {
     entity._destruct_state = _getdestructstate(entity) | 1;
   } else {
-    entity._destruct_state = _getdestructstate(entity) & -2;
+    entity._destruct_state = _getdestructstate(entity) &-2;
   }
   entity clientfield::set("destructible_character_state", entity._destruct_state);
 }

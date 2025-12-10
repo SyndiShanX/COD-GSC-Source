@@ -358,7 +358,7 @@ checkMatchDataKills(killId, victim, weapon, meansOfDeath) {
     self revenge(killId);
   }
 
-  if(victim.iDFlags & level.iDFLAGS_PENETRATION)
+  if(victim.iDFlags &level.iDFLAGS_PENETRATION)
     self incPlayerStat("bulletpenkills", 1);
 
   self_pers_rank = self.pers["rank"];

@@ -79,18 +79,18 @@ onStartGameType() {
 
   setClientNameMode("auto_change");
 
-  setObjectiveText(game["attackers"], & "OBJECTIVES_CTF");
-  setObjectiveText(game["defenders"], & "OBJECTIVES_CTF");
+  setObjectiveText(game["attackers"], &"OBJECTIVES_CTF");
+  setObjectiveText(game["defenders"], &"OBJECTIVES_CTF");
 
   if(level.splitscreen) {
-    setObjectiveScoreText(game["attackers"], & "OBJECTIVES_ONE_FLAG_ATTACKER");
-    setObjectiveScoreText(game["defenders"], & "OBJECTIVES_ONE_FLAG_DEFENDER");
+    setObjectiveScoreText(game["attackers"], &"OBJECTIVES_ONE_FLAG_ATTACKER");
+    setObjectiveScoreText(game["defenders"], &"OBJECTIVES_ONE_FLAG_DEFENDER");
   } else {
-    setObjectiveScoreText(game["attackers"], & "OBJECTIVES_ONE_FLAG_ATTACKER_SCORE");
-    setObjectiveScoreText(game["defenders"], & "OBJECTIVES_ONE_FLAG_DEFENDER_SCORE");
+    setObjectiveScoreText(game["attackers"], &"OBJECTIVES_ONE_FLAG_ATTACKER_SCORE");
+    setObjectiveScoreText(game["defenders"], &"OBJECTIVES_ONE_FLAG_DEFENDER_SCORE");
   }
-  setObjectiveHintText(game["attackers"], & "OBJECTIVES_ONE_FLAG_ATTACKER_HINT");
-  setObjectiveHintText(game["defenders"], & "OBJECTIVES_ONE_FLAG_DEFENDER_HINT");
+  setObjectiveHintText(game["attackers"], &"OBJECTIVES_ONE_FLAG_ATTACKER_HINT");
+  setObjectiveHintText(game["defenders"], &"OBJECTIVES_ONE_FLAG_DEFENDER_HINT");
 
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -226,8 +226,8 @@ createTeamFlag(team) {
   teamFlag = maps\mp\gametypes\_gameobjects::createCarryObject(team, trigger, visuals, (0, 0, 85));
   teamFlag maps\mp\gametypes\_gameobjects::setTeamUseTime("friendly", 15.0);
   teamFlag maps\mp\gametypes\_gameobjects::setTeamUseTime("enemy", 0);
-  teamFlag maps\mp\gametypes\_gameobjects::setTeamUseText("enemy", & "MP_CAPTURING_FLAG");
-  teamFlag maps\mp\gametypes\_gameobjects::setTeamUseText("friendly", & "MP_RETURNING_FLAG");
+  teamFlag maps\mp\gametypes\_gameobjects::setTeamUseText("enemy", &"MP_CAPTURING_FLAG");
+  teamFlag maps\mp\gametypes\_gameobjects::setTeamUseText("friendly", &"MP_RETURNING_FLAG");
 
   teamFlag maps\mp\gametypes\_gameobjects::allowCarry("enemy");
   teamFlag maps\mp\gametypes\_gameobjects::setVisibleTeam("any");
@@ -241,8 +241,6 @@ createTeamFlag(team) {
   teamFlag.onPickupFailed = ::onPickup;
   teamFlag.onDrop = ::onDrop;
   teamFlag.onReset = ::onReset;
-
-
 
   teamFlag.oldRadius = trigger.radius;
 
@@ -340,12 +338,11 @@ onPickup(player) {
 
     level.capZones[team] maps\mp\gametypes\_gameobjects::setVisibleTeam("any");
 
-
     self maps\mp\gametypes\_gameobjects::set3DIcon("enemy", "waypoint_defend");
     self maps\mp\gametypes\_gameobjects::set3DIcon("friendly", "waypoint_kill");
     self maps\mp\gametypes\_gameobjects::set2DIcon("friendly", level.iconTarget2D);
 
-    printAndSoundOnEveryone(team, otherteam, & "MP_ENEMY_FLAG_TAKEN_BY", & "MP_FLAG_TAKEN_BY", "mp_obj_taken", "mp_enemy_obj_taken", player);
+    printAndSoundOnEveryone(team, otherteam, &"MP_ENEMY_FLAG_TAKEN_BY", &"MP_FLAG_TAKEN_BY", "mp_obj_taken", "mp_enemy_obj_taken", player);
 
     leaderDialog("enemy_flag_taken", team, "status");
     leaderDialog("flag_taken", otherteam, "status");
@@ -368,7 +365,7 @@ returnFlag() {
 
   level.capZones[otherTeam] maps\mp\gametypes\_gameobjects::setVisibleTeam("none");
 
-  printAndSoundOnEveryone(team, getOtherTeam(team), & "MP_FLAG_RETURNED", & "MP_ENEMY_FLAG_RETURNED", "mp_obj_returned", "mp_obj_returned", "");
+  printAndSoundOnEveryone(team, getOtherTeam(team), &"MP_FLAG_RETURNED", &"MP_ENEMY_FLAG_RETURNED", "mp_obj_returned", "mp_obj_returned", "");
   leaderDialog("enemy_flag_returned", otherteam, "status");
   leaderDialog("flag_returned", team, "status");
 }
@@ -389,7 +386,7 @@ onDrop(player) {
     if(isDefined(player.carryFlag))
       player detachFlag();
 
-    printAndSoundOnEveryone(otherTeam, "none", & "MP_ENEMY_FLAG_DROPPED_BY", "", "mp_war_objective_lost", "", player);
+    printAndSoundOnEveryone(otherTeam, "none", &"MP_ENEMY_FLAG_DROPPED_BY", "", "mp_war_objective_lost", "", player);
   } else {
     playSoundOnPlayers("mp_war_objective_lost", otherTeam);
   }
@@ -428,11 +425,9 @@ onUse(player) {
   player notify("objective", "captured");
   player thread maps\mp\_matchdata::logGameEvent("capture", player.origin);
 
+  printAndSoundOnEveryone(team, otherteam, &"MP_ENEMY_FLAG_CAPTURED_BY", &"MP_FLAG_CAPTURED_BY", "mp_obj_captured", "mp_enemy_obj_captured", player);
 
-
-  printAndSoundOnEveryone(team, otherteam, & "MP_ENEMY_FLAG_CAPTURED_BY", & "MP_FLAG_CAPTURED_BY", "mp_obj_captured", "mp_enemy_obj_captured", player);
-
-  thread flagCaptured(team, & "MP_DOM_NEUTRAL_FLAG_CAPTURED");
+  thread flagCaptured(team, &"MP_DOM_NEUTRAL_FLAG_CAPTURED");
 
   level.teamFlags[otherTeam] maps\mp\gametypes\_gameobjects::allowCarry("none");
   level.teamFlags[otherTeam] maps\mp\gametypes\_gameobjects::setVisibleTeam("none");

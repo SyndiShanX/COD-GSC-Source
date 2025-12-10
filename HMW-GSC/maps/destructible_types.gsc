@@ -1105,7 +1105,6 @@ toy_light_ceiling_fluorescent(destructibleType) {
   //destructible_sound( "fluorescent_light_spark", undefined, 1);
   destructible_anim(get_precached_anim("light_fluorescent_null"), #animtree, "setanimknob", undefined, 2, "light_fluorescent_null");
   destructible_state(undefined, "me_lightfluohang_double_destroyed", undefined, undefined, "no_melee");
-
 }
 
 toy_light_ceiling_fluorescent_spotlight(destructibleType) {

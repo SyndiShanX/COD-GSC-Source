@@ -48,7 +48,7 @@ entity_died(localclientnum, set, newent) {
 }
 
 gpr_updated(localclientnum, set, newent) {
-  signbit = self.gpr & -2147483648;
+  signbit = self.gpr &-2147483648;
   self.gpr = self.gpr & 2147483647;
   data = self.gpr & 268435455;
   op = self.gpr >> 28;

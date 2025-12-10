@@ -25,15 +25,15 @@ function autoexec init() {
 }
 
 function private function_66da4eb0() {
-  behaviortreenetworkutility::registerbehaviortreeaction("traverseWallCrawlAction", & traversewallcrawlaction, & function_7d285db1, undefined);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldWallTraverse", & shouldwalltraverse);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldWallCrawl", & shouldwallcrawl);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("traverseWallIntro", & traversewallintro);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("traverseWallJumpOff", & traversewalljumpoff);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("quadCollisionService", & quadcollisionservice);
-  animationstatenetwork::registeranimationmocomp("quad_wall_traversal", & function_dd3e35df, undefined, undefined);
-  animationstatenetwork::registeranimationmocomp("quad_wall_jump_off", & function_5d8b540c, undefined, & function_18650281);
-  animationstatenetwork::registeranimationmocomp("quad_move_strict_traversal", & function_9e9b3f8b, undefined, & function_2433815e);
+  behaviortreenetworkutility::registerbehaviortreeaction("traverseWallCrawlAction", &traversewallcrawlaction, &function_7d285db1, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldWallTraverse", &shouldwalltraverse);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldWallCrawl", &shouldwallcrawl);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("traverseWallIntro", &traversewallintro);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("traverseWallJumpOff", &traversewalljumpoff);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("quadCollisionService", &quadcollisionservice);
+  animationstatenetwork::registeranimationmocomp("quad_wall_traversal", &function_dd3e35df, undefined, undefined);
+  animationstatenetwork::registeranimationmocomp("quad_wall_jump_off", &function_5d8b540c, undefined, &function_18650281);
+  animationstatenetwork::registeranimationmocomp("quad_move_strict_traversal", &function_9e9b3f8b, undefined, &function_2433815e);
 }
 
 function traversewallcrawlaction(entity, asmstatename) {
@@ -409,7 +409,7 @@ function intro_quad_spawn() {
   level.zombie_vars["zombie_spawn_delay"] = previous_spawn_delay;
   level.zombie_health = level.zombie_vars["zombie_health_start"];
   level.zombie_total = 0;
-  level.round_spawn_func = & zm::round_spawning;
+  level.round_spawn_func = &zm::round_spawning;
   level thread[[level.round_spawn_func]]();
   wait(2);
   level notify("quad_round_can_end");

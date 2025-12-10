@@ -17,14 +17,14 @@
 #namespace zm_asylum_achievements;
 
 function autoexec __init__sytem__() {
-  system::register("zm_theater_achievements", & __init__, undefined, undefined);
+  system::register("zm_theater_achievements", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  level.achievement_sound_func = & achievement_sound_func;
+  level.achievement_sound_func = &achievement_sound_func;
   level thread function_fa4b9452();
-  zm_spawner::register_zombie_death_event_callback( & function_1abfde35);
-  callback::on_connect( & onplayerconnect);
+  zm_spawner::register_zombie_death_event_callback(&function_1abfde35);
+  callback::on_connect(&onplayerconnect);
 }
 
 function achievement_sound_func(achievement_name_lower) {

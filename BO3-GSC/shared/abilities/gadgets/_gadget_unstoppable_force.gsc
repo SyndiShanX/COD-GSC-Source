@@ -15,16 +15,16 @@
 #namespace _gadget_unstoppable_force;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_unstoppable_force", & __init__, undefined, undefined);
+  system::register("gadget_unstoppable_force", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(29, & gadget_unstoppable_force_on, & gadget_unstoppable_force_off);
-  ability_player::register_gadget_possession_callbacks(29, & gadget_unstoppable_force_on_give, & gadget_unstoppable_force_on_take);
-  ability_player::register_gadget_flicker_callbacks(29, & gadget_unstoppable_force_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(29, & gadget_unstoppable_force_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(29, & gadget_unstoppable_force_is_flickering);
-  callback::on_connect( & gadget_unstoppable_force_on_connect);
+  ability_player::register_gadget_activation_callbacks(29, &gadget_unstoppable_force_on, &gadget_unstoppable_force_off);
+  ability_player::register_gadget_possession_callbacks(29, &gadget_unstoppable_force_on_give, &gadget_unstoppable_force_on_take);
+  ability_player::register_gadget_flicker_callbacks(29, &gadget_unstoppable_force_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(29, &gadget_unstoppable_force_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(29, &gadget_unstoppable_force_is_flickering);
+  callback::on_connect(&gadget_unstoppable_force_on_connect);
   clientfield::register("toplayer", "unstoppableforce_state", 1, 1, "int");
 }
 

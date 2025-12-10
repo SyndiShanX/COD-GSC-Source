@@ -268,7 +268,7 @@ genericBulletKill(data, victim, weapon) {
   if(player.pers["bulletStreak"] == 2)
     player maps\mp\gametypes\_persistence::statAdd("KILLS_BULLET_MULTI", 1, false, weapon);
   if(data.victim.iDFlagsTime == time) {
-    if(data.victim.iDFlags & level.iDFLAGS_PENETRATION)
+    if(data.victim.iDFlags &level.iDFLAGS_PENETRATION)
       player maps\mp\gametypes\_persistence::statAdd("BASIC_PENETRATION_KILLS", 1, false, weapon);
   }
 }

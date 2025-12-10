@@ -462,7 +462,7 @@ is_player(attacker) {
 air_strike_user_notify() {
   self endon("death");
   self endon("disconnect");
-  text = & "OKI3_AIRSTRIKE_HOWTO";
+  text = &"OKI3_AIRSTRIKE_HOWTO";
   self setup_client_hintelem();
   self.hintelem setText(text);
   wait(3.5);
@@ -551,7 +551,7 @@ watch_mortar_weapon() {
 hud_mortar_hint() {
   self endon("death");
   self endon("disconnect");
-  text = & "OKI3_MORTAR_HINT";
+  text = &"OKI3_MORTAR_HINT";
   self setup_client_hintelem();
   self.hintelem setText(text);
   wait(5);

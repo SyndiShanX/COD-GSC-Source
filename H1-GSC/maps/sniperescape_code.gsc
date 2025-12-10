@@ -698,14 +698,14 @@ countdown(var_0) {
   thread set_min_time_remaining(10);
   var_2 = maps\_hud_util::get_countdown_hud(undefined, undefined, undefined, undefined, var_1);
   var_2 setpulsefx(30, 1200000, 700);
-  var_2.text.label = & "SNIPERESCAPE_TIME_REMAINING";
+  var_2.text.label = &"SNIPERESCAPE_TIME_REMAINING";
   var_2 settenthstimer(var_1);
 
   if(!common_scripts\utility::flag("player_enters_fairgrounds")) {
     common_scripts\utility::flag_wait_or_timeout("player_enters_fairgrounds", var_1);
 
     if(!common_scripts\utility::flag("player_enters_fairgrounds")) {
-      setdvar("ui_deadquote", & "SNIPERESCAPE_FAILED_TO_EVAC");
+      setdvar("ui_deadquote", &"SNIPERESCAPE_FAILED_TO_EVAC");
       maps\_utility::missionfailedwrapper();
       return;
     }
@@ -803,7 +803,7 @@ kill_shielded_price() {
 }
 
 player_too_far_from_macmillan_fail() {
-  setdvar("ui_deadquote", & "SNIPERESCAPE_TOO_FAR_FROM_MACMILLAN");
+  setdvar("ui_deadquote", &"SNIPERESCAPE_TOO_FAR_FROM_MACMILLAN");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -811,7 +811,7 @@ price_dies() {
   if(isalive(level.price))
     level.price kill((0, 0, 0));
 
-  setdvar("ui_deadquote", & "SNIPERESCAPE_CPT_MACMILLAN_DIED");
+  setdvar("ui_deadquote", &"SNIPERESCAPE_CPT_MACMILLAN_DIED");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -4605,7 +4605,7 @@ set_c4_throw_binding() {
   var_2 = getkeybinding("+toggleads_throw");
 
   if(var_2["count"]) {
-    maps\_utility::add_hint_string("c4_throw", & "SCRIPT_HINT_THROW_C4_TOGGLE", maps\sniperescape_exchange::should_break_c4_throw);
+    maps\_utility::add_hint_string("c4_throw", &"SCRIPT_HINT_THROW_C4_TOGGLE", maps\sniperescape_exchange::should_break_c4_throw);
     return;
   }
 
@@ -4613,9 +4613,9 @@ set_c4_throw_binding() {
 
   if(var_2["count"]) {
     if(level.xenon || var_0)
-      maps\_utility::add_hint_string("c4_throw", & "SCRIPT_HINT_THROW_C4_SPEED_TRIGGER", maps\sniperescape_exchange::should_break_c4_throw);
+      maps\_utility::add_hint_string("c4_throw", &"SCRIPT_HINT_THROW_C4_SPEED_TRIGGER", maps\sniperescape_exchange::should_break_c4_throw);
     else
-      maps\_utility::add_hint_string("c4_throw", & "SCRIPT_HINT_THROW_C4_SPEED", maps\sniperescape_exchange::should_break_c4_throw);
+      maps\_utility::add_hint_string("c4_throw", &"SCRIPT_HINT_THROW_C4_SPEED", maps\sniperescape_exchange::should_break_c4_throw);
 
     return;
   }
@@ -4623,11 +4623,11 @@ set_c4_throw_binding() {
   var_2 = getkeybinding("+throw");
 
   if(var_2["count"]) {
-    maps\_utility::add_hint_string("c4_throw", & "SCRIPT_HINT_THROW_C4", maps\sniperescape_exchange::should_break_c4_throw);
+    maps\_utility::add_hint_string("c4_throw", &"SCRIPT_HINT_THROW_C4", maps\sniperescape_exchange::should_break_c4_throw);
     return;
   }
 
-  maps\_utility::add_hint_string("c4_throw", & "SCRIPT_HINT_THROW_C4_TOGGLE", maps\sniperescape_exchange::should_break_c4_throw);
+  maps\_utility::add_hint_string("c4_throw", &"SCRIPT_HINT_THROW_C4_TOGGLE", maps\sniperescape_exchange::should_break_c4_throw);
 }
 
 c4_hint() {

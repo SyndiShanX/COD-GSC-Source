@@ -132,7 +132,7 @@ function time_travel() {
     var_4e591161 thread function_676d98e4();
   }
   level flag::wait_till("ee_start_done");
-  array::run_all(var_be9116cc, & delete);
+  array::run_all(var_be9116cc, &delete);
   zm_zonemgr::enable_zone("zone_past_laboratory");
   level thread function_2634b833();
 }
@@ -395,7 +395,7 @@ function function_af12b9a4() {
   var_f12ee4c0 thread function_eb855685(var_f63ec558);
   level flag::wait_till("start_channeling_stone_step");
   level waittill("hash_4619f71b");
-  zm_spawner::register_zombie_death_event_callback( & function_e8de9974);
+  zm_spawner::register_zombie_death_event_callback(&function_e8de9974);
   var_b2b5bc6e = struct::get("keeper_spawn_loc", "targetname");
   var_aae59061 = getent("keeper_archon", "targetname");
   var_747532f4 = zombie_utility::spawn_zombie(var_aae59061, "keeper_archon_ai", var_b2b5bc6e);
@@ -649,14 +649,14 @@ function function_3faf6b59(var_747532f4) {
     var_747532f4 playSound("zmb_ee_resurrect_power_complete");
     wait(0.15);
   }
-  zm_spawner::deregister_zombie_death_event_callback( & function_e8de9974);
+  zm_spawner::deregister_zombie_death_event_callback(&function_e8de9974);
   var_82a4f07b = struct::get("keeper_end_loc");
   var_82a4f07b fx::play("mpd_fx", var_82a4f07b.origin, var_82a4f07b.angles, "delete_fx", 0, undefined, 1);
   level.var_8ef26cd9 = 1;
   foreach(player in level.players) {
     player thread zm_castle_util::function_fa7da172();
   }
-  callback::on_connect( & zm_castle_util::function_fa7da172);
+  callback::on_connect(&zm_castle_util::function_fa7da172);
   var_57615f80 = getEntArray("pyramid", "targetname");
   foreach(var_27fd0c6f in var_57615f80) {
     var_54a70b81 = (var_27fd0c6f.origin[0], var_27fd0c6f.origin[1], var_27fd0c6f.origin[2] - 96);
@@ -687,9 +687,9 @@ function function_3faf6b59(var_747532f4) {
   foreach(player in level.players) {
     player thread function_6ff05666();
   }
-  callback::on_connect( & function_6ff05666);
+  callback::on_connect(&function_6ff05666);
   level flag::wait_till("see_keeper");
-  callback::remove_on_connect( & function_6ff05666);
+  callback::remove_on_connect(&function_6ff05666);
   function_1c4bd669(1);
   var_747532f4 scene::play("cin_zm_dlc1_corrupted_keeper_float_emerge", var_747532f4);
   exploder::kill_exploder("fxexp_601");
@@ -698,7 +698,7 @@ function function_3faf6b59(var_747532f4) {
   exploder::kill_exploder("fxexp_604");
   var_747532f4 delete();
   var_82a4f07b notify("delete_fx");
-  callback::remove_on_connect( & zm_castle_util::function_fa7da172);
+  callback::remove_on_connect(&zm_castle_util::function_fa7da172);
   level.var_8ef26cd9 = undefined;
   zm_castle_vo::function_70721c81();
   function_1c4bd669(0);
@@ -984,8 +984,8 @@ function function_7d8964c9() {
   wait(2.5);
   level thread vril_generator(1);
   level flag::set("start_channeling_stone_step");
-  scene::add_scene_func("p7_fxanim_zm_castle_rocket_tip_bundle", & function_1ca91be4);
-  scene::add_scene_func("p7_fxanim_zm_castle_rocket_tip_bundle", & function_b404c31d);
+  scene::add_scene_func("p7_fxanim_zm_castle_rocket_tip_bundle", &function_1ca91be4);
+  scene::add_scene_func("p7_fxanim_zm_castle_rocket_tip_bundle", &function_b404c31d);
   level thread scene::play("p7_fxanim_zm_castle_rocket_tip_bundle");
   level thread scene::play("p7_fxanim_zm_castle_rocket_bell_tower_bundle");
 }
@@ -996,11 +996,11 @@ function function_1ca91be4(a_ents) {
   e_dempsey = a_ents["dempsey_02"];
   e_dempsey ghost();
   wait(5);
-  array::run_all(level.players, & playrumbleonentity, "zm_castle_rocket_tip");
+  array::run_all(level.players, &playrumbleonentity, "zm_castle_rocket_tip");
   var_3e414a21 waittill("hash_43ba2284");
-  array::run_all(level.players, & playrumbleonentity, "zm_castle_rocket_tip_tower_crash");
+  array::run_all(level.players, &playrumbleonentity, "zm_castle_rocket_tip_tower_crash");
   var_3e414a21 waittill("hash_87acceea");
-  array::run_all(level.players, & playrumbleonentity, "zm_castle_rocket_tip_ground_crash");
+  array::run_all(level.players, &playrumbleonentity, "zm_castle_rocket_tip_ground_crash");
   var_a723142d clientfield::set("pod_monitor_enable", 1);
   e_dempsey show();
   var_ee79aaa6 = getent("uc_capsule_crash_after", "targetname");
@@ -1013,7 +1013,7 @@ function function_1ca91be4(a_ents) {
   foreach(e_player in level.players) {
     e_player thread function_35c1d14d();
   }
-  callback::on_connect( & function_d4be5c9f);
+  callback::on_connect(&function_d4be5c9f);
   level thread scene::play("cin_cas_01_outro_3rd_static_poses");
   wait(3);
   var_a723142d delete();
@@ -1562,11 +1562,11 @@ function function_f6678e99() {
   }
   function_1c4bd669(1);
   level thread zm_castle_vo::function_f28fd307();
-  array::run_all(level.players, & playrumbleonentity, "zm_castle_moon_rocket_launch");
+  array::run_all(level.players, &playrumbleonentity, "zm_castle_moon_rocket_launch");
   level thread scene::play("p7_fxanim_zm_castle_moon_rocket_front_bundle");
   level thread zm_audio::sndmusicsystem_playstate("moon_rockets");
   wait(1);
-  scene::add_scene_func("p7_fxanim_zm_castle_moon_rockets_bundle", & function_6a8d41d1);
+  scene::add_scene_func("p7_fxanim_zm_castle_moon_rockets_bundle", &function_6a8d41d1);
   level thread scene::play("p7_fxanim_zm_castle_moon_rockets_bundle");
   wait(5.5);
   level scene::play("p7_fxanim_zm_castle_moon_rockets_bck_bundle");
@@ -1587,7 +1587,7 @@ function function_6a8d41d1(a_ents) {
 
 function function_6d74c298(var_e0e0227e) {
   wait(3.5);
-  array::run_all(level.players, & playrumbleonentity, "zm_castle_moon_explosion_rumble");
+  array::run_all(level.players, &playrumbleonentity, "zm_castle_moon_explosion_rumble");
   setlightingstate(1);
   foreach(e_player in level.players) {
     e_player clientfield::set_to_player("moon_explosion_bank", 1);
@@ -1638,9 +1638,9 @@ function ee_outro() {
   level function_1c4bd669(1, 0);
   zm_castle_vo::function_218256bd(1);
   var_d7e14379 = level function_58db5243(0);
-  callback::remove_on_connect( & function_d4be5c9f);
-  scene::add_scene_func("cin_cas_01_outro_3rd_sh010", & function_a029a5f1);
-  scene::add_scene_func("cin_cas_01_outro_3rd_sh195", & function_3c1114e8);
+  callback::remove_on_connect(&function_d4be5c9f);
+  scene::add_scene_func("cin_cas_01_outro_3rd_sh010", &function_a029a5f1);
+  scene::add_scene_func("cin_cas_01_outro_3rd_sh195", &function_3c1114e8);
   level scene::play("cin_cas_01_outro_3rd_sh010");
   level waittill("hash_8478520");
   level thread function_605386ad(0);
@@ -1658,7 +1658,7 @@ function ee_outro() {
     player zm_stats::increment_global_stat("DARKOPS_CASTLE_SUPER_EE");
   }
   level.sndoutro = 0;
-  array::thread_all(level.activeplayers, & zm_utility::give_player_all_perks);
+  array::thread_all(level.activeplayers, &zm_utility::give_player_all_perks);
 }
 
 function function_339377d6() {
@@ -1956,15 +1956,15 @@ function function_d6026710() {
   setdvar("", 0);
   setdvar("", 0);
   setdvar("", 0);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_690690ef);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_b1c42655);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_dc5045eb);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_c197b24a);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_3c8db42b);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_64783c5e);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_a1ac1452);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_bbf6c2d0);
-  level thread zm_castle_util::setup_devgui_func("", "", 1, & function_a9a41cbd);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_690690ef);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_b1c42655);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_dc5045eb);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_c197b24a);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_3c8db42b);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_64783c5e);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_a1ac1452);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_bbf6c2d0);
+  level thread zm_castle_util::setup_devgui_func("", "", 1, &function_a9a41cbd);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
@@ -1972,9 +1972,9 @@ function function_d6026710() {
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
-  level thread setup_devgui_func("", "", 1, & function_71b77de5);
-  level thread setup_devgui_func("", "", 1, & function_d6a136ff);
-  level thread setup_devgui_func("", "", 1, & function_f62f3c89);
+  level thread setup_devgui_func("", "", 1, &function_71b77de5);
+  level thread setup_devgui_func("", "", 1, &function_d6a136ff);
+  level thread setup_devgui_func("", "", 1, &function_f62f3c89);
   adddebugcommand("");
   adddebugcommand("");
   level thread function_ef5eaa6e();

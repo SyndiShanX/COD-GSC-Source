@@ -95,7 +95,7 @@ function ss_debug() {
 function init_1() {
   level flag::init("displays_active");
   level flag::init("wait_for_hack");
-  zm_sidequests::declare_sidequest_stage("sq", "ss1", & init_stage_1, & stage_logic, & exit_stage_1);
+  zm_sidequests::declare_sidequest_stage("sq", "ss1", &init_stage_1, &stage_logic, &exit_stage_1);
   buttons = getEntArray("sq_ss_button", "targetname");
   for(i = 0; i < buttons.size; i++) {
     ent = getent(buttons[i].target, "targetname");
@@ -105,7 +105,7 @@ function init_1() {
 }
 
 function init_2() {
-  zm_sidequests::declare_sidequest_stage("sq", "ss2", & init_stage_2, & stage_logic, & exit_stage_2);
+  zm_sidequests::declare_sidequest_stage("sq", "ss2", &init_stage_2, &stage_logic, &exit_stage_2);
 }
 
 function init_stage_1() {
@@ -123,7 +123,7 @@ function ss2_hack(hacker) {
 
 function stage_logic() {
   buttons = level._ss_buttons;
-  array::thread_all(buttons, & sq_ss_button_thread);
+  array::thread_all(buttons, &sq_ss_button_thread);
   if(isDefined(level._ss_hacks)) {
     for(i = 0; i < level._ss_hacks.size; i++) {
       zm_equip_hacker::deregister_hackable_struct(level._ss_hacks[i]);
@@ -209,7 +209,7 @@ function kill_debug() {
 function exit_stage_1(success) {
   kill_debug();
   level flag::set("ss1");
-  array::thread_all(level._ss_buttons, & sq_ss_button_dud_thread);
+  array::thread_all(level._ss_buttons, &sq_ss_button_dud_thread);
 }
 
 function exit_stage_2(success) {

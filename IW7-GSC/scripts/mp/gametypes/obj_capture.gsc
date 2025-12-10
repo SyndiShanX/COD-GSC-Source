@@ -7,8 +7,8 @@
 init() {
   var_00 = spawnStruct();
   var_00.pickuptime = 0.5;
-  var_00.usetextfriendly = & "MP_RETURNING_FLAG";
-  var_00.usetextenemy = & "MP_GRABBING_FLAG";
+  var_00.usetextfriendly = &"MP_RETURNING_FLAG";
+  var_00.usetextenemy = &"MP_GRABBING_FLAG";
   var_00.onpickupfn = ::onobjectpickup;
   var_00.ondropfn = ::onobjectdrop;
   var_00.onresetfn = ::onobjectreset;

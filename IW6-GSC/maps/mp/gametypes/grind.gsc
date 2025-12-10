@@ -58,19 +58,19 @@ onStartGameType() {
   if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = false;
 
-  setObjectiveText("allies", & "OBJECTIVES_WAR");
-  setObjectiveText("axis", & "OBJECTIVES_WAR");
+  setObjectiveText("allies", &"OBJECTIVES_WAR");
+  setObjectiveText("axis", &"OBJECTIVES_WAR");
 
   if(level.splitscreen) {
-    setObjectiveScoreText("allies", & "OBJECTIVES_WAR");
-    setObjectiveScoreText("axis", & "OBJECTIVES_WAR");
+    setObjectiveScoreText("allies", &"OBJECTIVES_WAR");
+    setObjectiveScoreText("axis", &"OBJECTIVES_WAR");
   } else {
-    setObjectiveScoreText("allies", & "OBJECTIVES_WAR_SCORE");
-    setObjectiveScoreText("axis", & "OBJECTIVES_WAR_SCORE");
+    setObjectiveScoreText("allies", &"OBJECTIVES_WAR_SCORE");
+    setObjectiveScoreText("axis", &"OBJECTIVES_WAR_SCORE");
   }
 
-  setObjectiveHintText("allies", & "OBJECTIVES_WAR_HINT");
-  setObjectiveHintText("axis", & "OBJECTIVES_WAR_HINT");
+  setObjectiveHintText("allies", &"OBJECTIVES_WAR_HINT");
+  setObjectiveHintText("axis", &"OBJECTIVES_WAR_HINT");
 
   initSpawns();
   createTags();

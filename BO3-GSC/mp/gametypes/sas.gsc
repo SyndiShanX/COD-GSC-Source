@@ -33,10 +33,10 @@ function main() {
   util::registerroundlimit(0, 10);
   util::registerroundwinlimit(0, 10);
   util::registernumlives(0, 100);
-  level.onstartgametype = & onstartgametype;
-  level.onplayerdamage = & onplayerdamage;
-  level.onplayerkilled = & onplayerkilled;
-  level.onplayerscore = & onplayerscore;
+  level.onstartgametype = &onstartgametype;
+  level.onplayerdamage = &onplayerdamage;
+  level.onplayerkilled = &onplayerkilled;
+  level.onplayerscore = &onplayerscore;
   level.pointsperprimarykill = getgametypesetting("pointsPerPrimaryKill");
   level.pointspersecondarykill = getgametypesetting("pointsPerSecondaryKill");
   level.pointsperprimarygrenadekill = getgametypesetting("pointsPerPrimaryGrenadeKill");
@@ -68,7 +68,7 @@ function main() {
   game["dialog"]["wm_humiliation"] = "mpl_wager_bankrupt";
   game["dialog"]["wm_humiliated"] = "sns_hum";
   gameobjects::register_allowed_gameobject(level.gametype);
-  level.givecustomloadout = & givecustomloadout;
+  level.givecustomloadout = &givecustomloadout;
   var_e9a58782 = [];
   if(!isDefined(var_e9a58782)) {
     var_e9a58782 = [];
@@ -259,7 +259,7 @@ function function_238fd5eb() {
   self playlocalsound("mpl_assassination_sting");
   var_a40af05c = self hud::createfontstring("default", 2.5);
   var_a40af05c hud::setpoint("CENTER", undefined, 0, -100);
-  var_a40af05c.label = & "MP_HUMILIATED";
+  var_a40af05c.label = &"MP_HUMILIATED";
   var_a40af05c.x = 0;
   var_a40af05c.archived = 1;
   var_a40af05c.alpha = 1;
@@ -290,13 +290,13 @@ function function_71a0cd6d(var_a40af05c) {
 }
 
 function setupteam(team) {
-  util::setobjectivetext(team, & "OBJECTIVES_SAS");
+  util::setobjectivetext(team, &"OBJECTIVES_SAS");
   if(level.splitscreen) {
-    util::setobjectivescoretext(team, & "OBJECTIVES_SAS");
+    util::setobjectivescoretext(team, &"OBJECTIVES_SAS");
   } else {
-    util::setobjectivescoretext(team, & "OBJECTIVES_SAS_SCORE");
+    util::setobjectivescoretext(team, &"OBJECTIVES_SAS_SCORE");
   }
-  util::setobjectivehinttext(team, & "OBJECTIVES_SAS_HINT");
+  util::setobjectivehinttext(team, &"OBJECTIVES_SAS_HINT");
   spawnlogic::add_spawn_points(team, "mp_dm_spawn");
   spawnlogic::place_spawn_points("mp_dm_spawn_start");
   level.spawn_start = spawnlogic::get_spawnpoint_array("mp_dm_spawn_start");

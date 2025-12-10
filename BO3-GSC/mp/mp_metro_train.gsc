@@ -71,7 +71,7 @@ function setup_gate(gate, gate_kill) {
   gate.gate_kill linkto(gate);
 }
 
-function spawn_start_train( & cars, & dividers, start, name) {
+function spawn_start_train(&cars, &dividers, start, name) {
   cars[0] = spawnvehicle("train_test_mp", (0, -2000, -200), (0, 0, 0), name);
   cars[0] setteam("neutral");
   cars[0] ghost();

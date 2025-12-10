@@ -13,7 +13,7 @@
 #namespace zm_bgb_killing_time;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_killing_time", & __init__, undefined, undefined);
+  system::register("zm_bgb_killing_time", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -21,8 +21,8 @@ function __init__() {
     return;
   }
   bgb::register("zm_bgb_killing_time", "activated");
-  clientfield::register("actor", "zombie_instakill_fx", 1, 1, "int", & function_a81107fc, 0, 1);
-  clientfield::register("toplayer", "instakill_upgraded_fx", 1, 1, "int", & function_cf8c9fce, 0, 0);
+  clientfield::register("actor", "zombie_instakill_fx", 1, 1, "int", &function_a81107fc, 0, 1);
+  clientfield::register("toplayer", "instakill_upgraded_fx", 1, 1, "int", &function_cf8c9fce, 0, 0);
 }
 
 function function_cf8c9fce(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

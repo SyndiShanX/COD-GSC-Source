@@ -37,7 +37,7 @@
 #namespace zm_zod_pods;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_pods", & __init__, & __main__, undefined);
+  system::register("zm_zod_pods", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -57,7 +57,7 @@ function __init__() {
   level.fungus_pods.rewards[2] = [];
   level.fungus_pods.rewards[3] = [];
   level.fungus_pods.bonus_points_amount = 100;
-  level.bonus_points_powerup_override = & fungus_pod_bonus_points_override;
+  level.bonus_points_powerup_override = &fungus_pod_bonus_points_override;
   level.fungus_pods.debug_reward_list = [];
   wpn_none = getweapon("none");
   a_keys = getarraykeys(a_table);
@@ -187,16 +187,16 @@ function function_77d7e068() {
 
 function private pod_sprayer_pickup_msg(e_player) {
   if(e_player clientfield::get_to_player("pod_sprayer_held")) {
-    return & "";
+    return &"";
   }
-  return & "ZM_ZOD_PICKUP_SPRAYER";
+  return &"ZM_ZOD_PICKUP_SPRAYER";
 }
 
 function private pod_sprayer_think() {
   while(true) {
     self.model = util::spawn_model("p7_zm_zod_bug_sprayer", self.origin, self.angles);
     self.model clientfield::set("pod_sprayer_glint", 1);
-    self.trigger = zm_zod_util::spawn_trigger_radius(self.origin, 50, 1, & pod_sprayer_pickup_msg);
+    self.trigger = zm_zod_util::spawn_trigger_radius(self.origin, 50, 1, &pod_sprayer_pickup_msg);
     while(true) {
       self.trigger waittill("trigger", e_who);
       if(e_who clientfield::get_to_player("pod_sprayer_held")) {
@@ -533,12 +533,12 @@ function function_92f587b4() {
 
 function pod_player_msg(e_player) {
   if(e_player clientfield::get_to_player("pod_sprayer_held")) {
-    return & "ZM_ZOD_POD_HARVEST";
+    return &"ZM_ZOD_POD_HARVEST";
   }
   if(e_player clientfield::get_to_player("pod_sprayer_hint_range") == 0) {
     e_player thread function_3f5779c4();
   }
-  return & "";
+  return &"";
 }
 
 function function_3f5779c4() {
@@ -610,7 +610,7 @@ function spawn_fungus_pods(n_pods) {
 
 function function_e1065706() {
   wait(getanimlength("p7_fxanim_zm_zod_fungus_pod_base_birth_anim"));
-  self.trigger = zm_zod_util::spawn_trigger_radius(self.origin + (anglestoup(self.angles) * 8), 50, 1, & pod_player_msg);
+  self.trigger = zm_zod_util::spawn_trigger_radius(self.origin + (anglestoup(self.angles) * 8), 50, 1, &pod_player_msg);
   self notify("hash_e446a51c");
 }
 
@@ -649,7 +649,7 @@ function dig_up_weapon(e_digger, wpn_to_spawn) {
   m_weapon endon("dig_up_weapon_timed_out");
   m_weapon.trigger = zm_zod_util::spawn_trigger_radius(v_spawnpt, 100, 1);
   m_weapon.trigger.wpn = wpn_to_spawn;
-  m_weapon.trigger.prompt_and_visibility_func = & weapon_trigger_update_prompt;
+  m_weapon.trigger.prompt_and_visibility_func = &weapon_trigger_update_prompt;
   m_weapon.trigger waittill("trigger", player);
   m_weapon.trigger notify("weapon_grabbed");
   m_weapon.trigger thread swap_weapon(wpn_to_spawn, player);

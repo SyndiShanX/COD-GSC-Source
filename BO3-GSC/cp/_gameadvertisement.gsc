@@ -47,43 +47,43 @@ function getgametyperules() {
   gametype = level.gametype;
   switch (gametype) {
     case "dm": {
-      return & dm_rules;
+      return &dm_rules;
     }
     case "tdm": {
-      return & tdm_rules;
+      return &tdm_rules;
     }
     case "dom": {
-      return & dom_rules;
+      return &dom_rules;
     }
     case "hq": {
-      return & hq_rules;
+      return &hq_rules;
     }
     case "sd": {
-      return & sd_rules;
+      return &sd_rules;
     }
     case "dem": {
-      return & dem_rules;
+      return &dem_rules;
     }
     case "ctf": {
-      return & ctf_rules;
+      return &ctf_rules;
     }
     case "koth": {
-      return & koth_rules;
+      return &koth_rules;
     }
     case "conf": {
-      return & conf_rules;
+      return &conf_rules;
     }
     case "oic": {
-      return & oic_rules;
+      return &oic_rules;
     }
     case "sas": {
-      return & sas_rules;
+      return &sas_rules;
     }
     case "gun": {
-      return & gun_rules;
+      return &gun_rules;
     }
     case "shrp": {
-      return & shrp_rules;
+      return &shrp_rules;
     }
   }
 }

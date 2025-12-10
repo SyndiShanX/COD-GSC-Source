@@ -76,12 +76,12 @@ function main() {
   level thread util::servertime();
   level thread util::init_utility();
   level thread register_clientfields();
-  util::registersystem("levelNotify", & levelnotifyhandler);
+  util::registersystem("levelNotify", &levelnotifyhandler);
   level.createfx_disable_fx = getdvarint("disable_fx") == 1;
   level thread _claymore::init();
   level thread _explosive_bolt::main();
-  callback::add_callback("hash_da8d7d74", & basic_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::add_callback("hash_da8d7d74", &basic_player_connect);
+  callback::on_spawned(&on_player_spawned);
   system::wait_till("all");
   art_review();
   level flagsys::set("load_main_complete");
@@ -110,5 +110,5 @@ function force_update_player_clientfields(localclientnum) {
 }
 
 function register_clientfields() {
-  clientfield::register("toplayer", "sndHealth", 1, 2, "int", & audio::sndhealthsystem, 0, 0);
+  clientfield::register("toplayer", "sndHealth", 1, 2, "int", &audio::sndhealthsystem, 0, 0);
 }

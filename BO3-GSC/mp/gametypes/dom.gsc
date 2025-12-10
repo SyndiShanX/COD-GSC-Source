@@ -38,12 +38,12 @@ function main() {
   level.scoreroundwinbased = getgametypesetting("cumulativeRoundScores") == 0;
   level.teambased = 1;
   level.overrideteamscore = 1;
-  level.onstartgametype = & onstartgametype;
-  level.onplayerkilled = & onplayerkilled;
-  level.onroundswitch = & onroundswitch;
-  level.onprecachegametype = & onprecachegametype;
-  level.onendgame = & onendgame;
-  level.onroundendgame = & onroundendgame;
+  level.onstartgametype = &onstartgametype;
+  level.onplayerkilled = &onplayerkilled;
+  level.onroundswitch = &onroundswitch;
+  level.onprecachegametype = &onprecachegametype;
+  level.onendgame = &onendgame;
+  level.onroundendgame = &onroundendgame;
   gameobjects::register_allowed_gameobject(level.gametype);
   globallogic_audio::set_leader_gametype_dialog("startDomination", "hcStartDomination", "objCapture", "objCapture");
   game["dialog"]["securing_a"] = "domFriendlySecuringA";
@@ -80,8 +80,8 @@ function main() {
 function onprecachegametype() {}
 
 function onstartgametype() {
-  util::setobjectivetext("allies", & "OBJECTIVES_DOM");
-  util::setobjectivetext("axis", & "OBJECTIVES_DOM");
+  util::setobjectivetext("allies", &"OBJECTIVES_DOM");
+  util::setobjectivetext("axis", &"OBJECTIVES_DOM");
   if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
   }
@@ -92,14 +92,14 @@ function onstartgametype() {
     game["defenders"] = oldattackers;
   }
   if(level.splitscreen) {
-    util::setobjectivescoretext("allies", & "OBJECTIVES_DOM");
-    util::setobjectivescoretext("axis", & "OBJECTIVES_DOM");
+    util::setobjectivescoretext("allies", &"OBJECTIVES_DOM");
+    util::setobjectivescoretext("axis", &"OBJECTIVES_DOM");
   } else {
-    util::setobjectivescoretext("allies", & "OBJECTIVES_DOM_SCORE");
-    util::setobjectivescoretext("axis", & "OBJECTIVES_DOM_SCORE");
+    util::setobjectivescoretext("allies", &"OBJECTIVES_DOM_SCORE");
+    util::setobjectivescoretext("axis", &"OBJECTIVES_DOM_SCORE");
   }
-  util::setobjectivehinttext("allies", & "OBJECTIVES_DOM_HINT");
-  util::setobjectivehinttext("axis", & "OBJECTIVES_DOM_HINT");
+  util::setobjectivehinttext("allies", &"OBJECTIVES_DOM_HINT");
+  util::setobjectivehinttext("axis", &"OBJECTIVES_DOM_HINT");
   level.flagbasefxid = [];
   setclientnamemode("auto_change");
   spawning::create_map_placed_influencers();
@@ -207,11 +207,11 @@ function domflags() {
     domflag.label = label;
     domflag.flagindex = trigger.visual.script_index;
     domflag gameobjects::set_visible_team("any");
-    domflag.onuse = & onuse;
-    domflag.onbeginuse = & onbeginuse;
-    domflag.onuseupdate = & onuseupdate;
-    domflag.onenduse = & onenduse;
-    domflag.onupdateuserate = & onupdateuserate;
+    domflag.onuse = &onuse;
+    domflag.onbeginuse = &onbeginuse;
+    domflag.onuseupdate = &onuseupdate;
+    domflag.onenduse = &onenduse;
+    domflag.onupdateuserate = &onupdateuserate;
     domflag.hasbeencaptured = 0;
     domflag gameobjects::set_objective_entity(visuals[0]);
     domflag gameobjects::set_owner_team("neutral");
@@ -347,7 +347,7 @@ function onenduse(team, player, success) {
 function flagcapturedfromneutral(team) {
   self.singleowner = 1;
   otherteam = util::getotherteam(team);
-  thread util::printandsoundoneveryone(team, undefined, & "", undefined, "mp_war_objective_taken");
+  thread util::printandsoundoneveryone(team, undefined, &"", undefined, "mp_war_objective_taken");
   thread sound::play_on_players(("mus_dom_captured" + "_") + level.teampostfix[team]);
   if(getteamflagcount(team) == level.flags.size) {
     statusdialog("secured_all", team, "objective_all");
@@ -364,7 +364,7 @@ function flagcapturedfromneutral(team) {
 
 function flagcapturedfromteam(team, oldteam) {
   self.singleowner = 0;
-  thread util::printandsoundoneveryone(team, oldteam, & "", & "", "mp_war_objective_taken", "mp_war_objective_lost", "");
+  thread util::printandsoundoneveryone(team, oldteam, &"", &"", "mp_war_objective_taken", "mp_war_objective_lost", "");
   if(getteamflagcount(team) == level.flags.size) {
     statusdialog("secured_all", team, "objective_all");
     statusdialog("lost_all", oldteam, "objective_all");
@@ -385,7 +385,7 @@ function flagcapturedfromteam(team, oldteam) {
 
 function flagneutralized(team, oldteam) {
   self.singleowner = 1;
-  thread util::printandsoundoneveryone("neutral", oldteam, & "", & "", "mp_war_objective_neutralized", "mp_war_objective_lost", "");
+  thread util::printandsoundoneveryone("neutral", oldteam, &"", &"", "mp_war_objective_neutralized", "mp_war_objective_lost", "");
   if(getteamflagcount(team) == level.flags.size) {
     statusdialog("lost_all", oldteam, "objective_all");
     flushobjectiveflagdialog();
@@ -397,27 +397,27 @@ function flagneutralized(team, oldteam) {
 }
 
 function getdomflagusestring(label, neutralized) {
-  string = & "";
+  string = &"";
   if(neutralized) {
     switch (label) {
       case "_a": {
-        string = & "MP_DOM_FLAG_A_NEUTRALIZED_BY";
+        string = &"MP_DOM_FLAG_A_NEUTRALIZED_BY";
         break;
       }
       case "_b": {
-        string = & "MP_DOM_FLAG_B_NEUTRALIZED_BY";
+        string = &"MP_DOM_FLAG_B_NEUTRALIZED_BY";
         break;
       }
       case "_c": {
-        string = & "MP_DOM_FLAG_C_NEUTRALIZED_BY";
+        string = &"MP_DOM_FLAG_C_NEUTRALIZED_BY";
         break;
       }
       case "_d": {
-        string = & "MP_DOM_FLAG_D_NEUTRALIZED_BY";
+        string = &"MP_DOM_FLAG_D_NEUTRALIZED_BY";
         break;
       }
       case "_e": {
-        string = & "MP_DOM_FLAG_E_NEUTRALIZED_BY";
+        string = &"MP_DOM_FLAG_E_NEUTRALIZED_BY";
         break;
       }
       default: {
@@ -427,23 +427,23 @@ function getdomflagusestring(label, neutralized) {
   } else {
     switch (label) {
       case "_a": {
-        string = & "MP_DOM_FLAG_A_CAPTURED_BY";
+        string = &"MP_DOM_FLAG_A_CAPTURED_BY";
         break;
       }
       case "_b": {
-        string = & "MP_DOM_FLAG_B_CAPTURED_BY";
+        string = &"MP_DOM_FLAG_B_CAPTURED_BY";
         break;
       }
       case "_c": {
-        string = & "MP_DOM_FLAG_C_CAPTURED_BY";
+        string = &"MP_DOM_FLAG_C_CAPTURED_BY";
         break;
       }
       case "_d": {
-        string = & "MP_DOM_FLAG_D_CAPTURED_BY";
+        string = &"MP_DOM_FLAG_D_CAPTURED_BY";
         break;
       }
       case "_e": {
-        string = & "MP_DOM_FLAG_E_CAPTURED_BY";
+        string = &"MP_DOM_FLAG_E_CAPTURED_BY";
         break;
       }
       default: {
@@ -461,7 +461,7 @@ function onusewithneutralizingflag(player) {
   print("" + self.label);
   level.usestartspawns = 0;
   assert(team != "");
-  string = & "";
+  string = &"";
   if(oldteam == "neutral") {
     level notify("flag_captured");
     string = getdomflagusestring(label, 0);

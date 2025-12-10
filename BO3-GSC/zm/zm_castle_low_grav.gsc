@@ -29,7 +29,7 @@
 #namespace zm_castle_low_grav;
 
 function autoexec __init__sytem__() {
-  system::register("zm_castle_low_grav", & __init__, & __main__, undefined);
+  system::register("zm_castle_low_grav", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -47,7 +47,7 @@ function __main__() {
   level flag::init("low_grav_countdown");
   level flag::init("low_grav_on");
   level.var_a75d7260 = getent("trig_low_gravity_zone", "targetname");
-  level.func_override_wallbuy_prompt = & function_efa3deb8;
+  level.func_override_wallbuy_prompt = &function_efa3deb8;
   level thread function_ab786717();
   level flag::wait_till("start_zombie_round_logic");
   level flag::init("pressure_pads_activated");
@@ -287,9 +287,9 @@ function function_767bba0() {
     if(level flag::get("undercroft_powerup_available")) {
       array::add(var_89ba571, level.var_6f0e5d4c);
     }
-    array::thread_all(var_89ba571, & clientfield::set, "undercroft_emissives", 1);
-    array::thread_all(var_6ad23999, & clientfield::set, "undercroft_emissives", 1);
-    array::thread_all(level.var_cddeb078, & clientfield::set, "floor_panel_emissives_glow", 1);
+    array::thread_all(var_89ba571, &clientfield::set, "undercroft_emissives", 1);
+    array::thread_all(var_6ad23999, &clientfield::set, "undercroft_emissives", 1);
+    array::thread_all(level.var_cddeb078, &clientfield::set, "floor_panel_emissives_glow", 1);
     level flag::wait_till("low_grav_countdown");
     wait(10);
     var_89ba571 = [];
@@ -302,9 +302,9 @@ function function_767bba0() {
     if(level flag::get("undercroft_powerup_available")) {
       array::add(var_89ba571, level.var_6f0e5d4c);
     }
-    array::thread_all(var_6ad23999, & clientfield::set, "undercroft_emissives", 0);
-    array::thread_all(var_89ba571, & clientfield::set, "undercroft_emissives", 0);
-    array::thread_all(level.var_cddeb078, & clientfield::set, "floor_panel_emissives_glow", 0);
+    array::thread_all(var_6ad23999, &clientfield::set, "undercroft_emissives", 0);
+    array::thread_all(var_89ba571, &clientfield::set, "undercroft_emissives", 0);
+    array::thread_all(level.var_cddeb078, &clientfield::set, "floor_panel_emissives_glow", 0);
     level flag::wait_till_clear("low_grav_on");
   }
 }
@@ -312,10 +312,10 @@ function function_767bba0() {
 function function_2f712e07() {
   var_4603701d = getEntArray("undercroft_floater_model", "targetname");
   if(getdvarint("splitscreen_playerCount") > 2) {
-    array::run_all(var_4603701d, & delete);
+    array::run_all(var_4603701d, &delete);
     return;
   }
-  array::thread_all(var_4603701d, & function_5f2da053);
+  array::thread_all(var_4603701d, &function_5f2da053);
   level flag::wait_till("low_grav_countdown");
   var_3bebe64c = var_4603701d.size;
   var_d1d3b1 = 5;
@@ -441,7 +441,7 @@ function function_7f2caa5(n_num, var_42133686) {
 
 function function_644bd455() {
   a_traps = struct::get_array("low_grav_trap", "targetname");
-  array::thread_all(a_traps, & function_d09bda12);
+  array::thread_all(a_traps, &function_d09bda12);
 }
 
 function function_d09bda12() {
@@ -566,9 +566,9 @@ function function_2cb9125b() {
   s_unitrigger_stub.var_bf3837fa = var_9369bf6c;
   level flag::set("undercroft_powerup_available");
   level.var_57c06a96 = 1;
-  s_unitrigger_stub.prompt_and_visibility_func = & function_94073af5;
+  s_unitrigger_stub.prompt_and_visibility_func = &function_94073af5;
   level.var_6f0e5d4c = getent(var_9369bf6c.target, "targetname");
-  thread zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, & function_81be0b2f);
+  thread zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, &function_81be0b2f);
 }
 
 function function_94073af5(player) {
@@ -649,7 +649,7 @@ function function_20c76956() {
   s_unitrigger_stub.script_height = 64;
   s_unitrigger_stub.var_bf3837fa = self;
   s_unitrigger_stub.var_bf3837fa.activated = 0;
-  thread zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, & function_147f328);
+  thread zm_unitrigger::register_static_unitrigger(s_unitrigger_stub, &function_147f328);
 }
 
 function function_147f328(var_607fccfa) {
@@ -697,7 +697,7 @@ function detect_reentry() {
 function function_ab786717() {
   level flagsys::wait_till("");
   wait(1);
-  zm_devgui::add_custom_devgui_callback( & function_e41a2453);
+  zm_devgui::add_custom_devgui_callback(&function_e41a2453);
   adddebugcommand("");
 }
 

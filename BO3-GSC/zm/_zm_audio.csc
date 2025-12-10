@@ -13,12 +13,12 @@
 #namespace zm_audio;
 
 function autoexec __init__sytem__() {
-  system::register("zm_audio", & __init__, undefined, undefined);
+  system::register("zm_audio", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("allplayers", "charindex", 1, 3, "int", & charindex_cb, 0, 1);
-  clientfield::register("toplayer", "isspeaking", 1, 1, "int", & isspeaking_cb, 0, 1);
+  clientfield::register("allplayers", "charindex", 1, 3, "int", &charindex_cb, 0, 1);
+  clientfield::register("toplayer", "isspeaking", 1, 1, "int", &isspeaking_cb, 0, 1);
   if(!isDefined(level.exert_sounds)) {
     level.exert_sounds = [];
   }
@@ -30,7 +30,7 @@ function __init__() {
   level.exert_sounds[0]["meleeswipesoundplayer"] = "vox_exert_generic_knifeswipe";
   level.exert_sounds[0]["dtplandsoundplayer"] = "vox_exert_generic_pain";
   level thread gameover_snapshot();
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function on_player_spawned(localclientnum) {}
@@ -82,7 +82,7 @@ function playerfalldamagesound(client_num, firstperson) {
 }
 
 function clientvoicesetup() {
-  callback::on_localclient_connect( & audio_player_connect);
+  callback::on_localclient_connect(&audio_player_connect);
   players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
     thread audio_player_connect(i);

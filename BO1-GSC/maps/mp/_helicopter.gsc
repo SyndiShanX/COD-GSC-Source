@@ -205,7 +205,7 @@ init() {
   precacheLocationSelector("compass_objpoint_helicopter");
   if(maps\mp\gametypes\_tweakables::getTweakableValue("killstreak", "allowhelicopter_comlink")) {
     maps\mp\gametypes\_hardpoints::registerKillstreak("helicopter_comlink_mp", "helicopter_comlink_mp", "killstreak_helicopter_comlink", "helicopter_used", ::useKillstreakHelicopter, true);
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("helicopter_comlink_mp", & "KILLSTREAK_EARNED_HELICOPTER_COMLINK", & "KILLSTREAK_HELICOPTER_COMLINK_NOT_AVAILABLE", & "KILLSTREAK_HELICOPTER_COMLINK_INBOUND");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("helicopter_comlink_mp", &"KILLSTREAK_EARNED_HELICOPTER_COMLINK", &"KILLSTREAK_HELICOPTER_COMLINK_NOT_AVAILABLE", &"KILLSTREAK_HELICOPTER_COMLINK_INBOUND");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("helicopter_comlink_mp", "mpl_killstreak_heli", "kls_cobra_used", "", "kls_cobra_enemy", "", "kls_cobra_ready");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("helicopter_comlink_mp", "scr_givehelicopter_comlink");
     maps\mp\gametypes\_hardpoints::registerKillstreakAltWeapon("helicopter_comlink_mp", "cobra_20mm_comlink_mp");

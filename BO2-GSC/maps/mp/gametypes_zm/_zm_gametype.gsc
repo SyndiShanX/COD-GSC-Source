@@ -1111,7 +1111,7 @@ start_round() {
     players[i] freeze_player_controls(1);
 
   level._module_round_hud.alpha = 1;
-  label = & "Next Round Starting In^2";
+  label = &"Next Round Starting In^2";
   level._module_round_hud.label = label;
   level._module_round_hud settimer(3);
   level thread maps\mp\zombies\_zm_audio_announcer::leaderdialog("countdown");
@@ -1635,11 +1635,11 @@ onplayerspawned() {
       if(self.team == "axis") {
         self.characterindex = 0;
         self._encounters_team = "A";
-        self._team_name = & "ZOMBIE_RACE_TEAM_1";
+        self._team_name = &"ZOMBIE_RACE_TEAM_1";
       } else {
         self.characterindex = 1;
         self._encounters_team = "B";
-        self._team_name = & "ZOMBIE_RACE_TEAM_2";
+        self._team_name = &"ZOMBIE_RACE_TEAM_2";
       }
     }
 

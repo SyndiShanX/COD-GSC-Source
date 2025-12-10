@@ -17,7 +17,7 @@ init() {
   if(!maps\mp\zombies\_zm_equipment::is_equipment_included("equip_hacker_zm")) {
     return;
   }
-  maps\mp\zombies\_zm_equipment::register_equipment("equip_hacker_zm", & "ZOMBIE_EQUIP_HACKER_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_HACKER_HOWTO", undefined, "hacker");
+  maps\mp\zombies\_zm_equipment::register_equipment("equip_hacker_zm", &"ZOMBIE_EQUIP_HACKER_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_HACKER_HOWTO", undefined, "hacker");
   level._hackable_objects = [];
   level._pooled_hackable_objects = [];
   onplayerconnect_callback(::hacker_on_player_connect);

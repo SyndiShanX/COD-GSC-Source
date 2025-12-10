@@ -12,10 +12,10 @@
 #namespace zm_island_traps;
 
 function init() {
-  clientfield::register("world", "proptrap_downdraft_rumble", 9000, 1, "int", & proptrap_downdraft_rumble, 0, 0);
-  clientfield::register("toplayer", "proptrap_downdraft_blur", 9000, 1, "int", & proptrap_downdraft_blur, 0, 0);
-  clientfield::register("world", "walltrap_draft_rumble", 9000, 1, "int", & walltrap_draft_rumble, 0, 0);
-  clientfield::register("toplayer", "walltrap_draft_blur", 9000, 1, "int", & walltrap_draft_blur, 0, 0);
+  clientfield::register("world", "proptrap_downdraft_rumble", 9000, 1, "int", &proptrap_downdraft_rumble, 0, 0);
+  clientfield::register("toplayer", "proptrap_downdraft_blur", 9000, 1, "int", &proptrap_downdraft_blur, 0, 0);
+  clientfield::register("world", "walltrap_draft_rumble", 9000, 1, "int", &walltrap_draft_rumble, 0, 0);
+  clientfield::register("toplayer", "walltrap_draft_blur", 9000, 1, "int", &walltrap_draft_blur, 0, 0);
 }
 
 function proptrap_downdraft_rumble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

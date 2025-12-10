@@ -28,9 +28,9 @@ func_979B() {
   var_00 = scripts\sp\vehicle_code::func_D808();
   scripts\sp\vehicle_code::func_FA7A(var_00);
   level.vehicle.func_8BBA = getEntArray("script_vehicle", "code_classname").size > 0;
-  scripts\sp\utility::func_16EB("invulerable_frags", & "SCRIPT_INVULERABLE_FRAGS", undefined);
-  scripts\sp\utility::func_16EB("invulerable_bullets", & "SCRIPT_INVULERABLE_BULLETS", undefined);
-  scripts\sp\utility::func_16EB("c12_bullets", & "SCRIPT_C12_BULLETS");
+  scripts\sp\utility::func_16EB("invulerable_frags", &"SCRIPT_INVULERABLE_FRAGS", undefined);
+  scripts\sp\utility::func_16EB("invulerable_bullets", &"SCRIPT_INVULERABLE_BULLETS", undefined);
+  scripts\sp\utility::func_16EB("c12_bullets", &"SCRIPT_C12_BULLETS");
 }
 
 func_1321A(var_00, var_01, var_02) {

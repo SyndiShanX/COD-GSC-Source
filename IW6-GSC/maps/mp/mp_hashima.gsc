@@ -288,7 +288,7 @@ hashimaCustomCrateFunc() {
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "hashima_missiles", HASHIMA_MISSILES_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), & "KILLSTREAKS_HINTS_HASHIMA_MISSILES");
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "hashima_missiles", HASHIMA_MISSILES_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), &"KILLSTREAKS_HINTS_HASHIMA_MISSILES");
   level thread watch_for_hashima_missiles_crate();
 }
 
@@ -505,9 +505,9 @@ use_switch_toggle_multiple_init() {
 
   self.trigger_list[0] = level.coal_car;
 
-  self.off_hintString = & "MP_HASHIMA_TRAIN_CAR";
+  self.off_hintString = &"MP_HASHIMA_TRAIN_CAR";
 
-  self.on_hintString = & "MP_HASHIMA_TRAIN_CAR";
+  self.on_hintString = &"MP_HASHIMA_TRAIN_CAR";
   self use_switch_toggle_wait();
 }
 

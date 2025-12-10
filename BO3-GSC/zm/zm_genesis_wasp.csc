@@ -18,14 +18,14 @@
 #namespace zm_ai_wasp;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_wasp", & __init__, undefined, undefined);
+  system::register("zm_ai_wasp", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "parasite_round_fx", 15000, 1, "counter", & parasite_round_fx, 0, 0);
-  clientfield::register("world", "toggle_on_parasite_fog", 15000, 2, "int", & parasite_fog_on, 0, 0);
-  clientfield::register("toplayer", "parasite_round_ring_fx", 15000, 1, "counter", & parasite_round_ring_fx, 0, 0);
-  clientfield::register("toplayer", "genesis_parasite_damage", 15000, 1, "counter", & genesis_parasite_damage, 0, 0);
+  clientfield::register("toplayer", "parasite_round_fx", 15000, 1, "counter", &parasite_round_fx, 0, 0);
+  clientfield::register("world", "toggle_on_parasite_fog", 15000, 2, "int", &parasite_fog_on, 0, 0);
+  clientfield::register("toplayer", "parasite_round_ring_fx", 15000, 1, "counter", &parasite_round_ring_fx, 0, 0);
+  clientfield::register("toplayer", "genesis_parasite_damage", 15000, 1, "counter", &genesis_parasite_damage, 0, 0);
   visionset_mgr::register_visionset_info("zm_wasp_round_visionset", 15000, 31, undefined, "zm_wasp_round_visionset");
   level._effect["parasite_round"] = "zombie/fx_parasite_round_tell_zod_zmb";
 }

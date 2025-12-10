@@ -12,13 +12,13 @@
 #namespace autoturret;
 
 function autoexec __init__sytem__() {
-  system::register("autoturret", & __init__, undefined, undefined);
+  system::register("autoturret", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("vehicle", "auto_turret_open", 1, 1, "int", & turret_open, 0, 0);
-  clientfield::register("scriptmover", "auto_turret_init", 1, 1, "int", & turret_init_anim, 0, 0);
-  clientfield::register("scriptmover", "auto_turret_close", 1, 1, "int", & turret_close_anim, 0, 0);
+  clientfield::register("vehicle", "auto_turret_open", 1, 1, "int", &turret_open, 0, 0);
+  clientfield::register("scriptmover", "auto_turret_init", 1, 1, "int", &turret_init_anim, 0, 0);
+  clientfield::register("scriptmover", "auto_turret_close", 1, 1, "int", &turret_close_anim, 0, 0);
   visionset_mgr::register_visionset_info("turret_visionset", 1, 16, undefined, "mp_vehicles_turret");
 }
 

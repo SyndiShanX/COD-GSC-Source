@@ -23,7 +23,7 @@
 #namespace zm_factory_teleporter;
 
 function autoexec __init__sytem__() {
-  system::register("zm_factory_teleporter", & __init__, & __main__, undefined);
+  system::register("zm_factory_teleporter", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -67,14 +67,14 @@ function __main__() {
   }
   level.teleport_ae_funcs = [];
   if(!issplitscreen()) {
-    level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_fov;
+    level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_fov;
   }
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_shellshock;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_shellshock_electric;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_bw_vision;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_red_vision;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_flashy_vision;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_flare_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_shellshock;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_shellshock_electric;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_bw_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_red_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_flashy_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_flare_vision;
 }
 
 function init_pack_door() {
@@ -220,7 +220,7 @@ function sndcountdown() {
 }
 
 function clock_timer() {
-  level util::delay(0, undefined, & zm_audio::sndmusicsystem_playstate, "timer");
+  level util::delay(0, undefined, &zm_audio::sndmusicsystem_playstate, "timer");
   self playLoopSound("evt_clock_tick_1sec");
   level waittill("stop_countdown");
   if(isDefined(level.musicsystem.currentstate) && level.musicsystem.currentstate == "timer") {
@@ -453,7 +453,7 @@ function teleport_core_think() {
               level.active_links++;
               level flag::set("teleporter_pad_link_" + level.active_links);
               level thread zm_factory::sndpa_dovox(("vox_maxis_teleporter_" + i) + "active_0");
-              level util::delay(10, undefined, & zm_audio::sndmusicsystem_playstate, "teleporter_" + level.active_links);
+              level util::delay(10, undefined, &zm_audio::sndmusicsystem_playstate, "teleporter_" + level.active_links);
               exploder::exploder(("teleporter_" + level.teleport_pad_names[i]) + "_linked");
               exploder::exploder(("lgt_teleporter_" + level.teleport_pad_names[i]) + "_linked");
               exploder::exploder_duration("mainframe_steam", 14.6);

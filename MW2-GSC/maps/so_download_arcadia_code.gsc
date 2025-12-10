@@ -303,12 +303,12 @@ download_files_hud_countdown(timeLeft) {
     hudelem = get_countdown_hud(x, self.hudelem_y);
     hudelem.alignX = "right";
     hudelem SetPulseFX(30, 900000, 700);
-    hudelem.label = & "SO_DOWNLOAD_ARCADIA_DSM_FRAME"; // DSM v6.04
+    hudelem.label = &"SO_DOWNLOAD_ARCADIA_DSM_FRAME"; // DSM v6.04
     wait 0.65;
 
     hudelem_status = get_countdown_hud(x, self.hudelem_y);
     hudelem_status SetPulseFX(30, 900000, 700);
-    hudelem_status.label = & "SO_DOWNLOAD_ARCADIA_DSM_INIT"; // Initiliazing
+    hudelem_status.label = &"SO_DOWNLOAD_ARCADIA_DSM_INIT"; // Initiliazing
 
     dsm_wait(hudelem_status, 2.5);
 
@@ -316,7 +316,7 @@ download_files_hud_countdown(timeLeft) {
 
     hudelem_status = get_countdown_hud(x, self.hudelem_y);
     hudelem_status SetPulseFX(30, 900000, 700);
-    hudelem_status.label = & "SO_DOWNLOAD_ARCADIA_DSM_CONNECTING"; // Connecting
+    hudelem_status.label = &"SO_DOWNLOAD_ARCADIA_DSM_CONNECTING"; // Connecting
 
     dsm_wait(hudelem_status, 0.9);
 
@@ -324,7 +324,7 @@ download_files_hud_countdown(timeLeft) {
 
     hudelem_status = get_countdown_hud(x, self.hudelem_y);
     hudelem_status SetPulseFX(30, 900000, 700);
-    hudelem_status.label = & "SO_DOWNLOAD_ARCADIA_DSM_LOGIN"; // Bypassing Login
+    hudelem_status.label = &"SO_DOWNLOAD_ARCADIA_DSM_LOGIN"; // Bypassing Login
 
     dsm_wait(hudelem_status, 3.75);
 
@@ -332,7 +332,7 @@ download_files_hud_countdown(timeLeft) {
 
     hudelem_status = get_countdown_hud(x, self.hudelem_y);
     hudelem_status SetPulseFX(30, 900000, 700);
-    hudelem_status.label = & "SO_DOWNLOAD_ARCADIA_DSM_LOCATE"; // Locating Files
+    hudelem_status.label = &"SO_DOWNLOAD_ARCADIA_DSM_LOCATE"; // Locating Files
 
     dsm_wait(hudelem_status, 1.5);
 
@@ -348,7 +348,7 @@ download_files_hud_countdown(timeLeft) {
   x_offset = x + 170;
   hudelem = get_countdown_hud(x, self.hudelem_y, undefined, true);
   hudelem SetPulseFX(30, 900000, 700);
-  hudelem.label = & "SO_DOWNLOAD_ARCADIA_DSM_PROGRESS"; // Files copied:
+  hudelem.label = &"SO_DOWNLOAD_ARCADIA_DSM_PROGRESS"; // Files copied:
 
   hudelem_status = get_download_state_hud(x_offset, self.hudelem_y, undefined, true);
   hudelem_status.alignX = "right";
@@ -361,7 +361,7 @@ download_files_hud_countdown(timeLeft) {
     self.totalFiles = RandomIntRange(level.NUM_FILES_MIN, level.NUM_FILES_MAX);
   }
 
-  hudelem_status_total.label = & "SO_DOWNLOAD_ARCADIA_DSM_TOTALFILES";
+  hudelem_status_total.label = &"SO_DOWNLOAD_ARCADIA_DSM_TOTALFILES";
   hudelem_status_total SetValue(self.totalfiles);
 
   timeLeft -= seconds(GetTime() - functionStartTime);
@@ -407,12 +407,12 @@ download_files_hud_countdown_abort() {
   hudelem.alignx = "right";
   //hudelem.label = "";
   //hudelem SetText( "ERROR: DOWNLOAD INTERRUPTED!" );
-  hudelem.label = & "SO_DOWNLOAD_ARCADIA_DSM_FRAME"; // DSM v6.04
+  hudelem.label = &"SO_DOWNLOAD_ARCADIA_DSM_FRAME"; // DSM v6.04
   hudelem.fontScale = 1.4;
   hudelem set_hud_red();
 
   hudelem_status = get_countdown_hud(x, self.hudelem_y);
-  hudelem_status.label = & "SO_DOWNLOAD_ARCADIA_DOWNLOAD_INTERRUPTED"; // DOWNLOAD INTERRUPTED
+  hudelem_status.label = &"SO_DOWNLOAD_ARCADIA_DOWNLOAD_INTERRUPTED"; // DOWNLOAD INTERRUPTED
   hudelem_status.fontScale = 1.4;
   hudelem_status set_hud_red();
 
@@ -431,12 +431,12 @@ download_files_hud_finish() {
   }
   hudelem = get_countdown_hud(x, self.hudelem_y);
   hudelem.alignx = "right";
-  hudelem.label = & "SO_DOWNLOAD_ARCADIA_DSM_FRAME"; // DSM v6.04
+  hudelem.label = &"SO_DOWNLOAD_ARCADIA_DSM_FRAME"; // DSM v6.04
   hudelem.fontScale = 1.4;
   hudelem set_hud_blue();
 
   hudelem_status = get_countdown_hud(x, self.hudelem_y);
-  hudelem_status.label = & "SO_DOWNLOAD_ARCADIA_DOWNLOAD_COMPLETE"; // DOWNLOAD COMPLETE
+  hudelem_status.label = &"SO_DOWNLOAD_ARCADIA_DOWNLOAD_COMPLETE"; // DOWNLOAD COMPLETE
   hudelem_status.fontScale = 1.4;
   hudelem_status set_hud_blue();
 
@@ -731,7 +731,7 @@ stryker_think() {
   stryker.veh_pathtype = "follow";
   stryker vehPhys_DisableCrashing();
   stryker maps\_vehicle::godon();
-  stryker setVehicleLookAtText("Honey Badger", & "");
+  stryker setVehicleLookAtText("Honey Badger", &"");
 
   foreach(player in level.players) {
     // Workaround for setting the C4 actionslot, setting player.remotemissile_actionslot swaps the actionslot
@@ -1023,7 +1023,7 @@ stryker_extraction() {
   level.stryker thread stryker_move_to_node(node);
 
   strykerObjIdx = level.downloadObjectiveIdx + 1;
-  Objective_Add(strykerObjIdx, "current", & "SO_DOWNLOAD_ARCADIA_OBJ_EXTRACT", self.origin);
+  Objective_Add(strykerObjIdx, "current", &"SO_DOWNLOAD_ARCADIA_OBJ_EXTRACT", self.origin);
   Objective_OnEntity(strykerObjIdx, self);
 
   thread stryker_extraction_enemies();

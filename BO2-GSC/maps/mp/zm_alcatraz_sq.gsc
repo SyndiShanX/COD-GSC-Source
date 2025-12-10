@@ -425,7 +425,7 @@ create_key_door_unitrigger(piece_num, width, height, length) {
   t_key_door.unitrigger_stub.origin = t_key_door.origin;
   t_key_door.unitrigger_stub.angles = t_key_door.angles;
   t_key_door.unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
-  t_key_door.unitrigger_stub.hint_string = & "ZM_PRISON_KEY_DOOR_LOCKED";
+  t_key_door.unitrigger_stub.hint_string = &"ZM_PRISON_KEY_DOOR_LOCKED";
   t_key_door.unitrigger_stub.cursor_hint = "HINT_NOICON";
   t_key_door.unitrigger_stub.script_width = width;
   t_key_door.unitrigger_stub.script_height = height;

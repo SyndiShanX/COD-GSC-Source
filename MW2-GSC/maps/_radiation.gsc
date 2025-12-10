@@ -13,7 +13,7 @@
 /************************************************************************************************************/
 
 main() {
-  // &&1 mR/hr
+  // && 1 mR/hr
   precacheString(&"SCOUTSNIPER_MRHR");
   // Avoid the radiation zones.\nListen for the clicks of the Geiger counter.
   precacheString(&"SCRIPT_RADIATION_DEATH");
@@ -233,8 +233,8 @@ updateRadiationDosimeter() {
   dosimeter.alpha = 0;
 
   dosimeter.alignX = "right";
-  // &&1 mR/hr
-  dosimeter.label = & "SCOUTSNIPER_MRHR";
+  // && 1 mR/hr
+  dosimeter.label = &"SCOUTSNIPER_MRHR";
 
   dosimeter thread updateRadiationDosimeterColor(self);
 
@@ -373,7 +373,7 @@ radiation_kill() {
 
   assert(!isAlive(self));
   // Avoid the radiation zones.\nListen for the clicks of the Geiger counter.
-  quote = & "SCRIPT_RADIATION_DEATH";
+  quote = &"SCRIPT_RADIATION_DEATH";
   setdvar("ui_deadquote", quote);
 }
 

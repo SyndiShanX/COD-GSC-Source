@@ -66,7 +66,7 @@ c4_location(tag, origin_offset, angles_offset, org) {
     c4_model.angles = self.angles;
 
   c4_model.trigger = get_use_trigger();
-  // Press and hold &&1 to plant the explosives.
+  // Press and hold && 1 to plant the explosives.
   c4_model.trigger sethintstring(&"SCRIPT_PLATFORM_HINT_PLANTEXPLOSIVES");
 
   if(isDefined(tag)) {

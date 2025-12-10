@@ -61,11 +61,11 @@ function main() {
   level.var_90e9447c = 0;
   level.intro_done = 0;
   include_weapons();
-  callback::on_localclient_connect( & function_82a94b2c);
+  callback::on_localclient_connect(&function_82a94b2c);
   register_client_fields();
   zm_cosmodrome_fx::main();
   level thread zm_cosmodrome_amb::main();
-  level.setupcustomcharacterexerts = & setup_personality_character_exerts;
+  level.setupcustomcharacterexerts = &setup_personality_character_exerts;
   visionset_mgr::register_visionset_info("zm_cosmodrome_no_power", 21000, 31, undefined, "zombie_cosmodrome_nopower");
   visionset_mgr::register_visionset_info("zm_cosmodrome_power_antic", 21000, 31, undefined, "zombie_cosmodrome_power_antic");
   visionset_mgr::register_visionset_info("zm_cosmodrome_power_flare", 21000, 31, undefined, "zombie_cosmodrome_power_flare");
@@ -312,32 +312,32 @@ function function_ea758913() {
 }
 
 function register_client_fields() {
-  clientfield::register("scriptmover", "zombie_has_eyes", 21000, 1, "int", & zm::zombie_eyes_clientfield_cb, 0, 0);
-  clientfield::register("actor", "COSMO_SOULPULL", 21000, 1, "int", & actor_flag_soulpull_handler, 0, 0);
-  clientfield::register("scriptmover", "COSMO_ROCKET_FX", 21000, 1, "int", & rocket_fx, 0, 0);
-  clientfield::register("scriptmover", "COSMO_MONKEY_LANDER_FX", 21000, 1, "int", & monkey_lander_fx, 0, 0);
-  clientfield::register("world", "COSMO_EGG_SAM_ANGRY", 21000, 1, "int", & samantha_is_angry, 0, 0);
-  clientfield::register("scriptmover", "COSMO_LANDER_ENGINE_FX", 21000, 1, "int", & lander_engine_fx, 0, 0);
-  clientfield::register("allplayers", "COSMO_PLAYER_LANDER_FOG", 21000, 1, "int", & player_lander_fog, 0, 0);
-  clientfield::register("scriptmover", "COSMO_LANDER_MOVE_FX", 21000, 1, "int", & lander_move_fx, 0, 0);
-  clientfield::register("scriptmover", "COSMO_LANDER_RUMBLE_AND_QUAKE", 21000, 1, "int", & lander_rumble_and_quake, 0, 0);
-  clientfield::register("world", "COSMO_LANDER_STATUS_LIGHTS", 21000, 2, "int", & function_32db5393, 0, 0);
-  clientfield::register("world", "COSMO_LANDER_STATION", 21000, 3, "int", & function_446c53e5, 0, 0);
-  clientfield::register("world", "COSMO_LANDER_DEST", 21000, 3, "int", & function_f6ffc831, 0, 0);
-  clientfield::register("world", "COSMO_LANDER_CATWALK_BAY", 21000, 3, "int", & function_89e03497, 0, 0);
-  clientfield::register("world", "COSMO_LANDER_BASE_ENTRY_BAY", 21000, 3, "int", & function_429d7872, 0, 0);
-  clientfield::register("world", "COSMO_LANDER_CENTRIFUGE_BAY", 21000, 3, "int", & function_7eaa1812, 0, 0);
-  clientfield::register("world", "COSMO_LANDER_STORAGE_BAY", 21000, 3, "int", & function_686d40af, 0, 0);
-  clientfield::register("scriptmover", "COSMO_LAUNCH_PANEL_CENTRIFUGE_STATUS", 21000, 1, "int", & launch_panel_centrifuge_status, 0, 0);
-  clientfield::register("scriptmover", "COSMO_LAUNCH_PANEL_BASEENTRY_STATUS", 21000, 1, "int", & launch_panel_baseentry_status, 0, 0);
-  clientfield::register("scriptmover", "COSMO_LAUNCH_PANEL_STORAGE_STATUS", 21000, 1, "int", & launch_panel_storage_status, 0, 0);
-  clientfield::register("scriptmover", "COSMO_LAUNCH_PANEL_CATWALK_STATUS", 21000, 1, "int", & launch_panel_catwalk_status, 0, 0);
-  clientfield::register("scriptmover", "COSMO_CENTRIFUGE_RUMBLE", 21000, 1, "int", & centrifuge_rumble_control, 0, 0);
-  clientfield::register("scriptmover", "COSMO_CENTRIFUGE_LIGHTS", 21000, 1, "int", & centrifuge_warning_lights_init, 0, 0);
-  clientfield::register("world", "COSMO_VISIONSET_BEGIN", 21000, 1, "int", & function_c07d3f2c, 0, 0);
-  clientfield::register("world", "COSMO_VISIONSET_NOPOWER", 21000, 1, "int", & function_d0429093, 0, 0);
-  clientfield::register("world", "COSMO_VISIONSET_POWERON", 21000, 1, "int", & function_87f08b47, 0, 0);
-  clientfield::register("world", "COSMO_VISIONSET_MONKEY", 21000, 1, "int", & function_e470dce, 0, 0);
+  clientfield::register("scriptmover", "zombie_has_eyes", 21000, 1, "int", &zm::zombie_eyes_clientfield_cb, 0, 0);
+  clientfield::register("actor", "COSMO_SOULPULL", 21000, 1, "int", &actor_flag_soulpull_handler, 0, 0);
+  clientfield::register("scriptmover", "COSMO_ROCKET_FX", 21000, 1, "int", &rocket_fx, 0, 0);
+  clientfield::register("scriptmover", "COSMO_MONKEY_LANDER_FX", 21000, 1, "int", &monkey_lander_fx, 0, 0);
+  clientfield::register("world", "COSMO_EGG_SAM_ANGRY", 21000, 1, "int", &samantha_is_angry, 0, 0);
+  clientfield::register("scriptmover", "COSMO_LANDER_ENGINE_FX", 21000, 1, "int", &lander_engine_fx, 0, 0);
+  clientfield::register("allplayers", "COSMO_PLAYER_LANDER_FOG", 21000, 1, "int", &player_lander_fog, 0, 0);
+  clientfield::register("scriptmover", "COSMO_LANDER_MOVE_FX", 21000, 1, "int", &lander_move_fx, 0, 0);
+  clientfield::register("scriptmover", "COSMO_LANDER_RUMBLE_AND_QUAKE", 21000, 1, "int", &lander_rumble_and_quake, 0, 0);
+  clientfield::register("world", "COSMO_LANDER_STATUS_LIGHTS", 21000, 2, "int", &function_32db5393, 0, 0);
+  clientfield::register("world", "COSMO_LANDER_STATION", 21000, 3, "int", &function_446c53e5, 0, 0);
+  clientfield::register("world", "COSMO_LANDER_DEST", 21000, 3, "int", &function_f6ffc831, 0, 0);
+  clientfield::register("world", "COSMO_LANDER_CATWALK_BAY", 21000, 3, "int", &function_89e03497, 0, 0);
+  clientfield::register("world", "COSMO_LANDER_BASE_ENTRY_BAY", 21000, 3, "int", &function_429d7872, 0, 0);
+  clientfield::register("world", "COSMO_LANDER_CENTRIFUGE_BAY", 21000, 3, "int", &function_7eaa1812, 0, 0);
+  clientfield::register("world", "COSMO_LANDER_STORAGE_BAY", 21000, 3, "int", &function_686d40af, 0, 0);
+  clientfield::register("scriptmover", "COSMO_LAUNCH_PANEL_CENTRIFUGE_STATUS", 21000, 1, "int", &launch_panel_centrifuge_status, 0, 0);
+  clientfield::register("scriptmover", "COSMO_LAUNCH_PANEL_BASEENTRY_STATUS", 21000, 1, "int", &launch_panel_baseentry_status, 0, 0);
+  clientfield::register("scriptmover", "COSMO_LAUNCH_PANEL_STORAGE_STATUS", 21000, 1, "int", &launch_panel_storage_status, 0, 0);
+  clientfield::register("scriptmover", "COSMO_LAUNCH_PANEL_CATWALK_STATUS", 21000, 1, "int", &launch_panel_catwalk_status, 0, 0);
+  clientfield::register("scriptmover", "COSMO_CENTRIFUGE_RUMBLE", 21000, 1, "int", &centrifuge_rumble_control, 0, 0);
+  clientfield::register("scriptmover", "COSMO_CENTRIFUGE_LIGHTS", 21000, 1, "int", &centrifuge_warning_lights_init, 0, 0);
+  clientfield::register("world", "COSMO_VISIONSET_BEGIN", 21000, 1, "int", &function_c07d3f2c, 0, 0);
+  clientfield::register("world", "COSMO_VISIONSET_NOPOWER", 21000, 1, "int", &function_d0429093, 0, 0);
+  clientfield::register("world", "COSMO_VISIONSET_POWERON", 21000, 1, "int", &function_87f08b47, 0, 0);
+  clientfield::register("world", "COSMO_VISIONSET_MONKEY", 21000, 1, "int", &function_e470dce, 0, 0);
 }
 
 function function_d87a7dcc() {
@@ -445,7 +445,7 @@ function init_cosmodrome_box_screens() {
   level.magic_box_tv_warehouse = array("p7_zm_asc_cam_monitor_screen_warehouse");
   level.magic_box_tv_random = array("p7_zm_asc_cam_monitor_screen_logo");
   level._box_locations = array(level.magic_box_tv_start_1, level.magic_box_tv_roof_connector, level.magic_box_tv_centrifuge, level.magic_box_tv_base_entry, level.magic_box_tv_storage, level.magic_box_tv_catwalks, level.magic_box_tv_north_pass, level.magic_box_tv_warehouse);
-  level._custom_box_monitor = & cosmodrome_screen_switch;
+  level._custom_box_monitor = &cosmodrome_screen_switch;
 }
 
 function cosmodrome_screen_switch(client_num, state, oldstate) {
@@ -913,7 +913,7 @@ function rocket_launch_display(localclientnum) {
       break;
     }
   }
-  array::thread_all(rocket_screens, & update_rocket_display, model);
+  array::thread_all(rocket_screens, &update_rocket_display, model);
 }
 
 function update_rocket_display(on_model) {

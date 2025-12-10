@@ -292,17 +292,17 @@ main() {
   // These hints are set in _remotemissile.gscs
   //	add_hint_string( "hint_predator_drone_4", 			&"HELLFIRE_USE_DRONE", 			::should_break_use_drone );
   //	add_hint_string( "hint_predator_drone_2", 			&"HELLFIRE_USE_DRONE_2", 		::should_break_use_drone );
-  add_hint_string("hint_predator_drone_vs_bmps_4", & "HELLFIRE_USE_DRONE", ::should_break_use_drone_vs_bmps);
-  add_hint_string("hint_predator_drone_vs_bmps_2", & "HELLFIRE_USE_DRONE_2", ::should_break_use_drone_vs_bmps);
-  add_hint_string("hint_steer_drone", & "SCRIPT_PLATFORM_STEER_DRONE", ::should_break_steer_drone);
+  add_hint_string("hint_predator_drone_vs_bmps_4", &"HELLFIRE_USE_DRONE", ::should_break_use_drone_vs_bmps);
+  add_hint_string("hint_predator_drone_vs_bmps_2", &"HELLFIRE_USE_DRONE_2", ::should_break_use_drone_vs_bmps);
+  add_hint_string("hint_steer_drone", &"SCRIPT_PLATFORM_STEER_DRONE", ::should_break_steer_drone);
   //add_hint_string( "hint_throw_semtex", 			&"INVASION_THROW_SEMTEX", 		::should_break_throw_semtex );
   //add_hint_string( "hint_get_semtex", 				&"INVASION_GET_SEMTEX", 		::should_break_get_semtex );
-  add_hint_string("hint_throw_smoke", & "INVASION_THROW_SMOKE", ::should_break_throw_smoke);
-  add_hint_string("hint_get_smoke", & "INVASION_GET_SMOKE", ::should_break_get_smoke);
+  add_hint_string("hint_throw_smoke", &"INVASION_THROW_SMOKE", ::should_break_throw_smoke);
+  add_hint_string("hint_get_smoke", &"INVASION_GET_SMOKE", ::should_break_get_smoke);
 
-  add_hint_string("hint_smoke_too_far", & "INVASION_SMOKE_TOO_FAR", ::should_break_smoke_too_far);
-  add_hint_string("hint_ads_with_stinger", & "INVASION_ADS_WITH_STINGER", ::should_break_ads_with_stinger);
-  add_hint_string("hint_toggle_ads_with_stinger", & "INVASION_TOGGLE_ADS_WITH_STINGER", ::should_break_ads_with_stinger);
+  add_hint_string("hint_smoke_too_far", &"INVASION_SMOKE_TOO_FAR", ::should_break_smoke_too_far);
+  add_hint_string("hint_ads_with_stinger", &"INVASION_ADS_WITH_STINGER", ::should_break_ads_with_stinger);
+  add_hint_string("hint_toggle_ads_with_stinger", &"INVASION_TOGGLE_ADS_WITH_STINGER", ::should_break_ads_with_stinger);
   /*
   flag_init( "got_stinger" );
   stingers = getEntArray( "stingers", "targetname" );
@@ -899,14 +899,14 @@ black_screen_intro() {
 
   lines = [];
   // wolverines
-  lines[lines.size] = & "INVASION_LINE1"; //
+  lines[lines.size] = &"INVASION_LINE1"; //
   // Day 2 - 13:45:[{FAKE_INTRO_SECONDS:4}]
-  lines["date"] = & "INVASION_LINE2";
+  lines["date"] = &"INVASION_LINE2";
   //pvt ramerez
-  lines[lines.size] = & "INVASION_LINE3";
+  lines[lines.size] = &"INVASION_LINE3";
   //virginia
-  lines[lines.size] = & "INVASION_LINE4";
-  lines[lines.size] = & "INVASION_LINE5";
+  lines[lines.size] = &"INVASION_LINE4";
+  lines[lines.size] = &"INVASION_LINE5";
 
   maps\_introscreen::introscreen_feed_lines(lines);
 
@@ -2946,7 +2946,7 @@ mission_fail_if_leaves_BT_waiter() {
 
   wait 1;
 
-  setDvar("ui_deadquote", & "INVASION_FAIL_ABANDONED");
+  setDvar("ui_deadquote", &"INVASION_FAIL_ABANDONED");
   maps\_utility::missionFailedWrapper();
 }
 
@@ -4154,7 +4154,7 @@ set_up_predator_drone_control_pickup() {
   predator_drone_control glow();
 
   predator_drone_control setCursorHint("HINT_NOICON");
-  // Press and hold ^3&&1^7 to pick up the turret.
+  // Press and hold ^3&& 1^7 to pick up the turret.
   predator_drone_control setHintString(&"INVASION_DRONE_PICKUP");
   predator_drone_control makeUsable();
 
@@ -4289,20 +4289,20 @@ hellfire_attacks() {
   rocket = MagicBullet("remote_missile_not_player_invasion", (level.uav.origin + (0, 0, -128)), first_tgt.origin);
   wait(randomfloatrange(3, 5));
 
-  //second closest to view but not the same, & diff
+  //second closest to view but not the same, &diff
   remainingtargets = array_remove(targets, first_tgt);
   targetpos = get_closest_to_player_view(remainingtargets);
   //targetpos = remainingtargets[ randomint( remainingtargets.size ) ];
   rocket = MagicBullet("remote_missile_not_player_invasion", (level.uav.origin + (0, 0, -128)), targetpos.origin);
   wait(randomfloatrange(3, 5));
 
-  //third random & diff
+  //third random &diff
   remainingtargets = array_remove(targets, targetpos);
   targetpos = remainingtargets[randomint(remainingtargets.size)];
   rocket = MagicBullet("remote_missile_not_player_invasion", (level.uav.origin + (0, 0, -128)), targetpos.origin);
   wait(randomfloatrange(3, 5));
 
-  //forth random & diff
+  //forth random &diff
   remainingtargets = array_remove(targets, targetpos);
   targetpos = remainingtargets[randomint(remainingtargets.size)];
   rocket = MagicBullet("remote_missile_not_player_invasion", (level.uav.origin + (0, 0, -128)), targetpos.origin);
@@ -4817,7 +4817,7 @@ mission_fail_if_sentry_dies() {
   level endon("sentry_in_position");
   self waittill("death");
 
-  setDvar("ui_deadquote", & "INVASION_FAIL_SENTRY");
+  setDvar("ui_deadquote", &"INVASION_FAIL_SENTRY");
   maps\_utility::missionFailedWrapper();
 }
 
@@ -6421,7 +6421,7 @@ setObjectiveLocation_nearest_enemy(objName) {
   level endon("moving " + objName);
   objective = level.objectives[objName];
   closest_enemy = undefined;
-  setObjectiveWaypoint(objName, & "INVASION_WAYPOINT_HOSTILES");
+  setObjectiveWaypoint(objName, &"INVASION_WAYPOINT_HOSTILES");
   north_trucks_retreat_point = getent("north_trucks_retreat_point", "targetname");
 
   while(objective.state != "done") {
@@ -6716,7 +6716,7 @@ objective_crash() {
   obj = getstruct("police_car_moment", "script_noteworthy");
   origin = obj.origin;
 
-  registerObjective("obj_crash", & "INVASION_OBJ_FOLEY", level.raptor.origin);
+  registerObjective("obj_crash", &"INVASION_OBJ_FOLEY", level.raptor.origin);
   setObjectiveState("obj_crash", "current");
   thread setObjectiveLocationMoving("obj_crash", level.raptor, (0, 0, 70));
 
@@ -6730,7 +6730,7 @@ objective_roof() {
   if(!flag("player_on_roof")) {
     origin = level.obj_sentry.origin;
 
-    registerObjective("obj_roof", & "INVASION_OBJ_ROOF", origin);
+    registerObjective("obj_roof", &"INVASION_OBJ_ROOF", origin);
     setObjectiveState("obj_roof", "current");
 
     flag_wait("player_on_roof");
@@ -6755,15 +6755,15 @@ objective_defend_roof() {
   south_side_of_roof = getstruct("south_side_of_roof_obj_loc", "targetname");
   origin = south_side_of_roof.origin;
 
-  registerObjective("obj_defend", & "INVASION_OBJ_DEFEND", origin);
+  registerObjective("obj_defend", &"INVASION_OBJ_DEFEND", origin);
   setObjectiveState("obj_defend", "current");
-  setObjectiveWaypoint("obj_defend", & "INVASION_WAYPOINT_DEFEND");
+  setObjectiveWaypoint("obj_defend", &"INVASION_WAYPOINT_DEFEND");
 
   flag_wait("northside_roof");
 
   northside_roof = getstruct("northside_roof", "targetname");
   setObjectiveLocation("obj_defend", northside_roof.origin);
-  setObjectiveWaypoint("obj_defend", & "INVASION_WAYPOINT_DEFEND");
+  setObjectiveWaypoint("obj_defend", &"INVASION_WAYPOINT_DEFEND");
 
   flag_wait("truck_guys_retreat");
 
@@ -6780,7 +6780,7 @@ objective_predator() {
   predator_drone_control = getent("predator_drone_control", "targetname");
   origin = predator_drone_control.origin;
 
-  registerObjective("obj_predator", & "INVASION_OBJ_PREDATOR", origin);
+  registerObjective("obj_predator", &"INVASION_OBJ_PREDATOR", origin);
   setObjectiveState("obj_predator", "current");
 
   flag_wait("player_has_predator_drones");
@@ -6792,7 +6792,7 @@ objective_burgertown() {
   nates_restaurant_goal = getent("nates_restaurant_goal", "targetname");
   origin = nates_restaurant_goal.origin;
 
-  registerObjective("obj_burgertown", & "INVASION_OBJ_REGROUP", origin);
+  registerObjective("obj_burgertown", &"INVASION_OBJ_REGROUP", origin);
   setObjectiveState("obj_burgertown", "current");
 
   flag_wait("time_to_clear_burgertown");
@@ -6800,7 +6800,7 @@ objective_burgertown() {
   objective_burgertown_groundfloor = getent("objective_burgertown_groundfloor", "targetname");
   origin = objective_burgertown_groundfloor.origin;
 
-  setObjectiveString("obj_burgertown", & "INVASION_OBJ_BURGERTOWN");
+  setObjectiveString("obj_burgertown", &"INVASION_OBJ_BURGERTOWN");
   setObjectiveLocation("obj_burgertown", origin);
 
   flag_wait("burger_town_lower_cleared");
@@ -6812,13 +6812,13 @@ objective_burgertown() {
 objective_BMPs() {
   wait .2;
   if(!flag("bmp_north_left_dead")) {
-    registerObjective("obj_bmps", & "INVASION_OBJ_BMPS", level.bmp_north_left.origin);
+    registerObjective("obj_bmps", &"INVASION_OBJ_BMPS", level.bmp_north_left.origin);
     setObjectiveState("obj_bmps", "current");
     thread setObjectiveLocationMoving("obj_bmps", level.bmp_north_left, (0, 0, 96));
     //setObjectiveWaypoint( "obj_bmps", &"INVASION_WAYPOINT_HOSTILES" );
   } else {
     if(!flag("bmp_north_mid_dead")) {
-      registerObjective("obj_bmps", & "INVASION_OBJ_BMPS", level.bmp_north_mid.origin);
+      registerObjective("obj_bmps", &"INVASION_OBJ_BMPS", level.bmp_north_mid.origin);
       setObjectiveState("obj_bmps", "current");
       thread setObjectiveLocationMoving("obj_bmps", level.bmp_north_mid, (0, 0, 96));
       //setObjectiveWaypoint( "obj_bmps", &"INVASION_WAYPOINT_HOSTILES" );
@@ -6840,7 +6840,7 @@ objective_regroup_at_nates() {
   objective = getent("raptor_in_nates_prep", "targetname");
   origin = objective.origin;
 
-  registerObjective("obj_nates_regroup", & "INVASION_OBJ_NATES_REGROUP", origin);
+  registerObjective("obj_nates_regroup", &"INVASION_OBJ_NATES_REGROUP", origin);
   setObjectiveState("obj_nates_regroup", "current");
 
   flag_wait("player_in_pos_to_cover_vip");
@@ -6852,15 +6852,15 @@ objective_defend_raptor() {
   //objective_burgertown_groundfloor = getent( "objective_burgertown_groundfloor", "targetname" );
   origin = level.raptor.origin;
 
-  registerObjective("obj_raptor_defend", & "INVASION_OBJ_VIP_ESCORT", origin);
+  registerObjective("obj_raptor_defend", &"INVASION_OBJ_VIP_ESCORT", origin);
   setObjectiveState("obj_raptor_defend", "current");
 
   thread setObjectiveLocationMoving("obj_raptor_defend", level.raptor, (0, 0, 70));
-  setObjectiveWaypoint("obj_raptor_defend", & "INVASION_WAYPOINT_PROTECT");
+  setObjectiveWaypoint("obj_raptor_defend", &"INVASION_WAYPOINT_PROTECT");
 
   flag_wait("president_in_BT_meat_locker");
 
-  setObjectiveString("obj_raptor_defend", & "INVASION_OBJ_BURGERTOWN_DEFEND");
+  setObjectiveString("obj_raptor_defend", &"INVASION_OBJ_BURGERTOWN_DEFEND");
   thread setObjectiveLocation_nearest_enemy("obj_raptor_defend");
 
   flag_wait("first_attack_heli_spawned");
@@ -6936,7 +6936,7 @@ objective_destroy_helicopter(second_heli) {
   //if( !isDefined( second_heli ) )
   //{
   level notify("moving obj_raptor_defend");
-  setObjectiveString("obj_raptor_defend", & "INVASION_OBJ_ATTACK_HELI");
+  setObjectiveString("obj_raptor_defend", &"INVASION_OBJ_ATTACK_HELI");
   setObjectiveLocation("obj_raptor_defend", origin);
   setObjectiveWaypoint("obj_raptor_defend");
   //registerObjective( "obj_destroy_helicopter", &"INVASION_OBJ_ATTACK_HELI", origin );
@@ -6983,7 +6983,7 @@ objective_defend_raptor2() {
   //	registerObjective( "obj_raptor_defend", &"INVASION_OBJ_BURGERTOWN_DEFEND", origin );
 
   level notify("moving obj_raptor_defend");
-  setObjectiveString("obj_raptor_defend", & "INVASION_OBJ_BURGERTOWN_DEFEND");
+  setObjectiveString("obj_raptor_defend", &"INVASION_OBJ_BURGERTOWN_DEFEND");
 
   thread setObjectiveLocation_nearest_enemy("obj_raptor_defend");
   //setObjectiveLocation( "obj_raptor_defend", origin );
@@ -7006,7 +7006,7 @@ objective_defend_raptor3() {
 
   level notify("moving obj_raptor_defend");
   //	registerObjective( "obj_raptor_defend", &"INVASION_OBJ_BURGERTOWN_DEFEND", origin );
-  setObjectiveString("obj_raptor_defend", & "INVASION_OBJ_BURGERTOWN_DEFEND");
+  setObjectiveString("obj_raptor_defend", &"INVASION_OBJ_BURGERTOWN_DEFEND");
   //setObjectiveLocation( "obj_raptor_defend", origin );
 
   thread setObjectiveLocation_nearest_enemy("obj_raptor_defend");
@@ -7024,7 +7024,7 @@ objective_convoy() {
     level.convoy = getent("convoy_obj", "targetname");
   //origin = convoy_obj.origin;
 
-  registerObjective("obj_convoy", & "INVASION_OBJ_CONVOY", level.convoy.origin);
+  registerObjective("obj_convoy", &"INVASION_OBJ_CONVOY", level.convoy.origin);
   thread setObjectiveLocationMoving("obj_convoy", level.convoy, (0, 0, 128));
   setObjectiveState("obj_convoy", "current");
 

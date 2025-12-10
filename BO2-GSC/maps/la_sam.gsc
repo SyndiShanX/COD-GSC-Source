@@ -482,7 +482,7 @@ get_on_sam() {
 }
 
 sam_turret_instructions() {
-  screen_message_create(&"LA_SHARED_SAM_TURRET_LOCK", & "LA_SHARED_SAM_TURRET_FIRE");
+  screen_message_create(&"LA_SHARED_SAM_TURRET_LOCK", &"LA_SHARED_SAM_TURRET_FIRE");
   level._screen_message_1.hidewheninmenu = 0;
   level._screen_message_2.hidewheninmenu = 0;
   wait 4;

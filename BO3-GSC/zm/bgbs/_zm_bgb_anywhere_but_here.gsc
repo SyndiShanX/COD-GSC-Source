@@ -16,7 +16,7 @@
 #namespace zm_bgb_anywhere_but_here;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_anywhere_but_here", & __init__, undefined, "bgb");
+  system::register("zm_bgb_anywhere_but_here", &__init__, undefined, "bgb");
 }
 
 function __init__() {
@@ -26,7 +26,7 @@ function __init__() {
   level._effect["teleport_splash"] = "zombie/fx_bgb_anywhere_but_here_teleport_zmb";
   level._effect["teleport_aoe"] = "zombie/fx_bgb_anywhere_but_here_teleport_aoe_zmb";
   level._effect["teleport_aoe_kill"] = "zombie/fx_bgb_anywhere_but_here_teleport_aoe_kill_zmb";
-  bgb::register("zm_bgb_anywhere_but_here", "activated", 2, undefined, undefined, & validation, & activation);
+  bgb::register("zm_bgb_anywhere_but_here", "activated", 2, undefined, undefined, &validation, &activation);
   bgb::function_4cda71bf("zm_bgb_anywhere_but_here", 1);
 }
 

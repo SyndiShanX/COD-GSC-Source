@@ -11,7 +11,7 @@
 #namespace blood;
 
 function autoexec __init__sytem__() {
-  system::register("blood", & __init__, undefined, undefined);
+  system::register("blood", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -19,7 +19,7 @@ function __init__() {
   level.bloodstage2 = getdvarfloat("cg_t7HealthOverlay_Threshold2", 0.8);
   level.bloodstage1 = getdvarfloat("cg_t7HealthOverlay_Threshold1", 0.99);
   level.use_digital_blood_enabled = getdvarfloat("scr_use_digital_blood_enabled", 1);
-  callback::on_localplayer_spawned( & localplayer_spawned);
+  callback::on_localplayer_spawned(&localplayer_spawned);
 }
 
 function localplayer_spawned(localclientnum) {

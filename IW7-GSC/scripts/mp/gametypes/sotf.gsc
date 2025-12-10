@@ -91,9 +91,9 @@ onstartgametype() {
     game["defenders"] = var_00;
   }
 
-  var_02 = & "OBJECTIVES_WAR";
-  var_03 = & "OBJECTIVES_WAR_SCORE";
-  var_04 = & "OBJECTIVES_WAR_HINT";
+  var_02 = &"OBJECTIVES_WAR";
+  var_03 = &"OBJECTIVES_WAR_SCORE";
+  var_04 = &"OBJECTIVES_WAR_HINT";
   scripts\mp\utility::setobjectivetext("allies", var_02);
   scripts\mp\utility::setobjectivetext("axis", var_02);
   if(level.splitscreen) {
@@ -410,7 +410,7 @@ definechestweapons() {
 }
 
 sotfcratecontents(param_00, param_01) {
-  scripts\mp\killstreaks\_airdrop::addcratetype("airdrop_sotf", "sotf_weapon", 100, ::sotfcratethink, param_00, param_00, & "KILLSTREAKS_HINTS_WEAPON_PICKUP");
+  scripts\mp\killstreaks\_airdrop::addcratetype("airdrop_sotf", "sotf_weapon", 100, ::sotfcratethink, param_00, param_00, &"KILLSTREAKS_HINTS_WEAPON_PICKUP");
 }
 
 sotfcratethink(param_00) {
@@ -420,7 +420,7 @@ sotfcratethink(param_00) {
   if(isDefined(game["strings"][self.cratetype + "_hint"])) {
     var_01 = game["strings"][self.cratetype + "_hint"];
   } else {
-    var_01 = & "PLATFORM_GET_KILLSTREAK";
+    var_01 = &"PLATFORM_GET_KILLSTREAK";
   }
 
   var_02 = "icon_hunted";

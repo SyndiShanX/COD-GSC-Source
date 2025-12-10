@@ -22,8 +22,8 @@
 function init() {
   level.planemortarexhaustfx = "killstreaks/fx_ls_exhaust_afterburner";
   clientfield::register("scriptmover", "planemortar_contrail", 1, 1, "int");
-  killstreaks::register("planemortar", "planemortar", "killstreak_planemortar", "planemortar_used", & usekillstreakplanemortar, 1);
-  killstreaks::register_strings("planemortar", & "MP_EARNED_PLANEMORTAR", & "KILLSTREAK_PLANEMORTAR_NOT_AVAILABLE", & "MP_WAR_PLANEMORTAR_INBOUND", & "MP_WAR_PLANEMORTAR_INBOUND_NEAR_YOUR_POSITION", & "KILLSTREAK_PLANEMORTAR_HACKED");
+  killstreaks::register("planemortar", "planemortar", "killstreak_planemortar", "planemortar_used", &usekillstreakplanemortar, 1);
+  killstreaks::register_strings("planemortar", &"MP_EARNED_PLANEMORTAR", &"KILLSTREAK_PLANEMORTAR_NOT_AVAILABLE", &"MP_WAR_PLANEMORTAR_INBOUND", &"MP_WAR_PLANEMORTAR_INBOUND_NEAR_YOUR_POSITION", &"KILLSTREAK_PLANEMORTAR_HACKED");
   killstreaks::register_dialog("planemortar", "mpl_killstreak_planemortar", "planeMortarDialogBundle", "planeMortarPilotDialogBundle", "friendlyPlaneMortar", "enemyPlaneMortar", "enemyPlaneMortarMultiple", "friendlyPlaneMortarHacked", "enemyPlaneMortarHacked", "requestPlaneMortar");
   killstreaks::set_team_kill_penalty_scale("planemortar", level.teamkillreducedpenalty);
 }
@@ -74,7 +74,7 @@ function selectplanemortarlocation(hardpointtype) {
     return 0;
   }
   self.pers["mortarRadarUsed"] = 0;
-  return self airsupport::finishhardpointlocationusage(locations, & useplanemortar);
+  return self airsupport::finishhardpointlocationusage(locations, &useplanemortar);
 }
 
 function waitplaybacktime(soundalias) {

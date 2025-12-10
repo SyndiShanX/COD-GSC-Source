@@ -15,7 +15,7 @@
 #namespace vehicle_death;
 
 function autoexec __init__sytem__() {
-  system::register("vehicle_death", & __init__, undefined, undefined);
+  system::register("vehicle_death", &__init__, undefined, undefined);
 }
 
 function __init__() {

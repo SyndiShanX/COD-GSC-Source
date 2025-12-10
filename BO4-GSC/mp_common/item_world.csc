@@ -111,7 +111,7 @@ private function_37175e73(var_fee74908) {
 
   for(wordindex = 0; wordindex < var_fee74908.size - 1; wordindex++) {
     for(bitindex = 0; bitindex < 32; bitindex++) {
-      if(var_fee74908[wordindex]&1 << bitindex) {
+      if(var_fee74908[wordindex]& 1 << bitindex) {
         itemindex = wordindex * 32 + bitindex;
         hide_item(-1, itemindex);
       }
@@ -897,7 +897,7 @@ private function_4e9220ab(localclientnum, oldval, newval, bnewent, binitialsnap,
     }
 
     seed = newval >> 1;
-    reset = newval&1;
+    reset = newval& 1;
     level.item_spawn_seed = seed;
 
     if(isdemoplaying() && !reset) {

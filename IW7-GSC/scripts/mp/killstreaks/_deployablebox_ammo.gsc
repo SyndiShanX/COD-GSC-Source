@@ -8,8 +8,8 @@ init() {
   var_00 = spawnStruct();
   var_00.var_39B = "deployable_vest_marker_mp";
   var_00.modelbase = "mil_ammo_case_1_open";
-  var_00.pow = & "KILLSTREAKS_HINTS_DEPLOYABLE_AMMO_USE";
-  var_00.var_3A41 = & "KILLSTREAKS_DEPLOYABLE_AMMO_TAKING";
+  var_00.pow = &"KILLSTREAKS_HINTS_DEPLOYABLE_AMMO_USE";
+  var_00.var_3A41 = &"KILLSTREAKS_DEPLOYABLE_AMMO_TAKING";
   var_00.var_67E5 = "deployable_ammo_taken";
   var_00.streakname = "deployable_ammo";
   var_00.var_10A38 = "used_deployable_ammo";

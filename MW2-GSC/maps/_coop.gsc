@@ -496,7 +496,7 @@ nag_should_draw_hud() {
 
 nag_prompt_show() {
   fadeTime = 0.05;
-  loc = & "SPECIAL_OPS_REVIVE_NAG_HINT";
+  loc = &"SPECIAL_OPS_REVIVE_NAG_HINT";
 
   hud = self get_nag_hud();
   hud.alpha = 0;

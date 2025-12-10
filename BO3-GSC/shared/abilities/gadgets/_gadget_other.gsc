@@ -15,16 +15,16 @@
 #namespace _gadget_other;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_other", & __init__, undefined, undefined);
+  system::register("gadget_other", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(1, & gadget_other_on_activate, & gadget_other_on_off);
-  ability_player::register_gadget_possession_callbacks(1, & gadget_other_on_give, & gadget_other_on_take);
-  ability_player::register_gadget_flicker_callbacks(1, & gadget_other_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(1, & gadget_other_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(1, & gadget_other_is_flickering);
-  ability_player::register_gadget_ready_callbacks(1, & gadget_other_ready);
+  ability_player::register_gadget_activation_callbacks(1, &gadget_other_on_activate, &gadget_other_on_off);
+  ability_player::register_gadget_possession_callbacks(1, &gadget_other_on_give, &gadget_other_on_take);
+  ability_player::register_gadget_flicker_callbacks(1, &gadget_other_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(1, &gadget_other_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(1, &gadget_other_is_flickering);
+  ability_player::register_gadget_ready_callbacks(1, &gadget_other_ready);
 }
 
 function gadget_other_is_inuse(slot) {

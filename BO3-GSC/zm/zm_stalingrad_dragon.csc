@@ -15,7 +15,7 @@
 #namespace dragon;
 
 function autoexec __init__sytem__() {
-  system::register("stalingrad_dragon", & __init__, undefined, undefined);
+  system::register("stalingrad_dragon", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -28,20 +28,20 @@ function __init__() {
 }
 
 function init_clientfields() {
-  clientfield::register("scriptmover", "dragon_body_glow", 12000, 1, "int", & function_d28f5c87, 0, 0);
-  clientfield::register("scriptmover", "dragon_notify_bullet_impact", 12000, 1, "int", & function_d6856592, 0, 0);
-  clientfield::register("scriptmover", "dragon_wound_glow_on", 12000, 2, "int", & function_cb9fb04a, 0, 0);
-  clientfield::register("scriptmover", "dragon_wound_glow_off", 12000, 2, "int", & function_bb6d58d0, 0, 0);
-  clientfield::register("scriptmover", "dragon_mouth_fx", 12000, 1, "int", & dragon_mouth_fx, 0, 0);
+  clientfield::register("scriptmover", "dragon_body_glow", 12000, 1, "int", &function_d28f5c87, 0, 0);
+  clientfield::register("scriptmover", "dragon_notify_bullet_impact", 12000, 1, "int", &function_d6856592, 0, 0);
+  clientfield::register("scriptmover", "dragon_wound_glow_on", 12000, 2, "int", &function_cb9fb04a, 0, 0);
+  clientfield::register("scriptmover", "dragon_wound_glow_off", 12000, 2, "int", &function_bb6d58d0, 0, 0);
+  clientfield::register("scriptmover", "dragon_mouth_fx", 12000, 1, "int", &dragon_mouth_fx, 0, 0);
   n_bits = getminbitcountfornum(10);
-  clientfield::register("scriptmover", "dragon_notetracks", 12000, n_bits, "counter", & function_47d133a9, 0, 0);
-  clientfield::register("toplayer", "dragon_fire_burn_tell", 12000, 3, "int", & function_2d57594b, 0, 0);
-  clientfield::register("world", "dragon_hazard_fx_anim_init", 12000, 1, "int", & function_b4311e07, 0, 0);
-  clientfield::register("world", "dragon_hazard_fountain", 12000, 1, "int", & function_50d62870, 0, 0);
-  clientfield::register("world", "dragon_hazard_library", 12000, 1, "counter", & function_6865d0d5, 0, 0);
-  clientfield::register("toplayer", "dragon_transportation_exploders", 12000, 1, "int", & dragon_transportation_exploders, 0, 0);
-  clientfield::register("allplayers", "dragon_transport_eject", 12000, 1, "int", & function_9f54e892, 0, 0);
-  clientfield::register("world", "dragon_boss_guts", 12000, 2, "int", & dragon_boss_guts, 0, 0);
+  clientfield::register("scriptmover", "dragon_notetracks", 12000, n_bits, "counter", &function_47d133a9, 0, 0);
+  clientfield::register("toplayer", "dragon_fire_burn_tell", 12000, 3, "int", &function_2d57594b, 0, 0);
+  clientfield::register("world", "dragon_hazard_fx_anim_init", 12000, 1, "int", &function_b4311e07, 0, 0);
+  clientfield::register("world", "dragon_hazard_fountain", 12000, 1, "int", &function_50d62870, 0, 0);
+  clientfield::register("world", "dragon_hazard_library", 12000, 1, "counter", &function_6865d0d5, 0, 0);
+  clientfield::register("toplayer", "dragon_transportation_exploders", 12000, 1, "int", &dragon_transportation_exploders, 0, 0);
+  clientfield::register("allplayers", "dragon_transport_eject", 12000, 1, "int", &function_9f54e892, 0, 0);
+  clientfield::register("world", "dragon_boss_guts", 12000, 2, "int", &dragon_boss_guts, 0, 0);
 }
 
 function function_d28f5c87(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -348,7 +348,7 @@ function function_6865d0d5(localclientnum, oldval, newval, bnewent, binitialsnap
   if(newval) {
     if(isDefined(level.var_a4d6e1f1) && level.var_a4d6e1f1) {
       level.var_a4d6e1f1 = undefined;
-      level scene::add_scene_func("p7_fxanim_zm_stal_dragon_hazard_library_banner_01_bundle", & function_ae0e995e, "play");
+      level scene::add_scene_func("p7_fxanim_zm_stal_dragon_hazard_library_banner_01_bundle", &function_ae0e995e, "play");
     }
     var_f8efe776 = getEntArray(localclientnum, "library_banner_01", "targetname");
     foreach(var_f558224f in var_f8efe776) {

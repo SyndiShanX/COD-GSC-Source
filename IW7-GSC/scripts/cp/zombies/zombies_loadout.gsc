@@ -712,7 +712,7 @@ func_F53D() {
 
     self.suit = "zom_suit";
     self allowdoublejump(0);
-    self allowslide(var_0B & var_02);
+    self allowslide(var_0B &var_02);
     self allowwallrun(0);
     self allowdodge(0);
     if(isDefined(var_08) && isDefined(var_09)) {
@@ -730,7 +730,7 @@ func_F53D() {
       thread scripts\cp\powers\coop_powers::givepower(var_10, "primary", undefined, undefined, undefined, 0, 1);
     }
 
-    _allowbattleslide(var_0B & var_03);
+    _allowbattleslide(var_0B &var_03);
     self energy_setmax(0, var_0D);
     self goal_radius(0, var_0D);
     self goalflag(0, var_0E);

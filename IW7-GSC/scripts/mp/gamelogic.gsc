@@ -20,7 +20,7 @@ func_C530(var_00) {
   level.func_72F1 = 0;
   var_01 = 20.0;
   matchforfeittimer(var_01);
-  var_02 = & "";
+  var_02 = &"";
 
   if(!isDefined(var_00)) {
     var_02 = game["end_reason"]["players_forfeited"];
@@ -77,11 +77,11 @@ matchforfeittimer(var_00) {
 
 func_5007(var_00) {
   if(var_00 == "allies") {
-    iprintln( & "MP_FACTION_UNSA_ELIMINATED");
+    iprintln(&"MP_FACTION_UNSA_ELIMINATED");
     logstring("team eliminated, win: opfor, allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
     thread endgame("axis", game["end_reason"]["allies_eliminated"]);
   } else if(var_00 == "axis") {
-    iprintln( & "MP_FACTION_SDF_ELIMINATED");
+    iprintln(&"MP_FACTION_SDF_ELIMINATED");
     logstring("team eliminated, win: allies, allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
     thread endgame("allies", game["end_reason"]["axis_eliminated"]);
   } else {
@@ -1549,21 +1549,21 @@ callback_startgametype() {
 
     game["allies"] = "UNSA";
     game["axis"] = "SDF";
-    game["strings"]["press_to_spawn"] = & "PLATFORM_PRESS_TO_SPAWN";
-    game["strings"]["spawn_next_round"] = & "MP_SPAWN_NEXT_ROUND";
-    game["strings"]["spawn_flag_wait"] = & "MP_SPAWN_FLAG_WAIT";
-    game["strings"]["spawn_point_capture_wait"] = & "MP_SPAWN_POINT_CAPTURE_WAIT";
-    game["strings"]["spawn_tag_wait"] = & "MP_SPAWN_TAG_WAIT";
-    game["strings"]["waiting_to_spawn"] = & "MP_WAITING_TO_SPAWN";
-    game["strings"]["waiting_to_safespawn"] = & "MP_WAITING_TO_SAFESPAWN";
-    game["strings"]["match_starting"] = & "MP_MATCH_STARTING";
-    game["strings"]["change_class"] = & "MP_CHANGE_CLASS_NEXT_SPAWN";
-    game["strings"]["change_rig"] = & "LUA_MENU_MP_CHANGE_RIG_NEXT_SPAWN";
-    game["strings"]["last_stand"] = & "MPUI_LAST_STAND";
-    game["strings"]["final_stand"] = & "MPUI_FINAL_STAND";
-    game["strings"]["c4_death"] = & "MPUI_C4_DEATH";
-    game["strings"]["must_select_loadout_to_spawn"] = & "MP_INGAME_ONLY_SELECT_LOADOUT_TO_SPAWN";
-    game["strings"]["cowards_way"] = & "PLATFORM_COWARDS_WAY_OUT";
+    game["strings"]["press_to_spawn"] = &"PLATFORM_PRESS_TO_SPAWN";
+    game["strings"]["spawn_next_round"] = &"MP_SPAWN_NEXT_ROUND";
+    game["strings"]["spawn_flag_wait"] = &"MP_SPAWN_FLAG_WAIT";
+    game["strings"]["spawn_point_capture_wait"] = &"MP_SPAWN_POINT_CAPTURE_WAIT";
+    game["strings"]["spawn_tag_wait"] = &"MP_SPAWN_TAG_WAIT";
+    game["strings"]["waiting_to_spawn"] = &"MP_WAITING_TO_SPAWN";
+    game["strings"]["waiting_to_safespawn"] = &"MP_WAITING_TO_SAFESPAWN";
+    game["strings"]["match_starting"] = &"MP_MATCH_STARTING";
+    game["strings"]["change_class"] = &"MP_CHANGE_CLASS_NEXT_SPAWN";
+    game["strings"]["change_rig"] = &"LUA_MENU_MP_CHANGE_RIG_NEXT_SPAWN";
+    game["strings"]["last_stand"] = &"MPUI_LAST_STAND";
+    game["strings"]["final_stand"] = &"MPUI_FINAL_STAND";
+    game["strings"]["c4_death"] = &"MPUI_C4_DEATH";
+    game["strings"]["must_select_loadout_to_spawn"] = &"MP_INGAME_ONLY_SELECT_LOADOUT_TO_SPAWN";
+    game["strings"]["cowards_way"] = &"PLATFORM_COWARDS_WAY_OUT";
     game["colors"]["black"] = (0, 0, 0);
     game["colors"]["white"] = (1, 1, 1);
     game["colors"]["grey"] = (0.5, 0.5, 0.5);

@@ -29,14 +29,14 @@
 #namespace zm_island_side_ee_spore_hallucinations;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_side_ee_spore_hallucinations", & __init__, undefined, undefined);
+  system::register("zm_island_side_ee_spore_hallucinations", &__init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("toplayer", "hallucinate_bloody_walls", 9000, 1, "int");
   clientfield::register("toplayer", "hallucinate_spooky_sounds", 9000, 1, "int");
-  callback::on_spawned( & on_player_spawned);
-  callback::on_connect( & on_player_connected);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_connect(&on_player_connected);
   level.var_40e8eaa5 = [];
   level.var_40e8eaa5["bloody_walls"] = getent("vol_hallucinate_bloody_walls", "targetname");
   level.var_40e8eaa5["corpses"] = getent("vol_hallucinate_corpses", "targetname");
@@ -137,7 +137,7 @@ function hallucinate_spooky_sounds(b_on = 1) {
 }
 
 function function_c6d55b0d() {
-  zm_devgui::add_custom_devgui_callback( & function_4c6daca1);
+  zm_devgui::add_custom_devgui_callback(&function_4c6daca1);
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");

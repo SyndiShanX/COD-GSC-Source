@@ -41,7 +41,7 @@ function speed_test() {
   while(true) {
     self waittill("trigger", player);
     if(isplayer(player)) {
-      self thread util::trigger_thread(player, & player_on_trigger, & player_off_trigger);
+      self thread util::trigger_thread(player, &player_on_trigger, &player_off_trigger);
     }
     wait(0.05);
   }

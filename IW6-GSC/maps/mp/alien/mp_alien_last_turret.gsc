@@ -73,7 +73,7 @@ remote_turret_monitoruse() {
       continue;
     }
     if(var_2 maps\mp\alien\_utility::is_holding_deployable()) {
-      var_2 maps\mp\_utility::setlowermessage("cant_buy", & "ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
+      var_2 maps\mp\_utility::setlowermessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HOLDING", 3);
       continue;
     }
 
@@ -90,12 +90,12 @@ remote_turret_monitoruse() {
       continue;
     }
     if(var_0.overloaded) {
-      var_2 maps\mp\_utility::setlowermessage("cant_buy", & "MP_ALIEN_LAST_TURRET_OFFLINE", 3);
+      var_2 maps\mp\_utility::setlowermessage("cant_buy", &"MP_ALIEN_LAST_TURRET_OFFLINE", 3);
       continue;
     }
 
     if(var_0.reloading) {
-      var_2 maps\mp\_utility::setlowermessage("cant_buy", & "MP_ALIEN_LAST_TURRET_RELOADING", 3);
+      var_2 maps\mp\_utility::setlowermessage("cant_buy", &"MP_ALIEN_LAST_TURRET_RELOADING", 3);
       continue;
     }
 
@@ -118,7 +118,7 @@ remote_turret_monitoruse() {
         var_0.owner = var_2;
         maps\mp\alien\_outline_proto::remove_from_outline_watch_list(self.outline_model);
       } else
-        var_2 maps\mp\_utility::setlowermessage("no_money", & "ALIEN_COLLECTIBLES_NO_MONEY", 3);
+        var_2 maps\mp\_utility::setlowermessage("no_money", &"ALIEN_COLLECTIBLES_NO_MONEY", 3);
 
       continue;
     }
@@ -220,7 +220,7 @@ move_player_camera_to_turret(var_0) {
   var_0 setclientomnvar("ui_alien_turret_overheat", 0);
   thread turret_overheat_monitor(var_0);
   thread turret_cooldown_monitor();
-  var_0 maps\mp\_utility::setlowermessage("disengage_turret", & "ALIEN_COLLECTIBLES_DISENGAGE_TURRET", 4);
+  var_0 maps\mp\_utility::setlowermessage("disengage_turret", &"ALIEN_COLLECTIBLES_DISENGAGE_TURRET", 4);
   var_0 add_reticle_to_player_view();
 }
 
@@ -303,7 +303,7 @@ wait_for_turret_to_spin_up() {
 wait_for_player_to_dismount_remote_turret() {
   self endon("death");
   self endon("disconnect");
-  maps\mp\_utility::setlowermessage("disengage_turret", & "ALIEN_COLLECTIBLES_DISENGAGE_TURRET", 0);
+  maps\mp\_utility::setlowermessage("disengage_turret", &"ALIEN_COLLECTIBLES_DISENGAGE_TURRET", 0);
 
   while(maps\mp\_utility::isusingremote())
     wait 0.5;

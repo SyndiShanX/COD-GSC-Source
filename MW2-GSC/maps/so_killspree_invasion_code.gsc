@@ -761,7 +761,7 @@ hud_create_kill_counter() {
     thread hud_create_p1_counter_nodraw();
   }
 
-  hudelem = so_create_hud_item(yline, so_hud_ypos(), & "SO_KILLSPREE_INVASION_HUD_REMAINING", self);
+  hudelem = so_create_hud_item(yline, so_hud_ypos(), &"SO_KILLSPREE_INVASION_HUD_REMAINING", self);
   hudelem_score = so_create_hud_item(yline, so_hud_ypos(), undefined, self);
   hudelem_score.alignx = "left";
 
@@ -801,7 +801,7 @@ hud_create_kill_counter() {
 hud_create_p1_counter() {
   level endon("special_op_failed");
 
-  hudelem = so_create_hud_item(4, so_hud_ypos(), & "SO_KILLSPREE_INVASION_PLAYER_LINE", self);
+  hudelem = so_create_hud_item(4, so_hud_ypos(), &"SO_KILLSPREE_INVASION_PLAYER_LINE", self);
   hudelem_score = so_create_hud_item(4, so_hud_ypos(), undefined, self);
   hudelem_score.alignx = "left";
   hudelem SetPlayerNameString(level.player);
@@ -845,7 +845,7 @@ hud_create_p1_counter_nodraw() {
 hud_create_p2_counter() {
   level endon("special_op_failed");
 
-  hudelem = so_create_hud_item(5, so_hud_ypos(), & "SO_KILLSPREE_INVASION_PLAYER_LINE", self);
+  hudelem = so_create_hud_item(5, so_hud_ypos(), &"SO_KILLSPREE_INVASION_PLAYER_LINE", self);
   hudelem_score = so_create_hud_item(5, so_hud_ypos(), undefined, self);
   hudelem_score.alignx = "left";
   hudelem SetPlayerNameString(level.player2);
@@ -989,10 +989,10 @@ hud_create_kill_splash(points) {
 
     if(!isDefined(self.hud_kill_combo_total)) {
       self.hud_kill_combo_total = 2;
-      self.hud_kill_combo = hud_create_kill_splash_default(self, & "SO_KILLSPREE_INVASION_SPLASH_COMBO");
+      self.hud_kill_combo = hud_create_kill_splash_default(self, &"SO_KILLSPREE_INVASION_SPLASH_COMBO");
       self.hud_kill_combo.y = self.hud_kill_splash_points.y - 30;
 
-      self.hud_kill_combo_points = hud_create_kill_splash_default(self, & "SO_KILLSPREE_INVASION_SPLASH_BONUS");
+      self.hud_kill_combo_points = hud_create_kill_splash_default(self, &"SO_KILLSPREE_INVASION_SPLASH_BONUS");
       self.hud_kill_combo_points.y = self.hud_kill_splash_points.y + 15;
       self.hud_combo_bonus = 0;
     } else {
@@ -1082,21 +1082,21 @@ hud_splash_destroy() {
 hud_splash_kill_style(points, current_msg) {
   if(points == level.hunter_finish_value) {
     self.solid_kills++;
-    return & "SO_KILLSPREE_INVASION_SCORE_FINISHED";
+    return &"SO_KILLSPREE_INVASION_SCORE_FINISHED";
   }
 
   if(points == level.hunter_kill_value) {
     self.solid_kills++;
-    return & "SO_KILLSPREE_INVASION_SCORE_KILL";
+    return &"SO_KILLSPREE_INVASION_SCORE_KILL";
   }
 
   if(points == level.hunter_brutal_value) {
     self.heartless_kills++;
-    return & "SO_KILLSPREE_INVASION_SCORE_BRUTAL";
+    return &"SO_KILLSPREE_INVASION_SCORE_BRUTAL";
   }
 
   if(points == level.btr_kill_value) {
-    return & "SO_KILLSPREE_INVASION_SCORE_BTR80";
+    return &"SO_KILLSPREE_INVASION_SCORE_BTR80";
   }
 }
 

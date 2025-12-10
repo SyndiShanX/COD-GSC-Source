@@ -201,7 +201,7 @@ function function_3118ca4d(player) {
   self delete();
 }
 
-function function_4dd46e10( & follow_points, num_follow_points) {
+function function_4dd46e10(&follow_points, num_follow_points) {
   for(i = 0; i < num_follow_points; i++) {
     follow_points[i] = self.origin;
   }

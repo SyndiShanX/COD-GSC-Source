@@ -14,7 +14,7 @@ init() {
     return;
   }
   registerclientfield("toplayer", "gasmaskoverlay", 16000, 1, "int");
-  maps\mp\zombies\_zm_equipment::register_equipment("equip_gasmask_zm", & "ZOMBIE_EQUIP_GASMASK_PICKUP_HINT_STRING", & "ZOMBIE_EQUIP_GASMASK_HOWTO", undefined, "gasmask", ::gasmask_activation_watcher_thread);
+  maps\mp\zombies\_zm_equipment::register_equipment("equip_gasmask_zm", &"ZOMBIE_EQUIP_GASMASK_PICKUP_HINT_STRING", &"ZOMBIE_EQUIP_GASMASK_HOWTO", undefined, "gasmask", ::gasmask_activation_watcher_thread);
   level.deathcard_spawn_func = ::remove_gasmask_on_player_bleedout;
   precacheitem("lower_equip_gasmask_zm");
   onplayerconnect_callback(::gasmask_on_player_connect);

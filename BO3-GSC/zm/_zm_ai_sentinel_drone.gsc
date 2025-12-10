@@ -36,7 +36,7 @@
 #namespace zm_ai_sentinel_drone;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_sentinel_drone", & __init__, & __main__, undefined);
+  system::register("zm_ai_sentinel_drone", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -44,7 +44,7 @@ function __init__() {
   level.var_fef7211a = 0;
   level.var_e476eac3 = 0;
   level.var_d6d4b6f9 = 2500;
-  zm_score::register_score_event("death_sentinel", & function_c35ddec4);
+  zm_score::register_score_event("death_sentinel", &function_c35ddec4);
   level flag::init("sentinel_round");
   level flag::init("sentinel_round_in_progress");
   level flag::init("sentinel_rez_in_progress");
@@ -60,7 +60,7 @@ function __init__() {
 function __main__() {
   execdevgui("");
   thread function_5715a7cc();
-  visionset_mgr::register_info("visionset", "zm_sentinel_round_visionset", 12000, 22, 31, 0, & visionset_mgr::ramp_in_out_thread, 0);
+  visionset_mgr::register_info("visionset", "zm_sentinel_round_visionset", 12000, 22, 31, 0, &visionset_mgr::ramp_in_out_thread, 0);
 }
 
 function register_clientfields() {
@@ -88,7 +88,7 @@ function function_2f7416e5() {
   level.var_a657e360.script_noteworthy = "riser_location";
   level.var_a657e360.script_string = "find_flesh";
   if(!isDefined(level.var_c7979e0a)) {
-    level.var_c7979e0a = & function_e38b964d;
+    level.var_c7979e0a = &function_e38b964d;
   }
   level thread[[level.var_c7979e0a]]();
 }
@@ -96,7 +96,7 @@ function function_2f7416e5() {
 function function_1e5d8e69() {
   level.var_fda4b3f3 = getspawnerarray("zombie_sentinel_spawner", "script_noteworthy");
   level.var_34fd66c3 = getspawnerarray("zombie_sentinel_zombie_spawner", "script_noteworthy");
-  array::thread_all(level.var_34fd66c3, & spawner::add_spawn_function, & zm_spawner::zombie_spawn_init);
+  array::thread_all(level.var_34fd66c3, &spawner::add_spawn_function, &zm_spawner::zombie_spawn_init);
   if(level.var_fda4b3f3.size == 0) {
     assertmsg("");
     return;
@@ -104,7 +104,7 @@ function function_1e5d8e69() {
   foreach(var_5631b793 in level.var_fda4b3f3) {
     var_5631b793.is_enabled = 1;
     var_5631b793.script_forcespawn = 1;
-    var_5631b793 spawner::add_spawn_function( & function_3b40bf32);
+    var_5631b793 spawner::add_spawn_function(&function_3b40bf32);
   }
 }
 
@@ -126,8 +126,8 @@ function function_e38b964d() {
       old_spawn_func = level.round_spawn_func;
       old_wait_func = level.round_wait_func;
       function_71f8e359();
-      level.round_spawn_func = & function_7766fb04;
-      level.round_wait_func = & function_989acb59;
+      level.round_spawn_func = &function_7766fb04;
+      level.round_wait_func = &function_989acb59;
       if(isDefined(level.var_a1ca5313)) {
         level.var_a78effc7 = [
           [level.var_a1ca5313]
@@ -178,7 +178,7 @@ function function_7766fb04() {
   if(level.intermission) {
     return;
   }
-  array::thread_all(level.players, & function_6a866be7);
+  array::thread_all(level.players, &function_6a866be7);
   function_e930da45();
   level.zombie_total = function_e9be6289();
   if(getdvarstring("") != "" && getdvarint("") > 0) {
@@ -211,7 +211,7 @@ function function_7766fb04() {
 function function_fded8158(spawner, s_spot) {
   var_663b2442 = zombie_utility::spawn_zombie(level.var_fda4b3f3[0], "sentinel", s_spot);
   if(isDefined(var_663b2442)) {
-    var_663b2442.check_point_in_enabled_zone = & zm_utility::check_point_in_playable_area;
+    var_663b2442.check_point_in_enabled_zone = &zm_utility::check_point_in_playable_area;
   }
   return var_663b2442;
 }
@@ -262,8 +262,8 @@ function function_23a30f49(var_c94972aa = 0) {
   }
   ai = function_fded8158(level.var_fda4b3f3[0]);
   if(isDefined(ai)) {
-    ai.nuke_damage_func = & function_306f9403;
-    ai.instakill_func = & function_306f9403;
+    ai.nuke_damage_func = &function_306f9403;
+    ai.instakill_func = &function_306f9403;
     ai.s_spawn_loc = s_spawn_loc;
     ai thread function_b27530eb(s_spawn_loc.origin);
     if(var_c94972aa) {
@@ -287,7 +287,7 @@ function function_b27530eb(v_pos) {
   self linkto(e_origin);
   e_origin moveto(var_92968756, 3);
   e_origin playSound("zmb_sentinel_intro_spawn");
-  e_origin util::delay(3, undefined, & function_e6bf0279);
+  e_origin util::delay(3, undefined, &function_e6bf0279);
   self clientfield::set("sentinel_spawn_fx", 1);
   wait(3);
   self clientfield::set("sentinel_spawn_fx", 0);
@@ -759,8 +759,8 @@ function function_3b40bf32() {
   self.missinglegs = 0;
   self.team = level.zombie_team;
   self.sword_kill_power = 4;
-  self.sentinel_electrifyzombie = & function_c72cf6e1;
-  self.sentinel_getnearestzombie = & function_49b3a408;
+  self.sentinel_electrifyzombie = &function_c72cf6e1;
+  self.sentinel_getnearestzombie = &function_49b3a408;
   if(isDefined(level.var_97596556)) {
     self.func_custom_cleanup_check = level.var_97596556;
   }
@@ -979,7 +979,7 @@ function function_5715a7cc() {
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
-  zm_devgui::add_custom_devgui_callback( & function_c630bba3);
+  zm_devgui::add_custom_devgui_callback(&function_c630bba3);
 }
 
 function function_c630bba3(cmd) {

@@ -60,8 +60,8 @@ bombzone_setupobjective(param_00) {
   var_01.trigger setuseprioritymax();
   var_01 scripts\mp\gameobjects::setusetime(level.planttime);
   var_01 scripts\mp\gameobjects::setwaitweaponchangeonuse(0);
-  var_01 scripts\mp\gameobjects::setusetext( & "MP_PLANTING_EXPLOSIVE");
-  var_01 scripts\mp\gameobjects::setusehinttext( & "PLATFORM_HOLD_TO_PLANT_EXPLOSIVES");
+  var_01 scripts\mp\gameobjects::setusetext(&"MP_PLANTING_EXPLOSIVE");
+  var_01 scripts\mp\gameobjects::setusehinttext(&"PLATFORM_HOLD_TO_PLANT_EXPLOSIVES");
   if(!level.multibomb) {
     var_01 scripts\mp\gameobjects::setkeyobject(level.sdbomb);
   }
@@ -281,7 +281,7 @@ bombzone_onusedefuseobject(param_00) {
 
   scripts\mp\gameobjects::disableobject();
   if(!level.hardcoremode) {
-    iprintln( & "MP_EXPLOSIVES_DEFUSED_BY", param_00);
+    iprintln(&"MP_EXPLOSIVES_DEFUSED_BY", param_00);
   }
 
   scripts\mp\utility::statusdialog("enemy_bomb_defused", level.otherteam[param_00.team], 1);
@@ -388,8 +388,8 @@ bombzone_onbombplanted(param_00, param_01) {
 
   var_07 scripts\mp\gameobjects::setusetime(level.defusetime);
   var_07 scripts\mp\gameobjects::setwaitweaponchangeonuse(0);
-  var_07 scripts\mp\gameobjects::setusetext( & "MP_DEFUSING_EXPLOSIVE");
-  var_07 scripts\mp\gameobjects::setusehinttext( & "PLATFORM_HOLD_TO_DEFUSE_EXPLOSIVES");
+  var_07 scripts\mp\gameobjects::setusetext(&"MP_DEFUSING_EXPLOSIVE");
+  var_07 scripts\mp\gameobjects::setusehinttext(&"PLATFORM_HOLD_TO_DEFUSE_EXPLOSIVES");
   var_07 scripts\mp\gameobjects::setvisibleteam("any");
   var_07 scripts\mp\gameobjects::set2dicon("friendly", "waypoint_defuse" + var_03);
   var_07 scripts\mp\gameobjects::set2dicon("enemy", "waypoint_defend" + var_03);

@@ -13,14 +13,14 @@
 #namespace namespace_724be82b;
 
 autoexec __init__system__() {
-  system::register(#"hash_262f628396f811df", & __init__, undefined, undefined);
+  system::register(#"hash_262f628396f811df", &__init__, undefined, undefined);
 }
 
 __init__() {
   if(!zm_trial::is_trial_mode()) {
     return;
   }
-  zm_trial::register_challenge(#"teleporter_timeout", & on_begin, & on_end);
+  zm_trial::register_challenge(#"teleporter_timeout", &on_begin, &on_end);
 }
 
 private on_begin(timeout_time, var_ee246467) {

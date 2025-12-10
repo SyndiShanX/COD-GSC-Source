@@ -30,12 +30,12 @@ tryusereconsquadmate(var_00, var_01) {
 
 usesquadmate(var_00) {
   if(scripts\mp\agents\agent_utility::getnumactiveagents("squadmate") >= 5) {
-    self iprintlnbold( & "KILLSTREAKS_AGENT_MAX");
+    self iprintlnbold(&"KILLSTREAKS_AGENT_MAX");
     return 0;
   }
 
   if(scripts\mp\agents\agent_utility::getnumownedactiveagents(self) >= 2) {
-    self iprintlnbold( & "KILLSTREAKS_AGENT_MAX");
+    self iprintlnbold(&"KILLSTREAKS_AGENT_MAX");
     return 0;
   }
 
@@ -52,7 +52,7 @@ usesquadmate(var_00) {
   var_04 = scripts\mp\agents\agents::add_humanoid_agent("squadmate", self.team, undefined, var_02, var_03, self, 0, 0, "veteran");
 
   if(!isDefined(var_04)) {
-    self iprintlnbold( & "KILLSTREAKS_AGENT_MAX");
+    self iprintlnbold(&"KILLSTREAKS_AGENT_MAX");
     return 0;
   }
 

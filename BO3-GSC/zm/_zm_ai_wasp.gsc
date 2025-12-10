@@ -47,9 +47,9 @@ function init() {
   clientfield::register("toplayer", "parasite_round_fx", 1, 1, "counter");
   clientfield::register("toplayer", "parasite_round_ring_fx", 1, 1, "counter");
   clientfield::register("world", "toggle_on_parasite_fog", 1, 2, "int");
-  visionset_mgr::register_info("visionset", "zm_wasp_round_visionset", 1, level.vsmgr_prio_overlay_zm_wasp_round, 31, 0, & visionset_mgr::ramp_in_out_thread, 0);
+  visionset_mgr::register_info("visionset", "zm_wasp_round_visionset", 1, level.vsmgr_prio_overlay_zm_wasp_round, 31, 0, &visionset_mgr::ramp_in_out_thread, 0);
   level._effect["lightning_wasp_spawn"] = "zombie/fx_parasite_spawn_buildup_zod_zmb";
-  callback::on_connect( & watch_player_melee_events);
+  callback::on_connect(&watch_player_melee_events);
   level thread aat::register_immunity("zm_aat_blast_furnace", "parasite", 1, 1, 1);
   level thread aat::register_immunity("zm_aat_dead_wire", "parasite", 1, 1, 1);
   level thread aat::register_immunity("zm_aat_fire_works", "parasite", 1, 1, 1);
@@ -61,7 +61,7 @@ function init() {
 function enable_wasp_rounds() {
   level.wasp_rounds_enabled = 1;
   if(!isDefined(level.wasp_round_track_override)) {
-    level.wasp_round_track_override = & wasp_round_tracker;
+    level.wasp_round_track_override = &wasp_round_tracker;
   }
   level thread[[level.wasp_round_track_override]]();
 }
@@ -83,7 +83,7 @@ function wasp_spawner_init() {
   }
   assert(level.wasp_spawners.size > 0);
   level.wasp_health = 100;
-  vehicle::add_main_callback("spawner_bo3_parasite_enemy_tool", & wasp_init);
+  vehicle::add_main_callback("spawner_bo3_parasite_enemy_tool", &wasp_init);
 }
 
 function get_current_wasp_count() {
@@ -112,7 +112,7 @@ function wasp_round_spawning() {
   if(level.intermission) {
     return;
   }
-  array::thread_all(level.players, & play_wasp_round);
+  array::thread_all(level.players, &play_wasp_round);
   n_wave_count = 10;
   if(level.players.size > 1) {
     n_wave_count = n_wave_count * (level.players.size * 0.75);
@@ -486,8 +486,8 @@ function wasp_round_tracker() {
       old_spawn_func = level.round_spawn_func;
       old_wait_func = level.round_wait_func;
       wasp_round_start();
-      level.round_spawn_func = & wasp_round_spawning;
-      level.round_wait_func = & wasp_round_wait_func;
+      level.round_spawn_func = &wasp_round_spawning;
+      level.round_wait_func = &wasp_round_wait_func;
       if(isDefined(level.zm_custom_get_next_wasp_round)) {
         level.next_wasp_round = [
           [level.zm_custom_get_next_wasp_round]
@@ -595,7 +595,7 @@ function wasp_init() {
   self thread wasp_cleanup_failsafe();
   level thread zm_spawner::zombie_death_event(self);
   self thread zm_spawner::enemy_death_detection();
-  self.thundergun_knockdown_func = & wasp_thundergun_knockdown;
+  self.thundergun_knockdown_func = &wasp_thundergun_knockdown;
   self zm_spawner::zombie_history(("zombie_wasp_spawn_init -> Spawned = ") + self.origin);
   if(isDefined(level.achievement_monitor_func)) {
     self[[level.achievement_monitor_func]]();

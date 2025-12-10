@@ -221,7 +221,7 @@ objectives() {
       objective_number = 0;
       end_position = getent("rallypoint", "targetname");
       obj_position = getent(end_position.target, "targetname");
-      objective_add(objective_number, "current", & "BONEYARD_OBJ_RALLYPOINT", obj_position.origin);
+      objective_add(objective_number, "current", &"BONEYARD_OBJ_RALLYPOINT", obj_position.origin);
       level thread lerp_objective_pos(objective_number, obj_position, end_position);
     case "flyby":
     case "higround":
@@ -231,8 +231,8 @@ objectives() {
       Objective_State(objective_number, "done");
       objective_number = 1;
       obj_position = getent("rallypoint", "targetname");
-      objective_add(objective_number, "current", & "BONEYARD_OBJ_RIDE", obj_position.origin);
-      Objective_SetPointerTextOverride(objective_number, & "BONEYARD_OBJ_RIDE_ICON");
+      objective_add(objective_number, "current", &"BONEYARD_OBJ_RIDE", obj_position.origin);
+      Objective_SetPointerTextOverride(objective_number, &"BONEYARD_OBJ_RIDE_ICON");
       //		flag_wait( "uaz_drive" );
       Objective_OnEntity(objective_number, level.uaz, (-48, -32, 16));
 
@@ -244,7 +244,7 @@ objectives() {
       Objective_State(objective_number, "done");
       objective_number = 2;
       obj_position = level.c130;
-      objective_add(objective_number, "current", & "BONEYARD_OBJ_C130", obj_position.origin);
+      objective_add(objective_number, "current", &"BONEYARD_OBJ_C130", obj_position.origin);
       setsaveddvar("compass", 0);
 
       thread sp_objective_onentity(objective_number, level.c130);
@@ -943,7 +943,7 @@ start_higround() {
 
   objective_number = 0;
   obj_position = getent("rallypoint", "targetname");
-  objective_add(objective_number, "current", & "BONEYARD_OBJ_RALLYPOINT", obj_position.origin);
+  objective_add(objective_number, "current", &"BONEYARD_OBJ_RALLYPOINT", obj_position.origin);
 
   level.player start_at(GetEnt("start_higround_player", "targetname"));
 
@@ -1657,7 +1657,7 @@ ride_uaz_failed_mount() {
   level endon("uaz_mounted");
   flag_wait("uaz_mount_end");
 
-  setDvar("ui_deadquote", & "BONEYARD_DEADQUOTE_MOUNT");
+  setDvar("ui_deadquote", &"BONEYARD_DEADQUOTE_MOUNT");
   missionfailedwrapper();
 }
 
@@ -1707,7 +1707,7 @@ ride_uaz_takeoff_missed() {
 
   flag_wait("c130_takeoff_missed");
 
-  setDvar("ui_deadquote", & "BONEYARD_DEADQUOTE_TAKEOFF");
+  setDvar("ui_deadquote", &"BONEYARD_DEADQUOTE_TAKEOFF");
   missionfailedwrapper();
 }
 

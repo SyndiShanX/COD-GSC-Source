@@ -69,7 +69,7 @@ init_spawns() {
 initkillstreak() {
   if(maps\mp\gametypes\_tweakables::gettweakablevalue("killstreak", "allowdogs")) {
     maps\mp\killstreaks\_killstreaks::registerkillstreak("dogs_mp", "dogs_mp", "killstreak_dogs", "dogs_used", ::usekillstreakdogs, 1);
-    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("dogs_mp", & "KILLSTREAK_EARNED_DOGS", & "KILLSTREAK_DOGS_NOT_AVAILABLE", & "KILLSTREAK_DOGS_INBOUND");
+    maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("dogs_mp", &"KILLSTREAK_EARNED_DOGS", &"KILLSTREAK_DOGS_NOT_AVAILABLE", &"KILLSTREAK_DOGS_INBOUND");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("dogs_mp", "mpl_killstreak_dogs", "kls_dogs_used", "", "kls_dogs_enemy", "", "kls_dogs_ready");
     maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("dogs_mp", "scr_givedogs");
     maps\mp\killstreaks\_killstreaks::setkillstreakteamkillpenaltyscale("dogs_mp", 0.0);

@@ -109,7 +109,7 @@ func_109C2(param_00) {
   param_00 endon("disconnect");
   param_00 endon("death");
   self.trigger setcursorhint("HINT_NOICON");
-  self.trigger sethintstring( & "MP_PICKUP_SPEED_STRIP");
+  self.trigger sethintstring(&"MP_PICKUP_SPEED_STRIP");
   self.trigger scripts\mp\utility::setselfusable(param_00);
   self.trigger thread scripts\mp\utility::notusableforjoiningplayers(param_00);
   for(;;) {

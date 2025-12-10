@@ -22,7 +22,7 @@
 #namespace zm_stalingrad_timer;
 
 function autoexec __init__sytem__() {
-  system::register("zm_stalingrad_timer", & __init__, & __main__, undefined);
+  system::register("zm_stalingrad_timer", &__init__, &__main__, undefined);
 }
 
 function __init__() {}
@@ -34,7 +34,7 @@ function __main__() {
   foreach(s_wallbuy in level._spawned_wallbuys) {
     if(s_wallbuy.zombie_weapon_upgrade == "melee_wrench") {
       level.var_b9f3bf28 = s_wallbuy;
-      level.var_b9f3bf28.trigger_stub.prompt_and_visibility_func = & function_6ac3689a;
+      level.var_b9f3bf28.trigger_stub.prompt_and_visibility_func = &function_6ac3689a;
       break;
     }
   }
@@ -211,7 +211,7 @@ function function_cc8ae246(str_reward) {
     case 50: {
       str_weapon = "melee_daisho";
       var_31fcdfe3 = 5;
-      level.var_b9f3bf28.var_5cf530a8 = & "ZM_STALINGRAD_EE_WONDERWEAPON";
+      level.var_b9f3bf28.var_5cf530a8 = &"ZM_STALINGRAD_EE_WONDERWEAPON";
       break;
     }
   }
@@ -250,8 +250,8 @@ function function_3d5b5002() {
   }
   if(level.var_2801f599 < var_ec31aba8) {
     level.perk_purchase_limit = level._custom_perks.size;
-    callback::on_spawned( & on_player_spawned);
-    array::thread_all(level.players, & function_959f59b8);
+    callback::on_spawned(&on_player_spawned);
+    array::thread_all(level.players, &function_959f59b8);
   }
 }
 

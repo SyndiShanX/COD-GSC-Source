@@ -21,7 +21,7 @@ main() {
   so_chopper_invasion_init_flags();
   so_chopper_invasion_precache();
 
-  add_hint_string("ads_slowdown", & "SO_CHOPPER_INVASION_HINT_ADS_SLOWDOWN", ::so_ads_slowdown_hint);
+  add_hint_string("ads_slowdown", &"SO_CHOPPER_INVASION_HINT_ADS_SLOWDOWN", ::so_ads_slowdown_hint);
 
   so_delete_all_by_type(::type_spawn_trigger, ::type_spawners, ::type_killspawner_trigger, ::type_goalvolume, ::custom_flag_trigger);
   delete_turrets();
@@ -74,8 +74,8 @@ precache_strings() {
   PrecacheString(&"SO_CHOPPER_INVASION_DEADQUOTE_HINT2");
 
   quotes = [];
-  quotes[quotes.size] = & "SO_CHOPPER_INVASION_DEADQUOTE_HINT1";
-  quotes[quotes.size] = & "SO_CHOPPER_INVASION_DEADQUOTE_HINT2";
+  quotes[quotes.size] = &"SO_CHOPPER_INVASION_DEADQUOTE_HINT1";
+  quotes[quotes.size] = &"SO_CHOPPER_INVASION_DEADQUOTE_HINT2";
   so_include_deadquote_array(quotes);
 }
 
@@ -305,7 +305,7 @@ so_init_players() {
 so_chopper_invasion_objectives() {
   ref = getstruct("so_end_of_level", "targetname");
   // Link up with your partner at the extraction point.
-  Objective_Add(0, "current", & "SO_CHOPPER_INVASION_OBJ_REGULAR", groundpos(ref.origin));
+  Objective_Add(0, "current", &"SO_CHOPPER_INVASION_OBJ_REGULAR", groundpos(ref.origin));
 }
 
 empty() {}
@@ -635,7 +635,7 @@ end_go_to_diner_thread() {
 
 end_lookat() {
   level.chopper chopper_default_pitch_roll();
-  Objective_String(0, & "SO_CHOPPER_INVASION_OBJ_FINAL");
+  Objective_String(0, &"SO_CHOPPER_INVASION_OBJ_FINAL");
   Objective_OnEntity(0, level.chopper);
 
   // This is done when put on the path

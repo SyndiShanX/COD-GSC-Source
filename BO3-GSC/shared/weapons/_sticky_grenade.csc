@@ -11,12 +11,12 @@
 #namespace sticky_grenade;
 
 function autoexec __init__sytem__() {
-  system::register("sticky_grenade", & __init__, undefined, undefined);
+  system::register("sticky_grenade", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level._effect["grenade_light"] = "weapon/fx_equip_light_os";
-  callback::add_weapon_type("sticky_grenade", & spawned);
+  callback::add_weapon_type("sticky_grenade", &spawned);
 }
 
 function spawned(localclientnum) {

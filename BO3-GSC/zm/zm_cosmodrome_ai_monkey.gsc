@@ -15,7 +15,7 @@
 #namespace zm_cosmodrome_ai_monkey;
 
 function init() {
-  level.monkey_zombie_enter_level = & monkey_cosmodrome_enter_level;
+  level.monkey_zombie_enter_level = &monkey_cosmodrome_enter_level;
 }
 
 function monkey_cosmodrome_enter_level() {
@@ -77,7 +77,7 @@ function monkey_lander_get_closest_dest() {
 }
 
 function monkey_cosmodrome_prespawn() {
-  self.lander_death = & monkey_cosmodrome_lander_death;
+  self.lander_death = &monkey_cosmodrome_lander_death;
 }
 
 function monkey_cosmodrome_failsafe() {

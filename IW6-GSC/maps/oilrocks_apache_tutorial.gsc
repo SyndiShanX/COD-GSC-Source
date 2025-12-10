@@ -37,7 +37,7 @@ main() {
 
 objectives() {
   var_0 = maps\_utility::obj("tutorial");
-  objective_add(var_0, "active", & "OILROCKS_OBJ_TUTORIAL");
+  objective_add(var_0, "active", &"OILROCKS_OBJ_TUTORIAL");
   objective_current(var_0);
   common_scripts\utility::flag_wait("FLAG_apache_tut_fly_finished");
   maps\_utility::objective_complete(var_0);

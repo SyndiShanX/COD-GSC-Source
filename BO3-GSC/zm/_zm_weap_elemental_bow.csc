@@ -9,13 +9,13 @@
 #namespace zm_weap_elemental_bow;
 
 function autoexec __init__sytem__() {
-  system::register("_zm_weap_elemental_bow", & __init__, undefined, undefined);
+  system::register("_zm_weap_elemental_bow", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "elemental_bow" + "_ambient_bow_fx", 5000, 1, "int", & function_5b4bf635, 0, 0);
-  clientfield::register("missile", "elemental_bow" + "_arrow_impact_fx", 5000, 1, "int", & function_4e8aa99, 0, 0);
-  clientfield::register("missile", "elemental_bow4" + "_arrow_impact_fx", 5000, 1, "int", & function_bdaa35c, 0, 0);
+  clientfield::register("toplayer", "elemental_bow" + "_ambient_bow_fx", 5000, 1, "int", &function_5b4bf635, 0, 0);
+  clientfield::register("missile", "elemental_bow" + "_arrow_impact_fx", 5000, 1, "int", &function_4e8aa99, 0, 0);
+  clientfield::register("missile", "elemental_bow4" + "_arrow_impact_fx", 5000, 1, "int", &function_bdaa35c, 0, 0);
   level._effect["elemental_bow_ambient_bow"] = "dlc1/zmb_weapon/fx_bow_default_ambient_1p_zmb";
   level._effect["elemental_bow_arrow_impact"] = "dlc1/zmb_weapon/fx_bow_default_impact_zmb";
   level._effect["elemental_bow_arrow_charged_impact"] = "dlc1/zmb_weapon/fx_bow_default_impact_ug_zmb";

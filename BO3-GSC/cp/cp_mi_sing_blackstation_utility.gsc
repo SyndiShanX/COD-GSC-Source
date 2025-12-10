@@ -705,9 +705,9 @@ function water_manager() {
 
 function function_3c57957(t_start, a_e_debris, str_endon) {
   var_e7610d59 = ("p7_fxanim_cp_blackstation_" + t_start.script_string) + "_bundle";
-  level scene::add_scene_func(var_e7610d59, & function_8fbe0681, "play", str_endon, a_e_debris, t_start);
+  level scene::add_scene_func(var_e7610d59, &function_8fbe0681, "play", str_endon, a_e_debris, t_start);
   if(isDefined(a_e_debris)) {
-    array::thread_all(a_e_debris, & function_c1eab89b, t_start);
+    array::thread_all(a_e_debris, &function_c1eab89b, t_start);
   }
   level flag::wait_till("surging_inward");
   while(!level flag::get(str_endon)) {
@@ -1141,7 +1141,7 @@ function create_wave(t_storm) {
   t_wave = getent(e_wave.target, "targetname");
   e_wave playSound("evt_wave_dist");
   t_wave playSound("evt_wave_splash");
-  array::thread_all(getEntArray("wave_fodder", "script_noteworthy"), & enemy_wave_tracker, t_wave, s_wave);
+  array::thread_all(getEntArray("wave_fodder", "script_noteworthy"), &enemy_wave_tracker, t_wave, s_wave);
   foreach(player in level.players) {
     player thread player_wave_trigger_tracker(t_wave);
   }
@@ -1576,7 +1576,7 @@ function function_da77906f(a_ents, str_state) {
 }
 
 function cleanup_ai() {
-  array::run_all(getaiteamarray("axis"), & delete);
+  array::run_all(getaiteamarray("axis"), &delete);
 }
 
 function missile_launcher_equip_hint() {

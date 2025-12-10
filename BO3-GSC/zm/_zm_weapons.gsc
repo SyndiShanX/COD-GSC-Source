@@ -39,8 +39,8 @@ function init() {
   }
   init_weapons();
   init_weapon_upgrade();
-  level._weaponobjects_on_player_connect_override = & weaponobjects_on_player_connect_override;
-  level._zombiemode_check_firesale_loc_valid_func = & default_check_firesale_loc_valid_func;
+  level._weaponobjects_on_player_connect_override = &weaponobjects_on_player_connect_override;
+  level._zombiemode_check_firesale_loc_valid_func = &default_check_firesale_loc_valid_func;
   level.missileentities = [];
   level thread onplayerconnect();
 }
@@ -356,13 +356,13 @@ function weaponobjects_on_player_connect_override_internal() {
 function weaponobjects_on_player_connect_override() {
   add_retrievable_knife_init_name("knife_ballistic");
   add_retrievable_knife_init_name("knife_ballistic_upgraded");
-  callback::on_connect( & weaponobjects_on_player_connect_override_internal);
+  callback::on_connect(&weaponobjects_on_player_connect_override_internal);
 }
 
 function createballisticknifewatcher_zm(weaponname) {
   watcher = self weaponobjects::createuseweaponobjectwatcher(weaponname, self.team);
-  watcher.onspawn = & _zm_weap_ballistic_knife::on_spawn;
-  watcher.onspawnretrievetriggers = & _zm_weap_ballistic_knife::on_spawn_retrieve_trigger;
+  watcher.onspawn = &_zm_weap_ballistic_knife::on_spawn;
+  watcher.onspawnretrievetriggers = &_zm_weap_ballistic_knife::on_spawn_retrieve_trigger;
   watcher.storedifferentobject = 1;
   watcher.headicon = 0;
 }
@@ -394,9 +394,9 @@ function add_zombie_weapon(weapon_name, upgrade_name, hint, cost, weaponvo, weap
   struct.upgrade = upgrade;
   struct.weapon_classname = ("weapon_" + weapon_name) + "_zm";
   if(isDefined(level.weapon_cost_client_filled) && level.weapon_cost_client_filled) {
-    struct.hint = & "ZOMBIE_WEAPONCOSTONLY_CFILL";
+    struct.hint = &"ZOMBIE_WEAPONCOSTONLY_CFILL";
   } else {
-    struct.hint = & "ZOMBIE_WEAPONCOSTONLYFILL";
+    struct.hint = &"ZOMBIE_WEAPONCOSTONLYFILL";
   }
   struct.cost = cost;
   struct.vox = weaponvo;
@@ -686,10 +686,10 @@ function init_spawnable_weapon_upgrade() {
       if(unitrigger_stub.weapon.name == "tazer_knuckles" && isDefined(level.taser_trig_adjustment)) {
         unitrigger_stub.origin = unitrigger_stub.origin + level.taser_trig_adjustment;
       }
-      zm_unitrigger::register_static_unitrigger(unitrigger_stub, & weapon_spawn_think);
+      zm_unitrigger::register_static_unitrigger(unitrigger_stub, &weapon_spawn_think);
     } else {
-      unitrigger_stub.prompt_and_visibility_func = & wall_weapon_update_prompt;
-      zm_unitrigger::register_static_unitrigger(unitrigger_stub, & weapon_spawn_think);
+      unitrigger_stub.prompt_and_visibility_func = &wall_weapon_update_prompt;
+      zm_unitrigger::register_static_unitrigger(unitrigger_stub, &weapon_spawn_think);
     }
     spawn_list[i].trigger_stub = unitrigger_stub;
   }
@@ -763,10 +763,10 @@ function add_dynamic_wallbuy(weapon, wallbuy, pristine) {
       unitrigger_stub.origin = unitrigger_stub.origin + level.taser_trig_adjustment;
     }
     zm_melee_weapon::add_stub(unitrigger_stub, weapon);
-    zm_unitrigger::register_static_unitrigger(unitrigger_stub, & zm_melee_weapon::melee_weapon_think);
+    zm_unitrigger::register_static_unitrigger(unitrigger_stub, &zm_melee_weapon::melee_weapon_think);
   } else {
-    unitrigger_stub.prompt_and_visibility_func = & wall_weapon_update_prompt;
-    zm_unitrigger::register_static_unitrigger(unitrigger_stub, & weapon_spawn_think);
+    unitrigger_stub.prompt_and_visibility_func = &wall_weapon_update_prompt;
+    zm_unitrigger::register_static_unitrigger(unitrigger_stub, &weapon_spawn_think);
   }
   spawned_wallbuy.trigger_stub = unitrigger_stub;
   weaponidx = undefined;
@@ -810,19 +810,19 @@ function wall_weapon_update_prompt(player) {
     cost = get_weapon_cost(weapon);
     if(isDefined(level.weapon_cost_client_filled) && level.weapon_cost_client_filled) {
       if(player bgb::is_enabled("zm_bgb_secret_shopper") && !is_wonder_weapon(player.currentweapon) && player.currentweapon.type !== "melee") {
-        self.stub.hint_string = & "ZOMBIE_WEAPONCOSTONLY_CFILL_BGB_SECRET_SHOPPER";
+        self.stub.hint_string = &"ZOMBIE_WEAPONCOSTONLY_CFILL_BGB_SECRET_SHOPPER";
         self sethintstring(self.stub.hint_string);
       } else {
-        self.stub.hint_string = & "ZOMBIE_WEAPONCOSTONLY_CFILL";
+        self.stub.hint_string = &"ZOMBIE_WEAPONCOSTONLY_CFILL";
         self sethintstring(self.stub.hint_string);
       }
     } else {
       if(player bgb::is_enabled("zm_bgb_secret_shopper") && !is_wonder_weapon(player.currentweapon) && player.currentweapon.type !== "melee") {
-        self.stub.hint_string = & "ZOMBIE_WEAPONCOSTONLYFILL_BGB_SECRET_SHOPPER";
+        self.stub.hint_string = &"ZOMBIE_WEAPONCOSTONLYFILL_BGB_SECRET_SHOPPER";
         n_bgb_cost = player get_ammo_cost_for_weapon(player.currentweapon);
         self sethintstring(self.stub.hint_string, cost, n_bgb_cost);
       } else {
-        self.stub.hint_string = & "ZOMBIE_WEAPONCOSTONLYFILL";
+        self.stub.hint_string = &"ZOMBIE_WEAPONCOSTONLYFILL";
         self sethintstring(self.stub.hint_string, cost);
       }
     }
@@ -839,26 +839,26 @@ function wall_weapon_update_prompt(player) {
     if(isDefined(level.weapon_cost_client_filled) && level.weapon_cost_client_filled) {
       if(player bgb::is_enabled("zm_bgb_secret_shopper") && !is_wonder_weapon(player.currentweapon) && player.currentweapon.type !== "melee") {
         if(isDefined(self.stub.hacked) && self.stub.hacked) {
-          self.stub.hint_string = & "ZOMBIE_WEAPONAMMOHACKED_CFILL_BGB_SECRET_SHOPPER";
+          self.stub.hint_string = &"ZOMBIE_WEAPONAMMOHACKED_CFILL_BGB_SECRET_SHOPPER";
         } else {
-          self.stub.hint_string = & "ZOMBIE_WEAPONAMMOONLY_CFILL_BGB_SECRET_SHOPPER";
+          self.stub.hint_string = &"ZOMBIE_WEAPONAMMOONLY_CFILL_BGB_SECRET_SHOPPER";
         }
         self sethintstring(self.stub.hint_string);
       } else {
         if(isDefined(self.stub.hacked) && self.stub.hacked) {
-          self.stub.hint_string = & "ZOMBIE_WEAPONAMMOHACKED_CFILL";
+          self.stub.hint_string = &"ZOMBIE_WEAPONAMMOHACKED_CFILL";
         } else {
-          self.stub.hint_string = & "ZOMBIE_WEAPONAMMOONLY_CFILL";
+          self.stub.hint_string = &"ZOMBIE_WEAPONAMMOONLY_CFILL";
         }
         self sethintstring(self.stub.hint_string);
       }
     } else {
       if(player bgb::is_enabled("zm_bgb_secret_shopper") && !is_wonder_weapon(player.currentweapon) && player.currentweapon.type !== "melee") {
-        self.stub.hint_string = & "ZOMBIE_WEAPONAMMOONLY_BGB_SECRET_SHOPPER";
+        self.stub.hint_string = &"ZOMBIE_WEAPONAMMOONLY_BGB_SECRET_SHOPPER";
         n_bgb_cost = player get_ammo_cost_for_weapon(player.currentweapon);
         self sethintstring(self.stub.hint_string, ammo_cost, n_bgb_cost);
       } else {
-        self.stub.hint_string = & "ZOMBIE_WEAPONAMMOONLY";
+        self.stub.hint_string = &"ZOMBIE_WEAPONAMMOONLY";
         self sethintstring(self.stub.hint_string, ammo_cost);
       }
     }
@@ -1274,14 +1274,14 @@ function get_player_weapon_with_same_base(weapon) {
 function get_weapon_hint_ammo() {
   if(!(isDefined(level.obsolete_prompt_format_needed) && level.obsolete_prompt_format_needed)) {
     if(isDefined(level.weapon_cost_client_filled) && level.weapon_cost_client_filled) {
-      return & "ZOMBIE_WEAPONCOSTONLY_CFILL";
+      return &"ZOMBIE_WEAPONCOSTONLY_CFILL";
     }
-    return & "ZOMBIE_WEAPONCOSTONLYFILL";
+    return &"ZOMBIE_WEAPONCOSTONLYFILL";
   }
   if(isDefined(level.has_pack_a_punch) && !level.has_pack_a_punch) {
-    return & "ZOMBIE_WEAPONCOSTAMMO";
+    return &"ZOMBIE_WEAPONCOSTAMMO";
   }
-  return & "ZOMBIE_WEAPONCOSTAMMO_UPGRADE";
+  return &"ZOMBIE_WEAPONCOSTAMMO_UPGRADE";
 }
 
 function weapon_set_first_time_hint(cost, ammo_cost) {
@@ -1321,7 +1321,7 @@ function weapon_spawn_think() {
   if(isDefined(self.stub) && (isDefined(self.stub.trigger_per_player) && self.stub.trigger_per_player)) {
     onlyplayer = self.parent_player;
     if(zm_utility::is_placeable_mine(self.weapon)) {
-      can_buy_weapon_extra_check_func = & placeable_mine_can_buy_weapon_extra_check_func;
+      can_buy_weapon_extra_check_func = &placeable_mine_can_buy_weapon_extra_check_func;
     }
   }
   self thread zm_magicbox::decide_hide_show_hint("stop_hint_logic", second_endon, onlyplayer, can_buy_weapon_extra_check_func);

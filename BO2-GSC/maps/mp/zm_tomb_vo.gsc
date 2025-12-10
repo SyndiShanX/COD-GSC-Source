@@ -621,7 +621,7 @@ maxis_audio_logs() {
     s_origin.unitrigger_stub.radius = 36;
     s_origin.unitrigger_stub.height = 256;
     s_origin.unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
-    s_origin.unitrigger_stub.hint_string = & "ZM_TOMB_MAXIS_AUDIOLOG";
+    s_origin.unitrigger_stub.hint_string = &"ZM_TOMB_MAXIS_AUDIOLOG";
     s_origin.unitrigger_stub.cursor_hint = "HINT_NOICON";
     s_origin.unitrigger_stub.require_look_at = 1;
     s_origin.unitrigger_stub.script_int = s_origin.script_int;

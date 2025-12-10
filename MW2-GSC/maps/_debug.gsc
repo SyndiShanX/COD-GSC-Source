@@ -1043,8 +1043,8 @@ debug_character_count() {
   drones.alignY = "middle";
   drones.x = 10;
   drones.y = 100;
-  // drones: [&&1]
-  drones.label = & "DEBUG_DRONES";
+  // drones: [&& 1]
+  drones.label = &"DEBUG_DRONES";
   drones.alpha = 0;
 
   //allies
@@ -1053,8 +1053,8 @@ debug_character_count() {
   allies.alignY = "middle";
   allies.x = 10;
   allies.y = 115;
-  // allies: [&&1]
-  allies.label = & "DEBUG_ALLIES";
+  // allies: [&& 1]
+  allies.label = &"DEBUG_ALLIES";
   allies.alpha = 0;
 
   //allies
@@ -1063,8 +1063,8 @@ debug_character_count() {
   axis.alignY = "middle";
   axis.x = 10;
   axis.y = 130;
-  // axis: [&&1]
-  axis.label = & "DEBUG_AXIS";
+  // axis: [&& 1]
+  axis.label = &"DEBUG_AXIS";
   axis.alpha = 0;
 
   //vehicles
@@ -1073,8 +1073,8 @@ debug_character_count() {
   vehicles.alignY = "middle";
   vehicles.x = 10;
   vehicles.y = 145;
-  // drones: [&&1]
-  vehicles.label = & "DEBUG_VEHICLES";
+  // drones: [&& 1]
+  vehicles.label = &"DEBUG_VEHICLES";
   vehicles.alpha = 0;
 
   //total
@@ -1083,8 +1083,8 @@ debug_character_count() {
   total.alignY = "middle";
   total.x = 10;
   total.y = 160;
-  // total: [&&1]
-  total.label = & "DEBUG_TOTAL";
+  // total: [&& 1]
+  total.label = &"DEBUG_TOTAL";
   total.alpha = 0;
 
   lastdvar = "off";

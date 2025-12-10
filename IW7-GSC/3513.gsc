@@ -931,7 +931,7 @@ func_627B(var_00) {
   self.func_DCFC rc8_disable_movement(0);
   self.func_DCFC rc8_disable_rotation(0);
   self.func_DCFC rc8_disable_attack(0);
-  self.func_DCFC.useobj scripts\mp\killstreaks\utility::func_F774(self, & "KILLSTREAKS_HINTS_RC8_CONTROL", 360, 360, 30000, 30000, 1);
+  self.func_DCFC.useobj scripts\mp\killstreaks\utility::func_F774(self, &"KILLSTREAKS_HINTS_RC8_CONTROL", 360, 360, 30000, 30000, 1);
   self.func_DCFC.active = 1;
   self notify("switched_mode");
 }

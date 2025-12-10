@@ -12,7 +12,7 @@
 #namespace exploder;
 
 function autoexec __init__sytem__() {
-  system::register("exploder", & __init__, & __main__, undefined);
+  system::register("exploder", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -168,10 +168,10 @@ function __main__() {
       level thread exploder_trigger(trig, trig.script_exploder_radiant);
     }
     if(isDefined(trig.script_stop_exploder)) {
-      level trigger::add_function(trig, undefined, & stop_exploder, trig.script_stop_exploder);
+      level trigger::add_function(trig, undefined, &stop_exploder, trig.script_stop_exploder);
     }
     if(isDefined(trig.script_stop_exploder_radiant)) {
-      level trigger::add_function(trig, undefined, & stop_exploder, trig.script_stop_exploder_radiant);
+      level trigger::add_function(trig, undefined, &stop_exploder, trig.script_stop_exploder_radiant);
     }
   }
 }

@@ -761,7 +761,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sw
   sweapon = figureoutweapon(sweapon, einflictor);
   pixendevent();
 
-  if(idflags & level.idflags_penetration && isplayer(eattacker) && eattacker hasperk("specialty_bulletpenetration"))
+  if(idflags &level.idflags_penetration && isplayer(eattacker) && eattacker hasperk("specialty_bulletpenetration"))
     self thread maps\mp\gametypes\_battlechatter_mp::perkspecificbattlechatter("deepimpact", 1);
 
   attackerishittingteammate = isplayer(eattacker) && self isenemyplayer(eattacker) == 0;
@@ -794,12 +794,12 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sw
       }
     }
 
-    if(idflags & level.idflags_shield_explosive_impact) {
+    if(idflags &level.idflags_shield_explosive_impact) {
       shitloc = "none";
 
-      if(!(idflags & level.idflags_shield_explosive_impact_huge))
+      if(!(idflags &level.idflags_shield_explosive_impact_huge))
         idamage = idamage * 0.0;
-    } else if(idflags & level.idflags_shield_explosive_splash) {
+    } else if(idflags &level.idflags_shield_explosive_splash) {
       if(isDefined(einflictor) && isDefined(einflictor.stucktoplayer) && einflictor.stucktoplayer == self)
         idamage = 101;
 
@@ -808,7 +808,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sw
       return;
   }
 
-  if(!(idflags & level.idflags_no_protection)) {
+  if(!(idflags &level.idflags_no_protection)) {
     if(isDefined(einflictor) && (smeansofdeath == "MOD_GAS" || maps\mp\gametypes\_class::isexplosivedamage(undefined, smeansofdeath))) {
       if((einflictor.classname == "grenade" || sweapon == "tabun_gas_mp") && self.lastspawntime + 3500 > gettime() && distancesquared(einflictor.origin, self.lastspawnpoint.origin) < 62500) {
         return;
@@ -1084,7 +1084,7 @@ isaikillstreakdamage(sweapon, einflictor) {
 finishplayerdamagewrapper(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex) {
   pixbeginevent("finishPlayerDamageWrapper");
 
-  if(!level.console && idflags & level.idflags_penetration && isplayer(eattacker)) {
+  if(!level.console && idflags &level.idflags_penetration && isplayer(eattacker)) {
     println("penetrated:" + self getentitynumber() + " health:" + self.health + " attacker:" + eattacker.clientid + " inflictor is player:" + isplayer(einflictor) + " damage:" + idamage + " hitLoc:" + shitloc);
 
     eattacker addplayerstat("penetration_shots", 1);

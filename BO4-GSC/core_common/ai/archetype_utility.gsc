@@ -1369,7 +1369,7 @@ canseeenemywrapper() {
       return 0;
     }
 
-    if(isDefined(node.spawnflags) && (node.spawnflags&4) == 4) {
+    if(isDefined(node.spawnflags) && (node.spawnflags& 4) == 4) {
       if(node.type == #"cover left" && yawtoenemy > 10) {
         return 0;
       }
@@ -1383,7 +1383,7 @@ canseeenemywrapper() {
   nodeoffset = (0, 0, 0);
 
   if(node.type == #"cover pillar") {
-    assert(!(isDefined(node.spawnflags) && (node.spawnflags&2048) == 2048) || !(isDefined(node.spawnflags) && (node.spawnflags&1024) == 1024));
+    assert(!(isDefined(node.spawnflags) && (node.spawnflags& 2048) == 2048) || !(isDefined(node.spawnflags) && (node.spawnflags& 1024) == 1024));
     canseefromleft = 1;
     canseefromright = 1;
     nodeoffset = (-32, 3.7, 60);
@@ -1423,15 +1423,15 @@ calculatenodeoffsetposition(node, nodeoffset) {
 gethighestnodestance(node) {
   assert(isDefined(node));
 
-  if(isDefined(node.spawnflags) && (node.spawnflags&4) == 4) {
+  if(isDefined(node.spawnflags) && (node.spawnflags& 4) == 4) {
     return "stand";
   }
 
-  if(isDefined(node.spawnflags) && (node.spawnflags&8) == 8) {
+  if(isDefined(node.spawnflags) && (node.spawnflags& 8) == 8) {
     return "crouch";
   }
 
-  if(isDefined(node.spawnflags) && (node.spawnflags&16) == 16) {
+  if(isDefined(node.spawnflags) && (node.spawnflags& 16) == 16) {
     return "prone";
   }
 
@@ -1448,15 +1448,15 @@ isstanceallowedatnode(stance, node) {
   assert(isDefined(stance));
   assert(isDefined(node));
 
-  if(stance == "stand" && isDefined(node.spawnflags) && (node.spawnflags&4) == 4) {
+  if(stance == "stand" && isDefined(node.spawnflags) && (node.spawnflags& 4) == 4) {
     return true;
   }
 
-  if(stance == "crouch" && isDefined(node.spawnflags) && (node.spawnflags&8) == 8) {
+  if(stance == "crouch" && isDefined(node.spawnflags) && (node.spawnflags& 8) == 8) {
     return true;
   }
 
-  if(stance == "prone" && isDefined(node.spawnflags) && (node.spawnflags&16) == 16) {
+  if(stance == "prone" && isDefined(node.spawnflags) && (node.spawnflags& 16) == 16) {
     return true;
   }
 
@@ -1926,7 +1926,7 @@ isbalconydeath(behaviortreeentity) {
     return false;
   }
 
-  if(!(behaviortreeentity.node.spawnflags&1024 || behaviortreeentity.node.spawnflags&2048)) {
+  if(!(behaviortreeentity.node.spawnflags& 1024 || behaviortreeentity.node.spawnflags& 2048)) {
     return false;
   }
 
@@ -1949,12 +1949,12 @@ isbalconydeath(behaviortreeentity) {
 balconydeath(behaviortreeentity) {
   behaviortreeentity.clamptonavmesh = 0;
 
-  if(behaviortreeentity.node.spawnflags&1024) {
+  if(behaviortreeentity.node.spawnflags& 1024) {
     behaviortreeentity setblackboardattribute("_special_death", "balcony");
     return;
   }
 
-  if(behaviortreeentity.node.spawnflags&2048) {
+  if(behaviortreeentity.node.spawnflags& 2048) {
     behaviortreeentity setblackboardattribute("_special_death", "balcony_norail");
   }
 }

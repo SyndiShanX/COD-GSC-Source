@@ -55,16 +55,16 @@
 #namespace ability_player;
 
 function autoexec __init__sytem__() {
-  system::register("ability_player", & __init__, undefined, undefined);
+  system::register("ability_player", &__init__, undefined, undefined);
 }
 
 function __init__() {
   init_abilities();
   setup_clientfields();
   level thread gadgets_wait_for_game_end();
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
-  callback::on_disconnect( & on_player_disconnect);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_disconnect(&on_player_disconnect);
   if(!isDefined(level._gadgets_level)) {
     level._gadgets_level = [];
   }
@@ -653,15 +653,15 @@ function abilities_devgui_think() {
     arg = getdvarstring("");
     switch (cmd) {
       case "": {
-        abilities_devgui_handle_player_command(cmd, & abilities_devgui_power_fill);
+        abilities_devgui_handle_player_command(cmd, &abilities_devgui_power_fill);
         break;
       }
       case "": {
-        abilities_devgui_handle_player_command(cmd, & abilities_devgui_power_toggle_auto_fill);
+        abilities_devgui_handle_player_command(cmd, &abilities_devgui_power_toggle_auto_fill);
         break;
       }
       case "": {
-        abilities_devgui_handle_player_command(cmd, & abilities_devgui_give, arg);
+        abilities_devgui_handle_player_command(cmd, &abilities_devgui_give, arg);
       }
       case "": {
         break;

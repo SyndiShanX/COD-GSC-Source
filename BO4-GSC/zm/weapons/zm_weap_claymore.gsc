@@ -266,7 +266,7 @@ function_cbb2f05b(watcher) {
     self.waschained = 1;
   }
 
-  if(isDefined(idflags) && idflags&8) {
+  if(isDefined(idflags) && idflags& 8) {
     self.wasdamagedfrombulletpenetration = 1;
   }
 

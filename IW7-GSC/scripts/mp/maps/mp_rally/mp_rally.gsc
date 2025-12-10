@@ -150,7 +150,7 @@ setuppowerlines() {
 barreldroppersetup(param_00, param_01, param_02, param_03) {
   var_04 = getent(param_00, "targetname");
   var_04 makeusable();
-  var_04 sethintstring( & "MP_RALLY_ACTIVATE_BARREL");
+  var_04 sethintstring(&"MP_RALLY_ACTIVATE_BARREL");
   var_04 _meth_84A4(64);
   var_04 _meth_84A6(60);
   var_04 setuserange(64);
@@ -327,7 +327,7 @@ burninatorsetup(param_00, param_01) {
   var_02 = getent(param_00, "targetname");
   var_02.bigredbutton = getent(param_01, "targetname");
   var_02.bigredbutton makeusable();
-  var_02.bigredbutton sethintstring( & "MP_RALLY_ACTIVATE_FIRE");
+  var_02.bigredbutton sethintstring(&"MP_RALLY_ACTIVATE_FIRE");
   var_02.bigredbutton _meth_84A4(64);
   var_02.bigredbutton _meth_84A6(60);
   var_02.bigredbutton setuserange(64);

@@ -32,7 +32,7 @@
 #namespace zm_genesis_util;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_util", & __init__, & __main__, undefined);
+  system::register("zm_genesis_util", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -52,8 +52,8 @@ function __init__() {
   registerclientfield("world", "gen_rune_shadow", 15000, 1, "int");
   clientfield::register("clientuimodel", "zmInventory.widget_rune_parts", 15000, 1, "int");
   clientfield::register("clientuimodel", "zmInventory.player_rune_quest", 15000, 1, "int");
-  level.custom_spawner_entry["crawl"] = & function_48cfc7df;
-  level.perk_random_idle_effects_override = & function_555e8704;
+  level.custom_spawner_entry["crawl"] = &function_48cfc7df;
+  level.perk_random_idle_effects_override = &function_555e8704;
   level thread function_828240c9();
 }
 
@@ -94,7 +94,7 @@ function function_5ea427bf(player) {
   } else if(isDefined(self.stub.func_unitrigger_visible)) {
     b_visible = self[[self.stub.func_unitrigger_visible]](player);
   }
-  str_msg = & "";
+  str_msg = &"";
   param1 = undefined;
   if(b_visible) {
     if(isDefined(self.stub.func_unitrigger_message)) {
@@ -137,7 +137,7 @@ function set_unitrigger_hint_string(str_message, param1) {
   self.hint_string = str_message;
   self.hint_parm1 = param1;
   zm_unitrigger::unregister_unitrigger(self);
-  zm_unitrigger::register_unitrigger(self, & unitrigger_think);
+  zm_unitrigger::register_unitrigger(self, &unitrigger_think);
 }
 
 function private spawn_unitrigger(origin, angles, radius_or_dims, use_trigger = 0, func_per_player_msg) {
@@ -166,8 +166,8 @@ function private spawn_unitrigger(origin, angles, radius_or_dims, use_trigger = 
     trigger_stub.func_unitrigger_message = func_per_player_msg;
     zm_unitrigger::unitrigger_force_per_player_triggers(trigger_stub, 1);
   }
-  trigger_stub.prompt_and_visibility_func = & function_5ea427bf;
-  zm_unitrigger::register_unitrigger(trigger_stub, & unitrigger_think);
+  trigger_stub.prompt_and_visibility_func = &function_5ea427bf;
+  zm_unitrigger::register_unitrigger(trigger_stub, &unitrigger_think);
   return trigger_stub;
 }
 
@@ -185,7 +185,7 @@ function function_b6faf5c0() {
 }
 
 function function_c3266652(str_targetname, n_duration, n_offset) {
-  var_bd7e807d = array::filter(level.var_7c6cbc08, 0, & function_f889e065, str_targetname);
+  var_bd7e807d = array::filter(level.var_7c6cbc08, 0, &function_f889e065, str_targetname);
   assert(isDefined(var_bd7e807d), ("" + str_targetname) + "");
   if(!isDefined(level.var_e17963aa[str_targetname])) {
     foreach(var_dddfc725 in var_bd7e807d) {
@@ -316,8 +316,8 @@ function function_1f629fb(var_216e90fd) {
   while(true) {
     a_ai_enemies = getaiteamarray(level.zombie_team);
     var_f7c98a7 = arraysortclosest(a_ai_enemies, self.origin, a_ai_enemies.size, 0, 96);
-    var_f7c98a7 = array::filter(var_f7c98a7, 0, & function_2179430a);
-    var_f7c98a7 = array::filter(var_f7c98a7, 0, & function_bb218fa3, self, 2304);
+    var_f7c98a7 = array::filter(var_f7c98a7, 0, &function_2179430a);
+    var_f7c98a7 = array::filter(var_f7c98a7, 0, &function_bb218fa3, self, 2304);
     if(var_f7c98a7.size) {
       foreach(var_7cb53454 in var_f7c98a7) {
         b_result = var_7cb53454 function_c8040935(var_216e90fd);
@@ -331,8 +331,8 @@ function function_1f629fb(var_216e90fd) {
       }
     }
     a_e_players = arraysortclosest(level.activeplayers, self.origin, level.activeplayers.size, 0, 64);
-    a_e_players = array::filter(a_e_players, 0, & function_bb218fa3, self, 1024);
-    a_e_players = array::filter(a_e_players, 0, & function_6f7936c1);
+    a_e_players = array::filter(a_e_players, 0, &function_bb218fa3, self, 1024);
+    a_e_players = array::filter(a_e_players, 0, &function_6f7936c1);
     if(a_e_players.size) {
       foreach(e_player in a_e_players) {
         if(zm_utility::is_player_valid(e_player)) {
@@ -781,7 +781,7 @@ function function_8fb96327() {
 function electricity_rune_quest_start() {
   a_s_start_pos = struct::get_array("electricity_rune_quest_start", "targetname");
   s_start_pos = array::random(a_s_start_pos);
-  s_start_pos thread function_15e7a0c8("electricity_rq_started", & function_2f157912, & function_e889d17c);
+  s_start_pos thread function_15e7a0c8("electricity_rq_started", &function_2f157912, &function_e889d17c);
 }
 
 function function_2f157912(e_who) {
@@ -795,7 +795,7 @@ function function_e889d17c(e_who) {
 function fire_rune_quest_start() {
   a_s_start_pos = struct::get_array("fire_rune_quest_start", "targetname");
   s_start_pos = array::random(a_s_start_pos);
-  s_start_pos thread function_15e7a0c8("fire_rq_started", & function_8164c629, & function_9b7022b5);
+  s_start_pos thread function_15e7a0c8("fire_rq_started", &function_8164c629, &function_9b7022b5);
 }
 
 function function_8164c629(e_who) {
@@ -809,7 +809,7 @@ function function_9b7022b5(e_who) {
 function light_rune_quest_start() {
   a_s_start_pos = struct::get_array("light_rune_quest_start", "targetname");
   s_start_pos = array::random(a_s_start_pos);
-  s_start_pos thread function_15e7a0c8("light_rq_started", & function_45c80653, & function_aef2e0a3);
+  s_start_pos thread function_15e7a0c8("light_rq_started", &function_45c80653, &function_aef2e0a3);
 }
 
 function function_45c80653(e_who) {
@@ -823,7 +823,7 @@ function function_aef2e0a3(e_who) {
 function shadow_rune_quest_start() {
   a_s_start_pos = struct::get_array("shadow_rune_quest_start", "targetname");
   s_start_pos = array::random(a_s_start_pos);
-  s_start_pos thread function_15e7a0c8("shadow_rq_started", & function_9944ee4d, & function_6d12ad69);
+  s_start_pos thread function_15e7a0c8("shadow_rq_started", &function_9944ee4d, &function_6d12ad69);
 }
 
 function function_9944ee4d(e_who) {
@@ -858,7 +858,7 @@ function function_15e7a0c8(var_7b429b7d, var_6908e64b, var_4162ae69) {
   v_pos = self.origin;
   v_angles = self.angles;
   level thread function_83fe94ad(v_pos, var_7b429b7d);
-  s_unitrigger_stub = spawn_trigger_radius(v_pos, 72, 1, & function_e0596480);
+  s_unitrigger_stub = spawn_trigger_radius(v_pos, 72, 1, &function_e0596480);
   while(!level flag::get(var_7b429b7d)) {
     s_unitrigger_stub waittill("trigger", e_who);
     var_a97dcbff = e_who flag::get("holding_gateworm");
@@ -883,7 +883,7 @@ function function_15e7a0c8(var_7b429b7d, var_6908e64b, var_4162ae69) {
 }
 
 function function_e0596480(e_who) {
-  return & "";
+  return &"";
 }
 
 function function_83fe94ad(v_start_pos, var_7b429b7d) {
@@ -1344,7 +1344,7 @@ function function_c0411192() {
   var_3e38f0ae = arraycombine(var_3e38f0ae, var_da104453, 0, 0);
   var_da104453 = struct::get_array("");
   var_3e38f0ae = arraycombine(var_3e38f0ae, var_da104453, 0, 0);
-  array::thread_all(var_3e38f0ae, & function_b411d2a8);
+  array::thread_all(var_3e38f0ae, &function_b411d2a8);
 }
 
 function function_6c518807() {
@@ -1356,7 +1356,7 @@ function function_6c518807() {
   var_3e38f0ae = arraycombine(var_3e38f0ae, var_da104453, 0, 0);
   var_da104453 = struct::get_array("");
   var_3e38f0ae = arraycombine(var_3e38f0ae, var_da104453, 0, 0);
-  array::thread_all(var_3e38f0ae, & function_ba547024);
+  array::thread_all(var_3e38f0ae, &function_ba547024);
 }
 
 function function_ba547024() {
@@ -1398,25 +1398,25 @@ function debug_spawn_points() {
   }
   a_s_spawn_points = arraycombine(a_s_points, var_97786609, 0, 0);
   var_c16df719 = struct::get_array("");
-  array::thread_all(var_c16df719, & function_2e9f38b0);
-  array::thread_all(a_s_spawn_points, & function_7129ea51);
-  array::thread_all(level.zones, & function_3d73091f);
+  array::thread_all(var_c16df719, &function_2e9f38b0);
+  array::thread_all(a_s_spawn_points, &function_7129ea51);
+  array::thread_all(level.zones, &function_3d73091f);
 }
 
 function function_f448730a() {
   level notify("hash_3e617e39");
   for(i = 1; i < 4; i++) {
-    level scene::add_scene_func("" + i, & function_871166cb, "");
+    level scene::add_scene_func("" + i, &function_871166cb, "");
   }
-  array::thread_all(level.zones, & function_a41558a6);
+  array::thread_all(level.zones, &function_a41558a6);
 }
 
 function function_81eb9b35() {
   level notify("hash_3e617e39");
   for(i = 1; i < 4; i++) {
-    level scene::remove_scene_func("" + i, & function_871166cb, "");
+    level scene::remove_scene_func("" + i, &function_871166cb, "");
   }
-  array::thread_all(level.zones, & function_141ddc35);
+  array::thread_all(level.zones, &function_141ddc35);
 }
 
 function function_871166cb(a_ents) {
@@ -1438,13 +1438,13 @@ function function_871166cb(a_ents) {
 
 function function_a41558a6() {
   foreach(a_locs in self.a_loc_types) {
-    array::thread_all(a_locs, & function_835d6248);
+    array::thread_all(a_locs, &function_835d6248);
   }
 }
 
 function function_141ddc35() {
   foreach(a_locs in self.a_loc_types) {
-    array::thread_all(a_locs, & function_3e617e39);
+    array::thread_all(a_locs, &function_3e617e39);
   }
 }
 
@@ -1453,7 +1453,7 @@ function function_3d73091f() {
   #
   assert(self.a_loc_types[""].size > 0, ("" + self.volumes[0].targetname) + "");
   foreach(a_locs in self.a_loc_types) {
-    array::thread_all(a_locs, & function_2e9f38b0);
+    array::thread_all(a_locs, &function_2e9f38b0);
   }
 }
 
@@ -1524,7 +1524,7 @@ function function_7129ea51() {
 function function_1953a761() {
   level notify("hash_4a4c33ec");
   a_s_points = struct::get_array("");
-  array::thread_all(a_s_points, & function_ed69d7f4);
+  array::thread_all(a_s_points, &function_ed69d7f4);
 }
 
 function function_ed69d7f4() {
@@ -1550,7 +1550,7 @@ function function_4086bd17(v_point) {
 function function_90c620d8() {
   level notify("hash_6aa36145");
   var_9f26317f = getEntArray("", "");
-  array::thread_all(var_9f26317f, & function_7b7eeb90);
+  array::thread_all(var_9f26317f, &function_7b7eeb90);
 }
 
 function function_5e8cafb9() {
@@ -1650,8 +1650,8 @@ function devgui() {
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
-  level thread setup_devgui_func("", "", 1, & zm_genesis_minor_ee::function_e1963311);
-  zm_devgui::add_custom_devgui_callback( & function_dbc092aa);
+  level thread setup_devgui_func("", "", 1, &zm_genesis_minor_ee::function_e1963311);
+  zm_devgui::add_custom_devgui_callback(&function_dbc092aa);
 }
 
 function function_dbc092aa(cmd) {
@@ -1662,7 +1662,7 @@ function function_dbc092aa(cmd) {
       var_9f26317f thread function_5e8cafb9();
       foreach(t_door in var_9f26317f) {
         var_3ccf13b = t_door function_78e15936();
-        array::thread_all(var_3ccf13b, & function_bc81bb3b);
+        array::thread_all(var_3ccf13b, &function_bc81bb3b);
       }
       break;
     }

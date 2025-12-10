@@ -18,19 +18,19 @@ init() {
   precacheshader("hud_ks_minigun");
   precacheshader("hud_ks_m32");
   maps\mp\killstreaks\_killstreaks::registerkillstreak("inventory_minigun_mp", "inventory_minigun_mp", "killstreak_minigun", "minigun_used", ::usecarriedkillstreakweapon, 0, 1, "MINIGUN_USED");
-  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("inventory_minigun_mp", & "KILLSTREAK_EARNED_MINIGUN", & "KILLSTREAK_MINIGUN_NOT_AVAILABLE", & "KILLSTREAK_MINIGUN_INBOUND");
+  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("inventory_minigun_mp", &"KILLSTREAK_EARNED_MINIGUN", &"KILLSTREAK_MINIGUN_NOT_AVAILABLE", &"KILLSTREAK_MINIGUN_INBOUND");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("inventory_minigun_mp", "mpl_killstreak_minigun", "kls_death_used", "", "kls_death_enemy", "", "kls_death_ready");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("inventory_minigun_mp", "scr_giveminigun_drop");
   maps\mp\killstreaks\_killstreaks::registerkillstreak("minigun_mp", "minigun_mp", "killstreak_minigun", "minigun_used", ::usecarriedkillstreakweapon, 0, 1, "MINIGUN_USED");
-  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("minigun_mp", & "KILLSTREAK_EARNED_MINIGUN", & "KILLSTREAK_MINIGUN_NOT_AVAILABLE", & "KILLSTREAK_MINIGUN_INBOUND");
+  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("minigun_mp", &"KILLSTREAK_EARNED_MINIGUN", &"KILLSTREAK_MINIGUN_NOT_AVAILABLE", &"KILLSTREAK_MINIGUN_INBOUND");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("minigun_mp", "mpl_killstreak_minigun", "kls_death_used", "", "kls_death_enemy", "", "kls_death_ready");
   maps\mp\killstreaks\_killstreaks::registerkillstreak("inventory_m32_mp", "inventory_m32_mp", "killstreak_m32", "m32_used", ::usecarriedkillstreakweapon, 0, 1, "M32_USED");
-  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("inventory_m32_mp", & "KILLSTREAK_EARNED_M32", & "KILLSTREAK_M32_NOT_AVAILABLE", & "KILLSTREAK_M32_INBOUND");
+  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("inventory_m32_mp", &"KILLSTREAK_EARNED_M32", &"KILLSTREAK_M32_NOT_AVAILABLE", &"KILLSTREAK_M32_INBOUND");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("inventory_m32_mp", "mpl_killstreak_m32", "kls_mgl_used", "", "kls_mgl_enemy", "", "kls_mgl_ready");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("inventory_m32_mp", "scr_givem32_drop");
   maps\mp\killstreaks\_killstreaks::overrideentitycameraindemo("inventory_m32_mp", 1);
   maps\mp\killstreaks\_killstreaks::registerkillstreak("m32_mp", "m32_mp", "killstreak_m32", "m32_used", ::usecarriedkillstreakweapon, 0, 1, "M32_USED");
-  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("m32_mp", & "KILLSTREAK_EARNED_M32", & "KILLSTREAK_M32_NOT_AVAILABLE", & "KILLSTREAK_M32_INBOUND");
+  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("m32_mp", &"KILLSTREAK_EARNED_M32", &"KILLSTREAK_M32_NOT_AVAILABLE", &"KILLSTREAK_M32_INBOUND");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("m32_mp", "mpl_killstreak_m32", "kls_mgl_used", "", "kls_mgl_enemy", "", "kls_mgl_ready");
   maps\mp\killstreaks\_killstreaks::overrideentitycameraindemo("m32_mp", 1);
   level.killstreakicons["killstreak_minigun"] = "hud_ks_minigun";
@@ -86,7 +86,7 @@ watchkillstreakweapondelay() {
       if(!timeleft)
         timeleft = 1;
 
-      self iprintlnbold(&"MP_UNAVAILABLE_FOR_N", " " + timeleft + " ", & "EXE_SECONDS");
+      self iprintlnbold(&"MP_UNAVAILABLE_FOR_N", " " + timeleft + " ", &"EXE_SECONDS");
       self switchtoweapon(currentweapon);
       wait 0.5;
     }

@@ -959,10 +959,10 @@ loadout_updateplayerarchetype(var_00) {
   }
 
   self _meth_845E(0);
-  self allowdoublejump(var_06 & var_01);
-  self allowslide(var_06 & var_02);
-  self allowwallrun(var_06 & var_03);
-  self allowdodge(var_06 & var_04);
+  self allowdoublejump(var_06 &var_01);
+  self allowslide(var_06 &var_02);
+  self allowwallrun(var_06 &var_03);
+  self allowdodge(var_06 &var_04);
   self allowlean(0);
   self setsuit(var_05);
   self energy_setmax(0, var_09);

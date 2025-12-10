@@ -17,12 +17,12 @@
 #namespace doa_pickups;
 
 function init() {
-  clientfield::register("scriptmover", "pickuptype", 1, 10, "int", & function_892b2a87, 0, 0);
-  clientfield::register("scriptmover", "pickupwobble", 1, 1, "int", & function_77c1258e, 0, 0);
-  clientfield::register("scriptmover", "pickuprotate", 1, 1, "int", & pickuprotate, 0, 0);
-  clientfield::register("scriptmover", "pickupscale", 1, 8, "int", & function_b3289e6d, 0, 0);
-  clientfield::register("scriptmover", "pickupvisibility", 1, 1, "int", & function_68ad0d79, 0, 0);
-  clientfield::register("scriptmover", "pickupmoveto", 1, 4, "int", & function_474724d7, 0, 0);
+  clientfield::register("scriptmover", "pickuptype", 1, 10, "int", &function_892b2a87, 0, 0);
+  clientfield::register("scriptmover", "pickupwobble", 1, 1, "int", &function_77c1258e, 0, 0);
+  clientfield::register("scriptmover", "pickuprotate", 1, 1, "int", &pickuprotate, 0, 0);
+  clientfield::register("scriptmover", "pickupscale", 1, 8, "int", &function_b3289e6d, 0, 0);
+  clientfield::register("scriptmover", "pickupvisibility", 1, 1, "int", &function_68ad0d79, 0, 0);
+  clientfield::register("scriptmover", "pickupmoveto", 1, 4, "int", &function_474724d7, 0, 0);
   level.doa.pickups = [];
   function_db1442f2("zombietron_silver_coin", 1.25, 1, 0);
   function_db1442f2("zombietron_silver_brick", 1.25, 1, 1);
@@ -236,7 +236,7 @@ function function_892b2a87(localclientnum, oldval, newval, bnewent, binitialsnap
   if(isDefined(level.doa.arenas[level.doa.current_arena].var_869acbe6) && level.doa.arenas[level.doa.current_arena].var_869acbe6 && localclientnum > 0) {
     return;
   }
-  type = newval & (64 - 1);
+  type = newval &(64 - 1);
   variant = undefined;
   if(newval > 38) {
     variant = newval >> 6;

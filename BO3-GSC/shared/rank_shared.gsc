@@ -12,11 +12,11 @@
 #namespace rank;
 
 function autoexec __init__sytem__() {
-  system::register("rank", & __init__, undefined, undefined);
+  system::register("rank", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
+  callback::on_start_gametype(&init);
 }
 
 function init() {
@@ -67,7 +67,7 @@ function init() {
     rankid++;
     rankname = tablelookup(level.ranktable_name, 0, rankid, 1);
   }
-  callback::on_connect( & on_player_connect);
+  callback::on_connect(&on_player_connect);
 }
 
 function initscoreinfo() {
@@ -342,9 +342,9 @@ function on_player_connect() {
     self setdstat("playerstatslist", "lastxp", "StatValue", getrankxpcapped(self.pers["rankxp"]));
   }
   self.explosivekills[0] = 0;
-  callback::on_spawned( & on_player_spawned);
-  callback::on_joined_team( & on_joined_team);
-  callback::on_joined_spectate( & on_joined_spectators);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_joined_team(&on_joined_team);
+  callback::on_joined_spectate(&on_joined_spectators);
 }
 
 function on_joined_team() {
@@ -612,10 +612,10 @@ function updaterankscorehud(amount) {
   wait(0.05);
   if(isDefined(self.hud_rankscroreupdate)) {
     if(self.rankupdatetotal < 0) {
-      self.hud_rankscroreupdate.label = & "";
+      self.hud_rankscroreupdate.label = &"";
       self.hud_rankscroreupdate.color = (0.73, 0.19, 0.19);
     } else {
-      self.hud_rankscroreupdate.label = & "MP_PLUS";
+      self.hud_rankscroreupdate.label = &"MP_PLUS";
       self.hud_rankscroreupdate.color = (1, 1, 0.5);
     }
     self.hud_rankscroreupdate setvalue(self.rankupdatetotal);
@@ -640,10 +640,10 @@ function updatemomentumhud(amount, reason, reasonvalue) {
   self.rankupdatetotal = self.rankupdatetotal + amount;
   if(isDefined(self.hud_rankscroreupdate)) {
     if(self.rankupdatetotal < 0) {
-      self.hud_rankscroreupdate.label = & "";
+      self.hud_rankscroreupdate.label = &"";
       self.hud_rankscroreupdate.color = (0.73, 0.19, 0.19);
     } else {
-      self.hud_rankscroreupdate.label = & "MP_PLUS";
+      self.hud_rankscroreupdate.label = &"MP_PLUS";
       self.hud_rankscroreupdate.color = (1, 1, 0.5);
     }
     self.hud_rankscroreupdate setvalue(self.rankupdatetotal);

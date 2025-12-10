@@ -28,7 +28,7 @@
 #namespace callback;
 
 function autoexec __init__sytem__() {
-  system::register("callback", & __init__, undefined, undefined);
+  system::register("callback", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -36,15 +36,15 @@ function __init__() {
 }
 
 function set_default_callbacks() {
-  level.callbackplayerspawned = & playerspawned;
-  level.callbacklocalclientconnect = & localclientconnect;
-  level.callbackcreatingcorpse = & creating_corpse;
-  level.callbackentityspawned = & entityspawned;
-  level.callbackairsupport = & airsupport;
-  level.callbackplayaifootstep = & footsteps::playaifootstep;
-  level.callbackplaylightloopexploder = & exploder::playlightloopexploder;
-  level._custom_weapon_cb_func = & spawned_weapon_type;
-  level.gadgetvisionpulse_reveal_func = & gadget_vision_pulse::gadget_visionpulse_reveal;
+  level.callbackplayerspawned = &playerspawned;
+  level.callbacklocalclientconnect = &localclientconnect;
+  level.callbackcreatingcorpse = &creating_corpse;
+  level.callbackentityspawned = &entityspawned;
+  level.callbackairsupport = &airsupport;
+  level.callbackplayaifootstep = &footsteps::playaifootstep;
+  level.callbackplaylightloopexploder = &exploder::playlightloopexploder;
+  level._custom_weapon_cb_func = &spawned_weapon_type;
+  level.gadgetvisionpulse_reveal_func = &gadget_vision_pulse::gadget_visionpulse_reveal;
 }
 
 function localclientconnect(localclientnum) {

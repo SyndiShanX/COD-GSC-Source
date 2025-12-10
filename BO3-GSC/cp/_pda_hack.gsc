@@ -35,7 +35,7 @@ class chackableobject {
     m_n_hack_duration = 2;
     m_n_hack_radius = 72;
     m_n_hack_height = 128;
-    m_hack_complete_func = & hacking_completed;
+    m_hack_complete_func = &hacking_completed;
     m_does_hack_time_scale = 0;
     m_str_team = "axis";
   }
@@ -236,7 +236,7 @@ class chackableobject {
 #namespace _pda_hack;
 
 function autoexec __init__sytem__() {
-  system::register("pda_hack", & __init__, undefined, undefined);
+  system::register("pda_hack", &__init__, undefined, undefined);
 }
 
 function __init__() {}

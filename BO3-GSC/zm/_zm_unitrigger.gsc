@@ -10,7 +10,7 @@
 #namespace zm_unitrigger;
 
 function autoexec __init__sytem__() {
-  system::register("zm_unitrigger", & __init__, undefined, undefined);
+  system::register("zm_unitrigger", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -640,7 +640,7 @@ function get_closest_unitriggers(org, array, dist = 9999999) {
   return triggers;
 }
 
-function create_unitrigger(str_hint, n_radius = 64, func_prompt_and_visibility = & unitrigger_prompt_and_visibility, func_unitrigger_logic = & unitrigger_logic, s_trigger_type = "unitrigger_radius_use") {
+function create_unitrigger(str_hint, n_radius = 64, func_prompt_and_visibility = &unitrigger_prompt_and_visibility, func_unitrigger_logic = &unitrigger_logic, s_trigger_type = "unitrigger_radius_use") {
   s_unitrigger = spawnStruct();
   s_unitrigger.origin = self.origin;
   s_unitrigger.angles = self.angles;
@@ -655,7 +655,7 @@ function create_unitrigger(str_hint, n_radius = 64, func_prompt_and_visibility =
   return s_unitrigger;
 }
 
-function create_dyn_unitrigger(str_hint, n_radius = 64, func_prompt_and_visibility = & unitrigger_prompt_and_visibility, func_unitrigger_logic = & unitrigger_logic, s_trigger_type = "unitrigger_radius_use") {
+function create_dyn_unitrigger(str_hint, n_radius = 64, func_prompt_and_visibility = &unitrigger_prompt_and_visibility, func_unitrigger_logic = &unitrigger_logic, s_trigger_type = "unitrigger_radius_use") {
   s_unitrigger = spawnStruct();
   s_unitrigger.origin = self.origin;
   s_unitrigger.angles = self.angles;

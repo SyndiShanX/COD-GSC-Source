@@ -11,13 +11,13 @@
 #namespace zm_trap_fire;
 
 function autoexec __init__sytem__() {
-  system::register("zm_trap_fire", & __init__, undefined, undefined);
+  system::register("zm_trap_fire", &__init__, undefined, undefined);
 }
 
 function __init__() {
   a_traps = struct::get_array("trap_fire", "targetname");
   foreach(trap in a_traps) {
-    clientfield::register("world", trap.script_noteworthy, 21000, 1, "int", & trap_fx_monitor, 0, 0);
+    clientfield::register("world", trap.script_noteworthy, 21000, 1, "int", &trap_fx_monitor, 0, 0);
   }
 }
 

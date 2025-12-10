@@ -25,7 +25,7 @@ function init_shared() {
   level.smokegrenadetotaltime = level.smokegrenadeduration + level.smokegrenadedissipation;
   level.fx_smokegrenade_single = "smoke_center";
   level.smoke_grenade_triggers = [];
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function watchsmokegrenadedetonation(owner, statweapon, grenadeweaponname, duration, totaltime) {

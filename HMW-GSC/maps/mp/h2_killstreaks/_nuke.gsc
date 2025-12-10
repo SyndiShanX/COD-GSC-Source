@@ -28,7 +28,7 @@ init() {
   level._effect["nuke_flash"] = loadfx("fx/explosions/nuke_flash");
   level._effect["nuke_aftermath"] = loadfx("fx/explosions/nuke_smoke_fill");
 
-  game["strings"]["nuclear_strike"] = & "MP_TACTICAL_NUKE"; // is Manticore right now from AW
+  game["strings"]["nuclear_strike"] = &"MP_TACTICAL_NUKE"; // is Manticore right now from AW
 
   level.killstreakFuncs["nuke_mp"] = ::tryUseNuke;
 
@@ -38,16 +38,14 @@ init() {
   level.nukeTimer = getDvarInt("scr_nukeTimer");
   level.cancelMode = getDvarInt("scr_nukeCancelMode");
 
-
   setDevDvarIfUninitialized("scr_nukeDistance", 5000);
   setDevDvarIfUninitialized("scr_nukeEndsGame", true);
   setDevDvarIfUninitialized("scr_nukeDebugPosition", false);
-
 }
 
 tryUseNuke(lifeId, allowCancel) {
   if(isDefined(level.nukeIncoming)) {
-    self iprintlnbold( & "LUA_KS_UNAVAILABLE_NUKE");
+    self iprintlnbold(&"LUA_KS_UNAVAILABLE_NUKE");
     return false;
   }
 
@@ -98,13 +96,13 @@ doNuke(allowCancel) {
     if( isDefined( playerteam ) )
     {
     if( playerteam == self.pers["team"] )
-    player iprintln( &"MP_TACTICAL_NUKE_CALLED", self );
+    player iprintln(&"MP_TACTICAL_NUKE_CALLED", self );
     }
     }
     */
   } else {
     if(!level.hardcoreMode)
-      self iprintlnbold( & "LUA_KS_TNUKE");
+      self iprintlnbold(&"LUA_KS_TNUKE");
   }
 
   level thread delaythread_nuke((level.nukeTimer - 3.3), ::nukeSoundIncoming);
@@ -183,12 +181,10 @@ nukeEffects() {
     nukeEnt setModel("tag_origin");
     nukeEnt.angles = (0, (player.angles[1] + 180), 90);
 
-
     if(getDvarInt("scr_nukeDebugPosition")) {
       lineTop = (nukeEnt.origin[0], nukeEnt.origin[1], (nukeEnt.origin[2] + 500));
       thread draw_line_for_time(nukeEnt.origin, lineTop, (1, 0, 0), 10);
     }
-
 
       nukeEnt thread nukeEffect(player);
     player.nuked = true;

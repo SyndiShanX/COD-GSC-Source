@@ -12,7 +12,7 @@
 #namespace zm_bgb_stock_option;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_stock_option", & __init__, undefined, undefined);
+  system::register("zm_bgb_stock_option", &__init__, undefined, undefined);
 }
 
 function __init__() {

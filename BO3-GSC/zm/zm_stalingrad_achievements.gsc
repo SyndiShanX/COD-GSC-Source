@@ -11,13 +11,13 @@
 #namespace zm_stalingrad_achievements;
 
 function autoexec __init__sytem__() {
-  system::register("zm_stalingrad_achievements", & __init__, undefined, undefined);
+  system::register("zm_stalingrad_achievements", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level thread function_73d8758f();
   level thread function_42b2ae41();
-  callback::on_connect( & on_player_connect);
+  callback::on_connect(&on_player_connect);
 }
 
 function on_player_connect() {
@@ -33,7 +33,7 @@ function on_player_connect() {
 
 function function_73d8758f() {
   level waittill("hash_c1471acf");
-  array::run_all(level.players, & giveachievement, "ZM_STALINGRAD_NIKOLAI");
+  array::run_all(level.players, &giveachievement, "ZM_STALINGRAD_NIKOLAI");
 }
 
 function function_69021ea7() {
@@ -44,7 +44,7 @@ function function_69021ea7() {
 
 function function_42b2ae41() {
   level waittill("hash_399599c1");
-  array::run_all(level.players, & giveachievement, "ZM_STALINGRAD_TWENTY_ROUNDS");
+  array::run_all(level.players, &giveachievement, "ZM_STALINGRAD_TWENTY_ROUNDS");
 }
 
 function function_35e5c39b() {

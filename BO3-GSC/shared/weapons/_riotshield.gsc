@@ -29,7 +29,7 @@ function init_shared() {
   level.riotshieldmeleeanimback = % mp_riotshield::o_riot_stand_melee_back;
   level.riotshield_placement_zoffset = 26;
   thread register();
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function register() {

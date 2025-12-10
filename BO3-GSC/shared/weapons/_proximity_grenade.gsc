@@ -34,8 +34,8 @@ function init_shared() {
   level.proximitygrenadeprotectedtime = getdvarfloat("scr_proximityGrenadeProtectedTime", 0.45);
   level.poisonfxduration = 6;
   level thread register();
-  callback::on_spawned( & on_player_spawned);
-  callback::add_weapon_damage(getweapon("proximity_grenade"), & on_damage);
+  callback::on_spawned(&on_player_spawned);
+  callback::add_weapon_damage(getweapon("proximity_grenade"), &on_damage);
   level thread updatedvars();
 }
 
@@ -74,13 +74,13 @@ function createproximitygrenadewatcher() {
   watcher.immediatedetonation = 1;
   watcher.detectiongraceperiod = level.proximitygrenadegraceperiod;
   watcher.detonateradius = level.proximitygrenadedetectionradius;
-  watcher.onstun = & weaponobjects::weaponstun;
+  watcher.onstun = &weaponobjects::weaponstun;
   watcher.stuntime = 1;
-  watcher.ondetonatecallback = & proximitydetonate;
+  watcher.ondetonatecallback = &proximitydetonate;
   watcher.activationdelay = level.proximitygrenadeactivationtime;
   watcher.activatesound = "wpn_claymore_alert";
   watcher.immunespecialty = "specialty_immunetriggershock";
-  watcher.onspawn = & onspawnproximitygrenadeweaponobject;
+  watcher.onspawn = &onspawnproximitygrenadeweaponobject;
 }
 
 function creategadgetproximitygrenadewatcher() {
@@ -96,12 +96,12 @@ function creategadgetproximitygrenadewatcher() {
   watcher.immediatedetonation = 1;
   watcher.detectiongraceperiod = level.proximitygrenadegraceperiod;
   watcher.detonateradius = level.proximitygrenadedetectionradius;
-  watcher.onstun = & weaponobjects::weaponstun;
+  watcher.onstun = &weaponobjects::weaponstun;
   watcher.stuntime = 1;
-  watcher.ondetonatecallback = & proximitydetonate;
+  watcher.ondetonatecallback = &proximitydetonate;
   watcher.activationdelay = level.proximitygrenadeactivationtime;
   watcher.activatesound = "wpn_claymore_alert";
-  watcher.onspawn = & onspawnproximitygrenadeweaponobject;
+  watcher.onspawn = &onspawnproximitygrenadeweaponobject;
 }
 
 function onspawnproximitygrenadeweaponobject(watcher, owner) {

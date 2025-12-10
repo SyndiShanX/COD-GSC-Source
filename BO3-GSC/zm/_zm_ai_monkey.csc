@@ -9,12 +9,12 @@
 #namespace _zm_ai_monkey;
 
 function autoexec __init__sytem__() {
-  system::register("monkey", & __init__, undefined, undefined);
+  system::register("monkey", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  ai::add_archetype_spawn_function("monkey", & function_70fb871f);
-  clientfield::register("actor", "monkey_eye_glow", 21000, 1, "int", & function_2e74dabc, 0, 0);
+  ai::add_archetype_spawn_function("monkey", &function_70fb871f);
+  clientfield::register("actor", "monkey_eye_glow", 21000, 1, "int", &function_2e74dabc, 0, 0);
   level._effect["monkey_eye_glow"] = "dlc5/zmhd/fx_zmb_monkey_eyes";
 }
 

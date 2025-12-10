@@ -176,9 +176,9 @@ killcam(
     if(timeUntilRespawn > 0)
       setLowerMessage("kc_info", game["strings"]["waiting_to_spawn"], timeUntilRespawn);
     else
-      setLowerMessage("kc_info", & "PLATFORM_PRESS_TO_SKIP");
+      setLowerMessage("kc_info", &"PLATFORM_PRESS_TO_SKIP");
   } else if(!level.gameEnded) {
-    setLowerMessage("kc_info", & "PLATFORM_PRESS_TO_RESPAWN");
+    setLowerMessage("kc_info", &"PLATFORM_PRESS_TO_RESPAWN");
   }
 
   if(!level.showingFinalKillcam)

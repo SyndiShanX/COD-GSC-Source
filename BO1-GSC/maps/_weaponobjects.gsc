@@ -48,9 +48,9 @@ onPlayerSpawned() {
 }
 
 setup_retrievable_hint_strings() {
-  create_retrievable_hint("hatchet", & "WEAPON_HATCHET_PICKUP");
-  create_retrievable_hint("satchel_charge", & "WEAPON_SATCHEL_CHARGE_PICKUP");
-  create_retrievable_hint("claymore", & "WEAPON_CLAYMORE_PICKUP");
+  create_retrievable_hint("hatchet", &"WEAPON_HATCHET_PICKUP");
+  create_retrievable_hint("satchel_charge", &"WEAPON_SATCHEL_CHARGE_PICKUP");
+  create_retrievable_hint("claymore", &"WEAPON_CLAYMORE_PICKUP");
 }
 
 create_retrievable_hint(name, hint) {
@@ -476,7 +476,7 @@ weapon_object_damage(watcher) {
   thread reset_weapon_object_explode_this_frame();
   if(isDefined(type) && (IsSubStr(type, "MOD_GRENADE_SPLASH") || IsSubStr(type, "MOD_GRENADE") || IsSubStr(type, "MOD_EXPLOSIVE")))
     self.wasChained = true;
-  if(isDefined(iDFlags) && (iDFlags & level.iDFLAGS_PENETRATION))
+  if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION))
     self.wasDamagedFromBulletPenetration = true;
   self.wasDamaged = true;
   watcher thread wait_and_detonate(self, 0.0, attacker);

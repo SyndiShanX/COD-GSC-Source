@@ -21,12 +21,12 @@
 
 function main() {
   globallogic::init();
-  level.onstartgametype = & onstartgametype;
-  level.onspawnplayer = & onspawnplayer;
-  level.onplayerkilled = & onplayerkilled;
-  level.onendgame = & onendgame;
+  level.onstartgametype = &onstartgametype;
+  level.onspawnplayer = &onspawnplayer;
+  level.onplayerkilled = &onplayerkilled;
+  level.onendgame = &onendgame;
   globallogic_audio::set_leader_gametype_dialog("startGunGame", "hcSstartGunGame", "", "");
-  level.givecustomloadout = & givecustomloadout;
+  level.givecustomloadout = &givecustomloadout;
   level.setbacksperdemotion = getgametypesetting("setbacks");
   level.inactivitykick = 60;
   gameobjects::register_allowed_gameobject(level.gametype);
@@ -273,13 +273,13 @@ function addguntoprogression(weaponname, attachment1, attachment2, attachment3, 
 }
 
 function setupteam(team) {
-  util::setobjectivetext(team, & "OBJECTIVES_GUN");
+  util::setobjectivetext(team, &"OBJECTIVES_GUN");
   if(level.splitscreen) {
-    util::setobjectivescoretext(team, & "OBJECTIVES_GUN");
+    util::setobjectivescoretext(team, &"OBJECTIVES_GUN");
   } else {
-    util::setobjectivescoretext(team, & "OBJECTIVES_GUN_SCORE");
+    util::setobjectivescoretext(team, &"OBJECTIVES_GUN_SCORE");
   }
-  util::setobjectivehinttext(team, & "OBJECTIVES_GUN_HINT");
+  util::setobjectivehinttext(team, &"OBJECTIVES_GUN_HINT");
   spawnlogic::add_spawn_points(team, "mp_dm_spawn");
   spawnlogic::place_spawn_points("mp_dm_spawn_start");
 }

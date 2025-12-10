@@ -78,10 +78,10 @@ give_player_tickets(var_00, var_01, var_02, var_03) {
 
 arcade_game_hint_func(var_00, var_01) {
   if(var_0.requires_power && !var_0.powered_on)
-    return & "COOP_INTERACTIONS_REQUIRES_POWER";
+    return &"COOP_INTERACTIONS_REQUIRES_POWER";
 
   if(scripts\engine\utility::is_true(var_0.out_of_order))
-    return & "CP_ZMB_INTERACTIONS_MACHINE_OUT_OF_ORDER";
+    return &"CP_ZMB_INTERACTIONS_MACHINE_OUT_OF_ORDER";
 
   return level.interaction_hintstrings[var_0.script_noteworthy];
 }

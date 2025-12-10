@@ -19,8 +19,8 @@ function init_shared() {
   if(!isDefined(level.acousticsensorhandle)) {
     level.acousticsensorhandle = 0;
   }
-  callback::on_localclient_connect( & on_player_connect);
-  callback::add_weapon_type("acoustic_sensor", & spawned);
+  callback::on_localclient_connect(&on_player_connect);
+  callback::add_weapon_type("acoustic_sensor", &spawned);
 }
 
 function on_player_connect(localclientnum) {
@@ -58,7 +58,7 @@ function spawned(localclientnum) {
   self thread watchshutdown(handle);
   owner = self getowner(localclientnum);
   addacousticsensor(handle, self, owner);
-  util::local_players_entity_thread(self, & spawnedperclient);
+  util::local_players_entity_thread(self, &spawnedperclient);
 }
 
 function spawnedperclient(localclientnum) {

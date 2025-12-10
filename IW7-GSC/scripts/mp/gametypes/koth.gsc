@@ -82,18 +82,18 @@ initializematchrules() {
 }
 
 onstartgametype() {
-  scripts\mp\utility::setobjectivetext("allies", & "OBJECTIVES_KOTH");
-  scripts\mp\utility::setobjectivetext("axis", & "OBJECTIVES_KOTH");
+  scripts\mp\utility::setobjectivetext("allies", &"OBJECTIVES_KOTH");
+  scripts\mp\utility::setobjectivetext("axis", &"OBJECTIVES_KOTH");
   if(level.splitscreen) {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_KOTH");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_KOTH");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_KOTH");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_KOTH");
   } else {
-    scripts\mp\utility::setobjectivescoretext("allies", & "OBJECTIVES_KOTH_SCORE");
-    scripts\mp\utility::setobjectivescoretext("axis", & "OBJECTIVES_KOTH_SCORE");
+    scripts\mp\utility::setobjectivescoretext("allies", &"OBJECTIVES_KOTH_SCORE");
+    scripts\mp\utility::setobjectivescoretext("axis", &"OBJECTIVES_KOTH_SCORE");
   }
 
-  scripts\mp\utility::setobjectivehinttext("allies", & "OBJECTIVES_KOTH_HINT");
-  scripts\mp\utility::setobjectivehinttext("axis", & "OBJECTIVES_KOTH_HINT");
+  scripts\mp\utility::setobjectivehinttext("allies", &"OBJECTIVES_KOTH_HINT");
+  scripts\mp\utility::setobjectivehinttext("axis", &"OBJECTIVES_KOTH_HINT");
   setclientnamemode("auto_change");
   var_00[0] = "hardpoint";
   var_00[1] = "tdm";
@@ -357,7 +357,7 @@ hpcaptureloop() {
   for(;;) {
     level.zone.gameobject scripts\mp\gameobjects::allowuse("enemy");
     level.zone.gameobject scripts\mp\gameobjects::setvisibleteam("any");
-    level.zone.gameobject scripts\mp\gameobjects::setusetext( & "MP_SECURING_POSITION");
+    level.zone.gameobject scripts\mp\gameobjects::setusetext(&"MP_SECURING_POSITION");
     if(!level.usehqrules) {
       level.zone.gameobject thread scripts\mp\gametypes\obj_zonecapture::hardpoint_setneutral();
       level.zone.gameobject scripts\mp\gameobjects::cancontestclaim(1);

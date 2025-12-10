@@ -24,13 +24,13 @@ init() {
   precacheitem("missile_drone_projectile_mp");
   loadfx("weapon/missile/fx_missile_drone_light_red");
   registerkillstreak("inventory_missile_drone_mp", "inventory_missile_drone_mp", "killstreak_missile_drone", "missile_drone_used", ::missile_drone_killstreak, 1);
-  registerkillstreakstrings("inventory_missile_drone_mp", & "KILLSTREAK_EARNED_MISSILE_DRONE", & "KILLSTREAK_MISSILE_DRONE_NOT_AVAILABLE", & "KILLSTREAK_MISSILE_DRONE_INBOUND");
+  registerkillstreakstrings("inventory_missile_drone_mp", &"KILLSTREAK_EARNED_MISSILE_DRONE", &"KILLSTREAK_MISSILE_DRONE_NOT_AVAILABLE", &"KILLSTREAK_MISSILE_DRONE_INBOUND");
   registerkillstreakdialog("inventory_missile_drone_mp", "mpl_killstreak_missile_drone", "kls_hkdrone_used", "", "kls_hkdrone_enemy", "", "kls_hkdrone_ready");
   registerkillstreakdevdvar("inventory_missile_drone_mp", "scr_givemissiledrone");
   registerkillstreak("missile_drone_mp", "missile_drone_mp", "killstreak_missile_drone", "missile_drone_used", ::missile_drone_killstreak, 1);
   registerkillstreakaltweapon("missile_drone_mp", "missile_drone_projectile_mp");
   registerkillstreakaltweapon("inventory_missile_drone_mp", "missile_drone_projectile_mp");
-  registerkillstreakstrings("missile_drone_mp", & "KILLSTREAK_EARNED_MISSILE_DRONE", & "KILLSTREAK_MISSILE_DRONE_NOT_AVAILABLE", & "KILLSTREAK_MISSILE_DRONE_INBOUND");
+  registerkillstreakstrings("missile_drone_mp", &"KILLSTREAK_EARNED_MISSILE_DRONE", &"KILLSTREAK_MISSILE_DRONE_NOT_AVAILABLE", &"KILLSTREAK_MISSILE_DRONE_INBOUND");
   registerkillstreakdialog("missile_drone_mp", "mpl_killstreak_missile_drone", "kls_hkdrone_used", "", "kls_hkdrone_enemy", "", "kls_hkdrone_ready");
   setkillstreakteamkillpenaltyscale("missile_drone_mp", 0.0);
 }

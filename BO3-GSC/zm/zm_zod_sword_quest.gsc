@@ -34,7 +34,7 @@
 #namespace zm_zod_sword;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_sword", & __init__, & __main__, undefined);
+  system::register("zm_zod_sword", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -60,11 +60,11 @@ function __init__() {
   clientfield::register("toplayer", "ZM_ZOD_UI_LVL1_EGG_PICKUP", 1, 1, "int");
   clientfield::register("toplayer", "ZM_ZOD_UI_LVL2_SWORD_PICKUP", 1, 1, "int");
   clientfield::register("toplayer", "ZM_ZOD_UI_LVL2_EGG_PICKUP", 1, 1, "int");
-  callback::on_connect( & on_player_connect);
-  callback::on_disconnect( & on_player_disconnect);
-  callback::on_spawned( & on_player_spawned);
-  zm_zod_util::on_zombie_killed( & on_zombie_killed);
-  zm_zod_util::on_player_bled_out( & on_bled_out);
+  callback::on_connect(&on_player_connect);
+  callback::on_disconnect(&on_player_disconnect);
+  callback::on_spawned(&on_player_spawned);
+  zm_zod_util::on_zombie_killed(&on_zombie_killed);
+  zm_zod_util::on_player_bled_out(&on_bled_out);
   level thread sword_devgui();
 }
 
@@ -132,7 +132,7 @@ function __main__() {
     e_statue.statue_id = statue_id;
     s_trigger_pos = struct::get(e_statue.target, "targetname");
     if(isDefined(s_trigger_pos.target)) {
-      zm_zod_smashables::add_callback(s_trigger_pos.target, & function_2c009d2e, e_statue);
+      zm_zod_smashables::add_callback(s_trigger_pos.target, &function_2c009d2e, e_statue);
       continue;
     }
     level thread function_2c009d2e(e_statue);
@@ -220,8 +220,8 @@ function function_aa4e4fa4(s_loc, n_char_index) {
   s_loc.unitrigger_stub.require_look_at = 0;
   s_loc.unitrigger_stub.n_char_index = n_char_index;
   zm_unitrigger::unitrigger_force_per_player_triggers(s_loc.unitrigger_stub, 1);
-  s_loc.unitrigger_stub.prompt_and_visibility_func = & function_ac03c228;
-  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, & function_4a3c552c);
+  s_loc.unitrigger_stub.prompt_and_visibility_func = &function_ac03c228;
+  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, &function_4a3c552c);
 }
 
 function function_ac03c228(player) {
@@ -246,15 +246,15 @@ function function_4a703d7c(player) {
   n_quest_state = level clientfield::get("keeper_quest_state_" + n_char_index);
   b_result = 0;
   if(isDefined(player.beastmode) && player.beastmode) {
-    self.hint_string = & "";
+    self.hint_string = &"";
   } else {
     if(n_quest_state === 2 || n_quest_state === 3) {
-      self.hint_string = & "";
+      self.hint_string = &"";
     } else {
       if(player.characterindex !== n_char_index) {
-        self.hint_string = & "ZM_ZOD_KEEPER_EGG_CANNOT_PICKUP";
+        self.hint_string = &"ZM_ZOD_KEEPER_EGG_CANNOT_PICKUP";
       } else if(n_quest_state === 1 && player has_sword()) {
-        self.hint_string = & "ZM_ZOD_KEEPER_EGG_PICKUP";
+        self.hint_string = &"ZM_ZOD_KEEPER_EGG_PICKUP";
         b_result = 1;
       }
     }
@@ -308,8 +308,8 @@ function create_magic_circle_unitrigger(s_loc, n_char_index) {
   s_loc.unitrigger_stub.require_look_at = 0;
   s_loc.unitrigger_stub.n_char_index = n_char_index;
   zm_unitrigger::unitrigger_force_per_player_triggers(s_loc.unitrigger_stub, 1);
-  s_loc.unitrigger_stub.prompt_and_visibility_func = & magic_circle_trigger_visibility;
-  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, & magic_circle_trigger_think);
+  s_loc.unitrigger_stub.prompt_and_visibility_func = &magic_circle_trigger_visibility;
+  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, &magic_circle_trigger_think);
 }
 
 function magic_circle_trigger_visibility(player) {
@@ -349,7 +349,7 @@ function function_74e5c19(player) {
     var_efb73168 = 0;
   }
   if(var_efb73168) {
-    self.hint_string = & "ZM_ZOD_SWORD_DEFEND_PLACE";
+    self.hint_string = &"ZM_ZOD_SWORD_DEFEND_PLACE";
     self setvisibletoplayer(player);
   } else {
     self.hint_string = "";
@@ -419,7 +419,7 @@ function magic_circle_trigger_activate(trig_stub, player) {
   player clientfield::increment_uimodel("zmhud.swordChargeUpdate");
   while(true) {
     trig_stub.ai_defender = [];
-    trig_stub.var_2330d68c = array::filter(var_fb35e9c2, 0, & function_ed69c2a1, var_181b74a5);
+    trig_stub.var_2330d68c = array::filter(var_fb35e9c2, 0, &function_ed69c2a1, var_181b74a5);
     var_90e5cd72 = 0;
     while(var_90e5cd72 < 2 && var_73fc403f < n_kills_needed) {
       trig_stub.var_87b7360++;
@@ -623,8 +623,8 @@ function function_6f69a416(s_loc, n_char_index) {
   s_loc.unitrigger_stub.require_look_at = 0;
   s_loc.unitrigger_stub.n_char_index = n_char_index;
   zm_unitrigger::unitrigger_force_per_player_triggers(s_loc.unitrigger_stub, 1);
-  s_loc.unitrigger_stub.prompt_and_visibility_func = & function_8ca48fdc;
-  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, & function_2bca570);
+  s_loc.unitrigger_stub.prompt_and_visibility_func = &function_8ca48fdc;
+  zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, &function_2bca570);
 }
 
 function function_8ca48fdc(player) {
@@ -641,24 +641,24 @@ function function_8ca48fdc(player) {
 
 function function_c722bbbb(player) {
   if(isDefined(player.beastmode) && player.beastmode || player flag::get("waiting_for_upgraded_sword")) {
-    self.hint_string = & "";
+    self.hint_string = &"";
     return false;
   }
   n_char_index = self.stub.n_char_index;
   n_quest_state = level clientfield::get("keeper_quest_state_" + n_char_index);
   if(n_quest_state === 6 && player has_sword(1)) {
-    self.hint_string = & "ZM_ZOD_KEEPER_SWORD_PLACE";
+    self.hint_string = &"ZM_ZOD_KEEPER_SWORD_PLACE";
     return true;
   }
   if(n_quest_state === 7) {
-    self.hint_string = & "ZM_ZOD_KEEPER_SWORD_PICKUP";
+    self.hint_string = &"ZM_ZOD_KEEPER_SWORD_PICKUP";
     return true;
   }
   if(player.characterindex === n_char_index) {
-    self.hint_string = & "ZM_ZOD_KEEPER_EGG_CANNOT_PICKUP";
+    self.hint_string = &"ZM_ZOD_KEEPER_EGG_CANNOT_PICKUP";
     return false;
   }
-  self.hint_string = & "";
+  self.hint_string = &"";
   return false;
 }
 
@@ -736,34 +736,34 @@ function function_2f31f931(e_player) {
   var_5f66b0c7 = level clientfield::get("ee_quest_state");
   n_quest_state = level clientfield::get("keeper_quest_state_" + e_player.characterindex);
   if(n_quest_state === 7) {
-    self.hint_string = & "";
+    self.hint_string = &"";
   } else {
     if(e_player.sword_quest.upgrade_stage >= 1) {
       if(b_sword_rock && !e_player has_sword() && !var_c9c683e8) {
         if(b_inventory && e_player.var_b170d6d6 === 0) {
           self setvisibletoplayer(e_player);
-          self.hint_string = & "ZM_ZOD_SWORD_EGG_PLACE";
+          self.hint_string = &"ZM_ZOD_SWORD_EGG_PLACE";
         } else {
           if(var_5f66b0c7 < 1) {
             self setvisibletoplayer(e_player);
-            self.hint_string = & "ZM_ZOD_SWORD_EGG_RETRIEVE";
+            self.hint_string = &"ZM_ZOD_SWORD_EGG_RETRIEVE";
           } else {
-            self.hint_string = & "";
+            self.hint_string = &"";
           }
         }
       } else {
-        self.hint_string = & "";
+        self.hint_string = &"";
       }
     } else {
       if(b_here && b_satisfied) {
         self setvisibletoplayer(e_player);
-        self.hint_string = & "ZM_ZOD_X_TO_PICK_UP_EGG";
+        self.hint_string = &"ZM_ZOD_X_TO_PICK_UP_EGG";
       } else {
         if(!b_here && !b_satisfied && b_inventory) {
           self setvisibletoplayer(e_player);
-          self.hint_string = & "ZM_ZOD_SWORD_EGG_PLACE";
+          self.hint_string = &"ZM_ZOD_SWORD_EGG_PLACE";
         } else {
-          self.hint_string = & "";
+          self.hint_string = &"";
         }
       }
     }
@@ -1000,12 +1000,12 @@ function function_3608024(b_is_active) {
 function defend_player_message(e_player) {
   s_placement = level.sword_quest.defend.a_placement[e_player.characterindex];
   if(e_player has_sword(1)) {
-    return & "ZM_ZOD_SWORD_DEFEND_PLACE";
+    return &"ZM_ZOD_SWORD_DEFEND_PLACE";
   }
   if(isDefined(s_placement.sword_model) && e_player.sword_quest.upgrade_stage == 2) {
-    return & "ZM_ZOD_SWORD_DEFEND_RETRIEVE";
+    return &"ZM_ZOD_SWORD_DEFEND_RETRIEVE";
   }
-  return & "";
+  return &"";
 }
 
 function give_sword(n_sword_level, var_74719138 = 0) {
@@ -1103,7 +1103,7 @@ function function_2c009d2e(e_statue) {
     return;
   }
   s_trigger_pos = struct::get(e_statue.target, "targetname");
-  e_statue.trigger = zm_zod_util::spawn_trigger_radius(s_trigger_pos.origin, 64, 1, & function_2f31f931);
+  e_statue.trigger = zm_zod_util::spawn_trigger_radius(s_trigger_pos.origin, 64, 1, &function_2f31f931);
   e_statue.trigger.statue_id = e_statue.statue_id;
   while(true) {
     e_statue.trigger zm_zod_util::unitrigger_refresh_message();
@@ -1204,10 +1204,10 @@ function sword_devgui() {
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
-  level thread zm_zod_util::setup_devgui_func("", "", 0, & function_b3babd8c);
-  level thread zm_zod_util::setup_devgui_func("", "", 1, & function_b3babd8c);
-  level thread zm_zod_util::setup_devgui_func("", "", 2, & function_b3babd8c);
-  level thread zm_zod_util::setup_devgui_func("", "", 4, & function_b3babd8c);
+  level thread zm_zod_util::setup_devgui_func("", "", 0, &function_b3babd8c);
+  level thread zm_zod_util::setup_devgui_func("", "", 1, &function_b3babd8c);
+  level thread zm_zod_util::setup_devgui_func("", "", 2, &function_b3babd8c);
+  level thread zm_zod_util::setup_devgui_func("", "", 4, &function_b3babd8c);
   n_sword_level = 0;
   var_47719d0d = 0;
   s_sword_rock = getent("", "");

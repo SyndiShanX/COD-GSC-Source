@@ -15,16 +15,16 @@
 #namespace achievements;
 
 function autoexec __init__sytem__() {
-  system::register("achievements", & __init__, undefined, undefined);
+  system::register("achievements", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_connect( & on_player_connect);
-  callback::on_ai_spawned( & on_ai_spawned);
-  callback::on_ai_damage( & on_ai_damage);
-  callback::on_ai_killed( & on_ai_killed);
-  callback::on_player_killed( & on_player_death);
-  spawner::add_archetype_spawn_function("wasp", & function_632712d7, 3);
+  callback::on_connect(&on_player_connect);
+  callback::on_ai_spawned(&on_ai_spawned);
+  callback::on_ai_damage(&on_ai_damage);
+  callback::on_ai_killed(&on_ai_killed);
+  callback::on_player_killed(&on_player_death);
+  spawner::add_archetype_spawn_function("wasp", &function_632712d7, 3);
   function_4462a8b7();
 }
 

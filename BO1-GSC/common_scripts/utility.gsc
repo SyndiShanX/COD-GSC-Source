@@ -1016,7 +1016,7 @@ is_false(check) {
 
 has_spawnflag(spawnflags) {
   if(isDefined(self.spawnflags)) {
-    return ((self.spawnflags & spawnflags) == spawnflags);
+    return ((self.spawnflags &spawnflags) == spawnflags);
   }
   return false;
 }

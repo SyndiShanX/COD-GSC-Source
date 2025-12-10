@@ -22,7 +22,7 @@
 #namespace laststand;
 
 function autoexec __init__sytem__() {
-  system::register("laststand", & __init__, undefined, undefined);
+  system::register("laststand", &__init__, undefined, undefined);
 }
 
 function __init__() {

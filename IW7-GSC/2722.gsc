@@ -189,7 +189,7 @@ door_state_update(var_00) {
         var_3.unresolved_collision_func = undefined;
     }
 
-    var_15 = scripts\engine\utility::ter_op(var_1.statecurr == 0, & "MP_DOOR_USE_OPEN", & "MP_DOOR_USE_CLOSE");
+    var_15 = scripts\engine\utility::ter_op(var_1.statecurr == 0, &"MP_DOOR_USE_OPEN", &"MP_DOOR_USE_CLOSE");
     var_01 sethintstring(var_15);
     var_01 makeusable();
     var_01 waittill("trigger");

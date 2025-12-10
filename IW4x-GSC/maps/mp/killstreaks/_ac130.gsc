@@ -43,7 +43,6 @@ init() {
   level._effect["ac130_light_red_blink"] = loadfx("misc/aircraft_light_red_blink");
   level._effect["ac130_engineeffect"] = loadfx("fire/jet_engine_ac130");
 
-
   level._effect["coop_muzzleflash_105mm"] = loadfx("muzzleflashes/ac130_105mm");
   level._effect["coop_muzzleflash_40mm"] = loadfx("muzzleflashes/ac130_40mm");
 
@@ -75,7 +74,6 @@ init() {
 
   level.ac130_Speed["move"] = 250;
   level.ac130_Speed["rotate"] = 70;
-
 
   flag_init("allow_context_sensative_dialog");
   flag_set("allow_context_sensative_dialog");
@@ -159,9 +157,6 @@ init_sounds() {
   setAC130Ambience("ambient_ac130_int1");
 
   level.scr_sound["foo"]["bar"] = "";
-
-
-
 
   add_context_sensative_dialog("ai", "in_sight", 0, "ac130_fco_moreenemy");
   add_context_sensative_dialog("ai", "in_sight", 1, "ac130_fco_getthatguy");
@@ -255,7 +250,6 @@ add_context_sensative_dialog(name1, name2, group, soundAlias) {
     level.scr_sound[name1][name2][group].played = false;
     level.scr_sound[name1][name2][group].sounds = [];
   }
-
 
   index = level.scr_sound[name1][name2][group].sounds.size;
   level.scr_sound[name1][name2][group].sounds[index] = soundAlias;
@@ -389,7 +383,6 @@ setAC130Player(player) {
   player thread shotFired();
   player thread clouds();
 
-
   player thread removeAC130PlayerAfterTime(level.ac130_use_duration * player.killStreakScaler);
   player thread removeAC130PlayerOnDisconnect();
   player thread removeAC130PlayerOnChangeTeams();
@@ -522,14 +515,11 @@ removeAC130Player(player, disconnected) {
     }
   }
 
-
   wait(0.5);
 
   level.ac130.planeModel playSound("veh_ac130_ext_dist_fade");
 
   wait(0.5);
-
-
 
   level.ac130player = undefined;
   level.ac130.planeModel hide();
@@ -607,7 +597,6 @@ ac130_spawn() {
   ac130model.maxhealth = 1000;
   ac130model.health = ac130model.maxhealth;
   ac130model thread damageTracker();
-
 
   ac130model linkTo(level.ac130, "tag_player", (0, 80, 32), (-25, 0, 0));
   level.ac130.planeModel = ac130model;
@@ -792,7 +781,6 @@ weaponReload(weapon) {
 
   self setWeaponAmmoClip(weapon, 9999);
 
-
   if(self getCurrentWeapon() == weapon) {
     self takeWeapon(weapon);
     self _giveWeapon(weapon);
@@ -951,8 +939,6 @@ context_Sensative_Dialog_Guy_In_Sight() {
 context_Sensative_Dialog_Guy_In_Sight_Check() {
   prof_begin("AI_in_sight_check");
 
-
-
   enemies = [];
 
   for(i = 0; i < enemies.size; i++) {
@@ -1022,7 +1008,6 @@ enemy_killed_thread() {
 
   for(;;) {
     level waittill("ai_killed", guy);
-
 
     thread context_Sensative_Dialog_Kill(guy, level.ac130player);
   }
@@ -1153,7 +1138,6 @@ context_Sensative_Dialog_Filler() {
     if((isDefined(level.radio_in_use)) && (level.radio_in_use == true))
       level waittill("radio_not_in_use");
 
-
     currentTime = getTime();
     if((currentTime - level.lastRadioTransmission) >= 3000) {
       level.lastRadioTransmission = currentTime;
@@ -1184,7 +1168,6 @@ context_Sensative_Dialog_Play_Random_Group_Sound(name1, name2, force_transmit_on
 
   randGroup = randomint(level.scr_sound[name1][name2].size);
 
-
   if(level.scr_sound[name1][name2][randGroup].played == true) {
     for(i = 0; i < level.scr_sound[name1][name2].size; i++) {
       randGroup++;
@@ -1195,7 +1178,6 @@ context_Sensative_Dialog_Play_Random_Group_Sound(name1, name2, force_transmit_on
       validGroupNum = randGroup;
       break;
     }
-
 
     if(!isDefined(validGroupNum)) {
       for(i = 0; i < level.scr_sound[name1][name2].size; i++)
@@ -1516,7 +1498,6 @@ angel_flare() {
   wait 0.05;
   playFXOnTag(fx_id, rig, "flare_left_bot");
   playFXOnTag(fx_id, rig, "flare_right_bot");
-
 
   wait(3.0);
 

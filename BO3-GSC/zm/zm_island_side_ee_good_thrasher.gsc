@@ -38,7 +38,7 @@
 #namespace zm_island_side_ee_good_thrasher;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_side_ee_good_thrasher", & __init__, undefined, undefined);
+  system::register("zm_island_side_ee_good_thrasher", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -53,8 +53,8 @@ function __init__() {
   level.var_564761a3.var_ff07b157 setscale(0.1);
   v_pos = level.var_564761a3.var_ff07b157.origin + (-16, -48, 0);
   level.var_564761a3.var_480b39a3 = util::spawn_model("tag_origin", v_pos, level.var_564761a3.var_ff07b157.angles);
-  callback::on_spawned( & on_player_spawned);
-  callback::on_connect( & on_player_connected);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_connect(&on_player_connected);
   var_d1cfa380 = getminbitcountfornum(7);
   var_a15256dd = getminbitcountfornum(3);
   clientfield::register("scriptmover", "side_ee_gt_spore_glow_fx", 9000, 1, "int");
@@ -90,7 +90,7 @@ function function_4aee2763() {
 }
 
 function function_ad9a2050() {
-  callback::remove_on_spawned( & on_player_spawned);
+  callback::remove_on_spawned(&on_player_spawned);
   level notify("hash_9fe92074");
   var_199cfb62 = getEntArray("mdl_good_thrasher_wall", "targetname");
   var_c047302 = var_199cfb62[0];
@@ -260,8 +260,8 @@ function function_4c6beece(var_f9f788a6, b_hero_weapon, e_attacker) {
     self.var_d7bb540a = self.var_d7bb540a - 1;
     a_e_enemies = var_88c0f006 array::get_touching(getaiteamarray("axis"));
     a_e_players = var_88c0f006 array::get_touching(level.players);
-    array::thread_all(a_e_enemies, & function_c6cec92d, 1, b_hero_weapon, e_attacker);
-    array::thread_all(a_e_players, & function_c6cec92d, 1, b_hero_weapon, undefined);
+    array::thread_all(a_e_enemies, &function_c6cec92d, 1, b_hero_weapon, e_attacker);
+    array::thread_all(a_e_players, &function_c6cec92d, 1, b_hero_weapon, undefined);
     wait(1);
   }
   self clientfield::set("side_ee_gt_spore_cloud_fx", 0);
@@ -566,7 +566,7 @@ function function_909c515f() {
 }
 
 function function_a0e0b4c2() {
-  zm_devgui::add_custom_devgui_callback( & function_9eaf14a2);
+  zm_devgui::add_custom_devgui_callback(&function_9eaf14a2);
   adddebugcommand("");
   adddebugcommand("");
 }

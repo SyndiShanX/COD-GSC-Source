@@ -53,17 +53,17 @@ function white_infinite_igc() {
   level thread function_19b91013();
   load::function_c32ba481(1);
   level thread newworld_util::function_30ec5bf7();
-  level util::do_chyron_text(&"CP_MI_ZURICH_NEWWORLD_INTRO_LINE_1_FULL", "", & "CP_MI_ZURICH_NEWWORLD_INTRO_LINE_3_FULL", & "CP_MI_ZURICH_NEWWORLD_INTRO_LINE_3_SHORT", & "CP_MI_ZURICH_NEWWORLD_INTRO_LINE_4_FULL", & "CP_MI_ZURICH_NEWWORLD_INTRO_LINE_4_SHORT", & "CP_MI_ZURICH_NEWWORLD_INTRO_LINE_5_FULL", & "CP_MI_ZURICH_NEWWORLD_INTRO_LINE_5_SHORT", "", "");
+  level util::do_chyron_text(&"CP_MI_ZURICH_NEWWORLD_INTRO_LINE_1_FULL", "", &"CP_MI_ZURICH_NEWWORLD_INTRO_LINE_3_FULL", &"CP_MI_ZURICH_NEWWORLD_INTRO_LINE_3_SHORT", &"CP_MI_ZURICH_NEWWORLD_INTRO_LINE_4_FULL", &"CP_MI_ZURICH_NEWWORLD_INTRO_LINE_4_SHORT", &"CP_MI_ZURICH_NEWWORLD_INTRO_LINE_5_FULL", &"CP_MI_ZURICH_NEWWORLD_INTRO_LINE_5_SHORT", "", "");
   if(isDefined(level.bzm_newworlddialogue1callback)) {
     level thread[[level.bzm_newworlddialogue1callback]]();
   }
-  level scene::add_scene_func("p7_fxanim_cp_newworld_train_intro_glass_bundle", & function_f910c34a);
-  level scene::add_scene_func("cin_new_01_01_whiteinfinite_1st_intro", & function_7b872728);
-  level scene::add_scene_func("cin_new_01_01_whiteinfinite_1st_intro", & function_f8514554);
+  level scene::add_scene_func("p7_fxanim_cp_newworld_train_intro_glass_bundle", &function_f910c34a);
+  level scene::add_scene_func("cin_new_01_01_whiteinfinite_1st_intro", &function_7b872728);
+  level scene::add_scene_func("cin_new_01_01_whiteinfinite_1st_intro", &function_f8514554);
   level scene::add_player_linked_scene("p7_fxanim_cp_newworld_train_intro_glass_bundle");
   level thread scene::play("p7_fxanim_cp_newworld_train_intro_glass_bundle");
   level thread scene::play("cin_new_01_01_whiteinfinite_1st_intro");
-  array::thread_all(level.activeplayers, & newworld_util::function_737d2864, & "CP_MI_ZURICH_NEWWORLD_LOCATION_TRAIN", & "CP_MI_ZURICH_NEWWORLD_TIME_TRAIN1");
+  array::thread_all(level.activeplayers, &newworld_util::function_737d2864, &"CP_MI_ZURICH_NEWWORLD_LOCATION_TRAIN", &"CP_MI_ZURICH_NEWWORLD_TIME_TRAIN1");
   level thread function_6fe6a34d();
   level waittill("hash_a4a076ed");
   setpauseworld(0);
@@ -184,8 +184,8 @@ function inbound_igc() {
   newworld_util::function_83a7d040();
   util::streamer_wait();
   newworld_util::player_snow_fx();
-  scene::add_scene_func("cin_new_14_01_inbound_1st_preptalk", & taylor_inbound_igc, "play");
-  scene::add_scene_func("cin_new_14_01_inbound_1st_preptalk", & function_985304c3, "play");
+  scene::add_scene_func("cin_new_14_01_inbound_1st_preptalk", &taylor_inbound_igc, "play");
+  scene::add_scene_func("cin_new_14_01_inbound_1st_preptalk", &function_985304c3, "play");
   if(isDefined(level.bzm_newworlddialogue10callback)) {
     level thread[[level.bzm_newworlddialogue10callback]]();
   }
@@ -196,7 +196,7 @@ function inbound_igc() {
 
 function function_985304c3(a_ents) {
   level flag::clear("infinite_white_transition");
-  array::thread_all(level.activeplayers, & newworld_util::function_737d2864, & "CP_MI_ZURICH_NEWWORLD_LOCATION_TRAIN", & "CP_MI_ZURICH_NEWWORLD_TIME_TRAIN2");
+  array::thread_all(level.activeplayers, &newworld_util::function_737d2864, &"CP_MI_ZURICH_NEWWORLD_LOCATION_TRAIN", &"CP_MI_ZURICH_NEWWORLD_TIME_TRAIN2");
 }
 
 function taylor_inbound_igc(a_ents) {
@@ -242,8 +242,8 @@ function skipto_train_init(str_objective, b_starting) {
       e_clip delete();
     }
   }
-  util::delay(0.6, undefined, & newworld_util::function_3e37f48b, 0);
-  util::delay(1, undefined, & function_1a874d86);
+  util::delay(0.6, undefined, &newworld_util::function_3e37f48b, 0);
+  util::delay(1, undefined, &function_1a874d86);
   level thread namespace_e38c3c58::function_c132cd41();
   level thread train_brake_flaps_init();
   battlechatter::function_d9f49fba(1);
@@ -337,7 +337,7 @@ function function_6cff67b8() {
 
 function function_7710c097() {
   level clientfield::set("train_dropdown_glass", 1);
-  scene::add_scene_func("cin_new_16_01_detachbombcar_aie_drop", & function_d6c3792a, "init");
+  scene::add_scene_func("cin_new_16_01_detachbombcar_aie_drop", &function_d6c3792a, "init");
   level thread scene::init("cin_new_16_01_detachbombcar_aie_drop");
   trigger::wait_till("train_car_4_robot_spawns");
   level thread function_6a30b44c();
@@ -346,7 +346,7 @@ function function_7710c097() {
     ai_robot = spawner::simple_spawn_single("train_car_4_secondstory");
     ai_robot thread function_c19bd331();
   }
-  scene::add_scene_func("cin_new_16_01_detachbombcar_aie_drop", & function_613f8b51, "play");
+  scene::add_scene_func("cin_new_16_01_detachbombcar_aie_drop", &function_613f8b51, "play");
   level thread scene::play("cin_new_16_01_detachbombcar_aie_drop");
   level waittill("hash_60e2e11");
   level clientfield::set("train_dropdown_glass", 2);
@@ -423,11 +423,11 @@ function function_f3519ceb() {
 }
 
 function setup_robot_spawn_scenes() {
-  scene::add_scene_func("p7_fxanim_cp_newworld_charging_station_open_01_bundle", & function_1d0cebf2, "init");
-  scene::add_scene_func("p7_fxanim_cp_newworld_charging_station_open_01_bundle", & charging_station_open, "done");
-  scene::add_scene_func("cin_new_scr_temp_robot_fwd", & init_train_wakeup_robot, "init");
-  scene::add_scene_func("cin_new_scr_temp_robot_fwd", & play_train_wakeup_robot, "play");
-  scene::add_scene_func("cin_new_scr_temp_robot_fwd", & done_train_wakeup_robot, "done");
+  scene::add_scene_func("p7_fxanim_cp_newworld_charging_station_open_01_bundle", &function_1d0cebf2, "init");
+  scene::add_scene_func("p7_fxanim_cp_newworld_charging_station_open_01_bundle", &charging_station_open, "done");
+  scene::add_scene_func("cin_new_scr_temp_robot_fwd", &init_train_wakeup_robot, "init");
+  scene::add_scene_func("cin_new_scr_temp_robot_fwd", &play_train_wakeup_robot, "play");
+  scene::add_scene_func("cin_new_scr_temp_robot_fwd", &done_train_wakeup_robot, "done");
 }
 
 function function_1d0cebf2(a_ents) {
@@ -485,8 +485,8 @@ function function_704b33db() {
 }
 
 function function_5e667e1f() {
-  scene::add_scene_func("cin_gen_traversal_robot_climb_train_right", & function_b30301a7, "done");
-  scene::add_scene_func("cin_gen_traversal_robot_climb_train_left", & function_b30301a7, "done");
+  scene::add_scene_func("cin_gen_traversal_robot_climb_train_right", &function_b30301a7, "done");
+  scene::add_scene_func("cin_gen_traversal_robot_climb_train_left", &function_b30301a7, "done");
   switch (level.activeplayers.size) {
     case 1:
     case 2: {
@@ -562,22 +562,22 @@ function function_54bd9482() {
 }
 
 function train_civilians(str_objective) {
-  scene::add_scene_func("cin_new_15_01_train_vign_drinks", & train_civilian_logic, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_drinks", & function_ffaa48a3, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male01", & train_civilian_logic, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male01", & function_ffaa48a3, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male01_table", & train_civilian_logic, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male01_table", & function_ffaa48a3, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male02", & train_civilian_logic, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male02", & function_ffaa48a3, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female01", & train_civilian_logic, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female01", & function_ffaa48a3, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female01_table", & train_civilian_logic, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female01_table", & function_ffaa48a3, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female02", & train_civilian_logic, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female02", & function_ffaa48a3, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female02_table", & train_civilian_logic, "play");
-  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female02_table", & function_ffaa48a3, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_drinks", &train_civilian_logic, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_drinks", &function_ffaa48a3, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male01", &train_civilian_logic, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male01", &function_ffaa48a3, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male01_table", &train_civilian_logic, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male01_table", &function_ffaa48a3, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male02", &train_civilian_logic, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_male02", &function_ffaa48a3, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female01", &train_civilian_logic, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female01", &function_ffaa48a3, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female01_table", &train_civilian_logic, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female01_table", &function_ffaa48a3, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female02", &train_civilian_logic, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female02", &function_ffaa48a3, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female02_table", &train_civilian_logic, "play");
+  scene::add_scene_func("cin_new_15_01_train_vign_passengercar_female02_table", &function_ffaa48a3, "play");
   if(str_objective === "train_inbound_igc" || str_objective === "train_train_start" || str_objective === "underground_staging_room_igc") {
     a_s_scenes = struct::get_array("train_civilians_car_1", "script_noteworthy");
     foreach(s_scene in a_s_scenes) {
@@ -698,8 +698,8 @@ function function_6114e822() {
   level thread function_783ceb85();
   var_83b961d3 = struct::get("robot_swing_enter_left", "targetname");
   var_d2b65346 = struct::get("robot_swing_enter_right", "targetname");
-  scene::add_scene_func("cin_new_15_02_train_aie_robot_swing_enter", & function_e1da9958, "play");
-  scene::add_scene_func("cin_new_15_02_train_aie_robot_swing_enter", & function_5e60279a, "done");
+  scene::add_scene_func("cin_new_15_02_train_aie_robot_swing_enter", &function_e1da9958, "play");
+  scene::add_scene_func("cin_new_15_02_train_aie_robot_swing_enter", &function_5e60279a, "done");
   wait(0.5);
   var_83b961d3 thread scene::play();
   if(level.activeplayers.size > 2) {
@@ -757,21 +757,21 @@ function train_lockdown() {
   trigger::wait_till("train_lockdown", undefined, undefined, 0);
   exploder::exploder("ex_breakglass");
   clientfield::set("train_lockdown_shutters_1", 1);
-  array::run_all(getEntArray("train_lockdown_door", "targetname"), & movey, -64, 0.5);
+  array::run_all(getEntArray("train_lockdown_door", "targetname"), &movey, -64, 0.5);
   level thread start_sequential_train_door_lockdown();
   level thread function_123070a9();
   wait(1.5);
-  scene::add_scene_func("cin_new_15_02_train_aie_smash", & function_b8f52cb2, "play");
-  scene::add_scene_func("cin_new_15_02_train_aie_smash", & train_lockdown_glass_break_left, "play");
-  scene::add_scene_func("cin_new_15_02_train_aie_smash", & train_lockdown_glass_break_right, "play");
-  scene::add_scene_func("cin_new_15_02_train_aie_smash", & function_84631064, "done");
+  scene::add_scene_func("cin_new_15_02_train_aie_smash", &function_b8f52cb2, "play");
+  scene::add_scene_func("cin_new_15_02_train_aie_smash", &train_lockdown_glass_break_left, "play");
+  scene::add_scene_func("cin_new_15_02_train_aie_smash", &train_lockdown_glass_break_right, "play");
+  scene::add_scene_func("cin_new_15_02_train_aie_smash", &function_84631064, "done");
   level thread scene::play("cin_new_15_02_train_aie_smash");
   level waittill("train_lockdown_glass_break_right");
-  array::run_all(getEntArray("train_lockdown_glass", "targetname"), & delete);
+  array::run_all(getEntArray("train_lockdown_glass", "targetname"), &delete);
 }
 
 function function_e7752aae() {
-  scene::add_scene_func("cin_new_15_02_train_aie_smash", & function_f1aa562d, "init");
+  scene::add_scene_func("cin_new_15_02_train_aie_smash", &function_f1aa562d, "init");
   trigger::wait_till("start_lockdown_robots");
   level thread scene::init("cin_new_15_02_train_aie_smash");
 }
@@ -1139,8 +1139,8 @@ function skipto_train_rooftop_init(str_objective, b_starting) {
     level thread function_75fc9f6a();
     level thread train_car_door_lock(1);
     level thread train_spawn_functions();
-    level thread array::run_all(getEntArray("train_lockdown_door", "targetname"), & movey, -64, 0.5);
-    level thread array::run_all(getEntArray("train_lockdown_glass", "targetname"), & delete);
+    level thread array::run_all(getEntArray("train_lockdown_door", "targetname"), &movey, -64, 0.5);
+    level thread array::run_all(getEntArray("train_lockdown_glass", "targetname"), &delete);
     level thread setup_robot_spawn_scenes();
     load::function_a2995f22();
     level clientfield::set("train_main_fx_occlude", 1);
@@ -1166,7 +1166,7 @@ function skipto_train_rooftop_init(str_objective, b_starting) {
   foreach(var_1bad7ee6 in var_a59819c6) {
     var_1bad7ee6 trigger::use();
   }
-  callback::on_ai_killed( & function_9ee5007a);
+  callback::on_ai_killed(&function_9ee5007a);
   level thread train_wind_resistance();
   level thread train_player_checkpoints();
   level thread function_f9012fc();
@@ -1203,9 +1203,9 @@ function function_376cc585() {
 function skipto_train_rooftop_done(str_objective, b_starting, b_direct, player) {}
 
 function train_spawn_functions() {
-  spawner::add_spawn_function_group("train_robot_rushers", "script_noteworthy", & train_robot_rushers);
-  spawner::add_spawn_function_group("train_roof1_reinforcements", "targetname", & function_422fbc49);
-  spawner::add_spawn_function_group("train_rooftop_depth", "script_noteworthy", & function_ca6ecfb3);
+  spawner::add_spawn_function_group("train_robot_rushers", "script_noteworthy", &train_robot_rushers);
+  spawner::add_spawn_function_group("train_roof1_reinforcements", "targetname", &function_422fbc49);
+  spawner::add_spawn_function_group("train_rooftop_depth", "script_noteworthy", &function_ca6ecfb3);
 }
 
 function train_robot_rushers() {
@@ -1251,7 +1251,7 @@ function function_6ba3e1f3() {
 }
 
 function train_quadtank_scenes() {
-  scene::add_scene_func("cin_gen_ambient_quadtank_inactive", & function_3f4179e6, "play");
+  scene::add_scene_func("cin_gen_ambient_quadtank_inactive", &function_3f4179e6, "play");
   scene::play("cin_gen_ambient_quadtank_inactive");
 }
 
@@ -1389,13 +1389,13 @@ function function_84dc13df() {
   objectives::set("cp_level_newworld_train_subobj_hack_door");
   var_3b374bac = getent("train_detach_bomb_hack", "targetname");
   var_3b374bac triggerenable(1);
-  e_player = newworld_util::function_16dd8c5f("train_detach_bomb_hack", & "cp_level_newworld_access_door", & "CP_MI_ZURICH_NEWWORLD_HACK", "train_door_panel", "train_door_hacked", 0);
+  e_player = newworld_util::function_16dd8c5f("train_detach_bomb_hack", &"cp_level_newworld_access_door", &"CP_MI_ZURICH_NEWWORLD_HACK", "train_door_panel", "train_door_hacked", 0);
   objectives::complete("cp_level_newworld_train_subobj_hack_door");
   return e_player;
 }
 
 function function_cfb8d002() {
-  scene::add_scene_func("p7_fxanim_cp_newworld_train_end_bundle", & function_368767cf, "init");
+  scene::add_scene_func("p7_fxanim_cp_newworld_train_end_bundle", &function_368767cf, "init");
   level thread scene::init("p7_fxanim_cp_newworld_train_end_bundle");
 }
 
@@ -1415,12 +1415,12 @@ function detach_bomb_igc(e_player) {
   if(isDefined(level.bzm_newworlddialogue11callback)) {
     level thread[[level.bzm_newworlddialogue11callback]]();
   }
-  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", & function_956507bd, "play");
-  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", & derez_taylor, "play");
-  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", & function_87eb5c2, "play");
-  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", & function_80caa10e, "play");
-  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", & function_7db3194d, "play");
-  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", & function_37f058fc, "play");
+  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", &function_956507bd, "play");
+  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", &derez_taylor, "play");
+  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", &function_87eb5c2, "play");
+  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", &function_80caa10e, "play");
+  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", &function_7db3194d, "play");
+  scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", &function_37f058fc, "play");
   level thread scene::play("cin_new_16_01_detachbombcar_1st_detach", e_player);
   hidemiscmodels("train_bomb_exterior_hide");
   var_3ebf068e = getent("newworld_train_end", "targetname");
@@ -1609,7 +1609,7 @@ function function_3641dc88() {
   iprintlnbold("");
   level clientfield::set("sndTrainContext", 2);
   level thread environment_transition(e_tunnel_1, e_tunnel_2, e_tunnel_3, var_718f1be5, var_9791964e, var_bd9410b7);
-  level util::delay(6, undefined, & newworld_util::player_snow_fx);
+  level util::delay(6, undefined, &newworld_util::player_snow_fx);
 }
 
 function function_c4addffd(n_delay = 3) {
@@ -1622,7 +1622,7 @@ function function_c4addffd(n_delay = 3) {
   newworld_util::function_85d8906c();
   level environment_transition(level.var_2982cbda[0], level.var_2982cbda[1], level.var_2982cbda[2], e_tunnel_1, e_tunnel_2, e_tunnel_3);
   wait(n_delay);
-  level util::delay(3, undefined, & newworld_util::player_snow_fx);
+  level util::delay(3, undefined, &newworld_util::player_snow_fx);
   level environment_transition(level.var_2982cbda[0], level.var_2982cbda[1], level.var_2982cbda[2], var_f9c66158, var_6bcdd093, var_45cb562a);
 }
 
@@ -1673,7 +1673,7 @@ function environment_move(e_environment_1, e_environment_2, e_environment_3) {
   while(!level flag::get("train_terrain_transition")) {
     function_c7d3965b(e_environment_1);
     e_environment_1.origin = level.v_train_terrain_origin;
-    util::delay(0.1, "train_terrain_stop", & function_8db22683, e_environment_1);
+    util::delay(0.1, "train_terrain_stop", &function_8db22683, e_environment_1);
     e_environment_1 movex(36736, 4);
     e_environment_2 movex(36736, 4);
     if(isDefined(e_environment_3)) {
@@ -1686,7 +1686,7 @@ function environment_move(e_environment_1, e_environment_2, e_environment_3) {
     if(isDefined(e_environment_3)) {
       function_c7d3965b(e_environment_3);
       e_environment_3.origin = level.v_train_terrain_origin;
-      util::delay(0.1, "train_terrain_stop", & function_8db22683, e_environment_3);
+      util::delay(0.1, "train_terrain_stop", &function_8db22683, e_environment_3);
       e_environment_1 movex(36736, 4);
       e_environment_2 movex(36736, 4);
       e_environment_3 movex(36736, 4);
@@ -1697,7 +1697,7 @@ function environment_move(e_environment_1, e_environment_2, e_environment_3) {
     }
     function_c7d3965b(e_environment_2);
     e_environment_2.origin = level.v_train_terrain_origin;
-    util::delay(0.1, "train_terrain_stop", & function_8db22683, e_environment_2);
+    util::delay(0.1, "train_terrain_stop", &function_8db22683, e_environment_2);
     e_environment_1 movex(36736, 4);
     e_environment_2 movex(36736, 4);
     if(isDefined(e_environment_3)) {
@@ -1739,7 +1739,7 @@ function environment_transition(e_old_environment_1, e_old_environment_2, e_old_
     }
     function_c7d3965b(a_new[0]);
     a_new[0].origin = level.v_train_terrain_origin;
-    util::delay(0.1, "train_terrain_stop", & function_8db22683, a_new[0]);
+    util::delay(0.1, "train_terrain_stop", &function_8db22683, a_new[0]);
     array::push_front(a_old, a_new[0]);
     array::pop_front(a_new, 0);
     foreach(e_track_model in a_old) {
@@ -1827,7 +1827,7 @@ function function_c24ce0f9(a_s_teleports) {
       util::wait_network_frame();
       self show();
       self clientfield::set("player_spawn_fx", 1);
-      self util::delay(2, "death", & clientfield::set, "player_spawn_fx", 0);
+      self util::delay(2, "death", &clientfield::set, "player_spawn_fx", 0);
       self thread function_f26eff53();
       wait(2);
       self disableinvulnerability();
@@ -1856,7 +1856,7 @@ function function_f9012fc() {
   foreach(player in level.players) {
     player thread grenade_toss(var_32400ae0);
   }
-  callback::on_spawned( & grenade_toss, var_32400ae0);
+  callback::on_spawned(&grenade_toss, var_32400ae0);
 }
 
 function grenade_toss(var_32400ae0) {
@@ -2141,7 +2141,7 @@ function function_3fbeb972(var_12b288c7) {
       break;
     }
   }
-  self util::delay(30, "death", & function_7bece35e);
+  self util::delay(30, "death", &function_7bece35e);
 }
 
 function function_7bece35e() {

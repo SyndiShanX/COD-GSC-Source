@@ -15,7 +15,7 @@
 #namespace _zm_weap_nesting_dolls;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_nesting_dolls", & __init__, undefined, undefined);
+  system::register("zm_weap_nesting_dolls", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -30,7 +30,7 @@ function __init__() {
   gravity = getdvarfloat("bg_gravity");
   level.nesting_dolls_launch_peak_time = (level.nesting_dolls_launch_speed * sin(level.nesting_dolls_launch_angle)) / abs(gravity) * 0.5;
   level.nesting_dolls_max_ids = 10;
-  level.zombiemode_devgui_nesting_dolls_give = & player_give_nesting_dolls;
+  level.zombiemode_devgui_nesting_dolls_give = &player_give_nesting_dolls;
   setup_nesting_dolls_data();
 }
 

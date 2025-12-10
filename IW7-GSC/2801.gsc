@@ -107,7 +107,7 @@ func_109C2(var_00) {
   var_00 endon("disconnect");
   var_00 endon("death");
   self.trigger setcursorhint("HINT_NOICON");
-  self.trigger sethintstring( & "MP_PICKUP_SPEED_STRIP");
+  self.trigger sethintstring(&"MP_PICKUP_SPEED_STRIP");
   self.trigger scripts\mp\utility\game::setselfusable(var_00);
   self.trigger thread scripts\mp\utility\game::notusableforjoiningplayers(var_00);
 

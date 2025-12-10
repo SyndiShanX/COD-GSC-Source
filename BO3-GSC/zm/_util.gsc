@@ -129,7 +129,7 @@ function setlowermessage(text, time, combinemessageandtimer) {
   self.lowermessage settext(text);
   if(isDefined(time) && time > 0) {
     if(!isDefined(combinemessageandtimer) || !combinemessageandtimer) {
-      self.lowertimer.label = & "";
+      self.lowertimer.label = &"";
     } else {
       self.lowermessage settext("");
       self.lowertimer.label = text;
@@ -137,7 +137,7 @@ function setlowermessage(text, time, combinemessageandtimer) {
     self.lowertimer settimer(time);
   } else {
     self.lowertimer settext("");
-    self.lowertimer.label = & "";
+    self.lowertimer.label = &"";
   }
   if(self issplitscreen()) {
     self.lowermessage.fontscale = 1.4;
@@ -164,14 +164,14 @@ function setlowermessagevalue(text, value, combinemessage) {
   }
   if(isDefined(value) && value > 0) {
     if(!isDefined(combinemessage) || !combinemessage) {
-      self.lowertimer.label = & "";
+      self.lowertimer.label = &"";
     } else {
       self.lowertimer.label = text;
     }
     self.lowertimer setvalue(value);
   } else {
     self.lowertimer settext("");
-    self.lowertimer.label = & "";
+    self.lowertimer.label = &"";
   }
   if(self issplitscreen()) {
     self.lowermessage.fontscale = 1.4;

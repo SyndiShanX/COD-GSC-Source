@@ -28,7 +28,7 @@
 #namespace _zm_weap_elemental_bow_demongate;
 
 function autoexec __init__sytem__() {
-  system::register("_zm_weap_elemental_bow_demongate", & __init__, & __main__, undefined);
+  system::register("_zm_weap_elemental_bow_demongate", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -47,13 +47,13 @@ function __init__() {
 }
 
 function __main__() {
-  callback::on_connect( & function_71c07c9d);
+  callback::on_connect(&function_71c07c9d);
 }
 
 function function_71c07c9d() {
   self thread zm_weap_elemental_bow::function_982419bb("elemental_bow_demongate");
   self thread zm_weap_elemental_bow::function_ececa597("elemental_bow_demongate", "elemental_bow_demongate4");
-  self thread zm_weap_elemental_bow::function_7bc6b9d("elemental_bow_demongate", "elemental_bow_demongate4", & function_7e0efd7);
+  self thread zm_weap_elemental_bow::function_7bc6b9d("elemental_bow_demongate", "elemental_bow_demongate4", &function_7e0efd7);
 }
 
 function function_7e0efd7(weapon, position, radius, attacker, normal) {
@@ -524,8 +524,8 @@ function function_99d2c8aa(e_player) {
   }
   a_ai_enemies = getaiteamarray(level.zombie_team);
   var_237d778f = arraysortclosest(a_ai_enemies, var_51b6a540, a_ai_enemies.size, 0, var_6f3820ea);
-  var_237d778f = array::filter(var_237d778f, 0, & zm_weap_elemental_bow::function_5aec3adc);
-  var_237d778f = array::filter(var_237d778f, 0, & function_c994aef0, self);
+  var_237d778f = array::filter(var_237d778f, 0, &zm_weap_elemental_bow::function_5aec3adc);
+  var_237d778f = array::filter(var_237d778f, 0, &function_c994aef0, self);
   if(var_237d778f.size) {
     var_9183256c = var_237d778f[0];
     var_9183256c.var_bc9b5fbd = 1;

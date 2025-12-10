@@ -856,7 +856,7 @@ devgui_increase_momentum(score) {
     if(player.sessionstate != "playing") {
       continue;
     }
-    player maps\mp\gametypes\_globallogic_score::giveplayermomentumnotification(score, & "testPlayerScoreForTan", "PLAYER_SCORE", 0);
+    player maps\mp\gametypes\_globallogic_score::giveplayermomentumnotification(score, &"testPlayerScoreForTan", "PLAYER_SCORE", 0);
   }
 
 }

@@ -488,7 +488,7 @@ ruins_battle_2() {
   level thread ruins_retreat_reaction();
   autosave_by_name("Ber1 ruins retreat");
   simple_floodspawn("office_defend_spawners");
-  objective_string(2, & "BER1_CLEAR_CLOCKTOWER");
+  objective_string(2, &"BER1_CLEAR_CLOCKTOWER");
   objective_position(2, (944, -368, -229.6));
   clock_tower_battle();
 }

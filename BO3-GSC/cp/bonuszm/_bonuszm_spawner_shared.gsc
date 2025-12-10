@@ -69,7 +69,7 @@ function function_9bb9e127() {
 
 function function_b6c845e8() {
   if(level.var_a9e78bf7["zombifyenabled"]) {
-    level.overrideglobalspawnfunc = & bonuzm_spawn;
+    level.overrideglobalspawnfunc = &bonuzm_spawn;
   } else {
     level.overrideglobalspawnfunc = undefined;
   }

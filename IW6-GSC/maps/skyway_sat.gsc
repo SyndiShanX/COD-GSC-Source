@@ -11,8 +11,8 @@ section_flag_inits() {
 }
 
 section_precache() {
-  maps\_utility::add_hint_string("hint_sat_bridge_1", & "SKYWAY_HINT_BRIDGE", ::hint_bridge_1);
-  maps\_utility::add_hint_string("hint_sat_bridge_2", & "SKYWAY_HINT_BRIDGE", ::hint_bridge_2);
+  maps\_utility::add_hint_string("hint_sat_bridge_1", &"SKYWAY_HINT_BRIDGE", ::hint_bridge_1);
+  maps\_utility::add_hint_string("hint_sat_bridge_2", &"SKYWAY_HINT_BRIDGE", ::hint_bridge_2);
 }
 
 hint_bridge_1() {

@@ -17,7 +17,7 @@
 function main() {
   clientfield::register("world", "mpSpireExteriorBillboard", 1, 2, "int");
   mp_spire_fx::main();
-  level.add_raps_omit_locations = & add_raps_omit_locations;
+  level.add_raps_omit_locations = &add_raps_omit_locations;
   load::main();
   compass::setupminimap("compass_map_mp_spire");
   spawncollision("collision_clip_ramp_64x24", "collider", (4168.34, 708.791, -12.0068), (0, 0, 0));
@@ -60,11 +60,11 @@ function main() {
   }
   mp_spire_amb::main();
   setdvar("compassmaxrange", "2100");
-  game["strings"]["war_callsign_a"] = & "MPUI_CALLSIGN_MAPNAME_A";
-  game["strings"]["war_callsign_b"] = & "MPUI_CALLSIGN_MAPNAME_B";
-  game["strings"]["war_callsign_c"] = & "MPUI_CALLSIGN_MAPNAME_C";
-  game["strings"]["war_callsign_d"] = & "MPUI_CALLSIGN_MAPNAME_D";
-  game["strings"]["war_callsign_e"] = & "MPUI_CALLSIGN_MAPNAME_E";
+  game["strings"]["war_callsign_a"] = &"MPUI_CALLSIGN_MAPNAME_A";
+  game["strings"]["war_callsign_b"] = &"MPUI_CALLSIGN_MAPNAME_B";
+  game["strings"]["war_callsign_c"] = &"MPUI_CALLSIGN_MAPNAME_C";
+  game["strings"]["war_callsign_d"] = &"MPUI_CALLSIGN_MAPNAME_D";
+  game["strings"]["war_callsign_e"] = &"MPUI_CALLSIGN_MAPNAME_E";
   game["strings_menu"]["war_callsign_a"] = "@MPUI_CALLSIGN_MAPNAME_A";
   game["strings_menu"]["war_callsign_b"] = "@MPUI_CALLSIGN_MAPNAME_B";
   game["strings_menu"]["war_callsign_c"] = "@MPUI_CALLSIGN_MAPNAME_C";
@@ -87,7 +87,7 @@ function exterior_billboard_exploders() {
   }
 }
 
-function add_raps_omit_locations( & omit_locations) {
+function add_raps_omit_locations(&omit_locations) {
   if(!isDefined(omit_locations)) {
     omit_locations = [];
   } else if(!isarray(omit_locations)) {

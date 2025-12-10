@@ -1488,7 +1488,7 @@ socotra_karma_spawn() {
   animalignnode.targetname = "karma_loc";
   level thread run_scene("karma_rescue_karma_idle");
   level.rts.karma thread karma_helpme(level.rts.karma.origin, 200);
-  level thread maps\_so_rts_support::trigger_use(level.rts.karma_poi.karma_trigger, & "SO_RTS_MP_SOCOTRA_FREE_KARMA", "socotra_karma_rescued");
+  level thread maps\_so_rts_support::trigger_use(level.rts.karma_poi.karma_trigger, &"SO_RTS_MP_SOCOTRA_FREE_KARMA", "socotra_karma_rescued");
   level waittill("socotra_karma_rescued");
   level thread karma_sayswhoareyou();
   level.rts.karma_poi.karma_trigger delete();
@@ -2100,11 +2100,11 @@ socotra_pick_safehouses() {
   safehouse5.bldgid = safeloc5.script_parameters;
   safehouse5.trig = getent(safeloc5.target, "targetname");
   level.rts.safehouses = array(safehouse1, safehouse2, safehouse3, safehouse4, safehouse5);
-  maps\_so_rts_poi::add_poi(poinames[0], safehouse1, "axis", 1, 1, 0, & "rts_search_poi");
-  maps\_so_rts_poi::add_poi(poinames[1], safehouse2, "axis", 1, 1, 0, & "rts_search_poi");
-  maps\_so_rts_poi::add_poi(poinames[2], safehouse3, "axis", 1, 1, 0, & "rts_search_poi");
-  maps\_so_rts_poi::add_poi(poinames[3], safehouse4, "axis", 1, 1, 0, & "rts_search_poi");
-  maps\_so_rts_poi::add_poi(poinames[4], safehouse5, "axis", 1, 1, 0, & "rts_search_poi");
+  maps\_so_rts_poi::add_poi(poinames[0], safehouse1, "axis", 1, 1, 0, &"rts_search_poi");
+  maps\_so_rts_poi::add_poi(poinames[1], safehouse2, "axis", 1, 1, 0, &"rts_search_poi");
+  maps\_so_rts_poi::add_poi(poinames[2], safehouse3, "axis", 1, 1, 0, &"rts_search_poi");
+  maps\_so_rts_poi::add_poi(poinames[3], safehouse4, "axis", 1, 1, 0, &"rts_search_poi");
+  maps\_so_rts_poi::add_poi(poinames[4], safehouse5, "axis", 1, 1, 0, &"rts_search_poi");
 
   foreach(spot in level.rts.safehouses) {
     target = "mp_socotra_bldg_0" + spot.bldgid;

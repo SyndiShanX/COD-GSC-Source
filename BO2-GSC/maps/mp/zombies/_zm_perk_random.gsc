@@ -75,7 +75,7 @@ wunderfizzstub_update_prompt(player) {
   self.hint_parm1 = undefined;
 
   if(isDefined(self.stub.trigger_target.is_locked) && self.stub.trigger_target.is_locked) {
-    self.hint_string = & "ZM_TOMB_RPU";
+    self.hint_string = &"ZM_TOMB_RPU";
     return false;
   } else if(self.stub.trigger_target.is_current_ball_location) {
     if(isDefined(self.stub.trigger_target.machine_user)) {
@@ -83,11 +83,11 @@ wunderfizzstub_update_prompt(player) {
         n_purchase_limit = player get_player_perk_purchase_limit();
 
         if(player.num_perks >= n_purchase_limit) {
-          self.hint_string = & "ZM_TOMB_RPT";
+          self.hint_string = &"ZM_TOMB_RPT";
           self.hint_parm1 = n_purchase_limit;
           return false;
         } else {
-          self.hint_string = & "ZM_TOMB_RPP";
+          self.hint_string = &"ZM_TOMB_RPP";
           return true;
         }
       } else
@@ -96,17 +96,17 @@ wunderfizzstub_update_prompt(player) {
       n_purchase_limit = player get_player_perk_purchase_limit();
 
       if(player.num_perks >= n_purchase_limit) {
-        self.hint_string = & "ZM_TOMB_RPT";
+        self.hint_string = &"ZM_TOMB_RPT";
         self.hint_parm1 = n_purchase_limit;
         return false;
       } else {
-        self.hint_string = & "ZM_TOMB_RPB";
+        self.hint_string = &"ZM_TOMB_RPB";
         self.hint_parm1 = level._random_zombie_perk_cost;
         return true;
       }
     }
   } else {
-    self.hint_string = & "ZM_TOMB_RPE";
+    self.hint_string = &"ZM_TOMB_RPE";
     return false;
   }
 }

@@ -86,7 +86,6 @@ endGameDeath(duration) {
 
   wait(duration + 1);
 
-
   self _suicide();
 }
 
@@ -101,7 +100,6 @@ setCombatHigh() {
     self.moveSpeedScaler = 1.25;
     self maps\mp\gametypes\_weapons::updateMoveSpeedScale("primary");
   }
-
 
   if(level.splitscreen) {
     yOffset = 56;
@@ -226,9 +224,6 @@ trackSiegeEnable() {
   for(;;) {
     self waittill("gambit_on");
 
-
-
-
     self.moveSpeedScaler = 0;
     self maps\mp\gametypes\_weapons::updateMoveSpeedScale("primary");
     class = weaponClass(self getCurrentWeapon());
@@ -287,7 +282,6 @@ jumpStateListener() {
 
 unsetSiege() {
   self.moveSpeedScaler = 1;
-
 
   self resetSpreadOverride();
   self maps\mp\gametypes\_weapons::updateMoveSpeedScale("primary");
@@ -482,8 +476,6 @@ oneManArmyWeaponChangeTracker() {
       continue;
     }
 
-
-
     self thread selectOneManArmyClass();
   }
 }
@@ -584,8 +576,6 @@ giveOneManArmyClass(className) {
   self.OMAClassChanged = true;
 
   self maps\mp\gametypes\_class::giveLoadout(self.pers["team"], className, false);
-
-
 
   if(isDefined(self.carryFlag))
     self attach(self.carryFlag, "J_spine4", true);
@@ -705,7 +695,6 @@ monitorTIUse() {
       continue;
     }
 
-
     if(isDefined(self.setSpawnPoint))
       self deleteTI(self.setSpawnPoint);
 
@@ -760,9 +749,7 @@ GlowStickSetupAndWaitForDeath(owner) {
 GlowStickTeamUpdater(showForTeam, showEffect, owner) {
   self endon("death");
 
-
   wait(0.05);
-
 
   angles = self getTagAngles("tag_fire_fx");
   fxEnt = SpawnFx(showEffect, self getTagOrigin("tag_fire_fx"), anglesToForward(angles), anglesToUp(angles));
@@ -887,8 +874,6 @@ GlowStickEnemyUseListener(owner) {
 
     player notify("destroyed_insertion", owner);
     player notify("destroyed_explosive");
-
-
 
     if(isDefined(owner) && player != owner)
       owner thread leaderDialogOnPlayer("ti_destroyed");

@@ -436,11 +436,11 @@ drone_setName() {
   assert(isDefined(self.name));
   subText = undefined;
   if(!isDefined(self.weapon)) {
-    subText = & "";
+    subText = &"";
   } else {
     switch (self.weapon) {
       case "commando_sp":
-        subText = & "";
+        subText = &"";
         break;
       case "m1garand":
       case "m1garand_wet":
@@ -465,7 +465,7 @@ drone_setName() {
     subText = (&"WEAPON_MEDICPLACEHOLDER");
   }
   assert(isDefined(subText));
-  self setlookattext(self.name, & "");
+  self setlookattext(self.name, &"");
 }
 
 drone_think(firstNode) {

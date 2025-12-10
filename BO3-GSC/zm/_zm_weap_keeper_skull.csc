@@ -12,19 +12,19 @@
 #namespace keeper_skull;
 
 function autoexec __init__sytem__() {
-  system::register("keeper_skull", & __init__, undefined, undefined);
+  system::register("keeper_skull", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("actor", "zombie_explode", 9000, 1, "int", & zombie_explode_fx, 0, 0);
-  clientfield::register("actor", "death_ray_shock_eye_fx", 9000, 1, "int", & death_ray_shock_eye_fx, 0, 0);
-  clientfield::register("actor", "entranced", 9000, 1, "int", & function_384d8884, 0, 0);
-  clientfield::register("actor", "thrasher_skull_fire", 9000, 1, "int", & thrasher_skull_fire, 0, 0);
-  clientfield::register("toplayer", "skull_beam_fx", 9000, 2, "int", & function_4fb98616, 0, 0);
-  clientfield::register("toplayer", "skull_torch_fx", 9000, 2, "int", & function_2802db6f, 0, 0);
-  clientfield::register("allplayers", "skull_beam_3p_fx", 9000, 2, "int", & function_3f47ba02, 0, 0);
-  clientfield::register("allplayers", "skull_torch_3p_fx", 9000, 2, "int", & function_cea6821, 0, 0);
-  clientfield::register("allplayers", "skull_emissive", 9000, 1, "int", & function_c92fcc97, 0, 0);
+  clientfield::register("actor", "zombie_explode", 9000, 1, "int", &zombie_explode_fx, 0, 0);
+  clientfield::register("actor", "death_ray_shock_eye_fx", 9000, 1, "int", &death_ray_shock_eye_fx, 0, 0);
+  clientfield::register("actor", "entranced", 9000, 1, "int", &function_384d8884, 0, 0);
+  clientfield::register("actor", "thrasher_skull_fire", 9000, 1, "int", &thrasher_skull_fire, 0, 0);
+  clientfield::register("toplayer", "skull_beam_fx", 9000, 2, "int", &function_4fb98616, 0, 0);
+  clientfield::register("toplayer", "skull_torch_fx", 9000, 2, "int", &function_2802db6f, 0, 0);
+  clientfield::register("allplayers", "skull_beam_3p_fx", 9000, 2, "int", &function_3f47ba02, 0, 0);
+  clientfield::register("allplayers", "skull_torch_3p_fx", 9000, 2, "int", &function_cea6821, 0, 0);
+  clientfield::register("allplayers", "skull_emissive", 9000, 1, "int", &function_c92fcc97, 0, 0);
   level._effect["death_ray_shock_eyes"] = "zombie/fx_tesla_shock_eyes_zmb";
   level._effect["glow_eye_white"] = "zombie/fx_glow_eye_white";
   level._effect["zombie_explode"] = "dlc2/island/fx_zombie_torso_explo";

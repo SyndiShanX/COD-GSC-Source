@@ -17,7 +17,7 @@ function magic_box_init() {
   level._box_locations = array("start_chest", "foyer_chest", "crematorium_chest", "alleyway_chest", "control_chest", "stage_chest", "dressing_chest", "dining_chest", "theater_chest");
   level thread magic_box_update();
   level thread watch_fire_sale();
-  callback::on_connect( & function_72feb26b);
+  callback::on_connect(&function_72feb26b);
 }
 
 function function_72feb26b() {

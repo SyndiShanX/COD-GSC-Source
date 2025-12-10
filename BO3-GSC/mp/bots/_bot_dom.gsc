@@ -15,10 +15,10 @@
 #namespace bot_dom;
 
 function init() {
-  level.botupdate = & bot_update;
-  level.botprecombat = & bot_pre_combat;
-  level.botupdatethreatgoal = & bot_update_threat_goal;
-  level.botidle = & bot_idle;
+  level.botupdate = &bot_update;
+  level.botprecombat = &bot_pre_combat;
+  level.botupdatethreatgoal = &bot_update_threat_goal;
+  level.botidle = &bot_idle;
 }
 
 function bot_update() {

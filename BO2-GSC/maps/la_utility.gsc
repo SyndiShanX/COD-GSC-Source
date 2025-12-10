@@ -757,7 +757,7 @@ use_player_cougar() {
 }
 
 cougar_controls_instructions() {
-  screen_message_create(&"LA_SHARED_COUGAR_GAS", & "LA_SHARED_COUGAR_BRAKE");
+  screen_message_create(&"LA_SHARED_COUGAR_GAS", &"LA_SHARED_COUGAR_BRAKE");
   n_timeout = 0;
 
   while(!level.player gasbuttonpressed()) {
@@ -1484,7 +1484,7 @@ sam_visionset() {
 
 sam_hint() {
   level endon("sam_event_done");
-  screen_message_create(&"LA_1_SAM_HINT_ADS", & "LA_1_SAM_HINT_FIRE");
+  screen_message_create(&"LA_1_SAM_HINT_ADS", &"LA_1_SAM_HINT_FIRE");
   level waittill("sam_hint_drone_killed");
   screen_message_delete();
 }

@@ -132,7 +132,7 @@ function centrifuge_init() {
   assert(isDefined(centrifuge_collision_brush.target), "");
   centrifuge_collision_brush linkto(getent(centrifuge_collision_brush.target, "targetname"));
   tip_sound_origins = getEntArray("origin_centrifuge_spinning_sound", "targetname");
-  array::thread_all(tip_sound_origins, & centrifuge_spinning_edge_sounds);
+  array::thread_all(tip_sound_origins, &centrifuge_spinning_edge_sounds);
   level flag::wait_till("start_zombie_round_logic");
   centrifuge_trap clientfield::set("COSMO_CENTRIFUGE_LIGHTS", 1);
   wait(4);

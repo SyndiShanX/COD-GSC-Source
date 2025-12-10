@@ -25,7 +25,7 @@
 #namespace zm_ai_dogs;
 
 function autoexec __init__sytem__() {
-  system::register("zm_ai_dogs", & __init__, undefined, "aat");
+  system::register("zm_ai_dogs", &__init__, undefined, "aat");
 }
 
 function __init__() {
@@ -72,7 +72,7 @@ function init_dog_fx() {
 function enable_dog_rounds() {
   level.dog_rounds_enabled = 1;
   if(!isDefined(level.dog_round_track_override)) {
-    level.dog_round_track_override = & dog_round_tracker;
+    level.dog_round_track_override = &dog_round_tracker;
   }
   level thread[[level.dog_round_track_override]]();
 }
@@ -94,7 +94,7 @@ function dog_spawner_init() {
   }
   assert(level.dog_spawners.size > 0);
   level.dog_health = 100;
-  array::thread_all(level.dog_spawners, & spawner::add_spawn_function, & dog_init);
+  array::thread_all(level.dog_spawners, &spawner::add_spawn_function, &dog_init);
 }
 
 function dog_round_spawning() {
@@ -115,7 +115,7 @@ function dog_round_spawning() {
   level.dog_intermission = 1;
   level thread dog_round_aftermath();
   players = getplayers();
-  array::thread_all(players, & play_dog_round);
+  array::thread_all(players, &play_dog_round);
   wait(1);
   level thread zm_audio::sndannouncerplayvox("dogstart");
   wait(6);
@@ -320,8 +320,8 @@ function dog_round_tracker() {
       old_spawn_func = level.round_spawn_func;
       old_wait_func = level.round_wait_func;
       dog_round_start();
-      level.round_spawn_func = & dog_round_spawning;
-      level.round_wait_func = & dog_round_wait_func;
+      level.round_spawn_func = &dog_round_spawning;
+      level.round_wait_func = &dog_round_wait_func;
       level.next_dog_round = level.round_number + randomintrange(4, 6);
       getplayers()[0] iprintln("" + level.next_dog_round);
     } else if(level flag::get("dog_round")) {
@@ -420,7 +420,7 @@ function dog_init() {
   self cleargoalvolume();
   self.flame_damage_time = 0;
   self.meleedamage = 40;
-  self.thundergun_knockdown_func = & dog_thundergun_knockdown;
+  self.thundergun_knockdown_func = &dog_thundergun_knockdown;
   self zm_spawner::zombie_history(("zombie_dog_spawn_init -> Spawned = ") + self.origin);
   if(isDefined(level.achievement_monitor_func)) {
     self[[level.achievement_monitor_func]]();

@@ -15,11 +15,11 @@
 #namespace singlelockap_guidance;
 
 function autoexec __init__sytem__() {
-  system::register("singlelockap_guidance", & __init__, undefined, undefined);
+  system::register("singlelockap_guidance", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function on_player_spawned() {
@@ -256,7 +256,7 @@ function getbesttarget(weapon) {
     newitem = spawnStruct();
     newitem.index = i;
     newitem.dot = vectordot(playerforward, vectornormalize(targetsvalid[i].origin - self.origin));
-    array::insertion_sort(dots, & targetinsertionsortcompare, newitem);
+    array::insertion_sort(dots, &targetinsertionsortcompare, newitem);
   }
   index = 0;
   foreach(dot in dots) {

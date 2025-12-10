@@ -15,15 +15,15 @@
 #namespace duplicate_render;
 
 function autoexec __init__sytem__() {
-  system::register("duplicate_render", & __init__, undefined, undefined);
+  system::register("duplicate_render", &__init__, undefined, undefined);
 }
 
 function __init__() {
   if(!isDefined(level.drfilters)) {
     level.drfilters = [];
   }
-  callback::on_spawned( & on_player_spawned);
-  callback::on_localclient_connect( & on_player_connect);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_localclient_connect(&on_player_connect);
   set_dr_filter_framebuffer("none_fb", 0, undefined, undefined, 0, 1, 0);
   set_dr_filter_framebuffer_duplicate("none_fbd", 0, undefined, undefined, 1, 0, 0);
   set_dr_filter_offscreen("none_os", 0, undefined, undefined, 2, 0, 0);

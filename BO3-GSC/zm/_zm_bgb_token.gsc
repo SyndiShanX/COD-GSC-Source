@@ -17,14 +17,14 @@
 #namespace bgb_token;
 
 function autoexec __init__sytem__() {
-  system::register("bgb_token", & __init__, & __main__, undefined);
+  system::register("bgb_token", &__init__, &__main__, undefined);
 }
 
 function private __init__() {
   if(!is_bgb_token_in_use()) {
     return;
   }
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function private __main__() {

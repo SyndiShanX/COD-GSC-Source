@@ -243,7 +243,7 @@ use_low_attack(player) {
   return false;
 }
 prepareAttackPlayer(player) {
-  level.dog_death_quote = & "SCRIPT_PLATFORM_DOG_DEATH_DO_NOTHING";
+  level.dog_death_quote = &"SCRIPT_PLATFORM_DOG_DEATH_DO_NOTHING";
   distanceToTarget = distance(self.origin, self.enemy.origin);
   targetHeight = Abs(self.enemy.origin[2] - self.origin[2]);
   self.enemy_attack_start_distance = distanceToTarget;
@@ -321,11 +321,11 @@ dog_melee_death(player) {
           } else {
             debug_anim_print("dog_combat::dog_melee_death() - Settingcombat_player_neck_snap");
             self setanimstate("combat_attack_player");
-            level.dog_death_quote = & "SCRIPT_PLATFORM_DOG_DEATH_TOO_LATE";
+            level.dog_death_quote = &"SCRIPT_PLATFORM_DOG_DEATH_TOO_LATE";
           }
           return;
         }
-        level.dog_death_quote = & "SCRIPT_PLATFORM_DOG_DEATH_TOO_SOON";
+        level.dog_death_quote = &"SCRIPT_PLATFORM_DOG_DEATH_TOO_SOON";
         debug_anim_print("dog_combat::dog_melee_death() - Settingcombat_player_neck_miss");
         self setanimstate("combat_player_neck_miss");
         return;

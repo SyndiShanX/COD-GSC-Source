@@ -29,7 +29,7 @@ init() {
   maps\_zombiemode_utility::register_placeable_mine_for_level("spikemore_zm");
   level._CF_SCRIPTMOVER_CLIENT_FLAG_SPIKEMORE = 5;
   level._spikeable_objects = [];
-  maps\_weaponobjects::create_retrievable_hint("spikemore", & "ZOMBIE_TEMPLE_WEAPON_SPIKEMORE_PICKUP");
+  maps\_weaponobjects::create_retrievable_hint("spikemore", &"ZOMBIE_TEMPLE_WEAPON_SPIKEMORE_PICKUP");
   level.create_level_specific_weaponobject_watchers = ::create_spikemore_watcher_zm;
 }
 
@@ -281,9 +281,9 @@ show_spikemore_hint(string) {
   self endon("death");
   self endon("disconnect");
   if(string == "spikemore_purchased") {
-    text = & "ZOMBIE_TEMPLE_SPIKEMORE_HOWTO";
+    text = &"ZOMBIE_TEMPLE_SPIKEMORE_HOWTO";
   } else {
-    text = & "ZOMBIE_TEMPLE_SPIKEMORE_ALREADY_PURCHASED";
+    text = &"ZOMBIE_TEMPLE_SPIKEMORE_ALREADY_PURCHASED";
   }
   self setup_client_hintelem();
   self.hintelem setText(text);

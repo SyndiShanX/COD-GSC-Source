@@ -20,9 +20,9 @@
 
 function init() {
   level flag::init("meteor_impact");
-  zm_sidequests::declare_sidequest_stage("sq", "LGS", & init_stage, & stage_logic, & exit_stage);
+  zm_sidequests::declare_sidequest_stage("sq", "LGS", &init_stage, &stage_logic, &exit_stage);
   zm_sidequests::set_stage_time_limit("sq", "LGS", 300);
-  zm_sidequests::declare_stage_asset_from_struct("sq", "LGS", "sq_lgs_crystal", & lgs_crystal);
+  zm_sidequests::declare_stage_asset_from_struct("sq", "LGS", "sq_lgs_crystal", &lgs_crystal);
 }
 
 function init_stage() {
@@ -318,7 +318,7 @@ function exit_stage(success) {
   }
   level._lgs_veh = undefined;
   if(success) {
-    zm_temple_sq_brock::create_radio(4, & zm_temple_sq_brock::radio4_override);
+    zm_temple_sq_brock::create_radio(4, &zm_temple_sq_brock::radio4_override);
   } else {
     zm_temple_sq_brock::create_radio(3);
     level thread zm_temple_sq_skits::fail_skit();

@@ -23,7 +23,7 @@ testmenu() {
   for(;;) {
     wait 10.0;
     notifydata = spawnStruct();
-    notifydata.titletext = & "MP_CHALLENGE_COMPLETED";
+    notifydata.titletext = &"MP_CHALLENGE_COMPLETED";
     notifydata.notifytext = "wheee";
     notifydata.sound = "mp_challenge_complete";
     self thread maps\mp\gametypes\_hud_message::notifymessage(notifydata);

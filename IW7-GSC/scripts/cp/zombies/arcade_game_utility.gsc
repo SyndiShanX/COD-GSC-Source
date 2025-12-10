@@ -89,12 +89,12 @@ arcade_game_hint_func(param_00, param_01) {
     if(isDefined(level.needspowerstring)) {
       return level.needspowerstring;
     } else {
-      return & "COOP_INTERACTIONS_REQUIRES_POWER";
+      return &"COOP_INTERACTIONS_REQUIRES_POWER";
     }
   }
 
   if(scripts\engine\utility::istrue(param_00.out_of_order)) {
-    return & "CP_ZMB_INTERACTIONS_MACHINE_OUT_OF_ORDER";
+    return &"CP_ZMB_INTERACTIONS_MACHINE_OUT_OF_ORDER";
   }
 
   return level.interaction_hintstrings[param_00.script_noteworthy];

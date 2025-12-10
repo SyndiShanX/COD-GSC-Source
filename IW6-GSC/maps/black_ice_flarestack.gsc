@@ -14,7 +14,7 @@ section_flag_inits() {
 }
 
 section_precache() {
-  maps\_utility::add_hint_string("hint_flarestack_button_press", & "BLACK_ICE_COMMAND_USE_CONSOLE", ::hint_button_press);
+  maps\_utility::add_hint_string("hint_flarestack_button_press", &"BLACK_ICE_COMMAND_USE_CONSOLE", ::hint_button_press);
 }
 
 hint_button_press() {
@@ -223,7 +223,7 @@ event_flarestack_enter_fail_watcher() {
     }
   }
 
-  setdvar("ui_deadquote", & "BLACK_ICE_FLARESTACK_FAIL_ENEMY_KILL");
+  setdvar("ui_deadquote", &"BLACK_ICE_FLARESTACK_FAIL_ENEMY_KILL");
   level.player setclienttriggeraudiozone("blackice_flarestack_fail", 0.1);
   maps\_utility::missionfailedwrapper();
 }

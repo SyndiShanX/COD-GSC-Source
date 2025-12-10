@@ -68,23 +68,23 @@ func_CAE3() {
   scripts\engine\utility::flag_set("hill_allies_start");
   scripts\engine\utility::flag_init("jackals_start_call_in");
   scripts\engine\utility::flag_init("jackals_landed");
-  precachestring( & "PHSPACE_OBJ_PLAYER_JACKAL");
-  precachestring( & "PHSPACE_OBJ_ASSIST_REPEL");
-  precachestring( & "PHSPACE_OBJ_SDF_SQUADRON");
-  precachestring( & "PHSPACE_OBJ_SDF_DESTROYER");
-  precachestring( & "PHSPACE_OBJ_RETURN_TO_RET");
-  precachestring( & "PHSPACE_OBJ_MONS");
-  scripts\sp\utility::func_16EB("basic_controls", & "PHSPACE_BASICS", ::func_8FFB);
-  scripts\sp\utility::func_16EB("basic_controls_pc", & "PHSPACE_BASICS_PC", ::func_8FFB);
-  scripts\sp\utility::func_16EB("basic_boosters", & "JACKAL_BOOST", ::func_8FFC);
-  scripts\sp\utility::func_16EB("basic_boosters_pc", & "JACKAL_BOOST_PC", ::func_8FFC);
-  scripts\sp\utility::func_16EB("basic_updown", & "PHSPACE_UPDOWN", ::func_9002);
-  scripts\sp\utility::func_16EB("hint_shoot_jackals", & "PHSPACE_HINT_ATTACK_JACKALS", ::func_8FFD);
-  scripts\sp\utility::func_16EB("hint_lockon", & "JACKAL_ADS", ::func_8FFF);
-  scripts\sp\utility::func_16EB("hint_shoot_ships", & "PHSPACE_HINT_ATTACK_SHIPS", ::func_9001);
-  scripts\sp\utility::func_16EB("hint_return_to_ret", & "PHSPACE_HINT_RETURN", ::func_9000);
-  scripts\sp\utility::func_16EB("hint_leaving_battle", & "PHSPACE_HINT_LEAVING", ::func_8FFE);
-  scripts\sp\utility::func_16EB("hint_switch_cannons", & "PHSPACE_HINT_CANNON", ::func_9012);
+  precachestring(&"PHSPACE_OBJ_PLAYER_JACKAL");
+  precachestring(&"PHSPACE_OBJ_ASSIST_REPEL");
+  precachestring(&"PHSPACE_OBJ_SDF_SQUADRON");
+  precachestring(&"PHSPACE_OBJ_SDF_DESTROYER");
+  precachestring(&"PHSPACE_OBJ_RETURN_TO_RET");
+  precachestring(&"PHSPACE_OBJ_MONS");
+  scripts\sp\utility::func_16EB("basic_controls", &"PHSPACE_BASICS", ::func_8FFB);
+  scripts\sp\utility::func_16EB("basic_controls_pc", &"PHSPACE_BASICS_PC", ::func_8FFB);
+  scripts\sp\utility::func_16EB("basic_boosters", &"JACKAL_BOOST", ::func_8FFC);
+  scripts\sp\utility::func_16EB("basic_boosters_pc", &"JACKAL_BOOST_PC", ::func_8FFC);
+  scripts\sp\utility::func_16EB("basic_updown", &"PHSPACE_UPDOWN", ::func_9002);
+  scripts\sp\utility::func_16EB("hint_shoot_jackals", &"PHSPACE_HINT_ATTACK_JACKALS", ::func_8FFD);
+  scripts\sp\utility::func_16EB("hint_lockon", &"JACKAL_ADS", ::func_8FFF);
+  scripts\sp\utility::func_16EB("hint_shoot_ships", &"PHSPACE_HINT_ATTACK_SHIPS", ::func_9001);
+  scripts\sp\utility::func_16EB("hint_return_to_ret", &"PHSPACE_HINT_RETURN", ::func_9000);
+  scripts\sp\utility::func_16EB("hint_leaving_battle", &"PHSPACE_HINT_LEAVING", ::func_8FFE);
+  scripts\sp\utility::func_16EB("hint_switch_cannons", &"PHSPACE_HINT_CANNON", ::func_9012);
   precachemodel("s1_handcuffs");
   precachemodel("decor_aatis_tower_globe_01");
   precachemodel("vm_hero_protagonist_helmet");
@@ -496,9 +496,9 @@ func_B8C5() {
     case "hvt_handoff":
       scripts\engine\utility::flag_wait("jackal_call_down");
     case "jackals":
-      _objective_add(scripts\sp\utility::func_C264("OBJ_PLAYER_JACKAL"), "active", & "PHSPACE_OBJ_PLAYER_JACKAL");
+      _objective_add(scripts\sp\utility::func_C264("OBJ_PLAYER_JACKAL"), "active", &"PHSPACE_OBJ_PLAYER_JACKAL");
       objective_state(scripts\sp\utility::func_C264("OBJ_PLAYER_JACKAL"), "current");
-      _objective_add(scripts\sp\utility::func_C264("OBJ_ASSIST_REPEL"), "active", & "PHSPACE_OBJ_ASSIST_REPEL");
+      _objective_add(scripts\sp\utility::func_C264("OBJ_ASSIST_REPEL"), "active", &"PHSPACE_OBJ_ASSIST_REPEL");
       objective_state(scripts\sp\utility::func_C264("OBJ_ASSIST_REPEL"), "current");
       func_0BDC::func_137CF();
       objective_state(scripts\sp\utility::func_C264("OBJ_PLAYER_JACKAL"), "done");
@@ -506,12 +506,12 @@ func_B8C5() {
     case "space_approach":
       scripts\engine\utility::flag_wait("obj_sdf_squadron_start");
     case "jackal_assault":
-      _objective_add(scripts\sp\utility::func_C264("OBJ_SDF_SQUADRON"), "active", & "PHSPACE_OBJ_SDF_SQUADRON");
+      _objective_add(scripts\sp\utility::func_C264("OBJ_SDF_SQUADRON"), "active", &"PHSPACE_OBJ_SDF_SQUADRON");
       objective_state(scripts\sp\utility::func_C264("OBJ_SDF_SQUADRON"), "current");
       scripts\engine\utility::flag_wait("jackal_assault_complete");
       objective_state(scripts\sp\utility::func_C264("OBJ_SDF_SQUADRON"), "done");
     case "ship_assault":
-      _objective_add(scripts\sp\utility::func_C264("OBJ_SDF_DESTROYER"), "active", & "PHSPACE_OBJ_SDF_DESTROYER");
+      _objective_add(scripts\sp\utility::func_C264("OBJ_SDF_DESTROYER"), "active", &"PHSPACE_OBJ_SDF_DESTROYER");
       objective_state(scripts\sp\utility::func_C264("OBJ_SDF_DESTROYER"), "current");
       scripts\engine\utility::flag_wait("ship_assault_complete");
       objective_state(scripts\sp\utility::func_C264("OBJ_ASSIST_REPEL"), "done");
@@ -519,17 +519,17 @@ func_B8C5() {
     case "ram":
     case "trench_run":
     case "mons_intro":
-      _objective_add(scripts\sp\utility::func_C264("OBJ_RET_MONS"), "active", & "PHSPACE_OBJ_RETURN_TO_RET");
+      _objective_add(scripts\sp\utility::func_C264("OBJ_RET_MONS"), "active", &"PHSPACE_OBJ_RETURN_TO_RET");
       objective_state(scripts\sp\utility::func_C264("OBJ_RET_MONS"), "current");
       scripts\engine\utility::flag_wait("olympus_arrived");
-      _objective_string(scripts\sp\utility::func_C264("OBJ_RET_MONS"), & "PHSPACE_OBJ_MONS");
+      _objective_string(scripts\sp\utility::func_C264("OBJ_RET_MONS"), &"PHSPACE_OBJ_MONS");
 
       while(!scripts\engine\utility::flag_exist("flag_player_land"))
         wait 0.05;
 
       scripts\engine\utility::flag_wait("flag_player_land");
     case "landing":
-      _objective_string(scripts\sp\utility::func_C264("OBJ_RET_MONS"), & "PHSPACE_OBJ_RETURN_TO_RET");
+      _objective_string(scripts\sp\utility::func_C264("OBJ_RET_MONS"), &"PHSPACE_OBJ_RETURN_TO_RET");
     default:
   }
 }

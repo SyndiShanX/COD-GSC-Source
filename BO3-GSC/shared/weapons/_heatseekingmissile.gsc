@@ -16,7 +16,7 @@
 function init_shared() {
   game["locking_on_sound"] = "uin_alert_lockon_start";
   game["locked_on_sound"] = "uin_alert_lockon";
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
   level.fx_flare = "killstreaks/fx_heli_chaff";
   setdvar("", "");
 }
@@ -520,7 +520,7 @@ function lockingon(target, lock) {
     self thread watchclearlockingon(target, clientnum);
   } else {
     self notify("locking_on_cleared");
-    target.locking_on = target.locking_on & (~(1 << clientnum));
+    target.locking_on = target.locking_on &(~(1 << clientnum));
   }
 }
 
@@ -528,7 +528,7 @@ function watchclearlockingon(target, clientnum) {
   target endon("death");
   self endon("locking_on_cleared");
   self util::waittill_any("death", "disconnect");
-  target.locking_on = target.locking_on & (~(1 << clientnum));
+  target.locking_on = target.locking_on &(~(1 << clientnum));
 }
 
 function lockedon(target, lock) {
@@ -539,7 +539,7 @@ function lockedon(target, lock) {
     self thread watchclearlockedon(target, clientnum);
   } else {
     self notify("locked_on_cleared");
-    target.locked_on = target.locked_on & (~(1 << clientnum));
+    target.locked_on = target.locked_on &(~(1 << clientnum));
   }
 }
 
@@ -552,7 +552,7 @@ function targetinghacking(target, lock) {
     self thread watchclearhacking(target, clientnum);
   } else {
     self notify("locking_on_hacking_cleared");
-    target.locking_on_hacking = target.locking_on_hacking & (~(1 << clientnum));
+    target.locking_on_hacking = target.locking_on_hacking &(~(1 << clientnum));
   }
 }
 
@@ -560,7 +560,7 @@ function watchclearhacking(target, clientnum) {
   target endon("death");
   self endon("locking_on_hacking_cleared");
   self util::waittill_any("death", "disconnect");
-  target.locking_on_hacking = target.locking_on_hacking & (~(1 << clientnum));
+  target.locking_on_hacking = target.locking_on_hacking &(~(1 << clientnum));
 }
 
 function setfriendlyflags(weapon, target) {
@@ -636,7 +636,7 @@ function setfriendlyhacking(weapon, target) {
     if(isDefined(friendlyhackingmask)) {
       friendlyhacking = 0;
       clientnum = self getentitynumber();
-      friendlyhackingmask = friendlyhackingmask & (~(1 << clientnum));
+      friendlyhackingmask = friendlyhackingmask &(~(1 << clientnum));
       if(friendlyhackingmask != 0) {
         friendlyhacking = 1;
       }
@@ -651,7 +651,7 @@ function setfriendlytargetting(weapon, target) {
     if(isDefined(friendlytargetingmask)) {
       friendlytargeting = 0;
       clientnum = self getentitynumber();
-      friendlytargetingmask = friendlytargetingmask & (~(1 << clientnum));
+      friendlytargetingmask = friendlytargetingmask &(~(1 << clientnum));
       if(friendlytargetingmask != 0) {
         friendlytargeting = 1;
       }
@@ -667,7 +667,7 @@ function setfriendlytargetlocked(weapon, target) {
     if(isDefined(friendlylockingonmask)) {
       friendlytargetlocked = 0;
       clientnum = self getentitynumber();
-      friendlylockingonmask = friendlylockingonmask & (~(1 << clientnum));
+      friendlylockingonmask = friendlylockingonmask &(~(1 << clientnum));
       if(friendlylockingonmask != 0) {
         friendlytargetlocked = 1;
       }
@@ -683,7 +683,7 @@ function watchclearlockedon(target, clientnum) {
   self endon("locked_on_cleared");
   self util::waittill_any("death", "disconnect");
   if(isDefined(target)) {
-    target.locked_on = target.locked_on & (~(1 << clientnum));
+    target.locked_on = target.locked_on &(~(1 << clientnum));
   }
 }
 
@@ -798,7 +798,7 @@ function missiletarget_handleincomingmissile(responsefunc, endon1, endon2, allow
 }
 
 function missiletarget_proximitydetonateincomingmissile(endon1, endon2, allowdirectdamage) {
-  missiletarget_handleincomingmissile( & missiletarget_proximitydetonate, endon1, endon2, allowdirectdamage);
+  missiletarget_handleincomingmissile(&missiletarget_proximitydetonate, endon1, endon2, allowdirectdamage);
 }
 
 function _missiledetonate(attacker, weapon, range, mindamage, maxdamage, allowdirectdamage) {

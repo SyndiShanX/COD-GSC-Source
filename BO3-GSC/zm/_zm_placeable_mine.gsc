@@ -20,7 +20,7 @@
 #namespace zm_placeable_mine;
 
 function autoexec __init__sytem__() {
-  system::register("placeable_mine", undefined, & __main__, undefined);
+  system::register("placeable_mine", undefined, &__main__, undefined);
 }
 
 function private __main__() {
@@ -34,9 +34,9 @@ function private init_internal() {
     return;
   }
   level.placeable_mines = [];
-  level.placeable_mines_on_damage = & placeable_mine_damage;
-  level.pickup_placeable_mine = & pickup_placeable_mine;
-  level.pickup_placeable_mine_trigger_listener = & pickup_placeable_mine_trigger_listener;
+  level.placeable_mines_on_damage = &placeable_mine_damage;
+  level.pickup_placeable_mine = &pickup_placeable_mine;
+  level.pickup_placeable_mine_trigger_listener = &pickup_placeable_mine_trigger_listener;
   level.placeable_mine_planted_callbacks = [];
 }
 
@@ -299,14 +299,14 @@ function setup_watchers() {
   if(isDefined(level.placeable_mines)) {
     foreach(mine_type in level.placeable_mines) {
       watcher = self weaponobjects::createuseweaponobjectwatcher(mine_type.name, self.team);
-      watcher.onspawnretrievetriggers = & on_spawn_retrieve_trigger;
-      watcher.adjusttriggerorigin = & adjust_trigger_origin;
+      watcher.onspawnretrievetriggers = &on_spawn_retrieve_trigger;
+      watcher.adjusttriggerorigin = &adjust_trigger_origin;
       watcher.pickup = level.pickup_placeable_mine;
       watcher.pickup_trigger_listener = level.pickup_placeable_mine_trigger_listener;
       watcher.skip_weapon_object_damage = 1;
       watcher.headicon = 0;
       watcher.watchforfire = 1;
-      watcher.ondetonatecallback = & placeable_mine_detonate;
+      watcher.ondetonatecallback = &placeable_mine_detonate;
       watcher.ondamage = level.placeable_mines_on_damage;
     }
   }

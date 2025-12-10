@@ -20,8 +20,8 @@ init() {
   maps\mp\zombies\_zm_weapons::include_zombie_weapon("bouncing_tomahawk_zm", 0);
   maps\mp\zombies\_zm_weapons::include_zombie_weapon("upgraded_tomahawk_zm", 0);
   maps\mp\zombies\_zm_weapons::include_zombie_weapon("zombie_tomahawk_flourish", 0);
-  maps\mp\zombies\_zm_weapons::add_zombie_weapon("bouncing_tomahawk_zm", "zombie_tomahawk_flourish", & "ZOMBIE_WEAPON_SATCHEL_2000", 2000, "wpck_monkey", "", undefined, 1);
-  maps\mp\zombies\_zm_weapons::add_zombie_weapon("upgraded_tomahawk_zm", "zombie_tomahawk_flourish", & "ZOMBIE_WEAPON_SATCHEL_2000", 2000, "wpck_monkey", "", undefined, 1);
+  maps\mp\zombies\_zm_weapons::add_zombie_weapon("bouncing_tomahawk_zm", "zombie_tomahawk_flourish", &"ZOMBIE_WEAPON_SATCHEL_2000", 2000, "wpck_monkey", "", undefined, 1);
+  maps\mp\zombies\_zm_weapons::add_zombie_weapon("upgraded_tomahawk_zm", "zombie_tomahawk_flourish", &"ZOMBIE_WEAPON_SATCHEL_2000", 2000, "wpck_monkey", "", undefined, 1);
   level thread tomahawk_pickup();
   level.zombie_weapons_no_max_ammo = [];
   level.zombie_weapons_no_max_ammo["bouncing_tomahawk_zm"] = 1;

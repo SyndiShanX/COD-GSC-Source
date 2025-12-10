@@ -29,16 +29,16 @@
 #namespace namespace_c550ee23;
 
 function autoexec __init__sytem__() {
-  system::register("training_sim", & __init__, undefined, undefined);
+  system::register("training_sim", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
-  callback::on_ai_spawned( & on_ai_spawned);
-  callback::on_ai_damage( & on_ai_damage);
-  callback::on_ai_killed( & on_ai_killed);
-  callback::on_ai_spawned( & ai_death_derez);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_ai_spawned(&on_ai_spawned);
+  callback::on_ai_damage(&on_ai_damage);
+  callback::on_ai_killed(&on_ai_killed);
+  callback::on_ai_spawned(&ai_death_derez);
   clientfield::register("actor", "rez_in", 1, 1, "int");
   clientfield::register("actor", "rez_out", 1, 1, "int");
   clientfield::register("vehicle", "rez_in", 1, 1, "int");
@@ -168,7 +168,7 @@ function function_a91b6cca() {
     level.var_a91b6cca = 1;
     foreach(beacon in struct::get_array("round_beacon", "script_noteworthy")) {
       e_trig = getent(beacon.targetname, "target");
-      beacon.prompt = safehouse::init_interactive_prompt(e_trig, & "cp_safehouse_training_nextround", & "CP_SH_CAIRO_TRAINING_START_ROUND", & function_daea15a5, 0);
+      beacon.prompt = safehouse::init_interactive_prompt(e_trig, &"cp_safehouse_training_nextround", &"CP_SH_CAIRO_TRAINING_START_ROUND", &function_daea15a5, 0);
       beacon.prompt safehouse::function_e04cba0f();
       beacon.prompt.beacon = beacon;
     }
@@ -382,7 +382,7 @@ function function_86a2dc30() {
 function function_b5b532e8() {
   var_762314d8 = function_d2614e32();
   e_trig = getent(var_762314d8.targetname, "target");
-  var_762314d8.prompt = safehouse::init_interactive_prompt(e_trig, & "cp_safehouse_training_start", & "CP_SH_CAIRO_TRAINING_START_ROUND", & function_daea15a5, 0);
+  var_762314d8.prompt = safehouse::init_interactive_prompt(e_trig, &"cp_safehouse_training_start", &"CP_SH_CAIRO_TRAINING_START_ROUND", &function_daea15a5, 0);
   var_762314d8.prompt safehouse::function_e04cba0f();
   var_762314d8.prompt.beacon = var_762314d8;
   objectives::show("cp_safehouse_training_start", self);
@@ -445,7 +445,7 @@ function function_cce02c2e() {
       var_8e7d3ece = undefined;
       a_spawners = function_d05904dc(str_type);
       a_spawners = array::randomize(a_spawners);
-      a_spawners = array::merge_sort(a_spawners, & function_44933f23);
+      a_spawners = array::merge_sort(a_spawners, &function_44933f23);
       var_b3d71f31 = 0;
       assert(a_spawners.size, ("" + str_type) + "");
       for(i = 0; i < n_count; i++) {
@@ -475,7 +475,7 @@ function function_cce02c2e() {
             e_spawned.takedamage = 1;
             e_spawned ai::set_ignoreall(0);
             e_spawned getperfectinfo(self, 1);
-            e_spawned util::delay(1, "death", & solid);
+            e_spawned util::delay(1, "death", &solid);
             if(isactor(e_spawned)) {
               e_spawned thread function_9b1ae7e9(self);
             } else if(isvehicle(e_spawned)) {
@@ -733,7 +733,7 @@ function function_27b9fdd3(e_spawned, v_pos, var_8e7d3ece) {
 function function_d05904dc(str_type) {
   a_spawners = util::query_ents(associativearray("classname", str_type, "vehicletype", str_type), 0, [], 0, 1);
   a_spawners = getentarrayfromarray(a_spawners, self.var_bd5ad7fc, "prefabname");
-  a_spawners = array::filter(a_spawners, 0, & is_spawner);
+  a_spawners = array::filter(a_spawners, 0, &is_spawner);
   return a_spawners;
 }
 
@@ -1087,7 +1087,7 @@ function end_round() {
   }
   if(self.var_4c79ddb8.size) {
     wait(5);
-    level array::run_all(array::remove_dead(self.var_4c79ddb8), & kill);
+    level array::run_all(array::remove_dead(self.var_4c79ddb8), &kill);
   }
   wait(5);
   self.s_beacon.prompt function_daea15a5(self);

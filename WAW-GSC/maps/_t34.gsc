@@ -28,7 +28,7 @@ main(model, type) {
   if(!isDefined(type)) {
     type = "t34";
   }
-  level.vehicletypefancy[type] = & "VEHICLENAME_T34_TANK";
+  level.vehicletypefancy[type] = &"VEHICLENAME_T34_TANK";
 }
 
 init_local() {}

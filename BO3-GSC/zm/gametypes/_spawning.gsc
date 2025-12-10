@@ -17,7 +17,7 @@ function __init__() {
   foreach(team in level.teams) {
     level.recently_deceased[team] = util::spawn_array_struct();
   }
-  callback::on_connecting( & on_player_connecting);
+  callback::on_connecting(&on_player_connecting);
   level.spawnprotectiontime = getgametypesetting("spawnprotectiontime");
   level.spawnprotectiontimems = int((isDefined(level.spawnprotectiontime) ? level.spawnprotectiontime : 0) * 1000);
   setdvar("", "");
@@ -51,8 +51,8 @@ function init_spawn_system() {
 function on_player_connecting() {
   level endon("game_ended");
   self setentertime(gettime());
-  callback::on_spawned( & on_player_spawned);
-  callback::on_joined_team( & on_joined_team);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_joined_team(&on_joined_team);
   self thread ongrenadethrow();
 }
 

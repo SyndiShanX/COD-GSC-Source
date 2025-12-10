@@ -19,8 +19,8 @@
 
 function init() {
   level.remoteweapons = [];
-  level.remoteexithint = & "MP_REMOTE_EXIT";
-  callback::on_spawned( & on_player_spawned);
+  level.remoteexithint = &"MP_REMOTE_EXIT";
+  callback::on_spawned(&on_player_spawned);
 }
 
 function on_player_spawned() {

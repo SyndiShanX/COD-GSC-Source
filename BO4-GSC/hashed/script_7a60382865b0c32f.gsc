@@ -13,7 +13,7 @@
 #namespace namespace_fb2fa231;
 
 autoexec __init__system__() {
-  system::register(#"hash_f6d669c16956035", & __init__, & __main__, undefined);
+  system::register(#"hash_f6d669c16956035", &__init__, &__main__, undefined);
 }
 
 __init__() {
@@ -51,8 +51,8 @@ function_c12c0902() {
   a_containers = struct::get_array("chest_container");
   foreach(s_object in a_containers) {
     s_object.var_97c4739a = getent(s_object.target, "targetname");
-    s_object.mdl_gameobject gameobjects::set_onbeginuse_event( & function_b7ff7728);
-    s_object.mdl_gameobject gameobjects::set_onenduse_event( & function_24357980);
+    s_object.mdl_gameobject gameobjects::set_onbeginuse_event(&function_b7ff7728);
+    s_object.mdl_gameobject gameobjects::set_onenduse_event(&function_24357980);
     s_object.mdl_gameobject gameobjects::function_336b5791(#"allies");
     s_object.mdl_gameobject.state = "closed";
     s_object.var_97c4739a scene::init("p8_fxanim_test_weapon_crate_close_bundle", s_object.var_97c4739a);
@@ -62,8 +62,8 @@ function_c12c0902() {
   a_containers = struct::get_array("secret_container");
   foreach(s_object in a_containers) {
     s_object.var_97c4739a = getent(s_object.target, "targetname");
-    s_object.mdl_gameobject gameobjects::set_onbeginuse_event( & function_6a477b2b);
-    s_object.mdl_gameobject gameobjects::set_onenduse_event( & function_d62f7403);
+    s_object.mdl_gameobject gameobjects::set_onbeginuse_event(&function_6a477b2b);
+    s_object.mdl_gameobject gameobjects::set_onenduse_event(&function_d62f7403);
     s_object.mdl_gameobject gameobjects::function_336b5791(#"allies");
     s_object.mdl_gameobject.state = "closed";
     s_object.var_97c4739a scene::init("p8_fxanim_cp_journalist_vehicle_atv_cover_removal_bundle", s_object.var_97c4739a);
@@ -72,8 +72,8 @@ function_c12c0902() {
   }
   a_containers = struct::get_array("bed_container");
   foreach(s_object in a_containers) {
-    s_object.mdl_gameobject gameobjects::set_onbeginuse_event( & function_85c6cdd4);
-    s_object.mdl_gameobject gameobjects::set_onenduse_event( & function_e127fadc);
+    s_object.mdl_gameobject gameobjects::set_onbeginuse_event(&function_85c6cdd4);
+    s_object.mdl_gameobject gameobjects::set_onenduse_event(&function_e127fadc);
     s_object.mdl_gameobject gameobjects::function_336b5791(#"allies");
   }
 }

@@ -14,12 +14,12 @@
 #namespace zm_prototype_barrels;
 
 function autoexec __init__sytem__() {
-  system::register("zm_prototype_barrels", & __init__, undefined, undefined);
+  system::register("zm_prototype_barrels", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "exploding_barrel_burn_fx", 21000, 1, "int", & function_66d46c7d, 0, 0);
-  clientfield::register("scriptmover", "exploding_barrel_explode_fx", 21000, 1, "int", & function_b6fe19c5, 0, 0);
+  clientfield::register("scriptmover", "exploding_barrel_burn_fx", 21000, 1, "int", &function_66d46c7d, 0, 0);
+  clientfield::register("scriptmover", "exploding_barrel_explode_fx", 21000, 1, "int", &function_b6fe19c5, 0, 0);
 }
 
 function function_66d46c7d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

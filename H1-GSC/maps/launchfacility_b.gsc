@@ -43,12 +43,12 @@ main() {
   precacheshader("h1_hud_timer_border");
   precacheshader("h1_timer_on_flare");
   precacheshader("h1_timer_warning_flare");
-  maps\_utility::add_start("warehouse", ::start_warehouse, & "STARTS_WAREHOUSE");
-  maps\_utility::add_start("launchtubes", ::start_launchtubes, & "STARTS_LAUNCHTUBES");
-  maps\_utility::add_start("vaultdoors", ::start_vaultdoors, & "STARTS_VAULTDOORS");
-  maps\_utility::add_start("controlroom", ::start_controlroom, & "STARTS_CONTROLROOM");
-  maps\_utility::add_start("escape", ::start_escape, & "STARTS_ESCAPE1");
-  maps\_utility::add_start("elevator", ::start_elevator, & "STARTS_ELEVATOR");
+  maps\_utility::add_start("warehouse", ::start_warehouse, &"STARTS_WAREHOUSE");
+  maps\_utility::add_start("launchtubes", ::start_launchtubes, &"STARTS_LAUNCHTUBES");
+  maps\_utility::add_start("vaultdoors", ::start_vaultdoors, &"STARTS_VAULTDOORS");
+  maps\_utility::add_start("controlroom", ::start_controlroom, &"STARTS_CONTROLROOM");
+  maps\_utility::add_start("escape", ::start_escape, &"STARTS_ESCAPE1");
+  maps\_utility::add_start("elevator", ::start_elevator, &"STARTS_ELEVATOR");
   maps\_utility::default_start(::start_default);
   level thread maps\createart\launchfacility_b_art::main();
   level thread maps\launchfacility_b_fx::main();
@@ -97,7 +97,7 @@ main() {
   level.secondaryprogressbartexty = 55;
   level.secondaryprogressbarfontsize = 1;
   level.usetimer = 1;
-  level.missionfailedquote = & "LAUNCHFACILITY_B_BOMBS_GO_BOOM";
+  level.missionfailedquote = &"LAUNCHFACILITY_B_BOMBS_GO_BOOM";
   level.c4 = getent("c4", "targetname");
   level.keyboard = getent("keyboard", "targetname");
   level.elevator_upper = getent("elevator_upper", "targetname");
@@ -513,7 +513,7 @@ obj_control_room() {
   var_0 = 0;
   var_1 = getent("origin_obj_stairs", "targetname");
   wait 6;
-  objective_add(var_0, "active", & "LAUNCHFACILITY_B_GET_TO_THE_TELEMETRY", var_1.origin);
+  objective_add(var_0, "active", &"LAUNCHFACILITY_B_GET_TO_THE_TELEMETRY", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("location_change_stairs");
   var_1 = getent("origin_obj_breach_telemetry_room", "targetname");
@@ -540,14 +540,14 @@ obj_plant_the_c4() {
   common_scripts\utility::flag_wait("update_objectives");
   var_0 = 1;
   var_1 = getent("wall_explosives", "targetname");
-  objective_add(var_0, "active", & "LAUNCHFACILITY_B_PLANT_THE_C4", var_1.origin);
+  objective_add(var_0, "active", &"LAUNCHFACILITY_B_PLANT_THE_C4", var_1.origin);
   objective_indentlevel(var_0, 1);
   objective_current(var_0);
   common_scripts\utility::flag_wait("wall_destroyed");
   wait 1;
   objective_state(var_0, "done");
   var_0 = 2;
-  objective_add(var_0, "active", & "LAUNCHFACILITY_B_CLEAR_ROOM", var_1.origin);
+  objective_add(var_0, "active", &"LAUNCHFACILITY_B_CLEAR_ROOM", var_1.origin);
   objective_indentlevel(var_0, 1);
   objective_current(var_0);
   maps\_utility::waittill_aigroupcleared("control_room");
@@ -574,7 +574,7 @@ obj_upload_the_abort_codes() {
     var_2 = var_3.origin;
   }
 
-  objective_add(var_1, "active", & "LAUNCHFACILITY_B_UPLOAD_THE_ABORT_CODES", var_2);
+  objective_add(var_1, "active", &"LAUNCHFACILITY_B_UPLOAD_THE_ABORT_CODES", var_2);
   objective_current(var_1);
   common_scripts\utility::flag_wait("codes_uploaded");
   var_4 = "Codes uploaded with " + get_remaining_seconds() + " seconds remaining on gameskill " + level.gameskill;
@@ -590,7 +590,7 @@ obj_upload_the_abort_codes() {
 obj_follow_price() {
   var_0 = 4;
   var_1 = level.price.origin;
-  objective_add(var_0, "active", & "LAUNCHFACILITY_B_FOLLOW_PRICE", var_1);
+  objective_add(var_0, "active", &"LAUNCHFACILITY_B_FOLLOW_PRICE", var_1);
   objective_current(var_0);
   level.price thread lock_obj_location(var_0);
   common_scripts\utility::flag_wait("at_the_jeep");
@@ -690,7 +690,7 @@ starttimer() {
   level.hudtimerindex = 20;
   level.timer = maps\_hud_util::get_countdown_hud(undefined, undefined, undefined, undefined, level.stopwatch * 60);
   level.timer setpulsefx(30, 900000, 700);
-  level.timer.text.label = & "LAUNCHFACILITY_B_TIME_TILL_ICBM_IMPACT";
+  level.timer.text.label = &"LAUNCHFACILITY_B_TIME_TILL_ICBM_IMPACT";
   level.timer settenthstimer(level.stopwatch * 60);
   wait(level.stopwatch * 60);
   common_scripts\utility::flag_set("timer_expired");

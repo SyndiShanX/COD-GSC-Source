@@ -84,16 +84,9 @@ getPlant() {
   for(i = 0; i < traceorigins.size; i++) {
     trace = bulletTrace(traceorigins[i], (traceorigins[i] + (0, 0, -1000)), false, undefined);
 
-
-
-
-
-
-
     if(!isDefined(besttracefraction) || (trace["fraction"] < besttracefraction)) {
       besttracefraction = trace["fraction"];
       besttraceposition = trace["position"];
-
 
     }
   }
@@ -118,13 +111,6 @@ orientToNormal(normal) {
   neg_height = normal[2] * -1;
   tangent = (hor_dir[0] * neg_height, hor_dir[1] * neg_height, hor_length);
   plant_angle = vectortoangles(tangent);
-
-
-
-
-
-
-
 
   return plant_angle;
 }
@@ -235,7 +221,6 @@ setLowerMessage(name, text, time, priority) {
 
   self addLowerMessage(name, text, time, priority);
   self updateLowerMessage();
-
 }
 
 updateLowerMessage() {
@@ -704,7 +689,6 @@ leaderDialogOnPlayer(dialog, group, groupOverride) {
     self.leaderDialogGroups[group] = dialog;
     dialog = group;
 
-
     if(hadGroupDialog)
       return;
   }
@@ -1042,8 +1026,6 @@ restoreData() {
   foreach(weapon in saveData.weapons) {
     self _giveWeapon(weapon.name, int(tableLookup("mp/camoTable.csv", 1, self.loadoutPrimaryCamo, 0)));
 
-
-
     self setWeaponAmmoClip(weapon.name, weapon.clipAmmoR, "right");
     if(isSubStr(weapon.name, "akimbo"))
       self setWeaponAmmoClip(weapon.name, weapon.clipAmmoL, "left");
@@ -1059,7 +1041,6 @@ restoreData() {
 
     if(weapon == "none")
       weapon = self getLastWeapon();
-
 
     self setSpawnWeapon(weapon);
     self switchToWeapon(weapon);
@@ -1609,7 +1590,6 @@ statusMenu(duration) {
 
   self closepopupMenu("status_update");
 
-
   wait(10.0);
 
   self.statusMenu = false;
@@ -1655,7 +1635,6 @@ getWeaponClass(weapon) {
   tokens = strTok(weapon, "_");
 
   weaponClass = tablelookup("mp/statstable.csv", 4, tokens[0], 2);
-
 
   if(weaponClass == "") {
     weaponName = strip_suffix(weapon, "_mp");

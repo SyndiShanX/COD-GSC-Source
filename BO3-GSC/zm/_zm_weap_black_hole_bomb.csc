@@ -15,7 +15,7 @@
 #namespace zm_weap_black_hole_bomb;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_black_hole_bomb", & __init__, undefined, undefined);
+  system::register("zm_weap_black_hole_bomb", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -29,9 +29,9 @@ function __init__() {
   level._visionset_black_hole_bomb_transition_time_out = 1;
   level._visionset_black_hole_bomb_priority = 10;
   visionset_mgr::register_visionset_info("zombie_cosmodrome_blackhole", 21000, 30, undefined, "zombie_cosmodrome_blackhole");
-  clientfield::register("toplayer", "bhb_viewlights", 21000, 2, "int", & bhb_viewlights, 0, 0);
-  clientfield::register("scriptmover", "toggle_black_hole_deployed", 21000, 1, "int", & black_hole_deployed, 0, 0);
-  clientfield::register("actor", "toggle_black_hole_being_pulled", 21000, 1, "int", & black_hole_zombie_being_pulled, 0, 1);
+  clientfield::register("toplayer", "bhb_viewlights", 21000, 2, "int", &bhb_viewlights, 0, 0);
+  clientfield::register("scriptmover", "toggle_black_hole_deployed", 21000, 1, "int", &black_hole_deployed, 0, 0);
+  clientfield::register("actor", "toggle_black_hole_being_pulled", 21000, 1, "int", &black_hole_zombie_being_pulled, 0, 1);
 }
 
 function bhb_viewlights(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

@@ -15,11 +15,11 @@
 #namespace flak_drone;
 
 function autoexec __init__sytem__() {
-  system::register("flak_drone", & __init__, undefined, undefined);
+  system::register("flak_drone", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("vehicle", "flak_drone_camo", 1, 3, "int", & active_camo_changed, 0, 0);
+  clientfield::register("vehicle", "flak_drone_camo", 1, 3, "int", &active_camo_changed, 0, 0);
 }
 
 function active_camo_changed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

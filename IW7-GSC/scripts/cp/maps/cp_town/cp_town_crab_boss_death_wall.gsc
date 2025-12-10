@@ -664,8 +664,8 @@ revive_players_from_afterlife() {
 
 vehicle_teleporter_hint_func(param_00, param_01) {
   if(scripts\engine\utility::istrue(level.vehicle_teleporter_is_charged)) {
-    return & "CP_TOWN_INTERACTIONS_VEHICLE_TELEPORT_READY";
+    return &"CP_TOWN_INTERACTIONS_VEHICLE_TELEPORT_READY";
   }
 
-  return & "CP_TOWN_INTERACTIONS_ACTIVATE_TELEPORT";
+  return &"CP_TOWN_INTERACTIONS_ACTIVATE_TELEPORT";
 }

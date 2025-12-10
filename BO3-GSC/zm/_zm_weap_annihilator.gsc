@@ -20,11 +20,11 @@
 #namespace zm_weap_annihilator;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_annihilator", & __init__, undefined, undefined);
+  system::register("zm_weap_annihilator", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  zm_spawner::register_zombie_death_event_callback( & check_annihilator_death);
+  zm_spawner::register_zombie_death_event_callback(&check_annihilator_death);
   zm_hero_weapon::register_hero_weapon("hero_annihilator");
   level.weaponannihilator = getweapon("hero_annihilator");
 }

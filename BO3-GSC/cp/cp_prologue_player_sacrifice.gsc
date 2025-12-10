@@ -164,7 +164,7 @@ function function_a4e4e77d() {
   }
   foreach(player in level.players) {
     player shellshock("default", 5);
-    player.overrideplayerdamage = & function_947bfdac;
+    player.overrideplayerdamage = &function_947bfdac;
   }
 }
 
@@ -213,7 +213,7 @@ function spawn_handler_main() {
 function function_633f337() {
   level flag::wait_till("minister_pos");
   spawn_manager::enable("sm_robot_defend_tower");
-  util::delay(5, undefined, & spawn_manager::disable, "sm_robot_defend_tower");
+  util::delay(5, undefined, &spawn_manager::disable, "sm_robot_defend_tower");
   wait(5);
   spawn_manager::enable("sm_apc_reinforce");
   level flag::wait_till("start_defend_countdown");
@@ -495,9 +495,9 @@ function allied_ai_movements() {
 }
 
 function function_f76b808e() {
-  level scene::add_scene_func("cin_pro_17_02_robotdefend_vign_hookup_minsterlloop", & function_4dc9c2f9, "play");
-  level scene::add_scene_func("cin_pro_17_02_robotdefend_vign_hookup_khalilloop", & function_4e2b6779, "play");
-  level scene::add_scene_func("cin_pro_17_02_robotdefend_vign_hookup_hendricksloop", & function_8600d87b, "play");
+  level scene::add_scene_func("cin_pro_17_02_robotdefend_vign_hookup_minsterlloop", &function_4dc9c2f9, "play");
+  level scene::add_scene_func("cin_pro_17_02_robotdefend_vign_hookup_khalilloop", &function_4e2b6779, "play");
+  level scene::add_scene_func("cin_pro_17_02_robotdefend_vign_hookup_hendricksloop", &function_8600d87b, "play");
   level thread scene::play("cin_pro_17_02_robotdefend_vign_hookup_minsterlloop");
   level thread scene::play("cin_pro_17_02_robotdefend_vign_hookup_khalilloop");
   level thread scene::play("cin_pro_17_02_robotdefend_vign_hookup_hendricksloop");
@@ -589,8 +589,8 @@ function function_cd56c2cf(player) {
 
 function pod_handler() {
   level.e_blocker = getent("brush_pod", "targetname");
-  vehicle::add_spawn_function("fxanim_vtol_pod", & function_de0720c1);
-  vehicle::add_spawn_function("fxanim_pod", & function_52d9a509);
+  vehicle::add_spawn_function("fxanim_vtol_pod", &function_de0720c1);
+  vehicle::add_spawn_function("fxanim_pod", &function_52d9a509);
   level thread scene::play("p7_fxanim_cp_prologue_vtol_pod_drop_off_bundle");
   level thread function_45756e82();
   level thread function_aba4324();
@@ -637,13 +637,13 @@ function function_2063548d() {
   objectives::set("cp_level_prologue_get_out_alive");
   level.activeplayers[0] playLoopSound("evt_outro_tinnitus_lp", 4);
   level thread function_e7a97be1();
-  array::run_all(level.players, & util::set_low_ready, 1);
+  array::run_all(level.players, &util::set_low_ready, 1);
   function_657fb683();
   level thread util::screen_fade_in(1, "black", "cinematic_fader");
   level flag::set("pod_go");
   level thread function_f7af5999();
   function_a43cf0f6();
-  scene::add_scene_func("cin_pro_17_02_robotdefend_vign_hookup_player", & function_6e3b3bec, "play");
+  scene::add_scene_func("cin_pro_17_02_robotdefend_vign_hookup_player", &function_6e3b3bec, "play");
   level thread scene::play("cin_pro_17_02_robotdefend_vign_hookup_player");
   level util::clientnotify("sndOS1");
   level waittill("hash_7176ec93");
@@ -776,7 +776,7 @@ function function_94856821() {
 
 function function_34d9d6a7() {
   level waittill("hash_2ac435dc");
-  level scene::add_scene_func("p7_fxanim_cp_prologue_tower_vtol_collapse_v2_bundle", & function_4f43b0cc);
+  level scene::add_scene_func("p7_fxanim_cp_prologue_tower_vtol_collapse_v2_bundle", &function_4f43b0cc);
   level thread scene::play("p7_fxanim_cp_prologue_tower_vtol_collapse_v2_bundle");
   exploder::exploder_stop("light_exploder_defend_radio_tower");
   var_28ca079b = 360000;
@@ -821,29 +821,29 @@ function function_c0fa2edc() {
 }
 
 function setup_defend_spawn_funcs() {
-  vehicle::add_spawn_function("defend_truck_1", & function_45c35350);
-  vehicle::add_spawn_function("defend_truck_2", & function_45c35350);
-  vehicle::add_spawn_function("defend_truck_3", & function_b2d7edae);
-  vehicle::add_spawn_function("defend_truck_4", & function_b2d7edae);
-  vehicle::add_spawn_function("defend_apc_2", & function_c3228115, 1, 2);
-  vehicle::add_spawn_function("defend_apc_3", & function_c3228115, 1, 2);
-  spawner::add_spawn_function_group("ridge_guy", "targetname", & function_64dd8530);
-  spawner::add_spawn_function_group("apc3_crew", "targetname", & function_4b1fb716);
-  spawner::add_spawn_function_group("apc_reinforce", "targetname", & function_4b1fb716);
-  spawner::add_spawn_function_group("group_defend_1", "script_aigroup", & function_96551790);
-  spawner::add_spawn_function_group("rpg_intro", "script_aigroup", & function_54454538);
-  spawner::add_spawn_function_group("group_apc", "script_aigroup", & function_b9081af);
-  spawner::add_spawn_function_group("group_reinforce_1", "script_aigroup", & function_7f708ee);
-  spawner::add_spawn_function_group("group_reinforce_2", "script_aigroup", & function_bf932181);
-  spawner::add_spawn_function_group("group_reinforce_3", "script_aigroup", & function_7f708ee);
-  spawner::add_spawn_function_group("group_defend_2", "script_aigroup", & function_b9081af);
-  spawner::add_spawn_function_group("group_defend_3", "script_aigroup", & function_b9081af);
-  spawner::add_spawn_function_group("group_pod_right", "script_aigroup", & function_b9081af);
-  spawner::add_spawn_function_group("group_pod_left", "script_aigroup", & function_b9081af);
-  spawner::add_spawn_function_group("group_pod_robot", "script_aigroup", & function_98ae774);
-  spawner::add_spawn_function_group("defend_rpg", "targetname", & function_40fd81b);
-  spawner::add_spawn_function_group("robot_swarm", "targetname", & function_9d374);
-  spawner::add_spawn_function_group("group_tower_defender", "script_aigroup", & function_7f708ee);
+  vehicle::add_spawn_function("defend_truck_1", &function_45c35350);
+  vehicle::add_spawn_function("defend_truck_2", &function_45c35350);
+  vehicle::add_spawn_function("defend_truck_3", &function_b2d7edae);
+  vehicle::add_spawn_function("defend_truck_4", &function_b2d7edae);
+  vehicle::add_spawn_function("defend_apc_2", &function_c3228115, 1, 2);
+  vehicle::add_spawn_function("defend_apc_3", &function_c3228115, 1, 2);
+  spawner::add_spawn_function_group("ridge_guy", "targetname", &function_64dd8530);
+  spawner::add_spawn_function_group("apc3_crew", "targetname", &function_4b1fb716);
+  spawner::add_spawn_function_group("apc_reinforce", "targetname", &function_4b1fb716);
+  spawner::add_spawn_function_group("group_defend_1", "script_aigroup", &function_96551790);
+  spawner::add_spawn_function_group("rpg_intro", "script_aigroup", &function_54454538);
+  spawner::add_spawn_function_group("group_apc", "script_aigroup", &function_b9081af);
+  spawner::add_spawn_function_group("group_reinforce_1", "script_aigroup", &function_7f708ee);
+  spawner::add_spawn_function_group("group_reinforce_2", "script_aigroup", &function_bf932181);
+  spawner::add_spawn_function_group("group_reinforce_3", "script_aigroup", &function_7f708ee);
+  spawner::add_spawn_function_group("group_defend_2", "script_aigroup", &function_b9081af);
+  spawner::add_spawn_function_group("group_defend_3", "script_aigroup", &function_b9081af);
+  spawner::add_spawn_function_group("group_pod_right", "script_aigroup", &function_b9081af);
+  spawner::add_spawn_function_group("group_pod_left", "script_aigroup", &function_b9081af);
+  spawner::add_spawn_function_group("group_pod_robot", "script_aigroup", &function_98ae774);
+  spawner::add_spawn_function_group("defend_rpg", "targetname", &function_40fd81b);
+  spawner::add_spawn_function_group("robot_swarm", "targetname", &function_9d374);
+  spawner::add_spawn_function_group("group_tower_defender", "script_aigroup", &function_7f708ee);
 }
 
 function background_effects() {

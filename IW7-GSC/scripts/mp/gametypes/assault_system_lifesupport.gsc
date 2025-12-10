@@ -63,8 +63,8 @@ func_113AB() {
   scripts\mp\gameobjects::allowuse("friendly");
   scripts\mp\gameobjects::setusetime(1);
   scripts\mp\gameobjects::setwaitweaponchangeonuse(1);
-  scripts\mp\gameobjects::setusetext( & "MP_BREACH_OPERATE_SYSTEM_ON_ACTION");
-  scripts\mp\gameobjects::setusehinttext( & "MP_BREACH_OPERATE_LIFESUPPORT_ON");
+  scripts\mp\gameobjects::setusetext(&"MP_BREACH_OPERATE_SYSTEM_ON_ACTION");
+  scripts\mp\gameobjects::setusehinttext(&"MP_BREACH_OPERATE_LIFESUPPORT_ON");
   self.onbeginuse = ::func_113A5;
   self.onenduse = ::func_113A6;
   self.onuse = ::func_113A7;
@@ -84,8 +84,8 @@ func_113AA() {
   scripts\mp\gameobjects::allowuse("enemy");
   scripts\mp\gameobjects::setusetime(2);
   scripts\mp\gameobjects::setwaitweaponchangeonuse(1);
-  scripts\mp\gameobjects::setusetext( & "MP_BREACH_OPERATE_SYSTEM_OFF_ACTION");
-  scripts\mp\gameobjects::setusehinttext( & "MP_BREACH_OPERATE_LIFESUPPORT_OFF");
+  scripts\mp\gameobjects::setusetext(&"MP_BREACH_OPERATE_SYSTEM_OFF_ACTION");
+  scripts\mp\gameobjects::setusehinttext(&"MP_BREACH_OPERATE_LIFESUPPORT_OFF");
   self.onbeginuse = ::func_113A2;
   self.onenduse = ::func_113A3;
   self.onuse = ::func_113A4;

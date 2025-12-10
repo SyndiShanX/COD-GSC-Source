@@ -29,7 +29,7 @@
 
 function function_8e89793a() {
   level.var_ab7eb3d4 = 0;
-  level.var_c102a998 = & function_c102a998;
+  level.var_c102a998 = &function_c102a998;
   level thread function_419bf2ad();
 }
 

@@ -20,16 +20,16 @@
 #namespace zm_audio;
 
 function autoexec __init__sytem__() {
-  system::register("zm_audio", & __init__, undefined, undefined);
+  system::register("zm_audio", &__init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("allplayers", "charindex", 1, 3, "int");
   clientfield::register("toplayer", "isspeaking", 1, 1, "int");
   println("");
-  level.audio_get_mod_type = & get_mod_type;
+  level.audio_get_mod_type = &get_mod_type;
   level zmbvox();
-  callback::on_connect( & init_audio_functions);
+  callback::on_connect(&init_audio_functions);
   level thread sndannouncer_init();
 }
 
@@ -972,7 +972,7 @@ function sndmusicsystem_eesetup(state, origin1, origin2, origin3, origin4, origi
 function sndmusicsystem_eewait(origin, state) {
   temp_ent = spawn("script_origin", origin);
   temp_ent playLoopSound("zmb_meteor_loop");
-  temp_ent thread secretuse("main_music_egg_hit", vectorscale((0, 1, 0), 255), & sndmusicsystem_eeoverride);
+  temp_ent thread secretuse("main_music_egg_hit", vectorscale((0, 1, 0), 255), &sndmusicsystem_eeoverride);
   temp_ent waittill("main_music_egg_hit", player);
   temp_ent stoploopsound(1);
   player playSound("zmb_meteor_activate");
@@ -1296,7 +1296,7 @@ function sndradiosetup(alias_prefix, is_sequential = 0, origin1, origin2, origin
 
 function sndradiowait(origin, radio, is_sequential, num) {
   temp_ent = spawn("script_origin", origin);
-  temp_ent thread secretuse("sndRadioHit", vectorscale((0, 0, 1), 255), & sndradio_override, radio);
+  temp_ent thread secretuse("sndRadioHit", vectorscale((0, 0, 1), 255), &sndradio_override, radio);
   temp_ent waittill("sndradiohit", player);
   if(!(isDefined(is_sequential) && is_sequential)) {
     radionum = num;

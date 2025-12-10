@@ -740,7 +740,7 @@ turnGrenadeIntoADud(weapname, isThrownGrenade, player) {
       timeLeft = Int(level.grenadeLauncherDudTime - (maps\mp\gametypes\_globallogic_utils::getTimePassed() / 1000));
       if(!timeLeft)
         timeLeft = 1;
-      player iPrintLnBold(&"MP_LAUNCHER_UNAVAILABLE_FOR_N", " " + timeLeft + " ", & "EXE_SECONDS");
+      player iPrintLnBold(&"MP_LAUNCHER_UNAVAILABLE_FOR_N", " " + timeLeft + " ", &"EXE_SECONDS");
       self makeGrenadeDud();
     }
   } else if(level.thrownGrenadeDudTime >= (maps\mp\gametypes\_globallogic_utils::getTimePassed() / 1000) && isThrownGrenade) {
@@ -750,7 +750,7 @@ turnGrenadeIntoADud(weapname, isThrownGrenade, player) {
       timeLeft = Int(level.thrownGrenadeDudTime - (maps\mp\gametypes\_globallogic_utils::getTimePassed() / 1000));
       if(!timeLeft)
         timeLeft = 1;
-      player iPrintLnBold(&"MP_GRENADE_UNAVAILABLE_FOR_N", " " + timeLeft + " ", & "EXE_SECONDS");
+      player iPrintLnBold(&"MP_GRENADE_UNAVAILABLE_FOR_N", " " + timeLeft + " ", &"EXE_SECONDS");
       self makeGrenadeDud();
     }
   }

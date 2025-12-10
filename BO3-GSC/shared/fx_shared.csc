@@ -11,11 +11,11 @@
 #namespace fx;
 
 function autoexec __init__sytem__() {
-  system::register("fx", & __init__, undefined, undefined);
+  system::register("fx", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_localclient_connect( & player_init);
+  callback::on_localclient_connect(&player_init);
 }
 
 function player_init(clientnum) {

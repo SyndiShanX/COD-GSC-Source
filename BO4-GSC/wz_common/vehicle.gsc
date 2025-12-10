@@ -1701,7 +1701,7 @@ private function_17949e01() {
       if(waitresult._notify == #"touch" && isDefined(waitresult.pm_flags)) {
         time = gettime();
 
-        if(time > var_80831eb5 && waitresult.pm_flags&128) {
+        if(time > var_80831eb5 && waitresult.pm_flags& 128) {
           force = anglesToForward(waitresult.entity getplayerangles());
           force *= mag;
           force += (0, 0, height);

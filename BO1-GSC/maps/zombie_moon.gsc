@@ -952,8 +952,8 @@ wait_for_power() {
 
 moon_devgui(cmd) {}
 custom_add_weapons() {
-  maps\_zombiemode_weapons::add_zombie_weapon("microwavegundw_zm", "microwavegundw_upgraded_zm", & "ZOMBIE_WEAPON_MICROWAVEGUN_DW", 10, "microwave", "", undefined);
-  maps\_zombiemode_weapons::add_zombie_weapon("zombie_quantum_bomb", undefined, & "ZOMBIE_WEAPON_SATCHEL_2000", 2000, "quantum", "", undefined);
+  maps\_zombiemode_weapons::add_zombie_weapon("microwavegundw_zm", "microwavegundw_upgraded_zm", &"ZOMBIE_WEAPON_MICROWAVEGUN_DW", 10, "microwave", "", undefined);
+  maps\_zombiemode_weapons::add_zombie_weapon("zombie_quantum_bomb", undefined, &"ZOMBIE_WEAPON_SATCHEL_2000", 2000, "quantum", "", undefined);
 }
 
 moon_zombie_death_response() {

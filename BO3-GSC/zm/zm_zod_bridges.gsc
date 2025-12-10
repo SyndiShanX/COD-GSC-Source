@@ -79,12 +79,12 @@ class cbridge {
     a_e_walkway = getEntArray("bridge_walkway", "targetname");
     a_t_pull_trigger = getEntArray("bridge_pull_trigger", "targetname");
     a_e_pull_target = getEntArray("bridge_pull_target", "targetname");
-    m_a_e_blockers = array::filter(m_a_e_blockers, 0, & filter_areaname, str_areaname);
-    a_e_clip_blockers = array::filter(a_e_clip_blockers, 0, & filter_areaname, str_areaname);
+    m_a_e_blockers = array::filter(m_a_e_blockers, 0, &filter_areaname, str_areaname);
+    a_e_clip_blockers = array::filter(a_e_clip_blockers, 0, &filter_areaname, str_areaname);
     m_e_clip_blocker = a_e_clip_blockers[0];
-    a_e_walkway = array::filter(a_e_walkway, 0, & filter_areaname, str_areaname);
+    a_e_walkway = array::filter(a_e_walkway, 0, &filter_areaname, str_areaname);
     m_e_walkway = a_e_walkway[0];
-    a_e_pull_target = array::filter(a_e_pull_target, 0, & filter_areaname, str_areaname);
+    a_e_pull_target = array::filter(a_e_pull_target, 0, &filter_areaname, str_areaname);
     m_e_pull_target = a_e_pull_target[0];
     m_b_discovered = 0;
     m_e_walkway setinvisibletoall();
@@ -103,7 +103,7 @@ class cbridge {
 #namespace zm_zod_bridges;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_bridges", undefined, & __main__, undefined);
+  system::register("zm_zod_bridges", undefined, &__main__, undefined);
 }
 
 function __main__() {

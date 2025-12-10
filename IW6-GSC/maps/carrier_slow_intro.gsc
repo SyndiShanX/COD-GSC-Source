@@ -42,8 +42,8 @@ slow_intro_pre_load() {
   var_5 rotateto((0, 0, 0), 0.5);
   var_6 = getent("blast_shield6", "targetname");
   var_6 rotateto((0, 0, 0), 0.5);
-  maps\_utility::add_hint_string("3_days", & "CARRIER_3DAYS");
-  maps\_utility::intro_screen_create(&"CARRIER_INTROSCREEN_LINE1", & "CARRIER_INTROSCREEN_LINE2", & "CARRIER_INTROSCREEN_LINE3");
+  maps\_utility::add_hint_string("3_days", &"CARRIER_3DAYS");
+  maps\_utility::intro_screen_create(&"CARRIER_INTROSCREEN_LINE1", &"CARRIER_INTROSCREEN_LINE2", &"CARRIER_INTROSCREEN_LINE3");
   maps\_utility::intro_screen_custom_func(::custom_intro_screen_func);
   maps\_utility_dogs::init_dog_pc("c_hurt");
 }

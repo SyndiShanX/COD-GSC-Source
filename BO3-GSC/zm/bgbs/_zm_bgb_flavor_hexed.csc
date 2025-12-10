@@ -13,7 +13,7 @@
 #namespace zm_bgb_flavor_hexed;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_flavor_hexed", & __init__, undefined, undefined);
+  system::register("zm_bgb_flavor_hexed", &__init__, undefined, undefined);
 }
 
 function __init__() {

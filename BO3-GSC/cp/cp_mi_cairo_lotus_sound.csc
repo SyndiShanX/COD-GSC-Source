@@ -13,7 +13,7 @@
 function main() {
   level thread sndmusicrampers();
   level thread function_7bcb0782();
-  clientfield::register("world", "sndHakimPaVox", 1, 3, "int", & function_5e9a8778, 0, 0);
+  clientfield::register("world", "sndHakimPaVox", 1, 3, "int", &function_5e9a8778, 0, 0);
   level thread function_4904d6ff();
   level thread function_1a66f9f3();
 }

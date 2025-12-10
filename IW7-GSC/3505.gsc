@@ -20,7 +20,7 @@ init() {
   level.func_C321["odin_support"].func_1352D = "odin_target_killed";
   level.func_C321["odin_support"].func_1352C = "odin_targets_killed";
   level.func_C321["odin_support"].func_12B20 = 1;
-  level.func_C321["odin_support"].func_12B80 = & "KILLSTREAKS_ODIN_UNAVAILABLE";
+  level.func_C321["odin_support"].func_12B80 = &"KILLSTREAKS_ODIN_UNAVAILABLE";
   level.func_C321["odin_support"].weapon["airdrop"] = spawnStruct();
   level.func_C321["odin_support"].weapon["airdrop"].projectile = "odin_projectile_airdrop_mp";
   level.func_C321["odin_support"].weapon["airdrop"].func_E7BA = "smg_fire";
@@ -73,7 +73,7 @@ init() {
   level.func_C321["odin_assault"].func_1352D = "odin_target_killed";
   level.func_C321["odin_assault"].func_1352C = "odin_targets_killed";
   level.func_C321["odin_assault"].func_12B20 = 2;
-  level.func_C321["odin_assault"].func_12B80 = & "KILLSTREAKS_LOKI_UNAVAILABLE";
+  level.func_C321["odin_assault"].func_12B80 = &"KILLSTREAKS_LOKI_UNAVAILABLE";
   level.func_C321["odin_assault"].weapon["airdrop"] = spawnStruct();
   level.func_C321["odin_assault"].weapon["airdrop"].projectile = "odin_projectile_airdrop_mp";
   level.func_C321["odin_assault"].weapon["airdrop"].func_E7BA = "smg_fire";
@@ -138,7 +138,7 @@ func_128F1(var_00, var_01) {
   var_03 = 1;
 
   if(scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount + var_03 >= scripts\mp\utility\game::maxvehiclesallowed()) {
-    self iprintlnbold( & "KILLSTREAKS_TOO_MANY_VEHICLES");
+    self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
     return 0;
   }
 
@@ -839,7 +839,7 @@ func_1369E(var_00) {
     thread removeoutline(var_05, var_03);
     var_03 scripts\mp\utility\game::_setnameplatematerial("player_name_bg_green_agent", "player_name_bg_red_agent");
   } else
-    var_01 iprintlnbold( & "KILLSTREAKS_AGENT_MAX");
+    var_01 iprintlnbold(&"KILLSTREAKS_AGENT_MAX");
 }
 
 func_13AAE() {

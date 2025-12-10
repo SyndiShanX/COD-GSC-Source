@@ -229,7 +229,7 @@ checkMatchDataKills(killId, victim, weapon, meansOfDeath) {
     playFX(level._effect["money"], victim getTagOrigin("j_spine4"));
   }
 
-  if(victim.iDFlags & level.iDFLAGS_PENETRATION)
+  if(victim.iDFlags &level.iDFLAGS_PENETRATION)
     self incPlayerStat("bulletpenkills", 1);
 
   if(self.pers["rank"] < victim.pers["rank"])

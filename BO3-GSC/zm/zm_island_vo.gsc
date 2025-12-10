@@ -30,14 +30,14 @@
 #namespace zm_island_vo;
 
 function autoexec __init__sytem__() {
-  system::register("zm_island_vo", & __init__, undefined, undefined);
+  system::register("zm_island_vo", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
   level.a_e_speakers = [];
-  level.audio_get_mod_type = & custom_get_mod_type;
+  level.audio_get_mod_type = &custom_get_mod_type;
   function_267933e4();
   level thread function_772aa229();
   level thread function_c426b455();
@@ -56,7 +56,7 @@ function __init__() {
   level.var_9c6abc49 = [];
   level.var_caa91bc0 = [];
   level flag::init("skull_s_pickup_vo_locked");
-  zm_spawner::register_zombie_death_event_callback( & function_b978ce37);
+  zm_spawner::register_zombie_death_event_callback(&function_b978ce37);
 }
 
 function on_player_spawned() {
@@ -748,7 +748,7 @@ function function_6fc10b64() {
   wait(1.5);
   if(zm_utility::is_player_valid(self)) {
     self clientfield::set("player_vomit_fx", 1);
-    self util::delay(5, "disconnect", & clientfield::set, "player_vomit_fx", 0);
+    self util::delay(5, "disconnect", &clientfield::set, "player_vomit_fx", 0);
     self function_1881817("fruit", "vomit", 10, 0);
   }
 }

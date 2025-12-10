@@ -47,10 +47,10 @@ setskill(var_0) {
     level.difficultytype[1] = "normal";
     level.difficultytype[2] = "hardened";
     level.difficultytype[3] = "veteran";
-    level.difficultystring["easy"] = & "GAMESKILL_EASY";
-    level.difficultystring["normal"] = & "GAMESKILL_NORMAL";
-    level.difficultystring["hardened"] = & "GAMESKILL_HARDENED";
-    level.difficultystring["veteran"] = & "GAMESKILL_VETERAN";
+    level.difficultystring["easy"] = &"GAMESKILL_EASY";
+    level.difficultystring["normal"] = &"GAMESKILL_NORMAL";
+    level.difficultystring["hardened"] = &"GAMESKILL_HARDENED";
+    level.difficultystring["veteran"] = &"GAMESKILL_VETERAN";
     thread gameskill_change_monitor();
   }
 
@@ -791,9 +791,9 @@ player_health_packets() {
 playerhealthregeninit() {
   wait 0.05;
   level.strings["take_cover"] = spawnStruct();
-  level.strings["take_cover"].text = & "GAME_GET_TO_COVER";
+  level.strings["take_cover"].text = &"GAME_GET_TO_COVER";
   level.strings["get_back_up"] = spawnStruct();
-  level.strings["get_back_up"].text = & "GAME_LAST_STAND_GET_BACK_UP";
+  level.strings["get_back_up"].text = &"GAME_LAST_STAND_GET_BACK_UP";
 }
 
 playerhealthregen() {

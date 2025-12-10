@@ -78,7 +78,7 @@ function pallas_intro_igc() {
   newworld_util::function_83a7d040();
   util::streamer_wait();
   level flag::clear("infinite_white_transition");
-  array::thread_all(level.activeplayers, & newworld_util::function_737d2864, & "CP_MI_ZURICH_NEWWORLD_LOCATION_FACTORY", & "CP_MI_ZURICH_NEWWORLD_TIME_FACTORY");
+  array::thread_all(level.activeplayers, &newworld_util::function_737d2864, &"CP_MI_ZURICH_NEWWORLD_LOCATION_FACTORY", &"CP_MI_ZURICH_NEWWORLD_TIME_FACTORY");
   pallas_intro_scene();
   util::clear_streamer_hint();
   exploder::exploder_stop("fx_exterior_igc_tracer_intro");
@@ -87,14 +87,14 @@ function pallas_intro_igc() {
 function pallas_intro_scene() {
   exploder::exploder("fx_exterior_igc_tracer_intro");
   level scene::add_player_linked_scene("cin_new_02_01_pallasintro_vign_appear");
-  level scene::add_scene_func("cin_new_02_01_pallasintro_vign_appear", & function_453b588c);
-  level scene::add_scene_func("cin_new_02_01_pallasintro_vign_appear", & function_b0753d7b);
+  level scene::add_scene_func("cin_new_02_01_pallasintro_vign_appear", &function_453b588c);
+  level scene::add_scene_func("cin_new_02_01_pallasintro_vign_appear", &function_b0753d7b);
   level thread scene::play("cin_new_02_01_pallasintro_vign_appear");
   if(isDefined(level.bzm_newworlddialogue2callback)) {
     level thread[[level.bzm_newworlddialogue2callback]]();
   }
-  level scene::add_scene_func("cin_new_02_01_pallasintro_vign_appear_player", & function_1b440643);
-  level scene::add_scene_func("cin_new_02_01_pallasintro_vign_appear_player", & function_b1896f5, "players_done");
+  level scene::add_scene_func("cin_new_02_01_pallasintro_vign_appear_player", &function_1b440643);
+  level scene::add_scene_func("cin_new_02_01_pallasintro_vign_appear_player", &function_b1896f5, "players_done");
   level scene::play("cin_new_02_01_pallasintro_vign_appear_player");
   level thread namespace_e38c3c58::function_973b77f9();
 }
@@ -187,14 +187,14 @@ function skipto_factory_exterior_init(str_objective, b_starting) {
     spawn_manager::enable("sm_intro_area_ally_skipto");
     load::function_a2995f22();
   }
-  util::delay(0.6, undefined, & newworld_util::function_3e37f48b, 0);
+  util::delay(0.6, undefined, &newworld_util::function_3e37f48b, 0);
   level thread function_c5eadf67();
   battlechatter::function_d9f49fba(1);
   level thread namespace_e38c3c58::function_fa2e45b8();
   level thread intro_area();
   trigger::wait_till("alley_start");
   level thread namespace_e38c3c58::function_92eefdb3();
-  array::thread_all(spawner::get_ai_group_ai("intro_area_enemy"), & newworld_util::function_95132241);
+  array::thread_all(spawner::get_ai_group_ai("intro_area_enemy"), &newworld_util::function_95132241);
   skipto::objective_completed(str_objective);
 }
 
@@ -220,7 +220,7 @@ function skipto_alley_init(str_objective, b_starting) {
   savegame::checkpoint_save();
   level objectives::breadcrumb("alley_breadcrumb");
   level flag::set("player_completed_alley");
-  array::thread_all(spawner::get_ai_group_ai("alley_enemies"), & newworld_util::function_95132241);
+  array::thread_all(spawner::get_ai_group_ai("alley_enemies"), &newworld_util::function_95132241);
   skipto::objective_completed(str_objective);
 }
 
@@ -243,7 +243,7 @@ function skipto_warehouse_init(str_objective, b_starting) {
 
 function skipto_warehouse_done(str_objective, b_starting, b_direct, player) {
   objectives::complete("cp_level_newworld_factory_subobj_goto_hideout");
-  callback::remove_on_connect( & player_tac_mode_watcher);
+  callback::remove_on_connect(&player_tac_mode_watcher);
 }
 
 function skipto_foundry_init(str_objective, b_starting) {
@@ -296,16 +296,16 @@ function skipto_vat_room_done(str_objective, b_starting, b_direct, player) {
     objectives::complete("cp_level_newworld_vat_room_subobj_locate_command_ctr");
     objectives::complete("cp_level_newworld_vat_room_subobj_hack_door");
   }
-  callback::remove_on_connect( & function_5e3e5d06);
+  callback::remove_on_connect(&function_5e3e5d06);
 }
 
 function intro_area() {
-  spawner::add_spawn_function_group("friendly_left", "script_string", & set_threat_bias);
-  spawner::add_spawn_function_group("friendly_right", "script_string", & set_threat_bias);
-  spawner::add_spawn_function_group("left_flank", "script_string", & set_threat_bias);
-  spawner::add_spawn_function_group("right_flank", "script_string", & set_threat_bias);
+  spawner::add_spawn_function_group("friendly_left", "script_string", &set_threat_bias);
+  spawner::add_spawn_function_group("friendly_right", "script_string", &set_threat_bias);
+  spawner::add_spawn_function_group("left_flank", "script_string", &set_threat_bias);
+  spawner::add_spawn_function_group("right_flank", "script_string", &set_threat_bias);
   var_f91ba6e1 = getent("diaz_factory_first_target", "script_noteworthy");
-  var_f91ba6e1 spawner::add_spawn_function( & function_e9ba1a28);
+  var_f91ba6e1 spawner::add_spawn_function(&function_e9ba1a28);
   spawn_manager::enable("sm_intro_area_ally");
   spawn_manager::enable("sm_intro_initial_enemies_left");
   spawn_manager::enable("sm_intro_initial_enemies_right");
@@ -364,8 +364,8 @@ function function_cdca03a4() {
   level thread function_2fa20b5d();
   trigger::wait_till("intro_factory_retreat");
   spawn_manager::enable("sm_intro_tac_mode");
-  scene::add_scene_func("cin_new_03_01_factoryraid_aie_break_glass", & function_877af88d, "play");
-  scene::add_scene_func("cin_new_03_01_factoryraid_aie_break_glass", & function_8bd7bfb0, "play");
+  scene::add_scene_func("cin_new_03_01_factoryraid_aie_break_glass", &function_877af88d, "play");
+  scene::add_scene_func("cin_new_03_01_factoryraid_aie_break_glass", &function_8bd7bfb0, "play");
   level thread scene::play("cin_new_03_01_factoryraid_aie_break_glass");
 }
 
@@ -537,8 +537,8 @@ function function_5f94cc0() {
   if(isDefined(level.bzm_newworlddialogue2_2callback)) {
     level thread[[level.bzm_newworlddialogue2_2callback]]();
   }
-  level scene::add_scene_func("cin_new_03_03_factoryraid_vign_wallrunright_diaz", & function_574f2ed1, "done");
-  level scene::add_scene_func("cin_new_03_03_factoryraid_vign_wallrunright_diaz_pt2", & function_9e64a31f);
+  level scene::add_scene_func("cin_new_03_03_factoryraid_vign_wallrunright_diaz", &function_574f2ed1, "done");
+  level scene::add_scene_func("cin_new_03_03_factoryraid_vign_wallrunright_diaz_pt2", &function_9e64a31f);
   level thread scene::play("cin_new_03_03_factoryraid_vign_wallrunright_diaz");
   level waittill("hash_7c8ade1b");
   trigger::use("set_diaz_color_post_wallrun", "targetname");
@@ -661,7 +661,7 @@ function function_c5eadf67() {
     player thread player_tac_mode_watcher();
   }
   util::wait_network_frame();
-  callback::on_connect( & player_tac_mode_watcher);
+  callback::on_connect(&player_tac_mode_watcher);
 }
 
 function player_tac_mode_watcher() {
@@ -777,10 +777,10 @@ function function_14da3d31() {
 }
 
 function function_4fbc759(a_amws) {
-  scene::add_scene_func("cin_new_03_03_factoryraid_vign_startup_flee", & function_6f46b3ee, "init");
-  scene::add_scene_func("cin_new_03_03_factoryraid_vign_startup_flee", & function_54cce95e);
+  scene::add_scene_func("cin_new_03_03_factoryraid_vign_startup_flee", &function_6f46b3ee, "init");
+  scene::add_scene_func("cin_new_03_03_factoryraid_vign_startup_flee", &function_54cce95e);
   level thread scene::init("cin_new_03_03_factoryraid_vign_startup_flee", a_amws);
-  scene::add_scene_func("cin_new_03_03_factoryraid_vign_startup", & function_43764348, "init");
+  scene::add_scene_func("cin_new_03_03_factoryraid_vign_startup", &function_43764348, "init");
   a_s_scenes = struct::get_array("warehouse_startup_scene", "targetname");
   foreach(s_scene in a_s_scenes) {
     s_scene thread function_4432ae41();
@@ -880,7 +880,7 @@ function foundry_area() {
   level waittill("hash_fa1f139b");
   battlechatter::function_d9f49fba(1);
   level thread function_3a211205();
-  array::thread_all(getEntArray("vehicle_triggered", "script_noteworthy"), & function_8df847d);
+  array::thread_all(getEntArray("vehicle_triggered", "script_noteworthy"), &function_8df847d);
   spawn_manager::enable("sm_foundry_reactor_balcony_1");
   spawn_manager::enable("sm_foundry_front_vat_left");
   spawn_manager::enable("sm_foundry_front_vat_right");
@@ -908,7 +908,7 @@ function diaz_tutorial_and_talking() {
   if(isDefined(level.bzm_newworlddialogue2_3callback)) {
     level thread[[level.bzm_newworlddialogue2_3callback]]();
   }
-  scene::add_scene_func("cin_new_03_02_factoryraid_vign_explaindrones", & diaz_wasp_spawner);
+  scene::add_scene_func("cin_new_03_02_factoryraid_vign_explaindrones", &diaz_wasp_spawner);
   level thread scene::play("cin_new_03_02_factoryraid_vign_explaindrones");
   level waittill("hash_b14420d1");
   objectives::set("cp_level_newworld_factory_subobj_hijack_drone");
@@ -918,8 +918,8 @@ function diaz_tutorial_and_talking() {
   } else {
     level thread function_341b5959(0);
   }
-  scene::add_scene_func("cin_new_03_02_factoryraid_vign_explaindrones_open_door", & function_8aa7e247);
-  scene::add_scene_func("cin_new_03_02_factoryraid_vign_explaindrones_open_door", & function_190c4318);
+  scene::add_scene_func("cin_new_03_02_factoryraid_vign_explaindrones_open_door", &function_8aa7e247);
+  scene::add_scene_func("cin_new_03_02_factoryraid_vign_explaindrones_open_door", &function_190c4318);
   level thread scene::play("cin_new_03_02_factoryraid_vign_explaindrones_open_door");
   objectives::complete("cp_level_newworld_factory_subobj_hijack_drone");
   savegame::checkpoint_save();
@@ -949,7 +949,7 @@ function show_hijacking_hint() {
     }
     player thread function_70704b5f();
   }
-  callback::on_connect( & player_hijack_watcher);
+  callback::on_connect(&player_hijack_watcher);
   if(!newworld_util::function_81acf083()) {
     level thread objective_hijack_drone_markers();
   }
@@ -1052,7 +1052,7 @@ function player_hijack_watcher() {
       self waittill("clonedentity", e_clone);
       if(e_clone.targetname === "foundry_hackable_vehicle_ai") {
         self cybercom_gadget_security_breach::setanchorvolume(getent("hijacked_vehicle_range", "targetname"));
-        e_clone.overridevehicledamage = & callback_foundry_vehicle_damage;
+        e_clone.overridevehicledamage = &callback_foundry_vehicle_damage;
         e_clone thread hijacked_vehicle_death_watch();
         level flag::set("flag_hijack_complete");
         self flag::set("player_hijacked_vehicle");
@@ -1190,7 +1190,7 @@ function diaz_wasp_controller() {
   util::stop_magic_bullet_shield(self);
   self dodamage(self.health, self.origin);
   self clientfield::set("emp_vehicles_fx", 1);
-  self util::delay(8, undefined, & clientfield::set, "emp_vehicles_fx", 0);
+  self util::delay(8, undefined, &clientfield::set, "emp_vehicles_fx", 0);
 }
 
 function function_d0cde060() {
@@ -1229,14 +1229,14 @@ function open_door_to_junkyard_after_hijack() {
 
 function function_254442e() {
   level flag::init("foundry_junkyard_enemies_retreat");
-  scene::add_scene_func("cin_new_03_03_factoryraid_vign_junkyard", & function_dd0bd7eb, "init");
+  scene::add_scene_func("cin_new_03_03_factoryraid_vign_junkyard", &function_dd0bd7eb, "init");
   level scene::init("cin_new_03_03_factoryraid_vign_junkyard");
   var_4161ad80 = function_83d084fe("player_enters_junkyard");
   if(var_4161ad80.archetype === "amws") {
     wait(3);
   }
   level flag::set("foundry_junkyard_enemies_retreat");
-  scene::add_scene_func("cin_new_03_03_factoryraid_vign_junkyard", & function_328f9079, "done");
+  scene::add_scene_func("cin_new_03_03_factoryraid_vign_junkyard", &function_328f9079, "done");
   level scene::play("cin_new_03_03_factoryraid_vign_junkyard");
 }
 
@@ -1303,7 +1303,7 @@ function function_8df847d() {
 function function_763f6f1c(s_warp_pos) {
   self endon("death");
   self thread lui::screen_fade_out(1);
-  level util::delay(1, undefined, & flag::set, "player_returned_to_body_post_foundry");
+  level util::delay(1, undefined, &flag::set, "player_returned_to_body_post_foundry");
   self freezecontrols(1);
   self waittill("return_to_body");
   self waittill("transition_done");
@@ -1327,7 +1327,7 @@ function foundry_heavy_door_and_generator() {
       var_9f7fd4a1 = e_player.hijacked_vehicle_entity;
       var_9f7fd4a1.overridevehicledamage = undefined;
       var_9f7fd4a1 clientfield::set("emp_vehicles_fx", 1);
-      var_9f7fd4a1 util::delay(8, undefined, & clientfield::set, "emp_vehicles_fx", 0);
+      var_9f7fd4a1 util::delay(8, undefined, &clientfield::set, "emp_vehicles_fx", 0);
       var_9f7fd4a1 vehicle::god_off();
       var_9f7fd4a1 dodamage(var_9f7fd4a1.health + 100, var_9f7fd4a1.origin);
       if(var_9f7fd4a1.archetype == "wasp") {
@@ -1347,13 +1347,13 @@ function foundry_heavy_door_and_generator() {
       objectives::complete("cp_level_newworld_factory_hijack", veh.var_1ab87762);
       veh.var_d3f57f67 = 1;
       veh clientfield::set("emp_vehicles_fx", 1);
-      veh util::delay(8, undefined, & clientfield::set, "emp_vehicles_fx", 0);
+      veh util::delay(8, undefined, &clientfield::set, "emp_vehicles_fx", 0);
     }
   }
   a_flags = array("player_returned_to_body_post_foundry", "player_moving_to_vat_room");
   level flag::wait_till_any_timeout(10, a_flags);
   battlechatter::function_d9f49fba(0);
-  array::thread_all(getaiteamarray("axis"), & newworld_util::function_95132241);
+  array::thread_all(getaiteamarray("axis"), &newworld_util::function_95132241);
   level scene::stop("cin_new_03_02_factoryraid_vign_explaindrones_open_door");
   level.ai_diaz thread actor_camo(0);
   level.ai_diaz ai::set_behavior_attribute("sprint", 0);
@@ -1401,7 +1401,7 @@ function generator_damage_watch() {
   var_5c2b0988 clientfield::set("emp_generator_fx", 1);
   var_1066b4e5 show();
   var_5c2b0988 ghost();
-  scene::add_scene_func("p7_fxanim_cp_newworld_generator_debris_bundle", & function_11114c92, "play");
+  scene::add_scene_func("p7_fxanim_cp_newworld_generator_debris_bundle", &function_11114c92, "play");
   level thread scene::play("p7_fxanim_cp_newworld_generator_debris_bundle");
   objectives::complete("cp_level_newworld_foundry_subobj_destroy_generator", struct::get("foundry_generator_objective_struct", "targetname"));
   level flag::set("player_destroyed_foundry");
@@ -1410,7 +1410,7 @@ function generator_damage_watch() {
 }
 
 function function_3a211205() {
-  scene::add_scene_func("p7_fxanim_cp_newworld_generator_debris_bundle", & function_cd6bcaad, "init");
+  scene::add_scene_func("p7_fxanim_cp_newworld_generator_debris_bundle", &function_cd6bcaad, "init");
   level thread scene::init("p7_fxanim_cp_newworld_generator_debris_bundle");
 }
 
@@ -1564,7 +1564,7 @@ function function_2a38ab40() {
     player thread function_5e3e5d06();
   }
   util::wait_network_frame();
-  callback::on_connect( & function_5e3e5d06);
+  callback::on_connect(&function_5e3e5d06);
   trigger::wait_till("vat_room_hijack_tutorial");
   battlechatter::function_d9f49fba(1);
   level thread function_451d7f3e();
@@ -1724,7 +1724,7 @@ function function_61a9d0c7() {
   battlechatter::function_d9f49fba(0);
   level thread function_7fb08868();
   objectives::set("cp_level_newworld_vat_room_subobj_hack_door");
-  thread newworld_util::function_16dd8c5f("vat_room_exit_door_trigger", & "cp_level_newworld_access_door", & "CP_MI_ZURICH_NEWWORLD_HACK", "vat_room_door_panel", "vat_room_door_hacked");
+  thread newworld_util::function_16dd8c5f("vat_room_exit_door_trigger", &"cp_level_newworld_access_door", &"CP_MI_ZURICH_NEWWORLD_HACK", "vat_room_door_panel", "vat_room_door_hacked");
   objectives::complete("cp_level_newworld_vat_room_subobj_hack_door");
   level waittill("hash_d7559b12", e_player);
   return e_player;
@@ -1735,19 +1735,19 @@ function inside_man_igc(e_player) {
     level thread[[level.bzm_newworlddialogue3callback]]();
   }
   level thread namespace_e38c3c58::function_57c68b7b();
-  scene::add_scene_func("cin_sgen_16_01_charging_station_aie_awaken_robot03", & function_453c36ed, "play");
-  scene::add_scene_func("cin_sgen_16_01_charging_station_aie_awaken_robot04", & function_453c36ed, "play");
-  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh010", & function_f25ee153);
-  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh010", & function_d9753c8f);
-  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh010", & function_676dcd54);
-  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh010", & function_8d7047bd);
-  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh010", & function_1736807e);
-  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh010", & function_85526de2);
-  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh320", & function_2cd7e04e);
-  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh320", & function_ed4818dc);
-  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh300", & function_86e62a41);
-  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh320", & function_1f576299);
-  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh320", & newworld_util::function_43dfaf16, "skip_started");
+  scene::add_scene_func("cin_sgen_16_01_charging_station_aie_awaken_robot03", &function_453c36ed, "play");
+  scene::add_scene_func("cin_sgen_16_01_charging_station_aie_awaken_robot04", &function_453c36ed, "play");
+  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh010", &function_f25ee153);
+  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh010", &function_d9753c8f);
+  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh010", &function_676dcd54);
+  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh010", &function_8d7047bd);
+  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh010", &function_1736807e);
+  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh010", &function_85526de2);
+  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh320", &function_2cd7e04e);
+  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh320", &function_ed4818dc);
+  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh300", &function_86e62a41);
+  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh320", &function_1f576299);
+  scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh320", &newworld_util::function_43dfaf16, "skip_started");
   level thread scene::play("cin_new_04_01_insideman_1st_hack_sh010", e_player);
   wait(1);
   var_f5bb3a9b = getent("vat_room_exit_door", "targetname");
@@ -1900,8 +1900,8 @@ function function_2dbbd9b1(e_goalvolume) {
 }
 
 function spawn_hijack_vehicles(b_starting = 0) {
-  level.a_vh_hijack = spawner::simple_spawn("foundry_hackable_vehicle", & usable_vehicle_spawn_func);
-  vehicle::add_hijack_function("foundry_hackable_vehicle", & function_e0b67a17);
+  level.a_vh_hijack = spawner::simple_spawn("foundry_hackable_vehicle", &usable_vehicle_spawn_func);
+  vehicle::add_hijack_function("foundry_hackable_vehicle", &function_e0b67a17);
   if(!b_starting) {
     a_amws = [];
     foreach(var_92218239 in level.a_vh_hijack) {
@@ -1911,7 +1911,7 @@ function spawn_hijack_vehicles(b_starting = 0) {
     }
     level thread function_4fbc759(a_amws);
   }
-  scene::add_scene_func("cin_new_03_02_factoryraid_vign_explaindrones", & function_9ea16200, "init");
+  scene::add_scene_func("cin_new_03_02_factoryraid_vign_explaindrones", &function_9ea16200, "init");
   level scene::init("cin_new_03_02_factoryraid_vign_explaindrones");
 }
 
@@ -1949,8 +1949,8 @@ function setup_destroyable_vats(str_location) {
   level.var_7e8adada = getweapon("amws_launcher_turret_player");
   level.var_3e8a5e10 = getweapon("pamws_launcher_turret_player");
   a_e_vats = struct::get_array(str_location + "_destroyable_vat", "targetname");
-  array::thread_all(a_e_vats, & function_aef915b2);
-  scene::add_scene_func("p7_fxanim_cp_newworld_cauldron_bridge_bundle", & function_2aec5af4, "play");
+  array::thread_all(a_e_vats, &function_aef915b2);
+  scene::add_scene_func("p7_fxanim_cp_newworld_cauldron_bridge_bundle", &function_2aec5af4, "play");
 }
 
 function function_aef915b2() {
@@ -2069,7 +2069,7 @@ function destroyable_vat() {
         }
         self notify("hash_36ff97f");
         if(isDefined(self.str_exploder)) {
-          util::delay(1.5, undefined, & exploder::exploder, self.str_exploder);
+          util::delay(1.5, undefined, &exploder::exploder, self.str_exploder);
         }
         wait(0.5);
         self thread function_528ae2fd(sattacker);
@@ -2227,7 +2227,7 @@ function usable_vehicle_spawn_func() {
   self disableaimassist();
   self ai::set_ignoreall(1);
   self ai::set_ignoreme(1);
-  self.overridevehicledamage = & callback_foundry_no_vehicle_damage;
+  self.overridevehicledamage = &callback_foundry_no_vehicle_damage;
 }
 
 function diaz_wasp_spawner(a_ents) {
@@ -2441,7 +2441,7 @@ function function_8b7ac3d() {
 
 function function_6199a2b7() {
   level endon("hash_7fb08868");
-  array::thread_all(level.activeplayers, & function_4ff24fae);
+  array::thread_all(level.activeplayers, &function_4ff24fae);
   level waittill("hash_16f7f7c4");
   level.ai_diaz dialog::say("diaz_nice_going_now_tur_0", 1);
   level waittill("hash_96bdb9d9");

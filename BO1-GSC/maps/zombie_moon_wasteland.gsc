@@ -109,11 +109,11 @@ init_teleporter_message() {
 }
 
 set_teleporter_message(message) {
-  if(message != & "NULL_EMPTY") {
+  if(message != &"NULL_EMPTY") {
     level.lastMessageTime = gettime();
   }
   time = gettime() - level.lastMessageTime;
-  if((time < (1000 * 1)) && (message == & "NULL_EMPTY")) {
+  if((time < (1000 * 1)) && (message == &"NULL_EMPTY")) {
     return;
   }
   players = get_players();

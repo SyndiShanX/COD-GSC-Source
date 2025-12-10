@@ -32,10 +32,10 @@ function init_no_mans_land() {
   level flag::init("teleported_to_nml");
   var_cd70fc20 = getEntArray("nml_area1_spawners", "targetname");
   var_3f786b5b = getEntArray("nml_area2_spawners", "targetname");
-  array::thread_all(var_cd70fc20, & spawner::add_spawn_function, & zm_spawner::zombie_spawn_init);
-  array::thread_all(var_cd70fc20, & spawner::add_spawn_function, & zombie_utility::round_spawn_failsafe);
-  array::thread_all(var_3f786b5b, & spawner::add_spawn_function, & zm_spawner::zombie_spawn_init);
-  array::thread_all(var_3f786b5b, & spawner::add_spawn_function, & zombie_utility::round_spawn_failsafe);
+  array::thread_all(var_cd70fc20, &spawner::add_spawn_function, &zm_spawner::zombie_spawn_init);
+  array::thread_all(var_cd70fc20, &spawner::add_spawn_function, &zombie_utility::round_spawn_failsafe);
+  array::thread_all(var_3f786b5b, &spawner::add_spawn_function, &zm_spawner::zombie_spawn_init);
+  array::thread_all(var_3f786b5b, &spawner::add_spawn_function, &zombie_utility::round_spawn_failsafe);
   level.on_the_moon = 0;
   level.ever_been_on_the_moon = 0;
   level.initial_spawn = 1;
@@ -84,7 +84,7 @@ function nml_setup_round_spawner() {
   } else {
     level.nml_last_round = 1;
   }
-  level.round_spawn_func = & nml_round_manager;
+  level.round_spawn_func = &nml_round_manager;
   init_moon_nml_round(level.nml_last_round);
 }
 
@@ -411,7 +411,7 @@ function spawn_a_zombie(max_zombies, var_c194e88d, wait_delay, ignoregravity) {
       ai.ignore_gravity = 1;
     }
     if(isDefined(level.mp_side_step) && level.mp_side_step) {
-      ai.shouldsidestepfunc = & nml_shouldsidestep;
+      ai.shouldsidestepfunc = &nml_shouldsidestep;
       ai.sidestepanims = [];
     }
   }
@@ -536,7 +536,7 @@ function perk_machines_hide(cola, jug, moving = 0) {
         hackable = level.speed_cola_ents[1].hackable;
       }
     }
-    zm_equip_hacker::register_pooled_hackable_struct(hackable, & zm_hackables_perks::perk_hack, & zm_hackables_perks::perk_hack_qualifier);
+    zm_equip_hacker::register_pooled_hackable_struct(hackable, &zm_hackables_perks::perk_hack, &zm_hackables_perks::perk_hack_qualifier);
   }
 }
 
@@ -630,7 +630,7 @@ function nml_ramp_up_zombies() {
         }
         zombies[i].health = level.zombie_health;
         if(isDefined(level.mp_side_step) && level.mp_side_step) {
-          zombies[i].shouldsidestepfunc = & nml_shouldsidestep;
+          zombies[i].shouldsidestepfunc = &nml_shouldsidestep;
           zombies[i].sidestepanims = [];
         }
       }

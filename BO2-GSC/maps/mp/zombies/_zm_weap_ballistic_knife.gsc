@@ -103,7 +103,7 @@ on_spawn_retrieve_trigger(watcher, player) {
 
   pickup_trigger.owner = player;
   retrievable_model.retrievabletrigger = pickup_trigger;
-  hint_string = & "WEAPON_BALLISTIC_KNIFE_PICKUP";
+  hint_string = &"WEAPON_BALLISTIC_KNIFE_PICKUP";
 
   if(isDefined(hint_string))
     pickup_trigger sethintstring(hint_string);

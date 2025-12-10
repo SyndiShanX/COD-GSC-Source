@@ -21,12 +21,12 @@
 #namespace zm_tomb_ee_main_step_3;
 
 function init() {
-  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_3", & init_stage, & stage_logic, & exit_stage);
+  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_3", &init_stage, &stage_logic, &exit_stage);
 }
 
 function init_stage() {
   level._cur_stage_name = "step_3";
-  level.check_valid_poi = & mech_zombie_hole_valid;
+  level.check_valid_poi = &mech_zombie_hole_valid;
   create_buttons_and_triggers();
 }
 
@@ -75,7 +75,7 @@ function ready_to_activate(unitrigger_stub) {
   wait(0.5);
   self playsoundwithnotify("vox_maxi_robot_await_0", "ready_to_use");
   self waittill("ready_to_use");
-  zm_unitrigger::register_static_unitrigger(unitrigger_stub, & activate_fire_link);
+  zm_unitrigger::register_static_unitrigger(unitrigger_stub, &activate_fire_link);
 }
 
 function watch_for_triple_attack() {

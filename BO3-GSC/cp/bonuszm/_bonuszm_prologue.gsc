@@ -23,25 +23,25 @@ function autoexec init() {
     return;
   }
   namespace_babdccbe::init_voice();
-  level.bzm_prologuedialogue1callback = & function_da4ce9e5;
-  level.bzm_prologuedialogue2callback = & function_4f644e;
-  level.bzm_prologuedialogue2_1callback = & function_9d3fff7e;
-  level.bzm_prologuedialogue3callback = & function_2651deb7;
-  level.bzm_prologuedialogue4callback = & function_1c4085d8;
-  level.bzm_prologuedialogue5callback = & function_42430041;
-  level.bzm_prologuedialogue5_1callback = & function_a82e9445;
-  level.bzm_prologuedialogue5_2callback = & function_ce310eae;
-  level.bzm_prologuedialogue5_3callback = & function_f4338917;
-  level.bzm_prologuedialogue6callback = & function_68457aaa;
-  level.bzm_prologuedialogue6_1callback = & function_8f2579e2;
-  level.bzm_prologuedialogue6_2callback = & function_6922ff79;
-  level.bzm_prologuedialogue7callback = & function_8e47f513;
-  level.bzm_prologuedialogue8callback = & function_84369c34;
+  level.bzm_prologuedialogue1callback = &function_da4ce9e5;
+  level.bzm_prologuedialogue2callback = &function_4f644e;
+  level.bzm_prologuedialogue2_1callback = &function_9d3fff7e;
+  level.bzm_prologuedialogue3callback = &function_2651deb7;
+  level.bzm_prologuedialogue4callback = &function_1c4085d8;
+  level.bzm_prologuedialogue5callback = &function_42430041;
+  level.bzm_prologuedialogue5_1callback = &function_a82e9445;
+  level.bzm_prologuedialogue5_2callback = &function_ce310eae;
+  level.bzm_prologuedialogue5_3callback = &function_f4338917;
+  level.bzm_prologuedialogue6callback = &function_68457aaa;
+  level.bzm_prologuedialogue6_1callback = &function_8f2579e2;
+  level.bzm_prologuedialogue6_2callback = &function_6922ff79;
+  level.bzm_prologuedialogue7callback = &function_8e47f513;
+  level.bzm_prologuedialogue8callback = &function_84369c34;
   function_6872fad1();
 }
 
 function private function_6872fad1() {
-  callback::on_spawned( & function_6122f0b4);
+  callback::on_spawned(&function_6122f0b4);
 }
 
 function function_6122f0b4() {}

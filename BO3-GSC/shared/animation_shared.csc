@@ -13,12 +13,12 @@
 #namespace animation;
 
 function autoexec __init__sytem__() {
-  system::register("animation", & __init__, undefined, undefined);
+  system::register("animation", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "cracks_on", 1, getminbitcountfornum(4), "int", & cf_cracks_on, 0, 0);
-  clientfield::register("scriptmover", "cracks_off", 1, getminbitcountfornum(4), "int", & cf_cracks_off, 0, 0);
+  clientfield::register("scriptmover", "cracks_on", 1, getminbitcountfornum(4), "int", &cf_cracks_on, 0, 0);
+  clientfield::register("scriptmover", "cracks_off", 1, getminbitcountfornum(4), "int", &cf_cracks_off, 0, 0);
   setup_notetracks();
 }
 
@@ -185,18 +185,18 @@ function call_notetrack_handler(str_note) {
 }
 
 function setup_notetracks() {
-  add_notetrack_func("flag::set", & flag::set);
-  add_notetrack_func("flag::clear", & flag::clear);
-  add_notetrack_func("postfx::PlayPostFxBundle", & postfx::playpostfxbundle);
-  add_notetrack_func("postfx::StopPostFxBundle", & postfx::stoppostfxbundle);
-  add_global_notetrack_handler("red_cracks_on", & cracks_on, "red");
-  add_global_notetrack_handler("green_cracks_on", & cracks_on, "green");
-  add_global_notetrack_handler("blue_cracks_on", & cracks_on, "blue");
-  add_global_notetrack_handler("all_cracks_on", & cracks_on, "all");
-  add_global_notetrack_handler("red_cracks_off", & cracks_off, "red");
-  add_global_notetrack_handler("green_cracks_off", & cracks_off, "green");
-  add_global_notetrack_handler("blue_cracks_off", & cracks_off, "blue");
-  add_global_notetrack_handler("all_cracks_off", & cracks_off, "all");
+  add_notetrack_func("flag::set", &flag::set);
+  add_notetrack_func("flag::clear", &flag::clear);
+  add_notetrack_func("postfx::PlayPostFxBundle", &postfx::playpostfxbundle);
+  add_notetrack_func("postfx::StopPostFxBundle", &postfx::stoppostfxbundle);
+  add_global_notetrack_handler("red_cracks_on", &cracks_on, "red");
+  add_global_notetrack_handler("green_cracks_on", &cracks_on, "green");
+  add_global_notetrack_handler("blue_cracks_on", &cracks_on, "blue");
+  add_global_notetrack_handler("all_cracks_on", &cracks_on, "all");
+  add_global_notetrack_handler("red_cracks_off", &cracks_off, "red");
+  add_global_notetrack_handler("green_cracks_off", &cracks_off, "green");
+  add_global_notetrack_handler("blue_cracks_off", &cracks_off, "blue");
+  add_global_notetrack_handler("all_cracks_off", &cracks_off, "all");
 }
 
 function handle_notetracks() {

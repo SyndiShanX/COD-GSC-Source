@@ -792,7 +792,7 @@ play_dialog(dialogkey, dialogflags, dialogbuffer, enemy) {
     dialogflags = 0;
   }
 
-  if(!level.allowspecialistdialog && (dialogflags&16) == 0) {
+  if(!level.allowspecialistdialog && (dialogflags& 16) == 0) {
     return;
   }
 
@@ -806,12 +806,12 @@ play_dialog(dialogkey, dialogflags, dialogbuffer, enemy) {
     return;
   }
 
-  if(self isplayerunderwater() && !(dialogflags&8)) {
+  if(self isplayerunderwater() && !(dialogflags& 8)) {
     return;
   }
 
   if(self.playingdialog) {
-    if(!(dialogflags&4)) {
+    if(!(dialogflags& 4)) {
       return;
     }
 
@@ -819,11 +819,11 @@ play_dialog(dialogkey, dialogflags, dialogbuffer, enemy) {
     waitframe(1);
   }
 
-  if(dialogflags&32) {
+  if(dialogflags& 32) {
     self.playinggadgetreadydialog = 1;
   }
 
-  if(dialogflags&64) {
+  if(dialogflags& 64) {
     if(!isDefined(self.stolendialogindex)) {
       self.stolendialogindex = 0;
     }
@@ -833,9 +833,9 @@ play_dialog(dialogkey, dialogflags, dialogbuffer, enemy) {
     self.stolendialogindex %= 4;
   }
 
-  if(dialogflags&2) {
+  if(dialogflags& 2) {
     self playsoundontag(dialogalias, "J_Head");
-  } else if(dialogflags&1) {
+  } else if(dialogflags& 1) {
     if(isDefined(enemy)) {
       self playsoundontag(dialogalias, "J_Head", self.team, enemy);
     } else {

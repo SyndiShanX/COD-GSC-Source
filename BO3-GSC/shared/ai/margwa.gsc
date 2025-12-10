@@ -28,8 +28,8 @@
 
 function autoexec init() {
   initmargwabehaviorsandasm();
-  spawner::add_archetype_spawn_function("margwa", & archetypemargwablackboardinit);
-  spawner::add_archetype_spawn_function("margwa", & margwaserverutils::margwaspawnsetup);
+  spawner::add_archetype_spawn_function("margwa", &archetypemargwablackboardinit);
+  spawner::add_archetype_spawn_function("margwa", &margwaserverutils::margwaspawnsetup);
   clientfield::register("actor", "margwa_head_left", 1, 2, "int");
   clientfield::register("actor", "margwa_head_mid", 1, 2, "int");
   clientfield::register("actor", "margwa_head_right", 1, 2, "int");
@@ -72,45 +72,45 @@ function adddirecthitweapon(weaponname) {
 }
 
 function private initmargwabehaviorsandasm() {
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaTargetService", & margwatargetservice);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldSmashAttack", & margwashouldsmashattack);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldSwipeAttack", & margwashouldswipeattack);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldShowPain", & margwashouldshowpain);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldReactStun", & margwashouldreactstun);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldReactIDGun", & margwashouldreactidgun);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldReactSword", & margwashouldreactsword);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldSpawn", & margwashouldspawn);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldFreeze", & margwashouldfreeze);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldTeleportIn", & margwashouldteleportin);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldTeleportOut", & margwashouldteleportout);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldWait", & margwashouldwait);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldReset", & margwashouldreset);
-  behaviortreenetworkutility::registerbehaviortreeaction("margwaReactStunAction", & margwareactstunaction, undefined, undefined);
-  behaviortreenetworkutility::registerbehaviortreeaction("margwaSwipeAttackAction", & margwaswipeattackaction, & margwaswipeattackactionupdate, undefined);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaIdleStart", & margwaidlestart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaMoveStart", & margwamovestart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaTraverseActionStart", & margwatraverseactionstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaTeleportInStart", & margwateleportinstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaTeleportInTerminate", & margwateleportinterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaTeleportOutStart", & margwateleportoutstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaTeleportOutTerminate", & margwateleportoutterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaPainStart", & margwapainstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaPainTerminate", & margwapainterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaReactStunStart", & margwareactstunstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaReactStunTerminate", & margwareactstunterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaReactIDGunStart", & margwareactidgunstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaReactIDGunTerminate", & margwareactidgunterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaReactSwordStart", & margwareactswordstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaReactSwordTerminate", & margwareactswordterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaSpawnStart", & margwaspawnstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaSmashAttackStart", & margwasmashattackstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaSmashAttackTerminate", & margwasmashattackterminate);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaSwipeAttackStart", & margwaswipeattackstart);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaSwipeAttackTerminate", & margwaswipeattackterminate);
-  animationstatenetwork::registeranimationmocomp("mocomp_teleport_traversal@margwa", & mocompmargwateleporttraversalinit, & mocompmargwateleporttraversalupdate, & mocompmargwateleporttraversalterminate);
-  animationstatenetwork::registernotetrackhandlerfunction("margwa_smash_attack", & margwanotetracksmashattack);
-  animationstatenetwork::registernotetrackhandlerfunction("margwa_bodyfall large", & margwanotetrackbodyfall);
-  animationstatenetwork::registernotetrackhandlerfunction("margwa_melee_fire", & margwanotetrackpainmelee);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaTargetService", &margwatargetservice);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldSmashAttack", &margwashouldsmashattack);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldSwipeAttack", &margwashouldswipeattack);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldShowPain", &margwashouldshowpain);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldReactStun", &margwashouldreactstun);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldReactIDGun", &margwashouldreactidgun);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldReactSword", &margwashouldreactsword);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldSpawn", &margwashouldspawn);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldFreeze", &margwashouldfreeze);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldTeleportIn", &margwashouldteleportin);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldTeleportOut", &margwashouldteleportout);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldWait", &margwashouldwait);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaShouldReset", &margwashouldreset);
+  behaviortreenetworkutility::registerbehaviortreeaction("margwaReactStunAction", &margwareactstunaction, undefined, undefined);
+  behaviortreenetworkutility::registerbehaviortreeaction("margwaSwipeAttackAction", &margwaswipeattackaction, &margwaswipeattackactionupdate, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaIdleStart", &margwaidlestart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaMoveStart", &margwamovestart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaTraverseActionStart", &margwatraverseactionstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaTeleportInStart", &margwateleportinstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaTeleportInTerminate", &margwateleportinterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaTeleportOutStart", &margwateleportoutstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaTeleportOutTerminate", &margwateleportoutterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaPainStart", &margwapainstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaPainTerminate", &margwapainterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaReactStunStart", &margwareactstunstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaReactStunTerminate", &margwareactstunterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaReactIDGunStart", &margwareactidgunstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaReactIDGunTerminate", &margwareactidgunterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaReactSwordStart", &margwareactswordstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaReactSwordTerminate", &margwareactswordterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaSpawnStart", &margwaspawnstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaSmashAttackStart", &margwasmashattackstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaSmashAttackTerminate", &margwasmashattackterminate);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaSwipeAttackStart", &margwaswipeattackstart);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("margwaSwipeAttackTerminate", &margwaswipeattackterminate);
+  animationstatenetwork::registeranimationmocomp("mocomp_teleport_traversal@margwa", &mocompmargwateleporttraversalinit, &mocompmargwateleporttraversalupdate, &mocompmargwateleporttraversalterminate);
+  animationstatenetwork::registernotetrackhandlerfunction("margwa_smash_attack", &margwanotetracksmashattack);
+  animationstatenetwork::registernotetrackhandlerfunction("margwa_bodyfall large", &margwanotetrackbodyfall);
+  animationstatenetwork::registernotetrackhandlerfunction("margwa_melee_fire", &margwanotetrackpainmelee);
 }
 
 function private archetypemargwablackboardinit() {
@@ -124,7 +124,7 @@ function private archetypemargwablackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  blackboard::registerblackboardattribute(self, "_locomotion_should_turn", "should_not_turn", & bb_getshouldturn);
+  blackboard::registerblackboardattribute(self, "_locomotion_should_turn", "should_not_turn", &bb_getshouldturn);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -132,7 +132,7 @@ function private archetypemargwablackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  self.___archetypeonanimscriptedcallback = & archetypemargwaonanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = &archetypemargwaonanimscriptedcallback;
   self finalizetrackedblackboardattributes();
 }
 
@@ -617,7 +617,7 @@ function private margwaspawnsetup() {
   self.ignore_enemy_count = 1;
   self.ignore_round_robbin_death = 1;
   self.zombie_move_speed = "walk";
-  self.overrideactordamage = & margwadamage;
+  self.overrideactordamage = &margwadamage;
   self.candamage = 1;
   self.headattached = 3;
   self.headopen = 0;

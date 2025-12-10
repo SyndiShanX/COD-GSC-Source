@@ -30,7 +30,7 @@
 #namespace ctf;
 
 function autoexec __init__sytem__() {
-  system::register("ctf", & __init__, undefined, undefined);
+  system::register("ctf", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -54,17 +54,17 @@ function main() {
   }
   level.teambased = 1;
   level.overrideteamscore = 1;
-  level.onstartgametype = & onstartgametype;
-  level.onspawnplayer = & onspawnplayer;
-  level.onprecachegametype = & onprecachegametype;
-  level.onplayerkilled = & onplayerkilled;
-  level.onroundswitch = & onroundswitch;
-  level.onendgame = & onendgame;
-  level.onroundendgame = & onroundendgame;
-  level.getteamkillpenalty = & ctf_getteamkillpenalty;
-  level.getteamkillscore = & ctf_getteamkillscore;
-  level.setmatchscorehudelemforteam = & setmatchscorehudelemforteam;
-  level.shouldplayovertimeround = & shouldplayovertimeround;
+  level.onstartgametype = &onstartgametype;
+  level.onspawnplayer = &onspawnplayer;
+  level.onprecachegametype = &onprecachegametype;
+  level.onplayerkilled = &onplayerkilled;
+  level.onroundswitch = &onroundswitch;
+  level.onendgame = &onendgame;
+  level.onroundendgame = &onroundendgame;
+  level.getteamkillpenalty = &ctf_getteamkillpenalty;
+  level.getteamkillscore = &ctf_getteamkillscore;
+  level.setmatchscorehudelemforteam = &setmatchscorehudelemforteam;
+  level.shouldplayovertimeround = &shouldplayovertimeround;
   gameobjects::register_allowed_gameobject(level.gametype);
   if(!isDefined(game["ctf_teamscore_cache"])) {
     game["ctf_teamscore_cache"]["allies"] = 0;
@@ -83,7 +83,7 @@ function main() {
 function onprecachegametype() {
   game["flag_dropped_sound"] = "mp_war_objective_lost";
   game["flag_recovered_sound"] = "mp_war_objective_taken";
-  game["strings"]["score_limit_reached"] = & "MP_CAP_LIMIT_REACHED";
+  game["strings"]["score_limit_reached"] = &"MP_CAP_LIMIT_REACHED";
 }
 
 function onstartgametype() {
@@ -93,17 +93,17 @@ function onstartgametype() {
   setdebugsideswitch(game[""]);
   setclientnamemode("auto_change");
   globallogic_score::resetteamscores();
-  util::setobjectivetext("allies", & "OBJECTIVES_CTF");
-  util::setobjectivetext("axis", & "OBJECTIVES_CTF");
+  util::setobjectivetext("allies", &"OBJECTIVES_CTF");
+  util::setobjectivetext("axis", &"OBJECTIVES_CTF");
   if(level.splitscreen) {
-    util::setobjectivescoretext("allies", & "OBJECTIVES_CTF");
-    util::setobjectivescoretext("axis", & "OBJECTIVES_CTF");
+    util::setobjectivescoretext("allies", &"OBJECTIVES_CTF");
+    util::setobjectivescoretext("axis", &"OBJECTIVES_CTF");
   } else {
-    util::setobjectivescoretext("allies", & "OBJECTIVES_CTF_SCORE");
-    util::setobjectivescoretext("axis", & "OBJECTIVES_CTF_SCORE");
+    util::setobjectivescoretext("allies", &"OBJECTIVES_CTF_SCORE");
+    util::setobjectivescoretext("axis", &"OBJECTIVES_CTF_SCORE");
   }
-  util::setobjectivehinttext("allies", & "OBJECTIVES_CTF_HINT");
-  util::setobjectivehinttext("axis", & "OBJECTIVES_CTF_HINT");
+  util::setobjectivehinttext("allies", &"OBJECTIVES_CTF_HINT");
+  util::setobjectivehinttext("axis", &"OBJECTIVES_CTF_HINT");
   if(isDefined(game["overtime_round"])) {
     game["ctf_teamscore_cache"]["allies"] = game["ctf_teamscore_cache"]["allies"] + [[level._getteamscore]]("allies");
     game["ctf_teamscore_cache"]["axis"] = game["ctf_teamscore_cache"]["axis"] + [[level._getteamscore]]("axis");
@@ -114,15 +114,15 @@ function onstartgametype() {
       util::registertimelimit(game["ctf_overtime_time_to_beat"] / 60000, game["ctf_overtime_time_to_beat"] / 60000);
     }
     if(game["overtime_round"] == 1) {
-      util::setobjectivehinttext("allies", & "MP_CTF_OVERTIME_ROUND_1");
-      util::setobjectivehinttext("axis", & "MP_CTF_OVERTIME_ROUND_1");
+      util::setobjectivehinttext("allies", &"MP_CTF_OVERTIME_ROUND_1");
+      util::setobjectivehinttext("axis", &"MP_CTF_OVERTIME_ROUND_1");
     } else {
       if(isDefined(game["ctf_overtime_first_winner"])) {
-        util::setobjectivehinttext(game["ctf_overtime_first_winner"], & "MP_CTF_OVERTIME_ROUND_2_WINNER");
-        util::setobjectivehinttext(util::getotherteam(game["ctf_overtime_first_winner"]), & "MP_CTF_OVERTIME_ROUND_2_LOSER");
+        util::setobjectivehinttext(game["ctf_overtime_first_winner"], &"MP_CTF_OVERTIME_ROUND_2_WINNER");
+        util::setobjectivehinttext(util::getotherteam(game["ctf_overtime_first_winner"]), &"MP_CTF_OVERTIME_ROUND_2_LOSER");
       } else {
-        util::setobjectivehinttext("allies", & "MP_CTF_OVERTIME_ROUND_2_TIE");
-        util::setobjectivehinttext("axis", & "MP_CTF_OVERTIME_ROUND_2_TIE");
+        util::setobjectivehinttext("allies", &"MP_CTF_OVERTIME_ROUND_2_TIE");
+        util::setobjectivehinttext("axis", &"MP_CTF_OVERTIME_ROUND_2_TIE");
       }
     }
   }
@@ -249,11 +249,11 @@ function onroundendgame(winningteam) {
         winningteam = game["ctf_overtime_first_winner"];
       }
       if(game["ctf_overtime_first_winner"] == winningteam) {
-        level.endvictoryreasontext = & "MPUI_CTF_OVERTIME_FASTEST_CAP_TIME";
-        level.enddefeatreasontext = & "MPUI_CTF_OVERTIME_DEFEAT_TIMELIMIT";
+        level.endvictoryreasontext = &"MPUI_CTF_OVERTIME_FASTEST_CAP_TIME";
+        level.enddefeatreasontext = &"MPUI_CTF_OVERTIME_DEFEAT_TIMELIMIT";
       } else {
-        level.endvictoryreasontext = & "MPUI_CTF_OVERTIME_FASTEST_CAP_TIME";
-        level.enddefeatreasontext = & "MPUI_CTF_OVERTIME_DEFEAT_DID_NOT_DEFEND";
+        level.endvictoryreasontext = &"MPUI_CTF_OVERTIME_FASTEST_CAP_TIME";
+        level.enddefeatreasontext = &"MPUI_CTF_OVERTIME_DEFEAT_DID_NOT_DEFEND";
       }
     } else if(!isDefined(winningteam) || winningteam == "tie") {
       if(level.scoreroundwinbased) {
@@ -338,10 +338,10 @@ function createflag(trigger) {
     flag.objidpingfriendly = 1;
   }
   flag.allowweapons = 1;
-  flag.onpickup = & onpickup;
-  flag.onpickupfailed = & onpickup;
-  flag.ondrop = & ondrop;
-  flag.onreset = & onreset;
+  flag.onpickup = &onpickup;
+  flag.onpickupfailed = &onpickup;
+  flag.ondrop = &ondrop;
+  flag.onreset = &onreset;
   if(level.idleflagreturntime > 0) {
     flag.autoresettime = level.idleflagreturntime;
   } else {
@@ -363,7 +363,7 @@ function createflagzone(trigger) {
   flagzone gameobjects::set_visible_team("friendly");
   enemyteam = util::getotherteam(entityteam);
   flagzone gameobjects::set_key_object(level.teamflags[enemyteam]);
-  flagzone.onuse = & oncapture;
+  flagzone.onuse = &oncapture;
   flag = level.teamflags[entityteam];
   flag.flagbase = flagzone;
   flagzone.flag = flag;
@@ -453,11 +453,11 @@ function ondrop(player) {
     level.flaghints[otherteam] turn_off();
   }
   if(isDefined(player)) {
-    util::printandsoundoneveryone(team, undefined, & "", undefined, "mp_war_objective_lost");
+    util::printandsoundoneveryone(team, undefined, &"", undefined, "mp_war_objective_lost");
     level thread popups::displayteammessagetoteam(&"MP_FRIENDLY_FLAG_DROPPED", player, team);
     level thread popups::displayteammessagetoteam(&"MP_ENEMY_FLAG_DROPPED", player, otherteam);
   } else {
-    util::printandsoundoneveryone(team, undefined, & "", undefined, "mp_war_objective_lost");
+    util::printandsoundoneveryone(team, undefined, &"", undefined, "mp_war_objective_lost");
   }
   globallogic_audio::leader_dialog("ctfFriendlyFlagDropped", team, undefined, "ctf_flag");
   globallogic_audio::leader_dialog("ctfEnemyFlagDropped", otherteam, undefined, "ctf_flag_enemy");
@@ -515,7 +515,7 @@ function onpickup(player) {
   self clearreturnflaghudelems();
   if(isDefined(player) && player.pers["team"] == team) {
     self notify("picked_up");
-    util::printandsoundoneveryone(team, undefined, & "", undefined, "mp_obj_returned");
+    util::printandsoundoneveryone(team, undefined, &"", undefined, "mp_obj_returned");
     if(isDefined(player.pers["returns"])) {
       player.pers["returns"]++;
       player.returns = player.pers["returns"];
@@ -545,7 +545,7 @@ function onpickup(player) {
   player recordgameevent("pickup");
   scoreevents::processscoreevent("flag_grab", player);
   demo::bookmark("event", gettime(), player);
-  util::printandsoundoneveryone(otherteam, undefined, & "", undefined, "mp_obj_taken", "mp_enemy_obj_taken");
+  util::printandsoundoneveryone(otherteam, undefined, &"", undefined, "mp_obj_taken", "mp_enemy_obj_taken");
   level thread popups::displayteammessagetoteam(&"MP_FRIENDLY_FLAG_TAKEN", player, team);
   level thread popups::displayteammessagetoteam(&"MP_ENEMY_FLAG_TAKEN", player, otherteam);
   globallogic_audio::leader_dialog("ctfFriendlyFlagTaken", team, undefined, "ctf_flag");
@@ -625,7 +625,7 @@ function oncapture(player) {
   if(!isDefined(player.carryobject)) {
     return;
   }
-  util::printandsoundoneveryone(team, undefined, & "", undefined, "mp_obj_captured", "mp_enemy_obj_captured");
+  util::printandsoundoneveryone(team, undefined, &"", undefined, "mp_obj_captured", "mp_enemy_obj_captured");
   bbprint("mpobjective", "gametime %d objtype %s team %s playerx %d playery %d playerz %d", time, "ctf_flagcapture", enemyteam, player.origin);
   game["challenge"][team]["capturedFlag"] = 1;
   if(isDefined(player.pers["captures"])) {
@@ -799,22 +799,22 @@ function createreturnmessageelems() {
   level.returnmessageelems = [];
   level.returnmessageelems["allies"]["axis"] = hud::createservertimer("objective", 1.4, "allies");
   level.returnmessageelems["allies"]["axis"] hud::setpoint("TOPRIGHT", "TOPRIGHT", 0, 0);
-  level.returnmessageelems["allies"]["axis"].label = & "MP_ENEMY_FLAG_RETURNING_IN";
+  level.returnmessageelems["allies"]["axis"].label = &"MP_ENEMY_FLAG_RETURNING_IN";
   level.returnmessageelems["allies"]["axis"].alpha = 0;
   level.returnmessageelems["allies"]["axis"].archived = 0;
   level.returnmessageelems["allies"]["allies"] = hud::createservertimer("objective", 1.4, "allies");
   level.returnmessageelems["allies"]["allies"] hud::setpoint("TOPRIGHT", "TOPRIGHT", 0, 20);
-  level.returnmessageelems["allies"]["allies"].label = & "MP_YOUR_FLAG_RETURNING_IN";
+  level.returnmessageelems["allies"]["allies"].label = &"MP_YOUR_FLAG_RETURNING_IN";
   level.returnmessageelems["allies"]["allies"].alpha = 0;
   level.returnmessageelems["allies"]["allies"].archived = 0;
   level.returnmessageelems["axis"]["allies"] = hud::createservertimer("objective", 1.4, "axis");
   level.returnmessageelems["axis"]["allies"] hud::setpoint("TOPRIGHT", "TOPRIGHT", 0, 0);
-  level.returnmessageelems["axis"]["allies"].label = & "MP_ENEMY_FLAG_RETURNING_IN";
+  level.returnmessageelems["axis"]["allies"].label = &"MP_ENEMY_FLAG_RETURNING_IN";
   level.returnmessageelems["axis"]["allies"].alpha = 0;
   level.returnmessageelems["axis"]["allies"].archived = 0;
   level.returnmessageelems["axis"]["axis"] = hud::createservertimer("objective", 1.4, "axis");
   level.returnmessageelems["axis"]["axis"] hud::setpoint("TOPRIGHT", "TOPRIGHT", 0, 20);
-  level.returnmessageelems["axis"]["axis"].label = & "MP_YOUR_FLAG_RETURNING_IN";
+  level.returnmessageelems["axis"]["axis"].label = &"MP_YOUR_FLAG_RETURNING_IN";
   level.returnmessageelems["axis"]["axis"].alpha = 0;
   level.returnmessageelems["axis"]["axis"].archived = 0;
 }

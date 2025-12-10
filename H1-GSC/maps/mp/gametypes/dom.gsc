@@ -99,19 +99,19 @@ onstartgametype() {
   else if(game["status"] == "overtime_halftime")
     setomnvar("ui_current_round", 4);
 
-  maps\mp\_utility::setobjectivetext("allies", & "OBJECTIVES_DOM");
-  maps\mp\_utility::setobjectivetext("axis", & "OBJECTIVES_DOM");
+  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_DOM");
+  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_DOM");
 
   if(level.splitscreen) {
-    maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_DOM");
-    maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_DOM");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_DOM");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_DOM");
   } else {
-    maps\mp\_utility::setobjectivescoretext("allies", & "OBJECTIVES_DOM_SCORE");
-    maps\mp\_utility::setobjectivescoretext("axis", & "OBJECTIVES_DOM_SCORE");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_DOM_SCORE");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_DOM_SCORE");
   }
 
-  maps\mp\_utility::setobjectivehinttext("allies", & "OBJECTIVES_DOM_HINT");
-  maps\mp\_utility::setobjectivehinttext("axis", & "OBJECTIVES_DOM_HINT");
+  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_DOM_HINT");
+  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_DOM_HINT");
   setclientnamemode("auto_change");
   initspawns();
   precacheflags();

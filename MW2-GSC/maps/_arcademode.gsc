@@ -268,7 +268,7 @@ arcadeMode_death_detection() {
   if(lives < 0) {
     wait 1.5;
     // GAME OVER
-    level.arcadeMode_failureString = & "SCRIPT_GAME_OVER";
+    level.arcadeMode_failureString = &"SCRIPT_GAME_OVER";
     thread arcademode_ends();
     return;
   }
@@ -307,7 +307,7 @@ arcademode_update_timer() {
   hud_time settimer(timer - .1);
   wait(timer);
   // TIME UP
-  level.arcadeMode_failureString = & "SCRIPT_TIME_UP";
+  level.arcadeMode_failureString = &"SCRIPT_TIME_UP";
   thread arcadeMode_ends();
 }
 
@@ -326,7 +326,7 @@ arcademode_update_lives() {
       lives = getdvarint("arcademode_lives");
       if(lives < 0) {
         // GAME OVER
-        level.arcadeMode_failureString = & "SCRIPT_GAME_OVER";
+        level.arcadeMode_failureString = &"SCRIPT_GAME_OVER";
         thread arcadeMode_ends();
         return;
       }
@@ -1231,13 +1231,13 @@ pointPulse(amount) {
 
   if(amount <= 0) {
     // string not found for
-    hud_pointpulse.label = & "";
+    hud_pointpulse.label = &"";
     hud_pointpulse.color = (1, 0, 0);
     hud_pointpulse.glowColor = (0, 0, 0);
     hud_pointpulse.glowAlpha = 0;
   } else {
     // +
-    hud_pointpulse.label = & "SCRIPT_PLUS";
+    hud_pointpulse.label = &"SCRIPT_PLUS";
     hud_pointpulse.color = (1, 1, 1);
     hud_pointpulse.glowColor = level.color_cool_green_glow;
     hud_pointpulse.glowAlpha = 1;
@@ -1673,7 +1673,7 @@ arcadeMode_ends() {
     if(getdvarint("arcademode_died") != 1 && level.gameskill >= 2) {
       boost = int(score);
       // ZERO DEATHS BONUS x2
-      arcademode_end_boost(score, combined_score, boost, & "SCRIPT_ZERO_DEATHS", "bullet_ap_bark", scoreBoostYpos, fade_in_time);
+      arcademode_end_boost(score, combined_score, boost, &"SCRIPT_ZERO_DEATHS", "bullet_ap_bark", scoreBoostYpos, fade_in_time);
       score += boost;
       combined_score += boost;
     }
@@ -1696,14 +1696,14 @@ arcadeMode_ends() {
   if(skillmult > 1) {
     if(skillmult == 1.5) {
       // DIFFICULTY BONUS x1.5
-      string = & "SCRIPT_DIFFICULTY_BONUS_ONEANDAHALF";
+      string = &"SCRIPT_DIFFICULTY_BONUS_ONEANDAHALF";
     } else if(skillmult == 3) {
       // DIFFICULTY BONUS x3
-      string = & "SCRIPT_DIFFICULTY_BONUS_THREE";
+      string = &"SCRIPT_DIFFICULTY_BONUS_THREE";
     } else {
       assert(skillmult == 4);
       // DIFFICULTY BONUS x4
-      string = & "SCRIPT_DIFFICULTY_BONUS_FOUR";
+      string = &"SCRIPT_DIFFICULTY_BONUS_FOUR";
     }
     boost = int(ceil(score * skillmult) - score);
     arcademode_end_boost(score, combined_score, boost, string, "bullet_ap_glass", scoreBoostYpos, fade_in_time);
@@ -2081,7 +2081,7 @@ get_hud_multi() {
   hud_mult.sort = level.arcadeMode_hud_sort;
 
   // x
-  hud_mult.label = & "SCRIPT_X";
+  hud_mult.label = &"SCRIPT_X";
   hud_mult setvalue(level.arcadeMode_kill_streak_current_multiplier);
   hud_mult changeFontScaleOverTime(0.5);
   hud_mult.fontscale = 3;

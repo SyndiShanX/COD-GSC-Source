@@ -94,7 +94,7 @@ initmmmode() {
   setupdvarsmm();
   setspecialloadouts();
   setclientnamemode("auto_change");
-  var_0 = & "OBJECTIVES_MM";
+  var_0 = &"OBJECTIVES_MM";
   maps\mp\_utility::setobjectivetext("allies", var_0);
   maps\mp\_utility::setobjectivetext("axis", var_0);
 
@@ -106,8 +106,8 @@ initmmmode() {
     maps\mp\_utility::setobjectivescoretext("axis", var_0);
   }
 
-  maps\mp\_utility::setobjectivehinttext("allies", & "OBJECTIVES_INFECT_HINT");
-  maps\mp\_utility::setobjectivehinttext("axis", & "OBJECTIVES_INFECT_HINT");
+  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_INFECT_HINT");
+  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_INFECT_HINT");
   level thread mmawardxp();
   level thread watchhostmigrationmm();
 }
@@ -872,7 +872,7 @@ hidekillindicator() {
 killrangeindicator() {
   self endon("disconnect");
   self.killindicator = maps\mp\gametypes\_hud_util::createfontstring("objective", 1);
-  self.killindicator.label = & "MP_RANGE_KILL_INDICATOR";
+  self.killindicator.label = &"MP_RANGE_KILL_INDICATOR";
   self.killindicator setvalue(0);
   self.killindicator.x = 0;
   self.killindicator.y = 20;
@@ -892,7 +892,7 @@ killrangeindicator() {
   self.maxkillindicator.aligny = "top";
   self.maxkillindicator.horzalign = "right_adjustable";
   self.maxkillindicator.vertalign = "top_adjustable";
-  self.maxkillindicator.label = & "MP_MAX_KILL_INDICATOR";
+  self.maxkillindicator.label = &"MP_MAX_KILL_INDICATOR";
   self.maxkillindicator setvalue(0);
   self.maxkillindicator.alpha = 0;
   self.maxkillindicator.archived = 0;
@@ -930,7 +930,7 @@ matchbestkillrangeindicator() {
   level.maxmatchindicator.aligny = "top";
   level.maxmatchindicator.horzalign = "right_adjustable";
   level.maxmatchindicator.vertalign = "top_adjustable";
-  level.maxmatchindicator.label = & "MP_MAX_MATCH_INDICATOR";
+  level.maxmatchindicator.label = &"MP_MAX_MATCH_INDICATOR";
   level.maxmatchindicator setvalue(0);
   level.maxmatchindicator.alpha = 0;
   level.maxmatchindicator.archived = 0;

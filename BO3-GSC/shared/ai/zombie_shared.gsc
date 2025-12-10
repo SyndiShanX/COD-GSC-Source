@@ -64,27 +64,27 @@ function growling() {
 }
 
 function registernotetracks() {
-  anim.notetracks["anim_pose = \"stand\""] = & notetrackposestand;
-  anim.notetracks["anim_pose = \"crouch\""] = & notetrackposecrouch;
-  anim.notetracks["anim_movement = \"stop\""] = & notetrackmovementstop;
-  anim.notetracks["anim_movement = \"walk\""] = & notetrackmovementwalk;
-  anim.notetracks["anim_movement = \"run\""] = & notetrackmovementrun;
-  anim.notetracks["anim_alertness = causal"] = & notetrackalertnesscasual;
-  anim.notetracks["anim_alertness = alert"] = & notetrackalertnessalert;
-  anim.notetracks["gravity on"] = & notetrackgravity;
-  anim.notetracks["gravity off"] = & notetrackgravity;
-  anim.notetracks["gravity code"] = & notetrackgravity;
-  anim.notetracks["bodyfall large"] = & notetrackbodyfall;
-  anim.notetracks["bodyfall small"] = & notetrackbodyfall;
-  anim.notetracks["footstep"] = & notetrackfootstep;
-  anim.notetracks["step"] = & notetrackfootstep;
-  anim.notetracks["footstep_right_large"] = & notetrackfootstep;
-  anim.notetracks["footstep_right_small"] = & notetrackfootstep;
-  anim.notetracks["footstep_left_large"] = & notetrackfootstep;
-  anim.notetracks["footstep_left_small"] = & notetrackfootstep;
-  anim.notetracks["footscrape"] = & notetrackfootscrape;
-  anim.notetracks["land"] = & notetrackland;
-  anim.notetracks["start_ragdoll"] = & notetrackstartragdoll;
+  anim.notetracks["anim_pose = \"stand\""] = &notetrackposestand;
+  anim.notetracks["anim_pose = \"crouch\""] = &notetrackposecrouch;
+  anim.notetracks["anim_movement = \"stop\""] = &notetrackmovementstop;
+  anim.notetracks["anim_movement = \"walk\""] = &notetrackmovementwalk;
+  anim.notetracks["anim_movement = \"run\""] = &notetrackmovementrun;
+  anim.notetracks["anim_alertness = causal"] = &notetrackalertnesscasual;
+  anim.notetracks["anim_alertness = alert"] = &notetrackalertnessalert;
+  anim.notetracks["gravity on"] = &notetrackgravity;
+  anim.notetracks["gravity off"] = &notetrackgravity;
+  anim.notetracks["gravity code"] = &notetrackgravity;
+  anim.notetracks["bodyfall large"] = &notetrackbodyfall;
+  anim.notetracks["bodyfall small"] = &notetrackbodyfall;
+  anim.notetracks["footstep"] = &notetrackfootstep;
+  anim.notetracks["step"] = &notetrackfootstep;
+  anim.notetracks["footstep_right_large"] = &notetrackfootstep;
+  anim.notetracks["footstep_right_small"] = &notetrackfootstep;
+  anim.notetracks["footstep_left_large"] = &notetrackfootstep;
+  anim.notetracks["footstep_left_small"] = &notetrackfootstep;
+  anim.notetracks["footscrape"] = &notetrackfootscrape;
+  anim.notetracks["land"] = &notetrackland;
+  anim.notetracks["start_ragdoll"] = &notetrackstartragdoll;
 }
 
 function notetrackstopanim(note, flagname) {}
@@ -308,7 +308,7 @@ function donotetracksforeverproc(notetracksfunc, flagname, killstring, customfun
 }
 
 function donotetracksforever(flagname, killstring, customfunction, var1) {
-  donotetracksforeverproc( & donotetracks, flagname, killstring, customfunction, var1);
+  donotetracksforeverproc(&donotetracks, flagname, killstring, customfunction, var1);
 }
 
 function donotetracksfortimeproc(donotetracksforeverfunc, time, flagname, customfunction, ent, var1) {
@@ -319,7 +319,7 @@ function donotetracksfortimeproc(donotetracksforeverfunc, time, flagname, custom
 function donotetracksfortime(time, flagname, customfunction, var1) {
   ent = spawnStruct();
   ent thread donotetracksfortimeendnotify(time);
-  donotetracksfortimeproc( & donotetracksforever, time, flagname, customfunction, ent, var1);
+  donotetracksfortimeproc(&donotetracksforever, time, flagname, customfunction, ent, var1);
 }
 
 function donotetracksfortimeendnotify(time) {

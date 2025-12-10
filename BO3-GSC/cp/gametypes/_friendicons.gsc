@@ -9,11 +9,11 @@
 #namespace friendicons;
 
 function autoexec __init__sytem__() {
-  system::register("friendicons", & __init__, undefined, undefined);
+  system::register("friendicons", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
+  callback::on_start_gametype(&init);
 }
 
 function init() {
@@ -24,8 +24,8 @@ function init() {
     setdvar("scr_drawfriend", "0");
   }
   level.drawfriend = getdvarint("scr_drawfriend");
-  callback::on_spawned( & on_player_spawned);
-  callback::on_player_killed( & on_player_killed);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_player_killed(&on_player_killed);
   for(;;) {
     updatefriendiconsettings();
     wait(5);

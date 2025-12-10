@@ -31,7 +31,7 @@ class ccontainer {
 #namespace containers;
 
 function autoexec __init__sytem__() {
-  system::register("containers", & __init__, undefined, undefined);
+  system::register("containers", &__init__, undefined, undefined);
 }
 
 function __init__() {

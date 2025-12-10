@@ -11,7 +11,7 @@
 #include maps\mp\_visionset_mgr;
 
 enable_divetonuke_perk_for_level() {
-  maps\mp\zombies\_zm_perks::register_perk_basic_info("specialty_flakjacket", "divetonuke", 2000, & "ZOMBIE_PERK_DIVETONUKE", "zombie_perk_bottle_nuke");
+  maps\mp\zombies\_zm_perks::register_perk_basic_info("specialty_flakjacket", "divetonuke", 2000, &"ZOMBIE_PERK_DIVETONUKE", "zombie_perk_bottle_nuke");
   maps\mp\zombies\_zm_perks::register_perk_precache_func("specialty_flakjacket", ::divetonuke_precache);
   maps\mp\zombies\_zm_perks::register_perk_clientfields("specialty_flakjacket", ::divetonuke_register_clientfield, ::divetonuke_set_clientfield);
   maps\mp\zombies\_zm_perks::register_perk_machine("specialty_flakjacket", ::divetonuke_perk_machine_setup, ::divetonuke_perk_machine_think);

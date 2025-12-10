@@ -2808,7 +2808,7 @@ turret_createmovewatcher() {
   wait 0.5;
 
   if(isDefined(self.pickup_trigger)) {
-    level thread trigger_use(self.pickup_trigger, & "SO_RTS_PLACE", "turret_place_" + self getentitynumber(), self.use_alt_btn_to_move);
+    level thread trigger_use(self.pickup_trigger, &"SO_RTS_PLACE", "turret_place_" + self getentitynumber(), self.use_alt_btn_to_move);
     self connectpaths();
   }
 }
@@ -2983,7 +2983,7 @@ level_create_turrets(usable, hitpoints) {
 
     turret.overridevehicledamage = ::turret_deathwatch;
     turret.trigger = spawn("trigger_radius", turret.origin, 0, 80, 64);
-    turret thread trigger_hint(turret.trigger, & "SO_RTS_CANNOT_HACK");
+    turret thread trigger_hint(turret.trigger, &"SO_RTS_CANNOT_HACK");
     level notify("turret_created", turret);
     turret.bad_turret_spot = spawn("trigger_radius", turret.origin, 0, 128, 64);
     turret.bad_turret_spot.targetname = "bad_turret_spot";

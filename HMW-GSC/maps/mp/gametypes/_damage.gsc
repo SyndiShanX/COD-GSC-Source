@@ -130,7 +130,7 @@ handlesuicidedeath(var_0, var_1) {
     [[level.onsuicidedeath]](self);
 
   if(isDefined(self.friendlydamage))
-    self iprintlnbold( & "MP_FRIENDLY_FIRE_WILL_NOT");
+    self iprintlnbold(&"MP_FRIENDLY_FIRE_WILL_NOT");
 
   self.pers["suicideSpawnDelay"] = maps\mp\gametypes\_tweakables::gettweakablevalue("game", "suicidespawndelay");
 }
@@ -939,9 +939,9 @@ victimmodifydamageforcollats(var_0, var_1, var_2, var_3) {
 
 waittimerforspawn() {
   self endon("randomSpawnPressed");
-  self.kc_teamspawntext settext( & "PLATFORM_PRESS_TO_TEAMSPAWN");
+  self.kc_teamspawntext settext(&"PLATFORM_PRESS_TO_TEAMSPAWN");
   self.kc_teamspawntext.alpha = 1;
-  self.kc_randomspawntext settext( & "PLATFORM_PRESS_TO_RESPAWN");
+  self.kc_randomspawntext settext(&"PLATFORM_PRESS_TO_RESPAWN");
   self.kc_randomspawntext.alpha = 1;
   thread waitteamspawnbutton();
   thread waitspawnrandombutton();
@@ -960,7 +960,7 @@ waittimerforspawn() {
   wait 0.5;
 
   for(var_2 = var_1; var_2 > 0; var_2--) {
-    maps\mp\_utility::setlowermessage("kc_info", & "MP_TIME_TILL_SPAWN", var_1, 1, 1);
+    maps\mp\_utility::setlowermessage("kc_info", &"MP_TIME_TILL_SPAWN", var_1, 1, 1);
     wait 1;
   }
 
@@ -1560,7 +1560,7 @@ hitlocdebug(var_0, var_1, var_2, var_3, var_4) {
 
   var_0.damageinfo[0].damage = var_2;
   var_0.damageinfo[0].hitloc = var_3;
-  var_0.damageinfo[0].bp = var_4 & level.idflags_penetration;
+  var_0.damageinfo[0].bp = var_4 &level.idflags_penetration;
   var_0.damageinfo[0].jugg = var_1 maps\mp\_utility::isjuggernaut();
 
   if(isDefined(var_0.damageinfovictim) && var_0.damageinfovictim != var_1) {
@@ -1665,7 +1665,7 @@ callback_playerdamage_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
 
   var_14 = 0.0;
 
-  if(var_4 & level.idflags_stun) {
+  if(var_4 &level.idflags_stun) {
     var_14 = 0.0;
     var_3 = 0.0;
   } else if(var_9 == "shield") {
@@ -1694,12 +1694,12 @@ callback_playerdamage_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
       }
     }
 
-    if(var_4 & level.idflags_shield_explosive_impact) {
+    if(var_4 &level.idflags_shield_explosive_impact) {
       var_9 = "none";
 
-      if(!(var_4 & level.idflags_shield_explosive_impact_huge))
+      if(!(var_4 &level.idflags_shield_explosive_impact_huge))
         var_3 *= 0.0;
-    } else if(var_4 & level.idflags_shield_explosive_splash) {
+    } else if(var_4 &level.idflags_shield_explosive_splash) {
       if(isDefined(var_0) && isDefined(var_0.stuckenemyentity) && var_0.stuckenemyentity == var_2)
         var_3 = 51;
 
@@ -1799,7 +1799,7 @@ callback_playerdamage_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
       var_3 = var_20;
   }
 
-  if(!(var_4 & level.idflags_no_protection)) {
+  if(!(var_4 &level.idflags_no_protection)) {
     if(!level.teambased && var_17 && isDefined(var_1.owner) && var_1.owner == var_2) {
       if(var_5 == "MOD_CRUSH")
         var_2 maps\mp\_utility::_suicide();
@@ -1974,7 +1974,7 @@ callback_playerdamage_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
         var_24 = "none";
       if(!maps\mp\_utility::isreallyalive(var_2))
         var_24 = "killshot";
-      else if(var_4 & level.idflags_stun)
+      else if(var_4 &level.idflags_stun)
         var_24 = "stun";
       else if(isDefined(var_2.exo_health_on) && var_2.exo_health_on == 1)
         var_24 = "hitmorehealth";
@@ -2191,7 +2191,7 @@ callback_playerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
 finishplayerdamagewrapper(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   var_11 = 0;
 
-  if(maps\mp\_utility::isusingremote() && var_2 >= self.health && !(var_3 & level.idflags_stun) && !isDefined(self.inliveplayerkillstreak) && !self isgod())
+  if(maps\mp\_utility::isusingremote() && var_2 >= self.health && !(var_3 &level.idflags_stun) && !isDefined(self.inliveplayerkillstreak) && !self isgod())
     var_11 = 1;
 
   if(isDefined(level.ishorde) && level.ishorde)
@@ -2445,7 +2445,7 @@ laststandtimer(var_0, var_1) {
 
   if(!var_1 && (!isDefined(self.inc4death) || !self.inc4death)) {
     thread laststandallowsuicide();
-    maps\mp\_utility::setlowermessage("last_stand", & "PLATFORM_COWARDS_WAY_OUT", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+    maps\mp\_utility::setlowermessage("last_stand", &"PLATFORM_COWARDS_WAY_OUT", undefined, undefined, undefined, undefined, undefined, undefined, 1);
     thread laststandkeepoverlay();
   }
 
@@ -2453,7 +2453,7 @@ laststandtimer(var_0, var_1) {
     var_2 = spawn("script_model", self.origin);
     var_2 setModel("tag_origin");
     var_2 setcursorhint("HINT_NOICON");
-    var_2 sethintstring( & "PLATFORM_REVIVE");
+    var_2 sethintstring(&"PLATFORM_REVIVE");
     var_2 revivesetup(self);
     var_2 endon("death");
     var_3 = newteamhudelem(self.team);
@@ -2477,7 +2477,7 @@ laststandtimer(var_0, var_1) {
     var_2 = spawn("script_model", self.origin);
     var_2 setModel("tag_origin");
     var_2 setcursorhint("HINT_NOICON");
-    var_2 sethintstring( & "PLATFORM_REVIVE");
+    var_2 sethintstring(&"PLATFORM_REVIVE");
     var_2 revivesetup(self);
     var_2 endon("death");
     var_3 = newteamhudelem(self.team);
@@ -2974,10 +2974,10 @@ personalusebar(var_0) {
 personalusebaroldstyle(var_0) {
   var_1 = maps\mp\gametypes\_hud_util::createprimaryprogressbar();
   var_2 = maps\mp\gametypes\_hud_util::createprimaryprogressbartext();
-  var_2 settext( & "MPUI_REVIVING");
+  var_2 settext(&"MPUI_REVIVING");
   var_3 = var_0.owner maps\mp\gametypes\_hud_util::createprimaryprogressbar();
   var_4 = var_0.owner maps\mp\gametypes\_hud_util::createprimaryprogressbartext();
-  var_4 settext( & "MPUI_BEING_REVIVED");
+  var_4 settext(&"MPUI_BEING_REVIVED");
   var_5 = -1;
 
   while(maps\mp\_utility::isreallyalive(self) && isDefined(var_0) && var_0.inuse && !level.gameended && isDefined(self)) {
@@ -3078,16 +3078,16 @@ _obituary(var_0, var_1, var_2, var_3) {
     var_7 = var_6.team;
 
     if(var_7 == "spectator") {
-      var_6 iprintln( & "MP_OBITUARY_NEUTRAL", var_1.name, var_0.name);
+      var_6 iprintln(&"MP_OBITUARY_NEUTRAL", var_1.name, var_0.name);
       continue;
     }
 
     if(var_7 == var_4) {
-      var_6 iprintln( & "MP_OBITUARY_ENEMY", var_1.name, var_0.name);
+      var_6 iprintln(&"MP_OBITUARY_ENEMY", var_1.name, var_0.name);
       continue;
     }
 
-    var_6 iprintln( & "MP_OBITUARY_FRIENDLY", var_1.name, var_0.name);
+    var_6 iprintln(&"MP_OBITUARY_FRIENDLY", var_1.name, var_0.name);
   }
 }
 
@@ -3198,7 +3198,7 @@ processdamagetaken(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
   if(var_12 < 0)
     return 1;
 
-  if(isDefined(var_3) && var_3 & level.idflags_penetration)
+  if(isDefined(var_3) && var_3 &level.idflags_penetration)
     self.wasdamagedfrombulletpenetration = 1;
 
   self.wasdamaged = 1;

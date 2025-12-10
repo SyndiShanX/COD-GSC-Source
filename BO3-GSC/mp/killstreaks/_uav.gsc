@@ -38,14 +38,14 @@ function init() {
   level.activeplayeruavs = [];
   level.spawneduavs = [];
   if(tweakables::gettweakablevalue("killstreak", "allowradar")) {
-    killstreaks::register("uav", "uav", "killstreak_uav", "uav_used", & activateuav);
-    killstreaks::register_strings("uav", & "KILLSTREAK_EARNED_RADAR", & "KILLSTREAK_RADAR_NOT_AVAILABLE", & "KILLSTREAK_RADAR_INBOUND", undefined, & "KILLSTREAK_RADAR_HACKED");
+    killstreaks::register("uav", "uav", "killstreak_uav", "uav_used", &activateuav);
+    killstreaks::register_strings("uav", &"KILLSTREAK_EARNED_RADAR", &"KILLSTREAK_RADAR_NOT_AVAILABLE", &"KILLSTREAK_RADAR_INBOUND", undefined, &"KILLSTREAK_RADAR_HACKED");
     killstreaks::register_dialog("uav", "mpl_killstreak_radar", "uavDialogBundle", "uavPilotDialogBundle", "friendlyUav", "enemyUav", "enemyUavMultiple", "friendlyUavHacked", "enemyUavHacked", "requestUav", "threatUav");
   }
   level thread uavtracker();
-  callback::on_connect( & onplayerconnect);
-  callback::on_spawned( & onplayerspawned);
-  callback::on_joined_team( & onplayerjoinedteam);
+  callback::on_connect(&onplayerconnect);
+  callback::on_spawned(&onplayerspawned);
+  callback::on_joined_team(&onplayerjoinedteam);
   setmatchflag("radar_allies", 0);
   setmatchflag("radar_axis", 0);
 }
@@ -57,7 +57,7 @@ function hackedprefunction(hacker) {
 
 function configureteampost(owner, ishacked) {
   uav = self;
-  uav thread teams::waituntilteamchangesingleton(owner, "UAV_watch_team_change", & onteamchange, owner.entnum, "delete", "death", "leaving");
+  uav thread teams::waituntilteamchangesingleton(owner, "UAV_watch_team_change", &onteamchange, owner.entnum, "delete", "death", "leaving");
   if(ishacked == 0) {
     uav teams::hidetosameteam();
   } else {
@@ -86,8 +86,8 @@ function activateuav() {
   level.spawneduavs[level.spawneduavs.size] = uav;
   uav setModel("veh_t7_drone_uav_enemy_vista");
   uav.targetname = "uav";
-  uav killstreaks::configure_team("uav", killstreak_id, self, undefined, undefined, & configureteampost);
-  uav killstreak_hacking::enable_hacking("uav", & hackedprefunction, undefined);
+  uav killstreaks::configure_team("uav", killstreak_id, self, undefined, undefined, &configureteampost);
+  uav killstreak_hacking::enable_hacking("uav", &hackedprefunction, undefined);
   uav clientfield::set("enemyvehicle", 1);
   killstreak_detect::killstreaktargetset(uav);
   uav setdrawinfrared(1);
@@ -97,7 +97,7 @@ function activateuav() {
   uav.maxhealth = 700;
   uav.lowhealth = 700 * 0.5;
   uav setCanDamage(1);
-  uav thread killstreaks::monitordamage("uav", uav.maxhealth, & destroyuav, uav.lowhealth, & onlowhealth, 0, undefined, 1);
+  uav thread killstreaks::monitordamage("uav", uav.maxhealth, &destroyuav, uav.lowhealth, &onlowhealth, 0, undefined, 1);
   uav thread heatseekingmissile::missiletarget_proximitydetonateincomingmissile("crashing", undefined, 1);
   uav.rocketdamage = uav.maxhealth + 1;
   minflyheight = int(airsupport::getminimumflyheight());
@@ -111,8 +111,8 @@ function activateuav() {
   anglevector = anglevector * zoffset;
   uav linkto(rotator, "tag_origin", anglevector, (0, angle + attach_angle, 0));
   self addweaponstat(getweapon("uav"), "used", 1);
-  uav thread killstreaks::waitfortimeout("uav", 25000, & ontimeout, "delete", "death", "crashing");
-  uav thread killstreaks::waitfortimecheck(25000 / 2, & ontimecheck, "delete", "death", "crashing");
+  uav thread killstreaks::waitfortimeout("uav", 25000, &ontimeout, "delete", "death", "crashing");
+  uav thread killstreaks::waitfortimecheck(25000 / 2, &ontimecheck, "delete", "death", "crashing");
   uav thread startuavfx();
   self killstreaks::play_killstreak_start_dialog("uav", self.team, killstreak_id);
   uav killstreaks::play_pilot_dialog_on_owner("arrive", "uav", killstreak_id);
@@ -137,7 +137,7 @@ function destroyuav(attacker, weapon) {
   if(isDefined(attacker) && (!isDefined(self.owner) || self.owner util::isenemyplayer(attacker))) {
     challenges::destroyedaircraft(attacker, weapon, 0);
     scoreevents::processscoreevent("destroyed_uav", attacker, self.owner, weapon);
-    luinotifyevent(&"player_callout", 2, & "KILLSTREAK_DESTROYED_UAV", attacker.entnum);
+    luinotifyevent(&"player_callout", 2, &"KILLSTREAK_DESTROYED_UAV", attacker.entnum);
     attacker challenges::addflyswatterstat(weapon, self);
   }
   if(!self.leaving) {

@@ -24,23 +24,23 @@
 #namespace zm_traps;
 
 function autoexec __init__sytem__() {
-  system::register("zm_traps", & __init__, & __main__, undefined);
+  system::register("zm_traps", &__init__, &__main__, undefined);
 }
 
 function __init__() {
   level.trap_kills = 0;
   level.burning_zombies = [];
-  callback::on_finalize_initialization( & init);
+  callback::on_finalize_initialization(&init);
 }
 
 function init() {
   traps = getEntArray("zombie_trap", "targetname");
-  array::thread_all(traps, & trap_init);
+  array::thread_all(traps, &trap_init);
 }
 
 function __main__() {
   traps = getEntArray("zombie_trap", "targetname");
-  array::thread_all(traps, & trap_main);
+  array::thread_all(traps, &trap_main);
 }
 
 function trap_init() {
@@ -54,22 +54,22 @@ function trap_init() {
     } else {
       switch (self.script_noteworthy) {
         case "rotating": {
-          self._trap_activate_func = & trap_activate_rotating;
+          self._trap_activate_func = &trap_activate_rotating;
           break;
         }
         case "flipper": {
-          self._trap_activate_func = & trap_activate_flipper;
+          self._trap_activate_func = &trap_activate_flipper;
           break;
         }
         default: {
-          self._trap_activate_func = & trap_activate_fire;
+          self._trap_activate_func = &trap_activate_fire;
         }
       }
     }
     if(isDefined(level._zombiemode_trap_use_funcs) && isDefined(level._zombiemode_trap_use_funcs[self._trap_type])) {
       self._trap_use_func = level._zombiemode_trap_use_funcs[self._trap_type];
     } else {
-      self._trap_use_func = & trap_use_think;
+      self._trap_use_func = &trap_use_think;
     }
   }
   self trap_model_type_init();
@@ -672,13 +672,13 @@ function trap_disable() {
     self._trap_cooldown_time = 0.05;
     self waittill("available");
   }
-  array::thread_all(self._trap_use_trigs, & triggerenable, 0);
+  array::thread_all(self._trap_use_trigs, &triggerenable, 0);
   self trap_lights_red();
   self._trap_cooldown_time = cooldown;
 }
 
 function trap_enable() {
-  array::thread_all(self._trap_use_trigs, & triggerenable, 1);
+  array::thread_all(self._trap_use_trigs, &triggerenable, 1);
   self trap_lights_green();
 }
 

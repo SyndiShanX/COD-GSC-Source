@@ -22,7 +22,7 @@
 #namespace devgui;
 
 function autoexec __init__sytem__() {
-  system::register("", & __init__, undefined, undefined);
+  system::register("", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -69,8 +69,8 @@ function __init__() {
   level thread devgui_vehicle_spawn_think();
   thread init_debug_center_screen();
   level thread dev::body_customization_devgui(1);
-  callback::on_connect( & hero_art_on_player_connect);
-  callback::on_connect( & on_player_connect);
+  callback::on_connect(&hero_art_on_player_connect);
+  callback::on_connect(&on_player_connect);
 }
 
 function on_player_connect() {
@@ -272,7 +272,7 @@ function devgui_weapon_think() {
   for(;;) {
     weapon_name = getdvarstring("");
     if(weapon_name != "") {
-      devgui_handle_player_command( & devgui_give_weapon, weapon_name);
+      devgui_handle_player_command(&devgui_give_weapon, weapon_name);
     }
     setdvar("", "");
     wait(0.5);
@@ -351,7 +351,7 @@ function devgui_attachment_cosmetic_variant_think() {
     attachment_1 = getdvarstring("");
     attachment_2 = getdvarstring("");
     if(old_attachment_1 != attachment_1 || old_attachment_2 != attachment_2 || old_index != index) {
-      devgui_handle_player_command( & devgui_update_attachment_cosmetic_variant, attachment_1, attachment_2);
+      devgui_handle_player_command(&devgui_update_attachment_cosmetic_variant, attachment_1, attachment_2);
     }
     old_index = index;
     old_attachment_1 = attachment_1;
@@ -444,7 +444,7 @@ function devgui_attachment_cycling_think() {
       state = "";
     }
     if("" == state) {
-      array::thread_all(getplayers(), & devgui_attachment_cycling_update);
+      array::thread_all(getplayers(), &devgui_attachment_cycling_update);
     }
     wait(0.5);
   }

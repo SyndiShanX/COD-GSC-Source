@@ -17,7 +17,7 @@
 #namespace zm_castle_zones;
 
 function init() {
-  level.custom_spawner_entry["crawl"] = & function_48cfc7df;
+  level.custom_spawner_entry["crawl"] = &function_48cfc7df;
   level flag::init("always_on");
   level flag::set("always_on");
   level thread function_e9579b3e();

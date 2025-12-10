@@ -19,17 +19,17 @@
 #namespace character_customization;
 
 function autoexec __init__sytem__() {
-  system::register("character_customization", & __init__, undefined, undefined);
+  system::register("character_customization", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  level.extra_cam_render_hero_func_callback = & process_character_extracam_request;
-  level.extra_cam_render_lobby_client_hero_func_callback = & process_lobby_client_character_extracam_request;
-  level.extra_cam_render_current_hero_headshot_func_callback = & process_current_hero_headshot_extracam_request;
-  level.extra_cam_render_outfit_preview_func_callback = & process_outfit_preview_extracam_request;
-  level.extra_cam_render_character_body_item_func_callback = & process_character_body_item_extracam_request;
-  level.extra_cam_render_character_helmet_item_func_callback = & process_character_helmet_item_extracam_request;
-  level.extra_cam_render_character_head_item_func_callback = & process_character_head_item_extracam_request;
+  level.extra_cam_render_hero_func_callback = &process_character_extracam_request;
+  level.extra_cam_render_lobby_client_hero_func_callback = &process_lobby_client_character_extracam_request;
+  level.extra_cam_render_current_hero_headshot_func_callback = &process_current_hero_headshot_extracam_request;
+  level.extra_cam_render_outfit_preview_func_callback = &process_outfit_preview_extracam_request;
+  level.extra_cam_render_character_body_item_func_callback = &process_character_body_item_extracam_request;
+  level.extra_cam_render_character_helmet_item_func_callback = &process_character_helmet_item_extracam_request;
+  level.extra_cam_render_character_head_item_func_callback = &process_character_head_item_extracam_request;
   level.intercom_dialog = associativearray("helmet", "", "head", "");
   if(!isDefined(level.liveccdata)) {
     level.liveccdata = [];
@@ -49,7 +49,7 @@ function __init__() {
   if(!isDefined(level.extra_cam_outfit_preview_data)) {
     level.extra_cam_outfit_preview_data = [];
   }
-  level.charactercustomizationsetup = & localclientconnect;
+  level.charactercustomizationsetup = &localclientconnect;
 }
 
 function localclientconnect(localclientnum) {

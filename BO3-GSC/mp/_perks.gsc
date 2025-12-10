@@ -15,13 +15,13 @@
 #namespace spawning;
 
 function autoexec __init__sytem__() {
-  system::register("perks", & __init__, undefined, undefined);
+  system::register("perks", &__init__, undefined, undefined);
 }
 
 function __init__() {
   clientfield::register("allplayers", "flying", 1, 1, "int");
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function on_player_connect(local_client_num) {}

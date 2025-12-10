@@ -25,7 +25,7 @@ func_3353() {
   precacherumble("light_1s");
   precacherumble("heavy_1s");
   precacherumble("heavy_2s");
-  precachestring( & "SCRIPT_PLATFORM_HINT_MELEE_COUNTER");
+  precachestring(&"SCRIPT_PLATFORM_HINT_MELEE_COUNTER");
   level.var_7649["bt_c6_explosion"] = loadfx("vfx\_requests\c6\vfx_c6_explosion");
   level.var_EC8C["asm_viewmodel_knife"] = "tactical_knife_iw7_vm";
   level.var_7649["bt_c6_knife_counter_stab"] = loadfx("vfx\iw7\core\robot\knife\vfx_c6_knife_sparks.vfx");
@@ -68,13 +68,13 @@ func_3508() {
 }
 
 func_F10A() {
-  precachestring( & "SCRIPT_PLATFORM_HINT_MELEE_TAP");
-  precachestring( & "EQUIPMENT_SEEKER_RETRIEVE");
-  precachestring( & "EQUIPMENT_SEEKER_IDLE");
-  precachestring( & "EQUIPMENT_SEEKER_SEARCHING");
-  precachestring( & "EQUIPMENT_SEEKER_LOCKED");
-  precachestring( & "EQUIPMENT_SEEKER_BLOWNUP");
-  precachestring( & "EQUIPMENT_SEEKER_TOP");
+  precachestring(&"SCRIPT_PLATFORM_HINT_MELEE_TAP");
+  precachestring(&"EQUIPMENT_SEEKER_RETRIEVE");
+  precachestring(&"EQUIPMENT_SEEKER_IDLE");
+  precachestring(&"EQUIPMENT_SEEKER_SEARCHING");
+  precachestring(&"EQUIPMENT_SEEKER_LOCKED");
+  precachestring(&"EQUIPMENT_SEEKER_BLOWNUP");
+  precachestring(&"EQUIPMENT_SEEKER_TOP");
   precacheshader("hud_jackal_static");
   precacheitem("seeker");
   precacheitem("seeker_autohold");
@@ -99,7 +99,7 @@ func_33FB() {
 func_341D() {
   precachemodel("vm_robot_c8_base");
   precacheitem("iw7_mauler_c8hack");
-  precachestring( & "EQUIPMENT_PICKUP_SHIELD");
+  precachestring(&"EQUIPMENT_PICKUP_SHIELD");
   precachemodel("weapon_retract_shield_wm");
   level.var_7649["grenade_flash_red"] = loadfx("vfx\_requests\c8\vfx_grenade_flash_red.vfx");
   level.var_7649["c8_barrel_glow"] = loadfx("vfx\iw7\core\robot\c8\vfx_c8_weapon_overheat.vfx");

@@ -3191,7 +3191,7 @@ updatePlayerScore(amount) {
   self notify("update_xp");
   self endon("update_xp");
   self.rankUpdateTotal += amount;
-  self.hud_rankscroreupdate.label = & "SCRIPT_PLUS";
+  self.hud_rankscroreupdate.label = &"SCRIPT_PLUS";
   self.hud_rankscroreupdate Setvalue(self.rankUpdateTotal);
   self.hud_rankscroreupdate.alpha = 1;
   self.hud_rankscroreupdate thread fontPulse(self);

@@ -3113,7 +3113,7 @@ hovercraft_drone_default(var_0) {
   level.hovercraftdrones = common_scripts\utility::array_removeundefined(level.hovercraftdrones);
   level.hovercraftdrones[level.hovercraftdrones.size] = self;
   self.name = "";
-  self setlookattext("", & "");
+  self setlookattext("", &"");
   self.team = "axis";
   self.health = 1;
 

@@ -28,34 +28,34 @@
 #namespace zm_blockers;
 
 function autoexec __init__sytem__() {
-  system::register("zm_blockers", & __init__, & __main__, undefined);
+  system::register("zm_blockers", &__init__, &__main__, undefined);
 }
 
 function __init__() {
-  zm_utility::add_zombie_hint("default_buy_debris", & "ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_COST");
-  zm_utility::add_zombie_hint("default_buy_door", & "ZOMBIE_BUTTON_BUY_OPEN_DOOR_COST");
-  zm_utility::add_zombie_hint("default_buy_door_close", & "ZOMBIE_BUTTON_BUY_CLOSE_DOOR");
+  zm_utility::add_zombie_hint("default_buy_debris", &"ZOMBIE_BUTTON_BUY_CLEAR_DEBRIS_COST");
+  zm_utility::add_zombie_hint("default_buy_door", &"ZOMBIE_BUTTON_BUY_OPEN_DOOR_COST");
+  zm_utility::add_zombie_hint("default_buy_door_close", &"ZOMBIE_BUTTON_BUY_CLOSE_DOOR");
   init_blockers();
 }
 
 function __main__() {
   if(isDefined(level.quantum_bomb_register_result_func)) {
-    [[level.quantum_bomb_register_result_func]]("open_nearest_door", & quantum_bomb_open_nearest_door_result, 35, & quantum_bomb_open_nearest_door_validation);
+    [[level.quantum_bomb_register_result_func]]("open_nearest_door", &quantum_bomb_open_nearest_door_result, 35, &quantum_bomb_open_nearest_door_validation);
   }
 }
 
 function init_blockers() {
   level.exterior_goals = struct::get_array("exterior_goal", "targetname");
-  array::thread_all(level.exterior_goals, & blocker_init);
+  array::thread_all(level.exterior_goals, &blocker_init);
   zombie_doors = getEntArray("zombie_door", "targetname");
   if(isDefined(zombie_doors)) {
     level flag::init("door_can_close");
-    array::thread_all(zombie_doors, & door_init);
+    array::thread_all(zombie_doors, &door_init);
   }
   zombie_debris = getEntArray("zombie_debris", "targetname");
-  array::thread_all(zombie_debris, & debris_init);
+  array::thread_all(zombie_debris, &debris_init);
   flag_blockers = getEntArray("flag_blocker", "targetname");
-  array::thread_all(flag_blockers, & flag_blocker);
+  array::thread_all(flag_blockers, &flag_blocker);
 }
 
 function door_init() {
@@ -326,7 +326,7 @@ function door_activate(time, open = 1, quick, use_blocker_clip_for_pathing) {
   }
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "clip" || (isDefined(self.script_string) && self.script_string == "clip")) {
     if(!open) {
-      self util::delay(time, undefined, & self_disconnectpaths);
+      self util::delay(time, undefined, &self_disconnectpaths);
       wait(0.1);
       self solid();
     }
@@ -1273,8 +1273,8 @@ function blocker_trigger_think() {
     self.unitrigger_stub.cursor_hint = "HINT_NOICON";
     self.unitrigger_stub.trigger_target = self;
     zm_unitrigger::unitrigger_force_per_player_triggers(self.unitrigger_stub, 1);
-    self.unitrigger_stub.prompt_and_visibility_func = & blockertrigger_update_prompt;
-    zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, & blocker_unitrigger_think);
+    self.unitrigger_stub.prompt_and_visibility_func = &blockertrigger_update_prompt;
+    zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, &blocker_unitrigger_think);
     zm_unitrigger::unregister_unitrigger(self.unitrigger_stub);
     if(!isDefined(trigger_location.angles)) {
       trigger_location.angles = (0, 0, 0);
@@ -1282,7 +1282,7 @@ function blocker_trigger_think() {
     self.unitrigger_stub.origin = (zm_utility::groundpos(trigger_location.origin) + vectorscale((0, 0, 1), 4)) + (anglesToForward(trigger_location.angles) * -11);
   }
   self thread trigger_delete_on_repair();
-  thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, & blocker_unitrigger_think);
+  thread zm_unitrigger::register_static_unitrigger(self.unitrigger_stub, &blocker_unitrigger_think);
   if(getdvarint("") > 0) {
     thread zm_utility::debug_blocker(trigger_pos, radius, height);
   }

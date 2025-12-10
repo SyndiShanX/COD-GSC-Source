@@ -41,7 +41,7 @@ function init_shared() {
     level.trackweaponstats = 1;
   }
   level._effect["flashNineBang"] = "_t6/misc/fx_equip_tac_insert_exp";
-  callback::on_start_gametype( & init);
+  callback::on_start_gametype(&init);
 }
 
 function init() {
@@ -51,8 +51,8 @@ function init() {
   if(!isDefined(level.roundstartexplosivedelay)) {
     level.roundstartexplosivedelay = 0;
   }
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function on_player_connect() {
@@ -705,9 +705,9 @@ function turn_grenade_into_a_dud(weapon, isthrowngrenade, player) {
         timeleft = 1;
       }
       if(isthrowngrenade) {
-        player iprintlnbold(&"MP_GRENADE_UNAVAILABLE_FOR_N", (" " + timeleft) + " ", & "EXE_SECONDS");
+        player iprintlnbold(&"MP_GRENADE_UNAVAILABLE_FOR_N", (" " + timeleft) + " ", &"EXE_SECONDS");
       } else {
-        player iprintlnbold(&"MP_LAUNCHER_UNAVAILABLE_FOR_N", (" " + timeleft) + " ", & "EXE_SECONDS");
+        player iprintlnbold(&"MP_LAUNCHER_UNAVAILABLE_FOR_N", (" " + timeleft) + " ", &"EXE_SECONDS");
       }
       self makegrenadedud();
     }

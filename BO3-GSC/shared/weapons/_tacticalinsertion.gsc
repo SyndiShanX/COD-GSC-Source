@@ -23,7 +23,7 @@ function init_shared() {
   }
   level._effect["tacticalInsertionFizzle"] = "_t6/misc/fx_equip_tac_insert_exp";
   clientfield::register("scriptmover", "tacticalinsertion", 1, 1, "int");
-  callback::on_spawned( & on_player_spawned);
+  callback::on_spawned(&on_player_spawned);
 }
 
 function on_player_spawned() {
@@ -206,8 +206,8 @@ function spawntacticalinsertion() {
   self.tacticalinsertion clientfield::set("tacticalinsertion", 1);
   self thread watchdisconnect();
   watcher = weaponobjects::getweaponobjectwatcherbyweapon(level.weapontacticalinsertion);
-  self.tacticalinsertion thread watchusetrigger(self.tacticalinsertion.friendlytrigger, & pickup, watcher.pickupsoundplayer, watcher.pickupsound);
-  self.tacticalinsertion thread watchusetrigger(self.tacticalinsertion.enemytrigger, & fizzle);
+  self.tacticalinsertion thread watchusetrigger(self.tacticalinsertion.friendlytrigger, &pickup, watcher.pickupsoundplayer, watcher.pickupsound);
+  self.tacticalinsertion thread watchusetrigger(self.tacticalinsertion.enemytrigger, &fizzle);
   if(isDefined(self.tacticalinsertioncount)) {
     self.tacticalinsertioncount++;
   } else {

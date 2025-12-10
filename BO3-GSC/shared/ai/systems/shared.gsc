@@ -162,7 +162,7 @@ function throwweapon(weapon, positiontag, scavenger) {
     angularvelocity = (vectornormalize(endangles - startangles)) * angularscalar;
     throwweapon = self dropweapon(weapon, positiontag, linearvelocity, angularvelocity, scavenger);
     if(isDefined(throwweapon)) {
-      throwweapon setcontents(throwweapon setcontents(0) & (~(((32768 | 67108864) | 8388608) | 33554432)));
+      throwweapon setcontents(throwweapon setcontents(0) &(~(((32768 | 67108864) | 8388608) | 33554432)));
     }
     return throwweapon;
   }
@@ -312,11 +312,11 @@ function donotetrackspostcallback(flagname, postfunction) {
 }
 
 function donotetracksforever(flagname, killstring, customfunction, debugidentifier) {
-  donotetracksforeverproc( & donotetracks, flagname, killstring, customfunction, debugidentifier);
+  donotetracksforeverproc(&donotetracks, flagname, killstring, customfunction, debugidentifier);
 }
 
 function donotetracksforeverintercept(flagname, killstring, interceptfunction, debugidentifier) {
-  donotetracksforeverproc( & donotetracksintercept, flagname, killstring, interceptfunction, debugidentifier);
+  donotetracksforeverproc(&donotetracksintercept, flagname, killstring, interceptfunction, debugidentifier);
 }
 
 function donotetracksforeverproc(notetracksfunc, flagname, killstring, customfunction, debugidentifier) {
@@ -348,13 +348,13 @@ function donotetracksforeverproc(notetracksfunc, flagname, killstring, customfun
 function donotetracksfortime(time, flagname, customfunction, debugidentifier) {
   ent = spawnStruct();
   ent thread donotetracksfortimeendnotify(time);
-  donotetracksfortimeproc( & donotetracksforever, time, flagname, customfunction, debugidentifier, ent);
+  donotetracksfortimeproc(&donotetracksforever, time, flagname, customfunction, debugidentifier, ent);
 }
 
 function donotetracksfortimeintercept(time, flagname, interceptfunction, debugidentifier) {
   ent = spawnStruct();
   ent thread donotetracksfortimeendnotify(time);
-  donotetracksfortimeproc( & donotetracksforeverintercept, time, flagname, interceptfunction, debugidentifier, ent);
+  donotetracksfortimeproc(&donotetracksforeverintercept, time, flagname, interceptfunction, debugidentifier, ent);
 }
 
 function donotetracksfortimeproc(donotetracksforeverfunc, time, flagname, customfunction, debugidentifier, ent) {

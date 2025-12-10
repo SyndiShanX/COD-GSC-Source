@@ -24,7 +24,7 @@
 #namespace zm_genesis_hope;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_hope", & __init__, & __main__, undefined);
+  system::register("zm_genesis_hope", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -77,9 +77,9 @@ function function_bb1fbc7f() {
   }
   level.var_e8bba4d1 = 1;
   var_4ea80194 = struct::get("hope_spark", "targetname");
-  var_4ea80194 zm_unitrigger::create_unitrigger("", 64, & function_4903bec6, & function_ed25d0f2, "unitrigger_radius_use");
+  var_4ea80194 zm_unitrigger::create_unitrigger("", 64, &function_4903bec6, &function_ed25d0f2, "unitrigger_radius_use");
   var_8dc2ea89 = struct::get("special_box", "targetname");
-  var_8dc2ea89 zm_unitrigger::create_unitrigger("", 64, & function_2650d73f, & function_46cfcb01, "unitrigger_radius_use");
+  var_8dc2ea89 zm_unitrigger::create_unitrigger("", 64, &function_2650d73f, &function_46cfcb01, "unitrigger_radius_use");
 }
 
 function function_4903bec6(player) {
@@ -181,11 +181,11 @@ function function_6143b210(e_triggerer) {
   level clientfield::set("hope_state", 3);
   level flag::set("hope_done");
   playsoundatposition("zmb_overachiever_spark_success", (0, 0, 0));
-  level.wallbuy_should_upgrade_weapon_override = & function_afddb902;
-  level.magicbox_should_upgrade_weapon_override = & function_7e7eb906;
+  level.wallbuy_should_upgrade_weapon_override = &function_afddb902;
+  level.magicbox_should_upgrade_weapon_override = &function_7e7eb906;
   zm_genesis_timer::function_cc8ae246(200);
-  level thread bgb::function_93da425("zm_bgb_crate_power", & function_f648c43);
-  level thread bgb::function_93da425("zm_bgb_wall_power", & function_f648c43);
+  level thread bgb::function_93da425("zm_bgb_crate_power", &function_f648c43);
+  level thread bgb::function_93da425("zm_bgb_wall_power", &function_f648c43);
 }
 
 function function_7e7eb906(e_player, w_weapon) {
@@ -201,10 +201,10 @@ function function_f648c43() {
 }
 
 function function_dfd4e9f8() {
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_7ecb414e);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_3246e71d);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_3ff1131a);
-  level thread zm_genesis_util::setup_devgui_func("", "", 1, & function_8070468);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_7ecb414e);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_3246e71d);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_3ff1131a);
+  level thread zm_genesis_util::setup_devgui_func("", "", 1, &function_8070468);
 }
 
 function function_3246e71d(n_val) {

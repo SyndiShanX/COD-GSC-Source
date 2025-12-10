@@ -21,7 +21,7 @@
 #namespace sentinel_drone;
 
 function autoexec __init__sytem__() {
-  system::register("sentinel_drone", & __init__, undefined, undefined);
+  system::register("sentinel_drone", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -39,7 +39,7 @@ function __init__() {
   clientfield::register("vehicle", "sentinel_drone_camera_scanner", 12000, 1, "int");
   clientfield::register("vehicle", "sentinel_drone_camera_destroyed", 12000, 1, "int");
   clientfield::register("scriptmover", "sentinel_drone_deathfx", 1, 1, "int");
-  vehicle::add_main_callback("sentinel_drone", & sentinel_drone_initialize);
+  vehicle::add_main_callback("sentinel_drone", &sentinel_drone_initialize);
   level._sentinel_enemy_detected_taunts = [];
   if(!isDefined(level._sentinel_enemy_detected_taunts)) {
     level._sentinel_enemy_detected_taunts = [];
@@ -175,8 +175,8 @@ function sentinel_drone_initialize() {
   self.targetplayertime = (gettime() + 1000) + randomint(1000);
   self.pers = [];
   self.pers["team"] = self.team;
-  self.overridevehicledamage = & sentinel_callbackdamage;
-  self.overridevehicleradiusdamage = & sentinel_drone_callbackradiusdamage;
+  self.overridevehicledamage = &sentinel_callbackdamage;
+  self.overridevehicleradiusdamage = &sentinel_drone_callbackradiusdamage;
   if(!isDefined(level.a_sentinel_drones)) {
     level.a_sentinel_drones = [];
   }
@@ -206,8 +206,8 @@ function sentinel_initbeamlaunchers() {
 
 function defaultrole() {
   self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("combat").update_func = & state_combat_update;
-  self vehicle_ai::get_state_callbacks("death").update_func = & state_death_update;
+  self vehicle_ai::get_state_callbacks("combat").update_func = &state_combat_update;
+  self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
   self vehicle_ai::call_custom_add_state_callbacks();
   vehicle_ai::startinitialstate("combat");
 }

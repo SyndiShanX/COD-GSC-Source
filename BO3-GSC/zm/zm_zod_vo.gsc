@@ -34,12 +34,12 @@
 #namespace zm_zod_vo;
 
 function autoexec __init__sytem__() {
-  system::register("zm_zod_vo", & __init__, undefined, undefined);
+  system::register("zm_zod_vo", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_connect( & on_player_connect);
-  callback::on_spawned( & on_player_spawned);
+  callback::on_connect(&on_player_connect);
+  callback::on_spawned(&on_player_spawned);
   level.a_e_speakers = [];
   level flag::init("story_vo_playing");
   level thread function_50460ed1();
@@ -86,9 +86,9 @@ function __init__() {
   level flag::init("vo_beastmode_hint");
   level thread vo_beastmode_hint();
   level thread vo_placeworm_hint();
-  level.audio_get_mod_type = & custom_get_mod_type;
-  level.custom_door_deny_vo_func = & function_33bc3cb3;
-  level._magic_box_used_vo = & zod_magic_box_used_vo;
+  level.audio_get_mod_type = &custom_get_mod_type;
+  level.custom_door_deny_vo_func = &function_33bc3cb3;
+  level._magic_box_used_vo = &zod_magic_box_used_vo;
 }
 
 function on_player_spawned() {

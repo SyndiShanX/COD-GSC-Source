@@ -99,14 +99,14 @@ function main() {
   level._uses_sticky_grenades = 0;
   level._uses_taser_knuckles = 0;
   level.sndzhdaudio = 1;
-  level.aat["zm_aat_blast_furnace"].validation_func = & function_339a163c;
-  level.aat["zm_aat_dead_wire"].validation_func = & function_339a163c;
-  level.aat["zm_aat_fire_works"].validation_func = & function_339a163c;
-  level.aat["zm_aat_thunder_wall"].validation_func = & function_339a163c;
-  level.aat["zm_aat_turned"].validation_func = & function_339a163c;
+  level.aat["zm_aat_blast_furnace"].validation_func = &function_339a163c;
+  level.aat["zm_aat_dead_wire"].validation_func = &function_339a163c;
+  level.aat["zm_aat_fire_works"].validation_func = &function_339a163c;
+  level.aat["zm_aat_thunder_wall"].validation_func = &function_339a163c;
+  level.aat["zm_aat_turned"].validation_func = &function_339a163c;
   level.random_pandora_box_start = 1;
-  level._zombie_custom_add_weapons = & custom_add_weapons;
-  level.register_offhand_weapons_for_level_defaults_override = & temple_offhand_weapon_overrride;
+  level._zombie_custom_add_weapons = &custom_add_weapons;
+  level.register_offhand_weapons_for_level_defaults_override = &temple_offhand_weapon_overrride;
   level.riser_fx_on_client = 1;
   level.use_clientside_rock_tearin_fx = 1;
   level.use_clientside_board_fx = 1;
@@ -114,12 +114,12 @@ function main() {
   zm_temple_sq::function_8a009481();
   level.var_e3a86334 = 121;
   visionset_mgr::register_info("overlay", "zm_ai_screecher_blur", 21000, level.var_e3a86334, 15, 1);
-  level.check_for_alternate_poi = & check_if_should_avoid_poi;
+  level.check_for_alternate_poi = &check_if_should_avoid_poi;
   level._dontinitnotifymessage = 1;
-  level._round_start_func = & zm::round_start;
-  level.givecustomcharacters = & givecustomcharacters;
+  level._round_start_func = &zm::round_start;
+  level.givecustomcharacters = &givecustomcharacters;
   initcharacterstartindex();
-  level.shrink_ray_model_mapping_func = & temple_shrink_ray_model_mapping_func;
+  level.shrink_ray_model_mapping_func = &temple_shrink_ray_model_mapping_func;
   level.use_zombie_heroes = 1;
   level flag::init("zm_temple_connected");
   init_sounds();
@@ -135,39 +135,39 @@ function main() {
   level.start_weapon = level.default_laststandpistol;
   level thread zm::last_stand_pistol_rank_init();
   level.zombiemode = 1;
-  level._zmbvoxlevelspecific = & init_level_specific_audio;
+  level._zmbvoxlevelspecific = &init_level_specific_audio;
   level thread function_54bf648f();
   level thread spikemore_delete_all_on_end_game();
   include_weapons();
   level.pap_interaction_height = 47;
   level._allow_melee_weapon_switching = 1;
-  level.player_intersection_tracker_override = & zombie_temple_player_intersection_tracker_override;
-  level.deathcard_spawn_func = & temple_death_screen_cleanup;
-  level.check_valid_spawn_override = & temple_check_valid_spawn;
+  level.player_intersection_tracker_override = &zombie_temple_player_intersection_tracker_override;
+  level.deathcard_spawn_func = &temple_death_screen_cleanup;
+  level.check_valid_spawn_override = &temple_check_valid_spawn;
   level.custom_ai_type = [];
   if(!isDefined(level.custom_ai_type)) {
     level.custom_ai_type = [];
   } else if(!isarray(level.custom_ai_type)) {
     level.custom_ai_type = array(level.custom_ai_type);
   }
-  level.custom_ai_type[level.custom_ai_type.size] = & zm_temple_ai_monkey::init;
+  level.custom_ai_type[level.custom_ai_type.size] = &zm_temple_ai_monkey::init;
   level.max_perks = 4;
   level.max_solo_lives = 3;
-  level.var_9aaae7ae = & function_869d6f66;
-  level.var_48c4b2bf = & function_90b3897b;
-  level.var_9e59cb5b = & function_f1ef26af;
+  level.var_9aaae7ae = &function_869d6f66;
+  level.var_48c4b2bf = &function_90b3897b;
+  level.var_9e59cb5b = &function_f1ef26af;
   _zm_weap_cymbal_monkey::init();
   temple_sidequest_of_awesome();
   level thread zm::post_main();
   level thread zm::register_sidequest("EOA", "ZOMBIE_TEMPLE_SIDEQUEST");
-  level.poi_positioning_func = & temple_poi_positioning_func;
-  level.powerup_fx_func = & temple_powerup_fx_func;
-  level.playerlaststand_func = & player_laststand_temple;
-  level.zombie_total_set_func = & function_f10deff8;
-  level.override_thundergun_damage_func = & zm_temple_traps::override_thundergun_damage_func;
+  level.poi_positioning_func = &temple_poi_positioning_func;
+  level.powerup_fx_func = &temple_powerup_fx_func;
+  level.playerlaststand_func = &player_laststand_temple;
+  level.zombie_total_set_func = &function_f10deff8;
+  level.override_thundergun_damage_func = &zm_temple_traps::override_thundergun_damage_func;
   level thread zm_temple_power::init_electric_switch();
   zm_temple_powerups::init();
-  level.zone_manager_init_func = & local_zone_init;
+  level.zone_manager_init_func = &local_zone_init;
   init_zones[0] = "temple_start_zone";
   level thread zm_zonemgr::manage_zones(init_zones);
   level thread add_powerups_after_round_1();
@@ -179,13 +179,13 @@ function main() {
   level thread zm_temple_pack_a_punch::init_pack_a_punch();
   level thread init_rolling_doors();
   level thread zm_temple_triggers::main();
-  callback::on_connect( & temple_player_connect);
-  level.player_out_of_playable_area_monitor_callback = & zombie_temple_player_out_of_playable_area_monitor_callback;
+  callback::on_connect(&temple_player_connect);
+  level.player_out_of_playable_area_monitor_callback = &zombie_temple_player_out_of_playable_area_monitor_callback;
   level thread zm_temple_sq::start_temple_sidequest();
   level thread zm_perks::spare_change();
   adddebugcommand("");
   adddebugcommand("");
-  scene::add_scene_func("cin_zmhd_sizzle_temple_cam", & cin_zmhd_sizzle_temple_cam, "play");
+  scene::add_scene_func("cin_zmhd_sizzle_temple_cam", &cin_zmhd_sizzle_temple_cam, "play");
   zm_temple_ffotd::main_end();
 }
 
@@ -426,7 +426,7 @@ function local_zone_init() {
 function function_54bf648f() {
   level.use_multiple_spawns = 1;
   level.spawner_int = 1;
-  level.fn_custom_zombie_spawner_selection = & function_54da140a;
+  level.fn_custom_zombie_spawner_selection = &function_54da140a;
 }
 
 function function_54da140a() {
@@ -552,7 +552,7 @@ function merge(left, right, less_than) {
 
 function init_rolling_doors() {
   rollingdoors = getEntArray("rolling_door", "targetname");
-  array::thread_all(rollingdoors, & rolling_door_think);
+  array::thread_all(rollingdoors, &rolling_door_think);
 }
 
 function rolling_door_think() {
@@ -631,7 +631,7 @@ function init_random_perk_machines() {
     }
     machine.allowed = array::randomize(machine.allowed);
   }
-  machines = mergesort(machines, & perk_machines_compare_func);
+  machines = mergesort(machines, &perk_machines_compare_func);
   for(i = 0; i < machines.size; i++) {
     machine = machines[i];
     randmachine = undefined;

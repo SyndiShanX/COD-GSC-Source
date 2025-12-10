@@ -15,9 +15,9 @@
 #namespace zm_temple_sq_bttp;
 
 function init() {
-  zm_sidequests::declare_sidequest_stage("sq", "bttp", & init_stage, & stage_logic, & exit_stage);
+  zm_sidequests::declare_sidequest_stage("sq", "bttp", &init_stage, &stage_logic, &exit_stage);
   zm_sidequests::set_stage_time_limit("sq", "bttp", 300);
-  zm_sidequests::declare_stage_asset_from_struct("sq", "bttp", "sq_bttp_glyph", undefined, & function_8feeec3c);
+  zm_sidequests::declare_stage_asset_from_struct("sq", "bttp", "sq_bttp_glyph", undefined, &function_8feeec3c);
 }
 
 function init_stage() {
@@ -27,7 +27,7 @@ function init_stage() {
   level.var_5f315f0b = 0;
   zm_temple_sq_brock::delete_radio();
   var_b28c3b10 = getEntArray("sq_spiketrap", "targetname");
-  array::thread_all(var_b28c3b10, & function_d0295ce3);
+  array::thread_all(var_b28c3b10, &function_d0295ce3);
   level thread delayed_start_skit();
 }
 
@@ -179,7 +179,7 @@ function exit_stage(success) {
   var_b28c3b10 = getEntArray("sq_spiketrap", "targetname");
   if(success) {
     zm_temple_sq::remove_skel();
-    zm_temple_sq_brock::create_radio(7, & zm_temple_sq_brock::radio7_override);
+    zm_temple_sq_brock::create_radio(7, &zm_temple_sq_brock::radio7_override);
   } else {
     if(isDefined(level._sq_skel)) {
       level._sq_skel show();

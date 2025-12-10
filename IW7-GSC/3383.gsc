@@ -116,10 +116,10 @@ func_51EB(var_00, var_01, var_02) {
   var_01 playlocalsound("purchase_deny");
 
   if(isDefined(var_02))
-    var_01 forceusehinton( & "COOP_INTERACTIONS_CANNOT_BUY");
+    var_01 forceusehinton(&"COOP_INTERACTIONS_CANNOT_BUY");
   else {
     var_01 thread scripts\cp\cp_vo::try_to_play_vo("no_cash", "zmb_comment_vo", "high", 30, 0, 0, 1, 50);
-    var_01 forceusehinton( & "COOP_INTERACTIONS_NEED_MONEY");
+    var_01 forceusehinton(&"COOP_INTERACTIONS_NEED_MONEY");
   }
 
   wait 1;
@@ -173,7 +173,7 @@ init_magic_wheel(var_00) {
     if(isDefined(level.magic_wheel_spin_hint))
       var_00 sethintstring(level.magic_wheel_spin_hint);
     else
-      var_00 sethintstring( & "CP_ZMB_INTERACTIONS_SPIN_WHEEL");
+      var_00 sethintstring(&"CP_ZMB_INTERACTIONS_SPIN_WHEEL");
   }
 }
 
@@ -215,11 +215,11 @@ func_100ED(var_00) {
   var_00 setuserange(72);
 
   if(scripts\engine\utility::flag_exist("fire_sale") && scripts\engine\utility::flag("fire_sale"))
-    var_00 sethintstring( & "COOP_INTERACTIONS_SPIN_WHEEL_FIRE_SALE");
+    var_00 sethintstring(&"COOP_INTERACTIONS_SPIN_WHEEL_FIRE_SALE");
   else if(isDefined(level.magic_wheel_spin_hint))
     var_00 sethintstring(level.magic_wheel_spin_hint);
   else
-    var_00 sethintstring( & "CP_ZMB_INTERACTIONS_SPIN_WHEEL");
+    var_00 sethintstring(&"CP_ZMB_INTERACTIONS_SPIN_WHEEL");
 }
 
 get_default_fx_state() {
@@ -847,7 +847,7 @@ func_10C4D(var_00, var_01, var_02) {
 
   foreach(var_05 in level.func_B163) {
     if(var_5.area_name == level.func_A8E2) {
-      var_05 sethintstring( & "COOP_INTERACTIONS_SPIN_WHEEL_FIRE_SALE");
+      var_05 sethintstring(&"COOP_INTERACTIONS_SPIN_WHEEL_FIRE_SALE");
       var_03 = var_05;
       continue;
     }
@@ -882,7 +882,7 @@ func_4DB4(var_00, var_01, var_02) {
         if(isDefined(level.magic_wheel_spin_hint))
           var_05 sethintstring(level.magic_wheel_spin_hint);
         else
-          var_05 sethintstring( & "CP_ZMB_INTERACTIONS_SPIN_WHEEL");
+          var_05 sethintstring(&"CP_ZMB_INTERACTIONS_SPIN_WHEEL");
 
         continue;
       }

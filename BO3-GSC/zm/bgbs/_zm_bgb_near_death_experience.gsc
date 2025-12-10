@@ -21,7 +21,7 @@
 #namespace zm_bgb_near_death_experience;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_near_death_experience", & __init__, undefined, "bgb");
+  system::register("zm_bgb_near_death_experience", &__init__, undefined, "bgb");
 }
 
 function __init__() {
@@ -30,8 +30,8 @@ function __init__() {
   }
   clientfield::register("allplayers", "zm_bgb_near_death_experience_3p_fx", 15000, 1, "int");
   clientfield::register("toplayer", "zm_bgb_near_death_experience_1p_fx", 15000, 1, "int");
-  bgb::register("zm_bgb_near_death_experience", "rounds", 3, & enable, & disable, undefined, undefined);
-  bgb::register_lost_perk_override("zm_bgb_near_death_experience", & lost_perk_override, 1);
+  bgb::register("zm_bgb_near_death_experience", "rounds", 3, &enable, &disable, undefined, undefined);
+  bgb::register_lost_perk_override("zm_bgb_near_death_experience", &lost_perk_override, 1);
 }
 
 function enable() {
@@ -41,7 +41,7 @@ function enable() {
   if(!isDefined(level.var_81ca70ba)) {
     level.var_81ca70ba = 0;
   }
-  self thread bgb::function_4ed517b9(240, & function_ff41ae2d, & function_3c1690be);
+  self thread bgb::function_4ed517b9(240, &function_ff41ae2d, &function_3c1690be);
   self thread function_1a31df5b();
   self thread function_d1a43fc9();
 }
@@ -61,13 +61,13 @@ function function_d1a43fc9() {
     e_player function_8b5fe69();
   }
   if(level.var_81ca70ba == 0) {
-    callback::on_connect( & on_connect);
+    callback::on_connect(&on_connect);
   }
   level.var_81ca70ba++;
   self util::waittill_any("disconnect", "bled_out", "bgb_update");
   level.var_81ca70ba--;
   if(level.var_81ca70ba == 0) {
-    callback::remove_on_connect( & on_connect);
+    callback::remove_on_connect(&on_connect);
   }
   foreach(e_player in level.players) {
     e_player zm_laststand::deregister_revive_override(e_player.var_e82a0595[0]);
@@ -83,7 +83,7 @@ function function_8b5fe69() {
   if(!isDefined(self.var_e82a0595)) {
     self.var_e82a0595 = [];
   }
-  s_revive_override = self zm_laststand::register_revive_override( & function_73277c01);
+  s_revive_override = self zm_laststand::register_revive_override(&function_73277c01);
   if(!isDefined(self.var_e82a0595)) {
     self.var_e82a0595 = [];
   } else if(!isarray(self.var_e82a0595)) {

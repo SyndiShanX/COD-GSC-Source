@@ -49,17 +49,17 @@ courtyard_upstairs_dialog() {
 }
 
 courtyard_objectives() {
-  objective_add(6, "current", & "OKI3_OBJ1");
+  objective_add(6, "current", &"OKI3_OBJ1");
   objective_position(6, (8203, -2236, 157));
   getent("planter_door_end", "targetname") notify("trigger");
   trigger_Wait("stairs_down_objective", "targetname");
   objective_position(6, (8424, -6856, 122));
   trigger_wait("secure_courtyard_drop_objective", "targetname");
-  objective_add(6, "current", & "OKI3_OBJ7", (7321, -5726, 139));
+  objective_add(6, "current", &"OKI3_OBJ7", (7321, -5726, 139));
   level thread monitor_volume_for_enemies("drop_volume", "drop_secured", "enter_courtyard");
   level waittill("drop_secured");
   objective_state(6, "done");
-  objective_add(7, "current", & "OKI3_OBJ8_A");
+  objective_add(7, "current", &"OKI3_OBJ8_A");
   house_guys_playerseek();
 }
 
@@ -106,7 +106,7 @@ monitor_radio_usage() {
 hud_radio_in_use() {
   self endon("death");
   self endon("disconnect");
-  text = & "OKI3_RADIO_INUSE";
+  text = &"OKI3_RADIO_INUSE";
   self setup_client_hintelem();
   self.hintelem setText(text);
   wait(3.5);
@@ -120,7 +120,7 @@ air_support_objective() {
   level.last_hero do_dialogue("call_in_planes");
   wait(.5);
   level.last_hero do_dialogue("kingdom_come");
-  objective_add(9, "current", & "OKI3_OBJ8", (7858, -2737.5, 558.5));
+  objective_add(9, "current", &"OKI3_OBJ8", (7858, -2737.5, 558.5));
   objective_icon(9, "hud_icon_airstrike");
   wait(1);
   level thread air_support_nag();
@@ -540,7 +540,7 @@ courtyard_north_spawners() {
   level notify("b1_spawners");
   objective_state(8, "done");
   objective_state(9, "done");
-  objective_add(10, "current", & "OKI3_OBJ9", (9223.5, -4690, 742));
+  objective_add(10, "current", &"OKI3_OBJ9", (9223.5, -4690, 742));
   objective_icon(10, "hud_icon_airstrike");
   autosave_by_name("building1_destroyed");
 }

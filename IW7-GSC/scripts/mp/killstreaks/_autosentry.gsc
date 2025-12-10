@@ -23,7 +23,7 @@ init() {
   level.sentrysettings["super_trophy"].modelgood = "super_trophy_mp_placement";
   level.sentrysettings["super_trophy"].modelbad = "super_trophy_mp_placement_fail";
   level.sentrysettings["super_trophy"].modeldestroyed = "super_trophy_mp";
-  level.sentrysettings["super_trophy"].pow = & "SENTRY_PICKUP";
+  level.sentrysettings["super_trophy"].pow = &"SENTRY_PICKUP";
   level.sentrysettings["super_trophy"].playerphysicstrace = 1;
   level.sentrysettings["super_trophy"].teamsplash = "used_super_trophy";
   level.sentrysettings["super_trophy"].shouldsplash = 0;
@@ -49,7 +49,7 @@ init() {
   level.sentrysettings["sentry_shock"].modelgood = "shock_sentry_gun_wm_obj";
   level.sentrysettings["sentry_shock"].modelbad = "shock_sentry_gun_wm_obj_red";
   level.sentrysettings["sentry_shock"].modeldestroyed = "shock_sentry_gun_wm_destroyed";
-  level.sentrysettings["sentry_shock"].pow = & "SENTRY_PICKUP";
+  level.sentrysettings["sentry_shock"].pow = &"SENTRY_PICKUP";
   level.sentrysettings["sentry_shock"].playerphysicstrace = 1;
   level.sentrysettings["sentry_shock"].teamsplash = "used_shock_sentry";
   level.sentrysettings["sentry_shock"].destroyedsplash = "callout_destroyed_sentry_shock";
@@ -2161,19 +2161,19 @@ allowweaponsforsentry(param_00) {
 placehinton() {
   var_00 = self.sentrytype;
   if(var_00 == "super_trophy") {
-    self.triggerportableradarping forceusehinton( & "LUA_MENU_MP_PLACE_SUPER_TROPHY");
+    self.triggerportableradarping forceusehinton(&"LUA_MENU_MP_PLACE_SUPER_TROPHY");
     return;
   }
 
-  self.triggerportableradarping forceusehinton( & "SENTRY_PLACE");
+  self.triggerportableradarping forceusehinton(&"SENTRY_PLACE");
 }
 
 cannotplacehinton() {
   var_00 = self.sentrytype;
   if(var_00 == "super_trophy") {
-    self.triggerportableradarping forceusehinton( & "LUA_MENU_MP_CANNOT_PLACE_SUPER_TROPHY");
+    self.triggerportableradarping forceusehinton(&"LUA_MENU_MP_CANNOT_PLACE_SUPER_TROPHY");
     return;
   }
 
-  self.triggerportableradarping forceusehinton( & "SENTRY_CANNOT_PLACE");
+  self.triggerportableradarping forceusehinton(&"SENTRY_CANNOT_PLACE");
 }

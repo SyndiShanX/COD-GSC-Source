@@ -46,7 +46,7 @@ enemyhq_basement_pre_load() {
 
 escape_objective() {
   var_0 = maps\_utility::obj("escapeobj");
-  objective_add(var_0, "current", & "ENEMY_HQ_ESCAPE_FROM_THE_ENEMY");
+  objective_add(var_0, "current", &"ENEMY_HQ_ESCAPE_FROM_THE_ENEMY");
   common_scripts\utility::flag_wait("obj_escape_complete");
   maps\_utility::objective_complete(var_0);
 }

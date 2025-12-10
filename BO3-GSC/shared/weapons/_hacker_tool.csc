@@ -15,11 +15,11 @@
 #namespace hacker_tool;
 
 function init_shared() {
-  clientfield::register("toplayer", "hacker_tool", 1, 2, "int", & player_hacking, 0, 0);
+  clientfield::register("toplayer", "hacker_tool", 1, 2, "int", &player_hacking, 0, 0);
   level.hackingsoundid = [];
   level.hackingsweetspotid = [];
   level.friendlyhackingsoundid = [];
-  callback::on_localplayer_spawned( & on_localplayer_spawned);
+  callback::on_localplayer_spawned(&on_localplayer_spawned);
 }
 
 function on_localplayer_spawned(localclientnum) {

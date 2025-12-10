@@ -10,7 +10,7 @@
 #namespace zm_aat_turned;
 
 function autoexec __init__sytem__() {
-  system::register("zm_aat_turned", & __init__, undefined, undefined);
+  system::register("zm_aat_turned", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -18,7 +18,7 @@ function __init__() {
     return;
   }
   aat::register("zm_aat_turned", "zmui_zm_aat_turned", "t7_icon_zm_aat_turned");
-  clientfield::register("actor", "zm_aat_turned", 1, 1, "int", & zm_aat_turned_cb, 0, 0);
+  clientfield::register("actor", "zm_aat_turned", 1, 1, "int", &zm_aat_turned_cb, 0, 0);
 }
 
 function zm_aat_turned_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

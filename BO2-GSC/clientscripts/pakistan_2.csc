@@ -280,23 +280,23 @@ facialrecognitionui_defalco(localclientnum, text, tag) {
 argusbuildui(localclientnum, usertag) {
   switch (usertag) {
     case "soldier1":
-      return facialrecognitionui_soldier1(localclientnum, & "PAKISTAN_2_ARGUS_SOLDIER", usertag);
+      return facialrecognitionui_soldier1(localclientnum, &"PAKISTAN_2_ARGUS_SOLDIER", usertag);
     case "soldier2":
-      return facialrecognitionui_soldier2(localclientnum, & "PAKISTAN_2_ARGUS_SOLDIER", usertag);
+      return facialrecognitionui_soldier2(localclientnum, &"PAKISTAN_2_ARGUS_SOLDIER", usertag);
     case "soldier3":
-      return facialrecognitionui_soldier3(localclientnum, & "PAKISTAN_2_ARGUS_SOLDIER", usertag);
+      return facialrecognitionui_soldier3(localclientnum, &"PAKISTAN_2_ARGUS_SOLDIER", usertag);
     case "soldier4":
-      return facialrecognitionui_soldier4(localclientnum, & "PAKISTAN_2_ARGUS_SOLDIER", usertag);
+      return facialrecognitionui_soldier4(localclientnum, &"PAKISTAN_2_ARGUS_SOLDIER", usertag);
     case "soldier5":
-      return facialrecognitionui_soldier5(localclientnum, & "PAKISTAN_2_ARGUS_SOLDIER", usertag);
+      return facialrecognitionui_soldier5(localclientnum, &"PAKISTAN_2_ARGUS_SOLDIER", usertag);
     case "soldier6":
-      return facialrecognitionui_soldier6(localclientnum, & "PAKISTAN_2_ARGUS_SOLDIER", usertag);
+      return facialrecognitionui_soldier6(localclientnum, &"PAKISTAN_2_ARGUS_SOLDIER", usertag);
     case "militia_leader":
-      return facialrecognitionui_militia_leader(localclientnum, & "PAKISTAN_2_ARGUS_SOLDIER", usertag);
+      return facialrecognitionui_militia_leader(localclientnum, &"PAKISTAN_2_ARGUS_SOLDIER", usertag);
     case "menendez":
-      return facialrecognitionui_menendez(localclientnum, & "PAKISTAN_2_ARGUS_MENENDEZ", usertag);
+      return facialrecognitionui_menendez(localclientnum, &"PAKISTAN_2_ARGUS_MENENDEZ", usertag);
     case "defalco":
-      return facialrecognitionui_defalco(localclientnum, & "PAKISTAN_2_ARGUS_DEFALCO", usertag);
+      return facialrecognitionui_defalco(localclientnum, &"PAKISTAN_2_ARGUS_DEFALCO", usertag);
   }
 }
 

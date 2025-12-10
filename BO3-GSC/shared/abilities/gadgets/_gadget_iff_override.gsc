@@ -15,17 +15,17 @@
 #namespace _gadget_iff_override;
 
 function autoexec __init__sytem__() {
-  system::register("gadget_iff_override", & __init__, undefined, undefined);
+  system::register("gadget_iff_override", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  ability_player::register_gadget_activation_callbacks(24, & gadget_iff_override_on, & gadget_iff_override_off);
-  ability_player::register_gadget_possession_callbacks(24, & gadget_iff_override_on_give, & gadget_iff_override_on_take);
-  ability_player::register_gadget_flicker_callbacks(24, & gadget_iff_override_on_flicker);
-  ability_player::register_gadget_is_inuse_callbacks(24, & gadget_iff_override_is_inuse);
-  ability_player::register_gadget_is_flickering_callbacks(24, & gadget_iff_override_is_flickering);
-  ability_player::register_gadget_primed_callbacks(24, & gadget_iff_override_is_primed);
-  callback::on_connect( & gadget_iff_override_on_connect);
+  ability_player::register_gadget_activation_callbacks(24, &gadget_iff_override_on, &gadget_iff_override_off);
+  ability_player::register_gadget_possession_callbacks(24, &gadget_iff_override_on_give, &gadget_iff_override_on_take);
+  ability_player::register_gadget_flicker_callbacks(24, &gadget_iff_override_on_flicker);
+  ability_player::register_gadget_is_inuse_callbacks(24, &gadget_iff_override_is_inuse);
+  ability_player::register_gadget_is_flickering_callbacks(24, &gadget_iff_override_is_flickering);
+  ability_player::register_gadget_primed_callbacks(24, &gadget_iff_override_is_primed);
+  callback::on_connect(&gadget_iff_override_on_connect);
 }
 
 function gadget_iff_override_is_inuse(slot) {

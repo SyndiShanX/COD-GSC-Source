@@ -68,10 +68,10 @@ main() {
       level.acolornodetriggers = common_scripts\utility::array_add(level.acolornodetriggers, var_0[var_1]);
   }
 
-  maps\_utility::add_start("breach", ::start_breach, & "STARTS_BREACH");
-  maps\_utility::add_start("vip", ::start_vip, & "STARTS_VIP");
-  maps\_utility::add_start("freefall", ::start_freefall, & "STARTS_FREEFALL");
-  maps\_utility::add_start("demo", ::start_demo, & "STARTS_DEMO");
+  maps\_utility::add_start("breach", ::start_breach, &"STARTS_BREACH");
+  maps\_utility::add_start("vip", ::start_vip, &"STARTS_VIP");
+  maps\_utility::add_start("freefall", ::start_freefall, &"STARTS_FREEFALL");
+  maps\_utility::add_start("demo", ::start_demo, &"STARTS_DEMO");
   maps\_utility::default_start(::start_default);
   thread no_grenade_death_hack();
   thread breach_compartment_setup();
@@ -1026,7 +1026,7 @@ mission_failed_veteran_no_headshot() {
   level notify("mission failed");
   thread killtimer();
   level notify("kill_timer");
-  setdvar("ui_deadquote", & "AIRPLANE_HOSTAGE_NO_HEADSHOT");
+  setdvar("ui_deadquote", &"AIRPLANE_HOSTAGE_NO_HEADSHOT");
   maps\_utility::missionfailedwrapper();
 }
 
@@ -1147,7 +1147,7 @@ freefall() {
   thread friendly_blows_door();
   wait 1;
   maps\_utility::musicplaywrapper("airplane_freefall_prep_music");
-  level thread timer_logic(30, & "AIRPLANE_TIME_TILL_EXPLOSION", 1);
+  level thread timer_logic(30, &"AIRPLANE_TIME_TILL_EXPLOSION", 1);
   thread bomb_think();
   common_scripts\utility::flag_wait("exit_door_blown");
   common_scripts\utility::flag_set("obj_freefall_given");
@@ -1492,7 +1492,7 @@ obj_rescue_vip() {
   common_scripts\utility::flag_wait("obj_rescue_vip_given");
   var_0 = 1;
   var_1 = getent("obj_rescue_vip1", "targetname");
-  objective_add(var_0, "active", & "AIRPLANE_OBJ_RESCUE_VIP", var_1.origin);
+  objective_add(var_0, "active", &"AIRPLANE_OBJ_RESCUE_VIP", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("player_up_breach_stairs");
   var_2 = getent("obj_rescue_vip2", "targetname");
@@ -1505,7 +1505,7 @@ obj_freefall() {
   common_scripts\utility::flag_wait("obj_freefall_given");
   var_0 = 2;
   var_1 = getent("obj_freefall", "targetname");
-  objective_add(var_0, "active", & "AIRPLANE_OBJ_FREEFALL", var_1.origin);
+  objective_add(var_0, "active", &"AIRPLANE_OBJ_FREEFALL", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("obj_freefall_complete");
   objective_state(var_0, "done");
@@ -1549,7 +1549,7 @@ player_breach_jump() {
   var_1 hide();
   thread killtimer();
   level notify("kill_timer");
-  setdvar("ui_deadquote", & "AIRPLANE_FAILED_JUMPED_OUT");
+  setdvar("ui_deadquote", &"AIRPLANE_FAILED_JUMPED_OUT");
   maps\_utility::missionfailedwrapper();
   level.player kill();
 }
@@ -1745,7 +1745,7 @@ timer_start() {
       break;
   }
 
-  level thread timer_logic(var_1, & "AIRPLANE_TIME_TO_LOCATE_VIP");
+  level thread timer_logic(var_1, &"AIRPLANE_TIME_TO_LOCATE_VIP");
   level.timer_start_time = gettime();
 }
 
@@ -1801,7 +1801,7 @@ hostage_timer(var_0) {
   level.hudtimerindex = 20;
   level.timer = maps\_hud_util::get_countdown_hud(undefined, undefined, undefined, undefined, var_0);
   level.timer setpulsefx(30, 900000, 700);
-  level.timer.text.label = & "AIRPLANE_TIME_TILL_HOSTAGE_KILL";
+  level.timer.text.label = &"AIRPLANE_TIME_TILL_HOSTAGE_KILL";
   level.timer settenthstimer(var_0);
   level.start_time = gettime();
   thread hostage_timer_cleanup();

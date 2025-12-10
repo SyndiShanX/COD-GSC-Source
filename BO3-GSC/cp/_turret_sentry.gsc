@@ -19,15 +19,15 @@
 #namespace sentry_turret;
 
 function autoexec __init__sytem__() {
-  system::register("sentry_turret", & __init__, undefined, undefined);
+  system::register("sentry_turret", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("veh_turret_sentry_machinegun", & function_b2e9d990);
-  vehicle::add_main_callback("veh_turret_sentry_sniper", & function_8f042083);
-  vehicle::add_main_callback("veh_turret_sentry_grenade", & function_8f042083);
-  vehicle::add_main_callback("veh_turret_sentry_guardian", & function_8f042083);
-  vehicle::add_main_callback("veh_turret_sentry_emp", & function_c2d2b587);
+  vehicle::add_main_callback("veh_turret_sentry_machinegun", &function_b2e9d990);
+  vehicle::add_main_callback("veh_turret_sentry_sniper", &function_8f042083);
+  vehicle::add_main_callback("veh_turret_sentry_grenade", &function_8f042083);
+  vehicle::add_main_callback("veh_turret_sentry_guardian", &function_8f042083);
+  vehicle::add_main_callback("veh_turret_sentry_emp", &function_c2d2b587);
   level._effect["sentry_turret_damage01"] = "destruct/fx_dest_turret_1";
   level._effect["sentry_turret_damage02"] = "destruct/fx_dest_turret_2";
   level._effect["sentry_turret_damage01"] = "destruct/fx_dest_turret_1";
@@ -151,7 +151,7 @@ function function_c8f2c95d(point) {
     yaw_delta = absangleclamp360(yaw_delta);
   }
   self.targetpoints[self.targetpoints.size] = function_5f695de4(point, yaw_delta);
-  array::merge_sort(self.targetpoints, & function_4ac3c3a1, 1);
+  array::merge_sort(self.targetpoints, &function_4ac3c3a1, 1);
 }
 
 function function_b2e9d990() {
@@ -176,21 +176,21 @@ function function_8f042083() {
   }
   self thread turret_idle_sound();
   self enableaimassist();
-  self.onkill = & function_aa320a88;
+  self.onkill = &function_aa320a88;
   self.scanning_arc = 90;
   self.default_pitch = 0;
   function_e606dad7();
   function_1b820c4d();
   self.state_machine = statemachine::create("brain", self);
-  self.state_machine statemachine::add_state("main", undefined, & function_e59668cf, undefined);
-  self.state_machine statemachine::add_state("scripted", undefined, & function_4642c69e, undefined);
+  self.state_machine statemachine::add_state("main", undefined, &function_e59668cf, undefined);
+  self.state_machine statemachine::add_state("scripted", undefined, &function_4642c69e, undefined);
   self.state_machine statemachine::add_interrupt_connection("main", "scripted", "enter_vehicle");
   self.state_machine statemachine::add_interrupt_connection("scripted", "main", "exit_vehicle");
   self disconnectpaths();
   self thread function_78a2820e();
   self thread sentry_turret_damage();
   self thread turret::track_lens_flare();
-  self.overridevehicledamage = & cicturretcallback_vehicledamage;
+  self.overridevehicledamage = &cicturretcallback_vehicledamage;
   if(isDefined(self.script_startstate)) {
     if(self.script_startstate == "off") {
       self function_e6f10cc7(self.angles);

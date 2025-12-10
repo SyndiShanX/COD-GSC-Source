@@ -53,15 +53,15 @@ function init() {
   }
   level.doa.current_arena = 0;
   level.doa.var_ec2bff7b = [];
-  function_abd3b624("vault", 5, 2, & "DOA_VAULT", undefined, "vault");
-  function_abd3b624("coop", 9, 3, & "DOA_FARM", undefined, "coop");
-  function_abd3b624("armory", 13, 1, & "DOA_ARMORY", undefined, "armory");
-  function_abd3b624("mystic_armory", 13, 7, & "DOA_MYSTICAL_ARMORY", undefined, "alien_armory");
-  function_abd3b624("wolfhole", 17, 6, & "DOA_WOLFHOLE", undefined, "wolfhole");
-  function_abd3b624("bomb_storage", 21, 8, & "DOA_BOMB_STORAGE", undefined, "bomb_storage");
-  function_abd3b624("hangar", 21, 5, & "DOA_HANGAR", undefined, "hangar");
-  function_abd3b624("mine", 28, 4, & "DOA_MINE", undefined, "cave");
-  function_abd3b624("righteous", 36, 10, & "DOA_RIGHTEOUS_ROOM", 36, "temple", undefined, 2);
+  function_abd3b624("vault", 5, 2, &"DOA_VAULT", undefined, "vault");
+  function_abd3b624("coop", 9, 3, &"DOA_FARM", undefined, "coop");
+  function_abd3b624("armory", 13, 1, &"DOA_ARMORY", undefined, "armory");
+  function_abd3b624("mystic_armory", 13, 7, &"DOA_MYSTICAL_ARMORY", undefined, "alien_armory");
+  function_abd3b624("wolfhole", 17, 6, &"DOA_WOLFHOLE", undefined, "wolfhole");
+  function_abd3b624("bomb_storage", 21, 8, &"DOA_BOMB_STORAGE", undefined, "bomb_storage");
+  function_abd3b624("hangar", 21, 5, &"DOA_HANGAR", undefined, "hangar");
+  function_abd3b624("mine", 28, 4, &"DOA_MINE", undefined, "cave");
+  function_abd3b624("righteous", 36, 10, &"DOA_RIGHTEOUS_ROOM", 36, "temple", undefined, 2);
   foreach(arena in level.doa.var_3c04d3df) {
     function_abd3b624(arena.script_noteworthy, 999, 13, istring(("DOA_" + toupper(arena.script_noteworthy)) + "_ROOM"), 999, arena.script_noteworthy, 120);
   }

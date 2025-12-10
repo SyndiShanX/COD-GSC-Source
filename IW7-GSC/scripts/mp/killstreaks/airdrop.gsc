@@ -19,60 +19,60 @@ init() {
   level.littlebirds = [];
   level.cratetypes = [];
   level.cratemaxval = [];
-  addcratetype("dronedrop", "venom", 85, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_VENOM_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop", "uav", 85, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_UAV_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop", "counter_uav", 70, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_COUNTER_UAV_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop", "drone_hive", 70, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_ORBITAL_DEPLOYMENT_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop", "ball_drone_backup", 65, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_BALL_DRONE_BACKUP_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop", "bombardment", 65, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_BOMBARDMENT_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop", "precision_airstrike", 65, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_PRECISION_AIRSTRIKE_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop", "sentry_shock", 45, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_SENTRY_SHOCK_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop", "jackal", 25, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_JACKAL_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop", "thor", 10, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_THOR_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop", "directional_uav", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_DIRECTIONAL_UAV_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop", "remote_c8", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_RC8_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop", "minijackal", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_MINI_JACKAL_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop_grnd", "venom", 35, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_VENOM_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop_grnd", "uav", 30, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_UAV_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop_grnd", "counter_uav", 25, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_COUNTER_UAV_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop_grnd", "drone_hive", 25, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_ORBITAL_DEPLOYMENT_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop_grnd", "ball_drone_backup", 25, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_BALL_DRONE_BACKUP_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop_grnd", "bombardment", 20, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_BOMBARDMENT_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop_grnd", "precision_airstrike", 20, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_PRECISION_AIRSTRIKE_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop_grnd", "sentry_shock", 15, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_SENTRY_SHOCK_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop", "venom", 85, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_VENOM_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop", "uav", 85, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_UAV_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop", "counter_uav", 70, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_COUNTER_UAV_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop", "drone_hive", 70, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_ORBITAL_DEPLOYMENT_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop", "ball_drone_backup", 65, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_BALL_DRONE_BACKUP_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop", "bombardment", 65, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_BOMBARDMENT_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop", "precision_airstrike", 65, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_PRECISION_AIRSTRIKE_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop", "sentry_shock", 45, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_SENTRY_SHOCK_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop", "jackal", 25, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_JACKAL_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop", "thor", 10, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_THOR_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop", "directional_uav", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_DIRECTIONAL_UAV_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop", "remote_c8", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_RC8_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop", "minijackal", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_MINI_JACKAL_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop_grnd", "venom", 35, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_VENOM_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop_grnd", "uav", 30, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_UAV_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop_grnd", "counter_uav", 25, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_COUNTER_UAV_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop_grnd", "drone_hive", 25, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_ORBITAL_DEPLOYMENT_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop_grnd", "ball_drone_backup", 25, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_BALL_DRONE_BACKUP_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop_grnd", "bombardment", 20, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_BOMBARDMENT_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop_grnd", "precision_airstrike", 20, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_PRECISION_AIRSTRIKE_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop_grnd", "sentry_shock", 15, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_SENTRY_SHOCK_PICKUP", undefined, "care_package_iw7_dummy");
   addcratetype("dronedrop_trap", "bomb_trap", 100, ::killstreakbombcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop_reroll", "venom", 85, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, & "KILLSTREAKS_HINTS_VENOM_REROLL", "care_package_iw7_dummy");
-  addcratetype("dronedrop_reroll", "uav", 85, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, & "KILLSTREAKS_HINTS_UAV_REROLL", "care_package_iw7_dummy");
-  addcratetype("dronedrop_reroll", "counter_uav", 70, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, & "KILLSTREAKS_HINTS_COUNTER_UAV_REROLL", "care_package_iw7_dummy");
-  addcratetype("dronedrop_reroll", "drone_hive", 70, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, & "KILLSTREAKS_HINTS_ORBITAL_DEPLOYMENT_REROLL", "care_package_iw7_dummy");
-  addcratetype("dronedrop_reroll", "ball_drone_backup", 65, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, & "KILLSTREAKS_HINTS_BALL_DRONE_BACKUP_REROLL", "care_package_iw7_dummy");
-  addcratetype("dronedrop_reroll", "bombardment", 65, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, & "KILLSTREAKS_HINTS_BOMBARDMENT_REROLL", "care_package_iw7_dummy");
-  addcratetype("dronedrop_reroll", "precision_airstrike", 65, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, & "KILLSTREAKS_HINTS_PRECISION_AIRSTRIKE_REROLL", "care_package_iw7_dummy");
-  addcratetype("dronedrop_reroll", "sentry_shock", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, & "KILLSTREAKS_HINTS_SENTRY_SHOCK_REROLL", "care_package_iw7_dummy");
-  addcratetype("dronedrop_reroll", "jackal", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, & "KILLSTREAKS_HINTS_JACKAL_REROLL", "care_package_iw7_dummy");
-  addcratetype("dronedrop_reroll", "thor", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, & "KILLSTREAKS_HINTS_THOR_REROLL", "care_package_iw7_dummy");
-  addcratetype("dronedrop_reroll", "directional_uav", 1, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, & "KILLSTREAKS_HINTS_DIRECTIONAL_UAV_REROLL", "care_package_iw7_dummy");
-  addcratetype("dronedrop_reroll", "remote_c8", 1, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, & "KILLSTREAKS_HINTS_RC8_REROLL", "care_package_iw7_dummy");
-  addcratetype("dronedrop_reroll", "minijackal", 1, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, & "KILLSTREAKS_HINTS_MINI_JACKAL_REROLL", "care_package_iw7_dummy");
-  addcratetype("dronedrop_highroll", "sentry_shock", 15, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_SENTRY_SHOCK_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop_highroll", "jackal", 15, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_JACKAL_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop_highroll", "thor", 10, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_THOR_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop_highroll", "directional_uav", 10, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_DIRECTIONAL_UAV_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop_highroll", "remote_c8", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_RC8_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop_highroll", "minijackal", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_MINI_JACKAL_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("jackaldrop", "venom", 85, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_VENOM_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("jackaldrop", "uav", 85, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_UAV_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("jackaldrop", "counter_uav", 70, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_COUNTER_UAV_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("jackaldrop", "drone_hive", 70, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_ORBITAL_DEPLOYMENT_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("jackaldrop", "ball_drone_backup", 65, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_BALL_DRONE_BACKUP_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("jackaldrop", "bombardment", 65, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_BOMBARDMENT_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("jackaldrop", "precision_airstrike", 65, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_PRECISION_AIRSTRIKE_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("jackaldrop", "sentry_shock", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_SENTRY_SHOCK_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("jackaldrop", "jackal", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_JACKAL_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("jackaldrop", "thor", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_THOR_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("jackaldrop", "directional_uav", 1, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_DIRECTIONAL_UAV_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("jackaldrop", "remote_c8", 1, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_RC8_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("jackaldrop", "minijackal", 1, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_MINI_JACKAL_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop_reroll", "venom", 85, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, &"KILLSTREAKS_HINTS_VENOM_REROLL", "care_package_iw7_dummy");
+  addcratetype("dronedrop_reroll", "uav", 85, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, &"KILLSTREAKS_HINTS_UAV_REROLL", "care_package_iw7_dummy");
+  addcratetype("dronedrop_reroll", "counter_uav", 70, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, &"KILLSTREAKS_HINTS_COUNTER_UAV_REROLL", "care_package_iw7_dummy");
+  addcratetype("dronedrop_reroll", "drone_hive", 70, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, &"KILLSTREAKS_HINTS_ORBITAL_DEPLOYMENT_REROLL", "care_package_iw7_dummy");
+  addcratetype("dronedrop_reroll", "ball_drone_backup", 65, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, &"KILLSTREAKS_HINTS_BALL_DRONE_BACKUP_REROLL", "care_package_iw7_dummy");
+  addcratetype("dronedrop_reroll", "bombardment", 65, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, &"KILLSTREAKS_HINTS_BOMBARDMENT_REROLL", "care_package_iw7_dummy");
+  addcratetype("dronedrop_reroll", "precision_airstrike", 65, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, &"KILLSTREAKS_HINTS_PRECISION_AIRSTRIKE_REROLL", "care_package_iw7_dummy");
+  addcratetype("dronedrop_reroll", "sentry_shock", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, &"KILLSTREAKS_HINTS_SENTRY_SHOCK_REROLL", "care_package_iw7_dummy");
+  addcratetype("dronedrop_reroll", "jackal", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, &"KILLSTREAKS_HINTS_JACKAL_REROLL", "care_package_iw7_dummy");
+  addcratetype("dronedrop_reroll", "thor", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, &"KILLSTREAKS_HINTS_THOR_REROLL", "care_package_iw7_dummy");
+  addcratetype("dronedrop_reroll", "directional_uav", 1, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, &"KILLSTREAKS_HINTS_DIRECTIONAL_UAV_REROLL", "care_package_iw7_dummy");
+  addcratetype("dronedrop_reroll", "remote_c8", 1, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, &"KILLSTREAKS_HINTS_RC8_REROLL", "care_package_iw7_dummy");
+  addcratetype("dronedrop_reroll", "minijackal", 1, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", undefined, &"KILLSTREAKS_HINTS_MINI_JACKAL_REROLL", "care_package_iw7_dummy");
+  addcratetype("dronedrop_highroll", "sentry_shock", 15, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_SENTRY_SHOCK_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop_highroll", "jackal", 15, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_JACKAL_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop_highroll", "thor", 10, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_THOR_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop_highroll", "directional_uav", 10, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_DIRECTIONAL_UAV_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop_highroll", "remote_c8", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_RC8_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop_highroll", "minijackal", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_MINI_JACKAL_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("jackaldrop", "venom", 85, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_VENOM_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("jackaldrop", "uav", 85, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_UAV_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("jackaldrop", "counter_uav", 70, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_COUNTER_UAV_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("jackaldrop", "drone_hive", 70, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_ORBITAL_DEPLOYMENT_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("jackaldrop", "ball_drone_backup", 65, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_BALL_DRONE_BACKUP_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("jackaldrop", "bombardment", 65, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_BOMBARDMENT_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("jackaldrop", "precision_airstrike", 65, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_PRECISION_AIRSTRIKE_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("jackaldrop", "sentry_shock", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_SENTRY_SHOCK_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("jackaldrop", "jackal", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_JACKAL_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("jackaldrop", "thor", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_THOR_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("jackaldrop", "directional_uav", 1, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_DIRECTIONAL_UAV_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("jackaldrop", "remote_c8", 1, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_RC8_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("jackaldrop", "minijackal", 1, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_MINI_JACKAL_PICKUP", undefined, "care_package_iw7_dummy");
   if(isDefined(level.customcratefunc)) {
     [[level.customcratefunc]]("care_package_iw7_un_wm", "care_package_iw7_ca_wm");
   }
@@ -646,7 +646,7 @@ cratesetupforuse(param_00, param_01, param_02, param_03) {
 }
 
 fakererollcratesetupforuse(param_00, param_01) {
-  var_02 = & "PLATFORM_GET_KILLSTREAK";
+  var_02 = &"PLATFORM_GET_KILLSTREAK";
   if(isDefined(game["strings"][self.cratetype + "_hint"])) {
     var_02 = game["strings"][self.cratetype + "_hint"];
   }
@@ -691,7 +691,7 @@ watchcratereroll(param_00) {
   var_02 = getcratetypefordroptype(self.droptype);
   changecrateweight(self.droptype, self.cratetype, var_01);
   self.cratetype = var_02;
-  var_03 = & "PLATFORM_GET_KILLSTREAK";
+  var_03 = &"PLATFORM_GET_KILLSTREAK";
   if(isDefined(game["strings"][self.cratetype + "_hint"])) {
     var_03 = game["strings"][self.cratetype + "_hint"];
   }
@@ -2108,7 +2108,7 @@ killstreakcratethink(param_00) {
   if(isDefined(game["strings"][self.cratetype + "_hint"])) {
     var_01 = game["strings"][self.cratetype + "_hint"];
   } else {
-    var_01 = & "PLATFORM_GET_KILLSTREAK";
+    var_01 = &"PLATFORM_GET_KILLSTREAK";
   }
 
   var_02 = -10000;
@@ -2208,7 +2208,7 @@ killstreakbombcratethink(param_00) {
     self.triggerportableradarping endon("disconnect");
   }
 
-  var_01 = [ & "KILLSTREAKS_HINTS_SENTRY_SHOCK_PICKUP", & "KILLSTREAKS_HINTS_JACKAL_PICKUP", & "KILLSTREAKS_HINTS_THOR_PICKUP", & "KILLSTREAKS_HINTS_RC8_PICKUP", & "KILLSTREAKS_HINTS_MINI_JACKAL_PICKUP"];
+  var_01 = [ &"KILLSTREAKS_HINTS_SENTRY_SHOCK_PICKUP", &"KILLSTREAKS_HINTS_JACKAL_PICKUP", &"KILLSTREAKS_HINTS_THOR_PICKUP", &"KILLSTREAKS_HINTS_RC8_PICKUP", &"KILLSTREAKS_HINTS_MINI_JACKAL_PICKUP"];
   var_02 = scripts\engine\utility::random(var_01);
   var_03 = undefined;
   if(level.gametype == "grnd") {
@@ -2283,7 +2283,7 @@ dronewatchgameover() {
 nukecratethink(param_00) {
   self endon("restarting_physics");
   self endon("death");
-  cratesetupforuse( & "PLATFORM_CALL_NUKE", scripts\mp\utility::getkillstreakoverheadicon(self.cratetype));
+  cratesetupforuse(&"PLATFORM_CALL_NUKE", scripts\mp\utility::getkillstreakoverheadicon(self.cratetype));
   thread nukecapturethink();
   for(;;) {
     self waittill("captured", var_01);
@@ -2597,10 +2597,10 @@ get_friendly_crate_model() {
 }
 
 dropzoneaddcratetypes() {
-  addcratetype("dronedrop_grnd", "jackal", 15, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_JACKAL_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop_grnd", "thor", 10, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_THOR_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop_grnd", "directional_uav", 10, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_DIRECTIONAL_UAV_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop_grnd", "remote_c8", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_RC8_PICKUP", undefined, "care_package_iw7_dummy");
-  addcratetype("dronedrop_grnd", "minijackal", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", & "KILLSTREAKS_HINTS_MINI_JACKAL_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop_grnd", "jackal", 15, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_JACKAL_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop_grnd", "thor", 10, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_THOR_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop_grnd", "directional_uav", 10, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_DIRECTIONAL_UAV_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop_grnd", "remote_c8", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_RC8_PICKUP", undefined, "care_package_iw7_dummy");
+  addcratetype("dronedrop_grnd", "minijackal", 5, ::killstreakcratethink, "care_package_iw7_un_wm", "care_package_iw7_ca_wm", &"KILLSTREAKS_HINTS_MINI_JACKAL_PICKUP", undefined, "care_package_iw7_dummy");
   generatemaxweightedcratevalue();
 }

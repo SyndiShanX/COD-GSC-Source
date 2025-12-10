@@ -27,14 +27,14 @@ function init() {}
 function main() {
   cybercom_gadget::registerability(0, 4);
   level.cybercom.exo_breakdown = spawnStruct();
-  level.cybercom.exo_breakdown._is_flickering = & _is_flickering;
-  level.cybercom.exo_breakdown._on_flicker = & _on_flicker;
-  level.cybercom.exo_breakdown._on_give = & _on_give;
-  level.cybercom.exo_breakdown._on_take = & _on_take;
-  level.cybercom.exo_breakdown._on_connect = & _on_connect;
-  level.cybercom.exo_breakdown._on = & _on;
-  level.cybercom.exo_breakdown._off = & _off;
-  level.cybercom.exo_breakdown._is_primed = & _is_primed;
+  level.cybercom.exo_breakdown._is_flickering = &_is_flickering;
+  level.cybercom.exo_breakdown._on_flicker = &_on_flicker;
+  level.cybercom.exo_breakdown._on_give = &_on_give;
+  level.cybercom.exo_breakdown._on_take = &_on_take;
+  level.cybercom.exo_breakdown._on_connect = &_on_connect;
+  level.cybercom.exo_breakdown._on = &_on;
+  level.cybercom.exo_breakdown._off = &_off;
+  level.cybercom.exo_breakdown._is_primed = &_is_primed;
 }
 
 function _is_flickering(slot) {}
@@ -47,8 +47,8 @@ function _on_give(slot, weapon) {
   if(self hascybercomability("cybercom_exosuitbreakdown") == 2) {
     self.cybercom.var_110c156a = getdvarint("scr_exo_breakdown_upgraded_count", 2);
   }
-  self.cybercom.targetlockcb = & _get_valid_targets;
-  self.cybercom.targetlockrequirementcb = & _lock_requirement;
+  self.cybercom.targetlockcb = &_get_valid_targets;
+  self.cybercom.targetlockrequirementcb = &_lock_requirement;
   self thread cybercom::function_b5f4e597(weapon);
   self cybercom::function_8257bcb3("base_rifle_stn", 8);
   self cybercom::function_8257bcb3("base_rifle_crc", 2);

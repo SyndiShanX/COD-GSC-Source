@@ -33,13 +33,13 @@ main() {
   //VisionSetNight( "gulag_nvg", 1.5 );
 
   // The Gulag
-  //	PreCacheString( &"GULAG_INTROSCREEN_LINE_1" );
+  //	PreCacheString(&"GULAG_INTROSCREEN_LINE_1" );
   // Northern Russia - 09:20:[{FAKE_INTRO_SECONDS:02}] hrs
-  //	PreCacheString( &"GULAG_INTROSCREEN_LINE_2" );
+  //	PreCacheString(&"GULAG_INTROSCREEN_LINE_2" );
   // P03 'Roach' Silvers
-  //	PreCacheString( &"GULAG_INTROSCREEN_LINE_3" );
+  //	PreCacheString(&"GULAG_INTROSCREEN_LINE_3" );
   // SEAL Team Six, U.S.N.
-  //	PreCacheString( &"GULAG_INTROSCREEN_LINE_4" );
+  //	PreCacheString(&"GULAG_INTROSCREEN_LINE_4" );
 
   //	level.start_point = "unload";
   set_default_start("so_showers");
@@ -371,16 +371,16 @@ so_showers_timed_setup_get_spawners(randomize) {
 }
 
 so_showers_timed_setup_regular() {
-  level.challenge_objective = & "SO_SHOWERS_GULAG_OBJ_REGULAR";
+  level.challenge_objective = &"SO_SHOWERS_GULAG_OBJ_REGULAR";
 }
 
 so_showers_timed_setup_hardened() {
-  level.challenge_objective = & "SO_SHOWERS_GULAG_OBJ_HARDENED";
+  level.challenge_objective = &"SO_SHOWERS_GULAG_OBJ_HARDENED";
 }
 
 so_showers_timed_setup_veteran() {
   level.challenge_time_limit = 180;
-  level.challenge_objective = & "SO_SHOWERS_GULAG_OBJ_VETERAN";
+  level.challenge_objective = &"SO_SHOWERS_GULAG_OBJ_VETERAN";
 }
 
 gulag_shower_challenge_music() {

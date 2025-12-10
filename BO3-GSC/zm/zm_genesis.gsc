@@ -129,8 +129,8 @@ function autoexec opt_in() {
 }
 
 function setup_rex_starts() {
-  zm_utility::add_gametype("zclassic", & dummy, "zclassic", & dummy);
-  zm_utility::add_gameloc("default", & dummy, "default", & dummy);
+  zm_utility::add_gametype("zclassic", &dummy, "zclassic", &dummy);
+  zm_utility::add_gameloc("default", &dummy, "default", &dummy);
 }
 
 function dummy() {}
@@ -141,12 +141,12 @@ function main() {
   level._uses_sticky_grenades = 1;
   level._uses_taser_knuckles = 1;
   level flag::init("is_coop_door_price");
-  callback::on_spawned( & on_player_spawned);
-  callback::on_connect( & on_player_connected);
-  callback::on_disconnect( & zm_genesis_challenges::on_player_disconnect);
-  zm::register_actor_damage_callback( & function_82800a29);
-  zm::register_vehicle_damage_callback( & function_68a54382);
-  spawner::add_archetype_spawn_function("zombie", & zm_genesis_ai_spawning::function_47b2f1f4);
+  callback::on_spawned(&on_player_spawned);
+  callback::on_connect(&on_player_connected);
+  callback::on_disconnect(&zm_genesis_challenges::on_player_disconnect);
+  zm::register_actor_damage_callback(&function_82800a29);
+  zm::register_vehicle_damage_callback(&function_68a54382);
+  spawner::add_archetype_spawn_function("zombie", &zm_genesis_ai_spawning::function_47b2f1f4);
   setdvar("doublejump_enabled", 1);
   setdvar("playerEnergy_enabled", 1);
   setdvar("wallrun_enabled", 1);
@@ -173,38 +173,38 @@ function main() {
   zm_genesis_util::devgui();
   level.default_start_location = "start_room";
   level.default_game_mode = "zclassic";
-  level.precachecustomcharacters = & precachecustomcharacters;
-  level.givecustomcharacters = & givecustomcharacters;
+  level.precachecustomcharacters = &precachecustomcharacters;
+  level.givecustomcharacters = &givecustomcharacters;
   initcharacterstartindex();
-  level.custom_game_over_hud_elem = & function_1af84ba5;
-  level.register_offhand_weapons_for_level_defaults_override = & offhand_weapon_overrride;
-  level.zombiemode_offhand_weapon_give_override = & offhand_weapon_give_override;
-  level._zombie_custom_add_weapons = & custom_add_weapons;
+  level.custom_game_over_hud_elem = &function_1af84ba5;
+  level.register_offhand_weapons_for_level_defaults_override = &offhand_weapon_overrride;
+  level.zombiemode_offhand_weapon_give_override = &offhand_weapon_give_override;
+  level._zombie_custom_add_weapons = &custom_add_weapons;
   level._allow_melee_weapon_switching = 1;
   level.zombiemode_reusing_pack_a_punch = 1;
-  level._zombie_custom_spawn_logic = & function_dcf0070e;
-  level.minigun_damage_adjust_override = & function_83937162;
+  level._zombie_custom_spawn_logic = &function_dcf0070e;
+  level.minigun_damage_adjust_override = &function_83937162;
   setdvar("tu13_ai_useModifiedPushActors", 1);
   level.speed_change_round = 9;
   zombie_utility::set_zombie_var("zombie_powerup_drop_max_per_round", 4);
   level.do_randomized_zigzag_path = 1;
-  level.zm_custom_spawn_location_selection = & genesis_custom_spawn_location_selection;
-  level.enemy_location_override_func = & function_b51f6175;
-  level.player_intersection_tracker_override = & function_1b647c97;
-  level.var_9aaae7ae = & function_869d6f66;
-  level.var_9cef605e = & function_cc2772da;
-  level.var_2d4e3645 = & function_d9e1ec4d;
-  level.var_1c0253f1 = & zm_genesis_ee_quest::function_d86f4446;
+  level.zm_custom_spawn_location_selection = &genesis_custom_spawn_location_selection;
+  level.enemy_location_override_func = &function_b51f6175;
+  level.player_intersection_tracker_override = &function_1b647c97;
+  level.var_9aaae7ae = &function_869d6f66;
+  level.var_9cef605e = &function_cc2772da;
+  level.var_2d4e3645 = &function_d9e1ec4d;
+  level.var_1c0253f1 = &zm_genesis_ee_quest::function_d86f4446;
   level.var_774896e3 = "power_on3";
-  level.gravityspike_position_check = & function_6190ec3f;
+  level.gravityspike_position_check = &function_6190ec3f;
   level.custom_limited_weapon_checks = [];
-  level.custom_limited_weapon_checks[0] = & function_52c6fb28;
+  level.custom_limited_weapon_checks[0] = &function_52c6fb28;
   level.var_f06c86b9 = 0;
-  level.customrandomweaponweights = & function_659c2324;
-  level.func_magicbox_weapon_spawned = & function_1350a73f;
-  level.custom_magic_box_selection_logic = & function_e1630fb4;
-  level.revive_give_back_weapons_custom_func = & function_b45f77c1;
-  level.var_e26adf8d = & function_e26adf8d;
+  level.customrandomweaponweights = &function_659c2324;
+  level.func_magicbox_weapon_spawned = &function_1350a73f;
+  level.custom_magic_box_selection_logic = &function_e1630fb4;
+  level.revive_give_back_weapons_custom_func = &function_b45f77c1;
+  level.var_e26adf8d = &function_e26adf8d;
   include_weapons();
   zm_craftables::init();
   zm_genesis_flingers::function_976c9217();
@@ -214,10 +214,10 @@ function main() {
   level thread zm_genesis_challenges::init_challenge_boards();
   load::main();
   level thread zm_genesis_fx::function_2c301fae();
-  level._round_start_func = & zm::round_start;
+  level._round_start_func = &zm::round_start;
   init_sounds();
   level thread zm_genesis_sound::main();
-  array::thread_all(level.zombie_spawners, & spawner::add_spawn_function, & function_429599b3);
+  array::thread_all(level.zombie_spawners, &spawner::add_spawn_function, &function_429599b3);
   level thread zm_genesis_keeper_companion::main();
   level thread zm_genesis_portals::function_16616103();
   level thread zm_genesis_challenges::main();
@@ -234,8 +234,8 @@ function main() {
   zm_genesis_ffotd::main_end();
   level thread zm_genesis_ee_quest::function_26bc55e3();
   level thread zm_genesis_hope::start();
-  level.check_end_solo_game_override = & check_end_solo_game_override;
-  level._game_module_game_end_check = & function_63f29efd;
+  level.check_end_solo_game_override = &check_end_solo_game_override;
+  level._game_module_game_end_check = &function_63f29efd;
   level thread function_a81bfac6();
   level flag::wait_till("start_zombie_round_logic");
   level util::clientnotify("force_stop");
@@ -376,7 +376,7 @@ function on_player_spawned() {
 function on_player_connected() {
   self thread zm_genesis_undercroft_low_grav::function_c3f6aa22();
   self zm_genesis_challenges::on_player_connect();
-  self.overrideplayerdamage = & function_7427eacc;
+  self.overrideplayerdamage = &function_7427eacc;
   if(level.players.size > 1 && !level flag::get("is_coop_door_price")) {
     function_898d7758();
   }
@@ -462,10 +462,10 @@ function function_898d7758() {
 
 function function_ee64baa8() {
   level.use_multiple_spawns = 1;
-  level.fn_custom_zombie_spawner_selection = & function_9160f4d3;
+  level.fn_custom_zombie_spawner_selection = &function_9160f4d3;
   level.var_727bd376 = getEntArray("skeleton_spawner", "script_noteworthy");
-  array::thread_all(level.var_727bd376, & spawner::add_spawn_function, & zm_spawner::zombie_spawn_init);
-  array::thread_all(level.var_727bd376, & spawner::add_spawn_function, & function_68dbbc77);
+  array::thread_all(level.var_727bd376, &spawner::add_spawn_function, &zm_spawner::zombie_spawn_init);
+  array::thread_all(level.var_727bd376, &spawner::add_spawn_function, &function_68dbbc77);
   level waittill("start_zombie_round_logic");
   level.zones["apothicon_interior_zone"].script_int = 2;
 }
@@ -804,7 +804,7 @@ function include_perks_in_random_rotation() {
   zm_perk_random::include_perk_in_random_rotation("specialty_deadshot");
   zm_perk_random::include_perk_in_random_rotation("specialty_electriccherry");
   zm_perk_random::include_perk_in_random_rotation("specialty_widowswine");
-  level.custom_random_perk_weights = & function_fc65af2e;
+  level.custom_random_perk_weights = &function_fc65af2e;
 }
 
 function function_fc65af2e() {

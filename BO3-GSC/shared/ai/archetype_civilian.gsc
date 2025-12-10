@@ -20,22 +20,22 @@ function autoexec main() {
 #namespace archetypecivilian;
 
 function registerbehaviorscriptfunctions() {
-  spawner::add_archetype_spawn_function("civilian", & civilianblackboardinit);
-  spawner::add_archetype_spawn_function("civilian", & archetypecivilianinit);
+  spawner::add_archetype_spawn_function("civilian", &civilianblackboardinit);
+  spawner::add_archetype_spawn_function("civilian", &archetypecivilianinit);
   ai::registermatchedinterface("civilian", "sprint", 0, array(1, 0));
   ai::registermatchedinterface("civilian", "panic", 0, array(1, 0));
-  behaviortreenetworkutility::registerbehaviortreeaction("civilianMoveAction", & civilianmoveactioninitialize, undefined, & civilianmoveactionfinalize);
-  behaviortreenetworkutility::registerbehaviortreeaction("civilianCowerAction", & civiliancoweractioninitialize, undefined, undefined);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("civilianIsPanicked", & civilianispanicked);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("civilianPanic", & civilianpanic);
-  behaviorstatemachine::registerbsmscriptapiinternal("civilianPanic", & civilianpanic);
+  behaviortreenetworkutility::registerbehaviortreeaction("civilianMoveAction", &civilianmoveactioninitialize, undefined, &civilianmoveactionfinalize);
+  behaviortreenetworkutility::registerbehaviortreeaction("civilianCowerAction", &civiliancoweractioninitialize, undefined, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("civilianIsPanicked", &civilianispanicked);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("civilianPanic", &civilianpanic);
+  behaviorstatemachine::registerbsmscriptapiinternal("civilianPanic", &civilianpanic);
 }
 
 function private civilianblackboardinit() {
   blackboard::createblackboardforentity(self);
   ai::createinterfaceforentity(self);
   self aiutility::registerutilityblackboardattributes();
-  blackboard::registerblackboardattribute(self, "_panic", "calm", & bb_getpanic);
+  blackboard::registerblackboardattribute(self, "_panic", "calm", &bb_getpanic);
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
@@ -43,7 +43,7 @@ function private civilianblackboardinit() {
   if(isactor(self)) {
     self trackblackboardattribute("");
   }
-  self.___archetypeonanimscriptedcallback = & civilianonanimscriptedcallback;
+  self.___archetypeonanimscriptedcallback = &civilianonanimscriptedcallback;
   self finalizetrackedblackboardattributes();
 }
 

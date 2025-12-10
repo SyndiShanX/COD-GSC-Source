@@ -9,8 +9,8 @@
 #namespace damagefeedback;
 
 function __init__() {
-  callback::on_start_gametype( & main);
-  callback::on_connect( & on_player_connect);
+  callback::on_start_gametype(&main);
+  callback::on_connect(&on_player_connect);
 }
 
 function main() {}

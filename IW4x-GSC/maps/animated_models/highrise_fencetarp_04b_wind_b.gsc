@@ -9,7 +9,6 @@ main() {
   if(!isDefined(level.anim_prop_models))
     level.anim_prop_models = [];
 
-
   model = "highrise_fencetarp_04b_wind_b";
   level.anim_prop_models[model]["wind_b"] = "mp_storm_fencetarp_04_windB";
 }

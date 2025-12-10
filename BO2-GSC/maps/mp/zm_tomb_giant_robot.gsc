@@ -969,7 +969,7 @@ gr_head_exit_trigger_start(s_origin) {
   s_origin.unitrigger_stub.radius = 36;
   s_origin.unitrigger_stub.height = 256;
   s_origin.unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
-  s_origin.unitrigger_stub.hint_string = & "ZM_TOMB_EHT";
+  s_origin.unitrigger_stub.hint_string = &"ZM_TOMB_EHT";
   s_origin.unitrigger_stub.cursor_hint = "HINT_NOICON";
   s_origin.unitrigger_stub.require_look_at = 1;
   s_origin.unitrigger_stub.target = s_origin.target;

@@ -30,7 +30,7 @@
 #namespace zm_genesis_undercroft_low_grav;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_undercroft_low_grav", & __init__, & __main__, undefined);
+  system::register("zm_genesis_undercroft_low_grav", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -150,15 +150,15 @@ function function_5f1fa8cd(n_duration = 50) {
       exploder::exploder("fxexp_117");
     }
     level clientfield::set("snd_low_gravity_state", 1);
-    array::thread_all(var_e31d98a1, & clientfield::set, "undercroft_emissives", 1);
-    array::thread_all(level.var_eca8388c, & clientfield::set, "floor_panel_emissives_glow", 1);
+    array::thread_all(var_e31d98a1, &clientfield::set, "undercroft_emissives", 1);
+    array::thread_all(level.var_eca8388c, &clientfield::set, "floor_panel_emissives_glow", 1);
     wait(n_duration - 10);
     level function_e1998cb5();
     level flag::clear("low_grav_on");
     exploder::stop_exploder("lgt_low_gravity_on");
     level clientfield::set("snd_low_gravity_state", 0);
-    array::thread_all(var_e31d98a1, & clientfield::set, "undercroft_emissives", 0);
-    array::thread_all(level.var_eca8388c, & clientfield::set, "floor_panel_emissives_glow", 0);
+    array::thread_all(var_e31d98a1, &clientfield::set, "undercroft_emissives", 0);
+    array::thread_all(level.var_eca8388c, &clientfield::set, "floor_panel_emissives_glow", 0);
     level flag::wait_till_clear("grav_off_for_ee");
     wait(60);
   }
@@ -294,7 +294,7 @@ function function_23f211e9() {
 
 function function_c3e8e4a4() {
   s_loc = struct::get("perk_powerup_loc", "targetname");
-  level._powerup_timeout_override = & function_e4e4f426;
+  level._powerup_timeout_override = &function_e4e4f426;
   foreach(e_player in level.players) {
     var_6e4b5e90 = level thread zm_powerups::specific_powerup_drop("free_perk", s_loc.origin, undefined, undefined, undefined, e_player);
   }
@@ -322,7 +322,7 @@ function detect_reentry() {
 function function_ab786717() {
   level flagsys::wait_till("");
   wait(1);
-  zm_devgui::add_custom_devgui_callback( & function_e41a2453);
+  zm_devgui::add_custom_devgui_callback(&function_e41a2453);
   adddebugcommand("");
 }
 

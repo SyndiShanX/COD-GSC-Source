@@ -36,10 +36,10 @@ tomb_challenges_add_stats() {
     n_boxes_filled = 1;
   }
 
-  add_stat("zc_headshots", 0, & "ZM_TOMB_CH1", n_kills, undefined, ::reward_packed_weapon);
-  add_stat("zc_zone_captures", 0, & "ZM_TOMB_CH2", n_zone_caps, undefined, ::reward_powerup_max_ammo);
-  add_stat("zc_points_spent", 0, & "ZM_TOMB_CH3", n_points_spent, undefined, ::reward_double_tap, ::track_points_spent);
-  add_stat("zc_boxes_filled", 1, & "ZM_TOMB_CHT", n_boxes_filled, undefined, ::reward_one_inch_punch, ::init_box_footprints);
+  add_stat("zc_headshots", 0, &"ZM_TOMB_CH1", n_kills, undefined, ::reward_packed_weapon);
+  add_stat("zc_zone_captures", 0, &"ZM_TOMB_CH2", n_zone_caps, undefined, ::reward_powerup_max_ammo);
+  add_stat("zc_points_spent", 0, &"ZM_TOMB_CH3", n_points_spent, undefined, ::reward_double_tap, ::track_points_spent);
+  add_stat("zc_boxes_filled", 1, &"ZM_TOMB_CHT", n_boxes_filled, undefined, ::reward_one_inch_punch, ::init_box_footprints);
 }
 
 track_points_spent() {

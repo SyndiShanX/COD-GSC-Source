@@ -15,11 +15,11 @@
 #namespace zm_weap_shrink_ray;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_shrink_ray", & __init__, & __main__, undefined);
+  system::register("zm_weap_shrink_ray", &__init__, &__main__, undefined);
 }
 
 function __init__() {
-  clientfield::register("actor", "fun_size", 5000, 1, "int", & fun_size, 0, 0);
+  clientfield::register("actor", "fun_size", 5000, 1, "int", &fun_size, 0, 0);
 }
 
 function __main__() {}

@@ -17,7 +17,6 @@ main() {
   game["attackers"] = "axis";
   game["defenders"] = "allies";
 
-
   level.airstrikeHeightScale = 1.8;
 
   setdvar("r_specularcolorscale", "2");

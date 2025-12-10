@@ -398,24 +398,24 @@ staff_upgrade_watch() {
 
 staff_get_pickup_message() {
   if(self.element == "air")
-    return & "ZM_TOMB_PUAS";
+    return &"ZM_TOMB_PUAS";
   else if(self.element == "fire")
-    return & "ZM_TOMB_PUFS";
+    return &"ZM_TOMB_PUFS";
   else if(self.element == "lightning")
-    return & "ZM_TOMB_PULS";
+    return &"ZM_TOMB_PULS";
   else
-    return & "ZM_TOMB_PUIS";
+    return &"ZM_TOMB_PUIS";
 }
 
 staff_get_insert_message() {
   if(self.element == "air")
-    return & "ZM_TOMB_INAS";
+    return &"ZM_TOMB_INAS";
   else if(self.element == "fire")
-    return & "ZM_TOMB_INFS";
+    return &"ZM_TOMB_INFS";
   else if(self.element == "lightning")
-    return & "ZM_TOMB_INLS";
+    return &"ZM_TOMB_INLS";
   else
-    return & "ZM_TOMB_INWS";
+    return &"ZM_TOMB_INWS";
 }
 
 player_has_staff() {

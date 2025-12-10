@@ -15,10 +15,10 @@
 function init() {
   var_8b462b02 = getminbitcountfornum(2);
   var_fbab08c0 = getminbitcountfornum(3);
-  clientfield::register("scriptmover", "spider_queen_mouth_weakspot", 9000, var_8b462b02, "int", & spider_queen_mouth_weakspot, 0, 0);
-  clientfield::register("scriptmover", "spider_queen_bleed", 9000, 1, "counter", & spider_queen_bleed, 0, 0);
-  clientfield::register("scriptmover", "spider_queen_stage_bleed", 9000, var_fbab08c0, "int", & spider_queen_stage_bleed, 0, 0);
-  clientfield::register("scriptmover", "spider_queen_emissive_material", 9000, 1, "int", & spider_queen_emissive_material, 0, 0);
+  clientfield::register("scriptmover", "spider_queen_mouth_weakspot", 9000, var_8b462b02, "int", &spider_queen_mouth_weakspot, 0, 0);
+  clientfield::register("scriptmover", "spider_queen_bleed", 9000, 1, "counter", &spider_queen_bleed, 0, 0);
+  clientfield::register("scriptmover", "spider_queen_stage_bleed", 9000, var_fbab08c0, "int", &spider_queen_stage_bleed, 0, 0);
+  clientfield::register("scriptmover", "spider_queen_emissive_material", 9000, 1, "int", &spider_queen_emissive_material, 0, 0);
 }
 
 function spider_queen_mouth_weakspot(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

@@ -93,15 +93,15 @@ init() {
 
 func_128EF(var_00, var_01) {
   if(!isDefined(level.func_8638[level.script])) {
-    self iprintlnbold( & "KILLSTREAKS_UNAVAILABLE_IN_LEVEL");
+    self iprintlnbold(&"KILLSTREAKS_UNAVAILABLE_IN_LEVEL");
     return 0;
   }
 
   if(isDefined(self.laststand) && !scripts\mp\utility\game::_hasperk("specialty_finalstand")) {
-    self iprintlnbold( & "KILLSTREAKS_UNAVAILABLE_IN_LASTSTAND");
+    self iprintlnbold(&"KILLSTREAKS_UNAVAILABLE_IN_LASTSTAND");
     return 0;
   } else if(isDefined(level.func_B8F4)) {
-    self iprintlnbold( & "KILLSTREAKS_GROUND_APPROACHES_TOO_CROWDED");
+    self iprintlnbold(&"KILLSTREAKS_GROUND_APPROACHES_TOO_CROWDED");
     return 0;
   } else if(scripts\mp\utility\game::isusingremote())
     return 0;
@@ -174,7 +174,7 @@ func_F1C4() {
 func_1012E() {
   var_00 = scripts\mp\hud_util::createfontstring("bigfixed", 0.5);
   var_00 scripts\mp\hud_util::setpoint("CENTER", "CENTER", 0, -150);
-  var_00 give_zap_perk( & "KILLSTREAKS_SELECT_MOBILE_MORTAR_LOCATION");
+  var_00 give_zap_perk(&"KILLSTREAKS_SELECT_MOBILE_MORTAR_LOCATION");
   self.locationobjectives = [];
 
   for(var_01 = 0; var_01 < 3; var_1++) {

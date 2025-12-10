@@ -37,7 +37,7 @@
 #namespace ball;
 
 function autoexec __init__sytem__() {
-  system::register("ball", & __init__, & __main__, undefined);
+  system::register("ball", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -50,9 +50,9 @@ function __init__() {
   level.ballweapon = getweapon("ball");
   level.ballworldweapon = getweapon("ball_world");
   level.passingballweapon = getweapon("ball_world_pass");
-  level._grab_minigun = & function_18041b1b;
+  level._grab_minigun = &function_18041b1b;
   zm_hero_weapon::register_hero_weapon("ball");
-  zm::register_zombie_damage_override_callback( & function_f1b94849);
+  zm::register_zombie_damage_override_callback(&function_f1b94849);
 }
 
 function function_18041b1b(player) {
@@ -135,7 +135,7 @@ function function_f1b94849(willbekilled, inflictor, attacker, damage, flags, mea
 }
 
 function __main__() {
-  callback::on_connect( & function_cffd1019);
+  callback::on_connect(&function_cffd1019);
   level.ball_start = undefined;
   level.ball = undefined;
   level.objectivepingdelay = 1;
@@ -366,8 +366,8 @@ function setup_goal(trigger, team) {
   if(isDefined(level.ball)) {
     useobj gameobjects::set_key_object(level.ball);
   }
-  useobj.canuseobj = & can_use_goal;
-  useobj.onuse = & on_use_goal;
+  useobj.canuseobj = &can_use_goal;
+  useobj.onuse = &on_use_goal;
   useobj.ball_in_goal = 0;
   useobj.radiussq = trigger.radius * trigger.radius;
   useobj.center = trigger.origin + (0, 0, trigger.height * 0.5);
@@ -428,13 +428,13 @@ function spawn_ball(trigger) {
   ballobj.disallowremotecontrol = 1;
   ballobj.disallowplaceablepickup = 1;
   ballobj gameobjects::update_objective();
-  ballobj.canuseobject = & can_use_ball;
-  ballobj.onpickup = & on_pickup_ball;
-  ballobj.setdropped = & ball_set_dropped;
-  ballobj.onreset = & on_reset_ball;
-  ballobj.pickuptimeoutoverride = & ball_physics_timeout;
-  ballobj.carryweaponthink = & carry_think_ball;
-  ballobj.onuse = & function_756cbdda;
+  ballobj.canuseobject = &can_use_ball;
+  ballobj.onpickup = &on_pickup_ball;
+  ballobj.setdropped = &ball_set_dropped;
+  ballobj.onreset = &on_reset_ball;
+  ballobj.pickuptimeoutoverride = &ball_physics_timeout;
+  ballobj.carryweaponthink = &carry_think_ball;
+  ballobj.onuse = &function_756cbdda;
   ballobj.in_goal = 0;
   ballobj.lastcarrierscored = 0;
   ballobj.lastcarrierteam = "neutral";
@@ -1373,7 +1373,7 @@ function player_update_pass_target(ballobj) {
           possible_pass_targets[possible_pass_targets.size] = target;
         }
       }
-      possible_pass_targets = array::quicksort(possible_pass_targets, & compare_player_pass_dot);
+      possible_pass_targets = array::quicksort(possible_pass_targets, &compare_player_pass_dot);
       foreach(target in possible_pass_targets) {
         if(sighttracepassed(playereye, target.pass_origin, 0, target)) {
           new_target = target;

@@ -7,7 +7,7 @@
 func_C32F() {
   precacheitem("offhandshield");
   precacheitem("offhandshield_up1");
-  precachestring( & "EQUIPMENT_SHIELD_MELEE_HINT");
+  precachestring(&"EQUIPMENT_SHIELD_MELEE_HINT");
   level.player scripts\sp\utility::func_65E0("player_retract_shield_active");
   level.player.var_C337 = spawnStruct();
   level.player.var_C337.var_260E = 0;
@@ -22,8 +22,8 @@ func_C32F() {
   level.player.var_C337.var_CB8F.time = getdvarint("offhandshield_sweepTime");
   level.player.var_C337.var_CB8F.getclosestpointonnavmesh3d = level.player.var_C337.var_CB8F.var_56E8 / level.player.var_C337.var_CB8F.time;
   level.var_6DD1 = 1;
-  scripts\sp\utility::func_16EB("shield_recharge", & "WEAPON_HELP_SHIELD_RECHARGE");
-  scripts\sp\utility::func_16EB("shield_recharge_remind", & "WEAPON_HELP_SHIELD_RECHARGE");
+  scripts\sp\utility::func_16EB("shield_recharge", &"WEAPON_HELP_SHIELD_RECHARGE");
+  scripts\sp\utility::func_16EB("shield_recharge_remind", &"WEAPON_HELP_SHIELD_RECHARGE");
 }
 
 func_C334() {
@@ -146,7 +146,7 @@ func_B594() {
   var_00 = scripts\sp\hud_util::createfontstring("objective", 1.25);
   var_00 scripts\sp\hud_util::setpoint("CENTER", undefined, 0, 116);
   var_00.alpha = 1;
-  var_00 settext( & "EQUIPMENT_SHIELD_MELEE_HINT");
+  var_00 settext(&"EQUIPMENT_SHIELD_MELEE_HINT");
   func_13746(1);
   var_01 = 0.25;
   var_00 fadeovertime(var_01);

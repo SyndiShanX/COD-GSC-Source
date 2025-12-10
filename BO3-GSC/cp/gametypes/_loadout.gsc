@@ -24,14 +24,14 @@
 #namespace loadout;
 
 function autoexec __init__sytem__() {
-  system::register("loadout", & __init__, undefined, undefined);
+  system::register("loadout", &__init__, undefined, undefined);
 }
 
 function __init__() {
   level.player_interactive_model = "c_usa_cia_masonjr_viewbody";
-  callback::on_start_gametype( & init);
-  callback::on_connect( & on_connect);
-  callback::on_disconnect( & function_ef129246);
+  callback::on_start_gametype(&init);
+  callback::on_connect(&on_connect);
+  callback::on_disconnect(&function_ef129246);
   level thread function_adca0ced();
 }
 

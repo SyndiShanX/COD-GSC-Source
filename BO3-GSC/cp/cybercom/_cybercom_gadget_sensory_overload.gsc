@@ -31,14 +31,14 @@ function main() {
   level._effect["sensory_disable_human_riotshield"] = "electric/fx_ability_elec_sensory_ol_human";
   level._effect["sensory_disable_warlord"] = "electric/fx_ability_elec_sensory_ol_human";
   level.cybercom.sensory_overload = spawnStruct();
-  level.cybercom.sensory_overload._is_flickering = & _is_flickering;
-  level.cybercom.sensory_overload._on_flicker = & _on_flicker;
-  level.cybercom.sensory_overload._on_give = & _on_give;
-  level.cybercom.sensory_overload._on_take = & _on_take;
-  level.cybercom.sensory_overload._on_connect = & _on_connect;
-  level.cybercom.sensory_overload._on = & _on;
-  level.cybercom.sensory_overload._off = & _off;
-  level.cybercom.sensory_overload._is_primed = & _is_primed;
+  level.cybercom.sensory_overload._is_flickering = &_is_flickering;
+  level.cybercom.sensory_overload._on_flicker = &_on_flicker;
+  level.cybercom.sensory_overload._on_give = &_on_give;
+  level.cybercom.sensory_overload._on_take = &_on_take;
+  level.cybercom.sensory_overload._on_connect = &_on_connect;
+  level.cybercom.sensory_overload._on = &_on;
+  level.cybercom.sensory_overload._off = &_off;
+  level.cybercom.sensory_overload._is_primed = &_is_primed;
 }
 
 function _is_flickering(slot) {}
@@ -52,8 +52,8 @@ function _on_give(slot, weapon) {
     self.cybercom.var_110c156a = getdvarint("scr_sensory_overload_upgraded_count", 5);
     self.cybercom.var_bf39536d = getdvarint("scr_sensory_overload_upgraded_loops", 2);
   }
-  self.cybercom.targetlockcb = & _get_valid_targets;
-  self.cybercom.targetlockrequirementcb = & _lock_requirement;
+  self.cybercom.targetlockcb = &_get_valid_targets;
+  self.cybercom.targetlockrequirementcb = &_lock_requirement;
   self thread cybercom::function_b5f4e597(weapon);
   self cybercom::function_8257bcb3("base_rifle_stn", 8);
   self cybercom::function_8257bcb3("base_rifle_crc", 2);

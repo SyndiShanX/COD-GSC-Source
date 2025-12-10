@@ -19,7 +19,7 @@ init() {
   level.planemortarexhaustfx = loadfx("vehicle/exhaust/fx_exhaust_f35_afterburner");
   registerclientfield("scriptmover", "planemortar_contrail", 1, 1, "int");
   maps\mp\killstreaks\_killstreaks::registerkillstreak("planemortar_mp", "planemortar_mp", "killstreak_planemortar", "planemortar_used", ::usekillstreakplanemortar, 1);
-  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("planemortar_mp", & "MP_EARNED_PLANEMORTAR", & "KILLSTREAK_PLANEMORTAR_NOT_AVAILABLE", & "MP_WAR_PLANEMORTAR_INBOUND", & "MP_WAR_PLANEMORTAR_INBOUND_NEAR_YOUR_POSITION");
+  maps\mp\killstreaks\_killstreaks::registerkillstreakstrings("planemortar_mp", &"MP_EARNED_PLANEMORTAR", &"KILLSTREAK_PLANEMORTAR_NOT_AVAILABLE", &"MP_WAR_PLANEMORTAR_INBOUND", &"MP_WAR_PLANEMORTAR_INBOUND_NEAR_YOUR_POSITION");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdialog("planemortar_mp", "mpl_killstreak_planemortar", "kls_planemortar_used", "", "kls_planemortar_enemy", "", "kls_planemortar_ready");
   maps\mp\killstreaks\_killstreaks::registerkillstreakdevdvar("planemortar_mp", "scr_giveplanemortar");
   maps\mp\killstreaks\_killstreaks::setkillstreakteamkillpenaltyscale("planemortar_mp", level.teamkillreducedpenalty);

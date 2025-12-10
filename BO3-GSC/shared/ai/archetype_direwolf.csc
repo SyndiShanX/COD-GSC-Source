@@ -9,7 +9,7 @@
 #namespace archetypedirewolf;
 
 function autoexec __init__sytem__() {
-  system::register("direwolf", & __init__, undefined, undefined);
+  system::register("direwolf", &__init__, undefined, undefined);
 }
 
 function autoexec precache() {
@@ -18,7 +18,7 @@ function autoexec precache() {
 
 function __init__() {
   if(ai::shouldregisterclientfieldforarchetype("direwolf")) {
-    clientfield::register("actor", "direwolf_eye_glow_fx", 1, 1, "int", & direwolfeyeglowfxhandler, 0, 1);
+    clientfield::register("actor", "direwolf_eye_glow_fx", 1, 1, "int", &direwolfeyeglowfxhandler, 0, 1);
   }
 }
 

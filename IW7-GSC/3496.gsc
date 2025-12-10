@@ -183,10 +183,10 @@ func_3758(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   if(!scripts\mp\weapons::friendlyfirecheck(var_12.owner, var_01)) {
     return;
   }
-  if(isDefined(var_03) && var_03 & level.idflags_penetration)
+  if(isDefined(var_03) && var_03 &level.idflags_penetration)
     var_12.wasdamagedfrombulletpenetration = 1;
 
-  if(isDefined(var_03) && var_03 & level.idflags_no_team_protection)
+  if(isDefined(var_03) && var_03 &level.idflags_no_team_protection)
     self.wasdamagedfrombulletricochet = 1;
 
   var_12.wasdamaged = 1;

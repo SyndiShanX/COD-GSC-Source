@@ -73,7 +73,7 @@ function penthink() {
   self sethintstring(&"ZOMBIE_BUTTON_BUY_TRAP", self.zombie_cost);
   self setcursorhint("HINT_NOICON");
   triggers = getEntArray("pendulum_buy_trigger", "targetname");
-  array::thread_all(triggers, & hint_string, & "ZOMBIE_BUTTON_BUY_TRAP");
+  array::thread_all(triggers, &hint_string, &"ZOMBIE_BUTTON_BUY_TRAP");
   while(true) {
     self waittill("trigger", who);
     self.used_by = who;
@@ -85,7 +85,7 @@ function penthink() {
         if(!level.var_99432870) {
           level.var_99432870 = 1;
           level thread zm_sumpf::turnlightred("pendulum_light");
-          array::thread_all(triggers, & hint_string, & "ZOMBIE_TRAP_ACTIVE");
+          array::thread_all(triggers, &hint_string, &"ZOMBIE_TRAP_ACTIVE");
           zm_utility::play_sound_at_pos("purchase", who.origin);
           who thread zm_audio::create_and_play_dialog("level", "trap_log");
           who zm_score::minus_to_player_score(self.zombie_cost);
@@ -98,14 +98,14 @@ function penthink() {
           wait(0.5);
           self thread activatepen(motor_left, motor_right, who);
           self waittill("pendown");
-          array::thread_all(triggers, & hint_string, & "ZOMBIE_TRAP_COOLDOWN");
+          array::thread_all(triggers, &hint_string, &"ZOMBIE_TRAP_COOLDOWN");
           self thread moveleverup();
           self waittill("leverup");
           wait(45);
           pa_system playSound("zmb_warning");
           level thread zm_sumpf::turnlightgreen("pendulum_light");
           level.var_99432870 = 0;
-          array::thread_all(triggers, & hint_string, & "ZOMBIE_BUTTON_BUY_TRAP");
+          array::thread_all(triggers, &hint_string, &"ZOMBIE_BUTTON_BUY_TRAP");
         }
       }
     }

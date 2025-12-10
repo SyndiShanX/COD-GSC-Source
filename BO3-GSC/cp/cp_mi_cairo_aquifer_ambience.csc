@@ -15,16 +15,16 @@
 #namespace namespace_1254c007;
 
 function autoexec __init__sytem__() {
-  system::register("aquifer_ambience", & __init__, undefined, undefined);
+  system::register("aquifer_ambience", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "show_sand_storm", 1, 1, "int", & function_7ddc918d, 0, 0);
-  clientfield::register("world", "hide_sand_storm", 1, 1, "int", & function_e5def758, 0, 0);
-  clientfield::register("world", "play_trucks", 1, 1, "int", & function_91528afa, 0, 0);
-  clientfield::register("world", "start_ambience", 1, 1, "int", & function_134f3566, 0, 0);
-  clientfield::register("world", "stop_ambience", 1, 1, "int", & function_ad396d58, 0, 0);
-  clientfield::register("world", "kill_ambience", 1, 1, "int", & function_9ba61e20, 0, 0);
+  clientfield::register("toplayer", "show_sand_storm", 1, 1, "int", &function_7ddc918d, 0, 0);
+  clientfield::register("world", "hide_sand_storm", 1, 1, "int", &function_e5def758, 0, 0);
+  clientfield::register("world", "play_trucks", 1, 1, "int", &function_91528afa, 0, 0);
+  clientfield::register("world", "start_ambience", 1, 1, "int", &function_134f3566, 0, 0);
+  clientfield::register("world", "stop_ambience", 1, 1, "int", &function_ad396d58, 0, 0);
+  clientfield::register("world", "kill_ambience", 1, 1, "int", &function_9ba61e20, 0, 0);
   level thread function_89b52898();
 }
 
@@ -63,7 +63,7 @@ function function_ad396d58(localclientnum, oldval, newval, bnewent, binitialsnap
     var_3668f67c thread scene::stop(1);
     var_3668f67c.scene_played = 0;
   }
-  array::run_all(level.var_c2750169, & scene::stop, 1);
+  array::run_all(level.var_c2750169, &scene::stop, 1);
 }
 
 function function_9ba61e20(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -131,14 +131,14 @@ function function_5794dab9(s_bundle, delay) {
 function function_e5def758(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   var_76968f56 = getEntArray(localclientnum, "sand_storm", "targetname");
   if(var_76968f56.size > 0) {
-    array::run_all(var_76968f56, & visible, 0);
+    array::run_all(var_76968f56, &visible, 0);
   }
 }
 
 function function_7ddc918d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   var_76968f56 = getEntArray(localclientnum, "sand_storm", "targetname");
   if(var_76968f56.size > 0) {
-    array::run_all(var_76968f56, & visible, 1);
+    array::run_all(var_76968f56, &visible, 1);
   }
 }
 

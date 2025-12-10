@@ -1156,7 +1156,7 @@ depth_charge_check_failure() {
     return;
   }
   if(level.osprey_total_hits < var_0) {
-    setdvar("ui_deadquote", & "CARRIER_FAIL_FAR_AWAY");
+    setdvar("ui_deadquote", &"CARRIER_FAIL_FAR_AWAY");
     maps\_utility::missionfailedwrapper();
   }
 }

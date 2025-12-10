@@ -22,7 +22,7 @@ function main() {
   register_clientfields();
   function_34ad16fc();
   level thread function_6827f93b();
-  level.grenade_planted = & function_ff1f70cd;
+  level.grenade_planted = &function_ff1f70cd;
   level thread function_65b37e40();
 }
 
@@ -54,9 +54,9 @@ function function_713600fe(var_44f606ad = 0) {
   }
   var_69192d95 = struct::get("rocket_trap_rumble_source", "targetname");
   var_ac6452ae = getEntArray("rocket_tunnel_door_r", "targetname");
-  var_ac6452ae array::thread_all(var_ac6452ae, & function_e52f317f, 0, 10);
+  var_ac6452ae array::thread_all(var_ac6452ae, &function_e52f317f, 0, 10);
   var_1b5666fb = getEntArray("rocket_tunnel_door_l", "targetname");
-  var_1b5666fb array::thread_all(var_1b5666fb, & function_e52f317f, 1, 10);
+  var_1b5666fb array::thread_all(var_1b5666fb, &function_e52f317f, 1, 10);
   level flag::set("rocket_firing");
   zm_castle_teleporter::function_ee24bc2e();
   level thread function_563e8bc8();
@@ -180,13 +180,13 @@ function function_92008f69(var_ec7cc126) {
   var_f38730c7 = getent("rocket_trap_side_blast_damage_vol", "targetname");
   while(true) {
     if(var_ec7cc126) {
-      array::thread_all(level.activeplayers, & function_76de618f, var_5f1ce845, 1);
-      array::thread_all(getaiteamarray(level.zombie_team), & function_76de618f, var_5f1ce845, 1);
-      array::thread_all(level.activeplayers, & function_76de618f, var_f38730c7, 1);
-      array::thread_all(getaiteamarray(level.zombie_team), & function_76de618f, var_f38730c7, 1);
+      array::thread_all(level.activeplayers, &function_76de618f, var_5f1ce845, 1);
+      array::thread_all(getaiteamarray(level.zombie_team), &function_76de618f, var_5f1ce845, 1);
+      array::thread_all(level.activeplayers, &function_76de618f, var_f38730c7, 1);
+      array::thread_all(getaiteamarray(level.zombie_team), &function_76de618f, var_f38730c7, 1);
     } else {
-      array::thread_all(level.activeplayers, & function_76de618f, var_5f1ce845, 0);
-      array::thread_all(getaiteamarray(level.zombie_team), & function_76de618f, var_5f1ce845, 0);
+      array::thread_all(level.activeplayers, &function_76de618f, var_5f1ce845, 0);
+      array::thread_all(getaiteamarray(level.zombie_team), &function_76de618f, var_5f1ce845, 0);
     }
     wait(0.4);
   }

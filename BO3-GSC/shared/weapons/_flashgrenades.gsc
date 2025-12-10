@@ -14,7 +14,7 @@ function init_shared() {
   level.sound_flash_start = "";
   level.sound_flash_loop = "";
   level.sound_flash_stop = "";
-  callback::on_connect( & monitorflash);
+  callback::on_connect(&monitorflash);
 }
 
 function flashrumbleloop(duration) {

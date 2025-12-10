@@ -26,7 +26,7 @@
 #namespace zm_stalingrad_eye_beam_trap;
 
 function autoexec __init__sytem__() {
-  system::register("zm_stalingrad_eye_beam_trap", & __init__, undefined, undefined);
+  system::register("zm_stalingrad_eye_beam_trap", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -37,7 +37,7 @@ function __init__() {
   foreach(var_12b7bb35 in var_4c2cabd5) {
     var_9bafc533 = struct::get_array(var_12b7bb35.target, "targetname");
     foreach(s_target in var_9bafc533) {
-      s_unitrigger = s_target zm_unitrigger::create_unitrigger("", undefined, & function_a2abac9c, & function_fd8775a2);
+      s_unitrigger = s_target zm_unitrigger::create_unitrigger("", undefined, &function_a2abac9c, &function_fd8775a2);
       s_unitrigger.hint_parm1 = 1500;
       s_unitrigger flag::init("beam_cooldown");
       s_unitrigger flag::init("beam_on");

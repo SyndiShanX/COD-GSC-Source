@@ -11,7 +11,7 @@
 #namespace zm_perk_additionalprimaryweapon;
 
 function autoexec __init__sytem__() {
-  system::register("zm_perk_additionalprimaryweapon", & __init__, undefined, undefined);
+  system::register("zm_perk_additionalprimaryweapon", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -19,9 +19,9 @@ function __init__() {
 }
 
 function enable_additional_primary_weapon_perk_for_level() {
-  zm_perks::register_perk_clientfields("specialty_additionalprimaryweapon", & additional_primary_weapon_client_field_func, & additional_primary_weapon_code_callback_func);
+  zm_perks::register_perk_clientfields("specialty_additionalprimaryweapon", &additional_primary_weapon_client_field_func, &additional_primary_weapon_code_callback_func);
   zm_perks::register_perk_effects("specialty_additionalprimaryweapon", "additionalprimaryweapon_light");
-  zm_perks::register_perk_init_thread("specialty_additionalprimaryweapon", & init_additional_primary_weapon);
+  zm_perks::register_perk_init_thread("specialty_additionalprimaryweapon", &init_additional_primary_weapon);
 }
 
 function init_additional_primary_weapon() {

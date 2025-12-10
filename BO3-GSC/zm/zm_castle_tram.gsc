@@ -29,7 +29,7 @@
 #namespace zm_castle_tram;
 
 function autoexec __init__sytem__() {
-  system::register("zm_castle_tram", & __init__, & __main__, undefined);
+  system::register("zm_castle_tram", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -48,19 +48,19 @@ function __main__() {
   level thread function_3bda7a32();
   level thread function_57f998e3();
   level thread scene::play("p7_fxanim_zm_castle_tram_motor_small_gears_bundle");
-  scene::add_scene_func("p7_fxanim_zm_castle_tram_car_01_down_bundle", & function_310924ec, "init");
-  scene::add_scene_func("p7_fxanim_zm_castle_tram_car_01_start_bundle", & function_3584e778, "play");
-  scene::add_scene_func("p7_fxanim_zm_castle_tram_car_01_a_bundle", & function_3584e778, "play");
-  scene::add_scene_func("p7_fxanim_zm_castle_tram_car_01_b_bundle", & function_3584e778, "play");
-  scene::add_scene_func("p7_fxanim_zm_castle_tram_car_02_a_bundle", & function_3584e778, "play");
-  scene::add_scene_func("p7_fxanim_zm_castle_tram_car_02_b_bundle", & function_3584e778, "play");
+  scene::add_scene_func("p7_fxanim_zm_castle_tram_car_01_down_bundle", &function_310924ec, "init");
+  scene::add_scene_func("p7_fxanim_zm_castle_tram_car_01_start_bundle", &function_3584e778, "play");
+  scene::add_scene_func("p7_fxanim_zm_castle_tram_car_01_a_bundle", &function_3584e778, "play");
+  scene::add_scene_func("p7_fxanim_zm_castle_tram_car_01_b_bundle", &function_3584e778, "play");
+  scene::add_scene_func("p7_fxanim_zm_castle_tram_car_02_a_bundle", &function_3584e778, "play");
+  scene::add_scene_func("p7_fxanim_zm_castle_tram_car_02_b_bundle", &function_3584e778, "play");
 }
 
 function function_e16148c8() {
   s_spawn_pos = struct::get("tram_object_spawn_pos", "targetname");
   level waittill("start_zombie_round_logic");
   exploder::exploder("lgt_tram_car_02_down");
-  level._powerup_timeout_override = & function_ccc738b1;
+  level._powerup_timeout_override = &function_ccc738b1;
   intro_powerup = zm_powerups::specific_powerup_drop("castle_tram_token", struct::get("tram_token_spawn_pos").origin);
   level._powerup_timeout_override = undefined;
   level thread function_7b56c646();
@@ -123,7 +123,7 @@ function function_4173be8d(var_d484b386, var_15872fa7) {
 }
 
 function function_3bda7a32() {
-  scene::add_scene_func("p7_fxanim_zm_castle_tram_car_01_start_bundle", & function_350d7037, "init");
+  scene::add_scene_func("p7_fxanim_zm_castle_tram_car_01_start_bundle", &function_350d7037, "init");
   level.var_f31afb37 = 1;
   level waittill("start_zombie_round_logic");
   level thread function_3fb91800();
@@ -369,7 +369,7 @@ function function_b21df67c(e_player, var_8b961b44) {
   mdl_weapon endon("powerup_timedout");
   mdl_weapon.trigger = spawn_unitrigger(v_spawnpt, 100);
   mdl_weapon.trigger.wpn = var_8b961b44;
-  mdl_weapon.trigger.prompt_and_visibility_func = & weapon_trigger_update_prompt;
+  mdl_weapon.trigger.prompt_and_visibility_func = &weapon_trigger_update_prompt;
   mdl_weapon thread function_cc0d2cc9(var_8b961b44);
   return mdl_weapon;
 }
@@ -419,7 +419,7 @@ function weapon_trigger_update_prompt(player) {
 function function_97f09efd() {
   e_lever = struct::get("tram_call_lever_2", "targetname");
   t_use = spawn_unitrigger(e_lever.origin, 60);
-  t_use.hint_string = & "ZM_CASTLE_TRAM_REQUIRES_TOKEN";
+  t_use.hint_string = &"ZM_CASTLE_TRAM_REQUIRES_TOKEN";
   t_use.var_5be78056 = 0;
   level thread function_8f0015e0();
   while(true) {
@@ -489,7 +489,7 @@ function function_310924ec(a_ents) {
 function function_19b8e1e4(str_message, param1) {
   self.hint_string = str_message;
   zm_unitrigger::unregister_unitrigger(self);
-  zm_unitrigger::register_static_unitrigger(self, & unitrigger_think);
+  zm_unitrigger::register_static_unitrigger(self, &unitrigger_think);
 }
 
 function spawn_unitrigger(origin, radius) {
@@ -498,39 +498,39 @@ function spawn_unitrigger(origin, radius) {
   trigger_stub.radius = radius;
   trigger_stub.cursor_hint = "HINT_NOICON";
   trigger_stub.script_unitrigger_type = "unitrigger_radius_use";
-  trigger_stub.prompt_and_visibility_func = & function_5ea427bf;
-  zm_unitrigger::register_static_unitrigger(trigger_stub, & unitrigger_think);
+  trigger_stub.prompt_and_visibility_func = &function_5ea427bf;
+  zm_unitrigger::register_static_unitrigger(trigger_stub, &unitrigger_think);
   return trigger_stub;
 }
 
 function function_5ea427bf(player) {
-  str_msg = & "";
+  str_msg = &"";
   if(isDefined(self.stub.var_5be78056) && self.stub.var_5be78056) {
     cursor_hint = "HINT_WEAPON";
     cursor_hint_weapon = self.stub.weapon_pickup;
     self setcursorhint(cursor_hint, cursor_hint_weapon);
   } else {
     if(level flag::get("tram_docked") || level flag::get("player_tram_docked")) {
-      self.stub.hint_string = & "ZM_CASTLE_TRAM_DOCKED";
+      self.stub.hint_string = &"ZM_CASTLE_TRAM_DOCKED";
       self sethintstring(self.stub.hint_string);
       return false;
     }
     if(level flag::get("tram_moving")) {
-      self.stub.hint_string = & "ZM_CASTLE_TRAM_MOVING";
+      self.stub.hint_string = &"ZM_CASTLE_TRAM_MOVING";
       self sethintstring(self.stub.hint_string);
       return false;
     }
     if(level flag::get("tram_cooldown")) {
-      self.stub.hint_string = & "ZM_CASTLE_TRAM_COOLDOWN";
+      self.stub.hint_string = &"ZM_CASTLE_TRAM_COOLDOWN";
       self sethintstring(self.stub.hint_string);
       return false;
     }
     if(zm_powerup_castle_tram_token::function_83ef471e(player)) {
-      self.stub.hint_string = & "ZM_CASTLE_TRAM_CALL";
+      self.stub.hint_string = &"ZM_CASTLE_TRAM_CALL";
       self sethintstring(self.stub.hint_string);
       return true;
     }
-    self.stub.hint_string = & "ZM_CASTLE_TRAM_REQUIRES_TOKEN";
+    self.stub.hint_string = &"ZM_CASTLE_TRAM_REQUIRES_TOKEN";
     self sethintstring(self.stub.hint_string);
     return true;
   }
@@ -573,7 +573,7 @@ function function_ccd0cc8e() {
 function function_57f998e3() {
   level waittill("start_zombie_round_logic");
   wait(1);
-  zm_devgui::add_custom_devgui_callback( & function_72d0fbe3);
+  zm_devgui::add_custom_devgui_callback(&function_72d0fbe3);
 }
 
 function function_72d0fbe3(cmd) {

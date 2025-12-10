@@ -14,7 +14,7 @@
 #namespace zm_castle_teleporter;
 
 function autoexec __init__sytem__() {
-  system::register("zm_castle_teleporter", & __init__, undefined, undefined);
+  system::register("zm_castle_teleporter", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -25,10 +25,10 @@ function __init__() {
   level thread wait_for_teleport_aftereffect();
   level._effect["ee_quest_time_travel_ready"] = "dlc1/castle/fx_demon_gate_rune_glow";
   duplicate_render::set_dr_filter_framebuffer("flashback", 90, "flashback_on", "", 0, "mc/mtl_glitch", 0);
-  clientfield::register("world", "ee_quest_time_travel_ready", 5000, 1, "int", & function_ddac47c8, 0, 0);
-  clientfield::register("toplayer", "ee_quest_back_in_time_teleport_fx", 5000, 1, "int", & function_f5cfa4d7, 0, 0);
-  clientfield::register("toplayer", "ee_quest_back_in_time_postfx", 5000, 1, "int", & function_aa99fd7b, 0, 0);
-  clientfield::register("toplayer", "ee_quest_back_in_time_sfx", 5000, 1, "int", & function_a932c4c, 0, 0);
+  clientfield::register("world", "ee_quest_time_travel_ready", 5000, 1, "int", &function_ddac47c8, 0, 0);
+  clientfield::register("toplayer", "ee_quest_back_in_time_teleport_fx", 5000, 1, "int", &function_f5cfa4d7, 0, 0);
+  clientfield::register("toplayer", "ee_quest_back_in_time_postfx", 5000, 1, "int", &function_aa99fd7b, 0, 0);
+  clientfield::register("toplayer", "ee_quest_back_in_time_sfx", 5000, 1, "int", &function_a932c4c, 0, 0);
 }
 
 function function_f5cfa4d7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -89,14 +89,14 @@ function setup_teleport_aftereffects() {
   util::waitforclient(0);
   level.teleport_ae_funcs = [];
   if(getlocalplayers().size == 1) {
-    level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_fov;
+    level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_fov;
   }
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_shellshock;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_shellshock_electric;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_bw_vision;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_red_vision;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_flashy_vision;
-  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = & teleport_aftereffect_flare_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_shellshock;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_shellshock_electric;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_bw_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_red_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_flashy_vision;
+  level.teleport_ae_funcs[level.teleport_ae_funcs.size] = &teleport_aftereffect_flare_vision;
 }
 
 function wait_for_black_box() {

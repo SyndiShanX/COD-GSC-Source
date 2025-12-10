@@ -29,21 +29,21 @@
 function init() {
   clientfield::register("vehicle", "firefly_state", 1, 4, "int");
   clientfield::register("actor", "firefly_state", 1, 4, "int");
-  scene::add_scene_func("p7_fxanim_gp_ability_firefly_launch_bundle", & on_scene_firefly_launch, "play");
-  scene::add_scene_func("p7_fxanim_gp_ability_firebug_launch_bundle", & on_scene_firefly_launch, "play");
+  scene::add_scene_func("p7_fxanim_gp_ability_firefly_launch_bundle", &on_scene_firefly_launch, "play");
+  scene::add_scene_func("p7_fxanim_gp_ability_firebug_launch_bundle", &on_scene_firefly_launch, "play");
 }
 
 function main() {
   cybercom_gadget::registerability(2, 8, 1);
   level.cybercom.firefly_swarm = spawnStruct();
-  level.cybercom.firefly_swarm._is_flickering = & _is_flickering;
-  level.cybercom.firefly_swarm._on_flicker = & _on_flicker;
-  level.cybercom.firefly_swarm._on_give = & _on_give;
-  level.cybercom.firefly_swarm._on_take = & _on_take;
-  level.cybercom.firefly_swarm._on_connect = & _on_connect;
-  level.cybercom.firefly_swarm._on = & _on;
-  level.cybercom.firefly_swarm._off = & _off;
-  level.cybercom.firefly_swarm._is_primed = & _is_primed;
+  level.cybercom.firefly_swarm._is_flickering = &_is_flickering;
+  level.cybercom.firefly_swarm._on_flicker = &_on_flicker;
+  level.cybercom.firefly_swarm._on_give = &_on_give;
+  level.cybercom.firefly_swarm._on_take = &_on_take;
+  level.cybercom.firefly_swarm._on_connect = &_on_connect;
+  level.cybercom.firefly_swarm._on = &_on;
+  level.cybercom.firefly_swarm._off = &_off;
+  level.cybercom.firefly_swarm._is_primed = &_is_primed;
 }
 
 function _is_flickering(slot) {}
@@ -51,8 +51,8 @@ function _is_flickering(slot) {}
 function _on_flicker(slot, weapon) {}
 
 function _on_give(slot, weapon) {
-  self.cybercom.targetlockcb = & _get_valid_targets;
-  self.cybercom.targetlockrequirementcb = & _lock_requirement;
+  self.cybercom.targetlockcb = &_get_valid_targets;
+  self.cybercom.targetlockrequirementcb = &_lock_requirement;
   self thread cybercom::function_b5f4e597(weapon);
   self cybercom::function_8257bcb3("base_rifle", 2);
   self cybercom::function_8257bcb3("fem_rifle", 2);
@@ -225,12 +225,12 @@ function spawn_firefly_swarm(upgraded, targetent, swarms = getdvarint("scr_firef
       swarm.debug.dead = 0;
       swarm initthreatbias();
       swarm.state_machine = statemachine::create("brain", swarm, "swarm_change_state");
-      swarm.state_machine statemachine::add_state("init", & swarm_state_enter, & swarm_init, & swarm_state_cleanup);
-      swarm.state_machine statemachine::add_state("main", & swarm_state_enter, & swarm_main_think, & swarm_state_cleanup);
-      swarm.state_machine statemachine::add_state("move", & swarm_state_enter, & swarm_move_think, & swarm_state_cleanup);
-      swarm.state_machine statemachine::add_state("attack", & swarm_state_enter, & swarm_attack_think, & swarm_state_cleanup);
-      swarm.state_machine statemachine::add_state("hunt", & swarm_state_enter, & swarm_hunt_think, & swarm_state_cleanup);
-      swarm.state_machine statemachine::add_state("dead", & swarm_state_enter, & swarm_dead_think, & swarm_state_cleanup);
+      swarm.state_machine statemachine::add_state("init", &swarm_state_enter, &swarm_init, &swarm_state_cleanup);
+      swarm.state_machine statemachine::add_state("main", &swarm_state_enter, &swarm_main_think, &swarm_state_cleanup);
+      swarm.state_machine statemachine::add_state("move", &swarm_state_enter, &swarm_move_think, &swarm_state_cleanup);
+      swarm.state_machine statemachine::add_state("attack", &swarm_state_enter, &swarm_attack_think, &swarm_state_cleanup);
+      swarm.state_machine statemachine::add_state("hunt", &swarm_state_enter, &swarm_hunt_think, &swarm_state_cleanup);
+      swarm.state_machine statemachine::add_state("dead", &swarm_state_enter, &swarm_dead_think, &swarm_state_cleanup);
       swarm.state_machine statemachine::set_state("init");
       targetent = undefined;
     }

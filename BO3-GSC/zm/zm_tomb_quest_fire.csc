@@ -12,7 +12,7 @@
 #namespace zm_tomb_quest_fire;
 
 function main() {
-  clientfield::register("scriptmover", "barbecue_fx", 21000, 1, "int", & barbecue_fx, 0, 0);
+  clientfield::register("scriptmover", "barbecue_fx", 21000, 1, "int", &barbecue_fx, 0, 0);
 }
 
 function function_f53f6b0a(localclientnum) {

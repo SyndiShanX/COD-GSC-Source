@@ -522,7 +522,7 @@ func_F14C() {
       continue;
     }
 
-    thread lib_0E46::func_48C4("tag_origin", (0, 0, 25), & "EQUIPMENT_SEEKER_RETRIEVE", undefined, 60, 50, undefined, undefined, undefined, & "hud_interaction_prompt_center_equipment", undefined, undefined, undefined, undefined, 90);
+    thread lib_0E46::func_48C4("tag_origin", (0, 0, 25), &"EQUIPMENT_SEEKER_RETRIEVE", undefined, 60, 50, undefined, undefined, undefined, &"hud_interaction_prompt_center_equipment", undefined, undefined, undefined, undefined, 90);
     var_00 = 1;
     var_03 = scripts\engine\utility::waittill_any_return("trigger", "max_ammo", "no_inventory", "set_bt_target");
     if(var_03 == "trigger") {

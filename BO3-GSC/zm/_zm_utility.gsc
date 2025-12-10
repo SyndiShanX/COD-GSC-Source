@@ -774,7 +774,7 @@ function add_poi_attractor(zombie_poi) {
       if(!isDefined(zombie_poi.attractor_positions[i])) {
         continue;
       }
-      if(array_check_for_dupes_using_compare(zombie_poi.claimed_attractor_positions, zombie_poi.attractor_positions[i], & poi_locations_equal)) {
+      if(array_check_for_dupes_using_compare(zombie_poi.claimed_attractor_positions, zombie_poi.attractor_positions[i], &poi_locations_equal)) {
         if(isDefined(zombie_poi.attractor_positions[i][0]) && isDefined(self.origin)) {
           dist = distancesquared(zombie_poi.attractor_positions[i][0], zombie_poi.origin);
           if(dist < best_dist || !isDefined(best_pos)) {
@@ -858,7 +858,7 @@ function invalidate_attractor_pos(attractor_pos, zombie) {
     wait(0.1);
     return undefined;
   }
-  if(isDefined(self.attractor_positions) && !array_check_for_dupes_using_compare(self.attractor_positions, attractor_pos, & poi_locations_equal)) {
+  if(isDefined(self.attractor_positions) && !array_check_for_dupes_using_compare(self.attractor_positions, attractor_pos, &poi_locations_equal)) {
     index = 0;
     for(i = 0; i < self.attractor_positions.size; i++) {
       if(poi_locations_equal(self.attractor_positions[i], attractor_pos)) {
@@ -3586,7 +3586,7 @@ function undo_link_changes() {
   println("");
   println("");
   println("");
-  link_changes_internal( & unlink_nodes_wrapper, & link_nodes_wrapper);
+  link_changes_internal(&unlink_nodes_wrapper, &link_nodes_wrapper);
   delete_spawned_path_nodes();
 }
 
@@ -3595,7 +3595,7 @@ function redo_link_changes() {
   println("");
   println("");
   respawn_path_nodes();
-  link_changes_internal( & link_nodes_wrapper, & unlink_nodes_wrapper);
+  link_changes_internal(&link_nodes_wrapper, &unlink_nodes_wrapper);
 }
 
 function is_gametype_active(a_gametypes) {
@@ -3699,7 +3699,7 @@ function zombie_goto_round(n_target_round) {
   zm::set_round_number(n_target_round - 1);
   zombies = zombie_utility::get_round_enemy_array();
   if(isDefined(zombies)) {
-    array::run_all(zombies, & kill);
+    array::run_all(zombies, &kill);
   }
   level.sndgotoroundoccurred = 1;
   level waittill("between_round_over");

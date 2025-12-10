@@ -53,22 +53,22 @@ function init_craftables() {
   level flag::init("staff_fire_picked_up");
   level flag::init("staff_lightning_picked_up");
   level flag::init("staff_water_picked_up");
-  zm_craftables::add_zombie_craftable("equip_dieseldrone", & "ZM_TOMB_CRQ", & "ZM_TOMB_CRQ", & "ZM_TOMB_TQ", & onfullycrafted_quadrotor, 1);
+  zm_craftables::add_zombie_craftable("equip_dieseldrone", &"ZM_TOMB_CRQ", &"ZM_TOMB_CRQ", &"ZM_TOMB_TQ", &onfullycrafted_quadrotor, 1);
   zm_craftables::add_zombie_craftable_vox_category("equip_dieseldrone", "build_dd");
   zm_craftables::make_zombie_craftable_open("equip_dieseldrone", "veh_t7_dlc_zm_quadrotor", (0, 0, 0), (0, -4, 10));
-  zm_craftables::add_zombie_craftable("elemental_staff_fire", & "ZM_TOMB_CRF", & "ZM_TOMB_INS", & "ZM_TOMB_BOF", & staff_fire_fullycrafted, 1);
+  zm_craftables::add_zombie_craftable("elemental_staff_fire", &"ZM_TOMB_CRF", &"ZM_TOMB_INS", &"ZM_TOMB_BOF", &staff_fire_fullycrafted, 1);
   zm_craftables::add_zombie_craftable_vox_category("elemental_staff_fire", "fire_staff");
-  zm_craftables::add_zombie_craftable("elemental_staff_air", & "ZM_TOMB_CRA", & "ZM_TOMB_INS", & "ZM_TOMB_BOA", & staff_air_fullycrafted, 1);
+  zm_craftables::add_zombie_craftable("elemental_staff_air", &"ZM_TOMB_CRA", &"ZM_TOMB_INS", &"ZM_TOMB_BOA", &staff_air_fullycrafted, 1);
   zm_craftables::add_zombie_craftable_vox_category("elemental_staff_air", "air_staff");
-  zm_craftables::add_zombie_craftable("elemental_staff_lightning", & "ZM_TOMB_CRL", & "ZM_TOMB_INS", & "ZM_TOMB_BOL", & staff_lightning_fullycrafted, 1);
+  zm_craftables::add_zombie_craftable("elemental_staff_lightning", &"ZM_TOMB_CRL", &"ZM_TOMB_INS", &"ZM_TOMB_BOL", &staff_lightning_fullycrafted, 1);
   zm_craftables::add_zombie_craftable_vox_category("elemental_staff_lightning", "light_staff");
-  zm_craftables::add_zombie_craftable("elemental_staff_water", & "ZM_TOMB_CRW", & "ZM_TOMB_INS", & "ZM_TOMB_BOW", & staff_water_fullycrafted, 1);
+  zm_craftables::add_zombie_craftable("elemental_staff_water", &"ZM_TOMB_CRW", &"ZM_TOMB_INS", &"ZM_TOMB_BOW", &staff_water_fullycrafted, 1);
   zm_craftables::add_zombie_craftable_vox_category("elemental_staff_water", "ice_staff");
-  zm_craftables::add_zombie_craftable("gramophone", & "ZM_TOMB_CRAFT_GRAMOPHONE", & "ZM_TOMB_CRAFT_GRAMOPHONE", & "ZM_TOMB_BOUGHT_GRAMOPHONE", undefined, 0);
+  zm_craftables::add_zombie_craftable("gramophone", &"ZM_TOMB_CRAFT_GRAMOPHONE", &"ZM_TOMB_CRAFT_GRAMOPHONE", &"ZM_TOMB_BOUGHT_GRAMOPHONE", undefined, 0);
   zm_craftables::add_zombie_craftable_vox_category("gramophone", "gramophone");
-  level.zombie_craftable_persistent_weapon = & tomb_check_crafted_weapon_persistence;
-  level.custom_craftable_validation = & tomb_custom_craftable_validation;
-  level.zombie_custom_equipment_setup = & setup_quadrotor_purchase;
+  level.zombie_craftable_persistent_weapon = &tomb_check_crafted_weapon_persistence;
+  level.custom_craftable_validation = &tomb_custom_craftable_validation;
+  level.zombie_custom_equipment_setup = &setup_quadrotor_purchase;
   level thread hide_staff_model();
   level.quadrotor_status = spawnStruct();
   level.quadrotor_status.crafted = 0;
@@ -166,9 +166,9 @@ function run_craftables_devgui() {
 
 function include_craftables() {
   craftable_name = "equip_dieseldrone";
-  quadrotor_body = zm_craftables::generate_zombie_craftable_piece(craftable_name, "body", 32, 64, 0, undefined, & onpickup_common, & ondrop_common, undefined, undefined, undefined, undefined, "piece_quadrotor_zm_body", 1, "build_dd", 0);
-  quadrotor_brain = zm_craftables::generate_zombie_craftable_piece(craftable_name, "brain", 32, 64, 0, undefined, & onpickup_common, & ondrop_common, undefined, undefined, undefined, undefined, "piece_quadrotor_zm_brain", 1, "build_dd_brain", 0);
-  quadrotor_engine = zm_craftables::generate_zombie_craftable_piece(craftable_name, "engine", 32, 64, 0, undefined, & onpickup_common, & ondrop_common, undefined, undefined, undefined, undefined, "piece_quadrotor_zm_engine", 1, "build_dd", 0);
+  quadrotor_body = zm_craftables::generate_zombie_craftable_piece(craftable_name, "body", 32, 64, 0, undefined, &onpickup_common, &ondrop_common, undefined, undefined, undefined, undefined, "piece_quadrotor_zm_body", 1, "build_dd", 0);
+  quadrotor_brain = zm_craftables::generate_zombie_craftable_piece(craftable_name, "brain", 32, 64, 0, undefined, &onpickup_common, &ondrop_common, undefined, undefined, undefined, undefined, "piece_quadrotor_zm_brain", 1, "build_dd_brain", 0);
+  quadrotor_engine = zm_craftables::generate_zombie_craftable_piece(craftable_name, "engine", 32, 64, 0, undefined, &onpickup_common, &ondrop_common, undefined, undefined, undefined, undefined, "piece_quadrotor_zm_engine", 1, "build_dd", 0);
   quadrotor_body thread watch_part_pickup("piece_quadrotor_zm_body", 1, "zmInventory.show_maxis_drone_parts_widget");
   quadrotor_brain thread watch_part_pickup("piece_quadrotor_zm_brain", 1, "zmInventory.show_maxis_drone_parts_widget");
   quadrotor_engine thread watch_part_pickup("piece_quadrotor_zm_engine", 1, "zmInventory.show_maxis_drone_parts_widget");
@@ -177,7 +177,7 @@ function include_craftables() {
   quadrotor zm_craftables::add_craftable_piece(quadrotor_body);
   quadrotor zm_craftables::add_craftable_piece(quadrotor_brain);
   quadrotor zm_craftables::add_craftable_piece(quadrotor_engine);
-  quadrotor.triggerthink = & quadrotorcraftable;
+  quadrotor.triggerthink = &quadrotorcraftable;
   zm_craftables::include_zombie_craftable(quadrotor);
   level thread add_craftable_cheat(quadrotor);
   craftable_name = "gramophone";
@@ -204,30 +204,30 @@ function include_craftables() {
   gramophone zm_craftables::add_craftable_piece(vinyl_pickup_ice);
   gramophone zm_craftables::add_craftable_piece(vinyl_pickup_fire);
   gramophone zm_craftables::add_craftable_piece(vinyl_pickup_elec);
-  gramophone.triggerthink = & gramophonecraftable;
+  gramophone.triggerthink = &gramophonecraftable;
   zm_craftables::include_zombie_craftable(gramophone);
   level thread add_craftable_cheat(gramophone);
   craftable_name = "elemental_staff_air";
-  staff_air_gem = zm_craftables::generate_zombie_craftable_piece(craftable_name, "gem", 48, 64, 0, undefined, & onpickup_aircrystal, & ondrop_aircrystal, undefined, undefined, undefined, undefined, 2, 0, "crystal", 1);
-  staff_air_upper_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "upper_staff", 32, 64, 0, undefined, & function_f35af043, & ondrop_common, undefined, undefined, undefined, undefined, "air_staff.piece_zm_ustaff", 1, "staff_part");
-  staff_air_middle_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "middle_staff", 32, 64, 0, undefined, & function_f35af043, & ondrop_common, undefined, undefined, undefined, undefined, "air_staff.piece_zm_mstaff", 1, "staff_part");
-  staff_air_lower_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "lower_staff", 32, 64, 0, undefined, & function_f35af043, & ondrop_common, undefined, undefined, undefined, undefined, "air_staff.piece_zm_lstaff", 1, "staff_part");
+  staff_air_gem = zm_craftables::generate_zombie_craftable_piece(craftable_name, "gem", 48, 64, 0, undefined, &onpickup_aircrystal, &ondrop_aircrystal, undefined, undefined, undefined, undefined, 2, 0, "crystal", 1);
+  staff_air_upper_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "upper_staff", 32, 64, 0, undefined, &function_f35af043, &ondrop_common, undefined, undefined, undefined, undefined, "air_staff.piece_zm_ustaff", 1, "staff_part");
+  staff_air_middle_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "middle_staff", 32, 64, 0, undefined, &function_f35af043, &ondrop_common, undefined, undefined, undefined, undefined, "air_staff.piece_zm_mstaff", 1, "staff_part");
+  staff_air_lower_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "lower_staff", 32, 64, 0, undefined, &function_f35af043, &ondrop_common, undefined, undefined, undefined, undefined, "air_staff.piece_zm_lstaff", 1, "staff_part");
   staff = spawnStruct();
   staff.name = craftable_name;
   staff zm_craftables::add_craftable_piece(staff_air_gem);
   staff zm_craftables::add_craftable_piece(staff_air_upper_staff);
   staff zm_craftables::add_craftable_piece(staff_air_middle_staff);
   staff zm_craftables::add_craftable_piece(staff_air_lower_staff);
-  staff.triggerthink = & staffcraftable_air;
-  staff.custom_craftablestub_update_prompt = & tomb_staff_update_prompt;
+  staff.triggerthink = &staffcraftable_air;
+  staff.custom_craftablestub_update_prompt = &tomb_staff_update_prompt;
   zm_craftables::include_zombie_craftable(staff);
   level thread add_craftable_cheat(staff);
   count_staff_piece_pickup(array(staff_air_upper_staff, staff_air_middle_staff, staff_air_lower_staff));
   craftable_name = "elemental_staff_fire";
-  staff_fire_gem = zm_craftables::generate_zombie_craftable_piece(craftable_name, "gem", 48, 64, 0, undefined, & onpickup_firecrystal, & ondrop_firecrystal, undefined, undefined, undefined, undefined, 1, 0, "crystal", 1);
-  staff_fire_upper_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "upper_staff", 32, 64, 0, undefined, & function_4d932a71, & ondrop_common, undefined, undefined, undefined, undefined, "fire_staff.piece_zm_ustaff", 1, "staff_part");
-  staff_fire_middle_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "middle_staff", 32, 64, 0, undefined, & function_4d932a71, & ondrop_common, undefined, undefined, undefined, undefined, "fire_staff.piece_zm_mstaff", 1, "staff_part");
-  staff_fire_lower_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "lower_staff", 64, 128, 0, undefined, & function_4d932a71, & ondrop_common, undefined, undefined, undefined, undefined, "fire_staff.piece_zm_lstaff", 1, "staff_part");
+  staff_fire_gem = zm_craftables::generate_zombie_craftable_piece(craftable_name, "gem", 48, 64, 0, undefined, &onpickup_firecrystal, &ondrop_firecrystal, undefined, undefined, undefined, undefined, 1, 0, "crystal", 1);
+  staff_fire_upper_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "upper_staff", 32, 64, 0, undefined, &function_4d932a71, &ondrop_common, undefined, undefined, undefined, undefined, "fire_staff.piece_zm_ustaff", 1, "staff_part");
+  staff_fire_middle_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "middle_staff", 32, 64, 0, undefined, &function_4d932a71, &ondrop_common, undefined, undefined, undefined, undefined, "fire_staff.piece_zm_mstaff", 1, "staff_part");
+  staff_fire_lower_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "lower_staff", 64, 128, 0, undefined, &function_4d932a71, &ondrop_common, undefined, undefined, undefined, undefined, "fire_staff.piece_zm_lstaff", 1, "staff_part");
   level thread zm_tomb_main_quest::staff_mechz_drop_pieces(staff_fire_lower_staff);
   level thread zm_tomb_main_quest::staff_biplane_drop_pieces(array(staff_fire_middle_staff));
   level thread zm_tomb_main_quest::staff_unlock_with_zone_capture(staff_fire_upper_staff);
@@ -237,32 +237,32 @@ function include_craftables() {
   staff zm_craftables::add_craftable_piece(staff_fire_upper_staff);
   staff zm_craftables::add_craftable_piece(staff_fire_middle_staff);
   staff zm_craftables::add_craftable_piece(staff_fire_lower_staff);
-  staff.triggerthink = & staffcraftable_fire;
-  staff.custom_craftablestub_update_prompt = & tomb_staff_update_prompt;
+  staff.triggerthink = &staffcraftable_fire;
+  staff.custom_craftablestub_update_prompt = &tomb_staff_update_prompt;
   zm_craftables::include_zombie_craftable(staff);
   level thread add_craftable_cheat(staff);
   count_staff_piece_pickup(array(staff_fire_upper_staff, staff_fire_middle_staff, staff_fire_lower_staff));
   craftable_name = "elemental_staff_lightning";
-  staff_lightning_gem = zm_craftables::generate_zombie_craftable_piece(craftable_name, "gem", 48, 64, 0, undefined, & onpickup_lightningcrystal, & ondrop_lightningcrystal, undefined, undefined, undefined, undefined, 3, 0, "crystal", 1);
-  staff_lightning_upper_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "upper_staff", 32, 64, 0, undefined, & function_47c3d969, & ondrop_common, undefined, undefined, undefined, undefined, "lightning_staff.piece_zm_ustaff", 1, "staff_part");
-  staff_lightning_middle_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "middle_staff", 32, 64, 0, undefined, & function_47c3d969, & ondrop_common, undefined, undefined, undefined, undefined, "lightning_staff.piece_zm_mstaff", 1, "staff_part");
-  staff_lightning_lower_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "lower_staff", 32, 64, 0, undefined, & function_47c3d969, & ondrop_common, undefined, undefined, undefined, undefined, "lightning_staff.piece_zm_lstaff", 1, "staff_part");
+  staff_lightning_gem = zm_craftables::generate_zombie_craftable_piece(craftable_name, "gem", 48, 64, 0, undefined, &onpickup_lightningcrystal, &ondrop_lightningcrystal, undefined, undefined, undefined, undefined, 3, 0, "crystal", 1);
+  staff_lightning_upper_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "upper_staff", 32, 64, 0, undefined, &function_47c3d969, &ondrop_common, undefined, undefined, undefined, undefined, "lightning_staff.piece_zm_ustaff", 1, "staff_part");
+  staff_lightning_middle_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "middle_staff", 32, 64, 0, undefined, &function_47c3d969, &ondrop_common, undefined, undefined, undefined, undefined, "lightning_staff.piece_zm_mstaff", 1, "staff_part");
+  staff_lightning_lower_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "lower_staff", 32, 64, 0, undefined, &function_47c3d969, &ondrop_common, undefined, undefined, undefined, undefined, "lightning_staff.piece_zm_lstaff", 1, "staff_part");
   staff = spawnStruct();
   staff.name = craftable_name;
   staff zm_craftables::add_craftable_piece(staff_lightning_gem);
   staff zm_craftables::add_craftable_piece(staff_lightning_upper_staff);
   staff zm_craftables::add_craftable_piece(staff_lightning_middle_staff);
   staff zm_craftables::add_craftable_piece(staff_lightning_lower_staff);
-  staff.triggerthink = & staffcraftable_lightning;
-  staff.custom_craftablestub_update_prompt = & tomb_staff_update_prompt;
+  staff.triggerthink = &staffcraftable_lightning;
+  staff.custom_craftablestub_update_prompt = &tomb_staff_update_prompt;
   zm_craftables::include_zombie_craftable(staff);
   level thread add_craftable_cheat(staff);
   count_staff_piece_pickup(array(staff_lightning_upper_staff, staff_lightning_middle_staff, staff_lightning_lower_staff));
   craftable_name = "elemental_staff_water";
-  staff_water_gem = zm_craftables::generate_zombie_craftable_piece(craftable_name, "gem", 48, 64, 0, undefined, & onpickup_watercrystal, & ondrop_watercrystal, undefined, undefined, undefined, undefined, 4, 0, "crystal", 1);
-  staff_water_upper_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "upper_staff", 32, 64, 0, undefined, & function_6c091d36, & ondrop_common, undefined, undefined, undefined, undefined, "water_staff.piece_zm_ustaff", 1, "staff_part");
-  staff_water_middle_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "middle_staff", 32, 64, 0, undefined, & function_6c091d36, & ondrop_common, undefined, undefined, undefined, undefined, "water_staff.piece_zm_mstaff", 1, "staff_part");
-  staff_water_lower_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "lower_staff", 32, 64, 0, undefined, & function_6c091d36, & ondrop_common, undefined, undefined, undefined, undefined, "water_staff.piece_zm_lstaff", 1, "staff_part");
+  staff_water_gem = zm_craftables::generate_zombie_craftable_piece(craftable_name, "gem", 48, 64, 0, undefined, &onpickup_watercrystal, &ondrop_watercrystal, undefined, undefined, undefined, undefined, 4, 0, "crystal", 1);
+  staff_water_upper_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "upper_staff", 32, 64, 0, undefined, &function_6c091d36, &ondrop_common, undefined, undefined, undefined, undefined, "water_staff.piece_zm_ustaff", 1, "staff_part");
+  staff_water_middle_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "middle_staff", 32, 64, 0, undefined, &function_6c091d36, &ondrop_common, undefined, undefined, undefined, undefined, "water_staff.piece_zm_mstaff", 1, "staff_part");
+  staff_water_lower_staff = zm_craftables::generate_zombie_craftable_piece(craftable_name, "lower_staff", 32, 64, 0, undefined, &function_6c091d36, &ondrop_common, undefined, undefined, undefined, undefined, "water_staff.piece_zm_lstaff", 1, "staff_part");
   a_ice_staff_parts = array(staff_water_lower_staff, staff_water_middle_staff, staff_water_upper_staff);
   level thread zm_tomb_main_quest::staff_ice_dig_pieces(a_ice_staff_parts);
   staff = spawnStruct();
@@ -271,8 +271,8 @@ function include_craftables() {
   staff zm_craftables::add_craftable_piece(staff_water_upper_staff);
   staff zm_craftables::add_craftable_piece(staff_water_middle_staff);
   staff zm_craftables::add_craftable_piece(staff_water_lower_staff);
-  staff.triggerthink = & staffcraftable_water;
-  staff.custom_craftablestub_update_prompt = & tomb_staff_update_prompt;
+  staff.triggerthink = &staffcraftable_water;
+  staff.custom_craftablestub_update_prompt = &tomb_staff_update_prompt;
   zm_craftables::include_zombie_craftable(staff);
   level thread add_craftable_cheat(staff);
   count_staff_piece_pickup(array(staff_water_upper_staff, staff_water_middle_staff, staff_water_lower_staff));
@@ -394,13 +394,13 @@ function tomb_staff_update_prompt(player, b_set_hint_string_now, trigger) {
   if(isDefined(self.crafted) && self.crafted) {
     return true;
   }
-  self.hint_string = & "ZOMBIE_BUILD_PIECE_MORE";
+  self.hint_string = &"ZOMBIE_BUILD_PIECE_MORE";
   if(isDefined(player)) {
     if(!isDefined(player.current_craftable_pieces) || player.current_craftable_pieces.size < 1) {
       return false;
     }
     if(!self.craftablespawn zm_craftables::craftable_has_piece(player.current_craftable_pieces[0])) {
-      self.hint_string = & "ZOMBIE_BUILD_PIECE_WRONG";
+      self.hint_string = &"ZOMBIE_BUILD_PIECE_WRONG";
       return false;
     }
   }
@@ -431,32 +431,32 @@ function craftable_wait_your_turn() {
 
 function quadrotorcraftable() {
   craftable_wait_your_turn();
-  zm_craftables::craftable_trigger_think("quadrotor_zm_craftable_trigger", "equip_dieseldrone", "equip_dieseldrone", & "ZM_TOMB_TQ", 1, 1);
+  zm_craftables::craftable_trigger_think("quadrotor_zm_craftable_trigger", "equip_dieseldrone", "equip_dieseldrone", &"ZM_TOMB_TQ", 1, 1);
 }
 
 function staffcraftable_air() {
   craftable_wait_your_turn();
-  zm_craftables::craftable_trigger_think("staff_air_craftable_trigger", "elemental_staff_air", "staff_air", & "ZM_TOMB_PUAS", 1, 1);
+  zm_craftables::craftable_trigger_think("staff_air_craftable_trigger", "elemental_staff_air", "staff_air", &"ZM_TOMB_PUAS", 1, 1);
 }
 
 function staffcraftable_fire() {
   craftable_wait_your_turn();
-  zm_craftables::craftable_trigger_think("staff_fire_craftable_trigger", "elemental_staff_fire", "staff_fire", & "ZM_TOMB_PUFS", 1, 1);
+  zm_craftables::craftable_trigger_think("staff_fire_craftable_trigger", "elemental_staff_fire", "staff_fire", &"ZM_TOMB_PUFS", 1, 1);
 }
 
 function staffcraftable_lightning() {
   craftable_wait_your_turn();
-  zm_craftables::craftable_trigger_think("staff_lightning_craftable_trigger", "elemental_staff_lightning", "staff_lightning", & "ZM_TOMB_PULS", 1, 1);
+  zm_craftables::craftable_trigger_think("staff_lightning_craftable_trigger", "elemental_staff_lightning", "staff_lightning", &"ZM_TOMB_PULS", 1, 1);
 }
 
 function staffcraftable_water() {
   craftable_wait_your_turn();
-  zm_craftables::craftable_trigger_think("staff_water_craftable_trigger", "elemental_staff_water", "staff_water", & "ZM_TOMB_PUIS", 1, 1);
+  zm_craftables::craftable_trigger_think("staff_water_craftable_trigger", "elemental_staff_water", "staff_water", &"ZM_TOMB_PUIS", 1, 1);
 }
 
 function gramophonecraftable() {
   craftable_wait_your_turn();
-  zm_craftables::craftable_trigger_think("gramophone_craftable_trigger", "gramophone", "gramophone", & "ZOMBIE_GRAB_GRAMOPHONE", 1, 1);
+  zm_craftables::craftable_trigger_think("gramophone_craftable_trigger", "gramophone", "gramophone", &"ZOMBIE_GRAB_GRAMOPHONE", 1, 1);
 }
 
 function tankcraftableupdateprompt(player, sethintstringnow, buildabletrigger) {
@@ -640,7 +640,7 @@ function onpickup_watercrystal(player) {
 
 function vinyl_add_pickup(str_craftable_name, str_piece_name, str_model_name, str_bit_clientfield, str_quest_clientfield, str_vox_id, var_e46422e8) {
   b_one_time_vo = 1;
-  craftable = zm_craftables::generate_zombie_craftable_piece(str_craftable_name, str_piece_name, 32, 64, 0, undefined, & onpickup_common, & ondrop_common, undefined, undefined, undefined, undefined, str_bit_clientfield, 1, str_vox_id, b_one_time_vo, undefined, 0);
+  craftable = zm_craftables::generate_zombie_craftable_piece(str_craftable_name, str_piece_name, 32, 64, 0, undefined, &onpickup_common, &ondrop_common, undefined, undefined, undefined, undefined, str_bit_clientfield, 1, str_vox_id, b_one_time_vo, undefined, 0);
   craftable thread watch_part_pickup(str_quest_clientfield, 1, var_e46422e8);
   return craftable;
 }
@@ -686,7 +686,7 @@ function watch_staff_pickup() {
 function onfullycrafted_quadrotor(player) {
   level.quadrotor_status.crafted = 1;
   zm_craftables::set_hide_model_if_unavailable("equip_dieseldrone", 1);
-  self.custom_craftablestub_update_prompt = & function_52fbdde1;
+  self.custom_craftablestub_update_prompt = &function_52fbdde1;
   pickup_trig = level.quadrotor_status.pickup_trig;
   level.quadrotor_status.str_zone = zm_zonemgr::get_zone_from_position(pickup_trig.origin, 1);
   pickup_trig.model setModel("veh_t7_dlc_zm_quadrotor");
@@ -698,23 +698,23 @@ function onfullycrafted_quadrotor(player) {
 function function_52fbdde1(player) {
   var_703e6a13 = getweapon("equip_dieseldrone");
   if(player hasweapon(var_703e6a13)) {
-    self.hint_string = & "ZOMBIE_BUILD_PIECE_HAVE_ONE";
+    self.hint_string = &"ZOMBIE_BUILD_PIECE_HAVE_ONE";
     return false;
   }
   players = getplayers();
   for(i = 0; i < players.size; i++) {
     if(players[i] hasweapon(var_703e6a13)) {
-      self.hint_string = & "DLC5_QUADROTOR_UNAVAILABLE";
+      self.hint_string = &"DLC5_QUADROTOR_UNAVAILABLE";
       return false;
     }
   }
   quadrotors = getEntArray("quadrotor_ai", "targetname");
   if(quadrotors.size >= 1) {
-    self.hint_string = & "DLC5_QUADROTOR_UNAVAILABLE";
+    self.hint_string = &"DLC5_QUADROTOR_UNAVAILABLE";
     return false;
   }
   if(level flag::get("quadrotor_cooling_down")) {
-    self.hint_string = & "DLC5_QUADROTOR_COOLDOWN";
+    self.hint_string = &"DLC5_QUADROTOR_COOLDOWN";
     return false;
   }
   return true;

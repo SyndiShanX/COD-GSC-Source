@@ -14,7 +14,7 @@
 #namespace stalingrad_cleanup;
 
 function autoexec __init__sytem__() {
-  system::register("stalingrad_cleanup", & __init__, & __main__, undefined);
+  system::register("stalingrad_cleanup", &__init__, &__main__, undefined);
 }
 
 function __init__() {

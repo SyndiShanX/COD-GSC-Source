@@ -11,7 +11,7 @@
 #namespace zm_fog;
 
 function autoexec __init__sytem__() {
-  system::register("zm_fog", & __init__, & __main__, undefined);
+  system::register("zm_fog", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -86,13 +86,13 @@ function setup_devgui_func(str_devgui_path, str_dvar, n_value, func, n_base_valu
 
 function function_fb5e0a7e() {
   for(i = 0; i < 4; i++) {
-    level thread setup_devgui_func("" + i, "", i, & function_3dec91b9);
+    level thread setup_devgui_func("" + i, "", i, &function_3dec91b9);
   }
   for(i = 0; i < 16; i++) {
-    level thread setup_devgui_func("" + i, "", i, & function_49720b6e);
+    level thread setup_devgui_func("" + i, "", i, &function_49720b6e);
   }
   for(i = 1; i <= 4; i++) {
-    level thread setup_devgui_func("" + i, "", i, & function_124286f7);
+    level thread setup_devgui_func("" + i, "", i, &function_124286f7);
   }
 }
 

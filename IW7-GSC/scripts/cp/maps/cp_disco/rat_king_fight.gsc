@@ -1184,7 +1184,7 @@ item_keep_rotating(param_00) {
 soul_key_pick_up_monitor(param_00) {
   param_00 endon("death");
   param_00 makeusable();
-  param_00 sethintstring( & "CP_DISCO_INTERACTIONS_PICKUP_SOUL_KEY");
+  param_00 sethintstring(&"CP_DISCO_INTERACTIONS_PICKUP_SOUL_KEY");
   for(;;) {
     param_00 waittill("trigger", var_01);
     scripts\cp\zombies\directors_cut::give_dc_player_extra_xp_for_carrying_newb();
@@ -2273,7 +2273,7 @@ rkrelic_hint_func(param_00, param_01) {
 }
 
 rkdebug_hint_func(param_00, param_01) {
-  return & "CP_DISCO_INTERACTIONS_ENTER_THIS_AREA";
+  return &"CP_DISCO_INTERACTIONS_ENTER_THIS_AREA";
 }
 
 userkdebug(param_00, param_01) {}

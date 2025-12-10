@@ -120,7 +120,7 @@ spawn_quadrotor_pickup(v_origin, v_angles) {
   unitrigger_stub.radius = 36;
   unitrigger_stub.height = 256;
   unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
-  unitrigger_stub.hint_string = & "ZM_TOMB_DIHS";
+  unitrigger_stub.hint_string = &"ZM_TOMB_DIHS";
   unitrigger_stub.cursor_hint = "HINT_NOICON";
   unitrigger_stub.require_look_at = 1;
   maps\mp\zombies\_zm_unitrigger::register_static_unitrigger(unitrigger_stub, ::quadrotor_pickup_think);

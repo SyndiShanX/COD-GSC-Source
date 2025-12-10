@@ -21,11 +21,11 @@
 #namespace siegebot;
 
 function autoexec __init__sytem__() {
-  system::register("siegebot", & __init__, undefined, undefined);
+  system::register("siegebot", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  vehicle::add_main_callback("siegebot", & siegebot_initialize);
+  vehicle::add_main_callback("siegebot", &siegebot_initialize);
 }
 
 function siegebot_initialize() {
@@ -45,7 +45,7 @@ function siegebot_initialize() {
   self.goalradius = 9999999;
   self.goalheight = 5000;
   self setgoal(self.origin, 0, self.goalradius, self.goalheight);
-  self.overridevehicledamage = & siegebot_callback_damage;
+  self.overridevehicledamage = &siegebot_callback_damage;
   self siegebot_update_difficulty();
   self setgunnerturretontargetrange(0, self.settings.gunner_turret_on_target_range);
   self asmrequestsubstate("locomotion@movement");
@@ -83,19 +83,19 @@ function siegebot_update_difficulty() {
 
 function defaultrole() {
   self vehicle_ai::init_state_machine_for_role("default");
-  self vehicle_ai::get_state_callbacks("combat").update_func = & state_combat_update;
-  self vehicle_ai::get_state_callbacks("combat").exit_func = & state_combat_exit;
-  self vehicle_ai::get_state_callbacks("driving").update_func = & siegebot_driving;
-  self vehicle_ai::get_state_callbacks("death").update_func = & state_death_update;
-  self vehicle_ai::get_state_callbacks("pain").update_func = & pain_update;
-  self vehicle_ai::get_state_callbacks("emped").enter_func = & emped_enter;
-  self vehicle_ai::get_state_callbacks("emped").update_func = & emped_update;
-  self vehicle_ai::get_state_callbacks("emped").exit_func = & emped_exit;
-  self vehicle_ai::get_state_callbacks("emped").reenter_func = & emped_reenter;
-  self vehicle_ai::add_state("jump", & state_jump_enter, & state_jump_update, & state_jump_exit);
-  vehicle_ai::add_utility_connection("combat", "jump", & state_jump_can_enter);
+  self vehicle_ai::get_state_callbacks("combat").update_func = &state_combat_update;
+  self vehicle_ai::get_state_callbacks("combat").exit_func = &state_combat_exit;
+  self vehicle_ai::get_state_callbacks("driving").update_func = &siegebot_driving;
+  self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
+  self vehicle_ai::get_state_callbacks("pain").update_func = &pain_update;
+  self vehicle_ai::get_state_callbacks("emped").enter_func = &emped_enter;
+  self vehicle_ai::get_state_callbacks("emped").update_func = &emped_update;
+  self vehicle_ai::get_state_callbacks("emped").exit_func = &emped_exit;
+  self vehicle_ai::get_state_callbacks("emped").reenter_func = &emped_reenter;
+  self vehicle_ai::add_state("jump", &state_jump_enter, &state_jump_update, &state_jump_exit);
+  vehicle_ai::add_utility_connection("combat", "jump", &state_jump_can_enter);
   vehicle_ai::add_utility_connection("jump", "combat");
-  self vehicle_ai::add_state("unaware", undefined, & state_unaware_update, undefined);
+  self vehicle_ai::add_state("unaware", undefined, &state_unaware_update, undefined);
   vehicle_ai::startinitialstate("combat");
 }
 

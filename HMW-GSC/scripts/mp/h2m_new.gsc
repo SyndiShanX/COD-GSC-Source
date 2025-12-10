@@ -1,5 +1,5 @@
 main() {
-  // use map vision from start & don't wait for players
+  // use map vision from start &don't wait for players
   replacefunc(maps\mp\gametypes\_gamelogic::matchstarttimerwaitforplayers, ::matchstarttimerwaitforplayers_stub);
 
   // use new freeze when game ends

@@ -16,8 +16,8 @@
 #namespace bot_ctf;
 
 function init() {
-  level.onbotconnect = & on_bot_connect;
-  level.botidle = & bot_idle;
+  level.onbotconnect = &on_bot_connect;
+  level.botidle = &bot_idle;
 }
 
 function on_bot_connect() {

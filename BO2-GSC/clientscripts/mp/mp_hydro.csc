@@ -127,7 +127,7 @@ water_killstreak_fx(localclientnum) {
         continue;
       }
       foreach(ent in ents) {
-        if(player.eflags2 & airborne) {
+        if(player.eflags2 &airborne) {
           if(!isDefined(ent.loopfx[localclientnum]))
             ent.loopfx[localclientnum] = playFX(localclientnum, level._effect[ent.v["fxid"]], ent.v["origin"], ent.v["forward"], ent.v["up"]);
 

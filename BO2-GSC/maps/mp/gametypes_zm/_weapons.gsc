@@ -865,7 +865,7 @@ turngrenadeintoadud(weapname, isthrowngrenade, player) {
       if(!timeleft)
         timeleft = 1;
 
-      player iprintlnbold(&"MP_LAUNCHER_UNAVAILABLE_FOR_N", " " + timeleft + " ", & "EXE_SECONDS");
+      player iprintlnbold(&"MP_LAUNCHER_UNAVAILABLE_FOR_N", " " + timeleft + " ", &"EXE_SECONDS");
       self makegrenadedud();
     }
   } else if(level.throwngrenadedudtime >= maps\mp\gametypes_zm\_globallogic_utils::gettimepassed() / 1000 && isthrowngrenade) {
@@ -878,7 +878,7 @@ turngrenadeintoadud(weapname, isthrowngrenade, player) {
       if(!timeleft)
         timeleft = 1;
 
-      player iprintlnbold(&"MP_GRENADE_UNAVAILABLE_FOR_N", " " + timeleft + " ", & "EXE_SECONDS");
+      player iprintlnbold(&"MP_GRENADE_UNAVAILABLE_FOR_N", " " + timeleft + " ", &"EXE_SECONDS");
       self makegrenadedud();
     }
   }

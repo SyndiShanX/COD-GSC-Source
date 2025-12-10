@@ -8,7 +8,7 @@
 #namespace rewindobjects;
 
 function autoexec __init__sytem__() {
-  system::register("rewindobjects", & __init__, undefined, undefined);
+  system::register("rewindobjects", &__init__, undefined, undefined);
 }
 
 function __init__() {

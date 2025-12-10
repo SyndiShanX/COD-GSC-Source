@@ -30,12 +30,12 @@
 #namespace loadout;
 
 function autoexec __init__sytem__() {
-  system::register("loadout", & __init__, undefined, undefined);
+  system::register("loadout", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::on_start_gametype( & init);
-  callback::on_connect( & on_connect);
+  callback::on_start_gametype(&init);
+  callback::on_connect(&on_connect);
 }
 
 function on_connect() {}
@@ -290,8 +290,8 @@ function init() {
       }
     }
   }
-  callback::on_connecting( & on_player_connecting);
-  callback::add_weapon_damage(level.weaponspecialdiscgun, & on_damage_special_discgun);
+  callback::on_connecting(&on_player_connecting);
+  callback::add_weapon_damage(level.weaponspecialdiscgun, &on_damage_special_discgun);
 }
 
 function on_damage_special_discgun(eattacker, einflictor, weapon, meansofdeath, damage) {

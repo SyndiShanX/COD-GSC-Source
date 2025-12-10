@@ -42,7 +42,7 @@ cp_rave_onzombiedamaged(param_00, param_01, param_02, param_03, param_04, param_
   var_17 = isDefined(param_01) && isplayer(param_01);
   var_18 = var_16 && scripts\cp\utility::isheadshot(param_05, param_08, param_04, param_01);
   var_19 = scripts\engine\utility::istrue(self.battleslid);
-  var_1A = scripts\engine\utility::istrue(level.insta_kill) && !var_0E && !var_10 & !var_0F;
+  var_1A = scripts\engine\utility::istrue(level.insta_kill) && !var_0E && !var_10 &!var_0F;
   var_1B = !var_13 && var_18 && var_16 && param_01 scripts\cp\utility::is_consumable_active("headshot_explosion");
   var_1C = (param_04 == "MOD_EXPLOSIVE_BULLET" && isDefined(param_08) && param_08 == "none") || param_04 == "MOD_EXPLOSIVE" || param_04 == "MOD_GRENADE_SPLASH" || param_04 == "MOD_PROJECTILE" || param_04 == "MOD_PROJECTILE_SPLASH";
   var_1D = var_12 && param_01 scripts\cp\utility::is_consumable_active("increased_melee_damage");

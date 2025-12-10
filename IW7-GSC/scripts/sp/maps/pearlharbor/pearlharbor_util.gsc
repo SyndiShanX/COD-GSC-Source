@@ -1557,7 +1557,7 @@ func_A5E4() {
 
 func_2C16() {
   scripts\sp\names::func_7B05();
-  self _meth_8307(self.name, & "");
+  self _meth_8307(self.name, &"");
 }
 
 func_2C15() {

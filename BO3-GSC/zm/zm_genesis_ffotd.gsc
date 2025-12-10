@@ -20,7 +20,7 @@
 function main_start() {
   var_6674aa0f = struct::get("upper_courtyard_landing_pad12");
   var_6674aa0f.origin = var_6674aa0f.origin + vectorscale((1, 0, 0), 30);
-  level.var_2d0e5eb6 = & function_8921895f;
+  level.var_2d0e5eb6 = &function_8921895f;
   level.var_92a78c17 = spawn("trigger_box", (101, -6298, -625), 0, 425, 178, 520);
   level.var_92a78c17.angles = vectorscale((0, 1, 0), 317.8);
 }

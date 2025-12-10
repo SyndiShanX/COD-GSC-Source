@@ -80,7 +80,7 @@ function open_right_curtain() {
 function lower_movie_screen() {
   var_d647fedd = getEntArray("movie_screen", "targetname");
   var_d647fedd[0] playSound("evt_screen_lower");
-  array::run_all(var_d647fedd, & movez, -466, 6);
+  array::run_all(var_d647fedd, &movez, -466, 6);
   wait(8);
   level clientfield::set("zm_theater_screen_in_place", 1);
   util::clientnotify("sip");
@@ -103,7 +103,7 @@ function movie_reels_init() {
   temp_reels_0 = arraycombine(clean_bedroom_reels, bear_bedroom_reels, 0, 0);
   temp_reels_1 = arraycombine(interrogation_reels, pentagon_reels, 0, 0);
   all_reels = arraycombine(temp_reels_0, temp_reels_1, 0, 0);
-  array::thread_all(all_reels, & movie_reels);
+  array::thread_all(all_reels, &movie_reels);
   level thread movie_projector_reel_change();
 }
 

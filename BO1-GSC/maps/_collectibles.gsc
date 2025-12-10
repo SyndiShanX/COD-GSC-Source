@@ -144,7 +144,7 @@ collectible_achievement_unlock() {
 
 collectibleNotify(Unlock, num_found) {
   notifyData = spawnStruct();
-  notifyData.notifyText = & "SCRIPT_COLLECTIBLE";
+  notifyData.notifyText = &"SCRIPT_COLLECTIBLE";
   notifyData.sound = undefined;
   self maps\_hud_message::notifyMessage(notifyData);
 }

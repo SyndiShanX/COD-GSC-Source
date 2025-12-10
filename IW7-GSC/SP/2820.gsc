@@ -21,28 +21,28 @@ func_94F9() {
   var_01 = scripts\engine\utility::getstructarray("equipment_pickup", "targetname");
   scripts\engine\utility::array_thread(var_00, ::func_4842, "ammo");
   scripts\engine\utility::array_thread(var_01, ::func_4842, "equipment");
-  precachestring( & "EQUIPMENT_PICKUP_SEEKER");
-  precachestring( & "EQUIPMENT_PICKUP_SHIELD");
-  precachestring( & "EQUIPMENT_PICKUP_EMP");
-  precachestring( & "EQUIPMENT_PICKUP_ANTIGRAV");
-  precachestring( & "EQUIPMENT_PICKUP_DRONE");
-  precachestring( & "EQUIPMENT_PICKUP_FRAG");
-  precachestring( & "EQUIPMENT_PICKUP_HACK");
-  precachestring( & "EQUIPMENT_PICKUP_COVER");
-  precachestring( & "EQUIPMENT_PICKUP_NANOSHOT");
-  precachestring( & "EQUIPMENT_PICKUP_HELMET");
-  precachestring( & "EQUIPMENT_FULL_SEEKER");
-  precachestring( & "EQUIPMENT_FULL_SHIELD");
-  precachestring( & "EQUIPMENT_FULL_EMP");
-  precachestring( & "EQUIPMENT_FULL_ANTIGRAV");
-  precachestring( & "EQUIPMENT_FULL_DRONE");
-  precachestring( & "EQUIPMENT_FULL_FRAG");
-  precachestring( & "EQUIPMENT_FULL_HACK");
-  precachestring( & "EQUIPMENT_FULL_COVER");
-  precachestring( & "EQUIPMENT_FULL_NANOSHOT");
-  precachestring( & "EQUIPMENT_FULL_HELMET");
+  precachestring(&"EQUIPMENT_PICKUP_SEEKER");
+  precachestring(&"EQUIPMENT_PICKUP_SHIELD");
+  precachestring(&"EQUIPMENT_PICKUP_EMP");
+  precachestring(&"EQUIPMENT_PICKUP_ANTIGRAV");
+  precachestring(&"EQUIPMENT_PICKUP_DRONE");
+  precachestring(&"EQUIPMENT_PICKUP_FRAG");
+  precachestring(&"EQUIPMENT_PICKUP_HACK");
+  precachestring(&"EQUIPMENT_PICKUP_COVER");
+  precachestring(&"EQUIPMENT_PICKUP_NANOSHOT");
+  precachestring(&"EQUIPMENT_PICKUP_HELMET");
+  precachestring(&"EQUIPMENT_FULL_SEEKER");
+  precachestring(&"EQUIPMENT_FULL_SHIELD");
+  precachestring(&"EQUIPMENT_FULL_EMP");
+  precachestring(&"EQUIPMENT_FULL_ANTIGRAV");
+  precachestring(&"EQUIPMENT_FULL_DRONE");
+  precachestring(&"EQUIPMENT_FULL_FRAG");
+  precachestring(&"EQUIPMENT_FULL_HACK");
+  precachestring(&"EQUIPMENT_FULL_COVER");
+  precachestring(&"EQUIPMENT_FULL_NANOSHOT");
+  precachestring(&"EQUIPMENT_FULL_HELMET");
   scripts\engine\utility::flag_init("heavy_weapon_refilled");
-  scripts\sp\utility::func_16EB("heavy_weapon_refill", & "WEAPON_CACHE_HEAVY_WEAPON_HINT", ::func_8CF7);
+  scripts\sp\utility::func_16EB("heavy_weapon_refill", &"WEAPON_CACHE_HEAVY_WEAPON_HINT", ::func_8CF7);
 }
 
 spawn_equipment_crate(param_00, param_01, param_02, param_03) {
@@ -106,7 +106,7 @@ func_4842(param_00, param_01) {
     }
   }
 
-  var_06 = & "WEAPON_CACHE_USE_HINT";
+  var_06 = &"WEAPON_CACHE_USE_HINT";
   if(param_00 == "equipment") {
     if(isDefined(var_02.weapon_name) && var_02.weapon_name == "nanoshot" || var_02.weapon_name == "helmet") {
       var_02.can_save = 1;
@@ -129,9 +129,9 @@ func_4842(param_00, param_01) {
     if(param_00 == "ammo") {
       var_02.var_74B3 = 0;
       if(isstruct(self)) {
-        var_02 lib_0E46::func_48C4(undefined, undefined, var_06, 40, 300, undefined, 1, undefined, undefined, & "hud_interaction_prompt_center_ammo");
+        var_02 lib_0E46::func_48C4(undefined, undefined, var_06, 40, 300, undefined, 1, undefined, undefined, &"hud_interaction_prompt_center_ammo");
       } else {
-        var_02 lib_0E46::func_48C4("tag_origin", (0, 0, 50), var_06, 40, 300, undefined, 1, undefined, undefined, & "hud_interaction_prompt_center_ammo");
+        var_02 lib_0E46::func_48C4("tag_origin", (0, 0, 50), var_06, 40, 300, undefined, 1, undefined, undefined, &"hud_interaction_prompt_center_ammo");
       }
     }
 
@@ -317,8 +317,8 @@ func_484C(param_00, param_01) {
       var_02.var_3860 = 1;
       if(param_01 == "ammo") {
         var_02.var_74B3 = 0;
-        var_04 = & "WEAPON_CACHE_USE_HINT";
-        var_02 lib_0E46::func_48C4(undefined, undefined, var_04, 40, 300, undefined, 1, undefined, undefined, & "hud_interaction_prompt_center_ammo");
+        var_04 = &"WEAPON_CACHE_USE_HINT";
+        var_02 lib_0E46::func_48C4(undefined, undefined, var_04, 40, 300, undefined, 1, undefined, undefined, &"hud_interaction_prompt_center_ammo");
       }
 
       level.player notify("picked_up_equipment");
@@ -433,57 +433,57 @@ func_4847() {
   wait(0.15);
   switch (self.weapon_name) {
     case "frag":
-      var_01 = & "EQUIPMENT_PICKUP_FRAG";
-      var_09 = func_4843("primary", self.weapon_name, & "EQUIPMENT_FULL_FRAG");
+      var_01 = &"EQUIPMENT_PICKUP_FRAG";
+      var_09 = func_4843("primary", self.weapon_name, &"EQUIPMENT_FULL_FRAG");
       break;
 
     case "emp":
-      var_01 = & "EQUIPMENT_PICKUP_EMP";
-      var_09 = func_4843("primary", self.weapon_name, & "EQUIPMENT_FULL_EMP");
+      var_01 = &"EQUIPMENT_PICKUP_EMP";
+      var_09 = func_4843("primary", self.weapon_name, &"EQUIPMENT_FULL_EMP");
       break;
 
     case "antigrav":
-      var_01 = & "EQUIPMENT_PICKUP_ANTIGRAV";
-      var_09 = func_4843("primary", self.weapon_name, & "EQUIPMENT_FULL_ANTIGRAV");
+      var_01 = &"EQUIPMENT_PICKUP_ANTIGRAV";
+      var_09 = func_4843("primary", self.weapon_name, &"EQUIPMENT_FULL_ANTIGRAV");
       break;
 
     case "seeker":
-      var_01 = & "EQUIPMENT_PICKUP_SEEKER";
-      var_09 = func_4843("primary", self.weapon_name, & "EQUIPMENT_FULL_SEEKER");
+      var_01 = &"EQUIPMENT_PICKUP_SEEKER";
+      var_09 = func_4843("primary", self.weapon_name, &"EQUIPMENT_FULL_SEEKER");
       break;
 
     case "nanoshot":
-      var_01 = & "EQUIPMENT_PICKUP_NANOSHOT";
-      var_09 = func_4843("primary", self.weapon_name, & "EQUIPMENT_FULL_NANOSHOT");
+      var_01 = &"EQUIPMENT_PICKUP_NANOSHOT";
+      var_09 = func_4843("primary", self.weapon_name, &"EQUIPMENT_FULL_NANOSHOT");
       break;
 
     case "supportdrone":
-      var_01 = & "EQUIPMENT_PICKUP_DRONE";
-      var_09 = func_4843("secondary", self.weapon_name, & "EQUIPMENT_FULL_DRONE");
+      var_01 = &"EQUIPMENT_PICKUP_DRONE";
+      var_09 = func_4843("secondary", self.weapon_name, &"EQUIPMENT_FULL_DRONE");
       var_00 = 2;
       break;
 
     case "offhandshield":
-      var_01 = & "EQUIPMENT_PICKUP_SHIELD";
-      var_09 = func_4843("secondary", self.weapon_name, & "EQUIPMENT_FULL_SHIELD");
+      var_01 = &"EQUIPMENT_PICKUP_SHIELD";
+      var_09 = func_4843("secondary", self.weapon_name, &"EQUIPMENT_FULL_SHIELD");
       var_00 = 2;
       break;
 
     case "hackingdevice":
-      var_01 = & "EQUIPMENT_PICKUP_HACK";
-      var_09 = func_4843("secondary", self.weapon_name, & "EQUIPMENT_FULL_HACK");
+      var_01 = &"EQUIPMENT_PICKUP_HACK";
+      var_09 = func_4843("secondary", self.weapon_name, &"EQUIPMENT_FULL_HACK");
       var_00 = 2;
       break;
 
     case "coverwall":
-      var_01 = & "EQUIPMENT_PICKUP_COVER";
-      var_09 = func_4843("secondary", self.weapon_name, & "EQUIPMENT_FULL_COVER");
+      var_01 = &"EQUIPMENT_PICKUP_COVER";
+      var_09 = func_4843("secondary", self.weapon_name, &"EQUIPMENT_FULL_COVER");
       var_00 = 2;
       break;
 
     case "helmet":
-      var_01 = & "EQUIPMENT_PICKUP_HELMET";
-      var_09 = func_4843("secondary", self.weapon_name, & "EQUIPMENT_FULL_HELMET");
+      var_01 = &"EQUIPMENT_PICKUP_HELMET";
+      var_09 = func_4843("secondary", self.weapon_name, &"EQUIPMENT_FULL_HELMET");
       var_00 = 2;
       break;
   }
@@ -785,7 +785,7 @@ func_4845() {
   self endon("remove_pickup_cache");
   self endon("out_of_ammo");
   var_00 = func_4844();
-  lib_0E46::func_48C4(undefined, (0, 0, 4), var_00, 40, 300, undefined, undefined, undefined, undefined, & "hud_interaction_prompt_center_equipment");
+  lib_0E46::func_48C4(undefined, (0, 0, 4), var_00, 40, 300, undefined, undefined, undefined, undefined, &"hud_interaction_prompt_center_equipment");
   for(;;) {
     while(distancesquared(self.origin, level.player.origin) < squared(500) && level.player.var_13102 == 0 && self.var_3860) {
       func_484A();
@@ -793,7 +793,7 @@ func_4845() {
       thread lib_0E46::func_DFE3();
       self waittill("hint_destroyed");
       if(self.var_3860) {
-        lib_0E46::func_48C4(undefined, (0, 0, 4), var_00, 40, 300, undefined, undefined, undefined, 0, & "hud_interaction_prompt_center_equipment");
+        lib_0E46::func_48C4(undefined, (0, 0, 4), var_00, 40, 300, undefined, undefined, undefined, 0, &"hud_interaction_prompt_center_equipment");
         level.player scripts\engine\utility::waittill_any_3("picked_up_equipment", "equipment_change", "hackingdevice_end", "offhand_ammo", "item_ammo");
       }
     }

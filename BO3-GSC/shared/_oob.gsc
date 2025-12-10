@@ -11,7 +11,7 @@
 #namespace oob;
 
 function autoexec __init__sytem__() {
-  system::register("out_of_bounds", & __init__, undefined, undefined);
+  system::register("out_of_bounds", &__init__, undefined, undefined);
 }
 
 function __init__() {

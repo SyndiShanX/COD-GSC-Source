@@ -513,7 +513,7 @@ makereviveentity(var_00, var_01, var_02, var_03, var_04) {
   var_01 = scripts\engine\utility::drop_to_ground(var_01 + var_05, 32, -64);
   var_06 = spawn("script_model", var_01);
   var_06 setcursorhint("HINT_NOICON");
-  var_06 sethintstring( & "PLATFORM_REVIVE");
+  var_06 sethintstring(&"PLATFORM_REVIVE");
   var_6.owner = var_00;
   var_6.inuse = 0;
   var_6.targetname = "revive_trigger";

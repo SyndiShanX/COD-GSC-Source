@@ -18,12 +18,12 @@
 #namespace zm_tomb_ee_main_step_6;
 
 function init() {
-  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_6", & init_stage, & stage_logic, & exit_stage);
+  zm_sidequests::declare_sidequest_stage("little_girl_lost", "step_6", &init_stage, &stage_logic, &exit_stage);
 }
 
 function init_stage() {
   level._cur_stage_name = "step_6";
-  zm_spawner::add_custom_zombie_spawn_logic( & ruins_fist_glow_monitor);
+  zm_spawner::add_custom_zombie_spawn_logic(&ruins_fist_glow_monitor);
 }
 
 function stage_logic() {
@@ -89,7 +89,7 @@ function spawn_punch_upgrade_tablet(v_origin, e_player) {
     foreach(zombie in a_zombies) {
       if(distance2dsquared(e_player.origin, zombie.origin) < 65536 && (!(isDefined(zombie.is_mechz) && zombie.is_mechz)) && (!(isDefined(zombie.missinglegs) && zombie.missinglegs)) && (isDefined(zombie.completed_emerging_into_playable_area) && zombie.completed_emerging_into_playable_area)) {
         zombie.v_punched_from = e_player.origin;
-        zombie animcustom( & _zm_weap_one_inch_punch::knockdown_zombie_animate);
+        zombie animcustom(&_zm_weap_one_inch_punch::knockdown_zombie_animate);
       }
     }
     wait(1);

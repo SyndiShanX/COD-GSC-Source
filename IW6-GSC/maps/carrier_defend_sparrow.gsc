@@ -53,8 +53,8 @@ defend_sparrow_pre_load() {
   precachestring(&"CARRIER_USE_SPARROW_CONSOLE");
   precachestring(&"CARRIER_SPARROW_FIRE");
   precachestring(&"CARRIER_SPARROW_FIRE_PC");
-  maps\_utility::add_hint_string("fire_sparrow", & "CARRIER_SPARROW_FIRE");
-  maps\_utility::add_hint_string("fire_sparrow_pc", & "CARRIER_SPARROW_FIRE_PC");
+  maps\_utility::add_hint_string("fire_sparrow", &"CARRIER_SPARROW_FIRE");
+  maps\_utility::add_hint_string("fire_sparrow_pc", &"CARRIER_SPARROW_FIRE_PC");
   precacherumble("ac130_40mm_fire");
   precachemodel("crr_laptop_toughbook_obj");
   precacheitem("ac130_25mm_carrier");
@@ -186,7 +186,7 @@ sparrow_dead_operator() {
   var_0.ignoreall = 1;
   var_0.ignoreme = 1;
   var_0.diequietly = 1;
-  var_0 setlookattext("", & "");
+  var_0 setlookattext("", &"");
   var_0.name = "";
   var_0 setCanDamage(0);
   var_0.a.nodeath = 1;

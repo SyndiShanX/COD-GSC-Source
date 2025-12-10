@@ -25,7 +25,7 @@
 #namespace zm_island_portals;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_portals", & __init__, undefined, undefined);
+  system::register("zm_genesis_portals", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -37,7 +37,7 @@ function __init__() {
   clientfield::register("world", "portal_state_ending_3", 9000, 1, "int");
   clientfield::register("world", "pulse_ee_boat_portal_top", 9000, 1, "counter");
   clientfield::register("world", "pulse_ee_boat_portal_bottom", 9000, 1, "counter");
-  visionset_mgr::register_info("overlay", "zm_zod_transported", 9000, 20, 15, 1, & visionset_mgr::duration_lerp_thread_per_player, 0);
+  visionset_mgr::register_info("overlay", "zm_zod_transported", 9000, 20, 15, 1, &visionset_mgr::duration_lerp_thread_per_player, 0);
 }
 
 function function_16616103() {}
@@ -68,8 +68,8 @@ function create_portal(str_id, var_fc699b20, var_776628b2) {
     s_loc.unitrigger_stub.script_length = length;
     s_loc.unitrigger_stub.require_look_at = 0;
     s_loc.unitrigger_stub.str_areaname = str_areaname;
-    s_loc.unitrigger_stub.prompt_and_visibility_func = & function_16fca6d;
-    zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, & function_a90ab0d7);
+    s_loc.unitrigger_stub.prompt_and_visibility_func = &function_16fca6d;
+    zm_unitrigger::register_static_unitrigger(s_loc.unitrigger_stub, &function_a90ab0d7);
   } else {
     if(isDefined(var_776628b2)) {
       level flag::wait_till(var_776628b2);
@@ -179,7 +179,7 @@ function portal_teleport_player(player, show_fx = 1) {
   stand_offset = (0, 0, 0);
   a_ai_enemies = getaiteamarray("axis");
   a_ai_enemies = arraysort(a_ai_enemies, self.origin, 1, 99, 768);
-  array::thread_all(a_ai_enemies, & ai_delay_cleanup);
+  array::thread_all(a_ai_enemies, &ai_delay_cleanup);
   level.n_cleanup_manager_restart_time = 2 + 15;
   level.n_cleanup_manager_restart_time = level.n_cleanup_manager_restart_time + (gettime() / 1000);
   image_room = struct::get("teleport_room_" + n_pos, "targetname");

@@ -13,7 +13,7 @@
 #namespace zm_bgb_burned_out;
 
 function autoexec __init__sytem__() {
-  system::register("zm_bgb_burned_out", & __init__, undefined, undefined);
+  system::register("zm_bgb_burned_out", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -21,10 +21,10 @@ function __init__() {
     return;
   }
   bgb::register("zm_bgb_burned_out", "event");
-  clientfield::register("toplayer", ("zm_bgb_burned_out" + "_1p") + "toplayer", 1, 1, "counter", & function_9c2ec371, 0, 0);
-  clientfield::register("allplayers", ("zm_bgb_burned_out" + "_3p") + "_allplayers", 1, 1, "counter", & function_c8cfe3c0, 0, 0);
-  clientfield::register("actor", ("zm_bgb_burned_out" + "_fire_torso") + "_actor", 1, 1, "counter", & function_34caa903, 0, 0);
-  clientfield::register("vehicle", ("zm_bgb_burned_out" + "_fire_torso") + "_vehicle", 1, 1, "counter", & function_69abda16, 0, 0);
+  clientfield::register("toplayer", ("zm_bgb_burned_out" + "_1p") + "toplayer", 1, 1, "counter", &function_9c2ec371, 0, 0);
+  clientfield::register("allplayers", ("zm_bgb_burned_out" + "_3p") + "_allplayers", 1, 1, "counter", &function_c8cfe3c0, 0, 0);
+  clientfield::register("actor", ("zm_bgb_burned_out" + "_fire_torso") + "_actor", 1, 1, "counter", &function_34caa903, 0, 0);
+  clientfield::register("vehicle", ("zm_bgb_burned_out" + "_fire_torso") + "_vehicle", 1, 1, "counter", &function_69abda16, 0, 0);
   level._effect["zm_bgb_burned_out" + "_1p"] = "zombie/fx_bgb_burned_out_1p_zmb";
   level._effect["zm_bgb_burned_out" + "_3p"] = "zombie/fx_bgb_burned_out_3p_zmb";
   level._effect["zm_bgb_burned_out" + "_fire_torso"] = "zombie/fx_bgb_burned_out_fire_torso_zmb";

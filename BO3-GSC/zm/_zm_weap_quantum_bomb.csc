@@ -10,11 +10,11 @@
 #namespace zm_weap_quantum_bomb;
 
 function autoexec __init__sytem__() {
-  system::register("zm_weap_quantum_bomb", & __init__, undefined, undefined);
+  system::register("zm_weap_quantum_bomb", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  callback::add_weapon_type(getweapon("quantum_bomb"), & quantum_bomb_spawned);
+  callback::add_weapon_type(getweapon("quantum_bomb"), &quantum_bomb_spawned);
   level._effect["quantum_bomb_viewmodel_twist"] = "dlc5/zmb_weapon/fx_twist";
   level._effect["quantum_bomb_viewmodel_press"] = "dlc5/zmb_weapon/fx_press";
   level thread quantum_bomb_notetrack_think();

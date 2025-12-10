@@ -319,7 +319,7 @@ level_end_save() {
   }
   flag_set("game_saving");
   imagename = "levelshots / autosave / autosave_" + level.script + "end";
-  saveGame("levelend", & "AUTOSAVE_AUTOSAVE", imagename, true);
+  saveGame("levelend", &"AUTOSAVE_AUTOSAVE", imagename, true);
   flag_clear("game_saving");
 }
 
@@ -2533,7 +2533,7 @@ add_start(msg, func, loc_string) {
     precachestring(loc_string);
     level.start_loc_string[msg] = loc_string;
   } else {
-    level.start_loc_string[msg] = & "MISSING_LOC_STRING";
+    level.start_loc_string[msg] = &"MISSING_LOC_STRING";
   }
 }
 

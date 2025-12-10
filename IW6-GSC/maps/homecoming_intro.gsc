@@ -775,7 +775,7 @@ wounded_carry_guy() {
   var_2 = var_1 maps\_utility::spawn_ai();
   var_2 useanimtree(#animtree);
   var_2.name = "Pvt. Gavin";
-  var_2 setlookattext("Pvt. Gavin", & "");
+  var_2 setlookattext("Pvt. Gavin", &"");
   var_2 thread maps\_utility::magic_bullet_shield();
   var_2 maps\homecoming_drones::drone_gun_remove();
   thread maps\_utility::magic_bullet_shield();

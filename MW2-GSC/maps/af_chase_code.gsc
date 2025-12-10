@@ -453,7 +453,7 @@ bread_crumb_fail() {
 
     // Shepherd got away.
     level notify("stop_deadquote_for_gettingout_of_bounds");
-  SetDvar("ui_deadquote", & "AF_CHASE_MISSION_FAILED_KEEP_UP");
+  SetDvar("ui_deadquote", &"AF_CHASE_MISSION_FAILED_KEEP_UP");
   if(level.start_point != "test_boat_current")
     missionFailedWrapper();
 }
@@ -2372,7 +2372,7 @@ trigger_open_area() {
       flag_set("player_in_open"); // done every frame to support overlap.
       level notify("new_quote_string");
       // Stay clear of open areas as much as possible!
-      SetDvar("ui_deadquote", & "AF_CHASE_MISSION_FAILED_IN_THE_OPEN");
+      SetDvar("ui_deadquote", &"AF_CHASE_MISSION_FAILED_IN_THE_OPEN");
       wait .05;
     }
   }

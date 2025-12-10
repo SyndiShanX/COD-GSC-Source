@@ -14,7 +14,7 @@ init() {
 
 func_128FD(param_00, param_01) {
   if(isDefined(level.reminder_reaction_pointat)) {
-    self iprintlnbold( & "KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+    self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
   }
 
@@ -27,7 +27,7 @@ func_128FD(param_00, param_01) {
 
     return 0;
   } else if(isDefined(level.reminder_reaction_pointat)) {
-    self iprintlnbold( & "KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+    self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     scripts\mp\utility::clearusingremote();
     return 0;
   }
@@ -400,11 +400,11 @@ damagetracker() {
       return;
     }
 
-    if(isDefined(var_08) && var_08 & level.idflags_penetration) {
+    if(isDefined(var_08) && var_08 &level.idflags_penetration) {
       self.wasdamagedfrombulletpenetration = 1;
     }
 
-    if(isDefined(var_08) && var_08 & level.idflags_ricochet) {
+    if(isDefined(var_08) && var_08 &level.idflags_ricochet) {
       self.wasdamagedfrombulletricochet = 1;
     }
 

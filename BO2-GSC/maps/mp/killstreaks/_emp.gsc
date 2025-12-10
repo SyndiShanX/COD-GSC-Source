@@ -29,7 +29,7 @@ init() {
 
   level thread onplayerconnect();
   registerkillstreak("emp_mp", "emp_mp", "killstreak_emp", "emp_used", ::emp_use);
-  registerkillstreakstrings("emp_mp", & "KILLSTREAK_EARNED_EMP", & "KILLSTREAK_EMP_NOT_AVAILABLE", & "KILLSTREAK_EMP_INBOUND");
+  registerkillstreakstrings("emp_mp", &"KILLSTREAK_EARNED_EMP", &"KILLSTREAK_EMP_NOT_AVAILABLE", &"KILLSTREAK_EMP_INBOUND");
   registerkillstreakdialog("emp_mp", "mpl_killstreak_emp_activate", "kls_emp_used", "", "kls_emp_enemy", "", "kls_emp_ready");
   registerkillstreakdevdvar("emp_mp", "scr_giveemp");
   maps\mp\killstreaks\_killstreaks::createkillstreaktimer("emp_mp");

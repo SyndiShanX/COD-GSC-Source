@@ -13,11 +13,11 @@
 #namespace zm_theater_amb;
 
 function autoexec __init__sytem__() {
-  system::register("zm_theater_amb", & __init__, undefined, undefined);
+  system::register("zm_theater_amb", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("toplayer", "player_dust_mote", 21000, 1, "int", & function_9a4cfd8d, 0, 0);
+  clientfield::register("toplayer", "player_dust_mote", 21000, 1, "int", &function_9a4cfd8d, 0, 0);
 }
 
 function main() {
@@ -41,7 +41,7 @@ function power_on_all() {
 
 function telepad_loop() {
   telepad = struct::get_array("telepad", "targetname");
-  array::thread_all(telepad, & teleportation_audio);
+  array::thread_all(telepad, &teleportation_audio);
 }
 
 function teleportation_audio() {
@@ -100,7 +100,7 @@ function function_c9207335() {
   wait(3);
   level thread function_d667714e();
   var_13a52dfe = getEntArray(0, "sndMusicTrig", "targetname");
-  array::thread_all(var_13a52dfe, & function_60a32834);
+  array::thread_all(var_13a52dfe, &function_60a32834);
 }
 
 function function_60a32834() {

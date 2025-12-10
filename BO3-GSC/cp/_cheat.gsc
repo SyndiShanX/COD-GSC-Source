@@ -8,7 +8,7 @@
 #namespace cheat;
 
 function autoexec __init__sytem__() {
-  system::register("cheat", & __init__, undefined, undefined);
+  system::register("cheat", &__init__, undefined, undefined);
 }
 
 function __init__() {
@@ -56,7 +56,7 @@ function checkcheatchanged(toggledvar) {
 
 function specialfeaturesmenu() {
   level endon("unloaded");
-  addcheat("sf_use_ignoreammo", & ignore_ammomode);
+  addcheat("sf_use_ignoreammo", &ignore_ammomode);
   level.cheatdvars = getarraykeys(level.cheatstates);
   for(;;) {
     for(index = 0; index < level.cheatdvars.size; index++) {

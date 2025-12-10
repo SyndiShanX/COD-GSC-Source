@@ -10,18 +10,18 @@
 #namespace mechz;
 
 function autoexec main() {
-  clientfield::register("actor", "mechz_ft", 5000, 1, "int", & mechzclientutils::mechzflamethrowercallback, 0, 0);
-  clientfield::register("actor", "mechz_faceplate_detached", 5000, 1, "int", & mechzclientutils::mechz_detach_faceplate, 0, 0);
-  clientfield::register("actor", "mechz_powercap_detached", 5000, 1, "int", & mechzclientutils::mechz_detach_powercap, 0, 0);
-  clientfield::register("actor", "mechz_claw_detached", 5000, 1, "int", & mechzclientutils::mechz_detach_claw, 0, 0);
-  clientfield::register("actor", "mechz_115_gun_firing", 5000, 1, "int", & mechzclientutils::mechz_115_gun_muzzle_flash, 0, 0);
-  clientfield::register("actor", "mechz_rknee_armor_detached", 5000, 1, "int", & mechzclientutils::mechz_detach_rknee_armor, 0, 0);
-  clientfield::register("actor", "mechz_lknee_armor_detached", 5000, 1, "int", & mechzclientutils::mechz_detach_lknee_armor, 0, 0);
-  clientfield::register("actor", "mechz_rshoulder_armor_detached", 5000, 1, "int", & mechzclientutils::mechz_detach_rshoulder_armor, 0, 0);
-  clientfield::register("actor", "mechz_lshoulder_armor_detached", 5000, 1, "int", & mechzclientutils::mechz_detach_lshoulder_armor, 0, 0);
-  clientfield::register("actor", "mechz_headlamp_off", 5000, 2, "int", & mechzclientutils::mechz_headlamp_off, 0, 0);
-  clientfield::register("actor", "mechz_face", 1, 3, "int", & mechzclientutils::mechzfacecallback, 0, 0);
-  ai::add_archetype_spawn_function("mechz", & mechzclientutils::mechzspawn);
+  clientfield::register("actor", "mechz_ft", 5000, 1, "int", &mechzclientutils::mechzflamethrowercallback, 0, 0);
+  clientfield::register("actor", "mechz_faceplate_detached", 5000, 1, "int", &mechzclientutils::mechz_detach_faceplate, 0, 0);
+  clientfield::register("actor", "mechz_powercap_detached", 5000, 1, "int", &mechzclientutils::mechz_detach_powercap, 0, 0);
+  clientfield::register("actor", "mechz_claw_detached", 5000, 1, "int", &mechzclientutils::mechz_detach_claw, 0, 0);
+  clientfield::register("actor", "mechz_115_gun_firing", 5000, 1, "int", &mechzclientutils::mechz_115_gun_muzzle_flash, 0, 0);
+  clientfield::register("actor", "mechz_rknee_armor_detached", 5000, 1, "int", &mechzclientutils::mechz_detach_rknee_armor, 0, 0);
+  clientfield::register("actor", "mechz_lknee_armor_detached", 5000, 1, "int", &mechzclientutils::mechz_detach_lknee_armor, 0, 0);
+  clientfield::register("actor", "mechz_rshoulder_armor_detached", 5000, 1, "int", &mechzclientutils::mechz_detach_rshoulder_armor, 0, 0);
+  clientfield::register("actor", "mechz_lshoulder_armor_detached", 5000, 1, "int", &mechzclientutils::mechz_detach_lshoulder_armor, 0, 0);
+  clientfield::register("actor", "mechz_headlamp_off", 5000, 2, "int", &mechzclientutils::mechz_headlamp_off, 0, 0);
+  clientfield::register("actor", "mechz_face", 1, 3, "int", &mechzclientutils::mechzfacecallback, 0, 0);
+  ai::add_archetype_spawn_function("mechz", &mechzclientutils::mechzspawn);
   level._mechz_face = [];
   level._mechz_face[1] = "ai_face_zombie_generic_attack_1";
   level._mechz_face[2] = "ai_face_zombie_generic_death_1";
@@ -52,7 +52,7 @@ function autoexec precache() {
 #namespace mechzclientutils;
 
 function private mechzspawn(localclientnum) {
-  level._footstepcbfuncs[self.archetype] = & mechzprocessfootstep;
+  level._footstepcbfuncs[self.archetype] = &mechzprocessfootstep;
   level thread mechzsndcontext(self);
   self.headlight_fx = playFXOnTag(localclientnum, level._effect["fx_mech_head_light"], self, "tag_headlamp_FX");
   self.headlamp_on = 1;

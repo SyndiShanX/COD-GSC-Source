@@ -28,7 +28,7 @@ init() {
   level.fx_airstrike_bomb = loadfx("vehicle/exhaust/fx_exhaust_b52_bomber");
   if(maps\mp\gametypes\_tweakables::getTweakableValue("killstreak", "allowairstrike")) {
     maps\mp\gametypes\_hardpoints::registerKillstreak("airstrike_mp", "airstrike_mp", "killstreak_airstrike", "airstrike_used", ::useKillstreakAirstrike, true);
-    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("airstrike_mp", & "KILLSTREAK_EARNED_AIRSTRIKE", & "KILLSTREAK_AIRSTRIKE_NOT_AVAILABLE", & "KILLSTREAK_AIRSTRIKE_INBOUND", & "KILLSTREAK_AIRSTRIKE_INBOUND_NEAR_YOUR_POSITION");
+    maps\mp\gametypes\_hardpoints::registerKillstreakStrings("airstrike_mp", &"KILLSTREAK_EARNED_AIRSTRIKE", &"KILLSTREAK_AIRSTRIKE_NOT_AVAILABLE", &"KILLSTREAK_AIRSTRIKE_INBOUND", &"KILLSTREAK_AIRSTRIKE_INBOUND_NEAR_YOUR_POSITION");
     maps\mp\gametypes\_hardpoints::registerKillstreakDialog("airstrike_mp", "mpl_killstreak_air", "kls_airstrike_used", "", "kls_airstrike_enemy", "", "kls_airstrike_ready");
     maps\mp\gametypes\_hardpoints::registerKillstreakDevDvar("airstrike_mp", "scr_giveairstrike");
   }

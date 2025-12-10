@@ -83,7 +83,7 @@ function autoexec opt_in() {
 
 function main() {
   zm_castle_ffotd::main_start();
-  level.setupcustomcharacterexerts = & setup_personality_character_exerts;
+  level.setupcustomcharacterexerts = &setup_personality_character_exerts;
   level._effect["animscript_gibtrail_fx"] = "trail/fx_trail_blood_streak";
   level._effect["animscript_gib_fx"] = "weapon/bullet/fx_flesh_gib_fatal_01";
   level._effect["bloodspurt"] = "misc/fx_zombie_bloodspurt";
@@ -129,12 +129,12 @@ function include_weapons() {
 }
 
 function register_clientfields() {
-  clientfield::register("toplayer", "player_snow_fx", 5000, 1, "counter", & callback_player_snow_fx_logic, 0, 0);
+  clientfield::register("toplayer", "player_snow_fx", 5000, 1, "counter", &callback_player_snow_fx_logic, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.widget_shield_parts", 1, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.widget_fuses", 1, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmInventory.player_crafted_shield", 1, 1, "int", undefined, 0, 0);
-  clientfield::register("world", "snd_low_gravity_state", 5000, 2, "int", & snd_low_gravity_state, 0, 0);
-  clientfield::register("world", "castle_fog_bank_switch", 1, 1, "int", & castle_fog_bank_switch, 0, 0);
+  clientfield::register("world", "snd_low_gravity_state", 5000, 2, "int", &snd_low_gravity_state, 0, 0);
+  clientfield::register("world", "castle_fog_bank_switch", 1, 1, "int", &castle_fog_bank_switch, 0, 0);
 }
 
 function function_893a7cdd() {

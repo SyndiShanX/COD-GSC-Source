@@ -33,7 +33,7 @@ function autoexec init() {
   level.var_4fb25bb9["crawl"] = 3;
   setdvar("tu5_zmPathDistanceCheckTolarance", 20);
   setdvar("scr_zm_use_code_enemy_selection", 0);
-  level.closest_player_override = & castle_closest_player;
+  level.closest_player_override = &castle_closest_player;
   level thread update_closest_player();
   thread castle_zombie_devgui();
   level.move_valid_poi_to_navmesh = 1;
@@ -41,9 +41,9 @@ function autoexec init() {
 }
 
 function private initzmcastlebehaviorsandasm() {
-  animationstatenetwork::registeranimationmocomp("mocomp_teleport_traversal@zombie", & teleporttraversalmocompstart, undefined, undefined);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldMoveLowg", & shouldmovelowg);
-  behaviortreenetworkutility::registerbehaviortreescriptapi("zodShouldMove", & zodshouldmove);
+  animationstatenetwork::registeranimationmocomp("mocomp_teleport_traversal@zombie", &teleporttraversalmocompstart, undefined, undefined);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("shouldMoveLowg", &shouldmovelowg);
+  behaviortreenetworkutility::registerbehaviortreescriptapi("zodShouldMove", &zodshouldmove);
 }
 
 function teleporttraversalmocompstart(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
@@ -178,7 +178,7 @@ function private function_ca4f6cd2(player) {
 
 function private castle_closest_player(origin, var_6c55ba74) {
   aiprofile_beginentry("castle_closest_player");
-  players = array::filter(var_6c55ba74, 0, & function_4fee0339);
+  players = array::filter(var_6c55ba74, 0, &function_4fee0339);
   if(players.size == 0) {
     aiprofile_endentry();
     return undefined;
@@ -280,7 +280,7 @@ function private update_closest_player() {
 
 function private castle_zombie_devgui() {
   level flagsys::wait_till("");
-  zm_devgui::add_custom_devgui_callback( & castle_zombie_devgui_callback);
+  zm_devgui::add_custom_devgui_callback(&castle_zombie_devgui_callback);
   adddebugcommand("");
 }
 

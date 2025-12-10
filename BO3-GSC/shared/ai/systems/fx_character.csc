@@ -39,10 +39,10 @@ function private _configentity(localclientnum, entity) {
     entity._fxcharacter = [];
     handledgibs = array(8, 16, 32, 128, 256);
     foreach(gibflag in handledgibs) {
-      gibclientutils::addgibcallback(localclientnum, entity, gibflag, & _gibhandler);
+      gibclientutils::addgibcallback(localclientnum, entity, gibflag, &_gibhandler);
     }
     for(index = 1; index <= 20; index++) {
-      destructclientutils::adddestructpiececallback(localclientnum, entity, index, & _destructhandler);
+      destructclientutils::adddestructpiececallback(localclientnum, entity, index, &_destructhandler);
     }
   }
 }

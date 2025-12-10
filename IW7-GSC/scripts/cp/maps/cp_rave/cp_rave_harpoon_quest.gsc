@@ -23,7 +23,7 @@ collect_bait() {
   var_01 = spawn("script_model", var_00.origin);
   var_01 setModel("tag_origin");
   var_01 makeusable();
-  var_01 sethintstring( & "CP_RAVE_PICK_UP_BAIT");
+  var_01 sethintstring(&"CP_RAVE_PICK_UP_BAIT");
   level.bait_model = getent("bait_pickup", "targetname");
   for(;;) {
     var_01 waittill("trigger", var_02);
@@ -360,7 +360,7 @@ break_the_chains() {
   var_02 = spawn("script_origin", var_01);
   wait(0.1);
   var_02 makeusable();
-  var_02 sethintstring( & "CP_RAVE_BREAK_LOCK");
+  var_02 sethintstring(&"CP_RAVE_BREAK_LOCK");
   var_02 waittill("trigger");
   var_03 = spawn("script_model", var_00[0].origin);
   var_03 setModel("tag_origin");
@@ -378,7 +378,7 @@ take_harpoon_weapon() {
   var_01 = getent("harpoon_gun_quest_activation_spot", "targetname");
   scripts\engine\utility::flag_wait("harpoon_unlocked");
   var_01 makeusable();
-  var_01 sethintstring( & "CP_RAVE_PICKUP_ITEM");
+  var_01 sethintstring(&"CP_RAVE_PICKUP_ITEM");
   var_01 waittill("trigger", var_02);
   var_02 giveweapon("iw7_harpoon_zm");
   var_02 switchtoweapon("iw7_harpoon_zm");

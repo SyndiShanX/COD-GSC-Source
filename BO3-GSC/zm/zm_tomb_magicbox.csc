@@ -9,14 +9,14 @@
 #namespace tomb_magicbox;
 
 function autoexec __init__sytem__() {
-  system::register("tomb_magicbox", & __init__, undefined, undefined);
+  system::register("tomb_magicbox", &__init__, undefined, undefined);
 }
 
 function __init__() {
-  clientfield::register("zbarrier", "magicbox_initial_fx", 21000, 1, "int", & magicbox_initial_closed_fx, 0, 0);
-  clientfield::register("zbarrier", "magicbox_amb_fx", 21000, 2, "int", & magicbox_ambient_fx, 0, 0);
-  clientfield::register("zbarrier", "magicbox_open_fx", 21000, 1, "int", & magicbox_open_fx, 0, 0);
-  clientfield::register("zbarrier", "magicbox_leaving_fx", 21000, 1, "int", & magicbox_leaving_fx, 0, 0);
+  clientfield::register("zbarrier", "magicbox_initial_fx", 21000, 1, "int", &magicbox_initial_closed_fx, 0, 0);
+  clientfield::register("zbarrier", "magicbox_amb_fx", 21000, 2, "int", &magicbox_ambient_fx, 0, 0);
+  clientfield::register("zbarrier", "magicbox_open_fx", 21000, 1, "int", &magicbox_open_fx, 0, 0);
+  clientfield::register("zbarrier", "magicbox_leaving_fx", 21000, 1, "int", &magicbox_leaving_fx, 0, 0);
 }
 
 function magicbox_leaving_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

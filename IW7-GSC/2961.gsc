@@ -352,7 +352,7 @@ func_ABD2() {
 
   scripts\engine\utility::flag_set("game_saving");
   var_02 = "levelshots / autosave / autosave_" + level.script + "end";
-  _savegame("levelend", & "AUTOSAVE_AUTOSAVE", var_02, 1);
+  _savegame("levelend", &"AUTOSAVE_AUTOSAVE", var_02, 1);
   scripts\engine\utility::flag_clear("game_saving");
 }
 

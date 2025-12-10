@@ -28,9 +28,9 @@ function init() {
   level flag::init("w_placed");
   level flag::init("vg_placed");
   level flag::init("cvg_picked_up");
-  zm_sidequests::declare_sidequest_stage("ctvg", "build", & build_init, & build_stage_logic, & build_exit_stage);
-  zm_sidequests::declare_stage_asset_from_struct("ctvg", "build", "sq_cassimir_plates", & plate_thread);
-  zm_sidequests::declare_sidequest_stage("ctvg", "charge", & charge_init, & charge_stage_logic, & charge_exit_stage);
+  zm_sidequests::declare_sidequest_stage("ctvg", "build", &build_init, &build_stage_logic, &build_exit_stage);
+  zm_sidequests::declare_stage_asset_from_struct("ctvg", "build", "sq_cassimir_plates", &plate_thread);
+  zm_sidequests::declare_sidequest_stage("ctvg", "charge", &charge_init, &charge_stage_logic, &charge_exit_stage);
 }
 
 function plate_thread() {
@@ -67,7 +67,7 @@ function plates() {
   level notify("stage_1");
   level waittill("stage_1_done");
   level.teleport_target_trigger = spawn("trigger_radius", plates[0].origin + (vectorscale((0, 0, -1), 70)), 0, 125, 100);
-  level.black_hole_bomb_loc_check_func = & bhb_teleport_loc_check;
+  level.black_hole_bomb_loc_check_func = &bhb_teleport_loc_check;
   level waittill("ctvg_tp_done");
   level.black_hole_bomb_loc_check_func = undefined;
   level waittill("restart_round");
@@ -77,7 +77,7 @@ function plates() {
     plates[i].origin = targs[i].origin;
     plates[i].angles = targs[i].angles;
   }
-  zm_weap_quantum_bomb::quantum_bomb_register_result("ctvg", & dud_func, 100, & ctvg_validation);
+  zm_weap_quantum_bomb::quantum_bomb_register_result("ctvg", &dud_func, 100, &ctvg_validation);
   level._ctvg_pos = targs[0].origin;
   level waittill("ctvg_validation");
   zm_weap_quantum_bomb::quantum_bomb_deregister_result("ctvg");
@@ -124,7 +124,7 @@ function wire() {
   who zm_sidequests::add_sidequest_icon("sq", "wire");
   level flag::wait_till("c_built");
   wire_struct = struct::get("sq_wire_final", "targetname");
-  wire_struct thread zm_sidequests::fake_use("placed_wire", & wire_qualifier);
+  wire_struct thread zm_sidequests::fake_use("placed_wire", &wire_qualifier);
   wire_struct waittill("placed_wire", who);
   who thread zm_audio::create_and_play_dialog("eggs", "quest5", 8);
   who playSound("evt_casimir_charge");
@@ -149,7 +149,7 @@ function vg() {
   level flag::wait_till("w_placed");
   level flag::wait_till("power_on");
   vg_struct = struct::get("sq_charge_vg_pos", "targetname");
-  vg_struct thread zm_sidequests::fake_use("vg_placed", & vg_qualifier);
+  vg_struct thread zm_sidequests::fake_use("vg_placed", &vg_qualifier);
   vg_struct waittill("vg_placed", who);
   who thread zm_audio::create_and_play_dialog("eggs", "quest5", 9);
   level.vg_struct_sound = spawn("script_origin", vg_struct.origin);
@@ -352,7 +352,7 @@ function do_bucket_fill(target) {
     }
   }
   while(presses < target) {
-    level._charge_sound_ent thread zm_sidequests::fake_use("press", & bucket_qualifier);
+    level._charge_sound_ent thread zm_sidequests::fake_use("press", &bucket_qualifier);
     level._charge_sound_ent waittill("press");
     presses++;
     level._typing_time = gettime();
@@ -367,7 +367,7 @@ function wrong_presser_thread() {
   level endon("kill_press_monitor");
   while(true) {
     if(isDefined(level._charge_sound_ent)) {
-      level._charge_sound_ent thread zm_sidequests::fake_use("wrong_press", & wrong_press_qualifier);
+      level._charge_sound_ent thread zm_sidequests::fake_use("wrong_press", &wrong_press_qualifier);
       level._charge_sound_ent waittill("wrong_press", who);
       who thread zm_audio::create_and_play_dialog("eggs", "quest5", 11);
     }
@@ -378,7 +378,7 @@ function wrong_presser_thread() {
 function wrong_collector() {
   level endon("collected");
   while(true) {
-    self thread zm_sidequests::fake_use("wrong_collector", & wrong_press_qualifier);
+    self thread zm_sidequests::fake_use("wrong_collector", &wrong_press_qualifier);
     self waittill("wrong_collector", who);
     who thread zm_audio::create_and_play_dialog("eggs", "quest5", 27);
     wait(1);
@@ -402,7 +402,7 @@ function charge_stage_logic() {
   vg = struct::get("sq_charge_vg_pos", "targetname");
   level notify("kill_press_monitor");
   vg thread wrong_collector();
-  vg thread zm_sidequests::fake_use("collect", & bucket_qualifier);
+  vg thread zm_sidequests::fake_use("collect", &bucket_qualifier);
   vg waittill("collect", who);
   who thread zm_audio::create_and_play_dialog("eggs", "quest5", 27);
   who playSound("evt_vril_remove");

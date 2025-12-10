@@ -211,17 +211,17 @@ scale_value(value) {
 
 so_killspree_setup_regular() {
   level.points_goal = 300;
-  level.challenge_objective = & "SO_KILLSPREE_INVASION_OBJ_REGULAR";
+  level.challenge_objective = &"SO_KILLSPREE_INVASION_OBJ_REGULAR";
 }
 
 so_killspree_setup_hardened() {
   level.points_goal = 300;
-  level.challenge_objective = & "SO_KILLSPREE_INVASION_OBJ_HARDENED";
+  level.challenge_objective = &"SO_KILLSPREE_INVASION_OBJ_HARDENED";
 }
 
 so_killspree_setup_veteran() {
   level.points_goal = 300;
-  level.challenge_objective = & "SO_KILLSPREE_INVASION_OBJ_VETERAN";
+  level.challenge_objective = &"SO_KILLSPREE_INVASION_OBJ_VETERAN";
 }
 
 so_killspree_setup_radio_dialog() {

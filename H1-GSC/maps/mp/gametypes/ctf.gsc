@@ -136,17 +136,17 @@ onstartgametype() {
   flagbasefxdefault();
 
   if(level.splitscreen) {
-    maps\mp\_utility::setobjectivescoretext(game["attackers"], & "OBJECTIVES_ONE_FLAG_ATTACKER");
-    maps\mp\_utility::setobjectivescoretext(game["defenders"], & "OBJECTIVES_ONE_FLAG_DEFENDER");
+    maps\mp\_utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_ONE_FLAG_ATTACKER");
+    maps\mp\_utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_ONE_FLAG_DEFENDER");
   } else {
-    maps\mp\_utility::setobjectivescoretext(game["attackers"], & "OBJECTIVES_ONE_FLAG_ATTACKER_SCORE");
-    maps\mp\_utility::setobjectivescoretext(game["defenders"], & "OBJECTIVES_ONE_FLAG_DEFENDER_SCORE");
+    maps\mp\_utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_ONE_FLAG_ATTACKER_SCORE");
+    maps\mp\_utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_ONE_FLAG_DEFENDER_SCORE");
   }
 
-  maps\mp\_utility::setobjectivetext(game["attackers"], & "OBJECTIVES_CTF");
-  maps\mp\_utility::setobjectivetext(game["defenders"], & "OBJECTIVES_CTF");
-  maps\mp\_utility::setobjectivehinttext(game["attackers"], & "OBJECTIVES_ONE_FLAG_ATTACKER_HINT");
-  maps\mp\_utility::setobjectivehinttext(game["defenders"], & "OBJECTIVES_ONE_FLAG_DEFENDER_HINT");
+  maps\mp\_utility::setobjectivetext(game["attackers"], &"OBJECTIVES_CTF");
+  maps\mp\_utility::setobjectivetext(game["defenders"], &"OBJECTIVES_CTF");
+  maps\mp\_utility::setobjectivehinttext(game["attackers"], &"OBJECTIVES_ONE_FLAG_ATTACKER_HINT");
+  maps\mp\_utility::setobjectivehinttext(game["defenders"], &"OBJECTIVES_ONE_FLAG_DEFENDER_HINT");
   initspawn();
   var_2[0] = "ctf";
   maps\mp\gametypes\_gameobjects::main(var_2);
@@ -402,8 +402,8 @@ createteamflag(var_0) {
     if(var_10 > 0)
       var_8 maps\mp\gametypes\_gameobjects::setteamusetime("enemy", var_10);
 
-    var_8 maps\mp\gametypes\_gameobjects::setteamusetext("enemy", & "MP_GRABBING_FLAG");
-    var_8 maps\mp\gametypes\_gameobjects::setteamusetext("friendly", & "MP_RETURNING_FLAG");
+    var_8 maps\mp\gametypes\_gameobjects::setteamusetext("enemy", &"MP_GRABBING_FLAG");
+    var_8 maps\mp\gametypes\_gameobjects::setteamusetext("friendly", &"MP_RETURNING_FLAG");
     var_8 maps\mp\gametypes\_gameobjects::allowcarry("enemy");
     var_8 maps\mp\gametypes\_gameobjects::setvisibleteam("none");
     var_8 maps\mp\gametypes\_gameobjects::set2dicon("enemy", level.iconescort2d);

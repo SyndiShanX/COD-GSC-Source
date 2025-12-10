@@ -303,7 +303,7 @@ enable_countdown_timer(time_wait, set_start_time, message, timer_draw_delay) {
   level endon("special_op_terminated");
 
   if(!isDefined(message))
-    message = & "SPECIAL_OPS_STARTING_IN";
+    message = &"SPECIAL_OPS_STARTING_IN";
 
   hudelem = so_create_hud_item(0, so_hud_ypos(), message);
   hudelem SetPulseFX(50, time_wait * 1000, 500);
@@ -370,7 +370,7 @@ enable_challenge_timer(start_flag, passed_flag, message) {
   }
 
   if(!isDefined(message))
-    message = & "SPECIAL_OPS_TIME";
+    message = &"SPECIAL_OPS_TIME";
 
   if(!isDefined(level.challenge_time_beep_start))
     level.challenge_time_beep_start = level.challenge_time_hurry;
@@ -428,11 +428,11 @@ so_wait_for_player_ready(my_flag, y_line) {
   self freezecontrols(true);
   self disableweapons();
 
-  self.waiting_to_start_hud = so_create_hud_item(0, 0, & "SPECIAL_OPS_PRESS_TO_START", self, true);
+  self.waiting_to_start_hud = so_create_hud_item(0, 0, &"SPECIAL_OPS_PRESS_TO_START", self, true);
   self.waiting_to_start_hud.alignx = "center";
   self.waiting_to_start_hud.horzAlign = "center";
 
-  self.ready_indication_hud = so_create_hud_item(y_line, 0, & "SPECIAL_OPS_PLAYER_IS_NOT_READY", undefined, true);
+  self.ready_indication_hud = so_create_hud_item(y_line, 0, &"SPECIAL_OPS_PLAYER_IS_NOT_READY", undefined, true);
   self.ready_indication_hud.alignx = "center";
   self.ready_indication_hud.horzAlign = "center";
   self.ready_indication_hud settext(self.playername);
@@ -449,13 +449,13 @@ so_wait_for_player_ready(my_flag, y_line) {
     self waittill(self.unique_id + "_is_ready");
     flag_set(my_flag);
     self playSound("so_player_is_ready");
-    self.waiting_to_start_hud.label = & "SPECIAL_OPS_PRESS_TO_CANCEL";
+    self.waiting_to_start_hud.label = &"SPECIAL_OPS_PRESS_TO_CANCEL";
     self.ready_indication_hud so_hud_pulse_success(&"SPECIAL_OPS_PLAYER_IS_READY");
 
     self waittill(self.unique_id + "_is_not_ready");
     flag_clear(my_flag);
     self playSound("so_player_not_ready");
-    self.waiting_to_start_hud.label = & "SPECIAL_OPS_PRESS_TO_START";
+    self.waiting_to_start_hud.label = &"SPECIAL_OPS_PRESS_TO_START";
     self.ready_indication_hud so_hud_pulse_warning(&"SPECIAL_OPS_PLAYER_IS_NOT_READY");
   }
 }
@@ -530,7 +530,7 @@ enable_escape_warning() {
   level.escape_warning_triggers = getEntArray("player_trying_to_escape", "script_noteworthy");
   assertex(level.escape_warning_triggers.size > 0, "enable_escape_warning() requires at least one trigger with script_noteworthy = player_trying_to_escape");
 
-  add_hint_string("player_escape_warning", & "SPECIAL_OPS_EMPTY", ::disable_escape_warning);
+  add_hint_string("player_escape_warning", &"SPECIAL_OPS_EMPTY", ::disable_escape_warning);
   while(true) {
     wait 0.05;
     foreach(trigger in level.escape_warning_triggers) {
@@ -782,7 +782,7 @@ so_delete_breach_ents() {
 "Summary: Utility function to easily force the game to use a specific Special Ops deadquote."
 "Module: Utility"
 "MandatoryArg: <quote>: Message you want displayed on the Mission Failed summary."
-"Example: so_force_deadquote( &"SPECIAL_OPS_YOU_SUCK" );"
+"Example: so_force_deadquote(&"SPECIAL_OPS_YOU_SUCK" );"
 "SPMP: singleplayer"
 ///ScriptDocEnd
 =============

@@ -47,7 +47,7 @@
 #namespace zm_genesis_boss;
 
 function autoexec __init__sytem__() {
-  system::register("zm_genesis_boss", & __init__, & __main__, undefined);
+  system::register("zm_genesis_boss", &__init__, &__main__, undefined);
 }
 
 function __init__() {
@@ -64,8 +64,8 @@ function __main__() {
 }
 
 function function_7a5b2191() {
-  level thread zm_genesis_util::setup_devgui_func("", "", 0, & function_92d90d50);
-  level thread zm_genesis_util::setup_devgui_func("", "", 2, & function_92d90d50);
+  level thread zm_genesis_util::setup_devgui_func("", "", 0, &function_92d90d50);
+  level thread zm_genesis_util::setup_devgui_func("", "", 2, &function_92d90d50);
 }
 
 function function_92d90d50(n_val) {

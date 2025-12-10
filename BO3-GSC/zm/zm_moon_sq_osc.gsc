@@ -79,7 +79,7 @@ function init() {
   level._osc_cap = util::spawn_model("p7_zm_moo_glyph_dial_cap", level._osc_cap_spot.origin, level._osc_cap_spot.angles);
   level._osc_terms = 0;
   level thread osc_button_cover_setup();
-  zm_sidequests::declare_sidequest_stage("sq", "osc", & init_stage, & stage_logic, & exit_stage);
+  zm_sidequests::declare_sidequest_stage("sq", "osc", &init_stage, &stage_logic, &exit_stage);
 }
 
 function function_f65c74fe() {
@@ -185,7 +185,7 @@ function moon_jolie_greet() {
   }
   while(!level flag::get(level._osc_flags[1])) {
     for(i = 0; i < level._osc_rb_jolie_spots.size; i++) {
-      zm_equip_hacker::register_pooled_hackable_struct(level._osc_rb_jolie_spots[i], & moon_jolie_access);
+      zm_equip_hacker::register_pooled_hackable_struct(level._osc_rb_jolie_spots[i], &moon_jolie_access);
     }
     if(!isDefined(level._osc_flags[2]) || !isDefined(level._osc_flags[3])) {
       println("");
@@ -249,11 +249,11 @@ function moon_jolie_access(ent_hacker) {
     random_array[j] function_27fd2e20(1);
     random_array[j].focus._light playSound("evt_sq_rbs_light_on");
     random_array[j].focus._light playLoopSound("evt_sq_rbs_light_loop", 1);
-    zm_equip_hacker::register_pooled_hackable_struct(random_array[j].focus, & moon_jolie_work);
+    zm_equip_hacker::register_pooled_hackable_struct(random_array[j].focus, &moon_jolie_work);
   }
   level thread moon_good_jolie();
   level thread moon_bad_jolie();
-  array::thread_all(random_array, & moon_jolie_timer_vox);
+  array::thread_all(random_array, &moon_jolie_timer_vox);
 }
 
 function function_27fd2e20(var_ad826a0f) {

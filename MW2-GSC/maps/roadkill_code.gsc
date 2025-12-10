@@ -50,7 +50,7 @@ player_fails_if_he_kills_me(damage, attacker, direction_vec, point, type, modelN
 
   wait(1);
   // Friendly fire will not be tolerated!
-  SetDvar("ui_deadquote", & "SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // friendly fire will not be tolerated
+  SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // friendly fire will not be tolerated
   maps\_utility::missionFailedWrapper();
 }
 
@@ -811,7 +811,7 @@ fail_if_player_doesnt_defend_bridge() {
 
 bridge_layer_explodes() {
   // The bridge layer was destroyed.
-  SetDvar("ui_deadquote", & "ROADKILL_BRIDGELAYER_DESTROYED");
+  SetDvar("ui_deadquote", &"ROADKILL_BRIDGELAYER_DESTROYED");
   delayThread(3, ::missionFailedWrapper);
 
   explosion_fx = getfx("bmp_explosion");
@@ -1540,8 +1540,8 @@ player_ride_vehicle() {
   chair setModel(chairModel);
   chair LinkTo(self, "tag_seat_rb_attach", (0, 0, 0), (0, 0, 0));
   chair MakeUsable();
-  // Press and hold^3 &&1 ^7to board.
-  //chair SetHintString( &"ROADKILL_HOLD_TO_BOARD" );
+  // Press and hold^3 && 1 ^7to board.
+  //chair SetHintString(&"ROADKILL_HOLD_TO_BOARD" );
 
   flag_wait("convoy_moment");
   self thread gopath();
@@ -3919,7 +3919,7 @@ fail_player_for_excessive_firing() {
   }
 
   // An unsanctioned discharge will not be tolerated.
-  SetDvar("ui_deadquote", & "ROADKILL_SHOT_TOO_MUCH");
+  SetDvar("ui_deadquote", &"ROADKILL_SHOT_TOO_MUCH");
   missionFailedWrapper();
 }
 
@@ -4147,10 +4147,10 @@ roadkill_riverbank_objective() {
   // Protect the bridge layer.
   waittillframeend;
   // Protect the bridge layer.
-  Objective_Add(obj("bridge_layer"), "current", & "ROADKILL_OBJECTIVE_BRIDGELAYER", (0, 0, 0));
+  Objective_Add(obj("bridge_layer"), "current", &"ROADKILL_OBJECTIVE_BRIDGELAYER", (0, 0, 0));
   Objective_Current(obj("bridge_layer"));
   Objective_OnEntity(obj("bridge_layer"), level.foley);
-  Objective_SetPointerTextOverride(obj("bridge_layer"), & "SCRIPT_WAYPOINT_TARGETS");
+  Objective_SetPointerTextOverride(obj("bridge_layer"), &"SCRIPT_WAYPOINT_TARGETS");
 
   //SetSavedDvar( "compass", 1 );
   //	flag_wait( "player_enters_riverbank" );
@@ -4173,7 +4173,7 @@ roadkill_riverbank_objective() {
   origin = (-2488, -3755, 182);
 
   // Get in your Humvee.
-  Objective_Add(obj("convoy"), "current", & "ROADKILL_OBJECTIVE_HUMVEE", origin);
+  Objective_Add(obj("convoy"), "current", &"ROADKILL_OBJECTIVE_HUMVEE", origin);
   Objective_Current(obj("convoy"));
 
   for(;;) {
@@ -4187,21 +4187,21 @@ roadkill_riverbank_objective() {
   objective_position(obj("convoy"), (0, 0, 0));
 
   // Standby for airstrike.
-  Objective_String(obj("convoy"), & "ROADKILL_OBJECTIVE_AIRSTRIKE");
+  Objective_String(obj("convoy"), &"ROADKILL_OBJECTIVE_AIRSTRIKE");
   flag_wait("convoy_oscar_mike_after_explosion");
   objective_complete(obj("convoy"));
 }
 
 roadkill_ride_objective() {
   // Scan for hostile activity. Do not fire unless fired upon.
-  Objective_Add(obj("ride"), "current", & "ROADKILL_OBJECTIVE_SCAN", (0, 0, 0));
+  Objective_Add(obj("ride"), "current", &"ROADKILL_OBJECTIVE_SCAN", (0, 0, 0));
   Objective_Current(obj("ride"));
 
   flag_wait("shot_rings_out");
   wait(4.5);
 
   // Destroy targets of opportunity.
-  Objective_Add(obj("ride"), "current", & "ROADKILL_OBJECTIVE_TARGETS", (0, 0, 0));
+  Objective_Add(obj("ride"), "current", &"ROADKILL_OBJECTIVE_TARGETS", (0, 0, 0));
   Objective_Current(obj("ride"));
 
   flag_wait("player_knocked_down");
@@ -4210,7 +4210,7 @@ roadkill_ride_objective() {
 roadkill_dismount_objective() {
   if(!is_default_start()) {
     // Destroy targets of opportunity.
-    Objective_Add(obj("ride"), "current", & "ROADKILL_OBJECTIVE_TARGETS", (0, 0, 0));
+    Objective_Add(obj("ride"), "current", &"ROADKILL_OBJECTIVE_TARGETS", (0, 0, 0));
   }
 
   wait(0.5);
@@ -4227,7 +4227,7 @@ roadkill_dismount_objective() {
 
   node = GetNode("dismount_obj_node", "targetname");
   // Get eyes on the school.
-  Objective_String(obj("ride"), & "ROADKILL_OBJECTIVE_DISMOUNT");
+  Objective_String(obj("ride"), &"ROADKILL_OBJECTIVE_DISMOUNT");
   Objective_Position(obj("ride"), node.origin);
 
   flag_wait("friendlies_suppress_school");
@@ -4238,7 +4238,7 @@ roadkill_school_objective() {
   trigger = getEntWithFlag("roadkill_school_14");
 
   // Terminate the enemy presence in the school.
-  Objective_Add(obj("school"), "current", & "ROADKILL_OBJECTIVE_SCHOOL", trigger.origin);
+  Objective_Add(obj("school"), "current", &"ROADKILL_OBJECTIVE_SCHOOL", trigger.origin);
 
   for(;;) {
     if(IsAlive(level.foley))
@@ -4260,7 +4260,7 @@ roadkill_exfil_objective() {
   // Terminate the enemy presence in the school.
   struct = getstruct("roadkill_shepherd_ending_scene", "targetname");
   // Report to General Shepherd at the rally point.
-  Objective_Add(obj("exfil"), "current", & "ROADKILL_OBJECTIVE_REPORT", struct.origin);
+  Objective_Add(obj("exfil"), "current", &"ROADKILL_OBJECTIVE_REPORT", struct.origin);
   Objective_Current(obj("exfil"));
 }
 
@@ -4345,7 +4345,7 @@ player_dies_to_attackers() {
   eyepos = level.player getEye();
   org = undefined;
 
-  SetDvar("ui_deadquote", & "ROADKILL_GOT_SNIPED");
+  SetDvar("ui_deadquote", &"ROADKILL_GOT_SNIPED");
 
   // try to find an org that could see the player
   foreach(org in level.player_killer_orgs) {
@@ -6516,7 +6516,7 @@ shepdamage_bullet_thread() {
     self waittill("bullethit", other);
     if(other == level.player) {
       // Friendly fire will not be tolerated!
-      SetDvar("ui_deadquote", & "SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // friendly fire will not be tolerated
+      SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // friendly fire will not be tolerated
       missionfailedwrapper();
     }
   }
@@ -6532,7 +6532,7 @@ shepdamage_damage_thread() {
 
     if(attacker == level.player) {
       // Friendly fire will not be tolerated!
-      SetDvar("ui_deadquote", & "SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // friendly fire will not be tolerated
+      SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // friendly fire will not be tolerated
       missionfailedwrapper();
     }
   }
@@ -7230,7 +7230,7 @@ civ_hit(amt, attacker, force, b, c, d, e) {
 
   wait(1.5);
   // You are not authorized to fire on unarmed targets.
-  SetDvar("ui_deadquote", & "ROADKILL_SHOT_UNARMED");
+  SetDvar("ui_deadquote", &"ROADKILL_SHOT_UNARMED");
   missionFailedWrapper();
 }
 
