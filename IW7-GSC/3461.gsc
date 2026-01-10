@@ -251,7 +251,7 @@ func_1AA2(var_00) {
   var_01 = scripts\mp\killstreaks\target_marker::_meth_819B(var_00);
 
   if(!isDefined(var_1.location)) {
-    scripts\mp\utility\game::decrementfauxvehiclecount();
+    scripts\mp\utility::decrementfauxvehiclecount();
     return 0;
   }
 
@@ -310,13 +310,13 @@ airdropmarkeractivate(var_00, var_01) {
 
 func_1A9F(var_00) {
   if(isDefined(var_0.func_1AA0) && !issubstr(var_0.func_1AA0, "juggernaut") && !scripts\mp\utility\game::istrue(var_0.func_1A9E))
-    scripts\mp\utility\game::decrementfauxvehiclecount();
+    scripts\mp\utility::decrementfauxvehiclecount();
 }
 
 func_4FC3() {
   self endon("airDropMarkerActivate");
   self waittill("death");
-  scripts\mp\utility\game::decrementfauxvehiclecount();
+  scripts\mp\utility::decrementfauxvehiclecount();
 }
 
 initairdropcrate() {
@@ -1325,7 +1325,7 @@ watchownerdisconnect(var_00, var_01) {
 func_5CAC() {
   playFX(scripts\engine\utility::getfx("drone_explode"), self.origin);
   self playSound("sentry_explode");
-  scripts\mp\utility\game::decrementfauxvehiclecount();
+  scripts\mp\utility::decrementfauxvehiclecount();
   self delete();
 }
 
@@ -1594,7 +1594,7 @@ doflyby(var_00, var_01, var_02, var_03, var_04, var_05) {
 func_4FC2() {
   self waittill("death");
   waittillframeend;
-  scripts\mp\utility\game::decrementfauxvehiclecount();
+  scripts\mp\utility::decrementfauxvehiclecount();
 }
 
 domegaflyby(var_00, var_01, var_02, var_03) {
@@ -1883,7 +1883,7 @@ lbexplode() {
   playFX(level.chopper_fx["explode"]["death"]["cobra"], self.origin, var_00);
   self playSound("exp_helicopter_fuel");
   self notify("explode");
-  scripts\mp\utility\game::decrementfauxvehiclecount();
+  scripts\mp\utility::decrementfauxvehiclecount();
   self delete();
 }
 

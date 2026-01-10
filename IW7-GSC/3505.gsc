@@ -151,7 +151,7 @@ func_128F1(var_00, var_01) {
   var_04 = func_49F9(var_02);
 
   if(!isDefined(var_04)) {
-    scripts\mp\utility\game::decrementfauxvehiclecount();
+    scripts\mp\utility::decrementfauxvehiclecount();
     return 0;
   }
 
@@ -341,7 +341,7 @@ func_C318() {
 
   func_4074();
   func_C317(3.0);
-  scripts\mp\utility\game::decrementfauxvehiclecount();
+  scripts\mp\utility::decrementfauxvehiclecount();
   level.func_1639[self.odintype] = undefined;
   self delete();
 }
@@ -399,7 +399,7 @@ odin_leave() {
   self notify("gone");
   func_4074();
   func_C317(3.0);
-  scripts\mp\utility\game::decrementfauxvehiclecount();
+  scripts\mp\utility::decrementfauxvehiclecount();
   level.func_1639[self.odintype] = undefined;
   self delete();
 }

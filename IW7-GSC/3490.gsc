@@ -47,7 +47,7 @@ func_128E7(var_00, var_01) {
   var_04 = func_49D2(var_02);
 
   if(!isDefined(var_04)) {
-    scripts\mp\utility\game::decrementfauxvehiclecount();
+    scripts\mp\utility::decrementfauxvehiclecount();
     return 0;
   }
 

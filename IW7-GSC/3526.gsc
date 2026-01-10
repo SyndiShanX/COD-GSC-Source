@@ -119,7 +119,7 @@ func_10DFC(var_00) {
 
   if(!isDefined(var_01)) {
     level.func_C20D--;
-    scripts\mp\utility\game::decrementfauxvehiclecount();
+    scripts\mp\utility::decrementfauxvehiclecount();
     thread scripts\mp\killstreaks\killstreaks::func_11086();
     return 0;
   }
@@ -418,7 +418,7 @@ func_117A0() {
   }
 
   func_4074();
-  scripts\mp\utility\game::decrementfauxvehiclecount();
+  scripts\mp\utility::decrementfauxvehiclecount();
   playFX(scripts\engine\utility::getfx("thor_explode"), self.origin);
   self delete();
 }
@@ -501,7 +501,7 @@ func_11795(var_00) {
   self setscriptablepartstate("thrusters", "leave", 0);
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(5);
   func_4074();
-  scripts\mp\utility\game::decrementfauxvehiclecount();
+  scripts\mp\utility::decrementfauxvehiclecount();
   self delete();
 }
 

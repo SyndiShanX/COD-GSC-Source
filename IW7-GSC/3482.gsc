@@ -93,7 +93,7 @@ func_128F3(var_00, var_01) {
   var_04 = func_F1AD(var_00, "osprey_gunner", "compass_objpoint_osprey_friendly", "compass_objpoint_osprey_enemy", &"KILLSTREAKS_SELECT_MOBILE_MORTAR_LOCATION");
 
   if(!isDefined(var_04) || !var_04) {
-    scripts\mp\utility\game::decrementfauxvehiclecount();
+    scripts\mp\utility::decrementfauxvehiclecount();
     return 0;
   }
 

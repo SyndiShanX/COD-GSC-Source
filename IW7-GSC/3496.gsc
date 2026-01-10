@@ -308,7 +308,7 @@ func_5C28() {
   self waittill("death");
   self playSound("sentry_explode");
   playFX(level._effect["jammer_drone_explode"], self.origin);
-  scripts\mp\utility\game::decrementfauxvehiclecount();
+  scripts\mp\utility::decrementfauxvehiclecount();
   self delete();
 }
 

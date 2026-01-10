@@ -143,7 +143,7 @@ useballdrone(var_00, var_01) {
 
   if(!isDefined(var_03)) {
     scripts\mp\hud_message::showerrormessage("KILLSTREAKS_UNAVAILABLE");
-    scripts\mp\utility\game::decrementfauxvehiclecount();
+    scripts\mp\utility::decrementfauxvehiclecount();
     return 0;
   }
 
@@ -1368,7 +1368,7 @@ balldroneexplode() {
 }
 
 removeballdrone() {
-  scripts\mp\utility\game::decrementfauxvehiclecount();
+  scripts\mp\utility::decrementfauxvehiclecount();
 
   if(isDefined(self.radar))
     self.radar delete();

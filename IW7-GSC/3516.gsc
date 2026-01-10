@@ -48,7 +48,7 @@ func_128FE(var_00, var_01) {
     thread scripts\mp\utility\game::teamplayercardsplash("used_remote_tank", self);
     func_1146D("remote_tank");
   } else
-    scripts\mp\utility\game::decrementfauxvehiclecount();
+    scripts\mp\utility::decrementfauxvehiclecount();
 
   self.iscarrying = 0;
   return var_03;
@@ -590,7 +590,7 @@ func_114BE() {
   wait 2.0;
   playFX(level._effect["remote_tank_explode"], self.origin);
   self.mgturret delete();
-  scripts\mp\utility\game::decrementfauxvehiclecount();
+  scripts\mp\utility::decrementfauxvehiclecount();
   self delete();
 }
 

@@ -532,7 +532,7 @@ func_128F7(var_00) {
   var_02 = scripts\mp\killstreaks\target_marker::_meth_819B(var_00, ::checkrc8availablevalidationfunc);
 
   if(!isDefined(var_2.location)) {
-    scripts\mp\utility\game::decrementfauxvehiclecount();
+    scripts\mp\utility::decrementfauxvehiclecount();
     return 0;
   }
 

@@ -73,7 +73,7 @@ func_10DD3(var_00, var_01) {
 
     if(!isDefined(var_02)) {
       scripts\engine\utility::allow_weapon_switch(1);
-      scripts\mp\utility\game::decrementfauxvehiclecount();
+      scripts\mp\utility::decrementfauxvehiclecount();
       return 0;
     }
 
@@ -271,7 +271,7 @@ func_C6C7(var_00) {
   self notify("gone");
   func_4074();
   func_C6CC(3.0);
-  scripts\mp\utility\game::decrementfauxvehiclecount();
+  scripts\mp\utility::decrementfauxvehiclecount();
   level.func_163A["orbital_deployment"] = undefined;
   self delete();
 }

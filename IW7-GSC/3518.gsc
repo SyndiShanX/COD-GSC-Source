@@ -83,7 +83,7 @@ tryuseremoteuav(var_00, var_01) {
     scripts\mp\matchdata::logkillstreakevent(var_01, self.origin);
     thread scripts\mp\utility\game::teamplayercardsplash("used_remote_uav", self);
   } else
-    scripts\mp\utility\game::decrementfauxvehiclecount();
+    scripts\mp\utility::decrementfauxvehiclecount();
 
   self.iscarrying = 0;
   return var_03;
@@ -999,7 +999,7 @@ remoteuav_cleanup() {
   remoteuav_clearmarkedforowner();
   stopFXOnTag(level.remoteuav_fx["smoke"], self, "tag_origin");
   level.remote_uav[self.team] = undefined;
-  scripts\mp\utility\game::decrementfauxvehiclecount();
+  scripts\mp\utility::decrementfauxvehiclecount();
   self delete();
 }
 

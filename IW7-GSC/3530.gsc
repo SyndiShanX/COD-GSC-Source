@@ -58,7 +58,7 @@ func_130F5(var_00, var_01) {
   var_02 = setturretcanaidetach(var_00, var_01);
 
   if(!isDefined(var_02)) {
-    scripts\mp\utility\game::decrementfauxvehiclecount();
+    scripts\mp\utility::decrementfauxvehiclecount();
     return 0;
   }
 
@@ -683,7 +683,7 @@ vanguard_endride(var_00, var_01) {
   func_13174(var_00, var_01);
   stopFXOnTag(level.vanguard_fx["smoke"], var_01, "tag_origin");
   level.remote_uav[var_1.team] = undefined;
-  scripts\mp\utility\game::decrementfauxvehiclecount();
+  scripts\mp\utility::decrementfauxvehiclecount();
 
   if(isDefined(var_1.killcament))
     var_1.killcament delete();
