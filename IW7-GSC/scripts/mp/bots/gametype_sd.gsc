@@ -397,7 +397,7 @@ clear_target_zone_update() {
       if(!scripts\mp\bots\_bots_util::bot_is_defending_point(var_01.curorigin)) {
         var_01["min_goal_time"] = 2;
         var_01["max_goal_time"] = 4;
-        var_01["override_origin_node"] = scripts\engine\utility::random(var_01.bottargets);
+        var_01["override_origin_node"] = ::scripts\engine\utility::random(var_01.bottargets);
         scripts\mp\bots\_bots_strategy::bot_protect_point(var_01.curorigin, level.protect_radius, var_01);
         return;
       }
@@ -510,7 +510,7 @@ defender_update() {
   self endon("new_role");
   if(!scripts\mp\bots\_bots_util::bot_is_defending_point(self.defend_zone.curorigin)) {
     var_00["score_flags"] = "strict_los";
-    var_00["override_origin_node"] = scripts\engine\utility::random(self.defend_zone.bottargets);
+    var_00["override_origin_node"] = ::scripts\engine\utility::random(self.defend_zone.bottargets);
     scripts\mp\bots\_bots_strategy::bot_protect_point(self.defend_zone.curorigin, level.protect_radius, var_00);
   }
 }

@@ -286,8 +286,8 @@ setcrankedtimerdomflag(param_00) {
 dompoint_setupflagmodels() {
   game["flagmodels"] = [];
   game["flagmodels"]["neutral"] = "prop_flag_neutral";
-  game["flagmodels"]["allies"] = scripts\mp\teams::ismeleeing("allies");
-  game["flagmodels"]["axis"] = scripts\mp\teams::ismeleeing("axis");
+  game["flagmodels"]["allies"] = ::scripts\mp\teams::ismeleeing("allies");
+  game["flagmodels"]["axis"] = ::scripts\mp\teams::ismeleeing("axis");
 }
 
 updateflagstate(param_00, param_01) {

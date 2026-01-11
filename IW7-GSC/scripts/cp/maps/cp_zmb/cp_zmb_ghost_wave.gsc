@@ -957,11 +957,11 @@ stop_moving_targets_sequence() {
 
 purge_undefined_from_moving_target_array() {
   foreach(var_02, var_01 in level.moving_target_groups) {
-    level.moving_target_groups[var_02] = scripts\engine\utility::array_removeundefined(var_01);
+    level.moving_target_groups[var_02] = ::scripts\engine\utility::array_removeundefined(var_01);
   }
 
   foreach(var_04, var_01 in level.moving_target_priority) {
-    level.moving_target_priority[var_04] = scripts\engine\utility::array_removeundefined(var_01);
+    level.moving_target_priority[var_04] = ::scripts\engine\utility::array_removeundefined(var_01);
   }
 }
 
@@ -1228,11 +1228,11 @@ update_num_targets_escaped_hud() {
 
 remove_undefined_from_moving_target_array(param_00) {
   foreach(var_03, var_02 in level.moving_target_groups) {
-    level.moving_target_groups[var_03] = scripts\engine\utility::array_remove(var_02, param_00);
+    level.moving_target_groups[var_03] = ::scripts\engine\utility::array_remove(var_02, param_00);
   }
 
   foreach(var_05, var_02 in level.moving_target_priority) {
-    level.moving_target_priority[var_05] = scripts\engine\utility::array_remove(var_02, param_00);
+    level.moving_target_priority[var_05] = ::scripts\engine\utility::array_remove(var_02, param_00);
   }
 }
 
@@ -1301,7 +1301,7 @@ turn_off_ghost_arcade_scores(param_00) {
 }
 
 register_available_formation(param_00, param_01) {
-  level.available_formations[param_00] = scripts\engine\utility::array_add(level.available_formations[param_00], param_01);
+  level.available_formations[param_00] = ::scripts\engine\utility::array_add(level.available_formations[param_00], param_01);
 }
 
 register_formation_movements(param_00, param_01) {

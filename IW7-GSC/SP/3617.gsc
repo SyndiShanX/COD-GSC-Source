@@ -723,10 +723,10 @@ func_1066C(param_00) {
       while(var_11 < var_0E) {
         if(var_13 == 0 && !var_0D) {
           var_14 = 0;
-          var_12[var_12.size] = scripts\engine\utility::drop_to_ground(var_01 + rotatevector(var_0F, (0, var_14, 0)) * var_11, 12, -1000);
+          var_12[var_12.size] = ::scripts\engine\utility::drop_to_ground(var_01 + rotatevector(var_0F, (0, var_14, 0)) * var_11, 12, -1000);
         } else if(var_13 == 1) {
           var_14 = 0;
-          var_12[var_12.size] = scripts\engine\utility::drop_to_ground(var_01 + rotatevector(var_0F, (0, var_14, 0)) * var_11, 12, -1000);
+          var_12[var_12.size] = ::scripts\engine\utility::drop_to_ground(var_01 + rotatevector(var_0F, (0, var_14, 0)) * var_11, 12, -1000);
         }
 
         var_13++;

@@ -2512,7 +2512,7 @@ func_CFA3(param_00) {
   wait(1);
   var_01 = [];
   foreach(var_03 in scripts\engine\utility::getstructarray("c12_rocket_target", "targetname")) {
-    var_01[var_01.size] = scripts\engine\utility::spawn_script_origin(var_03.origin);
+    var_01[var_01.size] = ::scripts\engine\utility::spawn_script_origin(var_03.origin);
   }
 
   level.var_3623 = var_01;

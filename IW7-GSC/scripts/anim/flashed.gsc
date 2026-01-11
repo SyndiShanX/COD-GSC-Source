@@ -15,7 +15,7 @@ func_7FE4() {
   level.var_6EC0[var_00]++;
   if(level.var_6EC0[var_00] >= level.archetypes[var_00]["flashed"]["flashed"].size) {
     level.var_6EC0[var_00] = 0;
-    level.archetypes[var_00]["flashed"]["flashed"] = scripts\engine\utility::array_randomize(level.archetypes[var_00]["flashed"]["flashed"]);
+    level.archetypes[var_00]["flashed"]["flashed"] = ::scripts\engine\utility::array_randomize(level.archetypes[var_00]["flashed"]["flashed"]);
   }
 
   return level.archetypes[var_00]["flashed"]["flashed"][level.var_6EC0[var_00]];

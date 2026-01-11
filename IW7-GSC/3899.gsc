@@ -29,36 +29,36 @@ func_3E9F(param_00, param_01, param_02) {
 _meth_8162(param_00) {
   var_01 = [];
   if(scripts\asm\asm::asm_hasalias(param_00, "1")) {
-    var_01[7] = scripts\asm\asm::asm_lookupanimfromalias(param_00, "1");
+    var_01[7] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, "1");
   }
 
   if(scripts\asm\asm::asm_hasalias(param_00, "2")) {
-    var_01[0] = scripts\asm\asm::asm_lookupanimfromalias(param_00, "2");
+    var_01[0] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, "2");
     var_01[8] = var_01[0];
   }
 
   if(scripts\asm\asm::asm_hasalias(param_00, "3")) {
-    var_01[1] = scripts\asm\asm::asm_lookupanimfromalias(param_00, "3");
+    var_01[1] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, "3");
   }
 
   if(scripts\asm\asm::asm_hasalias(param_00, "4")) {
-    var_01[6] = scripts\asm\asm::asm_lookupanimfromalias(param_00, "4");
+    var_01[6] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, "4");
   }
 
   if(scripts\asm\asm::asm_hasalias(param_00, "6")) {
-    var_01[2] = scripts\asm\asm::asm_lookupanimfromalias(param_00, "6");
+    var_01[2] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, "6");
   }
 
   if(scripts\asm\asm::asm_hasalias(param_00, "7")) {
-    var_01[5] = scripts\asm\asm::asm_lookupanimfromalias(param_00, "7");
+    var_01[5] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, "7");
   }
 
   if(scripts\asm\asm::asm_hasalias(param_00, "8")) {
-    var_01[4] = scripts\asm\asm::asm_lookupanimfromalias(param_00, "8");
+    var_01[4] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, "8");
   }
 
   if(scripts\asm\asm::asm_hasalias(param_00, "9")) {
-    var_01[3] = scripts\asm\asm::asm_lookupanimfromalias(param_00, "9");
+    var_01[3] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, "9");
   }
 
   return var_01;
@@ -333,14 +333,14 @@ getcurrentweaponclipammo(param_00, param_01) {
     var_03 = "left";
   }
 
-  var_02[0] = scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "2");
-  var_02[1] = scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "3");
-  var_02[2] = scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "6");
-  var_02[3] = scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "9");
-  var_02[5] = scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "7");
-  var_02[6] = scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "4");
-  var_02[7] = scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "1");
-  var_02[8] = scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "2");
+  var_02[0] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "2");
+  var_02[1] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "3");
+  var_02[2] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "6");
+  var_02[3] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "9");
+  var_02[5] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "7");
+  var_02[6] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "4");
+  var_02[7] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "1");
+  var_02[8] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "2");
   return var_02;
 }
 

@@ -1008,7 +1008,7 @@ setspecialloadouts() {
   level.infect_allyrigs[level.infect_allyrigs.size] = "archetype_sniper";
   level.infect_allyrigs[level.infect_allyrigs.size] = "archetype_assassin";
   if(scripts\mp\utility::isusingdefaultclass("allies", 0)) {
-    level.infect_loadouts["allies"] = scripts\mp\utility::getmatchrulesspecialclass("allies", 0);
+    level.infect_loadouts["allies"] = ::scripts\mp\utility::getmatchrulesspecialclass("allies", 0);
   } else {
     level.infect_loadouts["allies"]["loadoutPrimary"] = level.survivorprimaryweapon;
     level.infect_loadouts["allies"]["loadoutPrimaryAttachment"] = level.attachmentsurvivorprimary;
@@ -1037,7 +1037,7 @@ setspecialloadouts() {
   }
 
   if(scripts\mp\utility::isusingdefaultclass("axis", 1)) {
-    level.infect_loadouts["axis_initial"] = scripts\mp\utility::getmatchrulesspecialclass("axis", 1);
+    level.infect_loadouts["axis_initial"] = ::scripts\mp\utility::getmatchrulesspecialclass("axis", 1);
     level.infect_loadouts["axis_initial"]["loadoutStreakType"] = "assault";
     level.infect_loadouts["axis_initial"]["loadoutKillstreak1"] = "none";
     level.infect_loadouts["axis_initial"]["loadoutKillstreak2"] = "none";
@@ -1071,7 +1071,7 @@ setspecialloadouts() {
   }
 
   if(scripts\mp\utility::isusingdefaultclass("axis", 0)) {
-    level.infect_loadouts["axis"] = scripts\mp\utility::getmatchrulesspecialclass("axis", 0);
+    level.infect_loadouts["axis"] = ::scripts\mp\utility::getmatchrulesspecialclass("axis", 0);
     level.infect_loadouts["axis"]["loadoutStreakType"] = "assault";
     level.infect_loadouts["axis"]["loadoutKillstreak1"] = "none";
     level.infect_loadouts["axis"]["loadoutKillstreak2"] = "none";

@@ -137,7 +137,7 @@ func_19CE(var_00) {
     func_45ED();
     self.func_4BDF = var_00;
     var_01 = self.func_EDAD;
-    level.func_22E0[func_7CE4()][var_01] = scripts\engine\utility::array_add(level.func_22E0[func_7CE4()][var_01], self);
+    level.func_22E0[func_7CE4()][var_01] = ::scripts\engine\utility::array_add(level.func_22E0[func_7CE4()][var_01], self);
     thread _meth_8467();
     return;
   }
@@ -320,14 +320,14 @@ func_159A(var_00, var_01, var_02, var_03) {
     if(!isDefined(level.func_22DE[var_02][var_0[var_04]])) {
       continue;
     }
-    level.func_22DE[var_02][var_0[var_04]] = scripts\engine\utility::array_removeundefined(level.func_22DE[var_02][var_0[var_04]]);
+    level.func_22DE[var_02][var_0[var_04]] = ::scripts\engine\utility::array_removeundefined(level.func_22DE[var_02][var_0[var_04]]);
 
     for(var_05 = 0; var_05 < level.func_22DE[var_02][var_0[var_04]].size; var_5++)
       level.func_22DE[var_02][var_0[var_04]][var_05].func_4BDF = var_0[var_04];
   }
 
   foreach(var_07 in var_01) {
-    level.func_22E0[var_02][var_07] = scripts\sp\utility::func_22B9(level.func_22E0[var_02][var_07]);
+    level.func_22E0[var_02][var_07] = ::scripts\sp\utility::func_22B9(level.func_22E0[var_02][var_07]);
     level.func_A95D[var_02][var_07] = level.func_4BE0[var_02][var_07];
     level.func_4BE0[var_02][var_07] = var_3[var_07];
   }
@@ -439,7 +439,7 @@ func_78D6(var_00, var_01) {
 }
 
 func_9F85(var_00, var_01, var_02) {
-  level.func_22DC[var_02][var_00] = scripts\sp\utility::func_22B9(level.func_22DC[var_02][var_00]);
+  level.func_22DC[var_02][var_00] = ::scripts\sp\utility::func_22B9(level.func_22DC[var_02][var_00]);
   var_03 = level.func_22DC[var_02][var_00];
   var_03 = scripts\engine\utility::array_combine(var_03, level.func_22E0[var_02][var_01]);
   var_04 = [];
@@ -893,7 +893,7 @@ func_171E(var_00, var_01) {
 
   foreach(var_04 in var_02) {
     if(isDefined(level.func_22DD[var_01]) && isDefined(level.func_22DD[var_01][var_04])) {
-      level.func_22DD[var_01][var_04] = scripts\engine\utility::array_add(level.func_22DD[var_01][var_04], self);
+      level.func_22DD[var_01][var_04] = ::scripts\engine\utility::array_add(level.func_22DD[var_01][var_04], self);
       continue;
     }
 
@@ -945,7 +945,7 @@ func_E16F() {
   var_03 = func_22AE(var_03);
 
   for(var_04 = 0; var_04 < var_3.size; var_4++)
-    level.func_22DE[var_01][var_3[var_04]] = scripts\engine\utility::array_remove(level.func_22DE[var_01][var_3[var_04]], self);
+    level.func_22DE[var_01][var_3[var_04]] = ::scripts\engine\utility::array_remove(level.func_22DE[var_01][var_3[var_04]], self);
 }
 
 func_16B5(var_00) {

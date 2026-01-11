@@ -191,7 +191,7 @@ func_1AD9() {
       if(isDefined(var_5.script_noteworthy) && var_5.script_noteworthy == "forward")
         var_06 = "front";
 
-      var_2.func_ECCE[var_06] = scripts\engine\utility::array_add(var_2.func_ECCE[var_06], var_05);
+      var_2.func_ECCE[var_06] = ::scripts\engine\utility::array_add(var_2.func_ECCE[var_06], var_05);
 
       if(var_06 == "front") {
         var_05 setscriptablepartstate("root", "0");
@@ -223,12 +223,12 @@ func_1AAE() {
   foreach(var_04 in level.createfxent) {
     if(isDefined(var_4.v["exploder"])) {
       if(var_4.v["exploder"] == var_00) {
-        var_2["pressurize"] = scripts\engine\utility::array_add(var_2["pressurize"], var_04);
+        var_2["pressurize"] = ::scripts\engine\utility::array_add(var_2["pressurize"], var_04);
         continue;
       }
 
       if(var_4.v["exploder"] == var_01)
-        var_2["depressurize"] = scripts\engine\utility::array_add(var_2["depressurize"], var_04);
+        var_2["depressurize"] = ::scripts\engine\utility::array_add(var_2["depressurize"], var_04);
     }
   }
 
@@ -247,7 +247,7 @@ func_1AAE() {
       var_14.origin = var_4.v["origin"];
       var_14.angles = var_4.v["angles"];
       var_14.delay = var_4.v["delay"];
-      self.func_4CD3[var_08] = scripts\engine\utility::array_add(self.func_4CD3[var_08], var_14);
+      self.func_4CD3[var_08] = ::scripts\engine\utility::array_add(self.func_4CD3[var_08], var_14);
     }
   }
 }
@@ -675,7 +675,7 @@ func_A852() {
         if(!isDefined(var_1["ai"]))
           var_1["ai"] = [];
 
-        var_1["ai"] = scripts\engine\utility::array_add(var_1["ai"], var_04);
+        var_1["ai"] = ::scripts\engine\utility::array_add(var_1["ai"], var_04);
       }
 
       var_04 glinton(#animtree);

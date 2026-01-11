@@ -54,7 +54,7 @@ func_E043(param_00, param_01) {
 func_E044(param_00, param_01) {
   foreach(var_04, var_03 in level.var_D928[param_01].var_D926) {
     if(scripts\engine\utility::array_contains(var_03, param_00)) {
-      level.var_D928[param_01].var_D926[var_04] = scripts\engine\utility::array_remove(var_03, param_00);
+      level.var_D928[param_01].var_D926[var_04] = ::scripts\engine\utility::array_remove(var_03, param_00);
       [
         [func_7966(param_01)]
       ](param_00);
@@ -81,7 +81,7 @@ func_9C99(param_00) {
 
 func_DB03(param_00) {
   foreach(var_03, var_02 in level.var_D928[param_00].var_D926) {
-    level.var_D928[param_00].var_D926[var_03] = scripts\engine\utility::array_removeundefined(level.var_D928[param_00].var_D926[var_03]);
+    level.var_D928[param_00].var_D926[var_03] = ::scripts\engine\utility::array_removeundefined(level.var_D928[param_00].var_D926[var_03]);
   }
 }
 
@@ -126,7 +126,7 @@ func_E062(param_00, param_01) {
   [
     [func_7966(param_00)]
   ](var_02);
-  level.var_D928[param_00].var_D926[param_01] = scripts\engine\utility::array_remove(level.var_D928[param_00].var_D926[param_01], var_02);
+  level.var_D928[param_00].var_D926[param_01] = ::scripts\engine\utility::array_remove(level.var_D928[param_00].var_D926[param_01], var_02);
 }
 
 func_FF7D(param_00) {

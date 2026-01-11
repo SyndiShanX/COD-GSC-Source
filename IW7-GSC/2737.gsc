@@ -560,7 +560,7 @@ func_11ACF(var_00, var_01, var_02, var_03) {
 
 func_8BE1(var_00, var_01) {
   if(isDefined(var_0.debuffedbyplayers[var_01])) {
-    var_0.debuffedbyplayers[var_01] = scripts\engine\utility::array_removeundefined(var_0.debuffedbyplayers[var_01]);
+    var_0.debuffedbyplayers[var_01] = ::scripts\engine\utility::array_removeundefined(var_0.debuffedbyplayers[var_01]);
     return var_0.debuffedbyplayers[var_01].size > 0;
   }
 
@@ -569,7 +569,7 @@ func_8BE1(var_00, var_01) {
 
 getdebuffattackersbyweapon(var_00, var_01) {
   if(isDefined(var_0.debuffedbyplayers[var_01])) {
-    var_0.debuffedbyplayers[var_01] = scripts\engine\utility::array_removeundefined(var_0.debuffedbyplayers[var_01]);
+    var_0.debuffedbyplayers[var_01] = ::scripts\engine\utility::array_removeundefined(var_0.debuffedbyplayers[var_01]);
 
     if(var_0.debuffedbyplayers[var_01].size > 0)
       return var_0.debuffedbyplayers[var_01];

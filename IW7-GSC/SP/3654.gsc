@@ -399,10 +399,10 @@ func_10424() {
 
     var_02.var_4BEC = var_04;
     if(var_04 < var_02.var_7345) {
-      var_00["not_viewable"] = scripts\engine\utility::array_add(var_00["not_viewable"], var_02);
+      var_00["not_viewable"] = ::scripts\engine\utility::array_add(var_00["not_viewable"], var_02);
       continue;
     } else {
-      var_00["viewable"] = scripts\engine\utility::array_add(var_00["viewable"], var_02);
+      var_00["viewable"] = ::scripts\engine\utility::array_add(var_00["viewable"], var_02);
     }
 
     if(getdvarint("cursor_hint_debug")) {
@@ -438,23 +438,23 @@ func_10426(param_00, param_01) {
       }
 
       if(var_07) {
-        var_02["remove"] = scripts\engine\utility::array_add(var_02["remove"], var_04);
+        var_02["remove"] = ::scripts\engine\utility::array_add(var_02["remove"], var_04);
         continue;
       }
     }
 
     var_08 = distancesquared(var_04.origin, level.player.origin);
     if(var_08 > squared(var_04.var_13393)) {
-      var_02["remove"] = scripts\engine\utility::array_add(var_02["remove"], var_04);
+      var_02["remove"] = ::scripts\engine\utility::array_add(var_02["remove"], var_04);
       continue;
     }
 
     if(var_08 > squared(var_04.var_13078) || var_04.var_9035) {
-      var_02["viewable"] = scripts\engine\utility::array_add(var_02["viewable"], var_04);
+      var_02["viewable"] = ::scripts\engine\utility::array_add(var_02["viewable"], var_04);
       continue;
     }
 
-    var_02["useable"] = scripts\engine\utility::array_add(var_02["useable"], var_04);
+    var_02["useable"] = ::scripts\engine\utility::array_add(var_02["useable"], var_04);
     var_04.var_369 = 1;
   }
 

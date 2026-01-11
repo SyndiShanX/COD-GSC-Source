@@ -330,25 +330,25 @@ func_95E5() {
   level.var_6EE9["unitednations"] = [];
   var_00 = 41;
   for(var_01 = 0; var_01 < var_00; var_01++) {
-    level.var_6EE9["unitednations"][var_01] = scripts\sp\utility::string(var_01 + 1);
+    level.var_6EE9["unitednations"][var_01] = ::scripts\sp\utility::string(var_01 + 1);
   }
 
   level.var_6EE9["unitednationshelmet"] = [];
   var_00 = 41;
   for(var_01 = 0; var_01 < var_00; var_01++) {
-    level.var_6EE9["unitednationshelmet"][var_01] = scripts\sp\utility::string(var_01 + 1);
+    level.var_6EE9["unitednationshelmet"][var_01] = ::scripts\sp\utility::string(var_01 + 1);
   }
 
   level.var_6EE9["unitednationsfemale"] = [];
   var_00 = 41;
   for(var_01 = 0; var_01 < var_00; var_01++) {
-    level.var_6EE9["unitednationsfemale"][var_01] = scripts\sp\utility::string(var_01 + 1);
+    level.var_6EE9["unitednationsfemale"][var_01] = ::scripts\sp\utility::string(var_01 + 1);
   }
 
   level.var_6EE9["unitednationsjackal"] = [];
   var_00 = 13;
   for(var_01 = 0; var_01 < var_00; var_01++) {
-    level.var_6EE9["unitednationsjackal"][var_01] = scripts\sp\utility::string(var_01 + 1);
+    level.var_6EE9["unitednationsjackal"][var_01] = ::scripts\sp\utility::string(var_01 + 1);
   }
 
   anim.var_6EEC = [];

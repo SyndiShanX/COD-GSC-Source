@@ -354,7 +354,7 @@ func_75E7(var_00, var_01) {
 func_31A1() {
   level.func_A065["evasion"] = [ % jackal_vehicle_evade_01, % jackal_vehicle_evade_02, % jackal_vehicle_evade_03, % jackal_vehicle_evade_04, % jackal_vehicle_evade_05, % jackal_vehicle_evade_06, % jackal_vehicle_evade_07, % jackal_vehicle_evade_08];
   level.func_A065["evasion_overlay"] = % jackal_evade_overlay;
-  level.func_A065["evasion"] = scripts\engine\utility::array_randomize(level.func_A065["evasion"]);
+  level.func_A065["evasion"] = ::scripts\engine\utility::array_randomize(level.func_A065["evasion"]);
 }
 
 func_104A7() {

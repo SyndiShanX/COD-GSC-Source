@@ -543,9 +543,9 @@ func_F92B(param_00) {
   self.a.var_2274 = scripts\anim\utility::func_B028("cover_crouch");
   if(scripts\anim\utility_common::weapon_pump_action_shotgun()) {
     if(param_00 == "lean" || param_00 == "stand") {
-      self.a.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_stand", "single");
+      self.a.var_2274["single"] = ::scripts\anim\utility::func_B027("shotgun_stand", "single");
     } else {
-      self.a.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_crouch", "single");
+      self.a.var_2274["single"] = ::scripts\anim\utility::func_B027("shotgun_crouch", "single");
     }
   }
 
@@ -567,7 +567,7 @@ func_FA52(param_00) {
     self.a.var_2274["semi4"] = var_01["semi4"];
     self.a.var_2274["semi5"] = var_01["semi5"];
     if(scripts\anim\utility_common::weapon_pump_action_shotgun()) {
-      self.a.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_stand", "single");
+      self.a.var_2274["single"] = ::scripts\anim\utility::func_B027("shotgun_stand", "single");
     } else {
       self.a.var_2274["single"] = var_01["single"];
     }

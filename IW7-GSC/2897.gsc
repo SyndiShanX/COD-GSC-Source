@@ -404,7 +404,7 @@ func_10635() {
       else
         self.func_747F[var_11].func_EB9C = "_large";
 
-      self.func_747E[var_12] = scripts\engine\utility::array_add(self.func_747E[var_12], self.func_747F[var_11]);
+      self.func_747E[var_12] = ::scripts\engine\utility::array_add(self.func_747E[var_12], self.func_747F[var_11]);
       continue;
     }
 

@@ -395,7 +395,7 @@ loadout_updateclassteam(var_00, var_01, var_02) {
     var_0.loadoutprimary = "iw7_fists";
   else {
     for(var_04 = 0; var_04 < 6; var_4++)
-      var_0.loadoutprimaryattachments[var_04] = scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_02, var_03, "class", "weaponSetups", 0, "attachment", var_04);
+      var_0.loadoutprimaryattachments[var_04] = ::scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_02, var_03, "class", "weaponSetups", 0, "attachment", var_04);
   }
 
   var_0.loadoutprimarycamo = scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_02, var_03, "class", "weaponSetups", 0, "camo");
@@ -403,7 +403,7 @@ loadout_updateclassteam(var_00, var_01, var_02) {
   var_0.loadoutsecondary = scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_02, var_03, "class", "weaponSetups", 1, "weapon");
 
   for(var_04 = 0; var_04 < 5; var_4++)
-    var_0.loadoutsecondaryattachments[var_04] = scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_02, var_03, "class", "weaponSetups", 1, "attachment", var_04);
+    var_0.loadoutsecondaryattachments[var_04] = ::scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_02, var_03, "class", "weaponSetups", 1, "attachment", var_04);
 
   var_0.loadoutsecondarycamo = scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_02, var_03, "class", "weaponSetups", 1, "camo");
   var_0.loadoutsecondaryreticle = scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_02, var_03, "class", "weaponSetups", 1, "reticle");
@@ -1695,11 +1695,11 @@ buildweaponname(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, 
   }
 
   for(var_15 = 0; var_15 < var_1.size; var_15++)
-    var_1[var_15] = scripts\mp\utility\game::attachmentmap_tounique(var_1[var_15], var_10);
+    var_1[var_15] = ::scripts\mp\utility\game::attachmentmap_tounique(var_1[var_15], var_10);
 
   if(isDefined(var_09)) {
     for(var_15 = 0; var_15 < var_9.size; var_15++)
-      var_9[var_15] = scripts\mp\utility\game::attachmentmap_tounique(var_9[var_15], var_10);
+      var_9[var_15] = ::scripts\mp\utility\game::attachmentmap_tounique(var_9[var_15], var_10);
   }
 
   if(isDefined(var_09))
@@ -1724,7 +1724,7 @@ buildweaponname(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, 
     var_20 = scripts\mp\utility\game::attachmentmap_toextra(var_19);
 
     if(isDefined(var_20))
-      var_17[var_17.size] = scripts\mp\utility\game::attachmentmap_tounique(var_20, var_10);
+      var_17[var_17.size] = ::scripts\mp\utility\game::attachmentmap_tounique(var_20, var_10);
   }
 
   if(var_17.size > 0)

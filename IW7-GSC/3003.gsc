@@ -110,7 +110,7 @@ func_FA1E() {
   var_00 = [];
 
   for(var_01 = 0; var_01 < 4; var_1++) {
-    var_0[var_01] = scripts\sp\utility::func_10639("droppod_arm");
+    var_0[var_01] = ::scripts\sp\utility::func_10639("droppod_arm");
     var_0[var_01].func_1FBB = "droppod_arm_" + var_01;
   }
 

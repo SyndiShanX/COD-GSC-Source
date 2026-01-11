@@ -106,17 +106,17 @@ func_4A29(param_00, param_01) {
   var_03.carriervisible = 0;
   var_03.visibleteam = "none";
   foreach(var_05 in level.teamnamelist) {
-    var_03.teamobjids[var_05] = scripts\mp\objidpoolmanager::requestminimapid(99);
+    var_03.teamobjids[var_05] = ::scripts\mp\objidpoolmanager::requestminimapid(99);
     if(var_03.teamobjids[var_05] != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_add(var_03.teamobjids[var_05], "invisible", var_03.curorigin);
       scripts\mp\objidpoolmanager::minimap_objective_team(var_03.teamobjids[var_05], var_05);
     }
 
-    var_03.objpoints[var_05] = scripts\mp\objpoints::func_4A23("objpoint_" + var_05 + "_" + var_03.entnum, var_03.curorigin + param_01, var_05, undefined);
+    var_03.objpoints[var_05] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_05 + "_" + var_03.entnum, var_03.curorigin + param_01, var_05, undefined);
     var_03.objpoints[var_05].alpha = 0;
     if(getdvarint("com_codcasterEnabled", 0) == 1) {
       var_06 = "mlg_" + var_05;
-      var_03.objpoints[var_06] = scripts\mp\objpoints::func_4A23("objpoint_" + var_06 + "_" + var_03.entnum, var_03.curorigin + param_01, var_05, undefined);
+      var_03.objpoints[var_06] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_06 + "_" + var_03.entnum, var_03.curorigin + param_01, var_05, undefined);
       var_03.objpoints[var_06].alpha = 0;
     }
   }
@@ -189,17 +189,17 @@ createcarryobject(param_00, param_01, param_02, param_03) {
   var_04.objidpingenemy = 0;
   var_04.objidpingfriendly = 0;
   foreach(var_07 in level.teamnamelist) {
-    var_04.teamobjids[var_07] = scripts\mp\objidpoolmanager::requestminimapid(99);
+    var_04.teamobjids[var_07] = ::scripts\mp\objidpoolmanager::requestminimapid(99);
     if(var_04.teamobjids[var_07] != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_add(var_04.teamobjids[var_07], "invisible", var_04.curorigin);
       scripts\mp\objidpoolmanager::minimap_objective_team(var_04.teamobjids[var_07], var_07);
     }
 
-    var_04.objpoints[var_07] = scripts\mp\objpoints::func_4A23("objpoint_" + var_07 + "_" + var_04.entnum, var_04.curorigin + param_03, var_07, undefined);
+    var_04.objpoints[var_07] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_07 + "_" + var_04.entnum, var_04.curorigin + param_03, var_07, undefined);
     var_04.objpoints[var_07].alpha = 0;
     if(getdvarint("com_codcasterEnabled", 0) == 1) {
       var_08 = "mlg_" + var_07;
-      var_04.objpoints[var_08] = scripts\mp\objpoints::func_4A23("objpoint_" + var_08 + "_" + var_04.entnum, var_04.curorigin + param_03, var_07, undefined);
+      var_04.objpoints[var_08] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_08 + "_" + var_04.entnum, var_04.curorigin + param_03, var_07, undefined);
       var_04.objpoints[var_08].alpha = 0;
     }
   }
@@ -1138,17 +1138,17 @@ createuseobject(param_00, param_01, param_02, param_03) {
   var_04.offset3d = param_03;
   var_04.var_4465 = [];
   foreach(var_07 in level.teamnamelist) {
-    var_04.teamobjids[var_07] = scripts\mp\objidpoolmanager::requestminimapid(99);
+    var_04.teamobjids[var_07] = ::scripts\mp\objidpoolmanager::requestminimapid(99);
     if(var_04.teamobjids[var_07] != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_add(var_04.teamobjids[var_07], "invisible", var_04.curorigin);
       scripts\mp\objidpoolmanager::minimap_objective_team(var_04.teamobjids[var_07], var_07);
     }
 
-    var_04.objpoints[var_07] = scripts\mp\objpoints::func_4A23("objpoint_" + var_07 + "_" + var_04.entnum, var_04.curorigin + param_03, var_07, undefined);
+    var_04.objpoints[var_07] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_07 + "_" + var_04.entnum, var_04.curorigin + param_03, var_07, undefined);
     var_04.objpoints[var_07].alpha = 0;
     if(getdvarint("com_codcasterEnabled", 0) == 1) {
       var_08 = "mlg_" + var_07;
-      var_04.objpoints[var_08] = scripts\mp\objpoints::func_4A23("objpoint_" + var_08 + "_" + var_04.entnum, var_04.curorigin + param_03, var_07, undefined);
+      var_04.objpoints[var_08] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_08 + "_" + var_04.entnum, var_04.curorigin + param_03, var_07, undefined);
       var_04.objpoints[var_08].alpha = 0;
     }
   }

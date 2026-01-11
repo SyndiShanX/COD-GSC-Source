@@ -1465,7 +1465,7 @@ func_7BC7(param_00) {
       continue;
     }
 
-    var_03["spot"] = scripts\engine\utility::random(var_03["spots"]);
+    var_03["spot"] = ::scripts\engine\utility::random(var_03["spots"]);
     return var_03;
   }
 }

@@ -29,7 +29,7 @@ createfx() {
 
 func_49C3() {
   var_00 = [];
-  var_0["trigger_multiple_createart_transient"] = scripts\sp\trigger::func_1272E;
+  var_0["trigger_multiple_createart_transient"] = ::scripts\sp\trigger::func_1272E;
 
   foreach(var_04, var_02 in var_00) {
     var_03 = getEntArray(var_04, "classname");

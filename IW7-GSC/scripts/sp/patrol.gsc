@@ -84,7 +84,7 @@ func_C97C(param_00) {
 
   var_09 = [];
   var_09["pause"] = "patrol_idle_";
-  var_09["turn180"] = scripts\engine\utility::ter_op(isDefined(self.var_C97E), self.var_C97E, "patrol_turn180");
+  var_09["turn180"] = ::scripts\engine\utility::ter_op(isDefined(self.var_C97E), self.var_C97E, "patrol_turn180");
   var_09["smoke"] = "patrol_idle_smoke";
   var_09["stretch"] = "patrol_idle_stretch";
   var_09["checkphone"] = "patrol_idle_checkphone";

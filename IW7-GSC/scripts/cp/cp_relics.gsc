@@ -104,7 +104,7 @@ init_passive_random_attachment(param_00) {
     var_08 = scripts\cp\utility::getweaponcosmeticattachment(var_06);
     var_09 = scripts\cp\utility::getweaponreticle(var_06);
     var_0A = scripts\cp\utility::getweaponpaintjobid(var_06);
-    param_00.weapon_build_models[var_05] = scripts\cp\utility::mpbuildweaponname(var_06, var_02, var_07, var_09, scripts\cp\utility::get_weapon_variant_id(param_00, var_04), self getentitynumber(), self.clientid, var_0A, var_08);
+    param_00.weapon_build_models[var_05] = ::scripts\cp\utility::mpbuildweaponname(var_06, var_02, var_07, var_09, scripts\cp\utility::get_weapon_variant_id(param_00, var_04), self getentitynumber(), self.clientid, var_0A, var_08);
   }
 }
 

@@ -189,7 +189,7 @@ func_1012E(param_00, param_01, param_02, param_03) {
   var_04 settext(param_02);
   self.locationobjectives = [];
   for(var_05 = 0; var_05 < param_03; var_05++) {
-    self.locationobjectives[var_05] = scripts\mp\objidpoolmanager::requestminimapid(1);
+    self.locationobjectives[var_05] = ::scripts\mp\objidpoolmanager::requestminimapid(1);
     if(self.locationobjectives[var_05] != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_add(self.locationobjectives[var_05], "invisible", (0, 0, 0));
       scripts\mp\objidpoolmanager::minimap_objective_position(self.locationobjectives[var_05], level.var_1A6F[level.script][var_05]["origin"]);

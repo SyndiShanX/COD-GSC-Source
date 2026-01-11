@@ -179,7 +179,7 @@ func_48BF(var_00) {
     if(isDefined(level.allies[var_02]) && isalive(level.allies[var_02])) {
       continue;
     }
-    level.allies[var_02] = scripts\sp\utility::func_107EA(var_02, 1);
+    level.allies[var_02] = ::scripts\sp\utility::func_107EA(var_02, 1);
     level.allies[var_02].grenadeammo = 0;
     level.allies[var_02] scripts\sp\utility::func_B14F();
     level.allies[var_02] _meth_8250(0);

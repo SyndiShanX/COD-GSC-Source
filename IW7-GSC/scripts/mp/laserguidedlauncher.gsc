@@ -253,7 +253,7 @@ func_AC11(param_00, param_01) {
 func_AC0C(param_00, param_01, param_02) {
   param_01 endon("death");
   param_00 waittill("death");
-  param_01.var_AC03[param_02] = scripts\engine\utility::array_remove(param_01.var_AC03[param_02], param_00);
+  param_01.var_AC03[param_02] = ::scripts\engine\utility::array_remove(param_01.var_AC03[param_02], param_00);
   if(param_01.var_AC03[param_02].size == 0) {
     param_01.var_AC03[param_02] = undefined;
     param_01 notify("LGM_target_lockedMissilesDestroyed");

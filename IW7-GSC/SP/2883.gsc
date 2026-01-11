@@ -612,7 +612,7 @@ func_CD50(param_00, param_01, param_02) {
   }
 
   if(isDefined(level.var_9A2E)) {
-    level.var_9A2E.var_4D94["actors"] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["actors"], self);
+    level.var_9A2E.var_4D94["actors"] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["actors"], self);
   }
 
   if(isDefined(param_02)) {
@@ -712,7 +712,7 @@ func_E1CE(param_00, param_01) {
 
 func_1690() {
   if(isDefined(level.var_9A2E)) {
-    level.var_9A2E.var_4D94["actors"] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["actors"], self);
+    level.var_9A2E.var_4D94["actors"] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["actors"], self);
   }
 }
 
@@ -800,7 +800,7 @@ func_CD4F(param_00, param_01) {
   }
 
   if(isDefined(level.var_9A2E)) {
-    level.var_9A2E.var_4D94["actors"] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["actors"], self);
+    level.var_9A2E.var_4D94["actors"] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["actors"], self);
   }
 
   if(isDefined(param_01)) {
@@ -1715,8 +1715,8 @@ func_9A37() {
     self.var_9C84 = 1;
     thread scripts\sp\interaction_manager::func_9A39();
     wait(getanimlength(var_15));
-    level.var_10E1C[self.var_9A30].var_EBEA["angle_" + var_10 + "_spent"] = scripts\engine\utility::array_add(level.var_10E1C[self.var_9A30].var_EBEA["angle_" + var_10 + "_spent"], var_15);
-    level.var_10E1C[self.var_9A30].var_EBEA[var_10] = scripts\engine\utility::array_remove(level.var_10E1C[self.var_9A30].var_EBEA[var_10], var_15);
+    level.var_10E1C[self.var_9A30].var_EBEA["angle_" + var_10 + "_spent"] = ::scripts\engine\utility::array_add(level.var_10E1C[self.var_9A30].var_EBEA["angle_" + var_10 + "_spent"], var_15);
+    level.var_10E1C[self.var_9A30].var_EBEA[var_10] = ::scripts\engine\utility::array_remove(level.var_10E1C[self.var_9A30].var_EBEA[var_10], var_15);
     if(isDefined(var_01["exitangles"])) {
       if(isDefined(var_01["interaction_position"])) {
         var_0E = vectortoangles(var_01["interaction_position"] - self.origin);
@@ -1743,7 +1743,7 @@ func_9A37() {
       func_10C47(var_1A);
       self give_left_powers(var_03, var_1A, 1, var_08, 1);
       wait(getanimlength(var_1A));
-      level.var_10E1C[self.var_9A30].var_EBEA[var_16] = scripts\engine\utility::array_remove(level.var_10E1C[self.var_9A30].var_EBEA[var_16], var_1A);
+      level.var_10E1C[self.var_9A30].var_EBEA[var_16] = ::scripts\engine\utility::array_remove(level.var_10E1C[self.var_9A30].var_EBEA[var_16], var_1A);
     }
 
     func_10C47(var_00);
@@ -2198,8 +2198,8 @@ func_CC88() {
     var_02 = level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["vo_lines_male"];
     var_03 = randomint(var_02.size);
     var_01 = var_02[var_03];
-    level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["vo_lines_male"] = scripts\sp\utility::array_remove_index(level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["vo_lines_male"], var_03);
-    level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["used_male_vo"] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["used_male_vo"], var_01);
+    level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["vo_lines_male"] = ::scripts\sp\utility::array_remove_index(level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["vo_lines_male"], var_03);
+    level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["used_male_vo"] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["used_male_vo"], var_01);
   }
 
   if(!isDefined(level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["used_female_vo"])) {
@@ -2214,8 +2214,8 @@ func_CC88() {
     var_02 = level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["vo_lines_female"];
     var_03 = randomint(var_02.size);
     var_01 = var_02[var_03];
-    level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["vo_lines_female"] = scripts\sp\utility::array_remove_index(level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["vo_lines_female"], var_03);
-    level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["used_female_vo"] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["used_female_vo"], var_01);
+    level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["vo_lines_female"] = ::scripts\sp\utility::array_remove_index(level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["vo_lines_female"], var_03);
+    level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["used_female_vo"] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["used_female_vo"], var_01);
   }
 
   var_04 = undefined;
@@ -2260,8 +2260,8 @@ func_CC8C(param_00) {
       var_04 = level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["vo_lines_male"];
       var_05 = randomint(var_04.size);
       var_02 = var_04[var_05];
-      level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["vo_lines_male"] = scripts\sp\utility::array_remove_index(level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["vo_lines_male"], var_05);
-      level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["used_male_vo"] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["used_male_vo"], var_02);
+      level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["vo_lines_male"] = ::scripts\sp\utility::array_remove_index(level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["vo_lines_male"], var_05);
+      level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["used_male_vo"] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["used_male_vo"], var_02);
     }
   }
 
@@ -2279,8 +2279,8 @@ func_CC8C(param_00) {
       var_04 = level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["vo_lines_female"];
       var_05 = randomint(var_04.size);
       var_02 = var_04[var_05];
-      level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["vo_lines_female"] = scripts\sp\utility::array_remove_index(level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["vo_lines_female"], var_05);
-      level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["used_female_vo"] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["used_female_vo"], var_02);
+      level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["vo_lines_female"] = ::scripts\sp\utility::array_remove_index(level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["vo_lines_female"], var_05);
+      level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["used_female_vo"] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["used_female_vo"], var_02);
     }
   }
 
@@ -2470,8 +2470,8 @@ func_DC7E() {
     }
 
     var_09 = level.var_10E1C[self.var_9A30].var_EBEA[var_07][randomint(level.var_10E1C[self.var_9A30].var_EBEA[var_07].size)];
-    level.var_10E1C[self.var_9A30].var_EBEA[var_08] = scripts\engine\utility::array_add(level.var_10E1C[self.var_9A30].var_EBEA[var_08], var_09);
-    level.var_10E1C[self.var_9A30].var_EBEA[var_07] = scripts\engine\utility::array_remove(level.var_10E1C[self.var_9A30].var_EBEA[var_07], var_09);
+    level.var_10E1C[self.var_9A30].var_EBEA[var_08] = ::scripts\engine\utility::array_add(level.var_10E1C[self.var_9A30].var_EBEA[var_08], var_09);
+    level.var_10E1C[self.var_9A30].var_EBEA[var_07] = ::scripts\engine\utility::array_remove(level.var_10E1C[self.var_9A30].var_EBEA[var_07], var_09);
     var_0A = undefined;
     var_0B = undefined;
     if(isDefined(self.var_C6B9)) {
@@ -2681,7 +2681,7 @@ func_CCCA(param_00, param_01) {
   self.var_BE79 = 0;
   self.var_43E5 = param_01;
   if(isDefined(level.var_9A2E)) {
-    level.var_9A2E.var_4D94["actors"] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["actors"], self);
+    level.var_9A2E.var_4D94["actors"] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["actors"], self);
   }
 
   while(self.script == "init") {

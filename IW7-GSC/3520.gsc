@@ -206,10 +206,10 @@ func_105A3(var_00, var_01) {
   var_0.outlineids = [];
 
   if(level.teambased) {
-    var_0.outlineids[0] = scripts\mp\utility\game::outlineenableforteam(var_00, "cyan", var_1.team, 1, 0, "equipment");
-    var_0.outlineids[1] = scripts\mp\utility\game::outlineenableforteam(var_00, "orange", scripts\mp\utility\game::getotherteam(var_1.team), 1, 0, "equipment");
+    var_0.outlineids[0] = ::scripts\mp\utility\game::outlineenableforteam(var_00, "cyan", var_1.team, 1, 0, "equipment");
+    var_0.outlineids[1] = ::scripts\mp\utility\game::outlineenableforteam(var_00, "orange", scripts\mp\utility\game::getotherteam(var_1.team), 1, 0, "equipment");
   } else
-    var_0.outlineids[0] = scripts\mp\utility\game::func_C793(var_00, "orange", 1, 0, "equipment");
+    var_0.outlineids[0] = ::scripts\mp\utility\game::func_C793(var_00, "orange", 1, 0, "equipment");
 
   var_00 hudoutlinedisableforclient(var_01);
   func_10575(var_00, var_01);

@@ -134,7 +134,7 @@ func_FA1D(param_00) {
         var_0C = scripts\cp\utility::getweaponpaintjobid(var_0D);
       }
 
-      param_00.weapon_build_models[var_08] = scripts\cp\utility::mpbuildweaponname(scripts\cp\utility::getweaponrootname(var_0E), var_0F, var_09, var_0B, scripts\cp\utility::get_weapon_variant_id(param_00, var_0E), self getentitynumber(), self.clientid, var_0C, var_0A);
+      param_00.weapon_build_models[var_08] = ::scripts\cp\utility::mpbuildweaponname(scripts\cp\utility::getweaponrootname(var_0E), var_0F, var_09, var_0B, scripts\cp\utility::get_weapon_variant_id(param_00, var_0E), self getentitynumber(), self.clientid, var_0C, var_0A);
       if(var_08 == "g18") {
         param_00 loadweaponsforplayer([param_00.weapon_build_models[var_08]], 1);
       }

@@ -1111,7 +1111,7 @@ func_F5AD() {
     var_01 = self.a.var_2274["lean_fire"];
     var_02 = self.a.var_2274["lean_single"];
     self.a.var_2274["fire"] = var_01;
-    self.a.var_2274["single"] = scripts\anim\utility::func_2274(var_02);
+    self.a.var_2274["single"] = ::scripts\anim\utility::func_2274(var_02);
     self.a.var_2274["semi2"] = var_02;
     self.a.var_2274["semi3"] = var_02;
     self.a.var_2274["semi4"] = var_02;
@@ -1128,7 +1128,7 @@ func_F5AD() {
     self.a.var_2274["semi4"] = var_00["semi4"];
     self.a.var_2274["semi5"] = var_00["semi5"];
     if(scripts\anim\utility_common::weapon_pump_action_shotgun()) {
-      self.a.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_stand", "single");
+      self.a.var_2274["single"] = ::scripts\anim\utility::func_B027("shotgun_stand", "single");
     } else {
       self.a.var_2274["single"] = var_00["single"];
     }
@@ -1147,16 +1147,16 @@ func_F317() {
   if(!isDefined(self.a.var_2274)) {}
 
   var_00 = scripts\anim\utility::func_B028("default_crouch");
-  var_01["add_aim_up"] = scripts\anim\utility::func_B027("cover_crouch", "add_aim_up");
-  var_02["add_aim_up"] = scripts\anim\utility::func_B027("cover_crouch", "add_aim_up");
-  var_03[0] = scripts\anim\utility::func_B027("cover_crouch", "add_aim_up");
+  var_01["add_aim_up"] = ::scripts\anim\utility::func_B027("cover_crouch", "add_aim_up");
+  var_02["add_aim_up"] = ::scripts\anim\utility::func_B027("cover_crouch", "add_aim_up");
+  var_03[0] = ::scripts\anim\utility::func_B027("cover_crouch", "add_aim_up");
   if(self.a.var_4667 == "over") {
-    self.a.var_2274["add_aim_up"] = scripts\anim\utility::func_B027("cover_crouch", "add_aim_up");
-    self.a.var_2274["add_aim_down"] = scripts\anim\utility::func_B027("cover_crouch", "add_aim_down");
-    self.a.var_2274["add_aim_left"] = scripts\anim\utility::func_B027("cover_crouch", "add_aim_left");
-    self.a.var_2274["add_aim_right"] = scripts\anim\utility::func_B027("cover_crouch", "add_aim_right");
-    self.a.var_2274["straight_level"] = scripts\anim\utility::func_B027("cover_crouch", "straight_level");
-    self.a.var_2274["exposed_idle"] = scripts\anim\utility::func_B027("default_stand", "exposed_idle");
+    self.a.var_2274["add_aim_up"] = ::scripts\anim\utility::func_B027("cover_crouch", "add_aim_up");
+    self.a.var_2274["add_aim_down"] = ::scripts\anim\utility::func_B027("cover_crouch", "add_aim_down");
+    self.a.var_2274["add_aim_left"] = ::scripts\anim\utility::func_B027("cover_crouch", "add_aim_left");
+    self.a.var_2274["add_aim_right"] = ::scripts\anim\utility::func_B027("cover_crouch", "add_aim_right");
+    self.a.var_2274["straight_level"] = ::scripts\anim\utility::func_B027("cover_crouch", "straight_level");
+    self.a.var_2274["exposed_idle"] = ::scripts\anim\utility::func_B027("default_stand", "exposed_idle");
     return;
   }
 
@@ -1164,7 +1164,7 @@ func_F317() {
     var_04 = self.a.var_2274["lean_fire"];
     var_05 = self.a.var_2274["lean_single"];
     self.a.var_2274["fire"] = var_04;
-    self.a.var_2274["single"] = scripts\anim\utility::func_2274(var_05);
+    self.a.var_2274["single"] = ::scripts\anim\utility::func_2274(var_05);
     self.a.var_2274["semi2"] = var_05;
     self.a.var_2274["semi3"] = var_05;
     self.a.var_2274["semi4"] = var_05;
@@ -1181,7 +1181,7 @@ func_F317() {
     self.a.var_2274["semi4"] = var_00["semi4"];
     self.a.var_2274["semi5"] = var_00["semi5"];
     if(scripts\anim\utility_common::weapon_pump_action_shotgun()) {
-      self.a.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_crouch", "single");
+      self.a.var_2274["single"] = ::scripts\anim\utility::func_B027("shotgun_crouch", "single");
     } else {
       self.a.var_2274["single"] = var_00["single"];
     }

@@ -252,7 +252,7 @@ func_AC11(var_00, var_01) {
 func_AC0C(var_00, var_01, var_02) {
   var_01 endon("death");
   var_00 waittill("death");
-  var_1.func_AC03[var_02] = scripts\engine\utility::array_remove(var_1.func_AC03[var_02], var_00);
+  var_1.func_AC03[var_02] = ::scripts\engine\utility::array_remove(var_1.func_AC03[var_02], var_00);
 
   if(var_1.func_AC03[var_02].size == 0) {
     var_1.func_AC03[var_02] = undefined;

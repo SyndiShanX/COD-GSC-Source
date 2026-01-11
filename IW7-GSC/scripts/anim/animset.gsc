@@ -213,9 +213,9 @@ func_FA33() {
 func_9503() {}
 
 func_F2AC() {
-  self.a.var_BCA5["move_l"] = scripts\anim\utility::func_B027("ambush", "move_l");
-  self.a.var_BCA5["move_r"] = scripts\anim\utility::func_B027("ambush", "move_r");
-  self.a.var_BCA5["move_b"] = scripts\anim\utility::func_B027("ambush", "move_b");
+  self.a.var_BCA5["move_l"] = ::scripts\anim\utility::func_B027("ambush", "move_l");
+  self.a.var_BCA5["move_r"] = ::scripts\anim\utility::func_B027("ambush", "move_r");
+  self.a.var_BCA5["move_b"] = ::scripts\anim\utility::func_B027("ambush", "move_b");
 }
 
 func_8CD8() {

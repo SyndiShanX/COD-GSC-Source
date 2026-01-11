@@ -45,10 +45,10 @@ choosedemeanoranimwithoverridevariants(param_00, param_01, param_02) {
 
   if(!scripts\asm\asm::asm_hasalias(param_02, var_04)) {
     var_05 = [];
-    var_05[0] = scripts\asm\asm::asm_lookupanimfromalias(param_02, "trans_to_one_hand_run");
-    var_05[1] = scripts\asm\asm::asm_lookupanimfromalias(param_02, "one_hand_run");
-    var_05[2] = scripts\asm\asm::asm_lookupanimfromalias(param_02, "trans_to_two_hand_run");
-    var_05[3] = scripts\asm\asm::asm_lookupanimfromalias(param_02, "two_hand_run");
+    var_05[0] = ::scripts\asm\asm::asm_lookupanimfromalias(param_02, "trans_to_one_hand_run");
+    var_05[1] = ::scripts\asm\asm::asm_lookupanimfromalias(param_02, "one_hand_run");
+    var_05[2] = ::scripts\asm\asm::asm_lookupanimfromalias(param_02, "trans_to_two_hand_run");
+    var_05[3] = ::scripts\asm\asm::asm_lookupanimfromalias(param_02, "two_hand_run");
     return var_05;
   }
 

@@ -156,7 +156,7 @@ func_106B8(param_00, param_01, param_02, param_03, param_04, param_05) {
         var_0F.var_C264 = var_0E;
         var_0F.physics_setgravitydynentscalar = "tag_origin";
         var_0F.name = "dropship_weapon_light";
-        var_09.var_4D94.fx["weapon_lights"] = scripts\engine\utility::array_add(var_09.var_4D94.fx["weapon_lights"], var_0F);
+        var_09.var_4D94.fx["weapon_lights"] = ::scripts\engine\utility::array_add(var_09.var_4D94.fx["weapon_lights"], var_0F);
       } else if(issubstr(var_0E.var_336, "fx_damage")) {
         var_0F = spawnStruct();
         var_0F.var_C264 = var_0E;
@@ -165,7 +165,7 @@ func_106B8(param_00, param_01, param_02, param_03, param_04, param_05) {
           var_09.var_4D94.fx["damage"][var_0E.var_EE52] = [];
         }
 
-        var_09.var_4D94.fx["damage"][var_0E.var_EE52] = scripts\engine\utility::array_add(var_09.var_4D94.fx["damage"][var_0E.var_EE52], var_0F);
+        var_09.var_4D94.fx["damage"][var_0E.var_EE52] = ::scripts\engine\utility::array_add(var_09.var_4D94.fx["damage"][var_0E.var_EE52], var_0F);
       } else {
         var_09.var_4D94.var_C743 = scripts\engine\utility::array_add(var_09.var_4D94.var_C743, var_0E);
       }
@@ -440,7 +440,7 @@ func_F9C8(param_00, param_01) {
       self.var_4D94.lights[var_04][var_05] = [];
     }
 
-    self.var_4D94.lights[var_04][var_05] = scripts\engine\utility::array_add(self.var_4D94.lights[var_04][var_05], param_00);
+    self.var_4D94.lights[var_04][var_05] = ::scripts\engine\utility::array_add(self.var_4D94.lights[var_04][var_05], param_00);
   }
 }
 
@@ -481,7 +481,7 @@ func_106B9(param_00, param_01) {
   }
 
   var_02 = "tag_seat_" + param_00;
-  self.var_4D94.var_F08B[param_00] = scripts\sp\utility::func_10639("dropship_seat");
+  self.var_4D94.var_F08B[param_00] = ::scripts\sp\utility::func_10639("dropship_seat");
   self.var_4D94.var_F08B[param_00] linkto(self, var_02, (0, 0, 0), (0, 0, 0));
   self.var_4D94.var_F08B[param_00].var_1FBB = "dropship_seat_" + param_00;
   self.var_4D94.var_F08B[param_00] glinton(#animtree);

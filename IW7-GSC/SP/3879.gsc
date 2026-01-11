@@ -10,7 +10,7 @@ func_79F5(param_00) {
   }
 
   if(level.var_10E6D.group.groups[param_00].size) {
-    level.var_10E6D.group.groups[param_00] = scripts\sp\utility::func_22B9(level.var_10E6D.group.groups[param_00]);
+    level.var_10E6D.group.groups[param_00] = ::scripts\sp\utility::func_22B9(level.var_10E6D.group.groups[param_00]);
   }
 
   return level.var_10E6D.group.groups[param_00];

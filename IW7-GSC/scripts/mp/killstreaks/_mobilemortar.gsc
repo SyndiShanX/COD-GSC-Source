@@ -176,7 +176,7 @@ func_1012E() {
   var_00 settext(&"KILLSTREAKS_SELECT_MOBILE_MORTAR_LOCATION");
   self.locationobjectives = [];
   for(var_01 = 0; var_01 < 3; var_01++) {
-    self.locationobjectives[var_01] = scripts\mp\objidpoolmanager::requestminimapid(1);
+    self.locationobjectives[var_01] = ::scripts\mp\objidpoolmanager::requestminimapid(1);
     if(self.locationobjectives[var_01] != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_add(self.locationobjectives[var_01], "invisible", (0, 0, 0));
       scripts\mp\objidpoolmanager::minimap_objective_position(self.locationobjectives[var_01], level.var_8638[level.script][var_01]["origin"]);

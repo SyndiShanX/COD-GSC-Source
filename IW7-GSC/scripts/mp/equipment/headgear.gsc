@@ -68,7 +68,7 @@ func_8C70(param_00) {
   var_01 = [];
   var_02 = [];
   for(var_03 = 0; var_03 < 5; var_03++) {
-    var_01[var_03] = scripts\engine\utility::spawn_tag_origin(self.origin + (0, 0, 36));
+    var_01[var_03] = ::scripts\engine\utility::spawn_tag_origin(self.origin + (0, 0, 36));
     var_02[var_03] = spawn("script_model", var_01[var_03].origin);
     var_02[var_03] linkto(var_01[var_03]);
   }

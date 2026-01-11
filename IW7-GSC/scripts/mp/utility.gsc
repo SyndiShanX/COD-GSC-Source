@@ -4836,9 +4836,9 @@ getmatchrulesspecialclass(param_00, param_01) {
   var_02["loadoutSecondaryCamo"] = getmatchrulesdatawithteamandindex("defaultClasses", param_00, param_01, "class", "weaponSetups", 1, "camo");
   var_02["loadoutSecondaryReticle"] = getmatchrulesdatawithteamandindex("defaultClasses", param_00, param_01, "class", "weaponSetups", 1, "reticle");
   var_02["loadoutPerks"] = var_03;
-  var_02["loadoutKillstreak1"] = scripts\mp\class::recipe_getkillstreak(param_00, param_01, 0);
-  var_02["loadoutKillstreak2"] = scripts\mp\class::recipe_getkillstreak(param_00, param_01, 1);
-  var_02["loadoutKillstreak3"] = scripts\mp\class::recipe_getkillstreak(param_00, param_01, 2);
+  var_02["loadoutKillstreak1"] = ::scripts\mp\class::recipe_getkillstreak(param_00, param_01, 0);
+  var_02["loadoutKillstreak2"] = ::scripts\mp\class::recipe_getkillstreak(param_00, param_01, 1);
+  var_02["loadoutKillstreak3"] = ::scripts\mp\class::recipe_getkillstreak(param_00, param_01, 2);
   var_02["loadoutJuggernaut"] = getmatchrulesdatawithteamandindex("defaultClasses", param_00, param_01, "juggernaut");
   return var_02;
 }

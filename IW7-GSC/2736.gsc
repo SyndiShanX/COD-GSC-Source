@@ -110,19 +110,19 @@ func_4A29(var_00, var_01) {
   var_3.visibleteam = "none";
 
   foreach(var_05 in level.teamnamelist) {
-    var_3.teamobjids[var_05] = scripts\mp\objidpoolmanager::requestminimapid(99);
+    var_3.teamobjids[var_05] = ::scripts\mp\objidpoolmanager::requestminimapid(99);
 
     if(var_3.teamobjids[var_05] != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_add(var_3.teamobjids[var_05], "invisible", var_3.curorigin);
       scripts\mp\objidpoolmanager::minimap_objective_team(var_3.teamobjids[var_05], var_05);
     }
 
-    var_3.objpoints[var_05] = scripts\mp\objpoints::func_4A23("objpoint_" + var_05 + "_" + var_3.entnum, var_3.curorigin + var_01, var_05, undefined);
+    var_3.objpoints[var_05] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_05 + "_" + var_3.entnum, var_3.curorigin + var_01, var_05, undefined);
     var_3.objpoints[var_05].alpha = 0;
 
     if(getdvarint("com_codcasterEnabled", 0) == 1) {
       var_06 = "mlg_" + var_05;
-      var_3.objpoints[var_06] = scripts\mp\objpoints::func_4A23("objpoint_" + var_06 + "_" + var_3.entnum, var_3.curorigin + var_01, var_05, undefined);
+      var_3.objpoints[var_06] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_06 + "_" + var_3.entnum, var_3.curorigin + var_01, var_05, undefined);
       var_3.objpoints[var_06].alpha = 0;
     }
   }
@@ -200,19 +200,19 @@ createcarryobject(var_00, var_01, var_02, var_03) {
   var_4.objidpingfriendly = 0;
 
   foreach(var_07 in level.teamnamelist) {
-    var_4.teamobjids[var_07] = scripts\mp\objidpoolmanager::requestminimapid(99);
+    var_4.teamobjids[var_07] = ::scripts\mp\objidpoolmanager::requestminimapid(99);
 
     if(var_4.teamobjids[var_07] != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_add(var_4.teamobjids[var_07], "invisible", var_4.curorigin);
       scripts\mp\objidpoolmanager::minimap_objective_team(var_4.teamobjids[var_07], var_07);
     }
 
-    var_4.objpoints[var_07] = scripts\mp\objpoints::func_4A23("objpoint_" + var_07 + "_" + var_4.entnum, var_4.curorigin + var_03, var_07, undefined);
+    var_4.objpoints[var_07] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_07 + "_" + var_4.entnum, var_4.curorigin + var_03, var_07, undefined);
     var_4.objpoints[var_07].alpha = 0;
 
     if(getdvarint("com_codcasterEnabled", 0) == 1) {
       var_08 = "mlg_" + var_07;
-      var_4.objpoints[var_08] = scripts\mp\objpoints::func_4A23("objpoint_" + var_08 + "_" + var_4.entnum, var_4.curorigin + var_03, var_07, undefined);
+      var_4.objpoints[var_08] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_08 + "_" + var_4.entnum, var_4.curorigin + var_03, var_07, undefined);
       var_4.objpoints[var_08].alpha = 0;
     }
   }
@@ -1104,19 +1104,19 @@ createuseobject(var_00, var_01, var_02, var_03) {
   var_4.func_4465 = [];
 
   foreach(var_07 in level.teamnamelist) {
-    var_4.teamobjids[var_07] = scripts\mp\objidpoolmanager::requestminimapid(99);
+    var_4.teamobjids[var_07] = ::scripts\mp\objidpoolmanager::requestminimapid(99);
 
     if(var_4.teamobjids[var_07] != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_add(var_4.teamobjids[var_07], "invisible", var_4.curorigin);
       scripts\mp\objidpoolmanager::minimap_objective_team(var_4.teamobjids[var_07], var_07);
     }
 
-    var_4.objpoints[var_07] = scripts\mp\objpoints::func_4A23("objpoint_" + var_07 + "_" + var_4.entnum, var_4.curorigin + var_03, var_07, undefined);
+    var_4.objpoints[var_07] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_07 + "_" + var_4.entnum, var_4.curorigin + var_03, var_07, undefined);
     var_4.objpoints[var_07].alpha = 0;
 
     if(getdvarint("com_codcasterEnabled", 0) == 1) {
       var_08 = "mlg_" + var_07;
-      var_4.objpoints[var_08] = scripts\mp\objpoints::func_4A23("objpoint_" + var_08 + "_" + var_4.entnum, var_4.curorigin + var_03, var_07, undefined);
+      var_4.objpoints[var_08] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_08 + "_" + var_4.entnum, var_4.curorigin + var_03, var_07, undefined);
       var_4.objpoints[var_08].alpha = 0;
     }
   }

@@ -776,7 +776,7 @@ func_1991(var_00) {
 
     if(level.func_A056.func_67D8 == level.func_A065["evasion"].size) {
       level.func_A056.func_67D8 = 0;
-      level.func_A065["evasion"] = scripts\engine\utility::array_randomize(level.func_A065["evasion"]);
+      level.func_A065["evasion"] = ::scripts\engine\utility::array_randomize(level.func_A065["evasion"]);
     }
   }
 

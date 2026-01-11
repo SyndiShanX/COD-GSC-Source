@@ -74,7 +74,7 @@ func_DED1(param_00, param_01, param_02, param_03, param_04) {
   }
 
   level.player.var_E6.var_E9 = scripts\engine\utility::array_add_safe(level.player.var_E6.var_E9, var_05);
-  level.player.var_E6.var_47[var_05.type] = scripts\engine\utility::array_add_safe(level.player.var_E6.var_47[var_05.type], var_05.var_7789);
+  level.player.var_E6.var_47[var_05.type] = ::scripts\engine\utility::array_add_safe(level.player.var_E6.var_47[var_05.type], var_05.var_7789);
   return var_05;
 }
 

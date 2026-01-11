@@ -79,7 +79,7 @@ func_12754() {
 func_DDE1() {
   foreach(var_01 in level.var_9A2E.var_4D94["actors"]) {
     if(!isDefined(var_01)) {
-      level.var_9A2E.var_4D94["actors"] = scripts\engine\utility::array_remove(level.var_9A2E.var_4D94["actors"], var_01);
+      level.var_9A2E.var_4D94["actors"] = ::scripts\engine\utility::array_remove(level.var_9A2E.var_4D94["actors"], var_01);
     }
   }
 }
@@ -87,14 +87,14 @@ func_DDE1() {
 func_168F() {
   if(isDefined(level.var_9A2E)) {
     if(!scripts\engine\utility::array_contains(level.var_9A2E.var_4D94["actors"], self)) {
-      level.var_9A2E.var_4D94["actors"] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["actors"], self);
+      level.var_9A2E.var_4D94["actors"] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["actors"], self);
     }
   }
 }
 
 func_DFB5() {
   if(isDefined(level.var_9A2E)) {
-    level.var_9A2E.var_4D94["actors"] = scripts\engine\utility::array_remove(level.var_9A2E.var_4D94["actors"], self);
+    level.var_9A2E.var_4D94["actors"] = ::scripts\engine\utility::array_remove(level.var_9A2E.var_4D94["actors"], self);
   }
 }
 
@@ -618,8 +618,8 @@ func_77B1(param_00, param_01) {
           var_03 = undefined;
         } else {
           var_03 = var_04[randomint(var_04.size)];
-          level.var_9A2E.var_4D94["reminder_vo"][param_00]["spent_" + self.gender] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["reminder_vo"][param_00]["spent_" + self.gender], var_03);
-          level.var_9A2E.var_4D94["reminder_vo"][param_00][self.gender] = scripts\engine\utility::array_remove(level.var_9A2E.var_4D94["reminder_vo"][param_00][self.gender], var_03);
+          level.var_9A2E.var_4D94["reminder_vo"][param_00]["spent_" + self.gender] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["reminder_vo"][param_00]["spent_" + self.gender], var_03);
+          level.var_9A2E.var_4D94["reminder_vo"][param_00][self.gender] = ::scripts\engine\utility::array_remove(level.var_9A2E.var_4D94["reminder_vo"][param_00][self.gender], var_03);
         }
         break;
     }
@@ -637,8 +637,8 @@ func_77B1(param_00, param_01) {
       var_03 = undefined;
     } else {
       var_03 = var_04[randomint(var_04.size)];
-      level.var_9A2E.var_4D94["busy_vo"]["spent_" + self.gender] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["busy_vo"]["spent_" + self.gender], var_03);
-      level.var_9A2E.var_4D94["busy_vo"][self.gender] = scripts\engine\utility::array_remove(level.var_9A2E.var_4D94["busy_vo"][self.gender], var_03);
+      level.var_9A2E.var_4D94["busy_vo"]["spent_" + self.gender] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["busy_vo"]["spent_" + self.gender], var_03);
+      level.var_9A2E.var_4D94["busy_vo"][self.gender] = ::scripts\engine\utility::array_remove(level.var_9A2E.var_4D94["busy_vo"][self.gender], var_03);
     }
   }
 

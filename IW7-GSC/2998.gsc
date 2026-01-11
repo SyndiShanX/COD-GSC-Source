@@ -1598,14 +1598,14 @@ func_39B6() {
 
 func_39F0(var_00, var_01, var_02, var_03) {
   if(isDefined(self.turrets["cap_turret_missile_barrage"])) {
-    self.turrets["cap_turret_missile_barrage"] = scripts\engine\utility::array_removeundefined(self.turrets["cap_turret_missile_barrage"]);
+    self.turrets["cap_turret_missile_barrage"] = ::scripts\engine\utility::array_removeundefined(self.turrets["cap_turret_missile_barrage"]);
 
     if(self.turrets["cap_turret_missile_barrage"].size > 0)
       thread func_39B7("cap_turret_missile_barrage", var_02, var_03);
   }
 
   if(isDefined(self.func_8B4F["cap_hardpoint_missile_barrage"])) {
-    self.func_8B4F["cap_hardpoint_missile_barrage"] = scripts\engine\utility::array_removeundefined(self.func_8B4F["cap_hardpoint_missile_barrage"]);
+    self.func_8B4F["cap_hardpoint_missile_barrage"] = ::scripts\engine\utility::array_removeundefined(self.func_8B4F["cap_hardpoint_missile_barrage"]);
 
     if(self.func_8B4F["cap_hardpoint_missile_barrage"].size > 0)
       thread func_39B8("cap_hardpoint_missile_barrage", var_02, var_03);
@@ -2778,7 +2778,7 @@ func_39B8(var_00, var_01, var_02, var_03, var_04) {
   self endon("death");
   self endon("entitydeleted");
   self.team = self.script_team;
-  self.func_8B4F[var_00] = scripts\engine\utility::array_removeundefined(self.func_8B4F[var_00]);
+  self.func_8B4F[var_00] = ::scripts\engine\utility::array_removeundefined(self.func_8B4F[var_00]);
 
   if(self.func_8B4F[var_00].size == 0) {
     return;
@@ -2819,7 +2819,7 @@ func_39B8(var_00, var_01, var_02, var_03, var_04) {
     var_11 = 0;
 
     while(var_06 > 0) {
-      self.func_8B4F[var_00] = scripts\engine\utility::array_removeundefined(self.func_8B4F[var_00]);
+      self.func_8B4F[var_00] = ::scripts\engine\utility::array_removeundefined(self.func_8B4F[var_00]);
 
       if(isDefined(self.func_8B4F[var_00]) && self.func_8B4F[var_00].size == 0) {
         return;
@@ -3419,7 +3419,7 @@ func_B7EA() {
     return;
   }
   self.func_912F = [];
-  self.func_912F["lock_on"] = scripts\sp\hud_util::func_499B("hud_iw7_warning", 256, 64);
+  self.func_912F["lock_on"] = ::scripts\sp\hud_util::func_499B("hud_iw7_warning", 256, 64);
   self.func_912F["lock_on"].alignx = "center";
   self.func_912F["lock_on"].aligny = "top";
   self.func_912F["lock_on"].horzalign = "center";

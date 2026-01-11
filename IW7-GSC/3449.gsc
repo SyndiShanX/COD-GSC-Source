@@ -5,11 +5,11 @@
 
 func_2E53() {
   level.func_2D1C = [];
-  level.func_2D1C["power_domeshield"] = scripts\mp\bots\bots_power_reaper::func_8995;
+  level.func_2D1C["power_domeshield"] = ::scripts\mp\bots\bots_power_reaper::func_8995;
   level.func_2D1C["power_overCharge"] = ::func_5234;
   level.func_2D1C["power_adrenaline"] = ::func_5234;
   level.func_2D1C["power_deployableCover"] = ::func_8991;
-  level.func_2D1C["power_rewind"] = scripts\mp\bots\bots_power_rewind::func_89DC;
+  level.func_2D1C["power_rewind"] = ::scripts\mp\bots\bots_power_rewind::func_89DC;
   level.func_2D1C["power_adrenaline"] = ::func_5234;
   level.func_2D1C["power_multiVisor"] = ::func_5234;
   level.func_2D1C["power_blinkKnife"] = ::func_897E;

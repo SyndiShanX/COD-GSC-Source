@@ -2147,7 +2147,7 @@ func_A76F() {
       var_08[var_0B] = [];
     }
 
-    var_08[var_0B] = scripts\engine\utility::array_add(var_08[var_0B], var_0A);
+    var_08[var_0B] = ::scripts\engine\utility::array_add(var_08[var_0B], var_0A);
   }
 
   for(var_01 = 0; var_01 < var_08.size; var_01++) {

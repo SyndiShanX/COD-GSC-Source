@@ -2290,7 +2290,7 @@ func_54F7() {
     return;
   }
   self.func_C3BE = self.func_EDAD;
-  level.func_22E0[scripts\sp\colors::func_7CE4()][self.func_EDAD] = scripts\engine\utility::array_remove(level.func_22E0[scripts\sp\colors::func_7CE4()][self.func_EDAD], self);
+  level.func_22E0[scripts\sp\colors::func_7CE4()][self.func_EDAD] = ::scripts\engine\utility::array_remove(level.func_22E0[scripts\sp\colors::func_7CE4()][self.func_EDAD], self);
   scripts\sp\colors::func_AB3A();
   self.func_EDAD = undefined;
   self.func_4BDF = undefined;
@@ -2330,11 +2330,11 @@ func_F3B5(var_00) {
   var_02 = scripts\sp\colors::func_7CE4();
 
   if(isDefined(self.func_EDAD))
-    level.func_22E0[var_02][self.func_EDAD] = scripts\engine\utility::array_remove(level.func_22E0[var_02][self.func_EDAD], self);
+    level.func_22E0[var_02][self.func_EDAD] = ::scripts\engine\utility::array_remove(level.func_22E0[var_02][self.func_EDAD], self);
 
   self.func_EDAD = var_01;
   level.func_22E0[var_02][var_01] = func_22B9(level.func_22E0[var_02][var_01]);
-  level.func_22E0[var_02][self.func_EDAD] = scripts\engine\utility::array_add(level.func_22E0[var_02][self.func_EDAD], self);
+  level.func_22E0[var_02][self.func_EDAD] = ::scripts\engine\utility::array_add(level.func_22E0[var_02][self.func_EDAD], self);
   thread scripts\sp\utility_code::func_BF01(var_01);
 }
 
@@ -6137,7 +6137,7 @@ func_61FF(var_00) {
   }
 
   self.func_1096A = scripts\anim\animset::func_8CD8;
-  self.custommoveanimset["run"] = scripts\anim\utility::func_B028("heat_run");
+  self.custommoveanimset["run"] = ::scripts\anim\utility::func_B028("heat_run");
 }
 
 func_5537() {
@@ -9250,7 +9250,7 @@ func_B2FC() {
     for(var_00 = 0; var_00 < 3; var_0++) {
       if(self.script_rotation_max[var_00] != 0) {
         if(self.script_rotation_speed[var_00] > 0) {
-          self.func_E746[var_00] = scripts\sp\math::func_10AB0(self.script_rotation_speed[var_00] * 10, 0, self.func_10BA1[var_00] + self.script_rotation_max[var_00], 0);
+          self.func_E746[var_00] = ::scripts\sp\math::func_10AB0(self.script_rotation_speed[var_00] * 10, 0, self.func_10BA1[var_00] + self.script_rotation_max[var_00], 0);
           continue;
         }
       }
@@ -9270,7 +9270,7 @@ func_B2FC() {
     for(var_00 = 0; var_00 < 3; var_0++) {
       if(self.func_EEE9[var_00] != 0) {
         if(self.func_EEEA[var_00] > 0) {
-          self.func_12689[var_00] = scripts\sp\math::func_10AB0(self.func_EEEA[var_00] * 10, 0, self.func_10CCA[var_00] + self.func_EEE9[var_00], 0);
+          self.func_12689[var_00] = ::scripts\sp\math::func_10AB0(self.func_EEEA[var_00] * 10, 0, self.func_10CCA[var_00] + self.func_EEE9[var_00], 0);
           continue;
         }
       }
@@ -9305,7 +9305,7 @@ func_12686() {
       }
 
       if(self.func_EEEA[var_01] > 0 && self.func_EEE9[var_01] != 0)
-        var_0[var_01] = scripts\sp\math::func_10AB4(self.func_12689[var_01], self.func_10CCA[var_01]);
+        var_0[var_01] = ::scripts\sp\math::func_10AB4(self.func_12689[var_01], self.func_10CCA[var_01]);
     }
 
     self.origin = (var_0[0], var_0[1], var_0[2]);
@@ -9335,7 +9335,7 @@ func_E702() {
       }
 
       if(self.script_rotation_speed[var_01] > 0 && self.script_rotation_max[var_01] != 0)
-        var_0[var_01] = scripts\sp\math::func_10AB4(self.func_E746[var_01], self.func_10BA1[var_01]);
+        var_0[var_01] = ::scripts\sp\math::func_10AB4(self.func_E746[var_01], self.func_10BA1[var_01]);
     }
 
     self.angles = (var_0[0], var_0[1], var_0[2]);

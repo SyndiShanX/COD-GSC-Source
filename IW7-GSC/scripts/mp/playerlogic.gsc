@@ -2408,7 +2408,7 @@ initplayerstats() {
   }
 
   scripts\mp\utility::initpersstat("longestStreak");
-  self.pers["lives"] = scripts\mp\utility::getgametypenumlives();
+  self.pers["lives"] = ::scripts\mp\utility::getgametypenumlives();
   scripts\mp\persistence::statsetchild("round", "killStreak", 0);
   scripts\mp\persistence::statsetchild("round", "loss", 0);
   scripts\mp\persistence::statsetchild("round", "win", 0);
@@ -2468,7 +2468,7 @@ incrementalivecount(param_00, param_01) {
     level.alive_players[param_00] = [];
   }
 
-  level.alive_players[param_00] = scripts\engine\utility::array_add(level.alive_players[param_00], self);
+  level.alive_players[param_00] = ::scripts\engine\utility::array_add(level.alive_players[param_00], self);
   if(scripts\mp\utility::istrue(param_01) && param_00 == "allies" || param_00 == "axis") {
     var_02 = level.otherteam[param_00];
     foreach(var_04 in level.players) {

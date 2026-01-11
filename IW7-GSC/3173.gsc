@@ -65,36 +65,36 @@ _meth_8162(param_00, param_01) {
   }
 
   if(scripts\asm\asm::asm_hasalias(param_00, var_03 + "1" + var_04)) {
-    var_02[7] = scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "1" + var_04);
+    var_02[7] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "1" + var_04);
   }
 
   if(scripts\asm\asm::asm_hasalias(param_00, var_03 + "2" + var_04)) {
-    var_02[0] = scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "2" + var_04);
+    var_02[0] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "2" + var_04);
     var_02[8] = var_02[0];
   }
 
   if(scripts\asm\asm::asm_hasalias(param_00, var_03 + "3" + var_04)) {
-    var_02[1] = scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "3" + var_04);
+    var_02[1] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "3" + var_04);
   }
 
   if(scripts\asm\asm::asm_hasalias(param_00, var_03 + "4" + var_04)) {
-    var_02[6] = scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "4" + var_04);
+    var_02[6] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "4" + var_04);
   }
 
   if(scripts\asm\asm::asm_hasalias(param_00, var_03 + "6" + var_04)) {
-    var_02[2] = scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "6" + var_04);
+    var_02[2] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "6" + var_04);
   }
 
   if(scripts\asm\asm::asm_hasalias(param_00, var_03 + "7" + var_04)) {
-    var_02[5] = scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "7" + var_04);
+    var_02[5] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "7" + var_04);
   }
 
   if(scripts\asm\asm::asm_hasalias(param_00, var_03 + "8" + var_04)) {
-    var_02[4] = scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "8" + var_04);
+    var_02[4] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "8" + var_04);
   }
 
   if(scripts\asm\asm::asm_hasalias(param_00, var_03 + "9" + var_04)) {
-    var_02[3] = scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "9" + var_04);
+    var_02[3] = ::scripts\asm\asm::asm_lookupanimfromalias(param_00, var_03 + "9" + var_04);
   }
 
   return var_02;
@@ -688,24 +688,24 @@ giveachievement(param_00) {
 
 func_3F03(param_00, param_01, param_02) {
   var_03 = [];
-  var_03[0] = scripts\asm\asm::asm_lookupanimfromalias(param_01, "0");
-  var_03[1] = scripts\asm\asm::asm_lookupanimfromalias(param_01, "1");
-  var_03[2] = scripts\asm\asm::asm_lookupanimfromalias(param_01, "2");
-  var_03[3] = scripts\asm\asm::asm_lookupanimfromalias(param_01, "3");
-  var_03[4] = scripts\asm\asm::asm_lookupanimfromalias(param_01, "4");
-  var_03[5] = scripts\asm\asm::asm_lookupanimfromalias(param_01, "5");
-  var_03[6] = scripts\asm\asm::asm_lookupanimfromalias(param_01, "6");
-  var_03[7] = scripts\asm\asm::asm_lookupanimfromalias(param_01, "7");
-  var_03[8] = scripts\asm\asm::asm_lookupanimfromalias(param_01, "8");
+  var_03[0] = ::scripts\asm\asm::asm_lookupanimfromalias(param_01, "0");
+  var_03[1] = ::scripts\asm\asm::asm_lookupanimfromalias(param_01, "1");
+  var_03[2] = ::scripts\asm\asm::asm_lookupanimfromalias(param_01, "2");
+  var_03[3] = ::scripts\asm\asm::asm_lookupanimfromalias(param_01, "3");
+  var_03[4] = ::scripts\asm\asm::asm_lookupanimfromalias(param_01, "4");
+  var_03[5] = ::scripts\asm\asm::asm_lookupanimfromalias(param_01, "5");
+  var_03[6] = ::scripts\asm\asm::asm_lookupanimfromalias(param_01, "6");
+  var_03[7] = ::scripts\asm\asm::asm_lookupanimfromalias(param_01, "7");
+  var_03[8] = ::scripts\asm\asm::asm_lookupanimfromalias(param_01, "8");
   return var_03;
 }
 
 func_3F0C(param_00, param_01, param_02) {
   var_03 = spawnStruct();
   var_04 = [];
-  var_04[0] = scripts\asm\asm::asm_lookupanimfromalias(param_01, "0");
-  var_04[1] = scripts\asm\asm::asm_lookupanimfromalias(param_01, "1");
-  var_04[2] = scripts\asm\asm::asm_lookupanimfromalias(param_01, "2");
+  var_04[0] = ::scripts\asm\asm::asm_lookupanimfromalias(param_01, "0");
+  var_04[1] = ::scripts\asm\asm::asm_lookupanimfromalias(param_01, "1");
+  var_04[2] = ::scripts\asm\asm::asm_lookupanimfromalias(param_01, "2");
   var_03.var_47 = var_04;
   var_03.var_7332 = scripts\asm\asm::asm_lookupanimfromalias(param_01, "forward");
   return var_03;

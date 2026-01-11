@@ -511,10 +511,10 @@ add_additional_map_spawners() {
   scripts\cp\zombies\zombies_spawning::create_spawner("alley_west", (-2425, 2782.5, 752), (0, 90, 0), "ground_spawn_no_boards", "spawn_ground", "concrete");
   scripts\cp\zombies\zombies_spawning::create_spawner("alley_west", (-2676, 3155.5, 7522), (0, 315, 0), "ground_spawn_no_boards", "spawn_ground", "concrete");
   level.rat_king_lair_spawners = [];
-  level.rat_king_lair_spawners[level.rat_king_lair_spawners.size] = scripts\cp\zombies\zombies_spawning::create_spawner("sewer_underground", (-699, 1933, 215), (0, 150, 0), "ground_spawn_no_boards", "spawn_ground", "dirt");
-  level.rat_king_lair_spawners[level.rat_king_lair_spawners.size] = scripts\cp\zombies\zombies_spawning::create_spawner("sewer_underground", (-1051, 1921, 215), (0, 235, 0), "ground_spawn_no_boards", "spawn_ground", "dirt");
-  level.rat_king_lair_spawners[level.rat_king_lair_spawners.size] = scripts\cp\zombies\zombies_spawning::create_spawner("sewer_underground", (-973, 1628, 215), (0, 0, 0), "ground_spawn_no_boards", "spawn_ground", "dirt");
-  level.rat_king_lair_spawners[level.rat_king_lair_spawners.size] = scripts\cp\zombies\zombies_spawning::create_spawner("sewer_underground", (-645, 1803, 215), (0, 100, 0), "ground_spawn_no_boards", "spawn_ground", "dirt");
+  level.rat_king_lair_spawners[level.rat_king_lair_spawners.size] = ::scripts\cp\zombies\zombies_spawning::create_spawner("sewer_underground", (-699, 1933, 215), (0, 150, 0), "ground_spawn_no_boards", "spawn_ground", "dirt");
+  level.rat_king_lair_spawners[level.rat_king_lair_spawners.size] = ::scripts\cp\zombies\zombies_spawning::create_spawner("sewer_underground", (-1051, 1921, 215), (0, 235, 0), "ground_spawn_no_boards", "spawn_ground", "dirt");
+  level.rat_king_lair_spawners[level.rat_king_lair_spawners.size] = ::scripts\cp\zombies\zombies_spawning::create_spawner("sewer_underground", (-973, 1628, 215), (0, 0, 0), "ground_spawn_no_boards", "spawn_ground", "dirt");
+  level.rat_king_lair_spawners[level.rat_king_lair_spawners.size] = ::scripts\cp\zombies\zombies_spawning::create_spawner("sewer_underground", (-645, 1803, 215), (0, 100, 0), "ground_spawn_no_boards", "spawn_ground", "dirt");
 }
 
 pillage_init() {

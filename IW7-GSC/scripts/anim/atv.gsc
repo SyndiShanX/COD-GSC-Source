@@ -503,7 +503,7 @@ func_2564(param_00) {
   self.a.var_2274["idle"] = level.var_EC85["atv"][param_00]["idle"];
   self.a.var_2274["drive"] = level.var_EC85["atv"][param_00]["drive"];
   self.a.var_2274["fire"] = level.var_EC85["atv"][param_00]["fire"];
-  self.a.var_2274["single"] = scripts\anim\utility::func_2274(level.var_EC85["atv"][param_00]["single"]);
+  self.a.var_2274["single"] = ::scripts\anim\utility::func_2274(level.var_EC85["atv"][param_00]["single"]);
   self.a.var_2274["burst2"] = level.var_EC85["atv"][param_00]["fire"];
   self.a.var_2274["burst3"] = level.var_EC85["atv"][param_00]["fire"];
   self.a.var_2274["burst4"] = level.var_EC85["atv"][param_00]["fire"];

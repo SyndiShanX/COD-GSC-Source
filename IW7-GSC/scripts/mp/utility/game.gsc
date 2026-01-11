@@ -1961,7 +1961,7 @@ removefromcharactersarray() {
 removefromspawnedgrouparray() {
   if(isDefined(self.group_name)) {
     if(isDefined(level.spawned_group) && isDefined(level.spawned_group[self.group_name]))
-      level.spawned_group[self.group_name] = scripts\engine\utility::array_remove(level.spawned_group[self.group_name], self);
+      level.spawned_group[self.group_name] = ::scripts\engine\utility::array_remove(level.spawned_group[self.group_name], self);
   }
 }
 

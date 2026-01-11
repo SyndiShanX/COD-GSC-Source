@@ -708,7 +708,7 @@ func_110C4() {
   else if(issuperready())
     self.pers["superCooldownTime"] = getcurrentsuper().func_461E;
   else if(issuperinuse())
-    self.pers["superCooldownTime"] = scripts\engine\utility::ter_op(shouldreacttonewenemy(), getcurrentsuper().func_461E, 0);
+    self.pers["superCooldownTime"] = ::scripts\engine\utility::ter_op(shouldreacttonewenemy(), getcurrentsuper().func_461E, 0);
   else
     self.pers["superCooldownTime"] = 0;
 }

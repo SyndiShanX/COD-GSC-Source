@@ -75,7 +75,7 @@ commander_aggregate_score_on_game_end() {
 
 commander_create_dom_obj(param_00) {
   if(!isDefined(self.fireteam_dom_point_obj[param_00])) {
-    self.fireteam_dom_point_obj[param_00] = scripts\mp\objidpoolmanager::requestminimapid(1);
+    self.fireteam_dom_point_obj[param_00] = ::scripts\mp\objidpoolmanager::requestminimapid(1);
     var_01 = (0, 0, 0);
     foreach(var_03 in level.domflags) {
       if(var_03.label == "_" + param_00) {
@@ -347,7 +347,7 @@ hud_monitorplayerownership() {
   self endon("disconnect");
   self.ownershipstring = [];
   for(var_00 = 0; var_00 < 16; var_00++) {
-    self.ownershipstring[var_00] = scripts\mp\hud_util::createfontstring("default", 1);
+    self.ownershipstring[var_00] = ::scripts\mp\hud_util::createfontstring("default", 1);
     self.ownershipstring[var_00].color = (1, 1, 1);
     self.ownershipstring[var_00].x = 0;
     self.ownershipstring[var_00].y = 30 + var_00 * 12;

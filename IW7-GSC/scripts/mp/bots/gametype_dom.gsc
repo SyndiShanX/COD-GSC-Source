@@ -183,7 +183,7 @@ setup_bot_dom() {
         var_01[var_03.teleport_zone] = [];
       }
 
-      var_01[var_03.teleport_zone] = scripts\engine\utility::array_add(var_01[var_03.teleport_zone], var_03);
+      var_01[var_03.teleport_zone] = ::scripts\engine\utility::array_add(var_01[var_03.teleport_zone], var_03);
     }
 
     foreach(var_07, var_06 in var_01) {

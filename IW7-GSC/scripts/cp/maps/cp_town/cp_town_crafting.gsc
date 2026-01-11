@@ -63,7 +63,7 @@ init_crafting_pieces() {
 
     var_02.part_location_struct = scripts\engine\utility::getstruct(var_02.target, "targetname");
     var_02.part_model = var_02.part_location_struct.script_parameters;
-    level.crafting_pieces[var_03[0]][var_03[1]] = scripts\engine\utility::array_add_safe(level.crafting_pieces[var_03[0]][var_03[1]], var_02);
+    level.crafting_pieces[var_03[0]][var_03[1]] = ::scripts\engine\utility::array_add_safe(level.crafting_pieces[var_03[0]][var_03[1]], var_02);
   }
 
   spawn_crafting_pieces("chem", "beaker", "clamp", "burner");

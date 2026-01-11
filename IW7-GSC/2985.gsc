@@ -972,8 +972,8 @@ func_3987(var_00) {
   var_03 = vectornormalize(var_0.origin - self.origin);
   var_04 = vectordot(var_01, var_03);
   var_05 = vectordot(var_02, var_03);
-  self.func_8B50["cap_hardpoint_missile_barrage"] = scripts\engine\utility::array_removeundefined(self.func_8B50["cap_hardpoint_missile_barrage"]);
-  self.func_8B51["cap_hardpoint_missile_barrage"] = scripts\engine\utility::array_removeundefined(self.func_8B51["cap_hardpoint_missile_barrage"]);
+  self.func_8B50["cap_hardpoint_missile_barrage"] = ::scripts\engine\utility::array_removeundefined(self.func_8B50["cap_hardpoint_missile_barrage"]);
+  self.func_8B51["cap_hardpoint_missile_barrage"] = ::scripts\engine\utility::array_removeundefined(self.func_8B51["cap_hardpoint_missile_barrage"]);
 
   if(var_04 < 0)
     var_06 = self.func_8B50["cap_hardpoint_missile_barrage"];

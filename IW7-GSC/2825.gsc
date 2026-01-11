@@ -323,7 +323,7 @@ func_3E94(var_00, var_01) {
 
     if(var_0.func_BF1B / 8 >= var_05) {
       if(level.func_D9E5["optionalunlocks"].size > 0) {
-        level.func_D9E5["optionalunlocks"] = scripts\engine\utility::array_randomize(level.func_D9E5["optionalunlocks"]);
+        level.func_D9E5["optionalunlocks"] = ::scripts\engine\utility::array_randomize(level.func_D9E5["optionalunlocks"]);
 
         foreach(var_07 in level.func_D9E5["optionalunlocks"]) {
           if(scripts\engine\utility::array_contains(level.func_D9E5["loaded_weapons"], var_07)) {
@@ -806,7 +806,7 @@ func_8835() {
     self.func_87EB["fx_tag"].origin = self.func_87EB["fx_tag"].origin + anglesToForward(var_0.angles) * 47.9;
     self.func_87EB["fx_tag"].origin = self.func_87EB["fx_tag"].origin + anglestoup(var_0.angles) * 52;
   } else
-    self.func_87EB["fx_tag"] = scripts\engine\utility::spawn_tag_origin();
+    self.func_87EB["fx_tag"] = ::scripts\engine\utility::spawn_tag_origin();
 
   if(!isDefined(var_00)) {
     self.func_87EB["fx_tag"].origin = self.origin + anglesToForward(self.angles) * -2.0;

@@ -532,7 +532,7 @@ sentry_handledeath() {
   self waittill("death");
 
   if(isDefined(self.owner))
-    self.owner.placedsentries[self.sentrytype] = scripts\engine\utility::array_remove(self.owner.placedsentries[self.sentrytype], self);
+    self.owner.placedsentries[self.sentrytype] = ::scripts\engine\utility::array_remove(self.owner.placedsentries[self.sentrytype], self);
 
   if(!isDefined(self)) {
     return;
@@ -617,7 +617,7 @@ sentry_handleuse(var_00) {
     if(self.sentrytype == "sam_turret" || self.sentrytype == "scramble_turret" || self.sentrytype == "sentry_shock" && scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_sam_turret"))
       self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeoff);
 
-    var_1.placedsentries[self.sentrytype] = scripts\engine\utility::array_remove(var_1.placedsentries[self.sentrytype], self);
+    var_1.placedsentries[self.sentrytype] = ::scripts\engine\utility::array_remove(var_1.placedsentries[self.sentrytype], self);
     var_01 setcarryingsentry(self, 0, var_00);
   }
 }

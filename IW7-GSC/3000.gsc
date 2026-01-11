@@ -20,7 +20,7 @@ func_7561(var_00, var_01, var_02, var_03) {
   var_4.state = var_03;
 
   if(isDefined(self.func_7560[var_00]))
-    self.func_7560[var_00] = scripts\engine\utility::array_add(self.func_7560[var_00], var_04);
+    self.func_7560[var_00] = ::scripts\engine\utility::array_add(self.func_7560[var_00], var_04);
   else
     self.func_7560[var_00] = [var_04];
 }

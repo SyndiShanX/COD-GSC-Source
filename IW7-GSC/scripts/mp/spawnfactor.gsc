@@ -203,7 +203,7 @@ func_26AE(param_00) {
   var_01 = [];
   var_02 = [];
   if(level.teambased) {
-    var_01[0] = scripts\mp\gameobjects::getenemyteam(self.team);
+    var_01[0] = ::scripts\mp\gameobjects::getenemyteam(self.team);
   } else {
     var_01[var_01.size] = "all";
   }
@@ -569,7 +569,7 @@ func_26B4(param_00) {
   var_01 = [];
   var_02 = [];
   if(level.teambased) {
-    var_01[0] = scripts\mp\gameobjects::getenemyteam(self.team);
+    var_01[0] = ::scripts\mp\gameobjects::getenemyteam(self.team);
   } else {
     var_01[var_01.size] = "all";
   }
@@ -627,7 +627,7 @@ func_26AF(param_00) {
   var_01 = [];
   var_02 = [];
   if(level.teambased) {
-    var_01[0] = scripts\mp\gameobjects::getenemyteam(self.team);
+    var_01[0] = ::scripts\mp\gameobjects::getenemyteam(self.team);
   } else {
     var_01[var_01.size] = "all";
   }

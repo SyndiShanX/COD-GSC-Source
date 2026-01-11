@@ -209,10 +209,10 @@ func_105A3(param_00, param_01) {
   func_10575(param_00, param_01);
   param_00.outlineids = [];
   if(level.teambased) {
-    param_00.outlineids[0] = scripts\mp\utility::outlineenableforteam(param_00, "cyan", param_01.team, 1, 0, "equipment");
-    param_00.outlineids[1] = scripts\mp\utility::outlineenableforteam(param_00, "orange", scripts\mp\utility::getotherteam(param_01.team), 1, 0, "equipment");
+    param_00.outlineids[0] = ::scripts\mp\utility::outlineenableforteam(param_00, "cyan", param_01.team, 1, 0, "equipment");
+    param_00.outlineids[1] = ::scripts\mp\utility::outlineenableforteam(param_00, "orange", scripts\mp\utility::getotherteam(param_01.team), 1, 0, "equipment");
   } else {
-    param_00.outlineids[0] = scripts\mp\utility::func_C793(param_00, "orange", 1, 0, "equipment");
+    param_00.outlineids[0] = ::scripts\mp\utility::func_C793(param_00, "orange", 1, 0, "equipment");
   }
 
   param_00 hudoutlinedisableforclient(param_01);

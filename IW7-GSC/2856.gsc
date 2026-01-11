@@ -572,13 +572,13 @@ func_1463(var_00, var_01) {
 
           foreach(var_36 in level.func_D9E5["loaded_weapon_types"][var_34]) {
             if(var_36.weapon_name == var_32)
-              level.func_D9E5["loaded_weapon_types"][var_34] = scripts\engine\utility::array_remove(level.func_D9E5["loaded_weapon_types"][var_34], var_36);
+              level.func_D9E5["loaded_weapon_types"][var_34] = ::scripts\engine\utility::array_remove(level.func_D9E5["loaded_weapon_types"][var_34], var_36);
           }
 
           var_19 = scripts\engine\utility::array_remove(var_19, var_32);
           thread scripts\sp\utility::func_1264E("weapon_" + var_32 + "_tr");
           var_30 = scripts\engine\utility::array_add(var_30, "weapon_" + var_32 + "_tr");
-          level.func_D9E5["loaded_weapons"] = scripts\engine\utility::array_remove(level.func_D9E5["loaded_weapons"], var_32);
+          level.func_D9E5["loaded_weapons"] = ::scripts\engine\utility::array_remove(level.func_D9E5["loaded_weapons"], var_32);
           var_23 = scripts\engine\utility::array_remove(var_23, var_32);
           continue;
         }
@@ -610,11 +610,11 @@ func_1463(var_00, var_01) {
 
     foreach(var_36 in level.func_D9E5["loaded_weapon_types"][var_34]) {
       if(var_36.weapon_name == var_41)
-        level.func_D9E5["loaded_weapon_types"][var_34] = scripts\engine\utility::array_remove(level.func_D9E5["loaded_weapon_types"][var_34], var_36);
+        level.func_D9E5["loaded_weapon_types"][var_34] = ::scripts\engine\utility::array_remove(level.func_D9E5["loaded_weapon_types"][var_34], var_36);
     }
 
     level.player _meth_84C7("weaponsLoaded", var_41, 0);
-    level.func_D9E5["loaded_weapons"] = scripts\engine\utility::array_remove(level.func_D9E5["loaded_weapons"], var_41);
+    level.func_D9E5["loaded_weapons"] = ::scripts\engine\utility::array_remove(level.func_D9E5["loaded_weapons"], var_41);
   }
 
   level.player _meth_84C7("lastWeaponPreload", var_00);
@@ -640,10 +640,10 @@ func_1463(var_00, var_01) {
         }
 
         if(!scripts\engine\utility::array_contains(level.func_D9E5["loaded_weapons"], var_25)) {
-          level.func_D9E5["loaded_weapons"] = scripts\engine\utility::array_add(level.func_D9E5["loaded_weapons"], var_25);
+          level.func_D9E5["loaded_weapons"] = ::scripts\engine\utility::array_add(level.func_D9E5["loaded_weapons"], var_25);
 
           if(isDefined(var_36))
-            level.func_D9E5["loaded_weapon_types"][var_34] = scripts\engine\utility::array_add(level.func_D9E5["loaded_weapon_types"][var_34], var_36);
+            level.func_D9E5["loaded_weapon_types"][var_34] = ::scripts\engine\utility::array_add(level.func_D9E5["loaded_weapon_types"][var_34], var_36);
         }
       }
     }

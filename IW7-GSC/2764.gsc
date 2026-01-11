@@ -123,8 +123,8 @@ main() {
   }
 
   thread scripts\mp\animatedmodels::main();
-  level.func["damagefeedback"] = scripts\mp\damagefeedback::updatedamagefeedback;
-  level.func["setTeamHeadIcon"] = scripts\mp\entityheadicons::setteamheadicon;
+  level.func["damagefeedback"] = ::scripts\mp\damagefeedback::updatedamagefeedback;
+  level.func["setTeamHeadIcon"] = ::scripts\mp\entityheadicons::setteamheadicon;
   level.func_A879 = ::laseron;
   level.func_A877 = ::laseroff;
   level.func_4537 = ::connectpaths;

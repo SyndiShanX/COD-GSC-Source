@@ -76,7 +76,7 @@ gathergroups(var_00) {
       continue;
     }
 
-    var_2[var_7.script_noteworthy] = scripts\engine\utility::array_add(var_2[var_7.script_noteworthy], var_07);
+    var_2[var_7.script_noteworthy] = ::scripts\engine\utility::array_add(var_2[var_7.script_noteworthy], var_07);
   }
 
   foreach(var_10 in var_02) {

@@ -178,7 +178,7 @@ func_E121(param_00) {
 
   if(level.teambased) {
     var_01 = self.team;
-    level.uavmodels[var_01] = scripts\engine\utility::array_removeundefined(level.uavmodels[var_01]);
+    level.uavmodels[var_01] = ::scripts\engine\utility::array_removeundefined(level.uavmodels[var_01]);
   } else {
     level.uavmodels = scripts\engine\utility::array_removeundefined(level.uavmodels);
   }

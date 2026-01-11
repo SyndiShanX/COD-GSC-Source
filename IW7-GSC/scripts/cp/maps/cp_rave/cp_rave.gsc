@@ -3267,10 +3267,10 @@ spawn_ground_pound_flowers(param_00) {
   var_07 = -1 * vectornormalize(var_06) * 50;
   var_08 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_vehicleclip", "physicscontents_item", "physicscontents_detail", "physicscontents_vehicleclip", "physicscontents_vehicle", "physicscontents_canshootclip", "physicscontents_missileclip", "physicscontents_clipshot"]);
   var_09 = [];
-  var_09[var_09.size] = scripts\engine\utility::drop_to_ground(var_01 + var_04, 32, -100);
-  var_09[var_09.size] = scripts\engine\utility::drop_to_ground(var_01 + var_05, 32, -100);
-  var_09[var_09.size] = scripts\engine\utility::drop_to_ground(var_01 + var_06, 32, -100);
-  var_09[var_09.size] = scripts\engine\utility::drop_to_ground(var_01 + var_07, 32, -100);
+  var_09[var_09.size] = ::scripts\engine\utility::drop_to_ground(var_01 + var_04, 32, -100);
+  var_09[var_09.size] = ::scripts\engine\utility::drop_to_ground(var_01 + var_05, 32, -100);
+  var_09[var_09.size] = ::scripts\engine\utility::drop_to_ground(var_01 + var_06, 32, -100);
+  var_09[var_09.size] = ::scripts\engine\utility::drop_to_ground(var_01 + var_07, 32, -100);
   var_0A = [];
   foreach(var_0C in var_09) {
     var_0D = scripts\common\trace::ray_trace(var_03, var_0C, param_00, var_08);

@@ -259,7 +259,7 @@ func_FEEB() {
   }
 
   if(isDefined(self.var_394) && scripts\anim\utility_common::weapon_pump_action_shotgun()) {
-    self.a.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_stand", "single");
+    self.a.var_2274["single"] = ::scripts\anim\utility::func_B027("shotgun_stand", "single");
   }
 
   for(;;) {
@@ -657,37 +657,37 @@ func_FA42(param_00, param_01, param_02) {
   var_04 = param_02.type;
   if(var_04 == "Cover Left") {
     var_03["shuffle_start"] = func_7C69(param_00, param_01);
-    var_03["shuffle"] = scripts\anim\utility::func_B027("shuffle", "shuffle_to_cover_left");
-    var_03["shuffle_end"] = scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_cover_left");
+    var_03["shuffle"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_to_cover_left");
+    var_03["shuffle_end"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_cover_left");
   } else if(var_04 == "Cover Right") {
     var_03["shuffle_start"] = func_7C69(param_00, param_01);
-    var_03["shuffle"] = scripts\anim\utility::func_B027("shuffle", "shuffle_to_cover_right");
-    var_03["shuffle_end"] = scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_cover_right");
+    var_03["shuffle"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_to_cover_right");
+    var_03["shuffle_end"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_cover_right");
   } else if(var_04 == "Cover Stand" && param_01.type == var_04) {
     if(param_00) {
-      var_03["shuffle_start"] = scripts\anim\utility::func_B027("shuffle", "shuffle_start_left_stand_to_stand");
-      var_03["shuffle"] = scripts\anim\utility::func_B027("shuffle", "shuffle_left_stand_to_stand");
-      var_03["shuffle_end"] = scripts\anim\utility::func_B027("shuffle", "shuffle_end_left_stand_to_stand");
+      var_03["shuffle_start"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_start_left_stand_to_stand");
+      var_03["shuffle"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_left_stand_to_stand");
+      var_03["shuffle_end"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_end_left_stand_to_stand");
     } else {
-      var_03["shuffle_start"] = scripts\anim\utility::func_B027("shuffle", "shuffle_start_right_stand_to_stand");
-      var_03["shuffle"] = scripts\anim\utility::func_B027("shuffle", "shuffle_right_stand_to_stand");
-      var_03["shuffle_end"] = scripts\anim\utility::func_B027("shuffle", "shuffle_end_right_stand_to_stand");
+      var_03["shuffle_start"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_start_right_stand_to_stand");
+      var_03["shuffle"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_right_stand_to_stand");
+      var_03["shuffle_end"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_end_right_stand_to_stand");
     }
   } else if(param_00) {
     var_03["shuffle_start"] = func_7C69(param_00, param_01);
-    var_03["shuffle"] = scripts\anim\utility::func_B027("shuffle", "shuffle_to_left_crouch");
+    var_03["shuffle"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_to_left_crouch");
     if(var_04 == "Cover Stand") {
-      var_03["shuffle_end"] = scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_left_stand");
+      var_03["shuffle_end"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_left_stand");
     } else {
-      var_03["shuffle_end"] = scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_left_crouch");
+      var_03["shuffle_end"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_left_crouch");
     }
   } else {
     var_03["shuffle_start"] = func_7C69(param_00, param_01);
-    var_03["shuffle"] = scripts\anim\utility::func_B027("shuffle", "shuffle_to_right_crouch");
+    var_03["shuffle"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_to_right_crouch");
     if(var_04 == "Cover Stand") {
-      var_03["shuffle_end"] = scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_right_stand");
+      var_03["shuffle_end"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_right_stand");
     } else {
-      var_03["shuffle_end"] = scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_right_crouch");
+      var_03["shuffle_end"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_right_crouch");
     }
   }
 

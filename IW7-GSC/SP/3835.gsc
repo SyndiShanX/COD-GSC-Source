@@ -472,8 +472,8 @@ func_FD72(param_00) {
 
 func_FD71() {
   foreach(var_02, var_01 in level.var_FD6E.var_1912) {
-    level.var_FD6E.var_1912[var_02] = scripts\engine\utility::array_removeundefined(level.var_FD6E.var_1912[var_02]);
-    level.var_FD6E.var_1912[var_02] = scripts\sp\utility::func_22B9(level.var_FD6E.var_1912[var_02]);
+    level.var_FD6E.var_1912[var_02] = ::scripts\engine\utility::array_removeundefined(level.var_FD6E.var_1912[var_02]);
+    level.var_FD6E.var_1912[var_02] = ::scripts\sp\utility::func_22B9(level.var_FD6E.var_1912[var_02]);
   }
 }
 
@@ -483,7 +483,7 @@ func_FD6F(param_00) {
   }
 
   self.var_ECE7 = param_00;
-  level.var_FD6E.var_1912[param_00] = scripts\engine\utility::array_add_safe(level.var_FD6E.var_1912[param_00], self);
+  level.var_FD6E.var_1912[param_00] = ::scripts\engine\utility::array_add_safe(level.var_FD6E.var_1912[param_00], self);
 }
 
 func_FDBB(param_00) {
@@ -1306,7 +1306,7 @@ func_3DDE(param_00, param_01) {
     scripts\sp\utility::func_13705();
     scripts\sp\utility::func_12641(var_02);
     if(!scripts\engine\utility::array_contains(level.var_D9E5["loaded_weapons"], param_00)) {
-      level.var_D9E5["loaded_weapons"] = scripts\engine\utility::array_add(level.var_D9E5["loaded_weapons"], param_00);
+      level.var_D9E5["loaded_weapons"] = ::scripts\engine\utility::array_add(level.var_D9E5["loaded_weapons"], param_00);
       level.player _meth_84C7("weaponsLoaded", param_00, 1);
     }
   }

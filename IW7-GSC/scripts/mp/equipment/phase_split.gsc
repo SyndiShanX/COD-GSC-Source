@@ -180,7 +180,7 @@ func_CAB2() {
   var_02 = var_03;
   if(var_02.size > 0 && var_02[0] != "none") {
     var_05 = var_02[0];
-    var_01["loadoutPrimary"] = scripts\mp\utility::getweaponrootname(var_05);
+    var_01["loadoutPrimary"] = ::scripts\mp\utility::getweaponrootname(var_05);
     var_06 = getweaponattachments(var_05);
     for(var_04 = 0; var_04 < var_06.size; var_04++) {
       var_07 = scripts\engine\utility::ter_op(var_04 > 0, "loadoutPrimaryAttachment" + var_04 + 1, "loadoutPrimaryAttachment");
@@ -192,7 +192,7 @@ func_CAB2() {
 
   if(var_02.size > 0 && var_02[1] != "none") {
     var_05 = var_02[1];
-    var_01["loadoutSecondary"] = scripts\mp\utility::getweaponrootname(var_05);
+    var_01["loadoutSecondary"] = ::scripts\mp\utility::getweaponrootname(var_05);
     var_06 = getweaponattachments(var_05);
     for(var_04 = 0; var_04 < var_06.size; var_04++) {
       var_07 = scripts\engine\utility::ter_op(var_04 > 0, "loadoutSecondaryAttachment1" + var_04, "loadoutSecondaryAttachment");

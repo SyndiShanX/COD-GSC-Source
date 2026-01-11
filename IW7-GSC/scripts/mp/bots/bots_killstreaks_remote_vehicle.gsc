@@ -1611,7 +1611,7 @@ bot_killstreak_get_zone_allies_outside(param_00) {
     var_06 = var_05 getnearestnode();
     var_07 = getnodezone(var_06);
     if(isDefined(var_07)) {
-      var_02[var_07] = scripts\engine\utility::array_add(var_02[var_07], var_05);
+      var_02[var_07] = ::scripts\engine\utility::array_add(var_02[var_07], var_05);
     }
   }
 
@@ -1628,7 +1628,7 @@ bot_killstreak_get_zone_enemies_outside(param_00) {
   foreach(var_05 in var_01) {
     var_06 = var_05 getnearestnode();
     var_07 = getnodezone(var_06);
-    var_02[var_07] = scripts\engine\utility::array_add(var_02[var_07], var_05);
+    var_02[var_07] = ::scripts\engine\utility::array_add(var_02[var_07], var_05);
   }
 
   return var_02;

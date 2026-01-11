@@ -193,7 +193,7 @@ func_1012E(var_00, var_01, var_02, var_03) {
   self.locationobjectives = [];
 
   for(var_05 = 0; var_05 < var_03; var_5++) {
-    self.locationobjectives[var_05] = scripts\mp\objidpoolmanager::requestminimapid(1);
+    self.locationobjectives[var_05] = ::scripts\mp\objidpoolmanager::requestminimapid(1);
 
     if(self.locationobjectives[var_05] != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_add(self.locationobjectives[var_05], "invisible", (0, 0, 0));
